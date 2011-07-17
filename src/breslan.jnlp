@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jnlp spec="1.0+"
-      codebase="file:///C:/sandbox/HelloJME3/build/hello"
-      href="hello.jnlp">
+      codebase="http://192.168.1.104/breslintalker/hello/"
+      href="breslin.jnlp">
  
   <information>
-    <title>breslin</title>
-    <vendor>breslin</vendor>
+    <title>Breslin</title>
+    <vendor>Breslin</vendor>
     <homepage href="192.168.1.104"/>
     <description>Description</description>
-    <description kind="short">short desc</description>
+    <description kind="short">Breslin</description>
     <offline-allowed/>
   </information>
   <security>
       <all-permissions/>
   </security>
   <resources>
-    <jar href="hello.jar"/>
+    <jar href="breslin.jar"/>
     <jar href="jME3-lwjgl-natives.jar" />
     <jar href="lwjgl.jar" />
     <jar href="jMonkeyEngine3.jar" />
@@ -27,8 +27,8 @@
   </resources>
   
    <application-desc
-      name="Dynamic Tree Demo Application"
-      main-class="hello.HelloJME3"
+      name="Ghost In The Graveyard"
+      main-class="game.Game"
       width="300"
       height="300">
   </application-desc>
