@@ -1,0 +1,4 @@
+cd lib
+del *.*
+cd ..
+
