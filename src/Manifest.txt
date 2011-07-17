@@ -1,1 +1,1 @@
-Main-Class: hello.HelloJME3
+Main-Class: breslin.game.Game
