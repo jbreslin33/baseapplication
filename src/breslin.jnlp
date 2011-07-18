@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jnlp spec="1.0+"
-      codebase="http://www.roacheopen.com/breslintalker/hello/"
+      codebase="http://www.roacheopen.com/breslinserver/"
       href="breslin.jnlp">
  
   <information>
