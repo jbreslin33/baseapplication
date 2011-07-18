@@ -1,0 +1,1 @@
+keytool -genkey -alias alias_breslin -keystore keystore_breslin < keystore.conf
