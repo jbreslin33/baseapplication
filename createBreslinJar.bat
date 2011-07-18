@@ -1,2 +1,3 @@
-cd src
-jar -cfm ..\lib\breslin.jar Manifest.txt breslin
+cd build
+jar -cfm ..\lib\breslin.jar ..\src\Manifest.txt *
+cd ..
