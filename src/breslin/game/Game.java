@@ -13,8 +13,20 @@ import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.controls.MouseButtonTrigger;
 
+//networking
+import java.net.*;
+import java.io.*;
+
 /** Sample 5 - how to map keys and mousebuttons to actions */
 public class Game extends SimpleApplication {
+
+
+	String mServerIP;
+
+	Game(String serverIP) {
+
+		mServerIP = serverIP;
+	}
 
   public static void main(String[] args) {
 
@@ -23,9 +35,13 @@ public class Game extends SimpleApplication {
 	    return;
    }
 
-    Game app = new Game();
+
+
+    Game app = new Game(args[0]);
     app.start();
   }
+
+
   protected Geometry player;
   Boolean isRunning=true;
 
@@ -38,6 +54,33 @@ public class Game extends SimpleApplication {
     player.setMaterial(mat);
     rootNode.attachChild(player);
     initKeys(); // load my custom keybinding
+
+
+    //networking
+
+    System.out.println("About to try networking...............................................................................................");
+
+    try {
+
+    // get a datagram socket
+	DatagramSocket socket = new DatagramSocket();
+
+	// send request
+    byte[] buf = new byte[256];
+
+    //buf[0] = 'W';
+
+    InetAddress address = InetAddress.getByName(mServerIP);
+	DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 4445);
+
+    socket.send(packet);
+
+    System.out.println("Sent packet");
+
+	} catch (IOException e) {
+		e.printStackTrace();
+    }
+
   }
 
   /** Custom Keybinding: Map named actions to inputs. */
