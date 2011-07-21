@@ -21,8 +21,8 @@ import java.io.*;
 public class Game extends SimpleApplication {
 
 //join game
-boolean sentJoinGame     = false;
-boolean receivedJoinGame = false;
+boolean mSentJoinGame     = false;
+boolean mReceivedJoinGame = false;
 
 //network
 String mServerIP;
@@ -64,6 +64,8 @@ Game(String serverIP)
 
 void joinGame()
 {
+
+	mSentJoinGame = true;
 	int messageCount = 0;
     //networking
     try {
@@ -134,7 +136,10 @@ void joinGame()
       if (isRunning) {
         if (name.equals("Join"))
         {
-        	joinGame();
+			if (!mSentJoinGame)
+			{
+        		joinGame();
+			}
         }
 
         if (name.equals("Rotate")) {
