@@ -56,26 +56,39 @@ public class Game extends SimpleApplication {
     initKeys(); // load my custom keybinding
 
 
+	int messageCount = 0;
     //networking
-
-    System.out.println("About to try networking...............................................................................................");
-
     try {
 
     // get a datagram socket
 	DatagramSocket socket = new DatagramSocket();
 
 	// send request
-    byte[] buf = new byte[256];
+    byte[] buf = new byte[1400];
 
-    //buf[0] = 'W';
+	//write to message
+    buf[0] = 'W';
+	messageCount++;
 
+	//now make new buffer so that it's only as big as needed.
+	byte[] realByteArray = new byte[messageCount];
+
+	for (int i = 0; i < messageCount; i++)
+	{
+		realByteArray[i] = buf[i];
+	}
+
+	//create DataGramPacket
     InetAddress address = InetAddress.getByName(mServerIP);
-	DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 4445);
+	DatagramPacket packet = new DatagramPacket(realByteArray, realByteArray.length, address, 4445);
 
+	//send packet to server
     socket.send(packet);
 
-    System.out.println("Sent packet");
+	//print out what you sent for debugging
+	String s = new String(packet.getData());
+
+    System.out.println("Data Sent:" + s);
 
 	} catch (IOException e) {
 		e.printStackTrace();
