@@ -74,8 +74,10 @@ public class Game extends SimpleApplication
     		byte[] buf = new byte[1400];
 
 			//write to message
-    		buf[0] = 'j';
-			messageCount++;
+    		buf[0] = -101;
+    		buf[1] = 'n';
+
+			messageCount = 5;
 
 			//now make new buffer so that it's only as big as needed.
 			byte[] realByteArray = new byte[messageCount];
@@ -87,7 +89,7 @@ public class Game extends SimpleApplication
 
 			//create DataGramPacket
     		InetAddress address = InetAddress.getByName(mServerIP);
-			DatagramPacket packet = new DatagramPacket(realByteArray, realByteArray.length, address, 4445);
+			DatagramPacket packet = new DatagramPacket(realByteArray, realByteArray.length, address, 30004);
 
 			//send packet to server
     		socket.send(packet);
