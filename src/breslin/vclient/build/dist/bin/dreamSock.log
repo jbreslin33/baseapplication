@@ -1,0 +1,5 @@
+Log file started (null)Fri Aug 12 12:51:50 2011: Server's information: IP address: 192.168.1.103, port: 30004
+Fri Aug 12 12:51:50 2011: WSAStartup OK
+Fri Aug 12 12:51:50 2011: No net interface given, using any interface available
+Fri Aug 12 12:51:50 2011: No port defined, picking one for you
+Fri Aug 12 12:51:50 2011: Opening UDP port = 4022

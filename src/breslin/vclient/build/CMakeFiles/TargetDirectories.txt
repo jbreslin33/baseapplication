@@ -1,0 +1,3 @@
+C:/sandbox/jbreslin33-socketchannel/vclient/build/CMakeFiles/ALL_BUILD.dir
+C:/sandbox/jbreslin33-socketchannel/vclient/build/CMakeFiles/Client.dir
+C:/sandbox/jbreslin33-socketchannel/vclient/build/CMakeFiles/ZERO_CHECK.dir

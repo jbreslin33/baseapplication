@@ -1,0 +1,4 @@
+Log file started (null)Fri Aug 12 12:51:45 2011: WSAStartup OK
+Fri Aug 12 12:51:45 2011: No net interface given, using any interface available
+Fri Aug 12 12:51:45 2011: Opening UDP port = 30004
+Fri Aug 12 12:51:58 2011: LIBRARY: Server: a client connected succesfully

@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="Client"
+	ProjectGUID="{49448516-B4F0-42E0-AB0F-EC85EC3D4829}"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="Client.dir\Debug"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\boost\boost_1_44&quot;;C:\sandbox\ogre\build\sdk\include\OIS;C:\sandbox\ogre\build\sdk\include;C:\sandbox\ogre\build\sdk\include\OGRE;C:\sandbox\ogre\build\sdk\Samples\include;"
+				BasicRuntimeChecks="3"
+				CompileAs="2"
+				DebugInformationFormat="3"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="0"
+				Optimization="0"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;Debug\&quot;"
+				AssemblerListingLocation="Debug"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:\sandbox\jbreslin33-socketchannel\vclient\build\Debug/Client_d.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\boost\boost_1_44&quot;;C:\sandbox\ogre\build\sdk\include\OIS;C:\sandbox\ogre\build\sdk\include;C:\sandbox\ogre\build\sdk\include\OGRE;C:\sandbox\ogre\build\sdk\Samples\include;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;Debug\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"
+CommandLine="if not exist .\dist\bin mkdir .\dist\bin&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="copy &quot;$(TargetPath)&quot; .\dist\bin&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86 /debug"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  C:\sandbox\ogre\build\sdk\lib\debug\OgreMain_d.lib &quot;C:\Program Files\boost\boost_1_44\lib\libboost_thread-vc90-mt-gd-1_44.lib&quot; &quot;C:\Program Files\boost\boost_1_44\lib\libboost_date_time-vc90-mt-gd-1_44.lib&quot; C:\sandbox\ogre\build\sdk\lib\debug\OIS_d.lib winmm.lib "
+				OutputFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\Debug\Client_d.exe"
+				Version="0.0"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\Debug/Client_d.pdb"
+				GenerateDebugInformation="TRUE"
+				SubSystem="2"
+				ImportLibrary="C:\sandbox\jbreslin33-socketchannel\vclient\build\Debug\Client_d.lib"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="Client.dir\Release"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\boost\boost_1_44&quot;;C:\sandbox\ogre\build\sdk\include\OIS;C:\sandbox\ogre\build\sdk\include;C:\sandbox\ogre\build\sdk\include\OGRE;C:\sandbox\ogre\build\sdk\Samples\include;"
+				CompileAs="2"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="2"
+				Optimization="2"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;Release\&quot;"
+				AssemblerListingLocation="Release"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:\sandbox\jbreslin33-socketchannel\vclient\build\Release/Client.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\boost\boost_1_44&quot;;C:\sandbox\ogre\build\sdk\include\OIS;C:\sandbox\ogre\build\sdk\include;C:\sandbox\ogre\build\sdk\include\OGRE;C:\sandbox\ogre\build\sdk\Samples\include;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;Release\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"
+CommandLine="if not exist .\dist\bin mkdir .\dist\bin&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="copy &quot;$(TargetPath)&quot; .\dist\bin&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  C:\sandbox\ogre\build\sdk\lib\release\OgreMain.lib &quot;C:\Program Files\boost\boost_1_44\lib\libboost_thread-vc90-mt-1_44.lib&quot; &quot;C:\Program Files\boost\boost_1_44\lib\libboost_date_time-vc90-mt-1_44.lib&quot; C:\sandbox\ogre\build\sdk\lib\release\OIS.lib winmm.lib "
+				OutputFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\Release\Client.exe"
+				Version="0.0"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\Release/Client.pdb"
+				SubSystem="2"
+				ImportLibrary="C:\sandbox\jbreslin33-socketchannel\vclient\build\Release\Client.lib"/>
+		</Configuration>
+		<Configuration
+			Name="MinSizeRel|Win32"
+			OutputDirectory="MinSizeRel"
+			IntermediateDirectory="Client.dir\MinSizeRel"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\boost\boost_1_44&quot;;C:\sandbox\ogre\build\sdk\include\OIS;C:\sandbox\ogre\build\sdk\include;C:\sandbox\ogre\build\sdk\include\OGRE;C:\sandbox\ogre\build\sdk\Samples\include;"
+				CompileAs="2"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="1"
+				Optimization="1"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"
+				AssemblerListingLocation="MinSizeRel"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:\sandbox\jbreslin33-socketchannel\vclient\build\MinSizeRel/Client.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\boost\boost_1_44&quot;;C:\sandbox\ogre\build\sdk\include\OIS;C:\sandbox\ogre\build\sdk\include;C:\sandbox\ogre\build\sdk\include\OGRE;C:\sandbox\ogre\build\sdk\Samples\include;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"
+CommandLine="if not exist .\dist\bin mkdir .\dist\bin&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="copy &quot;$(TargetPath)&quot; .\dist\bin&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  C:\sandbox\ogre\build\sdk\lib\release\OgreMain.lib &quot;C:\Program Files\boost\boost_1_44\lib\libboost_thread-vc90-mt-1_44.lib&quot; &quot;C:\Program Files\boost\boost_1_44\lib\libboost_date_time-vc90-mt-1_44.lib&quot; C:\sandbox\ogre\build\sdk\lib\release\OIS.lib winmm.lib "
+				OutputFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\MinSizeRel\Client.exe"
+				Version="0.0"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\MinSizeRel/Client.pdb"
+				SubSystem="2"
+				ImportLibrary="C:\sandbox\jbreslin33-socketchannel\vclient\build\MinSizeRel\Client.lib"/>
+		</Configuration>
+		<Configuration
+			Name="RelWithDebInfo|Win32"
+			OutputDirectory="RelWithDebInfo"
+			IntermediateDirectory="Client.dir\RelWithDebInfo"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\boost\boost_1_44&quot;;C:\sandbox\ogre\build\sdk\include\OIS;C:\sandbox\ogre\build\sdk\include;C:\sandbox\ogre\build\sdk\include\OGRE;C:\sandbox\ogre\build\sdk\Samples\include;"
+				CompileAs="2"
+				DebugInformationFormat="3"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="1"
+				Optimization="2"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"
+				AssemblerListingLocation="RelWithDebInfo"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:\sandbox\jbreslin33-socketchannel\vclient\build\RelWithDebInfo/Client.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\boost\boost_1_44&quot;;C:\sandbox\ogre\build\sdk\include\OIS;C:\sandbox\ogre\build\sdk\include;C:\sandbox\ogre\build\sdk\include\OGRE;C:\sandbox\ogre\build\sdk\Samples\include;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"
+CommandLine="if not exist .\dist\bin mkdir .\dist\bin&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="copy &quot;$(TargetPath)&quot; .\dist\bin&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86 /debug"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  C:\sandbox\ogre\build\sdk\lib\release\OgreMain.lib &quot;C:\Program Files\boost\boost_1_44\lib\libboost_thread-vc90-mt-1_44.lib&quot; &quot;C:\Program Files\boost\boost_1_44\lib\libboost_date_time-vc90-mt-1_44.lib&quot; C:\sandbox\ogre\build\sdk\lib\release\OIS.lib winmm.lib "
+				OutputFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\RelWithDebInfo\Client.exe"
+				Version="0.0"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\RelWithDebInfo/Client.pdb"
+				GenerateDebugInformation="TRUE"
+				SubSystem="2"
+				ImportLibrary="C:\sandbox\jbreslin33-socketchannel\vclient\build\RelWithDebInfo\Client.lib"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/sandbox/jbreslin33-socketchannel/vclient/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/jbreslin33-socketchannel/vclient -BC:/sandbox/jbreslin33-socketchannel/vclient/build --check-stamp-file C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;"
+					Outputs="C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/sandbox/jbreslin33-socketchannel/vclient/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/jbreslin33-socketchannel/vclient -BC:/sandbox/jbreslin33-socketchannel/vclient/build --check-stamp-file C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;"
+					Outputs="C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MinSizeRel|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/sandbox/jbreslin33-socketchannel/vclient/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/jbreslin33-socketchannel/vclient -BC:/sandbox/jbreslin33-socketchannel/vclient/build --check-stamp-file C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;"
+					Outputs="C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="RelWithDebInfo|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/sandbox/jbreslin33-socketchannel/vclient/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/jbreslin33-socketchannel/vclient -BC:/sandbox/jbreslin33-socketchannel/vclient/build --check-stamp-file C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;"
+					Outputs="C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+			</File>
+		<Filter
+			Name="Source Files"
+			Filter="">
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\game\BaseApplication.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\game\game.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\tdreamsock\dreamSockLog.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\tdreamsock\dreamWinSock.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\network\network.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\command\command.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\math\vector3D.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\shape.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\dynamicShape.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\ogreDynamicShape.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeMoveStates.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeRotationStates.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeAnimationStates.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\dispatch\dispatch.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\billboard\objectTitle.cpp">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\time\time.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="">
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\game\BaseApplication.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\game\game.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\tdreamsock\dreamSockLog.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\tdreamsock\dreamWinSock.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\network\network.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\command\command.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\math\vector3D.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\shape.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\dynamicShape.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\ogreDynamicShape.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeState.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeStateMachine.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeMoveStates.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeRotationStates.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeAnimationStates.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\dispatch\dispatch.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\billboard\objectTitle.h">
+			</File>
+			<File
+				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\time\time.h">
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

@@ -1,0 +1,8 @@
+C:/sandbox/jbreslin33-socketchannel/vserver/build/dist/bin/plugins.cfg
+C:/sandbox/jbreslin33-socketchannel/vserver/build/dist/bin/resources.cfg
+C:/sandbox/jbreslin33-socketchannel/vserver/build/dist/bin/OgreMain.dll
+C:/sandbox/jbreslin33-socketchannel/vserver/build/dist/bin/RenderSystem_Direct3D9.dll
+C:/sandbox/jbreslin33-socketchannel/vserver/build/dist/bin/RenderSystem_GL.dll
+C:/sandbox/jbreslin33-socketchannel/vserver/build/dist/bin/libOIS.dll
+C:/sandbox/jbreslin33-socketchannel/vserver/build/dist/bin/libboost_date_time-vc90-mt-1_44.lib
+C:/sandbox/jbreslin33-socketchannel/vserver/build/dist/bin/libboost_thread-vc90-mt-1_44.lib
