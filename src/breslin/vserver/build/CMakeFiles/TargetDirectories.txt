@@ -1,3 +1,0 @@
-C:/sandbox/baseapplication/src/breslin/vserver/build/CMakeFiles/ALL_BUILD.dir
-C:/sandbox/baseapplication/src/breslin/vserver/build/CMakeFiles/Server.dir
-C:/sandbox/baseapplication/src/breslin/vserver/build/CMakeFiles/ZERO_CHECK.dir
