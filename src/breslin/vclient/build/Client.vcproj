@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="Client"
-	ProjectGUID="{49448516-B4F0-42E0-AB0F-EC85EC3D4829}"
+	ProjectGUID="{BE5A8582-23DB-4E85-AFAB-BE69CA0B2538}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -34,7 +34,7 @@
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;Debug\&quot;"
 				AssemblerListingLocation="Debug"
 				ObjectFile="$(IntDir)\"
-				ProgramDataBaseFileName="C:\sandbox\jbreslin33-socketchannel\vclient\build\Debug/Client_d.pdb"
+				ProgramDataBaseFileName="C:\sandbox\baseapplication\src\breslin\vclient\build\Debug/Client_d.pdb"
 />
 			<Tool
 				Name="VCCustomBuildTool"/>
@@ -66,14 +66,14 @@ CommandLine="copy &quot;$(TargetPath)&quot; .\dist\bin&#x0D;&#x0A;if errorlevel 
 				LinkLibraryDependencies="false"
 				AdditionalOptions=" /STACK:10000000 /machine:X86 /debug"
 				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  C:\sandbox\ogre\build\sdk\lib\debug\OgreMain_d.lib &quot;C:\Program Files\boost\boost_1_44\lib\libboost_thread-vc90-mt-gd-1_44.lib&quot; &quot;C:\Program Files\boost\boost_1_44\lib\libboost_date_time-vc90-mt-gd-1_44.lib&quot; C:\sandbox\ogre\build\sdk\lib\debug\OIS_d.lib winmm.lib "
-				OutputFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\Debug\Client_d.exe"
+				OutputFile="C:\sandbox\baseapplication\src\breslin\vclient\build\Debug\Client_d.exe"
 				Version="0.0"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
-				ProgramDatabaseFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\Debug/Client_d.pdb"
+				ProgramDatabaseFile="C:\sandbox\baseapplication\src\breslin\vclient\build\Debug/Client_d.pdb"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
-				ImportLibrary="C:\sandbox\jbreslin33-socketchannel\vclient\build\Debug\Client_d.lib"/>
+				ImportLibrary="C:\sandbox\baseapplication\src\breslin\vclient\build\Debug\Client_d.lib"/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
@@ -97,7 +97,7 @@ CommandLine="copy &quot;$(TargetPath)&quot; .\dist\bin&#x0D;&#x0A;if errorlevel 
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;Release\&quot;"
 				AssemblerListingLocation="Release"
 				ObjectFile="$(IntDir)\"
-				ProgramDataBaseFileName="C:\sandbox\jbreslin33-socketchannel\vclient\build\Release/Client.pdb"
+				ProgramDataBaseFileName="C:\sandbox\baseapplication\src\breslin\vclient\build\Release/Client.pdb"
 />
 			<Tool
 				Name="VCCustomBuildTool"/>
@@ -129,13 +129,13 @@ CommandLine="copy &quot;$(TargetPath)&quot; .\dist\bin&#x0D;&#x0A;if errorlevel 
 				LinkLibraryDependencies="false"
 				AdditionalOptions=" /STACK:10000000 /machine:X86"
 				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  C:\sandbox\ogre\build\sdk\lib\release\OgreMain.lib &quot;C:\Program Files\boost\boost_1_44\lib\libboost_thread-vc90-mt-1_44.lib&quot; &quot;C:\Program Files\boost\boost_1_44\lib\libboost_date_time-vc90-mt-1_44.lib&quot; C:\sandbox\ogre\build\sdk\lib\release\OIS.lib winmm.lib "
-				OutputFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\Release\Client.exe"
+				OutputFile="C:\sandbox\baseapplication\src\breslin\vclient\build\Release\Client.exe"
 				Version="0.0"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=""
-				ProgramDatabaseFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\Release/Client.pdb"
+				ProgramDatabaseFile="C:\sandbox\baseapplication\src\breslin\vclient\build\Release/Client.pdb"
 				SubSystem="2"
-				ImportLibrary="C:\sandbox\jbreslin33-socketchannel\vclient\build\Release\Client.lib"/>
+				ImportLibrary="C:\sandbox\baseapplication\src\breslin\vclient\build\Release\Client.lib"/>
 		</Configuration>
 		<Configuration
 			Name="MinSizeRel|Win32"
@@ -159,7 +159,7 @@ CommandLine="copy &quot;$(TargetPath)&quot; .\dist\bin&#x0D;&#x0A;if errorlevel 
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"
 				AssemblerListingLocation="MinSizeRel"
 				ObjectFile="$(IntDir)\"
-				ProgramDataBaseFileName="C:\sandbox\jbreslin33-socketchannel\vclient\build\MinSizeRel/Client.pdb"
+				ProgramDataBaseFileName="C:\sandbox\baseapplication\src\breslin\vclient\build\MinSizeRel/Client.pdb"
 />
 			<Tool
 				Name="VCCustomBuildTool"/>
@@ -191,13 +191,13 @@ CommandLine="copy &quot;$(TargetPath)&quot; .\dist\bin&#x0D;&#x0A;if errorlevel 
 				LinkLibraryDependencies="false"
 				AdditionalOptions=" /STACK:10000000 /machine:X86"
 				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  C:\sandbox\ogre\build\sdk\lib\release\OgreMain.lib &quot;C:\Program Files\boost\boost_1_44\lib\libboost_thread-vc90-mt-1_44.lib&quot; &quot;C:\Program Files\boost\boost_1_44\lib\libboost_date_time-vc90-mt-1_44.lib&quot; C:\sandbox\ogre\build\sdk\lib\release\OIS.lib winmm.lib "
-				OutputFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\MinSizeRel\Client.exe"
+				OutputFile="C:\sandbox\baseapplication\src\breslin\vclient\build\MinSizeRel\Client.exe"
 				Version="0.0"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=""
-				ProgramDatabaseFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\MinSizeRel/Client.pdb"
+				ProgramDatabaseFile="C:\sandbox\baseapplication\src\breslin\vclient\build\MinSizeRel/Client.pdb"
 				SubSystem="2"
-				ImportLibrary="C:\sandbox\jbreslin33-socketchannel\vclient\build\MinSizeRel\Client.lib"/>
+				ImportLibrary="C:\sandbox\baseapplication\src\breslin\vclient\build\MinSizeRel\Client.lib"/>
 		</Configuration>
 		<Configuration
 			Name="RelWithDebInfo|Win32"
@@ -222,7 +222,7 @@ CommandLine="copy &quot;$(TargetPath)&quot; .\dist\bin&#x0D;&#x0A;if errorlevel 
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"
 				AssemblerListingLocation="RelWithDebInfo"
 				ObjectFile="$(IntDir)\"
-				ProgramDataBaseFileName="C:\sandbox\jbreslin33-socketchannel\vclient\build\RelWithDebInfo/Client.pdb"
+				ProgramDataBaseFileName="C:\sandbox\baseapplication\src\breslin\vclient\build\RelWithDebInfo/Client.pdb"
 />
 			<Tool
 				Name="VCCustomBuildTool"/>
@@ -254,164 +254,164 @@ CommandLine="copy &quot;$(TargetPath)&quot; .\dist\bin&#x0D;&#x0A;if errorlevel 
 				LinkLibraryDependencies="false"
 				AdditionalOptions=" /STACK:10000000 /machine:X86 /debug"
 				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  C:\sandbox\ogre\build\sdk\lib\release\OgreMain.lib &quot;C:\Program Files\boost\boost_1_44\lib\libboost_thread-vc90-mt-1_44.lib&quot; &quot;C:\Program Files\boost\boost_1_44\lib\libboost_date_time-vc90-mt-1_44.lib&quot; C:\sandbox\ogre\build\sdk\lib\release\OIS.lib winmm.lib "
-				OutputFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\RelWithDebInfo\Client.exe"
+				OutputFile="C:\sandbox\baseapplication\src\breslin\vclient\build\RelWithDebInfo\Client.exe"
 				Version="0.0"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
-				ProgramDatabaseFile="C:\sandbox\jbreslin33-socketchannel\vclient\build\RelWithDebInfo/Client.pdb"
+				ProgramDatabaseFile="C:\sandbox\baseapplication\src\breslin\vclient\build\RelWithDebInfo/Client.pdb"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
-				ImportLibrary="C:\sandbox\jbreslin33-socketchannel\vclient\build\RelWithDebInfo\Client.lib"/>
+				ImportLibrary="C:\sandbox\baseapplication\src\breslin\vclient\build\RelWithDebInfo\Client.lib"/>
 		</Configuration>
 	</Configurations>
 	<Files>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\vclient\CMakeLists.txt">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
 					Name="VCCustomBuildTool"
-					Description="Building Custom Rule C:/sandbox/jbreslin33-socketchannel/vclient/CMakeLists.txt"
-					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/jbreslin33-socketchannel/vclient -BC:/sandbox/jbreslin33-socketchannel/vclient/build --check-stamp-file C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
-					AdditionalDependencies="C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;"
-					Outputs="C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp"/>
+					Description="Building Custom Rule C:/sandbox/baseapplication/src/breslin/vclient/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/baseapplication/src/breslin/vclient -BC:/sandbox/baseapplication/src/breslin/vclient/build --check-stamp-file C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="C:\sandbox\baseapplication\src\breslin\vclient\CMakeLists.txt;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\CMakeLists.txt;"
+					Outputs="C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\generate.stamp"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32">
 					<Tool
 					Name="VCCustomBuildTool"
-					Description="Building Custom Rule C:/sandbox/jbreslin33-socketchannel/vclient/CMakeLists.txt"
-					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/jbreslin33-socketchannel/vclient -BC:/sandbox/jbreslin33-socketchannel/vclient/build --check-stamp-file C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
-					AdditionalDependencies="C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;"
-					Outputs="C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp"/>
+					Description="Building Custom Rule C:/sandbox/baseapplication/src/breslin/vclient/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/baseapplication/src/breslin/vclient -BC:/sandbox/baseapplication/src/breslin/vclient/build --check-stamp-file C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="C:\sandbox\baseapplication\src\breslin\vclient\CMakeLists.txt;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\CMakeLists.txt;"
+					Outputs="C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\generate.stamp"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="MinSizeRel|Win32">
 					<Tool
 					Name="VCCustomBuildTool"
-					Description="Building Custom Rule C:/sandbox/jbreslin33-socketchannel/vclient/CMakeLists.txt"
-					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/jbreslin33-socketchannel/vclient -BC:/sandbox/jbreslin33-socketchannel/vclient/build --check-stamp-file C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
-					AdditionalDependencies="C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;"
-					Outputs="C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp"/>
+					Description="Building Custom Rule C:/sandbox/baseapplication/src/breslin/vclient/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/baseapplication/src/breslin/vclient -BC:/sandbox/baseapplication/src/breslin/vclient/build --check-stamp-file C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="C:\sandbox\baseapplication\src\breslin\vclient\CMakeLists.txt;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\CMakeLists.txt;"
+					Outputs="C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\generate.stamp"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="RelWithDebInfo|Win32">
 					<Tool
 					Name="VCCustomBuildTool"
-					Description="Building Custom Rule C:/sandbox/jbreslin33-socketchannel/vclient/CMakeLists.txt"
-					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/jbreslin33-socketchannel/vclient -BC:/sandbox/jbreslin33-socketchannel/vclient/build --check-stamp-file C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
-					AdditionalDependencies="C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\jbreslin33-socketchannel\vclient\CMakeLists.txt;"
-					Outputs="C:\sandbox\jbreslin33-socketchannel\vclient\build\CMakeFiles\generate.stamp"/>
+					Description="Building Custom Rule C:/sandbox/baseapplication/src/breslin/vclient/CMakeLists.txt"
+					CommandLine="&quot;C:\Program Files\CMake 2.8\bin\cmake.exe&quot; -HC:/sandbox/baseapplication/src/breslin/vclient -BC:/sandbox/baseapplication/src/breslin/vclient/build --check-stamp-file C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="C:\sandbox\baseapplication\src\breslin\vclient\CMakeLists.txt;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeSystem.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCCompiler.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeSystemSpecificInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeGenericSystem.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\WindowsPaths.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeRCCompiler.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeRCInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCXXInformation.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\Windows-cl.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCPlatform.cmake;C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\CMakeCXXPlatform.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\Platform\cl.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\CMakeCommonLanguageInclude.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOGRE.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;C:\sandbox\ogre\build\sdk\CMake\PreprocessorUtils.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;C:\sandbox\ogre\build\sdk\CMake\FindOIS.cmake;C:\sandbox\ogre\build\sdk\CMake\FindPkgMacros.cmake;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindPkgConfig.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;&quot;C:\Program Files\CMake 2.8\share\cmake-2.8\Modules\FindBoost.cmake&quot;;C:\sandbox\baseapplication\src\breslin\vclient\CMakeLists.txt;"
+					Outputs="C:\sandbox\baseapplication\src\breslin\vclient\build\CMakeFiles\generate.stamp"/>
 				</FileConfiguration>
 			</File>
 		<Filter
 			Name="Source Files"
 			Filter="">
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\game\BaseApplication.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\game\BaseApplication.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\game\game.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\game\game.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\tdreamsock\dreamSockLog.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\tdreamsock\dreamSockLog.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\tdreamsock\dreamWinSock.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\tdreamsock\dreamWinSock.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\network\network.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\network\network.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\command\command.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\command\command.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\math\vector3D.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\math\vector3D.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\shape.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\shape\shape.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\dynamicShape.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\shape\dynamicShape.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\ogreDynamicShape.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\shape\ogreDynamicShape.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeMoveStates.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\states\dynamicShapeMoveStates.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeRotationStates.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\states\dynamicShapeRotationStates.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeAnimationStates.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\states\dynamicShapeAnimationStates.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\dispatch\dispatch.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\dispatch\dispatch.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\billboard\objectTitle.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\billboard\objectTitle.cpp">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\time\time.cpp">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\time\time.cpp">
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="">
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\game\BaseApplication.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\game\BaseApplication.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\game\game.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\game\game.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\tdreamsock\dreamSockLog.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\tdreamsock\dreamSockLog.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\tdreamsock\dreamWinSock.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\tdreamsock\dreamWinSock.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\network\network.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\network\network.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\command\command.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\command\command.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\math\vector3D.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\math\vector3D.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\shape.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\shape\shape.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\dynamicShape.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\shape\dynamicShape.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\shape\ogreDynamicShape.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\shape\ogreDynamicShape.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeState.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\states\dynamicShapeState.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeStateMachine.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\states\dynamicShapeStateMachine.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeMoveStates.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\states\dynamicShapeMoveStates.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeRotationStates.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\states\dynamicShapeRotationStates.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\states\dynamicShapeAnimationStates.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\states\dynamicShapeAnimationStates.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\dispatch\dispatch.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\dispatch\dispatch.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\billboard\objectTitle.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\billboard\objectTitle.h">
 			</File>
 			<File
-				RelativePath="C:\sandbox\jbreslin33-socketchannel\clientside\time\time.h">
+				RelativePath="C:\sandbox\baseapplication\src\breslin\clientside\time\time.h">
 			</File>
 		</Filter>
 	</Files>

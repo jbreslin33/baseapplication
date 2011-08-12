@@ -1,8 +1,8 @@
-# Install script for directory: C:/sandbox/jbreslin33-socketchannel/vserver
+# Install script for directory: C:/sandbox/baseapplication/src/breslin/vserver
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "C:/sandbox/jbreslin33-socketchannel/vserver/build/dist")
+  SET(CMAKE_INSTALL_PREFIX "C:/sandbox/baseapplication/src/breslin/vserver/build/dist")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,8 +33,8 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unsp
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee]|[Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
     FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE FILE FILES
-      "C:/sandbox/jbreslin33-socketchannel/vserver/dist/bin/win32/plugins.cfg"
-      "C:/sandbox/jbreslin33-socketchannel/vserver/dist/bin/win32/resources.cfg"
+      "C:/sandbox/baseapplication/src/breslin/vserver/dist/bin/win32/plugins.cfg"
+      "C:/sandbox/baseapplication/src/breslin/vserver/dist/bin/win32/resources.cfg"
       )
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee]|[Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
@@ -42,8 +42,8 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unsp
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
     FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE FILE FILES
-      "C:/sandbox/jbreslin33-socketchannel/vserver/dist/bin/win32/plugins_d.cfg"
-      "C:/sandbox/jbreslin33-socketchannel/vserver/dist/bin/win32/resources_d.cfg"
+      "C:/sandbox/baseapplication/src/breslin/vserver/dist/bin/win32/plugins_d.cfg"
+      "C:/sandbox/baseapplication/src/breslin/vserver/dist/bin/win32/resources_d.cfg"
       )
   ENDIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
@@ -94,7 +94,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "C:/sandbox/jbreslin33-socketchannel/vserver/build/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "C:/sandbox/baseapplication/src/breslin/vserver/build/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "C:/sandbox/jbreslin33-socketchannel/vserver/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "C:/sandbox/baseapplication/src/breslin/vserver/build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)
