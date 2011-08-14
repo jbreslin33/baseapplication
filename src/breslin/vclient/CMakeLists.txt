@@ -87,6 +87,9 @@ endif()
  if (WIN32)
 set(HDRS
 	
+	#ablility
+	../clientside/ability/ability.h
+	
 	#game
 	../clientside/game/BaseApplication.h
 	../clientside/game/game.h
@@ -127,6 +130,9 @@ set(HDRS
 )
  
 set(SRCS
+
+	#ablility
+	../clientside/ability/ability.cpp
 
 	#game
 	../clientside/game/BaseApplication.cpp
@@ -170,6 +176,9 @@ endif (WIN32)
 if (UNIX)
 set(HDRS
 
+	#ablility
+	../clientside/ability/ability.h
+
 	#game
 	../clientside/game/BaseApplication.h
 	../clientside/game/game.h
@@ -209,6 +218,9 @@ set(HDRS
 )
  
 set(SRCS
+
+	#ablility
+	../clientside/ability/ability.cpp
 
 	#game
 	../game/BaseApplication.cpp
