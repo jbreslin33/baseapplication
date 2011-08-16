@@ -90,6 +90,10 @@ set(HDRS
 	#ablility
 	../clientside/ability/ability.h
 	
+	#animation
+	../clientside/animation/animationAbility.h
+	../clientside/animation/ogreAnimationAbility.h
+	
 	#game
 	../clientside/game/BaseApplication.h
 	../clientside/game/game.h
@@ -133,6 +137,10 @@ set(SRCS
 
 	#ablility
 	../clientside/ability/ability.cpp
+
+	#animation
+	../clientside/animation/animationAbility.cpp
+	../clientside/animation/ogreAnimationAbility.cpp
 
 	#game
 	../clientside/game/BaseApplication.cpp
@@ -179,6 +187,10 @@ set(HDRS
 	#ablility
 	../clientside/ability/ability.h
 
+	#animation
+	../clientside/animation/animationAbility.h
+	../clientside/animation/ogreAnimationAbility.h
+
 	#game
 	../clientside/game/BaseApplication.h
 	../clientside/game/game.h
@@ -220,7 +232,11 @@ set(HDRS
 set(SRCS
 
 	#ablility
-	../clientside/ability/ability.cpp
+	../clientside/ability/abilityAbility.cpp
+
+	#animation
+	../clientside/animation/animation.cpp
+	../clientside/animation/ogreAnimationAbility.cpp
 
 	#game
 	../game/BaseApplication.cpp

@@ -7,11 +7,14 @@
 #include "../states/dynamicShapeStateMachine.h"
 #include "../states/dynamicShapeMoveStates.h"
 #include "../states/dynamicShapeRotationStates.h"
-#include "../states/dynamicShapeAnimationStates.h"
+
 
 #include "../dispatch/dispatch.h"
 
 #include "../billboard/objectTitle.h"
+
+//ability
+#include "../animation/animationAbility.h"
 
 #include <string.h>
 
@@ -20,6 +23,9 @@ DynamicShape::DynamicShape(Game* game, Dispatch* dispatch)
 	Shape         ()
 {
 	mGame = game;
+
+	//animation
+//	mAnimationAbility = new AnimationAbility(this);
 
 	mPosition = new Vector3D();
 	mVelocity = new Vector3D();
@@ -167,12 +173,6 @@ void DynamicShape::createStateMachines()
 	mRotationInterpolateTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
 	mRotationInterpolateTickStateMachine->setGlobalState       (Global_InterpolateTick_Rotation::Instance());
 
-    //animation interpolateTick states
-    mAnimationInterpolateTickStateMachine = new DynamicShapeStateMachine(this);    //setup the state machine
-    mAnimationInterpolateTickStateMachine->setCurrentState (Idle_InterpolateTick_Animation::Instance());
-    mAnimationInterpolateTickStateMachine->setPreviousState(Idle_InterpolateTick_Animation::Instance());
-    mAnimationInterpolateTickStateMachine->setGlobalState  (Global_InterpolateTick_Animation::Instance());  
-
 }
 
 void DynamicShape::processTick()
@@ -193,7 +193,10 @@ void DynamicShape::interpolateTick(float renderTime)
 	//update state machines...
 	mMoveInterpolateTickStateMachine->update();
 	mRotationInterpolateTickStateMachine->update();
-	mAnimationInterpolateTickStateMachine->update();
+	//mAnimationInterpolateTickStateMachine->update();
+	//m
+	mAnimationAbility->mAnimationInterpolateTickStateMachine->update();
+
 }
 
 float DynamicShape::getDegreesToServer()

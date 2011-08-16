@@ -10,8 +10,9 @@ public:
 	Ability(Shape* shape);
 	~Ability();
 
-private:
 	Shape* mShape;
+
+	//getShape() { return mShape; }
 
 };
 

@@ -13,6 +13,7 @@ class Game;
 class DynamicShapeStateMachine;
 class DynamicShapeState;
 class Dispatch;
+class AnimationAbility;
 
 class DynamicShape : public Shape //, public OgreAnimation
 {
@@ -20,9 +21,6 @@ class DynamicShape : public Shape //, public OgreAnimation
 public:
 DynamicShape(Game* game, Dispatch* dispatch);
 ~DynamicShape();
-
-//game pointer cause you gotta know about the world you inhabit as a playa
-Game* mGame;
 
 //network
 //flag
@@ -38,8 +36,9 @@ DynamicShapeStateMachine* mMoveProcessTickStateMachine;
 DynamicShapeStateMachine* mMoveInterpolateTickStateMachine;
 DynamicShapeStateMachine* mRotationProcessTickStateMachine;
 DynamicShapeStateMachine* mRotationInterpolateTickStateMachine;
-DynamicShapeStateMachine* mAnimationInterpolateTickStateMachine;
 
+//animation
+AnimationAbility* mAnimationAbility;
 
 //this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
 DynamicShape* mGhost;
@@ -91,9 +90,6 @@ virtual void        yaw                  (float amountToYaw, bool converToDegree
 virtual float       getDegreesToSomething(Vector3D something                       ) = 0;
 virtual void        translate            (Vector3D translateVector, int perspective) = 0;
 virtual std::string getName() = 0; 
-
-//animation
-virtual void enterAnimationState(DynamicShapeState* animationState) = 0;
 
 //ticks
 void processTick();

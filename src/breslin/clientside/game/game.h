@@ -122,6 +122,8 @@ public:
 	void unloadOtherScreens();
 	void initializeGui();
 
+	//time
+	float getRenderTime() { return mRenderTime; }
 	
 
 };

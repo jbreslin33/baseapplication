@@ -7,6 +7,8 @@
 //math
 #include "../../math/vector3D.h"
 
+class Game;
+
 class Shape
 {
 public:
@@ -20,8 +22,8 @@ Shape();
 **************************************************/
 public:
 
-int                      mIndex;
-
+int   mIndex;
+Game* mGame;
 /**************************************************
 *			METHODS
 **************************************************/
@@ -45,10 +47,6 @@ virtual void     drawTitle            (                          ) = 0;
 virtual void     appendToTitle        (std::string appendage     ) = 0;
 virtual void     appendToTitle        (int appendage             ) = 0;
 virtual void     clearTitle           (                          ) = 0;
-
-public:
-//animation
-virtual void     runAnimations        (                          ) = 0;   
 
 };
 
