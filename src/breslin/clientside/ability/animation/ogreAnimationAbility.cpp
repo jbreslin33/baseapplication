@@ -1,8 +1,8 @@
 #include "OgreAnimationAbility.h"
-#include "../shape/ogreDynamicShape.h"
-#include "../game/game.h"
+#include "../../shape/ogreDynamicShape.h"
+#include "../../game/game.h"
 
-#include "../states/dynamicShapeAnimationStates.h"
+#include "dynamicShapeAnimationStates.h"
 
 OgreAnimationAbility::OgreAnimationAbility(OgreDynamicShape* shape) : AnimationAbility(shape)
 {

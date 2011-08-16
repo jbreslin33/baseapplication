@@ -93,6 +93,7 @@ set(HDRS
 	#animation
 	../clientside/ability/animation/animationAbility.h
 	../clientside/ability/animation/ogreAnimationAbility.h
+	../clientside/ability/animation/dynamicShapeAnimationStates.h
 	
 	#game
 	../clientside/game/BaseApplication.h
@@ -121,7 +122,7 @@ set(HDRS
 	../clientside/states/dynamicShapeStateMachine.h
 	../clientside/states/dynamicShapeMoveStates.h
 	../clientside/states/dynamicShapeRotationStates.h
-	../clientside/states/dynamicShapeAnimationStates.h
+
 	
 	#dispatch
 	../clientside/dispatch/dispatch.h
@@ -141,6 +142,7 @@ set(SRCS
 	#animation
 	../clientside/ability/animation/animationAbility.cpp
 	../clientside/ability/animation/ogreAnimationAbility.cpp
+	../clientside/ability/animation/dynamicShapeAnimationStates.cpp
 
 	#game
 	../clientside/game/BaseApplication.cpp
@@ -167,7 +169,6 @@ set(SRCS
 	#states
 	../clientside/states/dynamicShapeMoveStates.cpp
 	../clientside/states/dynamicShapeRotationStates.cpp
-	../clientside/states/dynamicShapeAnimationStates.cpp
 	
 	#dispatch
 	../clientside/dispatch/dispatch.cpp
@@ -190,6 +191,7 @@ set(HDRS
 	#animation
 	../clientside/ability/animation/animationAbility.h
 	../clientside/ability/animation/ogreAnimationAbility.h
+	../clientside/ability/animation/dynamicShapeAnimationStates.h
 
 	#game
 	../clientside/game/BaseApplication.h
@@ -217,7 +219,6 @@ set(HDRS
 	../clientside/states/dynamicStateMachine.h
 	../clientside/states/dynamicShapeMoveStates.h
 	../clientside/states/dynamicShapeRotationStates.h
-	../clientside/states/dynamicShapeAnimationStates.h
 	
 	#dispatch
 	../clientside/dispatch/dispatch.h
@@ -237,6 +238,7 @@ set(SRCS
 	#animation
 	../clientside/ability/animation/animationAbility.cpp
 	../clientside/ability/animation/ogreAnimationAbility.cpp
+	../clientside/ability/animation/dynamicShapeAnimationStates.cpp
 
 	#game
 	../game/BaseApplication.cpp
@@ -263,7 +265,6 @@ set(SRCS
 	#states
 	../clientside/states/dynamicShapeMoveStates.cpp
 	../clientside/states/dynamicShapeRotationStates.cpp
-	../clientside/states/dynamicShapeAnimationStates.cpp
 	
 	#dispatch
 	../clientside/dispatch/dispatch.cpp

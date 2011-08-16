@@ -1,10 +1,10 @@
 #include "dynamicShapeAnimationStates.h"
-#include "dynamicShapeStateMachine.h"
+#include "../../states/dynamicShapeStateMachine.h"
 
-#include "../shape/dynamicShape.h"
+#include "../../shape/dynamicShape.h"
 
-#include "../billboard/objectTitle.h"
-#include "../animation/animationAbility.h"
+#include "../../billboard/objectTitle.h"
+#include "animationAbility.h"
 
 /******************** Global_InterpolateTick_Animation *****************/
 Global_InterpolateTick_Animation* Global_InterpolateTick_Animation::Instance()

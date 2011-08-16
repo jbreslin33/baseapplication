@@ -1,7 +1,7 @@
 #ifndef ANIMATIONABILITY_H
 #define ANIMATIONABILITY_H
 
-#include "../ability/ability.h"
+#include "../ability.h"
 
 class DynamicShapeStateMachine;
 class DynamicShapeState;

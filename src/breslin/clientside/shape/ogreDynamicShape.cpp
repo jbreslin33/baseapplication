@@ -3,9 +3,8 @@
 
 #include "../client/client.h"
 
-//animation states for enter method
-#include "../states/dynamicShapeAnimationStates.h"
-#include "../animation/ogreAnimationAbility.h"
+//animation
+#include "../ability/animation/ogreAnimationAbility.h"
 
 #include "../game/game.h"
 

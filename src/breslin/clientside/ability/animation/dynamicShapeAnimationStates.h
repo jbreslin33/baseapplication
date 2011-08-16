@@ -1,6 +1,6 @@
 #ifndef DYNAMICSHAPEANIMATIONSTATES_H
 #define DYNAMICSHAPEANIMATIONSTATES_H
-#include "dynamicShapeState.h"
+#include "../../states/dynamicShapeState.h"
 
 class DynamicShape;
 

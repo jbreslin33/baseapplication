@@ -1,8 +1,8 @@
 #include "AnimationAbility.h"
-#include "../shape/dynamicShape.h"
+#include "../../shape/dynamicShape.h"
 
-#include "../states/dynamicShapeStateMachine.h"
-#include "../states/dynamicShapeAnimationStates.h"
+#include "../../states/dynamicShapeStateMachine.h"
+#include "dynamicShapeAnimationStates.h"
 
 AnimationAbility::AnimationAbility(DynamicShape* shape)  : Ability(shape)
 {
