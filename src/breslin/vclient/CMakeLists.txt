@@ -87,12 +87,12 @@ endif()
  if (WIN32)
 set(HDRS
 	
-	#ablility
+	#ability
 	../clientside/ability/ability.h
 	
 	#animation
-	../clientside/animation/animationAbility.h
-	../clientside/animation/ogreAnimationAbility.h
+	../clientside/ability/animation/animationAbility.h
+	../clientside/ability/animation/ogreAnimationAbility.h
 	
 	#game
 	../clientside/game/BaseApplication.h
@@ -139,8 +139,8 @@ set(SRCS
 	../clientside/ability/ability.cpp
 
 	#animation
-	../clientside/animation/animationAbility.cpp
-	../clientside/animation/ogreAnimationAbility.cpp
+	../clientside/ability/animation/animationAbility.cpp
+	../clientside/ability/animation/ogreAnimationAbility.cpp
 
 	#game
 	../clientside/game/BaseApplication.cpp
@@ -188,8 +188,8 @@ set(HDRS
 	../clientside/ability/ability.h
 
 	#animation
-	../clientside/animation/animationAbility.h
-	../clientside/animation/ogreAnimationAbility.h
+	../clientside/ability/animation/animationAbility.h
+	../clientside/ability/animation/ogreAnimationAbility.h
 
 	#game
 	../clientside/game/BaseApplication.h
@@ -235,8 +235,8 @@ set(SRCS
 	../clientside/ability/abilityAbility.cpp
 
 	#animation
-	../clientside/animation/animation.cpp
-	../clientside/animation/ogreAnimationAbility.cpp
+	../clientside/ability/animation/animationAbility.cpp
+	../clientside/ability/animation/ogreAnimationAbility.cpp
 
 	#game
 	../game/BaseApplication.cpp
