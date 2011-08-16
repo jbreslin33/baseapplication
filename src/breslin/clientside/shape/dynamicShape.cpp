@@ -71,7 +71,6 @@ void DynamicShape::initializeVariables()
 
     //thresholds
     mPosInterpLimitHigh = 8.0; //how far away from server till we try to catch up
-    mPosInterpLimitLow  = 2.0; //how close to server till we are in sync
     mPosInterpFactor    = 4.0;
 
 	//deltas
@@ -197,7 +196,9 @@ void DynamicShape::interpolateTick(float renderTime)
 
 }
 
-float DynamicShape::getDegreesToServer()
+
+
+float DynamicShape::getDegreesToServer()  //rot
 {
     Vector3D serverRotNew;
 
@@ -213,7 +214,8 @@ float DynamicShape::getDegreesToServer()
 	return degreesToServer;
 }
 
-void DynamicShape::calculateServerRotationSpeed()
+
+void DynamicShape::calculateServerRotationSpeed()  //rot
 {
     mServerRotOld.zero();
     mServerRotNew.zero();
@@ -241,7 +243,7 @@ void DynamicShape::calculateServerRotationSpeed()
     }
 }
 
-void DynamicShape::calculateDeltaPosition()
+void DynamicShape::calculateDeltaPosition()  //mov
 {
 	mDeltaX = mServerFrame.mOrigin.x - getPosition().x;
     mDeltaY = mServerFrame.mOrigin.y - getPosition().y;

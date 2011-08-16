@@ -57,33 +57,32 @@ Command mCommandToRunOnShape;
 float mRenderTime;
 
 //run speed
-float mRunSpeed;
-float mRunSpeedMax;
+float mRunSpeed; //move
+float mRunSpeedMax; //move
 
 //thresholds
-float mTurnSpeed;
-float mPosInterpLimitHigh;
-float mPosInterpLimitLow;
-float mPosInterpFactor;
+float mTurnSpeed; //rot
+float mPosInterpLimitHigh; //mov
+float mPosInterpFactor; //mov
 
 //deltas
-float mDeltaX;
-float mDeltaZ;
-float mDeltaY;
-float mDeltaPosition;
+float mDeltaX;  //mov
+float mDeltaZ;  //mov
+float mDeltaY; //mov
+float mDeltaPosition; //mov
 
 //rotation
-float mServerRotSpeed;
+float mServerRotSpeed;  //rot
 
-float mRotInterpLimitHigh;
-float mRotInterpLimitLow;
-float mRotInterpIncrease; 
-float mRotInterpDecrease;
+float mRotInterpLimitHigh;  //rot
+float mRotInterpLimitLow;  //rot
+float mRotInterpIncrease;   //rot
+float mRotInterpDecrease;  //rot
 
 //rotation
-Vector3D mServerRotOld;
-Vector3D mServerRotNew;
-float    mDegreesToServer;
+Vector3D mServerRotOld;  //rot
+Vector3D mServerRotNew;  //rot
+float    mDegreesToServer;  //rot
 
 //virtual need to be implemented in subclass...
 virtual void        yaw                  (float amountToYaw, bool converToDegree   ) = 0;
@@ -96,11 +95,11 @@ void processTick();
 void interpolateTick(float renderTime);
 
 //rotation
-float getDegreesToServer();
-void  calculateServerRotationSpeed();
+float getDegreesToServer();  //rot
+void  calculateServerRotationSpeed();  //rot
 
 //move
-void calculateDeltaPosition();
+void calculateDeltaPosition();  //mov
 
 //messaging
 void readDeltaMoveCommand(Dispatch *mes);
