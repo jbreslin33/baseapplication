@@ -1,5 +1,5 @@
 #include "AbilityAnimationOgre.h"
-#include "../../shape/ogreDynamicShape.h"
+#include "../../shape/shapeDynamicOgre.h.h"
 #include "../../game/game.h"
 
 #include "abilityAnimationStates.h"

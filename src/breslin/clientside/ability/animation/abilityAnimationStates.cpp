@@ -1,7 +1,7 @@
 #include "abilityAnimationStates.h"
-#include "../../states/dynamicShapeStateMachine.h"
+#include "../../states/shapeDynamicStateMachine.h"
 
-#include "../../shape/dynamicShape.h"
+#include "../../shape/shapeDynamic.h"
 
 #include "../../billboard/objectTitle.h"
 #include "abilityAnimation.h"
@@ -12,14 +12,14 @@ Global_InterpolateTick_Animation* Global_InterpolateTick_Animation::Instance()
   static Global_InterpolateTick_Animation instance;
   return &instance;
 }
-void Global_InterpolateTick_Animation::enter(DynamicShape* dynamicShape)
+void Global_InterpolateTick_Animation::enter(DynamicShape* shapeDynamic)
 {
 }
-void Global_InterpolateTick_Animation::execute(DynamicShape* dynamicShape)
+void Global_InterpolateTick_Animation::execute(DynamicShape* shapeDynamic)
 {
 
 }
-void Global_InterpolateTick_Animation::exit(DynamicShape* dynamicShape)
+void Global_InterpolateTick_Animation::exit(DynamicShape* shapeDynamic)
 {
 }
 
@@ -30,21 +30,21 @@ Idle_InterpolateTick_Animation* Idle_InterpolateTick_Animation::Instance()
   static Idle_InterpolateTick_Animation instance;
   return &instance;
 }
-void Idle_InterpolateTick_Animation::enter(DynamicShape* dynamicShape)
+void Idle_InterpolateTick_Animation::enter(DynamicShape* shapeDynamic)
 {
-	dynamicShape->mabilityAnimation->enterAnimationState(this);
+	shapeDynamic->mabilityAnimation->enterAnimationState(this);
 }
 
-void Idle_InterpolateTick_Animation::execute(DynamicShape* dynamicShape)
+void Idle_InterpolateTick_Animation::execute(DynamicShape* shapeDynamic)
 {
-	if (!dynamicShape->mCommandToRunOnShape.mVelocity.isZero())
+	if (!shapeDynamic->mCommandToRunOnShape.mVelocity.isZero())
 	{
-		dynamicShape->mabilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Run_InterpolateTick_Animation::Instance());
+		shapeDynamic->mabilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Run_InterpolateTick_Animation::Instance());
 	}
 
-	dynamicShape->mabilityAnimation->runAnimations();
+	shapeDynamic->mabilityAnimation->runAnimations();
 }
-void Idle_InterpolateTick_Animation::exit(DynamicShape* dynamicShape)
+void Idle_InterpolateTick_Animation::exit(DynamicShape* shapeDynamic)
 {
 }
 
@@ -55,21 +55,21 @@ Run_InterpolateTick_Animation* Run_InterpolateTick_Animation::Instance()
   static Run_InterpolateTick_Animation instance;
   return &instance;
 }
-void Run_InterpolateTick_Animation::enter(DynamicShape* dynamicShape)
+void Run_InterpolateTick_Animation::enter(DynamicShape* shapeDynamic)
 {
-	dynamicShape->mabilityAnimation->enterAnimationState(this);
+	shapeDynamic->mabilityAnimation->enterAnimationState(this);
 }
-void Run_InterpolateTick_Animation::execute(DynamicShape* dynamicShape)
+void Run_InterpolateTick_Animation::execute(DynamicShape* shapeDynamic)
 {
-	if (dynamicShape->mCommandToRunOnShape.mVelocity.isZero())
+	if (shapeDynamic->mCommandToRunOnShape.mVelocity.isZero())
 	{
-		dynamicShape->mabilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Idle_InterpolateTick_Animation::Instance());
+		shapeDynamic->mabilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Idle_InterpolateTick_Animation::Instance());
 	}
 	
-	dynamicShape->mabilityAnimation->runAnimations();
+	shapeDynamic->mabilityAnimation->runAnimations();
 }
 
-void Run_InterpolateTick_Animation::exit(DynamicShape* dynamicShape)
+void Run_InterpolateTick_Animation::exit(DynamicShape* shapeDynamic)
 {
 }
 

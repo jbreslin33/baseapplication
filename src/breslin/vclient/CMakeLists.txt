@@ -95,6 +95,16 @@ set(HDRS
 	../clientside/ability/animation/abilityAnimationOgre.h
 	../clientside/ability/animation/abilityAnimationStates.h
 	
+	#move
+	../clientside/ability/animation/abilityAnimation.h
+	../clientside/ability/animation/abilityAnimationOgre.h
+	../clientside/ability/animation/abilityAnimationStates.h
+	
+	#rotation
+	../clientside/ability/animation/abilityMove.h
+	../clientside/ability/animation/abilityMoveOgre.h
+	../clientside/ability/animation/abilityMoveStates.h
+	
 	#game
 	../clientside/game/BaseApplication.h
 	../clientside/game/game.h
@@ -114,14 +124,14 @@ set(HDRS
 	
 	#shape
 	../clientside/shape/shape.h
-	../clientside/shape/dynamicShape.h
-	../clientside/shape/ogreDynamicShape.h
+	../clientside/shape/shapeDynamic.h
+	../clientside/shape/shapeDynamicOgre.h
 
 	#states
-	../clientside/states/dynamicShapeState.h
-	../clientside/states/dynamicShapeStateMachine.h
-	../clientside/states/dynamicShapeMoveStates.h
-	../clientside/states/dynamicShapeRotationStates.h
+	../clientside/states/stateDynamicShape.h
+	../clientside/states/stateDynamicShape.h
+	../clientside/states/stateDynamicShapeMove.h
+	../clientside/states/stateDynamicShapeRotation.h
 
 	
 	#dispatch
@@ -144,6 +154,16 @@ set(SRCS
 	../clientside/ability/animation/abilityAnimationOgre.cpp
 	../clientside/ability/animation/abilityAnimationStates.cpp
 
+	#move
+	../clientside/ability/animation/abilityMove.cpp
+	../clientside/ability/animation/abilityMoveOgre.cpp
+	../clientside/ability/animation/abilityMoveStates.cpp
+	
+	#rotation
+	../clientside/ability/animation/abilityRotation.cpp
+	../clientside/ability/animation/abilityRotationOgre.cpp
+	../clientside/ability/animation/abilityRotationStates.cpp
+
 	#game
 	../clientside/game/BaseApplication.cpp
 	../clientside/game/game.cpp
@@ -163,12 +183,12 @@ set(SRCS
 	
 	#shape
 	../clientside/shape/shape.cpp
-	../clientside/shape/dynamicShape.cpp
-	../clientside/shape/ogreDynamicShape.cpp
+	../clientside/shape/shapeDynamic.cpp
+	../clientside/shape/shapeDynamicOgre.cpp
 	
 	#states
-	../clientside/states/dynamicShapeMoveStates.cpp
-	../clientside/states/dynamicShapeRotationStates.cpp
+	../clientside/states/stateDynamicShapeMove.cpp
+	../clientside/states/stateDynamicShapeRotation.cpp
 	
 	#dispatch
 	../clientside/dispatch/dispatch.cpp
@@ -192,6 +212,16 @@ set(HDRS
 	../clientside/ability/animation/abilityAnimation.h
 	../clientside/ability/animation/abilityAnimationOgre.h
 	../clientside/ability/animation/abilityAnimationStates.h
+	
+	#move
+	../clientside/ability/animation/abilityAnimation.h
+	../clientside/ability/animation/abilityAnimationOgre.h
+	../clientside/ability/animation/abilityAnimationStates.h
+	
+	#rotation
+	../clientside/ability/animation/abilityMove.h
+	../clientside/ability/animation/abilityMoveOgre.h
+	../clientside/ability/animation/abilityMoveStates.h
 
 	#game
 	../clientside/game/BaseApplication.h
@@ -211,14 +241,14 @@ set(HDRS
 	
 	#shape
 	../clientside/shape/shape.h
-	../clientside/shape/dynamicShape.h
-	../clientside/shape/ogreDynamicShape.h
+	../clientside/shape/shapeDynamic.h
+	../clientside/shape/shapeDynamicOgre.h
 	
 	#states
-	../clientside/states/dynamicShapeState.h
-	../clientside/states/dynamicStateMachine.h
-	../clientside/states/dynamicShapeMoveStates.h
-	../clientside/states/dynamicShapeRotationStates.h
+	../clientside/states/stateDynamicShape.h
+	../clientside/states/stateDynamicShape.h
+	../clientside/states/stateDynamicShapeMove.h
+	../clientside/states/stateDynamicShapeRotation.h
 	
 	#dispatch
 	../clientside/dispatch/dispatch.h
@@ -240,6 +270,16 @@ set(SRCS
 	../clientside/ability/animation/abilityAnimationOgre.cpp
 	../clientside/ability/animation/abilityAnimationStates.cpp
 
+	#move
+	../clientside/ability/animation/abilityMove.cpp
+	../clientside/ability/animation/abilityMoveOgre.cpp
+	../clientside/ability/animation/abilityMoveStates.cpp
+	
+	#rotation
+	../clientside/ability/animation/abilityRotation.cpp
+	../clientside/ability/animation/abilityRotationOgre.cpp
+	../clientside/ability/animation/abilityRotationStates.cpp
+
 	#game
 	../game/BaseApplication.cpp
 	../clientside/game/game.cpp
@@ -259,12 +299,12 @@ set(SRCS
 	
 	#shape
 	../clientside/shape/shape.cpp
-	../clientside/shape/dynamicShape.cpp
-	../clientside/shape/ogreDynamicShape.cpp
+	../clientside/shape/shapeDynamic.cpp
+	../clientside/shape/shapeDynamicOgre.cpp
 	
 	#states
-	../clientside/states/dynamicShapeMoveStates.cpp
-	../clientside/states/dynamicShapeRotationStates.cpp
+	../clientside/states/stateDynamicShapeMove.cpp
+	../clientside/states/stateDynamicShapeRotation.cpp
 	
 	#dispatch
 	../clientside/dispatch/dispatch.cpp

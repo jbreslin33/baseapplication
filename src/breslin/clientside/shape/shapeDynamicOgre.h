@@ -4,7 +4,7 @@
 #define NUM_ANIMS 13           // number of animations the character has
 #define ANIM_FADE_SPEED 7.5f   // animation crossfade speed in % of full weight per second
 
-#include "dynamicShape.h"
+#include "shapeDynamic.h"
 
 //Ogre headers
 #include "Ogre.h"

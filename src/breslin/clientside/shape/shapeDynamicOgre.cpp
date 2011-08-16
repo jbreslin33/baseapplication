@@ -1,4 +1,4 @@
-#include "ogreDynamicShape.h"
+#include "shapeDynamicOgre.h"
 #include "../tdreamsock/dreamSockLog.h"
 
 #include "../client/client.h"

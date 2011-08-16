@@ -1,12 +1,12 @@
-#include "dynamicShape.h"
+#include "shapeDynamic.h"
 #include "../tdreamsock/dreamSockLog.h"
 
 //game
 #include "../game/game.h"
 
-#include "../states/dynamicShapeStateMachine.h"
-#include "../states/dynamicShapeMoveStates.h"
-#include "../states/dynamicShapeRotationStates.h"
+#include "../states/shapeDynamicStateMachine.h"
+#include "../states/shapeDynamicMoveStates.h"
+#include "../states/shapeDynamicRotationStates.h"
 
 
 #include "../dispatch/dispatch.h"

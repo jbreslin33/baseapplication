@@ -1,6 +1,6 @@
 #include "game.h"
 #include "../tdreamsock/dreamSockLog.h"
-#include "../shape/ogreDynamicShape.h"
+#include "../shape/shapeDynamicOgre.h.h"
 #include "../client/client.h"
 #include "../../math/vector3D.h"
 #include "../dispatch/dispatch.h"
