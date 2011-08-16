@@ -24,9 +24,6 @@ DynamicShape::DynamicShape(Game* game, Dispatch* dispatch)
 {
 	mGame = game;
 
-	//animation
-//	mAnimationAbility = new AnimationAbility(this);
-
 	mPosition = new Vector3D();
 	mVelocity = new Vector3D();
 	mRotation = new Vector3D();
@@ -35,6 +32,8 @@ DynamicShape::DynamicShape(Game* game, Dispatch* dispatch)
 	initializeVariables();
 	initializeCommands(mPosition,mRotation);
 	createStateMachines();
+
+	mAnimationAbility = NULL;	
 }
 
 DynamicShape::~DynamicShape()
@@ -193,9 +192,8 @@ void DynamicShape::interpolateTick(float renderTime)
 	//update state machines...
 	mMoveInterpolateTickStateMachine->update();
 	mRotationInterpolateTickStateMachine->update();
-	//mAnimationInterpolateTickStateMachine->update();
-	//m
-	mAnimationAbility->mAnimationInterpolateTickStateMachine->update();
+
+	mAnimationAbility->update();
 
 }
 

@@ -63,7 +63,6 @@ void setTopAnimation  (AnimID id, bool reset);
 void setBaseAnimation (AnimID id, bool reset);
 
 
-
 };
 
 #endif

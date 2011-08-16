@@ -26,6 +26,10 @@ DynamicShapeStateMachine* mAnimationInterpolateTickStateMachine;
 //animation
 virtual void enterAnimationState(DynamicShapeState* animationState) = 0;
 virtual void     runAnimations        (                          ) = 0;   
+
+//virtual
+void update();
+
 };
 
 #endif

@@ -9,3 +9,6 @@ Ability::~Ability()
 {
 }
 
+void Ability::update()
+{
+}

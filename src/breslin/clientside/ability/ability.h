@@ -12,7 +12,7 @@ public:
 
 	Shape* mShape;
 
-	//getShape() { return mShape; }
+	virtual void update();
 
 };
 

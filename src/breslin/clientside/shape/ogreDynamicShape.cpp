@@ -5,13 +5,12 @@
 
 //animation states for enter method
 #include "../states/dynamicShapeAnimationStates.h"
+#include "../animation/ogreAnimationAbility.h"
 
 #include "../game/game.h"
 
 #include "../billboard/objectTitle.h"
 
-//animation
-#include "../animation/ogreAnimationAbility.h"
 
 #include <string.h>
 

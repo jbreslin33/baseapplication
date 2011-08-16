@@ -17,3 +17,8 @@ AnimationAbility::AnimationAbility(DynamicShape* shape)  : Ability(shape)
 AnimationAbility::~AnimationAbility()
 {
 }
+
+void AnimationAbility::update()
+{
+	mAnimationInterpolateTickStateMachine->update();
+}
