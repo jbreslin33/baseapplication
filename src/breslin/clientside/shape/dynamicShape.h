@@ -13,7 +13,7 @@ class Game;
 class DynamicShapeStateMachine;
 class DynamicShapeState;
 class Dispatch;
-class AnimationAbility;
+class abilityAnimation;
 
 class DynamicShape : public Shape //, public OgreAnimation
 {
@@ -38,7 +38,7 @@ DynamicShapeStateMachine* mRotationProcessTickStateMachine;
 DynamicShapeStateMachine* mRotationInterpolateTickStateMachine;
 
 //animation
-AnimationAbility* mAnimationAbility;
+abilityAnimation* mabilityAnimation;
 
 //this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
 DynamicShape* mGhost;

@@ -4,7 +4,7 @@
 #define NUM_ANIMS 13           // number of animations the character has
 #define ANIM_FADE_SPEED 7.5f   // animation crossfade speed in % of full weight per second
 
-#include "../animation/animationAbility.h"
+#include "../animation/abilityAnimation.h"
 
 //Ogre headers
 #include "Ogre.h"
@@ -12,7 +12,7 @@ using namespace Ogre;
 
 class OgreDynamicShape;
 
-class OgreAnimationAbility : public AnimationAbility
+class AbilityAnimationOgre : public abilityAnimation
 {
 
 // all the animations our character has, and a null ID
@@ -37,8 +37,8 @@ enum AnimID
 
 public:
 
-	OgreAnimationAbility(OgreDynamicShape* shape);
-	~OgreAnimationAbility();
+	AbilityAnimationOgre(OgreDynamicShape* shape);
+	~AbilityAnimationOgre();
 
 /******************************************************
 *				VARIABLES

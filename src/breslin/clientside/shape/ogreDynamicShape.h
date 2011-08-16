@@ -11,7 +11,7 @@
 using namespace Ogre;
 
 class ObjectTitle;
-class OgreAnimationAbility;
+class AbilityAnimationOgre;
 
 #include <string>
 
@@ -75,7 +75,7 @@ SceneNode*  getSceneNode() { return mSceneNode; }
 Ogre::Vector3 converToVector3(Vector3D vector3d);
 
 //animation
-OgreAnimationAbility* mOgreAnimationAbility;
+AbilityAnimationOgre* mAbilityAnimationOgre;
 
 };
 

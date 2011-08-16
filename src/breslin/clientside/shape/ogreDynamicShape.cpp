@@ -4,7 +4,7 @@
 #include "../client/client.h"
 
 //animation
-#include "../ability/animation/ogreAnimationAbility.h"
+#include "../ability/animation/abilityAnimationOgre.h"
 
 #include "../game/game.h"
 
@@ -29,8 +29,8 @@
 	createShape();
 	
 	//animation
-	mOgreAnimationAbility = new OgreAnimationAbility(this);
-	mAnimationAbility = mOgreAnimationAbility;
+	mAbilityAnimationOgre = new AbilityAnimationOgre(this);
+	mabilityAnimation = mAbilityAnimationOgre;
 	
 	setupTitle();
 

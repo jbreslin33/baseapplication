@@ -1,10 +1,10 @@
-#include "AnimationAbility.h"
+#include "abilityAnimation.h"
 #include "../../shape/dynamicShape.h"
 
 #include "../../states/dynamicShapeStateMachine.h"
-#include "dynamicShapeAnimationStates.h"
+#include "abilityAnimationStates.h"
 
-AnimationAbility::AnimationAbility(DynamicShape* shape)  : Ability(shape)
+abilityAnimation::abilityAnimation(DynamicShape* shape)  : Ability(shape)
 {
 	//animation interpolateTick states
     mAnimationInterpolateTickStateMachine = new DynamicShapeStateMachine(shape);    //setup the state machine
@@ -14,11 +14,11 @@ AnimationAbility::AnimationAbility(DynamicShape* shape)  : Ability(shape)
 
 }
 
-AnimationAbility::~AnimationAbility()
+abilityAnimation::~abilityAnimation()
 {
 }
 
-void AnimationAbility::update()
+void abilityAnimation::update()
 {
 	mAnimationInterpolateTickStateMachine->update();
 }

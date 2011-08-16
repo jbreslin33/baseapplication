@@ -7,12 +7,12 @@ class DynamicShapeStateMachine;
 class DynamicShapeState;
 class DynamicShape;
 
-class AnimationAbility : public Ability
+class abilityAnimation : public Ability
 {
 public:
 
-	AnimationAbility(DynamicShape* shape);
-	~AnimationAbility();
+	abilityAnimation(DynamicShape* shape);
+	~abilityAnimation();
 
 /******************************************************
 *				VARIABLES

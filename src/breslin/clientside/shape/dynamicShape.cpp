@@ -14,7 +14,7 @@
 #include "../billboard/objectTitle.h"
 
 //ability
-#include "../ability/animation/animationAbility.h"
+#include "../ability/animation/abilityAnimation.h"
 
 #include <string.h>
 
@@ -33,7 +33,7 @@ DynamicShape::DynamicShape(Game* game, Dispatch* dispatch)
 	initializeCommands(mPosition,mRotation);
 	createStateMachines();
 
-	mAnimationAbility = NULL;	
+	mabilityAnimation = NULL;	
 }
 
 DynamicShape::~DynamicShape()
@@ -192,7 +192,7 @@ void DynamicShape::interpolateTick(float renderTime)
 	mMoveInterpolateTickStateMachine->update();
 	mRotationInterpolateTickStateMachine->update();
 
-	mAnimationAbility->update();
+	mabilityAnimation->update();
 
 }
 

@@ -1,10 +1,10 @@
-#include "dynamicShapeAnimationStates.h"
+#include "abilityAnimationStates.h"
 #include "../../states/dynamicShapeStateMachine.h"
 
 #include "../../shape/dynamicShape.h"
 
 #include "../../billboard/objectTitle.h"
-#include "animationAbility.h"
+#include "abilityAnimation.h"
 
 /******************** Global_InterpolateTick_Animation *****************/
 Global_InterpolateTick_Animation* Global_InterpolateTick_Animation::Instance()
@@ -32,17 +32,17 @@ Idle_InterpolateTick_Animation* Idle_InterpolateTick_Animation::Instance()
 }
 void Idle_InterpolateTick_Animation::enter(DynamicShape* dynamicShape)
 {
-	dynamicShape->mAnimationAbility->enterAnimationState(this);
+	dynamicShape->mabilityAnimation->enterAnimationState(this);
 }
 
 void Idle_InterpolateTick_Animation::execute(DynamicShape* dynamicShape)
 {
 	if (!dynamicShape->mCommandToRunOnShape.mVelocity.isZero())
 	{
-		dynamicShape->mAnimationAbility->mAnimationInterpolateTickStateMachine->changeState(Run_InterpolateTick_Animation::Instance());
+		dynamicShape->mabilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Run_InterpolateTick_Animation::Instance());
 	}
 
-	dynamicShape->mAnimationAbility->runAnimations();
+	dynamicShape->mabilityAnimation->runAnimations();
 }
 void Idle_InterpolateTick_Animation::exit(DynamicShape* dynamicShape)
 {
@@ -57,16 +57,16 @@ Run_InterpolateTick_Animation* Run_InterpolateTick_Animation::Instance()
 }
 void Run_InterpolateTick_Animation::enter(DynamicShape* dynamicShape)
 {
-	dynamicShape->mAnimationAbility->enterAnimationState(this);
+	dynamicShape->mabilityAnimation->enterAnimationState(this);
 }
 void Run_InterpolateTick_Animation::execute(DynamicShape* dynamicShape)
 {
 	if (dynamicShape->mCommandToRunOnShape.mVelocity.isZero())
 	{
-		dynamicShape->mAnimationAbility->mAnimationInterpolateTickStateMachine->changeState(Idle_InterpolateTick_Animation::Instance());
+		dynamicShape->mabilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Idle_InterpolateTick_Animation::Instance());
 	}
 	
-	dynamicShape->mAnimationAbility->runAnimations();
+	dynamicShape->mabilityAnimation->runAnimations();
 }
 
 void Run_InterpolateTick_Animation::exit(DynamicShape* dynamicShape)

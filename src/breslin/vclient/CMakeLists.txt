@@ -91,9 +91,9 @@ set(HDRS
 	../clientside/ability/ability.h
 	
 	#animation
-	../clientside/ability/animation/animationAbility.h
-	../clientside/ability/animation/ogreAnimationAbility.h
-	../clientside/ability/animation/dynamicShapeAnimationStates.h
+	../clientside/ability/animation/abilityAnimation.h
+	../clientside/ability/animation/abilityAnimationOgre.h
+	../clientside/ability/animation/abilityAnimationStates.h
 	
 	#game
 	../clientside/game/BaseApplication.h
@@ -140,9 +140,9 @@ set(SRCS
 	../clientside/ability/ability.cpp
 
 	#animation
-	../clientside/ability/animation/animationAbility.cpp
-	../clientside/ability/animation/ogreAnimationAbility.cpp
-	../clientside/ability/animation/dynamicShapeAnimationStates.cpp
+	../clientside/ability/animation/abilityAnimation.cpp
+	../clientside/ability/animation/abilityAnimationOgre.cpp
+	../clientside/ability/animation/abilityAnimationStates.cpp
 
 	#game
 	../clientside/game/BaseApplication.cpp
@@ -187,11 +187,11 @@ set(HDRS
 
 	#ablility
 	../clientside/ability/ability.h
-
+	
 	#animation
-	../clientside/ability/animation/animationAbility.h
-	../clientside/ability/animation/ogreAnimationAbility.h
-	../clientside/ability/animation/dynamicShapeAnimationStates.h
+	../clientside/ability/animation/abilityAnimation.h
+	../clientside/ability/animation/abilityAnimationOgre.h
+	../clientside/ability/animation/abilityAnimationStates.h
 
 	#game
 	../clientside/game/BaseApplication.h
@@ -236,9 +236,9 @@ set(SRCS
 	../clientside/ability/abilityAbility.cpp
 
 	#animation
-	../clientside/ability/animation/animationAbility.cpp
-	../clientside/ability/animation/ogreAnimationAbility.cpp
-	../clientside/ability/animation/dynamicShapeAnimationStates.cpp
+	../clientside/ability/animation/abilityAnimation.cpp
+	../clientside/ability/animation/abilityAnimationOgre.cpp
+	../clientside/ability/animation/abilityAnimationStates.cpp
 
 	#game
 	../game/BaseApplication.cpp

@@ -1,20 +1,20 @@
-#include "OgreAnimationAbility.h"
+#include "AbilityAnimationOgre.h"
 #include "../../shape/ogreDynamicShape.h"
 #include "../../game/game.h"
 
-#include "dynamicShapeAnimationStates.h"
+#include "abilityAnimationStates.h"
 
-OgreAnimationAbility::OgreAnimationAbility(OgreDynamicShape* shape) : AnimationAbility(shape)
+AbilityAnimationOgre::AbilityAnimationOgre(OgreDynamicShape* shape) : abilityAnimation(shape)
 {
 	mShape = shape;
 	setupAnimations();
 }
 
-OgreAnimationAbility::~OgreAnimationAbility()
+AbilityAnimationOgre::~AbilityAnimationOgre()
 {
 }
 
-void OgreAnimationAbility::setupAnimations()
+void AbilityAnimationOgre::setupAnimations()
 {
 	/*********  setup animations ***************/
     // this is very important due to the nature of the exported animations
@@ -39,7 +39,7 @@ void OgreAnimationAbility::setupAnimations()
     mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
 }
 
-void OgreAnimationAbility::runAnimations()
+void AbilityAnimationOgre::runAnimations()
 {
 	mAnims[mBaseAnimID]->addTime(mShape->mGame->mRenderTime * mShape->mRunSpeed * 1000/mShape->mRunSpeedMax);
 	mAnims[mTopAnimID]->addTime(mShape->mRenderTime * mShape->mRunSpeed * 1000/mShape->mRunSpeedMax);
@@ -48,7 +48,7 @@ void OgreAnimationAbility::runAnimations()
 	//fadeAnimations(mRenderTime);
 }
 
-void OgreAnimationAbility::enterAnimationState(DynamicShapeState* animationState)
+void AbilityAnimationOgre::enterAnimationState(DynamicShapeState* animationState)
 {
 	
 	if (animationState == Idle_InterpolateTick_Animation::Instance())
@@ -73,7 +73,7 @@ void OgreAnimationAbility::enterAnimationState(DynamicShapeState* animationState
 	}
 }
 
-void OgreAnimationAbility::fadeAnimations(Real deltaTime)
+void AbilityAnimationOgre::fadeAnimations(Real deltaTime)
 {
 	for (int i = 0; i < NUM_ANIMS; i++)
     {
@@ -101,7 +101,7 @@ void OgreAnimationAbility::fadeAnimations(Real deltaTime)
 	}
 }
 
-void OgreAnimationAbility::setBaseAnimation(AnimID id, bool reset)
+void AbilityAnimationOgre::setBaseAnimation(AnimID id, bool reset)
 {
 	if (mBaseAnimID >= 0 && mBaseAnimID < NUM_ANIMS)
     {
@@ -127,7 +127,7 @@ void OgreAnimationAbility::setBaseAnimation(AnimID id, bool reset)
 	}
 }
 
-void OgreAnimationAbility::setTopAnimation(AnimID id, bool reset)
+void AbilityAnimationOgre::setTopAnimation(AnimID id, bool reset)
 {
 
 	if (mTopAnimID >= 0 && mTopAnimID < NUM_ANIMS)
