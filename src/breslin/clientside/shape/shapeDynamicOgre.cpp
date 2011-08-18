@@ -3,7 +3,9 @@
 
 #include "../client/client.h"
 
-//animation
+//ability
+#include "../ability/rotation/abilityRotationOgre.h"
+#include "../ability/move/abilityMoveOgre.h"
 #include "../ability/animation/abilityAnimationOgre.h"
 
 #include "../game/game.h"
@@ -13,9 +15,9 @@
 
 #include <string.h>
 
-	OgreDynamicShape::OgreDynamicShape(Game* game, Dispatch* dispatch, bool isGhost)
+	ShapeDynamicOgre::ShapeDynamicOgre(Game* game, Dispatch* dispatch, bool isGhost)
 :
-	DynamicShape         (game,dispatch)
+	ShapeDynamic         (game,dispatch)
 {
 	//we use this to name shape. as ogre is picky about same names. it also serves as a counter of sorts.
 
@@ -28,9 +30,15 @@
 
 	createShape();
 	
-	//animation
+	//ability
+	mAbilityRotationOgre = new AbilityRotationOgre(this);
+	mAbilityRotation     = mAbilityRotationOgre;
+
+	mAbilityMoveOgre = new AbilityMoveOgre(this);
+	mAbilityMove     = mAbilityMoveOgre;
+
 	mAbilityAnimationOgre = new AbilityAnimationOgre(this);
-	mabilityAnimation = mAbilityAnimationOgre;
+	mAbilityAnimation     = mAbilityAnimationOgre;
 	
 	setupTitle();
 
@@ -38,7 +46,7 @@
 	if (!mIsGhost) 
 	{
 		//create a ghost for this shape
-		mGhost = new OgreDynamicShape(mGame,dispatch,true);
+		mGhost = new ShapeDynamicOgre(mGame,dispatch,true);
 		mGhost->setVisible(false);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
@@ -49,14 +57,14 @@
 
 }
 
-OgreDynamicShape::~OgreDynamicShape()
+ShapeDynamicOgre::~ShapeDynamicOgre()
 {
 	delete mObjectTitle;
 	//delete mEntity;
 	delete mSceneNode;
 }
 
-void OgreDynamicShape::createShape()
+void ShapeDynamicOgre::createShape()
 {
 	/*********  create shape ***************/
 	//mMeshName     = mesh;
@@ -82,7 +90,7 @@ void OgreDynamicShape::createShape()
 	scale(v);
 }
 
-void OgreDynamicShape::setupTitle()
+void ShapeDynamicOgre::setupTitle()
 {
 	/*********  setup title/billboard ***************/
 	const Ogre::String& titlename = "tn" + StringConverter::toString(mIndex);
@@ -94,12 +102,12 @@ void OgreDynamicShape::setupTitle()
     fontName, color);
 }
 
-void OgreDynamicShape::scale(Vector3D scaleVector)
+void ShapeDynamicOgre::scale(Vector3D scaleVector)
 {
 	getSceneNode()->scale(scaleVector.x, scaleVector.y, scaleVector.z);
 }
 
-void OgreDynamicShape::checkExtents(Vector3D min)
+void ShapeDynamicOgre::checkExtents(Vector3D min)
 {
 
 	Ogre::Vector3 max;
@@ -113,14 +121,14 @@ void OgreDynamicShape::checkExtents(Vector3D min)
 			//mMaximum = max;
 }
 
-void OgreDynamicShape::yaw(float amountToYaw, bool convertToDegree)
+void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 {
 	if (convertToDegree)
 	{
 		getSceneNode()->yaw(Degree(amountToYaw));
 	}
 }
-float OgreDynamicShape::getDegreesToSomething(Vector3D vectorOfSomething)
+float ShapeDynamicOgre::getDegreesToSomething(Vector3D vectorOfSomething)
 {
     //calculate how far off we are from server
     Quaternion toSomething = getSceneNode()->getOrientation().zAxis().getRotationTo(converToVector3(vectorOfSomething),Vector3::UNIT_Y);
@@ -131,7 +139,7 @@ float OgreDynamicShape::getDegreesToSomething(Vector3D vectorOfSomething)
 }
 
 //1 world, 2 local
-void OgreDynamicShape::translate(Vector3D translateVector, int perspective)
+void ShapeDynamicOgre::translate(Vector3D translateVector, int perspective)
 {
 	if (perspective == 1)
 	{
@@ -143,17 +151,17 @@ void OgreDynamicShape::translate(Vector3D translateVector, int perspective)
 	}
 }
 
-void OgreDynamicShape::setPosition(Vector3D position)
+void ShapeDynamicOgre::setPosition(Vector3D position)
 {
 	getSceneNode()->setPosition(converToVector3(position));
 }
 
-void OgreDynamicShape::setPosition(float x, float y, float z)
+void ShapeDynamicOgre::setPosition(float x, float y, float z)
 {
 	getSceneNode()->setPosition(x,y,z);
 }
 
-Vector3D OgreDynamicShape::getPosition()
+Vector3D ShapeDynamicOgre::getPosition()
 {
 	Vector3D position;
 	position.x = getSceneNode()->getPosition().x;
@@ -162,7 +170,7 @@ Vector3D OgreDynamicShape::getPosition()
 	return position;
 }
 
-Ogre::Vector3 OgreDynamicShape::converToVector3(Vector3D vector3d)
+Ogre::Vector3 ShapeDynamicOgre::converToVector3(Vector3D vector3d)
 {
 	Ogre::Vector3 vec3;
 	vec3.x = vector3d.x;
@@ -171,29 +179,29 @@ Ogre::Vector3 OgreDynamicShape::converToVector3(Vector3D vector3d)
 	return vec3;
 }
 
-void OgreDynamicShape::setVisible(bool visible)
+void ShapeDynamicOgre::setVisible(bool visible)
 {
 	getSceneNode()->setVisible(visible);
 }
 
 //title
 
-void OgreDynamicShape::drawTitle()
+void ShapeDynamicOgre::drawTitle()
 {
 	mObjectTitle->setTitle(mObjectTitleString); 
 	mObjectTitle->update();
 }
-void OgreDynamicShape::appendToTitle(std::string appendage)
+void ShapeDynamicOgre::appendToTitle(std::string appendage)
 {
 	mObjectTitleString.append(appendage);
 }
 
-void OgreDynamicShape::appendToTitle(int appendage)
+void ShapeDynamicOgre::appendToTitle(int appendage)
 {
 	mObjectTitleString.append(StringConverter::toString(appendage));
 }
 
-void OgreDynamicShape::clearTitle()
+void ShapeDynamicOgre::clearTitle()
 {
 	mObjectTitleString.clear();
 }

@@ -1,34 +1,37 @@
-#ifndef ANIMATIONABILITY_H
-#define ANIMATIONABILITY_H
+#ifndef ABILITYANIMATION_H
+#define ABILITYANIMATION_H
 
 #include "../ability.h"
 
-class DynamicShapeStateMachine;
-class DynamicShapeState;
-class DynamicShape;
+class ShapeDynamicStateMachine;
+class ShapeDynamicState;
+class ShapeDynamic;
 
-class abilityAnimation : public Ability
+class AbilityAnimation : public Ability
 {
 public:
 
-	abilityAnimation(DynamicShape* shape);
-	~abilityAnimation();
+	AbilityAnimation(ShapeDynamic* shape);
+	~AbilityAnimation();
 
 /******************************************************
 *				VARIABLES
 ********************************************************/
-DynamicShapeStateMachine* mAnimationInterpolateTickStateMachine;
+
+ShapeDynamicStateMachine* mAnimationInterpolateTickStateMachine;
 
 /******************************************************
 *				METHODS
 ********************************************************/
 
 //animation
-virtual void enterAnimationState(DynamicShapeState* animationState) = 0;
+virtual void enterAnimationState(ShapeDynamicState* animationState) = 0;
 virtual void     runAnimations        (                          ) = 0;   
 
 //virtual
 void update();
+void processTick();
+void interpolateTick(float renderTime);
 
 };
 

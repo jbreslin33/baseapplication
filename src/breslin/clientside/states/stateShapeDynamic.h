@@ -1,23 +1,23 @@
 #ifndef DYNAMICSHAPESTATE_H
 #define DYNAMICSHAPESTATE_H
 
-class DynamicShape;
+class ShapeDynamic;
 
-class DynamicShapeState
+class ShapeDynamicState
 {
 public:
 
-  virtual ~DynamicShapeState(){}
+  virtual ~ShapeDynamicState(){}
 
   //this will execute when the state is entered
-  virtual void enter(DynamicShape*)=0;
+  virtual void enter(ShapeDynamic*)=0;
 
   //this is the states normal update function
-  virtual void execute(DynamicShape*)=0;
+  virtual void execute(ShapeDynamic*)=0;
 
   //this will execute when the state is exited. (My word, isn't
   //life full of surprises... ;o))
-  virtual void exit(DynamicShape*)=0;
+  virtual void exit(ShapeDynamic*)=0;
 };
 
 #endif

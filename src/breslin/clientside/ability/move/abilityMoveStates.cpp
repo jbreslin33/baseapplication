@@ -1,10 +1,11 @@
-#include "shapeDynamicMoveStates.h"
-#include "shapeDynamicStateMachine.h"
+#include "abilityMoveStates.h"
+#include "../../states/stateMachineShapeDynamic.h"
 
-#include "../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
-#include "../shape/shapeDynamic.h"
+#include "../../shape/shapeDynamic.h"
 
+#include "abilityMove.h"
 //utility
 #include <math.h>
 
@@ -17,17 +18,17 @@ Global_ProcessTick_Move* Global_ProcessTick_Move::Instance()
   static Global_ProcessTick_Move instance;
   return &instance;
 }
-void Global_ProcessTick_Move::enter(DynamicShape* shapeDynamic)
+void Global_ProcessTick_Move::enter(ShapeDynamic* shapeDynamic)
 {
 
 }
-void Global_ProcessTick_Move::execute(DynamicShape* shapeDynamic)
+void Global_ProcessTick_Move::execute(ShapeDynamic* shapeDynamic)
 {
 	shapeDynamic->appendToTitle(shapeDynamic->mIndex);
 	
-	shapeDynamic->calculateDeltaPosition();
+	shapeDynamic->mAbilityMove->calculateDeltaPosition();
 }
-void Global_ProcessTick_Move::exit(DynamicShape* shapeDynamic)
+void Global_ProcessTick_Move::exit(ShapeDynamic* shapeDynamic)
 {
 }
 
@@ -38,18 +39,18 @@ Normal_ProcessTick_Move* Normal_ProcessTick_Move::Instance()
   static Normal_ProcessTick_Move instance;
   return &instance;
 }
-void Normal_ProcessTick_Move::enter(DynamicShape* shapeDynamic)
+void Normal_ProcessTick_Move::enter(ShapeDynamic* shapeDynamic)
 {
 
 }
-void Normal_ProcessTick_Move::execute(DynamicShape* shapeDynamic)
+void Normal_ProcessTick_Move::execute(ShapeDynamic* shapeDynamic)
 {
 	//shapeDynamic->appendToTitle("M:Normal");
 
 	// if distance exceeds threshold && server velocity is zero
-	if(shapeDynamic->mDeltaPosition > shapeDynamic->mPosInterpLimitHigh && !shapeDynamic->mServerFrame.mVelocity.isZero())
+	if(shapeDynamic->mAbilityMove->mDeltaPosition > shapeDynamic->mAbilityMove->mPosInterpLimitHigh && !shapeDynamic->mServerFrame.mVelocity.isZero())
 	{
-		shapeDynamic->mMoveProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
+		shapeDynamic->mAbilityMove->mMoveProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
     }
     else //server stopped or we are in sync so just use server vel as is, this is meat of normal state...
     {
@@ -66,7 +67,7 @@ void Normal_ProcessTick_Move::execute(DynamicShape* shapeDynamic)
         if(shapeDynamic->mCommandToRunOnShape.mMilliseconds != 0)
         {
 			
-			shapeDynamic->mRunSpeed =
+			shapeDynamic->mAbilityMove->mRunSpeed =
 			sqrt(
 			pow(shapeDynamic->mServerFrame.mVelocity.x, 2) + 
             pow(shapeDynamic->mServerFrame.mVelocity.y, 2) +
@@ -74,14 +75,14 @@ void Normal_ProcessTick_Move::execute(DynamicShape* shapeDynamic)
 			shapeDynamic->mCommandToRunOnShape.mMilliseconds;
         }
 
-        serverDest = serverDest * shapeDynamic->mRunSpeed;
+        serverDest = serverDest * shapeDynamic->mAbilityMove->mRunSpeed;
 
 		shapeDynamic->mCommandToRunOnShape.mVelocity.x = serverDest.x;
         shapeDynamic->mCommandToRunOnShape.mVelocity.y = serverDest.y;
         shapeDynamic->mCommandToRunOnShape.mVelocity.z = serverDest.z;
 	}
 }
-void Normal_ProcessTick_Move::exit(DynamicShape* shapeDynamic)
+void Normal_ProcessTick_Move::exit(ShapeDynamic* shapeDynamic)
 {
 }
 
@@ -92,17 +93,17 @@ Catchup_ProcessTick_Move* Catchup_ProcessTick_Move::Instance()
 	static Catchup_ProcessTick_Move instance;
 	return &instance;
 }
-void Catchup_ProcessTick_Move::enter(DynamicShape* shapeDynamic)
+void Catchup_ProcessTick_Move::enter(ShapeDynamic* shapeDynamic)
 {
 }
-void Catchup_ProcessTick_Move::execute(DynamicShape* shapeDynamic)
+void Catchup_ProcessTick_Move::execute(ShapeDynamic* shapeDynamic)
 {
 	//shapeDynamic->appendToTitle("M:Catchup");
 
 	//if we are back in sync
-    if(shapeDynamic->mDeltaPosition <= shapeDynamic->mPosInterpLimitHigh || shapeDynamic->mServerFrame.mVelocity.isZero())
+    if(shapeDynamic->mAbilityMove->mDeltaPosition <= shapeDynamic->mAbilityMove->mPosInterpLimitHigh || shapeDynamic->mServerFrame.mVelocity.isZero())
     {
-		shapeDynamic->mMoveProcessTickStateMachine->changeState(Normal_ProcessTick_Move::Instance());
+		shapeDynamic->mAbilityMove->mMoveProcessTickStateMachine->changeState(Normal_ProcessTick_Move::Instance());
     }
     else
     {
@@ -114,7 +115,7 @@ void Catchup_ProcessTick_Move::execute(DynamicShape* shapeDynamic)
         serverDest.z = shapeDynamic->mServerFrame.mVelocity.z;
         serverDest.normalise();
 
-        float multiplier = shapeDynamic->mDeltaPosition * shapeDynamic->mPosInterpFactor;
+        float multiplier = shapeDynamic->mAbilityMove->mDeltaPosition * shapeDynamic->mAbilityMove->mPosInterpFactor;
         serverDest = serverDest * multiplier;
         serverDest.x = shapeDynamic->mServerFrame.mOrigin.x + serverDest.x;
         serverDest.y = shapeDynamic->mServerFrame.mOrigin.y + serverDest.y;
@@ -133,14 +134,14 @@ void Catchup_ProcessTick_Move::execute(DynamicShape* shapeDynamic)
         //server velocity
 		if(shapeDynamic->mCommandToRunOnShape.mMilliseconds != 0)
         {
-           shapeDynamic->mRunSpeed = sqrt(pow(shapeDynamic->mServerFrame.mVelocity.x, 2) + 
+           shapeDynamic->mAbilityMove->mRunSpeed = sqrt(pow(shapeDynamic->mServerFrame.mVelocity.x, 2) + 
            pow(shapeDynamic->mServerFrame.mVelocity.y, 2) + pow(shapeDynamic->mServerFrame.mVelocity.z, 2))/shapeDynamic->mCommandToRunOnShape.mMilliseconds;
 		}
 
-		if(shapeDynamic->mRunSpeed != 0.0)
+		if(shapeDynamic->mAbilityMove->mRunSpeed != 0.0)
 		{
            //time needed to get to future server pos
-           float time = shapeDynamic->mDeltaPosition * shapeDynamic->mPosInterpFactor/shapeDynamic->mRunSpeed;
+           float time = shapeDynamic->mAbilityMove->mDeltaPosition * shapeDynamic->mAbilityMove->mPosInterpFactor/shapeDynamic->mAbilityMove->mRunSpeed;
 
            myDest.normalise();
 
@@ -163,7 +164,7 @@ void Catchup_ProcessTick_Move::execute(DynamicShape* shapeDynamic)
 		}
 	}
 }
-void Catchup_ProcessTick_Move::exit(DynamicShape* shapeDynamic)
+void Catchup_ProcessTick_Move::exit(ShapeDynamic* shapeDynamic)
 {
 }
 
@@ -175,15 +176,15 @@ Global_InterpolateTick_Move* Global_InterpolateTick_Move::Instance()
   static Global_InterpolateTick_Move instance;
   return &instance;
 }
-void Global_InterpolateTick_Move::enter(DynamicShape* shapeDynamic)
+void Global_InterpolateTick_Move::enter(ShapeDynamic* shapeDynamic)
 {
 
 }
-void Global_InterpolateTick_Move::execute(DynamicShape* shapeDynamic)
+void Global_InterpolateTick_Move::execute(ShapeDynamic* shapeDynamic)
 {
 
 }
-void Global_InterpolateTick_Move::exit(DynamicShape* shapeDynamic)
+void Global_InterpolateTick_Move::exit(ShapeDynamic* shapeDynamic)
 {
 }
 
@@ -194,11 +195,11 @@ Normal_InterpolateTick_Move* Normal_InterpolateTick_Move::Instance()
   static Normal_InterpolateTick_Move instance;
   return &instance;
 }
-void Normal_InterpolateTick_Move::enter(DynamicShape* shapeDynamic)
+void Normal_InterpolateTick_Move::enter(ShapeDynamic* shapeDynamic)
 {
 
 }
-void Normal_InterpolateTick_Move::execute(DynamicShape* shapeDynamic)
+void Normal_InterpolateTick_Move::execute(ShapeDynamic* shapeDynamic)
 {
 	Vector3D transVector;
 
@@ -214,7 +215,7 @@ void Normal_InterpolateTick_Move::execute(DynamicShape* shapeDynamic)
 		shapeDynamic->setPosition(shapeDynamic->getPosition().x, 0.0 ,shapeDynamic->getPosition().z);
 	}
 }
-void Normal_InterpolateTick_Move::exit(DynamicShape* shapeDynamic)
+void Normal_InterpolateTick_Move::exit(ShapeDynamic* shapeDynamic)
 {
 }
 
@@ -225,14 +226,14 @@ Off_InterpolateTick_Move* Off_InterpolateTick_Move::Instance()
 	static Off_InterpolateTick_Move instance;
 	return &instance;
 }
-void Off_InterpolateTick_Move::enter(DynamicShape* shapeDynamic)
+void Off_InterpolateTick_Move::enter(ShapeDynamic* shapeDynamic)
 {
 }
-void Off_InterpolateTick_Move::execute(DynamicShape* shapeDynamic)
+void Off_InterpolateTick_Move::execute(ShapeDynamic* shapeDynamic)
 {
 
 }
-void Off_InterpolateTick_Move::exit(DynamicShape* shapeDynamic)
+void Off_InterpolateTick_Move::exit(ShapeDynamic* shapeDynamic)
 {
 }
 

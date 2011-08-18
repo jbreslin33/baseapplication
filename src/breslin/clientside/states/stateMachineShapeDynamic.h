@@ -1,36 +1,37 @@
-#ifndef DYNAMICSHAPESTATEMACHINE_H
-#define DYNAMICSHAPESTATEMACHINE_H
-#include "shapeDynamicState.h"
+#ifndef SHAPEDYNAMICSTATEMACHINE_H
+#define SHAPEDYNAMICSTATEMACHINE_H
 
-class DynamicShape;
+#include "stateShapeDynamic.h"
 
-class DynamicShapeStateMachine
+class ShapeDynamic;
+
+class ShapeDynamicStateMachine
 {
 private:
   //a pointer to the agent that owns this instance
-  DynamicShape*   m_pOwner;
-  DynamicShapeState*    m_pCurrentState;
+  ShapeDynamic*   m_pOwner;
+  ShapeDynamicState*    m_pCurrentState;
 
   //a record of the last state the agent was in
-  DynamicShapeState*   m_pPreviousState;
+  ShapeDynamicState*   m_pPreviousState;
 
   //this is called every time the FSM is updated
-  DynamicShapeState*   m_pGlobalState;
+  ShapeDynamicState*   m_pGlobalState;
 
 public:
 
-  DynamicShapeStateMachine(DynamicShape* owner):m_pOwner(owner),
+  ShapeDynamicStateMachine(ShapeDynamic* owner):m_pOwner(owner),
 	                               m_pCurrentState(0),
                                    m_pPreviousState(0),
                                    m_pGlobalState(0)
   {}
 
-  virtual ~DynamicShapeStateMachine(){}
+  virtual ~ShapeDynamicStateMachine(){}
 
   //use these methods to initialize the FSM
-  void setCurrentState(DynamicShapeState* s){m_pCurrentState = s;}
-  void setGlobalState(DynamicShapeState* s) {m_pGlobalState = s;}
-  void setPreviousState(DynamicShapeState* s){m_pPreviousState = s;}
+  void setCurrentState(ShapeDynamicState* s){m_pCurrentState = s;}
+  void setGlobalState(ShapeDynamicState* s) {m_pGlobalState = s;}
+  void setPreviousState(ShapeDynamicState* s){m_pPreviousState = s;}
 
   //call this to update the FSM
   void  update()const
@@ -43,7 +44,7 @@ public:
   }
 
   //change to a new state
-  void  changeState(DynamicShapeState* pNewState)
+  void  changeState(ShapeDynamicState* pNewState)
   {
    // assert(pNewState &&
            //"<StateMachine::ChangeState>: trying to change to NULL state");
@@ -76,9 +77,9 @@ public:
  //   return typeid(*m_pCurrentState) == typeid(st);
  // }
 
-  DynamicShapeState*  currentState()  const{return m_pCurrentState;}
-  DynamicShapeState*  globalState()   const{return m_pGlobalState;}
-  DynamicShapeState*  previousState() const{return m_pPreviousState;}
+  ShapeDynamicState*  currentState()  const{return m_pCurrentState;}
+  ShapeDynamicState*  globalState()   const{return m_pGlobalState;}
+  ShapeDynamicState*  previousState() const{return m_pPreviousState;}
 };
 #endif
 

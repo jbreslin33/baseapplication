@@ -10,17 +10,19 @@
 
 //i want a dynamic shape...this should be dynamic shape shape should hide ogreshape...
 class Game;
-class DynamicShapeStateMachine;
-class DynamicShapeState;
+class ShapeDynamicStateMachine;
+class ShapeDynamicState;
 class Dispatch;
-class abilityAnimation;
+class AbilityRotation;
+class AbilityMove;
+class AbilityAnimation;
 
-class DynamicShape : public Shape //, public OgreAnimation
+class ShapeDynamic : public Shape //, public OgreAnimation
 {
 
 public:
-DynamicShape(Game* game, Dispatch* dispatch);
-~DynamicShape();
+ShapeDynamic(Game* game, Dispatch* dispatch);
+~ShapeDynamic();
 
 //network
 //flag
@@ -31,17 +33,13 @@ static const char mCommandOriginZ      = 16;
 static const char mCommandRotationX    = 32;
 static const char mCommandRotationZ    = 64;
 
-//state machines
-DynamicShapeStateMachine* mMoveProcessTickStateMachine;
-DynamicShapeStateMachine* mMoveInterpolateTickStateMachine;
-DynamicShapeStateMachine* mRotationProcessTickStateMachine;
-DynamicShapeStateMachine* mRotationInterpolateTickStateMachine;
-
-//animation
-abilityAnimation* mabilityAnimation;
+//abilitys
+AbilityRotation* mAbilityRotation;
+AbilityMove* mAbilityMove;
+AbilityAnimation* mAbilityAnimation;
 
 //this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
-DynamicShape* mGhost;
+ShapeDynamic* mGhost;
 
 //basic
 Vector3D* mPosition;
@@ -56,34 +54,6 @@ Command mCommandToRunOnShape;
 //time
 float mRenderTime;
 
-//run speed
-float mRunSpeed; //move
-float mRunSpeedMax; //move
-
-//thresholds
-float mTurnSpeed; //rot
-float mPosInterpLimitHigh; //mov
-float mPosInterpFactor; //mov
-
-//deltas
-float mDeltaX;  //mov
-float mDeltaZ;  //mov
-float mDeltaY; //mov
-float mDeltaPosition; //mov
-
-//rotation
-float mServerRotSpeed;  //rot
-
-float mRotInterpLimitHigh;  //rot
-float mRotInterpLimitLow;  //rot
-float mRotInterpIncrease;   //rot
-float mRotInterpDecrease;  //rot
-
-//rotation
-Vector3D mServerRotOld;  //rot
-Vector3D mServerRotNew;  //rot
-float    mDegreesToServer;  //rot
-
 //virtual need to be implemented in subclass...
 virtual void        yaw                  (float amountToYaw, bool converToDegree   ) = 0;
 virtual float       getDegreesToSomething(Vector3D something                       ) = 0;
@@ -93,13 +63,6 @@ virtual std::string getName() = 0;
 //ticks
 void processTick();
 void interpolateTick(float renderTime);
-
-//rotation
-float getDegreesToServer();  //rot
-void  calculateServerRotationSpeed();  //rot
-
-//move
-void calculateDeltaPosition();  //mov
 
 //messaging
 void readDeltaMoveCommand(Dispatch *mes);

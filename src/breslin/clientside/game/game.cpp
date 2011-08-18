@@ -1,6 +1,6 @@
 #include "game.h"
 #include "../tdreamsock/dreamSockLog.h"
-#include "../shape/shapeDynamicOgre.h.h"
+#include "../shape/shapeDynamicOgre.h"
 #include "../client/client.h"
 #include "../../math/vector3D.h"
 #include "../dispatch/dispatch.h"
@@ -86,7 +86,7 @@ void Game::shutdown(void)
 **********************************/
 void Game::addShape(bool b, Dispatch* dispatch)
 {
-	DynamicShape* shape = new OgreDynamicShape(this,dispatch,false);  //you should just need to call this...
+	ShapeDynamic* shape = new ShapeDynamicOgre(this,dispatch,false);  //you should just need to call this...
 }
 
 void Game::removeShape(Dispatch* dispatch)
@@ -126,8 +126,8 @@ void Game::frame(Dispatch* dispatch)
 
 		int id = dispatch->ReadByte();
 
-		DynamicShape* shape = NULL;
-		shape = getDynamicShape(id);
+		ShapeDynamic* shape = NULL;
+		shape = getShapeDynamic(id);
 
 		if (shape)
 		{
@@ -136,13 +136,13 @@ void Game::frame(Dispatch* dispatch)
 	}
 }
 
-DynamicShape* Game::getDynamicShape(int id)
+ShapeDynamic* Game::getShapeDynamic(int id)
 {
-	DynamicShape* shape = NULL;
+	ShapeDynamic* shape = NULL;
 
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
-		DynamicShape* curShape = mShapeVector.at(i);
+		ShapeDynamic* curShape = mShapeVector.at(i);
 		if (curShape->mIndex == id)
 		{
 			shape = curShape;

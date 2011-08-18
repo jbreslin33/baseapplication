@@ -1,10 +1,13 @@
 #include "AbilityAnimationOgre.h"
-#include "../../shape/shapeDynamicOgre.h.h"
+#include "../../shape/shapeDynamicOgre.h"
 #include "../../game/game.h"
+
+//abilitys
+#include "../move/abilityMove.h"
 
 #include "abilityAnimationStates.h"
 
-AbilityAnimationOgre::AbilityAnimationOgre(OgreDynamicShape* shape) : abilityAnimation(shape)
+AbilityAnimationOgre::AbilityAnimationOgre(ShapeDynamicOgre* shape) : AbilityAnimation(shape)
 {
 	mShape = shape;
 	setupAnimations();
@@ -41,14 +44,14 @@ void AbilityAnimationOgre::setupAnimations()
 
 void AbilityAnimationOgre::runAnimations()
 {
-	mAnims[mBaseAnimID]->addTime(mShape->mGame->mRenderTime * mShape->mRunSpeed * 1000/mShape->mRunSpeedMax);
-	mAnims[mTopAnimID]->addTime(mShape->mRenderTime * mShape->mRunSpeed * 1000/mShape->mRunSpeedMax);
+	mAnims[mBaseAnimID]->addTime(mShape->mGame->mRenderTime * mShape->mAbilityMove->mRunSpeed * 1000/mShape->mAbilityMove->mRunSpeedMax);
+	mAnims[mTopAnimID]->addTime(mShape->mRenderTime * mShape->mAbilityMove->mRunSpeed * 1000/mShape->mAbilityMove->mRunSpeedMax);
 	fadeAnimations(mShape->mRenderTime);
 
 	//fadeAnimations(mRenderTime);
 }
 
-void AbilityAnimationOgre::enterAnimationState(DynamicShapeState* animationState)
+void AbilityAnimationOgre::enterAnimationState(ShapeDynamicState* animationState)
 {
 	
 	if (animationState == Idle_InterpolateTick_Animation::Instance())

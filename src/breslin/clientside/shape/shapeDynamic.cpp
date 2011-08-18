@@ -4,9 +4,9 @@
 //game
 #include "../game/game.h"
 
-#include "../states/shapeDynamicStateMachine.h"
-#include "../states/shapeDynamicMoveStates.h"
-#include "../states/shapeDynamicRotationStates.h"
+#include "../states/stateMachineShapeDynamic.h"
+#include "../ability/move/abilityMoveStates.h"
+#include "../ability/rotation/abilityRotationStates.h"
 
 
 #include "../dispatch/dispatch.h"
@@ -14,11 +14,14 @@
 #include "../billboard/objectTitle.h"
 
 //ability
+#include "../ability/rotation/abilityRotation.h"
+#include "../ability/move/abilityMove.h"
 #include "../ability/animation/abilityAnimation.h"
+
 
 #include <string.h>
 
-DynamicShape::DynamicShape(Game* game, Dispatch* dispatch)
+ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 :
 	Shape         ()
 {
@@ -33,15 +36,18 @@ DynamicShape::DynamicShape(Game* game, Dispatch* dispatch)
 	initializeCommands(mPosition,mRotation);
 	createStateMachines();
 
-	mabilityAnimation = NULL;	
+	mAbilityRotation  = NULL;
+	mAbilityMove      = NULL;
+	mAbilityAnimation = NULL;	
+	
 }
 
-DynamicShape::~DynamicShape()
+ShapeDynamic::~ShapeDynamic()
 {
 
 }
 
-void DynamicShape::parseDispatch(Dispatch* dispatch)
+void ShapeDynamic::parseDispatch(Dispatch* dispatch)
 {
 	dispatch->BeginReading();
 	dispatch->ReadByte(); //should read -103 to add a shape..
@@ -58,42 +64,15 @@ void DynamicShape::parseDispatch(Dispatch* dispatch)
 	mRotation->z = dispatch->ReadFloat();
 }
 
-void DynamicShape::initializeVariables()
+void ShapeDynamic::initializeVariables()
 {
 	//dynamic
 	mRenderTime = 0.0;
 
-	//run speed
-	mRunSpeed     = 0.0;
-	mRunSpeedMax  = 200.0;
-
 	mGhost = NULL;
-
-    //thresholds
-    mPosInterpLimitHigh = 8.0; //how far away from server till we try to catch up
-    mPosInterpFactor    = 4.0;
-
-	//deltas
-	mDeltaX        = 0.0; 
-	mDeltaY		   = 0.0;
-	mDeltaZ        = 0.0;
-	mDeltaPosition = 0.0;
-
-	//////rotation
-    mTurnSpeed = 250.0;
-
-    mRotInterpLimitHigh = 6.0; //how far away from server till we try to catch up
-    mRotInterpLimitLow  = 4.0; //how close to server till we are in sync
-    mRotInterpIncrease  = 1.20f; //rot factor used to catchup to server
-    mRotInterpDecrease  = 0.80f; //rot factor used to allow server to catchup to client
-
-	//rotation
-	mServerRotOld.zero();
-	mServerRotNew.zero();
-	mDegreesToServer = 0.0;
 }
 
-void DynamicShape::initializeCommands(Vector3D* position, Vector3D* rotation)
+void ShapeDynamic::initializeCommands(Vector3D* position, Vector3D* rotation)
 {
 	//let's set the serverframe...for inititialize purposeses
 	mServerFrame.mOrigin.x = position->x;
@@ -143,124 +122,38 @@ void DynamicShape::initializeCommands(Vector3D* position, Vector3D* rotation)
 
 }
 
-void DynamicShape::createStateMachines()
+void ShapeDynamic::createStateMachines()
 {
-	//move processTick states
-	mMoveProcessTickStateMachine = new DynamicShapeStateMachine(this);    //setup the state machine
-	mMoveProcessTickStateMachine->setCurrentState      (Normal_ProcessTick_Move::Instance());
-	mMoveProcessTickStateMachine->setPreviousState     (Normal_ProcessTick_Move::Instance());
-	mMoveProcessTickStateMachine->setGlobalState       (Global_ProcessTick_Move::Instance());
-
-	//move interpolateTick states
-	mMoveInterpolateTickStateMachine = new DynamicShapeStateMachine(this);    //setup the state machine
-	mMoveInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Move::Instance());
-	mMoveInterpolateTickStateMachine->setPreviousState     (Normal_InterpolateTick_Move::Instance());
-	//mMoveInterpolateTickStateMachine->setGlobalState       (Global_InterpolateTick_Move::Instance());
-	mMoveInterpolateTickStateMachine->setGlobalState       (NULL);
-
-
-	//process tick rotation states
-	mRotationProcessTickStateMachine = new DynamicShapeStateMachine(this);    //setup the state machine
-	mRotationProcessTickStateMachine->setCurrentState      (Normal_ProcessTick_Rotation::Instance());
-	mRotationProcessTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
-	mRotationProcessTickStateMachine->setGlobalState       (Global_ProcessTick_Rotation::Instance());
-
-	//interpolate tick rotation states
-	mRotationInterpolateTickStateMachine = new DynamicShapeStateMachine(this);    //setup the state machine
-	mRotationInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Rotation::Instance());
-	mRotationInterpolateTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
-	mRotationInterpolateTickStateMachine->setGlobalState       (Global_InterpolateTick_Rotation::Instance());
-
 }
 
-void DynamicShape::processTick()
+void ShapeDynamic::processTick()
 {
 	clearTitle(); //empty title string so it can be filled anew
 
 	//update state machines...
-    mMoveProcessTickStateMachine->update();
-	mRotationProcessTickStateMachine->update();
-		
+	mAbilityRotation->processTick();
+	mAbilityMove->processTick();
 	//run billboard here for now.
 	//drawTitle();
 }
-void DynamicShape::interpolateTick(float renderTime)
+void ShapeDynamic::interpolateTick(float renderTime)
 {
 	mRenderTime = renderTime;
 
 	//update state machines...
-	mMoveInterpolateTickStateMachine->update();
-	mRotationInterpolateTickStateMachine->update();
-
-	mabilityAnimation->update();
+	mAbilityRotation->interpolateTick(mRenderTime);
+	mAbilityMove->interpolateTick(mRenderTime);
+	mAbilityAnimation->interpolateTick(mRenderTime);
 
 }
-
-
-
-float DynamicShape::getDegreesToServer()  //rot
-{
-    Vector3D serverRotNew;
-
-    serverRotNew.x = mServerFrame.mRot.x;
-	serverRotNew.y = 0;
-    serverRotNew.z = mServerFrame.mRot.z;
-
-    serverRotNew.normalise();
-
-    //calculate how far off we are from server
-	float degreesToServer = getDegreesToSomething(serverRotNew);
-
-	return degreesToServer;
-}
-
-
-void DynamicShape::calculateServerRotationSpeed()  //rot
-{
-    mServerRotOld.zero();
-    mServerRotNew.zero();
-
-    mServerRotOld.x = mServerFrame.mRotOld.x;
-	mServerRotOld.y = 0;
-    mServerRotOld.z = mServerFrame.mRotOld.z;
-
-    mServerRotNew.x = mServerFrame.mRot.x;
-	mServerRotNew.y = 0;
-    mServerRotNew.z = mServerFrame.mRot.z;
-
-    mServerRotNew.normalise();
-    mServerRotOld.normalise();
-
-    //calculate how far off we are from server
-	mDegreesToServer = getDegreesToSomething(mServerRotNew);
-
-    //calculate server rotation from last tick to new one
-	mServerRotSpeed = mGhost->getDegreesToSomething(mServerRotNew);
-
-    if(abs(mServerRotSpeed) < 0)
-    {
-		mServerRotSpeed = 0.0f;
-    }
-}
-
-void DynamicShape::calculateDeltaPosition()  //mov
-{
-	mDeltaX = mServerFrame.mOrigin.x - getPosition().x;
-    mDeltaY = mServerFrame.mOrigin.y - getPosition().y;
-    mDeltaZ = mServerFrame.mOrigin.z - getPosition().z;
-
-    //distance we are off from server
-    mDeltaPosition = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));
-}
-
 
 //this is all shapes coming to client game from server
 //should a shape be responsible to read it's own command?????
 //once we determine it's about him shouldn't we pass it off to
 //shape object to handle?
-void DynamicShape::readDeltaMoveCommand(Dispatch *mes)
+void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
 {
-	//DynamicShape* shape = NULL;
+	//ShapeDynamic* shape = NULL;
 
 	int flags = 0;
 
@@ -344,7 +237,7 @@ void DynamicShape::readDeltaMoveCommand(Dispatch *mes)
 }
 
 
-void DynamicShape::moveGhostShape()
+void ShapeDynamic::moveGhostShape()
 {
 	Vector3D transVector;
 

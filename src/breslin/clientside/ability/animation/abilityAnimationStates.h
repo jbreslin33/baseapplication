@@ -1,42 +1,42 @@
-#ifndef DYNAMICSHAPEANIMATIONSTATES_H
-#define DYNAMICSHAPEANIMATIONSTATES_H
-#include "../../states/shapeDynamicState.h"
+#ifndef ABILITYANIMATIONSTATES_H
+#define ABILITYANIMATIONSTATES_H
+#include "../../states/stateShapeDynamic.h"
 
-class DynamicShape;
+class ShapeDynamic;
 
 /********************InterpolateTick*************/
 
-class Global_InterpolateTick_Animation : public DynamicShapeState
+class Global_InterpolateTick_Animation : public ShapeDynamicState
 {
 private:
   Global_InterpolateTick_Animation(){}
 public:
   static Global_InterpolateTick_Animation* Instance();
-  void enter  (DynamicShape* shapeDynamic);
-  void execute(DynamicShape* shapeDynamic);
-  void exit   (DynamicShape* shapeDynamic);
+  void enter  (ShapeDynamic* shapeDynamic);
+  void execute(ShapeDynamic* shapeDynamic);
+  void exit   (ShapeDynamic* shapeDynamic);
 };
 
-class Idle_InterpolateTick_Animation : public DynamicShapeState
+class Idle_InterpolateTick_Animation : public ShapeDynamicState
 {
 private:
   Idle_InterpolateTick_Animation(){}
 public:
   static Idle_InterpolateTick_Animation* Instance();
-  void enter  (DynamicShape* shapeDynamic);
-  void execute(DynamicShape* shapeDynamic);
-  void exit   (DynamicShape* shapeDynamic);
+  void enter  (ShapeDynamic* shapeDynamic);
+  void execute(ShapeDynamic* shapeDynamic);
+  void exit   (ShapeDynamic* shapeDynamic);
 };
 
-class Run_InterpolateTick_Animation : public DynamicShapeState
+class Run_InterpolateTick_Animation : public ShapeDynamicState
 {
 private:
   Run_InterpolateTick_Animation(){}
 public:
   static Run_InterpolateTick_Animation* Instance();
-  void enter  (DynamicShape* shapeDynamic);
-  void execute(DynamicShape* shapeDynamic);
-  void exit   (DynamicShape* shapeDynamic);
+  void enter  (ShapeDynamic* shapeDynamic);
+  void execute(ShapeDynamic* shapeDynamic);
+  void exit   (ShapeDynamic* shapeDynamic);
 };
 
 #endif

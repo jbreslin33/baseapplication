@@ -9,7 +9,7 @@
 class Client;
 class MovableTextOverlay;
 class Dispatch;
-class DynamicShape;
+class ShapeDynamic;
 class Time;
 class Network;
 
@@ -25,8 +25,8 @@ public:
 	***************************************/
 
 	//Shapes
-	std::vector<DynamicShape*> mShapeVector;	 //all shapes in the client world
-	std::vector<DynamicShape*> mShapeGhostVector;	 //all shapes in the client world's ghost 
+	std::vector<ShapeDynamic*> mShapeVector;	 //all shapes in the client world
+	std::vector<ShapeDynamic*> mShapeGhostVector;	 //all shapes in the client world's ghost 
 
 	std::vector<MovableTextOverlay*> myVect;  //for writing above shapes head
 
@@ -92,7 +92,7 @@ public:
 	void addShape    (bool b, Dispatch* dispatch);
 	void removeShape (Dispatch* dispatch);
 
-	DynamicShape* getDynamicShape      (  int id);
+	ShapeDynamic* getShapeDynamic      (  int id);
 
 	void frame           (Dispatch* dispatch);
 	void interpolateFrame();

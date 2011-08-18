@@ -1,18 +1,18 @@
-#ifndef OGREANIMATIONABILITY_H
-#define OGREANIMATIONABILITY_H
+#ifndef ABILITYANIMATIONOGRE_H
+#define ABILITYANIMATIONOGRE_H
 
 #define NUM_ANIMS 13           // number of animations the character has
 #define ANIM_FADE_SPEED 7.5f   // animation crossfade speed in % of full weight per second
 
-#include "../animation/abilityAnimation.h"
+#include "abilityAnimation.h"
 
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
 
-class OgreDynamicShape;
+class ShapeDynamicOgre;
 
-class AbilityAnimationOgre : public abilityAnimation
+class AbilityAnimationOgre : public AbilityAnimation
 {
 
 // all the animations our character has, and a null ID
@@ -37,14 +37,14 @@ enum AnimID
 
 public:
 
-	AbilityAnimationOgre(OgreDynamicShape* shape);
+	AbilityAnimationOgre(ShapeDynamicOgre* shape);
 	~AbilityAnimationOgre();
 
 /******************************************************
 *				VARIABLES
 ********************************************************/
 //animation
-OgreDynamicShape* mShape;
+ShapeDynamicOgre* mShape;
 Ogre::AnimationState* mAnims[NUM_ANIMS];     // master animation list
 AnimID                mBaseAnimID;           // current base (full- or lower-body) animation
 AnimID                mTopAnimID;            // current top (upper-body) animation
@@ -57,7 +57,7 @@ Ogre::AnimationState  *mAnimationState;
 ********************************************************/
 void setupAnimations();
 void runAnimations();
-void enterAnimationState(DynamicShapeState* animationState);
+void enterAnimationState(ShapeDynamicState* animationState);
 void fadeAnimations   (Real deltaTime);
 void setTopAnimation  (AnimID id, bool reset);
 void setBaseAnimation (AnimID id, bool reset);

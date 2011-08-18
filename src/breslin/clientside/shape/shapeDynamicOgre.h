@@ -1,8 +1,5 @@
-#ifndef OGREDYNAMICSHAPE_H
-#define OGREDYNAMICSHAPE_H
-
-#define NUM_ANIMS 13           // number of animations the character has
-#define ANIM_FADE_SPEED 7.5f   // animation crossfade speed in % of full weight per second
+#ifndef SHAPEDYNAMICOGRE_H
+#define SHAPEDYNAMICOGRE_H
 
 #include "shapeDynamic.h"
 
@@ -11,16 +8,20 @@
 using namespace Ogre;
 
 class ObjectTitle;
+
+//ability
+class AbilityRotationOgre;
+class AbilityMoveOgre;
 class AbilityAnimationOgre;
 
 #include <string>
 
-class OgreDynamicShape : public DynamicShape //, public OgreAnimation
+class ShapeDynamicOgre : public ShapeDynamic //, public OgreAnimation
 {
 
 public:
-OgreDynamicShape(Game* game, Dispatch* dispatch, bool isGhost);
-~OgreDynamicShape();
+ShapeDynamicOgre(Game* game, Dispatch* dispatch, bool isGhost);
+~ShapeDynamicOgre();
 
 
 //ogre scene stuff
@@ -74,7 +75,9 @@ SceneNode*  getSceneNode() { return mSceneNode; }
 //utility
 Ogre::Vector3 converToVector3(Vector3D vector3d);
 
-//animation
+//ability
+AbilityRotationOgre* mAbilityRotationOgre;
+AbilityMoveOgre* mAbilityMoveOgre;
 AbilityAnimationOgre* mAbilityAnimationOgre;
 
 };

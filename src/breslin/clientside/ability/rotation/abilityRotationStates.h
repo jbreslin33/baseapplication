@@ -1,73 +1,73 @@
-#ifndef DYNAMICSHAPEROTATIONSTATES_H
-#define DYNAMICSHAPEROTATIONSTATES_H
-#include "shapeDynamicState.h"
+#ifndef ABILITYROTATIONSTATES_H
+#define ABILITYROTATIONSTATES_H
+#include "../../states/stateShapeDynamic.h"
 
-class DynamicShape;
+class ShapeDynamic;
 
-class Global_ProcessTick_Rotation : public DynamicShapeState
+class Global_ProcessTick_Rotation : public ShapeDynamicState
 {
 private:
   Global_ProcessTick_Rotation(){}
 public:
   static Global_ProcessTick_Rotation* Instance();
-  void enter  (DynamicShape* shapeDynamic);
-  void execute(DynamicShape* shapeDynamic);
-  void exit   (DynamicShape* shapeDynamic);
+  void enter  (ShapeDynamic* shapeDynamic);
+  void execute(ShapeDynamic* shapeDynamic);
+  void exit   (ShapeDynamic* shapeDynamic);
 };
 
-class Normal_ProcessTick_Rotation : public DynamicShapeState
+class Normal_ProcessTick_Rotation : public ShapeDynamicState
 {
 private:
   Normal_ProcessTick_Rotation(){}
 public:
   static Normal_ProcessTick_Rotation* Instance();
-  void enter  (DynamicShape* shapeDynamic);
-  void execute(DynamicShape* shapeDynamic);
-  void exit   (DynamicShape* shapeDynamic);
+  void enter  (ShapeDynamic* shapeDynamic);
+  void execute(ShapeDynamic* shapeDynamic);
+  void exit   (ShapeDynamic* shapeDynamic);
 };
 
-class Catchup_ProcessTick_Rotation : public DynamicShapeState
+class Catchup_ProcessTick_Rotation : public ShapeDynamicState
 {
 private:
   Catchup_ProcessTick_Rotation(){}
 public:
   static Catchup_ProcessTick_Rotation* Instance();
-  void enter  (DynamicShape* shapeDynamic);
-  void execute(DynamicShape* shapeDynamic);
-  void exit   (DynamicShape* shapeDynamic);
+  void enter  (ShapeDynamic* shapeDynamic);
+  void execute(ShapeDynamic* shapeDynamic);
+  void exit   (ShapeDynamic* shapeDynamic);
 };
 /********************InterpolateTick*************/
 
-class Global_InterpolateTick_Rotation : public DynamicShapeState
+class Global_InterpolateTick_Rotation : public ShapeDynamicState
 {
 private:
   Global_InterpolateTick_Rotation(){}
 public:
   static Global_InterpolateTick_Rotation* Instance();
-  void enter  (DynamicShape* shapeDynamic);
-  void execute(DynamicShape* shapeDynamic);
-  void exit   (DynamicShape* shapeDynamic);
+  void enter  (ShapeDynamic* shapeDynamic);
+  void execute(ShapeDynamic* shapeDynamic);
+  void exit   (ShapeDynamic* shapeDynamic);
 };
 
-class Normal_InterpolateTick_Rotation : public DynamicShapeState
+class Normal_InterpolateTick_Rotation : public ShapeDynamicState
 {
 private:
   Normal_InterpolateTick_Rotation(){}
 public:
   static Normal_InterpolateTick_Rotation* Instance();
-  void enter  (DynamicShape* shapeDynamic);
-  void execute(DynamicShape* shapeDynamic);
-  void exit   (DynamicShape* shapeDynamic);
+  void enter  (ShapeDynamic* shapeDynamic);
+  void execute(ShapeDynamic* shapeDynamic);
+  void exit   (ShapeDynamic* shapeDynamic);
 };
 
-class Off_InterpolateTick_Rotation : public DynamicShapeState
+class Off_InterpolateTick_Rotation : public ShapeDynamicState
 {
 private:
   Off_InterpolateTick_Rotation(){}
 public:
   static Off_InterpolateTick_Rotation* Instance();
-  void enter  (DynamicShape* shapeDynamic);
-  void execute(DynamicShape* shapeDynamic);
-  void exit   (DynamicShape* shapeDynamic);
+  void enter  (ShapeDynamic* shapeDynamic);
+  void execute(ShapeDynamic* shapeDynamic);
+  void exit   (ShapeDynamic* shapeDynamic);
 };
 #endif
