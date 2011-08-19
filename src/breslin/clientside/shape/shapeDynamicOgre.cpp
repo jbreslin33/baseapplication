@@ -4,8 +4,6 @@
 #include "../client/client.h"
 
 //ability
-#include "../ability/rotation/abilityRotationOgre.h"
-#include "../ability/move/abilityMoveOgre.h"
 #include "../ability/animation/abilityAnimationOgre.h"
 
 #include "../game/game.h"

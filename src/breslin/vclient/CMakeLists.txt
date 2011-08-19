@@ -146,6 +146,7 @@ set(SRCS
 
 	#animation
 	../clientside/ability/animation/abilityAnimation.cpp
+	../clientside/ability/animation/abilityAnimationOgre.cpp
 	../clientside/ability/animation/abilityAnimationStates.cpp
 
 	#move
@@ -154,7 +155,6 @@ set(SRCS
 	
 	#rotation
 	../clientside/ability/rotation/abilityRotation.cpp
-	../clientside/ability/rotation/abilityRotationOgre.cpp
 	../clientside/ability/rotation/abilityRotationStates.cpp
 
 	#game
