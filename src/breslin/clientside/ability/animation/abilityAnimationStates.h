@@ -6,7 +6,7 @@
 ********************************************************/
 
 //parent
-#include "../abilityState.h"
+#include "abilityAnimationState.h"
 
 /******************************************************
 *				FORWARD DECLARATIONS

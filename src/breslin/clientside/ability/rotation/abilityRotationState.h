@@ -1,23 +1,17 @@
-#ifndef ABILITYSTATE_H
-#define ABILITYSTATE_H
+#ifndef ABILITROTATIONSTATE_H
+#define ABILITROTATIONSTATE_H
 
-class Ability;
+class AbilityRotation;
 
-class AbilityState
+class AbilityRotationState
 {
 public:
 
-  virtual ~AbilityState(){}
+  virtual ~AbilityRotationState(){}
 
-  //this will execute when the state is entered
-  virtual void enter(Ability*)=0;
-
-  //this is the states normal update function
-  virtual void execute(Ability*)=0;
-
-  //this will execute when the state is exited. (My word, isn't
-  //life full of surprises... ;o))
-  virtual void exit(Ability*)=0;
+  virtual void enter  (AbilityRotation*)=0;
+  virtual void execute(AbilityRotation*)=0;
+  virtual void exit   (AbilityRotation*)=0;
 };
 
 #endif

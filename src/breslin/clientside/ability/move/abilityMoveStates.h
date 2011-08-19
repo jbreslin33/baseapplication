@@ -1,6 +1,6 @@
 #ifndef ABILITYMOVESTATES_H
 #define ABILITYMOVESTATES_H
-#include "../abilityState.h"
+#include "abilityMoveState.h"
 
 class Ability;
 

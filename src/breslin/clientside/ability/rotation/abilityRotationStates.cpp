@@ -1,5 +1,5 @@
 #include "abilityRotationStates.h"
-#include "../abilityStateMachine.h"
+#include "abilityStateMachine.h"
 
 #include "../../shape/shapeDynamic.h"
 
