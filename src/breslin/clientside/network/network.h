@@ -1,6 +1,9 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
+/**********************************
+*          INCLUDES
+**********************************/
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")
 	#pragma message ("Auto linking WinSock2 library")
@@ -39,6 +42,10 @@
 	#define DREAMSOCK_INVALID_SOCKET	-1
 #endif
 
+/**********************************
+*          FORWARD DECLARATIONS
+**********************************/
+
 #ifdef WIN32
 class DreamWinSock;
 #else
@@ -46,6 +53,10 @@ class DreamLinuxSock;
 #endif
 
 class Dispatch;
+
+/**********************************
+*          CLASS
+**********************************/
 
 class Network
 {

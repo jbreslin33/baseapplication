@@ -32,6 +32,9 @@ class AbilityRotation;
 class AbilityMove;
 class AbilityAnimation;
 
+/**********************************
+*          CLASS
+**********************************/
 class ShapeDynamic : public Shape
 {
 

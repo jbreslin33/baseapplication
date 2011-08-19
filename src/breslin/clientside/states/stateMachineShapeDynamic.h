@@ -1,12 +1,34 @@
 #ifndef SHAPEDYNAMICSTATEMACHINE_H
 #define SHAPEDYNAMICSTATEMACHINE_H
 
+/**********************************
+*          INCLUDES
+**********************************/
+//parent
 #include "stateShapeDynamic.h"
 
+/**********************************
+*          FORWARD DECLARATIONS
+**********************************/
 class ShapeDynamic;
 
+/**********************************
+*          CLASS
+**********************************/
 class ShapeDynamicStateMachine
 {
+public:
+
+  ShapeDynamicStateMachine(ShapeDynamic* owner):m_pOwner(owner),
+	                               m_pCurrentState(0),
+                                   m_pPreviousState(0),
+                                   m_pGlobalState(0)
+  {}
+  virtual ~ShapeDynamicStateMachine(){}
+
+/**********************************
+*          VARIABLES
+**********************************/
 private:
   //a pointer to the agent that owns this instance
   ShapeDynamic*   m_pOwner;
@@ -18,15 +40,14 @@ private:
   //this is called every time the FSM is updated
   ShapeDynamicState*   m_pGlobalState;
 
+/**********************************
+*          METHODS
+**********************************/
 public:
 
-  ShapeDynamicStateMachine(ShapeDynamic* owner):m_pOwner(owner),
-	                               m_pCurrentState(0),
-                                   m_pPreviousState(0),
-                                   m_pGlobalState(0)
-  {}
-
-  virtual ~ShapeDynamicStateMachine(){}
+  ShapeDynamicState*  currentState()  const{return m_pCurrentState;}
+  ShapeDynamicState*  globalState()   const{return m_pGlobalState;}
+  ShapeDynamicState*  previousState() const{return m_pPreviousState;}
 
   //use these methods to initialize the FSM
   void setCurrentState(ShapeDynamicState* s){m_pCurrentState = s;}
@@ -69,17 +90,6 @@ public:
   {
     changeState(m_pPreviousState);
   }
-
-  //returns true if the current state's type is equal to the type of the
-  //class passed as a parameter.
- // bool  isInState(const State& st)const
- // {
- //   return typeid(*m_pCurrentState) == typeid(st);
- // }
-
-  ShapeDynamicState*  currentState()  const{return m_pCurrentState;}
-  ShapeDynamicState*  globalState()   const{return m_pGlobalState;}
-  ShapeDynamicState*  previousState() const{return m_pPreviousState;}
 };
 #endif
 

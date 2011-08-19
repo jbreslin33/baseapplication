@@ -1,12 +1,18 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-//utility
+/**********************************
+*          INCLUDES
+**********************************/
+//standard library
 #include <string>
 
 //math
 #include "../../math/vector3D.h"
 
+/**********************************
+*          FORWARD DECLARATIONS
+**********************************/
 class Game;
 
 class Shape

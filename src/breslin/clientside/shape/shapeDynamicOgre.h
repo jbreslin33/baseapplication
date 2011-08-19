@@ -1,12 +1,19 @@
 #ifndef SHAPEDYNAMICOGRE_H
 #define SHAPEDYNAMICOGRE_H
 
+/**********************************
+*          INCLUDES
+**********************************/
+//parent
 #include "shapeDynamic.h"
 
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
 
+/**********************************
+*          FORWARD DECLARATIONS
+**********************************/
 class ObjectTitle;
 
 //ability
@@ -16,6 +23,9 @@ class AbilityAnimationOgre;
 
 #include <string>
 
+/**********************************
+*          CLASS
+**********************************/
 class ShapeDynamicOgre : public ShapeDynamic //, public OgreAnimation
 {
 
@@ -23,6 +33,12 @@ public:
 ShapeDynamicOgre(Game* game, Dispatch* dispatch, bool isGhost);
 ~ShapeDynamicOgre();
 
+/**********************************
+*          VARIABLES
+**********************************/
+
+//ghost
+bool mIsGhost;
 
 //ogre scene stuff
 std::string         mMeshName;
@@ -36,11 +52,16 @@ SceneNode*          mSceneNode;
 ObjectTitle* mObjectTitle;
 std::string  mObjectTitleString;
 
+//ability
+AbilityRotationOgre* mAbilityRotationOgre;
+AbilityMoveOgre* mAbilityMoveOgre;
+AbilityAnimationOgre* mAbilityAnimationOgre;
+
+/**********************************
+*          METHODS
+**********************************/
 //shape
 void createShape();
-
-//ghost
-bool mIsGhost;
 
 //debugging
 void checkExtents(Vector3D min);
@@ -74,11 +95,6 @@ SceneNode*  getSceneNode() { return mSceneNode; }
 
 //utility
 Ogre::Vector3 converToVector3(Vector3D vector3d);
-
-//ability
-AbilityRotationOgre* mAbilityRotationOgre;
-AbilityMoveOgre* mAbilityMoveOgre;
-AbilityAnimationOgre* mAbilityAnimationOgre;
 
 };
 
