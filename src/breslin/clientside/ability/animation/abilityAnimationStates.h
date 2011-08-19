@@ -4,18 +4,17 @@
 
 class ShapeDynamic;
 
-/********************InterpolateTick*************/
+/******************************************************
+*				INTERPOLATE
+*
+*				   STATES
+*
+********************************************************/
 
-class Global_InterpolateTick_Animation : public ShapeDynamicState
-{
-private:
-  Global_InterpolateTick_Animation(){}
-public:
-  static Global_InterpolateTick_Animation* Instance();
-  void enter  (ShapeDynamic* shapeDynamic);
-  void execute(ShapeDynamic* shapeDynamic);
-  void exit   (ShapeDynamic* shapeDynamic);
-};
+
+/******************************************************
+*				IDLE
+********************************************************/
 
 class Idle_InterpolateTick_Animation : public ShapeDynamicState
 {
@@ -28,6 +27,10 @@ public:
   void exit   (ShapeDynamic* shapeDynamic);
 };
 
+
+/******************************************************
+*				RUN
+********************************************************/
 class Run_InterpolateTick_Animation : public ShapeDynamicState
 {
 private:

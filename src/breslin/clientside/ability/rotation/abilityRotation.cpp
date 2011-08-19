@@ -18,7 +18,6 @@ AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDyn
 	mRotationInterpolateTickStateMachine = new ShapeDynamicStateMachine(shapeDynamic);    //setup the state machine
 	mRotationInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Rotation::Instance());
 	mRotationInterpolateTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
-	mRotationInterpolateTickStateMachine->setGlobalState       (Global_InterpolateTick_Rotation::Instance());
 
 	//////rotation
     mTurnSpeed = 250.0;

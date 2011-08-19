@@ -169,25 +169,6 @@ void Catchup_ProcessTick_Move::exit(ShapeDynamic* shapeDynamic)
 }
 
 
-/******************** Global_InterpolateTick_Move *****************/
-
-Global_InterpolateTick_Move* Global_InterpolateTick_Move::Instance()
-{
-  static Global_InterpolateTick_Move instance;
-  return &instance;
-}
-void Global_InterpolateTick_Move::enter(ShapeDynamic* shapeDynamic)
-{
-
-}
-void Global_InterpolateTick_Move::execute(ShapeDynamic* shapeDynamic)
-{
-
-}
-void Global_InterpolateTick_Move::exit(ShapeDynamic* shapeDynamic)
-{
-}
-
 /******************** Normal_InterpolateTick_Move *****************/
 
 Normal_InterpolateTick_Move* Normal_InterpolateTick_Move::Instance()
@@ -219,21 +200,4 @@ void Normal_InterpolateTick_Move::exit(ShapeDynamic* shapeDynamic)
 {
 }
 
-/******************** Off_InterpolateTick_Move *****************/
-
-Off_InterpolateTick_Move* Off_InterpolateTick_Move::Instance()
-{
-	static Off_InterpolateTick_Move instance;
-	return &instance;
-}
-void Off_InterpolateTick_Move::enter(ShapeDynamic* shapeDynamic)
-{
-}
-void Off_InterpolateTick_Move::execute(ShapeDynamic* shapeDynamic)
-{
-
-}
-void Off_InterpolateTick_Move::exit(ShapeDynamic* shapeDynamic)
-{
-}
 

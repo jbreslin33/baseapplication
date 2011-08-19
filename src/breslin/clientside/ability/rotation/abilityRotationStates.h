@@ -38,17 +38,6 @@ public:
 };
 /********************InterpolateTick*************/
 
-class Global_InterpolateTick_Rotation : public ShapeDynamicState
-{
-private:
-  Global_InterpolateTick_Rotation(){}
-public:
-  static Global_InterpolateTick_Rotation* Instance();
-  void enter  (ShapeDynamic* shapeDynamic);
-  void execute(ShapeDynamic* shapeDynamic);
-  void exit   (ShapeDynamic* shapeDynamic);
-};
-
 class Normal_InterpolateTick_Rotation : public ShapeDynamicState
 {
 private:

@@ -4,6 +4,18 @@
 
 class ShapeDynamic;
 
+/******************************************************
+*				PROCESS TICK
+*
+*				   STATES
+*
+********************************************************/
+
+
+/******************************************************
+*				GLOBAL
+********************************************************/
+
 class Global_ProcessTick_Move : public ShapeDynamicState
 {
 private:
@@ -15,6 +27,10 @@ public:
   void exit   (ShapeDynamic* shapeDynamic);
 };
 
+
+/******************************************************
+*				NORMAL
+********************************************************/
 class Normal_ProcessTick_Move : public ShapeDynamicState
 {
 private:
@@ -26,6 +42,10 @@ public:
   void exit   (ShapeDynamic* shapeDynamic);
 };
 
+
+/******************************************************
+*				CATCHUP
+********************************************************/
 class Catchup_ProcessTick_Move : public ShapeDynamicState
 {
 private:
@@ -37,18 +57,16 @@ public:
   void exit   (ShapeDynamic* shapeDynamic);
 };
 
+/******************************************************
+*				INTERPOLATE TICK
+*
+*				   STATES
+*
+********************************************************/
 
-class Global_InterpolateTick_Move : public ShapeDynamicState
-{
-private:
-  Global_InterpolateTick_Move(){}
-public:
-  static Global_InterpolateTick_Move* Instance();
-  void enter  (ShapeDynamic* shapeDynamic);
-  void execute(ShapeDynamic* shapeDynamic);
-  void exit   (ShapeDynamic* shapeDynamic);
-};
-
+/******************************************************
+*				NORMAL
+********************************************************/
 class Normal_InterpolateTick_Move : public ShapeDynamicState
 {
 private:
@@ -59,17 +77,5 @@ public:
   void execute(ShapeDynamic* shapeDynamic);
   void exit   (ShapeDynamic* shapeDynamic);
 };
-
-class Off_InterpolateTick_Move : public ShapeDynamicState
-{
-private:
-  Off_InterpolateTick_Move(){}
-public:
-  static Off_InterpolateTick_Move* Instance();
-  void enter  (ShapeDynamic* shapeDynamic);
-  void execute(ShapeDynamic* shapeDynamic);
-  void exit   (ShapeDynamic* shapeDynamic);
-};
-
 
 #endif
