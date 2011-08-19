@@ -39,6 +39,11 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	mAbilityRotation  = NULL;
 	mAbilityMove      = NULL;
 	mAbilityAnimation = NULL;	
+
+	//ability
+	mAbilityRotation = new AbilityRotation(this);
+	mAbilityMove     = new AbilityMove(this);
+
 	
 }
 

@@ -31,12 +31,6 @@
 	createShape();
 	
 	//ability
-	mAbilityRotationOgre = new AbilityRotationOgre(this);
-	mAbilityRotation     = mAbilityRotationOgre;
-
-	mAbilityMoveOgre = new AbilityMoveOgre(this);
-	mAbilityMove     = mAbilityMoveOgre;
-
 	mAbilityAnimationOgre = new AbilityAnimationOgre(this);
 	mAbilityAnimation     = mAbilityAnimationOgre;
 	
