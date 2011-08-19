@@ -1,7 +1,7 @@
 #include "abilityAnimation.h"
 #include "../../shape/shapeDynamic.h"
 
-#include "../../states/stateMachineShapeDynamic.h"
+#include "../abilityStateMachine.h"
 #include "abilityAnimationStates.h"
 
 AbilityAnimation::AbilityAnimation(ShapeDynamic* shape)  : Ability(shape)

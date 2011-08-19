@@ -66,7 +66,7 @@ Ogre::AnimationState  *mAnimationState;
 ********************************************************/
 void setupAnimations();
 void runAnimations();
-void enterAnimationState(ShapeDynamicState* animationState);
+void enterAnimationState(AbilityState* abilityState);
 void fadeAnimations   (Real deltaTime);
 void setTopAnimation  (AnimID id, bool reset);
 void setBaseAnimation (AnimID id, bool reset);

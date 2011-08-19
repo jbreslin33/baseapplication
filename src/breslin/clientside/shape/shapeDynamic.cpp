@@ -4,19 +4,20 @@
 //game
 #include "../game/game.h"
 
-#include "../states/stateMachineShapeDynamic.h"
+//ability
+#include "../ability/abilityStateMachine.h"
 #include "../ability/move/abilityMoveStates.h"
 #include "../ability/rotation/abilityRotationStates.h"
-
+#include "../ability/rotation/abilityRotation.h"
+#include "../ability/move/abilityMove.h"
+#include "../ability/animation/abilityAnimation.h"
 
 #include "../dispatch/dispatch.h"
 
 #include "../billboard/objectTitle.h"
 
-//ability
-#include "../ability/rotation/abilityRotation.h"
-#include "../ability/move/abilityMove.h"
-#include "../ability/animation/abilityAnimation.h"
+
+
 
 
 #include <string.h>
@@ -37,8 +38,12 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	createStateMachines();
 
 	//ability
-	mAbilityRotation = new AbilityRotation(this);
-	mAbilityMove     = new AbilityMove(this);
+	//mAbilityRotation = new AbilityRotation(this);
+	//mAbilityMove     = new AbilityMove(this);
+
+	addAbility(new AbilityRotation(this));
+	addAbility(new AbilityMove(this));
+
 	mAbilityAnimation = NULL;	
 	
 }
@@ -49,7 +54,7 @@ ShapeDynamic::~ShapeDynamic()
 
 void ShapeDynamic::addAbility(Ability* ability)
 {
-	
+	mAbilityVector.push_back(ability);	
 }
 
 void ShapeDynamic::parseDispatch(Dispatch* dispatch)
@@ -136,8 +141,12 @@ void ShapeDynamic::processTick()
 	clearTitle(); //empty title string so it can be filled anew
 
 	//update state machines...
-	mAbilityRotation->processTick();
-	mAbilityMove->processTick();
+	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+	{
+		mAbilityVector.at(i)->processTick();
+	}
+	//mAbilityRotation->processTick();
+	//mAbilityMove->processTick();
 
 	//run billboard here for now.
 	//drawTitle();
@@ -147,8 +156,14 @@ void ShapeDynamic::interpolateTick(float renderTime)
 	mRenderTime = renderTime;
 
 	//update state machines...
-	mAbilityRotation->interpolateTick(mRenderTime);
-	mAbilityMove->interpolateTick(mRenderTime);
+
+	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+	{
+		mAbilityVector.at(i)->interpolateTick(mRenderTime);
+	}
+
+	//mAbilityRotation->interpolateTick(mRenderTime);
+	//mAbilityMove->interpolateTick(mRenderTime);
 	mAbilityAnimation->interpolateTick(mRenderTime);
 
 }

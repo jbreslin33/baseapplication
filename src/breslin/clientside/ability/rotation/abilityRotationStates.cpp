@@ -1,5 +1,5 @@
 #include "abilityRotationStates.h"
-#include "../../states/stateMachineShapeDynamic.h"
+#include "../abilityStateMachine.h"
 
 #include "../../shape/shapeDynamic.h"
 
@@ -23,17 +23,17 @@ Global_ProcessTick_Rotation* Global_ProcessTick_Rotation::Instance()
   static Global_ProcessTick_Rotation instance;
   return &instance;
 }
-void Global_ProcessTick_Rotation::enter(ShapeDynamic* shapeDynamic)
+void Global_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 {
 }
-void Global_ProcessTick_Rotation::execute(ShapeDynamic* shapeDynamic)
+void Global_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-	shapeDynamic->mAbilityRotation->calculateServerRotationSpeed();
+	ability->calculateServerRotationSpeed();
 
 	shapeDynamic->mGhost->yaw(shapeDynamic->mAbilityRotation->mServerRotSpeed,true);	
 
 }
-void Global_ProcessTick_Rotation::exit(ShapeDynamic* shapeDynamic)
+void Global_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
 }
 
@@ -46,10 +46,10 @@ Normal_ProcessTick_Rotation* Normal_ProcessTick_Rotation::Instance()
   static Normal_ProcessTick_Rotation instance;
   return &instance;
 }
-void Normal_ProcessTick_Rotation::enter(ShapeDynamic* shapeDynamic)
+void Normal_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 {
 }
-void Normal_ProcessTick_Rotation::execute(ShapeDynamic* shapeDynamic)
+void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	//->mObjectTitleString.append("R:Normal");
 	
@@ -79,7 +79,7 @@ void Normal_ProcessTick_Rotation::execute(ShapeDynamic* shapeDynamic)
 		}
 	}
 }
-void Normal_ProcessTick_Rotation::exit(ShapeDynamic* shapeDynamic)
+void Normal_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
 }
 
@@ -92,10 +92,10 @@ Catchup_ProcessTick_Rotation* Catchup_ProcessTick_Rotation::Instance()
   static Catchup_ProcessTick_Rotation instance;
   return &instance;
 }
-void Catchup_ProcessTick_Rotation::enter(ShapeDynamic* shapeDynamic)
+void Catchup_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 {
 }
-void Catchup_ProcessTick_Rotation::execute(ShapeDynamic* shapeDynamic)
+void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	//->mObjectTitleString.append("R:Catchup");
 
@@ -140,7 +140,7 @@ void Catchup_ProcessTick_Rotation::execute(ShapeDynamic* shapeDynamic)
 		}
 	}
 }
-void Catchup_ProcessTick_Rotation::exit(ShapeDynamic* shapeDynamic)
+void Catchup_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
 }
 
@@ -160,10 +160,10 @@ Normal_InterpolateTick_Rotation* Normal_InterpolateTick_Rotation::Instance()
   static Normal_InterpolateTick_Rotation instance;
   return &instance;
 }
-void Normal_InterpolateTick_Rotation::enter(ShapeDynamic* shapeDynamic)
+void Normal_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 {
 }
-void Normal_InterpolateTick_Rotation::execute(ShapeDynamic* shapeDynamic)
+void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 
 	//->mObjectTitleString.append("R:Normal");
@@ -176,7 +176,7 @@ void Normal_InterpolateTick_Rotation::execute(ShapeDynamic* shapeDynamic)
     }
 
 }
-void Normal_InterpolateTick_Rotation::exit(ShapeDynamic* shapeDynamic)
+void Normal_InterpolateTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
 }
 
@@ -189,11 +189,11 @@ Off_InterpolateTick_Rotation* Off_InterpolateTick_Rotation::Instance()
   static Off_InterpolateTick_Rotation instance;
   return &instance;
 }
-void Off_InterpolateTick_Rotation::enter(ShapeDynamic* shapeDynamic)
+void Off_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 {
 	shapeDynamic->mCommandToRunOnShape.mRotSpeed = 0.0;
 }
-void Off_InterpolateTick_Rotation::execute(ShapeDynamic* shapeDynamic)
+void Off_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {		
 	//->mObjectTitleString.append("R:Off");
 	if (abs(shapeDynamic->mAbilityRotation->getDegreesToServer()) > shapeDynamic->mAbilityRotation->mRotInterpLimitLow)
@@ -201,7 +201,7 @@ void Off_InterpolateTick_Rotation::execute(ShapeDynamic* shapeDynamic)
 		shapeDynamic->mAbilityRotation->mRotationInterpolateTickStateMachine->changeState(Normal_InterpolateTick_Rotation::Instance());
     }
 }
-void Off_InterpolateTick_Rotation::exit(ShapeDynamic* shapeDynamic)
+void Off_InterpolateTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
 }
 

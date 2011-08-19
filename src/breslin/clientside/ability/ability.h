@@ -30,7 +30,7 @@ Shape* mShape;
 ********************************************************/
 
 virtual void processTick() { }
-virtual void interplateTick(float renderTime) { }
+virtual void interpolateTick(float renderTime) { }
 
 };
 

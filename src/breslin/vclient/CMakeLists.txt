@@ -89,18 +89,25 @@ set(HDRS
 	
 	#ability
 	../clientside/ability/ability.h
+	../clientside/ability/abilityStateMachine.h
 	
 	#animation
 	../clientside/ability/animation/abilityAnimation.h
 	../clientside/ability/animation/abilityAnimationOgre.h
+	
+	../clientside/ability/animation/abilityAnimationState.h
 	../clientside/ability/animation/abilityAnimationStates.h
 	
 	#move
 	../clientside/ability/move/abilityMove.h
+	
+	../clientside/ability/move/abilityMoveState.h
 	../clientside/ability/move/abilityMoveStates.h
 	
 	#rotation
 	../clientside/ability/rotation/abilityRotation.h
+	
+	../clientside/ability/rotation/abilityRotationState.h
 	../clientside/ability/rotation/abilityRotationStates.h
 	
 	#game
@@ -125,10 +132,6 @@ set(HDRS
 	../clientside/shape/shapeDynamic.h
 	../clientside/shape/shapeDynamicOgre.h
 
-	#states
-	../clientside/states/stateShapeDynamic.h
-	../clientside/states/stateMachineShapeDynamic.h
-	
 	#dispatch
 	../clientside/dispatch/dispatch.h
 	
@@ -195,20 +198,27 @@ endif (WIN32)
 if (UNIX)
 set(HDRS
 
-	#ablility
+	#ability
 	../clientside/ability/ability.h
+	../clientside/ability/abilityStateMachine.h
 	
 	#animation
 	../clientside/ability/animation/abilityAnimation.h
 	../clientside/ability/animation/abilityAnimationOgre.h
+	
+	../clientside/ability/animation/abilityAnimationState.h
 	../clientside/ability/animation/abilityAnimationStates.h
 	
 	#move
 	../clientside/ability/move/abilityMove.h
+	
+	../clientside/ability/move/abilityMoveState.h
 	../clientside/ability/move/abilityMoveStates.h
 	
 	#rotation
 	../clientside/ability/rotation/abilityRotation.h
+	
+	../clientside/ability/rotation/abilityRotationState.h
 	../clientside/ability/rotation/abilityRotationStates.h
 	
 	#game
@@ -231,10 +241,6 @@ set(HDRS
 	../clientside/shape/shape.h
 	../clientside/shape/shapeDynamic.h
 	../clientside/shape/shapeDynamicOgre.h
-	
-	#states
-	../clientside/states/stateShapeDynamic.h
-	../clientside/states/stateMachineShapeDynamic.h
 	
 	#dispatch
 	../clientside/dispatch/dispatch.h

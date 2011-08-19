@@ -10,8 +10,8 @@
 /******************************************************
 *				FORWARD DECLARATIONS
 ********************************************************/
-class ShapeDynamicStateMachine;
-class ShapeDynamicState;
+class AbilityStateMachine;
+class AbilityState;
 class ShapeDynamic;
 
 /******************************************************
@@ -27,8 +27,8 @@ public:
 /******************************************************
 *				VARIABLES
 ********************************************************/
-ShapeDynamicStateMachine* mRotationProcessTickStateMachine;
-ShapeDynamicStateMachine* mRotationInterpolateTickStateMachine;
+AbilityStateMachine* mRotationProcessTickStateMachine;
+AbilityStateMachine* mRotationInterpolateTickStateMachine;
 
 //shape
 ShapeDynamic* mShapeDynamic;

@@ -2,7 +2,7 @@
 #include "../../shape/shapeDynamic.h"
 #include "../../../command/command.h"
 
-#include "../../states/stateMachineShapeDynamic.h"
+#include "../abilityStateMachine.h"
 #include "abilityMoveStates.h"
 
 #include <math.h>

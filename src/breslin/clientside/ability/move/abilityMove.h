@@ -9,8 +9,8 @@
 /******************************************************
 *				FORWARD DECLARATIONS
 ********************************************************/
-class ShapeDynamicStateMachine;
-class ShapeDynamicState;
+class AbilityStateMachine;
+class AbilityState;
 class ShapeDynamic;
 
 /******************************************************
@@ -30,8 +30,8 @@ public:
 ShapeDynamic* mShapeDynamic;
 
 //state machines
-ShapeDynamicStateMachine* mMoveProcessTickStateMachine;
-ShapeDynamicStateMachine* mMoveInterpolateTickStateMachine;
+AbilityStateMachine* mMoveProcessTickStateMachine;
+AbilityStateMachine* mMoveInterpolateTickStateMachine;
 
 //run speed
 float mRunSpeed; 

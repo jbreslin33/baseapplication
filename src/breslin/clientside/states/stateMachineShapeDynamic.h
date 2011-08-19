@@ -1,58 +1,58 @@
-#ifndef SHAPEDYNAMICSTATEMACHINE_H
-#define SHAPEDYNAMICSTATEMACHINE_H
+#ifndef ABILITYSTATEMACHINE_H
+#define ABILITYSTATEMACHINE_H
 
 /**********************************
 *          INCLUDES
 **********************************/
 //parent
-#include "stateShapeDynamic.h"
+#include "stateAbility.h"
 
 /**********************************
 *          FORWARD DECLARATIONS
 **********************************/
-class ShapeDynamic;
+class Ability;
 
 /**********************************
 *          CLASS
 **********************************/
-class ShapeDynamicStateMachine
+class AbilityStateMachine
 {
 public:
 
-  ShapeDynamicStateMachine(ShapeDynamic* owner):m_pOwner(owner),
+  AbilityStateMachine(Ability* owner):m_pOwner(owner),
 	                               m_pCurrentState(0),
                                    m_pPreviousState(0),
                                    m_pGlobalState(0)
   {}
-  virtual ~ShapeDynamicStateMachine(){}
+  virtual ~AbilityStateMachine(){}
 
 /**********************************
 *          VARIABLES
 **********************************/
 private:
   //a pointer to the agent that owns this instance
-  ShapeDynamic*   m_pOwner;
-  ShapeDynamicState*    m_pCurrentState;
+  Ability*   m_pOwner;
+  AbilityState*    m_pCurrentState;
 
   //a record of the last state the agent was in
-  ShapeDynamicState*   m_pPreviousState;
+  AbilityState*   m_pPreviousState;
 
   //this is called every time the FSM is updated
-  ShapeDynamicState*   m_pGlobalState;
+  AbilityState*   m_pGlobalState;
 
 /**********************************
 *          METHODS
 **********************************/
 public:
 
-  ShapeDynamicState*  currentState()  const{return m_pCurrentState;}
-  ShapeDynamicState*  globalState()   const{return m_pGlobalState;}
-  ShapeDynamicState*  previousState() const{return m_pPreviousState;}
+  AbilityState*  currentState()  const{return m_pCurrentState;}
+  AbilityState*  globalState()   const{return m_pGlobalState;}
+  AbilityState*  previousState() const{return m_pPreviousState;}
 
   //use these methods to initialize the FSM
-  void setCurrentState(ShapeDynamicState* s){m_pCurrentState = s;}
-  void setGlobalState(ShapeDynamicState* s) {m_pGlobalState = s;}
-  void setPreviousState(ShapeDynamicState* s){m_pPreviousState = s;}
+  void setCurrentState(AbilityState* s){m_pCurrentState = s;}
+  void setGlobalState(AbilityState* s) {m_pGlobalState = s;}
+  void setPreviousState(AbilityState* s){m_pPreviousState = s;}
 
   //call this to update the FSM
   void  update()const
@@ -65,7 +65,7 @@ public:
   }
 
   //change to a new state
-  void  changeState(ShapeDynamicState* pNewState)
+  void  changeState(AbilityState* pNewState)
   {
    // assert(pNewState &&
            //"<StateMachine::ChangeState>: trying to change to NULL state");

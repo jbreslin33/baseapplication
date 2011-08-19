@@ -1,5 +1,5 @@
 #include "abilityMoveStates.h"
-#include "../../states/stateMachineShapeDynamic.h"
+#include "../abilityStateMachine.h"
 
 #include "../../tdreamsock/dreamSockLog.h"
 
@@ -18,17 +18,17 @@ Global_ProcessTick_Move* Global_ProcessTick_Move::Instance()
   static Global_ProcessTick_Move instance;
   return &instance;
 }
-void Global_ProcessTick_Move::enter(ShapeDynamic* shapeDynamic)
+void Global_ProcessTick_Move::enter(Ability* ability)
 {
 
 }
-void Global_ProcessTick_Move::execute(ShapeDynamic* shapeDynamic)
+void Global_ProcessTick_Move::execute(Ability* ability)
 {
 	shapeDynamic->appendToTitle(shapeDynamic->mIndex);
 	
 	shapeDynamic->mAbilityMove->calculateDeltaPosition();
 }
-void Global_ProcessTick_Move::exit(ShapeDynamic* shapeDynamic)
+void Global_ProcessTick_Move::exit(Ability* ability)
 {
 }
 
@@ -39,11 +39,11 @@ Normal_ProcessTick_Move* Normal_ProcessTick_Move::Instance()
   static Normal_ProcessTick_Move instance;
   return &instance;
 }
-void Normal_ProcessTick_Move::enter(ShapeDynamic* shapeDynamic)
+void Normal_ProcessTick_Move::enter(Ability* ability)
 {
 
 }
-void Normal_ProcessTick_Move::execute(ShapeDynamic* shapeDynamic)
+void Normal_ProcessTick_Move::execute(Ability* ability)
 {
 	//shapeDynamic->appendToTitle("M:Normal");
 
@@ -82,7 +82,7 @@ void Normal_ProcessTick_Move::execute(ShapeDynamic* shapeDynamic)
         shapeDynamic->mCommandToRunOnShape.mVelocity.z = serverDest.z;
 	}
 }
-void Normal_ProcessTick_Move::exit(ShapeDynamic* shapeDynamic)
+void Normal_ProcessTick_Move::exit(Ability* ability)
 {
 }
 
@@ -93,10 +93,10 @@ Catchup_ProcessTick_Move* Catchup_ProcessTick_Move::Instance()
 	static Catchup_ProcessTick_Move instance;
 	return &instance;
 }
-void Catchup_ProcessTick_Move::enter(ShapeDynamic* shapeDynamic)
+void Catchup_ProcessTick_Move::enter(Ability* ability)
 {
 }
-void Catchup_ProcessTick_Move::execute(ShapeDynamic* shapeDynamic)
+void Catchup_ProcessTick_Move::execute(Ability* ability)
 {
 	//shapeDynamic->appendToTitle("M:Catchup");
 
@@ -164,7 +164,7 @@ void Catchup_ProcessTick_Move::execute(ShapeDynamic* shapeDynamic)
 		}
 	}
 }
-void Catchup_ProcessTick_Move::exit(ShapeDynamic* shapeDynamic)
+void Catchup_ProcessTick_Move::exit(Ability* ability)
 {
 }
 
@@ -176,11 +176,11 @@ Normal_InterpolateTick_Move* Normal_InterpolateTick_Move::Instance()
   static Normal_InterpolateTick_Move instance;
   return &instance;
 }
-void Normal_InterpolateTick_Move::enter(ShapeDynamic* shapeDynamic)
+void Normal_InterpolateTick_Move::enter(Ability* ability)
 {
 
 }
-void Normal_InterpolateTick_Move::execute(ShapeDynamic* shapeDynamic)
+void Normal_InterpolateTick_Move::execute(Ability* ability)
 {
 	Vector3D transVector;
 
@@ -196,7 +196,7 @@ void Normal_InterpolateTick_Move::execute(ShapeDynamic* shapeDynamic)
 		shapeDynamic->setPosition(shapeDynamic->getPosition().x, 0.0 ,shapeDynamic->getPosition().z);
 	}
 }
-void Normal_InterpolateTick_Move::exit(ShapeDynamic* shapeDynamic)
+void Normal_InterpolateTick_Move::exit(Ability* ability)
 {
 }
 

@@ -1,7 +1,7 @@
 #include "abilityRotation.h"
 #include "../../shape/shapeDynamic.h"
 
-#include "../../states/stateMachineShapeDynamic.h"
+#include "../abilityStateMachine.h"
 #include "abilityRotationStates.h"
 
 AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)

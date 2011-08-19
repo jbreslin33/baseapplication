@@ -4,12 +4,12 @@
 /******************************************************
 *				INCLUDES
 ********************************************************/
-#include "../../states/stateShapeDynamic.h"
+#include "../abilityState.h"
 
 /******************************************************
 *				FORWARD DECLARATIONS
 ********************************************************/
-class ShapeDynamic;
+class AbilityRotation;
 
 /******************************************************
 *				PROCESS TICK
@@ -23,43 +23,43 @@ class ShapeDynamic;
 *				GLOBAL
 ********************************************************/
 
-class Global_ProcessTick_Rotation : public ShapeDynamicState
+class Global_ProcessTick_Rotation : public AbilityState
 {
 private:
   Global_ProcessTick_Rotation(){}
 public:
   static Global_ProcessTick_Rotation* Instance();
-  void enter  (ShapeDynamic* shapeDynamic);
-  void execute(ShapeDynamic* shapeDynamic);
-  void exit   (ShapeDynamic* shapeDynamic);
+  void enter  (AbilityRotation* abilityRotation);
+  void execute(AbilityRotation* abilityRotation);
+  void exit   (AbilityRotation* abilityRotation);
 };
 
 /******************************************************
 *				NORMAL
 ********************************************************/
-class Normal_ProcessTick_Rotation : public ShapeDynamicState
+class Normal_ProcessTick_Rotation : public AbilityState
 {
 private:
   Normal_ProcessTick_Rotation(){}
 public:
   static Normal_ProcessTick_Rotation* Instance();
-  void enter  (ShapeDynamic* shapeDynamic);
-  void execute(ShapeDynamic* shapeDynamic);
-  void exit   (ShapeDynamic* shapeDynamic);
+  void enter  (AbilityRotation* abilityRotation);
+  void execute(AbilityRotation* abilityRotation);
+  void exit   (AbilityRotation* abilityRotation);
 };
 
 /******************************************************
 *				CATCHUP
 ********************************************************/
-class Catchup_ProcessTick_Rotation : public ShapeDynamicState
+class Catchup_ProcessTick_Rotation : public AbilityState
 {
 private:
   Catchup_ProcessTick_Rotation(){}
 public:
   static Catchup_ProcessTick_Rotation* Instance();
-  void enter  (ShapeDynamic* shapeDynamic);
-  void execute(ShapeDynamic* shapeDynamic);
-  void exit   (ShapeDynamic* shapeDynamic);
+  void enter  (AbilityRotation* abilityRotation);
+  void execute(AbilityRotation* abilityRotation);
+  void exit   (AbilityRotation* abilityRotation);
 };
 
 /******************************************************
@@ -74,28 +74,28 @@ public:
 *				NORMAL
 ********************************************************/
 
-class Normal_InterpolateTick_Rotation : public ShapeDynamicState
+class Normal_InterpolateTick_Rotation : public AbilityState
 {
 private:
   Normal_InterpolateTick_Rotation(){}
 public:
   static Normal_InterpolateTick_Rotation* Instance();
-  void enter  (ShapeDynamic* shapeDynamic);
-  void execute(ShapeDynamic* shapeDynamic);
-  void exit   (ShapeDynamic* shapeDynamic);
+  void enter  (AbilityRotation* abilityRotation);
+  void execute(AbilityRotation* abilityRotation);
+  void exit   (AbilityRotation* abilityRotation);
 };
 
 /******************************************************
 *				OFF
 ********************************************************/
-class Off_InterpolateTick_Rotation : public ShapeDynamicState
+class Off_InterpolateTick_Rotation : public AbilityState
 {
 private:
   Off_InterpolateTick_Rotation(){}
 public:
   static Off_InterpolateTick_Rotation* Instance();
-  void enter  (ShapeDynamic* shapeDynamic);
-  void execute(ShapeDynamic* shapeDynamic);
-  void exit   (ShapeDynamic* shapeDynamic);
+  void enter  (AbilityRotation* abilityRotation);
+  void execute(AbilityRotation* abilityRotation);
+  void exit   (AbilityRotation* abilityRotation);
 };
 #endif

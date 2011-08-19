@@ -6,13 +6,13 @@
 ********************************************************/
 
 //parent
-#include "../../states/stateShapeDynamic.h"
+#include "../abilityState.h"
 
 /******************************************************
 *				FORWARD DECLARATIONS
 ********************************************************/
 
-class ShapeDynamic;
+class Ability;
 
 /******************************************************
 *				INTERPOLATE
@@ -26,30 +26,30 @@ class ShapeDynamic;
 *				IDLE
 ********************************************************/
 
-class Idle_InterpolateTick_Animation : public ShapeDynamicState
+class Idle_InterpolateTick_Animation : public AbilityState
 {
 private:
   Idle_InterpolateTick_Animation(){}
 public:
   static Idle_InterpolateTick_Animation* Instance();
-  void enter  (ShapeDynamic* shapeDynamic);
-  void execute(ShapeDynamic* shapeDynamic);
-  void exit   (ShapeDynamic* shapeDynamic);
+  void enter  (Ability* ability);
+  void execute(Ability* ability);
+  void exit   (Ability* ability);
 };
 
 
 /******************************************************
 *				RUN
 ********************************************************/
-class Run_InterpolateTick_Animation : public ShapeDynamicState
+class Run_InterpolateTick_Animation : public AbilityState
 {
 private:
   Run_InterpolateTick_Animation(){}
 public:
   static Run_InterpolateTick_Animation* Instance();
-  void enter  (ShapeDynamic* shapeDynamic);
-  void execute(ShapeDynamic* shapeDynamic);
-  void exit   (ShapeDynamic* shapeDynamic);
+  void enter  (Ability* ability);
+  void execute(Ability* ability);
+  void exit   (Ability* ability);
 };
 
 #endif
