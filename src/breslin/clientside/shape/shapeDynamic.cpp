@@ -45,7 +45,11 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 
 ShapeDynamic::~ShapeDynamic()
 {
+}
 
+void ShapeDynamic::addAbility(Ability* ability)
+{
+	
 }
 
 void ShapeDynamic::parseDispatch(Dispatch* dispatch)

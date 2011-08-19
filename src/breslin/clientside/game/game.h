@@ -1,11 +1,20 @@
 #ifndef GAME_H
 #define GAME_H
 
+/***************************************
+*   		INCLUDES
+***************************************/
+//standard library
+
+//parents
 #include "BaseApplication.h"
 
 //command
 #include "../../command/command.h"
 
+/***************************************
+*   		FORWARD DECLARATIONS
+***************************************/
 class Client;
 class MovableTextOverlay;
 class Dispatch;
@@ -20,9 +29,9 @@ public:
 	Game(const char* serverIP);
 	~Game();
 
-	/***************************************
-			    MEMBER VARIABLES
-	***************************************/
+/***************************************
+*   		MEMBER VARIABLES
+***************************************/
 
 	//Shapes
 	std::vector<ShapeDynamic*> mShapeVector;	 //all shapes in the client world

@@ -1,12 +1,21 @@
 #ifndef DYNAMICSHAPE_H
 #define DYNAMICSHAPE_H
 
+/***************************************
+*           INCLUDES
+***************************************/
+//standard library
+#include <vector>
+
+//parent
 #include "shape.h"
 
 //command
 #include "../../command/command.h"
 
-//#include <string>
+/***************************************
+*           FORWARD DECLARATIONS
+***************************************/
 
 //game
 class Game;
@@ -18,19 +27,23 @@ class ShapeDynamicState;
 class Dispatch;
 
 //ability
+class Ability;
 class AbilityRotation;
 class AbilityMove;
 class AbilityAnimation;
 
-class ShapeDynamic : public Shape //, public OgreAnimation
+class ShapeDynamic : public Shape
 {
 
 public:
 ShapeDynamic(Game* game, Dispatch* dispatch);
 ~ShapeDynamic();
 
-//network
-//flag
+/************************************************
+*                VARIABLES
+*************************************************/
+
+//network flags
 static const char mCommandMilliseconds = 2;
 static const char mCommandOriginX      = 4;
 static const char mCommandOriginY      = 8;
@@ -39,6 +52,7 @@ static const char mCommandRotationX    = 32;
 static const char mCommandRotationZ    = 64;
 
 //abilitys
+std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
 AbilityRotation* mAbilityRotation;
 AbilityMove* mAbilityMove;
 AbilityAnimation* mAbilityAnimation;
@@ -59,7 +73,15 @@ Command mCommandToRunOnShape;
 //time
 float mRenderTime;
 
+/*************************************************
+*				METHODS
+**************************************************/
+
 //virtual need to be implemented in subclass...
+
+//abilitys
+void addAbility(Ability* ability);
+
 virtual void        yaw                  (float amountToYaw, bool converToDegree   ) = 0;
 virtual float       getDegreesToSomething(Vector3D something                       ) = 0;
 virtual void        translate            (Vector3D translateVector, int perspective) = 0;
