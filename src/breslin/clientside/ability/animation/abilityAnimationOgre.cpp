@@ -10,6 +10,7 @@
 AbilityAnimationOgre::AbilityAnimationOgre(ShapeDynamicOgre* shape) : AbilityAnimation(shape)
 {
 	mShape = shape;
+	mAnimationFadeSpeed = 7.5;
 	setupAnimations();
 }
 
@@ -27,7 +28,7 @@ void AbilityAnimationOgre::setupAnimations()
     "SliceVertical", "SliceHorizontal", "Dance", "JumpStart", "JumpLoop", "JumpEnd"};
 
 	// populate our animation list
-    for (int i = 0; i < NUM_ANIMS; i++)
+    for (int i = 0; i < mNumberOfAnimations; i++)
     {
 		mAnims[i] = mShape->mEntity->getAnimationState(animNames[i]);
         mAnims[i]->setLoop(true);
@@ -76,12 +77,12 @@ void AbilityAnimationOgre::enterAnimationState(ShapeDynamicState* animationState
 
 void AbilityAnimationOgre::fadeAnimations(Real deltaTime)
 {
-	for (int i = 0; i < NUM_ANIMS; i++)
+	for (int i = 0; i < mNumberOfAnimations; i++)
     {
 		if (mFadingIn[i])
         {
 			// slowly fade this animation in until it has full weight
-            Real newWeight = mAnims[i]->getWeight() + deltaTime * ANIM_FADE_SPEED;
+            Real newWeight = mAnims[i]->getWeight() + deltaTime * mAnimationFadeSpeed;
             mAnims[i]->setWeight(Math::Clamp<Real>(newWeight, 0, 1));
             if (newWeight >= 1)
             {
@@ -91,7 +92,7 @@ void AbilityAnimationOgre::fadeAnimations(Real deltaTime)
         else if (mFadingOut[i])
         {
 			// slowly fade this animation out until it has no weight, and then disable it
-			Real newWeight = mAnims[i]->getWeight() - deltaTime * ANIM_FADE_SPEED;
+			Real newWeight = mAnims[i]->getWeight() - deltaTime * mAnimationFadeSpeed;
             mAnims[i]->setWeight(Math::Clamp<Real>(newWeight, 0, 1));
             if (newWeight <= 0)
             {
@@ -104,7 +105,7 @@ void AbilityAnimationOgre::fadeAnimations(Real deltaTime)
 
 void AbilityAnimationOgre::setBaseAnimation(AnimID id, bool reset)
 {
-	if (mBaseAnimID >= 0 && mBaseAnimID < NUM_ANIMS)
+	if (mBaseAnimID >= 0 && mBaseAnimID < mNumberOfAnimations)
     {
 		// if we have an old animation, fade it out
         mFadingIn[mBaseAnimID] = false;
@@ -131,7 +132,7 @@ void AbilityAnimationOgre::setBaseAnimation(AnimID id, bool reset)
 void AbilityAnimationOgre::setTopAnimation(AnimID id, bool reset)
 {
 
-	if (mTopAnimID >= 0 && mTopAnimID < NUM_ANIMS)
+	if (mTopAnimID >= 0 && mTopAnimID < mNumberOfAnimations)
     {
 		// if we have an old animation, fade it out
         mFadingIn[mTopAnimID] = false;

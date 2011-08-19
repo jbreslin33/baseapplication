@@ -1,8 +1,27 @@
 #ifndef ABILITYROTATIONSTATES_H
 #define ABILITYROTATIONSTATES_H
+
+/******************************************************
+*				INCLUDES
+********************************************************/
 #include "../../states/stateShapeDynamic.h"
 
+/******************************************************
+*				FORWARD DECLARATIONS
+********************************************************/
 class ShapeDynamic;
+
+/******************************************************
+*				PROCESS TICK
+*
+*				   STATES
+*
+********************************************************/
+
+
+/******************************************************
+*				GLOBAL
+********************************************************/
 
 class Global_ProcessTick_Rotation : public ShapeDynamicState
 {
@@ -15,6 +34,9 @@ public:
   void exit   (ShapeDynamic* shapeDynamic);
 };
 
+/******************************************************
+*				NORMAL
+********************************************************/
 class Normal_ProcessTick_Rotation : public ShapeDynamicState
 {
 private:
@@ -26,6 +48,9 @@ public:
   void exit   (ShapeDynamic* shapeDynamic);
 };
 
+/******************************************************
+*				CATCHUP
+********************************************************/
 class Catchup_ProcessTick_Rotation : public ShapeDynamicState
 {
 private:
@@ -36,7 +61,18 @@ public:
   void execute(ShapeDynamic* shapeDynamic);
   void exit   (ShapeDynamic* shapeDynamic);
 };
-/********************InterpolateTick*************/
+
+/******************************************************
+*				INTERPOLATE TICK
+*
+*				   STATES
+*
+********************************************************/
+
+
+/******************************************************
+*				NORMAL
+********************************************************/
 
 class Normal_InterpolateTick_Rotation : public ShapeDynamicState
 {
@@ -49,6 +85,9 @@ public:
   void exit   (ShapeDynamic* shapeDynamic);
 };
 
+/******************************************************
+*				OFF
+********************************************************/
 class Off_InterpolateTick_Rotation : public ShapeDynamicState
 {
 private:

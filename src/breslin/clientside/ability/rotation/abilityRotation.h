@@ -1,13 +1,22 @@
 #ifndef ABILITYROTATION_H
 #define ABILITYROTATION_H
 
+/******************************************************
+*				INCLUDES
+********************************************************/
 #include "../ability.h"
 #include "../../../math/vector3D.h"
 
+/******************************************************
+*				FORWARD DECLARATIONS
+********************************************************/
 class ShapeDynamicStateMachine;
 class ShapeDynamicState;
 class ShapeDynamic;
 
+/******************************************************
+*				CLASS
+********************************************************/
 class AbilityRotation : public Ability
 {
 public:
@@ -25,18 +34,19 @@ ShapeDynamicStateMachine* mRotationInterpolateTickStateMachine;
 ShapeDynamic* mShapeDynamic;
 
 //rotation
-float mTurnSpeed; //rot
-float mServerRotSpeed;  //rot
+float mTurnSpeed; 
+float mServerRotSpeed;  
 
-float mRotInterpLimitHigh;  //rot
-float mRotInterpLimitLow;  //rot
-float mRotInterpIncrease;   //rot
-float mRotInterpDecrease;  //rot
+float mRotInterpLimitHigh;  
+float mRotInterpLimitLow;  
+float mRotInterpIncrease;   
+float mRotInterpDecrease;  
 
 //rotation
-Vector3D mServerRotOld;  //rot
-Vector3D mServerRotNew;  //rot
-float    mDegreesToServer;  //rot
+Vector3D mServerRotOld;  
+Vector3D mServerRotNew;  
+float    mDegreesToServer;  
+
 /******************************************************
 *				METHODS
 ********************************************************/
@@ -46,8 +56,8 @@ void processTick();
 void interpolateTick(float renderTime);
 
 //rotation
-float getDegreesToServer();  //rot
-void  calculateServerRotationSpeed();  //rot
+float getDegreesToServer();  
+void  calculateServerRotationSpeed(); 
 
 };
 

@@ -1,17 +1,24 @@
 #ifndef ABILITYANIMATIONOGRE_H
 #define ABILITYANIMATIONOGRE_H
 
-#define NUM_ANIMS 13           // number of animations the character has
-#define ANIM_FADE_SPEED 7.5f   // animation crossfade speed in % of full weight per second
-
+/******************************************************
+*				INCLUDES
+********************************************************/
+//parent
 #include "abilityAnimation.h"
 
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
 
+/******************************************************
+*				FORWARD DECLARATIONS
+********************************************************/
 class ShapeDynamicOgre;
 
+/******************************************************
+*				CLASS
+********************************************************/
 class AbilityAnimationOgre : public AbilityAnimation
 {
 
@@ -19,7 +26,7 @@ class AbilityAnimationOgre : public AbilityAnimation
 // some of these affect separate body parts and will be blended together
 enum AnimID
 {
-        ANIM_IDLE_BASE,
+    ANIM_IDLE_BASE,
     ANIM_IDLE_TOP,
     ANIM_RUN_BASE,
     ANIM_RUN_TOP,
@@ -44,12 +51,14 @@ public:
 *				VARIABLES
 ********************************************************/
 //animation
+static const int mNumberOfAnimations = 13;
+float mAnimationFadeSpeed;
 ShapeDynamicOgre* mShape;
-Ogre::AnimationState* mAnims[NUM_ANIMS];     // master animation list
+Ogre::AnimationState* mAnims[mNumberOfAnimations];     // master animation list
 AnimID                mBaseAnimID;           // current base (full- or lower-body) animation
 AnimID                mTopAnimID;            // current top (upper-body) animation
-bool                  mFadingIn[NUM_ANIMS];  // which animations are fading in
-bool                  mFadingOut[NUM_ANIMS]; // which animations are fading out
+bool                  mFadingIn[mNumberOfAnimations];  // which animations are fading in
+bool                  mFadingOut[mNumberOfAnimations]; // which animations are fading out
 Ogre::AnimationState  *mAnimationState;
 
 /******************************************************

@@ -1,6 +1,16 @@
 #ifndef ABILITYANIMATIONSTATES_H
 #define ABILITYANIMATIONSTATES_H
+
+/******************************************************
+*				INCLUDES
+********************************************************/
+
+//parent
 #include "../../states/stateShapeDynamic.h"
+
+/******************************************************
+*				FORWARD DECLARATIONS
+********************************************************/
 
 class ShapeDynamic;
 

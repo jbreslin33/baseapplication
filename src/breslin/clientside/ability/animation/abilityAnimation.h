@@ -18,6 +18,9 @@ class ShapeDynamicState;
 //shape
 class ShapeDynamic;
 
+/******************************************************
+*				INCLUDES
+********************************************************/
 class AbilityAnimation : public Ability
 {
 public:
