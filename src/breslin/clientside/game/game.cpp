@@ -7,6 +7,10 @@
 #include "../time/time.h"
 #include "../network/network.h"
 
+//abilitys
+#include "../ability/rotation/abilityRotation.h"
+#include "../ability/move/abilityMove.h"
+
 Game::Game(const char* serverIP)
 {
 	StartLog();
@@ -87,6 +91,9 @@ void Game::shutdown(void)
 void Game::addShape(bool b, Dispatch* dispatch)
 {
 	ShapeDynamic* shape = new ShapeDynamicOgre(this,dispatch,false);  //you should just need to call this...
+	//ability
+	shape->addAbility(new AbilityRotation(shape));
+	shape->addAbility(new AbilityMove(shape));
 }
 
 void Game::removeShape(Dispatch* dispatch)

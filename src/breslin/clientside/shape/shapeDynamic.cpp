@@ -52,10 +52,6 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	initializeCommands(mPosition,mRotation);
 	createStateMachines();
 
-	//ability
-	addAbility(new AbilityRotation(this));
-	addAbility(new AbilityMove(this));
-
 	mAbilityAnimation = NULL;	
 	
 }
