@@ -46,6 +46,9 @@ ShapeDynamic(Game* game, Dispatch* dispatch);
 *                VARIABLES
 *************************************************/
 
+//speed
+float mSpeed; 
+
 //network flags
 static const char mCommandMilliseconds = 2;
 static const char mCommandOriginX      = 4;
@@ -89,6 +92,7 @@ virtual void        yaw                  (float amountToYaw, bool converToDegree
 virtual float       getDegreesToSomething(Vector3D something                       ) = 0;
 virtual void        translate            (Vector3D translateVector, int perspective) = 0;
 virtual std::string getName() = 0; 
+virtual float       getSpeed();
 
 //ticks
 void processTick();

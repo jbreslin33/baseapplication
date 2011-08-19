@@ -62,12 +62,12 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
         serverDest.z = abilityMove->mShapeDynamic->mServerFrame.mVelocity.z;
         serverDest.normalise();
 
-       // abilityMove->mShapeDynamic->mRunSpeed = 0.0;
+       // abilityMove->mShapeDynamic->mSpeed = 0.0;
 
         if(abilityMove->mShapeDynamic->mCommandToRunOnShape.mMilliseconds != 0)
         {
 			
-			abilityMove->mRunSpeed =
+			abilityMove->mShapeDynamic->mSpeed =
 			sqrt(
 			pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.x, 2) + 
             pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.y, 2) +
@@ -75,7 +75,7 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 			abilityMove->mShapeDynamic->mCommandToRunOnShape.mMilliseconds;
         }
 
-        serverDest = serverDest * abilityMove->mRunSpeed;
+        serverDest = serverDest * abilityMove->mShapeDynamic->mSpeed;
 
 		abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.x = serverDest.x;
         abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.y = serverDest.y;
@@ -134,14 +134,14 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
         //server velocity
 		if(abilityMove->mShapeDynamic->mCommandToRunOnShape.mMilliseconds != 0)
         {
-           abilityMove->mRunSpeed = sqrt(pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.x, 2) + 
+           abilityMove->mShapeDynamic->mSpeed = sqrt(pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.x, 2) + 
            pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.y, 2) + pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.z, 2))/abilityMove->mShapeDynamic->mCommandToRunOnShape.mMilliseconds;
 		}
 
-		if(abilityMove->mRunSpeed != 0.0)
+		if(abilityMove->mShapeDynamic->mSpeed != 0.0)
 		{
            //time needed to get to future server pos
-           float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mRunSpeed;
+           float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mShapeDynamic->mSpeed;
 
            myDest.normalise();
 

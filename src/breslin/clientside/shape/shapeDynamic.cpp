@@ -1,31 +1,46 @@
+/******************************************************
+*				INCLUDES
+********************************************************/
+
+//parent
 #include "shapeDynamic.h"
+
+//log
 #include "../tdreamsock/dreamSockLog.h"
 
 //game
 #include "../game/game.h"
 
 //ability
+#include "../ability/move/abilityMove.h"
 #include "../ability/move/abilityMoveStates.h"
+
 #include "../ability/rotation/abilityRotationStates.h"
 #include "../ability/rotation/abilityRotation.h"
-#include "../ability/move/abilityMove.h"
+
 #include "../ability/animation/abilityAnimation.h"
 
+//dispatch
 #include "../dispatch/dispatch.h"
 
+//title
 #include "../billboard/objectTitle.h"
 
-
-
-
-
 #include <string.h>
+
+/******************************************************
+*				CLASS
+********************************************************/
 
 ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 :
 	Shape         ()
 {
+	//game
 	mGame = game;
+
+	//speed
+	mSpeed     = 0.0;
 
 	mPosition = new Vector3D();
 	mVelocity = new Vector3D();
@@ -50,6 +65,11 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 ShapeDynamic::~ShapeDynamic()
 {
 }
+
+float ShapeDynamic::getSpeed()
+{
+	return mSpeed;
+}	
 
 void ShapeDynamic::addAbility(Ability* ability)
 {

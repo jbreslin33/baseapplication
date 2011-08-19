@@ -34,8 +34,7 @@ AbilityMoveStateMachine* mMoveProcessTickStateMachine;
 AbilityMoveStateMachine* mMoveInterpolateTickStateMachine;
 
 //run speed
-float mRunSpeed; 
-float mRunSpeedMax; 
+float mSpeedMax; 
 
 //thresholds
 float mPosInterpLimitHigh; 
