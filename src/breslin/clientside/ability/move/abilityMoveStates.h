@@ -16,45 +16,45 @@ class Ability;
 *				GLOBAL
 ********************************************************/
 
-class Global_ProcessTick_Move : public AbilityState
+class Global_ProcessTick_Move : public AbilityMoveState
 {
 private:
   Global_ProcessTick_Move(){}
 public:
   static Global_ProcessTick_Move* Instance();
-  void enter  (Ability* ability);
-  void execute(Ability* ability);
-  void exit   (Ability* ability);
+  void enter  (AbilityMove* abilityMove);
+  void execute(AbilityMove* abilityMove);
+  void exit   (AbilityMove* abilityMove);
 };
 
 
 /******************************************************
 *				NORMAL
 ********************************************************/
-class Normal_ProcessTick_Move : public AbilityState
+class Normal_ProcessTick_Move : public AbilityMoveState
 {
 private:
   Normal_ProcessTick_Move(){}
 public:
   static Normal_ProcessTick_Move* Instance();
-  void enter  (Ability* ability);
-  void execute(Ability* ability);
-  void exit   (Ability* ability);
+  void enter  (AbilityMove* abilityMove);
+  void execute(AbilityMove* abilityMove);
+  void exit   (AbilityMove* abilityMove);
 };
 
 
 /******************************************************
 *				CATCHUP
 ********************************************************/
-class Catchup_ProcessTick_Move : public AbilityState
+class Catchup_ProcessTick_Move : public AbilityMoveState
 {
 private:
   Catchup_ProcessTick_Move(){}
 public:
   static Catchup_ProcessTick_Move* Instance();
-  void enter  (Ability* ability);
-  void execute(Ability* ability);
-  void exit   (Ability* ability);
+  void enter  (AbilityMove* abilityMove);
+  void execute(AbilityMove* abilityMove);
+  void exit   (AbilityMove* abilityMove);
 };
 
 /******************************************************
@@ -67,15 +67,15 @@ public:
 /******************************************************
 *				NORMAL
 ********************************************************/
-class Normal_InterpolateTick_Move : public AbilityState
+class Normal_InterpolateTick_Move : public AbilityMoveState
 {
 private:
   Normal_InterpolateTick_Move(){}
 public:
   static Normal_InterpolateTick_Move* Instance();
-  void enter  (Ability* ability);
-  void execute(Ability* ability);
-  void exit   (Ability* ability);
+  void enter  (AbilityMove* abilityMove);
+  void execute(AbilityMove* abilityMove);
+  void exit   (AbilityMove* abilityMove);
 };
 
 #endif

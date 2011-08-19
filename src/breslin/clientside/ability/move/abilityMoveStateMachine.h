@@ -1,71 +1,71 @@
-#ifndef ABILITYSTATEMACHINE_H
-#define ABILITYSTATEMACHINE_H
+#ifndef ABILITYMOVESTATEMACHINE_H
+#define ABILITYMOVESTATEMACHINE_H
 
 /**********************************
 *          INCLUDES
 **********************************/
 
-#include "abilityState.h"
+#include "abilityMoveState.h"
 
 /**********************************
 *          FORWARD DECLARATIONS
 **********************************/
-class Ability;
+class AbilityMove;
 
 /**********************************
 *          CLASS
 **********************************/
-class AbilityStateMachine
+class AbilityMoveStateMachine
 {
 public:
 
-AbilityStateMachine(Ability* owner):m_pOwner(owner),
+AbilityMoveStateMachine(AbilityMove* owner):m_pOwner(owner),
 	                               m_pCurrentState(0),
                                    m_pPreviousState(0),
                                    m_pGlobalState(0)
 {
 
 }
-virtual ~AbilityStateMachine(){}
+virtual ~AbilityMoveStateMachine(){}
 
 /**********************************
 *          VARIABLES
 **********************************/
 private:
   
-Ability*        m_pOwner;
-AbilityState*   m_pCurrentState;
-AbilityState*   m_pPreviousState;
-AbilityState*   m_pGlobalState;
+AbilityMove*        m_pOwner;
+AbilityMoveState*   m_pCurrentState;
+AbilityMoveState*   m_pPreviousState;
+AbilityMoveState*   m_pGlobalState;
 
 /**********************************
 *          METHODS
 **********************************/
 public:
 
-AbilityState*  currentState()  const
+AbilityMoveState*  currentState()  const
 {
 	return m_pCurrentState;
 }
 
-AbilityState*  globalState()   const
+AbilityMoveState*  globalState()   const
 {
 	return m_pGlobalState;
 }
-AbilityState*  previousState() const
+AbilityMoveState*  previousState() const
 {
 	return m_pPreviousState;
 }
 
-void setCurrentState(AbilityState* s)
+void setCurrentState(AbilityMoveState* s)
 {
 	m_pCurrentState = s;
 }
-void setGlobalState(AbilityState* s)
+void setGlobalState(AbilityMoveState* s)
 {
 	m_pGlobalState = s;
 }
-void setPreviousState(AbilityState* s)
+void setPreviousState(AbilityMoveState* s)
 {
 	m_pPreviousState = s;
 }
@@ -82,7 +82,7 @@ void  update()const
 	}
  }
 
-void  changeState(AbilityState* pNewState)
+void  changeState(AbilityMoveState* pNewState)
 {
 	m_pPreviousState = m_pCurrentState;
 

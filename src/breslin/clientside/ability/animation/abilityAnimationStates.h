@@ -26,30 +26,30 @@ class Ability;
 *				IDLE
 ********************************************************/
 
-class Idle_InterpolateTick_Animation : public AbilityState
+class Idle_InterpolateTick_Animation : public AbilityAnimationState
 {
 private:
   Idle_InterpolateTick_Animation(){}
 public:
   static Idle_InterpolateTick_Animation* Instance();
-  void enter  (Ability* ability);
-  void execute(Ability* ability);
-  void exit   (Ability* ability);
+  void enter  (AbilityAnimation* abilityAnimation);
+  void execute(AbilityAnimation* abilityAnimation);
+  void exit   (AbilityAnimation* abilityAnimation);
 };
 
 
 /******************************************************
 *				RUN
 ********************************************************/
-class Run_InterpolateTick_Animation : public AbilityState
+class Run_InterpolateTick_Animation : public AbilityAnimationState
 {
 private:
   Run_InterpolateTick_Animation(){}
 public:
   static Run_InterpolateTick_Animation* Instance();
-  void enter  (Ability* ability);
-  void execute(Ability* ability);
-  void exit   (Ability* ability);
+  void enter  (AbilityAnimation* abilityAnimation);
+  void execute(AbilityAnimation* abilityAnimation);
+  void exit   (AbilityAnimation* abilityAnimation);
 };
 
 #endif

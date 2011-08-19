@@ -1,13 +1,16 @@
 #include "abilityAnimation.h"
 #include "../../shape/shapeDynamic.h"
 
-#include "../abilityStateMachine.h"
+#include "abilityAnimationStateMachine.h"
 #include "abilityAnimationStates.h"
 
-AbilityAnimation::AbilityAnimation(ShapeDynamic* shape)  : Ability(shape)
+AbilityAnimation::AbilityAnimation(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
 {
+	//shape
+	mShapeDynamic = shapeDynamic;
+
 	//animation interpolateTick states
-    mAnimationInterpolateTickStateMachine = new ShapeDynamicStateMachine(shape);    //setup the state machine
+    mAnimationInterpolateTickStateMachine = new AbilityAnimationStateMachine(this);    //setup the state machine
     mAnimationInterpolateTickStateMachine->setCurrentState (Idle_InterpolateTick_Animation::Instance());
     mAnimationInterpolateTickStateMachine->setPreviousState(Idle_InterpolateTick_Animation::Instance());
 }

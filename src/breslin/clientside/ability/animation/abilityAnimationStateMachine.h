@@ -1,71 +1,71 @@
-#ifndef ABILITYSTATEMACHINE_H
-#define ABILITYSTATEMACHINE_H
+#ifndef ABILITYANIMATIONSTATEMACHINE_H
+#define ABILITYANIMATIONSTATEMACHINE_H
 
 /**********************************
 *          INCLUDES
 **********************************/
 
-#include "abilityState.h"
+#include "abilityAnimationState.h"
 
 /**********************************
 *          FORWARD DECLARATIONS
 **********************************/
-class Ability;
+class AbilityAnimation;
 
 /**********************************
 *          CLASS
 **********************************/
-class AbilityStateMachine
+class AbilityAnimationStateMachine
 {
 public:
 
-AbilityStateMachine(Ability* owner):m_pOwner(owner),
+AbilityAnimationStateMachine(AbilityAnimation* owner):m_pOwner(owner),
 	                               m_pCurrentState(0),
                                    m_pPreviousState(0),
                                    m_pGlobalState(0)
 {
 
 }
-virtual ~AbilityStateMachine(){}
+virtual ~AbilityAnimationStateMachine(){}
 
 /**********************************
 *          VARIABLES
 **********************************/
 private:
   
-Ability*        m_pOwner;
-AbilityState*   m_pCurrentState;
-AbilityState*   m_pPreviousState;
-AbilityState*   m_pGlobalState;
+AbilityAnimation*        m_pOwner;
+AbilityAnimationState*   m_pCurrentState;
+AbilityAnimationState*   m_pPreviousState;
+AbilityAnimationState*   m_pGlobalState;
 
 /**********************************
 *          METHODS
 **********************************/
 public:
 
-AbilityState*  currentState()  const
+AbilityAnimationState*  currentState()  const
 {
 	return m_pCurrentState;
 }
 
-AbilityState*  globalState()   const
+AbilityAnimationState*  globalState()   const
 {
 	return m_pGlobalState;
 }
-AbilityState*  previousState() const
+AbilityAnimationState*  previousState() const
 {
 	return m_pPreviousState;
 }
 
-void setCurrentState(AbilityState* s)
+void setCurrentState(AbilityAnimationState* s)
 {
 	m_pCurrentState = s;
 }
-void setGlobalState(AbilityState* s)
+void setGlobalState(AbilityAnimationState* s)
 {
 	m_pGlobalState = s;
 }
-void setPreviousState(AbilityState* s)
+void setPreviousState(AbilityAnimationState* s)
 {
 	m_pPreviousState = s;
 }
@@ -82,7 +82,7 @@ void  update()const
 	}
  }
 
-void  changeState(AbilityState* pNewState)
+void  changeState(AbilityAnimationState* pNewState)
 {
 	m_pPreviousState = m_pCurrentState;
 

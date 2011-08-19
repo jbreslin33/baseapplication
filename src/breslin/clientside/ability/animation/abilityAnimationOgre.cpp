@@ -7,9 +7,9 @@
 
 #include "abilityAnimationStates.h"
 
-AbilityAnimationOgre::AbilityAnimationOgre(ShapeDynamicOgre* shape) : AbilityAnimation(shape)
+AbilityAnimationOgre::AbilityAnimationOgre(ShapeDynamicOgre* shapeDynamicOgre) : AbilityAnimation(shapeDynamicOgre)
 {
-	mShape = shape;
+	mShapeDynamicOgre = shapeDynamicOgre;
 	mAnimationFadeSpeed = 7.5;
 	setupAnimations();
 }
@@ -22,7 +22,7 @@ void AbilityAnimationOgre::setupAnimations()
 {
 	/*********  setup animations ***************/
     // this is very important due to the nature of the exported animations
-    mShape->mEntity->getSkeleton()->setBlendMode(ANIMBLEND_CUMULATIVE);
+    mShapeDynamicOgre->mEntity->getSkeleton()->setBlendMode(ANIMBLEND_CUMULATIVE);
     String animNames[] =
     {"IdleBase", "IdleTop", "RunBase", "RunTop", "HandsClosed", "HandsRelaxed", "DrawSwords",
     "SliceVertical", "SliceHorizontal", "Dance", "JumpStart", "JumpLoop", "JumpEnd"};
@@ -30,7 +30,7 @@ void AbilityAnimationOgre::setupAnimations()
 	// populate our animation list
     for (int i = 0; i < mNumberOfAnimations; i++)
     {
-		mAnims[i] = mShape->mEntity->getAnimationState(animNames[i]);
+		mAnims[i] = mShapeDynamicOgre->mEntity->getAnimationState(animNames[i]);
         mAnims[i]->setLoop(true);
         mFadingIn[i] = false;
         mFadingOut[i] = false;
@@ -45,15 +45,15 @@ void AbilityAnimationOgre::setupAnimations()
 
 void AbilityAnimationOgre::runAnimations()
 {
-	mAnims[mBaseAnimID]->addTime(mShape->mGame->mRenderTime * mShape->mAbilityMove->mRunSpeed * 1000/mShape->mAbilityMove->mRunSpeedMax);
-	mAnims[mTopAnimID]->addTime(mShape->mRenderTime * mShape->mAbilityMove->mRunSpeed * 1000/mShape->mAbilityMove->mRunSpeedMax);
-	fadeAnimations(mShape->mRenderTime);
+	mAnims[mBaseAnimID]->addTime(mShapeDynamicOgre->mGame->mRenderTime * mShapeDynamicOgre->mAbilityMove->mRunSpeed * 1000/mShapeDynamicOgre->mAbilityMove->mRunSpeedMax);
+	mAnims[mTopAnimID]->addTime(mShapeDynamicOgre->mRenderTime * mShapeDynamicOgre->mAbilityMove->mRunSpeed * 1000/mShapeDynamicOgre->mAbilityMove->mRunSpeedMax);
+	fadeAnimations(mShapeDynamicOgre->mRenderTime);
 }
 
-void AbilityAnimationOgre::enterAnimationState(ShapeDynamicState* animationState)
+void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAnimationState)
 {
 	
-	if (animationState == Idle_InterpolateTick_Animation::Instance())
+	if (abilityAnimationState == Idle_InterpolateTick_Animation::Instance())
 	{
 		// start off in the idle state (top and bottom together)
 		setBaseAnimation(ANIM_IDLE_BASE,false);
@@ -62,7 +62,7 @@ void AbilityAnimationOgre::enterAnimationState(ShapeDynamicState* animationState
 		// relax the hands since we're not holding anything
 		mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
 	}
-	else if (animationState == Run_InterpolateTick_Animation::Instance())
+	else if (abilityAnimationState == Run_InterpolateTick_Animation::Instance())
 	{
 		setBaseAnimation(ANIM_RUN_BASE, true);
 	    setTopAnimation(ANIM_RUN_TOP, true);

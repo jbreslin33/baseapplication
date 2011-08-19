@@ -1,7 +1,7 @@
 #include "abilityRotation.h"
 #include "../../shape/shapeDynamic.h"
 
-#include "../abilityStateMachine.h"
+#include "abilityRotationStateMachine.h"
 #include "abilityRotationStates.h"
 
 AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
@@ -9,13 +9,13 @@ AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDyn
 	mShapeDynamic = shapeDynamic;
 
 	//process tick rotation states
-	mRotationProcessTickStateMachine = new ShapeDynamicStateMachine(shapeDynamic);    //setup the state machine
+	mRotationProcessTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine
 	mRotationProcessTickStateMachine->setCurrentState      (Normal_ProcessTick_Rotation::Instance());
 	mRotationProcessTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
 	mRotationProcessTickStateMachine->setGlobalState       (Global_ProcessTick_Rotation::Instance());
 
 	//interpolate tick rotation states
-	mRotationInterpolateTickStateMachine = new ShapeDynamicStateMachine(shapeDynamic);    //setup the state machine
+	mRotationInterpolateTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine
 	mRotationInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Rotation::Instance());
 	mRotationInterpolateTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
 

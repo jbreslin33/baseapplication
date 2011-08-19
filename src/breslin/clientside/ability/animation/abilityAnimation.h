@@ -12,8 +12,8 @@
 *************************************/
 
 //states
-class AbilityStateMachine;
-class AbilityState;
+class AbilityAnimationStateMachine;
+class AbilityAnimationState;
 
 //shape
 class ShapeDynamic;
@@ -31,9 +31,11 @@ public:
 /******************************************************
 *				VARIABLES
 ********************************************************/
+//shape
+ShapeDynamic* mShapeDynamic;
 
 //state machine
-AbilityStateMachine* mAnimationInterpolateTickStateMachine;
+AbilityAnimationStateMachine* mAnimationInterpolateTickStateMachine;
 
 /******************************************************
 *				METHODS
@@ -44,7 +46,7 @@ void processTick();
 void interpolateTick(float renderTime);
 
 //animation
-virtual void enterAnimationState(AbilityState* abilityState) = 0;
+virtual void enterAnimationState(AbilityAnimationState* abilityAnimationState) = 0;
 virtual void     runAnimations        (                          ) = 0;  
 
 };

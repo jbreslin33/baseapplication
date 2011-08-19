@@ -1,5 +1,5 @@
 #include "abilityMoveStates.h"
-#include "../abilityStateMachine.h"
+#include "abilityMoveStateMachine.h"
 
 #include "../../tdreamsock/dreamSockLog.h"
 
@@ -18,17 +18,17 @@ Global_ProcessTick_Move* Global_ProcessTick_Move::Instance()
   static Global_ProcessTick_Move instance;
   return &instance;
 }
-void Global_ProcessTick_Move::enter(Ability* ability)
+void Global_ProcessTick_Move::enter(AbilityMove* abilityMove)
 {
 
 }
-void Global_ProcessTick_Move::execute(Ability* ability)
+void Global_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
-	shapeDynamic->appendToTitle(shapeDynamic->mIndex);
+	abilityMove->mShapeDynamic->appendToTitle(abilityMove->mShapeDynamic->mIndex);
 	
-	shapeDynamic->mAbilityMove->calculateDeltaPosition();
+	abilityMove->calculateDeltaPosition();
 }
-void Global_ProcessTick_Move::exit(Ability* ability)
+void Global_ProcessTick_Move::exit(AbilityMove* abilityMove)
 {
 }
 
@@ -39,50 +39,50 @@ Normal_ProcessTick_Move* Normal_ProcessTick_Move::Instance()
   static Normal_ProcessTick_Move instance;
   return &instance;
 }
-void Normal_ProcessTick_Move::enter(Ability* ability)
+void Normal_ProcessTick_Move::enter(AbilityMove* abilityMove)
 {
 
 }
-void Normal_ProcessTick_Move::execute(Ability* ability)
+void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
-	//shapeDynamic->appendToTitle("M:Normal");
+	//abilityMove->mShapeDynamic->appendToTitle("M:Normal");
 
 	// if distance exceeds threshold && server velocity is zero
-	if(shapeDynamic->mAbilityMove->mDeltaPosition > shapeDynamic->mAbilityMove->mPosInterpLimitHigh && !shapeDynamic->mServerFrame.mVelocity.isZero())
+	if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShapeDynamic->mServerFrame.mVelocity.isZero())
 	{
-		shapeDynamic->mAbilityMove->mMoveProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
+		abilityMove->mMoveProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
     }
     else //server stopped or we are in sync so just use server vel as is, this is meat of normal state...
     {
 		Vector3D serverDest;
        // Ogre::Vector3 myDest      = Ogre::Vector3::ZERO;
 
-		serverDest.x = shapeDynamic->mServerFrame.mVelocity.x;
-	    serverDest.y = shapeDynamic->mServerFrame.mVelocity.y;
-        serverDest.z = shapeDynamic->mServerFrame.mVelocity.z;
+		serverDest.x = abilityMove->mShapeDynamic->mServerFrame.mVelocity.x;
+	    serverDest.y = abilityMove->mShapeDynamic->mServerFrame.mVelocity.y;
+        serverDest.z = abilityMove->mShapeDynamic->mServerFrame.mVelocity.z;
         serverDest.normalise();
 
-       // shapeDynamic->mRunSpeed = 0.0;
+       // abilityMove->mShapeDynamic->mRunSpeed = 0.0;
 
-        if(shapeDynamic->mCommandToRunOnShape.mMilliseconds != 0)
+        if(abilityMove->mShapeDynamic->mCommandToRunOnShape.mMilliseconds != 0)
         {
 			
-			shapeDynamic->mAbilityMove->mRunSpeed =
+			abilityMove->mRunSpeed =
 			sqrt(
-			pow(shapeDynamic->mServerFrame.mVelocity.x, 2) + 
-            pow(shapeDynamic->mServerFrame.mVelocity.y, 2) +
-			pow(shapeDynamic->mServerFrame.mVelocity.z, 2)) /
-			shapeDynamic->mCommandToRunOnShape.mMilliseconds;
+			pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.x, 2) + 
+            pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.y, 2) +
+			pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.z, 2)) /
+			abilityMove->mShapeDynamic->mCommandToRunOnShape.mMilliseconds;
         }
 
-        serverDest = serverDest * shapeDynamic->mAbilityMove->mRunSpeed;
+        serverDest = serverDest * abilityMove->mRunSpeed;
 
-		shapeDynamic->mCommandToRunOnShape.mVelocity.x = serverDest.x;
-        shapeDynamic->mCommandToRunOnShape.mVelocity.y = serverDest.y;
-        shapeDynamic->mCommandToRunOnShape.mVelocity.z = serverDest.z;
+		abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.x = serverDest.x;
+        abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.y = serverDest.y;
+        abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.z = serverDest.z;
 	}
 }
-void Normal_ProcessTick_Move::exit(Ability* ability)
+void Normal_ProcessTick_Move::exit(AbilityMove* abilityMove)
 {
 }
 
@@ -93,38 +93,38 @@ Catchup_ProcessTick_Move* Catchup_ProcessTick_Move::Instance()
 	static Catchup_ProcessTick_Move instance;
 	return &instance;
 }
-void Catchup_ProcessTick_Move::enter(Ability* ability)
+void Catchup_ProcessTick_Move::enter(AbilityMove* abilityMove)
 {
 }
-void Catchup_ProcessTick_Move::execute(Ability* ability)
+void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
-	//shapeDynamic->appendToTitle("M:Catchup");
+	//abilityMove->mShapeDynamic->appendToTitle("M:Catchup");
 
 	//if we are back in sync
-    if(shapeDynamic->mAbilityMove->mDeltaPosition <= shapeDynamic->mAbilityMove->mPosInterpLimitHigh || shapeDynamic->mServerFrame.mVelocity.isZero())
+    if(abilityMove->mDeltaPosition <= abilityMove->mPosInterpLimitHigh || abilityMove->mShapeDynamic->mServerFrame.mVelocity.isZero())
     {
-		shapeDynamic->mAbilityMove->mMoveProcessTickStateMachine->changeState(Normal_ProcessTick_Move::Instance());
+		abilityMove->mMoveProcessTickStateMachine->changeState(Normal_ProcessTick_Move::Instance());
     }
     else
     {
 		Vector3D serverDest; //vector to future server pos
         Vector3D myDest; //vector from clienr pos to future server pos
 
-        serverDest.x = shapeDynamic->mServerFrame.mVelocity.x;
-        serverDest.y = shapeDynamic->mServerFrame.mVelocity.y;
-        serverDest.z = shapeDynamic->mServerFrame.mVelocity.z;
+        serverDest.x = abilityMove->mShapeDynamic->mServerFrame.mVelocity.x;
+        serverDest.y = abilityMove->mShapeDynamic->mServerFrame.mVelocity.y;
+        serverDest.z = abilityMove->mShapeDynamic->mServerFrame.mVelocity.z;
         serverDest.normalise();
 
-        float multiplier = shapeDynamic->mAbilityMove->mDeltaPosition * shapeDynamic->mAbilityMove->mPosInterpFactor;
+        float multiplier = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor;
         serverDest = serverDest * multiplier;
-        serverDest.x = shapeDynamic->mServerFrame.mOrigin.x + serverDest.x;
-        serverDest.y = shapeDynamic->mServerFrame.mOrigin.y + serverDest.y;
-        serverDest.z = shapeDynamic->mServerFrame.mOrigin.z + serverDest.z;
-                //LogString("mOrigin.y %f", shapeDynamic->mClient->mServerFrame.mOrigin.y);
+        serverDest.x = abilityMove->mShapeDynamic->mServerFrame.mOrigin.x + serverDest.x;
+        serverDest.y = abilityMove->mShapeDynamic->mServerFrame.mOrigin.y + serverDest.y;
+        serverDest.z = abilityMove->mShapeDynamic->mServerFrame.mOrigin.z + serverDest.z;
+                //LogString("mOrigin.y %f", abilityMove->mShapeDynamic->mClient->mServerFrame.mOrigin.y);
 
-        myDest.x = serverDest.x - shapeDynamic->getPosition().x;
-        myDest.y = serverDest.y - shapeDynamic->getPosition().y;
-        myDest.z = serverDest.z - shapeDynamic->getPosition().z;
+        myDest.x = serverDest.x - abilityMove->mShapeDynamic->getPosition().x;
+        myDest.y = serverDest.y - abilityMove->mShapeDynamic->getPosition().y;
+        myDest.z = serverDest.z - abilityMove->mShapeDynamic->getPosition().z;
 
 
         //dist from clienr pos to future server pos
@@ -132,16 +132,16 @@ void Catchup_ProcessTick_Move::execute(Ability* ability)
         predictDist = sqrt(predictDist);
 
         //server velocity
-		if(shapeDynamic->mCommandToRunOnShape.mMilliseconds != 0)
+		if(abilityMove->mShapeDynamic->mCommandToRunOnShape.mMilliseconds != 0)
         {
-           shapeDynamic->mAbilityMove->mRunSpeed = sqrt(pow(shapeDynamic->mServerFrame.mVelocity.x, 2) + 
-           pow(shapeDynamic->mServerFrame.mVelocity.y, 2) + pow(shapeDynamic->mServerFrame.mVelocity.z, 2))/shapeDynamic->mCommandToRunOnShape.mMilliseconds;
+           abilityMove->mRunSpeed = sqrt(pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.x, 2) + 
+           pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.y, 2) + pow(abilityMove->mShapeDynamic->mServerFrame.mVelocity.z, 2))/abilityMove->mShapeDynamic->mCommandToRunOnShape.mMilliseconds;
 		}
 
-		if(shapeDynamic->mAbilityMove->mRunSpeed != 0.0)
+		if(abilityMove->mRunSpeed != 0.0)
 		{
            //time needed to get to future server pos
-           float time = shapeDynamic->mAbilityMove->mDeltaPosition * shapeDynamic->mAbilityMove->mPosInterpFactor/shapeDynamic->mAbilityMove->mRunSpeed;
+           float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mRunSpeed;
 
            myDest.normalise();
 
@@ -149,22 +149,22 @@ void Catchup_ProcessTick_Move::execute(Ability* ability)
 		   float distTime = predictDist/time;
            myDest = myDest * distTime;
 
-           shapeDynamic->mCommandToRunOnShape.mVelocity.x = myDest.x;
-           shapeDynamic->mCommandToRunOnShape.mVelocity.y = myDest.y;
-           shapeDynamic->mCommandToRunOnShape.mVelocity.z = myDest.z;
+           abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.x = myDest.x;
+           abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.y = myDest.y;
+           abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.z = myDest.z;
 
 		}
 		else
 		{
 			//why would catchup ever need to set velocity to zero, wouldn't we simply leave catchup state??
-           shapeDynamic->mCommandToRunOnShape.mVelocity.x = 0.0;
-           shapeDynamic->mCommandToRunOnShape.mVelocity.y = 0.0;
-           shapeDynamic->mCommandToRunOnShape.mVelocity.z = 0.0;
+           abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.x = 0.0;
+           abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.y = 0.0;
+           abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.z = 0.0;
 
 		}
 	}
 }
-void Catchup_ProcessTick_Move::exit(Ability* ability)
+void Catchup_ProcessTick_Move::exit(AbilityMove* abilityMove)
 {
 }
 
@@ -176,27 +176,27 @@ Normal_InterpolateTick_Move* Normal_InterpolateTick_Move::Instance()
   static Normal_InterpolateTick_Move instance;
   return &instance;
 }
-void Normal_InterpolateTick_Move::enter(Ability* ability)
+void Normal_InterpolateTick_Move::enter(AbilityMove* abilityMove)
 {
 
 }
-void Normal_InterpolateTick_Move::execute(Ability* ability)
+void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 {
 	Vector3D transVector;
 
-    transVector.x = shapeDynamic->mCommandToRunOnShape.mVelocity.x;
-    transVector.y = shapeDynamic->mCommandToRunOnShape.mVelocity.y;
-    transVector.z = shapeDynamic->mCommandToRunOnShape.mVelocity.z;
+    transVector.x = abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.x;
+    transVector.y = abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.y;
+    transVector.z = abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.z;
         
-    shapeDynamic->translate(transVector * shapeDynamic->mRenderTime * 1000, 1);
+    abilityMove->mShapeDynamic->translate(transVector * abilityMove->mShapeDynamic->mRenderTime * 1000, 1);
 
 	//does this just prevent you from going below 0 up and down?
-    if(shapeDynamic->getPosition().y < 0.0)
+    if(abilityMove->mShapeDynamic->getPosition().y < 0.0)
 	{	
-		shapeDynamic->setPosition(shapeDynamic->getPosition().x, 0.0 ,shapeDynamic->getPosition().z);
+		abilityMove->mShapeDynamic->setPosition(abilityMove->mShapeDynamic->getPosition().x, 0.0 ,abilityMove->mShapeDynamic->getPosition().z);
 	}
 }
-void Normal_InterpolateTick_Move::exit(Ability* ability)
+void Normal_InterpolateTick_Move::exit(AbilityMove* abilityMove)
 {
 }
 

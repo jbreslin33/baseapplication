@@ -89,7 +89,6 @@ set(HDRS
 	
 	#ability
 	../clientside/ability/ability.h
-	../clientside/ability/abilityStateMachine.h
 	
 	#animation
 	../clientside/ability/animation/abilityAnimation.h
@@ -204,7 +203,6 @@ set(HDRS
 
 	#ability
 	../clientside/ability/ability.h
-	../clientside/ability/abilityStateMachine.h
 	
 	#animation
 	../clientside/ability/animation/abilityAnimation.h
@@ -212,18 +210,22 @@ set(HDRS
 	
 	../clientside/ability/animation/abilityAnimationState.h
 	../clientside/ability/animation/abilityAnimationStates.h
+	../clientside/ability/animation/abilityAnimationStateMachine.h
+	
 	
 	#move
 	../clientside/ability/move/abilityMove.h
 	
 	../clientside/ability/move/abilityMoveState.h
 	../clientside/ability/move/abilityMoveStates.h
+	../clientside/ability/move/abilityMoveStateMachine.h
 	
 	#rotation
 	../clientside/ability/rotation/abilityRotation.h
 	
 	../clientside/ability/rotation/abilityRotationState.h
 	../clientside/ability/rotation/abilityRotationStates.h
+	../clientside/ability/rotation/abilityRotationStateMachine.h
 	
 	#game
 	../clientside/game/BaseApplication.h

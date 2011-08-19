@@ -5,7 +5,6 @@
 #include "../game/game.h"
 
 //ability
-#include "../ability/abilityStateMachine.h"
 #include "../ability/move/abilityMoveStates.h"
 #include "../ability/rotation/abilityRotationStates.h"
 #include "../ability/rotation/abilityRotation.h"
@@ -38,11 +37,11 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	createStateMachines();
 
 	//ability
-	//mAbilityRotation = new AbilityRotation(this);
-	//mAbilityMove     = new AbilityMove(this);
+	mAbilityRotation = new AbilityRotation(this);
+	mAbilityMove     = new AbilityMove(this);
 
-	addAbility(new AbilityRotation(this));
-	addAbility(new AbilityMove(this));
+	addAbility(mAbilityRotation);
+	addAbility(mAbilityMove);
 
 	mAbilityAnimation = NULL;	
 	

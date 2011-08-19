@@ -1,5 +1,5 @@
 #include "abilityAnimationStates.h"
-#include "../abilityStateMachine.h"
+#include "abilityAnimationStateMachine.h"
 
 #include "../../shape/shapeDynamic.h"
 
@@ -24,21 +24,21 @@ Idle_InterpolateTick_Animation* Idle_InterpolateTick_Animation::Instance()
   static Idle_InterpolateTick_Animation instance;
   return &instance;
 }
-void Idle_InterpolateTick_Animation::enter(Ability* ability)
+void Idle_InterpolateTick_Animation::enter(AbilityAnimation* abilityAnimation)
 {
-	shapeDynamic->mAbilityAnimation->enterAnimationState(this);
+	abilityAnimation->enterAnimationState(this);
 }
 
-void Idle_InterpolateTick_Animation::execute(Ability* ability)
+void Idle_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
 {
-	if (!shapeDynamic->mCommandToRunOnShape.mVelocity.isZero())
+	if (!abilityAnimation->mShapeDynamic->mCommandToRunOnShape.mVelocity.isZero())
 	{
-		shapeDynamic->mAbilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Run_InterpolateTick_Animation::Instance());
+		abilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Run_InterpolateTick_Animation::Instance());
 	}
 
-	shapeDynamic->mAbilityAnimation->runAnimations();
+	abilityAnimation->runAnimations();
 }
-void Idle_InterpolateTick_Animation::exit(Ability* ability)
+void Idle_InterpolateTick_Animation::exit(AbilityAnimation* abilityAnimation)
 {
 }
 
@@ -51,21 +51,21 @@ Run_InterpolateTick_Animation* Run_InterpolateTick_Animation::Instance()
   static Run_InterpolateTick_Animation instance;
   return &instance;
 }
-void Run_InterpolateTick_Animation::enter(Ability* ability)
+void Run_InterpolateTick_Animation::enter(AbilityAnimation* abilityAnimation)
 {
-	shapeDynamic->mAbilityAnimation->enterAnimationState(this);
+	abilityAnimation->enterAnimationState(this);
 }
-void Run_InterpolateTick_Animation::execute(Ability* ability)
+void Run_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
 {
-	if (shapeDynamic->mCommandToRunOnShape.mVelocity.isZero())
+	if (abilityAnimation->mShapeDynamic->mCommandToRunOnShape.mVelocity.isZero())
 	{
-		shapeDynamic->mAbilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Idle_InterpolateTick_Animation::Instance());
+		abilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Idle_InterpolateTick_Animation::Instance());
 	}
 	
-	shapeDynamic->mAbilityAnimation->runAnimations();
+	abilityAnimation->runAnimations();
 }
 
-void Run_InterpolateTick_Animation::exit(Ability* ability)
+void Run_InterpolateTick_Animation::exit(AbilityAnimation* abilityAnimation)
 {
 }
 

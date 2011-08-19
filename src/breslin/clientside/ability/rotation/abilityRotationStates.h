@@ -23,7 +23,7 @@ class AbilityRotation;
 *				GLOBAL
 ********************************************************/
 
-class Global_ProcessTick_Rotation : public AbilityState
+class Global_ProcessTick_Rotation : public AbilityRotationState
 {
 private:
   Global_ProcessTick_Rotation(){}
@@ -37,7 +37,7 @@ public:
 /******************************************************
 *				NORMAL
 ********************************************************/
-class Normal_ProcessTick_Rotation : public AbilityState
+class Normal_ProcessTick_Rotation : public AbilityRotationState
 {
 private:
   Normal_ProcessTick_Rotation(){}
@@ -51,7 +51,7 @@ public:
 /******************************************************
 *				CATCHUP
 ********************************************************/
-class Catchup_ProcessTick_Rotation : public AbilityState
+class Catchup_ProcessTick_Rotation : public AbilityRotationState
 {
 private:
   Catchup_ProcessTick_Rotation(){}
@@ -74,7 +74,7 @@ public:
 *				NORMAL
 ********************************************************/
 
-class Normal_InterpolateTick_Rotation : public AbilityState
+class Normal_InterpolateTick_Rotation : public AbilityRotationState
 {
 private:
   Normal_InterpolateTick_Rotation(){}
@@ -88,7 +88,7 @@ public:
 /******************************************************
 *				OFF
 ********************************************************/
-class Off_InterpolateTick_Rotation : public AbilityState
+class Off_InterpolateTick_Rotation : public AbilityRotationState
 {
 private:
   Off_InterpolateTick_Rotation(){}

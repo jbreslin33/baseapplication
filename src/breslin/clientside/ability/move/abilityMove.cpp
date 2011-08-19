@@ -2,7 +2,7 @@
 #include "../../shape/shapeDynamic.h"
 #include "../../../command/command.h"
 
-#include "../abilityStateMachine.h"
+#include "abilityMoveStateMachine.h"
 #include "abilityMoveStates.h"
 
 #include <math.h>
@@ -12,13 +12,13 @@ AbilityMove::AbilityMove(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
 	mShapeDynamic = shapeDynamic;
 
 	//move processTick states
-	mMoveProcessTickStateMachine = new ShapeDynamicStateMachine(shapeDynamic);    //setup the state machine
+	mMoveProcessTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
 	mMoveProcessTickStateMachine->setCurrentState      (Normal_ProcessTick_Move::Instance());
 	mMoveProcessTickStateMachine->setPreviousState     (Normal_ProcessTick_Move::Instance());
 	mMoveProcessTickStateMachine->setGlobalState       (Global_ProcessTick_Move::Instance());
 
 	//move interpolateTick states
-	mMoveInterpolateTickStateMachine = new ShapeDynamicStateMachine(shapeDynamic);    //setup the state machine
+	mMoveInterpolateTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
 	mMoveInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Move::Instance());
 	mMoveInterpolateTickStateMachine->setPreviousState     (Normal_InterpolateTick_Move::Instance());
 	//mMoveInterpolateTickStateMachine->setGlobalState       (Global_InterpolateTick_Move::Instance());

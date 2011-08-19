@@ -15,6 +15,7 @@ using namespace Ogre;
 *				FORWARD DECLARATIONS
 ********************************************************/
 class ShapeDynamicOgre;
+class AbilityAnimationState;
 
 /******************************************************
 *				CLASS
@@ -53,7 +54,7 @@ public:
 //animation
 static const int mNumberOfAnimations = 13;
 float mAnimationFadeSpeed;
-ShapeDynamicOgre* mShape;
+ShapeDynamicOgre* mShapeDynamicOgre;
 Ogre::AnimationState* mAnims[mNumberOfAnimations];     // master animation list
 AnimID                mBaseAnimID;           // current base (full- or lower-body) animation
 AnimID                mTopAnimID;            // current top (upper-body) animation
@@ -66,7 +67,7 @@ Ogre::AnimationState  *mAnimationState;
 ********************************************************/
 void setupAnimations();
 void runAnimations();
-void enterAnimationState(AbilityState* abilityState);
+void enterAnimationState(AbilityAnimationState* abilityState);
 void fadeAnimations   (Real deltaTime);
 void setTopAnimation  (AnimID id, bool reset);
 void setBaseAnimation (AnimID id, bool reset);
