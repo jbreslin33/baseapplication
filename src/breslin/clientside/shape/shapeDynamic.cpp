@@ -36,14 +36,10 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	initializeCommands(mPosition,mRotation);
 	createStateMachines();
 
-	mAbilityRotation  = NULL;
-	mAbilityMove      = NULL;
-	mAbilityAnimation = NULL;	
-
 	//ability
 	mAbilityRotation = new AbilityRotation(this);
 	mAbilityMove     = new AbilityMove(this);
-
+	mAbilityAnimation = NULL;	
 	
 }
 
@@ -138,6 +134,7 @@ void ShapeDynamic::processTick()
 	//update state machines...
 	mAbilityRotation->processTick();
 	mAbilityMove->processTick();
+
 	//run billboard here for now.
 	//drawTitle();
 }

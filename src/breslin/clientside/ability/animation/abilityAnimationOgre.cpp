@@ -47,8 +47,6 @@ void AbilityAnimationOgre::runAnimations()
 	mAnims[mBaseAnimID]->addTime(mShape->mGame->mRenderTime * mShape->mAbilityMove->mRunSpeed * 1000/mShape->mAbilityMove->mRunSpeedMax);
 	mAnims[mTopAnimID]->addTime(mShape->mRenderTime * mShape->mAbilityMove->mRunSpeed * 1000/mShape->mAbilityMove->mRunSpeedMax);
 	fadeAnimations(mShape->mRenderTime);
-
-	//fadeAnimations(mRenderTime);
 }
 
 void AbilityAnimationOgre::enterAnimationState(ShapeDynamicState* animationState)

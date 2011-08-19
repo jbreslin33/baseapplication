@@ -1,10 +1,21 @@
 #ifndef ABILITYANIMATION_H
 #define ABILITYANIMATION_H
 
+/*************************************
+*         INCLUDES
+*************************************/
+//parent
 #include "../ability.h"
 
+/*************************************
+*         FORWARD DECLARATIONS
+*************************************/
+
+//states
 class ShapeDynamicStateMachine;
 class ShapeDynamicState;
+
+//shape
 class ShapeDynamic;
 
 class AbilityAnimation : public Ability
@@ -18,6 +29,7 @@ public:
 *				VARIABLES
 ********************************************************/
 
+//state machine
 ShapeDynamicStateMachine* mAnimationInterpolateTickStateMachine;
 
 /******************************************************

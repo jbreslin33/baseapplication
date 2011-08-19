@@ -6,13 +6,18 @@
 //command
 #include "../../command/command.h"
 
-#include <string>
+//#include <string>
 
-//i want a dynamic shape...this should be dynamic shape shape should hide ogreshape...
+//game
 class Game;
+
+//state machines
 class ShapeDynamicStateMachine;
 class ShapeDynamicState;
+
 class Dispatch;
+
+//ability
 class AbilityRotation;
 class AbilityMove;
 class AbilityAnimation;

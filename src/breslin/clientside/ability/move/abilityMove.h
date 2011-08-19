@@ -25,18 +25,18 @@ ShapeDynamicStateMachine* mMoveProcessTickStateMachine;
 ShapeDynamicStateMachine* mMoveInterpolateTickStateMachine;
 
 //run speed
-float mRunSpeed; //move
-float mRunSpeedMax; //move
+float mRunSpeed; 
+float mRunSpeedMax; 
 
 //thresholds
-float mPosInterpLimitHigh; //mov
-float mPosInterpFactor; //mov
+float mPosInterpLimitHigh; 
+float mPosInterpFactor; 
 
 //deltas
-float mDeltaX;  //mov
-float mDeltaZ;  //mov
-float mDeltaY; //mov
-float mDeltaPosition; //mov
+float mDeltaX;  
+float mDeltaZ;  
+float mDeltaY; 
+float mDeltaPosition; 
 
 /******************************************************
 *				METHODS
@@ -48,7 +48,7 @@ void processTick();
 void interpolateTick(float renderTime);
 
 //move
-void calculateDeltaPosition();  //mov
+void calculateDeltaPosition();  
 };
 
 #endif
