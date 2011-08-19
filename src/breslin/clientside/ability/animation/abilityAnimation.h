@@ -24,14 +24,13 @@ ShapeDynamicStateMachine* mAnimationInterpolateTickStateMachine;
 *				METHODS
 ********************************************************/
 
-//animation
-virtual void enterAnimationState(ShapeDynamicState* animationState) = 0;
-virtual void     runAnimations        (                          ) = 0;   
-
-//virtual
-void update();
+//updating
 void processTick();
 void interpolateTick(float renderTime);
+
+//animation
+virtual void enterAnimationState(ShapeDynamicState* animationState) = 0;
+virtual void     runAnimations        (                          ) = 0;  
 
 };
 

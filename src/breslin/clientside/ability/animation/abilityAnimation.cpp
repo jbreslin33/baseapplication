@@ -18,10 +18,9 @@ AbilityAnimation::~AbilityAnimation()
 {
 }
 
-void AbilityAnimation::update()
-{
-
-}
+/******************************************************
+*				UPDATING
+********************************************************/
 void AbilityAnimation::processTick()
 {
 

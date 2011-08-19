@@ -10,9 +10,17 @@ public:
 	Ability(Shape* shape);
 	~Ability();
 
-	Shape* mShape;
+/******************************************************
+*				VARIABLES
+********************************************************/
+Shape* mShape;
 
-	virtual void update();
+/******************************************************
+*				METHODS
+********************************************************/
+
+virtual void processTick() { }
+virtual void interplateTick(float renderTime) { }
 
 };
 
