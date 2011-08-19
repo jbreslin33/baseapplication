@@ -41,6 +41,7 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 
 	//speed
 	mSpeed     = 0.0;
+	mSpeedMax  = 200.0;
 
 	mPosition = new Vector3D();
 	mVelocity = new Vector3D();
@@ -52,11 +53,8 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	createStateMachines();
 
 	//ability
-	mAbilityRotation = new AbilityRotation(this);
-	mAbilityMove     = new AbilityMove(this);
-
-	addAbility(mAbilityRotation);
-	addAbility(mAbilityMove);
+	addAbility(new AbilityRotation(this));
+	addAbility(new AbilityMove(this));
 
 	mAbilityAnimation = NULL;	
 	
@@ -159,13 +157,11 @@ void ShapeDynamic::processTick()
 {
 	clearTitle(); //empty title string so it can be filled anew
 
-	//update state machines...
+	//process ticks on abilitys
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
 		mAbilityVector.at(i)->processTick();
 	}
-	//mAbilityRotation->processTick();
-	//mAbilityMove->processTick();
 
 	//run billboard here for now.
 	//drawTitle();
@@ -174,15 +170,11 @@ void ShapeDynamic::interpolateTick(float renderTime)
 {
 	mRenderTime = renderTime;
 
-	//update state machines...
-
+	//interpolate ticks on abilitys
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
 		mAbilityVector.at(i)->interpolateTick(mRenderTime);
 	}
-
-	//mAbilityRotation->interpolateTick(mRenderTime);
-	//mAbilityMove->interpolateTick(mRenderTime);
 	mAbilityAnimation->interpolateTick(mRenderTime);
 
 }

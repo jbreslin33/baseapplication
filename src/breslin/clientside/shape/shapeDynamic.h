@@ -48,6 +48,7 @@ ShapeDynamic(Game* game, Dispatch* dispatch);
 
 //speed
 float mSpeed; 
+float mSpeedMax; 
 
 //network flags
 static const char mCommandMilliseconds = 2;
@@ -59,8 +60,6 @@ static const char mCommandRotationZ    = 64;
 
 //abilitys
 std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
-AbilityRotation* mAbilityRotation;
-AbilityMove* mAbilityMove;
 AbilityAnimation* mAbilityAnimation;
 
 //this is used to rotate to and for debugging. it goes right to lates serverFrame from net.

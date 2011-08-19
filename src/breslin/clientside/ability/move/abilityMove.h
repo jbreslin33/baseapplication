@@ -33,9 +33,6 @@ ShapeDynamic* mShapeDynamic;
 AbilityMoveStateMachine* mMoveProcessTickStateMachine;
 AbilityMoveStateMachine* mMoveInterpolateTickStateMachine;
 
-//run speed
-float mSpeedMax; 
-
 //thresholds
 float mPosInterpLimitHigh; 
 float mPosInterpFactor; 
