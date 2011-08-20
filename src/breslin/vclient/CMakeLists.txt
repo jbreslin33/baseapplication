@@ -87,6 +87,7 @@ endif()
  if (WIN32)
 set(HDRS
 	
+
 	#ability
 	../clientside/ability/ability.h
 	
@@ -151,6 +152,9 @@ set(HDRS
 )
  
 set(SRCS
+
+	#main
+	./main.cpp
 
 	#ablility
 	../clientside/ability/ability.cpp
@@ -274,6 +278,9 @@ set(HDRS
 )
  
 set(SRCS
+
+	#main
+	./main.cpp
 
 	#ablility
 	../clientside/ability/abilityAbility.cpp
