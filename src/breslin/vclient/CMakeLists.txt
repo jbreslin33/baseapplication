@@ -116,6 +116,11 @@ set(HDRS
 	#game
 	../clientside/game/BaseApplication.h
 	../clientside/game/game.h
+	../clientside/game/gameOgre.h
+	
+	#graphics
+	../clientside/graphics/graphics.h
+	../clientside/graphics/graphicsOgre.h
 
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
@@ -166,6 +171,11 @@ set(SRCS
 	#game
 	../clientside/game/BaseApplication.cpp
 	../clientside/game/game.cpp
+	../clientside/game/gameOgre.cpp
+	
+	#graphics
+	../clientside/graphics/graphics.cpp
+	../clientside/graphics/graphicsOgre.cpp
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp
@@ -230,6 +240,11 @@ set(HDRS
 	#game
 	../clientside/game/BaseApplication.h
 	../clientside/game/game.h
+	../clientside/game/gameOgre.h
+	
+	#graphics
+	../clientside/graphics/graphics.h
+	../clientside/graphics/graphicsOgre.h
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
@@ -279,6 +294,11 @@ set(SRCS
 	#game
 	../game/BaseApplication.cpp
 	../clientside/game/game.cpp
+	../clientside/game/gameOgre.cpp
+	
+	#graphics
+	../clientside/graphics/graphics.cpp
+	../clientside/graphics/graphicsOgre.cpp
 
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp
