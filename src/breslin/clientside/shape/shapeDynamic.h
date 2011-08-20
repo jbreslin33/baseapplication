@@ -85,7 +85,8 @@ float mRenderTime;
 //virtual need to be implemented in subclass...
 
 //abilitys
-void addAbility(Ability* ability);
+void     addAbility(Ability* ability);
+Ability* getAbility(Ability* ability);
 
 virtual void        yaw                  (float amountToYaw, bool converToDegree   ) = 0;
 virtual float       getDegreesToSomething(Vector3D something                       ) = 0;

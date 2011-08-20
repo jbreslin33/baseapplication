@@ -67,7 +67,22 @@ float ShapeDynamic::getSpeed()
 
 void ShapeDynamic::addAbility(Ability* ability)
 {
+	
 	mAbilityVector.push_back(ability);	
+}
+
+Ability* ShapeDynamic::getAbility(Ability* ability)
+{
+	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+	{
+		//typeid(ability);
+
+		if (typeid(ability) == typeid(mAbilityVector.at(i)))
+		{
+			return mAbilityVector.at(i);
+		}
+	}
+	return 0;
 }
 
 void ShapeDynamic::parseDispatch(Dispatch* dispatch)

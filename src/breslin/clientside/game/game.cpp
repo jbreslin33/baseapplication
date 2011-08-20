@@ -94,6 +94,16 @@ void Game::addShape(bool b, Dispatch* dispatch)
 	//ability
 	shape->addAbility(new AbilityRotation(shape));
 	shape->addAbility(new AbilityMove(shape));
+
+	AbilityRotation* abilityRotation;
+	if (shape->getAbility(abilityRotation) == 0)
+	{
+		LogString("NO MATCH");
+	}
+	else
+	{
+		LogString("GOTCHA BITCH!");
+	}
 }
 
 void Game::removeShape(Dispatch* dispatch)
