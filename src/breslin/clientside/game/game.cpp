@@ -23,28 +23,23 @@
 #include "../ability/rotation/abilityRotation.h"
 #include "../ability/move/abilityMove.h"
 
+//parser
+#include "../parser/parser.h"
+
 
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
-Game::Game(const char* serverIP)
+Game::Game(const char* serverIP, int serverPort)
 {
 	StartLog();
-
-	mServerIP = serverIP;
 
 	//command
 	mLastCommandToServer = new Command();
 	mCommandToServer = new Command(); 
 
-	// Save server's address information for later use
-	mServerIP = serverIP;
-	mServerPort = 30004;
-
-	LogString("Server's information: IP address: %s, port: %d", mServerIP, mServerPort);
-
-	// Create client socket
-	mNetwork = new Network(mServerIP,mServerPort);
+	// network
+	mNetwork = new Network(serverIP,serverPort);
 
 	//time
 	mTime = new Time();
@@ -57,12 +52,8 @@ Game::Game(const char* serverIP)
 
 	mInit = true;
 
-
-
-
-
-
-
+	//parser
+	mParser = new Parser();
 }
 
 Game::~Game()
@@ -218,19 +209,19 @@ void Game::readPackets()
 
 		switch(type)
 		{
-			case mMessageAddShape:
+			case mParser->mMessageAddShape:
 				addShape(true,dispatch);
 			break;
 
-			case mMessageRemoveShape:
+			case mParser->mMessageRemoveShape:
 				removeShape(dispatch);
 			break;
 
-			case mMessageFrame:
+			case mParser->mMessageFrame:
 				frame(dispatch);
 			break;
 
-			case mMessageServerExit:
+			case mParser->mMessageServerExit:
 				shutdown();
 			break;
 		}
@@ -239,7 +230,7 @@ void Game::readPackets()
 void Game::sendConnect(const char *name)
 {
 	Dispatch* dispatch = new Dispatch();
-	dispatch->WriteByte(mMessageConnect);
+	dispatch->WriteByte(mParser->mMessageConnect);
 	dispatch->WriteString(name);
 	mNetwork->send(dispatch);
 }
@@ -247,7 +238,7 @@ void Game::sendConnect(const char *name)
 void Game::sendDisconnect()
 {
 	Dispatch* dispatch = new Dispatch();
-	dispatch->WriteByte(mMessageDisconnect);
+	dispatch->WriteByte(mParser->mMessageDisconnect);
 	mNetwork->send(dispatch);
 	mNetwork->reset();
 }
@@ -255,7 +246,7 @@ void Game::sendDisconnect()
 void Game::sendCommand(void)
 {
 	Dispatch* dispatch = new Dispatch();
-	dispatch->WriteByte(mMessageFrame);					
+	dispatch->WriteByte(mParser->mMessageFrame);					
 	dispatch->WriteShort(mNetwork->mOutgoingSequence);
 
 	// Build delta-compressed move command
@@ -264,23 +255,23 @@ void Game::sendCommand(void)
 	// Check what needs to be updated
 	if(mLastCommandToServer->mKey != mCommandToServer->mKey)
 	{
-		flags |= mCommandKey;
+		flags |= mParser->mCommandKey;
 	}
 
 	if(mLastCommandToServer->mMilliseconds != mCommandToServer->mMilliseconds)
 	{
-		flags |= mCommandMilliseconds;
+		flags |= mParser->mCommandMilliseconds;
 	}
 
 	// Add to the message
 	dispatch->WriteByte(flags);
 
-	if(flags & mCommandKey)
+	if(flags & mParser->mCommandKey)
 	{
 		dispatch->WriteByte(mCommandToServer->mKey);
 	}
 
-	if(flags & mCommandMilliseconds)
+	if(flags & mParser->mCommandMilliseconds)
 	{
 		dispatch->WriteByte(mCommandToServer->mMilliseconds);
 	}

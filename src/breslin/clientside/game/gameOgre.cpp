@@ -18,7 +18,7 @@
 /*********************************
 *		CONSTRUCTORS
 **********************************/
-GameOgre::GameOgre(const char* serverIP) : Game(serverIP)
+GameOgre::GameOgre(const char* serverIP, int serverPort) : Game(serverIP, serverPort)
 {
 	mGraphicsOgre = new GraphicsOgre(this);
 }

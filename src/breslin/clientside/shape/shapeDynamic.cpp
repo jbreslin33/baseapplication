@@ -5,6 +5,9 @@
 //parent
 #include "shapeDynamic.h"
 
+//standard library
+#include <string.h>
+
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
@@ -23,10 +26,11 @@
 //dispatch
 #include "../dispatch/dispatch.h"
 
+//parser
+#include "../parser/parser.h"
+
 //title
 #include "../billboard/objectTitle.h"
-
-#include <string.h>
 
 /******************************************************
 *				CLASS
@@ -249,7 +253,7 @@ void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
 	}
 
 	//milliseconds
-	if (flags & mCommandMilliseconds)
+	if (flags & mGame->mParser->mCommandMilliseconds)
 	{
 		mServerFrame.mMilliseconds = mes->ReadByte();
 		mCommandToRunOnShape.mMilliseconds = mServerFrame.mMilliseconds;

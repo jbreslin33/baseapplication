@@ -26,7 +26,7 @@ class GameOgre : public Game
 {
 public:
 	
-	GameOgre(const char* serverIP);
+	GameOgre(const char* serverIP, int serverPort);
 	~GameOgre();
 
 /***************************************

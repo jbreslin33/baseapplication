@@ -16,102 +16,81 @@
 *   		FORWARD DECLARATIONS
 ***************************************/
 class Client;
-class MovableTextOverlay;
 class Dispatch;
 class ShapeDynamic;
 class Time;
 class Network;
+class Parser;
 
 class Game 
 {
 public:
 	
-	Game(const char* serverIP);
+	Game(const char* serverIP, int serverPort);
 	~Game();
 
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
 
-	//Shapes
-	std::vector<ShapeDynamic*> mShapeVector;	 //all shapes in the client world
-	std::vector<ShapeDynamic*> mShapeGhostVector;	 //all shapes in the client world's ghost 
+//Shapes
+std::vector<ShapeDynamic*> mShapeVector;	 //all shapes in the client world
+std::vector<ShapeDynamic*> mShapeGhostVector;	 //all shapes in the client world's ghost 
 
-	std::vector<MovableTextOverlay*> myVect;  //for writing above shapes head
+//commands
+Command* mLastCommandToServer;
+Command* mCommandToServer; //for the human moves to be sent off to server
 
-	//commands
-	Command* mLastCommandToServer;
-	Command* mCommandToServer; //for the human moves to be sent off to server
+//Network
+Network*     mNetwork;
 
-	// Dispatches
-	static const char mCommandKey          = 1;
-	static const char mCommandMilliseconds = 2;
-
-	static const char mMessageFrame = 1;
-	static const char mMessageConnect     = -101;
-	static const char mMessageDisconnect  = -102;
-	static const char mMessageAddShape    = -103;
-	static const char mMessageRemoveShape = -104;
-
-	static const char mMessageConnecting    = 0;
-	static const char mMessageConnected     = 1;
-	static const char mMessageDisconnecting = 2;
-	static const char mMessageDisconnected  = 4;
-
-	static const char mMessageNonDeltaFrame = 2;
-	static const char mMessageServerExit = 3;
-	static const char mMessageKeepAlive = 12;
-
-	//Network
-	Network*     mNetwork;
-	int			 mServerPort;				// Port
-	const char*  mServerIP;
-
-	//time
-	Time* mTime;
-	float mFrameTime;
-	int   mOldTime;
+//time
+Time* mTime;
+float mFrameTime;
+int   mOldTime;
 
 //initialize
 bool mInit;
 bool mNetworkShutdown;
 
-
+//parser
+Parser* mParser;
 
 	
-	/***************************************
-			          METHODS
-	***************************************/
-	//Admin
-	void shutdown();
-	void gameLoop();
+/***************************************
+*			          METHODS
+***************************************/
 
-	//shape
-	virtual void addShape    (bool b, Dispatch* dispatch);
-	void removeShape (Dispatch* dispatch);
+//Admin
+void shutdown();
+void gameLoop();
 
-	ShapeDynamic* getShapeDynamic      (  int id);
+//shape
+virtual void addShape    (bool b, Dispatch* dispatch);
+void removeShape (Dispatch* dispatch);
 
-	void frame           (Dispatch* dispatch);
-	void interpolateFrame();
+ShapeDynamic* getShapeDynamic      (  int id);
 
-	// Network
-	void runNetwork    (int msec);
-	void readPackets   ();
-	void sendConnect   (const char *name);
-	void sendDisconnect(void);
-	void sendCommand   ();
+void frame           (Dispatch* dispatch);
+void interpolateFrame();
 
-	//time
-	virtual float getRenderTime() {  return 0; }
+// Network
+void runNetwork    (int msec);
+void readPackets   ();
+void sendConnect   (const char *name);
+void sendDisconnect(void);
+void sendCommand   ();
 
-	//input
-	virtual void processUnbufferedInput() { }
+//time
+virtual float getRenderTime() {  return 0; }
 
-	//graphics
-	virtual bool runGraphics() { return false; }
+//input
+virtual void processUnbufferedInput() { }
+
+//graphics
+virtual bool runGraphics() { return false; }
 	
-	virtual void initializeGui() { }
+virtual void initializeGui() { }
 
 };
 

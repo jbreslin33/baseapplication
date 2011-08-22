@@ -30,10 +30,13 @@
 
 #endif
 
-#include "../client/client.h"
-
 Network::Network(const char serverIP[32], int serverPort )
 {
+
+	//server address
+	mServerIP = serverIP;
+	mServerPort = serverPort;
+
 	//sequences
 	mOutgoingSequence		= 1;
 	mIncomingSequence		= 0;
@@ -51,11 +54,13 @@ Network::Network(const char serverIP[32], int serverPort )
 		LogString("ERROR IN CONSTRUCTOR OF SERVER, INVALID SOCKET");
 	}
 
-	setSendToAddress(serverIP,serverPort);
+	setSendToAddress(mServerIP,mServerPort);
 
 	//parse
 	mIncomingSequence = 0;
 	mDroppedPackets = 0;
+
+	//LogString("Server's information: IP address: %s, port: %d", mServerIP, mServerPort);
 }
 
 Network::~Network()

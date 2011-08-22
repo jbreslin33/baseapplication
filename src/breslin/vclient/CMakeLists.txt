@@ -120,7 +120,6 @@ set(HDRS
 	../clientside/game/gameOgre.h
 	
 	#graphics
-	../clientside/graphics/graphics.h
 	../clientside/graphics/graphicsOgre.h
 
 	#dreamsock
@@ -143,6 +142,10 @@ set(HDRS
 
 	#dispatch
 	../clientside/dispatch/dispatch.h
+	
+	#parser
+	../clientside/parser/parser.h
+	
 	
 	#billboard
 	../clientside/billboard/objectTitle.h
@@ -178,7 +181,6 @@ set(SRCS
 	../clientside/game/gameOgre.cpp
 	
 	#graphics
-	../clientside/graphics/graphics.cpp
 	../clientside/graphics/graphicsOgre.cpp
 	
 	#dreamsock
@@ -199,9 +201,11 @@ set(SRCS
 	../clientside/shape/shapeDynamic.cpp
 	../clientside/shape/shapeDynamicOgre.cpp
 	
-
 	#dispatch
 	../clientside/dispatch/dispatch.cpp
+	
+	#parser
+	../clientside/parser/parser.cpp
 	
 	#billboard
 	../clientside/billboard/objectTitle.cpp
@@ -247,7 +251,6 @@ set(HDRS
 	../clientside/game/gameOgre.h
 	
 	#graphics
-	../clientside/graphics/graphics.h
 	../clientside/graphics/graphicsOgre.h
 	
 	#dreamsock
@@ -269,6 +272,9 @@ set(HDRS
 	
 	#dispatch
 	../clientside/dispatch/dispatch.h
+	
+	#parser
+	../clientside/parser/parser.h
 	
 	#billboard
 	../clientside/billboard/objectTitle.h
@@ -304,7 +310,6 @@ set(SRCS
 	../clientside/game/gameOgre.cpp
 	
 	#graphics
-	../clientside/graphics/graphics.cpp
 	../clientside/graphics/graphicsOgre.cpp
 
 	#dreamsock
@@ -327,6 +332,9 @@ set(SRCS
 	
 	#dispatch
 	../clientside/dispatch/dispatch.cpp
+	
+	#parser
+	../clientside/parser/parser.cpp
 	
 	#billboard
 	../clientside/billboard/objectTitle.cpp

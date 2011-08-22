@@ -53,7 +53,6 @@ float mSpeed;
 float mSpeedMax; 
 
 //network flags
-static const char mCommandMilliseconds = 2;
 static const char mCommandOriginX      = 4;
 static const char mCommandOriginY      = 8;
 static const char mCommandOriginZ      = 16;

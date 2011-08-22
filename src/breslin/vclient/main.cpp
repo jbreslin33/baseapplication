@@ -28,9 +28,9 @@ extern "C" {
        
 		StartLogConsole();
         
-		GameOgre* gameOgre = new GameOgre(strCmdLine);
+		GameOgre* gameOgre = new GameOgre(strCmdLine,30004);
 #else
-        GameOgre* gameOgre = new GameOgre(argv[1]);
+        GameOgre* gameOgre = new GameOgre(argv[1],30004);
 #endif
         try
 		{

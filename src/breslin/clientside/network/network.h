@@ -68,6 +68,12 @@ Network(const char serverIP[32], int serverPort);
 *          VARIABLES
 **********************************/
 public:
+
+//server address
+int			 mServerPort;				// Port
+const char*  mServerIP;
+
+
 //sequences and packet loss stats
 unsigned short	mOutgoingSequence;		// OutFgoing packet sequence
 private:
