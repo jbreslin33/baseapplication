@@ -53,9 +53,9 @@ void GameOgre::addShape(bool b, Dispatch* dispatch)
 		INPUT
 **********************************/
 
-void GameOgre::processUnbufferedInput()
+void GameOgre::processInput()
 {
-	mGraphicsOgre->processUnbufferedInput();
+	mGraphicsOgre->processInput();
 }
 
 /*********************************

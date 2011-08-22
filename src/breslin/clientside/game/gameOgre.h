@@ -51,7 +51,7 @@ virtual bool runGraphics();
 
 virtual void initializeGui();
 
-virtual void processUnbufferedInput();
+virtual void processInput();
 
 
 

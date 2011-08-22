@@ -58,8 +58,7 @@ Game::Game(const char* serverIP, int serverPort)
 
 Game::~Game()
 {
-//	delete mClient;
-		mNetwork->close();
+	mNetwork->close();
 	delete mNetwork;
 }
 
@@ -70,13 +69,22 @@ void Game::gameLoop()
 {
 	while(true)
     {
-		processUnbufferedInput();
-		runNetwork(getRenderTime() * 1000);
+		//input
+		processInput();
+		
+		//network
+		runNetwork(getRenderTime() * 1000.0f);
+		
+		//move objects
 		interpolateFrame();
+
+		//draw
 		if (!runGraphics())
 		{
 			break;
 		}
+
+		//start gui if it is not already
 		initializeGui();
 	}
 }
@@ -178,9 +186,9 @@ void Game::interpolateFrame()
 /*********************************
 		NETWORK
 **********************************/
-void Game::runNetwork(int msec)
+void Game::runNetwork(float msec)
 {
-	static int time = 0;
+	static float time = 0.0f;
 	time += msec;
 
 	readPackets();

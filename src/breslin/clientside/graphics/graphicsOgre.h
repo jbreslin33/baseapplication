@@ -69,7 +69,7 @@ void initializeGui();
 	//input
 void buttonHit             (OgreBites::Button *button);
 bool mouseMoved            ( const OIS::MouseEvent &arg );
-void processUnbufferedInput();
+void processInput();
 };
 
 #endif

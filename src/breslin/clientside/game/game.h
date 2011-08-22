@@ -75,7 +75,7 @@ void frame           (Dispatch* dispatch);
 void interpolateFrame();
 
 // Network
-void runNetwork    (int msec);
+void runNetwork    (float msec);
 void readPackets   ();
 void sendConnect   (const char *name);
 void sendDisconnect(void);
@@ -85,7 +85,7 @@ void sendCommand   ();
 virtual float getRenderTime() {  return 0; }
 
 //input
-virtual void processUnbufferedInput() { }
+virtual void processInput() { }
 
 //graphics
 virtual bool runGraphics() { return false; }

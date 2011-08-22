@@ -143,7 +143,7 @@ bool GraphicsOgre::mouseMoved( const OIS::MouseEvent &arg )
     return true;
 }
 
-void GraphicsOgre::processUnbufferedInput()
+void GraphicsOgre::processInput()
 {
 	mGameOgre->mCommandToServer->mKey = 0;
     
