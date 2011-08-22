@@ -1,11 +1,21 @@
+//header
 #include "abilityMoveStates.h"
+
+//state machine
 #include "abilityMoveStateMachine.h"
 
+//log
 #include "../../tdreamsock/dreamSockLog.h"
 
+//game
+#include "../../game/game.h"
+
+//shape
 #include "../../shape/shapeDynamic.h"
 
+//ability
 #include "abilityMove.h"
+
 //utility
 #include <math.h>
 
@@ -188,7 +198,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
     transVector.y = abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.y;
     transVector.z = abilityMove->mShapeDynamic->mCommandToRunOnShape.mVelocity.z;
         
-    abilityMove->mShapeDynamic->translate(transVector * abilityMove->mShapeDynamic->mRenderTime * 1000, 1);
+	abilityMove->mShapeDynamic->translate(transVector * abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000, 1);
 
 	//does this just prevent you from going below 0 up and down?
     if(abilityMove->mShapeDynamic->getPosition().y < 0.0)

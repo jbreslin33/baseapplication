@@ -104,9 +104,6 @@ void ShapeDynamic::parseDispatch(Dispatch* dispatch)
 
 void ShapeDynamic::initializeVariables()
 {
-	//dynamic
-	mRenderTime = 0.0;
-
 	mGhost = NULL;
 }
 
@@ -179,14 +176,12 @@ void ShapeDynamic::processTick()
 }
 void ShapeDynamic::interpolateTick(float renderTime)
 {
-	mRenderTime = renderTime;
-
 	//interpolate ticks on abilitys
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
-		mAbilityVector.at(i)->interpolateTick(mRenderTime);
+		mAbilityVector.at(i)->interpolateTick(renderTime);
 	}
-	mAbilityAnimation->interpolateTick(mRenderTime);
+	mAbilityAnimation->interpolateTick(renderTime);
 
 }
 

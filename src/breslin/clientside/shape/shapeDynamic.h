@@ -46,6 +46,8 @@ ShapeDynamic(Game* game, Dispatch* dispatch);
 *                VARIABLES
 *************************************************/
 
+Game* mGame;
+
 //speed
 float mSpeed; 
 float mSpeedMax; 
@@ -74,9 +76,6 @@ int mLocal;
 //commands
 Command	mServerFrame;					// the latest frame from server
 Command mCommandToRunOnShape;
-
-//time
-float mRenderTime;
 
 /*************************************************
 *				METHODS

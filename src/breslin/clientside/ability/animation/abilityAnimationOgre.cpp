@@ -1,10 +1,16 @@
+//header
 #include "AbilityAnimationOgre.h"
+
+//shape
 #include "../../shape/shapeDynamicOgre.h"
+
+//game
 #include "../../game/game.h"
 
 //abilitys
 #include "../move/abilityMove.h"
 
+//states
 #include "abilityAnimationStates.h"
 
 AbilityAnimationOgre::AbilityAnimationOgre(ShapeDynamicOgre* shapeDynamicOgre) : AbilityAnimation(shapeDynamicOgre)
@@ -45,9 +51,9 @@ void AbilityAnimationOgre::setupAnimations()
 
 void AbilityAnimationOgre::runAnimations()
 {
-	mAnims[mBaseAnimID]->addTime(mShapeDynamicOgre->mGame->mRenderTime * mShapeDynamicOgre->mSpeed * 1000/mShapeDynamicOgre->mSpeedMax);
-	mAnims[mTopAnimID]->addTime(mShapeDynamicOgre->mRenderTime * mShapeDynamicOgre->mSpeed * 1000/mShapeDynamicOgre->mSpeedMax);
-	fadeAnimations(mShapeDynamicOgre->mRenderTime);
+	mAnims[mBaseAnimID]->addTime(mShapeDynamicOgre->mGame->getRenderTime() * mShapeDynamicOgre->mSpeed * 1000/mShapeDynamicOgre->mSpeedMax);
+	mAnims[mTopAnimID]->addTime(mShapeDynamicOgre->mGame->getRenderTime() * mShapeDynamicOgre->mSpeed * 1000/mShapeDynamicOgre->mSpeedMax);
+	fadeAnimations(mShapeDynamicOgre->mGame->getRenderTime());
 }
 
 void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAnimationState)

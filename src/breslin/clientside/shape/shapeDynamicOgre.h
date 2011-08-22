@@ -14,6 +14,11 @@ using namespace Ogre;
 /**********************************
 *          FORWARD DECLARATIONS
 **********************************/
+
+//game
+class GameOgre;
+
+//title
 class ObjectTitle;
 
 //ability
@@ -30,12 +35,15 @@ class ShapeDynamicOgre : public ShapeDynamic //, public OgreAnimation
 {
 
 public:
-ShapeDynamicOgre(Game* game, Dispatch* dispatch, bool isGhost);
+ShapeDynamicOgre(GameOgre* gameOgre, Dispatch* dispatch, bool isGhost);
 ~ShapeDynamicOgre();
 
 /**********************************
 *          VARIABLES
 **********************************/
+
+//game
+GameOgre* mGameOgre;
 
 //ghost
 bool mIsGhost;

@@ -5,9 +5,9 @@
 *   		INCLUDES
 ***************************************/
 //standard library
+#include <vector>
 
 //parents
-#include "BaseApplication.h"
 
 //command
 #include "../../command/command.h"
@@ -22,7 +22,7 @@ class ShapeDynamic;
 class Time;
 class Network;
 
-class Game : public BaseApplication
+class Game 
 {
 public:
 	
@@ -70,26 +70,15 @@ public:
 	//time
 	Time* mTime;
 	float mFrameTime;
-	float mRenderTime;
 	int   mOldTime;
+
+//initialize
+bool mInit;
+bool mNetworkShutdown;
+
+
+
 	
-	//initialize
-	bool mInit;
-	bool mNetworkShutdown;
-	bool mJoinGame;
-	bool mPlayingGame;
-	bool mInitializeGui;
-
-	//gui
-	OgreBites::Button* mJoinButton;
-
-	//keys
-	int mKeyUp;
-	int mKeyDown;
-	int mKeyLeft;
-	int mKeyRight;
-	int mKeySpace;
-
 	/***************************************
 			          METHODS
 	***************************************/
@@ -98,7 +87,7 @@ public:
 	void gameLoop();
 
 	//shape
-	void addShape    (bool b, Dispatch* dispatch);
+	virtual void addShape    (bool b, Dispatch* dispatch);
 	void removeShape (Dispatch* dispatch);
 
 	ShapeDynamic* getShapeDynamic      (  int id);
@@ -113,27 +102,16 @@ public:
 	void sendDisconnect(void);
 	void sendCommand   ();
 
+	//time
+	virtual float getRenderTime() {  return 0; }
+
 	//input
-	void processUnbufferedInput();
-	void buttonHit             (OgreBites::Button *button);
-	bool mouseMoved            ( const OIS::MouseEvent &arg );
+	virtual void processUnbufferedInput() { }
 
 	//graphics
-	Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
-    virtual void        createScene          ();
-    virtual bool        frameRenderingQueued (const Ogre::FrameEvent& evt);
-	bool                runGraphics          ();
-
-	//gui	
-	void hideGui();
-	void loadJoinScreen();
-	void hideJoinScreen();
-	void unloadOtherScreens();
-	void initializeGui();
-
-	//time
-	float getRenderTime() { return mRenderTime; }
+	virtual bool runGraphics() { return false; }
 	
+	virtual void initializeGui() { }
 
 };
 

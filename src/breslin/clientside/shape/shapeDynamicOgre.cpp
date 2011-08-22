@@ -1,23 +1,31 @@
 #include "shapeDynamicOgre.h"
+
+//standard library
+#include <string.h>
+
+//log
 #include "../tdreamsock/dreamSockLog.h"
 
-#include "../client/client.h"
+//game
+#include "../game/gameOgre.h"
+
+//graphics
+#include "../graphics/graphicsOgre.h"
 
 //ability
 #include "../ability/animation/abilityAnimationOgre.h"
 
-#include "../game/game.h"
-
+//title
 #include "../billboard/objectTitle.h"
 
 
-#include <string.h>
-
-	ShapeDynamicOgre::ShapeDynamicOgre(Game* game, Dispatch* dispatch, bool isGhost)
+ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, Dispatch* dispatch, bool isGhost)
 :
-	ShapeDynamic         (game,dispatch)
+	ShapeDynamic         (gameOgre,dispatch)
 {
 	//we use this to name shape. as ogre is picky about same names. it also serves as a counter of sorts.
+
+	mGameOgre = gameOgre;
 
 	mIsGhost = isGhost;
 
@@ -38,7 +46,7 @@
 	if (!mIsGhost) 
 	{
 		//create a ghost for this shape
-		mGhost = new ShapeDynamicOgre(mGame,dispatch,true);
+		mGhost = new ShapeDynamicOgre(mGameOgre,dispatch,true);
 		mGhost->setVisible(false);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
@@ -62,14 +70,14 @@ void ShapeDynamicOgre::createShape()
 	//mMeshName     = mesh;
 	mMeshName = "sinbad.mesh";
 	mName         = StringConverter::toString(mIndex);
-    mSceneNode    = mGame->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+	mSceneNode    = mGameOgre->mGraphicsOgre->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 
 	//set Starting position of sceneNode, we will attach our mesh to this. this is all that's needed for static shapes. actually we need to add
 	//rotation for them
 	mSceneNode->setPosition(mPosition->x,mPosition->y,mPosition->z);	
 	
 	//create mesh
-	mEntity = mGame->getSceneManager()->createEntity(mName, mMeshName);
+	mEntity = mGameOgre->mGraphicsOgre->getSceneManager()->createEntity(mName, mMeshName);
 
 	//attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
     mSceneNode->attachObject(mEntity);
@@ -90,7 +98,7 @@ void ShapeDynamicOgre::setupTitle()
 	const Ogre::String& fontName = "SdkTrays/Caption";
 	const Ogre::ColourValue& color = Ogre::ColourValue::White;
 	mObjectTitle = new ObjectTitle
-	(titlename, mEntity, mGame->getSceneManager()->getCamera("PlayerCam"), title,
+	(titlename, mEntity, mGameOgre->mGraphicsOgre->getSceneManager()->getCamera("PlayerCam"), title,
     fontName, color);
 }
 

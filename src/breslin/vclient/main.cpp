@@ -5,6 +5,9 @@
 //app
 #include "../clientside/game/gameOgre.h"
 
+//graphics
+#include "../clientside/graphics/graphicsOgre.h"
+
 /******************** MAIN ***********************/
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
@@ -22,15 +25,20 @@ extern "C" {
 #endif
     {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-                StartLogConsole();
-        Game* game = new Game(strCmdLine);
+       
+		StartLogConsole();
+        
+		GameOgre* gameOgre = new GameOgre(strCmdLine);
 #else
-        Game* game = new Game(argv[1]);
+        GameOgre* gameOgre = new GameOgre(argv[1]);
 #endif
-        try {
-            game->go();
-                        game->gameLoop();
-        } catch( Ogre::Exception& e ) {
+        try
+		{
+			gameOgre->mGraphicsOgre->go();
+            gameOgre->gameLoop();
+        }
+		catch( Ogre::Exception& e )
+		{
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
             MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
