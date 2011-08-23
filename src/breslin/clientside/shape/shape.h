@@ -14,6 +14,7 @@
 *          FORWARD DECLARATIONS
 **********************************/
 class Game;
+class Parser;
 
 class Shape
 {
@@ -30,6 +31,9 @@ public:
 
 int   mIndex;
 Game* mGame;
+
+Parser* mParser;
+
 /**************************************************
 *			METHODS
 **************************************************/

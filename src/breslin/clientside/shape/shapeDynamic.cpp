@@ -30,7 +30,6 @@
 #include "../parser/parser.h"
 
 
-
 /******************************************************
 *				CLASS
 ********************************************************/
@@ -255,7 +254,7 @@ void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
 	}
 
 	//milliseconds
-	if (flags & mGame->mParser->mCommandMilliseconds)
+	if (flags & mParser->mCommandMilliseconds)
 	{
 		mServerFrame->mMilliseconds = mes->ReadByte();
 		mCommandToRunOnShape->mMilliseconds = mServerFrame->mMilliseconds;

@@ -23,9 +23,6 @@
 #include "../ability/rotation/abilityRotation.h"
 #include "../ability/move/abilityMove.h"
 
-//parser
-#include "../parser/parser.h"
-
 //command
 #include "../command/command.h"
 
@@ -44,9 +41,6 @@ Game::Game(const char* serverIP, int serverPort)
 	mTime = new Time();
 	mFrameTime		 = 0.0f;
 	mOldTime         = 0;
-
-	//parser
-	mParser = new Parser();
 }
 
 Game::~Game()

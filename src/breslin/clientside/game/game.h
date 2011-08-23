@@ -43,9 +43,6 @@ Time* mTime;
 float mFrameTime;
 int   mOldTime;
 
-//parser
-Parser* mParser;
-
 	
 /***************************************
 *			          METHODS

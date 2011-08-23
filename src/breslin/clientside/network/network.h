@@ -113,9 +113,6 @@ public:
 //send
 void send(Dispatch* dispatch);
 
-//receive
-int  checkForDispatch(Dispatch* dispatch);
-
 //close
 void close();
 
@@ -149,6 +146,9 @@ int    setNonBlocking(u_long setMode);
 
 //send
 void send			 (int length, char *data, struct sockaddr addr);
+
+//receive
+int  checkForDispatch(Dispatch* dispatch);
 
 //parse
 void parsePacket(Dispatch *mes);
