@@ -4,6 +4,9 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
+//game
+#include "../game/game.h"
+
 //command
 #include "../command/command.h"
 
@@ -42,8 +45,11 @@
 
 #endif
 
-Network::Network(const char serverIP[32], int serverPort )
+Network::Network(Game* game, const char serverIP[32], int serverPort )
 {
+	//game
+	mGame = game;
+
 	//command
 	mCommandToServer     = new Command(); 
 	mLastCommandToServer = new Command();
@@ -393,3 +399,39 @@ void Network::sendCommand(void)
 	send(dispatch);
 }
 
+/***************************************************
+*			PACKETS
+***************************************************/
+void Network::readPackets()
+{
+	int type;
+	int ret;
+
+	Dispatch* dispatch = new Dispatch();
+
+	while(ret = checkForDispatch(dispatch))
+	{
+		dispatch->BeginReading();
+
+		type = dispatch->ReadByte();
+
+		switch(type)
+		{
+			case mParser->mMessageAddShape:
+				mGame->addShape(true,dispatch);
+			break;
+
+			case mParser->mMessageRemoveShape:
+				mGame->removeShape(dispatch);
+			break;
+
+			case mParser->mMessageFrame:
+				mGame->readServerTick(dispatch);
+			break;
+
+			case mParser->mMessageServerExit:
+				mGame->shutdown();
+			break;
+		}
+	}
+}

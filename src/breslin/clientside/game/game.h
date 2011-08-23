@@ -60,16 +60,17 @@ virtual void          addShape       (bool b, Dispatch* dispatch);
         void          removeShape    (Dispatch* dispatch);
         ShapeDynamic* getShapeDynamic(int id);
 
-// Network
-void runNetwork    (float msec);
-void readPackets   ();
-
 //Ticks
 void readServerTick           (Dispatch* dispatch);
 void interpolateTick();
 
 //time
 virtual float getRenderTime() {  return 0; }
+
+private:
+
+// Network
+void runNetwork    (float msec);
 
 //input
 virtual void processInput() { }

@@ -38,7 +38,7 @@ Game::Game(const char* serverIP, int serverPort)
 	StartLog();
 
 	// network
-	mNetwork = new Network(serverIP,serverPort);
+	mNetwork = new Network(this,serverIP,serverPort);
 
 	//time
 	mTime = new Time();
@@ -180,7 +180,7 @@ void Game::runNetwork(float msec)
 	static float time = 0.0f;
 	time += msec;
 
-	readPackets();
+	mNetwork->readPackets();
 	
 	// Framerate is too high
 	if(time > (1000 / 60))
@@ -191,39 +191,6 @@ void Game::runNetwork(float msec)
 	}
 }
 
-void Game::readPackets()
-{
-	int type;
-	int ret;
-
-	Dispatch* dispatch = new Dispatch();
-
-	while(ret = mNetwork->checkForDispatch(dispatch))
-	{
-		dispatch->BeginReading();
-
-		type = dispatch->ReadByte();
-
-		switch(type)
-		{
-			case mParser->mMessageAddShape:
-				addShape(true,dispatch);
-			break;
-
-			case mParser->mMessageRemoveShape:
-				removeShape(dispatch);
-			break;
-
-			case mParser->mMessageFrame:
-				readServerTick(dispatch);
-			break;
-
-			case mParser->mMessageServerExit:
-				shutdown();
-			break;
-		}
-	}
-}
 
 
 

@@ -52,6 +52,7 @@ class DreamWinSock;
 class DreamLinuxSock;
 #endif
 
+class Game;
 class Command;
 class Dispatch;
 class Parser;
@@ -63,13 +64,16 @@ class Parser;
 class Network
 {
 public:
-Network(const char serverIP[32], int serverPort);
+Network(Game* game, const char serverIP[32], int serverPort);
 ~Network();
 
 /**********************************
 *          VARIABLES
 **********************************/
 public:
+
+//game
+Game* mGame;
 
 //command
 Command* mCommandToServer; //for the human moves to be sent off to server
@@ -127,6 +131,10 @@ void sendDisconnect(void);
 //command
 void sendCommand   ();
 
+//packets
+void readPackets   ();
+
+
 private:
 
 //create
@@ -144,6 +152,7 @@ void send			 (int length, char *data, struct sockaddr addr);
 
 //parse
 void parsePacket(Dispatch *mes);
+
 
 
 
