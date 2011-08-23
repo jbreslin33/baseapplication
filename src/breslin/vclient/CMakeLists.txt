@@ -130,7 +130,7 @@ set(HDRS
 	../clientside/network/network.h
 	
 	#command
-	../command/command.h
+	../clientside/command/command.h
 	
 	#math
 	../math/vector3D.h
@@ -191,7 +191,7 @@ set(SRCS
 	../clientside/network/network.cpp
 	
 	#command
-	../command/command.cpp
+	../clientside/command/command.cpp
 	
 	#math
 	../math/vector3D.cpp
@@ -260,7 +260,7 @@ set(HDRS
 	../clientside/network/network.h
 	
 	#command
-	../command/command.h
+	../clientside/command/command.h
 
 	#math
 	../math/vector3D.h
@@ -320,7 +320,7 @@ set(SRCS
 	../clientside/network/network.cpp
 	
 	#command
-	../command/command.cpp
+	../clientside/command/command.cpp
 
 	#math
 	../math/vector3D.cpp

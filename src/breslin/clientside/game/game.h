@@ -9,9 +9,6 @@
 
 //parents
 
-//command
-#include "../../command/command.h"
-
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
@@ -21,6 +18,7 @@ class ShapeDynamic;
 class Time;
 class Network;
 class Parser;
+class Command;
 
 class Game 
 {

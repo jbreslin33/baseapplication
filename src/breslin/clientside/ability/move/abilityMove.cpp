@@ -1,6 +1,6 @@
 #include "abilityMove.h"
 #include "../../shape/shapeDynamic.h"
-#include "../../../command/command.h"
+#include "../../command/command.h"
 
 #include "abilityMoveStateMachine.h"
 #include "abilityMoveStates.h"
@@ -59,9 +59,9 @@ void AbilityMove::interpolateTick(float renderTime)
 void AbilityMove::calculateDeltaPosition()  //mov
 {
 
-	mDeltaX = mShapeDynamic->mServerFrame->mOrigin.x - mShapeDynamic->getPosition().x;
-    mDeltaY = mShapeDynamic->mServerFrame->mOrigin.y - mShapeDynamic->getPosition().y;
-    mDeltaZ = mShapeDynamic->mServerFrame->mOrigin.z - mShapeDynamic->getPosition().z;
+	mDeltaX = mShapeDynamic->mServerFrame->mOrigin->x - mShapeDynamic->getPosition().x;
+    mDeltaY = mShapeDynamic->mServerFrame->mOrigin->y - mShapeDynamic->getPosition().y;
+    mDeltaZ = mShapeDynamic->mServerFrame->mOrigin->z - mShapeDynamic->getPosition().z;
 
     //distance we are off from server
     mDeltaPosition = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));

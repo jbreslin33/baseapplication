@@ -26,6 +26,9 @@
 //parser
 #include "../parser/parser.h"
 
+//command
+#include "../command/command.h"
+
 
 /***************************************
 *			          CONSTRUCTORS

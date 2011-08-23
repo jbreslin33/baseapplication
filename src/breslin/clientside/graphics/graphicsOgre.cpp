@@ -4,6 +4,9 @@
 //game
 #include "../game/gameOgre.h"
 
+//command
+#include "../command/command.h"
+
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
