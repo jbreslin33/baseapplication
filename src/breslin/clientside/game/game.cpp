@@ -47,10 +47,7 @@ Game::Game(const char* serverIP, int serverPort)
 	mOldTime         = 0;
 
 	//initilize
- 	mInit			 = false;
 	mNetworkShutdown = false;
-
-	mInit = true;
 
 	//parser
 	mParser = new Parser();
@@ -67,6 +64,7 @@ Game::~Game()
 **********************************/
 void Game::gameLoop()
 {
+
 	while(true)
     {
 		//input
@@ -91,9 +89,6 @@ void Game::gameLoop()
 
 void Game::shutdown(void)
 {
-	if(!mInit)
-		return;
-	mInit = false;
 	sendDisconnect();
 }
 

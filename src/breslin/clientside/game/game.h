@@ -50,7 +50,6 @@ float mFrameTime;
 int   mOldTime;
 
 //initialize
-bool mInit;
 bool mNetworkShutdown;
 
 //parser
