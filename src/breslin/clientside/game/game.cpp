@@ -80,7 +80,7 @@ void Game::gameLoop()
 	}
 }
 
-void Game::shutdown(void)
+void Game::shutdown()
 {
 	mNetwork->sendDisconnect();
 }
