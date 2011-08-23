@@ -49,9 +49,6 @@ Time* mTime;
 float mFrameTime;
 int   mOldTime;
 
-//initialize
-bool mNetworkShutdown;
-
 //parser
 Parser* mParser;
 
@@ -70,8 +67,9 @@ void removeShape (Dispatch* dispatch);
 
 ShapeDynamic* getShapeDynamic      (  int id);
 
-void frame           (Dispatch* dispatch);
-void interpolateFrame();
+//Ticks
+void readServerTick           (Dispatch* dispatch);
+void interpolateTick();
 
 // Network
 void runNetwork    (float msec);

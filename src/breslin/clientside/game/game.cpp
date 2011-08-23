@@ -46,9 +46,6 @@ Game::Game(const char* serverIP, int serverPort)
 	mFrameTime		 = 0.0f;
 	mOldTime         = 0;
 
-	//initilize
-	mNetworkShutdown = false;
-
 	//parser
 	mParser = new Parser();
 }
@@ -74,7 +71,7 @@ void Game::gameLoop()
 		runNetwork(getRenderTime() * 1000.0f);
 		
 		//move objects
-		interpolateFrame();
+		interpolateTick();
 
 		//draw
 		if (!runGraphics())
@@ -114,7 +111,7 @@ void Game::removeShape(Dispatch* dispatch)
 	}
 }
 
-void Game::frame(Dispatch* dispatch)
+void Game::readServerTick(Dispatch* dispatch)
 {
 	int newTime;
 	int time;
@@ -128,11 +125,6 @@ void Game::frame(Dispatch* dispatch)
 
 	while (dispatch->getReadCount() <= dispatch->GetSize())
 	{
-		if (mNetworkShutdown)
-		{
-			return;
-		}
-
 		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(dispatch->GetSize()));
 
 		int id = dispatch->ReadByte();
@@ -170,7 +162,7 @@ ShapeDynamic* Game::getShapeDynamic(int id)
 	}
 }
 
-void Game::interpolateFrame()
+void Game::interpolateTick()
 {
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
@@ -221,7 +213,7 @@ void Game::readPackets()
 			break;
 
 			case mParser->mMessageFrame:
-				frame(dispatch);
+				readServerTick(dispatch);
 			break;
 
 			case mParser->mMessageServerExit:

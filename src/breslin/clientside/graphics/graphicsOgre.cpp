@@ -147,15 +147,6 @@ void GraphicsOgre::processInput()
 {
 	mGameOgre->mCommandToServer->mKey = 0;
     
-	if (mKeyboard->isKeyDown(OIS::KC_ESCAPE)) // ESCAPE
-    {
-		mGameOgre->mNetworkShutdown = true;
-    }
-	else
-	{
-		mGameOgre->mNetworkShutdown = false;
-	}
-    	
 	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     {
 		mGameOgre->mCommandToServer->mKey |= mKeyUp;

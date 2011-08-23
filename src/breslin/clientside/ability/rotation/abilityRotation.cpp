@@ -9,15 +9,15 @@ AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDyn
 	mShapeDynamic = shapeDynamic;
 
 	//process tick rotation states
-	mRotationProcessTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine
-	mRotationProcessTickStateMachine->setCurrentState      (Normal_ProcessTick_Rotation::Instance());
-	mRotationProcessTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
-	mRotationProcessTickStateMachine->setGlobalState       (Global_ProcessTick_Rotation::Instance());
+	mProcessTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine
+	mProcessTickStateMachine->setCurrentState      (Normal_ProcessTick_Rotation::Instance());
+	mProcessTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
+	mProcessTickStateMachine->setGlobalState       (Global_ProcessTick_Rotation::Instance());
 
 	//interpolate tick rotation states
-	mRotationInterpolateTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine
-	mRotationInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Rotation::Instance());
-	mRotationInterpolateTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
+	mInterpolateTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine
+	mInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Rotation::Instance());
+	mInterpolateTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
 
 	//////rotation
     mTurnSpeed = 250.0;
@@ -43,11 +43,11 @@ AbilityRotation::~AbilityRotation()
 ********************************************************/
 void AbilityRotation::processTick()
 {
-	mRotationProcessTickStateMachine->update();
+	mProcessTickStateMachine->update();
 }
 void AbilityRotation::interpolateTick(float renderTime)
 {
-	mRotationInterpolateTickStateMachine->update();
+	mInterpolateTickStateMachine->update();
 }
 
 /******************************************************

@@ -60,7 +60,7 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 	// if distance exceeds threshold && server velocity is zero
 	if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShapeDynamic->mServerFrame.mVelocity.isZero())
 	{
-		abilityMove->mMoveProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
+		abilityMove->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
     }
     else //server stopped or we are in sync so just use server vel as is, this is meat of normal state...
     {
@@ -113,7 +113,7 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 	//if we are back in sync
     if(abilityMove->mDeltaPosition <= abilityMove->mPosInterpLimitHigh || abilityMove->mShapeDynamic->mServerFrame.mVelocity.isZero())
     {
-		abilityMove->mMoveProcessTickStateMachine->changeState(Normal_ProcessTick_Move::Instance());
+		abilityMove->mProcessTickStateMachine->changeState(Normal_ProcessTick_Move::Instance());
     }
     else
     {

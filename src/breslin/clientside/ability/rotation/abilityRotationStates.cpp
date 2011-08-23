@@ -63,7 +63,7 @@ void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 	// are we too far off you need to change to catchup state
     if(abs(abilityRotation->mDegreesToServer) > abilityRotation->mRotInterpLimitHigh)
     {
-		abilityRotation->mRotationProcessTickStateMachine->changeState(Catchup_ProcessTick_Rotation::Instance());
+		abilityRotation->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Rotation::Instance());
 		return;
     }
     else
@@ -109,7 +109,7 @@ void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 	// are we back on track
     if(abs(abilityRotation->mDegreesToServer) < abilityRotation->mRotInterpLimitLow)
     {
-       abilityRotation->mRotationProcessTickStateMachine->changeState(Normal_ProcessTick_Rotation::Instance());
+       abilityRotation->mProcessTickStateMachine->changeState(Normal_ProcessTick_Rotation::Instance());
 		return;
     }
     else
@@ -179,7 +179,7 @@ void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 
    if (abilityRotation->mServerRotSpeed == 0.0 && abs(abilityRotation->getDegreesToServer()) < abilityRotation->mRotInterpLimitLow)
     {
-		abilityRotation->mRotationInterpolateTickStateMachine->changeState(Off_InterpolateTick_Rotation::Instance());
+		abilityRotation->mInterpolateTickStateMachine->changeState(Off_InterpolateTick_Rotation::Instance());
     }
 
 }
@@ -205,7 +205,7 @@ void Off_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 	//->mObjectTitleString.append("R:Off");
 	if (abs(abilityRotation->getDegreesToServer()) > abilityRotation->mRotInterpLimitLow)
     {
-		abilityRotation->mRotationInterpolateTickStateMachine->changeState(Normal_InterpolateTick_Rotation::Instance());
+		abilityRotation->mInterpolateTickStateMachine->changeState(Normal_InterpolateTick_Rotation::Instance());
     }
 }
 void Off_InterpolateTick_Rotation::exit(AbilityRotation* abilityRotation)

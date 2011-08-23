@@ -12,17 +12,17 @@ AbilityMove::AbilityMove(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
 	mShapeDynamic = shapeDynamic;
 
 	//move processTick states
-	mMoveProcessTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
-	mMoveProcessTickStateMachine->setCurrentState      (Normal_ProcessTick_Move::Instance());
-	mMoveProcessTickStateMachine->setPreviousState     (Normal_ProcessTick_Move::Instance());
-	mMoveProcessTickStateMachine->setGlobalState       (Global_ProcessTick_Move::Instance());
+	mProcessTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
+	mProcessTickStateMachine->setCurrentState      (Normal_ProcessTick_Move::Instance());
+	mProcessTickStateMachine->setPreviousState     (Normal_ProcessTick_Move::Instance());
+	mProcessTickStateMachine->setGlobalState       (Global_ProcessTick_Move::Instance());
 
 	//move interpolateTick states
-	mMoveInterpolateTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
-	mMoveInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Move::Instance());
-	mMoveInterpolateTickStateMachine->setPreviousState     (Normal_InterpolateTick_Move::Instance());
-	//mMoveInterpolateTickStateMachine->setGlobalState       (Global_InterpolateTick_Move::Instance());
-	mMoveInterpolateTickStateMachine->setGlobalState       (NULL);
+	mInterpolateTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
+	mInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Move::Instance());
+	mInterpolateTickStateMachine->setPreviousState     (Normal_InterpolateTick_Move::Instance());
+	//mInterpolateTickStateMachine->setGlobalState       (Global_InterpolateTick_Move::Instance());
+	mInterpolateTickStateMachine->setGlobalState       (NULL);
 
     //thresholds
     mPosInterpLimitHigh = 8.0; //how far away from server till we try to catch up
@@ -45,11 +45,11 @@ AbilityMove::~AbilityMove()
 ********************************************************/
 void AbilityMove::processTick()
 {
-	mMoveProcessTickStateMachine->update();
+	mProcessTickStateMachine->update();
 }
 void AbilityMove::interpolateTick(float renderTime)
 {
-	mMoveInterpolateTickStateMachine->update();
+	mInterpolateTickStateMachine->update();
 }
 
 /******************************************************

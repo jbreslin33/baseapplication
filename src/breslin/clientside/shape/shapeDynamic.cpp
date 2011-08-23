@@ -29,8 +29,7 @@
 //parser
 #include "../parser/parser.h"
 
-//title
-#include "../billboard/objectTitle.h"
+
 
 /******************************************************
 *				CLASS

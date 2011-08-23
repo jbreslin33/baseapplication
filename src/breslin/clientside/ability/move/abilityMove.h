@@ -30,8 +30,8 @@ public:
 ShapeDynamic* mShapeDynamic;
 
 //state machines
-AbilityMoveStateMachine* mMoveProcessTickStateMachine;
-AbilityMoveStateMachine* mMoveInterpolateTickStateMachine;
+AbilityMoveStateMachine* mProcessTickStateMachine;
+AbilityMoveStateMachine* mInterpolateTickStateMachine;
 
 //thresholds
 float mPosInterpLimitHigh; 

@@ -27,8 +27,8 @@ public:
 /******************************************************
 *				VARIABLES
 ********************************************************/
-AbilityRotationStateMachine* mRotationProcessTickStateMachine;
-AbilityRotationStateMachine* mRotationInterpolateTickStateMachine;
+AbilityRotationStateMachine* mProcessTickStateMachine;
+AbilityRotationStateMachine* mInterpolateTickStateMachine;
 
 //shape
 ShapeDynamic* mShapeDynamic;
