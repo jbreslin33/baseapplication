@@ -4,6 +4,9 @@
 //game
 #include "../game/gameOgre.h"
 
+//network
+#include "../network/network.h"
+
 //command
 #include "../command/command.h"
 
@@ -130,7 +133,7 @@ void GraphicsOgre::buttonHit(OgreBites::Button *button)
 		mJoinGame = true;
 		if (mJoinGame && !mPlayingGame)
 		{
-			mGameOgre->sendConnect("myname");
+			mGameOgre->mNetwork->sendConnect("myname");
 			//LogString("sent connect to server");
 			mPlayingGame = true;
 		}
@@ -151,29 +154,29 @@ bool GraphicsOgre::mouseMoved( const OIS::MouseEvent &arg )
 
 void GraphicsOgre::processInput()
 {
-	mGameOgre->mCommandToServer->mKey = 0;
+	mGameOgre->mNetwork->mCommandToServer->mKey = 0;
     
 	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     {
-		mGameOgre->mCommandToServer->mKey |= mKeyUp;
+		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyUp;
     }
 
     if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
     {
-		mGameOgre->mCommandToServer->mKey |= mKeyDown;
+		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyDown;
     }
 
 	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
     {
-		mGameOgre->mCommandToServer->mKey |= mKeyLeft;
+		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyLeft;
     }
 
     if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
     {
-		mGameOgre->mCommandToServer->mKey |= mKeyRight;
+		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyRight;
     }
 
-	mGameOgre->mCommandToServer->mMilliseconds = (int) (mGameOgre->mFrameTime * 1000);
+	mGameOgre->mNetwork->mCommandToServer->mMilliseconds = (int) (mGameOgre->mFrameTime * 1000);
 }
 
 

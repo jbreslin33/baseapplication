@@ -1,14 +1,26 @@
+//header
 #include "network.h"
 
+//log
 #include "../tdreamsock/dreamSockLog.h"
 
+//command
+#include "../command/command.h"
+
+//parser
+#include "../parser/parser.h"
+
+//dispatch
+#include "../dispatch/dispatch.h"
+
+//sockets
 #ifdef WIN32
 #include "../tdreamsock/dreamWinSock.h"
 #else
 #include "../tdreamsock/dreamLinuxSock.h"
 #endif
 
-#include "../dispatch/dispatch.h"
+
 
 #ifdef WIN32
 //do nothing
@@ -32,6 +44,12 @@
 
 Network::Network(const char serverIP[32], int serverPort )
 {
+	//command
+	mCommandToServer     = new Command(); 
+	mLastCommandToServer = new Command();
+
+	//parser
+	mParser = new Parser();
 
 	//server address
 	mServerIP = serverIP;
@@ -306,3 +324,72 @@ void Network::reset(void)
     mOutgoingSequence                = 1;
     mIncomingSequence                = 0;
 }
+
+
+/***************************************************
+*			CONNECT
+***************************************************/
+void Network::sendConnect(const char *name)
+{
+	Dispatch* dispatch = new Dispatch();
+	dispatch->WriteByte(mParser->mMessageConnect);
+	dispatch->WriteString(name);
+	send(dispatch);
+}
+
+/***************************************************
+*			DISCONNECT
+***************************************************/
+void Network::sendDisconnect()
+{
+	Dispatch* dispatch = new Dispatch();
+	dispatch->WriteByte(mParser->mMessageDisconnect);
+	send(dispatch);
+	reset();
+}
+
+/***************************************************
+*			COMMAND
+***************************************************/
+
+void Network::sendCommand(void)
+{
+	Dispatch* dispatch = new Dispatch();
+	dispatch->WriteByte(mParser->mMessageFrame);					
+	dispatch->WriteShort(mOutgoingSequence);
+
+	// Build delta-compressed move command
+	int flags = 0;
+
+	// Check what needs to be updated
+	if(mLastCommandToServer->mKey != mCommandToServer->mKey)
+	{
+		flags |= mParser->mCommandKey;
+	}
+
+	if(mLastCommandToServer->mMilliseconds != mCommandToServer->mMilliseconds)
+	{
+		flags |= mParser->mCommandMilliseconds;
+	}
+
+	// Add to the message
+	dispatch->WriteByte(flags);
+
+	if(flags & mParser->mCommandKey)
+	{
+		dispatch->WriteByte(mCommandToServer->mKey);
+	}
+
+	if(flags & mParser->mCommandMilliseconds)
+	{
+		dispatch->WriteByte(mCommandToServer->mMilliseconds);
+	}
+	
+	//set 'last' commands for diff
+	mLastCommandToServer->mKey = mCommandToServer->mKey;
+	mLastCommandToServer->mMilliseconds = mCommandToServer->mMilliseconds;
+
+	// Send the packet
+	send(dispatch);
+}
+

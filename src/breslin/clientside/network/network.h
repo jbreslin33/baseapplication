@@ -52,7 +52,9 @@ class DreamWinSock;
 class DreamLinuxSock;
 #endif
 
+class Command;
 class Dispatch;
+class Parser;
 
 /**********************************
 *          CLASS
@@ -68,6 +70,13 @@ Network(const char serverIP[32], int serverPort);
 *          VARIABLES
 **********************************/
 public:
+
+//command
+Command* mCommandToServer; //for the human moves to be sent off to server
+Command* mLastCommandToServer;
+
+//parser
+Parser* mParser;
 
 //server address
 int			 mServerPort;				// Port
@@ -109,6 +118,15 @@ void close();
 //reset
 void            reset();
 
+//connect
+void sendConnect   (const char *name);
+
+//disconnect
+void sendDisconnect(void);
+
+//command
+void sendCommand   ();
+
 private:
 
 //create
@@ -127,7 +145,6 @@ void send			 (int length, char *data, struct sockaddr addr);
 //parse
 void parsePacket(Dispatch *mes);
 
-//connect
 
 
 

@@ -35,10 +35,6 @@ public:
 std::vector<ShapeDynamic*> mShapeVector;	 //all shapes in the client world
 std::vector<ShapeDynamic*> mShapeGhostVector;	 //all shapes in the client world's ghost 
 
-//commands
-Command* mLastCommandToServer;
-Command* mCommandToServer; //for the human moves to be sent off to server
-
 //Network
 Network*     mNetwork;
 
@@ -71,9 +67,7 @@ void interpolateTick();
 // Network
 void runNetwork    (float msec);
 void readPackets   ();
-void sendConnect   (const char *name);
-void sendDisconnect(void);
-void sendCommand   ();
+
 
 //time
 virtual float getRenderTime() {  return 0; }

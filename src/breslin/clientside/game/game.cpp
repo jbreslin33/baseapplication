@@ -37,10 +37,6 @@ Game::Game(const char* serverIP, int serverPort)
 {
 	StartLog();
 
-	//command
-	mLastCommandToServer = new Command();
-	mCommandToServer = new Command(); 
-
 	// network
 	mNetwork = new Network(serverIP,serverPort);
 
@@ -86,7 +82,7 @@ void Game::gameLoop()
 
 void Game::shutdown(void)
 {
-	sendDisconnect();
+	mNetwork->sendDisconnect();
 }
 
 /*********************************
@@ -189,7 +185,7 @@ void Game::runNetwork(float msec)
 	// Framerate is too high
 	if(time > (1000 / 60))
 	{
-		sendCommand();
+		mNetwork->sendCommand();
 		mFrameTime = time / 1000.0f;
 		time = 0;
 	}
@@ -228,61 +224,6 @@ void Game::readPackets()
 		}
 	}
 }
-void Game::sendConnect(const char *name)
-{
-	Dispatch* dispatch = new Dispatch();
-	dispatch->WriteByte(mParser->mMessageConnect);
-	dispatch->WriteString(name);
-	mNetwork->send(dispatch);
-}
 
-void Game::sendDisconnect()
-{
-	Dispatch* dispatch = new Dispatch();
-	dispatch->WriteByte(mParser->mMessageDisconnect);
-	mNetwork->send(dispatch);
-	mNetwork->reset();
-}
-
-void Game::sendCommand(void)
-{
-	Dispatch* dispatch = new Dispatch();
-	dispatch->WriteByte(mParser->mMessageFrame);					
-	dispatch->WriteShort(mNetwork->mOutgoingSequence);
-
-	// Build delta-compressed move command
-	int flags = 0;
-
-	// Check what needs to be updated
-	if(mLastCommandToServer->mKey != mCommandToServer->mKey)
-	{
-		flags |= mParser->mCommandKey;
-	}
-
-	if(mLastCommandToServer->mMilliseconds != mCommandToServer->mMilliseconds)
-	{
-		flags |= mParser->mCommandMilliseconds;
-	}
-
-	// Add to the message
-	dispatch->WriteByte(flags);
-
-	if(flags & mParser->mCommandKey)
-	{
-		dispatch->WriteByte(mCommandToServer->mKey);
-	}
-
-	if(flags & mParser->mCommandMilliseconds)
-	{
-		dispatch->WriteByte(mCommandToServer->mMilliseconds);
-	}
-	
-	//set 'last' commands for diff
-	mLastCommandToServer->mKey = mCommandToServer->mKey;
-	mLastCommandToServer->mMilliseconds = mCommandToServer->mMilliseconds;
-
-	// Send the packet
-	mNetwork->send(dispatch);
-}
 
 
