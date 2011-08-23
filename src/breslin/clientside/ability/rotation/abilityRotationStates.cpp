@@ -70,18 +70,18 @@ void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
     {
          if (abilityRotation->mServerRotSpeed == 0.0)
          {
-			abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed = 0.0;
+			abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = 0.0;
          }
          else
          {
 			// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
             if(abilityRotation->mServerRotSpeed > 0.0)
             {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed = abilityRotation->mTurnSpeed;
+				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = abilityRotation->mTurnSpeed;
             }
 			else //clockwise - set to -mTurnSpeed
             {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed = -abilityRotation->mTurnSpeed;
+				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = -abilityRotation->mTurnSpeed;
             }
 		}
 	}
@@ -119,30 +119,30 @@ void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 			// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
             if(abilityRotation->mServerRotSpeed > 0.0)
             {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed = abilityRotation->mTurnSpeed;
+				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = abilityRotation->mTurnSpeed;
             }
             else //clockwise - set to -mTurnSpeed
             {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed = -abilityRotation->mTurnSpeed;
+				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = -abilityRotation->mTurnSpeed;
             }
 			if(abilityRotation->mDegreesToServer / abilityRotation->mServerRotSpeed > 0.0)
             {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed * abilityRotation->mRotInterpIncrease;
+				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed * abilityRotation->mRotInterpIncrease;
             }
             else
             {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed * abilityRotation->mRotInterpDecrease;
+				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed * abilityRotation->mRotInterpDecrease;
             }
 		}
         else if(abilityRotation->mServerRotSpeed == 0.0)
         {
 			if (abilityRotation->mDegreesToServer > 0.0)
             {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed = abilityRotation->mTurnSpeed;
+				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = abilityRotation->mTurnSpeed;
             }
             else //clockwise - set to -mTurnSpeed
             {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed = -abilityRotation->mTurnSpeed;
+				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = -abilityRotation->mTurnSpeed;
             }
 		}
 	}
@@ -174,7 +174,7 @@ void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 
 	//->mObjectTitleString.append("R:Normal");
-	float rotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed * abilityRotation->mShapeDynamic->mGame->getRenderTime();
+	float rotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed * abilityRotation->mShapeDynamic->mGame->getRenderTime();
    abilityRotation->mShapeDynamic->yaw(rotSpeed, true);
 
    if (abilityRotation->mServerRotSpeed == 0.0 && abs(abilityRotation->getDegreesToServer()) < abilityRotation->mRotInterpLimitLow)
@@ -198,7 +198,7 @@ Off_InterpolateTick_Rotation* Off_InterpolateTick_Rotation::Instance()
 }
 void Off_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 {
-	abilityRotation->mShapeDynamic->mCommandToRunOnShape.mRotSpeed = 0.0;
+	abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = 0.0;
 }
 void Off_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {		

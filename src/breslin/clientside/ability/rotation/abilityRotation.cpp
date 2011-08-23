@@ -58,9 +58,9 @@ float AbilityRotation::getDegreesToServer()  //rot
 {
     Vector3D serverRotNew;
 
-    serverRotNew.x = mShapeDynamic->mServerFrame.mRot.x;
+    serverRotNew.x = mShapeDynamic->mServerFrame->mRot.x;
 	serverRotNew.y = 0;
-    serverRotNew.z = mShapeDynamic->mServerFrame.mRot.z;
+    serverRotNew.z = mShapeDynamic->mServerFrame->mRot.z;
 
     serverRotNew.normalise();
 
@@ -75,13 +75,13 @@ void AbilityRotation::calculateServerRotationSpeed()  //rot
     mServerRotOld.zero();
     mServerRotNew.zero();
 
-    mServerRotOld.x = mShapeDynamic->mServerFrame.mRotOld.x;
+    mServerRotOld.x = mShapeDynamic->mServerFrame->mRotOld.x;
 	mServerRotOld.y = 0;
-    mServerRotOld.z = mShapeDynamic->mServerFrame.mRotOld.z;
+    mServerRotOld.z = mShapeDynamic->mServerFrame->mRotOld.z;
 
-    mServerRotNew.x = mShapeDynamic->mServerFrame.mRot.x;
+    mServerRotNew.x = mShapeDynamic->mServerFrame->mRot.x;
 	mServerRotNew.y = 0;
-    mServerRotNew.z = mShapeDynamic->mServerFrame.mRot.z;
+    mServerRotNew.z = mShapeDynamic->mServerFrame->mRot.z;
 
     mServerRotNew.normalise();
     mServerRotOld.normalise();

@@ -42,6 +42,9 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	//game
 	mGame = game;
 
+	mServerFrame         = new Command();
+	mCommandToRunOnShape = new Command();
+
 	//speed
 	mSpeed     = 0.0;
 	mSpeedMax  = 200.0;
@@ -113,50 +116,50 @@ void ShapeDynamic::initializeVariables()
 void ShapeDynamic::initializeCommands(Vector3D* position, Vector3D* rotation)
 {
 	//let's set the serverframe...for inititialize purposeses
-	mServerFrame.mOrigin.x = position->x;
-	mServerFrame.mOrigin.y = position->y;
-	mServerFrame.mOrigin.z = position->z;
+	mServerFrame->mOrigin.x = position->x;
+	mServerFrame->mOrigin.y = position->y;
+	mServerFrame->mOrigin.z = position->z;
 
-	mServerFrame.mOriginOld.x = position->x;
-	mServerFrame.mOriginOld.y = position->y;
-	mServerFrame.mOriginOld.z = position->z;
+	mServerFrame->mOriginOld.x = position->x;
+	mServerFrame->mOriginOld.y = position->y;
+	mServerFrame->mOriginOld.z = position->z;
 
-	mServerFrame.mVelocity.x = position->x;
-	mServerFrame.mVelocity.y = position->y;
-	mServerFrame.mVelocity.z = position->z;
+	mServerFrame->mVelocity.x = position->x;
+	mServerFrame->mVelocity.y = position->y;
+	mServerFrame->mVelocity.z = position->z;
 
-	mServerFrame.mRot.x = rotation->x;
-	mServerFrame.mRot.y = 0;
-	mServerFrame.mRot.z = rotation->z;
+	mServerFrame->mRot.x = rotation->x;
+	mServerFrame->mRot.y = 0;
+	mServerFrame->mRot.z = rotation->z;
 
-	mServerFrame.mMilliseconds = 0;
-	mServerFrame.mMillisecondsTotal = 0;
+	mServerFrame->mMilliseconds = 0;
+	mServerFrame->mMillisecondsTotal = 0;
 
-	mServerFrame.mKey = 0;
-	mServerFrame.mRotSpeed = 0;
+	mServerFrame->mKey = 0;
+	mServerFrame->mRotSpeed = 0;
 
 	//let's set the serverframe...for inititialize purposeses
-	mCommandToRunOnShape.mOrigin.x = position->x;
-	mCommandToRunOnShape.mOrigin.y = position->y;
-	mCommandToRunOnShape.mOrigin.z = position->z;
+	mCommandToRunOnShape->mOrigin.x = position->x;
+	mCommandToRunOnShape->mOrigin.y = position->y;
+	mCommandToRunOnShape->mOrigin.z = position->z;
 
-	mCommandToRunOnShape.mOriginOld.x = position->x;
-	mCommandToRunOnShape.mOriginOld.y = position->y;
-	mCommandToRunOnShape.mOriginOld.z = position->z;
+	mCommandToRunOnShape->mOriginOld.x = position->x;
+	mCommandToRunOnShape->mOriginOld.y = position->y;
+	mCommandToRunOnShape->mOriginOld.z = position->z;
 
-	mCommandToRunOnShape.mVelocity.x = position->x;
-	mCommandToRunOnShape.mVelocity.y = position->y;
-	mCommandToRunOnShape.mVelocity.z = position->z;
+	mCommandToRunOnShape->mVelocity.x = position->x;
+	mCommandToRunOnShape->mVelocity.y = position->y;
+	mCommandToRunOnShape->mVelocity.z = position->z;
 
-	mCommandToRunOnShape.mRot.x = rotation->x;
-	mCommandToRunOnShape.mRot.y = 0;
-	mCommandToRunOnShape.mRot.z = rotation->z;
+	mCommandToRunOnShape->mRot.x = rotation->x;
+	mCommandToRunOnShape->mRot.y = 0;
+	mCommandToRunOnShape->mRot.z = rotation->z;
 
-	mCommandToRunOnShape.mMilliseconds = 0;
-	mCommandToRunOnShape.mMillisecondsTotal = 0;
+	mCommandToRunOnShape->mMilliseconds = 0;
+	mCommandToRunOnShape->mMillisecondsTotal = 0;
 
-	mCommandToRunOnShape.mKey = 0;
-	mCommandToRunOnShape.mRotSpeed = 0;
+	mCommandToRunOnShape->mKey = 0;
+	mCommandToRunOnShape->mRotSpeed = 0;
 
 }
 
@@ -208,8 +211,8 @@ void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
 	// Origin
 	if(flags & mCommandOriginX)
 	{
-		mServerFrame.mOriginOld.x = mServerFrame.mOrigin.x;
-		mServerFrame.mOrigin.x = mes->ReadFloat();		
+		mServerFrame->mOriginOld.x = mServerFrame->mOrigin.x;
+		mServerFrame->mOrigin.x = mes->ReadFloat();		
 	}
 	else
 	{
@@ -218,8 +221,8 @@ void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
 
 	if(flags & mCommandOriginY)
 	{
-		mServerFrame.mOriginOld.y = mServerFrame.mOrigin.y;
-		mServerFrame.mOrigin.y = mes->ReadFloat();
+		mServerFrame->mOriginOld.y = mServerFrame->mOrigin.y;
+		mServerFrame->mOrigin.y = mes->ReadFloat();
 	}
 	else
 	{
@@ -228,8 +231,8 @@ void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
 
 	if(flags & mCommandOriginZ)
 	{
-		mServerFrame.mOriginOld.z = mServerFrame.mOrigin.z;
-		mServerFrame.mOrigin.z = mes->ReadFloat();	
+		mServerFrame->mOriginOld.z = mServerFrame->mOrigin.z;
+		mServerFrame->mOrigin.z = mes->ReadFloat();	
 	}
 	else
 	{
@@ -237,40 +240,40 @@ void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
 	}
 
 	//set old rot
-	mServerFrame.mRotOld.x = mServerFrame.mRot.x;
-	mServerFrame.mRotOld.z = mServerFrame.mRot.z;
+	mServerFrame->mRotOld.x = mServerFrame->mRot.x;
+	mServerFrame->mRotOld.z = mServerFrame->mRot.z;
 
 	//rotation
 	if(flags & mCommandRotationX)
 	{
-		mServerFrame.mRot.x = mes->ReadFloat();
+		mServerFrame->mRot.x = mes->ReadFloat();
 	}
 
 	if(flags & mCommandRotationZ)
 	{
-		mServerFrame.mRot.z = mes->ReadFloat();
+		mServerFrame->mRot.z = mes->ReadFloat();
 	}
 
 	//milliseconds
 	if (flags & mGame->mParser->mCommandMilliseconds)
 	{
-		mServerFrame.mMilliseconds = mes->ReadByte();
-		mCommandToRunOnShape.mMilliseconds = mServerFrame.mMilliseconds;
+		mServerFrame->mMilliseconds = mes->ReadByte();
+		mCommandToRunOnShape->mMilliseconds = mServerFrame->mMilliseconds;
 	}
 
-	if (mServerFrame.mMilliseconds != 0) 
+	if (mServerFrame->mMilliseconds != 0) 
 	{
-		if(!x && !z && !y && mServerFrame.mMilliseconds != 0)
+		if(!x && !z && !y && mServerFrame->mMilliseconds != 0)
 		{
-			mServerFrame.mVelocity.x = 0.0;
-			mServerFrame.mVelocity.y = 0.0;
-			mServerFrame.mVelocity.z = 0.0;
+			mServerFrame->mVelocity.x = 0.0;
+			mServerFrame->mVelocity.y = 0.0;
+			mServerFrame->mVelocity.z = 0.0;
 		}
 		else
 		{
-			mServerFrame.mVelocity.x = mServerFrame.mOrigin.x - mServerFrame.mOriginOld.x;
-			mServerFrame.mVelocity.y = mServerFrame.mOrigin.y - mServerFrame.mOriginOld.y;
-			mServerFrame.mVelocity.z = mServerFrame.mOrigin.z - mServerFrame.mOriginOld.z;
+			mServerFrame->mVelocity.x = mServerFrame->mOrigin.x - mServerFrame->mOriginOld.x;
+			mServerFrame->mVelocity.y = mServerFrame->mOrigin.y - mServerFrame->mOriginOld.y;
+			mServerFrame->mVelocity.z = mServerFrame->mOrigin.z - mServerFrame->mOriginOld.z;
 		}
 	}
 	processTick();
@@ -282,9 +285,9 @@ void ShapeDynamic::moveGhostShape()
 {
 	Vector3D transVector;
 
-	transVector.x = mServerFrame.mOrigin.x;
+	transVector.x = mServerFrame->mOrigin.x;
 	transVector.y = 0;
-	transVector.z = mServerFrame.mOrigin.z;
+	transVector.z = mServerFrame->mOrigin.z;
 
 	if (mGhost)
 	{

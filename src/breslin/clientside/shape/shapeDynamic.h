@@ -73,8 +73,8 @@ Vector3D* mRotation;
 int mLocal;
 
 //commands
-Command	mServerFrame;					// the latest frame from server
-Command mCommandToRunOnShape;
+Command* mServerFrame;					// the latest frame from server
+Command* mCommandToRunOnShape;
 
 /*************************************************
 *				METHODS
