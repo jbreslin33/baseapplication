@@ -81,9 +81,6 @@ void Game::gameLoop()
 		{
 			break;
 		}
-
-		//start gui if it is not already
-		initializeGui();
 	}
 }
 
@@ -114,6 +111,43 @@ void Game::removeShape(Dispatch* dispatch)
 	}
 }
 
+ShapeDynamic* Game::getShapeDynamic(int id)
+{
+	ShapeDynamic* shape = NULL;
+
+	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	{
+		ShapeDynamic* curShape = mShapeVector.at(i);
+		if (curShape->mIndex == id)
+		{
+			shape = curShape;
+		}
+	}
+
+	if(!shape)
+	{
+		return NULL;
+	}
+	else
+	{
+		return shape;
+	}
+}
+
+
+
+/*********************************
+		TICK
+**********************************/
+void Game::interpolateTick()
+{
+	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	{
+		mShapeVector.at(i)->interpolateTick(getRenderTime());
+	}
+}
+
+
 void Game::readServerTick(Dispatch* dispatch)
 {
 	int newTime;
@@ -139,37 +173,6 @@ void Game::readServerTick(Dispatch* dispatch)
 		{
 			shape->readDeltaMoveCommand(dispatch);
 		}
-	}
-}
-
-ShapeDynamic* Game::getShapeDynamic(int id)
-{
-	ShapeDynamic* shape = NULL;
-
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		ShapeDynamic* curShape = mShapeVector.at(i);
-		if (curShape->mIndex == id)
-		{
-			shape = curShape;
-		}
-	}
-
-	if(!shape)
-	{
-		return NULL;
-	}
-	else
-	{
-		return shape;
-	}
-}
-
-void Game::interpolateTick()
-{
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		mShapeVector.at(i)->interpolateTick(getRenderTime());
 	}
 }
 

@@ -62,7 +62,6 @@ void gameLoop();
 //shape
 virtual void addShape    (bool b, Dispatch* dispatch);
 void removeShape (Dispatch* dispatch);
-
 ShapeDynamic* getShapeDynamic      (  int id);
 
 //Ticks
@@ -85,8 +84,6 @@ virtual void processInput() { }
 //graphics
 virtual bool runGraphics() { return false; }
 	
-virtual void initializeGui() { }
-
 };
 
 #endif

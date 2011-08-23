@@ -65,15 +65,18 @@ bool GraphicsOgre::runGraphics()
 {
 	//Pump messages in all registered RenderWindow windows
 	WindowEventUtilities::messagePump();
-
 	if (!mRoot->renderOneFrame())
 	{
+		initializeGui();
 		return false;
 	}
 	else
 	{
+		initializeGui();
 		return true;
 	}
+
+
 }
 
 /*********************************
