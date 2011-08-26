@@ -84,16 +84,6 @@ void Dispatch::WriteFloat(float c)
 	memcpy(buf, &c, 4);
 }
 
-void Dispatch::WriteString(const char *s)
-{
-	if(!s)
-	{
-		return;
-	}
-	else
-		Write(s, strlen(s) + 1);
-}
-
 /**********************************************
 				READ
 ************************************************/
@@ -167,25 +157,3 @@ float Dispatch::ReadFloat()
 	return c;
 }
 
-char *Dispatch::ReadString()
-{
-	static char string[2048];
-	int	l, c;
-
-	l = 0;
-
-	do
-	{
-		c = ReadByte();
-
-		if (c == -1 || c == 0)
-			break;
-
-		string[l] = c;
-		l++;
-	} while(l < sizeof(string)-1);
-
-	string[l] = 0;
-
-	return string;
-}

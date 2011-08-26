@@ -57,13 +57,11 @@ void Server::sendAddShape(Client* client)
 		{
 			client->mMessage.WriteByte(1);	// local shape
 			client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mIndex);
-			client->mMessage.WriteString("");
 		}
 		else
 		{
 			client->mMessage.WriteByte(0);	// not-local shape
 			client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mIndex);
-			client->mMessage.WriteString("");
 		}
 		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mOrigin.x);
 		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mOrigin.y);
@@ -99,7 +97,6 @@ void Server::sendAddShape(Client* client)
 			mClientVector.at(i)->mMessage.WriteByte(DREAMSOCK_MES_ADDSHAPE); // type
 			mClientVector.at(i)->mMessage.WriteByte(0);
 			mClientVector.at(i)->mMessage.WriteByte(client->mShape->mIndex);
-			mClientVector.at(i)->mMessage.WriteString("");
 			
 			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mOrigin.x);
 			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mOrigin.y);
@@ -133,7 +130,6 @@ void Server::sendAddAIShape(Shape* shape)
 		mClientVector.at(i)->mMessage.WriteByte(DREAMSOCK_MES_ADDSHAPE); // type
 		mClientVector.at(i)->mMessage.WriteByte(0);
 		mClientVector.at(i)->mMessage.WriteByte(shape->mIndex);
-		mClientVector.at(i)->mMessage.WriteString("");
 
 		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mOrigin.x);
 		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mOrigin.y);

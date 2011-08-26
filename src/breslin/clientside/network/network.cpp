@@ -339,7 +339,6 @@ void Network::sendConnect(const char *name)
 {
 	Dispatch* dispatch = new Dispatch();
 	dispatch->WriteByte(mParser->mMessageConnect);
-	//dispatch->WriteString(name);
 	send(dispatch);
 }
 

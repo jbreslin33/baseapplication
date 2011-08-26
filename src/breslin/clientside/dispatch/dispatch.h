@@ -45,7 +45,6 @@ public:
 	void			WriteShort (short c);
 	void			WriteLong  (long c);
 	void			WriteFloat (float c);
-	void			WriteString(const char *s);
 
 	//read
 	char			*Read      (int s);
@@ -53,9 +52,6 @@ public:
 	short			ReadShort  ();
 	long			ReadLong   ();
 	float			ReadFloat  ();
-	char			*ReadString();
-
-
 
 };
 

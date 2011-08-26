@@ -95,7 +95,6 @@ void ShapeDynamic::parseDispatch(Dispatch* dispatch)
 	dispatch->ReadByte(); //should read -103 to add a shape..
 	mLocal	=    dispatch->ReadByte();
 	mIndex		=    dispatch->ReadByte();
-	dispatch->ReadString(); //strcpy(name, dispatch->ReadString()); //name
 	mPosition->x =   dispatch->ReadFloat();
 	mPosition->y =   dispatch->ReadFloat();
 	mPosition->z =   dispatch->ReadFloat();
