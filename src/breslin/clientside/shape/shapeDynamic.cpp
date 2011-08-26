@@ -35,6 +35,9 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	//game
 	mGame = game;
 
+	//parser
+	mParser = new Parser();
+
 	//commands
 	mServerFrame         = new Command();
 	mCommandToRunOnShape = new Command();
@@ -143,7 +146,7 @@ void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
 	flags = mes->ReadByte();
 
 	// Origin
-	if(flags & mCommandOriginX)
+	if(flags & mParser->mCommandOriginX)
 	{
 		mServerFrame->mOriginOld->x = mServerFrame->mOrigin->x;
 		mServerFrame->mOrigin->x = mes->ReadFloat();		
@@ -153,7 +156,7 @@ void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
 		x = false;
 	}
 
-	if(flags & mCommandOriginY)
+	if(flags & mParser->mCommandOriginY)
 	{
 		mServerFrame->mOriginOld->y = mServerFrame->mOrigin->y;
 		mServerFrame->mOrigin->y = mes->ReadFloat();
@@ -163,7 +166,7 @@ void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
 		y = false;
 	}
 
-	if(flags & mCommandOriginZ)
+	if(flags & mParser->mCommandOriginZ)
 	{
 		mServerFrame->mOriginOld->z = mServerFrame->mOrigin->z;
 		mServerFrame->mOrigin->z = mes->ReadFloat();	
@@ -178,12 +181,12 @@ void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
 	mServerFrame->mRotOld->z = mServerFrame->mRot->z;
 
 	//rotation
-	if(flags & mCommandRotationX)
+	if(flags & mParser->mCommandRotationX)
 	{
 		mServerFrame->mRot->x = mes->ReadFloat();
 	}
 
-	if(flags & mCommandRotationZ)
+	if(flags & mParser->mCommandRotationZ)
 	{
 		mServerFrame->mRot->z = mes->ReadFloat();
 	}

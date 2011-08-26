@@ -20,14 +20,14 @@
 //game
 class Game;
 
-//state machines
-class ShapeDynamicStateMachine;
-class ShapeDynamicState;
-
+//dispatch
 class Dispatch;
 
 //ability
 class Ability;
+
+//parser
+class Parser;
 
 /**********************************
 *          CLASS
@@ -43,18 +43,15 @@ ShapeDynamic(Game* game, Dispatch* dispatch);
 *                VARIABLES
 *************************************************/
 
+//game
 Game* mGame;
+
+//parser
+Parser* mParser;
 
 //speed
 float mSpeed; 
 float mSpeedMax; 
-
-//network flags
-static const char mCommandOriginX      = 4;
-static const char mCommandOriginY      = 8;
-static const char mCommandOriginZ      = 16;
-static const char mCommandRotationX    = 32;
-static const char mCommandRotationZ    = 64;
 
 //abilitys
 std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
@@ -76,12 +73,11 @@ Command* mCommandToRunOnShape;
 *				METHODS
 **************************************************/
 
-//virtual need to be implemented in subclass...
-
 //abilitys
 void     addAbility(Ability* ability);
 Ability* getAbility(Ability* ability);
 
+//movement
 virtual void        yaw                  (float amountToYaw, bool converToDegree   ) = 0;
 virtual float       getDegreesToSomething(Vector3D something                       ) = 0;
 virtual void        translate            (Vector3D translateVector, int perspective) = 0;
