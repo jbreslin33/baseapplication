@@ -51,11 +51,6 @@ char *Dispatch::GetNewPoint(int length)
 /**********************************************
 				WRITE
 ************************************************/
-void Dispatch::Write(const void *d, int length)
-{
-	memcpy(GetNewPoint(length), d, length);		
-}
-
 void Dispatch::WriteByte(char c)
 {
 	char *buf;
@@ -70,13 +65,6 @@ void Dispatch::WriteShort(short c)
 	memcpy(buf, &c, 2);
 }
 
-void Dispatch::WriteLong(long c)
-{
-	char *buf;
-	buf = GetNewPoint(4);
-	memcpy(buf, &c, 4);
-}
-
 void Dispatch::WriteFloat(float c)
 {
 	char *buf;
@@ -87,19 +75,6 @@ void Dispatch::WriteFloat(float c)
 /**********************************************
 				READ
 ************************************************/
-char *Dispatch::Read(int s)
-{
-	static char c[2048];
-
-	if(mReadCount+s > mSize)
-		return NULL;
-	else
-		memcpy(&c, &mCharArray[mReadCount], s);
-
-	mReadCount += s;
-
-	return c;
-}
 
 char Dispatch::ReadByte()
 {
@@ -125,20 +100,6 @@ short Dispatch::ReadShort()
 		memcpy(&c, &mCharArray[mReadCount], 2);
 
 	mReadCount += 2;
-
-	return c;
-}
-
-long Dispatch::ReadLong()
-{
-	long c;
-
-	if(mReadCount+4 > mSize)
-		c = -1;
-	else
-		memcpy(&c, &mCharArray[mReadCount], 4);
-
-	mReadCount += 4;
 
 	return c;
 }

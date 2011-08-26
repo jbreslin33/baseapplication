@@ -32,6 +32,7 @@ public:
 *			METHODS
 **************************************************/
 	//admin
+
 	int             getReadCount() { return mReadCount; }
 	void			BeginReading();
 	char			*GetNewPoint(int length);
@@ -40,17 +41,13 @@ public:
 	void			SetSize(int s)		{ mSize = s; }
 
 	//write
-	void			Write      (const void *d, int length);
 	void			WriteByte  (char c);
 	void			WriteShort (short c);
-	void			WriteLong  (long c);
 	void			WriteFloat (float c);
 
 	//read
-	char			*Read      (int s);
 	char			ReadByte   ();
 	short			ReadShort  ();
-	long			ReadLong   ();
 	float			ReadFloat  ();
 
 };
