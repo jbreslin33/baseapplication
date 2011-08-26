@@ -15,13 +15,7 @@
 #include "../game/game.h"
 
 //ability
-#include "../ability/move/abilityMove.h"
-#include "../ability/move/abilityMoveStates.h"
-
-#include "../ability/rotation/abilityRotationStates.h"
-#include "../ability/rotation/abilityRotation.h"
-
-#include "../ability/animation/abilityAnimation.h"
+#include "../ability/ability.h"
 
 //dispatch
 #include "../dispatch/dispatch.h"
@@ -41,6 +35,7 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	//game
 	mGame = game;
 
+	//commands
 	mServerFrame         = new Command();
 	mCommandToRunOnShape = new Command();
 
@@ -48,17 +43,18 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	mSpeed     = 0.0;
 	mSpeedMax  = 200.0;
 
+	//orientation
 	mPosition = new Vector3D();
 	mVelocity = new Vector3D();
 	mRotation = new Vector3D();
 
+	//dispatch
 	parseDispatch(dispatch);
-	initializeVariables();
-	initializeCommands(mPosition,mRotation);
-	createStateMachines();
 
-	mAbilityAnimation = NULL;	
-	
+	//ghost
+	mGhost = NULL;
+
+
 }
 
 ShapeDynamic::~ShapeDynamic()
@@ -107,65 +103,6 @@ void ShapeDynamic::parseDispatch(Dispatch* dispatch)
 	mRotation->z = dispatch->ReadFloat();
 }
 
-void ShapeDynamic::initializeVariables()
-{
-	mGhost = NULL;
-}
-
-void ShapeDynamic::initializeCommands(Vector3D* position, Vector3D* rotation)
-{
-	//let's set the serverframe...for inititialize purposeses
-	mServerFrame->mOrigin->x = position->x;
-	mServerFrame->mOrigin->y = position->y;
-	mServerFrame->mOrigin->z = position->z;
-
-	mServerFrame->mOriginOld->x = position->x;
-	mServerFrame->mOriginOld->y = position->y;
-	mServerFrame->mOriginOld->z = position->z;
-
-	mServerFrame->mVelocity->x = position->x;
-	mServerFrame->mVelocity->y = position->y;
-	mServerFrame->mVelocity->z = position->z;
-
-	mServerFrame->mRot->x = rotation->x;
-	mServerFrame->mRot->y = 0;
-	mServerFrame->mRot->z = rotation->z;
-
-	mServerFrame->mMilliseconds = 0;
-	mServerFrame->mMillisecondsTotal = 0;
-
-	mServerFrame->mKey = 0;
-	mServerFrame->mRotSpeed = 0;
-
-	//let's set the serverframe...for inititialize purposeses
-	mCommandToRunOnShape->mOrigin->x = position->x;
-	mCommandToRunOnShape->mOrigin->y = position->y;
-	mCommandToRunOnShape->mOrigin->z = position->z;
-
-	mCommandToRunOnShape->mOriginOld->x = position->x;
-	mCommandToRunOnShape->mOriginOld->y = position->y;
-	mCommandToRunOnShape->mOriginOld->z = position->z;
-
-	mCommandToRunOnShape->mVelocity->x = position->x;
-	mCommandToRunOnShape->mVelocity->y = position->y;
-	mCommandToRunOnShape->mVelocity->z = position->z;
-
-	mCommandToRunOnShape->mRot->x = rotation->x;
-	mCommandToRunOnShape->mRot->y = 0;
-	mCommandToRunOnShape->mRot->z = rotation->z;
-
-	mCommandToRunOnShape->mMilliseconds = 0;
-	mCommandToRunOnShape->mMillisecondsTotal = 0;
-
-	mCommandToRunOnShape->mKey = 0;
-	mCommandToRunOnShape->mRotSpeed = 0;
-
-}
-
-void ShapeDynamic::createStateMachines()
-{
-}
-
 void ShapeDynamic::processTick()
 {
 	clearTitle(); //empty title string so it can be filled anew
@@ -186,8 +123,6 @@ void ShapeDynamic::interpolateTick(float renderTime)
 	{
 		mAbilityVector.at(i)->interpolateTick(renderTime);
 	}
-	mAbilityAnimation->interpolateTick(renderTime);
-
 }
 
 //this is all shapes coming to client game from server

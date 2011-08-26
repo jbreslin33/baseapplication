@@ -22,9 +22,6 @@ class GameOgre;
 class ObjectTitle;
 
 //ability
-class AbilityRotationOgre;
-class AbilityMoveOgre;
-class AbilityAnimationOgre;
 
 #include <string>
 
@@ -61,9 +58,6 @@ ObjectTitle* mObjectTitle;
 std::string  mObjectTitleString;
 
 //ability
-AbilityRotationOgre* mAbilityRotationOgre;
-AbilityMoveOgre* mAbilityMoveOgre;
-AbilityAnimationOgre* mAbilityAnimationOgre;
 
 /**********************************
 *          METHODS

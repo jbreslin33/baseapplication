@@ -37,8 +37,7 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, Dispatch* dispatch, bool 
 	createShape();
 	
 	//ability
-	mAbilityAnimationOgre = new AbilityAnimationOgre(this);
-	mAbilityAnimation     = mAbilityAnimationOgre;
+	addAbility(new AbilityAnimationOgre(this));
 	
 	setupTitle();
 

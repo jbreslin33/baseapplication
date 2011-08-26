@@ -28,9 +28,6 @@ class Dispatch;
 
 //ability
 class Ability;
-class AbilityRotation;
-class AbilityMove;
-class AbilityAnimation;
 
 /**********************************
 *          CLASS
@@ -61,7 +58,6 @@ static const char mCommandRotationZ    = 64;
 
 //abilitys
 std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
-AbilityAnimation* mAbilityAnimation;
 
 //this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
 ShapeDynamic* mGhost;
@@ -98,15 +94,6 @@ void interpolateTick(float renderTime);
 
 //messaging
 void readDeltaMoveCommand(Dispatch *mes);
-
-//statemachines
-void createStateMachines();
-
-//commands
-void initializeCommands(Vector3D* position, Vector3D* rotation);
-
-//variables
-void initializeVariables();
 
 //dispatch
 void parseDispatch(Dispatch* dispatch);
