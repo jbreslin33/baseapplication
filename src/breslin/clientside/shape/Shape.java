@@ -4,6 +4,9 @@ package breslin.clientside.shape;
 /**********************************
 *          INCLUDES
 **********************************/
+//game
+import breslin.clientside.game.Game;
+
 //math
 import breslin.math.Vector3D;
 
@@ -20,7 +23,7 @@ public Shape(int ind, Vector3D position, Vector3D rotation)
 *			VARIABLES
 **************************************************/
 int   mIndex;
-//Game* mGame;
+Game mGame;
 
 //Parser* mParser;
 
