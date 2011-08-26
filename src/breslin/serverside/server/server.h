@@ -39,7 +39,7 @@ public:
 	void			sendAddAIShape(Shape* shape);
 	void			sendAddShape(Client* client);
 	void			sendRemoveShape(Shape* shape);
-	void			addClient(struct sockaddr *address, char *name);
+	void			addClient(struct sockaddr *address);
 
 	void			removeClient(Client *client);
 

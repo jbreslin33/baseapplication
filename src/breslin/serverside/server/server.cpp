@@ -169,7 +169,7 @@ void Server::sendRemoveShape(Shape* shape)
 }
 
 //called when internets client sends DREAMSOCK_MES_CONNECT message before it has a client, shape or anything.
-void Server::addClient(struct sockaddr *address, char *name)
+void Server::addClient(struct sockaddr *address)
 {
 	Client* client = new Client(mNetwork);
 	mClientVector.push_back(client);
@@ -207,7 +207,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	if (type == DREAMSOCK_MES_CONNECT)
 	{
-				addClient(address, mes->ReadString());
+				addClient(address);
 				LogString("LIBRARY: Server: a client connected succesfully");
 	}
 	else
