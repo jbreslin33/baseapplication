@@ -10,14 +10,9 @@ import breslin.clientside.game.Game;
 //math
 import breslin.math.Vector3D;
 
-class Shape
+public class Shape
 {
 
-
-public Shape(int ind, Vector3D position, Vector3D rotation)
-{
-
-}
 
 /**************************************************
 *			VARIABLES

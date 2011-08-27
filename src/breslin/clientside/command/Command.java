@@ -7,7 +7,7 @@ package breslin.clientside.command;
 //math
 import breslin.math.Vector3D;
 
-class Command
+public class Command
 {
 
 public Command()

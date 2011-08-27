@@ -5,7 +5,7 @@ public class Game
 
 //ArrayList<ShapeDynamic> myArr = new ArrayList<ShapeDynamic>();
 
-public Game(char serverIP, char serverPort)
+public Game(byte[] serverIP, int serverPort)
 {
 
 }

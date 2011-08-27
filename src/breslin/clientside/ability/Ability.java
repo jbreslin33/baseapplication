@@ -1,4 +1,4 @@
-package clientside.ability;
+package breslin.clientside.ability;
 
 /******************************************************
 *				INCLUDES
@@ -8,7 +8,7 @@ package clientside.ability;
 /******************************************************
 *				CLASS
 ********************************************************/
-class Ability
+public class Ability
 {
 
 
