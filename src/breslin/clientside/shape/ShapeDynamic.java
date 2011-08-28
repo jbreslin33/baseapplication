@@ -37,7 +37,7 @@ import breslin.clientside.command.Command;
 *          CLASS
 **********************************/
 
-class ShapeDynamic extends Shape
+public class ShapeDynamic extends Shape
 {
 
 public ShapeDynamic(Game game, Dispatch dispatch)
