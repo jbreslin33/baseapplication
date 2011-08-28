@@ -30,7 +30,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package jme3test.niftygui;
+package breslin.clientside.game;
+
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.material.Material;
@@ -56,8 +57,8 @@ public class TestNiftyGui extends SimpleApplication implements ScreenController 
     public void simpleInitApp() {
         Box b = new Box(Vector3f.ZERO, 1, 1, 1);
         Geometry geom = new Geometry("Box", b);
-        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        mat.setTexture("ColorMap", assetManager.loadTexture("Interface/Logo/Monkey.jpg"));
+        Material mat = new Material(assetManager, "art/Unshaded.j3md");
+        mat.setTexture("ColorMap", assetManager.loadTexture("art/Monkey.jpg"));
         geom.setMaterial(mat);
         rootNode.attachChild(geom);
 
@@ -67,9 +68,9 @@ public class TestNiftyGui extends SimpleApplication implements ScreenController 
                                                           guiViewPort);
         nifty = niftyDisplay.getNifty();
 
-        URL url = Thread.currentThread().getContextClassLoader().getResource("jme3test/niftygui/hellojme.xml");
-       
-        nifty.fromXml("Interface/Nifty/HelloJme.xml", "start", this);
+        URL url = Thread.currentThread().getContextClassLoader().getResource("art/hellojme.xml");
+
+        nifty.fromXml("art/HelloJme.xml", "start", this);
 
         // attach the nifty display to the gui view port as a processor
         guiViewPort.addProcessor(niftyDisplay);
