@@ -20,7 +20,7 @@ public class GraphicsMonkey extends SimpleApplication
 
 public GraphicsMonkey(GameMonkey gameMonkey)
 {
-
+	start();
 }
 
 
