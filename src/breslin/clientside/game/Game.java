@@ -52,7 +52,7 @@ ArrayList<ShapeDynamic> mShapeVector = new ArrayList<ShapeDynamic>(); //all shap
 ArrayList<ShapeDynamic> mShapeGhostVector = new ArrayList<ShapeDynamic>(); //all shapes in the client world's ghost
 
 //Network
-Network     mNetwork;
+public Network     mNetwork;
 
 //time
 //Time* mTime;

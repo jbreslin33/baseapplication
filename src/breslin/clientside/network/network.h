@@ -120,7 +120,7 @@ void close();
 void            reset();
 
 //connect
-void sendConnect   (const char *name);
+void sendConnect   ();
 
 //disconnect
 void sendDisconnect(void);

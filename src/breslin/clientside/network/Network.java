@@ -88,4 +88,11 @@ short	mDroppedPackets;			// Dropped packets
 *			          METHODS
 ***************************************/
 
+public void sendConnect()
+{
+
 }
+
+}
+
+

@@ -335,7 +335,7 @@ void Network::reset(void)
 /***************************************************
 *			CONNECT
 ***************************************************/
-void Network::sendConnect(const char *name)
+void Network::sendConnect()
 {
 	Dispatch* dispatch = new Dispatch();
 	dispatch->WriteByte(mParser->mMessageConnect);

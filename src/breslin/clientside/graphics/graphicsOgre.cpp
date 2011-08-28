@@ -133,7 +133,7 @@ void GraphicsOgre::buttonHit(OgreBites::Button *button)
 		mJoinGame = true;
 		if (mJoinGame && !mPlayingGame)
 		{
-			mGameOgre->mNetwork->sendConnect("myname");
+			mGameOgre->mNetwork->sendConnect();
 			//LogString("sent connect to server");
 			mPlayingGame = true;
 		}
