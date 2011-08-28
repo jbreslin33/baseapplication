@@ -4,6 +4,7 @@ package breslin.clientside.game;
 *           INCLUDES
 ***************************************/
 //standard library
+import java.io.*;
 import java.util.ArrayList;
 
 //dispatch
@@ -21,7 +22,26 @@ public class Game
 
 public Game(byte[] serverIP, int serverPort)
 {
+	//StartLog();
 
+	try
+	{
+		String serverIPString = new String(serverIP, "UTF8");
+		System.out.println("serverIP:" + serverIPString + " serverPort:" + serverPort);
+
+	}
+	catch (UnsupportedEncodingException e)
+	{
+	    e.printStackTrace();
+	}
+
+	// network
+	mNetwork = new Network(this,serverIP,serverPort);
+
+	//time
+	//mTime = new Time();
+	mFrameTime		 = 0.0f;
+	mOldTime         = 0;
 }
 
 /***************************************
