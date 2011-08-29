@@ -2,6 +2,13 @@
 package breslin.clientside.dispatch;
 
 /******************************************************
+*				INCLUDES
+********************************************************/
+
+//standard library
+import java.nio.ByteBuffer;
+
+/******************************************************
 *				CLASS
 ********************************************************/
 public class Dispatch
@@ -10,8 +17,10 @@ public class Dispatch
 
 public Dispatch()
 {
-	mMaxSize = 256;
+	mMaxSize = 1400;
 	mCharArray = new byte[mMaxSize];
+	mByteBuffer = ByteBuffer.wrap(mCharArray);
+
 	mSize		= 0;
 	mReadCount	= 0;
 }
@@ -23,6 +32,7 @@ public Dispatch()
 	int				mSize;
 	int				mReadCount;
 	public byte[]			mCharArray;
+	public ByteBuffer mByteBuffer;
 
 /**************************************************
 *			METHODS
@@ -60,6 +70,7 @@ void			SetSize(int s)
 //write
 public void			WriteByte  (byte  b)
 {
+
 
 }
 
