@@ -48,7 +48,7 @@ GraphicsMonkey mGraphicsMonkey;
 ***************************************/
 
 //shape
-void addShape(boolean b, Dispatch dispatch)
+public void addShape(boolean b, Dispatch dispatch)
 {
 
 }

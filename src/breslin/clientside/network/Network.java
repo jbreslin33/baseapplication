@@ -102,11 +102,67 @@ short	mDroppedPackets;			// Dropped packets
 *			          METHODS
 ***************************************/
 
+//packets
+boolean checkForDispatch(Dispatch dispatch)
+{
+	return true;
+}
+
+public void readPackets   ()
+{
+	//int type;
+	//int ret;
+
+	Dispatch dispatch = new Dispatch();
+
+	while(checkForDispatch(dispatch))
+	{
+		//dispatch->BeginReading();
+
+		int type = dispatch.ReadByte();
+
+		if (mParser.mMessageAddShape == type)
+		{
+			mGame.addShape(true,dispatch);
+		}
+/*
+		switch(type)
+		{
+			case mParser.mMessageAddShape:
+				mGame.addShape(true,dispatch);
+			break;
+
+			case mParser.mMessageRemoveShape:
+				mGame.removeShape(dispatch);
+			break;
+
+			case mParser.mMessageFrame:
+				mGame.readServerTick(dispatch);
+			break;
+
+			//case mParser.mMessageServerExit:
+			//	mGame.shutdown();
+			break;
+		}
+*/
+	}
+
+}
+
+
+//send
+
+
 public void sendConnect()
 {
 	Dispatch dispatch = new Dispatch();
 	dispatch.WriteByte(mParser.mMessageConnect);
 	send(dispatch);
+}
+
+public void sendCommand()
+{
+
 }
 
 public void send(Dispatch dispatch)

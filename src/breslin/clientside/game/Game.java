@@ -57,6 +57,7 @@ public Network     mNetwork;
 //time
 //Time* mTime;
 float mFrameTime;
+float mRunNetworkTime;
 int   mOldTime;
 
 
@@ -71,11 +72,27 @@ void shutdown()
 }
 void gameLoop()
 {
+	while(true)
+    {
+		//input
+		//processInput();
 
+		//network
+		runNetwork(getRenderTime() * 1000.0f);
+
+		//move objects
+		//interpolateTick();
+
+		//draw
+		//if (!runGraphics())
+		//{
+		//	break;
+		//}
+	}
 }
 
 //shape
-void         addShape       (boolean b, Dispatch dispatch)
+public void         addShape       (boolean b, Dispatch dispatch)
 {
 
 }
@@ -110,7 +127,19 @@ float getRenderTime()
 // Network
 void runNetwork    (float msec)
 {
+	mRunNetworkTime += msec;
+	//static float mMsec = 0.0f;
+	//mTime += msec;
 
+	mNetwork.readPackets();
+
+	// Framerate is too high
+	if(mRunNetworkTime > (1000 / 60))
+	{
+		mNetwork.sendCommand();
+		mFrameTime = mRunNetworkTime / 1000.0f;
+		mRunNetworkTime = 0;
+	}
 }
 
 //input

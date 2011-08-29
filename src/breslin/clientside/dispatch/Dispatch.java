@@ -90,7 +90,7 @@ void			WriteFloat (float f)
 }
 
 //read
-byte			ReadByte   ()
+public byte			ReadByte   ()
 {
 
 	byte byteRead = mByteBuffer.get();
