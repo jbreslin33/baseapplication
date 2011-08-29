@@ -10,7 +10,7 @@ public class Dispatch
 
 public Dispatch()
 {
-	mMaxSize = 1400;
+	mMaxSize = 256;
 	mCharArray = new byte[mMaxSize];
 	mSize		= 0;
 	mReadCount	= 0;
@@ -22,7 +22,7 @@ public Dispatch()
 	int				mMaxSize;
 	int				mSize;
 	int				mReadCount;
-	byte[]			mCharArray;
+	public byte[]			mCharArray;
 
 /**************************************************
 *			METHODS
@@ -58,7 +58,7 @@ void			SetSize(int s)
 }
 
 //write
-void			WriteByte  (byte  b)
+public void			WriteByte  (byte  b)
 {
 
 }

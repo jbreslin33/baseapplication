@@ -179,7 +179,7 @@ void Server::addClient(struct sockaddr *address)
 
 	mGame->createClientAvatar(client);
 
-	//LogString("LIB: Adding client with shape index %d", client->mShape->mIndex);
+	LogString("LIB: Adding client with shape index %d", client->mShape->mIndex);
 
 	sendAddShape(client);  
 }
@@ -200,7 +200,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 {
 	mes->BeginReading();
     int type = mes->ReadByte();
-
+	LogString("pp");
 	if (type == DREAMSOCK_MES_CONNECT)
 	{
 				addClient(address);

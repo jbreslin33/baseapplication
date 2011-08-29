@@ -4,6 +4,8 @@ package breslin.clientside.network;
 *   		INCLUDES
 ***************************************/
 //standard library
+import java.io.*;
+import java.net.*;
 
 //game
 import breslin.clientside.game.Game;
@@ -40,6 +42,8 @@ public Network(Game game, byte[] serverIP, int serverPort)
 	mServerIP = serverIP;
 	mServerPort = serverPort;
 
+
+
 	//sequences
 	mOutgoingSequence		= 1;
 	mIncomingSequence		= 0;
@@ -52,7 +56,17 @@ public Network(Game game, byte[] serverIP, int serverPort)
 	mIncomingSequence = 0;
 	mDroppedPackets = 0;
 
-	//LogString("Server's information: IP address: %s, port: %d", mServerIP, mServerPort);
+
+	try
+	{
+		String mServerIPString = new String(mServerIP, "UTF8");
+		System.out.println("NETWORK CONSTRUCTOR: serverIP:" + mServerIPString + " serverPort:" + serverPort);
+
+	}
+	catch (UnsupportedEncodingException e)
+	{
+	    e.printStackTrace();
+	}
 }
 
 
@@ -63,7 +77,6 @@ public Network(Game game, byte[] serverIP, int serverPort)
 //game
 Game mGame;
 
-
 //command
 Command mCommandToServer;
 Command mLastCommandToServer;
@@ -73,6 +86,7 @@ Parser mParser;
 
 //server address
 byte[] mServerIP;
+String mServerIPString;
 int mServerPort;
 
 //sequences
@@ -90,8 +104,41 @@ short	mDroppedPackets;			// Dropped packets
 
 public void sendConnect()
 {
-
+	Dispatch dispatch = new Dispatch();
+	dispatch.WriteByte(mParser.mMessageConnect);
+	send(dispatch);
 }
+
+public void send(Dispatch dispatch)
+{
+
+	try
+  	{
+
+    	byte[] message = new byte[256];
+    	message[0] = -101;
+		//dispatch.mCharArray;
+
+
+      	// Get the internet address of the specified host
+      	InetAddress address = InetAddress.getByName("localhost");
+
+      	// Initialize a datagram packet with data and address
+      	DatagramPacket packet = new DatagramPacket(message, message.length,
+      	    address, mServerPort);
+
+      	// Create a datagram socket, send the packet through it, close it.
+      	DatagramSocket dsocket = new DatagramSocket();
+      	dsocket.send(packet);
+      	dsocket.close();
+	}
+    catch (Exception e)
+    {
+      	System.err.println(e);
+    }
+}
+
+
 
 }
 
