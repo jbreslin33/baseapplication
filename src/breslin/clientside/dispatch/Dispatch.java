@@ -37,7 +37,12 @@ public Dispatch()
 /**************************************************
 *			METHODS
 **************************************************/
-	//admin
+//admin
+
+public byte[] getByteArray()
+{
+	return mCharArray;
+}
 
 int             getReadCount()
 
@@ -70,7 +75,7 @@ void			SetSize(int s)
 //write
 public void			WriteByte  (byte  b)
 {
-
+	mByteBuffer.put(b);
 
 }
 
@@ -87,8 +92,10 @@ void			WriteFloat (float f)
 //read
 byte			ReadByte   ()
 {
-	return 0;
 
+	byte byteRead = mByteBuffer.get();
+	mReadCount++;
+	return byteRead;
 }
 
 short			ReadShort  ()

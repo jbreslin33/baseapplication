@@ -111,20 +111,13 @@ public void sendConnect()
 
 public void send(Dispatch dispatch)
 {
-
 	try
   	{
-
-    	byte[] message = new byte[256];
-    	message[0] = -101;
-		//dispatch.mCharArray;
-
-
-      	// Get the internet address of the specified host
+     	// Get the internet address of the specified host
       	InetAddress address = InetAddress.getByName("localhost");
 
       	// Initialize a datagram packet with data and address
-      	DatagramPacket packet = new DatagramPacket(message, message.length,
+      	DatagramPacket packet = new DatagramPacket(dispatch.getByteArray(), dispatch.getByteArray().length,
       	    address, mServerPort);
 
       	// Create a datagram socket, send the packet through it, close it.
