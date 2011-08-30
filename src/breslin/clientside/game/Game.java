@@ -74,6 +74,8 @@ void gameLoop()
 {
 	while(true)
     {
+		System.out.println("gameloop");
+
 		//input
 		//processInput();  //right now
 

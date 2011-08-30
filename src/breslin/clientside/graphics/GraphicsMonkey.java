@@ -48,10 +48,10 @@ public GraphicsMonkey(GameMonkey gameMonkey)
 	start();
 	System.out.println("hereddddddddddddddddddddddddddddddddd");
 
-	for (int i = 0; i < 256; i++)
-	{
-		keyBuffer[i] = false;
-	}
+	//for (int i = 0; i < 256; i++)
+	//{
+	//	keyBuffer[i] = false;
+	//}
 
 
 

@@ -79,13 +79,13 @@ public Network(Game game, byte[] serverIP, int serverPort)
 
 	try
 	{
-		SocketAddress address = new InetSocketAddress(30001);
-    	DatagramChannel channel = DatagramChannel.open();
-    	channel.configureBlocking(false);
+		mSocketAddress = new InetSocketAddress(30001);
+    	mDatagramChannel = DatagramChannel.open();
+    	mDatagramChannel.configureBlocking(false);
 
-    	DatagramSocket socket = channel.socket();
+    	DatagramSocket mDatagramSocket = mDatagramChannel.socket();
 
-    	socket.bind(address);
+    	mDatagramSocket.bind(mSocketAddress);
 	}
 	catch (IOException ioe)
 	{
@@ -101,6 +101,10 @@ public Network(Game game, byte[] serverIP, int serverPort)
 
 //game
 Game mGame;
+
+//nonblocking recieve
+SocketAddress mSocketAddress;
+DatagramChannel mDatagramChannel;
 
 //command
 Command mCommandToServer;
@@ -130,6 +134,23 @@ short	mDroppedPackets;			// Dropped packets
 //packets
 boolean checkForDispatch(Dispatch dispatch)
 {
+System.out.println("fdf");
+   /*
+   try
+    {
+        //in.clear();
+        //dispatch.mByteBuffer.clear();
+        //SocketAddress client = mDatagramChannel.receive(dispatch.mByteBuffer);
+        //System.out.println("hhh");
+        //System.err.println(client);
+
+
+	}
+	catch (Exception ex)
+	{
+        System.err.println(ex);
+    }
+*/
 	System.out.println("checking for dispatch");
 	return false;
 }
