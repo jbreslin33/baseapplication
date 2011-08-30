@@ -105,7 +105,8 @@ short	mDroppedPackets;			// Dropped packets
 //packets
 boolean checkForDispatch(Dispatch dispatch)
 {
-	return true;
+	System.out.println("checking for dispatch");
+	return false;
 }
 
 public void readPackets   ()

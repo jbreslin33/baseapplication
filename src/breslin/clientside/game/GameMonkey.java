@@ -22,6 +22,8 @@ public GameMonkey(byte[] serverIP, int serverPort)
 {
 	super(serverIP,serverPort);
 	mGraphicsMonkey = new GraphicsMonkey(this);
+	System.out.println("calling gameLoopFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+	gameLoop();
 
 }
 
@@ -43,6 +45,9 @@ public static void main(String[] args)
 //graphics
 GraphicsMonkey mGraphicsMonkey;
 
+//render time
+float mRenderTime;
+
 /***************************************
 *			          METHODS
 ***************************************/
@@ -56,10 +61,19 @@ public void addShape(boolean b, Dispatch dispatch)
 //time
 float getRenderTime()
 {
-	return 0;
+	return mRenderTime;
 }
 
+
 //graphics
+/* This is the update loop */
+public void simpleUpdate(float tpf)
+{
+	// make the player rotate
+    //player.rotate(0, 2*tpf, 0);
+    mRenderTime = tpf;
+}
+
 boolean runGraphics()
 {
 	return true;

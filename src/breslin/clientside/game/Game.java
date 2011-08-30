@@ -75,7 +75,7 @@ void gameLoop()
 	while(true)
     {
 		//input
-		//processInput();
+		//processInput();  //right now
 
 		//network
 		runNetwork(getRenderTime() * 1000.0f);
@@ -128,15 +128,13 @@ float getRenderTime()
 void runNetwork    (float msec)
 {
 	mRunNetworkTime += msec;
-	//static float mMsec = 0.0f;
-	//mTime += msec;
 
 	mNetwork.readPackets();
 
 	// Framerate is too high
 	if(mRunNetworkTime > (1000 / 60))
 	{
-		mNetwork.sendCommand();
+	//	mNetwork.sendCommand();
 		mFrameTime = mRunNetworkTime / 1000.0f;
 		mRunNetworkTime = 0;
 	}

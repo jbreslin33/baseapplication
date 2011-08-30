@@ -14,7 +14,6 @@ import breslin.clientside.game.GameMonkey;
 //input
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
-import com.jme3.input.controls.AnalogListener;
 import com.jme3.input.controls.KeyTrigger;
 
 
@@ -47,6 +46,14 @@ public GraphicsMonkey(GameMonkey gameMonkey)
 	mPlayingGame = false;
 
 	start();
+	System.out.println("hereddddddddddddddddddddddddddddddddd");
+
+	for (int i = 0; i < 256; i++)
+	{
+		keyBuffer[i] = false;
+	}
+
+
 
 }
 
@@ -76,6 +83,9 @@ int mKeyLeft;
 int mKeyRight;
 int mKeySpace;
 
+boolean[] keyBuffer;
+
+
 
 /***************************************
 *			          METHODS
@@ -94,13 +104,13 @@ private void initKeys()
     inputManager.addMapping("Start",  new KeyTrigger(KeyInput.KEY_B));
 
     // Add the names to the action listener.
-    inputManager.addListener(analogListener, new String[]{"Start"});
+    inputManager.addListener(actionListener, new String[]{"Start"});
 
 }
 
-private AnalogListener analogListener = new AnalogListener()
+private ActionListener actionListener = new ActionListener()
 {
-	public void onAnalog(String name, float value, float tpf)
+	public void onAction(String name, boolean isPressed, float tpf)
 	{
         if (name.equals("Start"))
         {
@@ -175,7 +185,31 @@ void GraphicsOgre::buttonHit(OgreBites::Button *button)
 //bool mouseMoved            ( const OIS::MouseEvent &arg );
 void processInput()
 {
+	/*
+	mGameOgre->mNetwork->mCommandToServer->mKey = 0;
 
+	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
+    {
+		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyUp;
+    }
+
+    if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
+    {
+		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyDown;
+    }
+
+	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+    {
+		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyLeft;
+    }
+
+    if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
+    {
+		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyRight;
+    }
+
+	mGameOgre->mNetwork->mCommandToServer->mMilliseconds = (int) (mGameOgre->mFrameTime * 1000);
+	*/
 }
 }
 
