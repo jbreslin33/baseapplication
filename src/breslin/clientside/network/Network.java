@@ -7,6 +7,12 @@ package breslin.clientside.network;
 import java.io.*;
 import java.net.*;
 
+//nonblocking receive
+import java.net.SocketAddress;
+import java.net.InetSocketAddress;
+import java.nio.channels.DatagramChannel;
+import java.io.IOException;
+
 //game
 import breslin.clientside.game.Game;
 
@@ -67,6 +73,25 @@ public Network(Game game, byte[] serverIP, int serverPort)
 	{
 	    e.printStackTrace();
 	}
+
+
+	//for nonblocking recieve
+
+	try
+	{
+		SocketAddress address = new InetSocketAddress(30001);
+    	DatagramChannel channel = DatagramChannel.open();
+    	channel.configureBlocking(false);
+
+    	DatagramSocket socket = channel.socket();
+
+    	socket.bind(address);
+	}
+	catch (IOException ioe)
+	{
+		System.out.println("ERROR in nonblocking socket in network constructor");
+	}
+
 }
 
 
