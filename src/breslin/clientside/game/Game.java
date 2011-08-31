@@ -72,25 +72,25 @@ void shutdown()
 }
 void gameLoop()
 {
-	while(true)
-    {
-		System.out.println("gameloop");
+	//while(true)
+    //{
+//		System.out.println("gameloop");
 
 		//input
 		//processInput();  //right now
 
 		//network
-		runNetwork(getRenderTime() * 1000.0f);
+		//runNetwork(getRenderTime() * 1000.0f);
 
 		//move objects
 		//interpolateTick();
-
+		//runGraphics();
 		//draw
-		//if (!runGraphics())
-		//{
-		//	break;
-		//}
-	}
+//		if (!runGraphics())
+//		{
+//			break;
+//		}
+	//}
 }
 
 //shape
@@ -127,7 +127,7 @@ float getRenderTime()
 }
 
 // Network
-void runNetwork    (float msec)
+public void runNetwork    (float msec)
 {
 	mRunNetworkTime += msec;
 
@@ -149,7 +149,7 @@ void processInput()
 }
 
 //graphics
-boolean runGraphics()
+public boolean runGraphics()
 {
 	return false;
 }

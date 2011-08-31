@@ -134,7 +134,7 @@ short	mDroppedPackets;			// Dropped packets
 //packets
 boolean checkForDispatch(Dispatch dispatch)
 {
-System.out.println("fdf");
+//System.out.println("fdf");
    /*
    try
     {
@@ -151,7 +151,7 @@ System.out.println("fdf");
         System.err.println(ex);
     }
 */
-	System.out.println("checking for dispatch");
+//	System.out.println("checking for dispatch");
 	return false;
 }
 

@@ -91,6 +91,14 @@ boolean[] keyBuffer;
 *			          METHODS
 ***************************************/
 
+public void update()
+{
+	mGameMonkey.runNetwork(1);
+	super.update();
+}
+
+
+
 public void simpleInitApp()
 {
 	System.out.println("initialize keys with initKeys");
@@ -135,8 +143,10 @@ void        createScene          ()
 
 }
 //boolean        frameRenderingQueued (const Ogre::FrameEvent& evt);
-boolean                runGraphics          ()
+public boolean                runGraphics          ()
 {
+	System.out.println("running graphics");
+	super.update();
 	return true;
 }
 

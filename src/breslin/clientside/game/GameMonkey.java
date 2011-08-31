@@ -52,6 +52,7 @@ float mRenderTime;
 *			          METHODS
 ***************************************/
 
+
 //shape
 public void addShape(boolean b, Dispatch dispatch)
 {
@@ -74,8 +75,9 @@ public void simpleUpdate(float tpf)
     mRenderTime = tpf;
 }
 
-boolean runGraphics()
+public boolean runGraphics()
 {
+	mGraphicsMonkey.runGraphics();
 	return true;
 }
 
