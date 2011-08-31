@@ -76,7 +76,7 @@ void Server::sendAddShape(Client* client)
 		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mRot.x);
 		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mRot.z);
 	
-
+		LogString("sendPacket");
 		client->SendPacket(&client->mMessage);
 	}
 
@@ -171,10 +171,12 @@ void Server::addClient(struct sockaddr *address)
 	mClientVector.push_back(client);
 
 	client->SetSocketAddress(address);
+	//sockaddr_in* in = (sockaddr_in)address
+	//inet_ntoa(in->sin_addr)
 	client->mConnectionState = DREAMSOCK_CONNECTING;
 	client->mOutgoingSequence = 1;
 	client->mIncomingSequence = 0;
-	
+	LogString("address:%d",address->sa_data);
 	memcpy(&client->mMyaddress,client->GetSocketAddress(), sizeof(struct sockaddr));
 
 	mGame->createClientAvatar(client);
@@ -200,7 +202,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 {
 	mes->BeginReading();
     int type = mes->ReadByte();
-	LogString("pp");
+	//LogString("pp");
 	if (type == DREAMSOCK_MES_CONNECT)
 	{
 				addClient(address);
