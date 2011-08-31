@@ -12,6 +12,9 @@ import java.net.SocketAddress;
 import java.net.InetSocketAddress;
 import java.nio.channels.DatagramChannel;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.CharBuffer;
 
 //game
 import breslin.clientside.game.Game;
@@ -79,15 +82,28 @@ public Network(Game game, byte[] serverIP, int serverPort)
 
 	try
 	{
-		/*
-		mSocketAddress = new InetSocketAddress(30001);
-    	mDatagramChannel = DatagramChannel.open();
+		//client stuff
+		mDatagramChannel = DatagramChannel.open();
     	mDatagramChannel.configureBlocking(false);
 
-    	DatagramSocket mDatagramSocket = mDatagramChannel.socket();
+    	mClientSocketAddress = new InetSocketAddress(0);
 
-    	mDatagramSocket.bind(mSocketAddress);
-    	*/
+    	mDatagramSocket = mDatagramChannel.socket();
+    	mDatagramSocket.bind(mClientSocketAddress);
+
+		//server stuff
+    	mServerSocketAddress = new InetSocketAddress("localhost", 30004);
+    	mDatagramChannel.connect(mServerSocketAddress);
+
+   		ByteBuffer buffer = ByteBuffer.allocate(8);
+   		buffer.order(ByteOrder.BIG_ENDIAN);
+
+       	// send a byte of data to the server
+       	buffer.put((byte) 0);
+       	buffer.flip();
+    	mDatagramChannel.write(buffer);
+
+
 
 	}
 	catch (IOException ioe)
@@ -106,8 +122,10 @@ public Network(Game game, byte[] serverIP, int serverPort)
 Game mGame;
 
 //nonblocking recieve
-SocketAddress mSocketAddress;
 DatagramChannel mDatagramChannel;
+SocketAddress   mClientSocketAddress;
+SocketAddress   mServerSocketAddress;
+DatagramSocket  mDatagramSocket;
 
 //command
 Command mCommandToServer;
@@ -137,10 +155,11 @@ short	mDroppedPackets;			// Dropped packets
 //packets
 boolean checkForDispatch(Dispatch dispatch)
 {
-//System.out.println("fdf");
+System.out.println("fdf");
 
    try
     {
+		/*
         //in.clear();
         dispatch.mByteBuffer.clear();
         SocketAddress client = mDatagramChannel.receive(dispatch.mByteBuffer);
@@ -150,6 +169,22 @@ boolean checkForDispatch(Dispatch dispatch)
         dispatch.mByteBuffer.flip();
             System.out.println("dispatch recieved:" + dispatch.mByteBuffer.get());
         //System.err.println(client);
+        */
+        ByteBuffer buffer = ByteBuffer.allocate(1400);
+		buffer.order(ByteOrder.BIG_ENDIAN);
+
+		long numberOfBytesRead = mDatagramChannel.read(buffer);
+    	buffer.flip();
+
+
+		CharBuffer buff = buffer.asCharBuffer (  ) ;
+
+		if (numberOfBytesRead > 0)
+		{
+			System.out.println("got a byte");
+		}
+
+
 
 
 	}
