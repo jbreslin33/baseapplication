@@ -50,6 +50,7 @@ public Network(Game game, byte[] serverIP, int serverPort)
 	//server address
 	mServerIP = serverIP;
 	mServerPort = serverPort;
+	mClientPort = 30003;
 
 
 
@@ -82,6 +83,7 @@ public Network(Game game, byte[] serverIP, int serverPort)
 
 	try
 	{
+		/*
 		//client stuff
 		mDatagramChannel = DatagramChannel.open();
     	mDatagramChannel.configureBlocking(false);
@@ -92,7 +94,7 @@ public Network(Game game, byte[] serverIP, int serverPort)
     	mDatagramSocket.bind(mClientSocketAddress);
 
 		//server stuff
-    	mServerSocketAddress = new InetSocketAddress("localhost", 30004);
+    	mServerSocketAddress = new InetSocketAddress("192.168.1.104", 30004);
     	mDatagramChannel.connect(mServerSocketAddress);
 
    		ByteBuffer buffer = ByteBuffer.allocate(8);
@@ -102,8 +104,10 @@ public Network(Game game, byte[] serverIP, int serverPort)
        	buffer.put((byte) 0);
        	buffer.flip();
     	mDatagramChannel.write(buffer);
-
-
+*/
+	    mDatagramChannel = DatagramChannel.open();
+		mDatagramChannel.socket().bind(new InetSocketAddress(mClientPort));
+		mDatagramChannel.configureBlocking(false);
 
 	}
 	catch (IOException ioe)
@@ -123,9 +127,9 @@ Game mGame;
 
 //nonblocking recieve
 DatagramChannel mDatagramChannel;
-SocketAddress   mClientSocketAddress;
-SocketAddress   mServerSocketAddress;
-DatagramSocket  mDatagramSocket;
+//SocketAddress   mClientSocketAddress;
+//SocketAddress   mServerSocketAddress;
+//DatagramSocket  mDatagramSocket;
 
 //command
 Command mCommandToServer;
@@ -138,6 +142,7 @@ Parser mParser;
 byte[] mServerIP;
 String mServerIPString;
 int mServerPort;
+int mClientPort;
 
 //sequences
 short	mOutgoingSequence;		// OutFgoing packet sequence
@@ -155,7 +160,7 @@ short	mDroppedPackets;			// Dropped packets
 //packets
 boolean checkForDispatch(Dispatch dispatch)
 {
-System.out.println("fdf");
+//System.out.println("fdf");
 
    try
     {
@@ -170,6 +175,8 @@ System.out.println("fdf");
             System.out.println("dispatch recieved:" + dispatch.mByteBuffer.get());
         //System.err.println(client);
         */
+
+        /*
         ByteBuffer buffer = ByteBuffer.allocate(1400);
 		buffer.order(ByteOrder.BIG_ENDIAN);
 
@@ -183,7 +190,14 @@ System.out.println("fdf");
 		{
 			System.out.println("got a byte");
 		}
+*/
+		ByteBuffer buf = ByteBuffer.allocate(48);
+		buf.clear();
 
+		if (mDatagramChannel.receive(buf) != null)
+		{
+			System.out.println("dddddddddddddddddddd");
+		}
 
 
 
@@ -266,7 +280,7 @@ public void send(Dispatch dispatch)
       	    address, mServerPort);
 
       	// Create a datagram socket, send the packet through it, close it.
-      	DatagramSocket dsocket = new DatagramSocket();
+      	DatagramSocket dsocket = new DatagramSocket(mClientPort);
       	dsocket.send(packet);
       	dsocket.close();
 	}
