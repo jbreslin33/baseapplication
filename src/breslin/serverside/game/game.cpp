@@ -29,8 +29,10 @@ Game::Game()
 	
 	for(int i = 0; i < 5; i++)
 	{
-		createAIShape();
+		createAIShape(1,true,5);
 	}
+
+	createAIShape(2,true,5);
 }
 
 Game::~Game()
@@ -39,7 +41,7 @@ Game::~Game()
 	delete mServer;
 }
 
-void Game::createClientAvatar(Client* client)
+void Game::createClientAvatar(Client* client, int meshCode, bool collidable, float collisionRadius)
 {
 	Vector3D* pos = new Vector3D();
 	pos->x = 0;
@@ -55,7 +57,7 @@ void Game::createClientAvatar(Client* client)
 	rot->x = 0;
 	rot->z = 0;
 
-	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex()); 
+	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),meshCode,collidable,collisionRadius); 
 	shape->mGame = this; //for now to give access to shapeVector for collision i guess
 	mShapeVector.push_back(shape); //either way add this to shape vector
 
@@ -89,7 +91,7 @@ unsigned int Game::getOpenIndex()
 	return 0;
 }
 
-void Game::createAIShape()
+void Game::createAIShape(int meshCode, bool collidable, float collisionRadius)
 {
 	Vector3D* pos = new Vector3D();
 	pos->x = 0;
@@ -106,7 +108,7 @@ void Game::createAIShape()
 	rot->x = 0;
 	rot->z = 0;
 
-	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex()); 
+	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),meshCode,collidable,collisionRadius); 
 	shape->mGame = this; //for now to give access to shapeVector for collision i guess
 	mShapeVector.push_back(shape); //either way add this to shape vector
 

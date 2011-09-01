@@ -46,6 +46,9 @@ ShapeDynamic(Game* game, Dispatch* dispatch);
 //game
 Game* mGame;
 
+//mesh
+int mMeshCode;
+
 //parser
 Parser* mParser;
 

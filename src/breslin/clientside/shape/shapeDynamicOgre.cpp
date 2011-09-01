@@ -34,6 +34,9 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, Dispatch* dispatch, bool 
 		mIndex = mIndex * -1;
 	}	
 
+	//figure out mesh based on code passed in dispatch
+	mMeshName = getMeshString(mMeshCode);
+
 	createShape();
 	
 	//ability
@@ -63,11 +66,22 @@ ShapeDynamicOgre::~ShapeDynamicOgre()
 	delete mSceneNode;
 }
 
+std::string ShapeDynamicOgre::getMeshString(int meshCode)
+{
+	if (meshCode == 0)
+	{
+		return "sinbad.mesh";
+	}
+	if (meshCode == 1)
+	{
+		return "sinbad.mesh";
+	}
+}
+
 void ShapeDynamicOgre::createShape()
 {
 	/*********  create shape ***************/
 	//mMeshName     = mesh;
-	mMeshName = "sinbad.mesh";
 	mName         = StringConverter::toString(mIndex);
 	mSceneNode    = mGameOgre->mGraphicsOgre->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 
