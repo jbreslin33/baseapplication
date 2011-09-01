@@ -1,6 +1,9 @@
 //header
 #include "gameOgre.h"
 
+//standard library
+#include <string>
+
 //log
 #include "../tdreamsock/dreamSockLog.h"
 

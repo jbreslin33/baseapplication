@@ -30,7 +30,8 @@ class Shape
 {
 
 public:
-Shape(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,unsigned int index);
+Shape(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,unsigned int index,
+	  int meshCode, bool collidable, float collisionRadius);
 ~Shape();
 
 //ticks
@@ -40,6 +41,13 @@ void setKeyDirection();
 
 //associated client if any
 Client* mClient;
+
+//mesh
+int mMeshCode;
+
+//collision
+float mCollisionRadius;
+bool  mCollidable;
 
 
 

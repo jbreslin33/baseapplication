@@ -61,10 +61,11 @@ public:
 	~Game();
 
 	//shapes
-	void         createClientAvatar(Client* client);
-	void         createAIShape();
-	void         removeShape (Shape* shape);
-	unsigned int getOpenIndex();
+	void         createClientAvatar(Client* client, int meshCode, bool collidable, float collisionRadius);
+	void         createAIShape     (int meshCode, bool collidable, float collisionRadius);
+	
+	void         removeShape       (Shape* shape);
+	unsigned int getOpenIndex      ();
 	
 	// Network
 	void	sendCommand(void);

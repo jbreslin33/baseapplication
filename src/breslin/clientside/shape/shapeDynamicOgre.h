@@ -57,6 +57,8 @@ SceneNode*          mSceneNode;
 ObjectTitle* mObjectTitle;
 std::string  mObjectTitleString;
 
+
+
 //ability
 
 /**********************************
@@ -64,6 +66,7 @@ std::string  mObjectTitleString;
 **********************************/
 //shape
 void createShape();
+std::string getMeshString(int meshCode);
 
 //debugging
 void checkExtents(Vector3D min);

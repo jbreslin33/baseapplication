@@ -313,7 +313,7 @@ if (mClient)
 void Network::dreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr)
 {
 	int	ret;
-
+	
 	ret = sendto(sock, data, length, 0, &addr, sizeof(addr));
 
 	if(ret == -1)
