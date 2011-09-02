@@ -155,7 +155,10 @@ boolean checkForDispatch(Dispatch dispatch)
 
 		if (mDatagramChannel.receive(buf) != null)
 		{
+			buf.flip();  //this sets marker to beginning of buffer just like BeginReading in c++.
 			System.out.println("first byte:" + buf.get());
+			System.out.println("2nd byte:" + buf.get());
+			System.out.println("3d byte:" + buf.get());
 		}
 	}
 	catch (Exception ex)

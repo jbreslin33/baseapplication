@@ -193,7 +193,7 @@ void Server::addClient(struct sockaddr *address)
 	client->mConnectionState = DREAMSOCK_CONNECTING;
 	client->mOutgoingSequence = 1;
 	client->mIncomingSequence = 0;
-	LogString("address:%d",address->sa_data);
+	//LogString("address:%d",address->sa_data);
 	memcpy(&client->mMyaddress,client->GetSocketAddress(), sizeof(struct sockaddr));
 
 	mGame->createClientAvatar(client,true,true,5,1,false);
