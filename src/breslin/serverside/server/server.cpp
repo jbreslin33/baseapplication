@@ -41,6 +41,7 @@ void Server::sendAddShape(Client* client)
 
 	//this a new client so let him change to connectionState = DREAMSOCK_CONNECTED; 
 	client->mMessage.WriteByte(DREAMSOCK_MES_CONNECT);	// type
+	LogString("sending a Connect message -101");
 	client->SendPacket(&client->mMessage);
 
 	// First inform the new client of the other shapes by looping thru entire

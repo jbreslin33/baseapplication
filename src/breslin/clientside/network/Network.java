@@ -158,10 +158,16 @@ public void readPackets()
 	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
 	while(checkForDispatch(byteBuffer))
 	{
+
 		byteBuffer.flip(); //BeginReading() c++ equivalent
 
 		int type = byteBuffer.get();
 		System.out.println("type:" + type);
+
+		if (mParser.mMessageConnect == type)
+		{
+			System.out.println("connect message -101 recieved");
+		}
 
 		if (mParser.mMessageAddShape == type)
 		{
@@ -183,6 +189,7 @@ public void readPackets()
 		{
 			//	mGame.shutdown();
 		}
+		byteBuffer.clear();
 	}
 }
 
@@ -194,6 +201,7 @@ boolean checkForDispatch(ByteBuffer byteBuffer)
 
 		if (mDatagramChannel.receive(byteBuffer) != null)
 		{
+
 			//byteBuffer.flip();  //this sets marker to beginning of buffer just like BeginReading in c++.
 
 			// Parse system messages
