@@ -37,13 +37,16 @@ Game::Game()
 		createAIShape(position,false,true,5,0,true);
 	}
 
-	//collidable static shapes with no animation for now it's a WALL
-	Vector3D* position = new Vector3D();
-	position->x = 300;
-	position->y = 0;
-	position->z = 0;
-	createAIShape(position,false,true,5,0,false);
-
+	for (int i = 0; i < 3000; i = i + 120)
+	{
+		//collidable static shapes with no animation for now it's a WALL
+		Vector3D* position = new Vector3D();
+		position->x = 300;
+		position->y = 0;
+		position->z = 1 * i;
+		createAIShape(position,false,true,5,0,false);
+	}
+	
 }
 
 Game::~Game()
