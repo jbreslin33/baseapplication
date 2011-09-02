@@ -28,14 +28,13 @@ Game::Game()
 	mSpreadOutAIIndex = 1;
 	
 	for(int i = 0; i < 1; i++)
-	{
-		createAIShape(false,true,5,0);
+	{                  
+		createAIShape(false,true,5,0,true);
 	}
 
 	//collidable static shapes with no animation
-	//createAIShape(false,true,5,1);
-	
-	//createAIShape(1,false,5);
+	createAIShape(false,true,5,0,false);
+
 }
 
 Game::~Game()
@@ -44,7 +43,7 @@ Game::~Game()
 	delete mServer;
 }
 
-void Game::createClientAvatar(Client* client, bool animated ,bool collidable, float collisionRadius, int meshCode)
+void Game::createClientAvatar(Client* client, bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 {
 	Vector3D* pos = new Vector3D();
 	pos->x = 0;
@@ -60,7 +59,7 @@ void Game::createClientAvatar(Client* client, bool animated ,bool collidable, fl
 	rot->x = 0;
 	rot->z = 0;
 
-	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode); 
+	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
 	shape->mGame = this; //for now to give access to shapeVector for collision i guess
 	mShapeVector.push_back(shape); //either way add this to shape vector
 
@@ -94,7 +93,7 @@ unsigned int Game::getOpenIndex()
 	return 0;
 }
 
-void Game::createAIShape(bool animated, bool collidable, float collisionRadius, int meshCode)
+void Game::createAIShape(bool animated, bool collidable, float collisionRadius, int meshCode, bool ai)
 {
 	Vector3D* pos = new Vector3D();
 	pos->x = 0;
@@ -111,7 +110,7 @@ void Game::createAIShape(bool animated, bool collidable, float collisionRadius, 
 	rot->x = 0;
 	rot->z = 0;
 
-	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode); 
+	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
 	shape->mGame = this; //for now to give access to shapeVector for collision i guess
 	mShapeVector.push_back(shape); //either way add this to shape vector
 

@@ -6,7 +6,7 @@
 #include <string>
 
 Shape::Shape(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,unsigned int index,
-			 bool animated ,bool collidable, float collisionRadius, int meshCode)
+			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 :
 	Rotation(),
 	Move    (),
@@ -26,6 +26,9 @@ Shape::Shape(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::R
 
 	//animated
 	mAnimated = animated;
+
+	//ai
+	mAI = ai;
 }
 
 Shape::~Shape()
@@ -37,7 +40,7 @@ void Shape::processTick()
 	setKeyDirection();
 
 	//give ai a chance to jump in if this shape has not client
-	if (mClient == NULL)
+	if (mAI == true)
 	{
 		AI::processTick();
 	}

@@ -196,7 +196,7 @@ void Server::addClient(struct sockaddr *address)
 	LogString("address:%d",address->sa_data);
 	memcpy(&client->mMyaddress,client->GetSocketAddress(), sizeof(struct sockaddr));
 
-	mGame->createClientAvatar(client,true,true,5,1);
+	mGame->createClientAvatar(client,true,true,5,1,false);
 
 	LogString("LIB: Adding client with shape index %d", client->mShape->mIndex);
 
