@@ -27,26 +27,77 @@ Game::Game()
 	mRunningShapeIndex = 1;
 	mSpreadOutAIIndex = 1;
 	
-	for(int i = 0; i < 1; i++)
+	//ai guys, let's make them sinbads
+	for(int i = 0; i < 5; i++)
 	{                 
 		Vector3D* position = new Vector3D();
 		position->x = 0;
 		position->y = 0;
 		position->z = 300.0f * i;;
 		
-		createAIShape(position,false,true,5,0,true);
+		createAIShape(position,true,true,5,1,true);
 	}
 
-	for (int i = 0; i < 3000; i = i + 120)
+	Vector3D* position = new Vector3D();
+
+	//tombstone #1
+	position->x = -1000;
+	position->y = 0;
+	position->z = 1000;
+	createAIShape(position,false,true,5,0,false);
+	
+	//tombstone #2
+	position->x = 1000;
+	position->y = 0;
+	position->z = -1000;
+	createAIShape(position,false,true,5,0,false);
+
+
+
+	//east wall
+	for (int i = -2000; i < 2000; i = i + 200)
 	{
 		//collidable static shapes with no animation for now it's a WALL
 		Vector3D* position = new Vector3D();
-		position->x = 300;
+		position->x = 2500;
 		position->y = 0;
 		position->z = 1 * i;
 		createAIShape(position,false,true,5,0,false);
 	}
-	
+
+	//west wall
+	for (int i = -2000; i < 2000; i = i + 200)
+	{
+		//collidable static shapes with no animation for now it's a WALL
+		Vector3D* position = new Vector3D();
+		position->x = -2500;
+		position->y = 0;
+		position->z = 1 * i;
+		createAIShape(position,false,true,5,0,false);
+	}
+
+	//north wall
+	for (int i = -2500; i < 2500; i = i + 200)
+	{
+		//collidable static shapes with no animation for now it's a WALL
+		Vector3D* position = new Vector3D();
+		position->x = 1 * i;
+		position->y = 0;
+		position->z = -2000;
+		createAIShape(position,false,true,5,0,false);
+	}
+
+	//south wall
+	for (int i = -2500; i < 2500; i = i + 200)
+	{
+		//collidable static shapes with no animation for now it's a WALL
+		Vector3D* position = new Vector3D();
+		position->x = 1 * i;
+		position->y = 0;
+		position->z = 2000;
+		createAIShape(position,false,true,5,0,false);
+	}
+
 }
 
 Game::~Game()
@@ -252,10 +303,10 @@ void Game::sendCommand(void)
 		//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
 		for (unsigned int j = 0; j < mShapeVector.size(); j++)
 		{                         //the client to send to's message        //the shape command it's about
-			if (checkScope(mServer->mClientVector.at(i),mShapeVector.at(i)))
-			{
+			//if (checkScope(mServer->mClientVector.at(i),mShapeVector.at(i)))
+			//{
 				buildDeltaMoveCommand(&mServer->mClientVector.at(i)->mMessage, mShapeVector.at(j));
-			}
+			//}
 		}
 	}
 
