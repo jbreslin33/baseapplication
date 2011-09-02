@@ -77,7 +77,10 @@ void Server::sendAddShape(Client* client)
 		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mRot.z);
 
 		//mesh
-		client->mMessage.WriteByte(1);
+		client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mMeshCode);
+
+		//animate
+		client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mAnimated);
 		
 		client->SendPacket(&client->mMessage);
 	}
@@ -114,7 +117,10 @@ void Server::sendAddShape(Client* client)
 			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mRot.z);
 			
 			//mesh
-			mClientVector.at(i)->mMessage.WriteByte(1);
+			mClientVector.at(i)->mMessage.WriteByte(client->mShape->mMeshCode);
+
+			//animation
+			mClientVector.at(i)->mMessage.WriteByte(client->mShape->mAnimated);
 			
 			mClientVector.at(i)->SendPacket(&mClientVector.at(i)->mMessage);
 		}
@@ -149,7 +155,10 @@ void Server::sendAddAIShape(Shape* shape)
 		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mRot.z);
 
 		//mesh
-		mClientVector.at(i)->mMessage.WriteByte(1);
+		mClientVector.at(i)->mMessage.WriteByte(shape->mMeshCode);
+
+		//animated
+		mClientVector.at(i)->mMessage.WriteByte(shape->mAnimated);
 
 		mClientVector.at(i)->SendPacket(&mClientVector.at(i)->mMessage);
 	}
@@ -187,7 +196,7 @@ void Server::addClient(struct sockaddr *address)
 	LogString("address:%d",address->sa_data);
 	memcpy(&client->mMyaddress,client->GetSocketAddress(), sizeof(struct sockaddr));
 
-	mGame->createClientAvatar(client,1,true,5);
+	mGame->createClientAvatar(client,true,true,5,1);
 
 	LogString("LIB: Adding client with shape index %d", client->mShape->mIndex);
 

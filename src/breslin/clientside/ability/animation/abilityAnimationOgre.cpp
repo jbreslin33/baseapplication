@@ -17,6 +17,7 @@ AbilityAnimationOgre::AbilityAnimationOgre(ShapeDynamicOgre* shapeDynamicOgre) :
 {
 	mShapeDynamicOgre = shapeDynamicOgre;
 	mAnimationFadeSpeed = 7.5;
+
 	setupAnimations();
 }
 

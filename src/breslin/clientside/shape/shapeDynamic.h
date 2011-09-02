@@ -49,6 +49,8 @@ Game* mGame;
 //mesh
 int mMeshCode;
 
+bool mAnimate;
+
 //parser
 Parser* mParser;
 

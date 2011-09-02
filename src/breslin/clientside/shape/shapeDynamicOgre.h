@@ -101,6 +101,8 @@ SceneNode*  getSceneNode() { return mSceneNode; }
 //utility
 Ogre::Vector3 converToVector3(Vector3D vector3d);
 
+
+
 };
 
 #endif

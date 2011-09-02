@@ -61,8 +61,8 @@ public:
 	~Game();
 
 	//shapes
-	void         createClientAvatar(Client* client, int meshCode, bool collidable, float collisionRadius);
-	void         createAIShape     (int meshCode, bool collidable, float collisionRadius);
+	void createClientAvatar(Client* client, bool animated, bool collidable, float collisionRadius, int meshCode);
+	void createAIShape                     (bool animated, bool collidable, float collisionRadius, int meshCode);
 	
 	void         removeShape       (Shape* shape);
 	unsigned int getOpenIndex      ();

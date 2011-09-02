@@ -31,7 +31,7 @@ class Shape
 
 public:
 Shape(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,unsigned int index,
-	  int meshCode, bool collidable, float collisionRadius);
+	  bool animated, bool collidable, float collisionRadius, int meshCode);
 ~Shape();
 
 //ticks
@@ -49,6 +49,8 @@ int mMeshCode;
 float mCollisionRadius;
 bool  mCollidable;
 
+//animation
+bool mAnimated;
 
 
 

@@ -51,8 +51,13 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	mVelocity = new Vector3D();
 	mRotation = new Vector3D();
 
-	//dispatch
+	//mesh
 	mMeshCode = 0;
+
+	//animate
+	mAnimate = false;
+
+	//dispatch
 	parseDispatch(dispatch);
 
 	//ghost
@@ -104,7 +109,14 @@ void ShapeDynamic::parseDispatch(Dispatch* dispatch)
 	mVelocity->z = dispatch->ReadFloat();
 	mRotation->x = dispatch->ReadFloat();
 	mRotation->z = dispatch->ReadFloat();
+	
+	//mesh
 	mMeshCode    = dispatch->ReadByte();
+
+	//animate
+	
+	mAnimate = dispatch->ReadByte();
+	LogString("an:%d",mAnimate);
 }
 
 void ShapeDynamic::processTick()

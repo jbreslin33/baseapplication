@@ -27,12 +27,15 @@ Game::Game()
 	mRunningShapeIndex = 1;
 	mSpreadOutAIIndex = 1;
 	
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < 1; i++)
 	{
-		createAIShape(1,true,5);
+		createAIShape(false,true,5,0);
 	}
 
-	createAIShape(2,true,5);
+	//collidable static shapes with no animation
+	//createAIShape(false,true,5,1);
+	
+	//createAIShape(1,false,5);
 }
 
 Game::~Game()
@@ -41,7 +44,7 @@ Game::~Game()
 	delete mServer;
 }
 
-void Game::createClientAvatar(Client* client, int meshCode, bool collidable, float collisionRadius)
+void Game::createClientAvatar(Client* client, bool animated ,bool collidable, float collisionRadius, int meshCode)
 {
 	Vector3D* pos = new Vector3D();
 	pos->x = 0;
@@ -57,7 +60,7 @@ void Game::createClientAvatar(Client* client, int meshCode, bool collidable, flo
 	rot->x = 0;
 	rot->z = 0;
 
-	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),meshCode,collidable,collisionRadius); 
+	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode); 
 	shape->mGame = this; //for now to give access to shapeVector for collision i guess
 	mShapeVector.push_back(shape); //either way add this to shape vector
 
@@ -91,7 +94,7 @@ unsigned int Game::getOpenIndex()
 	return 0;
 }
 
-void Game::createAIShape(int meshCode, bool collidable, float collisionRadius)
+void Game::createAIShape(bool animated, bool collidable, float collisionRadius, int meshCode)
 {
 	Vector3D* pos = new Vector3D();
 	pos->x = 0;
@@ -108,7 +111,7 @@ void Game::createAIShape(int meshCode, bool collidable, float collisionRadius)
 	rot->x = 0;
 	rot->z = 0;
 
-	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),meshCode,collidable,collisionRadius); 
+	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode); 
 	shape->mGame = this; //for now to give access to shapeVector for collision i guess
 	mShapeVector.push_back(shape); //either way add this to shape vector
 
@@ -172,35 +175,39 @@ void Game::frame(int msec)
 
 void Game::checkCollisions(void)
 {
-   for (unsigned int i = 0; i < mShapeVector.size(); i++)
-   {
+	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	{
 	  
-	   for (unsigned int j = i+1; j < mShapeVector.size(); j++) 
-	   {
-		   
-          float x1 = mShapeVector.at(i)->mSceneNode->getPosition().x;
-	      float z1 = mShapeVector.at(i)->mSceneNode->getPosition().z;
-		  float x2 = mShapeVector.at(j)->mSceneNode->getPosition().x;
-	      float z2 = mShapeVector.at(j)->mSceneNode->getPosition().z;
+		if (mShapeVector.at(i)->mCollidable == true)
+		{
+			for (unsigned int j = i+1; j < mShapeVector.size(); j++) 
+			{
+				if (mShapeVector.at(j)->mCollidable == true)
+				{
+					float x1 = mShapeVector.at(i)->mSceneNode->getPosition().x;
+					float z1 = mShapeVector.at(i)->mSceneNode->getPosition().z;
+					float x2 = mShapeVector.at(j)->mSceneNode->getPosition().x;
+					float z2 = mShapeVector.at(j)->mSceneNode->getPosition().z;
 
-		  float distSq = pow((x1-x2),2) + pow((z1-z2),2);
+					float distSq = pow((x1-x2),2) + pow((z1-z2),2);
 
-		  if(distSq < 10000.0)
-		  {
-			 mShapeVector.at(i)->mCommand.mOrigin = mShapeVector.at(i)->mCommand.mOriginOld;
-			 mShapeVector.at(j)->mCommand.mOrigin = mShapeVector.at(j)->mCommand.mOriginOld;
+					if(distSq < 10000.0)
+					{
+						mShapeVector.at(i)->mCommand.mOrigin = mShapeVector.at(i)->mCommand.mOriginOld;
+						mShapeVector.at(j)->mCommand.mOrigin = mShapeVector.at(j)->mCommand.mOriginOld;
 
-             float x3 = mShapeVector.at(i)->mCommand.mOriginOld.x;
-	         float z3 = mShapeVector.at(i)->mCommand.mOriginOld.z;
-		     float x4 = mShapeVector.at(j)->mCommand.mOriginOld.x;
-	         float z4 = mShapeVector.at(j)->mCommand.mOriginOld.z;
+						float x3 = mShapeVector.at(i)->mCommand.mOriginOld.x;
+						float z3 = mShapeVector.at(i)->mCommand.mOriginOld.z;
+						float x4 = mShapeVector.at(j)->mCommand.mOriginOld.x;
+						float z4 = mShapeVector.at(j)->mCommand.mOriginOld.z;
 
-			
-             mShapeVector.at(i)->mSceneNode->setPosition(x3,0.0,z3);
-			 mShapeVector.at(j)->mSceneNode->setPosition(x4,0.0,z4);
-		  }
-	   }
-   }
+						mShapeVector.at(i)->mSceneNode->setPosition(x3,0.0,z3);
+						mShapeVector.at(j)->mSceneNode->setPosition(x4,0.0,z4);
+					}
+				}
+			}
+		}
+	}
 }
 
 bool Game::checkScope(Client* client, Shape* shape)

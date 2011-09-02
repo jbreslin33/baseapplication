@@ -28,8 +28,14 @@ Shape();
 **************************************************/
 public:
 
+//id
 int   mIndex;
+
+//game
 Game* mGame;
+
+//scale
+float mScale;
 
 Parser* mParser;
 

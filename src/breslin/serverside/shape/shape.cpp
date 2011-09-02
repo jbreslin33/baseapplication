@@ -6,7 +6,7 @@
 #include <string>
 
 Shape::Shape(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,unsigned int index,
-			 int meshCode, bool collidable, float collisionRadius)
+			 bool animated ,bool collidable, float collisionRadius, int meshCode)
 :
 	Rotation(),
 	Move    (),
@@ -23,6 +23,9 @@ Shape::Shape(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::R
 	//collision
 	mCollisionRadius = collisionRadius;
 	mCollidable = collidable;
+
+	//animated
+	mAnimated = animated;
 }
 
 Shape::~Shape()

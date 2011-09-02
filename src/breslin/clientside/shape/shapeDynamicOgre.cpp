@@ -36,11 +36,15 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, Dispatch* dispatch, bool 
 
 	//figure out mesh based on code passed in dispatch
 	mMeshName = getMeshString(mMeshCode);
+	
 
 	createShape();
 	
-	//ability
-	addAbility(new AbilityAnimationOgre(this));
+	//animation
+	if (mAnimate)
+	{
+		addAbility(new AbilityAnimationOgre(this));
+	}
 	
 	setupTitle();
 
@@ -70,10 +74,12 @@ std::string ShapeDynamicOgre::getMeshString(int meshCode)
 {
 	if (meshCode == 0)
 	{
-		return "sinbad.mesh";
+		mScale = 1;
+		return "cube.mesh";
 	}
 	if (meshCode == 1)
 	{
+		mScale = 30;
 		return "sinbad.mesh";
 	}
 }
@@ -97,9 +103,9 @@ void ShapeDynamicOgre::createShape()
 
 	//for scale, won't be needed in future hopefully...
 	Vector3D v;
-	v.x = 30;
-	v.y = 30;
-	v.z = 30;
+	v.x = mScale;
+	v.y = mScale;
+	v.z = mScale;
 	scale(v);
 }
 
