@@ -155,7 +155,7 @@ short	mDroppedPackets;			// Dropped packets
 
 public void readPackets()
 {
-	ByteBuffer byteBuffer = ByteBuffer.allocate(48);
+	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
 	while(checkForDispatch(byteBuffer))
 	{
 		byteBuffer.flip(); //BeginReading() c++ equivalent
