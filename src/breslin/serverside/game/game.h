@@ -36,6 +36,7 @@ class Command;
 class Server;
 class Client;
 class Shape;
+class Vector3D;
 
 class Game
 {
@@ -62,7 +63,7 @@ public:
 
 	//shapes
 	void createClientAvatar(Client* client, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
-	void createAIShape                     (bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
+	void createAIShape                     (Vector3D* position, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 	
 	void         removeShape       (Shape* shape);
 	unsigned int getOpenIndex      ();

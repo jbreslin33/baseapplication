@@ -28,12 +28,21 @@ Game::Game()
 	mSpreadOutAIIndex = 1;
 	
 	for(int i = 0; i < 1; i++)
-	{                  
-		createAIShape(false,true,5,0,true);
+	{                 
+		Vector3D* position = new Vector3D();
+		position->x = 0;
+		position->y = 0;
+		position->z = 300.0f * i;;
+		
+		createAIShape(position,false,true,5,0,true);
 	}
 
-	//collidable static shapes with no animation
-	createAIShape(false,true,5,0,false);
+	//collidable static shapes with no animation for now it's a WALL
+	Vector3D* position = new Vector3D();
+	position->x = 300;
+	position->y = 0;
+	position->z = 0;
+	createAIShape(position,false,true,5,0,false);
 
 }
 
@@ -93,14 +102,8 @@ unsigned int Game::getOpenIndex()
 	return 0;
 }
 
-void Game::createAIShape(bool animated, bool collidable, float collisionRadius, int meshCode, bool ai)
+void Game::createAIShape(Vector3D* position, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai)
 {
-	Vector3D* pos = new Vector3D();
-	pos->x = 0;
-	pos->y = 0;
-	pos->z = 300.0f * mSpreadOutAIIndex;;
-	mSpreadOutAIIndex++;
-
 	Vector3D* vel = new Vector3D();
 	vel->x = 0;
 	vel->y = 0;
@@ -110,7 +113,7 @@ void Game::createAIShape(bool animated, bool collidable, float collisionRadius, 
 	rot->x = 0;
 	rot->z = 0;
 
-	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
+	Shape* shape = new Shape(position,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
 	shape->mGame = this; //for now to give access to shapeVector for collision i guess
 	mShapeVector.push_back(shape); //either way add this to shape vector
 
