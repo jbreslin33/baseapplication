@@ -105,9 +105,22 @@ public Network(Game game, byte[] serverIP, int serverPort)
        	buffer.flip();
     	mDatagramChannel.write(buffer);
 */
+
+    	//lets setup one for client and then get the port as this will be used for sending and recieving henceforth and it will
+    	//be what port the serverside will think we are using. So we better be listening on it and sending on it!
+       	mInetSocketAddressClient = new InetSocketAddress(0);
+       	mClientPort = mInetSocketAddressClient.getPort();
+
+		//DatagramChannel to be used for send and reviece
 	    mDatagramChannel = DatagramChannel.open();
 		mDatagramChannel.socket().bind(new InetSocketAddress(mClientPort));
 		mDatagramChannel.configureBlocking(false);
+
+		//lets setup a SocketAddress for server so we can send,
+		//let's also connect to it so we can avoid overhead of security check
+		mInetSocketAddressServer = new InetSocketAddress("192.168.1.103", 30004);
+    	mDatagramChannel.connect(mInetSocketAddressServer);
+
 
 	}
 	catch (IOException ioe)
@@ -127,8 +140,8 @@ Game mGame;
 
 //nonblocking recieve
 DatagramChannel mDatagramChannel;
-//SocketAddress   mClientSocketAddress;
-//SocketAddress   mServerSocketAddress;
+InetSocketAddress   mInetSocketAddressClient;
+InetSocketAddress   mInetSocketAddressServer;
 //DatagramSocket  mDatagramSocket;
 
 //command
@@ -272,6 +285,7 @@ public void send(Dispatch dispatch)
 {
 	try
   	{
+		/*
      	// Get the internet address of the specified host
       	InetAddress address = InetAddress.getByName("localhost");
 
@@ -283,6 +297,10 @@ public void send(Dispatch dispatch)
       	DatagramSocket dsocket = new DatagramSocket(mClientPort);
       	dsocket.send(packet);
       	dsocket.close();
+      	*/
+
+      	dispatch.mByteBuffer.flip();
+		mDatagramChannel.write(dispatch.mByteBuffer);
 	}
     catch (Exception e)
     {
