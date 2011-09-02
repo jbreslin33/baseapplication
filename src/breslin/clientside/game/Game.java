@@ -6,6 +6,7 @@ package breslin.clientside.game;
 //standard library
 import java.io.*;
 import java.util.ArrayList;
+import java.nio.ByteBuffer;
 
 //dispatch
 import breslin.clientside.dispatch.Dispatch;
@@ -80,12 +81,12 @@ void shutdown()
 /***************************************
 *   		SHAPES
 ***************************************/
-public void addShape(boolean b, Dispatch dispatch)
+public void addShape(boolean b, ByteBuffer byteBuffer)
 {
 
 }
 
-public void removeShape(Dispatch dispatch)
+public void removeShape(ByteBuffer byteBuffer)
 {
 
 }
@@ -98,7 +99,7 @@ ShapeDynamic getShapeDynamic(int id)
 /***************************************
 *   		TICKS
 ***************************************/
-public void readServerTick           (Dispatch dispatch)
+public void readServerTick           (ByteBuffer byteBuffer)
 {
 
 }

@@ -19,8 +19,8 @@ using namespace Ogre;
 //graphics
 class GraphicsOgre;
 
-//Dispatch
-class Dispatch;
+//ByteBuffer
+class ByteBuffer;
 
 class GameOgre : public Game
 {
@@ -41,7 +41,7 @@ GraphicsOgre* mGraphicsOgre;
 ***************************************/
 
 //shape
-void addShape(bool b, Dispatch* dispatch);
+void addShape(bool b, ByteBuffer* byteBuffer);
 
 //time
 float getRenderTime();

@@ -25,7 +25,7 @@ public:
 *   		MEMBER VARIABLES
 ***************************************/
 
-// Dispatches
+// ByteBufferes
 static const char mCommandKey          = 1;
 static const char mCommandMilliseconds = 2;
 

@@ -10,8 +10,8 @@
 //math
 #include "../../math/vector3D.h"
 
-//dispatch
-#include "../dispatch/dispatch.h"
+//byteBuffer
+#include "../byteBuffer/byteBuffer.h"
 
 //time
 #include "../time/time.h"
@@ -82,14 +82,14 @@ void Game::shutdown()
 /*********************************
 		SHAPE
 **********************************/
-void Game::addShape(bool b, Dispatch* dispatch)
+void Game::addShape(bool b, ByteBuffer* byteBuffer)
 {
 
 }
 
-void Game::removeShape(Dispatch* dispatch)
+void Game::removeShape(ByteBuffer* byteBuffer)
 {
-	int index = dispatch->ReadByte();
+	int index = byteBuffer->ReadByte();
 	
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
@@ -137,30 +137,30 @@ void Game::interpolateTick()
 	}
 }
 
-void Game::readServerTick(Dispatch* dispatch)
+void Game::readServerTick(ByteBuffer* byteBuffer)
 {
 	int newTime;
 	int time;
 
 	// Skip sequences
-	dispatch->ReadShort();
+	byteBuffer->ReadShort();
 
 	newTime = mTime->dreamSock_GetCurrentSystemTime();
 	time = newTime - mOldTime;
     mOldTime = newTime;
 
-	while (dispatch->getReadCount() <= dispatch->GetSize())
+	while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
 	{
-		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(dispatch->GetSize()));
+		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
-		int id = dispatch->ReadByte();
+		int id = byteBuffer->ReadByte();
 
 		ShapeDynamic* shape = NULL;
 		shape = getShapeDynamic(id);
 
 		if (shape)
 		{
-			shape->readDeltaMoveCommand(dispatch);
+			shape->readDeltaMoveCommand(byteBuffer);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-#include "dispatch.h"
+#include "byteBuffer.h"
 
 #include "../tdreamsock/dreamSockLog.h"
 
@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-Dispatch::Dispatch()
+ByteBuffer::ByteBuffer()
 {
 	mMaxSize = 1400;
 	mCharArray = new char[mMaxSize];
@@ -14,25 +14,25 @@ Dispatch::Dispatch()
 	mReadCount	= 0;
 }
 
-Dispatch::~Dispatch()
+ByteBuffer::~ByteBuffer()
 {
 }
 
 /**********************************************
 				ADMIN
 ************************************************/
-void Dispatch::BeginReading()
+void ByteBuffer::BeginReading()
 {
 	mReadCount = 0;
 }
 
-void Dispatch::Clear()
+void ByteBuffer::Clear()
 {
 	mSize		= 0;
 	mReadCount	= 0;
 }
 
-char *Dispatch::GetNewPoint(int length)
+char *ByteBuffer::GetNewPoint(int length)
 {
 	char *tempData;
 
@@ -51,21 +51,21 @@ char *Dispatch::GetNewPoint(int length)
 /**********************************************
 				WRITE
 ************************************************/
-void Dispatch::WriteByte(char c)
+void ByteBuffer::WriteByte(char c)
 {
 	char *buf;
 	buf = GetNewPoint(1);
 	memcpy(buf, &c, 1);
 }
 
-void Dispatch::WriteShort(short c)
+void ByteBuffer::WriteShort(short c)
 {
 	char *buf;
 	buf = GetNewPoint(2);
 	memcpy(buf, &c, 2);
 }
 
-void Dispatch::WriteFloat(float c)
+void ByteBuffer::WriteFloat(float c)
 {
 	char *buf;
 	buf = GetNewPoint(4);
@@ -76,7 +76,7 @@ void Dispatch::WriteFloat(float c)
 				READ
 ************************************************/
 
-char Dispatch::ReadByte()
+char ByteBuffer::ReadByte()
 {
 	char c;
 
@@ -90,7 +90,7 @@ char Dispatch::ReadByte()
 	return c;
 }
 
-short Dispatch::ReadShort()
+short ByteBuffer::ReadShort()
 {
 	short c;
 
@@ -104,7 +104,7 @@ short Dispatch::ReadShort()
 	return c;
 }
 
-float Dispatch::ReadFloat()
+float ByteBuffer::ReadFloat()
 {
 	float c;
 

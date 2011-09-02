@@ -43,9 +43,9 @@ float GameOgre::getRenderTime()
 /*********************************
 *		SHAPE
 **********************************/
-void GameOgre::addShape(bool b, Dispatch* dispatch)
+void GameOgre::addShape(bool b, ByteBuffer* byteBuffer)
 {
-	ShapeDynamic* shape = new ShapeDynamicOgre(this,dispatch,false);  //you should just need to call this...
+	ShapeDynamic* shape = new ShapeDynamicOgre(this,byteBuffer,false);  //you should just need to call this...
 	
 	//ability
 	shape->addAbility(new AbilityRotation(shape));

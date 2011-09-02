@@ -54,7 +54,7 @@ class DreamLinuxSock;
 
 class Game;
 class Command;
-class Dispatch;
+class ByteBuffer;
 class Parser;
 
 /**********************************
@@ -111,7 +111,7 @@ DreamLinuxSock* mDreamLinuxSock;
 public:
 
 //send
-void send(Dispatch* dispatch);
+void send(ByteBuffer* byteBuffer);
 
 //close
 void close();
@@ -148,10 +148,10 @@ int    setNonBlocking(u_long setMode);
 void send			 (int length, char *data, struct sockaddr addr);
 
 //receive
-int  checkForDispatch(Dispatch* dispatch);
+int  checkForByteBuffer(ByteBuffer* byteBuffer);
 
 //parse
-void parsePacket(Dispatch *mes);
+void parsePacket(ByteBuffer *mes);
 
 
 

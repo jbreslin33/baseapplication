@@ -19,9 +19,9 @@
 #include "../billboard/objectTitle.h"
 
 
-ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, Dispatch* dispatch, bool isGhost)
+ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost)
 :
-	ShapeDynamic         (gameOgre,dispatch)
+	ShapeDynamic         (gameOgre,byteBuffer)
 {
 	//we use this to name shape. as ogre is picky about same names. it also serves as a counter of sorts.
 
@@ -34,7 +34,7 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, Dispatch* dispatch, bool 
 		mIndex = mIndex * -1;
 	}	
 
-	//figure out mesh based on code passed in dispatch
+	//figure out mesh based on code passed in byteBuffer
 	mMeshName = getMeshString(mMeshCode);
 	
 
@@ -52,7 +52,7 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, Dispatch* dispatch, bool 
 	if (!mIsGhost) 
 	{
 		//create a ghost for this shape
-		mGhost = new ShapeDynamicOgre(mGameOgre,dispatch,true);
+		mGhost = new ShapeDynamicOgre(mGameOgre,byteBuffer,true);
 		mGhost->setVisible(false);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.

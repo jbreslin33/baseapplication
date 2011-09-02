@@ -140,8 +140,8 @@ set(HDRS
 	../clientside/shape/shapeDynamic.h
 	../clientside/shape/shapeDynamicOgre.h
 
-	#dispatch
-	../clientside/dispatch/dispatch.h
+	#byteBuffer
+	../clientside/byteBuffer/byteBuffer.h
 	
 	#parser
 	../clientside/parser/parser.h
@@ -201,8 +201,8 @@ set(SRCS
 	../clientside/shape/shapeDynamic.cpp
 	../clientside/shape/shapeDynamicOgre.cpp
 	
-	#dispatch
-	../clientside/dispatch/dispatch.cpp
+	#byteBuffer
+	../clientside/byteBuffer/byteBuffer.cpp
 	
 	#parser
 	../clientside/parser/parser.cpp
@@ -270,8 +270,8 @@ set(HDRS
 	../clientside/shape/shapeDynamic.h
 	../clientside/shape/shapeDynamicOgre.h
 	
-	#dispatch
-	../clientside/dispatch/dispatch.h
+	#byteBuffer
+	../clientside/byteBuffer/byteBuffer.h
 	
 	#parser
 	../clientside/parser/parser.h
@@ -330,8 +330,8 @@ set(SRCS
 	../clientside/shape/shapeDynamic.cpp
 	../clientside/shape/shapeDynamicOgre.cpp
 	
-	#dispatch
-	../clientside/dispatch/dispatch.cpp
+	#byteBuffer
+	../clientside/byteBuffer/byteBuffer.cpp
 	
 	#parser
 	../clientside/parser/parser.cpp

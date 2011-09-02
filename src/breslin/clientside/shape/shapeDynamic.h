@@ -20,8 +20,8 @@
 //game
 class Game;
 
-//dispatch
-class Dispatch;
+//byteBuffer
+class ByteBuffer;
 
 //ability
 class Ability;
@@ -36,7 +36,7 @@ class ShapeDynamic : public Shape
 {
 
 public:
-ShapeDynamic(Game* game, Dispatch* dispatch);
+ShapeDynamic(Game* game, ByteBuffer* byteBuffer);
 ~ShapeDynamic();
 
 /************************************************
@@ -94,10 +94,10 @@ void processTick();
 void interpolateTick(float renderTime);
 
 //messaging
-void readDeltaMoveCommand(Dispatch *mes);
+void readDeltaMoveCommand(ByteBuffer *mes);
 
-//dispatch
-void parseDispatch(Dispatch* dispatch);
+//byteBuffer
+void parseByteBuffer(ByteBuffer* byteBuffer);
 
 //ghost
 void moveGhostShape();

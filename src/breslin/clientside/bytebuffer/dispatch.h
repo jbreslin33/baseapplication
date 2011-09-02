@@ -13,11 +13,11 @@ class Client;
 /******************************************************
 *				CLASS
 ********************************************************/
-class Dispatch
+class ByteBuffer
 {
 public:
-	Dispatch();
-	~Dispatch();
+	ByteBuffer();
+	~ByteBuffer();
 
 /**************************************************
 *			VARIABLES

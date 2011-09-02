@@ -143,22 +143,61 @@ short	mDroppedPackets;			// Dropped packets
 
 /***************************************
 *			          METHODS
+*
+*
+*
+*
 ***************************************/
 
-//packets
-boolean checkForDispatch(Dispatch dispatch)
+/***************************************
+*   		RECIEVE PACKETS
+***************************************/
+
+public void readPackets()
+{
+	ByteBuffer byteBuffer = ByteBuffer.allocate(48);
+	while(checkForDispatch(byteBuffer))
+	{
+		byteBuffer.flip(); //BeginReading() c++ equivalent
+
+		int type = byteBuffer.get();
+		System.out.println("type:" + type);
+
+		if (mParser.mMessageAddShape == type)
+		{
+			System.out.println("addShape");
+			mGame.addShape(true,byteBuffer);
+		}
+
+		if (mParser.mMessageRemoveShape == type)
+		{
+			mGame.removeShape(byteBuffer);
+		}
+
+		if (mParser.mMessageFrame == type)
+		{
+			mGame.readServerTick(byteBuffer);
+		}
+
+		if (mParser.mMessageServerExit == type)
+		{
+			//	mGame.shutdown();
+		}
+	}
+}
+
+boolean checkForDispatch(ByteBuffer byteBuffer)
 {
    try
     {
-		ByteBuffer buf = ByteBuffer.allocate(48);
-		buf.clear();
+		//byteBuffer.clear();
 
-		if (mDatagramChannel.receive(buf) != null)
+		if (mDatagramChannel.receive(byteBuffer) != null)
 		{
-			buf.flip();  //this sets marker to beginning of buffer just like BeginReading in c++.
-			System.out.println("first byte:" + buf.get());
-			System.out.println("2nd byte:" + buf.get());
-			System.out.println("3d byte:" + buf.get());
+			//byteBuffer.flip();  //this sets marker to beginning of buffer just like BeginReading in c++.
+
+			// Parse system messages
+			//parsePacket(byteBuffer);
 			return true;
 		}
 		else
@@ -170,47 +209,43 @@ boolean checkForDispatch(Dispatch dispatch)
 	{
         System.err.println("bres:" + ex);
     }
-
-	return false;
+    return false;
 }
 
-public void readPackets   ()
+
+
+
+void parsePacket(ByteBuffer byteBuffer)
 {
-	//int type;
-	//int ret;
+/*
+	mes->BeginReading();
 
-	Dispatch dispatch = new Dispatch();
+	int type = mes->ReadByte();
 
-	while(checkForDispatch(dispatch))
+	// Check if the type is a positive number
+	// = is the packet sequenced
+	if(type > 0)
 	{
-		//dispatch->BeginReading();
+		unsigned short sequence		= mes->ReadShort();
 
-		int type = dispatch.ReadByte();
-
-		if (mParser.mMessageAddShape == type)
+		if(sequence <= mIncomingSequence)
 		{
-			mGame.addShape(true,dispatch);
+			LogString("Client: (sequence: %d <= incoming seq: %d)",
+				sequence, mIncomingSequence);
+
+			LogString("Client: Sequence mismatch");
 		}
 
-		if (mParser.mMessageRemoveShape == type)
-		{
-			mGame.removeShape(dispatch);
-		}
+		mDroppedPackets = sequence - mIncomingSequence + 1;
 
-		if (mParser.mMessageFrame == type)
-		{
-			mGame.readServerTick(dispatch);
-		}
-
-		if (mParser.mMessageServerExit == type)
-		{
-			//	mGame.shutdown();
-		}
+		mIncomingSequence = sequence;
 	}
+	*/
 }
 
-
-//send
+/***************************************
+*   		SEND PACKETS
+***************************************/
 
 
 public void sendConnect()

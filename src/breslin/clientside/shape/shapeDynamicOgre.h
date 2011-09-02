@@ -32,7 +32,7 @@ class ShapeDynamicOgre : public ShapeDynamic //, public OgreAnimation
 {
 
 public:
-ShapeDynamicOgre(GameOgre* gameOgre, Dispatch* dispatch, bool isGhost);
+ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost);
 ~ShapeDynamicOgre();
 
 /**********************************

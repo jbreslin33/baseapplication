@@ -13,7 +13,7 @@
 *   		FORWARD DECLARATIONS
 ***************************************/
 class Client;
-class Dispatch;
+class ByteBuffer;
 class ShapeDynamic;
 class Time;
 class Network;
@@ -53,12 +53,12 @@ void shutdown();
 void gameLoop();
 
 //shape
-virtual void          addShape       (bool b, Dispatch* dispatch);
-        void          removeShape    (Dispatch* dispatch);
+virtual void          addShape       (bool b, ByteBuffer* byteBuffer);
+        void          removeShape    (ByteBuffer* byteBuffer);
         ShapeDynamic* getShapeDynamic(int id);
 
 //Ticks
-void readServerTick           (Dispatch* dispatch);
+void readServerTick           (ByteBuffer* byteBuffer);
 void interpolateTick();
 
 //time

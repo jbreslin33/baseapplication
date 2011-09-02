@@ -13,8 +13,8 @@
 //parser
 #include "../parser/parser.h"
 
-//dispatch
-#include "../dispatch/dispatch.h"
+//byteBuffer
+#include "../byteBuffer/byteBuffer.h"
 
 //sockets
 #ifdef WIN32
@@ -196,12 +196,12 @@ void Network::close()
 }
 
 //send
-void Network::send(Dispatch* dispatch)
+void Network::send(ByteBuffer* byteBuffer)
 {
-	send(dispatch->mSize,dispatch->mCharArray,*(struct sockaddr *) &sendToAddress);
+	send(byteBuffer->mSize,byteBuffer->mCharArray,*(struct sockaddr *) &sendToAddress);
 	
-	dispatch->BeginReading();
-	int type = dispatch->ReadByte();
+	byteBuffer->BeginReading();
+	int type = byteBuffer->ReadByte();
 
 	if(type > 0)
 	{
@@ -247,9 +247,9 @@ void Network::setSendToAddress(const char* serverIP, int serverPort)
 }
 
 //receive
-int Network::checkForDispatch(Dispatch* dispatch)
+int Network::checkForByteBuffer(ByteBuffer* byteBuffer)
 {
-	char* data = dispatch->mCharArray;
+	char* data = byteBuffer->mCharArray;
 
 	int ret;
 	struct sockaddr tempFrom;
@@ -263,7 +263,7 @@ int Network::checkForDispatch(Dispatch* dispatch)
 		return 0;
 
 	// Parse system messages
-	parsePacket(dispatch);
+	parsePacket(byteBuffer);
 
 	if(ret == -1)
 	{
@@ -294,13 +294,13 @@ int Network::checkForDispatch(Dispatch* dispatch)
 		return ret;
 	}
 
-	dispatch->SetSize(ret);
+	byteBuffer->SetSize(ret);
 
 	return ret;
 }
 
 //i feel like network should handle out of sequence packet warnings...
-void Network::parsePacket(Dispatch *mes)
+void Network::parsePacket(ByteBuffer *mes)
 {
 	mes->BeginReading();
 	int type = mes->ReadByte();
@@ -337,9 +337,9 @@ void Network::reset(void)
 ***************************************************/
 void Network::sendConnect()
 {
-	Dispatch* dispatch = new Dispatch();
-	dispatch->WriteByte(mParser->mMessageConnect);
-	send(dispatch);
+	ByteBuffer* byteBuffer = new ByteBuffer();
+	byteBuffer->WriteByte(mParser->mMessageConnect);
+	send(byteBuffer);
 }
 
 /***************************************************
@@ -347,9 +347,9 @@ void Network::sendConnect()
 ***************************************************/
 void Network::sendDisconnect()
 {
-	Dispatch* dispatch = new Dispatch();
-	dispatch->WriteByte(mParser->mMessageDisconnect);
-	send(dispatch);
+	ByteBuffer* byteBuffer = new ByteBuffer();
+	byteBuffer->WriteByte(mParser->mMessageDisconnect);
+	send(byteBuffer);
 	reset();
 }
 
@@ -359,9 +359,9 @@ void Network::sendDisconnect()
 
 void Network::sendCommand(void)
 {
-	Dispatch* dispatch = new Dispatch();
-	dispatch->WriteByte(mParser->mMessageFrame);					
-	dispatch->WriteShort(mOutgoingSequence);
+	ByteBuffer* byteBuffer = new ByteBuffer();
+	byteBuffer->WriteByte(mParser->mMessageFrame);					
+	byteBuffer->WriteShort(mOutgoingSequence);
 
 	// Build delta-compressed move command
 	int flags = 0;
@@ -378,16 +378,16 @@ void Network::sendCommand(void)
 	}
 
 	// Add to the message
-	dispatch->WriteByte(flags);
+	byteBuffer->WriteByte(flags);
 
 	if(flags & mParser->mCommandKey)
 	{
-		dispatch->WriteByte(mCommandToServer->mKey);
+		byteBuffer->WriteByte(mCommandToServer->mKey);
 	}
 
 	if(flags & mParser->mCommandMilliseconds)
 	{
-		dispatch->WriteByte(mCommandToServer->mMilliseconds);
+		byteBuffer->WriteByte(mCommandToServer->mMilliseconds);
 	}
 	
 	//set 'last' commands for diff
@@ -395,7 +395,7 @@ void Network::sendCommand(void)
 	mLastCommandToServer->mMilliseconds = mCommandToServer->mMilliseconds;
 
 	// Send the packet
-	send(dispatch);
+	send(byteBuffer);
 }
 
 /***************************************************
@@ -406,26 +406,26 @@ void Network::readPackets()
 	int type;
 	int ret;
 
-	Dispatch* dispatch = new Dispatch();
+	ByteBuffer* byteBuffer = new ByteBuffer();
 
-	while(ret = checkForDispatch(dispatch))
+	while(ret = checkForByteBuffer(byteBuffer))
 	{
-		dispatch->BeginReading();
+		byteBuffer->BeginReading();
 
-		type = dispatch->ReadByte();
+		type = byteBuffer->ReadByte();
 
 		switch(type)
 		{
 			case mParser->mMessageAddShape:
-				mGame->addShape(true,dispatch);
+				mGame->addShape(true,byteBuffer);
 			break;
 
 			case mParser->mMessageRemoveShape:
-				mGame->removeShape(dispatch);
+				mGame->removeShape(byteBuffer);
 			break;
 
 			case mParser->mMessageFrame:
-				mGame->readServerTick(dispatch);
+				mGame->readServerTick(byteBuffer);
 			break;
 
 			case mParser->mMessageServerExit:

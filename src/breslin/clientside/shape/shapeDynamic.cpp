@@ -17,8 +17,8 @@
 //ability
 #include "../ability/ability.h"
 
-//dispatch
-#include "../dispatch/dispatch.h"
+//byteBuffer
+#include "../byteBuffer/byteBuffer.h"
 
 //parser
 #include "../parser/parser.h"
@@ -28,7 +28,7 @@
 *				CLASS
 ********************************************************/
 
-ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
+ShapeDynamic::ShapeDynamic(Game* game, ByteBuffer* byteBuffer)
 :
 	Shape         ()
 {
@@ -57,8 +57,8 @@ ShapeDynamic::ShapeDynamic(Game* game, Dispatch* dispatch)
 	//animate
 	mAnimate = false;
 
-	//dispatch
-	parseDispatch(dispatch);
+	//byteBuffer
+	parseByteBuffer(byteBuffer);
 
 	//ghost
 	mGhost = NULL;
@@ -95,27 +95,27 @@ Ability* ShapeDynamic::getAbility(Ability* ability)
 	return 0;
 }
 
-void ShapeDynamic::parseDispatch(Dispatch* dispatch)
+void ShapeDynamic::parseByteBuffer(ByteBuffer* byteBuffer)
 {
-	dispatch->BeginReading();
-	dispatch->ReadByte(); //should read -103 to add a shape..
-	mLocal	=    dispatch->ReadByte();
-	mIndex		=    dispatch->ReadByte();
-	mPosition->x =   dispatch->ReadFloat();
-	mPosition->y =   dispatch->ReadFloat();
-	mPosition->z =   dispatch->ReadFloat();
-	mVelocity->x = dispatch->ReadFloat();
-	mVelocity->y = dispatch->ReadFloat();
-	mVelocity->z = dispatch->ReadFloat();
-	mRotation->x = dispatch->ReadFloat();
-	mRotation->z = dispatch->ReadFloat();
+	byteBuffer->BeginReading();
+	byteBuffer->ReadByte(); //should read -103 to add a shape..
+	mLocal	=    byteBuffer->ReadByte();
+	mIndex		=    byteBuffer->ReadByte();
+	mPosition->x =   byteBuffer->ReadFloat();
+	mPosition->y =   byteBuffer->ReadFloat();
+	mPosition->z =   byteBuffer->ReadFloat();
+	mVelocity->x = byteBuffer->ReadFloat();
+	mVelocity->y = byteBuffer->ReadFloat();
+	mVelocity->z = byteBuffer->ReadFloat();
+	mRotation->x = byteBuffer->ReadFloat();
+	mRotation->z = byteBuffer->ReadFloat();
 	
 	//mesh
-	mMeshCode    = dispatch->ReadByte();
+	mMeshCode    = byteBuffer->ReadByte();
 
 	//animate
 	
-	mAnimate = dispatch->ReadByte();
+	mAnimate = byteBuffer->ReadByte();
 	LogString("an:%d",mAnimate);
 }
 
@@ -145,7 +145,7 @@ void ShapeDynamic::interpolateTick(float renderTime)
 //should a shape be responsible to read it's own command?????
 //once we determine it's about him shouldn't we pass it off to
 //shape object to handle?
-void ShapeDynamic::readDeltaMoveCommand(Dispatch *mes)
+void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 {
 	//ShapeDynamic* shape = NULL;
 
