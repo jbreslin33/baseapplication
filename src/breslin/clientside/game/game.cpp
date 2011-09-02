@@ -137,7 +137,6 @@ void Game::interpolateTick()
 	}
 }
 
-
 void Game::readServerTick(Dispatch* dispatch)
 {
 	int newTime;

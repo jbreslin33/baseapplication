@@ -159,6 +159,11 @@ boolean checkForDispatch(Dispatch dispatch)
 			System.out.println("first byte:" + buf.get());
 			System.out.println("2nd byte:" + buf.get());
 			System.out.println("3d byte:" + buf.get());
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 	catch (Exception ex)
@@ -186,28 +191,22 @@ public void readPackets   ()
 		{
 			mGame.addShape(true,dispatch);
 		}
-/*
-		switch(type)
+
+		if (mParser.mMessageRemoveShape == type)
 		{
-			case mParser.mMessageAddShape:
-				mGame.addShape(true,dispatch);
-			break;
-
-			case mParser.mMessageRemoveShape:
-				mGame.removeShape(dispatch);
-			break;
-
-			case mParser.mMessageFrame:
-				mGame.readServerTick(dispatch);
-			break;
-
-			//case mParser.mMessageServerExit:
-			//	mGame.shutdown();
-			break;
+			mGame.removeShape(dispatch);
 		}
-*/
-	}
 
+		if (mParser.mMessageFrame == type)
+		{
+			mGame.readServerTick(dispatch);
+		}
+
+		if (mParser.mMessageServerExit == type)
+		{
+			//	mGame.shutdown();
+		}
+	}
 }
 
 

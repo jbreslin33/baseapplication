@@ -22,9 +22,6 @@ public GameMonkey(byte[] serverIP, int serverPort)
 {
 	super(serverIP,serverPort);
 	mGraphicsMonkey = new GraphicsMonkey(this);
-	System.out.println("calling gameLoopFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
-	gameLoop();
-
 }
 
 /**************************************
@@ -34,7 +31,6 @@ public static void main(String[] args)
 {
 	byte[] theByteArray = args[0].getBytes();
 	GameMonkey gameMonkey = new GameMonkey(theByteArray,30004);
-   // gameMonkey.start();
 }
 
 

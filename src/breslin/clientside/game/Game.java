@@ -63,43 +63,29 @@ int   mOldTime;
 
 /***************************************
 *			          METHODS
+*
+*
+*
+*
 ***************************************/
 
-//Admin
+/***************************************
+*   		ADMIN
+***************************************/
 void shutdown()
 {
 
 }
-void gameLoop()
-{
-	//while(true)
-    //{
-//		System.out.println("gameloop");
 
-		//input
-		//processInput();  //right now
-
-		//network
-		//runNetwork(getRenderTime() * 1000.0f);
-
-		//move objects
-		//interpolateTick();
-		//runGraphics();
-		//draw
-//		if (!runGraphics())
-//		{
-//			break;
-//		}
-	//}
-}
-
-//shape
-public void         addShape       (boolean b, Dispatch dispatch)
+/***************************************
+*   		SHAPES
+***************************************/
+public void addShape(boolean b, Dispatch dispatch)
 {
 
 }
 
-void         removeShape    (Dispatch dispatch)
+public void removeShape(Dispatch dispatch)
 {
 
 }
@@ -109,8 +95,10 @@ ShapeDynamic getShapeDynamic(int id)
 	return new ShapeDynamic(this, new Dispatch());
 }
 
-//Ticks
-void readServerTick           (Dispatch dispatch)
+/***************************************
+*   		TICKS
+***************************************/
+public void readServerTick           (Dispatch dispatch)
 {
 
 }
@@ -120,13 +108,17 @@ void interpolateTick()
 
 }
 
-//time
+/***************************************
+*   		TIME
+***************************************/
 float getRenderTime()
 {
 	return 0;
 }
 
-// Network
+/***************************************
+*   		NETWORK
+***************************************/
 public void runNetwork    (float msec)
 {
 	mRunNetworkTime += msec;
@@ -142,13 +134,17 @@ public void runNetwork    (float msec)
 	}
 }
 
-//input
+/***************************************
+*   		INPUT
+***************************************/
 void processInput()
 {
 
 }
 
-//graphics
+/***************************************
+*   		GRAPHICS
+***************************************/
 public boolean runGraphics()
 {
 	return false;
