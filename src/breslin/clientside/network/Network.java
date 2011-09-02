@@ -20,7 +20,7 @@ import java.nio.CharBuffer;
 import breslin.clientside.game.Game;
 
 //dispatch
-import breslin.clientside.dispatch.Dispatch;
+import breslin.clientside.bytebuffer.Dispatch;
 
 //command
 import breslin.clientside.command.Command;

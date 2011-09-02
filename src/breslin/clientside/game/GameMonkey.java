@@ -6,7 +6,7 @@ package breslin.clientside.game;
 //standard library
 
 //dispatch
-import breslin.clientside.dispatch.Dispatch;
+import breslin.clientside.bytebuffer.Dispatch;
 
 //graphics
 import breslin.clientside.graphics.GraphicsMonkey;

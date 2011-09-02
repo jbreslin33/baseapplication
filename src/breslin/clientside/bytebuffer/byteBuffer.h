@@ -1,5 +1,5 @@
-#ifndef DISPATCH_H
-#define DISPATCH_H
+#ifndef BYTEBUFFER_H
+#define BYTEBUFFER_H
 
 /******************************************************
 *				INCLUDES

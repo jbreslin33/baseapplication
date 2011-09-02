@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.nio.ByteBuffer;
 
 //dispatch
-import breslin.clientside.dispatch.Dispatch;
+import breslin.clientside.bytebuffer.Dispatch;
 
 //shape
 import breslin.clientside.shape.ShapeDynamic;

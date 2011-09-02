@@ -1,5 +1,5 @@
 
-package breslin.clientside.dispatch;
+package breslin.clientside.bytebuffer;
 
 /******************************************************
 *				INCLUDES

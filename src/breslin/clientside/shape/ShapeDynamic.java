@@ -16,7 +16,7 @@ import breslin.clientside.game.Game;
 import breslin.math.Vector3D;
 
 //dispatch
-import breslin.clientside.dispatch.Dispatch;
+import breslin.clientside.bytebuffer.Dispatch;
 
 //ability
 import breslin.clientside.ability.Ability;
