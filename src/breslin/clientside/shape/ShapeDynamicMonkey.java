@@ -8,6 +8,7 @@ import breslin.clientside.shape.ShapeDynamic;
 
 //standard library
 import java.util.ArrayList;
+import java.nio.ByteBuffer;
 
 //shape
 import breslin.clientside.shape.Shape;
@@ -17,9 +18,6 @@ import breslin.clientside.game.GameMonkey;
 
 //math
 import breslin.math.Vector3D;
-
-//dispatch
-import breslin.clientside.bytebuffer.Dispatch;
 
 //ability
 import breslin.clientside.ability.Ability;
@@ -39,9 +37,9 @@ class ShapeDynamicMonkey extends ShapeDynamic //, public OgreAnimation
 {
 
 
-public ShapeDynamicMonkey(GameMonkey gameMonkey, Dispatch dispatch, boolean isGhost)
+public ShapeDynamicMonkey(GameMonkey gameMonkey, ByteBuffer byteBuffer, boolean isGhost)
 {
-	super(gameMonkey,dispatch);
+	super(gameMonkey,byteBuffer);
 }
 
 /**********************************

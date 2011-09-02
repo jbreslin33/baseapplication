@@ -93,7 +93,8 @@ public void removeShape(ByteBuffer byteBuffer)
 
 ShapeDynamic getShapeDynamic(int id)
 {
-	return new ShapeDynamic(this, new Dispatch());
+	ByteBuffer byteBuffer = ByteBuffer.allocate(48);
+	return new ShapeDynamic(this, byteBuffer);
 }
 
 /***************************************

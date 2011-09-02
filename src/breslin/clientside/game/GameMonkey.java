@@ -4,9 +4,7 @@ package breslin.clientside.game;
 *   		INCLUDES
 ***************************************/
 //standard library
-
-//dispatch
-import breslin.clientside.bytebuffer.Dispatch;
+import java.nio.ByteBuffer;
 
 //graphics
 import breslin.clientside.graphics.GraphicsMonkey;
@@ -50,7 +48,7 @@ float mRenderTime;
 
 
 //shape
-public void addShape(boolean b, Dispatch dispatch)
+public void addShape(boolean b, ByteBuffer buffer)
 {
 
 }

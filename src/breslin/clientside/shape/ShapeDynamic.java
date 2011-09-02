@@ -5,6 +5,7 @@ package breslin.clientside.shape;
 ***************************************/
 //standard library
 import java.util.ArrayList;
+import java.nio.ByteBuffer;
 
 //shape
 import breslin.clientside.shape.Shape;
@@ -14,9 +15,6 @@ import breslin.clientside.game.Game;
 
 //math
 import breslin.math.Vector3D;
-
-//dispatch
-import breslin.clientside.bytebuffer.Dispatch;
 
 //ability
 import breslin.clientside.ability.Ability;
@@ -40,7 +38,7 @@ import breslin.clientside.command.Command;
 public class ShapeDynamic extends Shape
 {
 
-public ShapeDynamic(Game game, Dispatch dispatch)
+public ShapeDynamic(Game game, ByteBuffer byteBuffer)
 {
 	super();
 
@@ -126,13 +124,13 @@ void interpolateTick(float renderTime)
 }
 
 //messaging
-void readDeltaMoveCommand(Dispatch dispatch)
+void readDeltaMoveCommand(ByteBuffer byteBuffer)
 {
 
 }
 
 //dispatch
-void parseDispatch(Dispatch dispatch)
+void parseDispatch(ByteBuffer byteBuffer)
 {
 
 }
