@@ -52,15 +52,9 @@ public Network(Game game, byte[] serverIP, int serverPort)
 	mServerPort = serverPort;
 	mClientPort = 30003;
 
-
-
 	//sequences
 	mOutgoingSequence		= 1;
 	mIncomingSequence		= 0;
-
-//	mSocket = open();
-
-//	setSendToAddress(mServerIP,mServerPort);
 
 	//parse
 	mIncomingSequence = 0;
@@ -78,12 +72,12 @@ public Network(Game game, byte[] serverIP, int serverPort)
 	    e.printStackTrace();
 	}
 
-
 	//for nonblocking recieve
 	try
 	{
     	//lets setup one for client and then get the port as this will be used for sending and recieving henceforth and it will
-    	//be what port the serverside will think we are using. So we better be listening on it and sending on it!
+    	//be what port the serverside will think we are using. So we better be listening on it and sending on it! let's bind to it.
+    	//we will also make it non-blocking to avoid threading our game loop.
        	mInetSocketAddressClient = new InetSocketAddress(0);
        	mClientPort = mInetSocketAddressClient.getPort();
 
@@ -156,7 +150,7 @@ short	mDroppedPackets;			// Dropped packets
 public void readPackets()
 {
 	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
-	while(checkForDispatch(byteBuffer))
+	while(checkForByteBuffer(byteBuffer))
 	{
 
 		byteBuffer.flip(); //BeginReading() c++ equivalent
@@ -193,7 +187,7 @@ public void readPackets()
 	}
 }
 
-boolean checkForDispatch(ByteBuffer byteBuffer)
+boolean checkForByteBuffer(ByteBuffer byteBuffer)
 {
    try
     {
