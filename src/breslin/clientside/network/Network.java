@@ -205,7 +205,7 @@ boolean checkForDispatch(ByteBuffer byteBuffer)
 			//byteBuffer.flip();  //this sets marker to beginning of buffer just like BeginReading in c++.
 
 			// Parse system messages
-			//parsePacket(byteBuffer);
+			parsePacket(byteBuffer);
 			return true;
 		}
 		else
@@ -225,30 +225,31 @@ boolean checkForDispatch(ByteBuffer byteBuffer)
 
 void parsePacket(ByteBuffer byteBuffer)
 {
-/*
-	mes->BeginReading();
 
-	int type = mes->ReadByte();
+	//mes->BeginReading();
+	byteBuffer.flip();
+
+	int type = byteBuffer.get();
 
 	// Check if the type is a positive number
 	// = is the packet sequenced
 	if(type > 0)
 	{
-		unsigned short sequence		= mes->ReadShort();
+		short sequence		= byteBuffer.getShort();
 
 		if(sequence <= mIncomingSequence)
 		{
-			LogString("Client: (sequence: %d <= incoming seq: %d)",
-				sequence, mIncomingSequence);
-
-			LogString("Client: Sequence mismatch");
+			//LogString("Client: (sequence: %d <= incoming seq: %d)",
+			//	sequence, mIncomingSequence);
+			System.out.println("Client..Sequence mismatch");
+			//LogString("Client: Sequence mismatch");
 		}
-
-		mDroppedPackets = sequence - mIncomingSequence + 1;
+		//short add1 = 1;
+		//mDroppedPackets = sequence - mIncomingSequence + add1;
 
 		mIncomingSequence = sequence;
 	}
-	*/
+
 }
 
 /***************************************
