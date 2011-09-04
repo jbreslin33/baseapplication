@@ -168,9 +168,8 @@ public void readPackets()
 
 		if (mParser.mMessageAddShape == type)
 		{
-			System.out.println("before mLocal");
-			//System.out.println("mLocal:" + byteBuffer.get());
-			System.out.println("after mLocal");
+			System.out.println("local:" + byteBuffer.get());
+			System.out.println("index:" + byteBuffer.get());
 			mGame.addShape(true,byteBuffer);
 		}
 
