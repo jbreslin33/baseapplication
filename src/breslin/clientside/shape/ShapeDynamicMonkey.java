@@ -120,14 +120,16 @@ String         mName;
 //shape
 void createShape()
 {
+	System.out.println("scale:" + mScale);
 
- 	Box b = new Box(Vector3f.ZERO, 1, 1, 1);
+ 	Box b = new Box(Vector3f.ZERO, 60, 60, 60);
     Geometry geom = new Geometry("Box", b);
     Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
     mat.setColor("Color", ColorRGBA.Blue);
     geom.setMaterial(mat);
     mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
-    geom.move((float)mPosition.x,(float)mPosition.z,(float)mPosition.y);
+    //geom.move((float)mPosition.x,(float)mPosition.y,(float)mPosition.z);
+
 
 }
 
@@ -221,7 +223,7 @@ String getMeshString(int meshCode)
 
 	if (meshCode == 0)
 	{
-		mScale = 1;
+		mScale = 10;
 		return "cube.mesh";
 	}
 	if (meshCode == 1)

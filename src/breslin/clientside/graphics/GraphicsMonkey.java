@@ -4,6 +4,7 @@ package breslin.clientside.graphics;
 *   		INCLUDES
 ***************************************/
 //standard library
+import com.jme3.math.Vector3f;
 
 //parent
 import com.jme3.app.SimpleApplication;
@@ -52,7 +53,6 @@ public GraphicsMonkey(GameMonkey gameMonkey)
 	//{
 	//	keyBuffer[i] = false;
 	//}
-
 
 
 }
@@ -129,6 +129,14 @@ private ActionListener actionListener = new ActionListener()
 				System.out.println("send Connect.....");
 				mGameMonkey.mNetwork.sendConnect();
 				mPlayingGame = true;
+
+				//can i set cam pos now?
+				Vector3f startCamPosition = new Vector3f(0, 700, 700);
+				Vector3f lookAtVector = new Vector3f(0,0,-300);
+				Vector3f worldDirection   = new Vector3f(0,1,0);
+				cam.setLocation(startCamPosition);
+
+				cam.lookAt(lookAtVector,worldDirection);
 			}
         }
     }

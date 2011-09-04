@@ -31,9 +31,9 @@ Game::Game()
 	for(int i = 0; i < 5; i++)
 	{                 
 		Vector3D* position = new Vector3D();
-		position->x = 0;
+		position->x = 100.0f * i;
 		position->y = 0;
-		position->z = 50.0f * i;;
+		position->z = 0;
 		
 		createAIShape(position,true,true,5,1,true);
 	}
