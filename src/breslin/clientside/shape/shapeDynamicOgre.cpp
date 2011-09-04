@@ -79,7 +79,7 @@ std::string ShapeDynamicOgre::getMeshString(int meshCode)
 	}
 	if (meshCode == 1)
 	{
-		mScale = 30 / 30;
+		mScale = 30;
 		return "sinbad.mesh";
 	}
 }
