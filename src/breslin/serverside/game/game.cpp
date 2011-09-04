@@ -28,10 +28,10 @@ Game::Game()
 	mSpreadOutAIIndex = 1;
 	
 	//ai guys, let's make them sinbads
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < 0; i++)
 	{                 
 		Vector3D* position = new Vector3D();
-		position->x = 100.0f * i;
+		position->x = 300.0f * i;
 		position->y = 0;
 		position->z = 0;
 		
@@ -51,7 +51,7 @@ Game::Game()
 	position->y = 0;
 	position->z = -1000;
 	createAIShape(position,false,true,5,0,false);
-
+/*
 	//east wall
 	for (int i = -2000; i < 2000; i = i + 200)
 	{
@@ -95,7 +95,7 @@ Game::Game()
 		position->z = 2000;
 		createAIShape(position,false,true,5,0,false);
 	}
-
+*/
 }
 
 Game::~Game()

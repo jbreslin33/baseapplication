@@ -116,7 +116,7 @@ void ShapeDynamic::parseByteBuffer(ByteBuffer* byteBuffer)
 	//animate
 	
 	mAnimate = byteBuffer->ReadByte();
-	LogString("an:%d",mAnimate);
+	//LogString("an:%d",mAnimate);
 }
 
 void ShapeDynamic::processTick()
