@@ -149,6 +149,9 @@ short	mDroppedPackets;			// Dropped packets
 
 public void readPackets()
 {
+
+
+
 	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
 	while(checkForByteBuffer(byteBuffer))
 	{
@@ -156,16 +159,18 @@ public void readPackets()
 		byteBuffer.flip(); //BeginReading() c++ equivalent
 
 		int type = byteBuffer.get();
-		System.out.println("type:" + type);
+		//System.out.println("type:" + type);
 
 		if (mParser.mMessageConnect == type)
 		{
-			System.out.println("connect message -101 recieved");
+			//System.out.println("connect message -101 recieved");
 		}
 
 		if (mParser.mMessageAddShape == type)
 		{
-			System.out.println("addShape");
+			System.out.println("before mLocal");
+			//System.out.println("mLocal:" + byteBuffer.get());
+			System.out.println("after mLocal");
 			mGame.addShape(true,byteBuffer);
 		}
 
@@ -184,6 +189,7 @@ public void readPackets()
 			//	mGame.shutdown();
 		}
 		byteBuffer.clear();
+		//byteBuffer.flip();
 	}
 }
 
@@ -199,11 +205,14 @@ boolean checkForByteBuffer(ByteBuffer byteBuffer)
 			//byteBuffer.flip();  //this sets marker to beginning of buffer just like BeginReading in c++.
 
 			// Parse system messages
-			parsePacket(byteBuffer);
+			//parsePacket(byteBuffer);
 			return true;
 		}
 		else
 		{
+
+
+
 			return false;
 		}
 	}
@@ -224,7 +233,7 @@ void parsePacket(ByteBuffer byteBuffer)
 	byteBuffer.flip();
 
 	int type = byteBuffer.get();
-
+	System.out.println("type:" + type);
 	// Check if the type is a positive number
 	// = is the packet sequenced
 	if(type > 0)

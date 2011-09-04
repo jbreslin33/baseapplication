@@ -9,6 +9,7 @@ import breslin.clientside.shape.ShapeDynamic;
 //standard library
 import java.util.ArrayList;
 import java.nio.ByteBuffer;
+import java.lang.String;
 
 //shape
 import breslin.clientside.shape.Shape;
@@ -33,13 +34,53 @@ import breslin.clientside.command.Command;
 /**********************************
 *          CLASS
 **********************************/
-class ShapeDynamicMonkey extends ShapeDynamic //, public OgreAnimation
+public class ShapeDynamicMonkey extends ShapeDynamic //, public OgreAnimation
 {
 
 
 public ShapeDynamicMonkey(GameMonkey gameMonkey, ByteBuffer byteBuffer, boolean isGhost)
 {
 	super(gameMonkey,byteBuffer);
+
+	System.out.println("creating a monkey shape in constructor.");
+	//we use this to name shape. as ogre is picky about same names. it also serves as a counter of sorts.
+
+	mGameMonkey = gameMonkey;
+
+	mIsGhost = isGhost;
+
+	if (mIsGhost)
+	{
+		mIndex = mIndex * -1;
+	}
+
+	//figure out mesh based on code passed in byteBuffer
+	mMeshName = getMeshString(mMeshCode);
+
+
+	createShape();
+
+	//animation
+	//if (mAnimate)
+	//{
+	//	addAbility(new AbilityAnimationOgre(this));
+	//}
+
+	//setupTitle();
+
+	//call create ghost here..
+	if (!mIsGhost)
+	{
+		//create a ghost for this shape
+		mGhost = new ShapeDynamicMonkey(mGameMonkey,byteBuffer,true);
+		//mGhost->setVisible(false);
+
+		//put shape and ghost in game vectors so they can be looped and game now knows of them.
+		mGame.mShapeVector.add(this);
+		mGame.mShapeGhostVector.add(mGhost);
+	}
+
+
 }
 
 /**********************************
@@ -88,7 +129,7 @@ void scale(Vector3D scaleVector)
 }
 
 //movement
-void yaw        (float amountToYaw, boolean converToDegree   )
+public void yaw        (float amountToYaw, boolean converToDegree   )
 {
 
 }
@@ -158,7 +199,22 @@ String getName()
 //utility
 //Ogre::Vector3 converToVector3(Vector3D vector3d);
 
+
+
+String getMeshString(int meshCode)
+{
+
+	if (meshCode == 0)
+	{
+		mScale = 1;
+		return "cube.mesh";
+	}
+	if (meshCode == 1)
+	{
+		mScale = 30;
+		return "sinbad.mesh";
+	}
+	return "cube.mesh";
 }
 
-
-
+}

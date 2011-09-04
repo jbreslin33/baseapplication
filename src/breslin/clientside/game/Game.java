@@ -49,8 +49,8 @@ public Game(byte[] serverIP, int serverPort)
 *   		MEMBER VARIABLES
 ***************************************/
 //Shapes
-ArrayList<ShapeDynamic> mShapeVector = new ArrayList<ShapeDynamic>(); //all shapes in the client world
-ArrayList<ShapeDynamic> mShapeGhostVector = new ArrayList<ShapeDynamic>(); //all shapes in the client world's ghost
+public ArrayList<ShapeDynamic> mShapeVector = new ArrayList<ShapeDynamic>(); //all shapes in the client world
+public ArrayList<ShapeDynamic> mShapeGhostVector = new ArrayList<ShapeDynamic>(); //all shapes in the client world's ghost
 
 //Network
 public Network     mNetwork;
@@ -93,7 +93,7 @@ public void removeShape(ByteBuffer byteBuffer)
 
 ShapeDynamic getShapeDynamic(int id)
 {
-	ByteBuffer byteBuffer = ByteBuffer.allocate(48);
+	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
 	return new ShapeDynamic(this, byteBuffer);
 }
 

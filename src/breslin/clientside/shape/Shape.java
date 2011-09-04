@@ -13,14 +13,19 @@ import breslin.math.Vector3D;
 public class Shape
 {
 
-
+public Shape()
+{
+	//scale
+	mScale = 0;
+}
 /**************************************************
 *			VARIABLES
 **************************************************/
 int   mIndex;
 Game mGame;
 
-//Parser* mParser;
+//scale
+float mScale;
 
 /**************************************************
 *			METHODS

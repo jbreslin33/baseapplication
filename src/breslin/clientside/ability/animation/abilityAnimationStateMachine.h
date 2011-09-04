@@ -43,20 +43,6 @@ AbilityAnimationState*   m_pGlobalState;
 **********************************/
 public:
 
-AbilityAnimationState*  currentState()  const
-{
-	return m_pCurrentState;
-}
-
-AbilityAnimationState*  globalState()   const
-{
-	return m_pGlobalState;
-}
-AbilityAnimationState*  previousState() const
-{
-	return m_pPreviousState;
-}
-
 void setCurrentState(AbilityAnimationState* s)
 {
 	m_pCurrentState = s;
@@ -98,12 +84,6 @@ void  changeState(AbilityAnimationState* pNewState)
        m_pCurrentState->enter(m_pOwner);
 	}
   }
-
-void  revertToPreviousState()
-{
-	changeState(m_pPreviousState);
-}
-
 };
 #endif
 

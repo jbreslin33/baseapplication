@@ -42,6 +42,37 @@ public ShapeDynamic(Game game, ByteBuffer byteBuffer)
 {
 	super();
 
+	//game
+	mGame = game;
+
+	//parser
+	mParser = new Parser();
+
+	//commands
+	mServerFrame         = new Command();
+	mCommandToRunOnShape = new Command();
+
+	//speed
+	mSpeed     = 0;
+	mSpeedMax  = 200;
+
+	//orientation
+	mPosition = new Vector3D();
+	mVelocity = new Vector3D();
+	mRotation = new Vector3D();
+
+	//mesh
+	mMeshCode = 0;
+
+	//animate
+	mAnimate = false;
+
+	//byteBuffer
+//	parseByteBuffer(byteBuffer);
+
+	//ghost
+	mGhost = null;
+
 }
 
 /************************************************
@@ -50,6 +81,12 @@ public ShapeDynamic(Game game, ByteBuffer byteBuffer)
 
 //game
 Game mGame;
+
+//mesh
+int mMeshCode;
+
+//animate
+boolean mAnimate;
 
 //parser
 Parser mParser;
@@ -62,7 +99,7 @@ float mSpeedMax;
 ArrayList<Ability> mAbilityVector = new ArrayList<Ability>();
 
 //this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
-ShapeDynamic mGhost;
+public ShapeDynamic mGhost;
 
 //basic
 Vector3D mPosition;
@@ -91,7 +128,7 @@ Ability getAbility(Ability ability)
 }
 
 //movement
-void   yaw                  (float amountToYaw, boolean converToDegree   )
+public void   yaw                  (float amountToYaw, boolean converToDegree   )
 {
 
 }
@@ -129,9 +166,41 @@ void readDeltaMoveCommand(ByteBuffer byteBuffer)
 
 }
 
-//dispatch
-void parseDispatch(ByteBuffer byteBuffer)
+void parseByteBuffer(ByteBuffer byteBuffer)
 {
+
+	//byteBuffer->BeginReading();
+	System.out.println("before");
+	byteBuffer.flip();
+	System.out.println("type:" + byteBuffer.get()); //should read -103 to add a shape..
+
+	mLocal	=    byteBuffer.get(); //error
+				System.out.println("after2");
+	mIndex		=    byteBuffer.get();
+
+	mPosition.x =   byteBuffer.getFloat();
+	mPosition.y =   byteBuffer.getFloat();
+	mPosition.z =   byteBuffer.getFloat();
+
+	mVelocity.x = byteBuffer.getFloat();
+	mVelocity.y = byteBuffer.getFloat();
+	mVelocity.z = byteBuffer.getFloat();
+	mRotation.x = byteBuffer.getFloat();
+	mRotation.z = byteBuffer.getFloat();
+
+	//mesh
+	mMeshCode    = byteBuffer.get();
+
+	//animate
+	int animate = byteBuffer.get();
+	if (animate == 1)
+	{
+		mAnimate = true;
+	}
+	else
+	{
+		mAnimate = false;
+	}
 
 }
 

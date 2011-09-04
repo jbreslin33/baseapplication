@@ -9,6 +9,15 @@ import java.nio.ByteBuffer;
 //graphics
 import breslin.clientside.graphics.GraphicsMonkey;
 
+//shape
+import breslin.clientside.shape.ShapeDynamicMonkey;
+import breslin.clientside.shape.ShapeDynamic;
+
+
+//ability
+//import breslin.clientside.ability.rotation.AbilityRotation;
+//import breslin.clientside.ability.move.AbilityMove;
+
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
@@ -48,9 +57,13 @@ float mRenderTime;
 
 
 //shape
-public void addShape(boolean b, ByteBuffer buffer)
+public void addShape(boolean b, ByteBuffer byteBuffer)
 {
+	ShapeDynamic shapeDynamicMonkey = new ShapeDynamicMonkey(this,byteBuffer,false);  //you should just need to call this...
 
+	//ability
+	//shapeDynamicMonkey.addAbility(new AbilityRotation(shapeDynamicMonkey));
+	//shapeDynamicMonkey.addAbility(new AbilityMove    (shapeDynamicMonkey));
 }
 
 //time
