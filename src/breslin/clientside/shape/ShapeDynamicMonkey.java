@@ -11,6 +11,13 @@ import java.util.ArrayList;
 import java.nio.ByteBuffer;
 import java.lang.String;
 
+  // geometry
+  import com.jme3.material.Material;
+  import com.jme3.math.Vector3f;
+  import com.jme3.scene.Geometry;
+  import com.jme3.scene.shape.Box;
+  import com.jme3.math.ColorRGBA;
+
 //shape
 import breslin.clientside.shape.Shape;
 
@@ -113,6 +120,13 @@ String         mName;
 //shape
 void createShape()
 {
+
+ 	Box b = new Box(Vector3f.ZERO, 1, 1, 1);
+    Geometry geom = new Geometry("Box", b);
+    Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
+    mat.setColor("Color", ColorRGBA.Blue);
+    geom.setMaterial(mat);
+    mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
 
 }
 

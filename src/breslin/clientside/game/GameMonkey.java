@@ -46,7 +46,7 @@ public static void main(String[] args)
 ***************************************/
 
 //graphics
-GraphicsMonkey mGraphicsMonkey;
+public GraphicsMonkey mGraphicsMonkey;
 
 //render time
 float mRenderTime;
@@ -97,6 +97,7 @@ void processInput()
 {
 
 }
+
 
 }
 
