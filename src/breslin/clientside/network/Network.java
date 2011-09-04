@@ -156,10 +156,10 @@ public void readPackets()
 	while(checkForByteBuffer(byteBuffer))
 	{
 
-		byteBuffer.flip(); //BeginReading() c++ equivalent
+		byteBuffer.position(0); //BeginReading() c++ equivalent
 
 		int type = byteBuffer.get();
-		//System.out.println("type:" + type);
+
 
 		if (mParser.mMessageConnect == type)
 		{
@@ -168,8 +168,6 @@ public void readPackets()
 
 		if (mParser.mMessageAddShape == type)
 		{
-			System.out.println("local:" + byteBuffer.get());
-			System.out.println("index:" + byteBuffer.get());
 			mGame.addShape(true,byteBuffer);
 		}
 
@@ -188,7 +186,6 @@ public void readPackets()
 			//	mGame.shutdown();
 		}
 		byteBuffer.clear();
-		//byteBuffer.flip();
 	}
 }
 
@@ -196,15 +193,13 @@ boolean checkForByteBuffer(ByteBuffer byteBuffer)
 {
    try
     {
-		//byteBuffer.clear();
-
 		if (mDatagramChannel.receive(byteBuffer) != null)
 		{
 
-			//byteBuffer.flip();  //this sets marker to beginning of buffer just like BeginReading in c++.
+			byteBuffer.position(0);  //this sets marker to beginning of buffer just like BeginReading in c++.
 
 			// Parse system messages
-			//parsePacket(byteBuffer);
+			parsePacket(byteBuffer);
 			return true;
 		}
 		else
@@ -222,17 +217,12 @@ boolean checkForByteBuffer(ByteBuffer byteBuffer)
     return false;
 }
 
-
-
-
 void parsePacket(ByteBuffer byteBuffer)
 {
 
-	//mes->BeginReading();
-	byteBuffer.flip();
+	byteBuffer.position(0);
 
 	int type = byteBuffer.get();
-	System.out.println("type:" + type);
 	// Check if the type is a positive number
 	// = is the packet sequenced
 	if(type > 0)
@@ -241,12 +231,9 @@ void parsePacket(ByteBuffer byteBuffer)
 
 		if(sequence <= mIncomingSequence)
 		{
-			//LogString("Client: (sequence: %d <= incoming seq: %d)",
-			//	sequence, mIncomingSequence);
 			System.out.println("Client..Sequence mismatch");
-			//LogString("Client: Sequence mismatch");
+
 		}
-		//short add1 = 1;
 		//mDroppedPackets = sequence - mIncomingSequence + add1;
 
 		mIncomingSequence = sequence;

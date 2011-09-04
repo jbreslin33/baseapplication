@@ -68,7 +68,7 @@ public ShapeDynamic(Game game, ByteBuffer byteBuffer)
 	mAnimate = false;
 
 	//byteBuffer
-//	parseByteBuffer(byteBuffer);
+	parseByteBuffer(byteBuffer);
 
 	//ghost
 	mGhost = null;
@@ -169,18 +169,14 @@ void readDeltaMoveCommand(ByteBuffer byteBuffer)
 void parseByteBuffer(ByteBuffer byteBuffer)
 {
 
-	//byteBuffer->BeginReading();
-	System.out.println("before");
-	byteBuffer.flip();
-	System.out.println("type:" + byteBuffer.get()); //should read -103 to add a shape..
+	byteBuffer.position(0);
 
-	mLocal	=    byteBuffer.get(); //error
-				System.out.println("after2");
-	mIndex		=    byteBuffer.get();
+	mLocal	    = byteBuffer.get(); //error
+	mIndex		= byteBuffer.get();
 
-	mPosition.x =   byteBuffer.getFloat();
-	mPosition.y =   byteBuffer.getFloat();
-	mPosition.z =   byteBuffer.getFloat();
+	mPosition.x = byteBuffer.getFloat();
+	mPosition.y = byteBuffer.getFloat();
+	mPosition.z = byteBuffer.getFloat();
 
 	mVelocity.x = byteBuffer.getFloat();
 	mVelocity.y = byteBuffer.getFloat();
