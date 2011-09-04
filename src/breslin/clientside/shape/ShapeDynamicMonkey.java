@@ -127,6 +127,7 @@ void createShape()
     mat.setColor("Color", ColorRGBA.Blue);
     geom.setMaterial(mat);
     mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
+    geom.move((float)mPosition.x,(float)mPosition.z,(float)mPosition.y);
 
 }
 

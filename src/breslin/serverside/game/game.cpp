@@ -33,7 +33,7 @@ Game::Game()
 		Vector3D* position = new Vector3D();
 		position->x = 0;
 		position->y = 0;
-		position->z = 300.0f * i;;
+		position->z = 50.0f * i;;
 		
 		createAIShape(position,true,true,5,1,true);
 	}
@@ -51,8 +51,6 @@ Game::Game()
 	position->y = 0;
 	position->z = -1000;
 	createAIShape(position,false,true,5,0,false);
-
-
 
 	//east wall
 	for (int i = -2000; i < 2000; i = i + 200)
