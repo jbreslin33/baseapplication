@@ -128,6 +128,10 @@ void createShape()
 
 	//scale
 	mSceneNode.scale(mScale,mScale,mScale);
+
+	//move
+	mPosition.x = 5.0f;
+	setPosition((float)mPosition.x,(float)mPosition.y,(float)mPosition.z);
 }
 
 //debugging
@@ -158,7 +162,9 @@ void setPosition(Vector3D position                        )
 }
 void setPosition(float x, float y, float z                )
 {
-
+	//in ogre setPosition is absolute so for jmonkey i could just take the difference?
+	//mSceneNode.getPosition();
+	mSceneNode.setLocalTranslation(x,y,z);
 }
 void setVisible (boolean visible                             )
 {
