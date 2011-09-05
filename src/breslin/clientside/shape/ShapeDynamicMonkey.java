@@ -18,7 +18,7 @@ import java.lang.String;
   import com.jme3.scene.shape.Box;
   import com.jme3.math.ColorRGBA;
   import com.jme3.scene.Node;
-  import com.jme3.light.DirectionalLight;
+
 
 //shape
 import breslin.clientside.shape.Shape;
@@ -122,21 +122,12 @@ Node          mSceneNode;
 //shape
 void createShape()
 {
-	System.out.println("scale:" + mScale);
+	//actually create the shape and attach to node.
+	mSceneNode = (Node) mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(getMeshString(mMeshCode));
+	mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(mSceneNode);
 
- mGameMonkey.mGraphicsMonkey.getViewPort().setBackgroundColor(ColorRGBA.LightGray);
-    DirectionalLight dl = new DirectionalLight();
-    dl.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
-    mGameMonkey.mGraphicsMonkey.getRootNode().addLight(dl);
-
-String mesh = getMeshString(mMeshCode);
-System.out.println("MESH:" + mesh);
-mSceneNode = (Node) mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(mesh);
-mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(mSceneNode);
-
-
-//scale
-mSceneNode.scale(mScale,mScale,mScale);
+	//scale
+	mSceneNode.scale(mScale,mScale,mScale);
 }
 
 //debugging

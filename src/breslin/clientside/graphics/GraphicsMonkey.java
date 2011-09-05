@@ -17,6 +17,9 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 
+//light
+import com.jme3.light.DirectionalLight;
+
 
 /***************************************
 *   		FORWARD DECLARATIONS
@@ -54,6 +57,10 @@ public GraphicsMonkey(GameMonkey gameMonkey)
 	//	keyBuffer[i] = false;
 	//}
 
+	//let their be light
+	DirectionalLight directionalLight = new DirectionalLight();
+	directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
+    getRootNode().addLight(directionalLight);
 
 }
 

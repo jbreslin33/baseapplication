@@ -112,11 +112,9 @@ void ShapeDynamic::parseByteBuffer(ByteBuffer* byteBuffer)
 	
 	//mesh
 	mMeshCode    = byteBuffer->ReadByte();
-	LogString("mMeshCode:%d",mMeshCode);
+
 	//animate
-	
 	mAnimate = byteBuffer->ReadByte();
-	//LogString("an:%d",mAnimate);
 }
 
 void ShapeDynamic::processTick()
