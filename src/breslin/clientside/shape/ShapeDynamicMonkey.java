@@ -17,6 +17,8 @@ import java.lang.String;
   import com.jme3.scene.Geometry;
   import com.jme3.scene.shape.Box;
   import com.jme3.math.ColorRGBA;
+  import com.jme3.scene.Node;
+  import com.jme3.light.DirectionalLight;
 
 //shape
 import breslin.clientside.shape.Shape;
@@ -106,7 +108,7 @@ String         mName;
 //Entity*             mEntity;
 
 //this is your pointer to move shape, really all you need.
-//SceneNode*          mSceneNode;
+Node          mSceneNode;
 
 //billboard
 //ObjectTitle* mObjectTitle;
@@ -122,15 +124,19 @@ void createShape()
 {
 	System.out.println("scale:" + mScale);
 
- 	Box b = new Box(Vector3f.ZERO, 60, 60, 60);
-    Geometry geom = new Geometry("Box", b);
-    Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
-    mat.setColor("Color", ColorRGBA.Blue);
-    geom.setMaterial(mat);
-    mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
-    //geom.move((float)mPosition.x,(float)mPosition.y,(float)mPosition.z);
+ mGameMonkey.mGraphicsMonkey.getViewPort().setBackgroundColor(ColorRGBA.LightGray);
+    DirectionalLight dl = new DirectionalLight();
+    dl.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
+    mGameMonkey.mGraphicsMonkey.getRootNode().addLight(dl);
+
+String mesh = getMeshString(mMeshCode);
+System.out.println("MESH:" + mesh);
+mSceneNode = (Node) mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(mesh);
+mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(mSceneNode);
 
 
+//scale
+mSceneNode.scale(mScale,mScale,mScale);
 }
 
 //debugging
@@ -223,13 +229,13 @@ String getMeshString(int meshCode)
 
 	if (meshCode == 0)
 	{
-		mScale = 10;
+		mScale = .25f;
 		return "cube.mesh";
 	}
 	if (meshCode == 1)
 	{
-		mScale = 30;
-		return "sinbad.mesh";
+		mScale = .25f;
+		return "assets/Models/Sinbad/Sinbad.mesh.xml";
 	}
 	return "cube.mesh";
 }

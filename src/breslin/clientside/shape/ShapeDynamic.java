@@ -168,8 +168,9 @@ void readDeltaMoveCommand(ByteBuffer byteBuffer)
 
 void parseByteBuffer(ByteBuffer byteBuffer)
 {
-
 	byteBuffer.position(0);
+
+	byteBuffer.get(); //type should be -103
 
 	mLocal	    = byteBuffer.get(); //error
 	mIndex		= byteBuffer.get();

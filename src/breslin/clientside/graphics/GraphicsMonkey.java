@@ -126,17 +126,21 @@ private ActionListener actionListener = new ActionListener()
 			mJoinGame = true;
 			if (mJoinGame && !mPlayingGame)
 			{
+
+
+
 				System.out.println("send Connect.....");
 				mGameMonkey.mNetwork.sendConnect();
 				mPlayingGame = true;
 
-				//can i set cam pos now?
-				Vector3f startCamPosition = new Vector3f(0, 700, 700);
-				Vector3f lookAtVector = new Vector3f(0,0,-300);
+				//Set Camera to position and to lookat avatar at 0,0,0
+				Vector3f startCamPosition = new Vector3f(0, 20, 20);
+				Vector3f lookAtVector = new Vector3f(0,0,0);
 				Vector3f worldDirection   = new Vector3f(0,1,0);
 				cam.setLocation(startCamPosition);
-
+				System.out.println("setLocation of cam");
 				cam.lookAt(lookAtVector,worldDirection);
+
 			}
         }
     }
