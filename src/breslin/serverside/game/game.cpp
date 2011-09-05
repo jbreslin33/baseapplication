@@ -26,45 +26,19 @@ Game::Game()
 
 	mRunningShapeIndex = 1;
 	mSpreadOutAIIndex = 1;
-	
+	/*
 	//ai guys, let's make them sinbads
-	for(int i = 0; i < 0; i++)
+	for(int i = 0; i < 3; i++)
 	{                 
 		Vector3D* position = new Vector3D();
-		position->x = 300.0f * i;
+		position->x = 5.0f;
 		position->y = 0;
-		position->z = 0;
+		position->z = 2 * i;
 		
-		createAIShape(position,true,false,.5,1,true);
+		createAIShape(position,true,true,.66,1,true);
 	}
 	Vector3D* position = new Vector3D();
 	
-	//tombstone #1
-	position->x = 10;
-	position->y = 0;
-	position->z = 10;
-	createAIShape(position,false,true,.5,0,false);
-
-
-/*
-	for (int i = 1; i < 10; i++)
-	{
-		//tombstone #1
-		position->x = i;
-		position->y = 0;
-		position->z = 0;
-		createAIShape(position,false,false,.04166,0,false);
-	}
-	//for (int i = 0; i < 10; i++)
-	//{
-		//tombstone #1
-		position->x = 1;
-		position->y = -1;
-		position->z = 0;
-		createAIShape(position,false,false,.04166,0,false);
-	//}
-*/
-/*	
 	//east wall
 	for (int i = -10; i < 10; i++)
 	{
@@ -73,41 +47,41 @@ Game::Game()
 		position->x = 10;
 		position->y = 0;
 		position->z = 1 * i;
-		createAIShape(position,false,false,.04166,0,false);
+		createAIShape(position,false,true,.5,0,false);
 	}
-*/
-	/*
+
+	
 	//west wall
-	for (int i = -100; i < 100; i = i + 200)
+	for (int i = -10; i < 10; i++)
 	{
 		//collidable static shapes with no animation for now it's a WALL
 		Vector3D* position = new Vector3D();
-		position->x = -2500;
+		position->x = -10;
 		position->y = 0;
 		position->z = 1 * i;
-		createAIShape(position,false,true,5,0,false);
+		createAIShape(position,false,true,.5,0,false);
 	}
 
 	//north wall
-	for (int i = -2500; i < 2500; i = i + 200)
+	for (int i = -10; i < 10; i = i++)
 	{
 		//collidable static shapes with no animation for now it's a WALL
 		Vector3D* position = new Vector3D();
 		position->x = 1 * i;
 		position->y = 0;
-		position->z = -2000;
-		createAIShape(position,false,true,5,0,false);
+		position->z = -10;
+		createAIShape(position,false,true,.5,0,false);
 	}
 
 	//south wall
-	for (int i = -2500; i < 2500; i = i + 200)
+	for (int i = -10; i < 10; i = i++)
 	{
 		//collidable static shapes with no animation for now it's a WALL
 		Vector3D* position = new Vector3D();
 		position->x = 1 * i;
 		position->y = 0;
-		position->z = 2000;
-		createAIShape(position,false,true,5,0,false);
+		position->z = 10;
+		createAIShape(position,false,true,.5,0,false);
 	}
 */
 }

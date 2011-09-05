@@ -42,7 +42,7 @@ void Shape::processTick()
 	//give ai a chance to jump in if this shape has not client
 	if (mAI == true)
 	{
-		//AI::processTick();
+		AI::processTick();
 	}
 
 	//don't do any rotation if there is no mKey set
