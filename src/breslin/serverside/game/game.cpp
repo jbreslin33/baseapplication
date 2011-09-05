@@ -35,11 +35,18 @@ Game::Game()
 		position->y = 0;
 		position->z = 0;
 		
-		createAIShape(position,true,false,.04166,1,true);
+		createAIShape(position,true,false,.5,1,true);
 	}
-
 	Vector3D* position = new Vector3D();
+	
+	//tombstone #1
+	position->x = 10;
+	position->y = 0;
+	position->z = 10;
+	createAIShape(position,false,true,.5,0,false);
 
+
+/*
 	for (int i = 1; i < 10; i++)
 	{
 		//tombstone #1
@@ -56,21 +63,22 @@ Game::Game()
 		position->z = 0;
 		createAIShape(position,false,false,.04166,0,false);
 	//}
-
-	/*
+*/
+/*	
 	//east wall
-	for (int i = -2000; i < 2000; i = i + 200)
+	for (int i = -10; i < 10; i++)
 	{
 		//collidable static shapes with no animation for now it's a WALL
 		Vector3D* position = new Vector3D();
-		position->x = 2500;
+		position->x = 10;
 		position->y = 0;
 		position->z = 1 * i;
-		createAIShape(position,false,true,5,0,false);
+		createAIShape(position,false,false,.04166,0,false);
 	}
-
+*/
+	/*
 	//west wall
-	for (int i = -2000; i < 2000; i = i + 200)
+	for (int i = -100; i < 100; i = i + 200)
 	{
 		//collidable static shapes with no animation for now it's a WALL
 		Vector3D* position = new Vector3D();
@@ -250,8 +258,10 @@ void Game::checkCollisions(void)
 					float z2 = mShapeVector.at(j)->mSceneNode->getPosition().z;
 
 					float distSq = pow((x1-x2),2) + pow((z1-z2),2);
-
-					if(distSq < 10000.0)
+					
+					//i am simply adding the 2 collisionradius's of the 2 objects in question then comparing
+					//to distSQ between them. IS this right or is it working by chance?
+					if(distSq < mShapeVector.at(i)->mCollisionRadius + mShapeVector.at(j)->mCollisionRadius)
 					{
 						mShapeVector.at(i)->mCommand.mOrigin = mShapeVector.at(i)->mCommand.mOriginOld;
 						mShapeVector.at(j)->mCommand.mOrigin = mShapeVector.at(j)->mCommand.mOriginOld;
