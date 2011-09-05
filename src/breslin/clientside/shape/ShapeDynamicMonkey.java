@@ -154,17 +154,26 @@ public void yaw        (float amountToYaw, boolean converToDegree   )
 
 void translate  (Vector3D translateVector, int perspective)
 {
-
+	if (perspective == 1)
+	{
+		//getSceneNode()->translate(converToVector3(translateVector), Ogre::Node::TS_WORLD);
+		getSceneNode().move((float)translateVector.x,(float)translateVector.y,(float)translateVector.z);
+	}
+	if (perspective == 2)
+	{
+		//getSceneNode()->translate(converToVector3(translateVector), Ogre::Node::TS_LOCAL);
+		getSceneNode().move((float)translateVector.x,(float)translateVector.y,(float)translateVector.z);
+	}
 }
 void setPosition(Vector3D position                        )
 {
-
+	getSceneNode().setLocalTranslation((float)position.x,(float)position.y,(float)position.z);
 }
 void setPosition(float x, float y, float z                )
 {
 	//in ogre setPosition is absolute so for jmonkey i could just take the difference?
 	//mSceneNode.getPosition();
-	mSceneNode.setLocalTranslation(x,y,z);
+	getSceneNode().setLocalTranslation(x,y,z);
 }
 void setVisible (boolean visible                             )
 {
@@ -178,7 +187,13 @@ float    getDegreesToSomething(Vector3D something                       )
 }
 Vector3D getPosition          (                                         )
 {
-	return new Vector3D();
+	Vector3f vector3f = getSceneNode().getWorldTranslation();
+	Vector3D vector3D = new Vector3D();
+	vector3D.x = vector3f.x;
+	vector3D.y = vector3f.y;
+	vector3D.z = vector3f.z;
+
+	return vector3D;
 }
 
 //title
@@ -213,8 +228,8 @@ String getName()
 	return mName;
 }
 
-//ogre scene node
-//SceneNode*  getSceneNode() { return mSceneNode; }
+//scene node
+Node  getSceneNode() { return mSceneNode; }
 
 //utility
 //Ogre::Vector3 converToVector3(Vector3D vector3d);
