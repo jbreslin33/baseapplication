@@ -44,7 +44,7 @@ ShapeDynamic::ShapeDynamic(Game* game, ByteBuffer* byteBuffer)
 
 	//speed
 	mSpeed     = 0.0;
-	mSpeedMax  = 200.0;
+	mSpeedMax  = 200.0 /120;
 
 	//orientation
 	mPosition = new Vector3D();

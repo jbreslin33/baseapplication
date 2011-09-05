@@ -3,7 +3,7 @@
 
 #include "../../serverside/client/client.h"
 
-#define MAX_RUN_SPEED 200           // character running speed in units per second
+#define MAX_RUN_SPEED 1.66           // character running speed in units per second
 
 #include <string>
 
@@ -29,8 +29,8 @@ Move::Move()
     mRunSpeed     = 0.0;
 
     //run acceleration
-    mRunAccel    = 5.0;
-    mRunDecel    = 5.0;
+    mRunAccel    = .04166;
+    mRunDecel    = .04166;
 
 
  	//move states

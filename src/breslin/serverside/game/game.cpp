@@ -35,23 +35,29 @@ Game::Game()
 		position->y = 0;
 		position->z = 0;
 		
-		createAIShape(position,true,true,5,1,true);
+		createAIShape(position,true,false,.04166,1,true);
 	}
 
 	Vector3D* position = new Vector3D();
 
-	//tombstone #1
-	position->x = -1000;
-	position->y = 0;
-	position->z = 1000;
-	createAIShape(position,false,true,5,0,false);
-	
-	//tombstone #2
-	position->x = 1000;
-	position->y = 0;
-	position->z = -1000;
-	createAIShape(position,false,true,5,0,false);
-/*
+	for (int i = 1; i < 10; i++)
+	{
+		//tombstone #1
+		position->x = i;
+		position->y = 0;
+		position->z = 0;
+		createAIShape(position,false,false,.04166,0,false);
+	}
+	//for (int i = 0; i < 10; i++)
+	//{
+		//tombstone #1
+		position->x = 1;
+		position->y = -1;
+		position->z = 0;
+		createAIShape(position,false,false,.04166,0,false);
+	//}
+
+	/*
 	//east wall
 	for (int i = -2000; i < 2000; i = i + 200)
 	{

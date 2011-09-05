@@ -5,7 +5,7 @@
 
 #include "../../command/command.h"
 
-#define MAX_RUN_SPEED 200           // character running speed in units per second
+#define MAX_RUN_SPEED 1.66           // character running speed in units per second
 
 Normal_Move* Normal_Move::Instance()
 {

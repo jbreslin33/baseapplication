@@ -73,13 +73,15 @@ ShapeDynamicOgre::~ShapeDynamicOgre()
 std::string ShapeDynamicOgre::getMeshString(int meshCode)
 {
 	if (meshCode == 0)
+		
 	{
-		mScale = 1;
+		//this cube is exactly 1 ogre world unit. Which I take to be 1 meter.
+		mScale = .01;
 		return "cube.mesh";
 	}
 	if (meshCode == 1)
 	{
-		mScale = 30;
+		mScale = .25;
 		return "sinbad.mesh";
 	}
 }
