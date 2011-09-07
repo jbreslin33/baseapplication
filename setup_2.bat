@@ -2,9 +2,9 @@ mkdir lib
 mkdir build
 mkdir build\art
 echo jmonkey
-copy ..\jme3\dist\jMonkeyEngine3.jar lib\
-copy ..\jme3\lib\lwjgl\lwjgl.jar lib\
-copy ..\jme3\lib\lwjgl\jME3-lwjgl-natives.jar lib\
+copy "C:\Program Files\jmonkeyplatform\jmonkeyplatform\libs" lib\
+copy "C:\Program Files\jmonkeyplatform\jmonkeyplatform\libs" lib\
+copy "C:\Program Files\jmonkeyplatform\jmonkeyplatform\libs" lib\
 echo art
-xcopy art\*.* build\art /s
-
+//xcopy art\*.* build\art /s
+xcopy "C:\sandbox\jmonkeyengine-read-only\engine\src\test-data\Models\Sinbad\*.*" build\art /s 

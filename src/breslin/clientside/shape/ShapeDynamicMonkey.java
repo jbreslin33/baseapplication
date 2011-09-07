@@ -247,7 +247,7 @@ String getMeshString(int meshCode)
 	if (meshCode == 1)
 	{
 		mScale = .25f;
-		return "assets/Models/Sinbad/Sinbad.mesh.xml";
+		return "art/Sinbad.mesh.xml";
 	}
 	return "cube.mesh";
 }
