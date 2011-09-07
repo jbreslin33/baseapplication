@@ -183,7 +183,16 @@ void setVisible (boolean visible                             )
 //check position
 float    getDegreesToSomething(Vector3D something                       )
 {
-	return 0;
+
+	Vector3f vector3fA = new Vector3f();
+
+	Vector3f vector3fB = new Vector3f();
+	vector3fB.x = (float)something.x;
+	vector3fB.y = (float)something.y;
+	vector3fB.z = (float)something.z;
+
+	return vector3fA.dot(vector3fB);
+
 }
 Vector3D getPosition          (                                         )
 {
