@@ -155,8 +155,8 @@ float ShapeDynamicOgre::getDegreesToSomething(Vector3D vectorOfSomething)
     Quaternion toSomething = getSceneNode()->getOrientation().zAxis().getRotationTo(converToVector3(vectorOfSomething),Vector3::UNIT_Y);
 
     // convert to degrees
-    Real degreesToServer = toSomething.getYaw().valueDegrees();
-	return degreesToServer;
+    Real degreesToSomething = toSomething.getYaw().valueDegrees();
+	return degreesToSomething;
 }
 
 //1 world, 2 local

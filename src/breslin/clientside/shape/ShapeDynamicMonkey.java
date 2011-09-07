@@ -149,6 +149,7 @@ void scale(Vector3D scaleVector)
 //movement
 public void yaw        (float amountToYaw, boolean converToDegree   )
 {
+	getSceneNode().rotate(amountToYaw,0,0);
 
 }
 
