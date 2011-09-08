@@ -63,8 +63,8 @@ public Network(Game game, byte[] serverIP, int serverPort)
 
 	try
 	{
-		String mServerIPString = new String(mServerIP, "UTF8");
-		System.out.println("NETWORK CONSTRUCTOR: serverIP:" + mServerIPString + " serverPort:" + serverPort);
+		String serverIPString = new String(mServerIP, "UTF8");
+		System.out.println("NETWORK CONSTRUCTOR: serverIP:" + serverIPString + " serverPort:" + serverPort);
 
 	}
 	catch (UnsupportedEncodingException e)
@@ -88,7 +88,9 @@ public Network(Game game, byte[] serverIP, int serverPort)
 
 		//lets setup a SocketAddress for server so we can send,
 		//let's also connect to it so we can avoid overhead of security check
-		mInetSocketAddressServer = new InetSocketAddress("192.168.1.103", 30004);
+
+		String mServerIPString = new String(mServerIP, "UTF8");
+		mInetSocketAddressServer = new InetSocketAddress(mServerIPString, 30004);
     	mDatagramChannel.connect(mInetSocketAddressServer);
 
 	}
