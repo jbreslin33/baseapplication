@@ -18,6 +18,8 @@ import java.lang.String;
   import com.jme3.scene.shape.Box;
   import com.jme3.math.ColorRGBA;
   import com.jme3.scene.Node;
+  import com.jme3.math.Quaternion;
+  import com.jme3.math.Transform;
 
 
 //shape
@@ -184,7 +186,13 @@ void setVisible (boolean visible                             )
 //check position
 float    getDegreesToSomething(Vector3D something                       )
 {
+	//Transform transformGhost = getSceneNode().getWorldTransform();
+	//Quaternion quaternionThis = transform.getRotation();
 
+
+
+
+/*
 	Vector3f vector3fA = new Vector3f();
 
 	Vector3f vector3fB = new Vector3f();
@@ -193,8 +201,10 @@ float    getDegreesToSomething(Vector3D something                       )
 	vector3fB.z = (float)something.z;
 
 	return vector3fA.dot(vector3fB);
-
+*/
+return 0.0f;
 }
+
 Vector3D getPosition          (                                         )
 {
 	Vector3f vector3f = getSceneNode().getWorldTranslation();

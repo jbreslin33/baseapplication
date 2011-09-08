@@ -151,7 +151,7 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 }
 float ShapeDynamicOgre::getDegreesToSomething(Vector3D vectorOfSomething)
 {
-    //calculate how far off we are from server
+    //calculate how far off we are from some vector
     Quaternion toSomething = getSceneNode()->getOrientation().zAxis().getRotationTo(converToVector3(vectorOfSomething),Vector3::UNIT_Y);
 
     // convert to degrees
