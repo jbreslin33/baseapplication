@@ -21,5 +21,9 @@ void normalise();
 
 Vector3D operator*(float num) const;
 
+//getDegreesToSomething
+double Vec3_Module(const double * v);
+double Vec3_Dot(const double * a, const double * b);
+double Vec3_Angle(const double * a, const double * b);
 };
 #endif

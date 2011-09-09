@@ -26,7 +26,7 @@ Game::Game()
 
 	mRunningShapeIndex = 1;
 	mSpreadOutAIIndex = 1;
-	/*
+	
 	//ai guys, let's make them sinbads
 	for(int i = 0; i < 3; i++)
 	{                 
@@ -37,6 +37,7 @@ Game::Game()
 		
 		createAIShape(position,true,true,.66,1,true);
 	}
+	/*
 	Vector3D* position = new Vector3D();
 	
 	//east wall
