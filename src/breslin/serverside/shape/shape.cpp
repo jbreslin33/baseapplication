@@ -51,7 +51,7 @@ void Shape::processTick()
 	//is this why the rotation gets off???
 	//UPDATE--I now check for mKey inside Rotation State machine
     
-	Rotation::processTick();
+	//Rotation::processTick();
 
 	//even though there is no mKey set we still need to move as
 	//brian has put in a deceleration factor so let's let it run...
@@ -85,7 +85,8 @@ void Shape::processTick()
 
 }
 
-void Shape::setKeyDirection()
+void Shape::setKeyDirection()  //this is called first in process tick so let's start conversion to separate
+//move/rotation.
 {
 	mKeyDirection.x = 0;
     mKeyDirection.y = 0;

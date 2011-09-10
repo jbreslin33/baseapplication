@@ -41,7 +41,11 @@ void Normal_Move::execute(Move* move)
 	}
 
 	// move in current body direction (not the goal direction)
-	move->mSceneNode->translate(0, 0, move->mCommand.mClientFrametime * move->mRunSpeed,Node::TS_LOCAL);
+	//move->mSceneNode->translate(0, 0, move->mCommand.mClientFrametime * move->mRunSpeed,Node::TS_LOCAL);
+	move->mSceneNode->translate(move->mKeyDirection.x * move->mCommand.mClientFrametime * move->mRunSpeed,
+		0,
+		move->mKeyDirection.z  * move->mCommand.mClientFrametime * move->mRunSpeed,
+		Node::TS_WORLD);
 }
 void Normal_Move::exit(Move* move)
 {
@@ -124,7 +128,12 @@ void Accelerate_Move::execute(Move* move)
 	}
 
 	// move in current body direction (not the goal direction)
-	move->mSceneNode->translate(0, 0, move->mCommand.mClientFrametime * move->mRunSpeed,Node::TS_LOCAL);
+	//this is what i want to change, hopefully it is not threaded all over...
+	//move->mSceneNode->translate(0, 0, move->mCommand.mClientFrametime * move->mRunSpeed,Node::TS_WORLD);
+	move->mSceneNode->translate(move->mKeyDirection.x * move->mCommand.mClientFrametime * move->mRunSpeed,
+		0,
+		move->mKeyDirection.z  * move->mCommand.mClientFrametime * move->mRunSpeed,
+		Node::TS_WORLD);
 }
 void Accelerate_Move::exit(Move* move)
 {
