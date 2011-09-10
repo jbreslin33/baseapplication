@@ -28,7 +28,7 @@ Game::Game()
 	mSpreadOutAIIndex = 1;
 	
 	//ai guys, let's make them sinbads
-	for(int i = 0; i < 3; i++)
+	for(int i = 0; i < 0; i++)
 	{                 
 		Vector3D* position = new Vector3D();
 		position->x = 5.0f;

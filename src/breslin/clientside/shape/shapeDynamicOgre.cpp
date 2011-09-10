@@ -59,6 +59,7 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, b
 		mGame->mShapeVector.push_back(this);
 		mGame->mShapeGhostVector.push_back(mGhost);	
 	}
+	
 
 
 }
@@ -151,24 +152,28 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 }
 float ShapeDynamicOgre::getDegreesToSomething(Vector3D vectorOfSomething)
 {
-	/*
+	
     //calculate how far off we are from some vector
     Quaternion toSomething = getSceneNode()->getOrientation().zAxis().getRotationTo(converToVector3(vectorOfSomething),Vector3::UNIT_Y);
 
     // convert to degrees
     Real degreesToSomething = toSomething.getYaw().valueDegrees();
-	return degreesToSomething;
-	*/
-
+		//LogString("degBrian:%f",degreesToSomething);
+	//return degreesToSomething;
 	
+
+/*
 	double a[] = {vectorOfSomething.x, vectorOfSomething.y, vectorOfSomething.z};
     double b[] = {getSceneNode()->getOrientation().zAxis().x, getSceneNode()->getOrientation().zAxis().y,
 	getSceneNode()->getOrientation().zAxis().z};
 
 	Vector3D* vector3D = new Vector3D();
-	return (float)vector3D->Vec3_Angle(a,b);
-
-	//return 0;
+	float degrees = (float)vector3D->Vec3_Angle(a,b);
+	LogString("degJim:%f",degrees);
+	//return degrees;
+*/
+	return degreesToSomething;
+	//return degreesToSomething;
 
 }
 
