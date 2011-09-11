@@ -58,7 +58,7 @@ void Shape::processTick()
 	Move::processTick();
 
 	//jump is a good work in progress but it's now it's own thing
-	Jump::processTick();
+	//Jump::processTick();
 
 
 
@@ -111,4 +111,5 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 	{
 		mKeyDirection.x += 1;
 	}
+	mKeyDirection.normalise();
 }
