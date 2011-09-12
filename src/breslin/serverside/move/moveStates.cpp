@@ -20,6 +20,8 @@ void Normal_Move::enter(Move* move)
 }
 void Normal_Move::execute(Move* move)
 {
+	
+	//check for No_move and Decelerate and Accelerate states..
     if (move->mKeyDirection.isZeroLength()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
@@ -42,8 +44,7 @@ void Normal_Move::execute(Move* move)
 		}
 	}
 
-	// move in current body direction (not the goal direction)
-	//move->mSceneNode->translate(0, 0, move->mCommand.mClientFrametime * move->mRunSpeed,Node::TS_LOCAL);
+	//actual move
 	move->mSceneNode->translate(move->mKeyDirection.x * move->mCommand.mClientFrametime * move->mRunSpeed,
 		0,
 		move->mKeyDirection.z  * move->mCommand.mClientFrametime * move->mRunSpeed,
@@ -103,7 +104,6 @@ void Accelerate_Move::enter(Move* move)
 }
 void Accelerate_Move::execute(Move* move)
 {
-	//LogString("acc");
     if (move->mKeyDirection.isZeroLength()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
@@ -130,9 +130,7 @@ void Accelerate_Move::execute(Move* move)
 		}
 	}
 
-	// move in current body direction (not the goal direction)
-	//this is what i want to change, hopefully it is not threaded all over...
-	//move->mSceneNode->translate(0, 0, move->mCommand.mClientFrametime * move->mRunSpeed,Node::TS_WORLD);
+	//actual move
 	move->mSceneNode->translate(move->mKeyDirection.x * move->mCommand.mClientFrametime * move->mRunSpeed,
 		0,
 		move->mKeyDirection.z  * move->mCommand.mClientFrametime * move->mRunSpeed,
@@ -178,8 +176,7 @@ void Decelerate_Move::execute(Move* move)
 		}
 	}
 
-	// move in current body direction (not the goal direction)
-	//move->mSceneNode->translate(0, 0, move->mCommand.mClientFrametime * move->mRunSpeed,Node::TS_LOCAL);	
+	//actual move
 	move->mSceneNode->translate(move->mKeyDirection.x * move->mCommand.mClientFrametime * move->mRunSpeed,
 		0,
 		move->mKeyDirection.z  * move->mCommand.mClientFrametime * move->mRunSpeed,

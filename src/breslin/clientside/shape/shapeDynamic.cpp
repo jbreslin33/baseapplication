@@ -211,18 +211,46 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 
 	if (mServerFrame->mMilliseconds != 0) 
 	{
+		if (x)
+		{
+			mServerFrame->mVelocity->x = mServerFrame->mOrigin->x - mServerFrame->mOriginOld->x;
+			LogString("x:%f",mServerFrame->mVelocity->x);
+		}
+		else
+		{
+			mServerFrame->mVelocity->x = 0.0;
+		}
+
+		if (z)
+		{
+			mServerFrame->mVelocity->z = mServerFrame->mOrigin->z - mServerFrame->mOriginOld->z;
+			LogString("z:%f",mServerFrame->mVelocity->z);
+		}
+		else
+		{
+			mServerFrame->mVelocity->z = 0.0;
+		}
+
+		/*
 		if(!x && !z && !y && mServerFrame->mMilliseconds != 0)
 		{
 			mServerFrame->mVelocity->x = 0.0;
 			mServerFrame->mVelocity->y = 0.0;
 			mServerFrame->mVelocity->z = 0.0;
 		}
+
+
 		else
 		{
 			mServerFrame->mVelocity->x = mServerFrame->mOrigin->x - mServerFrame->mOriginOld->x;
+			LogString("x:%f",mServerFrame->mVelocity->x);
+			
 			mServerFrame->mVelocity->y = mServerFrame->mOrigin->y - mServerFrame->mOriginOld->y;
+
 			mServerFrame->mVelocity->z = mServerFrame->mOrigin->z - mServerFrame->mOriginOld->z;
+			LogString("z:%f",mServerFrame->mVelocity->z);
 		}
+		*/
 	}
 	processTick();
 	moveGhostShape();
