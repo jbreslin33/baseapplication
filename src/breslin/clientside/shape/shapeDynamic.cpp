@@ -128,7 +128,7 @@ void ShapeDynamic::processTick()
 	}
 
 	//run billboard here for now.
-	//drawTitle();
+	drawTitle();
 }
 void ShapeDynamic::interpolateTick(float renderTime)
 {

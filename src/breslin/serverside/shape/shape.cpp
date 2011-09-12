@@ -71,6 +71,8 @@ void Shape::processTick()
     mCommand.mVelocity.y = mSceneNode->getPosition().y - mCommand.mOrigin.y;
     mCommand.mVelocity.z = mSceneNode->getPosition().z - mCommand.mOrigin.z;
 
+	//mCommand.mVelocity.normalise();
+
 	mCommand.mOriginOld.x = mCommand.mOrigin.x;
     mCommand.mOriginOld.z = mCommand.mOrigin.z;
     mCommand.mOriginOld.y = mCommand.mOrigin.y;

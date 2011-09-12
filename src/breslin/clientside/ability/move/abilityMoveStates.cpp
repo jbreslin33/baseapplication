@@ -55,15 +55,17 @@ void Normal_ProcessTick_Move::enter(AbilityMove* abilityMove)
 }
 void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
-	//abilityMove->mShapeDynamic->appendToTitle("M:Normal");
+	abilityMove->mShapeDynamic->appendToTitle("M:Normal");
 
 	// if distance exceeds threshold && server velocity is zero
+	/*
 	if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShapeDynamic->mServerFrame->mVelocity->isZero())
 	{
 		abilityMove->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
     }
-    else //server stopped or we are in sync so just use server vel as is, this is meat of normal state...
+    else //server stopped or we are in sync so just use server vel as is..
     {
+	*/
 		Vector3D serverDest;
        // Ogre::Vector3 myDest      = Ogre::Vector3::ZERO;
 
@@ -90,7 +92,7 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 		abilityMove->mShapeDynamic->mCommandToRunOnShape->mVelocity->x = serverDest.x;
         abilityMove->mShapeDynamic->mCommandToRunOnShape->mVelocity->y = serverDest.y;
         abilityMove->mShapeDynamic->mCommandToRunOnShape->mVelocity->z = serverDest.z;
-	}
+	//}
 }
 void Normal_ProcessTick_Move::exit(AbilityMove* abilityMove)
 {
@@ -108,7 +110,7 @@ void Catchup_ProcessTick_Move::enter(AbilityMove* abilityMove)
 }
 void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
-	//abilityMove->mShapeDynamic->appendToTitle("M:Catchup");
+	abilityMove->mShapeDynamic->appendToTitle("M:Catchup");
 
 	//if we are back in sync
     if(abilityMove->mDeltaPosition <= abilityMove->mPosInterpLimitHigh || abilityMove->mShapeDynamic->mServerFrame->mVelocity->isZero())

@@ -1,4 +1,6 @@
 #include "moveStates.h"
+#include "../tdreamsock/dreamSockLog.h"
+
 #include "moveStateMachine.h"
 
 #include "move.h"
@@ -101,6 +103,7 @@ void Accelerate_Move::enter(Move* move)
 }
 void Accelerate_Move::execute(Move* move)
 {
+	//LogString("acc");
     if (move->mKeyDirection.isZeroLength()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
