@@ -45,6 +45,7 @@ Message	mMessage; //is this all i need to get information over the internets?
 
 //keys
 Vector3 mKeyDirection;
+float mKeyRotation;
 Vector3 mGoalDirection;
 
 Game* mGame;

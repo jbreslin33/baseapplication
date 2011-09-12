@@ -94,6 +94,7 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
     mKeyDirection.y = 0;
     mKeyDirection.z = 0;
 
+	mKeyRotation = 0.0f;
                 
     // keep track of the player's intended direction
     if(mCommand.mKey & KEY_UP) 
@@ -113,5 +114,21 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 	{
 		mKeyDirection.x += 1;
 	}
+
 	mKeyDirection.normalise();
+
+
+    // keep track of the player's intended rotation
+    if(mCommand.mKey & KEY_COUNTER_CLOCKWISE) 
+	{
+		mKeyRotation += -1;
+		LogString("counter");
+	}
+    if(mCommand.mKey & KEY_CLOCKWISE) 
+	{
+		mKeyRotation += 1;
+		LogString("clockwise");
+	}
+
+
 }

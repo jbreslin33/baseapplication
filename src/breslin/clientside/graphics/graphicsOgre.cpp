@@ -27,7 +27,8 @@ GraphicsOgre::GraphicsOgre(GameOgre* gameOgre)
 	mKeyDown = 2;
 	mKeyLeft = 4;
 	mKeyRight = 8;
-	mKeySpace = 16;
+	mKeyCounterClockwise = 16;
+	mKeyClockwise = 32;
 
 	//initilize
 	mInitializeGui = false;
@@ -166,14 +167,24 @@ void GraphicsOgre::processInput()
 		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyDown;
     }
 
-	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left
     {
 		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyLeft;
     }
 
-    if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
+    if (mKeyboard->isKeyDown(OIS::KC_L)) // Right
     {
 		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyRight;
+    }
+    
+	if (mKeyboard->isKeyDown(OIS::KC_Z)) // Rotate -yaw(counter-clockwise)
+    {
+		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyCounterClockwise;
+    }
+
+    if (mKeyboard->isKeyDown(OIS::KC_X)) // Right + yaw(clockwise)
+    {
+		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyClockwise;
     }
 
 	mGameOgre->mNetwork->mCommandToServer->mMilliseconds = (int) (mGameOgre->mFrameTime * 1000);

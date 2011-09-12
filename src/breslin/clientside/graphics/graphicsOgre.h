@@ -46,7 +46,8 @@ int mKeyUp;
 int mKeyDown;
 int mKeyLeft;
 int mKeyRight;
-int mKeySpace;
+int mKeyCounterClockwise;
+int mKeyClockwise;
 	
 
 /***************************************

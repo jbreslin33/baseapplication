@@ -33,6 +33,7 @@ OgreShape::OgreShape(Vector3D* position, Vector3D* velocity, Vector3D* rotation,
 
 	//keys
     mKeyDirection = Vector3::ZERO;
+	mKeyRotation = 0.0f;
 	mGoalDirection = Vector3::ZERO;
 
 	mGame = NULL;
