@@ -171,7 +171,15 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 		//getSceneNode()->setDirection(direction,Ogre::Node::TS_WORLD);
 		//getSceneNode()->getOrientation
 	}
-	LogString("zAxis:%f",getSceneNode()->getOrientation().zAxis().z);
+	//LogString("zAxis:%f",getSceneNode()->getOrientation().zAxis().z);
+	Ogre::Quaternion orientation = getSceneNode()->getOrientation();
+	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
+	LogString("x:%f",vector.x);
+	//LogString("y:%f",vector.y);
+	LogString("z:%f",vector.z);
+	//Ogre::Real radians = getSceneNode()->getOrientation().zAxis().z;
+	//Ogre::Real degrees = Ogre::Math::RadiansToDegrees(radians);
+	//LogString("degrees:%f",degrees);
 	//LogString("w:%f",getSceneNode()->getOrientation().w);
 	//LogString("x:%f",getSceneNode()->getOrientation().x);
 	//LogString("y:%f",getSceneNode()->getOrientation().y);
