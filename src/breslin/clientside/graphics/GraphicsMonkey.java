@@ -115,11 +115,20 @@ public void simpleInitApp()
 //input
 private void initKeys()
 {
+
+	//b
 	// You can map one or several inputs to one named action
     inputManager.addMapping("Start",  new KeyTrigger(KeyInput.KEY_B));
 
     // Add the names to the action listener.
     inputManager.addListener(actionListener, new String[]{"Start"});
+
+	//x
+	// You can map one or several inputs to one named action
+    inputManager.addMapping("Rotate",  new KeyTrigger(KeyInput.KEY_X));
+
+    // Add the names to the action listener.
+    inputManager.addListener(actionListener, new String[]{"Rotate"});
 
 }
 
@@ -127,6 +136,8 @@ private ActionListener actionListener = new ActionListener()
 {
 	public void onAction(String name, boolean isPressed, float tpf)
 	{
+
+		//Start
         if (name.equals("Start"))
         {
 
@@ -150,6 +161,15 @@ private ActionListener actionListener = new ActionListener()
 
 			}
         }
+
+
+       	//Rotate
+		if (name.equals("Rotate"))
+        {
+
+			//mGameMonkey.
+        }
+
     }
 };
 
