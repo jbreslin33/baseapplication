@@ -10,6 +10,9 @@
 //command
 #include "../command/command.h"
 
+//shape
+#include "../shape/shapeDynamic.h" //only need this to tes yaw you can pull it out later.
+
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
@@ -180,12 +183,23 @@ void GraphicsOgre::processInput()
 	if (mKeyboard->isKeyDown(OIS::KC_Z)) // Rotate -yaw(counter-clockwise)
     {
 		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyCounterClockwise;
+		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyClockwise;
+		if (mGameOgre->mShapeGhostVector.at(0))
+		{
+			mGameOgre->mShapeVector.at(0)->yaw(-1,true);
+		}
     }
 
     if (mKeyboard->isKeyDown(OIS::KC_X)) // Right + yaw(clockwise)
     {
 		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyClockwise;
+		if (mGameOgre->mShapeGhostVector.at(0))
+		{
+			mGameOgre->mShapeVector.at(0)->yaw(1,true);
+			//mGameOgre->mShapeGhostVector.at(0)->
+		}
     }
+
 
 	mGameOgre->mNetwork->mCommandToServer->mMilliseconds = (int) (mGameOgre->mFrameTime * 1000);
 }

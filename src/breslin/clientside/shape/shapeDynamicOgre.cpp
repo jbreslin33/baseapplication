@@ -53,7 +53,7 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, b
 	{
 		//create a ghost for this shape
 		mGhost = new ShapeDynamicOgre(mGameOgre,byteBuffer,true);
-		mGhost->setVisible(true);
+		mGhost->setVisible(false);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
 		mGame->mShapeVector.push_back(this);
@@ -147,8 +147,34 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 {
 	if (convertToDegree)
 	{
-		getSceneNode()->yaw(Degree(amountToYaw));
+		//getSceneNode()->yaw(Degree(amountToYaw));
+//1 = due west, -1 = due east, 0 = due south, -2 due east, 2 = due west
+		Vector3 direction;
+		/*
+		direction.x = 1; //northwest
+		direction.y = 0;
+		direction.z = 1; 
+		
+		direction.x = -1; //southeast
+		direction.y = 0;
+		direction.z = -1; 
+
+		direction.x = -1; //northeast
+		direction.y = 0;
+		direction.z = 1; 
+		*/
+		direction.x = 1; //southwest
+		direction.y = 0;
+		direction.z = -1; 
+
+		direction.normalise();
+		getSceneNode()->setDirection(direction,Ogre::Node::TS_WORLD);
 	}
+	//LogString("w:%f",getSceneNode()->getOrientation().w);
+	//LogString("x:%f",getSceneNode()->getOrientation().x);
+	//LogString("w:%y",getSceneNode()->getOrientation().y);
+	//LogString("w:%z",getSceneNode()->getOrientation().z);
+	//getSceneNode()->setOrientation(
 }
 float ShapeDynamicOgre::getDegreesToSomething(Vector3D vectorOfSomething)
 {

@@ -51,7 +51,7 @@ void Shape::processTick()
 	//is this why the rotation gets off???
 	//UPDATE--I now check for mKey inside Rotation State machine
     
-	//Rotation::processTick();
+	Rotation::processTick();
 
 	//even though there is no mKey set we still need to move as
 	//brian has put in a deceleration factor so let's let it run...
@@ -122,12 +122,10 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
     if(mCommand.mKey & KEY_COUNTER_CLOCKWISE) 
 	{
 		mKeyRotation += -1;
-		LogString("counter");
 	}
     if(mCommand.mKey & KEY_CLOCKWISE) 
 	{
 		mKeyRotation += 1;
-		LogString("clockwise");
 	}
 
 
