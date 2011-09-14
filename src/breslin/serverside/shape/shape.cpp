@@ -51,7 +51,7 @@ void Shape::processTick()
 	//is this why the rotation gets off???
 	//UPDATE--I now check for mKey inside Rotation State machine
     
-	Rotation::processTick();
+	//Rotation::processTick();
 
 	//even though there is no mKey set we still need to move as
 	//brian has put in a deceleration factor so let's let it run...
