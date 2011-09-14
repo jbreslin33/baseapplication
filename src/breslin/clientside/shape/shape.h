@@ -47,6 +47,9 @@ Parser* mParser;
 virtual void     setPosition          (Vector3D                  ) = 0;
 virtual void     setPosition          (float x, float y, float z ) = 0;
 
+//setting rotation
+virtual void    setRotation(Vector3D* vector3D) = 0;
+
 //getting position
 virtual Vector3D getPosition          (                          ) = 0;
 

@@ -1,6 +1,9 @@
 //header
 #include "abilityRotationStates.h"
 
+//log
+#include "../../tdreamsock/dreamSockLog.h"
+
 //state machine
 #include "abilityRotationStateMachine.h"
 
@@ -38,7 +41,9 @@ void Global_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Global_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	abilityRotation->calculateServerRotationSpeed();
-	abilityRotation->mShapeDynamic->mGhost->yaw(abilityRotation->mServerRotSpeed,true);
+	//abilityRotation->mShapeDynamic->mGhost->yaw(abilityRotation->mServerRotSpeed,true);
+	abilityRotation->mShapeDynamic->mGhost->setRotation(abilityRotation->mShapeDynamic->mServerFrame->mRot);
+	//LogString("x:%f",abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRot->x);
 }
 void Global_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
@@ -61,6 +66,7 @@ void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 	//->mObjectTitleString.append("R:Normal");
 	
 	// are we too far off you need to change to catchup state
+	/*
     if(abs(abilityRotation->mDegreesToServer) > abilityRotation->mRotInterpLimitHigh)
     {
 		abilityRotation->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Rotation::Instance());
@@ -85,6 +91,7 @@ void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
             }
 		}
 	}
+	*/
 }
 void Normal_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
 {

@@ -53,7 +53,7 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, b
 	{
 		//create a ghost for this shape
 		mGhost = new ShapeDynamicOgre(mGameOgre,byteBuffer,true);
-		mGhost->setVisible(false);
+		mGhost->setVisible(true);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
 		mGame->mShapeVector.push_back(this);
@@ -141,6 +141,14 @@ void ShapeDynamicOgre::checkExtents(Vector3D min)
 			//mExtent = EXTENT_FINITE;
 			//mMinimum = min;
 			//mMaximum = max;
+}
+void ShapeDynamicOgre::setRotation(Vector3D* vector3D)
+{
+	Vector3 vec;
+	vec.x = vector3D->x;
+	vec.y = vector3D->y;
+	vec.z = vector3D->z;
+	getSceneNode()->setDirection(vec,Ogre::Node::TS_WORLD);
 }
 
 void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)

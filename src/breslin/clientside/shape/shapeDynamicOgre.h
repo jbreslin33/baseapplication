@@ -80,6 +80,7 @@ void translate  (Vector3D translateVector, int perspective);
 void setPosition(Vector3D position                        );
 void setPosition(float x, float y, float z                );
 void setVisible (bool visible                             );
+void setRotation(Vector3D* vector3D);
 
 //check position
 float    getDegreesToSomething(Vector3D something                       );

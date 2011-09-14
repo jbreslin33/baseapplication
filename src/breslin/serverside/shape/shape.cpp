@@ -81,10 +81,17 @@ void Shape::processTick()
     mCommand.mOrigin.y = mSceneNode->getPosition().y;
     mCommand.mOrigin.z = mSceneNode->getPosition().z;
 
+	Ogre::Quaternion orientation = mSceneNode->getOrientation();
+    Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
 
-    mCommand.mRot.x = mSceneNode->getOrientation().zAxis().x;
-    mCommand.mRot.z = mSceneNode->getOrientation().zAxis().z;
+    //mCommand.mRot.x = mSceneNode->getOrientation().zAxis().x;
+    //mCommand.mRot.z = mSceneNode->getOrientation().zAxis().z;
 
+	mCommand.mRot.x = vector.x;
+    mCommand.mRot.z = vector.z;
+
+	//LogString("x:%f",vector.x);
+	//LogString("z:%f",mCommand.mRot.z);
 }
 
 void Shape::setKeyDirection()  //this is called first in process tick so let's start conversion to separate
@@ -95,8 +102,8 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
     mKeyDirection.z = 0;
 
 	mKeyRotation = 0.0f;
-                
-    // keep track of the player's intended direction
+    
+	// keep track of the player's intended direction
     if(mCommand.mKey & KEY_UP) 
 	{
 		mKeyDirection.z += -1;
