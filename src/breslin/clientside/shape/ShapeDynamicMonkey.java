@@ -190,6 +190,16 @@ public void yaw        (float amountToYaw, boolean converToDegree   )
 {
 	getSceneNode().rotate(0,amountToYaw,0);
 
+//Ogre::Quaternion orientation = getSceneNode()->getOrientation();
+//	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
+
+ //Quaternion rot = localTransform.getRotation();
+ Transform worldTransform = mSceneNode.getWorldTransform();
+ Quaternion rotation = worldTransform.getRotation();
+ Vector3f vector = rotation.getRotationColumn(0);
+System.out.println("x:" + vector.x);
+System.out.println("z:" + vector.z);
+
 }
 
 void translate  (Vector3D translateVector, int perspective)
