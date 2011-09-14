@@ -48,7 +48,7 @@ void GameOgre::addShape(bool b, ByteBuffer* byteBuffer)
 	ShapeDynamic* shapeDynamicOgre = new ShapeDynamicOgre(this,byteBuffer,false);  //you should just need to call this...
 	
 	//ability
-	//shapeDynamicOgre->addAbility(new AbilityRotation(shapeDynamicOgre));
+	shapeDynamicOgre->addAbility(new AbilityRotation(shapeDynamicOgre));
 	shapeDynamicOgre->addAbility(new AbilityMove(shapeDynamicOgre));
 }
 

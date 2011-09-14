@@ -183,21 +183,25 @@ void GraphicsOgre::processInput()
 	if (mKeyboard->isKeyDown(OIS::KC_Z)) // Rotate -yaw(counter-clockwise)
     {
 		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyCounterClockwise;
+/*	
 		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyClockwise;
 		if (mGameOgre->mShapeGhostVector.at(0))
 		{
 			mGameOgre->mShapeVector.at(0)->yaw(-1,true);
 		}
+		*/
     }
 
     if (mKeyboard->isKeyDown(OIS::KC_X)) // Right + yaw(clockwise)
     {
 		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyClockwise;
+		/*
 		if (mGameOgre->mShapeGhostVector.at(0))
 		{
 			mGameOgre->mShapeVector.at(0)->yaw(1,true);
 			//mGameOgre->mShapeGhostVector.at(0)->
 		}
+		*/
     }
 
 
