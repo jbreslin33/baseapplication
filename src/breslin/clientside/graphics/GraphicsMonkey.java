@@ -166,8 +166,9 @@ private ActionListener actionListener = new ActionListener()
        	//Rotate
 		if (name.equals("Rotate"))
         {
-
+			mGameMonkey.mShapeVector.get(0).yaw(.10f,true);
 			//mGameMonkey.
+
         }
 
     }

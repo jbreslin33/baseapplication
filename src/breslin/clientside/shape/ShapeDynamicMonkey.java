@@ -134,11 +134,12 @@ void createShape()
 	//move
 	mPosition.x = 5.0f;
 	setPosition((float)mPosition.x,(float)mPosition.y,(float)mPosition.z);
-
+/*
 	Vector3f position = new Vector3f();
 	Vector3f upPosition = new Vector3f();
 
 	Quaternion rotationQuaternion = new Quaternion();
+*/
 /*
 	position.x = -1; //southwest
 	position.y = 0;
@@ -153,6 +154,7 @@ void createShape()
 	position.y = 0;
 	position.z = 1;
 */
+/*
 	position.x = 1; //northeast
 	position.y = 0;
 	position.z = -1;
@@ -165,7 +167,7 @@ void createShape()
 
 	rotationQuaternion.lookAt(position,upPosition);
 	mSceneNode.setLocalRotation(rotationQuaternion);
-
+*/
 
 //	mSceneNode.lookAt(position,upPosition);
 //	Quaternion localRotationQuat = mSceneNode.getLocalRotation();
@@ -186,7 +188,7 @@ void scale(Vector3D scaleVector)
 //movement
 public void yaw        (float amountToYaw, boolean converToDegree   )
 {
-	getSceneNode().rotate(amountToYaw,0,0);
+	getSceneNode().rotate(0,amountToYaw,0);
 
 }
 
