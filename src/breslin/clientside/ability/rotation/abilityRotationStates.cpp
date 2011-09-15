@@ -66,7 +66,7 @@ void Normal_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-	LogString("mDeltaRotation:%f",abilityRotation->mDeltaRotation);
+	//LogString("mDeltaRotation:%f",abilityRotation->mDeltaRotation);
 	//->mObjectTitleString.append("R:Normal");
 	//NEW COPIED FROM MOVE
 	/*
@@ -230,11 +230,14 @@ void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
     transVector.z = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->z;
         
 	transVector = transVector * abilityRotation->mShapeDynamic->mGame->getRenderTime() * 1000;
-	Vector3D* newRotation;
+	Vector3D* newRotation = new Vector3D();
 	newRotation->x = transVector.x + abilityRotation->mShapeDynamic->getRotation()->x;
 	newRotation->y = transVector.y + abilityRotation->mShapeDynamic->getRotation()->y;
 	newRotation->z = transVector.z + abilityRotation->mShapeDynamic->getRotation()->z;
 	
+
+	//LogString("x:%f",newRotation->x);
+	//LogString("z:%f",newRotation->z);
 	abilityRotation->mShapeDynamic->setRotation(newRotation);
 
 	//abilityRotation->
