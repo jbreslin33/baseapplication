@@ -34,6 +34,9 @@ AbilityMove::AbilityMove(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
 	mDeltaZ        = 0.0;
 	mDeltaPosition = 0.0;
 
+	//speed
+	mSpeed     = 0.0;
+
 }
 
 AbilityMove::~AbilityMove()

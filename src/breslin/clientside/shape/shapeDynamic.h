@@ -56,7 +56,7 @@ bool mAnimate;
 Parser* mParser;
 
 //speed
-float mSpeed; 
+float mSpeed;
 float mSpeedMax; 
 
 //abilitys
@@ -88,7 +88,6 @@ virtual void        yaw                  (float amountToYaw, bool converToDegree
 virtual float       getDegreesToSomething(Vector3D something                       ) = 0;
 virtual void        translate            (Vector3D translateVector, int perspective) = 0;
 virtual std::string getName() = 0; 
-virtual float       getSpeed();
 
 //ticks
 void processTick();

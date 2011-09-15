@@ -43,7 +43,7 @@ ShapeDynamic::ShapeDynamic(Game* game, ByteBuffer* byteBuffer)
 	mCommandToRunOnShape = new Command();
 
 	//speed
-	mSpeed     = 0.0;
+	mSpeed = 0.0f;
 	mSpeedMax  = 1.66f;
 
 	//orientation
@@ -69,11 +69,6 @@ ShapeDynamic::ShapeDynamic(Game* game, ByteBuffer* byteBuffer)
 ShapeDynamic::~ShapeDynamic()
 {
 }
-
-float ShapeDynamic::getSpeed()
-{
-	return mSpeed;
-}	
 
 void ShapeDynamic::addAbility(Ability* ability)
 {
@@ -149,9 +144,12 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 
 	int flags = 0;
 
-	bool x = true;
-	bool z = true;
-	bool y = true;
+	bool moveXChanged = true;
+	bool moveYChanged = true;
+	bool moveZChanged = true;
+
+	bool rotationXChanged = true;
+	bool rotationZChanged = true;
 
 	// Flags
 	flags = mes->ReadByte();
@@ -164,7 +162,7 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 	}
 	else
 	{
-		x = false;
+		moveXChanged = false;
 	}
 
 	if(flags & mParser->mCommandOriginY)
@@ -174,7 +172,7 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 	}
 	else
 	{
-		y = false;
+		moveYChanged = false;
 	}
 
 	if(flags & mParser->mCommandOriginZ)
@@ -184,7 +182,7 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 	}
 	else
 	{
-		z = false;
+		moveZChanged = false;
 	}
 
 	//set old rot
@@ -195,12 +193,13 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 	if(flags & mParser->mCommandRotationX)
 	{
 		mServerFrame->mRotation->x = mes->ReadFloat();
-		
+		rotationXChanged = false;
 	}
 
 	if(flags & mParser->mCommandRotationZ)
 	{
 		mServerFrame->mRotation->z = mes->ReadFloat();
+		rotationZChanged = false;
 	}
 
 	//milliseconds
@@ -212,35 +211,54 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 
 	if (mServerFrame->mMilliseconds != 0) 
 	{
-		if (x)
+		//position
+		if (moveXChanged)
 		{
 			mServerFrame->mMoveVelocity->x = mServerFrame->mPosition->x - mServerFrame->mPositionOld->x;
-			//LogString("x:%f",mServerFrame->mMoveVelocity->x);
 		}
 		else
 		{
 			mServerFrame->mMoveVelocity->x = 0.0;
 		}
 		
-		if (y)
+		if (moveYChanged)
 		{
 			mServerFrame->mMoveVelocity->y = mServerFrame->mPosition->y - mServerFrame->mPositionOld->y;
-			//LogString("y:%f",mServerFrame->mMoveVelocity->y);
 		}
 		else
 		{
 			mServerFrame->mMoveVelocity->y = 0.0;
 		}
 
-		if (z)
+		if (moveZChanged)
 		{
 			mServerFrame->mMoveVelocity->z = mServerFrame->mPosition->z - mServerFrame->mPositionOld->z;
-			//LogString("z:%f",mServerFrame->mMoveVelocity->z);
 		}
 		else
 		{
 			mServerFrame->mMoveVelocity->z = 0.0;
 		}
+
+		//rotation
+		if (rotationXChanged)
+		{
+			mServerFrame->mRotationVelocity->x = mServerFrame->mRotation->x - mServerFrame->mRotationOld->x;
+		}
+		else
+		{
+			mServerFrame->mRotationVelocity->x = 0.0;
+		}
+		
+		if (rotationZChanged)
+		{
+			mServerFrame->mRotationVelocity->z = mServerFrame->mRotation->z - mServerFrame->mRotationOld->z;
+		}
+		else
+		{
+			mServerFrame->mRotationVelocity->z = 0.0;
+		}
+
+
 	}
 	processTick();
 }

@@ -29,8 +29,9 @@ AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDyn
 
 	//////rotation
     mTurnSpeed = 250.0;
+	mSpeed = 0.0f;
 
-    mRotInterpLimitHigh = 6.0; //how far away from server till we try to catch up
+    mRotInterpLimitHigh = .000001; //how far away from server till we try to catch up
     mRotInterpLimitLow  = 4.0; //how close to server till we are in sync
     mRotInterpIncrease  = 1.20f; //rot factor used to catchup to server
     mRotInterpDecrease  = 0.80f; //rot factor used to allow server to catchup to client
@@ -71,9 +72,9 @@ void AbilityRotation::interpolateTick(float renderTime)
 void AbilityRotation::calculateDeltaRotation()  
 {
 
-	mDeltaX = mShapeDynamic->mServerFrame->mPosition->x - mShapeDynamic->getRotation()->x;
-    mDeltaY = mShapeDynamic->mServerFrame->mPosition->y - mShapeDynamic->getRotation()->y;
-    mDeltaZ = mShapeDynamic->mServerFrame->mPosition->z - mShapeDynamic->getRotation()->z;
+	mDeltaX = mShapeDynamic->mServerFrame->mRotation->x - mShapeDynamic->getRotation()->x;
+    mDeltaY = mShapeDynamic->mServerFrame->mRotation->y - mShapeDynamic->getRotation()->y;
+    mDeltaZ = mShapeDynamic->mServerFrame->mRotation->z - mShapeDynamic->getRotation()->z;
 
     //distance we are off from server
     mDeltaRotation = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));

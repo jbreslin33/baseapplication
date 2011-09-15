@@ -43,6 +43,8 @@ float mDeltaZ;
 float mDeltaY; 
 float mDeltaPosition; 
 
+float mSpeed; 
+
 /******************************************************
 *				METHODS
 ********************************************************/

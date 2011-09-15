@@ -83,7 +83,7 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
         if(abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds != 0)
         {
 			
-			abilityMove->mShapeDynamic->mSpeed =
+			abilityMove->mSpeed =
 			sqrt(
 			pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x, 2) + 
             pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->y, 2) +
@@ -91,7 +91,7 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 			abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
         }
 
-        serverDest = serverDest * abilityMove->mShapeDynamic->mSpeed;
+        serverDest = serverDest * abilityMove->mSpeed;
 
 		abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = serverDest.x;
         abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = serverDest.y;
@@ -150,14 +150,15 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
         //server velocity
 		if(abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds != 0)
         {
-           abilityMove->mShapeDynamic->mSpeed = sqrt(pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x, 2) + 
+           abilityMove->mSpeed = sqrt(pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x, 2) + 
            pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->y, 2) + pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->z, 2))/abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
+		   abilityMove->mShapeDynamic->mSpeed = abilityMove->mSpeed;
 		}
 
-		if(abilityMove->mShapeDynamic->mSpeed != 0.0)
+		if(abilityMove->mSpeed != 0.0)
 		{
            //time needed to get to future server pos
-           float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mShapeDynamic->mSpeed;
+           float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mSpeed;
 
            myDest.normalise();
 

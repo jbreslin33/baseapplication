@@ -35,6 +35,7 @@ ShapeDynamic* mShapeDynamic;
 
 //rotation
 float mTurnSpeed; 
+float mSpeed;
 float mServerRotSpeed;  
 
 float mRotInterpLimitHigh;  
@@ -52,6 +53,8 @@ float mDeltaX;
 float mDeltaZ;  
 float mDeltaY; 
 float mDeltaRotation; 
+
+
 
 /******************************************************
 *				METHODS

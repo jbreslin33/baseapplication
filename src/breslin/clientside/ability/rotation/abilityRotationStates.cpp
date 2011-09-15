@@ -66,8 +66,48 @@ void Normal_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
+	LogString("mDeltaRotation:%f",abilityRotation->mDeltaRotation);
 	//->mObjectTitleString.append("R:Normal");
-	
+	//NEW COPIED FROM MOVE
+	/*
+	if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->isZero())
+	{
+		abilityMove->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
+    }
+    else //server stopped or we are in sync so just use server vel as is..
+    {
+	*/
+		Vector3D serverDest;
+       // Ogre::Vector3 myDest      = Ogre::Vector3::ZERO;
+
+		serverDest.x = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x;
+	    serverDest.y = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->y;
+        serverDest.z = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z;
+        serverDest.normalise();
+
+       // abilityMove->mShapeDynamic->mSpeed = 0.0;
+
+        if(abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds != 0)
+        {
+			
+			abilityRotation->mSpeed =
+			sqrt(
+			pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x, 2) + 
+            pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->y, 2) +
+			pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z, 2)) /
+			abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
+        }
+
+        serverDest = serverDest * abilityRotation->mSpeed;
+
+		abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x = serverDest.x;
+        abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->y = serverDest.y;
+        abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->z = serverDest.z;
+	//}
+
+
+//////OLD IS BELOW
+
 	// are we too far off you need to change to catchup state
 	/*
     if(abs(abilityRotation->mDegreesToServer) > abilityRotation->mRotInterpLimitHigh)
@@ -183,6 +223,22 @@ void Normal_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 
+	Vector3D transVector;
+
+    transVector.x = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x;
+    transVector.y = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->y;
+    transVector.z = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->z;
+        
+	transVector = transVector * abilityRotation->mShapeDynamic->mGame->getRenderTime() * 1000;
+	Vector3D* newRotation;
+	newRotation->x = transVector.x + abilityRotation->mShapeDynamic->getRotation()->x;
+	newRotation->y = transVector.y + abilityRotation->mShapeDynamic->getRotation()->y;
+	newRotation->z = transVector.z + abilityRotation->mShapeDynamic->getRotation()->z;
+	
+	abilityRotation->mShapeDynamic->setRotation(newRotation);
+
+	//abilityRotation->
+/*
 	//->mObjectTitleString.append("R:Normal");
 	float rotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed * abilityRotation->mShapeDynamic->mGame->getRenderTime();
    abilityRotation->mShapeDynamic->yaw(rotSpeed, true);
@@ -191,7 +247,7 @@ void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
     {
 		abilityRotation->mInterpolateTickStateMachine->changeState(Off_InterpolateTick_Rotation::Instance());
     }
-
+*/
 }
 void Normal_InterpolateTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
