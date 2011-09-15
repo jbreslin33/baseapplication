@@ -204,7 +204,14 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
     transVector.y = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y;
     transVector.z = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z;
         
-	abilityMove->mShapeDynamic->translate(transVector * abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000, 1);
+	transVector = transVector * abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000;
+	Vector3D newPosition;
+	newPosition.x = transVector.x + abilityMove->mShapeDynamic->getPosition().x;
+	newPosition.y = transVector.y + abilityMove->mShapeDynamic->getPosition().y;
+	newPosition.z = transVector.z + abilityMove->mShapeDynamic->getPosition().z;
+	
+	abilityMove->mShapeDynamic->setPosition(newPosition);
+	//abilityMove->mShapeDynamic->translate(transVector * abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000, 1);
 
 	//does this just prevent you from going below 0 up and down?
     if(abilityMove->mShapeDynamic->getPosition().y < 0.0)
