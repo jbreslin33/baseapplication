@@ -42,8 +42,10 @@ void Global_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	abilityRotation->calculateServerRotationSpeed();
 	//abilityRotation->mShapeDynamic->mGhost->yaw(abilityRotation->mServerRotSpeed,true);
-	abilityRotation->mShapeDynamic->mGhost->setRotation(abilityRotation->mShapeDynamic->mServerFrame->mRot);
-	//LogString("x:%f",abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRot->x);
+	
+	//this will move the ghost shape to server position before we do anything with non-ghosts.
+	abilityRotation->mShapeDynamic->mGhost->setRotation(abilityRotation->mShapeDynamic->mServerFrame->mRotation);
+	//LogString("x:%f",abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotation->x);
 }
 void Global_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
 {

@@ -67,7 +67,7 @@ ShapeDynamic* mGhost;
 
 //basic
 Vector3D* mPosition;
-Vector3D* mVelocity;
+Vector3D* mMoveVelocity;
 Vector3D* mRotation;
 int mLocal;
 

@@ -25,8 +25,8 @@ AbilityMove::AbilityMove(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
 	mInterpolateTickStateMachine->setGlobalState       (NULL);
 
     //thresholds
-    mPosInterpLimitHigh = .066; //how far away from server till we try to catch up
-    mPosInterpFactor    = 4.0;
+    mPosInterpLimitHigh = .066f; //how far away from server till we try to catch up
+    mPosInterpFactor    = 4.0f;
 
 	//deltas
 	mDeltaX        = 0.0; 
@@ -59,9 +59,9 @@ void AbilityMove::interpolateTick(float renderTime)
 void AbilityMove::calculateDeltaPosition()  //mov
 {
 
-	mDeltaX = mShapeDynamic->mServerFrame->mOrigin->x - mShapeDynamic->getPosition().x;
-    mDeltaY = mShapeDynamic->mServerFrame->mOrigin->y - mShapeDynamic->getPosition().y;
-    mDeltaZ = mShapeDynamic->mServerFrame->mOrigin->z - mShapeDynamic->getPosition().z;
+	mDeltaX = mShapeDynamic->mServerFrame->mPosition->x - mShapeDynamic->getPosition().x;
+    mDeltaY = mShapeDynamic->mServerFrame->mPosition->y - mShapeDynamic->getPosition().y;
+    mDeltaZ = mShapeDynamic->mServerFrame->mPosition->z - mShapeDynamic->getPosition().z;
 
     //distance we are off from server
     mDeltaPosition = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));
