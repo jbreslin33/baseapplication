@@ -86,6 +86,9 @@ void setRotation(Vector3D* vector3D);
 float    getDegreesToSomething(Vector3D something                       );
 Vector3D getPosition          (                                         );
 
+//check rotation
+Vector3D* getRotation();
+
 //title
 void drawTitle    ();
 void appendToTitle(std::string appendage);

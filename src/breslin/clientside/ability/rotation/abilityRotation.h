@@ -47,6 +47,12 @@ Vector3D mServerRotOld;
 Vector3D mServerRotNew;  
 float    mDegreesToServer;  
 
+//deltas
+float mDeltaX;  
+float mDeltaZ;  
+float mDeltaY; 
+float mDeltaRotation; 
+
 /******************************************************
 *				METHODS
 ********************************************************/
@@ -56,6 +62,7 @@ void processTick();
 void interpolateTick(float renderTime);
 
 //rotation
+void  calculateDeltaRotation();
 float getDegreesToServer();  
 void  calculateServerRotationSpeed(); 
 

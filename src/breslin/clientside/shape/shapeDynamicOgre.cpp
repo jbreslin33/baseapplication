@@ -151,6 +151,17 @@ void ShapeDynamicOgre::setRotation(Vector3D* vector3D)
 	getSceneNode()->setDirection(vec,Ogre::Node::TS_WORLD);
 }
 
+Vector3D* ShapeDynamicOgre::getRotation()
+{
+	Vector3D* vector3D = new Vector3D();
+	
+	vector3D->x = getSceneNode()->getOrientation().x;
+	vector3D->y = getSceneNode()->getOrientation().y;
+	vector3D->z = getSceneNode()->getOrientation().z;
+
+	return vector3D;
+}
+
 void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 {
 	if (convertToDegree)

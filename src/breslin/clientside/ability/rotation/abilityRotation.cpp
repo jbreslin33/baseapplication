@@ -4,6 +4,8 @@
 #include "abilityRotationStateMachine.h"
 #include "abilityRotationStates.h"
 
+#include <math.h>
+
 #ifdef WIN32
 //do nothing
 #else
@@ -38,6 +40,12 @@ AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDyn
 	mServerRotNew.zero();
 	mDegreesToServer = 0.0;
 
+	//deltas
+	mDeltaX        = 0.0; 
+	mDeltaY		   = 0.0;
+	mDeltaZ        = 0.0;
+	mDeltaRotation = 0.0;
+
 }
 
 AbilityRotation::~AbilityRotation()
@@ -59,6 +67,17 @@ void AbilityRotation::interpolateTick(float renderTime)
 /******************************************************
 *				Rotation
 ********************************************************/
+
+void AbilityRotation::calculateDeltaRotation()  
+{
+
+	mDeltaX = mShapeDynamic->mServerFrame->mPosition->x - mShapeDynamic->getRotation()->x;
+    mDeltaY = mShapeDynamic->mServerFrame->mPosition->y - mShapeDynamic->getRotation()->y;
+    mDeltaZ = mShapeDynamic->mServerFrame->mPosition->z - mShapeDynamic->getRotation()->z;
+
+    //distance we are off from server
+    mDeltaRotation = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));
+}
 
 float AbilityRotation::getDegreesToServer()  //rot
 {
