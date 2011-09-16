@@ -33,88 +33,51 @@ void Normal_Rotation::execute(Rotation* rotation)
 	//Real yawAtSpeed;
 
 	//rotation->mSceneNode->yaw(Degree(yawToGoal));
-
-/*
-	rotation->mGoalDirection += rotation->mKeyDirection.z * Vector3::UNIT_Z;
-	rotation->mGoalDirection.y = 0;
-    rotation->mGoalDirection += rotation->mKeyDirection.x * Vector3::UNIT_X;
-
-    rotation->mGoalDirection.normalise();
-
-    Quaternion toGoal = rotation->mSceneNode->getOrientation().zAxis().getRotationTo
-		(rotation->mGoalDirection,Vector3::UNIT_Y);
-    
-	// calculate how much the character has to turn to face goal direction
-    Real yawToGoal = toGoal.getYaw().valueDegrees();
-
-    // this is how much the character CAN turn this frame
-    if(yawToGoal == 0.0)
-	{
-		yawAtSpeed = 0.0;
-	}
-    else
-	{
-		yawAtSpeed = yawToGoal / Math::Abs(yawToGoal) * clientFrametime * TURN_SPEED;
-	}
-
-    // turn as much as we can, but not more than we need to
-    if (yawToGoal < 0)
-	{
-		yawToGoal = std::min<Real>(0, std::max<Real>(yawToGoal, yawAtSpeed)); //yawToGoal = Math::Clamp<Real>(yawToGoal, yawAtSpeed, 0);
-	}         
-	else if (yawToGoal > 0)
-	{
-		yawToGoal = std::max<Real>(0, std::min<Real>(yawToGoal, yawAtSpeed)); //yawToGoal = Math::Clamp<Real>(yawToGoal, 0, yawAtSpeed);
-	}               
-    rotation->mSceneNode->yaw(Degree(yawToGoal));
-
-
-	/* ORIGINAL________________
-	float clientFrametime;
-
-    clientFrametime = rotation->mCommand.mMilliseconds / 1000.0f;;
-
-	rotation->mGoalDirection = Vector3::ZERO;   // we will calculate this
-
-	Real yawAtSpeed;
-
-	rotation->mGoalDirection += rotation->mKeyDirection.z * Vector3::UNIT_Z;
-	rotation->mGoalDirection.y = 0;
-    rotation->mGoalDirection += rotation->mKeyDirection.x * Vector3::UNIT_X;
-
-    rotation->mGoalDirection.normalise();
-
-    Quaternion toGoal = rotation->mSceneNode->getOrientation().zAxis().getRotationTo
-		(rotation->mGoalDirection,Vector3::UNIT_Y);
-    
-	// calculate how much the character has to turn to face goal direction
-    Real yawToGoal = toGoal.getYaw().valueDegrees();
-
-    // this is how much the character CAN turn this frame
-    if(yawToGoal == 0.0)
-	{
-		yawAtSpeed = 0.0;
-	}
-    else
-	{
-		yawAtSpeed = yawToGoal / Math::Abs(yawToGoal) * clientFrametime * TURN_SPEED;
-	}
-
-    // turn as much as we can, but not more than we need to
-    if (yawToGoal < 0)
-	{
-		yawToGoal = std::min<Real>(0, std::max<Real>(yawToGoal, yawAtSpeed)); //yawToGoal = Math::Clamp<Real>(yawToGoal, yawAtSpeed, 0);
-	}         
-	else if (yawToGoal > 0)
-	{
-		yawToGoal = std::max<Real>(0, std::min<Real>(yawToGoal, yawAtSpeed)); //yawToGoal = Math::Clamp<Real>(yawToGoal, 0, yawAtSpeed);
-	}               
-    rotation->mSceneNode->yaw(Degree(yawToGoal));
-	*/
 }
 void Normal_Rotation::exit(Rotation* rotation)
 {
 }
+
+Accelerate_Rotation* Accelerate_Rotation::Instance()
+{
+  static Accelerate_Rotation instance;
+  return &instance;
+}
+void Accelerate_Rotation::enter(Rotation* rotation)
+{
+}
+void Accelerate_Rotation::execute(Rotation* rotation)
+{
+	if (rotation->mCommand.mKey != 0)
+	{
+		rotation->mRotationStateMachine->changeState(Normal_Rotation::Instance());
+		return;
+	}
+}
+void Accelerate_Rotation::exit(Rotation* rotation)
+{
+}
+
+Decelerate_Rotation* Decelerate_Rotation::Instance()
+{
+  static Decelerate_Rotation instance;
+  return &instance;
+}
+void Decelerate_Rotation::enter(Rotation* rotation)
+{
+}
+void Decelerate_Rotation::execute(Rotation* rotation)
+{
+	if (rotation->mCommand.mKey != 0)
+	{
+		rotation->mRotationStateMachine->changeState(Normal_Rotation::Instance());
+		return;
+	}
+}
+void Decelerate_Rotation::exit(Rotation* rotation)
+{
+}
+
 
 No_Rotation* No_Rotation::Instance()
 {

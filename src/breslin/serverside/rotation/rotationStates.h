@@ -26,4 +26,26 @@ public:
   void exit   (Rotation* rotation);
 };
 
+class Accelerate_Rotation : public RotationState
+{
+private:
+  Accelerate_Rotation(){}
+public:
+  static Accelerate_Rotation* Instance();
+  void enter  (Rotation* rotation);
+  void execute(Rotation* rotation);
+  void exit   (Rotation* rotation);
+};
+
+class Decelerate_Rotation : public RotationState
+{
+private:
+  Decelerate_Rotation(){}
+public:
+  static Decelerate_Rotation* Instance();
+  void enter  (Rotation* rotation);
+  void execute(Rotation* rotation);
+  void exit   (Rotation* rotation);
+};
+
 #endif
