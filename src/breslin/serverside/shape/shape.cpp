@@ -67,31 +67,29 @@ void Shape::processTick()
 	//going to be sent to clients so it's not in move or rotation.
 	//though it could be i guess, velocity and position could go in move
 	//and mRot could go in rotation.
-    mCommand.mVelocity.x = mSceneNode->getPosition().x - mCommand.mOrigin.x;
-    mCommand.mVelocity.y = mSceneNode->getPosition().y - mCommand.mOrigin.y;
-    mCommand.mVelocity.z = mSceneNode->getPosition().z - mCommand.mOrigin.z;
+    mCommand.mPositionVelocity.x = mSceneNode->getPosition().x - mCommand.mPosition.x;
+    mCommand.mPositionVelocity.y = mSceneNode->getPosition().y - mCommand.mPosition.y;
+    mCommand.mPositionVelocity.z = mSceneNode->getPosition().z - mCommand.mPosition.z;
 
-	//mCommand.mVelocity.normalise();
+	//mCommand.mPositionVelocity.normalise();
 
-	mCommand.mOriginOld.x = mCommand.mOrigin.x;
-    mCommand.mOriginOld.z = mCommand.mOrigin.z;
-    mCommand.mOriginOld.y = mCommand.mOrigin.y;
+	mCommand.mPositionOld.x = mCommand.mPosition.x;
+    mCommand.mPositionOld.z = mCommand.mPosition.z;
+    mCommand.mPositionOld.y = mCommand.mPosition.y;
 
-    mCommand.mOrigin.x = mSceneNode->getPosition().x;
-    mCommand.mOrigin.y = mSceneNode->getPosition().y;
-    mCommand.mOrigin.z = mSceneNode->getPosition().z;
+    mCommand.mPosition.x = mSceneNode->getPosition().x;
+    mCommand.mPosition.y = mSceneNode->getPosition().y;
+    mCommand.mPosition.z = mSceneNode->getPosition().z;
 
 	Ogre::Quaternion orientation = mSceneNode->getOrientation();
     Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
 
-    //mCommand.mRot.x = mSceneNode->getOrientation().zAxis().x;
-    //mCommand.mRot.z = mSceneNode->getOrientation().zAxis().z;
+    //mCommand.mRotation.x = mSceneNode->getOrientation().zAxis().x;
+    //mCommand.mRotation.z = mSceneNode->getOrientation().zAxis().z;
 
-	mCommand.mRot.x = vector.x;
-    mCommand.mRot.z = vector.z;
+	mCommand.mRotation.x = vector.x;
+    mCommand.mRotation.z = vector.z;
 
-	//LogString("x:%f",vector.x);
-	//LogString("z:%f",mCommand.mRot.z);
 }
 
 void Shape::setKeyDirection()  //this is called first in process tick so let's start conversion to separate

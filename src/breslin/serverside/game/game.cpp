@@ -238,13 +238,13 @@ void Game::checkCollisions(void)
 					//to distSQ between them. IS this right or is it working by chance?
 					if(distSq < mShapeVector.at(i)->mCollisionRadius + mShapeVector.at(j)->mCollisionRadius)
 					{
-						mShapeVector.at(i)->mCommand.mOrigin = mShapeVector.at(i)->mCommand.mOriginOld;
-						mShapeVector.at(j)->mCommand.mOrigin = mShapeVector.at(j)->mCommand.mOriginOld;
+						mShapeVector.at(i)->mCommand.mPosition = mShapeVector.at(i)->mCommand.mPositionOld;
+						mShapeVector.at(j)->mCommand.mPosition = mShapeVector.at(j)->mCommand.mPositionOld;
 
-						float x3 = mShapeVector.at(i)->mCommand.mOriginOld.x;
-						float z3 = mShapeVector.at(i)->mCommand.mOriginOld.z;
-						float x4 = mShapeVector.at(j)->mCommand.mOriginOld.x;
-						float z4 = mShapeVector.at(j)->mCommand.mOriginOld.z;
+						float x3 = mShapeVector.at(i)->mCommand.mPositionOld.x;
+						float z3 = mShapeVector.at(i)->mCommand.mPositionOld.z;
+						float x4 = mShapeVector.at(j)->mCommand.mPositionOld.x;
+						float z4 = mShapeVector.at(j)->mCommand.mPositionOld.z;
 
 						mShapeVector.at(i)->mSceneNode->setPosition(x3,0.0,z3);
 						mShapeVector.at(j)->mSceneNode->setPosition(x4,0.0,z4);
@@ -367,25 +367,25 @@ void Game::buildDeltaMoveCommand(Message *mes, Shape* shape)
 /********** CHECK WHAT NEEDS TO BE UPDATED *****************/
 
 	//Origin
-	if(shape->mLastCommand.mOrigin.x != command->mOrigin.x)
+	if(shape->mLastCommand.mPosition.x != command->mPosition.x)
 	{
 		flags |= CMD_ORIGIN_X;
 	}
-	if(shape->mLastCommand.mOrigin.y != command->mOrigin.y)
+	if(shape->mLastCommand.mPosition.y != command->mPosition.y)
 	{
 		flags |= CMD_ORIGIN_Y;
 	}
-	if(shape->mLastCommand.mOrigin.z != command->mOrigin.z)
+	if(shape->mLastCommand.mPosition.z != command->mPosition.z)
 	{
 		flags |= CMD_ORIGIN_Z;
 	}
 
 	//Rotation
-	if(shape->mLastCommand.mRot.x != command->mRot.x)
+	if(shape->mLastCommand.mRotation.x != command->mRotation.x)
 	{
 		flags |= CMD_ROTATION_X;
 	}
-	if(shape->mLastCommand.mRot.z != command->mRot.z)
+	if(shape->mLastCommand.mRotation.z != command->mRotation.z)
 	{
 		flags |= CMD_ROTATION_Z;
 	}
@@ -400,7 +400,6 @@ void Game::buildDeltaMoveCommand(Message *mes, Shape* shape)
 
 	//check scope first....
 	//let's check within 10000
-	
 
 	mes->WriteByte(shape->mIndex);
 
@@ -410,26 +409,28 @@ void Game::buildDeltaMoveCommand(Message *mes, Shape* shape)
 	//Origin
 	if(flags & CMD_ORIGIN_X)
 	{
-		mes->WriteFloat(command->mOrigin.x);
+		mes->WriteFloat(command->mPosition.x);
 	}
 	if(flags & CMD_ORIGIN_Y)
 	{
-		mes->WriteFloat(command->mOrigin.y);
+		mes->WriteFloat(command->mPosition.y);
 	}
 	if(flags & CMD_ORIGIN_Z)
 	{
-		mes->WriteFloat(command->mOrigin.z);
+		mes->WriteFloat(command->mPosition.z);
 	}
-
 
 	//Rotation
 	if(flags & CMD_ROTATION_X)
 	{
-		mes->WriteFloat(command->mRot.x);
+		mes->WriteFloat(command->mRotation.x);
+		//LogString("x:%f",command->mRotation.x);
+
 	}
 	if(flags & CMD_ROTATION_Z)
 	{
-		mes->WriteFloat(command->mRot.z);
+		mes->WriteFloat(command->mRotation.z);
+		//LogString("z:%f",command->mRotation.z);
 	}
 
 	//Milliseconds

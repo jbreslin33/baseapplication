@@ -64,18 +64,18 @@ void Server::sendAddShape(Client* client)
 			client->mMessage.WriteByte(0);	// not-local shape
 			client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mIndex);
 		}
-		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mOrigin.x);
-		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mOrigin.y);
-		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mOrigin.z);
+		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPosition.x);
+		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPosition.y);
+		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPosition.z);
 
 
-		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mVelocity.x);
-		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mVelocity.y);
-		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mVelocity.z);
+		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPositionVelocity.x);
+		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPositionVelocity.y);
+		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPositionVelocity.z);
 
 
-		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mRot.x);
-		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mRot.z);
+		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mRotation.x);
+		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mRotation.z);
 
 		//mesh
 		client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mMeshCode);
@@ -104,18 +104,18 @@ void Server::sendAddShape(Client* client)
 			mClientVector.at(i)->mMessage.WriteByte(0);
 			mClientVector.at(i)->mMessage.WriteByte(client->mShape->mIndex);
 			
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mOrigin.x);
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mOrigin.y);
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mOrigin.z);
+			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPosition.x);
+			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPosition.y);
+			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPosition.z);
 
 
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mVelocity.x);
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mVelocity.y);
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mVelocity.z);
+			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.x);
+			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.y);
+			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.z);
 
 
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mRot.x);
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mRot.z);
+			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mRotation.x);
+			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mRotation.z);
 			
 			//mesh
 			mClientVector.at(i)->mMessage.WriteByte(client->mShape->mMeshCode);
@@ -143,17 +143,17 @@ void Server::sendAddAIShape(Shape* shape)
 		mClientVector.at(i)->mMessage.WriteByte(0);
 		mClientVector.at(i)->mMessage.WriteByte(shape->mIndex);
 
-		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mOrigin.x);
-		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mOrigin.y);
-		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mOrigin.z);
+		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mPosition.x);
+		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mPosition.y);
+		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mPosition.z);
 
-		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mVelocity.x);
-		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mVelocity.y);
-		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mVelocity.z);
+		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mPositionVelocity.x);
+		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mPositionVelocity.y);
+		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mPositionVelocity.z);
 
 
-		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mRot.x);
-		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mRot.z);
+		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mRotation.x);
+		mClientVector.at(i)->mMessage.WriteFloat(shape->mCommand.mRotation.z);
 
 		//mesh
 		mClientVector.at(i)->mMessage.WriteByte(shape->mMeshCode);

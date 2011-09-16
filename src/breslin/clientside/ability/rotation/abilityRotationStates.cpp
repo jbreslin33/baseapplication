@@ -226,18 +226,21 @@ void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 	Vector3D transVector;
 
     transVector.x = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x;
-    transVector.y = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->y;
+    //transVector->y = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->y;
+	transVector.y = 0.0;
     transVector.z = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->z;
-        
+	LogString("x:%f",abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x);
+
 	transVector = transVector * abilityRotation->mShapeDynamic->mGame->getRenderTime() * 1000;
 	Vector3D* newRotation = new Vector3D();
 	newRotation->x = transVector.x + abilityRotation->mShapeDynamic->getRotation()->x;
-	newRotation->y = transVector.y + abilityRotation->mShapeDynamic->getRotation()->y;
+	//newRotation->y = transVector.y + abilityRotation->mShapeDynamic->getRotation()->y;
+	newRotation->y = 0.0;
 	newRotation->z = transVector.z + abilityRotation->mShapeDynamic->getRotation()->z;
 	
 
-	//LogString("x:%f",newRotation->x);
-	//LogString("z:%f",newRotation->z);
+	LogString("x:%f",newRotation->x);
+	LogString("z:%f",newRotation->z);
 	abilityRotation->mShapeDynamic->setRotation(newRotation);
 
 	//abilityRotation->

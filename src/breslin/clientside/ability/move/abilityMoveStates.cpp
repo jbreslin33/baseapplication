@@ -204,7 +204,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
     transVector.x = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x;
     transVector.y = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y;
     transVector.z = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z;
-        
+	//LogString("x:%f",transVector.x);
 	transVector = transVector * abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000;
 	Vector3D newPosition;
 	newPosition.x = transVector.x + abilityMove->mShapeDynamic->getPosition().x;
