@@ -81,7 +81,7 @@ void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
        // Ogre::Vector3 myDest      = Ogre::Vector3::ZERO;
 
 		serverDest.x = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x;
-	    serverDest.y = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->y;
+	    serverDest.y = 0.0;
         serverDest.z = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z;
         serverDest.normalise();
 
