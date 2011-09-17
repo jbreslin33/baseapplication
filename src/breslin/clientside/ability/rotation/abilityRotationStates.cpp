@@ -137,9 +137,8 @@ void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
         serverDest.x = abilityRotation->mShapeDynamic->mServerFrame->mPosition->x + serverDest.x;
         serverDest.y = 0.0f;
         serverDest.z = abilityRotation->mShapeDynamic->mServerFrame->mPosition->z + serverDest.z;
-                //LogString("mPosition->y %f", abilityRotation->mShapeDynamic->mClient->mServerFrame->mPosition->y);
-
-        myDest.x = serverDest.x - abilityRotation->mShapeDynamic->getPosition().x;
+       
+		myDest.x = serverDest.x - abilityRotation->mShapeDynamic->getPosition().x;
         myDest.y = 0.0f;
         myDest.z = serverDest.z - abilityRotation->mShapeDynamic->getPosition().z;
 
