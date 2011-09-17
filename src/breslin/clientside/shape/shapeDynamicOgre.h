@@ -75,6 +75,7 @@ void checkExtents(Vector3D min);
 void scale(Vector3D scaleVector);
 
 //movement
+float getDegreesToSomething(Vector3D vectorOfSomething);
 void yaw        (float amountToYaw, bool converToDegree   );
 void translate  (Vector3D translateVector, int perspective);
 void setPosition(Vector3D position                        );

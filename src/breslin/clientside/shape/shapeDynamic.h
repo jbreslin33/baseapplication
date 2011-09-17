@@ -84,6 +84,7 @@ void     addAbility(Ability* ability);
 Ability* getAbility(Ability* ability);
 
 //movement
+virtual float       getDegreesToSomething(Vector3D something                       ) = 0;
 virtual void        yaw                  (float amountToYaw, bool converToDegree   ) = 0;
 virtual void        translate            (Vector3D translateVector, int perspective) = 0;
 virtual std::string getName() = 0; 

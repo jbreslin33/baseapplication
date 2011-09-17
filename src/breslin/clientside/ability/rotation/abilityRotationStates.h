@@ -85,5 +85,17 @@ public:
   void exit   (AbilityRotation* abilityRotation);
 };
 
-
+/******************************************************
+*				OFF
+********************************************************/
+class Off_InterpolateTick_Rotation : public AbilityRotationState
+{
+private:
+  Off_InterpolateTick_Rotation(){}
+public:
+  static Off_InterpolateTick_Rotation* Instance();
+  void enter  (AbilityRotation* abilityRotation);
+  void execute(AbilityRotation* abilityRotation);
+  void exit   (AbilityRotation* abilityRotation);
+};
 #endif
