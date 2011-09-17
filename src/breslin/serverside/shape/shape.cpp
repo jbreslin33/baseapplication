@@ -90,7 +90,7 @@ void Shape::processTick()
 	mCommand.mRotation.x = mSceneNode->_getDerivedOrientation().zAxis().x;
 
     mCommand.mRotation.z = mSceneNode->_getDerivedOrientation().zAxis().z;
-	LogString("z:%f",mCommand.mRotation.z);
+	//LogString("z:%f",mCommand.mRotation.z);
 }
 
 void Shape::setKeyDirection()  //this is called first in process tick so let's start conversion to separate
