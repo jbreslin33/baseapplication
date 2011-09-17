@@ -63,7 +63,7 @@ void Normal_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-
+//going to try to treat x and z seperate.
 	
 	// if distance exceeds threshold && server velocity is zero
 	if(abilityRotation->mDeltaRotation > abilityRotation->mRotInterpLimitHigh &&
