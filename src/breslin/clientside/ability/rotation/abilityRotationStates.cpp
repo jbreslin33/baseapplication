@@ -64,10 +64,6 @@ void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	//abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotation = abilityRotation->mShapeDynamic->mServerFrame->mRotation;
 	
-	//let's divy up here
-	
-
-	/*
 	// if distance exceeds threshold && server velocity is zero
 	if(abilityRotation->mDeltaRotation > abilityRotation->mRotInterpLimitHigh && !abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->isZero())
 	{
@@ -75,15 +71,12 @@ void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
     }
 	else //server stopped or we are in sync so just use server vel as is..
     {
-		*/
-
-	/*
 		Vector3D serverDest;
 
-		//serverDest.x = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x;
-	    //serverDest.y = 0.0;
-        //serverDest.z = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z;
-        //serverDest.normalise();
+		serverDest.x = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x;
+	    serverDest.y = 0.0;
+        serverDest.z = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z;
+        serverDest.normalise();
 
         if(abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds != 0)
         {
@@ -95,13 +88,12 @@ void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 			abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
         }
 
-       // serverDest = serverDest * abilityRotation->mSpeed;
+        serverDest = serverDest * abilityRotation->mSpeed;
 
 		abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x = serverDest.x;
         abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->y = 0.0f;
         abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->z = serverDest.z;
-	*/
-	//}
+	}
 }
 void Normal_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
@@ -216,7 +208,6 @@ void Normal_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 
-	/*
 	Vector3D transVector;
 
     transVector.x = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x;
@@ -228,10 +219,8 @@ void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 	newRotation->x = transVector.x + abilityRotation->mShapeDynamic->getRotation()->x;
 	newRotation->y = 0.0;
 	newRotation->z = transVector.z + abilityRotation->mShapeDynamic->getRotation()->z;
-	*/
-	
 
-	abilityRotation->mShapeDynamic->setRotation(abilityRotation->mShapeDynamic->mServerFrame->mRotation);
+	abilityRotation->mShapeDynamic->setRotation(newRotation);
 
 
 }
