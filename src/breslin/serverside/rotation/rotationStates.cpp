@@ -7,7 +7,7 @@
 
 #include "rotation.h"
 
-#define MAX_TURN_SPEED 100     // character turning in degrees per second
+#define MAX_TURN_SPEED 250     // character turning in degrees per second
 
 Normal_Rotation* Normal_Rotation::Instance()
 {
