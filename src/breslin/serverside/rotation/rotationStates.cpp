@@ -15,7 +15,7 @@ void Normal_Rotation::enter(Rotation* rotation)
 }
 void Normal_Rotation::execute(Rotation* rotation)
 {
-	/*
+	
 	if (rotation->mKeyRotation == 0)
 	{
 		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
@@ -37,13 +37,11 @@ void Normal_Rotation::execute(Rotation* rotation)
 			return;
 		}
 	}
-	*/
-	if (rotation->mKeyRotation == 0)
-		return;
-	//actual rotate
-// rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 
-rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
+	//actual rotate
+	 rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
+
+//rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
 }
 void Normal_Rotation::exit(Rotation* rotation)
 {

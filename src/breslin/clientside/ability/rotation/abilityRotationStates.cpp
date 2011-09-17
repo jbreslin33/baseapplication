@@ -113,7 +113,7 @@ void Catchup_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-	abilityRotation->mShapeDynamic->appendToTitle("M:Catchup");
+	//abilityRotation->mShapeDynamic->appendToTitle("M:Catchup");
 
 	//if we are back in sync
 	if(abilityRotation->mDeltaRotation <= abilityRotation->mRotInterpLimitHigh || abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->isZero())
