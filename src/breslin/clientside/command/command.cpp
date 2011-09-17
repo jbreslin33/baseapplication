@@ -8,7 +8,6 @@ Command::Command()
 
 	mRot        = new Vector3D();
 	mRotOld      = new Vector3D();
-	mRotationVelocity = new Vector3D();
 
 	mKey = 0;
 	mMilliseconds = 0;

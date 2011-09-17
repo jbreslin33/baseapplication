@@ -148,9 +148,6 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 	bool moveYChanged = true;
 	bool moveZChanged = true;
 
-	bool rotationXChanged = true;
-	bool rotationZChanged = true;
-
 	// Flags
 	flags = mes->ReadByte();
 
@@ -195,19 +192,11 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 		mServerFrame->mRotOld->x = mServerFrame->mRot->x;
 		mServerFrame->mRot->x = mes->ReadFloat();
 	}
-	else
-	{
-		rotationXChanged = false;
-	}
 
 	if(flags & mParser->mCommandRotationZ)
 	{
 		mServerFrame->mRotOld->z = mServerFrame->mRot->z;
 		mServerFrame->mRot->z = mes->ReadFloat();
-	}
-	else
-	{
-		rotationZChanged = false;
 	}
 
 	//milliseconds
@@ -246,27 +235,6 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 		{
 			mServerFrame->mMoveVelocity->z = 0.0;
 		}
-
-		//rotation
-		if (rotationXChanged)
-		{
-			mServerFrame->mRotationVelocity->x = mServerFrame->mRot->x - mServerFrame->mRotOld->x;
-		}
-		else
-		{
-			mServerFrame->mRotationVelocity->x = 0.0;
-		}
-		
-		if (rotationZChanged)
-		{
-			mServerFrame->mRotationVelocity->z = mServerFrame->mRot->z - mServerFrame->mRotOld->z;
-		}
-		else
-		{
-			mServerFrame->mRotationVelocity->z = 0.0;
-		}
-
-
 	}
 	processTick();
 }
