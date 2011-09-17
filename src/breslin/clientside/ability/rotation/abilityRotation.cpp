@@ -69,19 +69,15 @@ void AbilityRotation::interpolateTick(float renderTime)
 
 void AbilityRotation::calculateDeltaRotation()  
 {
-
 	mDeltaX = mShapeDynamic->mServerFrame->mRotation->x - mShapeDynamic->getRotation()->x;
     mDeltaZ = mShapeDynamic->mServerFrame->mRotation->z - mShapeDynamic->getRotation()->z;
 	
+    //distance we are off from server
+    mDeltaRotation = sqrt(pow(mDeltaX, 2) + pow(mDeltaZ, 2));
+
 	//LogString("mRotationX:%f",mShapeDynamic->mServerFrame->mRotation->x);
 	//LogString("getRotationZ:%f",mShapeDynamic->getRotation()->z);
 	//LogString("mDeltaX:%f",mDeltaX);
-
-
 	//LogString("mDeltaZ:%f",mDeltaZ);
-
-
-    //distance we are off from server
-    mDeltaRotation = sqrt(pow(mDeltaX, 2) + pow(mDeltaZ, 2));
 }
 

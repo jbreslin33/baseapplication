@@ -59,13 +59,14 @@ Normal_ProcessTick_Rotation* Normal_ProcessTick_Rotation::Instance()
 }
 void Normal_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 {
+
 }
 void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-	//abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotation = abilityRotation->mShapeDynamic->mServerFrame->mRotation;
-	
+	abilityRotation->mShapeDynamic->appendToTitle("R:Normal");
 	// if distance exceeds threshold && server velocity is zero
-	if(abilityRotation->mDeltaRotation > abilityRotation->mRotInterpLimitHigh && !abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->isZero())
+	if(abilityRotation->mDeltaRotation > abilityRotation->mRotInterpLimitHigh &&
+		!abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->isZero())
 	{
 		abilityRotation->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Rotation::Instance());
     }
@@ -113,10 +114,11 @@ void Catchup_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-	//abilityRotation->mShapeDynamic->appendToTitle("M:Catchup");
+	abilityRotation->mShapeDynamic->appendToTitle("R:Catchup");
 
 	//if we are back in sync
-	if(abilityRotation->mDeltaRotation <= abilityRotation->mRotInterpLimitHigh || abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->isZero())
+	if(abilityRotation->mDeltaRotation <= abilityRotation->mRotInterpLimitHigh ||
+		abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->isZero())
     {
 		abilityRotation->mProcessTickStateMachine->changeState(Normal_ProcessTick_Rotation::Instance());
     }
@@ -151,7 +153,8 @@ void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
         {
 			abilityRotation->mSpeed = sqrt(
 				pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x, 2) + 
-				pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z, 2))/abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
+				pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z, 2)) /
+				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
 			
 			abilityRotation->mShapeDynamic->mSpeed = abilityRotation->mSpeed;
 		}
@@ -159,7 +162,8 @@ void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 		if(abilityRotation->mSpeed != 0.0)
 		{
            //time needed to get to future server pos
-           float time = abilityRotation->mDeltaRotation * abilityRotation->mRotationInterpFactor/abilityRotation->mSpeed;
+           float time = abilityRotation->mDeltaRotation *
+			   abilityRotation->mRotationInterpFactor/abilityRotation->mSpeed;
 
            myDest.normalise();
 
