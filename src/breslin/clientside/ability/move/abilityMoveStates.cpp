@@ -62,7 +62,6 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 	abilityMove->mShapeDynamic->appendToTitle("M:Normal");
 
 	// if distance exceeds threshold && server velocity is zero
-	
 	if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->isZero())
 	{
 		abilityMove->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
@@ -71,14 +70,10 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
     {
 	
 		Vector3D serverDest;
-       // Ogre::Vector3 myDest      = Ogre::Vector3::ZERO;
-
 		serverDest.x = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x;
 	    serverDest.y = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->y;
         serverDest.z = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->z;
         serverDest.normalise();
-
-       // abilityMove->mShapeDynamic->mSpeed = 0.0;
 
         if(abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds != 0)
         {
@@ -204,7 +199,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
     transVector.x = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x;
     transVector.y = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y;
     transVector.z = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z;
-	//LogString("x:%f",transVector.x);
+
 	transVector = transVector * abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000;
 	Vector3D newPosition;
 	newPosition.x = transVector.x + abilityMove->mShapeDynamic->getPosition().x;
@@ -212,7 +207,6 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 	newPosition.z = transVector.z + abilityMove->mShapeDynamic->getPosition().z;
 	
 	abilityMove->mShapeDynamic->setPosition(newPosition);
-	//abilityMove->mShapeDynamic->translate(transVector * abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000, 1);
 
 	//does this just prevent you from going below 0 up and down?
     if(abilityMove->mShapeDynamic->getPosition().y < 0.0)

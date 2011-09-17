@@ -27,6 +27,7 @@ MoveStateMachine* mMoveStateMachine;
 //run speed
 float mRunSpeed;
 
+
 //run acceleration
 float mRunDecel;
 float mRunAccel;

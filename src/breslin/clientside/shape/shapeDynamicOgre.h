@@ -83,7 +83,6 @@ void setVisible (bool visible                             );
 void setRotation(Vector3D* vector3D);
 
 //check position
-float    getDegreesToSomething(Vector3D something                       );
 Vector3D getPosition          (                                         );
 
 //check rotation

@@ -1,4 +1,8 @@
 #include "abilityRotation.h"
+
+//log
+#include "../../tdreamsock/dreamSockLog.h"
+
 #include "../../shape/shapeDynamic.h"
 
 #include "abilityRotationStateMachine.h"
@@ -27,19 +31,12 @@ AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDyn
 	mInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Rotation::Instance());
 	mInterpolateTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
 
-	//////rotation
-    mTurnSpeed = 250.0;
+	//speed
 	mSpeed = 0.0f;
 
-    mRotInterpLimitHigh = .000001; //how far away from server till we try to catch up
-    mRotInterpLimitLow  = 4.0; //how close to server till we are in sync
-    mRotInterpIncrease  = 1.20f; //rot factor used to catchup to server
-    mRotInterpDecrease  = 0.80f; //rot factor used to allow server to catchup to client
-
-	//rotation
-	mServerRotOld.zero();
-	mServerRotNew.zero();
-	mDegreesToServer = 0.0;
+	//thresholds
+	mRotInterpLimitHigh   = .066f; //how far away from server till we try to catch up
+	mRotationInterpFactor = 4.0f;
 
 	//deltas
 	mDeltaX        = 0.0; 
@@ -73,53 +70,17 @@ void AbilityRotation::calculateDeltaRotation()
 {
 
 	mDeltaX = mShapeDynamic->mServerFrame->mRotation->x - mShapeDynamic->getRotation()->x;
-    mDeltaY = mShapeDynamic->mServerFrame->mRotation->y - mShapeDynamic->getRotation()->y;
     mDeltaZ = mShapeDynamic->mServerFrame->mRotation->z - mShapeDynamic->getRotation()->z;
+	
+	//LogString("mRotationX:%f",mShapeDynamic->mServerFrame->mRotation->x);
+	//LogString("getRotationX:%f",mShapeDynamic->getRotation()->x);
+	//LogString("mDeltaX:%f",mDeltaX);
+
+
+	//LogString("mDeltaZ:%f",mDeltaZ);
+
 
     //distance we are off from server
-    mDeltaRotation = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));
+    mDeltaRotation = sqrt(pow(mDeltaX, 2) + pow(mDeltaZ, 2));
 }
 
-float AbilityRotation::getDegreesToServer()  //rot
-{
-    Vector3D serverRotNew;
-
-    serverRotNew.x = mShapeDynamic->mServerFrame->mRotation->x;
-	serverRotNew.y = 0;
-    serverRotNew.z = mShapeDynamic->mServerFrame->mRotation->z;
-
-    serverRotNew.normalise();
-
-    //calculate how far off we are from server
-	float degreesToServer = mShapeDynamic->getDegreesToSomething(serverRotNew);
-
-	return degreesToServer;
-}
-
-void AbilityRotation::calculateServerRotationSpeed()  //rot
-{
-    mServerRotOld.zero();
-    mServerRotNew.zero();
-
-    mServerRotOld.x = mShapeDynamic->mServerFrame->mRotationOld->x;
-	mServerRotOld.y = 0;
-    mServerRotOld.z = mShapeDynamic->mServerFrame->mRotationOld->z;
-
-    mServerRotNew.x = mShapeDynamic->mServerFrame->mRotation->x;
-	mServerRotNew.y = 0;
-    mServerRotNew.z = mShapeDynamic->mServerFrame->mRotation->z;
-
-    mServerRotNew.normalise();
-    mServerRotOld.normalise();
-
-    //calculate how far off we are from server
-	mDegreesToServer = mShapeDynamic->getDegreesToSomething(mServerRotNew);
-
-    //calculate server rotation from last tick to new one
-	mServerRotSpeed = mShapeDynamic->mGhost->getDegreesToSomething(mServerRotNew);
-
-    if(abs(mServerRotSpeed) < 0)
-    {
-		mServerRotSpeed = 0.0f;
-    }
-}

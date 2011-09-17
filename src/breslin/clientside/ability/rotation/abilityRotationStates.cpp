@@ -40,12 +40,8 @@ void Global_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Global_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-	//abilityRotation->calculateServerRotationSpeed();
-	//abilityRotation->mShapeDynamic->mGhost->yaw(abilityRotation->mServerRotSpeed,true);
-	
 	//this will move the ghost shape to server position before we do anything with non-ghosts.
 	abilityRotation->mShapeDynamic->mGhost->setRotation(abilityRotation->mShapeDynamic->mServerFrame->mRotation);
-	//LogString("x:%f",abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotation->x);
 	abilityRotation->calculateDeltaRotation();
 }
 void Global_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
@@ -66,26 +62,28 @@ void Normal_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-	//LogString("mDeltaRotation:%f",abilityRotation->mDeltaRotation);
-	//->mObjectTitleString.append("R:Normal");
-	//NEW COPIED FROM MOVE
+	abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotation = abilityRotation->mShapeDynamic->mServerFrame->mRotation;
+	
+	//let's divy up here
+	
+
 	/*
-	if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->isZero())
+	// if distance exceeds threshold && server velocity is zero
+	if(abilityRotation->mDeltaRotation > abilityRotation->mRotInterpLimitHigh && !abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->isZero())
 	{
-		abilityMove->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
+		abilityRotation->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Rotation::Instance());
     }
-    else //server stopped or we are in sync so just use server vel as is..
+	else //server stopped or we are in sync so just use server vel as is..
     {
-	*/
+		*/
+
+	/*
 		Vector3D serverDest;
-       // Ogre::Vector3 myDest      = Ogre::Vector3::ZERO;
 
-		serverDest.x = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x;
-	    serverDest.y = 0.0;
-        serverDest.z = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z;
-        serverDest.normalise();
-
-       // abilityMove->mShapeDynamic->mSpeed = 0.0;
+		//serverDest.x = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x;
+	    //serverDest.y = 0.0;
+        //serverDest.z = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z;
+        //serverDest.normalise();
 
         if(abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds != 0)
         {
@@ -93,48 +91,17 @@ void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 			abilityRotation->mSpeed =
 			sqrt(
 			pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x, 2) + 
-            pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->y, 2) +
 			pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z, 2)) /
 			abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
         }
 
-        serverDest = serverDest * abilityRotation->mSpeed;
+       // serverDest = serverDest * abilityRotation->mSpeed;
 
 		abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x = serverDest.x;
-        abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->y = serverDest.y;
+        abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->y = 0.0f;
         abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->z = serverDest.z;
-	//}
-
-
-//////OLD IS BELOW
-
-	// are we too far off you need to change to catchup state
-	/*
-    if(abs(abilityRotation->mDegreesToServer) > abilityRotation->mRotInterpLimitHigh)
-    {
-		abilityRotation->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Rotation::Instance());
-		return;
-    }
-    else
-    {
-         if (abilityRotation->mServerRotSpeed == 0.0)
-         {
-			abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = 0.0;
-         }
-         else
-         {
-			// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
-            if(abilityRotation->mServerRotSpeed > 0.0)
-            {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = abilityRotation->mTurnSpeed;
-            }
-			else //clockwise - set to -mTurnSpeed
-            {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = -abilityRotation->mTurnSpeed;
-            }
-		}
-	}
 	*/
+	//}
 }
 void Normal_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
@@ -154,48 +121,74 @@ void Catchup_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-	//->mObjectTitleString.append("R:Catchup");
+	abilityRotation->mShapeDynamic->appendToTitle("M:Catchup");
 
-	// are we back on track
-    if(abs(abilityRotation->mDegreesToServer) < abilityRotation->mRotInterpLimitLow)
+	//if we are back in sync
+	if(abilityRotation->mDeltaRotation <= abilityRotation->mRotInterpLimitHigh || abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->isZero())
     {
-       abilityRotation->mProcessTickStateMachine->changeState(Normal_ProcessTick_Rotation::Instance());
-		return;
+		abilityRotation->mProcessTickStateMachine->changeState(Normal_ProcessTick_Rotation::Instance());
     }
     else
     {
-		if(abilityRotation->mServerRotSpeed != 0.0)
+		Vector3D serverDest; //vector to future server pos
+        Vector3D myDest; //vector from clienr pos to future server pos
+
+        serverDest.x = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x;
+        serverDest.y = 0.0f;
+        serverDest.z = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z;
+        serverDest.normalise();
+
+        float multiplier = abilityRotation->mDeltaRotation * abilityRotation->mRotationInterpFactor;
+        serverDest = serverDest * multiplier;
+        serverDest.x = abilityRotation->mShapeDynamic->mServerFrame->mPosition->x + serverDest.x;
+        serverDest.y = 0.0f;
+        serverDest.z = abilityRotation->mShapeDynamic->mServerFrame->mPosition->z + serverDest.z;
+                //LogString("mPosition->y %f", abilityRotation->mShapeDynamic->mClient->mServerFrame->mPosition->y);
+
+        myDest.x = serverDest.x - abilityRotation->mShapeDynamic->getPosition().x;
+        myDest.y = 0.0f;
+        myDest.z = serverDest.z - abilityRotation->mShapeDynamic->getPosition().z;
+
+
+        //dist from clienr pos to future server pos
+        float predictDist = pow(myDest.x, 2) + pow(myDest.y, 2) + pow(myDest.z, 2);
+        predictDist = sqrt(predictDist);
+
+        //server velocity
+		if(abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds != 0)
         {
-			// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
-            if(abilityRotation->mServerRotSpeed > 0.0)
-            {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = abilityRotation->mTurnSpeed;
-            }
-            else //clockwise - set to -mTurnSpeed
-            {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = -abilityRotation->mTurnSpeed;
-            }
-			if(abilityRotation->mDegreesToServer / abilityRotation->mServerRotSpeed > 0.0)
-            {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed * abilityRotation->mRotInterpIncrease;
-            }
-            else
-            {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed * abilityRotation->mRotInterpDecrease;
-            }
+			abilityRotation->mSpeed = sqrt(
+				pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x, 2) + 
+				pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z, 2))/abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
+			
+			abilityRotation->mShapeDynamic->mSpeed = abilityRotation->mSpeed;
 		}
-        else if(abilityRotation->mServerRotSpeed == 0.0)
-        {
-			if (abilityRotation->mDegreesToServer > 0.0)
-            {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = abilityRotation->mTurnSpeed;
-            }
-            else //clockwise - set to -mTurnSpeed
-            {
-				abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = -abilityRotation->mTurnSpeed;
-            }
+
+		if(abilityRotation->mSpeed != 0.0)
+		{
+           //time needed to get to future server pos
+           float time = abilityRotation->mDeltaRotation * abilityRotation->mRotationInterpFactor/abilityRotation->mSpeed;
+
+           myDest.normalise();
+
+           //client vel needed to get to future server pos in time
+		   float distTime = predictDist/time;
+           myDest = myDest * distTime;
+
+           abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x = myDest.x;
+           abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->y = 0.0f;
+           abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->z = myDest.z;
+
 		}
-	}
+		else
+		{
+			//why would catchup ever need to set velocity to zero, wouldn't we simply leave catchup state??
+           abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x = 0.0;
+           abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->y = 0.0;
+           abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->z = 0.0;
+
+		}
+	}	
 }
 void Catchup_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
@@ -223,64 +216,26 @@ void Normal_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 
+	/*
 	Vector3D transVector;
 
     transVector.x = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x;
-    //transVector->y = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->y;
 	transVector.y = 0.0;
     transVector.z = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->z;
-	LogString("x:%f",abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x);
 
 	transVector = transVector * abilityRotation->mShapeDynamic->mGame->getRenderTime() * 1000;
 	Vector3D* newRotation = new Vector3D();
 	newRotation->x = transVector.x + abilityRotation->mShapeDynamic->getRotation()->x;
-	//newRotation->y = transVector.y + abilityRotation->mShapeDynamic->getRotation()->y;
 	newRotation->y = 0.0;
 	newRotation->z = transVector.z + abilityRotation->mShapeDynamic->getRotation()->z;
+	*/
 	
 
-	LogString("x:%f",newRotation->x);
-	LogString("z:%f",newRotation->z);
-	abilityRotation->mShapeDynamic->setRotation(newRotation);
+	abilityRotation->mShapeDynamic->setRotation(abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotation);
 
-	//abilityRotation->
-/*
-	//->mObjectTitleString.append("R:Normal");
-	float rotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed * abilityRotation->mShapeDynamic->mGame->getRenderTime();
-   abilityRotation->mShapeDynamic->yaw(rotSpeed, true);
 
-   if (abilityRotation->mServerRotSpeed == 0.0 && abs(abilityRotation->getDegreesToServer()) < abilityRotation->mRotInterpLimitLow)
-    {
-		abilityRotation->mInterpolateTickStateMachine->changeState(Off_InterpolateTick_Rotation::Instance());
-    }
-*/
 }
 void Normal_InterpolateTick_Rotation::exit(AbilityRotation* abilityRotation)
-{
-}
-
-/******************************************************
-*				OFF
-********************************************************/
-
-Off_InterpolateTick_Rotation* Off_InterpolateTick_Rotation::Instance()
-{
-  static Off_InterpolateTick_Rotation instance;
-  return &instance;
-}
-void Off_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
-{
-	abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed = 0.0;
-}
-void Off_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
-{		
-	//->mObjectTitleString.append("R:Off");
-	if (abs(abilityRotation->getDegreesToServer()) > abilityRotation->mRotInterpLimitLow)
-    {
-		abilityRotation->mInterpolateTickStateMachine->changeState(Normal_InterpolateTick_Rotation::Instance());
-    }
-}
-void Off_InterpolateTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
 }
 

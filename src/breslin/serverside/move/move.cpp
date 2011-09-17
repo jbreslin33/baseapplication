@@ -30,6 +30,7 @@ Move::Move()
     //runSpeed
     mRunSpeed     = 0.0;
 
+
     //run acceleration
     mRunAccel    = .04166;
     mRunDecel    = .04166;

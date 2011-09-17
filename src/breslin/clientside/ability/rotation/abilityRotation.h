@@ -33,20 +33,12 @@ AbilityRotationStateMachine* mInterpolateTickStateMachine;
 //shape
 ShapeDynamic* mShapeDynamic;
 
-//rotation
-float mTurnSpeed; 
+//speed
 float mSpeed;
-float mServerRotSpeed;  
 
+//thresholds
 float mRotInterpLimitHigh;  
-float mRotInterpLimitLow;  
-float mRotInterpIncrease;   
-float mRotInterpDecrease;  
-
-//rotation
-Vector3D mServerRotOld;  
-Vector3D mServerRotNew;  
-float    mDegreesToServer;  
+float mRotationInterpFactor;
 
 //deltas
 float mDeltaX;  
@@ -66,8 +58,7 @@ void interpolateTick(float renderTime);
 
 //rotation
 void  calculateDeltaRotation();
-float getDegreesToServer();  
-void  calculateServerRotationSpeed(); 
+
 
 };
 

@@ -20,6 +20,12 @@ public:
 Rotation();
 ~Rotation();
 
+float mRotationSpeed;
+
+//acceleration
+float mRotationDecel;
+float mRotationAccel;
+
 //movement
 void processTick    ();
 

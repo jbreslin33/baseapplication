@@ -24,6 +24,9 @@ AbilityMove::AbilityMove(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
 	//mInterpolateTickStateMachine->setGlobalState       (Global_InterpolateTick_Move::Instance());
 	mInterpolateTickStateMachine->setGlobalState       (NULL);
 
+	//speed
+	mSpeed     = 0.0;
+
     //thresholds
     mPosInterpLimitHigh = .066f; //how far away from server till we try to catch up
     mPosInterpFactor    = 4.0f;
@@ -33,10 +36,6 @@ AbilityMove::AbilityMove(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
 	mDeltaY		   = 0.0;
 	mDeltaZ        = 0.0;
 	mDeltaPosition = 0.0;
-
-	//speed
-	mSpeed     = 0.0;
-
 }
 
 AbilityMove::~AbilityMove()

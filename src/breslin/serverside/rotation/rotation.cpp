@@ -21,12 +21,16 @@ using namespace Ogre;
 #define KEY_COUNTER_CLOCKWISE      16
 #define KEY_CLOCKWISE              32
 
-#define TURN_SPEED 250.0f      // character turning in degrees per second
-
 Rotation::Rotation()
 :
 	OgreShape()
 {
+	mRotationSpeed  = 0.0;
+
+    //run acceleration
+    mRotationAccel    = .04166;
+    mRotationDecel    = .04166;
+
 	//rotation states
 	mRotationStateMachine = new RotationStateMachine(this);    //setup the state machine
 	mRotationStateMachine->setCurrentState      (Normal_Rotation::Instance());

@@ -87,8 +87,9 @@ void Shape::processTick()
     //mCommand.mRotation.x = mSceneNode->getOrientation().zAxis().x;
     //mCommand.mRotation.z = mSceneNode->getOrientation().zAxis().z;
 
-	mCommand.mRotation.x = vector.x;
-    mCommand.mRotation.z = vector.z;
+	mCommand.mRotation.x = mSceneNode->_getDerivedOrientation().zAxis().x;
+	LogString("x:%f",mCommand.mRotation.x);
+    mCommand.mRotation.z = mSceneNode->_getDerivedOrientation().zAxis().z;
 
 }
 

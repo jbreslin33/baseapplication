@@ -33,6 +33,9 @@ ShapeDynamic* mShapeDynamic;
 AbilityMoveStateMachine* mProcessTickStateMachine;
 AbilityMoveStateMachine* mInterpolateTickStateMachine;
 
+//speed
+float mSpeed; 
+
 //thresholds
 float mPosInterpLimitHigh; 
 float mPosInterpFactor; 
@@ -42,8 +45,6 @@ float mDeltaX;
 float mDeltaZ;  
 float mDeltaY; 
 float mDeltaPosition; 
-
-float mSpeed; 
 
 /******************************************************
 *				METHODS

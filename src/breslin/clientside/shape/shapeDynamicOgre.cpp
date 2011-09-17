@@ -156,9 +156,9 @@ Vector3D* ShapeDynamicOgre::getRotation()
 {
 	Vector3D* vector3D = new Vector3D();
 	
-	vector3D->x = getSceneNode()->getOrientation().x;
-	vector3D->y = getSceneNode()->getOrientation().y;
-	vector3D->z = getSceneNode()->getOrientation().z;
+	vector3D->x = getSceneNode()->_getDerivedOrientation().zAxis().x;
+	vector3D->y = 0.0;
+	vector3D->z = getSceneNode()->_getDerivedOrientation().zAxis().z;
 
 	return vector3D;
 }
@@ -207,32 +207,6 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 	//LogString("z:%f",getSceneNode()->getOrientation().z);
 	//getSceneNode()->setOrientation(
 	*/
-}
-float ShapeDynamicOgre::getDegreesToSomething(Vector3D vectorOfSomething)
-{
-	
-    //calculate how far off we are from some vector
-    Quaternion toSomething = getSceneNode()->getOrientation().zAxis().getRotationTo(converToVector3(vectorOfSomething),Vector3::UNIT_Y);
-
-    // convert to degrees
-    Real degreesToSomething = toSomething.getYaw().valueDegrees();
-		//LogString("degBrian:%f",degreesToSomething);
-	//return degreesToSomething;
-	
-
-/*
-	double a[] = {vectorOfSomething.x, vectorOfSomething.y, vectorOfSomething.z};
-    double b[] = {getSceneNode()->getOrientation().zAxis().x, getSceneNode()->getOrientation().zAxis().y,
-	getSceneNode()->getOrientation().zAxis().z};
-
-	Vector3D* vector3D = new Vector3D();
-	float degrees = (float)vector3D->Vec3_Angle(a,b);
-	LogString("degJim:%f",degrees);
-	//return degrees;
-*/
-	return degreesToSomething;
-	//return degreesToSomething;
-
 }
 
 //1 world, 2 local
