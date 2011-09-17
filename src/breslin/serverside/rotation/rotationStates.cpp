@@ -1,4 +1,8 @@
 #include "rotationStates.h"
+
+//log
+#include "../tdreamsock/dreamSockLog.h"
+
 #include "rotationStateMachine.h"
 
 #include "rotation.h"
@@ -39,7 +43,8 @@ void Normal_Rotation::execute(Rotation* rotation)
 	}
 
 	//actual rotate
-	 rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
+	LogString("N:%f",rotation->mRotationSpeed);
+	rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 
 //rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
 }
@@ -91,7 +96,8 @@ void Accelerate_Rotation::execute(Rotation* rotation)
 	}
 
 	//actual rotate
- rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
+	LogString("N:%f",rotation->mRotationSpeed);
+	rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 }
 void Accelerate_Rotation::exit(Rotation* rotation)
 {
@@ -141,7 +147,8 @@ void Decelerate_Rotation::execute(Rotation* rotation)
 	}
 
 	//actual rotate
- rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
+	LogString("N:%f",rotation->mRotationSpeed);
+	rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 
 }
 void Decelerate_Rotation::exit(Rotation* rotation)
