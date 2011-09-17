@@ -43,7 +43,7 @@ void Normal_Rotation::execute(Rotation* rotation)
 	}
 
 	//actual rotate
-	LogString("N:%f",rotation->mRotationSpeed);
+//	LogString("N:%f",rotation->mRotationSpeed);
 	rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 
 //rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
@@ -96,7 +96,7 @@ void Accelerate_Rotation::execute(Rotation* rotation)
 	}
 
 	//actual rotate
-	LogString("N:%f",rotation->mRotationSpeed);
+//	LogString("N:%f",rotation->mRotationSpeed);
 	rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 }
 void Accelerate_Rotation::exit(Rotation* rotation)
@@ -147,7 +147,7 @@ void Decelerate_Rotation::execute(Rotation* rotation)
 	}
 
 	//actual rotate
-	LogString("N:%f",rotation->mRotationSpeed);
+//	LogString("N:%f",rotation->mRotationSpeed);
 	rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 
 }
