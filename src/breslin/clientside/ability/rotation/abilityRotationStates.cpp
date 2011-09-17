@@ -62,7 +62,7 @@ void Normal_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-	abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotation = abilityRotation->mShapeDynamic->mServerFrame->mRotation;
+	//abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotation = abilityRotation->mShapeDynamic->mServerFrame->mRotation;
 	
 	//let's divy up here
 	
@@ -231,7 +231,7 @@ void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 	*/
 	
 
-	abilityRotation->mShapeDynamic->setRotation(abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotation);
+	abilityRotation->mShapeDynamic->setRotation(abilityRotation->mShapeDynamic->mServerFrame->mRotation);
 
 
 }

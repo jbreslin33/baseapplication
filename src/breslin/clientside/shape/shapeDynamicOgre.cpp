@@ -156,9 +156,9 @@ Vector3D* ShapeDynamicOgre::getRotation()
 {
 	Vector3D* vector3D = new Vector3D();
 	
-	vector3D->x = getSceneNode()->_getDerivedOrientation().zAxis().x;
+	vector3D->x = getSceneNode()->_getDerivedOrientation().zAxis().x * -1;
 	vector3D->y = 0.0;
-	vector3D->z = getSceneNode()->_getDerivedOrientation().zAxis().z;
+	vector3D->z = getSceneNode()->_getDerivedOrientation().zAxis().z * -1;
 
 	return vector3D;
 }

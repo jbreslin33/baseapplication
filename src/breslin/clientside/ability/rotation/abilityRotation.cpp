@@ -73,7 +73,7 @@ void AbilityRotation::calculateDeltaRotation()
     mDeltaZ = mShapeDynamic->mServerFrame->mRotation->z - mShapeDynamic->getRotation()->z;
 	
 	//LogString("mRotationX:%f",mShapeDynamic->mServerFrame->mRotation->x);
-	LogString("getRotationX:%f",mShapeDynamic->getRotation()->x);
+	LogString("getRotationZ:%f",mShapeDynamic->getRotation()->z);
 	//LogString("mDeltaX:%f",mDeltaX);
 
 
