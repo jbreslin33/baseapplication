@@ -30,7 +30,8 @@ AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDyn
 	mInterpolateTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine
 	mInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Rotation::Instance());
 	mInterpolateTickStateMachine->setPreviousState     (Normal_ProcessTick_Rotation::Instance());
-
+//notes..close but the client is having trouble keeping up with rotation especially when max speed on server reaches
+	//250 which is what it's set to. I think the throttle on the client needs to be upped.
 	//speed
 	mSpeed = 0.0f;
 
