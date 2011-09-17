@@ -28,8 +28,8 @@ Rotation::Rotation()
 	mRotationSpeed  = 0.0;
 
     //run acceleration
-    mRotationAccel    = .04166 * 10;
-    mRotationDecel    = .04166 * 10;
+    mRotationAccel    = .04166 * 100;
+    mRotationDecel    = .04166 * 100;
 
 	//rotation states
 	mRotationStateMachine = new RotationStateMachine(this);    //setup the state machine

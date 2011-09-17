@@ -63,15 +63,41 @@ void Normal_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-	abilityRotation->mShapeDynamic->appendToTitle("R:Normal");
+
+	
 	// if distance exceeds threshold && server velocity is zero
 	if(abilityRotation->mDeltaRotation > abilityRotation->mRotInterpLimitHigh &&
 		!abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->isZero())
 	{
-		abilityRotation->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Rotation::Instance());
+		//abilityRotation->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Rotation::Instance());
+		abilityRotation->mShapeDynamic->appendToTitle("R:Catchup");
+
+		Vector3D serverDest;
+
+		serverDest.x = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x;
+	    serverDest.y = 0.0;
+        serverDest.z = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z;
+        serverDest.normalise();
+
+        if(abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds != 0)
+        {
+			
+			abilityRotation->mSpeed =
+			sqrt(
+			pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x, 2) + 
+			pow(abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->z, 2)) /
+			abilityRotation->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
+        }
+
+        serverDest = serverDest * abilityRotation->mSpeed;
+
+		abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->x = serverDest.x;
+        abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->y = 0.0f;
+        abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotationVelocity->z = serverDest.z;
     }
 	else //server stopped or we are in sync so just use server vel as is..
     {
+		abilityRotation->mShapeDynamic->appendToTitle("R:Normal");
 		Vector3D serverDest;
 
 		serverDest.x = abilityRotation->mShapeDynamic->mServerFrame->mRotationVelocity->x;

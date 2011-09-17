@@ -36,8 +36,8 @@ AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDyn
 	mSpeed = 0.0f;
 
 	//thresholds
-	mRotInterpLimitHigh   = .066f; //how far away from server till we try to catch up
-	mRotationInterpFactor = 4.0f;
+	mRotInterpLimitHigh   = .066f / 10; //how far away from server till we try to catch up
+	mRotationInterpFactor = 4.0f * 100;
 
 	//deltas
 	mDeltaX        = 0.0; 
