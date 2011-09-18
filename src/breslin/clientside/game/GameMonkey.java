@@ -6,7 +6,6 @@ package breslin.clientside.game;
 //standard library
 import java.nio.ByteBuffer;
 
-
 //graphics
 import breslin.clientside.graphics.GraphicsMonkey;
 
@@ -14,10 +13,9 @@ import breslin.clientside.graphics.GraphicsMonkey;
 import breslin.clientside.shape.ShapeDynamicMonkey;
 import breslin.clientside.shape.ShapeDynamic;
 
-
 //ability
 //import breslin.clientside.ability.rotation.AbilityRotation;
-//import breslin.clientside.ability.move.AbilityMove;
+import breslin.clientside.ability.move.AbilityMove;
 
 /***************************************
 *   		FORWARD DECLARATIONS
@@ -64,7 +62,7 @@ public void addShape(boolean b, ByteBuffer byteBuffer)
 
 	//ability
 	//shapeDynamicMonkey.addAbility(new AbilityRotation(shapeDynamicMonkey));
-	//shapeDynamicMonkey.addAbility(new AbilityMove    (shapeDynamicMonkey));
+	shapeDynamicMonkey.addAbility(new AbilityMove    (shapeDynamicMonkey));
 }
 
 //time

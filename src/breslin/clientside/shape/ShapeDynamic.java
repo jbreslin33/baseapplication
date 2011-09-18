@@ -116,7 +116,7 @@ public Command mCommandToRunOnShape;
 **************************************************/
 
 //abilitys
-void     addAbility(Ability ability)
+public void     addAbility(Ability ability)
 {
 
 }
