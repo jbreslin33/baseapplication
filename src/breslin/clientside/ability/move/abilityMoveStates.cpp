@@ -20,7 +20,6 @@
 #include <math.h>
 
 
-
 /******************** Global_ProcessTick_Move *****************/
 
 Global_ProcessTick_Move* Global_ProcessTick_Move::Instance()
@@ -42,6 +41,7 @@ void Global_ProcessTick_Move::execute(AbilityMove* abilityMove)
 void Global_ProcessTick_Move::exit(AbilityMove* abilityMove)
 {
 }
+
 
 /******************** Normal_ProcessTick_Move *****************/
 

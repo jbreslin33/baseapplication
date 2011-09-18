@@ -7,9 +7,9 @@ import com.jme3.math.Quaternion;
 public class Vector3D
 {
 
-public double x;
-public double y;
-public double z;
+public float x;
+public float y;
+public float z;
 
 public Vector3D()
 {
@@ -18,19 +18,19 @@ public Vector3D()
 	z = 0;
 }
 
-public Vector3D(double x1, double y1, double z1)
+public Vector3D(float x1, float y1, float z1)
 {
 	x = x1;
 	y = y1;
 	z = z1;
 }
 
-double length()
+public double length()
 {
 	return Math.sqrt(x*x + y*y + z*z);
 }
 
-boolean isZero()
+public boolean isZero()
 {
 	if (x == 0.0 && y == 0.0 && z == 0.0)
 	{
@@ -42,14 +42,14 @@ boolean isZero()
 	}
 }
 
-void zero()
+public void zero()
 {
 	x = 0;
 	y = 0;
 	z = 0;
 }
 
-void normalise()
+public void normalise()
 {
 	double len = length();
 	if (len == 0)

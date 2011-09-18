@@ -113,7 +113,7 @@ void interpolateTick()
 /***************************************
 *   		TIME
 ***************************************/
-float getRenderTime()
+public float getRenderTime()
 {
 	return 0;
 }

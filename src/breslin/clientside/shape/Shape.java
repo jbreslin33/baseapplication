@@ -21,34 +21,34 @@ public Shape()
 /**************************************************
 *			VARIABLES
 **************************************************/
-int   mIndex;
-Game mGame;
+public int   mIndex;
+public Game mGame;
 
 //scale
-float mScale;
+public float mScale;
 
 /**************************************************
 *			METHODS
 **************************************************/
 
 //setting position
- void     setPosition          (Vector3D vector3D         ) { }
- void     setPosition          (float x, float y, float z ) { }
+public void     setPosition          (Vector3D vector3D         ) { }
+public void     setPosition          (float x, float y, float z ) { }
 
 //getting position
- Vector3D getPosition          (                          ) { return new Vector3D(); }
+public Vector3D getPosition          (                          ) { return new Vector3D(); }
 
 //size
- void     scale                (Vector3D vector3D         ) { }
+public void     scale                (Vector3D vector3D         ) { }
 
 //visibility
- void     setVisible           (boolean b                    ) { }
+public void     setVisible           (boolean b                    ) { }
 
 
 //title
- void     drawTitle            (                          ) { }
- void     appendToTitle        (String appendage     ) { }
- void     appendToTitle        (int appendage             ) { }
- void     clearTitle           (                          ) { }
+public void     drawTitle            (                          ) { }
+public void     appendToTitle        (String appendage     ) { }
+public void     appendToTitle        (int appendage             ) { }
+public void     clearTitle           (                          ) { }
 
 }

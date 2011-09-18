@@ -14,3 +14,11 @@ javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.
 javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/rotation/AbilityRotationState.java
 javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/rotation/AbilityRotationStateMachine.java
 javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/rotation/Global_ProcessTick_Rotation.java
+
+javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/move/AbilityMove.java
+javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/move/AbilityMoveState.java
+javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/move/AbilityMoveStateMachine.java
+javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/move/Global_ProcessTick_Move.java
+javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/move/Normal_ProcessTick_Move.java
+javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/move/Catchup_ProcessTick_Move.java
+javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/move/Normal_InterpolateTick_Move.java

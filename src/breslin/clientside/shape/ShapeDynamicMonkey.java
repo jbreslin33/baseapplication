@@ -122,7 +122,7 @@ Node          mSceneNode;
 *          METHODS
 **********************************/
 //shape
-void createShape()
+public void createShape()
 {
 	//actually create the shape and attach to node.
 	mSceneNode = (Node) mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(getMeshString(mMeshCode));
@@ -174,13 +174,13 @@ void createShape()
 }
 
 //debugging
-void checkExtents(Vector3D min)
+public void checkExtents(Vector3D min)
 {
 
 }
 
 //size
-void scale(Vector3D scaleVector)
+public void scale(Vector3D scaleVector)
 {
 
 }
@@ -202,7 +202,7 @@ System.out.println("z:" + vector.z);
 
 }
 
-void translate  (Vector3D translateVector, int perspective)
+public void translate  (Vector3D translateVector, int perspective)
 {
 	if (perspective == 1)
 	{
@@ -215,23 +215,23 @@ void translate  (Vector3D translateVector, int perspective)
 		getSceneNode().move((float)translateVector.x,(float)translateVector.y,(float)translateVector.z);
 	}
 }
-void setPosition(Vector3D position                        )
+public void setPosition(Vector3D position                        )
 {
 	getSceneNode().setLocalTranslation((float)position.x,(float)position.y,(float)position.z);
 }
-void setPosition(float x, float y, float z                )
+public void setPosition(float x, float y, float z                )
 {
 	//in ogre setPosition is absolute so for jmonkey i could just take the difference?
 	//mSceneNode.getPosition();
 	getSceneNode().setLocalTranslation(x,y,z);
 }
-void setVisible (boolean visible                             )
+public void setVisible (boolean visible                             )
 {
 
 }
 
 //check position
-float    getDegreesToSomething(Vector3D something                       )
+public float    getDegreesToSomething(Vector3D something                       )
 {
 	//Transform transformGhost = getSceneNode().getWorldTransform();
 	//Quaternion quaternionThis = transform.getRotation();
@@ -252,7 +252,7 @@ float    getDegreesToSomething(Vector3D something                       )
 return 0.0f;
 }
 
-Vector3D getPosition          (                                         )
+public Vector3D getPosition          (                                         )
 {
 	Vector3f vector3f = getSceneNode().getWorldTranslation();
 	Vector3D vector3D = new Vector3D();
@@ -264,46 +264,46 @@ Vector3D getPosition          (                                         )
 }
 
 //title
-void drawTitle    ()
+public void drawTitle    ()
 {
 
 }
 
-void appendToTitle(String appendage)
+public void appendToTitle(String appendage)
 {
 
 }
-void appendToTitle(int appendage)
-{
-
-}
-
-void clearTitle   ()
+public void appendToTitle(int appendage)
 {
 
 }
 
-void setupTitle()
+public void clearTitle   ()
+{
+
+}
+
+public void setupTitle()
 {
 
 }
 
 
 //name
-String getName()
+public String getName()
 {
 	return mName;
 }
 
 //scene node
-Node  getSceneNode() { return mSceneNode; }
+public Node  getSceneNode() { return mSceneNode; }
 
 //utility
 //Ogre::Vector3 converToVector3(Vector3D vector3d);
 
 
 
-String getMeshString(int meshCode)
+public String getMeshString(int meshCode)
 {
 
 	if (meshCode == 0)

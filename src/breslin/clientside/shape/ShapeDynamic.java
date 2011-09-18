@@ -80,7 +80,7 @@ public ShapeDynamic(Game game, ByteBuffer byteBuffer)
 *************************************************/
 
 //game
-Game mGame;
+public Game mGame;
 
 //mesh
 int mMeshCode;
@@ -92,8 +92,8 @@ boolean mAnimate;
 Parser mParser;
 
 //speed
-float mSpeed;
-float mSpeedMax;
+public float mSpeed;
+public float mSpeedMax;
 
 //abilitys
 ArrayList<Ability> mAbilityVector = new ArrayList<Ability>();
@@ -108,8 +108,8 @@ Vector3D mRotation;
 int mLocal;
 
 //commands
-Command mServerFrame;					// the latest frame from server
-Command mCommandToRunOnShape;
+public Command mServerFrame;					// the latest frame from server
+public Command mCommandToRunOnShape;
 
 /*************************************************
 *				METHODS
@@ -202,7 +202,7 @@ void parseByteBuffer(ByteBuffer byteBuffer)
 }
 
 //ghost
-void moveGhostShape()
+public void moveGhostShape()
 {
 
 }

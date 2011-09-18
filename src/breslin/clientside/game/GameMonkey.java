@@ -68,7 +68,7 @@ public void addShape(boolean b, ByteBuffer byteBuffer)
 }
 
 //time
-float getRenderTime()
+public float getRenderTime()
 {
 	return mRenderTime;
 }
