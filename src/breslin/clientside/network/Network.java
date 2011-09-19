@@ -163,22 +163,25 @@ public void readPackets()
 
 		if (mParser.mMessageConnect == type)
 		{
-			//System.out.println("connect message -101 recieved");
+			System.out.println("BRESSAGE: mMessageConnect");
 		}
 
 		if (mParser.mMessageAddShape == type)
 		{
 			mGame.addShape(true,byteBuffer);
+			System.out.println("BRESSAGE: mMessageAddShape");
 		}
 
 		if (mParser.mMessageRemoveShape == type)
 		{
 			mGame.removeShape(byteBuffer);
+			System.out.println("BRESSAGE: mMessageRemoveShape");
 		}
 
 		if (mParser.mMessageFrame == type)
 		{
 			mGame.readServerTick(byteBuffer);
+			System.out.println("BRESSAGE: mMessageFrame");
 		}
 
 		if (mParser.mMessageServerExit == type)
@@ -280,15 +283,16 @@ public void sendCommand()
 	// Add to the message
 	byteBuffer.putInt(flags);
 
-
-	if(flags & mParser.mCommandKey)
+	int x = flags & mParser.mCommandKey;
+	if(x == 1)
 	{
-		byteBuffer.put(mCommandToServer.mKey);
+		byteBuffer.putInt(mCommandToServer.mKey);
 	}
-/*
-	if(flags & mParser.mCommandMilliseconds)
+
+	x = flags & mParser.mCommandMilliseconds;
+	if(x == 1)
 	{
-		byteBuffer.put(mCommandToServer.mMilliseconds);
+		byteBuffer.putInt(mCommandToServer.mMilliseconds);
 	}
 
 	//set 'last' commands for diff
@@ -297,7 +301,7 @@ public void sendCommand()
 
 	// Send the packet
 	send(byteBuffer);
-*/
+
 }
 
 
