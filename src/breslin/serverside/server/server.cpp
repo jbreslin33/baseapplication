@@ -416,7 +416,7 @@ void Server::readPackets(void)
 				break;
 
 			case USER_MES_FRAME:
-			LogString("Got frame (size: %d bytes)", ret);
+			//LogString("Got frame (size: %d bytes)", ret);
 
 				// Skip sequences
 				mes.ReadShort();

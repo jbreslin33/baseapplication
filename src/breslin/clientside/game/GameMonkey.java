@@ -68,6 +68,7 @@ public void addShape(boolean b, ByteBuffer byteBuffer)
 //time
 public float getRenderTime()
 {
+	System.out.println("r:" + mRenderTime);
 	return mRenderTime;
 }
 

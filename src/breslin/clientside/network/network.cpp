@@ -382,7 +382,7 @@ void Network::sendCommand(void)
 
 	if(flags & mParser->mCommandKey)
 	{
-		
+		byteBuffer->WriteByte(mCommandToServer->mKey);
 	}
 
 	if(flags & mParser->mCommandMilliseconds)

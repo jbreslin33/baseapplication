@@ -81,11 +81,12 @@ public float mDeltaPosition;
 ********************************************************/
 
 //updating
-void processTick()
+public void processTick()
 {
 	mProcessTickStateMachine.update();
 }
-void interpolateTick(float renderTime)
+
+public void interpolateTick(float renderTime)
 {
 	mInterpolateTickStateMachine.update();
 }

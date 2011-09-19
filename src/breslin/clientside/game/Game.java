@@ -99,7 +99,30 @@ ShapeDynamic getShapeDynamic(int id)
 ***************************************/
 public void readServerTick           (ByteBuffer byteBuffer)
 {
+	int newTime;
+	int time;
 
+	// Skip sequences
+	byteBuffer.getShort();
+
+	newTime = mTime->dreamSock_GetCurrentSystemTime();
+	time = newTime - mOldTime;
+    mOldTime = newTime;
+
+	while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
+	{
+		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
+
+		int id = byteBuffer->ReadByte();
+
+		ShapeDynamic* shape = NULL;
+		shape = getShapeDynamic(id);
+
+		if (shape)
+		{
+			shape->readDeltaMoveCommand(byteBuffer);
+		}
+	}
 }
 
 void interpolateTick()
@@ -112,6 +135,7 @@ void interpolateTick()
 ***************************************/
 public float getRenderTime()
 {
+	System.out.println("fd");
 	return 0;
 }
 

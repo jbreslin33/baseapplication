@@ -33,8 +33,6 @@ void Global_ProcessTick_Move::enter(AbilityMove* abilityMove)
 }
 void Global_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
-	//this does what the setDirection in rotation states does. it moves the ghosts before the non-ghost logic
-	//is processed
 	abilityMove->mShapeDynamic->moveGhostShape();
 	abilityMove->calculateDeltaPosition();
 }

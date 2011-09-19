@@ -118,7 +118,7 @@ public Command mCommandToRunOnShape;
 //abilitys
 public void     addAbility(Ability ability)
 {
-
+	mAbilityVector.add(ability);
 }
 
 Ability getAbility(Ability ability)
@@ -151,13 +151,28 @@ float  getSpeed()
 }
 
 //ticks
-void processTick()
+public void processTick()
 {
+	System.out.println("ddddd");
+	clearTitle(); //empty title string so it can be filled anew
 
+	//process ticks on abilitys
+	for (int i = 0; i < mAbilityVector.size(); i++)
+	{
+		mAbilityVector.get(i).processTick();
+	}
+
+	//run billboard here for now.
+	drawTitle();
 }
-void interpolateTick(float renderTime)
-{
 
+public void interpolateTick(float renderTime)
+{
+	//interpolate ticks on abilitys
+	for (int i = 0; i < mAbilityVector.size(); i++)
+	{
+		mAbilityVector.get(i).interpolateTick(renderTime);
+	}
 }
 
 //messaging

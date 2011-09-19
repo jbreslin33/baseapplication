@@ -52,11 +52,12 @@ float    mDegreesToServer;
 ********************************************************/
 
 //updating
-void processTick()
+public void processTick()
 {
 
 }
-void interpolateTick(float renderTime)
+
+public void interpolateTick(float renderTime)
 {
 
 }
