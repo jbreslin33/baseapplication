@@ -178,7 +178,103 @@ public void interpolateTick(float renderTime)
 //messaging
 public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 {
+	//ShapeDynamic* shape = NULL;
 
+	int flags = 0;
+
+	boolean moveXChanged = true;
+	boolean moveYChanged = true;
+	boolean moveZChanged = true;
+
+	// Flags
+	flags = byteBuffer.get();
+
+	// Origin
+	if(flags & mParser.mCommandOriginX)
+	{
+		mServerFrame.mPositionOld.x = mServerFrame.mPosition.x;
+		mServerFrame.mPosition.x = mes.getFloat();
+	}
+	else
+	{
+		moveXChanged = false;
+	}
+
+	if(flags & mParser.mCommandOriginY)
+	{
+		mServerFrame.mPositionOld.y = mServerFrame.mPosition.y;
+		mServerFrame.mPosition.y = mes.getFloat();
+	}
+	else
+	{
+		moveYChanged = false;
+	}
+
+	if(flags & mParser.mCommandOriginZ)
+	{
+		mServerFrame.mPositionOld.z = mServerFrame.mPosition.z;
+		mServerFrame.mPosition.z = mes.getFloat();
+	}
+	else
+	{
+		moveZChanged = false;
+	}
+
+	//set old rot
+
+
+
+	//rotation
+	if(flags & mParser.mCommandRotationX)
+	{
+		mServerFrame.mRotOld.x = mServerFrame.mRot.x;
+		mServerFrame.mRot.x = byteBuffer.getFloat();
+	}
+
+	if(flags & mParser.mCommandRotationZ)
+	{
+		mServerFrame.mRotOld.z = mServerFrame.mRot.z;
+		mServerFrame.mRot.z = byteBuffer.getFloat();
+	}
+
+	//milliseconds
+	if (flags & mParser.mCommandMilliseconds)
+	{
+		mServerFrame.mMilliseconds = byteBuffer.get();
+		mCommandToRunOnShape.mMilliseconds = mServerFrame.mMilliseconds;
+	}
+
+	if (mServerFrame.mMilliseconds != 0)
+	{
+		//position
+		if (moveXChanged)
+		{
+			mServerFrame.mMoveVelocity.x = mServerFrame.mPosition.x - mServerFrame.mPositionOld.x;
+		}
+		else
+		{
+			mServerFrame.mMoveVelocity.x = 0.0;
+		}
+
+		if (moveYChanged)
+		{
+			mServerFrame.mMoveVelocity.y = mServerFrame.mPosition.y - mServerFrame.mPositionOld.y;
+		}
+		else
+		{
+			mServerFrame.mMoveVelocity.y = 0.0;
+		}
+
+		if (moveZChanged)
+		{
+			mServerFrame.mMoveVelocity.z = mServerFrame.mPosition.z - mServerFrame.mPositionOld.z;
+		}
+		else
+		{
+			mServerFrame.mMoveVelocity.z = 0.0;
+		}
+	}
+	processTick();
 }
 
 void parseByteBuffer(ByteBuffer byteBuffer)
