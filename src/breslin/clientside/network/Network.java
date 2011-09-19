@@ -257,8 +257,55 @@ public void sendConnect()
 public void sendCommand()
 {
 
+	byte[] mCharArray = new byte[1400];
+	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
+
+	byteBuffer.put(mParser.mMessageFrame);
+	byteBuffer.putShort(mOutgoingSequence);
+
+	// Build delta-compressed move command
+	int flags = 0;
+
+	// Check what needs to be updated
+	if(mLastCommandToServer.mKey != mCommandToServer.mKey)
+	{
+		flags |= mParser.mCommandKey;
+	}
+
+	if(mLastCommandToServer.mMilliseconds != mCommandToServer.mMilliseconds)
+	{
+		flags |= mParser.mCommandMilliseconds;
+	}
+
+	// Add to the message
+	byteBuffer.putInt(flags);
+
+/*
+	if(flags & mParser.mCommandKey)
+	{
+		byteBuffer.put(mCommandToServer.mKey);
+	}
+
+	if(flags & mParser.mCommandMilliseconds)
+	{
+		byteBuffer.put(mCommandToServer.mMilliseconds);
+	}
+
+	//set 'last' commands for diff
+	mLastCommandToServer.mKey = mCommandToServer.mKey;
+	mLastCommandToServer.mMilliseconds = mCommandToServer.mMilliseconds;
+
+	// Send the packet
+	send(byteBuffer);
+*/
 }
 
+
+public void reset()
+{
+    mOutgoingSequence                = 1;
+    mIncomingSequence                = 0;
+}
 
 public void send(ByteBuffer byteBuffer)
 {
@@ -271,6 +318,19 @@ public void send(ByteBuffer byteBuffer)
     {
       	System.err.println(e);
     }
+
+
+
+byteBuffer.position(0);
+
+	int type = byteBuffer.get();
+	// Check if the type is a positive number
+	// = is the packet sequenced
+	if(type > 0)
+	{
+
+		mOutgoingSequence++;
+	}
 }
 
 }
