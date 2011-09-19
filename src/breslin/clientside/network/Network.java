@@ -19,8 +19,6 @@ import java.nio.CharBuffer;
 //game
 import breslin.clientside.game.Game;
 
-//dispatch
-import breslin.clientside.bytebuffer.Dispatch;
 
 //command
 import breslin.clientside.command.Command;
@@ -250,9 +248,10 @@ void parsePacket(ByteBuffer byteBuffer)
 
 public void sendConnect()
 {
-	Dispatch dispatch = new Dispatch();
-	dispatch.WriteByte(mParser.mMessageConnect);
-	send(dispatch);
+	byte[] mCharArray = new byte[1400];
+	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
+	byteBuffer.put(mParser.mMessageConnect);
+	send(byteBuffer);
 }
 
 public void sendCommand()
@@ -260,20 +259,19 @@ public void sendCommand()
 
 }
 
-public void send(Dispatch dispatch)
+
+public void send(ByteBuffer byteBuffer)
 {
 	try
   	{
-      	dispatch.mByteBuffer.flip(); //get buffer ready for send, sets mark to beginning.
-		mDatagramChannel.write(dispatch.mByteBuffer); //write to channel you are connecting to.
+      	byteBuffer.flip(); //get buffer ready for send, sets mark to beginning.
+		mDatagramChannel.write(byteBuffer); //write to channel you are connecting to.
 	}
     catch (Exception e)
     {
       	System.err.println(e);
     }
 }
-
-
 
 }
 
