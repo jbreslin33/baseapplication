@@ -116,8 +116,8 @@ InetSocketAddress   mInetSocketAddressServer;
 //DatagramSocket  mDatagramSocket;
 
 //command
-Command mCommandToServer;
-Command mLastCommandToServer;
+public Command mCommandToServer;
+public Command mLastCommandToServer;
 
 //parser
 Parser mParser;

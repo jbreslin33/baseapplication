@@ -116,13 +116,26 @@ public void simpleInitApp()
 private void initKeys()
 {
 
-	//b
-	// You can map one or several inputs to one named action
-    inputManager.addMapping("Start",  new KeyTrigger(KeyInput.KEY_B));
+	/**********Join******/
 
-    // Add the names to the action listener.
+    inputManager.addMapping("Start",  new KeyTrigger(KeyInput.KEY_B));
     inputManager.addListener(actionListener, new String[]{"Start"});
 
+	/**********Move******/
+
+    inputManager.addMapping("Forward",  new KeyTrigger(KeyInput.KEY_I));
+    inputManager.addListener(actionListener, new String[]{"Forward"});
+
+	inputManager.addMapping("Backward",  new KeyTrigger(KeyInput.KEY_K));
+    inputManager.addListener(actionListener, new String[]{"Backward"});
+
+    inputManager.addMapping("Left",  new KeyTrigger(KeyInput.KEY_J));
+    inputManager.addListener(actionListener, new String[]{"Left"});
+
+    inputManager.addMapping("Right",  new KeyTrigger(KeyInput.KEY_L));
+    inputManager.addListener(actionListener, new String[]{"Right"});
+
+	/**********Rotate******/
 	//x
 	// You can map one or several inputs to one named action
     inputManager.addMapping("Rotate",  new KeyTrigger(KeyInput.KEY_X));
@@ -137,16 +150,13 @@ private ActionListener actionListener = new ActionListener()
 	public void onAction(String name, boolean isPressed, float tpf)
 	{
 
-		//Start
+		/**********Join******/
         if (name.equals("Start"))
         {
 
 			mJoinGame = true;
 			if (mJoinGame && !mPlayingGame)
 			{
-
-
-
 				System.out.println("send Connect.....");
 				mGameMonkey.mNetwork.sendConnect();
 				mPlayingGame = true;
@@ -158,18 +168,41 @@ private ActionListener actionListener = new ActionListener()
 				cam.setLocation(startCamPosition);
 				System.out.println("setLocation of cam");
 				cam.lookAt(lookAtVector,worldDirection);
-
 			}
         }
 
 
-       	//Rotate
+		/**********MOVE******/
+
+		if (name.equals("Forward"))
+		{
+			mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyUp;
+		}
+
+		if (name.equals("Backward"))
+		{
+			mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyDown;
+		}
+
+		if (name.equals("Left"))
+		{
+			mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyLeft;
+		}
+
+		if (name.equals("Right"))
+		{
+			mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyRight;
+		}
+
+		/**********Rotate******/
 		if (name.equals("Rotate"))
         {
 			mGameMonkey.mShapeVector.get(0).yaw(.10f,true);
 			//mGameMonkey.
 
         }
+
+		mGameMonkey.mNetwork.mCommandToServer.mMilliseconds = (int) (mGameMonkey.mFrameTime * 1000);
 
     }
 };

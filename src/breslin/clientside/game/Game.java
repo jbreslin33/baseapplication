@@ -57,9 +57,9 @@ public Network     mNetwork;
 
 //time
 //Time* mTime;
-float mFrameTime;
-float mRunNetworkTime;
-int   mOldTime;
+public float mFrameTime;
+public float mRunNetworkTime;
+public int   mOldTime;
 
 
 /***************************************
@@ -73,7 +73,7 @@ int   mOldTime;
 /***************************************
 *   		ADMIN
 ***************************************/
-void shutdown()
+public void shutdown()
 {
 
 }
@@ -130,7 +130,7 @@ public void runNetwork    (float msec)
 	// Framerate is too high
 	if(mRunNetworkTime > (1000 / 60))
 	{
-	//	mNetwork.sendCommand();
+		mNetwork.sendCommand();
 		mFrameTime = mRunNetworkTime / 1000.0f;
 		mRunNetworkTime = 0;
 	}
