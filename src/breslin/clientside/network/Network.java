@@ -280,12 +280,12 @@ public void sendCommand()
 	// Add to the message
 	byteBuffer.putInt(flags);
 
-/*
+
 	if(flags & mParser.mCommandKey)
 	{
 		byteBuffer.put(mCommandToServer.mKey);
 	}
-
+/*
 	if(flags & mParser.mCommandMilliseconds)
 	{
 		byteBuffer.put(mCommandToServer.mMilliseconds);
