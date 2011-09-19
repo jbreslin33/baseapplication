@@ -139,15 +139,8 @@ void Game::interpolateTick()
 
 void Game::readServerTick(ByteBuffer* byteBuffer)
 {
-	int newTime;
-	int time;
-
 	// Skip sequences
 	byteBuffer->ReadShort();
-
-	newTime = mTime->dreamSock_GetCurrentSystemTime();
-	time = newTime - mOldTime;
-    mOldTime = newTime;
 
 	while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
 	{

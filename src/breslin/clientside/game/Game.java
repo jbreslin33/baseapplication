@@ -90,8 +90,34 @@ public void removeShape(ByteBuffer byteBuffer)
 
 ShapeDynamic getShapeDynamic(int id)
 {
+/*
 	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
+
+
+
 	return new ShapeDynamic(this, byteBuffer);
+*/
+
+ShapeDynamic shape = null;
+
+	for (int i = 0; i < mShapeVector.size(); i++)
+	{
+		ShapeDynamic curShape = mShapeVector.get(i);
+		if (curShape.mIndex == id)
+		{
+			shape = curShape;
+		}
+	}
+
+	if(shape == null)
+	{
+		return null;
+	}
+	else
+	{
+		return shape;
+	}
+
 }
 
 /***************************************
@@ -99,28 +125,22 @@ ShapeDynamic getShapeDynamic(int id)
 ***************************************/
 public void readServerTick           (ByteBuffer byteBuffer)
 {
-	int newTime;
-	int time;
-
 	// Skip sequences
 	byteBuffer.getShort();
 
-	newTime = mTime->dreamSock_GetCurrentSystemTime();
-	time = newTime - mOldTime;
-    mOldTime = newTime;
-
-	while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
+	while (byteBuffer.hasRemaining())
 	{
 		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
-		int id = byteBuffer->ReadByte();
+		int id = byteBuffer.get();
 
-		ShapeDynamic* shape = NULL;
+		ShapeDynamic shape = null;
 		shape = getShapeDynamic(id);
 
-		if (shape)
+		if (shape != null)
 		{
-			shape->readDeltaMoveCommand(byteBuffer);
+			System.out.println("got shape");
+			shape.readDeltaMoveCommand(byteBuffer);
 		}
 	}
 }

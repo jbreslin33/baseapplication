@@ -176,7 +176,7 @@ public void interpolateTick(float renderTime)
 }
 
 //messaging
-void readDeltaMoveCommand(ByteBuffer byteBuffer)
+public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 {
 
 }
