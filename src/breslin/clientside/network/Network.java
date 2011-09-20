@@ -181,7 +181,6 @@ public void readPackets()
 		if (mParser.mMessageFrame == type)
 		{
 			mGame.readServerTick(byteBuffer);
-			System.out.println("BRESSAGE: mMessageFrame");
 		}
 
 		if (mParser.mMessageServerExit == type)
@@ -259,7 +258,7 @@ public void sendConnect()
 
 public void sendCommand()
 {
-
+    System.out.println("SEndCommand");
 	byte[] mCharArray = new byte[1400];
 	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
 
@@ -268,6 +267,8 @@ public void sendCommand()
 
 	// Build delta-compressed move command
 	int flags = 0;
+
+	System.out.println("mCommandToServer.mKey:" + mCommandToServer.mKey);
 
 	// Check what needs to be updated
 	if(mLastCommandToServer.mKey != mCommandToServer.mKey)
@@ -286,6 +287,7 @@ public void sendCommand()
 	int x = flags & mParser.mCommandKey;
 	if(x == 1)
 	{
+		System.out.println("mCommandToServer.mKey");
 		byteBuffer.putInt(mCommandToServer.mKey);
 	}
 

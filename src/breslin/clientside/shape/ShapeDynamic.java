@@ -153,7 +153,6 @@ float  getSpeed()
 //ticks
 public void processTick()
 {
-	System.out.println("ddddd");
 	clearTitle(); //empty title string so it can be filled anew
 
 	//process ticks on abilitys

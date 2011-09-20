@@ -171,6 +171,7 @@ void GraphicsOgre::buttonHit(OgreBites::Button *button)
 //bool mouseMoved            ( const OIS::MouseEvent &arg );
 void processInput()
 {
+	mGameMonkey.mNetwork.mCommandToServer.mKey = 0;
 
 	if (Keyboard.isKeyDown(Keyboard.KEY_B))
 	{

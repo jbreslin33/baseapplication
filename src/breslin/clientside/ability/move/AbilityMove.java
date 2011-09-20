@@ -84,6 +84,7 @@ public float mDeltaPosition;
 public void processTick()
 {
 	mProcessTickStateMachine.update();
+
 }
 
 public void interpolateTick(float renderTime)

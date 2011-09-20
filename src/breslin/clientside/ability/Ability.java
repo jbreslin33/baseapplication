@@ -28,8 +28,14 @@ public	Ability()
 *				METHODS
 ********************************************************/
 
-public void processTick() { }
-public void interpolateTick(float renderTime) { }
+public void processTick()
+{
+
+}
+public void interpolateTick(float renderTime)
+{
+
+}
 
 };
 

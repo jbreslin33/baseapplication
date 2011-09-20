@@ -139,7 +139,6 @@ public void readServerTick           (ByteBuffer byteBuffer)
 
 		if (shape != null)
 		{
-			System.out.println("got shape");
 			shape.readDeltaMoveCommand(byteBuffer);
 		}
 	}
