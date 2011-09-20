@@ -69,9 +69,9 @@ public:
 ~Client();
 	int				mConnectionState;		// Connecting, connected, disconnecting, disconnected
 
-	unsigned short	mOutgoingSequence;		// OutFgoing packet sequence
-	unsigned short	mIncomingSequence;		// Incoming packet sequence
-	unsigned short	mDroppedPackets;			// Dropped packets
+	short	mOutgoingSequence;		// OutFgoing packet sequence
+	short	mIncomingSequence;		// Incoming packet sequence
+	short	mDroppedPackets;			// Dropped packets
 
 	struct sockaddr	mMyaddress;				// Socket address
 

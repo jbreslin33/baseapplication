@@ -309,7 +309,7 @@ void Network::parsePacket(ByteBuffer *mes)
 	// = is the packet sequenced
 	if(type > 0)
 	{
-		unsigned short sequence		= mes->ReadShort();
+		short sequence		= mes->ReadShort();
 
 		if(sequence <= mIncomingSequence)
 		{
