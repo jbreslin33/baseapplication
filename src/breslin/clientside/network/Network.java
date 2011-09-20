@@ -258,8 +258,7 @@ public void sendConnect()
 
 public void sendCommand()
 {
-    System.out.println("SEndCommand");
-	byte[] mCharArray = new byte[1400];
+   	byte[] mCharArray = new byte[1400];
 	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
 
 	byteBuffer.put(mParser.mMessageFrame);
@@ -273,6 +272,7 @@ public void sendCommand()
 	// Check what needs to be updated
 	if(mLastCommandToServer.mKey != mCommandToServer.mKey)
 	{
+		System.outprintln("UPDATE KEY");
 		flags |= mParser.mCommandKey;
 	}
 
