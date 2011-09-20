@@ -267,12 +267,12 @@ public void sendCommand()
 	// Build delta-compressed move command
 	int flags = 0;
 
-	System.out.println("mCommandToServer.mKey:" + mCommandToServer.mKey);
+	//System.out.println("mCommandToServer.mKey:" + mCommandToServer.mKey);
 
 	// Check what needs to be updated
 	if(mLastCommandToServer.mKey != mCommandToServer.mKey)
 	{
-		System.outprintln("UPDATE KEY");
+		//System.out.println("UPDATE KEY");
 		flags |= mParser.mCommandKey;
 	}
 
@@ -287,19 +287,22 @@ public void sendCommand()
 	int x = flags & mParser.mCommandKey;
 	if(x == 1)
 	{
-		System.out.println("mCommandToServer.mKey");
-		byteBuffer.putInt(mCommandToServer.mKey);
+		System.out.println("KEYFLAG___________________");
+		byteBuffer.put(mCommandToServer.mKey);
 	}
 
 	x = flags & mParser.mCommandMilliseconds;
 	if(x == 1)
 	{
-		byteBuffer.putInt(mCommandToServer.mMilliseconds);
+				//System.out.println("KEYMILL_______MILL____________");
+		byteBuffer.put(mCommandToServer.mMilliseconds);
 	}
 
 	//set 'last' commands for diff
 	mLastCommandToServer.mKey = mCommandToServer.mKey;
 	mLastCommandToServer.mMilliseconds = mCommandToServer.mMilliseconds;
+
+
 
 	// Send the packet
 	send(byteBuffer);
@@ -317,7 +320,28 @@ public void send(ByteBuffer byteBuffer)
 {
 	try
   	{
-      	byteBuffer.flip(); //get buffer ready for send, sets mark to beginning.
+      	//byteBuffer.flip(); //get buffer ready for send, sets mark to beginning.
+      		byteBuffer.position(0);
+      		System.out.println("type:" + byteBuffer.get());
+            System.out.println("seq:" + byteBuffer.getShort());
+            if (byteBuffer.hasRemaining())
+            {
+				System.out.println("flags:" + byteBuffer.getInt());
+			}
+            if (byteBuffer.hasRemaining())
+            {
+				System.out.println("key:" + byteBuffer.get());
+			}
+            if (byteBuffer.hasRemaining())
+            {
+				System.out.println("mil:" + byteBuffer.get());
+			}
+            //int x = flags & mParser.mCommandKey;
+			//	if(x == 1)
+
+            		      		//System.out.println("type:" + byteBuffer.get());
+      		byteBuffer.position(0);
+
 		mDatagramChannel.write(byteBuffer); //write to channel you are connecting to.
 	}
     catch (Exception e)

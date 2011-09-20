@@ -130,6 +130,7 @@ public void readServerTick           (ByteBuffer byteBuffer)
 
 	while (byteBuffer.hasRemaining())
 	{
+
 		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
 		int id = byteBuffer.get();

@@ -150,25 +150,7 @@ void initializeGui()
 
 }
 
-	//input
-//void buttonHit             (OgreBites::Button *button);
-/*
-void GraphicsOgre::buttonHit(OgreBites::Button *button)
-{
-	if (button == mJoinButton)
-	{
-		mJoinGame = true;
-		if (mJoinGame && !mPlayingGame)
-		{
-			mGameOgre->mNetwork->sendConnect("myname");
-			mPlayingGame = true;
-		}
-
-		hideGui();
-	}
-}
-*/
-//bool mouseMoved            ( const OIS::MouseEvent &arg );
+//input
 void processInput()
 {
 	mGameMonkey.mNetwork.mCommandToServer.mKey = 0;
@@ -218,7 +200,9 @@ void processInput()
 		mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyRight;
 	}
 
-	mGameMonkey.mNetwork.mCommandToServer.mMilliseconds = (int) (mGameMonkey.mFrameTime * 1000);
+
+	mGameMonkey.mNetwork.mCommandToServer.mMilliseconds = (byte) (mGameMonkey.mFrameTime * 1000);
+//		System.out.println("mFrameTime:" + mGameMonkey.mFrameTime);
 }
 
 

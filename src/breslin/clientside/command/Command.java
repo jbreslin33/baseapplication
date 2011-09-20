@@ -36,9 +36,9 @@ public Vector3D mRotOld;	    //velocity during last frame/tick
 
 public float mRotSpeed;
 
-public int mKey;               //key pressed
-public int mMilliseconds;      //not used
-public int mMillisecondsTotal;      //not used
+public byte mKey;               //key pressed
+public byte mMilliseconds;      //not used
+public byte mMillisecondsTotal;      //not used
 
 public float mClientFrametime;
 /**************************************************
