@@ -190,30 +190,33 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 	flags = byteBuffer.get();
 
 	// Origin
-	if(flags & mParser.mCommandOriginX)
+	int i = flags & mParser.mCommandOriginX;
+	if(i == 1)
 	{
 		mServerFrame.mPositionOld.x = mServerFrame.mPosition.x;
-		mServerFrame.mPosition.x = mes.getFloat();
+		mServerFrame.mPosition.x = byteBuffer.getFloat();
 	}
 	else
 	{
 		moveXChanged = false;
 	}
 
-	if(flags & mParser.mCommandOriginY)
+	i = flags & mParser.mCommandOriginY;
+	if(i == 1)
 	{
 		mServerFrame.mPositionOld.y = mServerFrame.mPosition.y;
-		mServerFrame.mPosition.y = mes.getFloat();
+		mServerFrame.mPosition.y = byteBuffer.getFloat();
 	}
 	else
 	{
 		moveYChanged = false;
 	}
 
-	if(flags & mParser.mCommandOriginZ)
+	i = flags & mParser.mCommandOriginZ;
+	if(i == 1)
 	{
 		mServerFrame.mPositionOld.z = mServerFrame.mPosition.z;
-		mServerFrame.mPosition.z = mes.getFloat();
+		mServerFrame.mPosition.z = byteBuffer.getFloat();
 	}
 	else
 	{
@@ -225,24 +228,28 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 
 
 	//rotation
-	if(flags & mParser.mCommandRotationX)
+	i = flags & mParser.mCommandRotationX;
+	if(i == 1)
 	{
 		mServerFrame.mRotOld.x = mServerFrame.mRot.x;
 		mServerFrame.mRot.x = byteBuffer.getFloat();
 	}
 
-	if(flags & mParser.mCommandRotationZ)
+	i = flags & mParser.mCommandRotationZ;
+	if(i == 1)
 	{
 		mServerFrame.mRotOld.z = mServerFrame.mRot.z;
 		mServerFrame.mRot.z = byteBuffer.getFloat();
 	}
 
+	i = flags & mParser.mCommandMilliseconds;
 	//milliseconds
-	if (flags & mParser.mCommandMilliseconds)
+	if (i == 1)
 	{
 		mServerFrame.mMilliseconds = byteBuffer.get();
 		mCommandToRunOnShape.mMilliseconds = mServerFrame.mMilliseconds;
 	}
+
 
 	if (mServerFrame.mMilliseconds != 0)
 	{
@@ -253,7 +260,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		}
 		else
 		{
-			mServerFrame.mMoveVelocity.x = 0.0;
+			mServerFrame.mMoveVelocity.x = 0.0f;
 		}
 
 		if (moveYChanged)
@@ -262,7 +269,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		}
 		else
 		{
-			mServerFrame.mMoveVelocity.y = 0.0;
+			mServerFrame.mMoveVelocity.y = 0.0f;
 		}
 
 		if (moveZChanged)
@@ -271,7 +278,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		}
 		else
 		{
-			mServerFrame.mMoveVelocity.z = 0.0;
+			mServerFrame.mMoveVelocity.z = 0.0f;
 		}
 	}
 	processTick();
