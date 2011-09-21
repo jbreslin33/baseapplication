@@ -289,10 +289,10 @@ public void sendCommand()
 
 	if(mLastCommandToServer.mMilliseconds != mCommandToServer.mMilliseconds)
 	{
-//		System.out.println("EVAHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+	//	System.out.println("EVAHHHHHHHHHHHHHHHHHHHHHHHHHHH");
 		flags |= mParser.mCommandMilliseconds;
 	}
-	flags |= mParser.mCommandMilliseconds;  //temporary because above if is never getting realized
+	//flags |= mParser.mCommandMilliseconds;  //temporary because above if is never getting realized
 	//System.out.println("lmil" + mLastCommandToServer.mMilliseconds);
 	//System.out.println("cmil" + mCommandToServer.mMilliseconds);
 
@@ -313,7 +313,7 @@ public void sendCommand()
 		byteBuffer.put(mCommandToServer.mMilliseconds);
 	}
 	//byte b = '17';
-	byteBuffer.put((byte)17); //temporary because above if is never getting realized
+	//byteBuffer.put((byte)17); //temporary because above if is never getting realized
 
 	//set 'last' commands for diff
 	mLastCommandToServer.mKey = mCommandToServer.mKey;
