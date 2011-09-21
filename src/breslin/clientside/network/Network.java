@@ -289,6 +289,7 @@ public void sendCommand()
 
 	if(mLastCommandToServer.mMilliseconds != mCommandToServer.mMilliseconds)
 	{
+		System.out.println("EVAHHHHHHHHHHHHHHHHHHHHHHHHHHH");
 		flags |= mParser.mCommandMilliseconds;
 	}
 	System.out.println("lmil" + mLastCommandToServer.mMilliseconds);
