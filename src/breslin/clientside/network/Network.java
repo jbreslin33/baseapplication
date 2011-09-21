@@ -292,6 +292,7 @@ public void sendCommand()
 		System.out.println("EVAHHHHHHHHHHHHHHHHHHHHHHHHHHH");
 		flags |= mParser.mCommandMilliseconds;
 	}
+	flags |= mParser.mCommandMilliseconds;  //temporary because above if is never getting realized
 	System.out.println("lmil" + mLastCommandToServer.mMilliseconds);
 	System.out.println("cmil" + mCommandToServer.mMilliseconds);
 
@@ -311,6 +312,8 @@ public void sendCommand()
 	//	System.out.println("mil:" + mCommandToServer.mMilliseconds);
 		byteBuffer.put(mCommandToServer.mMilliseconds);
 	}
+	//byte b = '17';
+	byteBuffer.put((byte)17); //temporary because above if is never getting realized
 
 	//set 'last' commands for diff
 	mLastCommandToServer.mKey = mCommandToServer.mKey;
@@ -334,26 +337,26 @@ public void send(ByteBuffer byteBuffer)
 {
 	try
   	{
-		/*
+
       	//byteBuffer.flip(); //get buffer ready for send, sets mark to beginning.
       		byteBuffer.position(0);
-      		System.out.println("type:" + byteBuffer.get());
-            System.out.println("seq:" + byteBuffer.get());
+      		System.out.println("$type:" + byteBuffer.get());
+            System.out.println("$seq:" + byteBuffer.getShort());
             if (byteBuffer.hasRemaining())
             {
-				System.out.println("flags:" + byteBuffer.getInt());
+				System.out.println("$flags:" + byteBuffer.get());
 			}
             if (byteBuffer.hasRemaining())
             {
-				System.out.println("key:" + byteBuffer.get());
+				System.out.println("$key:" + byteBuffer.get());
 			}
             if (byteBuffer.hasRemaining())
             {
-				System.out.println("mil:" + byteBuffer.get());
+				System.out.println("$mil:" + byteBuffer.get());
 			}
             //int x = flags & mParser.mCommandKey;
 			//	if(x == 1)
-*/
+
             		      		//System.out.println("type:" + byteBuffer.get());
       		byteBuffer.position(0);
 

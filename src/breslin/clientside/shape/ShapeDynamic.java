@@ -245,6 +245,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 	//milliseconds
 	if (i == 1)
 	{
+		System.out.println("dfdf");
 		mServerFrame.mMilliseconds = byteBuffer.get();
 		mCommandToRunOnShape.mMilliseconds = mServerFrame.mMilliseconds;
 	}

@@ -374,7 +374,7 @@ void Network::sendCommand(void)
 
 	if(mLastCommandToServer->mMilliseconds != mCommandToServer->mMilliseconds)
 	{
-		LogString("evahHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+		//LogString("evahHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
 		flags |= mParser->mCommandMilliseconds;
 	}
 	
