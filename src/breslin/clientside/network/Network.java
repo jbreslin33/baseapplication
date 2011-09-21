@@ -128,7 +128,7 @@ int mClientPort;
 
 //sequences
 short	mOutgoingSequence;		// OutFgoing packet sequence
-short	mIncomingSequence;		// Incoming packet sequence
+short mIncomingSequence;		// Incoming packet sequence
 short	mDroppedPackets;			// Dropped packets
 
 
@@ -262,6 +262,11 @@ public void sendCommand()
 	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
 
 	byteBuffer.put(mParser.mMessageFrame);
+
+	//mCharArray[1] = (mOutgoingSequence & 0xFF00) >> 8;
+	//mCharArray[2] = (mOutgoingSequence & 0x00FF);
+
+
 	byteBuffer.putShort(mOutgoingSequence);
 
 	// Build delta-compressed move command
@@ -320,10 +325,11 @@ public void send(ByteBuffer byteBuffer)
 {
 	try
   	{
+		/*
       	//byteBuffer.flip(); //get buffer ready for send, sets mark to beginning.
       		byteBuffer.position(0);
       		System.out.println("type:" + byteBuffer.get());
-            System.out.println("seq:" + byteBuffer.getShort());
+            System.out.println("seq:" + byteBuffer.get());
             if (byteBuffer.hasRemaining())
             {
 				System.out.println("flags:" + byteBuffer.getInt());
@@ -338,7 +344,7 @@ public void send(ByteBuffer byteBuffer)
 			}
             //int x = flags & mParser.mCommandKey;
 			//	if(x == 1)
-
+*/
             		      		//System.out.println("type:" + byteBuffer.get());
       		byteBuffer.position(0);
 

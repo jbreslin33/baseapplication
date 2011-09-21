@@ -239,7 +239,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				// -> is the packet sequenced
 				if(type > 0)
 				{
-					short sequence         = mes->ReadShort();
+					signed short sequence         = mes->ReadShort();
 
 					if(sequence <= mClientVector.at(i)->mIncomingSequence)
 					{
@@ -419,8 +419,8 @@ void Server::readPackets(void)
 			//LogString("Got frame (size: %d bytes)", ret);
 
 				// Skip sequences
-				mes.ReadShort();
-							
+				signed short seq = mes.ReadShort();
+				LogString("seq:%d",seq);
 				//let's try this with shapes instead.....
 				for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
 				{

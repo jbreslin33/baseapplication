@@ -126,7 +126,7 @@ ShapeDynamic shape = null;
 public void readServerTick           (ByteBuffer byteBuffer)
 {
 	// Skip sequences
-	byteBuffer.getShort();
+	byteBuffer.getInt();
 
 	while (byteBuffer.hasRemaining())
 	{

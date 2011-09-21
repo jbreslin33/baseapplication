@@ -88,10 +88,10 @@ const char*  mServerIP;
 
 
 //sequences and packet loss stats
-short	mOutgoingSequence;		// OutFgoing packet sequence
+signed short	mOutgoingSequence;		// OutFgoing packet sequence
 private:
-short	mIncomingSequence;		// Incoming packet sequence
-short	mDroppedPackets;			// Dropped packets
+signed short	mIncomingSequence;		// Incoming packet sequence
+signed short	mDroppedPackets;			// Dropped packets
 
 //socket
 SOCKET mSocket;
