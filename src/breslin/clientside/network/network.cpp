@@ -376,6 +376,9 @@ void Network::sendCommand(void)
 	{
 		flags |= mParser->mCommandMilliseconds;
 	}
+	
+	LogString("lmil:%d",mLastCommandToServer->mMilliseconds);
+	LogString("cmil:%d",mCommandToServer->mMilliseconds);
 
 	// Add to the message
 	byteBuffer->WriteByte(flags);

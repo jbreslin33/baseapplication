@@ -396,7 +396,7 @@ void Server::readPackets(void)
 			mes.BeginReading();
 
 			type = mes.ReadByte();
-			LogString("type:%d",type);
+			//LogString("type:%d",type);
 			// Check the type of the message
 			switch(type)
 			{

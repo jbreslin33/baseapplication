@@ -264,7 +264,7 @@ public void sendCommand()
 	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
 
 	byteBuffer.put(mParser.mMessageFrame);  //type
-	System.out.println("type:" + mParser.mMessageFrame);
+	//System.out.println("type:" + mParser.mMessageFrame);
 
 	byteBuffer.putShort(mOutgoingSequence);  //sequence
 	byte one = byteBuffer.get(1);
@@ -272,7 +272,7 @@ public void sendCommand()
 	byteBuffer.put(1,two);
 	byteBuffer.put(2,one);
 
-	System.out.println("seq:" + mOutgoingSequence);
+	//System.out.println("seq:" + mOutgoingSequence);
 
 	// Build delta-compressed move command
 	byte flags = 0;
@@ -291,6 +291,8 @@ public void sendCommand()
 	{
 		flags |= mParser.mCommandMilliseconds;
 	}
+	System.out.println("lmil" + mLastCommandToServer.mMilliseconds);
+	System.out.println("cmil" + mCommandToServer.mMilliseconds);
 
 	// Add to the message
 	byteBuffer.put(flags);
@@ -298,14 +300,14 @@ public void sendCommand()
 	int x = flags & mParser.mCommandKey;
 	if(x == 1)
 	{
-		System.out.println("key" + mCommandToServer.mKey);
+	//	System.out.println("key" + mCommandToServer.mKey);
 		byteBuffer.put(mCommandToServer.mKey);
 	}
 
 	x = flags & mParser.mCommandMilliseconds;
 	if(x == 1)
 	{
-		System.out.println("mil:" + mCommandToServer.mMilliseconds);
+	//	System.out.println("mil:" + mCommandToServer.mMilliseconds);
 		byteBuffer.put(mCommandToServer.mMilliseconds);
 	}
 

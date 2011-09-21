@@ -343,15 +343,17 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 	if(flags & CMD_KEY)
 	{
 		client->mShape->mCommand.mKey = mes->ReadByte();
-		//LogString("key:%d",client->mShape->mCommand.mKey);
+		LogString("key:%d",client->mShape->mCommand.mKey);
 	}
 
 	// Milliseconds
 	if(flags & CMD_MILLISECONDS)
 	{
-		client->mShape->mCommand.mMilliseconds = mes->ReadByte();
-	}
 
+		client->mShape->mCommand.mMilliseconds = mes->ReadByte();
+		LogString("mil:%d",client->mShape->mCommand.mMilliseconds);
+	}
+	LogString("cmil:%d",client->mShape->mCommand.mMilliseconds);
 	//let's keep a tally called mMillisecondsTotal by adding up everytime we ReadDeltaMove...
 	client->mShape->mCommand.mMillisecondsTotal += client->mShape->mCommand.mMilliseconds;
 
@@ -415,14 +417,17 @@ void Game::buildDeltaMoveCommand(Message *mes, Shape* shape)
 	if(flags & CMD_ORIGIN_X)
 	{
 		mes->WriteFloat(command->mPosition.x);
+		//LogString("x:%f",command->mPosition.x);
 	}
 	if(flags & CMD_ORIGIN_Y)
 	{
 		mes->WriteFloat(command->mPosition.y);
+		//LogString("y:%f",command->mPosition.y);
 	}
 	if(flags & CMD_ORIGIN_Z)
 	{
 		mes->WriteFloat(command->mPosition.z);
+		//LogString("z:%f",command->mPosition.z);
 	}
 
 	//Rotation
