@@ -261,19 +261,30 @@ public void sendCommand()
    	byte[] mCharArray = new byte[1400];
 	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
 
-	byteBuffer.put(mParser.mMessageFrame);
-
-	//mCharArray[1] = (mOutgoingSequence & 0xFF00) >> 8;
-	//mCharArray[2] = (mOutgoingSequence & 0x00FF);
+	byteBuffer.put(mParser.mMessageFrame);  //type
+	System.out.println("type:" + mParser.mMessageFrame);
 
 
-	byteBuffer.putShort(mOutgoingSequence);
+	//byte one = (mOutgoingSequence & 0xFF00) >> 8;
+	//byte two = (mOutgoingSequence & 0x00FF);
+	byteBuffer.putShort(mOutgoingSequence);  //sequence
+	byte one = byteBuffer.get(1);
+	byte two = byteBuffer.get(2);
 
+	byteBuffer.put(1,two);
+	byteBuffer.put(2,one);
+
+
+
+	//mCharArray[2] =  mCharArray[2]
+
+	System.out.println("seq:" + mOutgoingSequence);
 	// Build delta-compressed move command
 	int flags = 0;
 
 	//System.out.println("mCommandToServer.mKey:" + mCommandToServer.mKey);
 
+/*
 	// Check what needs to be updated
 	if(mLastCommandToServer.mKey != mCommandToServer.mKey)
 	{
@@ -308,7 +319,7 @@ public void sendCommand()
 	mLastCommandToServer.mMilliseconds = mCommandToServer.mMilliseconds;
 
 
-
+*/
 	// Send the packet
 	send(byteBuffer);
 
