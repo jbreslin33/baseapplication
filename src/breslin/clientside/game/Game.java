@@ -145,8 +145,13 @@ public void readServerTick           (ByteBuffer byteBuffer)
 	}
 }
 
-void interpolateTick()
+public void interpolateTick()
 {
+
+	for (int i = 0; i < mShapeVector.size(); i++)
+	{
+		mShapeVector.get(i).interpolateTick(getRenderTime());
+	}
 
 }
 

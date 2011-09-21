@@ -41,9 +41,6 @@ public GraphicsMonkey(GameMonkey gameMonkey)
 	//game
 	mGameMonkey = gameMonkey;
 
-	//time
-	mRenderTime = 0;
-
 	//keys
 	mKeyUp = 1;
 	mKeyDown = 2;
@@ -78,9 +75,6 @@ boolean mPlayingGame;
 //game
 GameMonkey mGameMonkey;
 
-//time
-float mRenderTime;
-
 //gui
 //OgreBites::Button* mJoinButton;
 
@@ -106,10 +100,23 @@ public void update()
 	processInput();
 
 	//network
-	mGameMonkey.runNetwork(1);
+	mGameMonkey.runNetwork(mGameMonkey.getRenderTime() * 1000.0f);
+
+	//move objects
+	mGameMonkey.interpolateTick();
 
 	//super and other stuff
 	super.update();
+}
+
+//graphics
+/* This is the update loop */
+public void simpleUpdate(float tpf)
+{
+	// make the player rotate
+    //player.rotate(0, 2*tpf, 0);
+    mGameMonkey.mRenderTime = tpf;
+//    System.out.println("tpf:" + tpf);
 }
 
 void        createScene          ()
@@ -202,8 +209,8 @@ void processInput()
 
 
 	mGameMonkey.mNetwork.mCommandToServer.mMilliseconds = (byte) (mGameMonkey.mFrameTime * 1000);
-	System.out.println("mill mult:" + mGameMonkey.mNetwork.mCommandToServer.mMilliseconds);
-	System.out.println("mFrameTime:" + mGameMonkey.mFrameTime);
+//	System.out.println("mill mult:" + mGameMonkey.mNetwork.mCommandToServer.mMilliseconds);
+//	System.out.println("mFrameTime:" + mGameMonkey.mFrameTime);
 }
 
 

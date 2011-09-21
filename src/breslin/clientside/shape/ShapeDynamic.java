@@ -154,7 +154,6 @@ float  getSpeed()
 public void processTick()
 {
 	clearTitle(); //empty title string so it can be filled anew
-
 	//process ticks on abilitys
 	for (int i = 0; i < mAbilityVector.size(); i++)
 	{
@@ -168,6 +167,7 @@ public void processTick()
 public void interpolateTick(float renderTime)
 {
 	//interpolate ticks on abilitys
+//	System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 	for (int i = 0; i < mAbilityVector.size(); i++)
 	{
 		mAbilityVector.get(i).interpolateTick(renderTime);

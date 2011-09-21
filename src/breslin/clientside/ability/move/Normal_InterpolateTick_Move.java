@@ -54,7 +54,7 @@ public void enter(AbilityMove abilityMove)
 
 public void execute(AbilityMove abilityMove)
 {
-	System.out.println("i");
+//	System.out.println("i");
 	Vector3D transVector = new Vector3D();
 
     transVector.x = abilityMove.mShapeDynamic.mCommandToRunOnShape.mMoveVelocity.x;

@@ -57,7 +57,7 @@ public void enter(AbilityMove abilityMove)
 public void execute(AbilityMove abilityMove)
 {
 	//abilityMove.mShapeDynamic.appendToTitle("M:Normal");
-
+//	System.out.println("M:Normal");
 	// if distance exceeds threshold && server velocity is zero
 	if(abilityMove.mDeltaPosition > abilityMove.mPosInterpLimitHigh && !abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity.isZero())
 	{
