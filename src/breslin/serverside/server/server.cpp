@@ -420,7 +420,7 @@ void Server::readPackets(void)
 
 				// Skip sequences
 				signed short seq = mes.ReadShort();
-				LogString("seq:%d",seq);
+				//LogString("seq:%d",seq);
 				//let's try this with shapes instead.....
 				for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
 				{

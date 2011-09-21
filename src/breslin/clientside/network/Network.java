@@ -256,6 +256,8 @@ public void sendConnect()
 	send(byteBuffer);
 }
 
+
+
 public void sendCommand()
 {
    	byte[] mCharArray = new byte[1400];
@@ -264,27 +266,20 @@ public void sendCommand()
 	byteBuffer.put(mParser.mMessageFrame);  //type
 	System.out.println("type:" + mParser.mMessageFrame);
 
-
-	//byte one = (mOutgoingSequence & 0xFF00) >> 8;
-	//byte two = (mOutgoingSequence & 0x00FF);
 	byteBuffer.putShort(mOutgoingSequence);  //sequence
 	byte one = byteBuffer.get(1);
 	byte two = byteBuffer.get(2);
-
 	byteBuffer.put(1,two);
 	byteBuffer.put(2,one);
 
-
-
-	//mCharArray[2] =  mCharArray[2]
-
 	System.out.println("seq:" + mOutgoingSequence);
+
 	// Build delta-compressed move command
-	int flags = 0;
+	byte flags = 0;
 
 	//System.out.println("mCommandToServer.mKey:" + mCommandToServer.mKey);
 
-/*
+
 	// Check what needs to be updated
 	if(mLastCommandToServer.mKey != mCommandToServer.mKey)
 	{
@@ -298,19 +293,19 @@ public void sendCommand()
 	}
 
 	// Add to the message
-	byteBuffer.putInt(flags);
+	byteBuffer.put(flags);
 
 	int x = flags & mParser.mCommandKey;
 	if(x == 1)
 	{
-		System.out.println("KEYFLAG___________________");
+		System.out.println("key" + mCommandToServer.mKey);
 		byteBuffer.put(mCommandToServer.mKey);
 	}
 
 	x = flags & mParser.mCommandMilliseconds;
 	if(x == 1)
 	{
-				//System.out.println("KEYMILL_______MILL____________");
+		System.out.println("mil:" + mCommandToServer.mMilliseconds);
 		byteBuffer.put(mCommandToServer.mMilliseconds);
 	}
 
@@ -319,7 +314,7 @@ public void sendCommand()
 	mLastCommandToServer.mMilliseconds = mCommandToServer.mMilliseconds;
 
 
-*/
+
 	// Send the packet
 	send(byteBuffer);
 
