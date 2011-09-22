@@ -276,37 +276,40 @@ public void sendCommand()
 	byteBuffer.put(2,one);
 
 	// Build delta-compressed move command
-	byte flags = 0;
+	int flags = 0;
 
 	// Check what needs to be updated
 	if(mLastCommandToServer.mKey != mCommandToServer.mKey)
 	{
 		flags |= mParser.mCommandKey;
 	}
-
+	System.out.println("_______________________________________");
+	System.out.println("mLastCommandToServer.mMilliseconds:" + mLastCommandToServer.mMilliseconds);
+	System.out.println("mCommandToServer.mMilliseconds:" + mCommandToServer.mMilliseconds);
 	if(mLastCommandToServer.mMilliseconds != mCommandToServer.mMilliseconds)
 	{
-
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		flags |= mParser.mCommandMilliseconds;
 	}
 
 
 	// Add to the message
-	byteBuffer.put(flags);
+	byteBuffer.put((byte)flags);
 
 	int x = flags & mParser.mCommandKey;
 	if(x == 1)
 	{
+		System.out.println("KKKKKKKKKKKKKKKKKKKKKKKKKKKK");
 		//WRITE: key
-		byteBuffer.put(mCommandToServer.mKey);
+		byteBuffer.put((byte)mCommandToServer.mKey);
 	}
 
-	x = flags & mParser.mCommandMilliseconds;
-	if(x == 1)
+	int y = flags & mParser.mCommandMilliseconds;
+	if(y == 1)
 	{
 		//WRITE: milliseconds
 		System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
-		byteBuffer.put(mCommandToServer.mMilliseconds);
+		byteBuffer.put((byte)mCommandToServer.mMilliseconds);
 	}
 
 	//set 'last' commands for diff
@@ -328,11 +331,8 @@ public void send(ByteBuffer byteBuffer)
 {
 	try
   	{
-
-      	//byteBuffer.flip(); //get buffer ready for send, sets mark to beginning.
-
-
-      		byteBuffer.position(0);
+/*
+     		byteBuffer.position(0);
 
       		System.out.println("$type:" + byteBuffer.get());
 
@@ -359,12 +359,7 @@ public void send(ByteBuffer byteBuffer)
 			{
 				System.out.println("$mil:" + byteBuffer.get());
 			}
-
-            //int x = flags & mParser.mCommandKey;
-			//	if(x == 1)
-
-            		      		//System.out.println("type:" + byteBuffer.get());
-
+*/
       	byteBuffer.position(0);
 
 		mDatagramChannel.write(byteBuffer); //write to channel you are connecting to.

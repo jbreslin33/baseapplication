@@ -20,7 +20,7 @@ public Command()
 	mRotOld       = new Vector3D();
 
 	mKey = 0;
-	mMilliseconds = 0;
+	mMilliseconds = 19;
 	mMillisecondsTotal = 0;
 	mClientFrametime = 0.0f;
 }
@@ -36,9 +36,9 @@ public Vector3D mRotOld;	    //velocity during last frame/tick
 
 public float mRotSpeed;
 
-public byte mKey;               //key pressed
-public byte mMilliseconds;      //not used
-public byte mMillisecondsTotal;      //not used
+public int mKey;               //key pressed
+public int mMilliseconds;      //not used
+public int mMillisecondsTotal;      //not used
 
 public float mClientFrametime;
 /**************************************************
