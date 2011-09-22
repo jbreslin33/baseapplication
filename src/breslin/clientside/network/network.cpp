@@ -359,6 +359,7 @@ void Network::sendDisconnect()
 
 void Network::sendCommand(void)
 {
+	//create byteBuffer
 	ByteBuffer* byteBuffer = new ByteBuffer();
 
 	//WRITE: type

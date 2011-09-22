@@ -27,7 +27,7 @@ Command::Command()
 	mRotationVelocity.z = 0.0;
 
 	mKey = 0;
-	mMilliseconds = 0;
+	mMilliseconds = 19;
 	mMillisecondsTotal = 0;
 	mClientFrametime = 0.0f;
 }
