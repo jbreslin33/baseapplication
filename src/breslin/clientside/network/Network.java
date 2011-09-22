@@ -252,6 +252,7 @@ public void sendConnect()
 {
 	byte[] mCharArray = new byte[1400];
 	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
+
 	byteBuffer.put(mParser.mMessageConnect);
 	send(byteBuffer);
 }
@@ -260,41 +261,36 @@ public void sendConnect()
 
 public void sendCommand()
 {
+	//create byteBuffer
    	byte[] mCharArray = new byte[1400];
 	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
 
+	//WRITE: type
 	byteBuffer.put(mParser.mMessageFrame);  //type
-	//System.out.println("type:" + mParser.mMessageFrame);
 
+	//WRITE: sequence
 	byteBuffer.putShort(mOutgoingSequence);  //sequence
 	byte one = byteBuffer.get(1);
 	byte two = byteBuffer.get(2);
 	byteBuffer.put(1,two);
 	byteBuffer.put(2,one);
 
-	//System.out.println("seq:" + mOutgoingSequence);
-
 	// Build delta-compressed move command
 	byte flags = 0;
-
-	//System.out.println("mCommandToServer.mKey:" + mCommandToServer.mKey);
-
 
 	// Check what needs to be updated
 	if(mLastCommandToServer.mKey != mCommandToServer.mKey)
 	{
-		//System.out.println("UPDATE KEY");
 		flags |= mParser.mCommandKey;
 	}
 
+	System.out.println("milb:" + mCommandToServer.mMilliseconds);
 	if(mLastCommandToServer.mMilliseconds != mCommandToServer.mMilliseconds)
 	{
-	//	System.out.println("EVAHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+
 		flags |= mParser.mCommandMilliseconds;
 	}
-	//flags |= mParser.mCommandMilliseconds;  //temporary because above if is never getting realized
-	//System.out.println("lmil" + mLastCommandToServer.mMilliseconds);
-	//System.out.println("cmil" + mCommandToServer.mMilliseconds);
+
 
 	// Add to the message
 	byteBuffer.put(flags);
@@ -302,28 +298,23 @@ public void sendCommand()
 	int x = flags & mParser.mCommandKey;
 	if(x == 1)
 	{
-	//	System.out.println("key" + mCommandToServer.mKey);
+		//WRITE: key
 		byteBuffer.put(mCommandToServer.mKey);
 	}
 
 	x = flags & mParser.mCommandMilliseconds;
 	if(x == 1)
 	{
-	//	System.out.println("mil:" + mCommandToServer.mMilliseconds);
+		//WRITE: milliseconds
 		byteBuffer.put(mCommandToServer.mMilliseconds);
 	}
-	//byte b = '17';
-	//byteBuffer.put((byte)17); //temporary because above if is never getting realized
 
 	//set 'last' commands for diff
 	mLastCommandToServer.mKey = mCommandToServer.mKey;
 	mLastCommandToServer.mMilliseconds = mCommandToServer.mMilliseconds;
 
-
-
 	// Send the packet
 	send(byteBuffer);
-
 }
 
 
@@ -340,7 +331,9 @@ public void send(ByteBuffer byteBuffer)
 
       	//byteBuffer.flip(); //get buffer ready for send, sets mark to beginning.
 
+/*
       		byteBuffer.position(0);
+
       		System.out.println("$type:" + byteBuffer.get());
             System.out.println("$seq:" + byteBuffer.getShort());
             if (byteBuffer.hasRemaining())
@@ -355,6 +348,7 @@ public void send(ByteBuffer byteBuffer)
             {
 				System.out.println("$mil:" + byteBuffer.get());
 			}
+			*/
             //int x = flags & mParser.mCommandKey;
 			//	if(x == 1)
 

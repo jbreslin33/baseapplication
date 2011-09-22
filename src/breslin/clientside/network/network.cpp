@@ -360,7 +360,11 @@ void Network::sendDisconnect()
 void Network::sendCommand(void)
 {
 	ByteBuffer* byteBuffer = new ByteBuffer();
+
+	//WRITE: type
 	byteBuffer->WriteByte(mParser->mMessageFrame);					
+	
+	//WRITE: sequence
 	byteBuffer->WriteShort(mOutgoingSequence);
 
 	// Build delta-compressed move command
@@ -374,23 +378,21 @@ void Network::sendCommand(void)
 
 	if(mLastCommandToServer->mMilliseconds != mCommandToServer->mMilliseconds)
 	{
-		//LogString("evahHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
 		flags |= mParser->mCommandMilliseconds;
 	}
 	
-	LogString("lmil:%d",mLastCommandToServer->mMilliseconds);
-	LogString("cmil:%d",mCommandToServer->mMilliseconds);
-
 	// Add to the message
 	byteBuffer->WriteByte(flags);
 
 	if(flags & mParser->mCommandKey)
 	{
+		//WRITE: key
 		byteBuffer->WriteByte(mCommandToServer->mKey);
 	}
 
 	if(flags & mParser->mCommandMilliseconds)
 	{
+		//WRITE: milliseconds
 		byteBuffer->WriteByte(mCommandToServer->mMilliseconds);
 	}
 	

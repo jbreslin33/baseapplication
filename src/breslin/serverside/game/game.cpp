@@ -353,7 +353,7 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 		client->mShape->mCommand.mMilliseconds = mes->ReadByte();
 		//LogString("mil:%d",client->mShape->mCommand.mMilliseconds);
 	}
-	//LogString("cmil:%d",client->mShape->mCommand.mMilliseconds);
+	LogString("cmil:%d",client->mShape->mCommand.mMilliseconds);
 	//let's keep a tally called mMillisecondsTotal by adding up everytime we ReadDeltaMove...
 	client->mShape->mCommand.mMillisecondsTotal += client->mShape->mCommand.mMilliseconds;
 

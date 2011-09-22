@@ -209,7 +209,7 @@ void processInput()
 
 
 	mGameMonkey.mNetwork.mCommandToServer.mMilliseconds = (byte) (mGameMonkey.mFrameTime * 1000);
-	System.out.println("mill mult:" + mGameMonkey.mNetwork.mCommandToServer.mMilliseconds);
+	//System.out.println("mill mult:" + mGameMonkey.mNetwork.mCommandToServer.mMilliseconds);
 //	System.out.println("mFrameTime:" + mGameMonkey.mFrameTime);
 }
 
