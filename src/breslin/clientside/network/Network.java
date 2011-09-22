@@ -339,7 +339,7 @@ public void send(ByteBuffer byteBuffer)
   	{
 
       	//byteBuffer.flip(); //get buffer ready for send, sets mark to beginning.
-      	/*
+
       		byteBuffer.position(0);
       		System.out.println("$type:" + byteBuffer.get());
             System.out.println("$seq:" + byteBuffer.getShort());
@@ -359,7 +359,7 @@ public void send(ByteBuffer byteBuffer)
 			//	if(x == 1)
 
             		      		//System.out.println("type:" + byteBuffer.get());
-      	*/
+
       	byteBuffer.position(0);
 
 		mDatagramChannel.write(byteBuffer); //write to channel you are connecting to.
