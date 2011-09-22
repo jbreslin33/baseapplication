@@ -261,6 +261,10 @@ public void sendConnect()
 
 public void sendCommand()
 {
+	//bools
+	boolean sendKey          = false;
+	boolean sendMilliseconds = false;
+
 	//create byteBuffer
    	byte[] mCharArray = new byte[1400];
 	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
@@ -281,6 +285,7 @@ public void sendCommand()
 	// Check what needs to be updated
 	if(mLastCommandToServer.mKey != mCommandToServer.mKey)
 	{
+		sendKey = true;
 		flags |= mParser.mCommandKey;
 	}
 	System.out.println("_______________________________________");
@@ -288,6 +293,7 @@ public void sendCommand()
 	System.out.println("mCommandToServer.mMilliseconds:" + mCommandToServer.mMilliseconds);
 	if(mLastCommandToServer.mMilliseconds != mCommandToServer.mMilliseconds)
 	{
+		sendMilliseconds = true;
 		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		flags |= mParser.mCommandMilliseconds;
 	}
@@ -296,16 +302,18 @@ public void sendCommand()
 	// Add to the message
 	byteBuffer.put((byte)flags);
 
-	int x = flags & mParser.mCommandKey;
-	if(x == 1)
+	//int x = flags & mParser.mCommandKey;
+	//if(x == 1)
+	if (sendKey)
 	{
 		System.out.println("KKKKKKKKKKKKKKKKKKKKKKKKKKKK");
 		//WRITE: key
 		byteBuffer.put((byte)mCommandToServer.mKey);
 	}
 
-	int y = flags & mParser.mCommandMilliseconds;
-	if(y == 1)
+	//int y = flags & mParser.mCommandMilliseconds;
+	//if(y == 1)
+	if (sendMilliseconds)
 	{
 		//WRITE: milliseconds
 		System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
