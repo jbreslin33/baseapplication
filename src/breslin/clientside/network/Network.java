@@ -180,7 +180,7 @@ public void readPackets()
 
 		if (mParser.mMessageFrame == type)
 		{
-			System.out.println("BRESSAGE: mMessageFrame");
+			//System.out.println("BRESSAGE: mMessageFrame");
 			mGame.readServerTick(byteBuffer);
 		}
 

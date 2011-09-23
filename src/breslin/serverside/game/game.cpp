@@ -409,6 +409,7 @@ void Game::buildDeltaMoveCommand(Message *mes, Shape* shape)
 	//let's check within 10000
 
 	mes->WriteByte(shape->mIndex);
+	LogString("id:%d",shape->mIndex);
 
 	// Flags
 	mes->WriteByte(flags);  
@@ -417,6 +418,7 @@ void Game::buildDeltaMoveCommand(Message *mes, Shape* shape)
 	if(flags & CMD_ORIGIN_X)
 	{
 		mes->WriteFloat(command->mPosition.x);
+		LogString("x:%f",command->mPosition.x);
 	}
 	if(flags & CMD_ORIGIN_Y)
 	{

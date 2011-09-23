@@ -134,8 +134,11 @@ public void readServerTick           (ByteBuffer byteBuffer)
 	byte two = byteBuffer.get(2);
 	byteBuffer.put(1,two);
 	byteBuffer.put(2,one);
+	byteBuffer.position(1);
 	short sequence = byteBuffer.getShort();
-	System.out.println("sequence:" + sequence);
+//	System.out.println("sequence:" + sequence);
+
+
 
 
 
@@ -145,15 +148,19 @@ public void readServerTick           (ByteBuffer byteBuffer)
 		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
 		int id = byteBuffer.get();
+		//System.out.println("id:" + id);
 
 		ShapeDynamic shape = null;
 		shape = getShapeDynamic(id);
 
 		if (shape != null)
 		{
+			//System.out.println("got shape");
 			shape.readDeltaMoveCommand(byteBuffer);
 		}
+
 	}
+
 }
 
 public void interpolateTick()
