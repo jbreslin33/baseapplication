@@ -288,13 +288,12 @@ public void sendCommand()
 		sendKey = true;
 		flags |= mParser.mCommandKey;
 	}
-	System.out.println("_______________________________________");
-	System.out.println("mLastCommandToServer.mMilliseconds:" + mLastCommandToServer.mMilliseconds);
-	System.out.println("mCommandToServer.mMilliseconds:" + mCommandToServer.mMilliseconds);
+
+
 	if(mLastCommandToServer.mMilliseconds != mCommandToServer.mMilliseconds)
 	{
 		sendMilliseconds = true;
-		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
 		flags |= mParser.mCommandMilliseconds;
 	}
 
@@ -306,8 +305,6 @@ public void sendCommand()
 	//if(x == 1)
 	if (sendKey)
 	{
-		System.out.println("KKKKKKKKKKKKKKKKKKKKKKKKKKKK");
-		//WRITE: key
 		byteBuffer.put((byte)mCommandToServer.mKey);
 	}
 
@@ -315,8 +312,7 @@ public void sendCommand()
 	//if(y == 1)
 	if (sendMilliseconds)
 	{
-		//WRITE: milliseconds
-		System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+
 		byteBuffer.put((byte)mCommandToServer.mMilliseconds);
 	}
 

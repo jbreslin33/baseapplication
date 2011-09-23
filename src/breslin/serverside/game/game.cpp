@@ -343,13 +343,13 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 	if(flags & CMD_KEY)
 	{
 		client->mShape->mCommand.mKey = mes->ReadByte();
-		LogString("key:%d",client->mShape->mCommand.mKey);
+		//LogString("key:%d",client->mShape->mCommand.mKey);
 	}
 
 	// Milliseconds
 	if(flags & CMD_MILLISECONDS)
 	{
-		LogString("mil:%d",client->mShape->mCommand.mMilliseconds);
+		//LogString("mil:%d",client->mShape->mCommand.mMilliseconds);
 		client->mShape->mCommand.mMilliseconds = mes->ReadByte();
 		
 	}
