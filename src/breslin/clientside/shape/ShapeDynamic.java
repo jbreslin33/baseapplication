@@ -187,7 +187,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 
 	// Flags
 	flags = byteBuffer.get();
-
+	//System.out.println("flags:" + flags);
 	// Origin
 	int i = flags & mParser.mCommandOriginX;
 	if(i == 1)

@@ -417,17 +417,14 @@ void Game::buildDeltaMoveCommand(Message *mes, Shape* shape)
 	if(flags & CMD_ORIGIN_X)
 	{
 		mes->WriteFloat(command->mPosition.x);
-		LogString("x:%f",command->mPosition.x);
 	}
 	if(flags & CMD_ORIGIN_Y)
 	{
 		mes->WriteFloat(command->mPosition.y);
-		LogString("y:%f",command->mPosition.y);
 	}
 	if(flags & CMD_ORIGIN_Z)
 	{
 		mes->WriteFloat(command->mPosition.z);
-		LogString("z:%f",command->mPosition.z);
 	}
 
 	//Rotation
