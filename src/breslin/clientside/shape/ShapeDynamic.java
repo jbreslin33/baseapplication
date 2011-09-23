@@ -187,10 +187,9 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 
 	// Flags
 	flags = byteBuffer.get();
-	System.out.println("flags:" + flags);
+
 	// Origin
 	int i = flags & mParser.mCommandOriginX;
-	System.out.println("i:" + i);
 	if(i != 0)
 	{
 		mServerFrame.mPositionOld.x = mServerFrame.mPosition.x;
@@ -219,8 +218,6 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		//covert java int to float
 		float b = Float.intBitsToFloat(a);
 		mServerFrame.mPosition.x = b;
-
-		System.out.println("x:" + mServerFrame.mPosition.x);
 	}
 	else
 	{
@@ -228,10 +225,34 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 	}
 
 	i = flags & mParser.mCommandOriginY;
-	if(i == 1)
+	if(i != 0)
 	{
 		mServerFrame.mPositionOld.y = mServerFrame.mPosition.y;
-		mServerFrame.mPosition.y = byteBuffer.getFloat();
+
+
+		int p = byteBuffer.position();  //set current position to p
+
+		//get the next 4 bytes
+		byte one = byteBuffer.get(p);
+		byte two = byteBuffer.get(p + 1);
+		byte three = byteBuffer.get(p +2);
+		byte four = byteBuffer.get(p + 3);
+
+		//flip them
+		byteBuffer.put(p,four);
+		byteBuffer.put(p + 1,three);
+		byteBuffer.put(p + 2,two);
+		byteBuffer.put(p + 3,one);
+
+		//set position back to original
+		byteBuffer.position(p);
+
+		//get 4 bytes put them into a java int
+		int a = byteBuffer.getInt();
+
+		//covert java int to float
+		float b = Float.intBitsToFloat(a);
+		mServerFrame.mPosition.y = b;
 	}
 	else
 	{
@@ -239,10 +260,34 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 	}
 
 	i = flags & mParser.mCommandOriginZ;
-	if(i == 1)
+	if(i != 0)
 	{
 		mServerFrame.mPositionOld.z = mServerFrame.mPosition.z;
-		mServerFrame.mPosition.z = byteBuffer.getFloat();
+
+
+		int p = byteBuffer.position();  //set current position to p
+
+		//get the next 4 bytes
+		byte one = byteBuffer.get(p);
+		byte two = byteBuffer.get(p + 1);
+		byte three = byteBuffer.get(p +2);
+		byte four = byteBuffer.get(p + 3);
+
+		//flip them
+		byteBuffer.put(p,four);
+		byteBuffer.put(p + 1,three);
+		byteBuffer.put(p + 2,two);
+		byteBuffer.put(p + 3,one);
+
+		//set position back to original
+		byteBuffer.position(p);
+
+		//get 4 bytes put them into a java int
+		int a = byteBuffer.getInt();
+
+		//covert java int to float
+		float b = Float.intBitsToFloat(a);
+		mServerFrame.mPosition.z = b;
 	}
 	else
 	{
@@ -349,7 +394,17 @@ void parseByteBuffer(ByteBuffer byteBuffer)
 //ghost
 public void moveGhostShape()
 {
+	System.out.println("moveGhostShape fu");
+	Vector3D transVector = new Vector3D();
 
+	transVector.x = mServerFrame.mPosition.x;
+	transVector.y = 0;
+	transVector.z = mServerFrame.mPosition.z;
+
+	if (mGhost)
+	{
+		mGhost.setPosition(transVector);
+	}
 }
 
 
