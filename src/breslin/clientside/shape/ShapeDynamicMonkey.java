@@ -197,8 +197,7 @@ public void yaw        (float amountToYaw, boolean converToDegree   )
  Transform worldTransform = mSceneNode.getWorldTransform();
  Quaternion rotation = worldTransform.getRotation();
  Vector3f vector = rotation.getRotationColumn(0);
-System.out.println("x:" + vector.x);
-System.out.println("z:" + vector.z);
+
 
 }
 

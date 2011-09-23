@@ -107,6 +107,7 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 	{
 		mKeyDirection.z += -1;
 	}
+
     if(mCommand.mKey & KEY_LEFT) 
 	{
 		mKeyDirection.x += -1;
