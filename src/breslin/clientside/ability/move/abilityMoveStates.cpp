@@ -141,16 +141,17 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 
 		if(abilityMove->mSpeed != 0.0)
 		{
-           //time needed to get to future server pos
-           float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mSpeed;
+			//time needed to get to future server pos
+			float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mSpeed;
 
-           newVelocity->normalise();  //?????what the hell why i am normalizing this after all that work above?
+			newVelocity->normalise();  //?????what the hell why i am normalizing this after all that work above?
 
-           //client vel needed to get to future server pos in time
-		   float distTime = predictDist/time;
-		   newVelocity->multiply(distTime);
+			//client vel needed to get to future server pos in time
+			float distTime = predictDist/time;
+			newVelocity->multiply(distTime);
 
-		   abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->copyValuesFrom(newVelocity);
+			//set newVelocity to mCommandToRunOnShape->mMoveVelocity which is what interpolateTick uses
+			abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->copyValuesFrom(newVelocity);
 
 		}
 		else
