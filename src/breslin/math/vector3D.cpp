@@ -77,6 +77,21 @@ void Vector3D::multiply(float num)
 	z = z * num;
 }
 
+//add another vector to this one
+void Vector3D::add(Vector3D* vectorToAddtoThisOne)
+{
+	x = x + vectorToAddtoThisOne->x;
+	y = y + vectorToAddtoThisOne->y;
+	z = z + vectorToAddtoThisOne->z;
+}
+
+//subtract another vector from this one
+void Vector3D::subtract(Vector3D* vectorToAddtoThisOne)
+{
+	x = x - vectorToAddtoThisOne->x;
+	y = y - vectorToAddtoThisOne->y;
+	z = z - vectorToAddtoThisOne->z;
+}
 
 //copy values
 void Vector3D::copyValuesFrom(Vector3D* copyFrom)

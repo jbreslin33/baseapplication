@@ -142,18 +142,16 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 		   float distTime = predictDist/time;
 		   myDest->multiply(distTime);
 
-           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = myDest->x;
-           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = myDest->y;
-           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z = myDest->z;
 		   abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->copyValuesFrom(myDest);
 
 		}
 		else
 		{
 			//why would catchup ever need to set velocity to zero, wouldn't we simply leave catchup state??
-           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = 0.0;
-           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = 0.0;
-           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z = 0.0;
+           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = 0.0;
+           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = 0.0;
+           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z = 0.0;
+			abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->zero();
 
 		}
 	}

@@ -21,6 +21,8 @@ void normalise();
 
 Vector3D operator*(float num) const;
 void multiply(float num);
+void add     (Vector3D* vectorToAddtoThisOne);
+void subtract(Vector3D* vectorToAddtoThisOne);
 void copyValuesFrom(Vector3D* copyFrom);
 
 };
