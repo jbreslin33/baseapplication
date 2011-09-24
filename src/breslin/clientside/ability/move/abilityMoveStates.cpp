@@ -111,10 +111,11 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 
         float multiplier = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor;
 		serverDest->multiply(multiplier);
-        serverDest->x = abilityMove->mShapeDynamic->mServerFrame->mPosition->x + serverDest->x;
-        serverDest->y = abilityMove->mShapeDynamic->mServerFrame->mPosition->y + serverDest->y;
-        serverDest->z = abilityMove->mShapeDynamic->mServerFrame->mPosition->z + serverDest->z;
-		          
+       // serverDest->x = abilityMove->mShapeDynamic->mServerFrame->mPosition->x + serverDest->x;
+       // serverDest->y = abilityMove->mShapeDynamic->mServerFrame->mPosition->y + serverDest->y;
+       // serverDest->z = abilityMove->mShapeDynamic->mServerFrame->mPosition->z + serverDest->z;
+		serverDest->add(abilityMove->mShapeDynamic->mServerFrame->mPosition);
+
         myDest->x = serverDest->x - abilityMove->mShapeDynamic->getPosition().x;
         myDest->y = serverDest->y - abilityMove->mShapeDynamic->getPosition().y;
         myDest->z = serverDest->z - abilityMove->mShapeDynamic->getPosition().z;
