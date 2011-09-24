@@ -103,21 +103,19 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
     }
     else
     {
-		Vector3D* serverDest = new Vector3D(); //vector to future server pos
-        Vector3D* myDest     = new Vector3D(); //vector from clienr pos to future server pos
+		Vector3D* newVelocity = new Vector3D(); //vector to future server pos
 
- 		serverDest->copyValuesFrom(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity);
-        serverDest->normalise();
+ 		newVelocity->copyValuesFrom(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity);
+        newVelocity->normalise();
 
         float multiplier = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor;
-		serverDest->multiply(multiplier);
-		serverDest->add(abilityMove->mShapeDynamic->mServerFrame->mPosition);
+		newVelocity->multiply(multiplier);
+		newVelocity->add(abilityMove->mShapeDynamic->mServerFrame->mPosition);
 
-		serverDest->subtract(abilityMove->mShapeDynamic->getPosition());
-		myDest->copyValuesFrom(serverDest);
+		newVelocity->subtract(abilityMove->mShapeDynamic->getPosition());
 
         //dist from clienr pos to future server pos
-        float predictDist = pow(myDest->x, 2) + pow(myDest->y, 2) + pow(myDest->z, 2);
+        float predictDist = pow(newVelocity->x, 2) + pow(newVelocity->y, 2) + pow(newVelocity->z, 2);
         predictDist = sqrt(predictDist);
 
         //server velocity
@@ -135,13 +133,13 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
            //time needed to get to future server pos
            float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mSpeed;
 
-           myDest->normalise();
+           newVelocity->normalise();
 
            //client vel needed to get to future server pos in time
 		   float distTime = predictDist/time;
-		   myDest->multiply(distTime);
+		   newVelocity->multiply(distTime);
 
-		   abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->copyValuesFrom(myDest);
+		   abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->copyValuesFrom(newVelocity);
 
 		}
 		else
