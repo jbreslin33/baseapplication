@@ -147,9 +147,6 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 		else
 		{
 			//why would catchup ever need to set velocity to zero, wouldn't we simply leave catchup state??
-           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = 0.0;
-           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = 0.0;
-           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z = 0.0;
 			abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->zero();
 
 		}
@@ -173,17 +170,21 @@ void Normal_InterpolateTick_Move::enter(AbilityMove* abilityMove)
 }
 void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 {
-	Vector3D transVector;
+	Vector3D* transVector = new Vector3D();
 
-    transVector.x = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x;
-    transVector.y = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y;
-    transVector.z = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z;
+   // transVector.x = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x;
+    //transVector.y = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y;
+    //transVector.z = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z;
+	transVector->copyValuesFrom(abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity);
 
-	transVector = transVector * abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000;
-	Vector3D newPosition;
-	newPosition.x = transVector.x + abilityMove->mShapeDynamic->getPosition()->x;
-	newPosition.y = transVector.y + abilityMove->mShapeDynamic->getPosition()->y;
-	newPosition.z = transVector.z + abilityMove->mShapeDynamic->getPosition()->z;
+	float multipliedRenderTime = abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000;
+
+	transVector->multiply(multipliedRenderTime); 
+
+	Vector3D* newPosition = new Vector3D();
+	newPosition->x = transVector->x + abilityMove->mShapeDynamic->getPosition()->x;
+	newPosition->y = transVector->y + abilityMove->mShapeDynamic->getPosition()->y;
+	newPosition->z = transVector->z + abilityMove->mShapeDynamic->getPosition()->z;
 	
 	abilityMove->mShapeDynamic->setPosition(newPosition);
 

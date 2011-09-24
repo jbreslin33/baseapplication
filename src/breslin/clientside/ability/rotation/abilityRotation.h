@@ -43,8 +43,8 @@ float mRotInterpIncrease;
 float mRotInterpDecrease;  
 
 //rotation
-Vector3D mServerRotOld;  
-Vector3D mServerRotNew;  
+Vector3D* mServerRotOld;  
+Vector3D* mServerRotNew;  
 float    mDegreesToServer;  
 
 /******************************************************

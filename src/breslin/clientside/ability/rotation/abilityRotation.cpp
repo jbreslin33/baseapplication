@@ -34,8 +34,8 @@ AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDyn
     mRotInterpDecrease  = 0.80f; //rot factor used to allow server to catchup to client
 
 	//rotation
-	mServerRotOld.zero();
-	mServerRotNew.zero();
+	mServerRotOld = new Vector3D();
+	mServerRotNew = new Vector3D();
 	mDegreesToServer = 0.0;
 
 }
@@ -62,13 +62,13 @@ void AbilityRotation::interpolateTick(float renderTime)
 
 float AbilityRotation::getDegreesToServer()  //rot
 {
-    Vector3D serverRotNew;
+    Vector3D* serverRotNew = new Vector3D();
 
-    serverRotNew.x = mShapeDynamic->mServerFrame->mRot->x;
-	serverRotNew.y = 0;
-    serverRotNew.z = mShapeDynamic->mServerFrame->mRot->z;
+    serverRotNew->x = mShapeDynamic->mServerFrame->mRot->x;
+	serverRotNew->y = 0;
+    serverRotNew->z = mShapeDynamic->mServerFrame->mRot->z;
 
-    serverRotNew.normalise();
+    serverRotNew->normalise();
 
     //calculate how far off we are from server
 	float degreesToServer = mShapeDynamic->getDegreesToSomething(serverRotNew);
@@ -78,19 +78,19 @@ float AbilityRotation::getDegreesToServer()  //rot
 
 void AbilityRotation::calculateServerRotationSpeed()  //rot
 {
-    mServerRotOld.zero();
-    mServerRotNew.zero();
+    mServerRotOld->zero();
+    mServerRotNew->zero();
 
-    mServerRotOld.x = mShapeDynamic->mServerFrame->mRotOld->x;
-	mServerRotOld.y = 0;
-    mServerRotOld.z = mShapeDynamic->mServerFrame->mRotOld->z;
+    mServerRotOld->x = mShapeDynamic->mServerFrame->mRotOld->x;
+	mServerRotOld->y = 0;
+    mServerRotOld->z = mShapeDynamic->mServerFrame->mRotOld->z;
 
-    mServerRotNew.x = mShapeDynamic->mServerFrame->mRot->x;
-	mServerRotNew.y = 0;
-    mServerRotNew.z = mShapeDynamic->mServerFrame->mRot->z;
+    mServerRotNew->x = mShapeDynamic->mServerFrame->mRot->x;
+	mServerRotNew->y = 0;
+    mServerRotNew->z = mShapeDynamic->mServerFrame->mRot->z;
 
-    mServerRotNew.normalise();
-    mServerRotOld.normalise();
+    mServerRotNew->normalise();
+    mServerRotOld->normalise();
 
     //calculate how far off we are from server
 	mDegreesToServer = mShapeDynamic->getDegreesToSomething(mServerRotNew);

@@ -242,11 +242,11 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 
 void ShapeDynamic::moveGhostShape()
 {
-	Vector3D transVector;
+	Vector3D* transVector = new Vector3D();
 
-	transVector.x = mServerFrame->mPosition->x;
-	transVector.y = 0;
-	transVector.z = mServerFrame->mPosition->z;
+	transVector->x = mServerFrame->mPosition->x;
+	transVector->y = 0;
+	transVector->z = mServerFrame->mPosition->z;
 
 	if (mGhost)
 	{

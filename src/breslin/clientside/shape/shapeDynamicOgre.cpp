@@ -211,7 +211,7 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 
 //1 world, 2 local
 
-float ShapeDynamicOgre::getDegreesToSomething(Vector3D vectorOfSomething)
+float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 {
 	
     //calculate how far off we are from some vector
@@ -238,7 +238,7 @@ float ShapeDynamicOgre::getDegreesToSomething(Vector3D vectorOfSomething)
 
 }
 
-void ShapeDynamicOgre::translate(Vector3D translateVector, int perspective)
+void ShapeDynamicOgre::translate(Vector3D* translateVector, int perspective)
 {
 	if (perspective == 1)
 	{
@@ -250,7 +250,7 @@ void ShapeDynamicOgre::translate(Vector3D translateVector, int perspective)
 	}
 }
 
-void ShapeDynamicOgre::setPosition(Vector3D position)
+void ShapeDynamicOgre::setPosition(Vector3D* position)
 {
 	getSceneNode()->setPosition(converToVector3(position));
 }
@@ -269,12 +269,12 @@ Vector3D* ShapeDynamicOgre::getPosition()
 	return position;
 }
 
-Ogre::Vector3 ShapeDynamicOgre::converToVector3(Vector3D vector3d)
+Ogre::Vector3 ShapeDynamicOgre::converToVector3(Vector3D* vector3d)
 {
 	Ogre::Vector3 vec3;
-	vec3.x = vector3d.x;
-	vec3.y = vector3d.y;
-	vec3.z = vector3d.z;
+	vec3.x = vector3d->x;
+	vec3.y = vector3d->y;
+	vec3.z = vector3d->z;
 	return vec3;
 }
 
