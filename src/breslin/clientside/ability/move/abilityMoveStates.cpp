@@ -113,9 +113,6 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 		serverDest->multiply(multiplier);
 		serverDest->add(abilityMove->mShapeDynamic->mServerFrame->mPosition);
 
-        myDest->x = serverDest->x - abilityMove->mShapeDynamic->getPosition()->x;
-        myDest->y = serverDest->y - abilityMove->mShapeDynamic->getPosition()->y;
-        myDest->z = serverDest->z - abilityMove->mShapeDynamic->getPosition()->z;
 		serverDest->subtract(abilityMove->mShapeDynamic->getPosition());
 		myDest->copyValuesFrom(serverDest);
 
