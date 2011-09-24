@@ -1,7 +1,12 @@
 #include "abilityMove.h"
+
+//shape
 #include "../../shape/shapeDynamic.h"
+
+//command
 #include "../../command/command.h"
 
+//state machines
 #include "abilityMoveStateMachine.h"
 #include "abilityMoveStates.h"
 
@@ -67,4 +72,15 @@ void AbilityMove::calculateDeltaPosition()  //mov
 
     //distance we are off from server
     mDeltaPosition = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));
+}
+
+float AbilityMove::calcuateSpeed(Vector3D* velocity, int milliseconds)
+{
+	float speed = sqrt(
+	pow(velocity->x, 2) + 
+    pow(velocity->y, 2) +
+	pow(velocity->z, 2)) /
+	milliseconds;
+
+	return speed;
 }

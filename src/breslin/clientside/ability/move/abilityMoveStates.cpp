@@ -65,10 +65,6 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
     {
 	
 		Vector3D* serverDest = new Vector3D();
-		//serverDest->x = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x;
-	    //serverDest->y = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->y;
-        //serverDest->z = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->z;
-        //&serverDest = &abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity;
 		serverDest->copyValuesFrom(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity);
 		serverDest->normalise();
 
@@ -76,11 +72,10 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
         {
 			
 			abilityMove->mSpeed =
-			sqrt(
-			pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x, 2) + 
-            pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->y, 2) +
-			pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->z, 2)) /
-			abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
+			abilityMove->calcuateSpeed(
+			abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity,
+			abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds);
+	
         }
 
 		serverDest = serverDest->multiply(abilityMove->mSpeed);

@@ -12,6 +12,7 @@
 class AbilityMoveStateMachine;
 class AbilityMoveState;
 class ShapeDynamic;
+class Vector3D;
 
 /******************************************************
 *				CLASS
@@ -56,6 +57,7 @@ void interpolateTick(float renderTime);
 
 //move
 void calculateDeltaPosition();  
+float calcuateSpeed(Vector3D* velocity, int milliseconds);
 };
 
 #endif
