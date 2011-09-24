@@ -54,7 +54,7 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, b
 	{
 		//create a ghost for this shape
 		mGhost = new ShapeDynamicOgre(mGameOgre,byteBuffer,true);
-		mGhost->setVisible(false);
+		mGhost->setVisible(true);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
 		mGame->mShapeVector.push_back(this);

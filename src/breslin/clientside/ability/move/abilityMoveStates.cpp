@@ -75,6 +75,10 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
         }
 
 		serverDest->multiply(abilityMove->mSpeed);
+		
+		//keep player from teleporting
+		abilityMove->regulate(serverDest);
+
 		abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->copyValuesFrom(serverDest);
 	}
 }
@@ -151,6 +155,11 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 			newVelocity->multiply(distTime);
 
 			//set newVelocity to mCommandToRunOnShape->mMoveVelocity which is what interpolateTick uses
+			//LogString("x:%f",newVelocity->x);
+			
+			//keep player from "teleporting"
+			abilityMove->regulate(newVelocity);
+
 			abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->copyValuesFrom(newVelocity);
 
 		}

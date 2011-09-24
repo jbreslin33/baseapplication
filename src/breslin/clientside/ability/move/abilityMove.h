@@ -40,6 +40,7 @@ float mSpeed;
 //thresholds
 float mPosInterpLimitHigh; 
 float mPosInterpFactor; 
+float mMaximunVelocity;
 
 //deltas
 float mDeltaX;  
@@ -58,6 +59,7 @@ void interpolateTick(float renderTime);
 //move
 void calculateDeltaPosition();  
 float calcuateSpeed(Vector3D* velocity, int milliseconds);
+void regulate(Vector3D* velocityToRegulate);
 };
 
 #endif
