@@ -78,11 +78,8 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 	
         }
 
-		serverDest = serverDest->multiply(abilityMove->mSpeed);
-
-		abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = serverDest->x;
-        abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = serverDest->y;
-        abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z = serverDest->z;
+		serverDest->multiply(abilityMove->mSpeed);
+		abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->copyValuesFrom(serverDest);
 	}
 }
 void Normal_ProcessTick_Move::exit(AbilityMove* abilityMove)

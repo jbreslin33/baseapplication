@@ -62,14 +62,19 @@ Vector3D Vector3D::operator*(float num) const
 }
 
 //multiply this vector by a scalar
-Vector3D* Vector3D::multiply(float num)
+void Vector3D::multiply(float num)
 {
+	/*
 	Vector3D* vec = new Vector3D();
 	vec->x = x * num;
 	vec->y = y * num;
 	vec->z = z * num;
 
 	return vec;
+	*/
+	x = x * num;
+	y = y * num;
+	z = z * num;
 }
 
 
