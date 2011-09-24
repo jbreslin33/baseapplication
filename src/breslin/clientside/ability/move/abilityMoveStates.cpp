@@ -178,11 +178,11 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 
 	transVector->multiply(multipliedRenderTime); 
 
-	Vector3D* newPosition = new Vector3D();
+	//Vector3D* newPosition = new Vector3D();
 	transVector->add(abilityMove->mShapeDynamic->getPosition());
-	newPosition->copyValuesFrom(transVector);
+	//newPosition->copyValuesFrom(transVector);
 
-	abilityMove->mShapeDynamic->setPosition(newPosition);
+	abilityMove->mShapeDynamic->setPosition(transVector);
 }
 void Normal_InterpolateTick_Move::exit(AbilityMove* abilityMove)
 {
