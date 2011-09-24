@@ -170,18 +170,22 @@ void Normal_InterpolateTick_Move::enter(AbilityMove* abilityMove)
 }
 void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 {
+	//to be used to setPosition
 	Vector3D* transVector = new Vector3D();
 
+	//copy values from mMoveVelocity so we don't make changes to original
   	transVector->copyValuesFrom(abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity);
 
+	//get the mulitplier
 	float multipliedRenderTime = abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000;
 
+	//multiply our vector using render values
 	transVector->multiply(multipliedRenderTime); 
 
-	//Vector3D* newPosition = new Vector3D();
+	//add our velocity to current position
 	transVector->add(abilityMove->mShapeDynamic->getPosition());
-	//newPosition->copyValuesFrom(transVector);
 
+	//set new position
 	abilityMove->mShapeDynamic->setPosition(transVector);
 }
 void Normal_InterpolateTick_Move::exit(AbilityMove* abilityMove)
