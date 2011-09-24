@@ -125,7 +125,7 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 		//now subtract our current position from our new velocity
 		newVelocity->subtract(abilityMove->mShapeDynamic->getPosition());
 
-        //dist from clienr pos to future server pos
+        //dist from client pos to future server pos
         float predictDist = pow(newVelocity->x, 2) + pow(newVelocity->y, 2) + pow(newVelocity->z, 2);
         predictDist = sqrt(predictDist);
 
@@ -144,7 +144,7 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
            //time needed to get to future server pos
            float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mSpeed;
 
-           newVelocity->normalise();
+           newVelocity->normalise();  //?????what the hell why i am normalizing this after all that work above?
 
            //client vel needed to get to future server pos in time
 		   float distTime = predictDist/time;
