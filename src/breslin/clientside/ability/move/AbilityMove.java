@@ -128,25 +128,25 @@ void regulate(Vector3D velocityToRegulate)
 {
 	if (velocityToRegulate.x > mMaximunVelocity)
 	{
-		System.out.println("x:" + velocityToRegulate.x);
+//		System.out.println("x:" + velocityToRegulate.x);
 		velocityToRegulate.x = mMaximunVelocity;
 	}
 
 	if (velocityToRegulate.x < mMaximunVelocity * -1)
 	{
-		System.out.println("x:" + velocityToRegulate.x);
+		//System.out.println("x:" + velocityToRegulate.x);
 		velocityToRegulate.x = mMaximunVelocity * -1;
 	}
 
 	if (velocityToRegulate.y > mMaximunVelocity)
 	{
-		System.out.println("y:" + velocityToRegulate.y);
+		//System.out.println("y:" + velocityToRegulate.y);
 		velocityToRegulate.y = mMaximunVelocity;
 	}
 
 	if (velocityToRegulate.y < mMaximunVelocity * -1)
 	{
-		System.out.println("y:" + velocityToRegulate.y);
+		//System.out.println("y:" + velocityToRegulate.y);
 		velocityToRegulate.y = mMaximunVelocity * -1;
 	}
 }

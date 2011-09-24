@@ -167,7 +167,6 @@ public void processTick()
 public void interpolateTick(float renderTime)
 {
 	//interpolate ticks on abilitys
-//	System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 	for (int i = 0; i < mAbilityVector.size(); i++)
 	{
 		mAbilityVector.get(i).interpolateTick(renderTime);
@@ -190,7 +189,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 
 	// Origin
 	int i = flags & mParser.mCommandOriginX;
-	if(i != 0)
+	if(i == 4)
 	{
 		mServerFrame.mPositionOld.x = mServerFrame.mPosition.x;
 
@@ -225,7 +224,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 	}
 
 	i = flags & mParser.mCommandOriginY;
-	if(i != 0)
+	if(i == 8)
 	{
 		mServerFrame.mPositionOld.y = mServerFrame.mPosition.y;
 
@@ -260,7 +259,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 	}
 
 	i = flags & mParser.mCommandOriginZ;
-	if(i != 0)
+	if(i == 16)
 	{
 		mServerFrame.mPositionOld.z = mServerFrame.mPosition.z;
 
@@ -300,24 +299,69 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 
 	//rotation
 	i = flags & mParser.mCommandRotationX;
-	if(i == 1)
+	if(i == 32)
 	{
 		mServerFrame.mRotOld.x = mServerFrame.mRot.x;
-		mServerFrame.mRot.x = byteBuffer.getFloat();
+
+		int p = byteBuffer.position();  //set current position to p
+
+		//get the next 4 bytes
+		byte one = byteBuffer.get(p);
+		byte two = byteBuffer.get(p + 1);
+		byte three = byteBuffer.get(p +2);
+		byte four = byteBuffer.get(p + 3);
+
+		//flip them
+		byteBuffer.put(p,four);
+		byteBuffer.put(p + 1,three);
+		byteBuffer.put(p + 2,two);
+		byteBuffer.put(p + 3,one);
+
+		//set position back to original
+		byteBuffer.position(p);
+
+		//get 4 bytes put them into a java int
+		int a = byteBuffer.getInt();
+
+		//covert java int to float
+		float b = Float.intBitsToFloat(a);
+		mServerFrame.mRot.x = b;
 	}
 
 	i = flags & mParser.mCommandRotationZ;
-	if(i == 1)
+	if(i == 64)
 	{
 		mServerFrame.mRotOld.z = mServerFrame.mRot.z;
-		mServerFrame.mRot.z = byteBuffer.getFloat();
+
+		int p = byteBuffer.position();  //set current position to p
+
+		//get the next 4 bytes
+		byte one = byteBuffer.get(p);
+		byte two = byteBuffer.get(p + 1);
+		byte three = byteBuffer.get(p +2);
+		byte four = byteBuffer.get(p + 3);
+
+		//flip them
+		byteBuffer.put(p,four);
+		byteBuffer.put(p + 1,three);
+		byteBuffer.put(p + 2,two);
+		byteBuffer.put(p + 3,one);
+
+		//set position back to original
+		byteBuffer.position(p);
+
+		//get 4 bytes put them into a java int
+		int a = byteBuffer.getInt();
+
+		//covert java int to float
+		float b = Float.intBitsToFloat(a);
+		mServerFrame.mRot.z = b;
 	}
 
 	i = flags & mParser.mCommandMilliseconds;
 	//milliseconds
-	if (i == 1)
+	if (i == 2)
 	{
-		System.out.println("dfdf");
 		mServerFrame.mMilliseconds = byteBuffer.get();
 		mCommandToRunOnShape.mMilliseconds = mServerFrame.mMilliseconds;
 	}
