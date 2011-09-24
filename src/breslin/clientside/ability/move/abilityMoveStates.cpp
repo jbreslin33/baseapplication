@@ -63,19 +63,15 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
     }
     else //server stopped or we are in sync so just use server vel as is..
     {
-	
 		Vector3D* serverDest = new Vector3D();
 		serverDest->copyValuesFrom(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity);
 		serverDest->normalise();
 
         if(abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds != 0)
         {
-			
-			abilityMove->mSpeed =
-			abilityMove->calcuateSpeed(
+			abilityMove->mSpeed = abilityMove->calcuateSpeed(
 			abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity,
 			abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds);
-	
         }
 
 		serverDest->multiply(abilityMove->mSpeed);
@@ -107,28 +103,31 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
     }
     else
     {
-		Vector3D serverDest; //vector to future server pos
-        Vector3D myDest; //vector from clienr pos to future server pos
+		Vector3D* serverDest = new Vector3D(); //vector to future server pos
+        Vector3D* myDest     = new Vector3D(); //vector from clienr pos to future server pos
 
-        serverDest.x = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x;
-        serverDest.y = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->y;
-        serverDest.z = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->z;
-        serverDest.normalise();
+        //serverDest.x = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x;
+        //serverDest.y = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->y;
+        //serverDest.z = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->z;
+		serverDest->copyValuesFrom(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity);
+        serverDest->normalise();
 
         float multiplier = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor;
-        serverDest = serverDest * multiplier;
-        serverDest.x = abilityMove->mShapeDynamic->mServerFrame->mPosition->x + serverDest.x;
-        serverDest.y = abilityMove->mShapeDynamic->mServerFrame->mPosition->y + serverDest.y;
-        serverDest.z = abilityMove->mShapeDynamic->mServerFrame->mPosition->z + serverDest.z;
-                //LogString("mPosition->y %f", abilityMove->mShapeDynamic->mClient->mServerFrame->mPosition->y);
+        //serverDest = serverDest * multiplier;
+		serverDest->multiply(multiplier);
+        serverDest->x = abilityMove->mShapeDynamic->mServerFrame->mPosition->x + serverDest->x;
+        serverDest->y = abilityMove->mShapeDynamic->mServerFrame->mPosition->y + serverDest->y;
+        serverDest->z = abilityMove->mShapeDynamic->mServerFrame->mPosition->z + serverDest->z;
+		          
+		//LogString("mPosition->y %f", abilityMove->mShapeDynamic->mClient->mServerFrame->mPosition->y);
 
-        myDest.x = serverDest.x - abilityMove->mShapeDynamic->getPosition().x;
-        myDest.y = serverDest.y - abilityMove->mShapeDynamic->getPosition().y;
-        myDest.z = serverDest.z - abilityMove->mShapeDynamic->getPosition().z;
+        myDest->x = serverDest->x - abilityMove->mShapeDynamic->getPosition().x;
+        myDest->y = serverDest->y - abilityMove->mShapeDynamic->getPosition().y;
+        myDest->z = serverDest->z - abilityMove->mShapeDynamic->getPosition().z;
 
 
         //dist from clienr pos to future server pos
-        float predictDist = pow(myDest.x, 2) + pow(myDest.y, 2) + pow(myDest.z, 2);
+        float predictDist = pow(myDest->x, 2) + pow(myDest->y, 2) + pow(myDest->z, 2);
         predictDist = sqrt(predictDist);
 
         //server velocity
@@ -144,15 +143,15 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
            //time needed to get to future server pos
            float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mSpeed;
 
-           myDest.normalise();
+           myDest->normalise();
 
            //client vel needed to get to future server pos in time
 		   float distTime = predictDist/time;
-           myDest = myDest * distTime;
+		   myDest->multiply(distTime);
 
-           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = myDest.x;
-           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = myDest.y;
-           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z = myDest.z;
+           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = myDest->x;
+           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = myDest->y;
+           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z = myDest->z;
 
 		}
 		else
