@@ -394,14 +394,13 @@ void parseByteBuffer(ByteBuffer byteBuffer)
 //ghost
 public void moveGhostShape()
 {
-	System.out.println("moveGhostShape fu");
 	Vector3D transVector = new Vector3D();
 
 	transVector.x = mServerFrame.mPosition.x;
 	transVector.y = 0;
 	transVector.z = mServerFrame.mPosition.z;
 
-	if (mGhost)
+	if (mGhost != null)
 	{
 		mGhost.setPosition(transVector);
 	}

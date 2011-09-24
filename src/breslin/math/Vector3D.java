@@ -60,6 +60,40 @@ public void normalise()
 }
 
 
+//multiply this vector by a scalar
+public void multiply(float num)
+{
+	x = x * num;
+	y = y * num;
+	z = z * num;
+}
+
+//add another vector to this one
+public void add(Vector3D vectorToAddtoThisOne)
+{
+	x = x + vectorToAddtoThisOne.x;
+	y = y + vectorToAddtoThisOne.y;
+	z = z + vectorToAddtoThisOne.z;
+}
+
+//subtract another vector from this one
+public void subtract(Vector3D vectorToAddtoThisOne)
+{
+	x = x - vectorToAddtoThisOne.x;
+	y = y - vectorToAddtoThisOne.y;
+	z = z - vectorToAddtoThisOne.z;
+}
+
+//copy values
+public void copyValuesFrom(Vector3D copyFrom)
+{
+	x = copyFrom.x;
+	y = copyFrom.y;
+	z = copyFrom.z;
+}
+
+
+
 
 }
 

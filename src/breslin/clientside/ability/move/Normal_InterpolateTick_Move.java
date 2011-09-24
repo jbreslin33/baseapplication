@@ -55,6 +55,7 @@ public void enter(AbilityMove abilityMove)
 public void execute(AbilityMove abilityMove)
 {
 //	System.out.println("i");
+/*
 	Vector3D transVector = new Vector3D();
 
     transVector.x = abilityMove.mShapeDynamic.mCommandToRunOnShape.mMoveVelocity.x;
@@ -79,6 +80,24 @@ public void execute(AbilityMove abilityMove)
 		0.0f,
 		abilityMove.mShapeDynamic.getPosition().z);
 	}
+	*/
+	//to be used to setPosition
+	Vector3D transVector = new Vector3D();
+
+	//copy values from mMoveVelocity so we don't make changes to original
+  	transVector.copyValuesFrom(abilityMove.mShapeDynamic.mCommandToRunOnShape.mMoveVelocity);
+
+	//get the mulitplier
+	float multipliedRenderTime = abilityMove.mShapeDynamic.mGame.getRenderTime() * 1000;
+
+	//multiply our vector using render values
+	transVector.multiply(multipliedRenderTime);
+
+	//add our velocity to current position
+	transVector.add(abilityMove.mShapeDynamic.getPosition());
+
+	//set new position
+	abilityMove.mShapeDynamic.setPosition(transVector);
 }
 
 public void exit(AbilityMove abilityMove)

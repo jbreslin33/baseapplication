@@ -45,6 +45,7 @@ public AbilityMove(ShapeDynamic shapeDynamic)
     //thresholds
     mPosInterpLimitHigh = .066f; //how far away from server till we try to catch up
     mPosInterpFactor    = 4.0f;
+   	mMaximunVelocity    = .002083f; //do not let velocity go above this in any direction.
 
 	//deltas
 	mDeltaX        = 0.0f;
@@ -69,6 +70,7 @@ public float mSpeed;
 //thresholds
 public float mPosInterpLimitHigh;
 public float mPosInterpFactor;
+public float mMaximunVelocity;
 
 //deltas
 public float mDeltaX;
@@ -108,6 +110,45 @@ void calculateDeltaPosition()  //mov
 		java.lang.Math.pow((double)mDeltaX, 2.0) +
     	java.lang.Math.pow((double)mDeltaY, 2.0) +
     	java.lang.Math.pow((double)mDeltaZ, 2.0));
+}
+
+
+float calcuateSpeed(Vector3D velocity, int milliseconds)
+{
+	float speed = (float)java.lang.Math.sqrt(
+	java.lang.Math.pow(velocity.x, 2) +
+    java.lang.Math.pow(velocity.y, 2) +
+	java.lang.Math.pow(velocity.z, 2)) /
+	milliseconds;
+
+	return speed;
+}
+
+void regulate(Vector3D velocityToRegulate)
+{
+	if (velocityToRegulate.x > mMaximunVelocity)
+	{
+		System.out.println("x:" + velocityToRegulate.x);
+		velocityToRegulate.x = mMaximunVelocity;
+	}
+
+	if (velocityToRegulate.x < mMaximunVelocity * -1)
+	{
+		System.out.println("x:" + velocityToRegulate.x);
+		velocityToRegulate.x = mMaximunVelocity * -1;
+	}
+
+	if (velocityToRegulate.y > mMaximunVelocity)
+	{
+		System.out.println("y:" + velocityToRegulate.y);
+		velocityToRegulate.y = mMaximunVelocity;
+	}
+
+	if (velocityToRegulate.y < mMaximunVelocity * -1)
+	{
+		System.out.println("y:" + velocityToRegulate.y);
+		velocityToRegulate.y = mMaximunVelocity * -1;
+	}
 }
 
 };
