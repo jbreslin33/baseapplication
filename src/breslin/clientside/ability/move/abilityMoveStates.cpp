@@ -103,15 +103,26 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
     }
     else
     {
+		//this is what we will set mCommandToRunOnShape->mMoveVelocity to
 		Vector3D* newVelocity = new Vector3D(); //vector to future server pos
 
+		//first set newVelocity to most recent velocity from server.
  		newVelocity->copyValuesFrom(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity);
+
+		//normalise it now we know what direction to head in.
         newVelocity->normalise();
 
+		//le'ts find out how fast
+		//change in position times our interp factor
         float multiplier = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor;
+		
+		//multiply our normalized velocity by multiplier(change * interpfactor)
 		newVelocity->multiply(multiplier);
+		
+		//add the latest server position to our newvelocity
 		newVelocity->add(abilityMove->mShapeDynamic->mServerFrame->mPosition);
 
+		//now subtract our current position from our new velocity
 		newVelocity->subtract(abilityMove->mShapeDynamic->getPosition());
 
         //dist from clienr pos to future server pos
