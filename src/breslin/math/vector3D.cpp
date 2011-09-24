@@ -49,14 +49,6 @@ void Vector3D::normalise()
 //multiply this vector by a scalar
 void Vector3D::multiply(float num)
 {
-	/*
-	Vector3D* vec = new Vector3D();
-	vec->x = x * num;
-	vec->y = y * num;
-	vec->z = z * num;
-
-	return vec;
-	*/
 	x = x * num;
 	y = y * num;
 	z = z * num;
@@ -84,6 +76,5 @@ void Vector3D::copyValuesFrom(Vector3D* copyFrom)
 	x = copyFrom->x;
 	y = copyFrom->y;
 	z = copyFrom->z;
-	//return copyTo;
 }
 
