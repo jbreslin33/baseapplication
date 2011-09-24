@@ -34,10 +34,10 @@ Game::Game()
 	{                 
 		Vector3D* position = new Vector3D();
 		position->x = 5.0f;
-		position->y = 0;
-		position->z = 2 * i;
+		position->y = 0.0f;
+		position->z = 2.0f * i;
 		
-		createAIShape(position,true,true,.66,1,true);
+		createAIShape(position,true,true,.66f,1,true);
 	}
 	/*
 	Vector3D* position = new Vector3D();

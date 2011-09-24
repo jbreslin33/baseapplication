@@ -12,7 +12,7 @@ Vector3D::~Vector3D()
 {
 }
 
-double Vector3D::length()
+float Vector3D::length()
 {
 	return sqrt(x*x + y*y + z*z);
 }
@@ -38,27 +38,12 @@ void Vector3D::zero()
 
 void Vector3D::normalise()
 {
-	double len = length();
+	float len = length();
 	if (len == 0)
 		return;
 	x /= len;
 	y /= len;
 	z /= len;
-}
-
-//multiply this vector by a scalar
-Vector3D Vector3D::operator*(float num) const
-{
-	Vector3D vec;
-
-	vec.x = x;
-	vec.y = y;
-	vec.z = z;
-
-	vec.x = x * num;
-	vec.y = y * num;
-	vec.z = z * num;
-	return vec;
 }
 
 //multiply this vector by a scalar

@@ -8,7 +8,7 @@ public:
 Vector3D();
 ~Vector3D();
 
-double length();
+float length();
 
 float x;
 float y;
@@ -19,7 +19,6 @@ void zero();
 
 void normalise();
 
-Vector3D operator*(float num) const;
 void multiply(float num);
 void add     (Vector3D* vectorToAddtoThisOne);
 void subtract(Vector3D* vectorToAddtoThisOne);

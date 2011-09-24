@@ -32,8 +32,8 @@ Move::Move()
 
 
     //run acceleration
-    mRunAccel    = .04166;
-    mRunDecel    = .04166;
+    mRunAccel    = .04166f;
+    mRunDecel    = .04166f;
 
 
  	//move states
