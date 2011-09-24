@@ -172,29 +172,17 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 {
 	Vector3D* transVector = new Vector3D();
 
-   // transVector.x = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x;
-    //transVector.y = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y;
-    //transVector.z = abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z;
-	transVector->copyValuesFrom(abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity);
+  	transVector->copyValuesFrom(abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity);
 
 	float multipliedRenderTime = abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000;
 
 	transVector->multiply(multipliedRenderTime); 
 
 	Vector3D* newPosition = new Vector3D();
-	newPosition->x = transVector->x + abilityMove->mShapeDynamic->getPosition()->x;
-	newPosition->y = transVector->y + abilityMove->mShapeDynamic->getPosition()->y;
-	newPosition->z = transVector->z + abilityMove->mShapeDynamic->getPosition()->z;
-	
-	abilityMove->mShapeDynamic->setPosition(newPosition);
+	transVector->add(abilityMove->mShapeDynamic->getPosition());
+	newPosition->copyValuesFrom(transVector);
 
-	//does this just prevent you from going below 0 up and down?
-    if(abilityMove->mShapeDynamic->getPosition()->y < 0.0)
-	{	
-		abilityMove->mShapeDynamic->setPosition(abilityMove->mShapeDynamic->getPosition()->x,
-			0.0 ,
-			abilityMove->mShapeDynamic->getPosition()->z);
-	}
+	abilityMove->mShapeDynamic->setPosition(newPosition);
 }
 void Normal_InterpolateTick_Move::exit(AbilityMove* abilityMove)
 {
