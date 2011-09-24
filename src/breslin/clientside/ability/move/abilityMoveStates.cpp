@@ -106,25 +106,18 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 		Vector3D* serverDest = new Vector3D(); //vector to future server pos
         Vector3D* myDest     = new Vector3D(); //vector from clienr pos to future server pos
 
-        //serverDest.x = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x;
-        //serverDest.y = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->y;
-        //serverDest.z = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->z;
-		serverDest->copyValuesFrom(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity);
+ 		serverDest->copyValuesFrom(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity);
         serverDest->normalise();
 
         float multiplier = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor;
-        //serverDest = serverDest * multiplier;
 		serverDest->multiply(multiplier);
         serverDest->x = abilityMove->mShapeDynamic->mServerFrame->mPosition->x + serverDest->x;
         serverDest->y = abilityMove->mShapeDynamic->mServerFrame->mPosition->y + serverDest->y;
         serverDest->z = abilityMove->mShapeDynamic->mServerFrame->mPosition->z + serverDest->z;
 		          
-		//LogString("mPosition->y %f", abilityMove->mShapeDynamic->mClient->mServerFrame->mPosition->y);
-
         myDest->x = serverDest->x - abilityMove->mShapeDynamic->getPosition().x;
         myDest->y = serverDest->y - abilityMove->mShapeDynamic->getPosition().y;
         myDest->z = serverDest->z - abilityMove->mShapeDynamic->getPosition().z;
-
 
         //dist from clienr pos to future server pos
         float predictDist = pow(myDest->x, 2) + pow(myDest->y, 2) + pow(myDest->z, 2);
@@ -149,9 +142,10 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 		   float distTime = predictDist/time;
 		   myDest->multiply(distTime);
 
-           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = myDest->x;
-           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = myDest->y;
-           abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z = myDest->z;
+           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = myDest->x;
+           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = myDest->y;
+           //abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z = myDest->z;
+		   abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->copyValuesFrom(myDest);
 
 		}
 		else
