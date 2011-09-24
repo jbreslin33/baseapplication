@@ -116,9 +116,9 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
        // serverDest->z = abilityMove->mShapeDynamic->mServerFrame->mPosition->z + serverDest->z;
 		serverDest->add(abilityMove->mShapeDynamic->mServerFrame->mPosition);
 
-        myDest->x = serverDest->x - abilityMove->mShapeDynamic->getPosition().x;
-        myDest->y = serverDest->y - abilityMove->mShapeDynamic->getPosition().y;
-        myDest->z = serverDest->z - abilityMove->mShapeDynamic->getPosition().z;
+        myDest->x = serverDest->x - abilityMove->mShapeDynamic->getPosition()->x;
+        myDest->y = serverDest->y - abilityMove->mShapeDynamic->getPosition()->y;
+        myDest->z = serverDest->z - abilityMove->mShapeDynamic->getPosition()->z;
 
         //dist from clienr pos to future server pos
         float predictDist = pow(myDest->x, 2) + pow(myDest->y, 2) + pow(myDest->z, 2);
@@ -183,16 +183,18 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 
 	transVector = transVector * abilityMove->mShapeDynamic->mGame->getRenderTime() * 1000;
 	Vector3D newPosition;
-	newPosition.x = transVector.x + abilityMove->mShapeDynamic->getPosition().x;
-	newPosition.y = transVector.y + abilityMove->mShapeDynamic->getPosition().y;
-	newPosition.z = transVector.z + abilityMove->mShapeDynamic->getPosition().z;
+	newPosition.x = transVector.x + abilityMove->mShapeDynamic->getPosition()->x;
+	newPosition.y = transVector.y + abilityMove->mShapeDynamic->getPosition()->y;
+	newPosition.z = transVector.z + abilityMove->mShapeDynamic->getPosition()->z;
 	
 	abilityMove->mShapeDynamic->setPosition(newPosition);
 
 	//does this just prevent you from going below 0 up and down?
-    if(abilityMove->mShapeDynamic->getPosition().y < 0.0)
+    if(abilityMove->mShapeDynamic->getPosition()->y < 0.0)
 	{	
-		abilityMove->mShapeDynamic->setPosition(abilityMove->mShapeDynamic->getPosition().x, 0.0 ,abilityMove->mShapeDynamic->getPosition().z);
+		abilityMove->mShapeDynamic->setPosition(abilityMove->mShapeDynamic->getPosition()->x,
+			0.0 ,
+			abilityMove->mShapeDynamic->getPosition()->z);
 	}
 }
 void Normal_InterpolateTick_Move::exit(AbilityMove* abilityMove)

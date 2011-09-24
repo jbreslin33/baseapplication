@@ -84,7 +84,7 @@ void setVisible (bool visible                             );
 void setRotation(Vector3D* vector3D);
 
 //check position
-Vector3D getPosition          (                                         );
+Vector3D* getPosition          (                                         );
 
 //check rotation
 Vector3D* getRotation();

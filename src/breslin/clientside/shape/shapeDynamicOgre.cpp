@@ -260,12 +260,12 @@ void ShapeDynamicOgre::setPosition(float x, float y, float z)
 	getSceneNode()->setPosition(x,y,z);
 }
 
-Vector3D ShapeDynamicOgre::getPosition()
+Vector3D* ShapeDynamicOgre::getPosition()
 {
-	Vector3D position;
-	position.x = getSceneNode()->getPosition().x;
-	position.y = getSceneNode()->getPosition().y;
-	position.z = getSceneNode()->getPosition().z;
+	Vector3D* position = new Vector3D();
+	position->x = getSceneNode()->getPosition().x;
+	position->y = getSceneNode()->getPosition().y;
+	position->z = getSceneNode()->getPosition().z;
 	return position;
 }
 

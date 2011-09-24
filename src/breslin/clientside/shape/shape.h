@@ -51,7 +51,7 @@ virtual void     setPosition          (float x, float y, float z ) = 0;
 virtual void    setRotation(Vector3D* vector3D) = 0;
 
 //getting position
-virtual Vector3D getPosition          (                          ) = 0;
+virtual Vector3D* getPosition          (                          ) = 0;
 virtual Vector3D* getRotation          (                          ) = 0;
 //size
 virtual void     scale                (Vector3D                  ) = 0;
