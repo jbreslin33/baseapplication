@@ -111,14 +111,13 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 
         float multiplier = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor;
 		serverDest->multiply(multiplier);
-       // serverDest->x = abilityMove->mShapeDynamic->mServerFrame->mPosition->x + serverDest->x;
-       // serverDest->y = abilityMove->mShapeDynamic->mServerFrame->mPosition->y + serverDest->y;
-       // serverDest->z = abilityMove->mShapeDynamic->mServerFrame->mPosition->z + serverDest->z;
 		serverDest->add(abilityMove->mShapeDynamic->mServerFrame->mPosition);
 
         myDest->x = serverDest->x - abilityMove->mShapeDynamic->getPosition()->x;
         myDest->y = serverDest->y - abilityMove->mShapeDynamic->getPosition()->y;
         myDest->z = serverDest->z - abilityMove->mShapeDynamic->getPosition()->z;
+		serverDest->subtract(abilityMove->mShapeDynamic->getPosition());
+		myDest->copyValuesFrom(serverDest);
 
         //dist from clienr pos to future server pos
         float predictDist = pow(myDest->x, 2) + pow(myDest->y, 2) + pow(myDest->z, 2);
@@ -127,9 +126,11 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
         //server velocity
 		if(abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds != 0)
         {
-           abilityMove->mSpeed = sqrt(pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x, 2) + 
-           pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->y, 2) + pow(abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->z, 2))/abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
-		   abilityMove->mShapeDynamic->mSpeed = abilityMove->mSpeed;
+			abilityMove->mSpeed = abilityMove->calcuateSpeed(
+			abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity,
+			abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds);
+		   
+			abilityMove->mShapeDynamic->mSpeed = abilityMove->mSpeed;
 		}
 
 		if(abilityMove->mSpeed != 0.0)
