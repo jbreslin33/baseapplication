@@ -54,33 +54,6 @@ public void enter(AbilityMove abilityMove)
 
 public void execute(AbilityMove abilityMove)
 {
-//	System.out.println("i");
-/*
-	Vector3D transVector = new Vector3D();
-
-    transVector.x = abilityMove.mShapeDynamic.mCommandToRunOnShape.mMoveVelocity.x;
-    transVector.y = abilityMove.mShapeDynamic.mCommandToRunOnShape.mMoveVelocity.y;
-    transVector.z = abilityMove.mShapeDynamic.mCommandToRunOnShape.mMoveVelocity.z;
-
-	transVector.x = transVector.x * abilityMove.mShapeDynamic.mGame.getRenderTime() * 1000;
-	transVector.y = transVector.y * abilityMove.mShapeDynamic.mGame.getRenderTime() * 1000;
-	transVector.z = transVector.z * abilityMove.mShapeDynamic.mGame.getRenderTime() * 1000;
-
-	Vector3D newPosition = new Vector3D();
-	newPosition.x = transVector.x + abilityMove.mShapeDynamic.getPosition().x;
-	newPosition.y = transVector.y + abilityMove.mShapeDynamic.getPosition().y;
-	newPosition.z = transVector.z + abilityMove.mShapeDynamic.getPosition().z;
-
-	abilityMove.mShapeDynamic.setPosition(newPosition);
-
-	//does this just prevent you from going below 0 up and down?
-    if(abilityMove.mShapeDynamic.getPosition().y < 0.0)
-	{
-		abilityMove.mShapeDynamic.setPosition(abilityMove.mShapeDynamic.getPosition().x,
-		0.0f,
-		abilityMove.mShapeDynamic.getPosition().z);
-	}
-	*/
 	//to be used to setPosition
 	Vector3D transVector = new Vector3D();
 

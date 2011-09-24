@@ -56,43 +56,6 @@ public void enter(AbilityMove abilityMove)
 
 public void execute(AbilityMove abilityMove)
 {
-	//abilityMove.mShapeDynamic.appendToTitle("M:Normal");
-//	System.out.println("M:Normal");
-	// if distance exceeds threshold && server velocity is zero
-	/*
-	if(abilityMove.mDeltaPosition > abilityMove.mPosInterpLimitHigh && !abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity.isZero())
-	{
-		abilityMove.mProcessTickStateMachine.changeState(Catchup_ProcessTick_Move.getAbilityMoveState());
-    }
-    else //server stopped or we are in sync so just use server vel as is..
-    {
-
-		Vector3D serverDest = new Vector3D();
-		serverDest.x = abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity.x;
-	    serverDest.y = abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity.y;
-        serverDest.z = abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity.z;
-        serverDest.normalise();
-
-        if(abilityMove.mShapeDynamic.mCommandToRunOnShape.mMilliseconds != 0)
-        {
-
-			abilityMove.mSpeed = (float)
-			java.lang.Math.sqrt(
-			java.lang.Math.pow(abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity.x, 2) +
-            java.lang.Math.pow(abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity.y, 2) +
-			java.lang.Math.pow(abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity.z, 2)) /
-			abilityMove.mShapeDynamic.mCommandToRunOnShape.mMilliseconds;
-        }
-
-        serverDest.x = serverDest.x * abilityMove.mSpeed;
-        serverDest.y = serverDest.y * abilityMove.mSpeed;
-        serverDest.z = serverDest.z * abilityMove.mSpeed;
-
-		abilityMove.mShapeDynamic.mCommandToRunOnShape.mMoveVelocity.x = serverDest.x;
-        abilityMove.mShapeDynamic.mCommandToRunOnShape.mMoveVelocity.y = serverDest.y;
-        abilityMove.mShapeDynamic.mCommandToRunOnShape.mMoveVelocity.z = serverDest.z;
-	}
-	*/
 	// if distance exceeds threshold && server velocity is zero
 	if(abilityMove.mDeltaPosition > abilityMove.mPosInterpLimitHigh && !abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity.isZero())
 	{
