@@ -20,6 +20,7 @@ void zero();
 void normalise();
 
 Vector3D operator*(float num) const;
+Vector3D* multiply(float num);
 
 };
 #endif

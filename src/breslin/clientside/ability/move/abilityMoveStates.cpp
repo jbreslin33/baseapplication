@@ -64,11 +64,11 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
     else //server stopped or we are in sync so just use server vel as is..
     {
 	
-		Vector3D serverDest;
-		serverDest.x = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x;
-	    serverDest.y = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->y;
-        serverDest.z = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->z;
-        serverDest.normalise();
+		Vector3D* serverDest = new Vector3D();
+		serverDest->x = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->x;
+	    serverDest->y = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->y;
+        serverDest->z = abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->z;
+        serverDest->normalise();
 
         if(abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds != 0)
         {
@@ -81,11 +81,12 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 			abilityMove->mShapeDynamic->mCommandToRunOnShape->mMilliseconds;
         }
 
-        serverDest = serverDest * abilityMove->mSpeed;
+       // serverDest = serverDest * abilityMove->mSpeed;
+		serverDest = serverDest->multiply(abilityMove->mSpeed);
 
-		abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = serverDest.x;
-        abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = serverDest.y;
-        abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z = serverDest.z;
+		abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->x = serverDest->x;
+        abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->y = serverDest->y;
+        abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->z = serverDest->z;
 	}
 }
 void Normal_ProcessTick_Move::exit(AbilityMove* abilityMove)
