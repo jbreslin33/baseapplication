@@ -132,7 +132,7 @@ public void createShape()
 	mSceneNode.scale(mScale,mScale,mScale);
 
 	//move
-	mPosition.x = 5.0f;
+	//mPosition.x = 5.0f;
 	setPosition((float)mPosition.x,(float)mPosition.y,(float)mPosition.z);
 /*
 	Vector3f position = new Vector3f();
