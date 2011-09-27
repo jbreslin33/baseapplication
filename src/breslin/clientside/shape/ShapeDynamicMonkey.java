@@ -132,45 +132,8 @@ public void createShape()
 	mSceneNode.scale(mScale,mScale,mScale);
 
 	//move
-	//mPosition.x = 5.0f;
 	setPosition((float)mPosition.x,(float)mPosition.y,(float)mPosition.z);
-/*
-	Vector3f position = new Vector3f();
-	Vector3f upPosition = new Vector3f();
 
-	Quaternion rotationQuaternion = new Quaternion();
-*/
-/*
-	position.x = -1; //southwest
-	position.y = 0;
-	position.z = 1;
-
-
-	position.x = -1; //northwest
-	position.y = 0;
-	position.z = -1;
-
-	position.x = 1; //southeast
-	position.y = 0;
-	position.z = 1;
-*/
-/*
-	position.x = 1; //northeast
-	position.y = 0;
-	position.z = -1;
-
-	upPosition.x = 0;
-	upPosition.y = 1;
-	upPosition.z = 0;
-
-	position.normalize();
-
-	rotationQuaternion.lookAt(position,upPosition);
-	mSceneNode.setLocalRotation(rotationQuaternion);
-*/
-
-//	mSceneNode.lookAt(position,upPosition);
-//	Quaternion localRotationQuat = mSceneNode.getLocalRotation();
 }
 
 //debugging
