@@ -39,7 +39,16 @@ public GameMonkey(byte[] serverIP, int serverPort)
 **************************************/
 public static void main(String[] args)
 {
-	byte[] theByteArray = args[0].getBytes();
+	byte[] theByteArray;
+	if (args != null)
+	{
+		theByteArray = args[0].getBytes();
+	}
+	else
+	{
+		args[0] = "71.23.229.73";
+		theByteArray = args[0].getBytes();
+	}
 	GameMonkey gameMonkey = new GameMonkey(theByteArray,30004);
 }
 
