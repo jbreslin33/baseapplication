@@ -46,7 +46,7 @@ public static void main(String[] args)
 	}
 	else
 	{
-		String s = "71.23.229.73";
+		String s = "192.168.1.104";
 		theByteArray = s.getBytes();
 	}
 	GameMonkey gameMonkey = new GameMonkey(theByteArray,30004);
