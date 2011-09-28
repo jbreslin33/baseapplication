@@ -40,14 +40,14 @@ public GameMonkey(byte[] serverIP, int serverPort)
 public static void main(String[] args)
 {
 	byte[] theByteArray;
-	if (args != null)
+	if (args.length > 0)
 	{
 		theByteArray = args[0].getBytes();
 	}
 	else
 	{
-		args[0] = "71.23.229.73";
-		theByteArray = args[0].getBytes();
+		String s = "71.23.229.73";
+		theByteArray = s.getBytes();
 	}
 	GameMonkey gameMonkey = new GameMonkey(theByteArray,30004);
 }
