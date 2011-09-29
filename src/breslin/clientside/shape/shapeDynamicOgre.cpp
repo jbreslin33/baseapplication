@@ -78,12 +78,12 @@ std::string ShapeDynamicOgre::getMeshString(int meshCode)
 		
 	{
 		//this cube is exactly 1 ogre world unit. Which I take to be 1 meter.
-		mScale = .01;
+		mScale = .01f;
 		return "cube.mesh";
 	}
 	if (meshCode == 1)
 	{
-		mScale = .25;
+		mScale = .25f;
 		return "sinbad.mesh";
 	}
 }
@@ -168,52 +168,20 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 	if (convertToDegree)
 	{
 		getSceneNode()->yaw(Degree(amountToYaw));
-//1 = due west, -1 = due east, 0 = due south, -2 due east, 2 = due west
+		//1 = due west, -1 = due east, 0 = due south, -2 due east, 2 = due west
 		Vector3 direction;
-		/*
-		direction.x = 1; //northwest
-		direction.y = 0;
-		direction.z = 1; 
-		
-		direction.x = -1; //southeast
-		direction.y = 0;
-		direction.z = -1; 
-
-		direction.x = -1; //northeast
-		direction.y = 0;
-		direction.z = 1; 
-		*/
 		direction.x = 1; //southwest
 		direction.y = 0;
 		direction.z = -1; 
 
 		direction.normalise();
-		//getSceneNode()->setDirection(direction,Ogre::Node::TS_WORLD);
-		//getSceneNode()->getOrientation
 	}
-	/*
-	//LogString("zAxis:%f",getSceneNode()->getOrientation().zAxis().z);
-	Ogre::Quaternion orientation = getSceneNode()->getOrientation();
-	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
-	LogString("x:%f",vector.x);
-	//LogString("y:%f",vector.y);
-	LogString("z:%f",vector.z);
-	//Ogre::Real radians = getSceneNode()->getOrientation().zAxis().z;
-	//Ogre::Real degrees = Ogre::Math::RadiansToDegrees(radians);
-	//LogString("degrees:%f",degrees);
-	//LogString("w:%f",getSceneNode()->getOrientation().w);
-	//LogString("x:%f",getSceneNode()->getOrientation().x);
-	//LogString("y:%f",getSceneNode()->getOrientation().y);
-	//LogString("z:%f",getSceneNode()->getOrientation().z);
-	//getSceneNode()->setOrientation(
-	*/
 }
 
 //1 world, 2 local
 
 float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 {
-	
     //calculate how far off we are from some vector
 	Vector3 v;
 	v.x = 0;
@@ -223,23 +191,8 @@ float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 
     // convert to degrees
     Real degreesToSomething = toSomething.getYaw().valueDegrees();
-		//LogString("degBrian:%f",degreesToSomething);
-	//return degreesToSomething;
-	
 
-/*
-	double a[] = {vectorOfSomething.x, vectorOfSomething.y, vectorOfSomething.z};
-    double b[] = {getSceneNode()->getOrientation().zAxis().x, getSceneNode()->getOrientation().zAxis().y,
-	getSceneNode()->getOrientation().zAxis().z};
-
-	Vector3D* vector3D = new Vector3D();
-	float degrees = (float)vector3D->Vec3_Angle(a,b);
-	LogString("degJim:%f",degrees);
-	//return degrees;
-*/
 	return degreesToSomething;
-	//return degreesToSomething;
-
 }
 
 void ShapeDynamicOgre::translate(Vector3D* translateVector, int perspective)
