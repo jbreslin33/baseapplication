@@ -132,7 +132,7 @@ public void   yaw                  (float amountToYaw, boolean converToDegree   
 {
 
 }
-float  getDegreesToSomething(Vector3D something                       )
+public float  getDegreesToSomething(Vector3D something                       )
 {
 	return 0;
 }

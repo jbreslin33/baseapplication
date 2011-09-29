@@ -65,12 +65,45 @@ public void interpolateTick(float renderTime)
 //rotation
 float getDegreesToServer()
 {
+	Vector3D serverRotNew = new Vector3D();
 
-	return 0;
+    serverRotNew.x = mShapeDynamic.mServerFrame.mRot.x;
+	serverRotNew.y = 0;
+    serverRotNew.z = mShapeDynamic.mServerFrame.mRot.z;
+
+    serverRotNew.normalise();
+
+    //calculate how far off we are from server
+	float degreesToServer = mShapeDynamic.getDegreesToSomething(serverRotNew);
+
+	return degreesToServer;
 }
 void  calculateServerRotationSpeed()
 {
+	mServerRotOld.zero();
+    mServerRotNew.zero();
 
+    mServerRotOld.x = mShapeDynamic.mServerFrame.mRotOld.x;
+	mServerRotOld.y = 0;
+    mServerRotOld.z = mShapeDynamic.mServerFrame.mRotOld.z;
+
+    mServerRotNew.x = mShapeDynamic.mServerFrame.mRot.x;
+	mServerRotNew.y = 0;
+    mServerRotNew.z = mShapeDynamic.mServerFrame.mRot.z;
+
+    mServerRotNew.normalise();
+    mServerRotOld.normalise();
+
+    //calculate how far off we are from server
+	mDegreesToServer = mShapeDynamic.getDegreesToSomething(mServerRotNew);
+
+    //calculate server rotation from last tick to new one
+	mServerRotSpeed = mShapeDynamic.mGhost.getDegreesToSomething(mServerRotNew);
+
+    if(java.lang.Math.abs(mServerRotSpeed) < 0)
+    {
+		mServerRotSpeed = 0.0f;
+    }
 }
 
 }

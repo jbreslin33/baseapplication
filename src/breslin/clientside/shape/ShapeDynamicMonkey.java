@@ -232,6 +232,8 @@ public float    getDegreesToSomething(Vector3D something                       )
 */
 
 
+	//return degreesToServer;
+
 return 0.0f;
 }
 
