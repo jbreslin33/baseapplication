@@ -54,7 +54,14 @@ public void enter(AbilityRotation abilityRotation)
 
 public void execute(AbilityRotation abilityRotation)
 {
+	float rotSpeed = abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed * abilityRotation.mShapeDynamic.mGame.getRenderTime();
+	abilityRotation.mShapeDynamic.yaw(rotSpeed, true);
 
+	if (abilityRotation.mServerRotSpeed == 0.0 && abs(abilityRotation.getDegreesToServer()) < abilityRotation.mRotInterpLimitLow)
+    {
+		abilityRotation.mInterpolateTickStateMachine.changeState(Off_InterpolateTick_Rotation.getAbilityRotationState());
+		return;
+    }
 }
 
 public void exit(AbilityRotation abilityRotation)
