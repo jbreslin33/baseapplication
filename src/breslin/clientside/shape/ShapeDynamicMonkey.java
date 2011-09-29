@@ -230,6 +230,8 @@ public float    getDegreesToSomething(Vector3D something                       )
 
 	return vector3fA.dot(vector3fB);
 */
+
+
 return 0.0f;
 }
 
