@@ -1,8 +1,13 @@
 package breslin.math;
 
+//std
 import java.lang.Math;
+
+//quat
 import com.jme3.math.Quaternion;
-  import com.jme3.math.Vector3f;
+
+//vector
+import com.jme3.math.Vector3f;
 
 public class Vector3D
 {
@@ -49,6 +54,12 @@ public void zero()
 	z = 0;
 }
 
+public float dot(Vector3D v2)
+{
+	float d = x * v2.x + y * v2.y + z * v2.z;
+	return d;
+}
+
 public void normalise()
 {
 	double len = length();
@@ -92,51 +103,98 @@ public void copyValuesFrom(Vector3D copyFrom)
 	z = copyFrom.z;
 }
 
+public Vector3f getVector3f()
+{
+	Vector3f v3f = new Vector3f();
+	v3f.x = x;
+	v3f.y = y;
+	v3f.z = z;
+
+	return v3f;
+
+}
+
+public Vector3D crossProduct(Vector3D b)
+{
+	Vector3D a = new Vector3D();
+	a.copyValuesFrom(this);
+
+	Vector3D c = new Vector3D();
+	c.x = a.y * b.z - a.z * b.x;
+	c.y = a.z * b.x - a.x * b.z;
+	c.z = a.x * b.y - a.y * b.x;
+
+	return c;
+}
 
       // Quaternion getRotationTo(const Vector3& dest,
 		//	const Vector3& fallbackAxis = Vector3::ZERO) const
-      Quaternion getRotationTo(Vector3D vector,
+      Quaternion getRotationTo(Vector3D dest, Vector3D fallbackAxis)
       {
 
             // Based on Stan Melax's article in Game Programming Gems
-            Quaternion q;
-            /*
+            Quaternion q = new Quaternion();
+
             // Copy, since cannot modify local
-            Vector3 v0 = *this;
-            Vector3 v1 = dest;
+            //Vector3 v0 = *this;
+            Vector3D v0 = new Vector3D();
+            v0.copyValuesFrom(this);
+
+            //Vector3 v1 = dest;
+            Vector3D v1 = new Vector3D();
+
             v0.normalise();
             v1.normalise();
 
-            Real d = v0.dotProduct(v1);
+//            Real d = v0.dotProduct(v1);
+			float d = v0.dot(v1);
+
             // If dot == 1, vectors are the same
             if (d >= 1.0f)
             {
-                return Quaternion::IDENTITY;
+				Quaternion qIdentity = new Quaternion();
+                return qIdentity;
             }
+
 			if (d < (1e-6f - 1.0f))
 			{
 				// rotate 180 degrees about the fallback axis
-				q.FromAngleAxis(Radian(Math::PI), fallbackAxis);
+				q.fromAngleAxis((float)java.lang.Math.toRadians(Math.PI),fallbackAxis.getVector3f()); //java.lang.Math.PI;
+
+				//q.FromAngleAxis(Radian(Math::PI), fallbackAxis);
 
 			}
+
 			else
 			{
-                Real s = Math::Sqrt( (1+d)*2 );
-	            Real invs = 1 / s;
+            //    Real s = Math::Sqrt( (1+d)*2 );
+	        	float s = (float)java.lang.Math.sqrt((1 + d) * 2);
 
-				Vector3 c = v0.crossProduct(v1);
+	        	//Real invs = 1 / s;
+				float invs = 1 / s;
 
+//				Vector3 c = v0.crossProduct(v1);
+				Vector3D c = v0.crossProduct(v1);
+/*
     	        q.x = c.x * invs;
         	    q.y = c.y * invs;
             	q.z = c.z * invs;
             	q.w = s * 0.5f;
 				q.normalise();
+*/
+			float x = c.x * invs;
+			float y = c.y * invs;
+			float z = c.z * invs;
+			float w = s * 0.5f;
+
+			q.set(x,y,z,w);
+			q.normalize();
 			}
-        */
+
 			return q;
 }
 
-*/
+
 
 
 
