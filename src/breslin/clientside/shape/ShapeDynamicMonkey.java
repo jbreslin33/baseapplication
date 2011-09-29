@@ -6,6 +6,9 @@ package breslin.clientside.shape;
 //parent
 import breslin.clientside.shape.ShapeDynamic;
 
+//culling
+import com.jme3.scene.Spatial.CullHint;
+
 //standard library
 import java.util.ArrayList;
 import java.nio.ByteBuffer;
@@ -84,11 +87,12 @@ public ShapeDynamicMonkey(GameMonkey gameMonkey, ByteBuffer byteBuffer, boolean 
 	{
 		//create a ghost for this shape
 		mGhost = new ShapeDynamicMonkey(mGameMonkey,byteBuffer,true);
-		//mGhost->setVisible(false);
+		//mGhost.setVisible(false);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
 		mGame.mShapeVector.add(this);
 		mGame.mShapeGhostVector.add(mGhost);
+				//mGhost.setVisible(false);
 	}
 
 
@@ -133,6 +137,13 @@ public void createShape()
 
 	//move
 	setPosition((float)mPosition.x,(float)mPosition.y,(float)mPosition.z);
+
+	if (mIsGhost)
+	{
+		mSceneNode.setCullHint(CullHint.Always);
+	}
+
+
 
 }
 
@@ -189,7 +200,15 @@ public void setPosition(float x, float y, float z                )
 }
 public void setVisible (boolean visible                             )
 {
+	if (visible)
+	{
 
+		getSceneNode().setCullHint(CullHint.Always);
+	}
+	else
+	{
+		getSceneNode().setCullHint(CullHint.Never);
+	}
 }
 
 //check position

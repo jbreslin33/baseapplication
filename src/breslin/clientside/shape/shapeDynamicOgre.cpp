@@ -54,7 +54,7 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, b
 	{
 		//create a ghost for this shape
 		mGhost = new ShapeDynamicOgre(mGameOgre,byteBuffer,true);
-		mGhost->setVisible(true);
+		mGhost->setVisible(false);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
 		mGame->mShapeVector.push_back(this);
@@ -215,7 +215,11 @@ float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 {
 	
     //calculate how far off we are from some vector
-    Quaternion toSomething = getSceneNode()->getOrientation().zAxis().getRotationTo(converToVector3(vectorOfSomething),Vector3::UNIT_Y);
+	Vector3 v;
+	v.x = 0;
+	v.y = 1;
+	v.z = 0;
+	Quaternion toSomething = getSceneNode()->getOrientation().zAxis().getRotationTo(converToVector3(vectorOfSomething),v);
 
     // convert to degrees
     Real degreesToSomething = toSomething.getYaw().valueDegrees();

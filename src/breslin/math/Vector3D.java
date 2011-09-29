@@ -93,6 +93,52 @@ public void copyValuesFrom(Vector3D copyFrom)
 }
 
 
+      // Quaternion getRotationTo(const Vector3& dest,
+		//	const Vector3& fallbackAxis = Vector3::ZERO) const
+      Quaternion getRotationTo(Vector3D vector,
+      {
+
+            // Based on Stan Melax's article in Game Programming Gems
+            Quaternion q;
+            /*
+            // Copy, since cannot modify local
+            Vector3 v0 = *this;
+            Vector3 v1 = dest;
+            v0.normalise();
+            v1.normalise();
+
+            Real d = v0.dotProduct(v1);
+            // If dot == 1, vectors are the same
+            if (d >= 1.0f)
+            {
+                return Quaternion::IDENTITY;
+            }
+			if (d < (1e-6f - 1.0f))
+			{
+				// rotate 180 degrees about the fallback axis
+				q.FromAngleAxis(Radian(Math::PI), fallbackAxis);
+
+			}
+			else
+			{
+                Real s = Math::Sqrt( (1+d)*2 );
+	            Real invs = 1 / s;
+
+				Vector3 c = v0.crossProduct(v1);
+
+    	        q.x = c.x * invs;
+        	    q.y = c.y * invs;
+            	q.z = c.z * invs;
+            	q.w = s * 0.5f;
+				q.normalise();
+			}
+        */
+			return q;
+}
+
+*/
+
+
 
 
 }
