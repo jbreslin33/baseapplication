@@ -1,10 +1,10 @@
-package breslin.clientside.ability.move;
+package breslin.clientside.ability.rotation;
 
 /******************************************************
 *				INCLUDES
 ********************************************************/
 //parent
-import breslin.clientside.ability.move.AbilityMoveState;
+import breslin.clientside.ability.rotation.AbilityRotationState;
 
 //shape
 import breslin.clientside.shape.ShapeDynamic;
@@ -13,13 +13,13 @@ import breslin.clientside.shape.Shape;
 //math
 import breslin.math.Vector3D;
 
-class Normal_InterpolateTick_Move extends AbilityMoveState
+class Normal_InterpolateTick_Rotation extends AbilityRotationState
 {
 
-	private static Normal_InterpolateTick_Move mAbilityMoveState;
+	private static Normal_InterpolateTick_Rotation mAbilityRotationState;
 
 	/** A private Constructor prevents any other class from instantiating. */
-	private Normal_InterpolateTick_Move()
+	private Normal_InterpolateTick_Rotation()
 	{
 		  //	 Optional Code
 	}
@@ -32,12 +32,12 @@ class Normal_InterpolateTick_Move extends AbilityMoveState
 *
 ********************************************************/
 
-public static synchronized Normal_InterpolateTick_Move getAbilityMoveState()
+public static synchronized Normal_InterpolateTick_Rotation getAbilityRotationState()
 {
-   	if (mAbilityMoveState == null){
-    	mAbilityMoveState = new Normal_InterpolateTick_Move();
+   	if (mAbilityRotationState == null){
+    	mAbilityRotationState = new Normal_InterpolateTick_Rotation();
     }
-	    return mAbilityMoveState;
+	    return mAbilityRotationState;
 }
 
 
@@ -48,32 +48,16 @@ public Object clone()throws CloneNotSupportedException
 
 
 
-public void enter(AbilityMove abilityMove)
+public void enter(AbilityRotation abilityRotation)
 {
 }
 
-public void execute(AbilityMove abilityMove)
+public void execute(AbilityRotation abilityRotation)
 {
-	//to be used to setPosition
-	Vector3D transVector = new Vector3D();
 
-	//copy values from mMoveVelocity so we don't make changes to original
-  	transVector.copyValuesFrom(abilityMove.mShapeDynamic.mCommandToRunOnShape.mMoveVelocity);
-
-	//get the mulitplier
-	float multipliedRenderTime = abilityMove.mShapeDynamic.mGame.getRenderTime() * 1000;
-
-	//multiply our vector using render values
-	transVector.multiply(multipliedRenderTime);
-
-	//add our velocity to current position
-	transVector.add(abilityMove.mShapeDynamic.getPosition());
-
-	//set new position
-	abilityMove.mShapeDynamic.setPosition(transVector);
 }
 
-public void exit(AbilityMove abilityMove)
+public void exit(AbilityRotation abilityRotation)
 {
 }
 

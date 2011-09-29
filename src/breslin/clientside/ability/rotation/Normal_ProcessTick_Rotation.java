@@ -1,4 +1,4 @@
-package breslin.clientside.ability.move;
+package breslin.clientside.ability.rotation;
 
 /**********************************
 *          INCLUDES
@@ -12,16 +12,16 @@ import breslin.math.Vector3D;
 *				INCLUDES
 ********************************************************/
 //parent
-import breslin.clientside.ability.move.AbilityMoveState;
+import breslin.clientside.ability.rotation.AbilityRotationState;
 
 
-class Normal_ProcessTick_Move extends AbilityMoveState
+class Normal_ProcessTick_Rotation extends AbilityRotationState
 {
 
-	private static Normal_ProcessTick_Move mAbilityMoveState;
+	private static Normal_ProcessTick_Rotation mAbilityRotationState;
 
 	/** A private Constructor prevents any other class from instantiating. */
-	private Normal_ProcessTick_Move()
+	private Normal_ProcessTick_Rotation()
 	{
 		  //	 Optional Code
 	}
@@ -34,12 +34,12 @@ class Normal_ProcessTick_Move extends AbilityMoveState
 *
 ********************************************************/
 
-public static synchronized Normal_ProcessTick_Move getAbilityMoveState()
+public static synchronized Normal_ProcessTick_Rotation getAbilityRotationState()
 {
-   	if (mAbilityMoveState == null){
-    	mAbilityMoveState = new Normal_ProcessTick_Move();
+   	if (mAbilityRotationState == null){
+    	mAbilityRotationState = new Normal_ProcessTick_Rotation();
     }
-	    return mAbilityMoveState;
+	    return mAbilityRotationState;
 }
 
 
@@ -50,41 +50,16 @@ public Object clone()throws CloneNotSupportedException
 
 
 
-public void enter(AbilityMove abilityMove)
+public void enter(AbilityRotation abilityRotation)
 {
 }
 
-public void execute(AbilityMove abilityMove)
+public void execute(AbilityRotation abilityRotation)
 {
-	// if distance exceeds threshold && server velocity is zero
-	if(abilityMove.mDeltaPosition > abilityMove.mPosInterpLimitHigh && !abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity.isZero())
-	{
 
-		abilityMove.mProcessTickStateMachine.changeState(Catchup_ProcessTick_Move.getAbilityMoveState());
-    }
-    else //server stopped or we are in sync so just use server vel as is..
-    {
-		Vector3D serverDest = new Vector3D();
-		serverDest.copyValuesFrom(abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity);
-		serverDest.normalise();
-
-        if(abilityMove.mShapeDynamic.mCommandToRunOnShape.mMilliseconds != 0)
-        {
-			abilityMove.mSpeed = abilityMove.calcuateSpeed(
-			abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity,
-			abilityMove.mShapeDynamic.mCommandToRunOnShape.mMilliseconds);
-        }
-
-		serverDest.multiply(abilityMove.mSpeed);
-
-		//keep player from teleporting
-		abilityMove.regulate(serverDest);
-
-		abilityMove.mShapeDynamic.mCommandToRunOnShape.mMoveVelocity.copyValuesFrom(serverDest);
-	}
 }
 
-public void exit(AbilityMove abilityMove)
+public void exit(AbilityRotation abilityRotation)
 {
 }
 
