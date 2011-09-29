@@ -36,13 +36,10 @@ public static synchronized Catchup_ProcessTick_Rotation getAbilityRotationState(
 	    return mAbilityRotationState;
 }
 
-
 public Object clone()throws CloneNotSupportedException
 {
     throw new CloneNotSupportedException();
 }
-
-
 
 public void enter(AbilityRotation abilityRotation)
 {

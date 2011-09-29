@@ -1,4 +1,4 @@
-package breslin.clientside.ability;
+package breslin.clientside.ability.rotation;
 
 /**********************************
 *          INCLUDES

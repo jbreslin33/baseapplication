@@ -7,10 +7,12 @@ package breslin.clientside.ability.rotation;
 import breslin.clientside.ability.rotation.AbilityRotationState;
 
 
+
+
 class Global_ProcessTick_Rotation extends AbilityRotationState
 {
 
-	private static Global_ProcessTick_Rotation singletonObject;
+	private static Global_ProcessTick_Rotation mAbilityRotationState;
 
 	/** A private Constructor prevents any other class from instantiating. */
 	private Global_ProcessTick_Rotation()
@@ -26,12 +28,12 @@ class Global_ProcessTick_Rotation extends AbilityRotationState
 *
 ********************************************************/
 
-public static synchronized Global_ProcessTick_Rotation getSingletonObject()
+public static synchronized Global_ProcessTick_Rotation getAbilityRotationState()
 {
-   	if (singletonObject == null){
-    	singletonObject = new Global_ProcessTick_Rotation();
+   	if (mAbilityRotationState == null){
+    	mAbilityRotationState = new Global_ProcessTick_Rotation();
     }
-	    return singletonObject;
+	    return mAbilityRotationState;
 }
 
 public Object clone()throws CloneNotSupportedException
@@ -39,15 +41,14 @@ public Object clone()throws CloneNotSupportedException
     throw new CloneNotSupportedException();
 }
 
-
-
 public void enter(AbilityRotation abilityRotation)
 {
 }
 
 public void execute(AbilityRotation abilityRotation)
 {
-
+	abilityRotation.calculateServerRotationSpeed();
+	abilityRotation.mShapeDynamic.mGhost.yaw(abilityRotation.mServerRotSpeed,true);
 }
 
 public void exit(AbilityRotation abilityRotation)

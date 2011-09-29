@@ -59,7 +59,6 @@ public void execute(AbilityMove abilityMove)
 	// if distance exceeds threshold && server velocity is zero
 	if(abilityMove.mDeltaPosition > abilityMove.mPosInterpLimitHigh && !abilityMove.mShapeDynamic.mServerFrame.mMoveVelocity.isZero())
 	{
-
 		abilityMove.mProcessTickStateMachine.changeState(Catchup_ProcessTick_Move.getAbilityMoveState());
     }
     else //server stopped or we are in sync so just use server vel as is..
