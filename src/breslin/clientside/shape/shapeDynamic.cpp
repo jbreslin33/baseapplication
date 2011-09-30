@@ -182,10 +182,6 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 		moveZChanged = false;
 	}
 
-	//set old rot
-
-
-
 	//rotation
 	if(flags & mParser->mCommandRotationX)
 	{

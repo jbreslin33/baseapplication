@@ -74,7 +74,7 @@ public void addShape(boolean b, ByteBuffer byteBuffer)
 	ShapeDynamic shapeDynamicMonkey = new ShapeDynamicMonkey(this,byteBuffer,false);  //you should just need to call this...
 
 	//ability
-	//shapeDynamicMonkey.addAbility(new AbilityRotation(shapeDynamicMonkey));
+	shapeDynamicMonkey.addAbility(new AbilityRotation(shapeDynamicMonkey));
 	shapeDynamicMonkey.addAbility(new AbilityMove    (shapeDynamicMonkey));
 }
 

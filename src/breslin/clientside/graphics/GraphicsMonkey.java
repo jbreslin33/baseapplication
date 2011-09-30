@@ -113,10 +113,7 @@ public void update()
 /* This is the update loop */
 public void simpleUpdate(float tpf)
 {
-	// make the player rotate
-    //player.rotate(0, 2*tpf, 0);
     mGameMonkey.mRenderTime = tpf;
-//    System.out.println("tpf:" + tpf);
 }
 
 void        createScene          ()
@@ -128,7 +125,6 @@ void        createScene          ()
 
 public boolean                runGraphics          ()
 {
-	System.out.println("running graphics");
 	super.update();
 	return true;
 }
@@ -166,16 +162,14 @@ void processInput()
 	{
 		if (!mPlayingGame)
 		{
-			System.out.println("send Connect.....");
 			mGameMonkey.mNetwork.sendConnect();
 			mPlayingGame = true;
 
-			//Set Camera to position and to lookat avatar at 0,0,0
+			//Set Camera to position and to lookat avatar at 0,0,0(this should be same as ogre! if not fix it)
 			Vector3f startCamPosition = new Vector3f(0, 20, 20);
-			Vector3f lookAtVector = new Vector3f(0,0,0);
+			Vector3f lookAtVector     = new Vector3f(0,0,0);
 			Vector3f worldDirection   = new Vector3f(0,1,0);
 			cam.setLocation(startCamPosition);
-			System.out.println("setLocation of cam");
 			cam.lookAt(lookAtVector,worldDirection);
 		}
 		else
@@ -184,6 +178,7 @@ void processInput()
 		}
 	}
 
+	//move
 	if (Keyboard.isKeyDown(Keyboard.KEY_I))
 	{
 		mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyUp;
@@ -205,6 +200,17 @@ void processInput()
 	if (Keyboard.isKeyDown(Keyboard.KEY_L))
 	{
 		mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyRight;
+	}
+
+	//rotation
+	if (Keyboard.isKeyDown(Keyboard.KEY_G))
+	{
+		mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyCounterClockwise;
+	}
+
+	if (Keyboard.isKeyDown(Keyboard.KEY_H))
+	{
+		mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyClockwise;
 	}
 
 	mGameMonkey.mNetwork.mCommandToServer.mMilliseconds = (byte) (mGameMonkey.mFrameTime * 1000);

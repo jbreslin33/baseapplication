@@ -293,9 +293,6 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		moveZChanged = false;
 	}
 
-	//set old rot
-
-
 
 	//rotation
 	i = flags & mParser.mCommandRotationX;
