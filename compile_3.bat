@@ -27,3 +27,4 @@ javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.
 javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/rotation/Normal_ProcessTick_Rotation.java
 javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/rotation/Catchup_ProcessTick_Rotation.java
 javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/rotation/Normal_InterpolateTick_Rotation.java
+javac -d build -cp "lib/jME3-lwjgl-natives.jar;lib/jMonkeyEngine3.jar;lib/lwjgl.jar;.;./src/" src/breslin/clientside/ability/rotation/Off_InterpolateTick_Rotation.java
