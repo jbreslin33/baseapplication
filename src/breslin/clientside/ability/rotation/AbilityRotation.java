@@ -37,7 +37,7 @@ public AbilityRotation(ShapeDynamic shapeDynamic)
 	mInterpolateTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine
 	mInterpolateTickStateMachine.setCurrentState      (Normal_InterpolateTick_Rotation.getAbilityRotationState());
 	mInterpolateTickStateMachine.setPreviousState     (Normal_InterpolateTick_Rotation.getAbilityRotationState());
-	mInterpolateTickStateMachine.setGlobalState       (null);
+	//mInterpolateTickStateMachine.setGlobalState       (null);
 
 	//////rotation
     mTurnSpeed = 250.0f;
@@ -86,12 +86,12 @@ float    mDegreesToServer;
 //updating
 public void processTick()
 {
-
+	mProcessTickStateMachine.update();
 }
 
 public void interpolateTick(float renderTime)
 {
-
+	mInterpolateTickStateMachine.update();
 }
 
 //rotation

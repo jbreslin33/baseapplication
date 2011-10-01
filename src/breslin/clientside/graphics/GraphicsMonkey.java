@@ -46,7 +46,8 @@ public GraphicsMonkey(GameMonkey gameMonkey)
 	mKeyDown = 2;
 	mKeyLeft = 4;
 	mKeyRight = 8;
-	mKeySpace = 16;
+	mKeyCounterClockwise = 16;
+	mKeyClockwise = 32;
 
 	//initilize
 	mInitializeGui = false;
@@ -84,6 +85,9 @@ int mKeyDown;
 int mKeyLeft;
 int mKeyRight;
 int mKeySpace;
+
+int mKeyCounterClockwise;
+int mKeyClockwise;
 
 /***************************************
 *			          METHODS

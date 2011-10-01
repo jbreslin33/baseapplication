@@ -162,6 +162,7 @@ public void scale(Vector3D scaleVector)
 //movement
 public void yaw        (float amountToYaw, boolean converToDegree   )
 {
+	//System.out.println("a:" + amountToYaw);
 	getSceneNode().rotate(0,amountToYaw,0);
 
 //Ogre::Quaternion orientation = getSceneNode()->getOrientation();
@@ -214,6 +215,33 @@ public void setVisible (boolean visible                             )
 //check position
 public float    getDegreesToSomething(Vector3D something                       )
 {
+	System.out.println("x:" + something.x);
+	System.out.println("y:" + something.y);
+	System.out.println("z:" + something.z);
+   //calculate how far off we are from some vector
+	Vector3D fallback = new Vector3D();
+	fallback.x = 0;
+	fallback.y = 1;
+	fallback.z = 0;
+
+	Vector3f v = new Vector3f(0,1,0);
+
+	Transform worldTransform = mSceneNode.getWorldTransform();
+	Quaternion rotation = worldTransform.getRotation();
+ 	Vector3f f = rotation.getRotationColumn(0);
+ 	Vector3D from = new Vector3D();
+ 	from.x = f.x;
+ 	from.y = f.y;
+ 	from.z = f.z;
+
+
+	//Quaternion toSomething = getSceneNode().getOrientation().zAxis().getRotationTo(converToVector3(something),v);
+	Quaternion toSomething = from.getRotationTo(something,fallback);
+    // convert to degrees
+    //Real degreesToSomething = toSomething.getYaw().valueDegrees();
+	float degreesToSomething = toSomething.toAngleAxis(v);
+	System.out.println("d:" + degreesToSomething);
+	return degreesToSomething;
 	//Transform transformGhost = getSceneNode().getWorldTransform();
 	//Quaternion quaternionThis = transform.getRotation();
 
@@ -234,7 +262,7 @@ public float    getDegreesToSomething(Vector3D something                       )
 
 	//return degreesToServer;
 
-return 0.0f;
+//return 0.0f;
 }
 
 public Vector3D getPosition          (                                         )

@@ -323,6 +323,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		//covert java int to float
 		float b = Float.intBitsToFloat(a);
 		mServerFrame.mRot.x = b;
+//		System.out.println("x:" + mServerFrame.mRot.x);
 	}
 
 	i = flags & mParser.mCommandRotationZ;
@@ -353,6 +354,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		//covert java int to float
 		float b = Float.intBitsToFloat(a);
 		mServerFrame.mRot.z = b;
+	//	System.out.println("z:" + mServerFrame.mRot.z);
 	}
 
 	i = flags & mParser.mCommandMilliseconds;

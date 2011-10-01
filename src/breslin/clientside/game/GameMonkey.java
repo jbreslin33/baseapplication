@@ -14,7 +14,7 @@ import breslin.clientside.shape.ShapeDynamicMonkey;
 import breslin.clientside.shape.ShapeDynamic;
 
 //ability
-//import breslin.clientside.ability.rotation.AbilityRotation;
+import breslin.clientside.ability.rotation.AbilityRotation;
 import breslin.clientside.ability.move.AbilityMove;
 
 /***************************************

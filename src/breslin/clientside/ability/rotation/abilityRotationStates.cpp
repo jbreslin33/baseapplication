@@ -172,16 +172,14 @@ void Normal_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-
 	//->mObjectTitleString.append("R:Normal");
 	float rotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed * abilityRotation->mShapeDynamic->mGame->getRenderTime();
-   abilityRotation->mShapeDynamic->yaw(rotSpeed, true);
+	abilityRotation->mShapeDynamic->yaw(rotSpeed, true);
 
-   if (abilityRotation->mServerRotSpeed == 0.0 && abs(abilityRotation->getDegreesToServer()) < abilityRotation->mRotInterpLimitLow)
+	if (abilityRotation->mServerRotSpeed == 0.0 && abs(abilityRotation->getDegreesToServer()) < abilityRotation->mRotInterpLimitLow)
     {
 		abilityRotation->mInterpolateTickStateMachine->changeState(Off_InterpolateTick_Rotation::Instance());
     }
-
 }
 void Normal_InterpolateTick_Rotation::exit(AbilityRotation* abilityRotation)
 {

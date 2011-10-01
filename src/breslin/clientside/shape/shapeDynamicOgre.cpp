@@ -165,6 +165,7 @@ Vector3D* ShapeDynamicOgre::getRotation()
 
 void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 {
+	//LogString("a:%f",amountToYaw);
 	if (convertToDegree)
 	{
 		getSceneNode()->yaw(Degree(amountToYaw));
