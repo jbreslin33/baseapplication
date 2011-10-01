@@ -187,10 +187,10 @@ public Quaternion getRotationTo(Vector3D dest, Vector3D fallbackAxis)
 			float z = c.z * invs;
 			float w = s * 0.5f;
 
-			System.out.println("x:" + x);
-			System.out.println("y:" + y);
-			System.out.println("z:" + z);
-			System.out.println("w:" + w);
+			//System.out.println("x:" + x);
+		//	System.out.println("y:" + y);
+		//	System.out.println("z:" + z);
+		//	System.out.println("w:" + w);
 			q.set(x,y,z,w);
 			q.normalize();
 			}

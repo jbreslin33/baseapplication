@@ -240,7 +240,7 @@ public float    getDegreesToSomething(Vector3D something                       )
     // convert to degrees
     //Real degreesToSomething = toSomething.getYaw().valueDegrees();
 	float degreesToSomething = toSomething.toAngleAxis(v);
-	System.out.println("d:" + degreesToSomething);
+//	System.out.println("d:" + degreesToSomething);
 	return degreesToSomething;
 	//Transform transformGhost = getSceneNode().getWorldTransform();
 	//Quaternion quaternionThis = transform.getRotation();

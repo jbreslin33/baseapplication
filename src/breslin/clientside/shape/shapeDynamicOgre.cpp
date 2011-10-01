@@ -180,7 +180,8 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 }
 
 //1 world, 2 local
-
+//this is what i would like to simplify as it's what calls getRotationTo and I believe i am
+//getting valid numbers into the function
 float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 {
     //calculate how far off we are from some vector
