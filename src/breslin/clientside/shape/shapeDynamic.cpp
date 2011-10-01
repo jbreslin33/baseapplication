@@ -188,7 +188,7 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 		//LogString("r:x");
 		mServerFrame->mRotOld->x = mServerFrame->mRot->x;
 		mServerFrame->mRot->x = mes->ReadFloat();
-		LogString("x:%f",mServerFrame->mRot->x);
+		//LogString("x:%f",mServerFrame->mRot->x);
 	}
 
 	if(flags & mParser->mCommandRotationZ)
@@ -196,7 +196,7 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 		//LogString("r:y");
 		mServerFrame->mRotOld->z = mServerFrame->mRot->z;
 		mServerFrame->mRot->z = mes->ReadFloat();
-		LogString("z:%f",mServerFrame->mRot->z);
+		//LogString("z:%f",mServerFrame->mRot->z);
 	}
 
 	//milliseconds
