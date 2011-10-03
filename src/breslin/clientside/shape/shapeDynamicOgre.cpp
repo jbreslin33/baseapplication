@@ -203,6 +203,7 @@ float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 
     // convert to degrees
     Real degreesToSomething = toSomething.getYaw().valueDegrees();
+	LogString("D:%f",degreesToSomething);
 
 	return degreesToSomething;
 }

@@ -237,8 +237,11 @@ public float    getDegreesToSomething(Vector3D something                       )
 	Quaternion toSomething = orientation.getRotationTo(something,fallback);
 	System.out.println("y:" + toSomething.getY());
 
-	float degreesToSomething = toSomething.toAngleAxis(vector3f);
-	return degreesToSomething;
+	double rads = toSomething.toAngleAxis(vector3f);
+	double degs = Math.toDegrees(rads);
+
+	System.out.println("D:" + degs);
+	return (float)degs;
 
 }
 
