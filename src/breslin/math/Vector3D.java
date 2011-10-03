@@ -142,6 +142,7 @@ public Quaternion getRotationTo(Vector3D dest, Vector3D fallbackAxis)
 
             //Vector3 v1 = dest;
             Vector3D v1 = new Vector3D();
+            v1.copyValuesFrom(dest);
 
             v0.normalise();
             v1.normalise();
@@ -188,7 +189,7 @@ public Quaternion getRotationTo(Vector3D dest, Vector3D fallbackAxis)
 			float w = s * 0.5f;
 
 			//System.out.println("x:" + x);
-		//	System.out.println("y:" + y);
+		///	System.out.println("y:" + y);
 		//	System.out.println("z:" + z);
 		//	System.out.println("w:" + w);
 			q.set(x,y,z,w);
