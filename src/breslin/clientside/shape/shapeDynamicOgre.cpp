@@ -184,6 +184,36 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 //getting valid numbers into the function
 float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 {
+
+	//mCommandToRunOnShape->mRotOld->x;
+	//angleBetween
+
+	Vector3* something = new Vector3();
+
+
+
+
+	Vector3 thisRotation;
+	thisRotation.x = mCommandToRunOnShape->mRotOld->x;
+	thisRotation.y = mCommandToRunOnShape->mRotOld->y;
+	thisRotation.z = mCommandToRunOnShape->mRotOld->z;
+	
+	float f = (float)converToVector3(vectorOfSomething).angleBetween(thisRotation);
+	LogString("angle:%f",f);
+	/*
+	Vector3* x = new Vector3();
+	Vector3* y = new Vector3();
+	Vector3* z = new Vector3();
+
+	z->x = vectorOfSomething->x;
+	z->y = vectorOfSomething->y;
+	z->z = vectorOfSomething->z;
+	
+	
+	Quaternion a = new Quaternion(x,y,z);
+	*/
+	/*
+
     //calculate how far off we are from some vector
 	Vector3 v;
 	v.x = 0;
@@ -195,7 +225,9 @@ float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
     Real degreesToSomething = toSomething.getYaw().valueDegrees();
 
 	return degreesToSomething;
-}
+*/
+	return f;
+	}
 
 void ShapeDynamicOgre::translate(Vector3D* translateVector, int perspective)
 {

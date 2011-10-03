@@ -1,4 +1,6 @@
 #include "vector3D.h"
+
+
 #include <math.h>
 
 Vector3D::Vector3D()
