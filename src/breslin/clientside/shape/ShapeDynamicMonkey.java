@@ -215,9 +215,9 @@ public void setVisible (boolean visible                             )
 //check position
 public float    getDegreesToSomething(Vector3D something                       )
 {
-	//System.out.println("x:" + something.x);
-	//System.out.println("y:" + something.y);
-	//System.out.println("z:" + something.z);
+	System.out.println("x:" + something.x);
+	System.out.println("y:" + something.y);
+	System.out.println("z:" + something.z);
    //calculate how far off we are from some vector
 	Vector3D fallback = new Vector3D();
 	fallback.x = 0;

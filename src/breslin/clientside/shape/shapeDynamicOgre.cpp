@@ -185,11 +185,11 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 {
     //calculate how far off we are from some vector
-	Vector3 v;
-	v.x = 0;
-	v.y = 1;
-	v.z = 0;
-	Quaternion toSomething = getSceneNode()->getOrientation().zAxis().getRotationTo(converToVector3(vectorOfSomething),v);
+	Vector3 fallback;
+	fallback.x = 0;
+	fallback.y = 1;
+	fallback.z = 0;
+	Quaternion toSomething = getSceneNode()->getOrientation().zAxis().getRotationTo(converToVector3(vectorOfSomething),fallback);
 
     // convert to degrees
     Real degreesToSomething = toSomething.getYaw().valueDegrees();
