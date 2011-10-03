@@ -212,57 +212,34 @@ public void setVisible (boolean visible                             )
 	}
 }
 
-//check position
+//calculate how far off we are from some vector
 public float    getDegreesToSomething(Vector3D something                       )
 {
-	System.out.println("x:" + something.x);
-	System.out.println("y:" + something.y);
-	System.out.println("z:" + something.z);
-   //calculate how far off we are from some vector
+
+	//fallback
 	Vector3D fallback = new Vector3D();
 	fallback.x = 0;
 	fallback.y = 1;
 	fallback.z = 0;
 
-	Vector3f v = new Vector3f(0,1,0);
-
 	Transform worldTransform = mSceneNode.getWorldTransform();
-	Quaternion rotation = worldTransform.getRotation();
- 	Vector3f f = rotation.getRotationColumn(0);
- 	Vector3D from = new Vector3D();
- 	from.x = f.x;
- 	from.y = f.y;
- 	from.z = f.z;
+	Quaternion quaternion = worldTransform.getRotation();
+ 	Vector3f vector3f = quaternion.getRotationColumn(0);
+ 	Vector3D orientation = new Vector3D();
+ 	orientation.x = vector3f.x;
+ 	orientation.y = vector3f.y;
+ 	orientation.z = vector3f.z;
 
+ 	//System.out.println("x:" + orientation.x);
+ //	System.out.println("y:" + orientation.y);
+ //	System.out.println("z:" + orientation.z);
 
-	//Quaternion toSomething = getSceneNode().getOrientation().zAxis().getRotationTo(converToVector3(something),v);
-	Quaternion toSomething = from.getRotationTo(something,fallback);
-    // convert to degrees
-    //Real degreesToSomething = toSomething.getYaw().valueDegrees();
-	float degreesToSomething = toSomething.toAngleAxis(v);
-//	System.out.println("d:" + degreesToSomething);
+	Quaternion toSomething = orientation.getRotationTo(something,fallback);
+	System.out.println("y:" + toSomething.getY());
+
+	float degreesToSomething = toSomething.toAngleAxis(vector3f);
 	return degreesToSomething;
-	//Transform transformGhost = getSceneNode().getWorldTransform();
-	//Quaternion quaternionThis = transform.getRotation();
 
-
-
-
-/*
-	Vector3f vector3fA = new Vector3f();
-
-	Vector3f vector3fB = new Vector3f();
-	vector3fB.x = (float)something.x;
-	vector3fB.y = (float)something.y;
-	vector3fB.z = (float)something.z;
-
-	return vector3fA.dot(vector3fB);
-*/
-
-
-	//return degreesToServer;
-
-//return 0.0f;
 }
 
 public Vector3D getPosition          (                                         )

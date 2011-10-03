@@ -179,17 +179,27 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 	}
 }
 
-//1 world, 2 local
-//this is what i would like to simplify as it's what calls getRotationTo and I believe i am
-//getting valid numbers into the function
+//calculate how far off we are from some vector
 float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 {
-    //calculate how far off we are from some vector
+	//fallback
 	Vector3 fallback;
 	fallback.x = 0;
 	fallback.y = 1;
 	fallback.z = 0;
-	Quaternion toSomething = getSceneNode()->getOrientation().zAxis().getRotationTo(converToVector3(vectorOfSomething),fallback);
+
+	//get the orientation of shape in the z axis
+	Vector3 orientation;
+	orientation = getSceneNode()->getOrientation().zAxis();
+	//LogString("x:%f",orientation.x);
+	//LogString("y:%f",orientation.y);
+	//LogString("z:%f",orientation.z);
+
+	//get a quaternion that is the difference between 2 vectors
+	Quaternion toSomething = orientation.getRotationTo(converToVector3(vectorOfSomething),fallback);
+	//LogString("x:%f",toSomething.x);
+	LogString("y:%f",toSomething.y);
+	//LogString("z:%f",toSomething.z);
 
     // convert to degrees
     Real degreesToSomething = toSomething.getYaw().valueDegrees();
