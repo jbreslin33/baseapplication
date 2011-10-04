@@ -169,9 +169,9 @@ public void yaw        (float amountToYaw, boolean converToDegree   )
 //	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
 
  //Quaternion rot = localTransform.getRotation();
- Transform worldTransform = mSceneNode.getWorldTransform();
- Quaternion rotation = worldTransform.getRotation();
- Vector3f vector = rotation.getRotationColumn(0);
+// Transform worldTransform = mSceneNode.getWorldTransform();
+// Quaternion rotation = worldTransform.getRotation();
+// Vector3f vector = rotation.getRotationColumn(0);
 
 
 }
@@ -235,14 +235,20 @@ public float    getDegreesToSomething(Vector3D something                       )
  //	System.out.println("z:" + orientation.z);
 
 	Quaternion toSomething = orientation.getRotationTo(something,fallback);
-	System.out.println("y:" + toSomething.getY());
+	//System.out.println("y:" + toSomething.getY());
 
+	/*
 	double rads = toSomething.toAngleAxis(vector3f);
+	System.out.println("rads:" + rads);
 	double degs = Math.toDegrees(rads);
 
-	System.out.println("D:" + degs);
-	return (float)degs;
+	//System.out.println("D:" + degs);
+	return (float)rads;
+*/
 
+   Vector3f axis = new Vector3f();
+        float angle = toSomething.toAngleAxis(axis);
+return angle;
 }
 
 public Vector3D getPosition          (                                         )

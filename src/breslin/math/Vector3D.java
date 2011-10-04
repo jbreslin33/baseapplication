@@ -130,73 +130,53 @@ public Vector3D crossProduct(Vector3D b)
       // Quaternion getRotationTo(const Vector3& dest,
 		//	const Vector3& fallbackAxis = Vector3::ZERO) const
 public Quaternion getRotationTo(Vector3D dest, Vector3D fallbackAxis)
-      {
+{
 
-            // Based on Stan Melax's article in Game Programming Gems
-            Quaternion q = new Quaternion();
+	// Based on Stan Melax's article in Game Programming Gems
+    Quaternion q = new Quaternion();
 
-            // Copy, since cannot modify local
-            //Vector3 v0 = *this;
-            Vector3D v0 = new Vector3D();
-            v0.copyValuesFrom(this);
+    Vector3D v0 = new Vector3D();
+	v0.copyValuesFrom(this);
 
-            //Vector3 v1 = dest;
-            Vector3D v1 = new Vector3D();
-            v1.copyValuesFrom(dest);
+	Vector3D v1 = new Vector3D();
+    v1.copyValuesFrom(dest);
+    v0.normalise();
+    v1.normalise();
 
-            v0.normalise();
-            v1.normalise();
+	float d = v0.dot(v1);
 
-//            Real d = v0.dotProduct(v1);
-			float d = v0.dot(v1);
+    // If dot == 1, vectors are the same
+    if (d >= 1.0f)
+    {
+		System.out.println("q");
+		Quaternion qIdentity = new Quaternion();
+        return qIdentity;
+    }
 
-            // If dot == 1, vectors are the same
-            if (d >= 1.0f)
-            {
-				Quaternion qIdentity = new Quaternion();
-                return qIdentity;
-            }
+	if (d < (1e-6f - 1.0f))
+	{
+		// rotate 180 degrees about the fallback axis
+		System.out.println("same");
+		q.fromAngleAxis((float)java.lang.Math.toRadians(Math.PI),fallbackAxis.getVector3f()); //java.lang.Math.PI;
+	}
+	else
+	{
 
-			if (d < (1e-6f - 1.0f))
-			{
-				// rotate 180 degrees about the fallback axis
-				q.fromAngleAxis((float)java.lang.Math.toRadians(Math.PI),fallbackAxis.getVector3f()); //java.lang.Math.PI;
+   		float s = (float)java.lang.Math.sqrt((1 + d) * 2);
 
-				//q.FromAngleAxis(Radian(Math::PI), fallbackAxis);
+		float invs = 1 / s;
 
-			}
+		Vector3D c = v0.crossProduct(v1);
 
-			else
-			{
-            //    Real s = Math::Sqrt( (1+d)*2 );
-	        	float s = (float)java.lang.Math.sqrt((1 + d) * 2);
+		float x = c.x * invs;
+		float y = c.y * invs;
+		float z = c.z * invs;
+		float w = s * 0.5f;
 
-	        	//Real invs = 1 / s;
-				float invs = 1 / s;
-
-//				Vector3 c = v0.crossProduct(v1);
-				Vector3D c = v0.crossProduct(v1);
-/*
-    	        q.x = c.x * invs;
-        	    q.y = c.y * invs;
-            	q.z = c.z * invs;
-            	q.w = s * 0.5f;
-				q.normalise();
-*/
-			float x = c.x * invs;
-			float y = c.y * invs;
-			float z = c.z * invs;
-			float w = s * 0.5f;
-
-			//System.out.println("x:" + x);
-		///	System.out.println("y:" + y);
-		//	System.out.println("z:" + z);
-		//	System.out.println("w:" + w);
-			q.set(x,y,z,w);
-			q.normalize();
-			}
-
-			return q;
+		q.set(x,y,z,w);
+		q.normalize();
+	}
+	return q;
 }
 
 
