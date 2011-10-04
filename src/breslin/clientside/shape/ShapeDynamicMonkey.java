@@ -248,7 +248,10 @@ public float    getDegreesToSomething(Vector3D something                       )
 
    Vector3f axis = new Vector3f();
         float angle = toSomething.toAngleAxis(axis);
-return angle;
+        System.out.println("angle:" + angle);
+        double degs = Math.toDegrees(angle);
+        System.out.println("degs:" + degs);
+return (float)degs;
 }
 
 public Vector3D getPosition          (                                         )
