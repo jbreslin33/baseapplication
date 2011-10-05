@@ -161,6 +161,10 @@ public void processTick()
 	}
 
 	//run billboard here for now.
+
+	System.out.println("x:" + mServerFrame.mRot.x);
+	System.out.println("z:" + mServerFrame.mRot.z);
+
 	drawTitle();
 }
 
