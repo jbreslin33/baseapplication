@@ -48,8 +48,9 @@ public void enter(AbilityRotation abilityRotation)
 public void execute(AbilityRotation abilityRotation)
 {
 	abilityRotation.calculateServerRotationSpeed();
-	abilityRotation.mShapeDynamic.mGhost.yaw(abilityRotation.mServerRotSpeed,true);
-	//System.out.println("speed:" + abilityRotation.mServerRotSpeed);
+	System.out.println("mServerRotSpeed:" + abilityRotation.mServerRotSpeed);
+//	abilityRotation.mShapeDynamic.mGhost.yaw(abilityRotation.mServerRotSpeed,true);
+
 }
 
 public void exit(AbilityRotation abilityRotation)

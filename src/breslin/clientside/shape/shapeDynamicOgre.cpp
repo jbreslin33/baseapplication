@@ -191,9 +191,9 @@ float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 	//get the orientation of shape in the z axis
 	Vector3 orientation;
 	orientation = getSceneNode()->getOrientation().zAxis();
-	LogString("x:%f",orientation.x);
-	LogString("y:%f",orientation.y);
-	LogString("z:%f",orientation.z);
+	//LogString("x:%f",orientation.x);
+	//LogString("y:%f",orientation.y);
+	//LogString("z:%f",orientation.z);
 
 	//get a quaternion that is the difference between 2 vectors
 	Quaternion toSomething = orientation.getRotationTo(converToVector3(vectorOfSomething),fallback);

@@ -156,8 +156,8 @@ public Quaternion getRotationTo(Vector3D dest, Vector3D fallbackAxis)
 	if (d < (1e-6f - 1.0f))
 	{
 		// rotate 180 degrees about the fallback axis
-		System.out.println("same");
-		q.fromAngleAxis((float)java.lang.Math.toRadians(Math.PI),fallbackAxis.getVector3f()); //java.lang.Math.PI;
+		//System.out.println("same");
+		//q.fromAngleAxis((float)java.lang.Math.toRadians(Math.PI),fallbackAxis.getVector3f()); //java.lang.Math.PI;
 	}
 	else
 	{

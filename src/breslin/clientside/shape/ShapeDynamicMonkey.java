@@ -162,10 +162,18 @@ public void scale(Vector3D scaleVector)
 //movement
 public void yaw        (float amountToYaw, boolean converToDegree   )
 {
+		double rads = Math.toRadians(amountToYaw);
+
+/* This quaternion stores a 180 degree rolling rotation */
+Quaternion yawQuat = new Quaternion();
+yawQuat.fromAngleAxis( (float)rads , new Vector3f(0,1,0) );
+/* The rotation is applied: The object rolls by 180 degrees. */
+getSceneNode().setLocalRotation( yawQuat );
+
 	//System.out.println("a:" + amountToYaw);
-	double degs = Math.toRadians(amountToYaw);
-	getSceneNode().rotate(0,(float)degs,0);
-	System.out.println("yaw:" + degs);
+	//double degs = Math.toRadians(amountToYaw);
+//	getSceneNode().rotate(0,(float)degs,0);
+//	System.out.println("yaw:" + degs);
 	//getSceneNode().rotate(0,.1f,0);
 
 //Ogre::Quaternion orientation = getSceneNode()->getOrientation();

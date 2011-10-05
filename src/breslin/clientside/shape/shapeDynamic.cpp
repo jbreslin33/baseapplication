@@ -121,6 +121,9 @@ void ShapeDynamic::processTick()
 	{
 		mAbilityVector.at(i)->processTick();
 	}
+	
+	LogString("x:%f",mServerFrame->mRot->x);
+	LogString("z:%f",mServerFrame->mRot->z);
 
 	//run billboard here for now.
 	drawTitle();

@@ -57,13 +57,15 @@ public void enter(AbilityRotation abilityRotation)
 public void execute(AbilityRotation abilityRotation)
 {
 	// are we too far off you need to change to catchup state
-    if(java.lang.Math.abs(abilityRotation.mDegreesToServer) > abilityRotation.mRotInterpLimitHigh)
+
+    /*if(java.lang.Math.abs(abilityRotation.mDegreesToServer) > abilityRotation.mRotInterpLimitHigh)
     {
 		abilityRotation.mProcessTickStateMachine.changeState(Catchup_ProcessTick_Rotation.getAbilityRotationState());
 		return;
     }
     else
     {
+		*/
          if (abilityRotation.mServerRotSpeed == 0.0)
          {
 			abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed = 0.0f;
@@ -80,7 +82,7 @@ public void execute(AbilityRotation abilityRotation)
 				abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed = -abilityRotation.mTurnSpeed;
             }
 		}
-	}
+	//}
 }
 
 public void exit(AbilityRotation abilityRotation)

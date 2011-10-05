@@ -132,10 +132,6 @@ void  calculateServerRotationSpeed()
     //calculate server rotation from last tick to new one
 	mServerRotSpeed = mShapeDynamic.mGhost.getDegreesToSomething(mServerRotNew);
 
-    if(java.lang.Math.abs(mServerRotSpeed) < 0)
-    {
-		mServerRotSpeed = 0.0f;
-    }
 }
 
 }
