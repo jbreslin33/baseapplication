@@ -162,8 +162,8 @@ public void processTick()
 
 	//run billboard here for now.
 
-	System.out.println("x:" + mServerFrame.mRot.x);
-	System.out.println("z:" + mServerFrame.mRot.z);
+//	System.out.println("x:" + mServerFrame.mRot.x);
+//	System.out.println("z:" + mServerFrame.mRot.z);
 
 	drawTitle();
 }
@@ -327,7 +327,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		//covert java int to float
 		float b = Float.intBitsToFloat(a);
 		mServerFrame.mRot.x = b;
-//		System.out.println("x:" + mServerFrame.mRot.x);
+		System.out.println("x:" + mServerFrame.mRot.x);
 	}
 
 	i = flags & mParser.mCommandRotationZ;
