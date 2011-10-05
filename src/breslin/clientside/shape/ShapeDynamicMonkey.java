@@ -164,9 +164,9 @@ public void yaw        (float amountToYaw, boolean converToDegree   )
 {
 	//System.out.println("a:" + amountToYaw);
 	double degs = Math.toRadians(amountToYaw);
-	//getSceneNode().rotate(0,(float)degs,0);
+	getSceneNode().rotate(0,(float)degs,0);
 	System.out.println("yaw:" + degs);
-	getSceneNode().rotate(0,.1f,0);
+	//getSceneNode().rotate(0,.1f,0);
 
 //Ogre::Quaternion orientation = getSceneNode()->getOrientation();
 //	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;

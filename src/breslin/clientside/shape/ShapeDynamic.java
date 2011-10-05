@@ -365,7 +365,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		mCommandToRunOnShape.mMilliseconds = mServerFrame.mMilliseconds;
 	}
 
-set rotation direct from here using yaw....
+//set rotation direct from here using yaw....
 	if (mServerFrame.mMilliseconds != 0)
 	{
 		//position
