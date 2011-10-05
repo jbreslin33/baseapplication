@@ -1,6 +1,10 @@
 #ifndef VECTOR3D_H
 #define VECTOR3D_H
 
+//Ogre headers
+#include "Ogre.h"
+using namespace Ogre;
+
 class Vector3D
 {
 

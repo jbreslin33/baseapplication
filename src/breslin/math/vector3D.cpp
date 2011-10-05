@@ -79,4 +79,3 @@ void Vector3D::copyValuesFrom(Vector3D* copyFrom)
 	y = copyFrom->y;
 	z = copyFrom->z;
 }
-

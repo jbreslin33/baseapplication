@@ -140,7 +140,7 @@ public void createShape()
 
 	if (mIsGhost)
 	{
-		mSceneNode.setCullHint(CullHint.Always);
+		//mSceneNode.setCullHint(CullHint.Always);
 	}
 
 
@@ -163,7 +163,10 @@ public void scale(Vector3D scaleVector)
 public void yaw        (float amountToYaw, boolean converToDegree   )
 {
 	//System.out.println("a:" + amountToYaw);
-	getSceneNode().rotate(0,amountToYaw,0);
+	double degs = Math.toRadians(amountToYaw);
+	//getSceneNode().rotate(0,(float)degs,0);
+	System.out.println("yaw:" + degs);
+	getSceneNode().rotate(0,.1f,0);
 
 //Ogre::Quaternion orientation = getSceneNode()->getOrientation();
 //	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
@@ -224,7 +227,7 @@ public float    getDegreesToSomething(Vector3D something                       )
 
 	Transform worldTransform = mSceneNode.getWorldTransform();
 	Quaternion quaternion = worldTransform.getRotation();
- 	Vector3f vector3f = quaternion.getRotationColumn(2);
+ 	Vector3f vector3f = quaternion.getRotationColumn(0);
  	Vector3D orientation = new Vector3D();
  	orientation.x = vector3f.x;
  	orientation.y = vector3f.y;
@@ -237,14 +240,14 @@ public float    getDegreesToSomething(Vector3D something                       )
 	Quaternion toSomething = orientation.getRotationTo(something,fallback);
 	//System.out.println("y:" + toSomething.getY());
 
-	/*
+
 	double rads = toSomething.toAngleAxis(vector3f);
-	System.out.println("rads:" + rads);
+//	System.out.println("rads:" + rads);
 	double degs = Math.toDegrees(rads);
 
-	//System.out.println("D:" + degs);
-	return (float)rads;
-*/
+//	System.out.println("D:" + degs);
+	return (float)degs;
+/*
 
    Vector3f axis = new Vector3f();
         float angle = toSomething.toAngleAxis(axis);
@@ -252,6 +255,32 @@ public float    getDegreesToSomething(Vector3D something                       )
         double degs = Math.toDegrees(angle);
         System.out.println("degs:" + degs);
 return (float)degs;
+*/
+/*
+Transform worldTransform = mSceneNode.getWorldTransform();
+	Quaternion quaternion = worldTransform.getRotation();
+ 	Vector3f thisVector = quaternion.getRotationColumn(0);
+ 	//Vector3D orientation = new Vector3D();
+
+something.normalise();
+
+Vector3f v1 = new Vector3f();
+v1.x = something.x;
+v1.y = something.y;
+v1.z = something.z;
+//http://www.justin.tv/bravescast4#/w/1857247760/7
+
+
+Vector3f v2 = new  Vector3f();
+
+v2 = thisVector.normalize();
+
+float f = v2.angleBetween(v1);
+ System.out.println("f:" + f);
+ double degs = Math.toDegrees(f);
+ return (float)degs;
+ //return 0.0f;
+*/
 }
 
 public Vector3D getPosition          (                                         )

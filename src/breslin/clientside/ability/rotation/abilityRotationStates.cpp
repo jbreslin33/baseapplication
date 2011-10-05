@@ -1,6 +1,9 @@
 //header
 #include "abilityRotationStates.h"
 
+//log
+#include "../../tdreamsock/dreamSockLog.h"
+
 //state machine
 #include "abilityRotationStateMachine.h"
 
@@ -39,6 +42,7 @@ void Global_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	abilityRotation->calculateServerRotationSpeed();
 	abilityRotation->mShapeDynamic->mGhost->yaw(abilityRotation->mServerRotSpeed,true);
+	//LogString("speed:%f",abilityRotation->mServerRotSpeed);
 }
 void Global_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
