@@ -235,7 +235,7 @@ public float getDegreesToSomething(Vector3D something                       )
 
 	Transform worldTransform = mSceneNode.getWorldTransform();
 	Quaternion quaternion = worldTransform.getRotation();
- 	Vector3f vector3f = quaternion.getRotationColumn(0);
+ 	Vector3f vector3f = quaternion.getRotationColumn(2);
  	Vector3D orientation = new Vector3D();
  	orientation.x = vector3f.x;
  	orientation.y = vector3f.y;
