@@ -54,15 +54,12 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, b
 	{
 		//create a ghost for this shape
 		mGhost = new ShapeDynamicOgre(mGameOgre,byteBuffer,true);
-		mGhost->setVisible(false);
+		mGhost->setVisible(true);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
 		mGame->mShapeVector.push_back(this);
 		mGame->mShapeGhostVector.push_back(mGhost);	
 	}
-	
-
-
 }
 
 ShapeDynamicOgre::~ShapeDynamicOgre()
@@ -182,37 +179,20 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 //calculate how far off we are from some vector
 float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 {
-	//fallback
-	Vector3 fallback;
-	fallback.x = 0;
-	fallback.y = 1;
-	fallback.z = 0;
-
 	//get the orientation of shape in the z axis
 	Vector3 orientation;
 	orientation = getSceneNode()->getOrientation().zAxis();
-	/*
-	LogString("x:%f",orientation.x);
-	LogString("y:%f",orientation.y);
-	LogString("z:%f",orientation.z);
-*/
-	//get a quaternion that is the difference between 2 vectors
-	//convert
-	//Quaternion toSomething = orientation.getRotationTo(converToVector3(vectorOfSomething),fallback);
+	
 	Vector3D* orientation3D = new Vector3D();
 	orientation3D->x = orientation.x;
 	orientation3D->y = orientation.y;
 	orientation3D->z = orientation.z;
 	
 	Quaternion* toSomething = getRotationTo(orientation3D,vectorOfSomething);
-	//LogString("x:%f",toSomething.x);
-	//LogString("y:%f",toSomething.y);
-	//LogString("z:%f",toSomething.z);
-
+	
     // convert to degrees
     Real degreesToSomething = toSomething->getYaw().valueDegrees();
-	//LogString("D:%f",degreesToSomething);
-
+	
 	return degreesToSomething;
 }
 
@@ -310,10 +290,11 @@ Quaternion* ShapeDynamicOgre::getRotationTo(Vector3D* source, Vector3D* dest)
 	if (d < (1e-6f - 1.0f))
 	{
 		// rotate 180 degrees about the fallback axis
-		Vector3 fb;
-		fb.x = fallbackAxis->x;
-		fb.y = fallbackAxis->y;
-		fb.z = fallbackAxis->z;
+		//Vector3 fb;
+		//fb.x = fallbackAxis->x;
+		//fb.y = fallbackAxis->y;
+		//fb.z = fallbackAxis->z;
+		//quaternion->FromAngleAxis(Radian(Math::PI), fb);
 	}
 	else
 	{

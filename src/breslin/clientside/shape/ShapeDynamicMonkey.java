@@ -162,41 +162,23 @@ public void scale(Vector3D scaleVector)
 //movement
 public void yaw        (float amountToYaw, boolean converToDegree   )
 {
-		double rads = Math.toRadians(amountToYaw);
+	double rads = Math.toRadians(amountToYaw);
 
-/* This quaternion stores a 180 degree rolling rotation */
-Quaternion yawQuat = new Quaternion();
-yawQuat.fromAngleAxis( (float)rads , new Vector3f(0,1,0) );
-/* The rotation is applied: The object rolls by 180 degrees. */
-getSceneNode().setLocalRotation( yawQuat );
-
-	//System.out.println("a:" + amountToYaw);
-	//double degs = Math.toRadians(amountToYaw);
-//	getSceneNode().rotate(0,(float)degs,0);
-//	System.out.println("yaw:" + degs);
-	//getSceneNode().rotate(0,.1f,0);
-
-//Ogre::Quaternion orientation = getSceneNode()->getOrientation();
-//	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
-
- //Quaternion rot = localTransform.getRotation();
-// Transform worldTransform = mSceneNode.getWorldTransform();
-// Quaternion rotation = worldTransform.getRotation();
-// Vector3f vector = rotation.getRotationColumn(0);
-
-
+	/* This quaternion stores a 180 degree rolling rotation */
+	Quaternion yawQuat = new Quaternion();
+	yawQuat.fromAngleAxis( (float)rads , new Vector3f(0,1,0) );
+	/* The rotation is applied: The object rolls by 180 degrees. */
+	getSceneNode().setLocalRotation( yawQuat );
 }
 
 public void translate  (Vector3D translateVector, int perspective)
 {
 	if (perspective == 1)
 	{
-		//getSceneNode()->translate(converToVector3(translateVector), Ogre::Node::TS_WORLD);
 		getSceneNode().move((float)translateVector.x,(float)translateVector.y,(float)translateVector.z);
 	}
 	if (perspective == 2)
 	{
-		//getSceneNode()->translate(converToVector3(translateVector), Ogre::Node::TS_LOCAL);
 		getSceneNode().move((float)translateVector.x,(float)translateVector.y,(float)translateVector.z);
 	}
 }
@@ -226,7 +208,6 @@ public void setVisible (boolean visible                             )
 //calculate how far off we are from some vector
 public float getDegreesToSomething(Vector3D something                       )
 {
-
 	//fallback
 	Vector3D fallback = new Vector3D();
 	fallback.x = 0;
@@ -241,54 +222,14 @@ public float getDegreesToSomething(Vector3D something                       )
  	orientation.y = vector3f.y;
  	orientation.z = vector3f.z;
 
- 	System.out.println("x:" + orientation.x);
-  	System.out.println("y:" + orientation.y);
- 	System.out.println("z:" + orientation.z);
-
-	Quaternion toSomething = orientation.getRotationTo(something,fallback);
-	//System.out.println("y:" + toSomething.getY());
-
+ 	Quaternion toSomething = orientation.getRotationTo(something,fallback);
 
 	double rads = toSomething.toAngleAxis(vector3f);
-//	System.out.println("rads:" + rads);
+
 	double degs = Math.toDegrees(rads);
 
-//	System.out.println("D:" + degs);
 	return (float)degs;
-/*
 
-   Vector3f axis = new Vector3f();
-        float angle = toSomething.toAngleAxis(axis);
-        System.out.println("angle:" + angle);
-        double degs = Math.toDegrees(angle);
-        System.out.println("degs:" + degs);
-return (float)degs;
-*/
-/*
-Transform worldTransform = mSceneNode.getWorldTransform();
-	Quaternion quaternion = worldTransform.getRotation();
- 	Vector3f thisVector = quaternion.getRotationColumn(0);
- 	//Vector3D orientation = new Vector3D();
-
-something.normalise();
-
-Vector3f v1 = new Vector3f();
-v1.x = something.x;
-v1.y = something.y;
-v1.z = something.z;
-//http://www.justin.tv/bravescast4#/w/1857247760/7
-
-
-Vector3f v2 = new  Vector3f();
-
-v2 = thisVector.normalize();
-
-float f = v2.angleBetween(v1);
- System.out.println("f:" + f);
- double degs = Math.toDegrees(f);
- return (float)degs;
- //return 0.0f;
-*/
 }
 
 public Vector3D getPosition          (                                         )
@@ -356,6 +297,56 @@ public String getMeshString(int meshCode)
 		return "art/models/sinbad/Sinbad.mesh.xml";
 	}
 	return "cube.mesh";
+}
+
+
+Quaternion getRotationTo(Vector3D source, Vector3D dest)
+{
+	Quaternion quaternion = new Quaternion();
+
+	Vector3D fallbackAxis = new Vector3D(0.0f,1.0f,0.0f);
+
+	Vector3D v0 = new Vector3D();
+	Vector3D v1 = new Vector3D();
+	v0.copyValuesFrom(source);
+	v1.copyValuesFrom(dest);
+
+	v0.normalise();
+	v1.normalise();
+
+	//Real d = v0.dotProduct(v1);
+	float d = v0.dot(v1);
+
+    // If dot == 1, vectors are the same
+    if (d >= 1.0f)
+    {
+		Quaternion quaternionIdentity = new Quaternion(0.0f,0.0f,0.0f,1.0f);
+		return quaternionIdentity;
+    }
+
+	if (d < (1e-6f - 1.0f))
+	{
+		// rotate 180 degrees about the fallback axis
+		//Vector3 fb;
+	//	fb.x = fallbackAxis.x;
+	//	fb.y = fallbackAxis.y;
+	//	fb.z = fallbackAxis.z;
+		//quaternion.FromAngleAxis(Radian(Math::PI), fb);
+	}
+	else
+	{
+		float s = java.lang.Math.sqrt( (1+d)*2 );
+        float invs = 1 / s;
+
+		Vector3D c = v0.crossProduct(v1);
+
+   	    quaternion.x = c.x * invs;
+       	quaternion.y = c.y * invs;
+        quaternion.z = c.z * invs;
+        quaternion.w = s * 0.5f;
+		quaternion.normalise();
+	}
+return quaternion;
 }
 
 }

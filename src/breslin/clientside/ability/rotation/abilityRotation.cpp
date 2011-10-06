@@ -92,37 +92,13 @@ void AbilityRotation::calculateServerRotationSpeed()  //rot
     mServerRotNew->x = mShapeDynamic->mServerFrame->mRot->x;
 	mServerRotNew->y = 0;
     mServerRotNew->z = mShapeDynamic->mServerFrame->mRot->z;
-/*
-	LogString("oldX:%f",mServerRotOld->x);
-	LogString("oldY:%f",mServerRotOld->y);
-	LogString("oldZ:%f",mServerRotOld->z);
-
-	LogString("newX:%f",mServerRotNew->x);
-	LogString("newY:%f",mServerRotNew->y);
-	LogString("newZ:%f",mServerRotNew->z);
-*/	
 
     mServerRotNew->normalise();
     mServerRotOld->normalise();
-/*
-	LogString("oldX:%f",mServerRotOld->x);
-	LogString("oldY:%f",mServerRotOld->y);
-	LogString("oldZ:%f",mServerRotOld->z);
 
-	LogString("newX:%f",mServerRotNew->x);
-	LogString("newY:%f",mServerRotNew->y);
-	LogString("newZ:%f",mServerRotNew->z);
-*/
     //calculate how far off we are from server
 	mDegreesToServer = mShapeDynamic->getDegreesToSomething(mServerRotNew);
-	//LogString("mDegreesToServer:%f",mDegreesToServer);
+	
     //calculate server rotation from last tick to new one
 	mServerRotSpeed = mShapeDynamic->mGhost->getDegreesToSomething(mServerRotNew);
-	//LogString("mServerRotSpeed:%f",mServerRotSpeed);
-    /*
-	if(abs(mServerRotSpeed) < 0)
-    {
-		mServerRotSpeed = 0.0f;
-    }
-	*/
 }
