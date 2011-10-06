@@ -224,7 +224,7 @@ public void setVisible (boolean visible                             )
 }
 
 //calculate how far off we are from some vector
-public float    getDegreesToSomething(Vector3D something                       )
+public float getDegreesToSomething(Vector3D something                       )
 {
 
 	//fallback
@@ -241,9 +241,9 @@ public float    getDegreesToSomething(Vector3D something                       )
  	orientation.y = vector3f.y;
  	orientation.z = vector3f.z;
 
- 	//System.out.println("x:" + orientation.x);
- //	System.out.println("y:" + orientation.y);
- //	System.out.println("z:" + orientation.z);
+ 	System.out.println("x:" + orientation.x);
+  	System.out.println("y:" + orientation.y);
+ 	System.out.println("z:" + orientation.z);
 
 	Quaternion toSomething = orientation.getRotationTo(something,fallback);
 	//System.out.println("y:" + toSomething.getY());

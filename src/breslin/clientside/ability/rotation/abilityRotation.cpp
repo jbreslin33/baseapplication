@@ -115,10 +115,10 @@ void AbilityRotation::calculateServerRotationSpeed()  //rot
 
     //calculate how far off we are from server
 	mDegreesToServer = mShapeDynamic->getDegreesToSomething(mServerRotNew);
-
+	LogString("mDegreesToServer:%f",mDegreesToServer);
     //calculate server rotation from last tick to new one
 	mServerRotSpeed = mShapeDynamic->mGhost->getDegreesToSomething(mServerRotNew);
-	//LogString("getDegreesToSomething:%f",mServerRotSpeed);
+	LogString("mServerRotSpeed:%f",mServerRotSpeed);
     /*
 	if(abs(mServerRotSpeed) < 0)
     {

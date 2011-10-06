@@ -41,7 +41,6 @@ void Global_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Global_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	abilityRotation->calculateServerRotationSpeed();
-	LogString("mServerRotSpeed:%f",abilityRotation->mServerRotSpeed);
 	abilityRotation->mShapeDynamic->mGhost->yaw(abilityRotation->mServerRotSpeed,true);
 	
 }
