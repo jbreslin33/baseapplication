@@ -222,8 +222,8 @@ public float getDegreesToSomething(Vector3D something                       )
  	orientation.y = vector3f.y;
  	orientation.z = vector3f.z;
 
- 	Quaternion toSomething = orientation.getRotationTo(something,fallback);
-
+ 	//Quaternion toSomething = orientation.getRotationTo(something,fallback);
+	Quaternion toSomething = getRotationTo(orientation, something);
 	double rads = toSomething.toAngleAxis(vector3f);
 
 	double degs = Math.toDegrees(rads);
@@ -335,16 +335,17 @@ Quaternion getRotationTo(Vector3D source, Vector3D dest)
 	}
 	else
 	{
-		float s = java.lang.Math.sqrt( (1+d)*2 );
+		float s = (float)java.lang.Math.sqrt( (1+d)*2 );
         float invs = 1 / s;
 
 		Vector3D c = v0.crossProduct(v1);
 
-   	    quaternion.x = c.x * invs;
-       	quaternion.y = c.y * invs;
-        quaternion.z = c.z * invs;
-        quaternion.w = s * 0.5f;
-		quaternion.normalise();
+   	    float x = c.x * invs;
+        float y = c.y * invs;
+        float z = c.z * invs;
+        float w = s * 0.5f;
+		quaternion.set(x,y,z,w);
+		quaternion.normalize();
 	}
 return quaternion;
 }

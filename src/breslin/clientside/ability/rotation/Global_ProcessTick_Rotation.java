@@ -49,7 +49,7 @@ public void execute(AbilityRotation abilityRotation)
 {
 	abilityRotation.calculateServerRotationSpeed();
 	//System.out.println("mServerRotSpeed:" + abilityRotation.mServerRotSpeed);
-//	abilityRotation.mShapeDynamic.mGhost.yaw(abilityRotation.mServerRotSpeed,true);
+	abilityRotation.mShapeDynamic.mGhost.yaw(abilityRotation.mServerRotSpeed,true);
 
 }
 
