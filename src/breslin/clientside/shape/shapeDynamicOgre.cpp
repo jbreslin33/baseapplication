@@ -191,18 +191,26 @@ float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 	//get the orientation of shape in the z axis
 	Vector3 orientation;
 	orientation = getSceneNode()->getOrientation().zAxis();
+	/*
 	LogString("x:%f",orientation.x);
 	LogString("y:%f",orientation.y);
 	LogString("z:%f",orientation.z);
-
+*/
 	//get a quaternion that is the difference between 2 vectors
-	Quaternion toSomething = orientation.getRotationTo(converToVector3(vectorOfSomething),fallback);
+	//convert
+	//Quaternion toSomething = orientation.getRotationTo(converToVector3(vectorOfSomething),fallback);
+	Vector3D* orientation3D = new Vector3D();
+	orientation3D->x = orientation.x;
+	orientation3D->y = orientation.y;
+	orientation3D->z = orientation.z;
+	
+	Quaternion* toSomething = getRotationTo(orientation3D,vectorOfSomething);
 	//LogString("x:%f",toSomething.x);
 	//LogString("y:%f",toSomething.y);
 	//LogString("z:%f",toSomething.z);
 
     // convert to degrees
-    Real degreesToSomething = toSomething.getYaw().valueDegrees();
+    Real degreesToSomething = toSomething->getYaw().valueDegrees();
 	//LogString("D:%f",degreesToSomething);
 
 	return degreesToSomething;
@@ -273,4 +281,52 @@ void ShapeDynamicOgre::appendToTitle(int appendage)
 void ShapeDynamicOgre::clearTitle()
 {
 	mObjectTitleString.clear();
+}
+
+Quaternion* ShapeDynamicOgre::getRotationTo(Vector3D* source, Vector3D* dest)
+{
+	Quaternion* quaternion = new Quaternion();
+
+	Vector3D* fallbackAxis = new Vector3D(0.0f,1.0f,0.0f);
+
+	Vector3D* v0 = new Vector3D();
+	Vector3D* v1 = new Vector3D();
+	v0->copyValuesFrom(source);
+	v1->copyValuesFrom(dest);
+
+	v0->normalise();	
+	v1->normalise();
+
+	//Real d = v0.dotProduct(v1);
+	float d = v0->dot(v1);
+
+    // If dot == 1, vectors are the same
+    if (d >= 1.0f)
+    {
+		Quaternion* quaternionIdentity = new Quaternion(1.0,0.0,0.0,0.0);
+		return quaternionIdentity;
+    }
+			
+	if (d < (1e-6f - 1.0f))
+	{
+		// rotate 180 degrees about the fallback axis
+		Vector3 fb;
+		fb.x = fallbackAxis->x;
+		fb.y = fallbackAxis->y;
+		fb.z = fallbackAxis->z;
+	}
+	else
+	{
+		Real s = Math::Sqrt( (1+d)*2 );
+        Real invs = 1 / s;
+
+		Vector3D* c = v0->crossProduct(v1);
+
+   	    quaternion->x = c->x * invs;
+       	quaternion->y = c->y * invs;
+        quaternion->z = c->z * invs;
+        quaternion->w = s * 0.5f;
+		quaternion->normalise();
+	}
+return quaternion;
 }

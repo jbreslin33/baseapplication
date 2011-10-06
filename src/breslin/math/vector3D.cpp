@@ -10,6 +10,13 @@ Vector3D::Vector3D()
 	z = 0;
 }
 
+Vector3D::Vector3D(float x1, float y1, float z1)
+{
+	x = x1;
+	y = y1;
+	z = z1;
+}
+
 Vector3D::~Vector3D()
 {
 }
@@ -78,4 +85,23 @@ void Vector3D::copyValuesFrom(Vector3D* copyFrom)
 	x = copyFrom->x;
 	y = copyFrom->y;
 	z = copyFrom->z;
+}
+
+float Vector3D::dot(Vector3D* v2)
+{
+	float d = x * v2->x + y * v2->y + z * v2->z;
+	return d;
+}
+
+Vector3D* Vector3D::crossProduct(Vector3D* b)
+{
+	Vector3D* a = new Vector3D();
+	a->copyValuesFrom(this);
+
+	Vector3D* c = new Vector3D();
+	c->x = a->y * b->z - a->z * b->x;
+	c->y = a->z * b->x - a->x * b->z;
+	c->z = a->x * b->y - a->y * b->x;
+
+	return c;
 }

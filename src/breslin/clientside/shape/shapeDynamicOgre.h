@@ -88,6 +88,7 @@ Vector3D* getPosition          (                                         );
 
 //check rotation
 Vector3D* getRotation();
+Quaternion* getRotationTo(Vector3D* source, Vector3D* dest);
 
 //title
 void drawTitle    ();
