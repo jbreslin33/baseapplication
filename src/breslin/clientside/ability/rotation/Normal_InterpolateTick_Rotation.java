@@ -55,7 +55,7 @@ public void enter(AbilityRotation abilityRotation)
 public void execute(AbilityRotation abilityRotation)
 {
 	float rotSpeed = abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed * abilityRotation.mShapeDynamic.mGame.getRenderTime();
-	//abilityRotation.mShapeDynamic.yaw(rotSpeed, true);
+	abilityRotation.mShapeDynamic.yaw(rotSpeed, true);
 
 	if (abilityRotation.mServerRotSpeed == 0.0 && java.lang.Math.abs(abilityRotation.getDegreesToServer()) < abilityRotation.mRotInterpLimitLow)
     {

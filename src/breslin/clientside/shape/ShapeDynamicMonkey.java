@@ -13,7 +13,7 @@ import com.jme3.scene.Spatial.CullHint;
 import java.util.ArrayList;
 import java.nio.ByteBuffer;
 import java.lang.String;
-
+//import org.openmali.FastMath;
   // geometry
   import com.jme3.material.Material;
   import com.jme3.math.Vector3f;
@@ -142,9 +142,6 @@ public void createShape()
 	{
 		//mSceneNode.setCullHint(CullHint.Always);
 	}
-
-
-
 }
 
 //debugging
@@ -176,26 +173,20 @@ public void yaw        (float amount, boolean converToDegree   )
 	System.out.println("ddd");
 	*/
 
-
-	Quaternion currentRotation = getSceneNode().getLocalRotation();
-
+	//Quaternion currentRotation = getSceneNode().getLocalRotation();
 
 	//
 	//Quaternion amountToYaw   = new Quaternion();
-	amount = 10.f;
+	//amount = 10.f;
 	double rads = Math.toRadians(amount);
 	System.out.println("rads:" + rads);
 	//currentRotation.fromAngleAxis((float)rads), new Vector3f(0,1,0));
 
 	//Quaternion newRotate = amountToYaw.subtract(currentRotation);
 
-	getSceneNode().setLocalRotation(currentRotation.fromAngleAxis((float)rads, new Vector3f(0,1,0)));
-
-
-
+	//getSceneNode().setLocalRotation(currentRotation.fromAngleAxis((float)rads, new Vector3f(0,1,0)));
+	getSceneNode().rotate(0f,(float)rads,0f);
 	//amountToPitch.fromAngleAxis( (float)java.lang.Math.PI , new Vector3f(0,1,0) );
-
-
 
 	/* The rotation is applied: The object rolls by 180 degrees. */
 
@@ -208,12 +199,19 @@ public void yaw(float x, float z)
 	Vector3f yAxis = new Vector3f();
 	Vector3f zAxis = new Vector3f();
 
+	xAxis.normalize();
+
 	xAxis.x = x;
 	xAxis.z = z;
 
 	Quaternion q = new Quaternion();
 	Quaternion pitch = q.fromAxes(xAxis,yAxis,zAxis);
-	getSceneNode().setLocalRotation( pitch );
+	pitch.normalize();
+	//getSceneNode().setLocalRotation( pitch );
+	//getSceneNode().rotate(xAxis.x,xAxis.y,xAxis.z);
+	getSceneNode().rotate(0f,.1f,0f);
+	System.out.println("x:" + x);
+	System.out.println("z:" + z);
 }
 
 public void translate  (Vector3D translateVector, int perspective)
