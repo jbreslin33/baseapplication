@@ -160,15 +160,60 @@ public void scale(Vector3D scaleVector)
 }
 
 //movement
-public void yaw        (float amountToYaw, boolean converToDegree   )
+public void yaw        (float amount, boolean converToDegree   )
 {
+	/*
+	amountToYaw = .1f;
 	double rads = Math.toRadians(amountToYaw);
 
 	/* This quaternion stores a 180 degree rolling rotation */
+/*
 	Quaternion yawQuat = new Quaternion();
-	yawQuat.fromAngleAxis( (float)rads , new Vector3f(0,1,0) );
+	yawQuat.fromAngleAxis( .1f, new Vector3f(0,1,0) );
 	/* The rotation is applied: The object rolls by 180 degrees. */
+	/*
 	getSceneNode().setLocalRotation( yawQuat );
+	System.out.println("ddd");
+	*/
+
+
+	Quaternion currentRotation = getSceneNode().getLocalRotation();
+
+
+	//
+	//Quaternion amountToYaw   = new Quaternion();
+	amount = 10.f;
+	double rads = Math.toRadians(amount);
+	System.out.println("rads:" + rads);
+	//currentRotation.fromAngleAxis((float)rads), new Vector3f(0,1,0));
+
+	//Quaternion newRotate = amountToYaw.subtract(currentRotation);
+
+	getSceneNode().setLocalRotation(currentRotation.fromAngleAxis((float)rads, new Vector3f(0,1,0)));
+
+
+
+	//amountToPitch.fromAngleAxis( (float)java.lang.Math.PI , new Vector3f(0,1,0) );
+
+
+
+	/* The rotation is applied: The object rolls by 180 degrees. */
+
+//getSceneNode().setLocalRotation( roll180 );
+}
+
+public void yaw(float x, float z)
+{
+	Vector3f xAxis = new Vector3f();
+	Vector3f yAxis = new Vector3f();
+	Vector3f zAxis = new Vector3f();
+
+	xAxis.x = x;
+	xAxis.z = z;
+
+	Quaternion q = new Quaternion();
+	Quaternion pitch = q.fromAxes(xAxis,yAxis,zAxis);
+	getSceneNode().setLocalRotation( pitch );
 }
 
 public void translate  (Vector3D translateVector, int perspective)

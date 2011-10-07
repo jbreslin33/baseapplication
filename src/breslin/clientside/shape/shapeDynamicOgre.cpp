@@ -189,6 +189,7 @@ float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 	orientation3D->z = orientation.z;
 	
 	Quaternion* toSomething = getRotationTo(orientation3D,vectorOfSomething);
+
 	
     // convert to degrees
     Real degreesToSomething = toSomething->getYaw().valueDegrees();

@@ -132,6 +132,11 @@ public void   yaw                  (float amountToYaw, boolean converToDegree   
 {
 
 }
+//movement
+public void   yaw                  (float x, float z   )
+{
+
+}
 public float getDegreesToSomething(Vector3D something                       )
 {
 	return 0;
