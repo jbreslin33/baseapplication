@@ -276,9 +276,9 @@ public float getDegreesToSomething(Vector3D something                       )
 
 
 	//double degs = Math.toDegrees(rads);
-	System.out.println("angles[0]:" + angles[0];
-	System.out.println("angles[1]:" + angles[1];
-	System.out.println("angles[2]:" + angles[2];
+	System.out.println("angles[0]:" + angles[0]);
+	System.out.println("angles[1]:" + angles[1]);
+	System.out.println("angles[2]:" + angles[2]);
 	return angles[0];
 
 }
