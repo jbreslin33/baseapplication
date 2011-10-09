@@ -268,9 +268,11 @@ public float getDegreesToSomething(Vector3D something                       )
  	//Quaternion toSomething = orientation.getRotationTo(something,fallback);
 	Quaternion toSomething = getRotationTo(orientation, something);
 
+	float f = getYaw(toSomething);
 
-
+	return f;
 	//double rads = toSomething.toAngleAxis(vector3f);
+	/*
 	float[] angles = new float[3];
 	toSomething.toAngles(angles);
 
@@ -280,6 +282,7 @@ public float getDegreesToSomething(Vector3D something                       )
 	System.out.println("angles[1]:" + angles[1]);
 	System.out.println("angles[2]:" + angles[2]);
 	return angles[0];
+*/
 
 }
 
@@ -399,6 +402,28 @@ Quaternion getRotationTo(Vector3D source, Vector3D dest)
 		quaternion.normalize();
 	}
 return quaternion;
+}
+
+float getYaw(Quaternion q)
+{
+
+	float x = q.getX();
+	float y = q.getY();
+	float z = q.getZ();
+	float w = q.getW();
+		// yaw = atan2(localz.x, localz.z)
+			// pick parts of zAxis() implementation that we need
+			float fTx  = 2.0f*x;
+			float fTy  = 2.0f*y;
+			float fTz  = 2.0f*z;
+			float fTwy = fTy*w;
+			float fTxx = fTx*x;
+			float fTxz = fTz*x;
+			float fTyy = fTy*y;
+
+			//return Radian(Math::ATan2(fTxz+fTwy, 1.0f-(fTxx+fTyy)));
+		double theta = java.lang.Math.atan2(fTxz+fTwy, 1.0f-(fTxx+fTyy));
+		return (float) theta;
 }
 
 }
