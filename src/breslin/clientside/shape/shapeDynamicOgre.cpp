@@ -162,7 +162,6 @@ Vector3D* ShapeDynamicOgre::getRotation()
 
 void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 {
-	LogString("a:%f",amountToYaw);
 	if (convertToDegree)
 	{
 		getSceneNode()->yaw(Degree(amountToYaw));
@@ -189,11 +188,9 @@ float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 	orientation3D->z = orientation.z;
 	
 	Quaternion* toSomething = getRotationTo(orientation3D,vectorOfSomething);
-
 	
     // convert to degrees
     Real degreesToSomething = toSomething->getYaw().valueDegrees();
-	LogString("degreesToSomething:%f",degreesToSomething);
 	return degreesToSomething;
 }
 
