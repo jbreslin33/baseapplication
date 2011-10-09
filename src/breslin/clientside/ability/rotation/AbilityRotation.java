@@ -123,33 +123,14 @@ void  calculateServerRotationSpeed()
 	mServerRotNew.y = 0;
     mServerRotNew.z = mShapeDynamic.mServerFrame.mRot.z;
 
-/*
-	System.out.println("oldX:" + mServerRotOld.x);
-	System.out.println("oldY:" + mServerRotOld.y);
-	System.out.println("oldZ:" + mServerRotOld.z);
-
-	System.out.println("newX:" + mServerRotNew.x);
-	System.out.println("newY:" + mServerRotNew.y);
-	System.out.println("newZ:" + mServerRotNew.z);
-*/
     mServerRotNew.normalise();
     mServerRotOld.normalise();
 
-	System.out.println("oldX:" + mServerRotOld.x);
-	System.out.println("oldY:" + mServerRotOld.y);
-	System.out.println("oldZ:" + mServerRotOld.z);
-
-	System.out.println("newX:" + mServerRotNew.x);
-	System.out.println("newY:" + mServerRotNew.y);
-	System.out.println("newZ:" + mServerRotNew.z);
-
     //calculate how far off we are from server
 	mDegreesToServer = mShapeDynamic.getDegreesToSomething(mServerRotNew);
-	System.out.println("mDegreesToServer" + mDegreesToServer);
 
     //calculate server rotation from last tick to new one
 	mServerRotSpeed = mShapeDynamic.mGhost.getDegreesToSomething(mServerRotNew);
-	System.out.println("mServerRotSpeed" + mServerRotSpeed);
 }
 
 }

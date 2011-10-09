@@ -148,7 +148,6 @@ public Quaternion getRotationTo(Vector3D dest, Vector3D fallbackAxis)
     // If dot == 1, vectors are the same
     if (d >= 1.0f)
     {
-//		System.out.println("q");
 		Quaternion qIdentity = new Quaternion();
         return qIdentity;
     }

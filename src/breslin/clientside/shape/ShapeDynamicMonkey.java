@@ -159,38 +159,9 @@ public void scale(Vector3D scaleVector)
 //movement
 public void yaw        (float amount, boolean converToDegree   )
 {
-	/*
-	amountToYaw = .1f;
-	double rads = Math.toRadians(amountToYaw);
-
-	/* This quaternion stores a 180 degree rolling rotation */
-/*
-	Quaternion yawQuat = new Quaternion();
-	yawQuat.fromAngleAxis( .1f, new Vector3f(0,1,0) );
-	/* The rotation is applied: The object rolls by 180 degrees. */
-	/*
-	getSceneNode().setLocalRotation( yawQuat );
-	System.out.println("ddd");
-	*/
-
-	//Quaternion currentRotation = getSceneNode().getLocalRotation();
-
-	//
-	//Quaternion amountToYaw   = new Quaternion();
-	//amount = 10.f;
 	double rads = Math.toRadians(amount);
-	System.out.println("rads:" + rads);
-	//currentRotation.fromAngleAxis((float)rads), new Vector3f(0,1,0));
 
-	//Quaternion newRotate = amountToYaw.subtract(currentRotation);
-
-	//getSceneNode().setLocalRotation(currentRotation.fromAngleAxis((float)rads, new Vector3f(0,1,0)));
 	getSceneNode().rotate(0f,(float)rads,0f);
-	//amountToPitch.fromAngleAxis( (float)java.lang.Math.PI , new Vector3f(0,1,0) );
-
-	/* The rotation is applied: The object rolls by 180 degrees. */
-
-//getSceneNode().setLocalRotation( roll180 );
 }
 
 public void yaw(float x, float z)
@@ -207,11 +178,8 @@ public void yaw(float x, float z)
 	Quaternion q = new Quaternion();
 	Quaternion pitch = q.fromAxes(xAxis,yAxis,zAxis);
 	pitch.normalize();
-	//getSceneNode().setLocalRotation( pitch );
-	//getSceneNode().rotate(xAxis.x,xAxis.y,xAxis.z);
+
 	getSceneNode().rotate(0f,.1f,0f);
-	System.out.println("x:" + x);
-	System.out.println("z:" + z);
 }
 
 public void translate  (Vector3D translateVector, int perspective)
@@ -275,19 +243,6 @@ public float getDegreesToSomething(Vector3D something                       )
 	float f = (float)d2;
 
 	return f;
-	//double rads = toSomething.toAngleAxis(vector3f);
-	/*
-	float[] angles = new float[3];
-	toSomething.toAngles(angles);
-
-
-	//double degs = Math.toDegrees(rads);
-	System.out.println("angles[0]:" + angles[0]);
-	System.out.println("angles[1]:" + angles[1]);
-	System.out.println("angles[2]:" + angles[2]);
-	return angles[0];
-*/
-
 }
 
 public Vector3D getPosition          (                                         )
