@@ -275,7 +275,6 @@ Quaternion* ShapeDynamicOgre::getRotationTo(Vector3D* source, Vector3D* dest)
 	v0->normalise();	
 	v1->normalise();
 
-	//Real d = v0.dotProduct(v1);
 	float d = v0->dot(v1);
 
     // If dot == 1, vectors are the same
@@ -287,12 +286,16 @@ Quaternion* ShapeDynamicOgre::getRotationTo(Vector3D* source, Vector3D* dest)
 			
 	if (d < (1e-6f - 1.0f))
 	{
+		LogString("Fallback");
 		// rotate 180 degrees about the fallback axis
-		//Vector3 fb;
-		//fb.x = fallbackAxis->x;
-		//fb.y = fallbackAxis->y;
-		//fb.z = fallbackAxis->z;
+		Vector3 fb;
+		fb.x = fallbackAxis->x;
+		fb.y = fallbackAxis->y;
+		fb.z = fallbackAxis->z;
 		//quaternion->FromAngleAxis(Radian(Math::PI), fb);
+		
+		// rotate 180 degrees about the fallback axis
+		quaternion->FromAngleAxis(Radian(Math::PI), fb);
 	}
 	else
 	{
