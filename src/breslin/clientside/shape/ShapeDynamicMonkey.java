@@ -128,8 +128,11 @@ Node          mSceneNode;
 //shape
 public void createShape()
 {
+	System.out.println("mMeshCode:" + mMeshCode);
+
 	//actually create the shape and attach to node.
 	mSceneNode = (Node) mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(getMeshString(mMeshCode));
+
 	mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(mSceneNode);
 
 	//scale
