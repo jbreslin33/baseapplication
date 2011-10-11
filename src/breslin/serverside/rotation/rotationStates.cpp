@@ -147,7 +147,6 @@ void Decelerate_Rotation::execute(Rotation* rotation)
 	}
 
 	//actual rotate
-//	LogString("N:%f",rotation->mRotationSpeed);
 	rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 
 }

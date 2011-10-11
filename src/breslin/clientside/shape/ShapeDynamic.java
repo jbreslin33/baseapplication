@@ -54,7 +54,7 @@ public ShapeDynamic(Game game, ByteBuffer byteBuffer)
 
 	//speed
 	mSpeed     = 0;
-	mSpeedMax  = 200;
+	mSpeedMax  = 1.66f;
 
 	//orientation
 	mPosition = new Vector3D();
