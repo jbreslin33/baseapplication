@@ -310,7 +310,7 @@ public String getMeshString(int meshCode)
 	if (meshCode == 1)
 	{
 		mScale = .25f;
-		return "art/models/sinbad/Sinbad.mesh.xml";
+		return "jmonkey/models/sinbad/Sinbad.mesh.xml";
 	}
 	return "cube.mesh";
 }

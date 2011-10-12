@@ -4,6 +4,9 @@
 
     <property name="build.dir"   value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="art.dir" value="${src.dir}/art"/>
+    
+    
     <property name="jar.dir"     value="${build.dir}/jar"/>
 
     <property name="main-class"  value="breslin.clientside.game.GameMonkey"/>
@@ -21,22 +24,27 @@
         <fileset dir="${lib.dir}" includes="**/*.jar"/>
     </path>
 
-    <copy file="${src}/UKLights.jpeg" tofile="${build}/UKLights.jpeg"/>
+
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
           <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
     </target>
 
-    <target name="jar" depends="compile">
+         
+   <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
-        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
-            <manifest>
-                <attribute name="Main-Class" value="${main-class}"/>
+  <jar destfile="${jar.dir}/${ant.project.name}.jar">
+     <fileset dir="${classes.dir}" />
+     <fileset dir="${art.dir}" />
+     <manifest>
+                     <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
-        </jar>
-    </target>
+  </jar>
+ 
+ </target>
 
+        
     <target name="run" depends="jar">
             <java fork="true" classname="${main-class}">
             <arg value="192.168.1.103"/>
