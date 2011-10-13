@@ -221,7 +221,10 @@ void processInput()
 }
 
 
-
+public Vector3f getCameraLocation()
+{
+	return cam.getLocation();
+}
 
 };
 

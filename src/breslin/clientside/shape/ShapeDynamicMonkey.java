@@ -13,6 +13,7 @@ import com.jme3.scene.Spatial.CullHint;
 import java.util.ArrayList;
 import java.nio.ByteBuffer;
 import java.lang.String;
+import com.jme3.math.Vector3f;
 
 
   // geometry
@@ -127,6 +128,8 @@ String         mName;
 Node          mSceneNode;
 
 //billboard
+BitmapFont mBitmapFont;
+BitmapText mBitmapText;
 //ObjectTitle* mObjectTitle;
 //std::string  mObjectTitleString;
 
@@ -156,16 +159,23 @@ public void createShape()
 		//mSceneNode.setCullHint(CullHint.Always);
 	}
 
-//billboard
-BitmapFont font = mGameMonkey.mGraphicsMonkey.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
-BitmapText helloText = new BitmapText(font, false);
-helloText.setSize(font.getCharSet().getRenderedSize());
-helloText.setText("Hello World");
-//helloText.setLocalTranslation(0, helloText.getLineHeight(), 0);
-helloText.setQueueBucket(Bucket.Inherit);
-helloText.scale(.25f);
-mSceneNode.attachChild(helloText);
 
+	//billboard
+	if (mIsGhost)
+	{
+		mBitmapFont = null;
+		mBitmapText = null;
+	}
+	else
+	{
+		mBitmapFont = mGameMonkey.mGraphicsMonkey.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
+		mBitmapText = new BitmapText(mBitmapFont, false);
+		mBitmapText.setSize(mBitmapFont.getCharSet().getRenderedSize());
+		mBitmapText.setText("Hello World");
+		mBitmapText.setQueueBucket(Bucket.Inherit);
+		mBitmapText.scale(.02f);
+		mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(mBitmapText);
+	}
 }
 
 //debugging
@@ -188,24 +198,6 @@ public void yaw        (float amount, boolean converToDegree   )
 	getSceneNode().rotate(0f,(float)rads,0f);
 }
 
-public void yaw(float x, float z)
-{
-	Vector3f xAxis = new Vector3f();
-	Vector3f yAxis = new Vector3f();
-	Vector3f zAxis = new Vector3f();
-
-	xAxis.normalize();
-
-	xAxis.x = x;
-	xAxis.z = z;
-
-	Quaternion q = new Quaternion();
-	Quaternion pitch = q.fromAxes(xAxis,yAxis,zAxis);
-	pitch.normalize();
-
-	getSceneNode().rotate(0f,.1f,0f);
-}
-
 public void translate  (Vector3D translateVector, int perspective)
 {
 	if (perspective == 1)
@@ -220,11 +212,19 @@ public void translate  (Vector3D translateVector, int perspective)
 public void setPosition(Vector3D position                        )
 {
 	getSceneNode().setLocalTranslation((float)position.x,(float)position.y,(float)position.z);
+
+	if (!mIsGhost)
+	{
+		mBitmapText.setLocalTranslation((float)position.x -1.0f,(float)position.y + 2.0f,(float)position.z);
+
+		//System.out.println("setPostion");
+	//	Vector3f setPosition = new Vector3f(0.0f,0.0f,0.0f);
+		Vector3f upVector = new Vector3f(0.0f,1.0f,0.0f);
+		mBitmapText.lookAt(mGameMonkey.mGraphicsMonkey.getCameraLocation(),upVector);
+	}
 }
 public void setPosition(float x, float y, float z                )
 {
-	//in ogre setPosition is absolute so for jmonkey i could just take the difference?
-	//mSceneNode.getPosition();
 	getSceneNode().setLocalTranslation(x,y,z);
 }
 public void setVisible (boolean visible                             )
