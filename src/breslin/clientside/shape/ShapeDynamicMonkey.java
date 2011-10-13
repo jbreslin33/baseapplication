@@ -108,9 +108,11 @@ BitmapFont font = mGameMonkey.mGraphicsMonkey.getAssetManager().loadFont("Interf
 BitmapText helloText = new BitmapText(font, false);
 helloText.setSize(font.getCharSet().getRenderedSize());
 helloText.setText("Hello World");
-helloText.setLocalTranslation(0, helloText.getLineHeight(), 0);
+//helloText.setLocalTranslation(0, helloText.getLineHeight(), 0);
 helloText.setQueueBucket(Bucket.Inherit);
+helloText.scale(.05f);
 mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(helloText);
+
 
 }
 
