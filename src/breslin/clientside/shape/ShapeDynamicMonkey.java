@@ -13,17 +13,25 @@ import com.jme3.scene.Spatial.CullHint;
 import java.util.ArrayList;
 import java.nio.ByteBuffer;
 import java.lang.String;
-//import org.openmali.FastMath;
+
+
   // geometry
   import com.jme3.material.Material;
   import com.jme3.math.Vector3f;
   import com.jme3.scene.Geometry;
   import com.jme3.scene.shape.Box;
+  import com.jme3.scene.shape.Quad;
   import com.jme3.math.ColorRGBA;
   import com.jme3.scene.Node;
   import com.jme3.math.Quaternion;
   import com.jme3.math.Transform;
 
+
+
+//billboards
+import com.jme3.font.BitmapFont;
+import com.jme3.font.BitmapText;
+import com.jme3.renderer.queue.RenderQueue.Bucket;
 
 //shape
 import breslin.clientside.shape.Shape;
@@ -95,6 +103,14 @@ public ShapeDynamicMonkey(GameMonkey gameMonkey, ByteBuffer byteBuffer, boolean 
 				//mGhost.setVisible(false);
 	}
 
+//billboard
+BitmapFont font = mGameMonkey.mGraphicsMonkey.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
+BitmapText helloText = new BitmapText(font, false);
+helloText.setSize(font.getCharSet().getRenderedSize());
+helloText.setText("Hello World");
+helloText.setLocalTranslation(0, helloText.getLineHeight(), 0);
+helloText.setQueueBucket(Bucket.Inherit);
+mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(helloText);
 
 }
 
@@ -145,6 +161,7 @@ public void createShape()
 	{
 		//mSceneNode.setCullHint(CullHint.Always);
 	}
+
 }
 
 //debugging
