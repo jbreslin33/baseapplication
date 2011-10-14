@@ -92,6 +92,7 @@ set(HDRS
 	
 	#game
 	../serverside/game/game.h
+	../serverside/game/gameTag.h
 	
 	#tdreamsock
 	../serverside/tdreamsock/dreamSockLog.h
@@ -165,6 +166,7 @@ set(SRCS
 
 	#game
 	../serverside/game/game.cpp
+	../serverside/game/gameTag.cpp
 	
 	#dreamsock
 	../serverside/tdreamsock/dreamSockLog.cpp
@@ -230,6 +232,7 @@ set(HDRS
 	
 	#game
 	../serverside/game/game.h
+	../serverside/game/gameTag.h
 	
 	#network
 	../serverside/network/network.h
@@ -302,6 +305,7 @@ set(SRCS
 	
 	#game
 	../serverside/game/game.cpp
+	../serverside/game/gameTag.cpp
 
 	#dreamsock
 	../serverside/tdreamsock/dreamSockLog.cpp

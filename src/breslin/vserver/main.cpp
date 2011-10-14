@@ -3,6 +3,9 @@
 #define _WINSOCKAPI_
 #endif
 
+#include <stdio.h>
+#include <string.h>
+
 #include <windows.h>
 
 #endif
@@ -23,6 +26,8 @@
 #endif
 
 #include "../serverside/game/game.h"
+#include "../serverside/game/gameTag.h"
+
 #include "../serverside/server/server.h"
 #include "../serverside/network/network.h"
 #include "../serverside/tdreamsock/dreamSockLog.h"
@@ -103,9 +108,33 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	StartLogConsole();
 
+	const char* cmdLine = lpCmdLine;
 
-	game = new Game();
+	const char* aGame    = "1";
+	const char* aGameTag = "2";
 
+	if (strcmp (cmdLine,aGame) == 0)
+	{
+		game = new Game();
+	}
+
+	if (strcmp (cmdLine,aGameTag) == 0)
+	{
+		game = new GameTag();
+	}
+
+	/*
+	if (lpCmdLine == aGame)
+	{
+		game = new Game();
+	}
+	if (lpCmdLine == aTagGame)
+	{
+		game = new GameTag();
+	}
+	*/
+	//game = new Game();
+	
 /*
 	if(game->InitNetwork() != 0)
 	{
@@ -232,7 +261,7 @@ int keyPress(void)
 int main(int argc, char **argv)
 {
 
-	game = new Game;
+	game = new GameTag();
 /*
 	if(game->InitNetwork() != 0)
 	{
