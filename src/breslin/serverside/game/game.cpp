@@ -217,7 +217,10 @@ void Game::frame(int msec)
 	sendCommand();
 	mFrameTime = 0;
 }
+/*
+game is tag but what should i do here i think this is where we need to extend classes.
 
+*/
 void Game::checkCollisions(void)
 {
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
