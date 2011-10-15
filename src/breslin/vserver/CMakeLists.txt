@@ -103,6 +103,7 @@ set(HDRS
 	
 	#shape
 	../serverside/shape/shape.h
+	../serverside/shape/shapeTag.h
 	../serverside/shape/ogreShape.h
 	
 	#move
@@ -177,6 +178,7 @@ set(SRCS
 	
 	#shape
 	../serverside/shape/shape.cpp
+	../serverside/shape/shapeTag.cpp
 	../serverside/shape/ogreShape.cpp
 	
 	#move
@@ -243,6 +245,7 @@ set(HDRS
 	
 	#shape
 	../serverside/shape/shape.h
+	../serverside/shape/shapeTag.h
 	../serverside/shape/ogreShape.h
 	
 	#move
@@ -316,6 +319,7 @@ set(SRCS
 	
 	#shape
 	../serverside/shape/shape.cpp
+	../serverside/shape/shapeTag.cpp
 	../serverside/shape/ogreShape.cpp
 	
 	#move
