@@ -16,17 +16,17 @@ import java.lang.String;
 import com.jme3.math.Vector3f;
 
 
-  // geometry
-  import com.jme3.material.Material;
-  import com.jme3.math.Vector3f;
-  import com.jme3.scene.Geometry;
-  import com.jme3.scene.shape.Box;
-  import com.jme3.scene.shape.Quad;
-  import com.jme3.math.ColorRGBA;
-  import com.jme3.scene.Node;
-  import com.jme3.math.Quaternion;
-  import com.jme3.math.Transform;
-
+// geometry
+import com.jme3.material.Material;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.shape.Box;
+import com.jme3.scene.shape.Quad;
+import com.jme3.math.ColorRGBA;
+import com.jme3.scene.Node;
+import com.jme3.math.Quaternion;
+import com.jme3.math.Transform;
+import com.jme3.texture.Texture;
 
 
 //billboards
@@ -144,7 +144,39 @@ public void createShape()
 	System.out.println("mMeshCode:" + mMeshCode);
 
 	//actually create the shape and attach to node.
-	mSceneNode = (Node) mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(getMeshString(mMeshCode));
+
+	//model
+
+
+	//if (mMeshCode == 0)
+	//{
+		/** A simple textured cube -- in good MIP map quality. */
+/*
+	 Box boxshape1 = new Box(new Vector3f(-3f,1.1f,0f), 1f,1f,1f);
+		Geometry cube = new Geometry("My Textured Box", boxshape1);
+		Material mat_stl = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(), "generic/pictures/Unshaded.j3md");
+		Texture tex_ml = mGameMonkey.mGraphicsMonkey.getAssetManager().loadTexture("generic/pictures/Monkey.jpg");
+		mat_stl.setTexture("ColorMap", tex_ml);
+		cube.setMaterial(mat_stl);
+    	mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(cube);
+*/
+Box b = new Box(Vector3f.ZERO, 1, 1, 1); // create cube shape at the origin
+        Geometry geom = new Geometry("Box", b);  // create cube geometry from the shape
+        Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),
+          "generic/pictures/Unshaded.j3md");  // create a simple material
+        mat.setColor("Color", ColorRGBA.Blue);   // set color of material to blue
+        geom.setMaterial(mat);                   // set the cube's material
+        mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
+	//}
+
+	if (mMeshCode == 1)
+	{
+		mSceneNode = (Node) mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(getMeshString(mMeshCode));
+	}
+
+
+
+
 
 	mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(mSceneNode);
 

@@ -15,7 +15,7 @@
 GameTag::GameTag()
 {
 	LogString("Hosting GameTag");
-
+/*
 	//ai guys, let's make them sinbads
 	for(int i = 0; i < 0; i++)
 	{                 
@@ -26,7 +26,7 @@ GameTag::GameTag()
 		
 		createAIShape(position,true,true,.66f,1,true);
 	}
-	/*
+	
 	Vector3D* position = new Vector3D();
 	
 	//east wall
