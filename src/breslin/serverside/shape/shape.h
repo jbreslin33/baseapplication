@@ -54,6 +54,7 @@ bool  mCollidable;
 //animation
 bool mAnimated;
 
+//ai
 bool mAI;
 
 

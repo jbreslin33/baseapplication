@@ -11,6 +11,7 @@ ShapeTag(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root*
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~ShapeTag();
 
+
 };
 
 #endif
