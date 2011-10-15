@@ -1,15 +1,15 @@
-#ifndef SHAPETAG_H
-#define SHAPETAG_H
+#ifndef SHAPETAGPLAYER_H
+#define SHAPETAGPLAYER_H
 
-#include "shape.h"
+#include "shapeTag.h"
 
-class ShapeTag : public	Shape
+class ShapeTagPlayer : public ShapeTag
 {
 
 public:
-ShapeTag(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,unsigned int index,
+ShapeTagPlayer(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,unsigned int index,
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
-~ShapeTag();
+~ShapeTagPlayer();
 
 
 };

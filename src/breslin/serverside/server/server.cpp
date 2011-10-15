@@ -189,12 +189,11 @@ void Server::addClient(struct sockaddr *address)
 	mClientVector.push_back(client);
 
 	client->SetSocketAddress(address);
-	//sockaddr_in* in = (sockaddr_in)address
-	//inet_ntoa(in->sin_addr)
+
 	client->mConnectionState = DREAMSOCK_CONNECTING;
 	client->mOutgoingSequence = 1;
 	client->mIncomingSequence = 0;
-	//LogString("address:%d",address->sa_data);
+
 	memcpy(&client->mMyaddress,client->GetSocketAddress(), sizeof(struct sockaddr));
 
 	mGame->createClientAvatar(client,true,true,.66f,1,false);

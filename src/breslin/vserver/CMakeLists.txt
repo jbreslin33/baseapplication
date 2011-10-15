@@ -102,9 +102,12 @@ set(HDRS
 	../serverside/network/network.h
 	
 	#shape
-	../serverside/shape/shape.h
-	../serverside/shape/shapeTag.h
 	../serverside/shape/ogreShape.h
+	../serverside/shape/shape.h
+	
+		#tag
+	../serverside/shape/shapeTag.h
+	../serverside/shape/shapeTagPlayer.h
 	
 	#move
 	../serverside/move/move.h
@@ -177,9 +180,12 @@ set(SRCS
 	../serverside/network/network.cpp
 	
 	#shape
-	../serverside/shape/shape.cpp
-	../serverside/shape/shapeTag.cpp
 	../serverside/shape/ogreShape.cpp
+	../serverside/shape/shape.cpp
+	
+		#tag
+	../serverside/shape/shapeTag.cpp
+	../serverside/shape/shapeTagPlayer.cpp
 	
 	#move
 	../serverside/move/move.cpp
@@ -244,9 +250,12 @@ set(HDRS
 	../serverside/tdreamsock/dreamLinuxSock.h
 	
 	#shape
-	../serverside/shape/shape.h
-	../serverside/shape/shapeTag.h
 	../serverside/shape/ogreShape.h
+	../serverside/shape/shape.h
+	
+		#tag
+	../serverside/shape/shapeTag.h
+	../serverside/shape/shapeTagPlayer.h
 	
 	#move
 	../serverside/move/move.h
@@ -318,9 +327,12 @@ set(SRCS
 	../serverside/network/network.cpp
 	
 	#shape
-	../serverside/shape/shape.cpp
-	../serverside/shape/shapeTag.cpp
 	../serverside/shape/ogreShape.cpp
+	../serverside/shape/shape.cpp
+	
+		#tag
+	../serverside/shape/shapeTag.cpp
+	../serverside/shape/shapeTagPlayer.cpp
 	
 	#move
 	../serverside/move/move.cpp

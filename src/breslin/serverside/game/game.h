@@ -55,8 +55,6 @@ public:
 	int     mFrameTime;
 
 	//shapes
-	int mRunningShapeIndex;
-	int mSpreadOutAIIndex;
 	std::vector<Shape*> mShapeVector;	//every tangible item in game world..
 
 public:
@@ -64,7 +62,7 @@ public:
 	~Game();
 
 	//shapes
-	void createClientAvatar(Client* client, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
+	virtual void createClientAvatar(Client* client, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 	void createAIShape                     (Vector3D* position, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 	
 	void         removeShape       (Shape* shape);

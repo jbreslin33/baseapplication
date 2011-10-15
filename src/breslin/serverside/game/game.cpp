@@ -3,11 +3,19 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
+//server
 #include "../server/server.h"
+
+//network
 #include "../network/network.h"
 
+//client
 #include "../client/client.h"
+
+//shape
 #include "../shape/shape.h"
+
+//command
 #include "../../command/command.h"
 
 Game::Game()
@@ -25,68 +33,6 @@ Game::Game()
 	mServerTime	= 0;
 	mFramenum	= 0;
 	mFrameTime  = 0;
-
-	mRunningShapeIndex = 1;
-	mSpreadOutAIIndex = 1;
-	
-	//ai guys, let's make them sinbads
-	for(int i = 0; i < 0; i++)
-	{                 
-		Vector3D* position = new Vector3D();
-		position->x = 5.0f;
-		position->y = 0.0f;
-		position->z = 2.0f * i;
-		
-		createAIShape(position,true,true,.66f,1,true);
-	}
-	/*
-	Vector3D* position = new Vector3D();
-	
-	//east wall
-	for (int i = -10; i < 10; i++)
-	{
-		//collidable static shapes with no animation for now it's a WALL
-		Vector3D* position = new Vector3D();
-		position->x = 10;
-		position->y = 0;
-		position->z = 1 * i;
-		createAIShape(position,false,true,.5,0,false);
-	}
-
-	
-	//west wall
-	for (int i = -10; i < 10; i++)
-	{
-		//collidable static shapes with no animation for now it's a WALL
-		Vector3D* position = new Vector3D();
-		position->x = -10;
-		position->y = 0;
-		position->z = 1 * i;
-		createAIShape(position,false,true,.5,0,false);
-	}
-
-	//north wall
-	for (int i = -10; i < 10; i = i++)
-	{
-		//collidable static shapes with no animation for now it's a WALL
-		Vector3D* position = new Vector3D();
-		position->x = 1 * i;
-		position->y = 0;
-		position->z = -10;
-		createAIShape(position,false,true,.5,0,false);
-	}
-
-	//south wall
-	for (int i = -10; i < 10; i = i++)
-	{
-		//collidable static shapes with no animation for now it's a WALL
-		Vector3D* position = new Vector3D();
-		position->x = 1 * i;
-		position->y = 0;
-		position->z = 10;
-		createAIShape(position,false,true,.5,0,false);
-	}
-*/
 }
 
 Game::~Game()
