@@ -142,74 +142,17 @@ BitmapText mBitmapText;
 //shape
 public void createShape()
 {
-	System.out.println("mMeshCode:" + mMeshCode);
 
-	//actually create the shape and attach to node.
-
-	//model
-
-
-	//if (mMeshCode == 0)
-	//{
-		/** A simple textured cube -- in good MIP map quality. */
-/*
-	 Box boxshape1 = new Box(new Vector3f(-3f,1.1f,0f), 1f,1f,1f);
-		Geometry cube = new Geometry("My Textured Box", boxshape1);
-		Material mat_stl = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(), "generic/pictures/Unshaded.j3md");
-		Texture tex_ml = mGameMonkey.mGraphicsMonkey.getAssetManager().loadTexture("generic/pictures/Monkey.jpg");
-		mat_stl.setTexture("ColorMap", tex_ml);
-		cube.setMaterial(mat_stl);
-    	mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(cube);
-*/
-/*
-Box b = new Box(Vector3f.ZERO, 1, 1, 1); // create cube shape at the origin
-        Geometry geom = new Geometry("Box", b);  // create cube geometry from the shape
-       // Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),
-          //"generic/pictures/Particle.j3md");  // create a simple material
-       //mat.setColor("Color", ColorRGBA.Blue);   // set color of material to blue
-
-        Texture textureMonkey = mGameMonkey.mGraphicsMonkey.getAssetManager().loadTexture(new TextureKey("generic/pictures/Monkey.jpg"));
-
-    	  Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(), "generic/pictures/Unshaded.j3md");
-				mat.setTexture("Texture", textureMonkey);
-
-      geom.setMaterial(mat);                   // set the cube's material
-        mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
-	//}
-*/
-/*
-  Box b = new Box(Vector3f.ZERO, 1, 1, 1); // create cube shape at the origin
-        Geometry geom = new Geometry("Box", b);  // create cube geometry from the shape
-        //Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),
-          //"generic/pictures/Unshaded.j3md");  // create a simple material
-        //mat.setColor("Color", ColorRGBA.Blue);   // set color of material to blue
-        //geom.setMaterial(mat);                   // set the cube's material
-        mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
-*/
-/*
- Box b = new Box(Vector3f.ZERO, 1, 1, 1); // create cube shape at the origin
-        Geometry geom = new Geometry("Box", b);  // create cube geometry from the shape
-        Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),
-          "generic/pictures/Unshaded.j3md");  // create a simple material
-        //mat.setColor("Diffuse", ColorRGBA.Blue);   // set color of material to blue
-        geom.setMaterial(mat);                   // set the cube's material
-        mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
-*/
-Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
-Geometry geom = new Geometry("A shape", mesh);
-Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),
-    "generic/pictures/ShowNormals.j3md");
-geom.setMaterial(mat);
-mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
+	Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
+	Geometry geom = new Geometry("A shape", mesh);
+	Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),"generic/pictures/ShowNormals.j3md");
+	geom.setMaterial(mat);
+	mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
 
 	if (mMeshCode == 1)
 	{
 		mSceneNode = (Node) mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(getMeshString(mMeshCode));
 	}
-
-
-
-
 
 	mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(mSceneNode);
 
