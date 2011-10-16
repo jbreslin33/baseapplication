@@ -195,7 +195,7 @@ Box b = new Box(Vector3f.ZERO, 1, 1, 1); // create cube shape at the origin
         geom.setMaterial(mat);                   // set the cube's material
         mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
 */
-Sphere mesh = new Sphere(32, 32, 10, false, true);
+Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
 Geometry geom = new Geometry("A shape", mesh);
 Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),
     "generic/pictures/ShowNormals.j3md");
