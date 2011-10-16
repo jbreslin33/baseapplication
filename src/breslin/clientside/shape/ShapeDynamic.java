@@ -115,6 +115,34 @@ public Command mCommandToRunOnShape;
 *				METHODS
 **************************************************/
 
+//conversion
+float convertIntToFloat(ByteBuffer byteBuffer)
+{
+		int p = byteBuffer.position();  //set current position to p
+
+		//get the next 4 bytes
+		byte one = byteBuffer.get(p);
+		byte two = byteBuffer.get(p + 1);
+		byte three = byteBuffer.get(p +2);
+		byte four = byteBuffer.get(p + 3);
+
+		//flip them
+		byteBuffer.put(p,four);
+		byteBuffer.put(p + 1,three);
+		byteBuffer.put(p + 2,two);
+		byteBuffer.put(p + 3,one);
+
+		//set position back to original
+		byteBuffer.position(p);
+
+		//get 4 bytes put them into a java int
+		int a = byteBuffer.getInt();
+
+		//covert java int to float
+		float b = Float.intBitsToFloat(a);
+		return b;
+}
+
 //abilitys
 public void     addAbility(Ability ability)
 {
@@ -194,30 +222,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 	{
 		mServerFrame.mPositionOld.x = mServerFrame.mPosition.x;
 
-
-		int p = byteBuffer.position();  //set current position to p
-
-		//get the next 4 bytes
-		byte one = byteBuffer.get(p);
-		byte two = byteBuffer.get(p + 1);
-		byte three = byteBuffer.get(p +2);
-		byte four = byteBuffer.get(p + 3);
-
-		//flip them
-		byteBuffer.put(p,four);
-		byteBuffer.put(p + 1,three);
-		byteBuffer.put(p + 2,two);
-		byteBuffer.put(p + 3,one);
-
-		//set position back to original
-		byteBuffer.position(p);
-
-		//get 4 bytes put them into a java int
-		int a = byteBuffer.getInt();
-
-		//covert java int to float
-		float b = Float.intBitsToFloat(a);
-		mServerFrame.mPosition.x = b;
+		mServerFrame.mPosition.x = convertIntToFloat(byteBuffer);
 	}
 	else
 	{
@@ -229,30 +234,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 	{
 		mServerFrame.mPositionOld.y = mServerFrame.mPosition.y;
 
-
-		int p = byteBuffer.position();  //set current position to p
-
-		//get the next 4 bytes
-		byte one = byteBuffer.get(p);
-		byte two = byteBuffer.get(p + 1);
-		byte three = byteBuffer.get(p +2);
-		byte four = byteBuffer.get(p + 3);
-
-		//flip them
-		byteBuffer.put(p,four);
-		byteBuffer.put(p + 1,three);
-		byteBuffer.put(p + 2,two);
-		byteBuffer.put(p + 3,one);
-
-		//set position back to original
-		byteBuffer.position(p);
-
-		//get 4 bytes put them into a java int
-		int a = byteBuffer.getInt();
-
-		//covert java int to float
-		float b = Float.intBitsToFloat(a);
-		mServerFrame.mPosition.y = b;
+		mServerFrame.mPosition.y = convertIntToFloat(byteBuffer);
 	}
 	else
 	{
@@ -264,30 +246,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 	{
 		mServerFrame.mPositionOld.z = mServerFrame.mPosition.z;
 
-
-		int p = byteBuffer.position();  //set current position to p
-
-		//get the next 4 bytes
-		byte one = byteBuffer.get(p);
-		byte two = byteBuffer.get(p + 1);
-		byte three = byteBuffer.get(p +2);
-		byte four = byteBuffer.get(p + 3);
-
-		//flip them
-		byteBuffer.put(p,four);
-		byteBuffer.put(p + 1,three);
-		byteBuffer.put(p + 2,two);
-		byteBuffer.put(p + 3,one);
-
-		//set position back to original
-		byteBuffer.position(p);
-
-		//get 4 bytes put them into a java int
-		int a = byteBuffer.getInt();
-
-		//covert java int to float
-		float b = Float.intBitsToFloat(a);
-		mServerFrame.mPosition.z = b;
+		mServerFrame.mPosition.z = convertIntToFloat(byteBuffer);
 	}
 	else
 	{
@@ -332,6 +291,8 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		mServerFrame.mRotOld.z = mServerFrame.mRot.z;
 
 		int p = byteBuffer.position();  //set current position to p
+
+
 
 		//get the next 4 bytes
 		byte one = byteBuffer.get(p);

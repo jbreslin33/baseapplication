@@ -17,6 +17,7 @@ import com.jme3.math.Vector3f;
 
 
 // geometry
+import com.jme3.scene.Spatial;
 import com.jme3.material.Material;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
@@ -104,10 +105,6 @@ public ShapeDynamicMonkey(GameMonkey gameMonkey, ByteBuffer byteBuffer, boolean 
 		mGame.mShapeGhostVector.add(mGhost);
 		mGhost.setVisible(false);
 	}
-
-
-
-
 }
 
 /**********************************
@@ -126,7 +123,7 @@ String         mName;
 //Entity*             mEntity;
 
 //this is your pointer to move shape, really all you need.
-Node          mSceneNode;
+Spatial          mSceneNode;
 
 //billboard
 BitmapFont mBitmapFont;
@@ -143,24 +140,33 @@ BitmapText mBitmapText;
 public void createShape()
 {
 
-	Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
-	Geometry geom = new Geometry("A shape", mesh);
-	Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),"generic/pictures/ShowNormals.j3md");
-	geom.setMaterial(mat);
-	mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
+	if (mMeshCode == 0)
+	{
+
+		Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
+		Geometry geom = new Geometry("A shape", mesh);
+
+		mSceneNode = geom;
+
+		Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),"generic/pictures/ShowNormals.j3md");
+		mSceneNode.setMaterial(mat);
+		//mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
+
+	}
 
 	if (mMeshCode == 1)
 	{
-		mSceneNode = (Node) mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(getMeshString(mMeshCode));
+		mSceneNode = mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(getMeshString(mMeshCode));
+		//scale
+		mSceneNode.scale(mScale,mScale,mScale);
 	}
 
 	mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(mSceneNode);
 
-	//scale
-	mSceneNode.scale(mScale,mScale,mScale);
 
 	//move
 	setPosition((float)mPosition.x,(float)mPosition.y,(float)mPosition.z);
+	System.out.println("y:" + (float)mPosition.y);
 
 	if (mIsGhost)
 	{
@@ -321,7 +327,7 @@ public String getName()
 }
 
 //scene node
-public Node  getSceneNode() { return mSceneNode; }
+public Spatial  getSceneNode() { return mSceneNode; }
 
 //utility
 //Ogre::Vector3 converToVector3(Vector3D vector3d);
