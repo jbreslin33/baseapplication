@@ -21,6 +21,7 @@ import com.jme3.material.Material;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
+import com.jme3.scene.shape.Sphere;
 import com.jme3.scene.shape.Quad;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
@@ -176,7 +177,7 @@ Box b = new Box(Vector3f.ZERO, 1, 1, 1); // create cube shape at the origin
         mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
 	//}
 */
-
+/*
   Box b = new Box(Vector3f.ZERO, 1, 1, 1); // create cube shape at the origin
         Geometry geom = new Geometry("Box", b);  // create cube geometry from the shape
         //Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),
@@ -184,6 +185,23 @@ Box b = new Box(Vector3f.ZERO, 1, 1, 1); // create cube shape at the origin
         //mat.setColor("Color", ColorRGBA.Blue);   // set color of material to blue
         //geom.setMaterial(mat);                   // set the cube's material
         mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
+*/
+/*
+ Box b = new Box(Vector3f.ZERO, 1, 1, 1); // create cube shape at the origin
+        Geometry geom = new Geometry("Box", b);  // create cube geometry from the shape
+        Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),
+          "generic/pictures/Unshaded.j3md");  // create a simple material
+        //mat.setColor("Diffuse", ColorRGBA.Blue);   // set color of material to blue
+        geom.setMaterial(mat);                   // set the cube's material
+        mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
+*/
+Sphere mesh = new Sphere(32, 32, 10, false, true);
+Geometry geom = new Geometry("A shape", mesh);
+Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),
+    "generic/pictures/ShowNormals.j3md");
+geom.setMaterial(mat);
+mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
+
 	if (mMeshCode == 1)
 	{
 		mSceneNode = (Node) mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(getMeshString(mMeshCode));
