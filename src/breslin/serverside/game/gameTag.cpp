@@ -41,7 +41,7 @@ GameTag::GameTag()
 		createAIShape(position,false,true,.5,0,false);
 	}
 
-/*	
+
 	//west wall
 	for (int i = -10; i < 10; i++)
 	{
@@ -74,7 +74,7 @@ GameTag::GameTag()
 		position->z = 10;
 		createAIShape(position,false,true,.5,0,false);
 	}
-*/
+
 }
 
 GameTag::~GameTag()
