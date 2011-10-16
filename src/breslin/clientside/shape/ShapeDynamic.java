@@ -322,6 +322,7 @@ void parseByteBuffer(ByteBuffer byteBuffer)
 	mLocal	    = byteBuffer.get(); //error
 	mIndex		= byteBuffer.get();
 
+/*
 	mPosition.x = byteBuffer.getFloat();
 	mPosition.y = byteBuffer.getFloat();
 	mPosition.z = byteBuffer.getFloat();
@@ -331,6 +332,18 @@ void parseByteBuffer(ByteBuffer byteBuffer)
 	mVelocity.z = byteBuffer.getFloat();
 	mRotation.x = byteBuffer.getFloat();
 	mRotation.z = byteBuffer.getFloat();
+*/
+//convertIntToFloat(byteBuffer)
+	mPosition.x = convertIntToFloat(byteBuffer);
+	mPosition.y = convertIntToFloat(byteBuffer);
+	mPosition.z = convertIntToFloat(byteBuffer);
+
+	mVelocity.x = convertIntToFloat(byteBuffer);
+	mVelocity.y = convertIntToFloat(byteBuffer);
+	mVelocity.z = convertIntToFloat(byteBuffer);
+	mRotation.x = convertIntToFloat(byteBuffer);
+	mRotation.z = convertIntToFloat(byteBuffer);
+
 
 	//mesh
 	mMeshCode    = byteBuffer.get();
