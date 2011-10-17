@@ -47,7 +47,7 @@
         
     <target name="run" depends="jar">
             <java fork="true" classname="${main-class}">
-            <arg value="192.168.2.112"/>
+            <arg value="71.23.229.73"/>
                 <classpath>
                     <path refid="classpath"/>
                     <path location="${jar.dir}/${ant.project.name}.jar"/>
