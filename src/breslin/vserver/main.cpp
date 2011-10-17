@@ -122,25 +122,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	{
 		game = new GameTag();
 	}
-
-	/*
-	if (lpCmdLine == aGame)
-	{
-		game = new Game();
-	}
-	if (lpCmdLine == aTagGame)
-	{
-		game = new GameTag();
-	}
-	*/
-	//game = new Game();
 	
-/*
-	if(game->InitNetwork() != 0)
-	{
-		LogString("Could not create game server");
-	}
-*/
 	MSG WinMsg;
 	bool done = false;
 	int time, oldTime, newTime;
@@ -261,13 +243,19 @@ int keyPress(void)
 int main(int argc, char **argv)
 {
 
-	game = new GameTag();
-/*
-	if(game->InitNetwork() != 0)
+	const char* aGame    = "1";
+	const char* aGameTag = "2";
+
+	if (strcmp (argv[1],aGame) == 0)
 	{
-		LogString("Could not create game server");
+		game = new Game();
 	}
-*/
+
+	if (strcmp (argv[1],aGameTag) == 0)
+	{
+		game = new GameTag();
+	}
+
 	LogString("Welcome to Army War Server v2.0");
 	LogString("-------------------------------\n");
 
