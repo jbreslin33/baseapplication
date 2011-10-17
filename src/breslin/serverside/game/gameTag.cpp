@@ -27,7 +27,7 @@ GameTag::GameTag()
 		createAIShape(position,true,true,.66f,1,true);
 	}
 */	
-
+/*
 	Vector3D* position = new Vector3D();
 	
 	//east wall
@@ -74,7 +74,7 @@ GameTag::GameTag()
 		position->z = 10;
 		createAIShape(position,false,true,.5,0,false);
 	}
-
+*/
 }
 
 GameTag::~GameTag()
