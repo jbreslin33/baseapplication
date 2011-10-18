@@ -36,6 +36,7 @@ ShapeDynamic* mShapeDynamic;
 //rotation
 float mTurnSpeed; 
 float mServerRotSpeed;  
+float mServerRotSpeedOld;
 
 float mRotInterpLimitHigh;  
 float mRotInterpLimitLow;  

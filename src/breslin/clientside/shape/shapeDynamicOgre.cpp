@@ -265,7 +265,7 @@ Quaternion* ShapeDynamicOgre::getRotationTo(Vector3D* source, Vector3D* dest)
 {
 	Quaternion* quaternion = new Quaternion();
 
-	Vector3D* fallbackAxis = new Vector3D(0.0f,1.0f,0.0f);
+	Vector3D* fallbackAxis = new Vector3D(0.0f,0.0f,0.0f);
 
 	Vector3D* v0 = new Vector3D();
 	Vector3D* v1 = new Vector3D();
@@ -280,6 +280,7 @@ Quaternion* ShapeDynamicOgre::getRotationTo(Vector3D* source, Vector3D* dest)
     // If dot == 1, vectors are the same
     if (d >= 1.0f)
     {
+		//LogString("VECTORS ARE THE SAME!!!!!!!!!!!!!!!!");
 		Quaternion* quaternionIdentity = new Quaternion(1.0,0.0,0.0,0.0);
 		return quaternionIdentity;
     }

@@ -32,6 +32,9 @@ AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDyn
 	//////rotation
     mTurnSpeed = 250.0;
 
+	mServerRotSpeed = 0.0f;
+	mServerRotSpeedOld = 0.0f;
+
     mRotInterpLimitHigh = 6.0; //how far away from server till we try to catch up
     mRotInterpLimitLow  = 4.0; //how close to server till we are in sync
     mRotInterpIncrease  = 1.20f; //rot factor used to catchup to server
@@ -54,6 +57,7 @@ AbilityRotation::~AbilityRotation()
 void AbilityRotation::processTick()
 {
 	mProcessTickStateMachine->update();
+	//LogString("mRotSpeed:%f",mShapeDynamic->mCommandToRunOnShape->mRotSpeed);
 }
 void AbilityRotation::interpolateTick(float renderTime)
 {
@@ -100,5 +104,32 @@ void AbilityRotation::calculateServerRotationSpeed()  //rot
 	mDegreesToServer = mShapeDynamic->getDegreesToSomething(mServerRotNew);
 	
     //calculate server rotation from last tick to new one
-	mServerRotSpeed = mShapeDynamic->mGhost->getDegreesToSomething(mServerRotNew);
+	mServerRotSpeedOld = mServerRotSpeed;
+	float serverRotSpeed = mShapeDynamic->mGhost->getDegreesToSomething(mServerRotNew);
+
+	//if it's a tiny value we have an anomoly which I have not solved yet so use mServerRotSpeedOld...
+	if (serverRotSpeed < 1.0f || serverRotSpeed > -1.0f)
+	{
+		mServerRotSpeed = mServerRotSpeedOld;
+	}
+	else
+	{
+		mServerRotSpeed = serverRotSpeed;
+	}
+	LogString("mServerRotSpeed:%f",mServerRotSpeed);
 }
+/*
+void AbilityMove::regulate(Vector3D* velocityToRegulate)
+{
+	
+	if (velocityToRegulate->x > mMaximunVelocity)
+	{
+		velocityToRegulate->x = mMaximunVelocity;
+	}
+	
+	if (velocityToRegulate->x < mMaximunVelocity * -1)
+	{
+		velocityToRegulate->x = mMaximunVelocity * -1;
+	}
+}
+*/
