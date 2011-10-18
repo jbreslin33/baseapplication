@@ -116,7 +116,6 @@ void AbilityRotation::calculateServerRotationSpeed()  //rot
 	{
 		mServerRotSpeed = serverRotSpeed;
 	}
-	LogString("mServerRotSpeed:%f",mServerRotSpeed);
 }
 /*
 void AbilityMove::regulate(Vector3D* velocityToRegulate)
