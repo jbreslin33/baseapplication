@@ -15,9 +15,9 @@
 GameTag::GameTag()
 {
 	LogString("Hosting GameTag");
-/*
+
 	//ai guys, let's make them sinbads
-	for(int i = 0; i < 0; i++)
+	for(int i = 0; i < 1; i++)
 	{                 
 		Vector3D* position = new Vector3D();
 		position->x = 5.0f;
@@ -26,7 +26,9 @@ GameTag::GameTag()
 		
 		createAIShape(position,true,true,.66f,1,true);
 	}
-*/	
+	
+
+	//Grave1
 /*
 	Vector3D* position = new Vector3D();
 	
