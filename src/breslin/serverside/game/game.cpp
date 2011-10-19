@@ -83,10 +83,8 @@ unsigned int Game::getOpenIndex()
 		}
 		if (someoneHasThisIndex == false)
 		{
-			//proposedIndexOpen = true;
 			return  proposedIndex;
 		}
-
 	}
 	return 0;
 }
