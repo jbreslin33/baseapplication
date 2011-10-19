@@ -26,57 +26,6 @@ GameTag::GameTag()
 
 		createAIShape(position, new Vector3D(), new Vector3D, true, true, .66f, 1, true);
 	}
-	
-
-	//Grave1
-/*
-	Vector3D* position = new Vector3D();
-	
-	//east wall
-	for (int i = -10; i < 10; i++)
-	{
-		//collidable static shapes with no animation for now it's a WALL
-		Vector3D* position = new Vector3D();
-		position->x = 10;
-		position->y = 0;
-		position->z = 1 * i;
-		createAIShape(position, new Vector3D(), new Vector3D, false, true, .5, 0, false);
-	}
-
-
-	//west wall
-	for (int i = -10; i < 10; i++)
-	{
-		//collidable static shapes with no animation for now it's a WALL
-		Vector3D* position = new Vector3D();
-		position->x = -10;
-		position->y = 0;
-		position->z = 1 * i;
-		createAIShape(position,false,true,.5,0,false);
-	}
-
-	//north wall
-	for (int i = -10; i < 10; i = i++)
-	{
-		//collidable static shapes with no animation for now it's a WALL
-		Vector3D* position = new Vector3D();
-		position->x = 1 * i;
-		position->y = 0;
-		position->z = -10;
-		createAIShape(position, new Vector3D(), new Vector3D, false, true, .5, 0, false);
-	}
-
-	//south wall
-	for (int i = -10; i < 10; i = i++)
-	{
-		//collidable static shapes with no animation for now it's a WALL
-		Vector3D* position = new Vector3D();
-		position->x = 1 * i;
-		position->y = 0;
-		position->z = 10;
-		createAIShape(position, new Vector3D(), new Vector3D, false, true, .5, 0, false);
-	}
-*/
 }
 
 GameTag::~GameTag()

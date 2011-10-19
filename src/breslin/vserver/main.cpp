@@ -25,8 +25,10 @@
 #include <fcntl.h>
 #endif
 
+//possible games
 #include "../serverside/game/game.h"
 #include "../serverside/game/gameTag.h"
+#include "../serverside/game/gameGhostInTheGraveyard.h"
 
 #include "../serverside/server/server.h"
 #include "../serverside/network/network.h"
@@ -112,6 +114,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	const char* aGame    = "1";
 	const char* aGameTag = "2";
+	const char* aGameGhostInTheGraveyard = "3";
 
 	if (strcmp (cmdLine,aGame) == 0)
 	{
@@ -121,6 +124,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	if (strcmp (cmdLine,aGameTag) == 0)
 	{
 		game = new GameTag();
+	}
+
+	if (strcmp (cmdLine,aGameGhostInTheGraveyard) == 0)
+	{
+		game = new GameGhostInTheGraveyard();
 	}
 	
 	MSG WinMsg;
