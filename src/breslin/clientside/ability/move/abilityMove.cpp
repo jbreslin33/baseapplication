@@ -38,13 +38,13 @@ AbilityMove::AbilityMove(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
     //thresholds
     mPosInterpLimitHigh = .066f; //how far away from server till we try to catch up
     mPosInterpFactor    = 4.0f;
-	mMaximunVelocity    = .002083; //do not let velocity go above this in any direction.
+	mMaximunVelocity    = .003083f; //do not let velocity go above this in any direction.
 
 	//deltas
-	mDeltaX        = 0.0; 
-	mDeltaY		   = 0.0;
-	mDeltaZ        = 0.0;
-	mDeltaPosition = 0.0;
+	mDeltaX        = 0.0f; 
+	mDeltaY		   = 0.0f;
+	mDeltaZ        = 0.0f;
+	mDeltaPosition = 0.0f;
 }
 
 AbilityMove::~AbilityMove()
@@ -95,6 +95,7 @@ void AbilityMove::regulate(Vector3D* velocityToRegulate)
 	if (velocityToRegulate->x > mMaximunVelocity)
 	{
 		velocityToRegulate->x = mMaximunVelocity;
+
 	}
 	
 	if (velocityToRegulate->x < mMaximunVelocity * -1)
@@ -103,14 +104,14 @@ void AbilityMove::regulate(Vector3D* velocityToRegulate)
 	}
 	
 
-	//y
-	if (velocityToRegulate->y > mMaximunVelocity)
+	//z
+	if (velocityToRegulate->z > mMaximunVelocity)
 	{
-		velocityToRegulate->y = mMaximunVelocity;
+		velocityToRegulate->z = mMaximunVelocity;
 	}
 
-	if (velocityToRegulate->y < mMaximunVelocity * -1)
+	if (velocityToRegulate->z < mMaximunVelocity * -1)
 	{
-		velocityToRegulate->y = mMaximunVelocity * -1;
+		velocityToRegulate->z = mMaximunVelocity * -1;
 	}
 }

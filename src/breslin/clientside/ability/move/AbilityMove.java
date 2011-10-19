@@ -135,14 +135,14 @@ void regulate(Vector3D velocityToRegulate)
 		velocityToRegulate.x = mMaximunVelocity * -1;
 	}
 
-	if (velocityToRegulate.y > mMaximunVelocity)
+	if (velocityToRegulate.z > mMaximunVelocity)
 	{
-		velocityToRegulate.y = mMaximunVelocity;
+		velocityToRegulate.z = mMaximunVelocity;
 	}
 
-	if (velocityToRegulate.y < mMaximunVelocity * -1)
+	if (velocityToRegulate.z < mMaximunVelocity * -1)
 	{
-		velocityToRegulate.y = mMaximunVelocity * -1;
+		velocityToRegulate.z = mMaximunVelocity * -1;
 	}
 }
 

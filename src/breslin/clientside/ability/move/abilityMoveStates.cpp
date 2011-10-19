@@ -54,7 +54,7 @@ void Normal_ProcessTick_Move::enter(AbilityMove* abilityMove)
 }
 void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
-	//abilityMove->mShapeDynamic->appendToTitle("M:Normal");
+	abilityMove->mShapeDynamic->appendToTitle("M:Normal");
 
 	// if distance exceeds threshold && server velocity is zero
 	if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->isZero())
@@ -98,7 +98,7 @@ void Catchup_ProcessTick_Move::enter(AbilityMove* abilityMove)
 }
 void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
-	//abilityMove->mShapeDynamic->appendToTitle("M:Catchup");
+	abilityMove->mShapeDynamic->appendToTitle("M:Catchup");
 
 	//if we are back in sync
     if(abilityMove->mDeltaPosition <= abilityMove->mPosInterpLimitHigh || abilityMove->mShapeDynamic->mServerFrame->mMoveVelocity->isZero())
