@@ -103,7 +103,7 @@ public ShapeDynamicMonkey(GameMonkey gameMonkey, ByteBuffer byteBuffer, boolean 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
 		mGame.mShapeVector.add(this);
 		mGame.mShapeGhostVector.add(mGhost);
-		mGhost.setVisible(false);
+		mGhost.setVisible(true);
 	}
 }
 

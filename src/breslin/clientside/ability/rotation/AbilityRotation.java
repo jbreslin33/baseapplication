@@ -40,7 +40,10 @@ public AbilityRotation(ShapeDynamic shapeDynamic)
 	//mInterpolateTickStateMachine.setGlobalState       (null);
 
 	//////rotation
-    mTurnSpeed = 250.0f;
+    mTurnSpeed         = 250.0f;
+    mServerRotSpeed    = 0.0f;
+    mServerRotSpeedOld = 0.0f;
+    mGhostSpeed        = 0.0f;
 
     mRotInterpLimitHigh = 6.0f; //how far away from server till we try to catch up
     mRotInterpLimitLow  = 4.0f; //how close to server till we are in sync
@@ -67,6 +70,8 @@ ShapeDynamic mShapeDynamic;
 //rotation
 float mTurnSpeed;
 float mServerRotSpeed;
+float mServerRotSpeedOld;
+float mGhostSpeed;
 
 float mRotInterpLimitHigh;
 float mRotInterpLimitLow;
@@ -127,10 +132,22 @@ void  calculateServerRotationSpeed()
     mServerRotOld.normalise();
 
     //calculate how far off we are from server
-	mDegreesToServer = mShapeDynamic.getDegreesToSomething(mServerRotNew);
+  	mDegreesToServer = mShapeDynamic.getDegreesToSomething(mServerRotNew);
 
-    //calculate server rotation from last tick to new one
-	mServerRotSpeed = mShapeDynamic.mGhost.getDegreesToSomething(mServerRotNew);
+      //calculate server rotation from last tick to new one
+  	mServerRotSpeedOld = mServerRotSpeed;
+
+  	float serverRotSpeed = mShapeDynamic.mGhost.getDegreesToSomething(mServerRotNew);
+  	mGhostSpeed = serverRotSpeed;
+  	//if it's a tiny value we have an anomoly which I have not solved yet so use mServerRotSpeedOld...
+  	if (serverRotSpeed < 1.0f || serverRotSpeed > -1.0f)
+  	{
+  		mServerRotSpeed = mServerRotSpeedOld;
+  	}
+  	else
+  	{
+  		mServerRotSpeed = serverRotSpeed;
+	}
 }
 
 }

@@ -119,18 +119,3 @@ void AbilityRotation::calculateServerRotationSpeed()  //rot
 		mServerRotSpeed = serverRotSpeed;
 	}
 }
-/*
-void AbilityMove::regulate(Vector3D* velocityToRegulate)
-{
-	
-	if (velocityToRegulate->x > mMaximunVelocity)
-	{
-		velocityToRegulate->x = mMaximunVelocity;
-	}
-	
-	if (velocityToRegulate->x < mMaximunVelocity * -1)
-	{
-		velocityToRegulate->x = mMaximunVelocity * -1;
-	}
-}
-*/
