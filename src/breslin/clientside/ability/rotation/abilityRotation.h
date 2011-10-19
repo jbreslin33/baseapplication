@@ -37,6 +37,7 @@ ShapeDynamic* mShapeDynamic;
 float mTurnSpeed; 
 float mServerRotSpeed;  
 float mServerRotSpeedOld;
+float mGhostSpeed;
 
 float mRotInterpLimitHigh;  
 float mRotInterpLimitLow;  

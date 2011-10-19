@@ -34,6 +34,7 @@ AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDyn
 
 	mServerRotSpeed = 0.0f;
 	mServerRotSpeedOld = 0.0f;
+	mGhostSpeed        = 0.0f;
 
     mRotInterpLimitHigh = 6.0; //how far away from server till we try to catch up
     mRotInterpLimitLow  = 4.0; //how close to server till we are in sync
@@ -105,8 +106,9 @@ void AbilityRotation::calculateServerRotationSpeed()  //rot
 	
     //calculate server rotation from last tick to new one
 	mServerRotSpeedOld = mServerRotSpeed;
+	
 	float serverRotSpeed = mShapeDynamic->mGhost->getDegreesToSomething(mServerRotNew);
-
+	mGhostSpeed = serverRotSpeed;
 	//if it's a tiny value we have an anomoly which I have not solved yet so use mServerRotSpeedOld...
 	if (serverRotSpeed < 1.0f || serverRotSpeed > -1.0f)
 	{
