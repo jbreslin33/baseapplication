@@ -91,18 +91,9 @@ unsigned int Game::getOpenIndex()
 	return 0;
 }
 
-void Game::createAIShape(Vector3D* position, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai)
+void Game::createAIShape(Vector3D* position, Vector3D* rotation, Vector3D* velocity, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai)
 {
-	Vector3D* vel = new Vector3D();
-	vel->x = 0;
-	vel->y = 0;
-	vel->z = 0;
-
-	Vector3D* rot = new Vector3D();
-	rot->x = 0;
-	rot->z = 0;
-
-	Shape* shape = new Shape(position,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
+	Shape* shape = new Shape(position,velocity,rotation,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
 	shape->mGame = this; //for now to give access to shapeVector for collision i guess
 	mShapeVector.push_back(shape); //either way add this to shape vector
 

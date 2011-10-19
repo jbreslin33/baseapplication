@@ -23,8 +23,8 @@ GameTag::GameTag()
 		position->x = 5.0f;
 		position->y = 0.0f;
 		position->z = 2.0f * i;
-		
-		createAIShape(position,true,true,.66f,1,true);
+
+		createAIShape(position, new Vector3D(), new Vector3D, true, true, .66f, 1, true);
 	}
 	
 
@@ -40,7 +40,7 @@ GameTag::GameTag()
 		position->x = 10;
 		position->y = 0;
 		position->z = 1 * i;
-		createAIShape(position,false,true,.5,0,false);
+		createAIShape(position, new Vector3D(), new Vector3D, false, true, .5, 0, false);
 	}
 
 
@@ -63,7 +63,7 @@ GameTag::GameTag()
 		position->x = 1 * i;
 		position->y = 0;
 		position->z = -10;
-		createAIShape(position,false,true,.5,0,false);
+		createAIShape(position, new Vector3D(), new Vector3D, false, true, .5, 0, false);
 	}
 
 	//south wall
@@ -74,7 +74,7 @@ GameTag::GameTag()
 		position->x = 1 * i;
 		position->y = 0;
 		position->z = 10;
-		createAIShape(position,false,true,.5,0,false);
+		createAIShape(position, new Vector3D(), new Vector3D, false, true, .5, 0, false);
 	}
 */
 }
