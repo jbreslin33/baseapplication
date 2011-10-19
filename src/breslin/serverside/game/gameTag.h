@@ -13,6 +13,7 @@ GameTag();
 
 //shapes
 virtual void createClientAvatar(Client* client, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
+virtual void checkCollisions();
 
 Shape* mItShape;
   
