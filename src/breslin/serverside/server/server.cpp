@@ -34,7 +34,6 @@ Server::~Server()
 //send a shape that has a client. i.e. a new human player
 void Server::sendAddShape(Client* client)
 {
-
 	// init mMessage for client
 	client->mMessage.Init(client->mMessage.outgoingData,
 		sizeof(client->mMessage.outgoingData));
