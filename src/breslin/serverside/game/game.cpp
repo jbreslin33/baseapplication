@@ -303,13 +303,19 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 
 //does this even care that a client is passed it? other than that it needs it access mShape? which
 //i should already have?
-void Game::buildDeltaMoveCommand(Message *mes, Shape* shape)
+void Game::buildDeltaMoveCommand(Message* mes, Shape* shape)
 {
 	Command* command = &shape->mCommand;
-	
-	int flags = 0;
 
-/********** CHECK WHAT NEEDS TO BE UPDATED *****************/
+	int flags = setFlag(command,shape);
+	buildDeltaMoveMessage(command,flags,mes,shape);
+
+}
+
+int Game::setFlag(Command* command, Shape* shape)
+{
+
+	int flags = 0;
 
 	//Origin
 	if(shape->mLastCommand.mPosition.x != command->mPosition.x)
@@ -340,50 +346,47 @@ void Game::buildDeltaMoveCommand(Message *mes, Shape* shape)
 	{
 		flags |= CMD_MILLISECONDS;
 	}
+	return flags;
+}
 
-	/******ADD TO THE MESSAGE *****/
-
-	//check scope first....
-	//let's check within 10000
-
-	mes->WriteByte(shape->mIndex);
-	//LogString("id:%d",shape->mIndex);
+void Game::buildDeltaMoveMessage(Command* command, int flags, Message* message, Shape* shape)
+{
+	message->WriteByte(shape->mIndex);
 
 	// Flags
-	mes->WriteByte(flags);  
+	message->WriteByte(flags);  
 
 	//Origin
 	if(flags & CMD_ORIGIN_X)
 	{
-		mes->WriteFloat(command->mPosition.x);
+		message->WriteFloat(command->mPosition.x);
 	}
 	if(flags & CMD_ORIGIN_Y)
 	{
-		mes->WriteFloat(command->mPosition.y);
+		message->WriteFloat(command->mPosition.y);
 	}
 	if(flags & CMD_ORIGIN_Z)
 	{
-		mes->WriteFloat(command->mPosition.z);
+		message->WriteFloat(command->mPosition.z);
 	}
 
 	//Rotation
 	if(flags & CMD_ROTATION_X)
 	{
-		mes->WriteFloat(command->mRotation.x);
+		message->WriteFloat(command->mRotation.x);
 		//LogString("x:%f",command->mRotation.x);
 
 	}
 	if(flags & CMD_ROTATION_Z)
 	{
-		mes->WriteFloat(command->mRotation.z);
+		message->WriteFloat(command->mRotation.z);
 		//LogString("z:%f",command->mRotation.z);
 	}
 
 	//Milliseconds
 	if(flags & CMD_MILLISECONDS)
 	{
-		mes->WriteByte(command->mMillisecondsTotal);
+		message->WriteByte(command->mMillisecondsTotal);
 	}
-
-	//shape->mCommand.mMillisecondsTotal = 0;
 }
+

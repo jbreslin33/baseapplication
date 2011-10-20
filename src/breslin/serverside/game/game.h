@@ -72,7 +72,11 @@ public:
 	void	sendCommand(void);
 	void	sendExitNotification(void);
 	void	readDeltaMoveCommand(Message *mes, Client *client);
-	void	buildDeltaMoveCommand(Message *mes, Shape* shape);
+	
+	//delta move command
+	void buildDeltaMoveCommand(Message *mes, Shape* shape);
+	int  setFlag(Command* command, Shape* shape);
+	void buildDeltaMoveMessage(Command* command, int flags, Message* message, Shape* shape);
 
 	//time
 	void	frame(int msec);
