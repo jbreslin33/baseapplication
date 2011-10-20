@@ -113,3 +113,90 @@ void GameTag::checkCollisions(void)
 	}
 }
 
+void GameTag::buildDeltaMoveCommand(Message* mes, Shape* shape)
+{
+	Command* command = &shape->mCommand;
+
+	int flags = setFlag(command,shape);
+	buildDeltaMoveMessage(command,flags,mes,shape);
+}
+
+
+int GameTag::setFlag(Command* command, Shape* shape)
+{
+
+	int flags = 0;
+
+	//Origin
+	if(shape->mLastCommand.mPosition.x != command->mPosition.x)
+	{
+		flags |= CMD_ORIGIN_X;
+	}
+	if(shape->mLastCommand.mPosition.y != command->mPosition.y)
+	{
+		flags |= CMD_ORIGIN_Y;
+	}
+	if(shape->mLastCommand.mPosition.z != command->mPosition.z)
+	{
+		flags |= CMD_ORIGIN_Z;
+	}
+
+	//Rotation
+	if(shape->mLastCommand.mRotation.x != command->mRotation.x)
+	{
+		flags |= CMD_ROTATION_X;
+	}
+	if(shape->mLastCommand.mRotation.z != command->mRotation.z)
+	{
+		flags |= CMD_ROTATION_Z;
+	}
+	
+	//Milliseconds
+	if(shape->mLastCommand.mMillisecondsTotal != command->mMillisecondsTotal)
+	{
+		flags |= CMD_MILLISECONDS;
+	}
+	return flags;
+}
+
+void GameTag::buildDeltaMoveMessage(Command* command, int flags, Message* message, Shape* shape)
+{
+	message->WriteByte(shape->mIndex);
+
+	// Flags
+	message->WriteByte(flags);  
+
+	//Origin
+	if(flags & CMD_ORIGIN_X)
+	{
+		message->WriteFloat(command->mPosition.x);
+	}
+	if(flags & CMD_ORIGIN_Y)
+	{
+		message->WriteFloat(command->mPosition.y);
+	}
+	if(flags & CMD_ORIGIN_Z)
+	{
+		message->WriteFloat(command->mPosition.z);
+	}
+
+	//Rotation
+	if(flags & CMD_ROTATION_X)
+	{
+		message->WriteFloat(command->mRotation.x);
+		//LogString("x:%f",command->mRotation.x);
+
+	}
+	if(flags & CMD_ROTATION_Z)
+	{
+		message->WriteFloat(command->mRotation.z);
+		//LogString("z:%f",command->mRotation.z);
+	}
+
+	//Milliseconds
+	if(flags & CMD_MILLISECONDS)
+	{
+		message->WriteByte(command->mMillisecondsTotal);
+	}
+}
+

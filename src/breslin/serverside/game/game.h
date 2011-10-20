@@ -74,9 +74,9 @@ public:
 	void	readDeltaMoveCommand(Message *mes, Client *client);
 	
 	//delta move command
-	void buildDeltaMoveCommand(Message *mes, Shape* shape);
-	int  setFlag(Command* command, Shape* shape);
-	void buildDeltaMoveMessage(Command* command, int flags, Message* message, Shape* shape);
+	virtual void buildDeltaMoveCommand(Message *mes, Shape* shape);
+	virtual int  setFlag(Command* command, Shape* shape);
+	virtual void buildDeltaMoveMessage(Command* command, int flags, Message* message, Shape* shape);
 
 	//time
 	void	frame(int msec);
