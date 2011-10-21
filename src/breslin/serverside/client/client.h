@@ -47,11 +47,6 @@
 // Note (for all messages - system and user):
 // positive = sequenced message
 // negative = un-sequenced message
-#define DREAMSOCK_MES_CONNECT		-101
-#define DREAMSOCK_MES_DISCONNECT	-102
-#define DREAMSOCK_MES_ADDSHAPE		-103
-#define DREAMSOCK_MES_REMOVESHAPE	-104
-#define DREAMSOCK_MES_PING			-105
 
 // Error codes
 #define DREAMSOCK_SERVER_ERROR			1

@@ -21,11 +21,6 @@
 // Note (for all messages - system and user):
 // positive = sequenced message
 // negative = un-sequenced message
-#define DREAMSOCK_MES_CONNECT		-101
-#define DREAMSOCK_MES_DISCONNECT	-102
-#define DREAMSOCK_MES_ADDSHAPE		-103
-#define DREAMSOCK_MES_REMOVESHAPE	-104
-#define DREAMSOCK_MES_PING			-105
 
 // Introduce classes
 class Network;
@@ -67,6 +62,13 @@ public:
 
 	void	readPackets(void);
 	const char *mLocalIP;
+
+	//codes
+	static const int mConnect     = -101;
+	static const int mDisconnect  = -102;
+	static const int mAddShape    = -103;
+	static const int mRemoveShape = -104;
+
 };
 
 #endif

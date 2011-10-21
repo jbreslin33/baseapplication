@@ -22,6 +22,12 @@ Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 	mNetwork = new Network(localIP, port);
 
 	init = true;
+
+	//codes
+	//mConnect      = -101;
+//	mDisconnect   = -102;
+//	mAddShape     = -103;
+//	mRemoveShape  = -104;
 }
 
 Server::~Server()
@@ -39,7 +45,7 @@ void Server::sendAddShape(Client* client)
 		sizeof(client->mMessage.outgoingData));
 
 	//this a new client so let him change to connectionState = DREAMSOCK_CONNECTED; 
-	client->mMessage.WriteByte(DREAMSOCK_MES_CONNECT);	// type
+	client->mMessage.WriteByte(mConnect);	// type
 	LogString("sending a Connect message -101");
 	client->SendPacket(&client->mMessage);
 
@@ -51,7 +57,7 @@ void Server::sendAddShape(Client* client)
 		client->mMessage.Init(client->mMessage.outgoingData,
 			sizeof(client->mMessage.outgoingData));
 
-		client->mMessage.WriteByte(DREAMSOCK_MES_ADDSHAPE); // tell internet clients to add a shape
+		client->mMessage.WriteByte(mAddShape); // tell internet clients to add a shape
 
 		if (mGame->mShapeVector.at(i) == client->mShape)
 		{
@@ -99,7 +105,7 @@ void Server::sendAddShape(Client* client)
 			mClientVector.at(i)->mMessage.Init(mClientVector.at(i)->mMessage.outgoingData,
 				sizeof(mClientVector.at(i)->mMessage.outgoingData));
 
-			mClientVector.at(i)->mMessage.WriteByte(DREAMSOCK_MES_ADDSHAPE); // type
+			mClientVector.at(i)->mMessage.WriteByte(mAddShape); // type
 			mClientVector.at(i)->mMessage.WriteByte(0);
 			mClientVector.at(i)->mMessage.WriteByte(client->mShape->mIndex);
 			
@@ -138,7 +144,7 @@ void Server::sendAddAIShape(Shape* shape)
 		mClientVector.at(i)->mMessage.Init(mClientVector.at(i)->mMessage.outgoingData,
 			sizeof(mClientVector.at(i)->mMessage.outgoingData));
 
-		mClientVector.at(i)->mMessage.WriteByte(DREAMSOCK_MES_ADDSHAPE); // type
+		mClientVector.at(i)->mMessage.WriteByte(mAddShape); // type
 		mClientVector.at(i)->mMessage.WriteByte(0);
 		mClientVector.at(i)->mMessage.WriteByte(shape->mIndex);
 
@@ -175,7 +181,7 @@ void Server::sendRemoveShape(Shape* shape)
 		mClientVector.at(i)->mMessage.Init(mClientVector.at(i)->mMessage.outgoingData,
 			sizeof(mClientVector.at(i)->mMessage.outgoingData));
 
-		mClientVector.at(i)->mMessage.WriteByte(DREAMSOCK_MES_REMOVESHAPE);	// type
+		mClientVector.at(i)->mMessage.WriteByte(mRemoveShape);	// type
 		mClientVector.at(i)->mMessage.WriteByte(index);							// index
 	}
 	sendPackets();
@@ -219,7 +225,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	mes->BeginReading();
     int type = mes->ReadByte();
 	//LogString("pp");
-	if (type == DREAMSOCK_MES_CONNECT)
+	if (type == mConnect)
 	{
 				addClient(address);
 				LogString("LIBRARY: Server: a client connected succesfully");
@@ -259,7 +265,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				// Parse through the system messages
 				switch(type)
 				{
-					case DREAMSOCK_MES_DISCONNECT:
+					case mDisconnect:
 						//if(mClientVector.at(i) == NULL)
 						//	break;
 
@@ -296,7 +302,7 @@ int Server::checkForTimeout(char *data, struct sockaddr *from)
 			// receive notification of a client disconnecting
 			Message mes;
 			mes.Init(data, sizeof(data));
-			mes.WriteByte(DREAMSOCK_MES_DISCONNECT);
+			mes.WriteByte(mDisconnect);
 
 			*(struct sockaddr *) from = *mClientVector.at(i)->GetSocketAddress();
 
@@ -398,11 +404,11 @@ void Server::readPackets(void)
 			// Check the type of the message
 			switch(type)
 			{
-			case DREAMSOCK_MES_CONNECT:
+			case mConnect:
 
 				break;
 
-			case DREAMSOCK_MES_DISCONNECT:
+			case mDisconnect:
 
 				for (unsigned int i = 0; i < mClientVector.size(); i++)
 				{
