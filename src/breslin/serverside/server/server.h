@@ -35,7 +35,7 @@ public:
 	void			sendAddShape(Client* client);
 	void			sendRemoveShape(Shape* shape);
 	void			addClient(struct sockaddr *address);
-
+	void			writeAddShape(Client* client, char local);
 	void			removeClient(Client *client);
 
 	

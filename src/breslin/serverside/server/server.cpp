@@ -36,6 +36,31 @@ Server::~Server()
 	mNetwork->dreamSock_CloseSocket(mNetwork->mSocket);
 }
 
+void Server::writeAddShape(Client* client, char local)
+{
+			client->mMessage.WriteByte(mAddShape); // type
+			client->mMessage.WriteByte(local);
+			client->mMessage.WriteByte(client->mShape->mIndex);
+			
+			client->mMessage.WriteFloat(client->mShape->mCommand.mPosition.x);
+			client->mMessage.WriteFloat(client->mShape->mCommand.mPosition.y);
+			client->mMessage.WriteFloat(client->mShape->mCommand.mPosition.z);
+
+
+			client->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.x);
+			client->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.y);
+			client->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.z);
+
+
+			client->mMessage.WriteFloat(client->mShape->mCommand.mRotation.x);
+			client->mMessage.WriteFloat(client->mShape->mCommand.mRotation.z);
+			
+			//mesh
+			client->mMessage.WriteByte(client->mShape->mMeshCode);
+
+			//animation
+			client->mMessage.WriteByte(client->mShape->mAnimated);
+}
 
 //send a shape that has a client. i.e. a new human player
 void Server::sendAddShape(Client* client)
@@ -46,7 +71,6 @@ void Server::sendAddShape(Client* client)
 
 	//this a new client so let him change to connectionState = DREAMSOCK_CONNECTED; 
 	client->mMessage.WriteByte(mConnect);	// type
-	LogString("sending a Connect message -101");
 	client->SendPacket(&client->mMessage);
 
 	// First inform the new client of the other shapes by looping thru entire
@@ -104,7 +128,8 @@ void Server::sendAddShape(Client* client)
 			//init mMessage for client
 			mClientVector.at(i)->mMessage.Init(mClientVector.at(i)->mMessage.outgoingData,
 				sizeof(mClientVector.at(i)->mMessage.outgoingData));
-
+			writeAddShape(mClientVector.at(i),0);
+/*
 			mClientVector.at(i)->mMessage.WriteByte(mAddShape); // type
 			mClientVector.at(i)->mMessage.WriteByte(0);
 			mClientVector.at(i)->mMessage.WriteByte(client->mShape->mIndex);
@@ -127,6 +152,7 @@ void Server::sendAddShape(Client* client)
 
 			//animation
 			mClientVector.at(i)->mMessage.WriteByte(client->mShape->mAnimated);
+			*/
 			
 			mClientVector.at(i)->SendPacket(&mClientVector.at(i)->mMessage);
 		}
