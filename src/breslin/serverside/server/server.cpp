@@ -46,15 +46,13 @@ void Server::writeAddShape(Client* client, char local)
 			client->mMessage.WriteFloat(client->mShape->mCommand.mPosition.y);
 			client->mMessage.WriteFloat(client->mShape->mCommand.mPosition.z);
 
-
 			client->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.x);
 			client->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.y);
 			client->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.z);
 
-
 			client->mMessage.WriteFloat(client->mShape->mCommand.mRotation.x);
 			client->mMessage.WriteFloat(client->mShape->mCommand.mRotation.z);
-			
+
 			//mesh
 			client->mMessage.WriteByte(client->mShape->mMeshCode);
 
@@ -81,18 +79,21 @@ void Server::sendAddShape(Client* client)
 		client->mMessage.Init(client->mMessage.outgoingData,
 			sizeof(client->mMessage.outgoingData));
 
-		client->mMessage.WriteByte(mAddShape); // tell internet clients to add a shape
+		//client->mMessage.WriteByte(mAddShape); // tell internet clients to add a shape
 
 		if (mGame->mShapeVector.at(i) == client->mShape)
 		{
-			client->mMessage.WriteByte(1);	// local shape
-			client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mIndex);
+			writeAddShape(client,1);
+			//client->mMessage.WriteByte(1);	// local shape
+			//client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mIndex);
 		}
 		else
 		{
-			client->mMessage.WriteByte(0);	// not-local shape
-			client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mIndex);
+			writeAddShape(client,0);
+			//client->mMessage.WriteByte(0);	// not-local shape
+			//client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mIndex);
 		}
+		/*
 		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPosition.x);
 		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPosition.y);
 		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPosition.z);
@@ -111,7 +112,7 @@ void Server::sendAddShape(Client* client)
 
 		//animate
 		client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mAnimated);
-		
+		*/
 		client->SendPacket(&client->mMessage);
 	}
 
@@ -129,31 +130,6 @@ void Server::sendAddShape(Client* client)
 			mClientVector.at(i)->mMessage.Init(mClientVector.at(i)->mMessage.outgoingData,
 				sizeof(mClientVector.at(i)->mMessage.outgoingData));
 			writeAddShape(mClientVector.at(i),0);
-/*
-			mClientVector.at(i)->mMessage.WriteByte(mAddShape); // type
-			mClientVector.at(i)->mMessage.WriteByte(0);
-			mClientVector.at(i)->mMessage.WriteByte(client->mShape->mIndex);
-			
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPosition.x);
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPosition.y);
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPosition.z);
-
-
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.x);
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.y);
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.z);
-
-
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mRotation.x);
-			mClientVector.at(i)->mMessage.WriteFloat(client->mShape->mCommand.mRotation.z);
-			
-			//mesh
-			mClientVector.at(i)->mMessage.WriteByte(client->mShape->mMeshCode);
-
-			//animation
-			mClientVector.at(i)->mMessage.WriteByte(client->mShape->mAnimated);
-			*/
-			
 			mClientVector.at(i)->SendPacket(&mClientVector.at(i)->mMessage);
 		}
 	}
@@ -169,7 +145,8 @@ void Server::sendAddAIShape(Shape* shape)
 		//init mMessage for client
 		mClientVector.at(i)->mMessage.Init(mClientVector.at(i)->mMessage.outgoingData,
 			sizeof(mClientVector.at(i)->mMessage.outgoingData));
-
+		writeAddShape(mClientVector.at(i),0);
+/*
 		mClientVector.at(i)->mMessage.WriteByte(mAddShape); // type
 		mClientVector.at(i)->mMessage.WriteByte(0);
 		mClientVector.at(i)->mMessage.WriteByte(shape->mIndex);
@@ -191,7 +168,7 @@ void Server::sendAddAIShape(Shape* shape)
 
 		//animated
 		mClientVector.at(i)->mMessage.WriteByte(shape->mAnimated);
-
+*/
 		mClientVector.at(i)->SendPacket(&mClientVector.at(i)->mMessage);
 	}
 }
