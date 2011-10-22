@@ -44,7 +44,6 @@ void Server::writeAddShape(Client* client, Shape* shape, char local)
 	client->mMessage.WriteFloat(shape->mCommand.mPositionVelocity.y);
 	client->mMessage.WriteFloat(shape->mCommand.mPositionVelocity.z);
 
-
 	client->mMessage.WriteFloat(shape->mCommand.mRotation.x);
 	client->mMessage.WriteFloat(shape->mCommand.mRotation.z);
 			
@@ -116,6 +115,8 @@ void Server::sendAddAIShape(Shape* shape)
 		mClientVector.at(i)->mMessage.Init(mClientVector.at(i)->mMessage.outgoingData,
 			sizeof(mClientVector.at(i)->mMessage.outgoingData));
 
+		writeAddShape(mClientVector.at(i),shape,0);
+/*
 		mClientVector.at(i)->mMessage.WriteByte(mAddShape); // type
 		mClientVector.at(i)->mMessage.WriteByte(0);
 		mClientVector.at(i)->mMessage.WriteByte(shape->mIndex);
@@ -137,7 +138,7 @@ void Server::sendAddAIShape(Shape* shape)
 
 		//animated
 		mClientVector.at(i)->mMessage.WriteByte(shape->mAnimated);
-
+*/
 		mClientVector.at(i)->SendPacket(&mClientVector.at(i)->mMessage);
 	}
 }
