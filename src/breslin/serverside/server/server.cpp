@@ -52,6 +52,19 @@ void Server::writeAddShape(Client* client, Shape* shape, char local, bool skipNe
 
 	//animation
 	client->mMessage.WriteByte(shape->mAnimated);
+
+	//send it
+	client->SendPacket(&client->mMessage);
+}
+
+void Server::writeAddShapes(Client* client, Shape* shape, char local, bool skipNewClient)
+{
+	for (unsigned int i = 0; i < mClientVector.size(); i++)
+	{
+		client = mClientVector.at(i);
+
+		writeAddShape(client,shape,local,skipNewClient);
+	}
 }
 
 //send a shape that has a client. i.e. a new human player
@@ -72,7 +85,6 @@ void Server::sendAddShape(Client* client)
 		client->mMessage.Init(client->mMessage.outgoingData,
 			sizeof(client->mMessage.outgoingData));
 
-		writeAddShape(client,mGame->mShapeVector.at(i),1,false);
 		if (mGame->mShapeVector.at(i) == client->mShape)
 		{
 			writeAddShape(client,mGame->mShapeVector.at(i), 1, false);
@@ -81,7 +93,6 @@ void Server::sendAddShape(Client* client)
 		{
 			writeAddShape(client,mGame->mShapeVector.at(i), 0, false);
 		}
-		client->SendPacket(&client->mMessage);
 	}
 
 	// Then tell the others about the new shape
@@ -99,8 +110,6 @@ void Server::sendAddShape(Client* client)
 				sizeof(mClientVector.at(i)->mMessage.outgoingData));
 
 			writeAddShape(mClientVector.at(i), mClientVector.at(i)->mShape, 0, false);
-			
-			mClientVector.at(i)->SendPacket(&mClientVector.at(i)->mMessage);
 		}
 	}
 }
@@ -108,18 +117,7 @@ void Server::sendAddShape(Client* client)
 //this is your serverside guy. he has no client, but we still need to tell everyone about the chap
 void Server::sendAddAIShape(Shape* shape)
 {
-	// Send 'Add Shape' message to every client
-	// Then tell the others about the new shape
-	for (unsigned int i = 0; i < mClientVector.size(); i++)
-	{
-		//init mMessage for client
-		mClientVector.at(i)->mMessage.Init(mClientVector.at(i)->mMessage.outgoingData,
-			sizeof(mClientVector.at(i)->mMessage.outgoingData));
-
-		writeAddShape(mClientVector.at(i),shape,0, false);
-
-		mClientVector.at(i)->SendPacket(&mClientVector.at(i)->mMessage);
-	}
+	writeAddShapes(0,shape,0, false);
 }
 
 void Server::sendRemoveShape(Shape* shape)
