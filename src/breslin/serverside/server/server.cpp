@@ -30,30 +30,30 @@ Server::~Server()
 	mNetwork->dreamSock_CloseSocket(mNetwork->mSocket);
 }
 
-void Server::writeAddShape(Client* client, char local)
+void Server::writeAddShape(Client* client, Shape* shape, char local)
 {
 			client->mMessage.WriteByte(mAddShape); // type
 			client->mMessage.WriteByte(local);
-			client->mMessage.WriteByte(client->mShape->mIndex);
+			client->mMessage.WriteByte(shape->mIndex);
 			
-			client->mMessage.WriteFloat(client->mShape->mCommand.mPosition.x);
-			client->mMessage.WriteFloat(client->mShape->mCommand.mPosition.y);
-			client->mMessage.WriteFloat(client->mShape->mCommand.mPosition.z);
+			client->mMessage.WriteFloat(shape->mCommand.mPosition.x);
+			client->mMessage.WriteFloat(shape->mCommand.mPosition.y);
+			client->mMessage.WriteFloat(shape->mCommand.mPosition.z);
 
 
-			client->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.x);
-			client->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.y);
-			client->mMessage.WriteFloat(client->mShape->mCommand.mPositionVelocity.z);
+			client->mMessage.WriteFloat(shape->mCommand.mPositionVelocity.x);
+			client->mMessage.WriteFloat(shape->mCommand.mPositionVelocity.y);
+			client->mMessage.WriteFloat(shape->mCommand.mPositionVelocity.z);
 
 
-			client->mMessage.WriteFloat(client->mShape->mCommand.mRotation.x);
-			client->mMessage.WriteFloat(client->mShape->mCommand.mRotation.z);
+			client->mMessage.WriteFloat(shape->mCommand.mRotation.x);
+			client->mMessage.WriteFloat(shape->mCommand.mRotation.z);
 			
 			//mesh
-			client->mMessage.WriteByte(client->mShape->mMeshCode);
+			client->mMessage.WriteByte(shape->mMeshCode);
 
 			//animation
-			client->mMessage.WriteByte(client->mShape->mAnimated);
+			client->mMessage.WriteByte(shape->mAnimated);
 }
 
 //send a shape that has a client. i.e. a new human player
@@ -75,18 +75,21 @@ void Server::sendAddShape(Client* client)
 		client->mMessage.Init(client->mMessage.outgoingData,
 			sizeof(client->mMessage.outgoingData));
 
-		client->mMessage.WriteByte(mAddShape); // tell internet clients to add a shape
-
+		//client->mMessage.WriteByte(mAddShape); // tell internet clients to add a shape
+		writeAddShape(client,mGame->mShapeVector.at(i),1);
 		if (mGame->mShapeVector.at(i) == client->mShape)
 		{
-			client->mMessage.WriteByte(1);	// local shape
-			client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mIndex);
+			writeAddShape(client,mGame->mShapeVector.at(i),1);
+			//client->mMessage.WriteByte(1);	// local shape
+			//client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mIndex);
 		}
 		else
 		{
-			client->mMessage.WriteByte(0);	// not-local shape
-			client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mIndex);
+			writeAddShape(client,mGame->mShapeVector.at(i),0);
+			//client->mMessage.WriteByte(0);	// not-local shape
+			//client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mIndex);
 		}
+		/*
 		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPosition.x);
 		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPosition.y);
 		client->mMessage.WriteFloat(mGame->mShapeVector.at(i)->mCommand.mPosition.z);
@@ -105,7 +108,7 @@ void Server::sendAddShape(Client* client)
 
 		//animate
 		client->mMessage.WriteByte(mGame->mShapeVector.at(i)->mAnimated);
-		
+		*/
 		client->SendPacket(&client->mMessage);
 	}
 
@@ -122,7 +125,7 @@ void Server::sendAddShape(Client* client)
 			//init mMessage for client
 			mClientVector.at(i)->mMessage.Init(mClientVector.at(i)->mMessage.outgoingData,
 				sizeof(mClientVector.at(i)->mMessage.outgoingData));
-			writeAddShape(mClientVector.at(i),0);
+			writeAddShape(mClientVector.at(i), mClientVector.at(i)->mShape, 0);
 /*
 			mClientVector.at(i)->mMessage.WriteByte(mAddShape); // type
 			mClientVector.at(i)->mMessage.WriteByte(0);
