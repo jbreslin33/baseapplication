@@ -61,9 +61,16 @@ void Server::writeAddShapes(Client* client, Shape* shape, char local, bool skipN
 {
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
-		client = mClientVector.at(i);
+		if (skipNewClient)
+		{
+			if(mClientVector.at(i) == client)
+			{
+				continue;
+			}
+			client = mClientVector.at(i);
 
-		writeAddShape(client,shape,local,skipNewClient);
+			writeAddShape(client,shape,local,skipNewClient);
+		}
 	}
 }
 
@@ -96,22 +103,7 @@ void Server::sendAddShape(Client* client)
 	}
 
 	// Then tell the others about the new shape
-	for (unsigned int i = 0; i < mClientVector.size(); i++)
-	{
-		//don't send to the client you allready sent to above...
-		if(mClientVector.at(i) == client)
-		{
-			continue;
-		}
-		else //inform everyone else
-		{
-			//init mMessage for client
-			mClientVector.at(i)->mMessage.Init(mClientVector.at(i)->mMessage.outgoingData,
-				sizeof(mClientVector.at(i)->mMessage.outgoingData));
-
-			writeAddShape(mClientVector.at(i), mClientVector.at(i)->mShape, 0, false);
-		}
-	}
+	writeAddShapes(client,client->mShape,0,true);
 }
 
 //this is your serverside guy. he has no client, but we still need to tell everyone about the chap
