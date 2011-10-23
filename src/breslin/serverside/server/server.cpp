@@ -32,8 +32,6 @@ Server::~Server()
 
 void Server::writeAddShape(Client* client, Shape* shape)
 {
-	//Client* client = shape->mClient;
-
 	client->mMessage.Init(client->mMessage.outgoingData, sizeof(client->mMessage.outgoingData));
 
 	client->mMessage.WriteByte(mAddShape); // type
@@ -64,8 +62,6 @@ void Server::writeAddShape(Client* client, Shape* shape)
 
 	//animation
 	client->mMessage.WriteByte(shape->mAnimated);
-
-
 }
 
 //to all clients
