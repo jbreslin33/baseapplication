@@ -69,32 +69,38 @@ void Server::writeAddShape(Client* client, Shape* shape)
 
 }
 
+//to all clients
 void Server::sendAddShape(Shape* shape)
 {
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
 		Client* client = mClientVector.at(i);
+		
 		//write it
 		writeAddShape(client,shape);
 		
 		//send it
 		client->SendPacket(&client->mMessage);
 	}
+}
 
-	//this shape we are adding has a client so that client is going to need to know about all the shapes.
-	/*
-	if (shape->mClient)
+//to just one client
+void Server::sendAddShape(Client* client)
+{
+	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
 	{
-		for (unsigned int j = 0; j < mGame->mShapeVector.size(); j++)
+		if (client)
 		{
-			if (mGame->mShapeVector.at(j) != shape)
+			if (client->mShape != mGame->mShapeVector.at(i))
 			{
-				LogString("add ai guy");
-				writeAddShape(mGame->mShapeVector.at(j));
+				//write it
+				writeAddShape(client,mGame->mShapeVector.at(i));
+		
+				//send it
+				client->SendPacket(&client->mMessage);
 			}
 		}
 	}
-	*/
 }
 
 void Server::sendRemoveShape(Shape* shape)
@@ -143,6 +149,7 @@ void Server::addClient(struct sockaddr *address)
 	client->SendPacket(&client->mMessage);
 
 	sendAddShape(client->mShape);
+	sendAddShape(client);
 }
 
 void Server::removeClient(Client *client)
