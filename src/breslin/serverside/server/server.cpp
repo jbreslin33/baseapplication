@@ -66,16 +66,19 @@ void Server::writeAddShape(Client* client, Shape* shape)
 	//animation
 	client->mMessage.WriteByte(shape->mAnimated);
 
-	//send it
-	client->SendPacket(&client->mMessage);
+
 }
 
 void Server::sendAddShape(Shape* shape)
 {
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
-		LogString("how many more times!");
-		writeAddShape(mClientVector.at(i),shape);
+		Client* client = mClientVector.at(i);
+		//write it
+		writeAddShape(client,shape);
+		
+		//send it
+		client->SendPacket(&client->mMessage);
 	}
 
 	//this shape we are adding has a client so that client is going to need to know about all the shapes.
