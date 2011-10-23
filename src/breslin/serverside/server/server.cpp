@@ -165,12 +165,13 @@ void Server::removeClient(Client *client)
 void Server::parsePacket(Message *mes, struct sockaddr *address)
 {
 	mes->BeginReading();
-    int type = mes->ReadByte();
-	//LogString("pp");
+
+	int type = mes->ReadByte();
+
 	if (type == mConnect)
 	{
 		addClient(address);
-		LogString("LIBRARY: Server: a client connected succesfully");
+		//LogString("LIBRARY: Server: a client connected succesfully");
 	}
 	else
 	{

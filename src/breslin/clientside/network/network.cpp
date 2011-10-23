@@ -424,11 +424,9 @@ void Network::readPackets()
 		switch(type)
 		{
 			case mParser->mMessageConnect:
-				LogString("got connect");
 			break;
 
 			case mParser->mMessageAddShape:
-				LogString("adding a shape message recieved");
 				mGame->addShape(true,byteBuffer);
 			break;
 
