@@ -94,7 +94,6 @@ void Game::createAIShape(Vector3D* position, Vector3D* rotation, Vector3D* veloc
 	Shape* shape = new Shape(position,velocity,rotation,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
 	shape->mGame = this; //for now to give access to shapeVector for collision i guess
 	mShapeVector.push_back(shape); //either way add this to shape vector
-	LogString("sendAddShape from createAIShape");
 	mServer->sendAddShape(shape);
 }
 

@@ -47,7 +47,6 @@ void Server::writeAddShape(Client* client, Shape* shape)
 		client->mMessage.WriteByte(0);
 	}
 	client->mMessage.WriteByte(shape->mIndex);
-	LogString("mIndex:%d",shape->mIndex);
 			
 	client->mMessage.WriteFloat(shape->mCommand.mPosition.x);
 	client->mMessage.WriteFloat(shape->mCommand.mPosition.y);
@@ -136,10 +135,6 @@ void Server::addClient(struct sockaddr *address)
 
 	mGame->createClientAvatar(client,true,true,.66f,1,false);
 
-	//LogString("LIB: Adding client with shape index %d", client->mShape->mIndex);
-
-	//sendAddShape(client);  
-
 	// init mMessage for client
 	client->mMessage.Init(client->mMessage.outgoingData,
 		sizeof(client->mMessage.outgoingData));
@@ -148,7 +143,10 @@ void Server::addClient(struct sockaddr *address)
 	client->mMessage.WriteByte(mConnect);	// type
 	client->SendPacket(&client->mMessage);
 
+	//let everyone know about this shape
 	sendAddShape(client->mShape);
+
+	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
 	sendAddShape(client);
 }
 

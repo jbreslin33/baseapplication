@@ -43,7 +43,6 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, b
 	//animation
 	if (mAnimate)
 	{
-		LogString("add animation");
 		addAbility(new AbilityAnimationOgre(this));
 	}
 	
