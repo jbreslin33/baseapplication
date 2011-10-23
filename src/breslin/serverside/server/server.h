@@ -31,12 +31,10 @@ class Shape;
 class Server
 {
 public:
-	void			sendAddAIShape(Shape* shape);
-	void			sendAddShape(Client* client);
+	void			sendAddShape(Shape* shape);
 	void			sendRemoveShape(Shape* shape);
 	void			addClient(struct sockaddr *address);
-	void			writeAddShape(Client* client, Shape* shape, char local, bool skipNewClient);
-	void			writeAddShapes(Client* client, Shape* shape, char local, bool skipNewClient);
+	void			writeAddShape(Client* client, Shape* shape);
 	void			removeClient(Client *client);
 
 	

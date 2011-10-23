@@ -30,11 +30,24 @@ Server::~Server()
 	mNetwork->dreamSock_CloseSocket(mNetwork->mSocket);
 }
 
-void Server::writeAddShape(Client* client, Shape* shape, char local, bool skipNewClient)
+void Server::writeAddShape(Client* client, Shape* shape)
 {
+	//Client* client = shape->mClient;
+
+	client->mMessage.Init(client->mMessage.outgoingData, sizeof(client->mMessage.outgoingData));
+
 	client->mMessage.WriteByte(mAddShape); // type
-	client->mMessage.WriteByte(local);
+
+	if (client->mShape == shape)
+	{
+		client->mMessage.WriteByte(1);
+	}
+	else
+	{
+		client->mMessage.WriteByte(0);
+	}
 	client->mMessage.WriteByte(shape->mIndex);
+	LogString("mIndex:%d",shape->mIndex);
 			
 	client->mMessage.WriteFloat(shape->mCommand.mPosition.x);
 	client->mMessage.WriteFloat(shape->mCommand.mPosition.y);
@@ -57,59 +70,28 @@ void Server::writeAddShape(Client* client, Shape* shape, char local, bool skipNe
 	client->SendPacket(&client->mMessage);
 }
 
-void Server::writeAddShapes(Client* client, Shape* shape, char local, bool skipNewClient)
+void Server::sendAddShape(Shape* shape)
 {
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
-		if (skipNewClient)
-		{
-			if(mClientVector.at(i) == client)
-			{
-				continue;
-			}
-			client = mClientVector.at(i);
-
-			writeAddShape(client,shape,local,skipNewClient);
-		}
+		LogString("how many more times!");
+		writeAddShape(mClientVector.at(i),shape);
 	}
-}
 
-//send a shape that has a client. i.e. a new human player
-void Server::sendAddShape(Client* client)
-{
-	// init mMessage for client
-	client->mMessage.Init(client->mMessage.outgoingData,
-		sizeof(client->mMessage.outgoingData));
-
-	//this a new client so let him change to connectionState = DREAMSOCK_CONNECTED; 
-	client->mMessage.WriteByte(mConnect);	// type
-	client->SendPacket(&client->mMessage);
-
-	// First inform the new client of the other shapes by looping thru entire
-	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
+	//this shape we are adding has a client so that client is going to need to know about all the shapes.
+	/*
+	if (shape->mClient)
 	{
-		//init mMessage for client
-		client->mMessage.Init(client->mMessage.outgoingData,
-			sizeof(client->mMessage.outgoingData));
-
-		if (mGame->mShapeVector.at(i) == client->mShape)
+		for (unsigned int j = 0; j < mGame->mShapeVector.size(); j++)
 		{
-			writeAddShape(client,mGame->mShapeVector.at(i), 1, false);
-		}
-		else
-		{
-			writeAddShape(client,mGame->mShapeVector.at(i), 0, false);
+			if (mGame->mShapeVector.at(j) != shape)
+			{
+				LogString("add ai guy");
+				writeAddShape(mGame->mShapeVector.at(j));
+			}
 		}
 	}
-
-	// Then tell the others about the new shape
-	writeAddShapes(client,client->mShape,0,true);
-}
-
-//this is your serverside guy. he has no client, but we still need to tell everyone about the chap
-void Server::sendAddAIShape(Shape* shape)
-{
-	writeAddShapes(0,shape,0, false);
+	*/
 }
 
 void Server::sendRemoveShape(Shape* shape)
@@ -145,9 +127,19 @@ void Server::addClient(struct sockaddr *address)
 
 	mGame->createClientAvatar(client,true,true,.66f,1,false);
 
-	LogString("LIB: Adding client with shape index %d", client->mShape->mIndex);
+	//LogString("LIB: Adding client with shape index %d", client->mShape->mIndex);
 
-	sendAddShape(client);  
+	//sendAddShape(client);  
+
+	// init mMessage for client
+	client->mMessage.Init(client->mMessage.outgoingData,
+		sizeof(client->mMessage.outgoingData));
+
+	//this a new client so let him change to connectionState = DREAMSOCK_CONNECTED; 
+	client->mMessage.WriteByte(mConnect);	// type
+	client->SendPacket(&client->mMessage);
+
+	sendAddShape(client->mShape);
 }
 
 void Server::removeClient(Client *client)
@@ -169,8 +161,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	//LogString("pp");
 	if (type == mConnect)
 	{
-				addClient(address);
-				LogString("LIBRARY: Server: a client connected succesfully");
+		addClient(address);
+		LogString("LIBRARY: Server: a client connected succesfully");
 	}
 	else
 	{
