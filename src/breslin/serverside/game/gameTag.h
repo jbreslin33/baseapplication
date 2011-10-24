@@ -12,7 +12,7 @@ GameTag();
 ~GameTag();
 
 //shapes
-virtual void createClientAvatar(Client* client, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
+virtual void addShape(Client* client, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 virtual void checkCollisions();
 
 //delta move command

@@ -65,7 +65,7 @@ void Server::writeAddShape(Client* client, Shape* shape)
 }
 
 //to all clients
-void Server::addShape(Shape* shape)
+void Server::sendShape(Shape* shape)
 {
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
@@ -80,7 +80,7 @@ void Server::addShape(Shape* shape)
 }
 
 //to just one client
-void Server::addShape(Client* client)
+void Server::sendShape(Client* client)
 {
 	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
 	{
@@ -129,8 +129,8 @@ void Server::addClient(struct sockaddr *address)
 
 	memcpy(&client->mMyaddress,client->GetSocketAddress(), sizeof(struct sockaddr));
 
-	mGame->createClientAvatar(client,true,true,.66f,1,false);
-
+	//mGame->addShape(client,true,true,.66f,1,false);
+	Shape* shape = new Shape(mGame,client,new Vector3D(),new Vector3D(),new Vector3D(),mGame->mRoot,mGame->getOpenIndex(),true,true,.66f,1,false); 
 	// init mMessage for client
 	client->mMessage.Init(client->mMessage.outgoingData,
 		sizeof(client->mMessage.outgoingData));
@@ -140,10 +140,10 @@ void Server::addClient(struct sockaddr *address)
 	client->SendPacket(&client->mMessage);
 
 	//let everyone know about this shape
-	addShape(client->mShape);
+	sendShape(client->mShape);
 
 	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
-	addShape(client);
+	sendShape(client);
 }
 
 void Server::removeClient(Client *client)

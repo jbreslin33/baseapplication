@@ -41,7 +41,8 @@ Game::~Game()
 	delete mServer;
 }
 
-void Game::createClientAvatar(Client* client, bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
+/*
+void Game::addShape(Client* client, bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 {
 	Vector3D* pos = new Vector3D();
 	pos->x = 0;
@@ -68,6 +69,14 @@ void Game::createClientAvatar(Client* client, bool animated ,bool collidable, fl
 	}
 }
 
+void Game::addShape(Vector3D* position, Vector3D* rotation, Vector3D* velocity, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai)
+{
+	Shape* shape = new Shape(position,velocity,rotation,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
+	shape->mGame = this; //for now to give access to shapeVector for collision i guess
+	mShapeVector.push_back(shape); //either way add this to shape vector
+	mServer->sendShape(shape);
+}
+*/
 unsigned int Game::getOpenIndex()
 {
 	bool proposedIndexOpen = false;
@@ -89,13 +98,7 @@ unsigned int Game::getOpenIndex()
 	return 0;
 }
 
-void Game::createAIShape(Vector3D* position, Vector3D* rotation, Vector3D* velocity, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai)
-{
-	Shape* shape = new Shape(position,velocity,rotation,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
-	shape->mGame = this; //for now to give access to shapeVector for collision i guess
-	mShapeVector.push_back(shape); //either way add this to shape vector
-	mServer->addShape(shape);
-}
+
 
 void Game::removeShape(Shape* shape)
 {

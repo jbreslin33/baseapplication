@@ -31,16 +31,15 @@ class Shape;
 class Server
 {
 public:
-	void			addShape(Shape* shape);
-	void			addShape(Client* client);
-	void			sendRemoveShape(Shape* shape);
-	void			addClient(struct sockaddr *address);
-	void			writeAddShape(Client* client, Shape* shape);
-	void			removeClient(Client *client);
+	void sendShape(Shape* shape);
+	void sendShape(Client* client);
+	void sendRemoveShape(Shape* shape);
+	void addClient(struct sockaddr *address);
+	void writeAddShape(Client* client, Shape* shape);
+	void removeClient(Client *client);
 
-	
-	void			parsePacket(Message *mes, struct sockaddr *address);
-	int				checkForTimeout(char *data, struct sockaddr *from);
+	void parsePacket(Message *mes, struct sockaddr *address);
+	int  checkForTimeout(char *data, struct sockaddr *from);
 
 	std::vector<Client*> mClientVector;
 

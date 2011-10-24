@@ -24,7 +24,10 @@ GameTag::GameTag()
 		position->y = 0.0f;
 		position->z = 2.0f * i;
 
-		createAIShape(position, new Vector3D(), new Vector3D, true, true, .66f, 1, true);
+//		addShape(0,position, new Vector3D(), new Vector3D, true, true, .66f, 1, true);
+		Shape* shape = new Shape(0,new Vector3D(),new Vector3D(),new Vector3D(),
+			mRoot,getOpenIndex(),true,true,.66f,1,true); 
+	
 		mItShape = mShapeVector.at(0);
 	}
 }
@@ -34,7 +37,7 @@ GameTag::~GameTag()
 	
 }
 
-void GameTag::createClientAvatar(Client* client, bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
+void GameTag::addShape(Client* client, bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 {
 	Vector3D* pos = new Vector3D();
 	pos->x = 0;
@@ -50,7 +53,7 @@ void GameTag::createClientAvatar(Client* client, bool animated ,bool collidable,
 	rot->x = 0;
 	rot->z = 0;
 
-	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
+	Shape* shape = new Shape(client,pos,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
 	shape->mGame = this; //for now to give access to shapeVector for collision i guess
 	mShapeVector.push_back(shape); //either way add this to shape vector
 
