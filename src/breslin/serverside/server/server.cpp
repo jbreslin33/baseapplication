@@ -30,34 +30,6 @@ Server::~Server()
 	mNetwork->dreamSock_CloseSocket(mNetwork->mSocket);
 }
 
-
-//to all clients
-void Server::sendShape(Shape* shape)
-{
-
-}
-
-//to just one client
-void Server::sendShape(Client* client)
-{
-/*
-	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
-	{
-		if (client)
-		{
-			if (client->mShape != mGame->mShapeVector.at(i))
-			{
-				//write it
-				mGame->mShapeVector.at(i)->write(client);
-		
-				//send it
-				client->SendPacket(&client->mMessage);
-			}
-		}
-	}
-	*/
-}
-
 void Server::sendRemoveShape(Shape* shape)
 {
 	
@@ -73,12 +45,6 @@ void Server::sendRemoveShape(Shape* shape)
 		mClientVector.at(i)->mMessage.WriteByte(index);							// index
 	}
 	sendPackets();
-}
-
-//called when internets client sends DREAMSOCK_MES_CONNECT message before it has a client, shape or anything.
-void Server::addClient(struct sockaddr *address)
-{
-	Client* client = new Client(this, address);
 }
 
 void Server::removeClient(Client *client)
@@ -101,7 +67,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	if (type == mConnect)
 	{
-		addClient(address);
+		Client* client = new Client(this, address);
 		//LogString("LIBRARY: Server: a client connected succesfully");
 	}
 	else

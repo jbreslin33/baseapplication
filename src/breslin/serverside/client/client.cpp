@@ -34,11 +34,9 @@ Client::Client(Server* server, struct sockaddr *address)
 	mMessage.WriteByte(mServer->mConnect);	// type
 	SendPacket(&mMessage);
 
+	//create the shape for this client -- the avatar
 	mShape = new Shape(mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,mServer->mGame->getOpenIndex(),true,true,.66f,1,false); 
 		
-	//let everyone know about this shape
-	//mServer->sendShape(mShape);
-
 	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
 	sendAllShapes();
 }

@@ -31,10 +31,7 @@ class Shape;
 class Server
 {
 public:
-	void sendShape(Shape* shape);
-	void sendShape(Client* client);
 	void sendRemoveShape(Shape* shape);
-	void addClient(struct sockaddr *address);
 	void removeClient(Client *client);
 
 	void parsePacket(Message *mes, struct sockaddr *address);
