@@ -106,11 +106,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				switch(type)
 				{
 					case mDisconnect:
-						//if(mClientVector.at(i) == NULL)
-						//	break;
-
-					    removeClient(mClientVector.at(i));
-
+					    //removeClient(mClientVector.at(i));
+						mClientVector.at(i)->remove();
 						LogString("LIBRARY: Server: a client disconnected");
 						break;
 				}

@@ -74,7 +74,7 @@ public:
 	int				mLastMessageTime;
 
 public:
-
+	void remove();
 	void			SendPacket(Message *message);
 	void sendAllShapes();
 	//clients address to send back messages to

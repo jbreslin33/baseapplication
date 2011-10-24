@@ -47,6 +47,18 @@ Client::~Client()
 	//delete mNetwork;
 }
 
+void Client::remove()
+{
+	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+	{
+		if (mServer->mClientVector.at(i) == this)
+		{
+			mServer->mGame->removeShape(mShape); //remove the shape associated with this client while your at it.
+			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
+		}
+	}
+}
+
 void Client::sendAllShapes()
 {
 	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
