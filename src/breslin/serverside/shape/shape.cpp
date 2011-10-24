@@ -14,8 +14,10 @@ Shape::Shape(Game* game, Client* client, Vector3D* position, Vector3D* velocity,
 	AI      (),
 	OgreShape		  (position,velocity,rotation,root,index)
 {
+	mGame = game;
+
 	//client if this shape has associated with it
-	mClient = NULL;
+	mClient = client;
 
 	//mesh
 	mMeshCode = meshCode;
@@ -29,6 +31,14 @@ Shape::Shape(Game* game, Client* client, Vector3D* position, Vector3D* velocity,
 
 	//ai
 	mAI = ai;
+
+	mGame->mShapeVector.push_back(this);
+
+	if (client != NULL)
+	{
+		client->mShape = this; 
+		client->mShape->mClient = client; //set client it could be NULL meaning just a serverside shape
+	}
 }
 
 Shape::~Shape()

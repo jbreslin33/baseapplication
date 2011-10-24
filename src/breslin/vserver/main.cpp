@@ -128,7 +128,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	if (strcmp (cmdLine,aGameGhostInTheGraveyard) == 0)
 	{
-		game = new GameGhostInTheGraveyard();
+//		game = new GameGhostInTheGraveyard();
 	}
 	
 	MSG WinMsg;
