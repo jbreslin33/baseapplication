@@ -34,21 +34,13 @@ Server::~Server()
 //to all clients
 void Server::sendShape(Shape* shape)
 {
-	for (unsigned int i = 0; i < mClientVector.size(); i++)
-	{
-		Client* client = mClientVector.at(i);
-		
-		//write it
-		shape->write(client);
-		
-		//send it
-		client->SendPacket(&client->mMessage);
-	}
+
 }
 
 //to just one client
 void Server::sendShape(Client* client)
 {
+/*
 	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
 	{
 		if (client)
@@ -63,6 +55,7 @@ void Server::sendShape(Client* client)
 			}
 		}
 	}
+	*/
 }
 
 void Server::sendRemoveShape(Shape* shape)

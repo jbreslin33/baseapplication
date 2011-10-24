@@ -40,6 +40,23 @@ Shape::Shape(Game* game, Client* client, Vector3D* position, Vector3D* velocity,
 		client->mShape = this; 
 		client->mShape->mClient = client; //set client it could be NULL meaning just a serverside shape
 	}
+	else
+	{
+		
+	}
+
+//send this shape to all clients
+		for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
+		{
+			Client* client = mGame->mServer->mClientVector.at(i);
+		
+			//write it
+			write(client);
+		
+			//send it
+			client->SendPacket(&client->mMessage);
+		}
+
 }
 
 Shape::~Shape()

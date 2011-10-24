@@ -76,7 +76,7 @@ public:
 public:
 
 	void			SendPacket(Message *message);
-
+	void sendAllShapes();
 	//clients address to send back messages to
 	struct sockaddr *GetSocketAddress(void) { return &mMyaddress; }
 	void			SetSocketAddress(struct sockaddr *address) { memcpy(&mMyaddress, address, sizeof(struct sockaddr)); }
