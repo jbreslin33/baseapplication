@@ -28,7 +28,7 @@ Client::Client(Server* server, struct sockaddr *address)
 	mOutgoingSequence = 1;
 	mIncomingSequence = 0;
 
-	memcpy(&mMyaddress,GetSocketAddress(), sizeof(struct sockaddr));
+	//memcpy(&mMyaddress,GetSocketAddress(), sizeof(struct sockaddr));
 }
 
 Client::~Client()
