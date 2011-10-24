@@ -34,8 +34,8 @@ Client::Client(Server* server, struct sockaddr *address)
 	mMessage.WriteByte(mServer->mConnect);	// type
 	SendPacket(&mMessage);
 
-	Shape* mShape = new Shape(mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,mServer->mGame->getOpenIndex(),true,true,.66f,1,false); 
-	
+	mShape = new Shape(mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,mServer->mGame->getOpenIndex(),true,true,.66f,1,false); 
+		
 	//let everyone know about this shape
 	//mServer->sendShape(mShape);
 

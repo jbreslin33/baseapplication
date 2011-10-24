@@ -35,28 +35,22 @@ Shape::Shape(Game* game, Client* client, Vector3D* position, Vector3D* velocity,
 
 	mGame->mShapeVector.push_back(this);
 
-	if (client != NULL)
-	{
-		client->mShape = this; 
-		client->mShape->mClient = client; //set client it could be NULL meaning just a serverside shape
-	}
-	else
-	{
-		
-	}
+	//if (client != NULL)
+	//{//
+	//	mClient->mShape = this; 
+	//}
 
-//send this shape to all clients
-		for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
-		{
-			Client* client = mGame->mServer->mClientVector.at(i);
+	//send this shape to all clients
+	for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
+	{
+		Client* clientToSendTo = mGame->mServer->mClientVector.at(i);
 		
-			//write it
-			write(client);
+		//write it
+		write(clientToSendTo);
 		
-			//send it
-			client->SendPacket(&client->mMessage);
-		}
-
+		//send it
+		clientToSendTo->SendPacket(&clientToSendTo->mMessage);
+	}
 }
 
 Shape::~Shape()
