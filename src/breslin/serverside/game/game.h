@@ -61,12 +61,6 @@ public:
 	Game();
 	~Game();
 
-	//shapes
-	//virtual void addShape(Client* client,                                              
-	//	bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
-	//virtual void addShape        (Vector3D* position, Vector3D* rotation, Vector3D* velocity,
-	//	bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
-	
 	void         removeShape       (Shape* shape);
 	unsigned int getOpenIndex      ();
 	

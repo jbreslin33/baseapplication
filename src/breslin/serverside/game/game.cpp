@@ -41,42 +41,6 @@ Game::~Game()
 	delete mServer;
 }
 
-/*
-void Game::addShape(Client* client, bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
-{
-	Vector3D* pos = new Vector3D();
-	pos->x = 0;
-	pos->y = 0;
-	pos->z = 0;
-
-	Vector3D* vel = new Vector3D();
-	vel->x = 0;
-	vel->y = 0;
-	vel->z = 0;
-
-	Vector3D* rot = new Vector3D();
-	rot->x = 0;
-	rot->z = 0;
-
-	Shape* shape = new Shape(pos,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
-	shape->mGame = this; //for now to give access to shapeVector for collision i guess
-	mShapeVector.push_back(shape); //either way add this to shape vector
-
-	if (client != NULL)
-	{
-		client->mShape = shape; 
-		client->mShape->mClient = client; //set client it could be NULL meaning just a serverside shape
-	}
-}
-
-void Game::addShape(Vector3D* position, Vector3D* rotation, Vector3D* velocity, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai)
-{
-	Shape* shape = new Shape(position,velocity,rotation,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
-	shape->mGame = this; //for now to give access to shapeVector for collision i guess
-	mShapeVector.push_back(shape); //either way add this to shape vector
-	mServer->sendShape(shape);
-}
-*/
 unsigned int Game::getOpenIndex()
 {
 	bool proposedIndexOpen = false;
@@ -97,8 +61,6 @@ unsigned int Game::getOpenIndex()
 	}
 	return 0;
 }
-
-
 
 void Game::removeShape(Shape* shape)
 {

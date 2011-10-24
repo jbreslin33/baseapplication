@@ -24,7 +24,6 @@ GameTag::GameTag()
 		position->y = 0.0f;
 		position->z = 2.0f * i;
 
-//		addShape(0,position, new Vector3D(), new Vector3D, true, true, .66f, 1, true);
 		Shape* shape = new Shape(this,0,new Vector3D(),new Vector3D(),new Vector3D(),
 			mRoot,getOpenIndex(),true,true,.66f,1,true); 
 	
@@ -36,34 +35,7 @@ GameTag::~GameTag()
 {
 	
 }
-/*
-void GameTag::addShape(Client* client, bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
-{
-	Vector3D* pos = new Vector3D();
-	pos->x = 0;
-	pos->y = 0;
-	pos->z = 0;
 
-	Vector3D* vel = new Vector3D();
-	vel->x = 0;
-	vel->y = 0;
-	vel->z = 0;
-
-	Vector3D* rot = new Vector3D();
-	rot->x = 0;
-	rot->z = 0;
-
-	Shape* shape = new Shape(this,client,pos,vel,rot,mRoot,getOpenIndex(),animated,collidable,collisionRadius,meshCode,ai); 
-	shape->mGame = this; //for now to give access to shapeVector for collision i guess
-	mShapeVector.push_back(shape); //either way add this to shape vector
-
-	if (client != NULL)
-	{
-		client->mShape = shape; 
-		client->mShape->mClient = client; //set client it could be NULL meaning just a serverside shape
-	}
-}
-*/
 void GameTag::checkCollisions(void)
 {
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
