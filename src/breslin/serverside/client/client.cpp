@@ -3,6 +3,9 @@
 
 #include "../../serverside/network/network.h"
 #include "../../serverside/server/server.h"
+#include "../../serverside/game/game.h"
+#include "../../serverside/shape/shape.h"
+
 #ifdef WIN32
 //
 #else
@@ -15,7 +18,7 @@
 Client::Client(Server* server, struct sockaddr *address)
 {
 	mServer = server;
-	mShape = NULL; //to be filled when we actually create the shape
+
 	SetSocketAddress(address);
 
 	mLastMessageTime  = 0;
@@ -30,6 +33,14 @@ Client::Client(Server* server, struct sockaddr *address)
 	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
 	mMessage.WriteByte(mServer->mConnect);	// type
 	SendPacket(&mMessage);
+
+	Shape* mShape = new Shape(mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,mServer->mGame->getOpenIndex(),true,true,.66f,1,false); 
+	
+	//let everyone know about this shape
+	mServer->sendShape(mShape);
+
+	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
+	mServer->sendShape(this);
 }
 
 Client::~Client()

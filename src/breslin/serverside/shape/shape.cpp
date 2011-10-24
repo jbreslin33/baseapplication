@@ -2,6 +2,7 @@
 #include "../tdreamsock/dreamSockLog.h"
 
 #include "../../serverside/client/client.h"
+#include "../../serverside/server/server.h"
 
 #include <string>
 
@@ -144,6 +145,38 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 	{
 		mKeyRotation += 1;
 	}
+}
 
+void Shape::write(Client* client)
+{
+	client->mMessage.Init(client->mMessage.outgoingData, sizeof(client->mMessage.outgoingData));
 
+	client->mMessage.WriteByte(mGame->mServer->mAddShape); // type
+
+	if (client->mShape == this)
+	{
+		client->mMessage.WriteByte(1);
+	}
+	else
+	{
+		client->mMessage.WriteByte(0);
+	}
+	client->mMessage.WriteByte(mIndex);
+			
+	client->mMessage.WriteFloat(mCommand.mPosition.x);
+	client->mMessage.WriteFloat(mCommand.mPosition.y);
+	client->mMessage.WriteFloat(mCommand.mPosition.z);
+
+	client->mMessage.WriteFloat(mCommand.mPositionVelocity.x);
+	client->mMessage.WriteFloat(mCommand.mPositionVelocity.y);
+	client->mMessage.WriteFloat(mCommand.mPositionVelocity.z);
+
+	client->mMessage.WriteFloat(mCommand.mRotation.x);
+	client->mMessage.WriteFloat(mCommand.mRotation.z);
+			
+	//mesh
+	client->mMessage.WriteByte(mMeshCode);
+
+	//animation
+	client->mMessage.WriteByte(mAnimated);
 }

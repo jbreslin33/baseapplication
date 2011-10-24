@@ -41,6 +41,8 @@ void processTick();
 
 void setKeyDirection();
 
+void write(Client* client);
+
 //associated client if any
 Client* mClient;
 

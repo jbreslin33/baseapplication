@@ -30,39 +30,6 @@ Server::~Server()
 	mNetwork->dreamSock_CloseSocket(mNetwork->mSocket);
 }
 
-void Server::writeAddShape(Client* client, Shape* shape)
-{
-	client->mMessage.Init(client->mMessage.outgoingData, sizeof(client->mMessage.outgoingData));
-
-	client->mMessage.WriteByte(mAddShape); // type
-
-	if (client->mShape == shape)
-	{
-		client->mMessage.WriteByte(1);
-	}
-	else
-	{
-		client->mMessage.WriteByte(0);
-	}
-	client->mMessage.WriteByte(shape->mIndex);
-			
-	client->mMessage.WriteFloat(shape->mCommand.mPosition.x);
-	client->mMessage.WriteFloat(shape->mCommand.mPosition.y);
-	client->mMessage.WriteFloat(shape->mCommand.mPosition.z);
-
-	client->mMessage.WriteFloat(shape->mCommand.mPositionVelocity.x);
-	client->mMessage.WriteFloat(shape->mCommand.mPositionVelocity.y);
-	client->mMessage.WriteFloat(shape->mCommand.mPositionVelocity.z);
-
-	client->mMessage.WriteFloat(shape->mCommand.mRotation.x);
-	client->mMessage.WriteFloat(shape->mCommand.mRotation.z);
-			
-	//mesh
-	client->mMessage.WriteByte(shape->mMeshCode);
-
-	//animation
-	client->mMessage.WriteByte(shape->mAnimated);
-}
 
 //to all clients
 void Server::sendShape(Shape* shape)
@@ -72,7 +39,7 @@ void Server::sendShape(Shape* shape)
 		Client* client = mClientVector.at(i);
 		
 		//write it
-		writeAddShape(client,shape);
+		shape->write(client);
 		
 		//send it
 		client->SendPacket(&client->mMessage);
@@ -89,7 +56,7 @@ void Server::sendShape(Client* client)
 			if (client->mShape != mGame->mShapeVector.at(i))
 			{
 				//write it
-				writeAddShape(client,mGame->mShapeVector.at(i));
+				mGame->mShapeVector.at(i)->write(client);
 		
 				//send it
 				client->SendPacket(&client->mMessage);
@@ -119,14 +86,6 @@ void Server::sendRemoveShape(Shape* shape)
 void Server::addClient(struct sockaddr *address)
 {
 	Client* client = new Client(this, address);
-
-	Shape* shape = new Shape(mGame,client,new Vector3D(),new Vector3D(),new Vector3D(),mGame->mRoot,mGame->getOpenIndex(),true,true,.66f,1,false); 
-	
-	//let everyone know about this shape
-	sendShape(client->mShape);
-
-	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
-	sendShape(client);
 }
 
 void Server::removeClient(Client *client)
