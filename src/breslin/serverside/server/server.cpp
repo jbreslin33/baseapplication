@@ -120,8 +120,8 @@ void Server::addClient(struct sockaddr *address)
 {
 	Client* client = new Client(this, address);
 
-	//mGame->addShape(client,true,true,.66f,1,false);
 	Shape* shape = new Shape(mGame,client,new Vector3D(),new Vector3D(),new Vector3D(),mGame->mRoot,mGame->getOpenIndex(),true,true,.66f,1,false); 
+	
 	// init mMessage for client
 	client->mMessage.Init(client->mMessage.outgoingData,
 		sizeof(client->mMessage.outgoingData));

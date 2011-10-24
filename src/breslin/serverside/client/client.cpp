@@ -15,20 +15,15 @@
 Client::Client(Server* server, struct sockaddr *address)
 {
 	mServer = server;
-
 	mShape = NULL; //to be filled when we actually create the shape
-
-	mLastMessageTime		= 0;
-
-	mServer->mClientVector.push_back(this);
-
 	SetSocketAddress(address);
 
-	mConnectionState = DREAMSOCK_CONNECTING;
+	mLastMessageTime  = 0;
+	mConnectionState  = DREAMSOCK_CONNECTING;
 	mOutgoingSequence = 1;
 	mIncomingSequence = 0;
 
-	//memcpy(&mMyaddress,GetSocketAddress(), sizeof(struct sockaddr));
+	mServer->mClientVector.push_back(this);
 }
 
 Client::~Client()
