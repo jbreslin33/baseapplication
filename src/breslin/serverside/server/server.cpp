@@ -122,14 +122,6 @@ void Server::addClient(struct sockaddr *address)
 
 	Shape* shape = new Shape(mGame,client,new Vector3D(),new Vector3D(),new Vector3D(),mGame->mRoot,mGame->getOpenIndex(),true,true,.66f,1,false); 
 	
-	// init mMessage for client
-	client->mMessage.Init(client->mMessage.outgoingData,
-		sizeof(client->mMessage.outgoingData));
-
-	//this a new client so let him change to connectionState = DREAMSOCK_CONNECTED; 
-	client->mMessage.WriteByte(mConnect);	// type
-	client->SendPacket(&client->mMessage);
-
 	//let everyone know about this shape
 	sendShape(client->mShape);
 

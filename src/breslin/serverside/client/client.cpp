@@ -23,7 +23,13 @@ Client::Client(Server* server, struct sockaddr *address)
 	mOutgoingSequence = 1;
 	mIncomingSequence = 0;
 
+	//register this client with server
 	mServer->mClientVector.push_back(this);
+
+	//send a connect message
+	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+	mMessage.WriteByte(mServer->mConnect);	// type
+	SendPacket(&mMessage);
 }
 
 Client::~Client()
