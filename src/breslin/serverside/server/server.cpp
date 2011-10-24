@@ -118,16 +118,7 @@ void Server::sendRemoveShape(Shape* shape)
 //called when internets client sends DREAMSOCK_MES_CONNECT message before it has a client, shape or anything.
 void Server::addClient(struct sockaddr *address)
 {
-	Client* client = new Client(mNetwork);
-	mClientVector.push_back(client);
-
-	client->SetSocketAddress(address);
-
-	client->mConnectionState = DREAMSOCK_CONNECTING;
-	client->mOutgoingSequence = 1;
-	client->mIncomingSequence = 0;
-
-	memcpy(&client->mMyaddress,client->GetSocketAddress(), sizeof(struct sockaddr));
+	Client* client = new Client(this, address);
 
 	//mGame->addShape(client,true,true,.66f,1,false);
 	Shape* shape = new Shape(mGame,client,new Vector3D(),new Vector3D(),new Vector3D(),mGame->mRoot,mGame->getOpenIndex(),true,true,.66f,1,false); 

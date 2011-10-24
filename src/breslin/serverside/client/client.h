@@ -53,13 +53,14 @@
 #define DREAMSOCK_CLIENT_ERROR			2
 
 // Introduce classes
+class Server;
 class Network;
 class Shape;
 
 class Client
 {
 public:
-	Client(Network* network);
+	Client(Server* server, struct sockaddr *address);
 
 ~Client();
 	int				mConnectionState;		// Connecting, connected, disconnecting, disconnected
@@ -83,9 +84,11 @@ public:
 	Message	mMessage;
 
     Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the clients personal avatar..
+	
 	Command mClientCommandToServerArray[64];
 	Command	mClientCommandToServer; //for the human moves to be sent off to server		
-	Network* mNetwork;
+
+	Server* mServer;
 
 };
 #endif
