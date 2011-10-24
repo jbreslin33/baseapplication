@@ -65,7 +65,7 @@ void Server::writeAddShape(Client* client, Shape* shape)
 }
 
 //to all clients
-void Server::sendAddShape(Shape* shape)
+void Server::addShape(Shape* shape)
 {
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
@@ -80,7 +80,7 @@ void Server::sendAddShape(Shape* shape)
 }
 
 //to just one client
-void Server::sendAddShape(Client* client)
+void Server::addShape(Client* client)
 {
 	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
 	{
@@ -140,10 +140,10 @@ void Server::addClient(struct sockaddr *address)
 	client->SendPacket(&client->mMessage);
 
 	//let everyone know about this shape
-	sendAddShape(client->mShape);
+	addShape(client->mShape);
 
 	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
-	sendAddShape(client);
+	addShape(client);
 }
 
 void Server::removeClient(Client *client)
