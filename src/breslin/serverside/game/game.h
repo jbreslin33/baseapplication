@@ -61,9 +61,6 @@ public:
 	Game();
 	~Game();
 
-	void         removeShape       (Shape* shape);
-	unsigned int getOpenIndex      ();
-	
 	// Network
 	void	sendCommand(void);
 	void	sendExitNotification(void);

@@ -62,18 +62,6 @@ unsigned int Game::getOpenIndex()
 	return 0;
 }
 
-void Game::removeShape(Shape* shape)
-{
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		if (mShapeVector.at(i) == shape)
-		{
-			mServer->sendRemoveShape(shape);
-			mShapeVector.erase (mShapeVector.begin()+i);
-		}
-	}
-}
-
 void Game::frame(int msec)
 {
 	mRealTime += msec;

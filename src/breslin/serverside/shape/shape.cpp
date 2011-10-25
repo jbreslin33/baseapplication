@@ -6,14 +6,14 @@
 
 #include <string>
 
-Shape::Shape(Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,unsigned int index,
+Shape::Shape(Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 :
 	Rotation(),
 	Move    (),
 	Jump    (),
 	AI      (),
-	OgreShape		  (position,velocity,rotation,root,index)
+	OgreShape		  (position,velocity,rotation,root)
 {
 	mGame = game;
 
@@ -55,6 +55,39 @@ Shape::Shape(Game* game, Client* client, Vector3D* position, Vector3D* velocity,
 
 Shape::~Shape()
 {
+}
+
+unsigned int Shape::getOpenIndex()
+{
+	bool proposedIndexOpen = false;
+	for (unsigned int proposedIndex = 1; !proposedIndexOpen; proposedIndex++) //keep going till you get an index
+	{
+		bool someoneHasThisIndex = false;
+		for (unsigned int i = 0; i < mShapeVector.size(); i++)
+		{
+			if (mShapeVector.at(i)->mIndex == proposedIndex)
+			{
+				someoneHasThisIndex = true;
+			}
+		}
+		if (someoneHasThisIndex == false)
+		{
+			return  proposedIndex;
+		}
+	}
+	return 0;
+}
+
+void Shape::remove()
+{
+	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
+	{
+		if (mGame->mShapeVector.at(i) == this)
+		{
+			mGame->mServer->sendRemoveShape(this);
+			mGame->mShapeVector.erase (mGame->mShapeVector.begin()+i);
+		}
+	}
 }
 
 void Shape::processTick()

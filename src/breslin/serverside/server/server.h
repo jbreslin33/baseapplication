@@ -32,7 +32,6 @@ class Server
 {
 public:
 	void sendRemoveShape(Shape* shape);
-	void removeClient(Client *client);
 
 	void parsePacket(Message *mes, struct sockaddr *address);
 	int  checkForTimeout(char *data, struct sockaddr *from);

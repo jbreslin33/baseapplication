@@ -47,18 +47,6 @@ void Server::sendRemoveShape(Shape* shape)
 	sendPackets();
 }
 
-void Server::removeClient(Client *client)
-{
-	for (unsigned int i = 0; i < mClientVector.size(); i++)
-	{
-		if (mClientVector.at(i) == client)
-		{
-			mGame->removeShape(client->mShape); //remove the shape associated with this client while your at it.
-			mClientVector.erase (mClientVector.begin()+i);
-		}
-	}
-}
-
 void Server::parsePacket(Message *mes, struct sockaddr *address)
 {
 	mes->BeginReading();
@@ -143,7 +131,7 @@ int Server::checkForTimeout(char *data, struct sockaddr *from)
 
 			*(struct sockaddr *) from = *mClientVector.at(i)->GetSocketAddress();
 
-			removeClient(mClientVector.at(i));
+			mClientVector.at(i)->remove();
 
 			return mes.GetSize();
 		}
