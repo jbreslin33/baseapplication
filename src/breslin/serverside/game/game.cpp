@@ -41,27 +41,6 @@ Game::~Game()
 	delete mServer;
 }
 
-unsigned int Game::getOpenIndex()
-{
-	bool proposedIndexOpen = false;
-	for (unsigned int proposedIndex = 1; !proposedIndexOpen; proposedIndex++) //keep going till you get an index
-	{
-		bool someoneHasThisIndex = false;
-		for (unsigned int i = 0; i < mShapeVector.size(); i++)
-		{
-			if (mShapeVector.at(i)->mIndex == proposedIndex)
-			{
-				someoneHasThisIndex = true;
-			}
-		}
-		if (someoneHasThisIndex == false)
-		{
-			return  proposedIndex;
-		}
-	}
-	return 0;
-}
-
 void Game::frame(int msec)
 {
 	mRealTime += msec;
@@ -342,3 +321,24 @@ void Game::buildDeltaMoveMessage(Command* command, int flags, Message* message, 
 	}
 }
 
+
+unsigned int Game::getOpenIndex()
+{
+	bool proposedIndexOpen = false;
+	for (unsigned int proposedIndex = 1; !proposedIndexOpen; proposedIndex++) //keep going till you get an index
+	{
+		bool someoneHasThisIndex = false;
+		for (unsigned int i = 0; i < mShapeVector.size(); i++)
+		{
+			if (mShapeVector.at(i)->mIndex == proposedIndex)
+			{
+				someoneHasThisIndex = true;
+			}
+		}
+		if (someoneHasThisIndex == false)
+		{
+			return  proposedIndex;
+		}
+	}
+	return 0;
+}

@@ -4,7 +4,6 @@
 //parents
 #include "../../serverside/rotation/rotation.h"
 #include "../../serverside/move/move.h"
-#include "../../serverside/jump/jump.h"
 #include "../../serverside/ai/ai.h"
 
 //Ogre headers
@@ -27,16 +26,13 @@ class Shape
 	:
 	public Move ,
 	public Rotation ,
-	public Jump,
 	public AI
 {
 
 public:
-Shape(Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~Shape();
-
-unsigned int getOpenIndex      ();
 
 void remove();
 

@@ -24,8 +24,8 @@ GameTag::GameTag()
 		position->y = 0.0f;
 		position->z = 2.0f * i;
 
-		Shape* shape = new Shape(this,0,new Vector3D(),new Vector3D(),new Vector3D(),
-			mRoot,getOpenIndex(),true,true,.66f,1,true); 
+		Shape* shape = new Shape(getOpenIndex(),this,0,new Vector3D(),new Vector3D(),new Vector3D(),
+			mRoot,true,true,.66f,1,true); 
 	
 		mItShape = mShapeVector.at(0);
 	}

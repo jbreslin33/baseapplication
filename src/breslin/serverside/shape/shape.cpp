@@ -6,14 +6,13 @@
 
 #include <string>
 
-Shape::Shape(Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 :
 	Rotation(),
 	Move    (),
-	Jump    (),
 	AI      (),
-	OgreShape		  (position,velocity,rotation,root)
+	OgreShape		  (index,position,velocity,rotation,root)
 {
 	mGame = game;
 
@@ -35,11 +34,6 @@ Shape::Shape(Game* game, Client* client, Vector3D* position, Vector3D* velocity,
 
 	mGame->mShapeVector.push_back(this);
 
-	//if (client != NULL)
-	//{//
-	//	mClient->mShape = this; 
-	//}
-
 	//send this shape to all clients
 	for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
 	{
@@ -55,27 +49,6 @@ Shape::Shape(Game* game, Client* client, Vector3D* position, Vector3D* velocity,
 
 Shape::~Shape()
 {
-}
-
-unsigned int Shape::getOpenIndex()
-{
-	bool proposedIndexOpen = false;
-	for (unsigned int proposedIndex = 1; !proposedIndexOpen; proposedIndex++) //keep going till you get an index
-	{
-		bool someoneHasThisIndex = false;
-		for (unsigned int i = 0; i < mShapeVector.size(); i++)
-		{
-			if (mShapeVector.at(i)->mIndex == proposedIndex)
-			{
-				someoneHasThisIndex = true;
-			}
-		}
-		if (someoneHasThisIndex == false)
-		{
-			return  proposedIndex;
-		}
-	}
-	return 0;
 }
 
 void Shape::remove()
@@ -111,11 +84,6 @@ void Shape::processTick()
 	//even though there is no mKey set we still need to move as
 	//brian has put in a deceleration factor so let's let it run...
 	Move::processTick();
-
-	//jump is a good work in progress but it's now it's own thing
-	//Jump::processTick();
-
-
 
 	//set all vars to be sent off to clients playing on internets
 	//none of this actually moves anything on server it is what is

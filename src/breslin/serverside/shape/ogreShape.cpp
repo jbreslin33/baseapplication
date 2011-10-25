@@ -4,12 +4,14 @@
 //math
 #include "../../math/vector3D.h"
 
+#include "shape.h"
+
 OgreShape::OgreShape()
 {
 }
 
 //this is the contructor for server side ogre shape
-OgreShape::OgreShape(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root)
+OgreShape::OgreShape(unsigned int index, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root)
 {
 	Ogre::SceneManager* mSceneManager = root->createSceneManager(Ogre::ST_GENERIC);
 
@@ -28,6 +30,7 @@ OgreShape::OgreShape(Vector3D* position, Vector3D* velocity, Vector3D* rotation,
 	mSceneNode = mSceneManager->getRootSceneNode()->createChildSceneNode(spawnPoint);
 
  	mPosition = position;
+	mIndex = 0;
 	mIndex  = index;
 
 	//keys
@@ -43,4 +46,3 @@ OgreShape::~OgreShape()
 	//delete mSceneManager;
 	delete mSceneNode;
 }
-

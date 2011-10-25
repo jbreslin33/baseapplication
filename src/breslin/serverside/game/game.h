@@ -61,6 +61,8 @@ public:
 	Game();
 	~Game();
 
+unsigned int getOpenIndex      ();
+
 	// Network
 	void	sendCommand(void);
 	void	sendExitNotification(void);

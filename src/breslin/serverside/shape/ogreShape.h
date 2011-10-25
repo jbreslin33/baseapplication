@@ -27,7 +27,7 @@ class OgreShape
 
 public:
 OgreShape();
-OgreShape(Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,unsigned int index);
+OgreShape(unsigned int index, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root);
 ~OgreShape();
 
 //ogre scene stuff
@@ -46,7 +46,6 @@ Message	mMessage; //is this all i need to get information over the internets?
 //keys
 Vector3 mKeyDirection;
 float mKeyRotation;
-//Vector3 mNormalizedRotation;
 Vector3 mGoalDirection;
 
 Game* mGame;
