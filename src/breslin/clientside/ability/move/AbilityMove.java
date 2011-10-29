@@ -45,7 +45,7 @@ public AbilityMove(ShapeDynamic shapeDynamic)
     //thresholds
     mPosInterpLimitHigh = .066f; //how far away from server till we try to catch up
     mPosInterpFactor    = 4.0f;
-   	mMaximunVelocity    = .002083f; //do not let velocity go above this in any direction.
+   	mMaximunVelocity    = .003083f; //do not let velocity go above this in any direction.
 
 	//deltas
 	mDeltaX        = 0.0f;
