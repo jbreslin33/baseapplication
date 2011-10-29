@@ -90,6 +90,9 @@ set(HDRS
 	#main
 	./main.h
 	
+	#ability
+	../serverside/ability/ability.h
+	
 	#game
 	../serverside/game/game.h
 	../serverside/game/gameTag.h
@@ -160,6 +163,9 @@ set(SRCS
 	#main
 	./main.cpp
 
+	#ability
+	../serverside/ability/ability.cpp
+
 	#game
 	../serverside/game/game.cpp
 	../serverside/game/gameTag.cpp
@@ -223,6 +229,9 @@ set(HDRS
 	
 	#main
 	./main.h
+	
+	#ability
+	../serverside/ability/ability.h
 	
 	#game
 	../serverside/game/game.h
@@ -292,6 +301,9 @@ set(SRCS
 
 	#main
 	./main.cpp
+	
+	#ability
+	../serverside/ability/ability.cpp
 	
 	#game
 	../serverside/game/game.cpp
