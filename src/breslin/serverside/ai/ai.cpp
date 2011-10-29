@@ -23,7 +23,7 @@ using namespace Ogre;
 #define KEY_COUNTER_CLOCKWISE      16
 #define KEY_CLOCKWISE              32
 
-AI::AI(Shape* shape)
+AI::AI(Shape* shape) : Ability(shape)
 {
 	mShape = shape;
 

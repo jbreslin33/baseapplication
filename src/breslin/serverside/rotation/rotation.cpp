@@ -21,7 +21,7 @@ using namespace Ogre;
 #define KEY_COUNTER_CLOCKWISE      16
 #define KEY_CLOCKWISE              32
 
-Rotation::Rotation(Shape* shape)
+Rotation::Rotation(Shape* shape) : Ability(shape)
 {
 	mShape = shape;
 

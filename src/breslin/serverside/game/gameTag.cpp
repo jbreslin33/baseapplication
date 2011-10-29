@@ -9,6 +9,11 @@
 //client
 #include "../client/client.h"
 
+//abilitys
+#include "../rotation/rotation.h"
+#include "../move/move.h"
+#include "../ai/ai.h"
+
 //math
 #include "../../math/vector3D.h"
 
@@ -26,7 +31,12 @@ GameTag::GameTag()
 
 		Shape* shape = new Shape(getOpenIndex(),this,0,new Vector3D(),new Vector3D(),new Vector3D(),
 			mRoot,true,true,.66f,1,true); 
-	
+
+		//add abilitys
+		shape->addAbility(new Rotation(shape));
+		shape->addAbility(new Move(shape));
+		shape->addAbility(new AI(shape));
+
 		mItShape = mShapeVector.at(0);
 	}
 }

@@ -1,10 +1,24 @@
+//parent
 #include "client.h"
+
+//log
 #include "../tdreamsock/dreamSockLog.h"
 
+//network
 #include "../../serverside/network/network.h"
+
+//server
 #include "../../serverside/server/server.h"
+
+//game
 #include "../../serverside/game/game.h"
+
+//shape
 #include "../../serverside/shape/shape.h"
+
+//abilitys
+#include "../rotation/rotation.h"
+#include "../move/move.h"
 
 #ifdef WIN32
 //
@@ -36,7 +50,11 @@ Client::Client(Server* server, struct sockaddr *address)
 
 	//create the shape for this client -- the avatar
 	mShape = new Shape(mServer->mGame->getOpenIndex(),mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f,1,false); 
-		
+	
+	//add abilitys
+	mShape->addAbility(new Rotation(mShape));
+	mShape->addAbility(new Move(mShape));
+
 	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
 	sendAllShapes();
 }

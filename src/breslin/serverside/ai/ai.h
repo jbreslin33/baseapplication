@@ -1,6 +1,9 @@
 #ifndef SERVERSIDEAI_H
 #define SERVERSIDEAI_H
 
+//parent
+#include "../ability/ability.h"
+
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
@@ -9,7 +12,7 @@ class Command;
 class AIStateMachine;
 class Shape;
 
-class AI 
+class AI : public Ability
 {
 
 public:

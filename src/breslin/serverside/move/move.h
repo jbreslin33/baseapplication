@@ -1,6 +1,9 @@
 #ifndef SERVERSIDEMOVE_H
 #define SERVERSIDEMOVE_H
 
+//parent
+#include "../ability/ability.h"
+
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
@@ -9,7 +12,7 @@ class Command;
 class MoveStateMachine;
 class Shape;
 
-class Move 
+class Move : public Ability
 {
 
 public:

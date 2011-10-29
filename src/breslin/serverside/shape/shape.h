@@ -93,9 +93,9 @@ Vector3 mGoalDirection;
 
 Game* mGame;
 
-Rotation* mRotation;
-Move* mMove;
-AI* mAI;
+//Rotation* mRotation;
+//Move* mMove;
+//AI* mAI;
 
 };
 

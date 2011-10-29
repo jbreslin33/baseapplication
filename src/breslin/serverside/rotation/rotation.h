@@ -1,6 +1,8 @@
 #ifndef ROTATION_H
 #define ROTATION_H
 
+//parent
+#include "../ability/ability.h"
 
 //Ogre headers
 #include "Ogre.h"
@@ -10,7 +12,7 @@ class Command;
 class RotationStateMachine;
 class Shape;
 
-class Rotation
+class Rotation : public Ability
 {
 
 public:
