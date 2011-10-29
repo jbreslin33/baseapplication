@@ -322,18 +322,6 @@ void parseByteBuffer(ByteBuffer byteBuffer)
 	mLocal	    = byteBuffer.get(); //error
 	mIndex		= byteBuffer.get();
 
-/*
-	mPosition.x = byteBuffer.getFloat();
-	mPosition.y = byteBuffer.getFloat();
-	mPosition.z = byteBuffer.getFloat();
-
-	mVelocity.x = byteBuffer.getFloat();
-	mVelocity.y = byteBuffer.getFloat();
-	mVelocity.z = byteBuffer.getFloat();
-	mRotation.x = byteBuffer.getFloat();
-	mRotation.z = byteBuffer.getFloat();
-*/
-//convertIntToFloat(byteBuffer)
 	mPosition.x = convertIntToFloat(byteBuffer);
 	mPosition.y = convertIntToFloat(byteBuffer);
 	mPosition.z = convertIntToFloat(byteBuffer);
