@@ -1,9 +1,6 @@
 #ifndef SERVERSIDEAI_H
 #define SERVERSIDEAI_H
 
-//parents
-#include "../../serverside/shape/ogreShape.h"
-
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;

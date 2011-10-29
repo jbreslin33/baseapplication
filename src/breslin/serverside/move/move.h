@@ -1,9 +1,6 @@
 #ifndef SERVERSIDEMOVE_H
 #define SERVERSIDEMOVE_H
 
-//parents
-#include "../../serverside/shape/ogreShape.h"
-
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;

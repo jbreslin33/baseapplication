@@ -103,14 +103,12 @@ set(HDRS
 	../serverside/network/network.h
 	
 	#shape
-	../serverside/shape/ogreShape.h
 	../serverside/shape/shape.h
 	
 		#tag
 	../serverside/shape/shapeTag.h
 	../serverside/shape/shapeTagPlayer.h
-	../serverside/shape/shapeGhostInTheGraveyardPlayer.h
-	
+		
 	#move
 	../serverside/move/move.h
 	../serverside/move/move.h
@@ -141,7 +139,7 @@ set(HDRS
 	../math/vector3D.h
 	
 	#command
-	../command/command.h
+	../serverside/command/command.h
 	
 	#message
 	../serverside/message/message.h
@@ -175,13 +173,11 @@ set(SRCS
 	../serverside/network/network.cpp
 	
 	#shape
-	../serverside/shape/ogreShape.cpp
 	../serverside/shape/shape.cpp
 	
 		#tag
 	../serverside/shape/shapeTag.cpp
 	../serverside/shape/shapeTagPlayer.cpp
-	../serverside/shape/shapeGhostInTheGraveyardPlayer.cpp
 	
 	#move
 	../serverside/move/move.cpp
@@ -205,7 +201,7 @@ set(SRCS
 	../math/vector3D.cpp
 	
 	#command
-	../command/command.cpp
+	../serverside/command/command.cpp
 	
 	#message
 	../serverside/message/message.cpp
@@ -240,14 +236,12 @@ set(HDRS
 	../serverside/tdreamsock/dreamSockLog.h
 	../serverside/tdreamsock/dreamLinuxSock.h
 	
-	#shape
-	../serverside/shape/ogreShape.h
+		#shape
 	../serverside/shape/shape.h
 	
 		#tag
 	../serverside/shape/shapeTag.h
 	../serverside/shape/shapeTagPlayer.h
-	../serverside/shape/shapeGhostInTheGraveyardPlayer.h
 	
 	#move
 	../serverside/move/move.h
@@ -279,7 +273,7 @@ set(HDRS
 	../math/vector3D.h
 	
 	#command
-	../command/command.h
+	../serverside/command/command.h
 	
 	#message
 	../serverside/message/message.h
@@ -312,13 +306,11 @@ set(SRCS
 	../serverside/network/network.cpp
 	
 	#shape
-	../serverside/shape/ogreShape.cpp
 	../serverside/shape/shape.cpp
 	
 		#tag
 	../serverside/shape/shapeTag.cpp
 	../serverside/shape/shapeTagPlayer.cpp
-	../serverside/shape/shapeGhostInTheGraveyardPlayer.cpp
 	
 	#move
 	../serverside/move/move.cpp
@@ -342,7 +334,7 @@ set(SRCS
 	../math/vector3D.cpp
 	
 	#command
-	../command/command.cpp
+	../serverside/command/command.cpp
 	
 	#message
 	../serverside/message/message.cpp

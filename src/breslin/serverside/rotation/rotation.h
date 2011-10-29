@@ -1,8 +1,6 @@
 #ifndef ROTATION_H
 #define ROTATION_H
 
-//parents
-#include "../../serverside/shape/ogreShape.h"
 
 //Ogre headers
 #include "Ogre.h"

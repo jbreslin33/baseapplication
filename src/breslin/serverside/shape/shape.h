@@ -1,14 +1,15 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-//parents
-#include "../../serverside/rotation/rotation.h"
-#include "../../serverside/move/move.h"
-#include "../../serverside/ai/ai.h"
-
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
+
+//command
+#include "../command/command.h"
+
+//message
+#include "../message/message.h"
 
 #include <string>
 
@@ -20,7 +21,13 @@ using namespace Ogre;
 #define KEY_COUNTER_CLOCKWISE      16
 #define KEY_CLOCKWISE              32
 
+//forward declarations
+class Game;
 class Client;
+class Rotation;
+class Move;
+class AI;
+class Vector3D;
 
 class Shape
 {

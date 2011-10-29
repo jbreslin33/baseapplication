@@ -1,8 +1,26 @@
+//parent
 #include "shape.h"
+
+//log
 #include "../tdreamsock/dreamSockLog.h"
 
+//game
+#include "../game/game.h"
+
+//client
 #include "../../serverside/client/client.h"
+
+//server
 #include "../../serverside/server/server.h"
+
+//rotation
+#include "../rotation/rotation.h"
+
+//move
+#include "../move/move.h"
+
+//ai
+#include "../ai/ai.h"
 
 #include <string>
 
@@ -108,33 +126,17 @@ void Shape::processTick()
 	//give ai a chance to jump in if this shape has not client
 	if (mIsAI == true)
 	{
-		//AI::processTick();
 		mAI->processTick();
 	}
 
-	//don't do any rotation if there is no mKey set
-	//should we though? we do it for movement below
-	//does rotation not get to do the same?
-	//is this why the rotation gets off???
-	//UPDATE--I now check for mKey inside Rotation State machine
-    
-	//Rotation::processTick();
 	mRotation->processTick();
-	//even though there is no mKey set we still need to move as
-	//brian has put in a deceleration factor so let's let it run...
-	//Move::processTick();
+	
 	mMove->processTick();
 	
-	//set all vars to be sent off to clients playing on internets
-	//none of this actually moves anything on server it is what is
-	//going to be sent to clients so it's not in move or rotation.
-	//though it could be i guess, velocity and position could go in move
-	//and mRot could go in rotation.
-    mCommand.mPositionVelocity.x = mSceneNode->getPosition().x - mCommand.mPosition.x;
+	
+	mCommand.mPositionVelocity.x = mSceneNode->getPosition().x - mCommand.mPosition.x;
     mCommand.mPositionVelocity.y = mSceneNode->getPosition().y - mCommand.mPosition.y;
     mCommand.mPositionVelocity.z = mSceneNode->getPosition().z - mCommand.mPosition.z;
-
-	//mCommand.mPositionVelocity.normalise();
 
 	mCommand.mPositionOld.x = mCommand.mPosition.x;
     mCommand.mPositionOld.z = mCommand.mPosition.z;
@@ -147,13 +149,9 @@ void Shape::processTick()
 	Ogre::Quaternion orientation = mSceneNode->getOrientation();
     Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
 
-    //mCommand.mRotation.x = mSceneNode->getOrientation().zAxis().x;
-    //mCommand.mRotation.z = mSceneNode->getOrientation().zAxis().z;
-
-	mCommand.mRotation.x = mSceneNode->_getDerivedOrientation().zAxis().x;
+  	mCommand.mRotation.x = mSceneNode->_getDerivedOrientation().zAxis().x;
 
     mCommand.mRotation.z = mSceneNode->_getDerivedOrientation().zAxis().z;
-	//LogString("z:%f",mCommand.mRotation.z);
 }
 
 void Shape::setKeyDirection()  //this is called first in process tick so let's start conversion to separate

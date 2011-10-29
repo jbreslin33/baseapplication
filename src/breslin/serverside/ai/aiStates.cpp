@@ -10,6 +10,9 @@
 //ability
 #include "ai.h"
 
+//game
+#include "../game/game.h"
+
 //shapes
 #include "../shape/shape.h"
 
