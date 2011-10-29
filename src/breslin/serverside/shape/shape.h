@@ -28,6 +28,7 @@ class Rotation;
 class Move;
 class AI;
 class Vector3D;
+class Ability;
 
 class Shape
 {
@@ -39,12 +40,20 @@ Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector
 
 void remove();
 
+//abilitys
+void     addAbility(Ability* ability);
+Ability* getAbility(Ability* ability);
+
 //ticks
 void processTick();
 
 void setKeyDirection();
 
 void write(Client* client);
+
+
+//abilitys
+std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
 
 //associated client if any
 Client* mClient;

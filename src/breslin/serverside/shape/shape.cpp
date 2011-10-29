@@ -22,6 +22,9 @@
 //ai
 #include "../ai/ai.h"
 
+//ability
+
+
 #include <string>
 
 Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
@@ -106,6 +109,28 @@ Shape::~Shape()
 {
 	delete mSceneNode;
 }
+
+
+void Shape::addAbility(Ability* ability)
+{
+	
+	mAbilityVector.push_back(ability);	
+}
+
+Ability* Shape::getAbility(Ability* ability)
+{
+	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+	{
+		//typeid(ability);
+
+		if (typeid(ability) == typeid(mAbilityVector.at(i)))
+		{
+			return mAbilityVector.at(i);
+		}
+	}
+	return 0;
+}
+
 
 void Shape::remove()
 {
