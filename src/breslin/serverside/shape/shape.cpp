@@ -57,20 +57,6 @@ Ogre::SceneManager* mSceneManager = root->createSceneManager(Ogre::ST_GENERIC);
 	mKeyRotation  = 0.0f;
 	mGoalDirection = Vector3::ZERO;
 
-	//abilitys
-	//mRotation = new Rotation(this);
-	//mMove = new Move(this);
-
-	/*
-	if (mIsAI)
-	{
-		mAI = new AI(this);
-	}
-	else
-	{
-		mAI = 0;
-	}
-*/
 	//game
 	mGame = game;
 
@@ -149,17 +135,6 @@ void Shape::processTick()
 {
 	setKeyDirection();
 
-	/*
-	//give ai a chance to jump in if this shape has not client
-	if (mIsAI == true)
-	{
-		mAI->processTick();
-	}
-
-	mRotation->processTick();
-	
-	mMove->processTick();
-	*/
 	//process ticks on abilitys
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
