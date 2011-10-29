@@ -8,15 +8,51 @@
 
 Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
-:
-	Rotation(),
-	Move    (),
-	AI      (),
-	OgreShape		  (index,position,velocity,rotation,root)
 {
+
+/****************ogreshape******/
+Ogre::SceneManager* mSceneManager = root->createSceneManager(Ogre::ST_GENERIC);
+
+	// set command origins
+	mCommand.mPosition.x = position->x;
+	mCommand.mPosition.y = position->y;
+	mCommand.mPosition.z = position->z;
+
+	//convert to ogre format
+	Vector3 spawnPoint;
+	spawnPoint.x = mCommand.mPosition.x;
+	spawnPoint.y = mCommand.mPosition.y;
+	spawnPoint.z = mCommand.mPosition.z;
+
+	//create node to represent shape on server and pass in spawnPoint
+	mSceneNode = mSceneManager->getRootSceneNode()->createChildSceneNode(spawnPoint);
+
+ 	mPosition = position;
+	mIndex = 0;
+	mIndex  = index;
+
+	//keys
+    mKeyDirection = Vector3::ZERO;
+	mKeyRotation  = 0.0f;
+	mGoalDirection = Vector3::ZERO;
+
+	//abilitys
+	mRotation = new Rotation(this);
+	mMove = new Move(this);
+
+	if (mIsAI)
+	{
+		mAI = new AI(this);
+	}
+	else
+	{
+		mAI = 0;
+	}
+
+	//game
 	mGame = game;
 
-	//client if this shape has associated with it
+	//client -- if this shape has associated with it
 	mClient = client;
 
 	//mesh
@@ -29,8 +65,8 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	//animated
 	mAnimated = animated;
 
-	//ai
-	mAI = ai;
+	//ai -- bool
+	mIsAI = ai;
 
 	mGame->mShapeVector.push_back(this);
 
@@ -45,10 +81,12 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 		//send it
 		clientToSendTo->SendPacket(&clientToSendTo->mMessage);
 	}
+	
 }
 
 Shape::~Shape()
 {
+	delete mSceneNode;
 }
 
 void Shape::remove()
@@ -68,9 +106,10 @@ void Shape::processTick()
 	setKeyDirection();
 
 	//give ai a chance to jump in if this shape has not client
-	if (mAI == true)
+	if (mIsAI == true)
 	{
-		AI::processTick();
+		//AI::processTick();
+		mAI->processTick();
 	}
 
 	//don't do any rotation if there is no mKey set
@@ -79,12 +118,13 @@ void Shape::processTick()
 	//is this why the rotation gets off???
 	//UPDATE--I now check for mKey inside Rotation State machine
     
-	Rotation::processTick();
-
+	//Rotation::processTick();
+	mRotation->processTick();
 	//even though there is no mKey set we still need to move as
 	//brian has put in a deceleration factor so let's let it run...
-	Move::processTick();
-
+	//Move::processTick();
+	mMove->processTick();
+	
 	//set all vars to be sent off to clients playing on internets
 	//none of this actually moves anything on server it is what is
 	//going to be sent to clients so it's not in move or rotation.

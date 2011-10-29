@@ -1,10 +1,19 @@
+//parent
 #include "moveStates.h"
+
+//log
 #include "../tdreamsock/dreamSockLog.h"
 
+//states
 #include "moveStateMachine.h"
 
+//ability
 #include "move.h"
 
+//shape
+#include "../shape/shape.h"
+
+//commands
 #include "../../command/command.h"
 
 #define MAX_RUN_SPEED 1.66           // character running speed in units per second
@@ -22,7 +31,7 @@ void Normal_Move::execute(Move* move)
 {
 	
 	//check for No_move and Decelerate and Accelerate states..
-    if (move->mKeyDirection.isZeroLength()) 
+    if (move->mShape->mKeyDirection.isZeroLength()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
 		{
@@ -45,9 +54,9 @@ void Normal_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mSceneNode->translate(move->mKeyDirection.x * move->mCommand.mClientFrametime * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mCommand.mClientFrametime * move->mRunSpeed,
 		0,
-		move->mKeyDirection.z  * move->mCommand.mClientFrametime * move->mRunSpeed,
+		move->mShape->mKeyDirection.z  * move->mShape->mCommand.mClientFrametime * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Normal_Move::exit(Move* move)
@@ -64,7 +73,7 @@ void No_Move::enter(Move* move)
 }
 void No_Move::execute(Move* move)
 {
-    if (move->mKeyDirection.isZeroLength()) 
+    if (move->mShape->mKeyDirection.isZeroLength()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
 		{
@@ -104,7 +113,7 @@ void Accelerate_Move::enter(Move* move)
 }
 void Accelerate_Move::execute(Move* move)
 {
-    if (move->mKeyDirection.isZeroLength()) 
+    if (move->mShape->mKeyDirection.isZeroLength()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
 		{
@@ -131,9 +140,9 @@ void Accelerate_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mSceneNode->translate(move->mKeyDirection.x * move->mCommand.mClientFrametime * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mCommand.mClientFrametime * move->mRunSpeed,
 		0,
-		move->mKeyDirection.z  * move->mCommand.mClientFrametime * move->mRunSpeed,
+		move->mShape->mKeyDirection.z  * move->mShape->mCommand.mClientFrametime * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Accelerate_Move::exit(Move* move)
@@ -150,7 +159,7 @@ void Decelerate_Move::enter(Move* move)
 }
 void Decelerate_Move::execute(Move* move)
 {
-    if (move->mKeyDirection.isZeroLength()) 
+    if (move->mShape->mKeyDirection.isZeroLength()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
 		{
@@ -177,9 +186,9 @@ void Decelerate_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mSceneNode->translate(move->mKeyDirection.x * move->mCommand.mClientFrametime * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mCommand.mClientFrametime * move->mRunSpeed,
 		0,
-		move->mKeyDirection.z  * move->mCommand.mClientFrametime * move->mRunSpeed,
+		move->mShape->mKeyDirection.z  * move->mShape->mCommand.mClientFrametime * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Decelerate_Move::exit(Move* move)

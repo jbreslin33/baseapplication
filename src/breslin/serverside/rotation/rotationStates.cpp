@@ -3,9 +3,14 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
+//states
 #include "rotationStateMachine.h"
 
+//ability
 #include "rotation.h"
+
+//shape
+#include "../shape/shape.h"
 
 #define MAX_TURN_SPEED 250     // character turning in degrees per second
 
@@ -20,7 +25,7 @@ void Normal_Rotation::enter(Rotation* rotation)
 void Normal_Rotation::execute(Rotation* rotation)
 {
 	
-	if (rotation->mKeyRotation == 0)
+	if (rotation->mShape->mKeyRotation == 0)
 	{
 		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
 		{
@@ -44,9 +49,9 @@ void Normal_Rotation::execute(Rotation* rotation)
 
 	//actual rotate
 //	LogString("N:%f",rotation->mRotationSpeed);
-	rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 
-//rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
+//rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mCommand.mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
 }
 void Normal_Rotation::exit(Rotation* rotation)
 {
@@ -63,13 +68,13 @@ void Accelerate_Rotation::enter(Rotation* rotation)
 void Accelerate_Rotation::execute(Rotation* rotation)
 {
 	/*
-	if (rotation->mCommand.mKey != 0)
+	if (rotation->mShape->mCommand.mKey != 0)
 	{
 		rotation->mRotationStateMachine->changeState(Normal_Rotation::Instance());
 		return;
 	}
 	*/
-	if (rotation->mKeyRotation == 0)
+	if (rotation->mShape->mKeyRotation == 0)
 	{
 		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
 		{
@@ -97,7 +102,7 @@ void Accelerate_Rotation::execute(Rotation* rotation)
 
 	//actual rotate
 //	LogString("N:%f",rotation->mRotationSpeed);
-	rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 }
 void Accelerate_Rotation::exit(Rotation* rotation)
 {
@@ -114,13 +119,13 @@ void Decelerate_Rotation::enter(Rotation* rotation)
 void Decelerate_Rotation::execute(Rotation* rotation)
 {
 	/*
-	if (rotation->mCommand.mKey != 0)
+	if (rotation->mShape->mCommand.mKey != 0)
 	{
 		rotation->mRotationStateMachine->changeState(Normal_Rotation::Instance());
 		return;
 	}
 	*/
-	if (rotation->mKeyRotation == 0)
+	if (rotation->mShape->mKeyRotation == 0)
 	{
 		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
 		{
@@ -147,7 +152,7 @@ void Decelerate_Rotation::execute(Rotation* rotation)
 	}
 
 	//actual rotate
-	rotation->mSceneNode->yaw(Degree(rotation->mKeyRotation * rotation->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mCommand.mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 
 }
 void Decelerate_Rotation::exit(Rotation* rotation)
@@ -165,7 +170,7 @@ void No_Rotation::enter(Rotation* rotation)
 }
 void No_Rotation::execute(Rotation* rotation)
 {
-	if (rotation->mKeyRotation == 0)
+	if (rotation->mShape->mKeyRotation == 0)
 	{
 		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
 		{

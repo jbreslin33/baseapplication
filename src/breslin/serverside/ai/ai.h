@@ -10,17 +10,20 @@ using namespace Ogre;
 
 class Command;
 class AIStateMachine;
+class Shape;
 
-class AI : public virtual OgreShape
+class AI 
 {
 
 public:
 
-AI();
+AI(Shape* shape);
 ~AI();
 
 //ticks
 void processTick    ();
+
+Shape* mShape;
 
 AIStateMachine* mAIStateMachine;
 

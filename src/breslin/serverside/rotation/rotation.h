@@ -12,13 +12,15 @@ class Command;
 class RotationStateMachine;
 class Shape;
 
-class Rotation :  public virtual OgreShape
+class Rotation
 {
 
 public:
 
-Rotation();
+Rotation(Shape* shape);
 ~Rotation();
+
+Shape* mShape;
 
 float mRotationSpeed;
 

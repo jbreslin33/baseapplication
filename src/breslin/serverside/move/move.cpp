@@ -23,10 +23,10 @@ using namespace Ogre;
 #define KEY_COUNTER_CLOCKWISE      16
 #define KEY_CLOCKWISE              32
 
-Move::Move()
-:
-	OgreShape()
+Move::Move(Shape* shape)
 {
+	mShape = shape;
+
     //runSpeed
     mRunSpeed     = 0.0;
 

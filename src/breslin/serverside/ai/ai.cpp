@@ -23,10 +23,10 @@ using namespace Ogre;
 #define KEY_COUNTER_CLOCKWISE      16
 #define KEY_CLOCKWISE              32
 
-AI::AI()
-:
-	OgreShape()
+AI::AI(Shape* shape)
 {
+	mShape = shape;
+
  	//ai states
 	mAIStateMachine = new AIStateMachine(this);    //setup the state machine
 	mAIStateMachine->setCurrentState      (Random_AI::Instance());

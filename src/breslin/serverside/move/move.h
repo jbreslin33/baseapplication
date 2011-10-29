@@ -10,17 +10,20 @@ using namespace Ogre;
 
 class Command;
 class MoveStateMachine;
+class Shape;
 
-class Move : public virtual OgreShape
+class Move 
 {
 
 public:
 
-Move();
+Move(Shape* shape);
 ~Move();
 
 //ticks
 void processTick    ();
+
+Shape* mShape;
 
 MoveStateMachine* mMoveStateMachine;
 

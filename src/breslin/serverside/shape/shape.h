@@ -23,10 +23,6 @@ using namespace Ogre;
 class Client;
 
 class Shape
-	:
-	public Move ,
-	public Rotation ,
-	public AI
 {
 
 public:
@@ -57,9 +53,33 @@ bool  mCollidable;
 bool mAnimated;
 
 //ai
-bool mAI;
+bool mIsAI;
 
+/******OGRESHAPE*******/
 
+//ogre scene stuff
+SceneNode*          mSceneNode;
+
+//stats
+Vector3D* mPosition;
+
+int			mIndex;
+
+Command	mCommand;		// current frame's commands we are about to or are running this on shapes on server.
+Command mLastCommand;   //this is the last command sent to clients and also that was ran on server
+
+Message	mMessage; //is this all i need to get information over the internets?
+
+//keys
+Vector3 mKeyDirection;
+float mKeyRotation;
+Vector3 mGoalDirection;
+
+Game* mGame;
+
+Rotation* mRotation;
+Move* mMove;
+AI* mAI;
 
 };
 

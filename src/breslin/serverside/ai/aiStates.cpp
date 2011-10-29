@@ -1,10 +1,19 @@
+//parent
 #include "aiStates.h"
+
+//log
+#include "../tdreamsock/dreamSockLog.h"
+
+//states
 #include "aiStateMachine.h"
 
+//ability
 #include "ai.h"
 
-#include "../tdreamsock/dreamSockLog.h" //log
+//shapes
+#include "../shape/shape.h"
 
+//commands
 #include "../../command/command.h"
 
 //rand
@@ -41,23 +50,23 @@ void Random_AI::enter(AI* ai)
 void Random_AI::execute(AI* ai)
 {
 
-	srand ( (short)time(NULL) + ai->mIndex);	/* initialize random seed: */
-	ai->mCommand.mKey = rand() % 16 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
+	srand ( (short)time(NULL) + ai->mShape->mIndex);	/* initialize random seed: */
+	ai->mShape->mCommand.mKey = rand() % 16 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
 
-	if (ai->mCommand.mKey == 16)
+	if (ai->mShape->mCommand.mKey == 16)
 	{
-		ai->mCommand.mKey = 2;
+		ai->mShape->mCommand.mKey = 2;
 	}
-	if (ai->mCommand.mKey == 0)
+	if (ai->mShape->mCommand.mKey == 0)
 	{
-		ai->mCommand.mKey = 4;
+		ai->mShape->mCommand.mKey = 4;
 	}
 
 	//let's set them both because right now brian uses both. but for us ai guys they should be the same number???
-	ai->mCommand.mMillisecondsTotal = ai->mGame->mFrameTime;
-	ai->mCommand.mMilliseconds = ai->mGame->mFrameTime;
+	ai->mShape->mCommand.mMillisecondsTotal = ai->mShape->mGame->mFrameTime;
+	ai->mShape->mCommand.mMilliseconds = ai->mShape->mGame->mFrameTime;
 
-	ai->mCommand.mClientFrametime = ai->mCommand.mMillisecondsTotal / 1000.0f;
+	ai->mShape->mCommand.mClientFrametime = ai->mShape->mCommand.mMillisecondsTotal / 1000.0f;
 
 }
 void Random_AI::exit(AI* ai)

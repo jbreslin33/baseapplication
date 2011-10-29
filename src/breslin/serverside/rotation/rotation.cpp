@@ -21,10 +21,10 @@ using namespace Ogre;
 #define KEY_COUNTER_CLOCKWISE      16
 #define KEY_CLOCKWISE              32
 
-Rotation::Rotation()
-:
-	OgreShape()
+Rotation::Rotation(Shape* shape)
 {
+	mShape = shape;
+
 	mRotationSpeed  = 0.0;
 
     //run acceleration
