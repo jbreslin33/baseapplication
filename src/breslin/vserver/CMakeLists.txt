@@ -113,30 +113,30 @@ set(HDRS
 	../serverside/shape/shapeTagPlayer.h
 		
 	#move
-	../serverside/move/move.h
-	../serverside/move/move.h
+	../serverside/ability/move/move.h
+	../serverside/ability/move/move.h
 	
 	#move states
-	../serverside/move/moveStateMachine.h
-	../serverside/move/moveState.h
-	../serverside/move/moveStates.h
+	../serverside/ability/move/moveStateMachine.h
+	../serverside/ability/move/moveState.h
+	../serverside/ability/move/moveStates.h
 	
 	#ai
-	../serverside/ai/ai.h
-	../serverside/ai/ai.h
+	../serverside/ability/ai/ai.h
+	../serverside/ability/ai/ai.h
 	
 	#ai states
-	../serverside/ai/aiStateMachine.h
-	../serverside/ai/aiState.h
-	../serverside/ai/aiStates.h	
+	../serverside/ability/ai/aiStateMachine.h
+	../serverside/ability/ai/aiState.h
+	../serverside/ability/ai/aiStates.h	
 
 	#rotation
-	../serverside/rotation/rotation.h
+	../serverside/ability/rotation/rotation.h
 	
 	#rotation states
-	../serverside/rotation/rotationStateMachine.h
-	../serverside/rotation/rotationState.h
-	../serverside/rotation/rotationStates.h	
+	../serverside/ability/rotation/rotationStateMachine.h
+	../serverside/ability/rotation/rotationState.h
+	../serverside/ability/rotation/rotationStates.h	
 	
 	#math
 	../math/vector3D.h
@@ -186,22 +186,22 @@ set(SRCS
 	../serverside/shape/shapeTagPlayer.cpp
 	
 	#move
-	../serverside/move/move.cpp
+	../serverside/ability/move/move.cpp
 	
 	#move states
-	../serverside/move/moveStates.cpp
+	../serverside/ability/move/moveStates.cpp
 	
 	#ai
-	../serverside/ai/ai.cpp
+	../serverside/ability/ai/ai.cpp
 	
 	#ai states
-	../serverside/ai/aiStates.cpp
+	../serverside/ability/ai/aiStates.cpp
 	
 	#rotation
-	../serverside/rotation/rotation.cpp
+	../serverside/ability/rotation/rotation.cpp
 	
 	#rotation states
-	../serverside/rotation/rotationStates.cpp
+	../serverside/ability/rotation/rotationStates.cpp
 	
 	#math
 	../math/vector3D.cpp
@@ -253,30 +253,30 @@ set(HDRS
 	../serverside/shape/shapeTagPlayer.h
 	
 	#move
-	../serverside/move/move.h
-	../serverside/move/move.h
+	../serverside/ability/move/move.h
+	../serverside/ability/move/move.h
 	
 	#move states
-	../serverside/move/moveStateMachine.h
-	../serverside/move/moveState.h
-	../serverside/move/moveStates.h
+	../serverside/ability/move/moveStateMachine.h
+	../serverside/ability/move/moveState.h
+	../serverside/ability/move/moveStates.h
 	
 	#ai
-	../serverside/ai/ai.h
-	../serverside/ai/ai.h
+	../serverside/ability/ai/ai.h
+	../serverside/ability/ai/ai.h
 	
 	#ai states
-	../serverside/ai/aiStateMachine.h
-	../serverside/ai/aiState.h
-	../serverside/ai/aiStates.h	
+	../serverside/ability/ai/aiStateMachine.h
+	../serverside/ability/ai/aiState.h
+	../serverside/ability/ai/aiStates.h	
 	
 	#rotation
-	../serverside/rotation/rotation.h
+	../serverside/ability/rotation/rotation.h
 	
 	#rotation states
-	../serverside/rotation/rotationStateMachine.h
-	../serverside/rotation/rotationState.h
-	../serverside/rotation/rotationStates.h	
+	../serverside/ability/rotation/rotationStateMachine.h
+	../serverside/ability/rotation/rotationState.h
+	../serverside/ability/rotation/rotationStates.h	
 		
 	#math
 	../math/vector3D.h
@@ -325,22 +325,22 @@ set(SRCS
 	../serverside/shape/shapeTagPlayer.cpp
 	
 	#move
-	../serverside/move/move.cpp
+	../serverside/ability/move/move.cpp
 	
 	#move states
-	../serverside/move/moveStates.cpp
+	../serverside/ability/move/moveStates.cpp
 	
 	#ai
-	../serverside/ai/ai.cpp
+	../serverside/ability/ai/ai.cpp
 	
 	#ai states
-	../serverside/ai/aiStates.cpp
+	../serverside/ability/ai/aiStates.cpp
 	
 	#rotation
-	../serverside/rotation/rotation.cpp
+	../serverside/ability/rotation/rotation.cpp
 	
 	#rotation states
-	../serverside/rotation/rotationStates.cpp
+	../serverside/ability/rotation/rotationStates.cpp
 	
 	#math
 	../math/vector3D.cpp

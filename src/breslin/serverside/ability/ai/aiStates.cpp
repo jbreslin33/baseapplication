@@ -2,7 +2,7 @@
 #include "aiStates.h"
 
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
 //states
 #include "aiStateMachine.h"
@@ -11,13 +11,13 @@
 #include "ai.h"
 
 //game
-#include "../game/game.h"
+#include "../../game/game.h"
 
 //shapes
-#include "../shape/shape.h"
+#include "../../shape/shape.h"
 
 //commands
-#include "../command/command.h"
+#include "../../command/command.h"
 
 //rand
 #include <stdlib.h>

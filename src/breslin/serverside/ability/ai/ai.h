@@ -2,7 +2,7 @@
 #define SERVERSIDEAI_H
 
 //parent
-#include "../ability/ability.h"
+#include "../ability.h"
 
 //Ogre headers
 #include "Ogre.h"

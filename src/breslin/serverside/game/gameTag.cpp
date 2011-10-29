@@ -10,9 +10,9 @@
 #include "../client/client.h"
 
 //abilitys
-#include "../rotation/rotation.h"
-#include "../move/move.h"
-#include "../ai/ai.h"
+#include "../ability/rotation/rotation.h"
+#include "../ability/move/move.h"
+#include "../ability/ai/ai.h"
 
 //math
 #include "../../math/vector3D.h"

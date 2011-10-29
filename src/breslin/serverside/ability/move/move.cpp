@@ -1,7 +1,7 @@
 #include "move.h"
-#include "../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
-#include "../../serverside/client/client.h"
+#include "../../client/client.h"
 
 #define MAX_RUN_SPEED 1.66           // character running speed in units per second
 

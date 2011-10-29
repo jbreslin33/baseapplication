@@ -2,7 +2,7 @@
 #include "moveStates.h"
 
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
 //states
 #include "moveStateMachine.h"
@@ -11,10 +11,10 @@
 #include "move.h"
 
 //shape
-#include "../shape/shape.h"
+#include "../../shape/shape.h"
 
 //commands
-#include "../command/command.h"
+#include "../../command/command.h"
 
 #define MAX_RUN_SPEED 1.66           // character running speed in units per second
 

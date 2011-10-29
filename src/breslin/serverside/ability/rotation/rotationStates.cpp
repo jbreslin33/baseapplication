@@ -1,7 +1,7 @@
 #include "rotationStates.h"
 
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
 //states
 #include "rotationStateMachine.h"
@@ -10,7 +10,7 @@
 #include "rotation.h"
 
 //shape
-#include "../shape/shape.h"
+#include "../../shape/shape.h"
 
 #define MAX_TURN_SPEED 250     // character turning in degrees per second
 

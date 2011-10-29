@@ -17,8 +17,8 @@
 #include "../../serverside/shape/shape.h"
 
 //abilitys
-#include "../rotation/rotation.h"
-#include "../move/move.h"
+#include "../ability/rotation/rotation.h"
+#include "../ability/move/move.h"
 
 #ifdef WIN32
 //

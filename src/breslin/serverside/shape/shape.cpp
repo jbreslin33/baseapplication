@@ -14,13 +14,13 @@
 #include "../../serverside/server/server.h"
 
 //rotation
-#include "../rotation/rotation.h"
+#include "../ability/rotation/rotation.h"
 
 //move
-#include "../move/move.h"
+#include "../ability/move/move.h"
 
 //ai
-#include "../ai/ai.h"
+#include "../ability/ai/ai.h"
 
 //ability
 
