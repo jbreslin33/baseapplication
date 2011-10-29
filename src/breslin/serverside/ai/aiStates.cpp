@@ -17,7 +17,7 @@
 #include "../shape/shape.h"
 
 //commands
-#include "../../command/command.h"
+#include "../command/command.h"
 
 //rand
 #include <stdlib.h>

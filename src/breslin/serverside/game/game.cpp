@@ -16,7 +16,7 @@
 #include "../shape/shape.h"
 
 //command
-#include "../../command/command.h"
+#include "../command/command.h"
 
 Game::Game()
 {
