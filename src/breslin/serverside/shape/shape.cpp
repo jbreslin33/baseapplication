@@ -126,8 +126,6 @@ Ability* Shape::getAbility(Ability* ability)
 {
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
-		//typeid(ability);
-
 		if (typeid(ability) == typeid(mAbilityVector.at(i)))
 		{
 			return mAbilityVector.at(i);
