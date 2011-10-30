@@ -174,10 +174,10 @@ void GameTag::buildDeltaMoveMessage(Command* command, int flags, Message* messag
 	Game::buildDeltaMoveMessage(command,flags,message,shape);
 	
 	//IT
-	if(flags & CMD_IT)
-	{
-		message->WriteFloat(command->mPosition.x);
-	}
+	//if(flags & CMD_IT)
+	//{
+	//	message->WriteFloat(command->mPosition.x);
+	//}
 	/*
 	message->WriteByte(shape->mIndex);
 

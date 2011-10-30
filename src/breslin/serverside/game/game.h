@@ -18,7 +18,7 @@ using namespace Ogre;
 #define KEY_COUNTER_CLOCKWISE      16
 #define KEY_CLOCKWISE              32
 
-//flag
+//flag 1
 #define CMD_KEY						1
 #define CMD_MILLISECONDS            2
 #define CMD_ORIGIN_X                4
@@ -26,7 +26,7 @@ using namespace Ogre;
 #define CMD_ORIGIN_Z               16 
 #define CMD_ROTATION_X             32
 #define CMD_ROTATION_Z             64
-#define CMD_IT         128
+#define CMD_PIGGY_BIT             128
 //skip next guy???
 
 #define USER_MES_FRAME				1

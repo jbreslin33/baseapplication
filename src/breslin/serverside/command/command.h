@@ -37,6 +37,9 @@ int mMillisecondsTotal;      //not used
 
 float mClientFrametime;
 
+//piggyBit
+bool mPiggyBit;
+
 /******************************************************
 *				METHODS
 ********************************************************/

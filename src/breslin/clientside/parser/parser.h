@@ -46,9 +46,6 @@ static const char mCommandOriginZ      = 16;
 static const char mCommandRotationX    = 32;
 static const char mCommandRotationZ    = 64;
 
-
-
-
 };
 
 #endif

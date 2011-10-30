@@ -292,7 +292,15 @@ int Game::setFlag(Command* command, Shape* shape)
 	{
 		flags |= CMD_MILLISECONDS;
 	}
+	
+	if(shape->mLastCommand.mPiggyBit != command->mPiggyBit)
+	{
+		flags |= CMD_PIGGY_BIT;
+	}
 	return flags;
+	
+
+	
 }
 
 void Game::buildDeltaMoveMessage(Command* command, int flags, Message* message, Shape* shape)
@@ -320,13 +328,10 @@ void Game::buildDeltaMoveMessage(Command* command, int flags, Message* message, 
 	if(flags & CMD_ROTATION_X)
 	{
 		message->WriteFloat(command->mRotation.x);
-		//LogString("x:%f",command->mRotation.x);
-
 	}
 	if(flags & CMD_ROTATION_Z)
 	{
 		message->WriteFloat(command->mRotation.z);
-		//LogString("z:%f",command->mRotation.z);
 	}
 
 	//Milliseconds

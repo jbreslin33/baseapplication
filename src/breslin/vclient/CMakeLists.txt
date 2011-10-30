@@ -145,13 +145,15 @@ set(HDRS
 	
 	#parser
 	../clientside/parser/parser.h
-	
-	
+		
 	#billboard
 	../clientside/billboard/objectTitle.h
 	
 	#time
 	../clientside/time/time.h
+
+	#parser
+	../clientside/parser/parser.h
 )
  
 set(SRCS
@@ -212,6 +214,9 @@ set(SRCS
 	
 	#time
 	../clientside/time/time.cpp
+	
+	#parser
+	../clientside/parser/parser.cpp
 
 )
 endif (WIN32)
@@ -281,6 +286,9 @@ set(HDRS
 	
 	#time
 	../clientside/time/time.h
+	
+	#parser
+	../clientside/parser/parser.h
 )
  
 set(SRCS
@@ -341,6 +349,9 @@ set(SRCS
 	
 	#time
 	../clientside/time/time.cpp
+	
+	#parser
+	../clientside/parser/parser.cpp
 
 	
 )

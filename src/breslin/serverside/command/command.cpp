@@ -30,6 +30,8 @@ Command::Command()
 	mMilliseconds = 19;
 	mMillisecondsTotal = 0;
 	mClientFrametime = 0.0f;
+
+	mPiggyBit = false;
 }
 
 Command::~Command()
