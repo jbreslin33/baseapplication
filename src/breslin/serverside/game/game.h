@@ -84,8 +84,9 @@ public:
 	void	frame(int msec);
 	
 	//collision detection
-	virtual void	checkCollisions(void);
-
+	virtual void checkCollisions();
+	virtual void collision(Shape* shape1, Shape* shape2);
+	
 	//scope
  	bool    checkScope(Client* client, Shape* shape);
 

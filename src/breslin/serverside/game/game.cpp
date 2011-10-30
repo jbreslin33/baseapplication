@@ -119,21 +119,26 @@ void Game::checkCollisions(void)
 					//to distSQ between them. IS this right or is it working by chance?
 					if(distSq < mShapeVector.at(i)->mCollisionRadius + mShapeVector.at(j)->mCollisionRadius)
 					{
-						mShapeVector.at(i)->mCommand.mPosition = mShapeVector.at(i)->mCommand.mPositionOld;
-						mShapeVector.at(j)->mCommand.mPosition = mShapeVector.at(j)->mCommand.mPositionOld;
-
-						float x3 = mShapeVector.at(i)->mCommand.mPositionOld.x;
-						float z3 = mShapeVector.at(i)->mCommand.mPositionOld.z;
-						float x4 = mShapeVector.at(j)->mCommand.mPositionOld.x;
-						float z4 = mShapeVector.at(j)->mCommand.mPositionOld.z;
-
-						mShapeVector.at(i)->mSceneNode->setPosition(x3,0.0,z3);
-						mShapeVector.at(j)->mSceneNode->setPosition(x4,0.0,z4);
+						collision(mShapeVector.at(i),mShapeVector.at(j));
 					}
 				}
 			}
 		}
 	}
+}
+
+void Game::collision(Shape* shape1, Shape* shape2)
+{
+	shape1->mCommand.mPosition = shape1->mCommand.mPositionOld;
+	shape2->mCommand.mPosition = shape2->mCommand.mPositionOld;
+
+	float x3 = shape1->mCommand.mPositionOld.x;
+	float z3 = shape1->mCommand.mPositionOld.z;
+	float x4 = shape2->mCommand.mPositionOld.x;
+	float z4 = shape2->mCommand.mPositionOld.z;
+
+	shape1->mSceneNode->setPosition(x3,0.0,z3);
+	shape2->mSceneNode->setPosition(x4,0.0,z4);
 }
 
 bool Game::checkScope(Client* client, Shape* shape)
