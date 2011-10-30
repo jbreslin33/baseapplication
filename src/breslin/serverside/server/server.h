@@ -27,6 +27,7 @@ class Network;
 class Client;
 class Game;
 class Shape;
+class Parser;
 
 class Server
 {
@@ -55,6 +56,9 @@ public:
 	static const int mDisconnect  = -102;
 	static const int mAddShape    = -103;
 	static const int mRemoveShape = -104;
+
+	//parser
+	Parser* mParser;
 
 public:
 	Server(Game* serverSideGame,const char *localIP, int serverPort);

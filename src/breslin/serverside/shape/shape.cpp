@@ -61,6 +61,14 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	//ai -- bool
 	mIsAI = ai;
 
+	//keys
+	mKeyUp = 1;
+	mKeyDown = 2;
+	mKeyLeft = 4;
+	mKeyRight = 8;
+	mKeyCounterClockwise = 16;
+	mKeyClockwise = 32;
+
 	createShape(root,position);
 
 	addAbilitys();
@@ -187,21 +195,21 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 	mKeyRotation = 0.0f;
     
 	// keep track of the player's intended direction
-    if(mCommand.mKey & KEY_UP) 
+    if(mCommand.mKey & mKeyUp) 
 	{
 		mKeyDirection.z += -1;
 	}
 
-    if(mCommand.mKey & KEY_LEFT) 
+    if(mCommand.mKey & mKeyLeft) 
 	{
 		mKeyDirection.x += -1;
 	}
                 
-    if(mCommand.mKey & KEY_DOWN) 
+    if(mCommand.mKey & mKeyDown) 
 	{
         mKeyDirection.z += 1;
 	}
-    if(mCommand.mKey & KEY_RIGHT) 
+    if(mCommand.mKey & mKeyRight) 
 	{
 		mKeyDirection.x += 1;
 	}
@@ -210,11 +218,11 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 
 
     // keep track of the player's intended rotation
-    if(mCommand.mKey & KEY_COUNTER_CLOCKWISE) 
+    if(mCommand.mKey & mKeyCounterClockwise) 
 	{
 		mKeyRotation += -1;
 	}
-    if(mCommand.mKey & KEY_CLOCKWISE) 
+    if(mCommand.mKey & mKeyClockwise) 
 	{
 		mKeyRotation += 1;
 	}

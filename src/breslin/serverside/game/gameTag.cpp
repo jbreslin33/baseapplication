@@ -3,6 +3,9 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
+//parser
+#include "../parser/parser.h"
+
 //server
 #include "../server/serverTag.h"
 
@@ -140,31 +143,31 @@ int GameTag::setFlag(Command* command, Shape* shape)
 	//Origin
 	if(shape->mLastCommand.mPosition.x != command->mPosition.x)
 	{
-		flags |= CMD_ORIGIN_X;
+		flags |= mParser->mCommandOriginX;
 	}
 	if(shape->mLastCommand.mPosition.y != command->mPosition.y)
 	{
-		flags |= CMD_ORIGIN_Y;
+		flags |= mParser->mCommandOriginY;
 	}
 	if(shape->mLastCommand.mPosition.z != command->mPosition.z)
 	{
-		flags |= CMD_ORIGIN_Z;
+		flags |= mParser->mCommandOriginZ;
 	}
 
 	//Rotation
 	if(shape->mLastCommand.mRotation.x != command->mRotation.x)
 	{
-		flags |= CMD_ROTATION_X;
+		flags |= mParser->mCommandRotationX;
 	}
 	if(shape->mLastCommand.mRotation.z != command->mRotation.z)
 	{
-		flags |= CMD_ROTATION_Z;
+		flags |= mParser->mCommandRotationZ;
 	}
 	
 	//Milliseconds
 	if(shape->mLastCommand.mMillisecondsTotal != command->mMillisecondsTotal)
 	{
-		flags |= CMD_MILLISECONDS;
+		flags |= mParser->mCommandMilliseconds;
 	}
 	return flags;
 }
@@ -185,31 +188,31 @@ void GameTag::buildDeltaMoveMessage(Command* command, int flags, Message* messag
 	message->WriteByte(flags);  
 
 	//Origin
-	if(flags & CMD_ORIGIN_X)
+	if(flags & mCommandOriginX)
 	{
 		message->WriteFloat(command->mPosition.x);
 	}
-	if(flags & CMD_ORIGIN_Y)
+	if(flags & mCommandOriginY)
 	{
 		message->WriteFloat(command->mPosition.y);
 	}
-	if(flags & CMD_ORIGIN_Z)
+	if(flags & mCommandOriginZ)
 	{
 		message->WriteFloat(command->mPosition.z);
 	}
 
 	//Rotation
-	if(flags & CMD_ROTATION_X)
+	if(flags & mCommandRotationX)
 	{
 		message->WriteFloat(command->mRotation.x);
 	}
-	if(flags & CMD_ROTATION_Z)
+	if(flags & mCommandRotationZ)
 	{
 		message->WriteFloat(command->mRotation.z);
 	}
 
 	//Milliseconds
-	if(flags & CMD_MILLISECONDS)
+	if(flags & mCommandMilliseconds)
 	{
 		message->WriteByte(command->mMillisecondsTotal);
 	}

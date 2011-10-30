@@ -3,6 +3,9 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
+//parser
+#include "../parser/parser.h"
+
 //server
 #include "../server/server.h"
 
@@ -20,6 +23,8 @@
 
 Game::Game()
 {
+	mParser = new Parser();
+
 	StartLog();
 
 #ifdef _DEBUG
@@ -172,7 +177,7 @@ void Game::sendCommand(void)
 			sizeof(mServer->mClientVector.at(i)->mMessage.outgoingData));
 
 		//start filling said mMessage that belongs to client
-		mServer->mClientVector.at(i)->mMessage.WriteByte(USER_MES_FRAME);			// type
+		mServer->mClientVector.at(i)->mMessage.WriteByte(mParser->mMessageFrame);			// type
 		mServer->mClientVector.at(i)->mMessage.WriteShort(mServer->mClientVector.at(i)->mOutgoingSequence);
 
 		//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
@@ -206,7 +211,7 @@ void Game::sendExitNotification(void)
 		mServer->mClientVector.at(i)->mMessage.Init(mServer->mClientVector.at(i)->mMessage.outgoingData,
 			sizeof(mServer->mClientVector.at(i)->mMessage.outgoingData));
 
-		mServer->mClientVector.at(i)->mMessage.WriteByte(USER_MES_SERVEREXIT);	// type
+		mServer->mClientVector.at(i)->mMessage.WriteByte(mParser->mMessageServerExit);	// type
 		mServer->mClientVector.at(i)->mMessage.WriteShort(mServer->mClientVector.at(i)->mOutgoingSequence);
 	}
 
@@ -224,14 +229,14 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 	//LogString("flags:%d",flags);
 
 	// Key
-	if(flags & CMD_KEY)
+	if(flags & mParser->mCommandKey)
 	{
 		client->mShape->mCommand.mKey = mes->ReadByte();
 		//LogString("key:%d",client->mShape->mCommand.mKey);
 	}
 
 	// Milliseconds
-	if(flags & CMD_MILLISECONDS)
+	if(flags & mParser->mCommandMilliseconds)
 	{
 		//LogString("mil:%d",client->mShape->mCommand.mMilliseconds);
 		client->mShape->mCommand.mMilliseconds = mes->ReadByte();
@@ -266,37 +271,38 @@ int Game::setFlag(Command* command, Shape* shape)
 	//Origin
 	if(shape->mLastCommand.mPosition.x != command->mPosition.x)
 	{
-		flags |= CMD_ORIGIN_X;
+		flags |= mParser->mCommandOriginX;
 	}
 	if(shape->mLastCommand.mPosition.y != command->mPosition.y)
 	{
-		flags |= CMD_ORIGIN_Y;
+		flags |= mParser->mCommandOriginY;
 	}
 	if(shape->mLastCommand.mPosition.z != command->mPosition.z)
 	{
-		flags |= CMD_ORIGIN_Z;
+		flags |= mParser->mCommandOriginZ;
 	}
 
 	//Rotation
 	if(shape->mLastCommand.mRotation.x != command->mRotation.x)
 	{
-		flags |= CMD_ROTATION_X;
+		flags |= mParser->mCommandRotationX;
 	}
 	if(shape->mLastCommand.mRotation.z != command->mRotation.z)
 	{
-		flags |= CMD_ROTATION_Z;
+		flags |= mParser->mCommandRotationZ;
 	}
 	
 	//Milliseconds
 	if(shape->mLastCommand.mMillisecondsTotal != command->mMillisecondsTotal)
 	{
-		flags |= CMD_MILLISECONDS;
+		flags |= mParser->mCommandMilliseconds;
 	}
-	
+	/*
 	if(shape->mLastCommand.mPiggyBit != command->mPiggyBit)
 	{
-		flags |= CMD_PIGGY_BIT;
+		flags |= mParser->mCommandPiggyBit;
 	}
+	*/
 	return flags;
 	
 
@@ -311,31 +317,31 @@ void Game::buildDeltaMoveMessage(Command* command, int flags, Message* message, 
 	message->WriteByte(flags);  
 
 	//Origin
-	if(flags & CMD_ORIGIN_X)
+	if(flags & mParser->mCommandOriginX)
 	{
 		message->WriteFloat(command->mPosition.x);
 	}
-	if(flags & CMD_ORIGIN_Y)
+	if(flags & mParser->mCommandOriginY)
 	{
 		message->WriteFloat(command->mPosition.y);
 	}
-	if(flags & CMD_ORIGIN_Z)
+	if(flags & mParser->mCommandOriginZ)
 	{
 		message->WriteFloat(command->mPosition.z);
 	}
 
 	//Rotation
-	if(flags & CMD_ROTATION_X)
+	if(flags & mParser->mCommandRotationX)
 	{
 		message->WriteFloat(command->mRotation.x);
 	}
-	if(flags & CMD_ROTATION_Z)
+	if(flags & mParser->mCommandRotationZ)
 	{
 		message->WriteFloat(command->mRotation.z);
 	}
 
 	//Milliseconds
-	if(flags & CMD_MILLISECONDS)
+	if(flags & mParser->mCommandMilliseconds)
 	{
 		message->WriteByte(command->mMillisecondsTotal);
 	}

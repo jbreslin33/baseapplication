@@ -13,14 +13,6 @@ using namespace Ogre;
 
 #include <string>
 
-//key defines prob should be changed to a variable if possible
-#define KEY_UP					1
-#define KEY_DOWN				2
-#define KEY_LEFT				4
-#define KEY_RIGHT				8
-#define KEY_COUNTER_CLOCKWISE      16
-#define KEY_CLOCKWISE              32
-
 //forward declarations
 class Game;
 class Client;
@@ -77,6 +69,14 @@ bool mAnimated;
 
 //ai
 bool mIsAI;
+
+//keys
+int mKeyUp;
+int mKeyDown;
+int mKeyLeft;
+int mKeyRight;
+int mKeyCounterClockwise;
+int mKeyClockwise;
 
 /******OGRESHAPE*******/
 

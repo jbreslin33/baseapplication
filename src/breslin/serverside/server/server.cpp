@@ -4,6 +4,9 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
+//parser
+#include "../parser/parser.h"
+
 //network
 #include "../network/network.h"
 
@@ -20,8 +23,13 @@
 #include "../game/game.h"
 
 
+
+
 Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 {
+
+	mParser = new Parser();
+
 	init			= false;
 	mGame = serverSideGame;
 	mLocalIP = localIP;
@@ -265,7 +273,7 @@ void Server::readPackets()
 				}
 				break;
 
-			case USER_MES_FRAME:
+			case mParser->mMessageFrame:
 			//LogString("Got frame (size: %d bytes)", ret);
 
 				// Skip sequences
