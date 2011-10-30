@@ -54,8 +54,24 @@ void GameTag::createWorld()
 		mItShape = mShapeVector.at(0);
 	}
 }
-
-void GameTag::checkCollisions(void)
+void GameTag::collision(Shape* shape1, Shape* shape2)
+{
+	Game::collision(shape1,shape2);
+	
+	//let's make someone it
+	if (shape1 == mItShape)
+	{
+		mItShape = shape2;
+		LogString("IT:%d",mItShape->mIndex);
+	}
+	else if (shape2 == mItShape)
+	{
+		mItShape = shape1;
+		LogString("IT:%d",mItShape->mIndex);
+	}
+}
+/*
+void GameTag::checkCollisions()
 {
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
@@ -106,7 +122,7 @@ void GameTag::checkCollisions(void)
 		}
 	}
 }
-
+*/
 void GameTag::buildDeltaMoveCommand(Message* mes, Shape* shape)
 {
 	Command* command = &shape->mCommand;
