@@ -31,26 +31,23 @@
 //server side client constructor, many instances will be made, one for each client connected.
 Client::Client(Server* server, struct sockaddr *address)
 {
+	//server
 	mServer = server;
-
-	SetSocketAddress(address);
 
 	mLastMessageTime  = 0;
 	mConnectionState  = DREAMSOCK_CONNECTING;
 	mOutgoingSequence = 1;
 	mIncomingSequence = 0;
 
+	SetSocketAddress(address);
+
 	//register this client with server
 	mServer->mClientVector.push_back(this);
 
-	//send a connect message
-	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-	mMessage.WriteByte(mServer->mConnect);	// type
-	SendPacket(&mMessage);
 
-	//create the shape for this client -- the avatar
-	mShape = new Shape(mServer->mGame->getOpenIndex(),mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f,1,false); 
-	
+
+	createShape();
+
 	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
 	sendAllShapes();
 }
@@ -59,6 +56,21 @@ Client::~Client()
 {
 	mServer->mNetwork->dreamSock_CloseSocket(mServer->mNetwork->mSocket);
 	//delete mNetwork;
+}
+
+void Client::sendConnect()
+{
+	//send a connect message
+	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+	mMessage.WriteByte(mServer->mConnect);	// type
+	SendPacket(&mMessage);
+}
+
+void Client::createShape()
+{
+	//create the shape for this client -- the avatar
+	mShape = new Shape(mServer->mGame->getOpenIndex(),mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f,1,false); 
+	
 }
 
 void Client::remove()

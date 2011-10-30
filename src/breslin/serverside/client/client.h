@@ -63,6 +63,7 @@ public:
 	Client(Server* server, struct sockaddr *address);
 
 ~Client();
+
 	int				mConnectionState;		// Connecting, connected, disconnecting, disconnected
 
 	signed short	mOutgoingSequence;		// OutFgoing packet sequence
@@ -74,6 +75,8 @@ public:
 	int				mLastMessageTime;
 
 public:
+	void createShape();
+	void sendConnect();
 	void remove();
 	void			SendPacket(Message *message);
 	void sendAllShapes();
