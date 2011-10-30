@@ -43,14 +43,21 @@ void remove();
 //abilitys
 void     addAbility(Ability* ability);
 Ability* getAbility(Ability* ability);
+void addAbilitys();
+
+//create
+void createShape(Ogre::Root* root, Vector3D* position);
 
 //ticks
 void processTick();
 
 void setKeyDirection();
 
+void setValues();
+
 void write(Client* client);
 
+void sendShapeToClients();
 
 //abilitys
 std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape

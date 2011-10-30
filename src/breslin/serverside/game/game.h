@@ -26,7 +26,7 @@ using namespace Ogre;
 #define CMD_ORIGIN_Z               16 
 #define CMD_ROTATION_X             32
 #define CMD_ROTATION_Z             64
-#define CMD_SKIPNEXTSHAPE         128
+#define CMD_IT         128
 //skip next guy???
 
 #define USER_MES_FRAME				1

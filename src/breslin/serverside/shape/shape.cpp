@@ -31,25 +31,10 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 {
 
-/****************ogreshape******/
-Ogre::SceneManager* mSceneManager = root->createSceneManager(Ogre::ST_GENERIC);
-
-	// set command origins
-	mCommand.mPosition.x = position->x;
-	mCommand.mPosition.y = position->y;
-	mCommand.mPosition.z = position->z;
-
-	//convert to ogre format
-	Vector3 spawnPoint;
-	spawnPoint.x = mCommand.mPosition.x;
-	spawnPoint.y = mCommand.mPosition.y;
-	spawnPoint.z = mCommand.mPosition.z;
-
-	//create node to represent shape on server and pass in spawnPoint
-	mSceneNode = mSceneManager->getRootSceneNode()->createChildSceneNode(spawnPoint);
+	//set values
+	mCommand.mPosition.copyValuesFrom(position);
 
  	mPosition = position;
-	mIndex = 0;
 	mIndex  = index;
 
 	//keys
@@ -76,8 +61,38 @@ Ogre::SceneManager* mSceneManager = root->createSceneManager(Ogre::ST_GENERIC);
 	//ai -- bool
 	mIsAI = ai;
 
+	createShape(root,position);
+
+	addAbilitys();
+
+	//register with shape vector
 	mGame->mShapeVector.push_back(this);
 
+	sendShapeToClients();
+	
+}
+
+Shape::~Shape()
+{
+	delete mSceneNode;
+}
+
+void Shape::createShape(Ogre::Root* root, Vector3D* position)
+{
+	//create ogre shape
+	Ogre::SceneManager* mSceneManager = root->createSceneManager(Ogre::ST_GENERIC);
+
+	//create node to represent shape on server and pass in spawnPoint
+	mSceneNode = mSceneManager->getRootSceneNode()->createChildSceneNode(position->convertToVector3());
+}
+
+void Shape::setValues()
+{
+	
+}
+
+void Shape::sendShapeToClients()
+{
 	//send this shape to all clients
 	for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
 	{
@@ -89,19 +104,22 @@ Ogre::SceneManager* mSceneManager = root->createSceneManager(Ogre::ST_GENERIC);
 		//send it
 		clientToSendTo->SendPacket(&clientToSendTo->mMessage);
 	}
-	
 }
-
-Shape::~Shape()
-{
-	delete mSceneNode;
-}
-
 
 void Shape::addAbility(Ability* ability)
 {
-	
 	mAbilityVector.push_back(ability);	
+}
+
+void Shape::addAbilitys()
+{
+	//add abilitys
+	addAbility(new Rotation(this));
+	addAbility(new Move(this));
+	if (mIsAI)
+	{
+		addAbility(new AI(this));
+	}
 }
 
 Ability* Shape::getAbility(Ability* ability)

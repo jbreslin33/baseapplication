@@ -105,3 +105,13 @@ Vector3D* Vector3D::crossProduct(Vector3D* b)
 
 	return c;
 }
+
+Vector3 Vector3D::convertToVector3()
+{
+	Vector3 vector3;
+	vector3.x = x;
+	vector3.y = y;
+	vector3.z = z;
+
+	return vector3;
+}
