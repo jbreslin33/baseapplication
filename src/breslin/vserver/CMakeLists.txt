@@ -149,9 +149,13 @@ set(HDRS
 	
 	#server
 	../serverside/server/server.h
+		#tag
+	../serverside/server/serverTag.h
 	
 	#client
 	../serverside/client/client.h
+		#tag
+	../serverside/client/clientTag.h
 	
 	#billboard
 	#../billboard/objectTitle.h
@@ -214,9 +218,13 @@ set(SRCS
 	
 	#server
 	../serverside/server/server.cpp
+		#tag
+	../serverside/server/serverTag.cpp
 	
 	#client
 	../serverside/client/client.cpp
+		#tag
+	../serverside/client/clientTag.cpp
 	
 	#billboard
 	#../billboard/objectTitle.cpp
@@ -289,9 +297,13 @@ set(HDRS
 	
 	#server
 	../serverside/server/server.h
+		#tag
+	../serverside/server/serverTag.h
 	
 	#client
 	../serverside/client/client.h
+		#tag
+	../serverside/client/clientTag.h
 	
 	#billboard
 	#../billboard/objectTitle.h
@@ -353,9 +365,13 @@ set(SRCS
 	
 	#server
 	../serverside/server/server.cpp
+		#tag
+	../serverside/server/serverTag.cpp
 	
 	#client
-	../serverside/client/client.cpp
+	../serverside/client/client.h
+		#tag
+	../serverside/client/clientTag.h
 	
 	#billboard
 	#../billboard/objectTitle.cpp

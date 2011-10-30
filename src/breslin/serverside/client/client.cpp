@@ -5,16 +5,16 @@
 #include "../tdreamsock/dreamSockLog.h"
 
 //network
-#include "../../serverside/network/network.h"
+#include "../network/network.h"
 
 //server
-#include "../../serverside/server/server.h"
+#include "../server/server.h"
 
 //game
-#include "../../serverside/game/game.h"
+#include "../game/game.h"
 
 //shape
-#include "../../serverside/shape/shape.h"
+#include "../shape/shape.h"
 
 //abilitys
 #include "../ability/rotation/rotation.h"

@@ -1,11 +1,22 @@
-
+//parent
 #include "server.h"
+
+//log
 #include "../tdreamsock/dreamSockLog.h"
 
+//network
 #include "../network/network.h"
+
+//client
 #include "../client/client.h"
+
+//message
 #include "../message/message.h"
+
+//shape
 #include "../shape/shape.h"
+
+//game
 #include "../game/game.h"
 
 
