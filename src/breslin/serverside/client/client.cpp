@@ -42,9 +42,8 @@ Client::Client(Server* server, struct sockaddr *address)
 	SetSocketAddress(address);
 
 	//register this client with server
-	mServer->mClientVector.push_back(this);
-
-
+	mServer->addClient(this);
+	
 
 	createShape();
 

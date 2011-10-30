@@ -43,8 +43,12 @@ public:
 	bool			init;
 
 public:
-					Server(Game* serverSideGame,const char *localIP, int serverPort);
-					~Server();
+	Server(Game* serverSideGame,const char *localIP, int serverPort);
+	~Server();
+
+	void addClient(Client* client);
+
+
 
 	int				getPacket(char *data, struct sockaddr *from);
 	void			sendPackets(void);

@@ -30,6 +30,11 @@ Server::~Server()
 	mNetwork->dreamSock_CloseSocket(mNetwork->mSocket);
 }
 
+void Server::addClient(Client* client)
+{
+	mClientVector.push_back(client);
+}
+
 void Server::sendRemoveShape(Shape* shape)
 {
 	
