@@ -61,7 +61,14 @@ public:
 	Game();
 	~Game();
 
-unsigned int getOpenIndex      ();
+	//server
+	virtual void createServer();
+
+	//world
+	virtual void createWorld();
+
+	//index
+	unsigned int getOpenIndex      ();
 
 	// Network
 	void	sendCommand(void);

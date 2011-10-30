@@ -124,6 +124,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	if (strcmp (cmdLine,aGameTag) == 0)
 	{
 		game = new GameTag();
+		
+		//server
+		game->createServer();
+
+		//world
+		game->createWorld();
 	}
 
 	if (strcmp (cmdLine,aGameGhostInTheGraveyard) == 0)

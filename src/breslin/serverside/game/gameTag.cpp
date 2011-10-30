@@ -3,6 +3,9 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
+//server
+#include "../server/serverTag.h"
+
 //shape
 #include "../shape/shapeTagPlayer.h"
 
@@ -20,7 +23,23 @@
 GameTag::GameTag()
 {
 	LogString("Hosting GameTag");
+	
+}
 
+GameTag::~GameTag()
+{
+	
+}
+
+void GameTag::createServer()
+{
+	LogString("createServer in GameTag");
+	mServer = new ServerTag(this,"", 30004);
+}
+
+void GameTag::createWorld()
+{
+	LogString("createWorld in GameTag");
 	//ai guys, let's make them sinbads
 	for(int i = 0; i < 1; i++)
 	{                 
@@ -34,11 +53,6 @@ GameTag::GameTag()
 
 		mItShape = mShapeVector.at(0);
 	}
-}
-
-GameTag::~GameTag()
-{
-	
 }
 
 void GameTag::checkCollisions(void)

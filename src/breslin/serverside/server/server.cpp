@@ -41,6 +41,11 @@ Server::~Server()
 	mNetwork->dreamSock_CloseSocket(mNetwork->mSocket);
 }
 
+void Server::createClient(struct sockaddr *address)
+{
+	Client* client = new Client(this, address);
+}
+
 void Server::addClient(Client* client)
 {
 	mClientVector.push_back(client);
@@ -71,7 +76,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	if (type == mConnect)
 	{
-		Client* client = new Client(this, address);
+		createClient(address);
 		//LogString("LIBRARY: Server: a client connected succesfully");
 	}
 	else
@@ -205,7 +210,7 @@ int Server::getPacket(char *data, struct sockaddr *from)
 }
 
 //this loops thru each client instance and then calls their sendPacket(mess) function
-void Server::sendPackets(void)
+void Server::sendPackets()
 {
 	// Check if the server is set up
 	if(!mNetwork->mSocket)
@@ -220,7 +225,7 @@ void Server::sendPackets(void)
 	}
 }
 
-void Server::readPackets(void)
+void Server::readPackets()
 {
 	char data[1400];
 

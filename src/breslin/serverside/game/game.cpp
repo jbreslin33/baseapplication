@@ -28,7 +28,6 @@ Game::Game()
 	mRoot = new Ogre::Root("plugins.cfg");
 #endif
 
-	mServer = new Server(this,"", 30004);
 	mRealTime	= 0;
 	mServerTime	= 0;
 	mFramenum	= 0;
@@ -39,6 +38,17 @@ Game::~Game()
 {
 	StopLog();
 	delete mServer;
+}
+
+void Game::createServer()
+{
+	LogString("createServer in Game");
+	mServer = new Server(this,"", 30004);
+}
+
+void Game::createWorld()
+{
+
 }
 
 void Game::frame(int msec)

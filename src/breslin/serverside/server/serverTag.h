@@ -10,6 +10,8 @@ public:
 	ServerTag(Game* serverSideGame,const char *localIP, int serverPort);
 	~ServerTag();
 
+	//client
+	void createClient(struct sockaddr *address);
 	void addClient(Client* client);
 };
 

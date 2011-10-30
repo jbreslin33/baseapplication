@@ -15,6 +15,12 @@ GameTag();
 //virtual void addShape(Client* client, bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 virtual void checkCollisions();
 
+//server
+virtual void createServer();
+
+//world
+virtual void createWorld();
+
 //delta move command
 virtual void buildDeltaMoveCommand(Message *mes, Shape* shape);
 virtual int  setFlag(Command* command, Shape* shape);

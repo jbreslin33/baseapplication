@@ -31,34 +31,23 @@ class Shape;
 class Server
 {
 public:
-	void sendRemoveShape(Shape* shape);
 
-	void parsePacket(Message *mes, struct sockaddr *address);
-	int  checkForTimeout(char *data, struct sockaddr *from);
-
+	//clients
 	std::vector<Client*> mClientVector;
 
+	//port
 	int				port;					// Port
 
+	//initialize
 	bool			init;
 
-public:
-	Server(Game* serverSideGame,const char *localIP, int serverPort);
-	~Server();
-
-	void addClient(Client* client);
-
-
-
-	int				getPacket(char *data, struct sockaddr *from);
-	void			sendPackets(void);
-
-	int				getPort(void)			{ return port; }
-
+	//game
 	Game* mGame;
+
+	//network
 	Network* mNetwork;
 
-	void	readPackets(void);
+	//address
 	const char *mLocalIP;
 
 	//codes
@@ -66,6 +55,30 @@ public:
 	static const int mDisconnect  = -102;
 	static const int mAddShape    = -103;
 	static const int mRemoveShape = -104;
+
+public:
+	Server(Game* serverSideGame,const char *localIP, int serverPort);
+	~Server();
+
+	//timeout
+	int  checkForTimeout(char *data, struct sockaddr *from);
+
+	//client
+	void createClient(struct sockaddr *address);
+	void addClient(Client* client);
+	
+	//shapes
+	void sendRemoveShape(Shape* shape);
+
+	//packets
+	int	 getPacket(char *data, struct sockaddr *from);
+	void sendPackets();
+	void readPackets();
+	void parsePacket(Message *mes, struct sockaddr *address);
+	
+	//port
+	int	getPort() { return port; }
+
 
 };
 
