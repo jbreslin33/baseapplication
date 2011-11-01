@@ -70,6 +70,10 @@ public void execute(AbilityMove abilityMove)
 	transVector.add(abilityMove.mShapeDynamic.getPosition());
 
 	//set new position
+
+	//protect against floating away
+	transVector.y = 0.0f;
+
 	abilityMove.mShapeDynamic.setPosition(transVector);
 }
 
