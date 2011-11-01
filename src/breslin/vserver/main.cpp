@@ -119,6 +119,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	if (strcmp (cmdLine,aGame) == 0)
 	{
 		game = new Game();
+
+		//server
+		game->createServer();
+
+		//world
+		game->createWorld();
 	}
 
 	if (strcmp (cmdLine,aGameTag) == 0)
@@ -135,6 +141,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	if (strcmp (cmdLine,aGameGhostInTheGraveyard) == 0)
 	{
 //		game = new GameGhostInTheGraveyard();
+
+		//server
+		game->createServer();
+
+		//world
+		game->createWorld();
 	}
 	
 	MSG WinMsg;
@@ -263,11 +275,23 @@ int main(int argc, char **argv)
 	if (strcmp (argv[1],aGame) == 0)
 	{
 		game = new Game();
+
+		//server
+		game->createServer();
+
+		//world
+		game->createWorld();
 	}
 
 	if (strcmp (argv[1],aGameTag) == 0)
 	{
 		game = new GameTag();
+
+		//server
+		game->createServer();
+
+		//world
+		game->createWorld();
 	}
 
 	LogString("Welcome to Army War Server v2.0");
