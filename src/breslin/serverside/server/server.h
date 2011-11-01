@@ -52,6 +52,8 @@ public:
 	const char *mLocalIP;
 
 	//codes
+static const int mMessageFrame = 1;
+
 	static const int mConnect     = -101;
 	static const int mDisconnect  = -102;
 	static const int mAddShape    = -103;

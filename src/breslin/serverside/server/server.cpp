@@ -273,7 +273,7 @@ void Server::readPackets()
 				}
 				break;
 
-			case mParser->mMessageFrame:
+			case mMessageFrame:
 			//LogString("Got frame (size: %d bytes)", ret);
 
 				// Skip sequences

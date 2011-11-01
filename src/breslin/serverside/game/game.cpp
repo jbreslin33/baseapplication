@@ -177,7 +177,7 @@ void Game::sendCommand(void)
 			sizeof(mServer->mClientVector.at(i)->mMessage.outgoingData));
 
 		//start filling said mMessage that belongs to client
-		mServer->mClientVector.at(i)->mMessage.WriteByte(mParser->mMessageFrame);			// type
+		mServer->mClientVector.at(i)->mMessage.WriteByte(mServer->mMessageFrame);			// type
 		mServer->mClientVector.at(i)->mMessage.WriteShort(mServer->mClientVector.at(i)->mOutgoingSequence);
 
 		//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
