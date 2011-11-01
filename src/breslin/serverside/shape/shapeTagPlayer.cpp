@@ -6,7 +6,7 @@ ShapeTagPlayer::ShapeTagPlayer(unsigned int index, Game* game, Client* client, V
 		ShapeTag(index, game, client,position,velocity,rotation,root,animated,collidable,collisionRadius,meshCode,ai)
 
 {
-	mIt = false;
+
 }
 	
 ShapeTagPlayer::~ShapeTagPlayer()

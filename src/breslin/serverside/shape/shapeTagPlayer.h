@@ -11,7 +11,6 @@ ShapeTagPlayer(unsigned int index, Game* game, Client* client, Vector3D* positio
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~ShapeTagPlayer();
 
-bool mIt;
 
 };
 
