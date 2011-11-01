@@ -29,7 +29,7 @@ public:
 static const char mCommandKey          = 1;
 static const char mCommandMilliseconds = 2;
 
-static const char mMessageFrame = 1;
+static const int mMessageFrame = 1;
 static const char mMessageConnect     = -101;
 static const char mMessageDisconnect  = -102;
 static const char mMessageAddShape    = -103;
