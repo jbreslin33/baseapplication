@@ -72,6 +72,20 @@ void ByteBuffer::WriteFloat(float c)
 	memcpy(buf, &c, 4);
 }
 
+void ByteBuffer::WriteString(const char *s)
+{
+	if(!s)
+	{
+		return;
+	}
+	else
+		Write(s, strlen(s) + 1);
+}
+
+void ByteBuffer::Write(const void *d, int length)
+{
+	memcpy(GetNewPoint(length), d, length);		
+}
 /**********************************************
 				READ
 ************************************************/

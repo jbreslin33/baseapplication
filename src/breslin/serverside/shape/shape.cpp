@@ -260,4 +260,7 @@ void Shape::write(Client* client)
 
 	//animation
 	client->mMessage.WriteByte(mAnimated);
+
+	//textCode
+	//client->mMessage.WriteByte(mCommand.mTextCode);
 }

@@ -44,6 +44,8 @@ public:
 	void			WriteByte  (char c);
 	void			WriteShort (short c);
 	void			WriteFloat (float c);
+	void			WriteString(const char *s);
+	void			Write(const void *d, int length);
 
 	//read
 	char			ReadByte   ();

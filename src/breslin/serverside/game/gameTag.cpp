@@ -117,6 +117,7 @@ int GameTag::setFlag(Command* command, Shape* shape)
 	{
 		flags |= mParser->mCommandMilliseconds;
 	}
+
 	return flags;
 }
 
