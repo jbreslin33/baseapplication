@@ -274,7 +274,7 @@ int main(int argc, char **argv)
 	LogString("-------------------------------\n");
 
 
-
+/*
 	if(argc > 1)
 	{
 		if(strcmp(argv[1], "-daemon") == 0)
@@ -282,7 +282,7 @@ int main(int argc, char **argv)
 			daemonInit();
 		}
 	}
-
+*/
 	// Ignore the SIGPIPE signal, so the program does not terminate if the
 	// pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
