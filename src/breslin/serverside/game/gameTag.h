@@ -25,6 +25,9 @@ virtual void buildDeltaMoveCommand(Message *mes, Shape* shape);
 virtual int  setFlag(Command* command, Shape* shape);
 virtual void buildDeltaMoveMessage(Command* command, int flags, Message* message, Shape* shape);
 
+//commands
+virtual void storeCommands(Shape* shape);
+
 Shape* mItShape;
   
 

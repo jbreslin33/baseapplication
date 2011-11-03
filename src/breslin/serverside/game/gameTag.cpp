@@ -168,3 +168,7 @@ void GameTag::buildDeltaMoveMessage(Command* command, int flags, Message* messag
 	*/
 }
 
+void GameTag::storeCommands(Shape* shape)
+{
+	Game::storeCommands(shape);
+}

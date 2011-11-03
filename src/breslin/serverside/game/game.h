@@ -54,8 +54,8 @@ public:
 	unsigned int getOpenIndex      ();
 
 	// Network
-	void	sendCommand(void);
-	void	sendExitNotification(void);
+	void	sendCommand();
+	void	sendExitNotification();
 	void	readDeltaMoveCommand(Message *mes, Client *client);
 	
 	//delta move command
@@ -72,6 +72,9 @@ public:
 	
 	//scope
  	bool    checkScope(Client* client, Shape* shape);
+
+	//commands
+	virtual void storeCommands(Shape* shape);
 
 };
 

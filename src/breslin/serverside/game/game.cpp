@@ -196,34 +196,31 @@ void Game::sendCommand(void)
 	// Store the sent command in mLastCommand->
 	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
 	{
-		mServer->mGame->mShapeVector.at(i)->mLastCommand->mClientFrametime = 
-			mServer->mGame->mShapeVector.at(i)->mCommand->mClientFrametime;
-
-		mServer->mGame->mShapeVector.at(i)->mLastCommand->mKey = 
-			mServer->mGame->mShapeVector.at(i)->mCommand->mKey;
-
-		mServer->mGame->mShapeVector.at(i)->mLastCommand->mMilliseconds = 
-			mServer->mGame->mShapeVector.at(i)->mCommand->mMilliseconds;
-
-		mServer->mGame->mShapeVector.at(i)->mLastCommand->mPosition->copyValuesFrom( 
-			mServer->mGame->mShapeVector.at(i)->mCommand->mPosition);
-
-		mServer->mGame->mShapeVector.at(i)->mLastCommand->mPositionOld->copyValuesFrom( 
-			mServer->mGame->mShapeVector.at(i)->mCommand->mPositionOld);
-
-		mServer->mGame->mShapeVector.at(i)->mLastCommand->mPositionVelocity->copyValuesFrom(  
-			mServer->mGame->mShapeVector.at(i)->mCommand->mPositionVelocity);
-
-		mServer->mGame->mShapeVector.at(i)->mLastCommand->mRotation->copyValuesFrom( 
-			mServer->mGame->mShapeVector.at(i)->mCommand->mRotation);
-
+		storeCommands(mServer->mGame->mShapeVector.at(i));
+		
 		mServer->mGame->mShapeVector.at(i)->mCommand->mMillisecondsTotal = 0;
 	}
 }
 
+void Game::storeCommands(Shape* shape)
+{
+	shape->mLastCommand->mClientFrametime = shape->mCommand->mClientFrametime;
+
+	shape->mLastCommand->mKey = shape->mCommand->mKey;
+
+	shape->mLastCommand->mMilliseconds = shape->mCommand->mMilliseconds;
+
+	shape->mLastCommand->mPosition->copyValuesFrom(shape->mCommand->mPosition);
+
+	shape->mLastCommand->mPositionOld->copyValuesFrom(shape->mCommand->mPositionOld);
+
+	shape->mLastCommand->mPositionVelocity->copyValuesFrom(shape->mCommand->mPositionVelocity);
+
+	shape->mLastCommand->mRotation->copyValuesFrom(shape->mCommand->mRotation);
+}
 
 //this is the whole shabang server exit not a player or shape exit
-void Game::sendExitNotification(void)
+void Game::sendExitNotification()
 {
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
