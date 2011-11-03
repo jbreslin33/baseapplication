@@ -88,8 +88,8 @@ Vector3D* mPosition;
 
 int			mIndex;
 
-Command	mCommand;		// current frame's commands we are about to or are running this on shapes on server.
-Command mLastCommand;   //this is the last command sent to clients and also that was ran on server
+Command*	mCommand;		// current frame's commands we are about to or are running this on shapes on server.
+Command* mLastCommand;   //this is the last command sent to clients and also that was ran on server
 
 Message	mMessage; //is this all i need to get information over the internets?
 

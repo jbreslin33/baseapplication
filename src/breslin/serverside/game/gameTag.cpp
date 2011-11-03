@@ -76,7 +76,7 @@ void GameTag::collision(Shape* shape1, Shape* shape2)
 
 void GameTag::buildDeltaMoveCommand(Message* mes, Shape* shape)
 {
-	Command* command = &shape->mCommand;
+	Command* command = shape->mCommand;
 
 	int flags = setFlag(command,shape);
 	buildDeltaMoveMessage(command,flags,mes,shape);
@@ -89,31 +89,31 @@ int GameTag::setFlag(Command* command, Shape* shape)
 	int flags = 0;
 
 	//Origin
-	if(shape->mLastCommand.mPosition.x != command->mPosition.x)
+	if(shape->mLastCommand->mPosition.x != command->mPosition.x)
 	{
 		flags |= mParser->mCommandOriginX;
 	}
-	if(shape->mLastCommand.mPosition.y != command->mPosition.y)
+	if(shape->mLastCommand->mPosition.y != command->mPosition.y)
 	{
 		flags |= mParser->mCommandOriginY;
 	}
-	if(shape->mLastCommand.mPosition.z != command->mPosition.z)
+	if(shape->mLastCommand->mPosition.z != command->mPosition.z)
 	{
 		flags |= mParser->mCommandOriginZ;
 	}
 
 	//Rotation
-	if(shape->mLastCommand.mRotation.x != command->mRotation.x)
+	if(shape->mLastCommand->mRotation.x != command->mRotation.x)
 	{
 		flags |= mParser->mCommandRotationX;
 	}
-	if(shape->mLastCommand.mRotation.z != command->mRotation.z)
+	if(shape->mLastCommand->mRotation.z != command->mRotation.z)
 	{
 		flags |= mParser->mCommandRotationZ;
 	}
 	
 	//Milliseconds
-	if(shape->mLastCommand.mMillisecondsTotal != command->mMillisecondsTotal)
+	if(shape->mLastCommand->mMillisecondsTotal != command->mMillisecondsTotal)
 	{
 		flags |= mParser->mCommandMilliseconds;
 	}
