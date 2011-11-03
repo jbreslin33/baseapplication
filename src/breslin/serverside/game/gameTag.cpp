@@ -124,48 +124,6 @@ int GameTag::setFlag(Command* command, Shape* shape)
 void GameTag::buildDeltaMoveMessage(Command* command, int flags, Message* message, Shape* shape)
 {
 	Game::buildDeltaMoveMessage(command,flags,message,shape);
-	
-	//IT
-	//if(flags & CMD_IT)
-	//{
-	//	message->WriteFloat(command->mPosition->x);
-	//}
-	/*
-	message->WriteByte(shape->mIndex);
-
-	// Flags
-	message->WriteByte(flags);  
-
-	//Origin
-	if(flags & mCommandOriginX)
-	{
-		message->WriteFloat(command->mPosition->x);
-	}
-	if(flags & mCommandOriginY)
-	{
-		message->WriteFloat(command->mPosition->y);
-	}
-	if(flags & mCommandOriginZ)
-	{
-		message->WriteFloat(command->mPosition->z);
-	}
-
-	//Rotation
-	if(flags & mCommandRotationX)
-	{
-		message->WriteFloat(command->mRotation->x);
-	}
-	if(flags & mCommandRotationZ)
-	{
-		message->WriteFloat(command->mRotation->z);
-	}
-
-	//Milliseconds
-	if(flags & mCommandMilliseconds)
-	{
-		message->WriteByte(command->mMillisecondsTotal);
-	}
-	*/
 }
 
 void GameTag::storeCommands(Shape* shape)
