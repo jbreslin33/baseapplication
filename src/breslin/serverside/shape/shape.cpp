@@ -35,7 +35,7 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	mLastCommand = new Command();
 
 	//set values
-	mCommand->mPosition.copyValuesFrom(position);
+	mCommand->mPosition->copyValuesFrom(position);
 
  	mPosition = position;
 	mIndex  = index;
@@ -168,24 +168,24 @@ void Shape::processTick()
 		mAbilityVector.at(i)->processTick();
 	}
 	
-	mCommand->mPositionVelocity.x = mSceneNode->getPosition().x - mCommand->mPosition.x;
-    mCommand->mPositionVelocity.y = mSceneNode->getPosition().y - mCommand->mPosition.y;
-    mCommand->mPositionVelocity.z = mSceneNode->getPosition().z - mCommand->mPosition.z;
+	mCommand->mPositionVelocity->x = mSceneNode->getPosition().x - mCommand->mPosition->x;
+    mCommand->mPositionVelocity->y = mSceneNode->getPosition().y - mCommand->mPosition->y;
+    mCommand->mPositionVelocity->z = mSceneNode->getPosition().z - mCommand->mPosition->z;
 
-	mCommand->mPositionOld.x = mCommand->mPosition.x;
-    mCommand->mPositionOld.z = mCommand->mPosition.z;
-    mCommand->mPositionOld.y = mCommand->mPosition.y;
+	mCommand->mPositionOld->x = mCommand->mPosition->x;
+    mCommand->mPositionOld->z = mCommand->mPosition->z;
+    mCommand->mPositionOld->y = mCommand->mPosition->y;
 
-    mCommand->mPosition.x = mSceneNode->getPosition().x;
-    mCommand->mPosition.y = mSceneNode->getPosition().y;
-    mCommand->mPosition.z = mSceneNode->getPosition().z;
+    mCommand->mPosition->x = mSceneNode->getPosition().x;
+    mCommand->mPosition->y = mSceneNode->getPosition().y;
+    mCommand->mPosition->z = mSceneNode->getPosition().z;
 
 	Ogre::Quaternion orientation = mSceneNode->getOrientation();
     Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
 
-  	mCommand->mRotation.x = mSceneNode->_getDerivedOrientation().zAxis().x;
+  	mCommand->mRotation->x = mSceneNode->_getDerivedOrientation().zAxis().x;
 
-    mCommand->mRotation.z = mSceneNode->_getDerivedOrientation().zAxis().z;
+    mCommand->mRotation->z = mSceneNode->_getDerivedOrientation().zAxis().z;
 }
 
 void Shape::setKeyDirection()  //this is called first in process tick so let's start conversion to separate
@@ -247,16 +247,16 @@ void Shape::write(Client* client)
 	}
 	client->mMessage.WriteByte(mIndex);
 			
-	client->mMessage.WriteFloat(mCommand->mPosition.x);
-	client->mMessage.WriteFloat(mCommand->mPosition.y);
-	client->mMessage.WriteFloat(mCommand->mPosition.z);
+	client->mMessage.WriteFloat(mCommand->mPosition->x);
+	client->mMessage.WriteFloat(mCommand->mPosition->y);
+	client->mMessage.WriteFloat(mCommand->mPosition->z);
 
-	client->mMessage.WriteFloat(mCommand->mPositionVelocity.x);
-	client->mMessage.WriteFloat(mCommand->mPositionVelocity.y);
-	client->mMessage.WriteFloat(mCommand->mPositionVelocity.z);
+	client->mMessage.WriteFloat(mCommand->mPositionVelocity->x);
+	client->mMessage.WriteFloat(mCommand->mPositionVelocity->y);
+	client->mMessage.WriteFloat(mCommand->mPositionVelocity->z);
 
-	client->mMessage.WriteFloat(mCommand->mRotation.x);
-	client->mMessage.WriteFloat(mCommand->mRotation.z);
+	client->mMessage.WriteFloat(mCommand->mRotation->x);
+	client->mMessage.WriteFloat(mCommand->mRotation->z);
 			
 	//mesh
 	client->mMessage.WriteByte(mMeshCode);

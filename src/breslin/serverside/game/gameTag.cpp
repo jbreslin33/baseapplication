@@ -89,25 +89,25 @@ int GameTag::setFlag(Command* command, Shape* shape)
 	int flags = 0;
 
 	//Origin
-	if(shape->mLastCommand->mPosition.x != command->mPosition.x)
+	if(shape->mLastCommand->mPosition->x != command->mPosition->x)
 	{
 		flags |= mParser->mCommandOriginX;
 	}
-	if(shape->mLastCommand->mPosition.y != command->mPosition.y)
+	if(shape->mLastCommand->mPosition->y != command->mPosition->y)
 	{
 		flags |= mParser->mCommandOriginY;
 	}
-	if(shape->mLastCommand->mPosition.z != command->mPosition.z)
+	if(shape->mLastCommand->mPosition->z != command->mPosition->z)
 	{
 		flags |= mParser->mCommandOriginZ;
 	}
 
 	//Rotation
-	if(shape->mLastCommand->mRotation.x != command->mRotation.x)
+	if(shape->mLastCommand->mRotation->x != command->mRotation->x)
 	{
 		flags |= mParser->mCommandRotationX;
 	}
-	if(shape->mLastCommand->mRotation.z != command->mRotation.z)
+	if(shape->mLastCommand->mRotation->z != command->mRotation->z)
 	{
 		flags |= mParser->mCommandRotationZ;
 	}
@@ -128,7 +128,7 @@ void GameTag::buildDeltaMoveMessage(Command* command, int flags, Message* messag
 	//IT
 	//if(flags & CMD_IT)
 	//{
-	//	message->WriteFloat(command->mPosition.x);
+	//	message->WriteFloat(command->mPosition->x);
 	//}
 	/*
 	message->WriteByte(shape->mIndex);
@@ -139,25 +139,25 @@ void GameTag::buildDeltaMoveMessage(Command* command, int flags, Message* messag
 	//Origin
 	if(flags & mCommandOriginX)
 	{
-		message->WriteFloat(command->mPosition.x);
+		message->WriteFloat(command->mPosition->x);
 	}
 	if(flags & mCommandOriginY)
 	{
-		message->WriteFloat(command->mPosition.y);
+		message->WriteFloat(command->mPosition->y);
 	}
 	if(flags & mCommandOriginZ)
 	{
-		message->WriteFloat(command->mPosition.z);
+		message->WriteFloat(command->mPosition->z);
 	}
 
 	//Rotation
 	if(flags & mCommandRotationX)
 	{
-		message->WriteFloat(command->mRotation.x);
+		message->WriteFloat(command->mRotation->x);
 	}
 	if(flags & mCommandRotationZ)
 	{
-		message->WriteFloat(command->mRotation.z);
+		message->WriteFloat(command->mRotation->z);
 	}
 
 	//Milliseconds

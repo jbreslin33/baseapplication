@@ -137,10 +137,10 @@ void Game::collision(Shape* shape1, Shape* shape2)
 	shape1->mCommand->mPosition = shape1->mCommand->mPositionOld;
 	shape2->mCommand->mPosition = shape2->mCommand->mPositionOld;
 
-	float x3 = shape1->mCommand->mPositionOld.x;
-	float z3 = shape1->mCommand->mPositionOld.z;
-	float x4 = shape2->mCommand->mPositionOld.x;
-	float z4 = shape2->mCommand->mPositionOld.z;
+	float x3 = shape1->mCommand->mPositionOld->x;
+	float z3 = shape1->mCommand->mPositionOld->z;
+	float x4 = shape2->mCommand->mPositionOld->x;
+	float z4 = shape2->mCommand->mPositionOld->z;
 
 	shape1->mSceneNode->setPosition(x3,0.0,z3);
 	shape2->mSceneNode->setPosition(x4,0.0,z4);
@@ -196,8 +196,26 @@ void Game::sendCommand(void)
 	// Store the sent command in mLastCommand->
 	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
 	{
-		memcpy(mServer->mGame->mShapeVector.at(i)->mLastCommand,
-			mServer->mGame->mShapeVector.at(i)->mCommand, sizeof(Command));
+		mServer->mGame->mShapeVector.at(i)->mLastCommand->mClientFrametime = 
+			mServer->mGame->mShapeVector.at(i)->mCommand->mClientFrametime;
+
+		mServer->mGame->mShapeVector.at(i)->mLastCommand->mKey = 
+			mServer->mGame->mShapeVector.at(i)->mCommand->mKey;
+
+		mServer->mGame->mShapeVector.at(i)->mLastCommand->mMilliseconds = 
+			mServer->mGame->mShapeVector.at(i)->mCommand->mMilliseconds;
+
+		mServer->mGame->mShapeVector.at(i)->mLastCommand->mPosition->copyValuesFrom( 
+			mServer->mGame->mShapeVector.at(i)->mCommand->mPosition);
+
+		mServer->mGame->mShapeVector.at(i)->mLastCommand->mPositionOld->copyValuesFrom( 
+			mServer->mGame->mShapeVector.at(i)->mCommand->mPositionOld);
+
+		mServer->mGame->mShapeVector.at(i)->mLastCommand->mPositionVelocity->copyValuesFrom(  
+			mServer->mGame->mShapeVector.at(i)->mCommand->mPositionVelocity);
+
+		mServer->mGame->mShapeVector.at(i)->mLastCommand->mRotation->copyValuesFrom( 
+			mServer->mGame->mShapeVector.at(i)->mCommand->mRotation);
 
 		mServer->mGame->mShapeVector.at(i)->mCommand->mMillisecondsTotal = 0;
 	}
@@ -271,25 +289,25 @@ int Game::setFlag(Command* command, Shape* shape)
 	int flags = 0;
 
 	//Origin
-	if(shape->mLastCommand->mPosition.x != command->mPosition.x)
+	if(shape->mLastCommand->mPosition->x != command->mPosition->x)
 	{
 		flags |= mParser->mCommandOriginX;
 	}
-	if(shape->mLastCommand->mPosition.y != command->mPosition.y)
+	if(shape->mLastCommand->mPosition->y != command->mPosition->y)
 	{
 		flags |= mParser->mCommandOriginY;
 	}
-	if(shape->mLastCommand->mPosition.z != command->mPosition.z)
+	if(shape->mLastCommand->mPosition->z != command->mPosition->z)
 	{
 		flags |= mParser->mCommandOriginZ;
 	}
 
 	//Rotation
-	if(shape->mLastCommand->mRotation.x != command->mRotation.x)
+	if(shape->mLastCommand->mRotation->x != command->mRotation->x)
 	{
 		flags |= mParser->mCommandRotationX;
 	}
-	if(shape->mLastCommand->mRotation.z != command->mRotation.z)
+	if(shape->mLastCommand->mRotation->z != command->mRotation->z)
 	{
 		flags |= mParser->mCommandRotationZ;
 	}
@@ -299,12 +317,7 @@ int Game::setFlag(Command* command, Shape* shape)
 	{
 		flags |= mParser->mCommandMilliseconds;
 	}
-	/*
-	if(shape->mLastCommand->mPiggyBit != command->mPiggyBit)
-	{
-		flags |= mParser->mCommandPiggyBit;
-	}
-	*/
+
 	return flags;
 	
 
@@ -321,25 +334,25 @@ void Game::buildDeltaMoveMessage(Command* command, int flags, Message* message, 
 	//Origin
 	if(flags & mParser->mCommandOriginX)
 	{
-		message->WriteFloat(command->mPosition.x);
+		message->WriteFloat(command->mPosition->x);
 	}
 	if(flags & mParser->mCommandOriginY)
 	{
-		message->WriteFloat(command->mPosition.y);
+		message->WriteFloat(command->mPosition->y);
 	}
 	if(flags & mParser->mCommandOriginZ)
 	{
-		message->WriteFloat(command->mPosition.z);
+		message->WriteFloat(command->mPosition->z);
 	}
 
 	//Rotation
 	if(flags & mParser->mCommandRotationX)
 	{
-		message->WriteFloat(command->mRotation.x);
+		message->WriteFloat(command->mRotation->x);
 	}
 	if(flags & mParser->mCommandRotationZ)
 	{
-		message->WriteFloat(command->mRotation.z);
+		message->WriteFloat(command->mRotation->z);
 	}
 
 	//Milliseconds

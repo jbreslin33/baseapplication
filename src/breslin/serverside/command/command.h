@@ -22,23 +22,18 @@ Command();
 /******************************************************
 *				VARIABLES
 ********************************************************/
-Vector3D mPosition;            //finish origin of frame/tick
-Vector3D mPositionOld;            //origin of last frame/tick
-Vector3D mPositionVelocity;	         //velocity during frame/tick
+Vector3D* mPosition;            //finish origin of frame/tick
+Vector3D* mPositionOld;            //origin of last frame/tick
+Vector3D* mPositionVelocity;	         //velocity during frame/tick
 
-Vector3D mRotation; //rotation during frame/tick
-Vector3D mRotationOld;	//velocity during last frame/tick
-Vector3D mRotationVelocity;
-float mRotSpeed;
+Vector3D* mRotation; //rotation during frame/tick
 
 int mKey;               //key pressed
+
 int mMilliseconds;      //not used
 int mMillisecondsTotal;      //not used
 
 float mClientFrametime;
-
-//piggyBit
-bool mPiggyBit;
 
 /******************************************************
 *				METHODS
