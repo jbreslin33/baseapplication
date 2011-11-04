@@ -73,10 +73,6 @@ int mKeyRight;
 int mKeyCounterClockwise;
 int mKeyClockwise;
 
-//commands
-Command*	mCommand;		// current frame's commands we are about to or are running this on shapes on server.
-Command* mLastCommand;   //this is the last command sent to clients and also that was ran on server
-
 Vector3D* mPosition;            //finish origin of frame/tick
 Vector3D* mPositionLast;
 

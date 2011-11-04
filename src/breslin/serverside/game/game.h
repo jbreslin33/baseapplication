@@ -13,7 +13,6 @@ using namespace Ogre;
 
 //class Network;
 class Message;
-class Command;
 class Server;
 class Client;
 class Shape;
@@ -60,8 +59,8 @@ public:
 	
 	//delta move command
 	virtual void buildDeltaMoveCommand(Message *mes, Shape* shape);
-	virtual int  setFlag(Command* command, Shape* shape);
-	virtual void buildDeltaMoveMessage(Command* command, int flags, Message* message, Shape* shape);
+	virtual int  setFlag(Shape* shape);
+	virtual void buildDeltaMoveMessage(int flags, Message* message, Shape* shape);
 
 	//time
 	void	frame(int msec);

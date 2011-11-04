@@ -13,6 +13,9 @@
 //game
 #include "../game/game.h"
 
+//math
+#include "../../math/vector3D.h"
+
 //server side client constructor, many instances will be made, one for each client connected.
 ClientTag::ClientTag(Server* server, struct sockaddr *address) : Client(server,address)
 {

@@ -18,6 +18,9 @@
 //shape
 #include "../shape/shape.h"
 
+//math
+#include "../../math/vector3D.h"
+
 Game::Game()
 {
 	mParser = new Parser();
@@ -270,44 +273,41 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 //i should already have?
 void Game::buildDeltaMoveCommand(Message* mes, Shape* shape)
 {
-	Command* command = shape->mCommand;
-
-	int flags = setFlag(command,shape);
-	buildDeltaMoveMessage(command,flags,mes,shape);
-
+	int flags = setFlag(shape);
+	buildDeltaMoveMessage(flags,mes,shape);
 }
 
-int Game::setFlag(Command* command, Shape* shape)
+int Game::setFlag(Shape* shape)
 {
 
 	int flags = 0;
 
 	//Origin
-	if(shape->mPosition->x != command->mPosition->x)
+	if(shape->mPosition->x != shape->mPositionLast->x)
 	{
 		flags |= mParser->mCommandOriginX;
 	}
-	if(shape->mPosition->y != command->mPosition->y)
+	if(shape->mPosition->y != shape->mPositionLast->y)
 	{
 		flags |= mParser->mCommandOriginY;
 	}
-	if(shape->mPosition->z != command->mPosition->z)
+	if(shape->mPosition->z != shape->mPositionLast->z)
 	{
 		flags |= mParser->mCommandOriginZ;
 	}
 
 	//Rotation
-	if(shape->mRotation->x != command->mRotation->x)
+	if(shape->mRotation->x != shape->mRotationLast->x)
 	{
 		flags |= mParser->mCommandRotationX;
 	}
-	if(shape->mRotation->z != command->mRotation->z)
+	if(shape->mRotation->z != shape->mRotationLast->z)
 	{
 		flags |= mParser->mCommandRotationZ;
 	}
 	
 	//Milliseconds
-	if(shape->mMillisecondsTotal != command->mMillisecondsTotal)
+	if(shape->mMillisecondsTotal != shape->mMillisecondsTotalLast)
 	{
 		flags |= mParser->mCommandMilliseconds;
 	}
@@ -318,7 +318,7 @@ int Game::setFlag(Command* command, Shape* shape)
 	
 }
 
-void Game::buildDeltaMoveMessage(Command* command, int flags, Message* message, Shape* shape)
+void Game::buildDeltaMoveMessage(int flags, Message* message, Shape* shape)
 {
 	message->WriteByte(shape->mIndex);
 

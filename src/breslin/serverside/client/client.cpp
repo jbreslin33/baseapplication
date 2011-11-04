@@ -20,6 +20,9 @@
 #include "../ability/rotation/rotation.h"
 #include "../ability/move/move.h"
 
+//math
+#include "../../math/vector3D.h"
+
 #ifdef WIN32
 //
 #else

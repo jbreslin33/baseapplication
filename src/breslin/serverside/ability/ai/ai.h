@@ -8,7 +8,6 @@
 #include "Ogre.h"
 using namespace Ogre;
 
-class Command;
 class AIStateMachine;
 class Shape;
 

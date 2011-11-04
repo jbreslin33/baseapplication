@@ -22,7 +22,8 @@
 //ai
 #include "../ability/ai/ai.h"
 
-//ability
+//math
+#include "../../math/vector3D.h"
 
 
 #include <string>
@@ -30,10 +31,6 @@
 Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 {
-	//command
-	mCommand = new Command();
-	mLastCommand = new Command();
-
 	mPosition         = new Vector3D();
 	mPositionLast         = new Vector3D();
 	
