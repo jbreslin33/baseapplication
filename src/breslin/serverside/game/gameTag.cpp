@@ -1,3 +1,4 @@
+//
 #include "gameTag.h"
 
 //log
@@ -26,17 +27,15 @@
 GameTag::GameTag()
 {
 	LogString("Hosting GameTag");
-	
 }
 
 GameTag::~GameTag()
 {
-	
 }
 
 void GameTag::createServer()
 {
-	LogString("createServer in GameTag");
+	LogString("createServer in GameTag breslin");
 	mServer = new ServerTag(this,"", 30004);
 }
 
