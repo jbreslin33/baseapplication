@@ -3,7 +3,7 @@
 Command::Command()
 {
 	mPosition         = new Vector3D();
-	mPositionOld      = new Vector3D();
+	mPositionBeforeCollision      = new Vector3D();
 	mPositionVelocity = new Vector3D();
 
 	mRotation         = new Vector3D();

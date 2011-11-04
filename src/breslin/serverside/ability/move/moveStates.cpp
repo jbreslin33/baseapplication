@@ -13,9 +13,6 @@
 //shape
 #include "../../shape/shape.h"
 
-//commands
-#include "../../command/command.h"
-
 #define MAX_RUN_SPEED 1.66           // character running speed in units per second
 
 Normal_Move* Normal_Move::Instance()
@@ -54,9 +51,9 @@ void Normal_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mCommand->mClientFrametime * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mClientFrametime * move->mRunSpeed,
 		0,
-		move->mShape->mKeyDirection.z  * move->mShape->mCommand->mClientFrametime * move->mRunSpeed,
+		move->mShape->mKeyDirection.z  * move->mShape->mClientFrametime * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Normal_Move::exit(Move* move)
@@ -140,9 +137,9 @@ void Accelerate_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mCommand->mClientFrametime * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mClientFrametime * move->mRunSpeed,
 		0,
-		move->mShape->mKeyDirection.z  * move->mShape->mCommand->mClientFrametime * move->mRunSpeed,
+		move->mShape->mKeyDirection.z  * move->mShape->mClientFrametime * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Accelerate_Move::exit(Move* move)
@@ -186,9 +183,9 @@ void Decelerate_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mCommand->mClientFrametime * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mClientFrametime * move->mRunSpeed,
 		0,
-		move->mShape->mKeyDirection.z  * move->mShape->mCommand->mClientFrametime * move->mRunSpeed,
+		move->mShape->mKeyDirection.z  * move->mShape->mClientFrametime * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Decelerate_Move::exit(Move* move)

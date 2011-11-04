@@ -49,9 +49,9 @@ void Normal_Rotation::execute(Rotation* rotation)
 
 	//actual rotate
 //	LogString("N:%f",rotation->mRotationSpeed);
-	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mCommand->mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 
-//rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mCommand->mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
+//rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
 }
 void Normal_Rotation::exit(Rotation* rotation)
 {
@@ -68,7 +68,7 @@ void Accelerate_Rotation::enter(Rotation* rotation)
 void Accelerate_Rotation::execute(Rotation* rotation)
 {
 	/*
-	if (rotation->mShape->mCommand->mKey != 0)
+	if (rotation->mShape->mKey != 0)
 	{
 		rotation->mRotationStateMachine->changeState(Normal_Rotation::Instance());
 		return;
@@ -102,7 +102,7 @@ void Accelerate_Rotation::execute(Rotation* rotation)
 
 	//actual rotate
 //	LogString("N:%f",rotation->mRotationSpeed);
-	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mCommand->mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 }
 void Accelerate_Rotation::exit(Rotation* rotation)
 {
@@ -119,7 +119,7 @@ void Decelerate_Rotation::enter(Rotation* rotation)
 void Decelerate_Rotation::execute(Rotation* rotation)
 {
 	/*
-	if (rotation->mShape->mCommand->mKey != 0)
+	if (rotation->mShape->mKey != 0)
 	{
 		rotation->mRotationStateMachine->changeState(Normal_Rotation::Instance());
 		return;
@@ -152,7 +152,7 @@ void Decelerate_Rotation::execute(Rotation* rotation)
 	}
 
 	//actual rotate
-	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mCommand->mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mClientFrametime * rotation->mRotationSpeed), Node::TS_WORLD);
 
 }
 void Decelerate_Rotation::exit(Rotation* rotation)

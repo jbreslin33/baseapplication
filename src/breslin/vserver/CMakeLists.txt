@@ -141,11 +141,6 @@ set(HDRS
 	#math
 	../math/vector3D.h
 	
-	#command
-	../serverside/command/command.h
-		#tag
-	../serverside/command/commandTag.h
-	
 	#message
 	../serverside/message/message.h
 	
@@ -211,11 +206,6 @@ set(SRCS
 	
 	#math
 	../math/vector3D.cpp
-	
-	#command
-	../serverside/command/command.cpp
-		#tag
-	../serverside/command/commandTag.cpp
 	
 	#message
 	../serverside/message/message.cpp
@@ -293,11 +283,6 @@ set(HDRS
 	#math
 	../math/vector3D.h
 	
-	#command
-	../serverside/command/command.h
-		#tag
-	../serverside/command/commandTag.h
-	
 	#message
 	../serverside/message/message.h
 	
@@ -362,11 +347,6 @@ set(SRCS
 	
 	#math
 	../math/vector3D.cpp
-	
-	#command
-	../serverside/command/command.cpp
-		#tag
-	../serverside/command/commandTag.cpp
 	
 	#message
 	../serverside/message/message.cpp

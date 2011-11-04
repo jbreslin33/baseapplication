@@ -5,9 +5,6 @@
 #include "Ogre.h"
 using namespace Ogre;
 
-//command
-#include "../command/command.h"
-
 //message
 #include "../message/message.h"
 
@@ -30,26 +27,24 @@ Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~Shape();
 
-void remove();
+/******************************************************
+*				VARIABLES
+********************************************************/
+//ogre scene stuff
+SceneNode*          mSceneNode;
 
-//abilitys
-void     addAbility(Ability* ability);
-Ability* getAbility(Ability* ability);
-void addAbilitys();
+int			mIndex;
 
-//create
-void createShape(Ogre::Root* root, Vector3D* position);
+//message
+Message	mMessage; //is this all i need to get information over the internets?
 
-//ticks
-void processTick();
+//keys
+Vector3 mKeyDirection;
+float   mKeyRotation;
+Vector3 mGoalDirection;
 
-void setKeyDirection();
-
-void setValues();
-
-void write(Client* client);
-
-void sendShapeToClients();
+//game
+Game* mGame;
 
 //abilitys
 std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
@@ -78,28 +73,57 @@ int mKeyRight;
 int mKeyCounterClockwise;
 int mKeyClockwise;
 
-/******OGRESHAPE*******/
-
-//ogre scene stuff
-SceneNode*          mSceneNode;
-
-//stats
-Vector3D* mPosition;
-
-int			mIndex;
-
+//commands
 Command*	mCommand;		// current frame's commands we are about to or are running this on shapes on server.
 Command* mLastCommand;   //this is the last command sent to clients and also that was ran on server
 
-Message	mMessage; //is this all i need to get information over the internets?
+Vector3D* mPosition;            //finish origin of frame/tick
+Vector3D* mPositionLast;
 
-//keys
-Vector3 mKeyDirection;
-float mKeyRotation;
-Vector3 mGoalDirection;
+Vector3D* mPositionBeforeCollision;            //origin of last frame/tick
 
-Game* mGame;
+Vector3D* mPositionVelocity;	         //velocity during frame/tick
+Vector3D* mPositionVelocityLast;
 
+Vector3D* mRotation; //rotation during frame/tick
+Vector3D* mRotationLast;
+
+int mKey;               //key pressed
+int mKeyLast; 
+
+int mMilliseconds;      //not used
+int mMillisecondsLast;
+
+int mMillisecondsTotal;      //not used
+int mMillisecondsTotalLast;
+
+float mClientFrametime;
+float mClientFrametimeLast;
+
+/******************************************************
+*				METHODS
+********************************************************/
+
+void remove();
+
+//abilitys
+void     addAbility(Ability* ability);
+Ability* getAbility(Ability* ability);
+void addAbilitys();
+
+//create
+void createShape(Ogre::Root* root, Vector3D* position);
+
+//ticks
+void processTick();
+
+void setKeyDirection();
+
+void setValues();
+
+void write(Client* client);
+
+void sendShapeToClients();
 };
 
 #endif

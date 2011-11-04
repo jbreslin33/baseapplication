@@ -23,7 +23,7 @@ Command();
 *				VARIABLES
 ********************************************************/
 Vector3D* mPosition;            //finish origin of frame/tick
-Vector3D* mPositionOld;            //origin of last frame/tick
+Vector3D* mPositionBeforeCollision;            //origin of last frame/tick
 Vector3D* mPositionVelocity;	         //velocity during frame/tick
 
 Vector3D* mRotation; //rotation during frame/tick

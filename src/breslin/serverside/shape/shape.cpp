@@ -30,14 +30,37 @@
 Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 {
-
+	//command
 	mCommand = new Command();
 	mLastCommand = new Command();
 
-	//set values
-	mCommand->mPosition->copyValuesFrom(position);
+	mPosition         = new Vector3D();
+	mPositionLast         = new Vector3D();
+	
+	mPositionBeforeCollision      = new Vector3D();
 
- 	mPosition = position;
+	mPositionVelocity = new Vector3D();
+	mPositionVelocityLast = new Vector3D();
+
+	mRotation         = new Vector3D();
+	mRotationLast         = new Vector3D();
+
+	mKey = 0;
+	mKeyLast = 0;
+
+	mMilliseconds = 19;
+	mMillisecondsLast = 19;
+
+	mMillisecondsTotal = 0;
+	mMillisecondsTotalLast = 0;
+
+	mClientFrametime = 0.0f;
+	mClientFrametimeLast = 0.0f;
+
+	//set values
+	mPosition->copyValuesFrom(position);
+
+ 	//mPosition = position;
 	mIndex  = index;
 
 	//keys
@@ -168,24 +191,24 @@ void Shape::processTick()
 		mAbilityVector.at(i)->processTick();
 	}
 	
-	mCommand->mPositionVelocity->x = mSceneNode->getPosition().x - mCommand->mPosition->x;
-    mCommand->mPositionVelocity->y = mSceneNode->getPosition().y - mCommand->mPosition->y;
-    mCommand->mPositionVelocity->z = mSceneNode->getPosition().z - mCommand->mPosition->z;
+	mPositionVelocity->x = mSceneNode->getPosition().x - mPosition->x;
+    mPositionVelocity->y = mSceneNode->getPosition().y - mPosition->y;
+    mPositionVelocity->z = mSceneNode->getPosition().z - mPosition->z;
 
-	mCommand->mPositionOld->x = mCommand->mPosition->x;
-    mCommand->mPositionOld->z = mCommand->mPosition->z;
-    mCommand->mPositionOld->y = mCommand->mPosition->y;
+	mPositionBeforeCollision->x = mPosition->x;
+    mPositionBeforeCollision->z = mPosition->z;
+    mPositionBeforeCollision->y = mPosition->y;
 
-    mCommand->mPosition->x = mSceneNode->getPosition().x;
-    mCommand->mPosition->y = mSceneNode->getPosition().y;
-    mCommand->mPosition->z = mSceneNode->getPosition().z;
+    mPosition->x = mSceneNode->getPosition().x;
+    mPosition->y = mSceneNode->getPosition().y;
+    mPosition->z = mSceneNode->getPosition().z;
 
 	Ogre::Quaternion orientation = mSceneNode->getOrientation();
     Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
 
-  	mCommand->mRotation->x = mSceneNode->_getDerivedOrientation().zAxis().x;
+  	mRotation->x = mSceneNode->_getDerivedOrientation().zAxis().x;
 
-    mCommand->mRotation->z = mSceneNode->_getDerivedOrientation().zAxis().z;
+    mRotation->z = mSceneNode->_getDerivedOrientation().zAxis().z;
 }
 
 void Shape::setKeyDirection()  //this is called first in process tick so let's start conversion to separate
@@ -198,21 +221,21 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 	mKeyRotation = 0.0f;
     
 	// keep track of the player's intended direction
-    if(mCommand->mKey & mKeyUp) 
+    if(mKey & mKeyUp) 
 	{
 		mKeyDirection.z += -1;
 	}
 
-    if(mCommand->mKey & mKeyLeft) 
+    if(mKey & mKeyLeft) 
 	{
 		mKeyDirection.x += -1;
 	}
                 
-    if(mCommand->mKey & mKeyDown) 
+    if(mKey & mKeyDown) 
 	{
         mKeyDirection.z += 1;
 	}
-    if(mCommand->mKey & mKeyRight) 
+    if(mKey & mKeyRight) 
 	{
 		mKeyDirection.x += 1;
 	}
@@ -221,11 +244,11 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 
 
     // keep track of the player's intended rotation
-    if(mCommand->mKey & mKeyCounterClockwise) 
+    if(mKey & mKeyCounterClockwise) 
 	{
 		mKeyRotation += -1;
 	}
-    if(mCommand->mKey & mKeyClockwise) 
+    if(mKey & mKeyClockwise) 
 	{
 		mKeyRotation += 1;
 	}
@@ -247,16 +270,16 @@ void Shape::write(Client* client)
 	}
 	client->mMessage.WriteByte(mIndex);
 			
-	client->mMessage.WriteFloat(mCommand->mPosition->x);
-	client->mMessage.WriteFloat(mCommand->mPosition->y);
-	client->mMessage.WriteFloat(mCommand->mPosition->z);
+	client->mMessage.WriteFloat(mPosition->x);
+	client->mMessage.WriteFloat(mPosition->y);
+	client->mMessage.WriteFloat(mPosition->z);
 
-	client->mMessage.WriteFloat(mCommand->mPositionVelocity->x);
-	client->mMessage.WriteFloat(mCommand->mPositionVelocity->y);
-	client->mMessage.WriteFloat(mCommand->mPositionVelocity->z);
+	client->mMessage.WriteFloat(mPositionVelocity->x);
+	client->mMessage.WriteFloat(mPositionVelocity->y);
+	client->mMessage.WriteFloat(mPositionVelocity->z);
 
-	client->mMessage.WriteFloat(mCommand->mRotation->x);
-	client->mMessage.WriteFloat(mCommand->mRotation->z);
+	client->mMessage.WriteFloat(mRotation->x);
+	client->mMessage.WriteFloat(mRotation->z);
 			
 	//mesh
 	client->mMessage.WriteByte(mMeshCode);
@@ -265,5 +288,5 @@ void Shape::write(Client* client)
 	client->mMessage.WriteByte(mAnimated);
 
 	//textCode
-	//client->mMessage.WriteByte(mCommand->mTextCode);
+	//client->mMessage.WriteByte(mTextCode);
 }

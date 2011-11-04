@@ -18,9 +18,6 @@
 //shape
 #include "../shape/shape.h"
 
-//command
-#include "../command/command.h"
-
 Game::Game()
 {
 	mParser = new Parser();
@@ -134,13 +131,13 @@ void Game::checkCollisions()
 
 void Game::collision(Shape* shape1, Shape* shape2)
 {
-	shape1->mCommand->mPosition = shape1->mCommand->mPositionOld;
-	shape2->mCommand->mPosition = shape2->mCommand->mPositionOld;
+	shape1->mPosition = shape1->mPositionBeforeCollision;
+	shape2->mPosition = shape2->mPositionBeforeCollision;
 
-	float x3 = shape1->mCommand->mPositionOld->x;
-	float z3 = shape1->mCommand->mPositionOld->z;
-	float x4 = shape2->mCommand->mPositionOld->x;
-	float z4 = shape2->mCommand->mPositionOld->z;
+	float x3 = shape1->mPositionBeforeCollision->x;
+	float z3 = shape1->mPositionBeforeCollision->z;
+	float x4 = shape2->mPositionBeforeCollision->x;
+	float z4 = shape2->mPositionBeforeCollision->z;
 
 	shape1->mSceneNode->setPosition(x3,0.0,z3);
 	shape2->mSceneNode->setPosition(x4,0.0,z4);
@@ -193,30 +190,30 @@ void Game::sendCommand(void)
 	// Send messages to all clients
 	mServer->sendPackets();
 
-	// Store the sent command in mLastCommand->
+	// Store the sent command in 
 	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
 	{
 		storeCommands(mServer->mGame->mShapeVector.at(i));
 		
-		mServer->mGame->mShapeVector.at(i)->mCommand->mMillisecondsTotal = 0;
+		mServer->mGame->mShapeVector.at(i)->mMillisecondsTotal = 0;
 	}
 }
 
 void Game::storeCommands(Shape* shape)
 {
-	shape->mLastCommand->mClientFrametime = shape->mCommand->mClientFrametime;
+	shape->mClientFrametime = shape->mClientFrametime;
 
-	shape->mLastCommand->mKey = shape->mCommand->mKey;
+	shape->mKey = shape->mKey;
 
-	shape->mLastCommand->mMilliseconds = shape->mCommand->mMilliseconds;
+	shape->mMilliseconds = shape->mMilliseconds;
 
-	shape->mLastCommand->mPosition->copyValuesFrom(shape->mCommand->mPosition);
+	shape->mPosition->copyValuesFrom(shape->mPosition);
 
-	shape->mLastCommand->mPositionOld->copyValuesFrom(shape->mCommand->mPositionOld);
+	shape->mPositionBeforeCollision->copyValuesFrom(shape->mPositionBeforeCollision);
 
-	shape->mLastCommand->mPositionVelocity->copyValuesFrom(shape->mCommand->mPositionVelocity);
+	shape->mPositionVelocity->copyValuesFrom(shape->mPositionVelocity);
 
-	shape->mLastCommand->mRotation->copyValuesFrom(shape->mCommand->mRotation);
+	shape->mRotation->copyValuesFrom(shape->mRotation);
 }
 
 //this is the whole shabang server exit not a player or shape exit
@@ -248,25 +245,25 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 	// Key
 	if(flags & mParser->mCommandKey)
 	{
-		client->mShape->mCommand->mKey = mes->ReadByte();
-		//LogString("key:%d",client->mShape->mCommand->mKey);
+		client->mShape->mKey = mes->ReadByte();
+		//LogString("key:%d",client->mShape->mKey);
 	}
 
 	// Milliseconds
 	if(flags & mParser->mCommandMilliseconds)
 	{
-		//LogString("mil:%d",client->mShape->mCommand->mMilliseconds);
-		client->mShape->mCommand->mMilliseconds = mes->ReadByte();
+		//LogString("mil:%d",client->mShape->mMilliseconds);
+		client->mShape->mMilliseconds = mes->ReadByte();
 		
 	}
-	//LogString("cmil:%d",client->mShape->mCommand->mMilliseconds);
+	//LogString("cmil:%d",client->mShape->mMilliseconds);
 	//let's keep a tally called mMillisecondsTotal by adding up everytime we ReadDeltaMove...
-	client->mShape->mCommand->mMillisecondsTotal += client->mShape->mCommand->mMilliseconds;
+	client->mShape->mMillisecondsTotal += client->mShape->mMilliseconds;
 
 	//do i want to tally up the mKeys too???? especially if I'm not going to act on them as soon as i read them, atleast that is the plan.
 
 	//let's set the shape's clientFrameTime right here.....
-	client->mShape->mCommand->mClientFrametime = client->mShape->mCommand->mMilliseconds / 1000.0f;
+	client->mShape->mClientFrametime = client->mShape->mMilliseconds / 1000.0f;
 }
 
 //does this even care that a client is passed it? other than that it needs it access mShape? which
@@ -286,31 +283,31 @@ int Game::setFlag(Command* command, Shape* shape)
 	int flags = 0;
 
 	//Origin
-	if(shape->mLastCommand->mPosition->x != command->mPosition->x)
+	if(shape->mPosition->x != command->mPosition->x)
 	{
 		flags |= mParser->mCommandOriginX;
 	}
-	if(shape->mLastCommand->mPosition->y != command->mPosition->y)
+	if(shape->mPosition->y != command->mPosition->y)
 	{
 		flags |= mParser->mCommandOriginY;
 	}
-	if(shape->mLastCommand->mPosition->z != command->mPosition->z)
+	if(shape->mPosition->z != command->mPosition->z)
 	{
 		flags |= mParser->mCommandOriginZ;
 	}
 
 	//Rotation
-	if(shape->mLastCommand->mRotation->x != command->mRotation->x)
+	if(shape->mRotation->x != command->mRotation->x)
 	{
 		flags |= mParser->mCommandRotationX;
 	}
-	if(shape->mLastCommand->mRotation->z != command->mRotation->z)
+	if(shape->mRotation->z != command->mRotation->z)
 	{
 		flags |= mParser->mCommandRotationZ;
 	}
 	
 	//Milliseconds
-	if(shape->mLastCommand->mMillisecondsTotal != command->mMillisecondsTotal)
+	if(shape->mMillisecondsTotal != command->mMillisecondsTotal)
 	{
 		flags |= mParser->mCommandMilliseconds;
 	}

@@ -3,9 +3,6 @@
 
 #include "../message/message.h"
 
-//command
-#include "../command/command.h"
-
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")
 #pragma message ("Auto linking WinSock2 library")
