@@ -328,31 +328,31 @@ void Game::buildDeltaMoveMessage(int flags, Message* message, Shape* shape)
 	//Origin
 	if(flags & mParser->mCommandOriginX)
 	{
-		message->WriteFloat(command->mPosition->x);
+		message->WriteFloat(shape->mPosition->x);
 	}
 	if(flags & mParser->mCommandOriginY)
 	{
-		message->WriteFloat(command->mPosition->y);
+		message->WriteFloat(shape->mPosition->y);
 	}
 	if(flags & mParser->mCommandOriginZ)
 	{
-		message->WriteFloat(command->mPosition->z);
+		message->WriteFloat(shape->mPosition->z);
 	}
 
 	//Rotation
 	if(flags & mParser->mCommandRotationX)
 	{
-		message->WriteFloat(command->mRotation->x);
+		message->WriteFloat(shape->mRotation->x);
 	}
 	if(flags & mParser->mCommandRotationZ)
 	{
-		message->WriteFloat(command->mRotation->z);
+		message->WriteFloat(shape->mRotation->z);
 	}
 
 	//Milliseconds
 	if(flags & mParser->mCommandMilliseconds)
 	{
-		message->WriteByte(command->mMillisecondsTotal);
+		message->WriteByte(shape->mMillisecondsTotal);
 	}
 }
 
