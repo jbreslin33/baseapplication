@@ -11,7 +11,7 @@ public:
 
 ~ClientTag();
 
-void createShape();
+virtual void createShape();
 
 };
 #endif

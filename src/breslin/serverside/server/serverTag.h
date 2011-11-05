@@ -11,8 +11,7 @@ public:
 	~ServerTag();
 
 	//client
-	void createClient(struct sockaddr *address);
-	void addClient(Client* client);
+	virtual void createClient(struct sockaddr *address);
 };
 
 #endif

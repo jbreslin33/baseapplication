@@ -23,7 +23,3 @@ void ServerTag::createClient(struct sockaddr *address)
 
 }
 
-void ServerTag::addClient(Client* client)
-{
-	mClientVector.push_back(client);
-}

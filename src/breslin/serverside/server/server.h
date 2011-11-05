@@ -70,7 +70,7 @@ public:
 	int  checkForTimeout(char *data, struct sockaddr *from);
 
 	//client
-	void createClient(struct sockaddr *address);
+	virtual void createClient(struct sockaddr *address);
 	void addClient(Client* client);
 	
 	//shapes

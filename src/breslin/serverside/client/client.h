@@ -72,7 +72,7 @@ public:
 	int				mLastMessageTime;
 
 public:
-	void createShape();
+	virtual void createShape();
 	void sendConnect();
 	void remove();
 	void			SendPacket(Message *message);
