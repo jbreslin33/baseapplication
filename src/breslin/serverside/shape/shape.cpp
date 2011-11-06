@@ -37,7 +37,6 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	mPositionBeforeCollision      = new Vector3D();
 
 	mPositionVelocity = new Vector3D();
-	mPositionVelocityLast = new Vector3D();
 
 	mRotation         = new Vector3D();
 	mRotationLast         = new Vector3D();
@@ -46,13 +45,11 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	mKeyLast = 0;
 
 	mMilliseconds = 19;
-	mMillisecondsLast = 19;
 
 	mMillisecondsTotal = 0;
 	mMillisecondsTotalLast = 0;
 
 	mClientFrametime = 0.0f;
-	mClientFrametimeLast = 0.0f;
 
 	//set values
 	mPosition->copyValuesFrom(position);

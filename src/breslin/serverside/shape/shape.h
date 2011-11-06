@@ -79,7 +79,6 @@ Vector3D* mPositionLast;
 Vector3D* mPositionBeforeCollision;            //origin of last frame/tick
 
 Vector3D* mPositionVelocity;	         //velocity during frame/tick
-Vector3D* mPositionVelocityLast;
 
 Vector3D* mRotation; //rotation during frame/tick
 Vector3D* mRotationLast;
@@ -88,13 +87,11 @@ int mKey;               //key pressed
 int mKeyLast; 
 
 int mMilliseconds;      //not used
-int mMillisecondsLast;
 
 int mMillisecondsTotal;      //not used
 int mMillisecondsTotalLast;
 
 float mClientFrametime;
-float mClientFrametimeLast;
 
 /******************************************************
 *				METHODS
