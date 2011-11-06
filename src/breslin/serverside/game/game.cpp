@@ -183,10 +183,7 @@ void Game::sendCommand(void)
 		//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
 		for (unsigned int j = 0; j < mShapeVector.size(); j++)
 		{                         //the client to send to's message        //the shape command it's about
-			//if (checkScope(mServer->mClientVector.at(i),mShapeVector.at(i)))
-			//{
-				buildDeltaMoveCommand(&mServer->mClientVector.at(i)->mMessage, mShapeVector.at(j));
-			//}
+			buildDeltaMoveCommand(&mServer->mClientVector.at(i)->mMessage, mShapeVector.at(j));
 		}
 	}
 
@@ -238,32 +235,25 @@ void Game::sendExitNotification()
 //this is just for clients right now, should i make another or hijack this function??
 void Game::readDeltaMoveCommand(Message *mes, Client *client)
 {
-	//LogString("dd");
 	int flags = 0;
 
 	// Flags
 	flags = mes->ReadByte();
-	//LogString("flags:%d",flags);
 
 	// Key
 	if(flags & mParser->mCommandKey)
 	{
 		client->mShape->mKey = mes->ReadByte();
-		//LogString("key:%d",client->mShape->mKey);
 	}
 
 	// Milliseconds
 	if(flags & mParser->mCommandMilliseconds)
 	{
-		//LogString("mil:%d",client->mShape->mMilliseconds);
 		client->mShape->mMilliseconds = mes->ReadByte();
 		
 	}
-	//LogString("cmil:%d",client->mShape->mMilliseconds);
 	//let's keep a tally called mMillisecondsTotal by adding up everytime we ReadDeltaMove...
 	client->mShape->mMillisecondsTotal += client->mShape->mMilliseconds;
-
-	//do i want to tally up the mKeys too???? especially if I'm not going to act on them as soon as i read them, atleast that is the plan.
 
 	//let's set the shape's clientFrameTime right here.....
 	client->mShape->mClientFrametime = client->mShape->mMilliseconds / 1000.0f;
