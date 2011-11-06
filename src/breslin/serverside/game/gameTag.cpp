@@ -11,7 +11,7 @@
 #include "../server/serverTag.h"
 
 //shape
-#include "../shape/shapeTagPlayer.h"
+#include "../shape/shapeTag.h"
 
 //client
 #include "../client/client.h"
@@ -50,7 +50,7 @@ void GameTag::createWorld()
 		position->y = 0.0f;
 		position->z = 2.0f * i;
 
-		Shape* shape = new ShapeTagPlayer(getOpenIndex(),this,0,new Vector3D(),new Vector3D(),new Vector3D(),
+		Shape* shape = new ShapeTag(getOpenIndex(),this,0,new Vector3D(),new Vector3D(),new Vector3D(),
 			mRoot,true,true,.66f,1,true); 
 
 		mItShape = mShapeVector.at(0);

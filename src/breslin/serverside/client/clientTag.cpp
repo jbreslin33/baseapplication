@@ -5,7 +5,7 @@
 #include "../tdreamsock/dreamSockLog.h"
 
 //shape
-#include "../shape/shapeTagPlayer.h"
+#include "../shape/shapeTag.h"
 
 //server
 #include "../server/server.h"
@@ -31,7 +31,7 @@ void ClientTag::createShape()
 {
 	//create the shape for this client -- the avatar
 	LogString("create ShapeTagPlayer in ClientTag");
-	mShape = new ShapeTagPlayer(mServer->mGame->getOpenIndex(),mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f,1,false); 
+	mShape = new ShapeTag(mServer->mGame->getOpenIndex(),mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f,1,false); 
 
 }
 

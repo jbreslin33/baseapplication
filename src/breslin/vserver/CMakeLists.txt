@@ -95,8 +95,8 @@ set(HDRS
 	
 	#game
 	../serverside/game/game.h
+		#tag
 	../serverside/game/gameTag.h
-	../serverside/game/gameGhostInTheGraveyard.h
 	
 	#tdreamsock
 	../serverside/tdreamsock/dreamSockLog.h
@@ -107,10 +107,8 @@ set(HDRS
 	
 	#shape
 	../serverside/shape/shape.h
-	
 		#tag
 	../serverside/shape/shapeTag.h
-	../serverside/shape/shapeTagPlayer.h
 		
 	#move
 	../serverside/ability/move/move.h
@@ -169,8 +167,8 @@ set(SRCS
 
 	#game
 	../serverside/game/game.cpp
+		#tag
 	../serverside/game/gameTag.cpp
-	../serverside/game/gameGhostInTheGraveyard.cpp
 	
 	#dreamsock
 	../serverside/tdreamsock/dreamSockLog.cpp
@@ -181,10 +179,8 @@ set(SRCS
 	
 	#shape
 	../serverside/shape/shape.cpp
-	
 		#tag
 	../serverside/shape/shapeTag.cpp
-	../serverside/shape/shapeTagPlayer.cpp
 	
 	#move
 	../serverside/ability/move/move.cpp
@@ -237,8 +233,8 @@ set(HDRS
 	
 	#game
 	../serverside/game/game.h
+		#tag
 	../serverside/game/gameTag.h
-	../serverside/game/gameGhostInTheGraveyard.h
 	
 	#network
 	../serverside/network/network.h
@@ -249,10 +245,8 @@ set(HDRS
 	
 		#shape
 	../serverside/shape/shape.h
-	
 		#tag
 	../serverside/shape/shapeTag.h
-	../serverside/shape/shapeTagPlayer.h
 	
 	#move
 	../serverside/ability/move/move.h
@@ -310,8 +304,8 @@ set(SRCS
 	
 	#game
 	../serverside/game/game.cpp
+		#tag
 	../serverside/game/gameTag.cpp
-	../serverside/game/gameGhostInTheGraveyard.cpp
 
 	#dreamsock
 	../serverside/tdreamsock/dreamSockLog.cpp
@@ -322,10 +316,8 @@ set(SRCS
 	
 	#shape
 	../serverside/shape/shape.cpp
-	
 		#tag
 	../serverside/shape/shapeTag.cpp
-	../serverside/shape/shapeTagPlayer.cpp
 	
 	#move
 	../serverside/ability/move/move.cpp
