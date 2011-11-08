@@ -134,8 +134,9 @@ void Game::checkCollisions()
 
 void Game::collision(Shape* shape1, Shape* shape2)
 {
-	shape1->mPosition = shape1->mPositionBeforeCollision;
-	shape2->mPosition = shape2->mPositionBeforeCollision;
+	LogString("Game collision");
+	shape1->mPosition->copyValuesFrom(shape1->mPositionBeforeCollision);
+	shape2->mPosition->copyValuesFrom(shape2->mPositionBeforeCollision);
 
 	float x3 = shape1->mPositionBeforeCollision->x;
 	float z3 = shape1->mPositionBeforeCollision->z;

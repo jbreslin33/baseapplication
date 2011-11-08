@@ -189,9 +189,10 @@ void Shape::processTick()
     mPositionVelocity->y = mSceneNode->getPosition().y - mPosition->y;
     mPositionVelocity->z = mSceneNode->getPosition().z - mPosition->z;
 
+
 	mPositionBeforeCollision->x = mPosition->x;
-    mPositionBeforeCollision->z = mPosition->z;
     mPositionBeforeCollision->y = mPosition->y;
+    mPositionBeforeCollision->z = mPosition->z;
 
     mPosition->x = mSceneNode->getPosition().x;
     mPosition->y = mSceneNode->getPosition().y;
