@@ -143,7 +143,7 @@ void sendShapeToClients();
 
 	//delta move command
 int  setMessageFlag();
-void addToMoveMessage(int flags, Message* message);
+void addToMoveMessage(Message* message);
 };
 
 #endif

@@ -332,8 +332,10 @@ int Shape::setMessageFlag()
 	return flags;
 }
 
-void Shape::addToMoveMessage(int flags, Message* message)
+void Shape::addToMoveMessage(Message* message)
 {
+	int flags = setMessageFlag();
+
 	message->WriteByte(mIndex);
 
 	// Flags
