@@ -60,7 +60,6 @@ void GameTag::collision(Shape* shape1, Shape* shape2)
 {
 	Game::collision(shape1,shape2);
 	
-	LogString("GameTag Collision");
 	//let's make someone it
 	if (shape1 == mItShape)
 	{
