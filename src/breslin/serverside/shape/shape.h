@@ -142,7 +142,7 @@ void writeAdd(Client* client);
 void sendShapeToClients();
 
 	//delta move command
-int  setMessageFlag();
+int  setFlag();
 void addToMoveMessage(Message* message);
 };
 

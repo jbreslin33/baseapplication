@@ -295,7 +295,7 @@ void Shape::buildDeltaMoveCommand(Message* mes)
 	buildDeltaMoveMessage(flags,mes);
 }
 */
-int Shape::setMessageFlag()
+int Shape::setFlag()
 {
 	int flags = 0;
 
@@ -334,7 +334,7 @@ int Shape::setMessageFlag()
 
 void Shape::addToMoveMessage(Message* message)
 {
-	int flags = setMessageFlag();
+	int flags = setFlag();
 
 	message->WriteByte(mIndex);
 
