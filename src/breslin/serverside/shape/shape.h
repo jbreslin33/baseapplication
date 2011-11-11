@@ -137,14 +137,13 @@ void setKeyDirection();
 
 void setValues();
 
-void write(Client* client);
+void writeAdd(Client* client);
 
 void sendShapeToClients();
 
 	//delta move command
-	virtual void buildDeltaMoveCommand(Message *mes);
-	virtual int  setFlag();
-	virtual void buildDeltaMoveMessage(int flags, Message* message);
+int  setMessageFlag();
+void addToMoveMessage(int flags, Message* message);
 };
 
 #endif

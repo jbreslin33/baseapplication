@@ -127,7 +127,7 @@ void Shape::sendShapeToClients()
 		Client* clientToSendTo = mGame->mServer->mClientVector.at(i);
 		
 		//write it
-		write(clientToSendTo);
+		writeAdd(clientToSendTo);
 		
 		//send it
 		clientToSendTo->SendPacket(&clientToSendTo->mMessage);
@@ -249,7 +249,7 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 	}
 }
 
-void Shape::write(Client* client)
+void Shape::writeAdd(Client* client)
 {
 	client->mMessage.Init(client->mMessage.outgoingData, sizeof(client->mMessage.outgoingData));
 
@@ -288,15 +288,15 @@ void Shape::write(Client* client)
 
 //does this even care that a client is passed it? other than that it needs it access mShape? which
 //i should already have?
+/*
 void Shape::buildDeltaMoveCommand(Message* mes)
 {
 	int flags = setFlag();
 	buildDeltaMoveMessage(flags,mes);
 }
-
-int Shape::setFlag()
+*/
+int Shape::setMessageFlag()
 {
-
 	int flags = 0;
 
 	//Origin
@@ -330,12 +330,9 @@ int Shape::setFlag()
 	}
 
 	return flags;
-	
-
-	
 }
 
-void Shape::buildDeltaMoveMessage(int flags, Message* message)
+void Shape::addToMoveMessage(int flags, Message* message)
 {
 	message->WriteByte(mIndex);
 

@@ -11,10 +11,6 @@ ShapeTag(unsigned int index, Game* game, Client* client, Vector3D* position, Vec
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~ShapeTag();
 
-//delta move command
-virtual void buildDeltaMoveCommand(Message *mes);
-virtual int  setFlag();
-virtual void buildDeltaMoveMessage(int flags, Message* message);
 };
 
 #endif

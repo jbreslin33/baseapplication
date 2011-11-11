@@ -94,7 +94,7 @@ void Client::sendAllShapes()
 		if (mShape != mServer->mGame->mShapeVector.at(i))
 		{
 			//write it
-			mServer->mGame->mShapeVector.at(i)->write(this);
+			mServer->mGame->mShapeVector.at(i)->writeAdd(this);
 		
 			//send it
 			SendPacket(&mMessage);
