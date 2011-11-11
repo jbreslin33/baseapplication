@@ -184,7 +184,7 @@ void Game::sendCommand(void)
 		//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
 		for (unsigned int j = 0; j < mShapeVector.size(); j++)
 		{                         //the client to send to's message        //the shape command it's about
-			buildDeltaMoveCommand(&mServer->mClientVector.at(i)->mMessage, mShapeVector.at(j));
+			mShapeVector.at(j)->buildDeltaMoveCommand(&mServer->mClientVector.at(i)->mMessage);
 		}
 	}
 
@@ -258,93 +258,6 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 
 	//let's set the shape's clientFrameTime right here.....
 	client->mShape->mClientFrametime = client->mShape->mMilliseconds / 1000.0f;
-}
-
-//does this even care that a client is passed it? other than that it needs it access mShape? which
-//i should already have?
-void Game::buildDeltaMoveCommand(Message* mes, Shape* shape)
-{
-	int flags = setFlag(shape);
-	buildDeltaMoveMessage(flags,mes,shape);
-}
-
-int Game::setFlag(Shape* shape)
-{
-
-	int flags = 0;
-
-	//Origin
-	if(shape->mPosition->x != shape->mPositionLast->x)
-	{
-		flags |= mParser->mCommandOriginX;
-	}
-	if(shape->mPosition->y != shape->mPositionLast->y)
-	{
-		flags |= mParser->mCommandOriginY;
-	}
-	if(shape->mPosition->z != shape->mPositionLast->z)
-	{
-		flags |= mParser->mCommandOriginZ;
-	}
-
-	//Rotation
-	if(shape->mRotation->x != shape->mRotationLast->x)
-	{
-		flags |= mParser->mCommandRotationX;
-	}
-	if(shape->mRotation->z != shape->mRotationLast->z)
-	{
-		flags |= mParser->mCommandRotationZ;
-	}
-	
-	//Milliseconds
-	if(shape->mMillisecondsTotal != shape->mMillisecondsTotalLast)
-	{
-		flags |= mParser->mCommandMilliseconds;
-	}
-
-	return flags;
-	
-
-	
-}
-
-void Game::buildDeltaMoveMessage(int flags, Message* message, Shape* shape)
-{
-	message->WriteByte(shape->mIndex);
-
-	// Flags
-	message->WriteByte(flags);  
-
-	//Origin
-	if(flags & mParser->mCommandOriginX)
-	{
-		message->WriteFloat(shape->mPosition->x);
-	}
-	if(flags & mParser->mCommandOriginY)
-	{
-		message->WriteFloat(shape->mPosition->y);
-	}
-	if(flags & mParser->mCommandOriginZ)
-	{
-		message->WriteFloat(shape->mPosition->z);
-	}
-
-	//Rotation
-	if(flags & mParser->mCommandRotationX)
-	{
-		message->WriteFloat(shape->mRotation->x);
-	}
-	if(flags & mParser->mCommandRotationZ)
-	{
-		message->WriteFloat(shape->mRotation->z);
-	}
-
-	//Milliseconds
-	if(flags & mParser->mCommandMilliseconds)
-	{
-		message->WriteByte(shape->mMillisecondsTotal);
-	}
 }
 
 

@@ -74,55 +74,6 @@ void GameTag::collision(Shape* shape1, Shape* shape2)
 	}
 }
 
-void GameTag::buildDeltaMoveCommand(Message* mes, Shape* shape)
-{
-	int flags = setFlag(shape);
-	buildDeltaMoveMessage(flags,mes,shape);
-}
-
-
-int GameTag::setFlag(Shape* shape)
-{
-
-	int flags = 0;
-
-	//Origin
-	if(shape->mPosition->x != shape->mPositionLast->x)
-	{
-		flags |= mParser->mCommandOriginX;
-	}
-	if(shape->mPosition->y != shape->mPositionLast->y)
-	{
-		flags |= mParser->mCommandOriginY;
-	}
-	if(shape->mPosition->z != shape->mPositionLast->z)
-	{
-		flags |= mParser->mCommandOriginZ;
-	}
-
-	//Rotation
-	if(shape->mRotation->x != shape->mRotationLast->x)
-	{
-		flags |= mParser->mCommandRotationX;
-	}
-	if(shape->mRotation->z != shape->mRotationLast->z)
-	{
-		flags |= mParser->mCommandRotationZ;
-	}
-	
-	//Milliseconds
-	if(shape->mMillisecondsTotal != shape->mMillisecondsTotalLast)
-	{
-		flags |= mParser->mCommandMilliseconds;
-	}
-
-	return flags;
-}
-
-void GameTag::buildDeltaMoveMessage(int flags, Message* message, Shape* shape)
-{
-	Game::buildDeltaMoveMessage(flags,message,shape);
-}
 
 void GameTag::storeCommands(Shape* shape)
 {

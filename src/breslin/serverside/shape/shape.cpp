@@ -285,3 +285,91 @@ void Shape::write(Client* client)
 	//textCode
 	//client->mMessage.WriteByte(mTextCode);
 }
+
+//does this even care that a client is passed it? other than that it needs it access mShape? which
+//i should already have?
+void Shape::buildDeltaMoveCommand(Message* mes)
+{
+	int flags = setFlag();
+	buildDeltaMoveMessage(flags,mes);
+}
+
+int Shape::setFlag()
+{
+
+	int flags = 0;
+
+	//Origin
+	if(mPosition->x != mPositionLast->x)
+	{
+		flags |= mCommandOriginX;
+	}
+	if(mPosition->y != mPositionLast->y)
+	{
+		flags |= mCommandOriginY;
+	}
+	if(mPosition->z != mPositionLast->z)
+	{
+		flags |= mCommandOriginZ;
+	}
+
+	//Rotation
+	if(mRotation->x != mRotationLast->x)
+	{
+		flags |= mCommandRotationX;
+	}
+	if(mRotation->z != mRotationLast->z)
+	{
+		flags |= mCommandRotationZ;
+	}
+	
+	//Milliseconds
+	if(mMillisecondsTotal != mMillisecondsTotalLast)
+	{
+		flags |= mCommandMilliseconds;
+	}
+
+	return flags;
+	
+
+	
+}
+
+void Shape::buildDeltaMoveMessage(int flags, Message* message)
+{
+	message->WriteByte(mIndex);
+
+	// Flags
+	message->WriteByte(flags);  
+
+	//Origin
+	if(flags & mCommandOriginX)
+	{
+		message->WriteFloat(mPosition->x);
+	}
+	if(flags & mCommandOriginY)
+	{
+		message->WriteFloat(mPosition->y);
+	}
+	if(flags & mCommandOriginZ)
+	{
+		message->WriteFloat(mPosition->z);
+	}
+
+	//Rotation
+	if(flags & mCommandRotationX)
+	{
+		message->WriteFloat(mRotation->x);
+	}
+	if(flags & mCommandRotationZ)
+	{
+		message->WriteFloat(mRotation->z);
+	}
+
+	//Milliseconds
+	if(flags & mCommandMilliseconds)
+	{
+		message->WriteByte(mMillisecondsTotal);
+	}
+}
+

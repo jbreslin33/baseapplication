@@ -57,11 +57,6 @@ public:
 	void	sendExitNotification();
 	void	readDeltaMoveCommand(Message *mes, Client *client);
 	
-	//delta move command
-	virtual void buildDeltaMoveCommand(Message *mes, Shape* shape);
-	virtual int  setFlag(Shape* shape);
-	virtual void buildDeltaMoveMessage(int flags, Message* message, Shape* shape);
-
 	//time
 	void	frame(int msec);
 	
