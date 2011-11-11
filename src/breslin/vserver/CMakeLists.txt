@@ -152,9 +152,6 @@ set(HDRS
 		#tag
 	../serverside/client/clientTag.h
 	
-	#parser
-	../serverside/parser/parser.h
-
 )
  
 set(SRCS
@@ -215,10 +212,7 @@ set(SRCS
 	../serverside/client/client.cpp
 		#tag
 	../serverside/client/clientTag.cpp
-	
-	#parser
-	../serverside/parser/parser.cpp
-	
+
 )
 endif (WIN32)
 
@@ -290,8 +284,6 @@ set(HDRS
 		#tag
 	../serverside/client/clientTag.h
 	
-	#parser
-	../serverside/parser/parser.h
 )
  
 set(SRCS
@@ -352,9 +344,6 @@ set(SRCS
 	../serverside/client/client.cpp
 		#tag
 	../serverside/client/clientTag.cpp
-	
-	#parser
-	../serverside/parser/parser.cpp
 
 )
 endif (UNIX)

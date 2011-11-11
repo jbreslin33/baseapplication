@@ -17,4 +17,49 @@ ShapeTag::~ShapeTag()
 }
 
 
+void ShapeTag::addToMoveMessage(Message* message)
+{
+	Shape::addToMoveMessage(message);
+	/*
+	int flags = setFlag();
+
+	message->WriteByte(mIndex);
+
+	// Flags
+	message->WriteByte(flags);  
+
+	//Origin
+	if(flags & mCommandOriginX)
+	{
+		message->WriteFloat(mPosition->x);
+	}
+	if(flags & mCommandOriginY)
+	{
+		message->WriteFloat(mPosition->y);
+	}
+	if(flags & mCommandOriginZ)
+	{
+		message->WriteFloat(mPosition->z);
+	}
+
+	//Rotation
+	if(flags & mCommandRotationX)
+	{
+		message->WriteFloat(mRotation->x);
+	}
+	if(flags & mCommandRotationZ)
+	{
+		message->WriteFloat(mRotation->z);
+	}
+
+	//Milliseconds
+	if(flags & mCommandMilliseconds)
+	{
+		message->WriteByte(mMillisecondsTotal);
+	}
+	*/
+}
+
+
+
 

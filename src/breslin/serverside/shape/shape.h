@@ -32,12 +32,9 @@ Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector
 ********************************************************/
 
 // ByteBufferes
-static const char mCommandKey          = 1;
 static const char mCommandMilliseconds = 2;
 
 
-static const char mMessageConnect     = -101;
-static const char mMessageDisconnect  = -102;
 static const char mMessageAddShape    = -103;
 static const char mMessageRemoveShape = -104;
 
@@ -143,7 +140,7 @@ void sendShapeToClients();
 
 	//delta move command
 int  setFlag();
-void addToMoveMessage(Message* message);
+virtual void addToMoveMessage(Message* message);
 };
 
 #endif

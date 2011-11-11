@@ -4,9 +4,6 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
-//parser
-#include "../parser/parser.h"
-
 //network
 #include "../network/network.h"
 
@@ -22,14 +19,8 @@
 //game
 #include "../game/game.h"
 
-
-
-
 Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 {
-
-	mParser = new Parser();
-
 	init			= false;
 	mGame = serverSideGame;
 	mLocalIP = localIP;

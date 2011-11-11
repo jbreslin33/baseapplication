@@ -366,7 +366,7 @@ void Shape::addToMoveMessage(Message* message)
 	}
 
 	//Milliseconds
-	if(flags & mCommandMilliseconds)
+	if(flags & mGame->mCommandMilliseconds)
 	{
 		message->WriteByte(mMillisecondsTotal);
 	}

@@ -3,9 +3,6 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
-//parser
-#include "../parser/parser.h"
-
 //server
 #include "../server/server.h"
 
@@ -23,8 +20,6 @@
 
 Game::Game()
 {
-	mParser = new Parser();
-
 	StartLog();
 
 #ifdef _DEBUG
@@ -225,7 +220,7 @@ void Game::sendExitNotification()
 		mServer->mClientVector.at(i)->mMessage.Init(mServer->mClientVector.at(i)->mMessage.outgoingData,
 			sizeof(mServer->mClientVector.at(i)->mMessage.outgoingData));
 
-		mServer->mClientVector.at(i)->mMessage.WriteByte(mParser->mMessageServerExit);	// type
+		mServer->mClientVector.at(i)->mMessage.WriteByte(mMessageServerExit);	// type
 		mServer->mClientVector.at(i)->mMessage.WriteShort(mServer->mClientVector.at(i)->mOutgoingSequence);
 	}
 
@@ -241,13 +236,13 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 	flags = mes->ReadByte();
 
 	// Key
-	if(flags & mParser->mCommandKey)
+	if(flags & mCommandKey)
 	{
 		client->mShape->mKey = mes->ReadByte();
 	}
 
 	// Milliseconds
-	if(flags & mParser->mCommandMilliseconds)
+	if(flags & mCommandMilliseconds)
 	{
 		client->mShape->mMilliseconds = mes->ReadByte();
 		

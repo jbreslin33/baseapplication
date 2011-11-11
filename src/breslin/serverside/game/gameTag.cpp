@@ -4,9 +4,6 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
-//parser
-#include "../parser/parser.h"
-
 //server
 #include "../server/serverTag.h"
 

@@ -17,16 +17,17 @@ class Server;
 class Client;
 class Shape;
 class Vector3D;
-class Parser;
 
 class Game
 {
 public:
 
-	Ogre::Root* mRoot;
+//statics
+static const char mCommandKey          = 1;
+static const char mCommandMilliseconds = 2;
+static const char mMessageServerExit = 3;
 
-	//parser
-	Parser* mParser;
+	Ogre::Root* mRoot;
 
 	Server	*mServer;  //go between for game(contains game logic) and Network(handles sending message across internets)
 
