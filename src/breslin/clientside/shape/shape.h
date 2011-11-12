@@ -13,7 +13,7 @@
 /**********************************
 *          FORWARD DECLARATIONS
 **********************************/
-class Game;
+class Application;
 class Parser;
 
 class Shape
@@ -32,7 +32,7 @@ public:
 int   mIndex;
 
 //game
-Game* mGame;
+Application* mApplication;
 
 //scale
 float mScale;

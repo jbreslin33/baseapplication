@@ -1,5 +1,5 @@
 //header
-#include "gameOgre.h"
+#include "applicationOgre.h"
 
 //standard library
 #include <string>
@@ -21,20 +21,20 @@
 /*********************************
 *		CONSTRUCTORS
 **********************************/
-GameOgre::GameOgre(const char* serverIP, int serverPort) : Game(serverIP, serverPort)
+ApplicationOgre::ApplicationOgre(const char* serverIP, int serverPort) : Application(serverIP, serverPort)
 {
-	LogString("GAMEoGRE!!!!!!!!!!!!!!!!");
+	LogString("ApplicationOgre!!!!!!!!!!!!!!!!");
 	mGraphicsOgre = new GraphicsOgre(this);
 }
 
-GameOgre::~GameOgre()
+ApplicationOgre::~ApplicationOgre()
 {
 }
 
 /*********************************
 *		TIME
 ***********************************/
-float GameOgre::getRenderTime()
+float ApplicationOgre::getRenderTime()
 {
 	//LogString("r:%f",mGraphicsOgre->mRenderTime);
 	return mGraphicsOgre->mRenderTime;
@@ -44,7 +44,7 @@ float GameOgre::getRenderTime()
 /*********************************
 *		SHAPE
 **********************************/
-void GameOgre::addShape(bool b, ByteBuffer* byteBuffer)
+void ApplicationOgre::addShape(bool b, ByteBuffer* byteBuffer)
 {
 	ShapeDynamic* shapeDynamicOgre = new ShapeDynamicOgre(this,byteBuffer,false);  //you should just need to call this...
 	
@@ -57,7 +57,7 @@ void GameOgre::addShape(bool b, ByteBuffer* byteBuffer)
 		INPUT
 **********************************/
 
-void GameOgre::processInput()
+void ApplicationOgre::processInput()
 {
 	mGraphicsOgre->processInput();
 }
@@ -65,7 +65,7 @@ void GameOgre::processInput()
 /*********************************
 		GRAPHICS 
 **********************************/
-bool GameOgre::runGraphics()
+bool ApplicationOgre::runGraphics()
 {
 	return mGraphicsOgre->runGraphics();
 }
@@ -74,7 +74,7 @@ bool GameOgre::runGraphics()
 		GUI
 **********************************/
 
-void GameOgre::initializeGui()
+void ApplicationOgre::initializeGui()
 {
 	mGraphicsOgre->initializeGui();
 }

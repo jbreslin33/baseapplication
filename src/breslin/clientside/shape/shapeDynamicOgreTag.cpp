@@ -4,9 +4,9 @@
 #include "../tdreamsock/dreamSockLog.h"
 
 
-ShapeDynamicOgreTag::ShapeDynamicOgreTag(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost)
+ShapeDynamicOgreTag::ShapeDynamicOgreTag(ApplicationOgre* applicationOgre, ByteBuffer* byteBuffer, bool isGhost)
 :
-	ShapeDynamicOgre         (gameOgre,byteBuffer,isGhost)
+	ShapeDynamicOgre         (applicationOgre,byteBuffer,isGhost)
 {
 	
 }

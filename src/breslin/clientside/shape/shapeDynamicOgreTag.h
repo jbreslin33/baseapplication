@@ -24,7 +24,7 @@ class ShapeDynamicOgreTag : public ShapeDynamicOgre
 {
 
 public:
-ShapeDynamicOgreTag(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost);
+ShapeDynamicOgreTag(ApplicationOgre* applicationOgre, ByteBuffer* byteBuffer, bool isGhost);
 ~ShapeDynamicOgreTag();
 
 /**********************************

@@ -12,7 +12,7 @@
 #include "../tdreamsock/dreamSockLog.h"
 
 //game
-#include "../game/game.h"
+#include "../game/application.h"
 
 //ability
 #include "../ability/ability.h"
@@ -28,12 +28,12 @@
 *				CLASS
 ********************************************************/
 
-ShapeDynamic::ShapeDynamic(Game* game, ByteBuffer* byteBuffer)
+ShapeDynamic::ShapeDynamic(Application* application, ByteBuffer* byteBuffer)
 :
 	Shape         ()
 {
 	//game
-	mGame = game;
+	mApplication = application;
 
 	//parser
 	mParser = new Parser();

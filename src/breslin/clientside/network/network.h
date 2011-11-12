@@ -52,7 +52,7 @@ class DreamWinSock;
 class DreamLinuxSock;
 #endif
 
-class Game;
+class Application;
 class Command;
 class ByteBuffer;
 class Parser;
@@ -64,7 +64,7 @@ class Parser;
 class Network
 {
 public:
-Network(Game* game, const char serverIP[32], int serverPort);
+Network(Application* application, const char serverIP[32], int serverPort);
 ~Network();
 
 /**********************************
@@ -73,7 +73,7 @@ Network(Game* game, const char serverIP[32], int serverPort);
 public:
 
 //game
-Game* mGame;
+Application* mApplication;
 
 //command
 Command* mCommandToServer; //for the human moves to be sent off to server

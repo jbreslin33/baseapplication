@@ -3,7 +3,7 @@
 #include "../clientside/tdreamsock/dreamSockLog.h"
 
 //app
-#include "../clientside/game/gameOgre.h"
+#include "../clientside/game/applicationOgre.h"
 
 //graphics
 #include "../clientside/graphics/graphicsOgre.h"
@@ -28,14 +28,14 @@ extern "C" {
        
 		StartLogConsole();
         
-		GameOgre* gameOgre = new GameOgre(strCmdLine,30004);
+		ApplicationOgre* applicationOgre = new ApplicationOgre(strCmdLine,30004);
 #else
-        GameOgre* gameOgre = new GameOgre(argv[1],30004);
+        ApplicationOgre* applicationOgre = new ApplicationOgre(argv[1],30004);
 #endif
         try
 		{
-			gameOgre->mGraphicsOgre->go();
-            gameOgre->gameLoop();
+			applicationOgre->mGraphicsOgre->go();
+            applicationOgre->gameLoop();
         }
 		catch( Ogre::Exception& e )
 		{

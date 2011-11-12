@@ -5,7 +5,7 @@
 #include "../../shape/shapeDynamicOgre.h"
 
 //game
-#include "../../game/game.h"
+#include "../../game/application.h"
 
 //abilitys
 #include "../move/abilityMove.h"
@@ -56,9 +56,9 @@ void AbilityAnimationOgre::setupAnimations()
 void AbilityAnimationOgre::runAnimations()
 {
 
-	mAnims[mBaseAnimID]->addTime(mShapeDynamicOgre->mGame->getRenderTime() * mShapeDynamicOgre->mSpeed * 1000/mShapeDynamicOgre->mSpeedMax);
-	mAnims[mTopAnimID]->addTime(mShapeDynamicOgre->mGame->getRenderTime() * mShapeDynamicOgre->mSpeed * 1000/mShapeDynamicOgre->mSpeedMax);
-	fadeAnimations(mShapeDynamicOgre->mGame->getRenderTime());
+	mAnims[mBaseAnimID]->addTime(mShapeDynamicOgre->mApplication->getRenderTime() * mShapeDynamicOgre->mSpeed * 1000/mShapeDynamicOgre->mSpeedMax);
+	mAnims[mTopAnimID]->addTime(mShapeDynamicOgre->mApplication->getRenderTime() * mShapeDynamicOgre->mSpeed * 1000/mShapeDynamicOgre->mSpeedMax);
+	fadeAnimations(mShapeDynamicOgre->mApplication->getRenderTime());
 }
 
 void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAnimationState)

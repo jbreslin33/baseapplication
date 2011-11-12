@@ -18,7 +18,7 @@
 ***************************************/
 
 //game
-class Game;
+class Application;
 
 //byteBuffer
 class ByteBuffer;
@@ -36,7 +36,7 @@ class ShapeDynamic : public Shape
 {
 
 public:
-ShapeDynamic(Game* game, ByteBuffer* byteBuffer);
+ShapeDynamic(Application* application, ByteBuffer* byteBuffer);
 ~ShapeDynamic();
 
 /************************************************
@@ -44,7 +44,7 @@ ShapeDynamic(Game* game, ByteBuffer* byteBuffer);
 *************************************************/
 
 //game
-Game* mGame;
+Application* mApplication;
 
 //mesh
 int mMeshCode;

@@ -1,5 +1,5 @@
 //header
-#include "game.h"
+#include "application.h"
 
 //log
 #include "../tdreamsock/dreamSockLog.h"
@@ -30,7 +30,7 @@
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
-Game::Game(const char* serverIP, int serverPort)
+Application::Application(const char* serverIP, int serverPort)
 {
 	StartLog();
 
@@ -43,7 +43,7 @@ Game::Game(const char* serverIP, int serverPort)
 	mOldTime         = 0;
 }
 
-Game::~Game()
+Application::~Application()
 {
 	mNetwork->close();
 	delete mNetwork;
@@ -52,7 +52,7 @@ Game::~Game()
 /*********************************
 		START/LOOP/END
 **********************************/
-void Game::gameLoop()
+void Application::gameLoop()
 {
 
 	while(true)
@@ -74,7 +74,7 @@ void Game::gameLoop()
 	}
 }
 
-void Game::shutdown()
+void Application::shutdown()
 {
 	mNetwork->sendDisconnect();
 }
@@ -82,12 +82,12 @@ void Game::shutdown()
 /*********************************
 		SHAPE
 **********************************/
-void Game::addShape(bool b, ByteBuffer* byteBuffer)
+void Application::addShape(bool b, ByteBuffer* byteBuffer)
 {
 
 }
 
-void Game::removeShape(ByteBuffer* byteBuffer)
+void Application::removeShape(ByteBuffer* byteBuffer)
 {
 	int index = byteBuffer->ReadByte();
 	
@@ -101,7 +101,7 @@ void Game::removeShape(ByteBuffer* byteBuffer)
 	}
 }
 
-ShapeDynamic* Game::getShapeDynamic(int id)
+ShapeDynamic* Application::getShapeDynamic(int id)
 {
 	ShapeDynamic* shape = NULL;
 
@@ -129,7 +129,7 @@ ShapeDynamic* Game::getShapeDynamic(int id)
 /*********************************
 		TICK
 **********************************/
-void Game::interpolateTick()
+void Application::interpolateTick()
 {
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
@@ -137,7 +137,7 @@ void Game::interpolateTick()
 	}
 }
 
-void Game::readServerTick(ByteBuffer* byteBuffer)
+void Application::readServerTick(ByteBuffer* byteBuffer)
 {
 	// Skip sequences
 	byteBuffer->ReadShort();
@@ -162,7 +162,7 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
 /*********************************
 		NETWORK
 **********************************/
-void Game::runNetwork(float msec)
+void Application::runNetwork(float msec)
 {
 	static float time = 0.0f;
 	time += msec;

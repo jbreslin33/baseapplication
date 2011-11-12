@@ -2,7 +2,7 @@
 #include "graphicsOgre.h"
 
 //game
-#include "../game/gameOgre.h"
+#include "../game/applicationOgre.h"
 
 //network
 #include "../network/network.h"
@@ -17,10 +17,10 @@
 #include "Ogre.h"
 using namespace Ogre;
 
-GraphicsOgre::GraphicsOgre(GameOgre* gameOgre)
+GraphicsOgre::GraphicsOgre(ApplicationOgre* applicationOgre)
 {
 	//game
-	mGameOgre = gameOgre;
+	mApplicationOgre = applicationOgre;
 
 	//time
 	mRenderTime = 0;
@@ -137,7 +137,7 @@ void GraphicsOgre::buttonHit(OgreBites::Button *button)
 		mJoinGame = true;
 		if (mJoinGame && !mPlayingGame)
 		{
-			mGameOgre->mNetwork->sendConnect();
+			mApplicationOgre->mNetwork->sendConnect();
 			//LogString("sent connect to server");
 			mPlayingGame = true;
 		}
@@ -158,40 +158,40 @@ bool GraphicsOgre::mouseMoved( const OIS::MouseEvent &arg )
 
 void GraphicsOgre::processInput()
 {
-	mGameOgre->mNetwork->mCommandToServer->mKey = 0;
+	mApplicationOgre->mNetwork->mCommandToServer->mKey = 0;
     
 	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     {
-		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyUp;
+		mApplicationOgre->mNetwork->mCommandToServer->mKey |= mKeyUp;
     }
 
     if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
     {
-		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyDown;
+		mApplicationOgre->mNetwork->mCommandToServer->mKey |= mKeyDown;
     }
 
 	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left
     {
-		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyLeft;
+		mApplicationOgre->mNetwork->mCommandToServer->mKey |= mKeyLeft;
     }
 
     if (mKeyboard->isKeyDown(OIS::KC_L)) // Right
     {
-		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyRight;
+		mApplicationOgre->mNetwork->mCommandToServer->mKey |= mKeyRight;
     }
     
 	if (mKeyboard->isKeyDown(OIS::KC_Z)) // Rotate -Yaw(counter-clockwise)
     {
-		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyCounterClockwise;
+		mApplicationOgre->mNetwork->mCommandToServer->mKey |= mKeyCounterClockwise;
     }
 
     if (mKeyboard->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
     {
-		mGameOgre->mNetwork->mCommandToServer->mKey |= mKeyClockwise;
+		mApplicationOgre->mNetwork->mCommandToServer->mKey |= mKeyClockwise;
     }
 
 
-	mGameOgre->mNetwork->mCommandToServer->mMilliseconds = (int) (mGameOgre->mFrameTime * 1000);
+	mApplicationOgre->mNetwork->mCommandToServer->mMilliseconds = (int) (mApplicationOgre->mFrameTime * 1000);
 }
 
 

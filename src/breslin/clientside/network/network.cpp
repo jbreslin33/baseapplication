@@ -5,7 +5,7 @@
 #include "../tdreamsock/dreamSockLog.h"
 
 //game
-#include "../game/game.h"
+#include "../game/application.h"
 
 //command
 #include "../command/command.h"
@@ -45,10 +45,10 @@
 
 #endif
 
-Network::Network(Game* game, const char serverIP[32], int serverPort )
+Network::Network(Application* application, const char serverIP[32], int serverPort )
 {
 	//game
-	mGame = game;
+	mApplication = application;
 
 	//command
 	mCommandToServer     = new Command(); 
@@ -427,19 +427,19 @@ void Network::readPackets()
 			break;
 
 			case mParser->mMessageAddShape:
-				mGame->addShape(true,byteBuffer);
+				mApplication->addShape(true,byteBuffer);
 			break;
 
 			case mParser->mMessageRemoveShape:
-				mGame->removeShape(byteBuffer);
+				mApplication->removeShape(byteBuffer);
 			break;
 
 			case mParser->mMessageFrame:
-				mGame->readServerTick(byteBuffer);
+				mApplication->readServerTick(byteBuffer);
 			break;
 
 			case mParser->mMessageServerExit:
-				mGame->shutdown();
+				mApplication->shutdown();
 			break;
 		}
 	}

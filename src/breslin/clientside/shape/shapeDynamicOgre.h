@@ -16,7 +16,7 @@ using namespace Ogre;
 **********************************/
 
 //game
-class GameOgre;
+class ApplicationOgre;
 
 //title
 class ObjectTitle;
@@ -32,7 +32,7 @@ class ShapeDynamicOgre : public ShapeDynamic //, public OgreAnimation
 {
 
 public:
-ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost);
+ShapeDynamicOgre(ApplicationOgre* applicationOgre, ByteBuffer* byteBuffer, bool isGhost);
 ~ShapeDynamicOgre();
 
 /**********************************
@@ -40,7 +40,7 @@ ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost);
 **********************************/
 
 //game
-GameOgre* mGameOgre;
+ApplicationOgre* mApplicationOgre;
 
 //ghost
 bool mIsGhost;

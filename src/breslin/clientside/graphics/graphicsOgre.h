@@ -14,13 +14,13 @@
 ***************************************/
 
 //game
-class GameOgre;
+class ApplicationOgre;
 
 class GraphicsOgre : public BaseApplication
 {
 public:
 	
-	GraphicsOgre(GameOgre* gameOgre);
+	GraphicsOgre(ApplicationOgre* applicationOgre);
 	~GraphicsOgre();
 
 /***************************************
@@ -33,7 +33,7 @@ bool mJoinGame;
 bool mPlayingGame;
 
 //game
-GameOgre* mGameOgre;
+ApplicationOgre* mApplicationOgre;
 
 //time
 float mRenderTime;

@@ -1,5 +1,5 @@
-#ifndef GAMEOGRE_H
-#define GAMEOGRE_H
+#ifndef APPLICATIONOGRE_H
+#define APPLICATIONOGRE_H
 
 /***************************************
 *   		INCLUDES
@@ -11,7 +11,7 @@
 using namespace Ogre;
 
 //parents
-#include "game.h"
+#include "application.h"
 
 /***************************************
 *   		FORWARD DECLARATIONS
@@ -22,12 +22,12 @@ class GraphicsOgre;
 //ByteBuffer
 class ByteBuffer;
 
-class GameOgre : public Game
+class ApplicationOgre : public Application
 {
 public:
 	
-	GameOgre(const char* serverIP, int serverPort);
-	~GameOgre();
+	ApplicationOgre(const char* serverIP, int serverPort);
+	~ApplicationOgre();
 
 /***************************************
 *   		MEMBER VARIABLES
@@ -52,9 +52,6 @@ virtual bool runGraphics();
 virtual void initializeGui();
 
 virtual void processInput();
-
-
-
 
 };
 

@@ -1,5 +1,5 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef APPLICATION_H
+#define APPLICATION_H
 
 /***************************************
 *   		INCLUDES
@@ -20,12 +20,12 @@ class Network;
 class Parser;
 class Command;
 
-class Game 
+class Application 
 {
 public:
 	
-	Game(const char* serverIP, int serverPort);
-	~Game();
+	Application(const char* serverIP, int serverPort);
+	~Application();
 
 /***************************************
 *   		MEMBER VARIABLES
