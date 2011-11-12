@@ -94,7 +94,7 @@ void processTick();
 void interpolateTick(float renderTime);
 
 //messaging
-void readDeltaMoveCommand(ByteBuffer *mes);
+void virtual readDeltaMoveCommand(ByteBuffer *mes);
 
 //byteBuffer
 void parseByteBuffer(ByteBuffer* byteBuffer);

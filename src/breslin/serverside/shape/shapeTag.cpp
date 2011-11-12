@@ -16,10 +16,50 @@ ShapeTag::~ShapeTag()
 {
 }
 
+int ShapeTag::setFlag()
+{
+	
+	int flags = 0;
+/*
+	//Origin
+	if(mPosition->x != mPositionLast->x)
+	{
+		flags |= mCommandOriginX;
+	}
+	if(mPosition->y != mPositionLast->y)
+	{
+		flags |= mCommandOriginY;
+	}
+	if(mPosition->z != mPositionLast->z)
+	{
+		flags |= mCommandOriginZ;
+	}
+
+	//Rotation
+	if(mRotation->x != mRotationLast->x)
+	{
+		flags |= mCommandRotationX;
+	}
+	if(mRotation->z != mRotationLast->z)
+	{
+		flags |= mCommandRotationZ;
+	}
+	
+	//Milliseconds
+	if(mMillisecondsTotal != mMillisecondsTotalLast)
+	{
+		flags |= mCommandMilliseconds;
+	}
+*/
+	return flags;
+}
 
 void ShapeTag::addToMoveMessage(Message* message)
 {
 	Shape::addToMoveMessage(message);
+	setFlag();
+
+
 	/*
 	int flags = setFlag();
 

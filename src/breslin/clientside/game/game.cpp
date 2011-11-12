@@ -154,6 +154,7 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
 		if (shape)
 		{
 			shape->readDeltaMoveCommand(byteBuffer);
+			shape->processTick();
 		}
 	}
 }

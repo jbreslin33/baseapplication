@@ -11,6 +11,7 @@ ShapeTag(unsigned int index, Game* game, Client* client, Vector3D* position, Vec
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~ShapeTag();
 
+int setFlag();
 virtual void addToMoveMessage(Message* message);
 
 };

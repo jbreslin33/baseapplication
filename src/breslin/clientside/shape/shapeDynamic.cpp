@@ -232,7 +232,7 @@ void ShapeDynamic::readDeltaMoveCommand(ByteBuffer *mes)
 			mServerFrame->mMoveVelocity->z = 0.0;
 		}
 	}
-	processTick();
+
 }
 
 

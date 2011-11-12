@@ -118,6 +118,8 @@ set(HDRS
 	../clientside/game/BaseApplication.h
 	../clientside/game/game.h
 	../clientside/game/gameOgre.h
+		#tag
+	../clientside/game/gameOgreTag.h
 	
 	#graphics
 	../clientside/graphics/graphicsOgre.h
@@ -139,7 +141,9 @@ set(HDRS
 	../clientside/shape/shape.h
 	../clientside/shape/shapeDynamic.h
 	../clientside/shape/shapeDynamicOgre.h
-
+		#tag
+	../clientside/shape/shapeDynamicOgreTag.h
+	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.h
 	
@@ -179,6 +183,8 @@ set(SRCS
 	../clientside/game/BaseApplication.cpp
 	../clientside/game/game.cpp
 	../clientside/game/gameOgre.cpp
+		#tag
+	../clientside/game/gameOgreTag.cpp
 	
 	#graphics
 	../clientside/graphics/graphicsOgre.cpp
@@ -200,6 +206,8 @@ set(SRCS
 	../clientside/shape/shape.cpp
 	../clientside/shape/shapeDynamic.cpp
 	../clientside/shape/shapeDynamicOgre.cpp
+		#tag
+	../clientside/shape/shapeDynamicOgreTag.cpp
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.cpp
@@ -250,6 +258,8 @@ set(HDRS
 	../clientside/game/BaseApplication.h
 	../clientside/game/game.h
 	../clientside/game/gameOgre.h
+		#tag
+	../clientside/game/gameOgreTag.h
 	
 	#graphics
 	../clientside/graphics/graphicsOgre.h
@@ -270,6 +280,8 @@ set(HDRS
 	../clientside/shape/shape.h
 	../clientside/shape/shapeDynamic.h
 	../clientside/shape/shapeDynamicOgre.h
+		#tag
+	../clientside/shape/shapeDynamicOgreTag.h
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.h
@@ -310,6 +322,8 @@ set(SRCS
 	../clientside/game/BaseApplication.cpp
 	../clientside/game/game.cpp
 	../clientside/game/gameOgre.cpp
+		#tag
+	../clientside/game/gameOgreTag.cpp
 	
 	#graphics
 	../clientside/graphics/graphicsOgre.cpp
@@ -331,6 +345,8 @@ set(SRCS
 	../clientside/shape/shape.cpp
 	../clientside/shape/shapeDynamic.cpp
 	../clientside/shape/shapeDynamicOgre.cpp
+		#tag
+	../clientside/shape/shapeDynamicOgreTag.cpp
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.cpp

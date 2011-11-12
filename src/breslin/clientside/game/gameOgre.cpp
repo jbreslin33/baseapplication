@@ -23,6 +23,7 @@
 **********************************/
 GameOgre::GameOgre(const char* serverIP, int serverPort) : Game(serverIP, serverPort)
 {
+	LogString("GAMEoGRE!!!!!!!!!!!!!!!!");
 	mGraphicsOgre = new GraphicsOgre(this);
 }
 
@@ -62,7 +63,7 @@ void GameOgre::processInput()
 }
 
 /*********************************
-		GRAPHICS ed isseilmann lincoln tech 215-969-0869
+		GRAPHICS 
 **********************************/
 bool GameOgre::runGraphics()
 {
