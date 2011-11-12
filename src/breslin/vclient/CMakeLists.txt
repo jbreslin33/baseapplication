@@ -118,7 +118,7 @@ set(HDRS
 	../clientside/game/BaseApplication.h
 	../clientside/game/application.h
 	../clientside/game/applicationOgre.h
-	
+	../clientside/game/game.h
 	
 	#graphics
 	../clientside/graphics/graphicsOgre.h
@@ -182,7 +182,7 @@ set(SRCS
 	../clientside/game/BaseApplication.cpp
 	../clientside/game/application.cpp
 	../clientside/game/applicationOgre.cpp
-
+	../clientside/game/game.cpp
 	
 	#graphics
 	../clientside/graphics/graphicsOgre.cpp
@@ -256,6 +256,7 @@ set(HDRS
 	../clientside/game/BaseApplication.h
 	../clientside/game/application.h
 	../clientside/game/applicationOgre.h
+	../clientside/game/game.h
 	
 	#graphics
 	../clientside/graphics/graphicsOgre.h
@@ -318,6 +319,7 @@ set(SRCS
 	../clientside/game/BaseApplication.cpp
 	../clientside/game/application.cpp
 	../clientside/game/applicationOgre.cpp
+	../clientside/game/game.hpp
 	
 	#graphics
 	../clientside/graphics/graphicsOgre.cpp
