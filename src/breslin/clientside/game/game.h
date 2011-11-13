@@ -36,7 +36,7 @@ std::vector<ShapeDynamic*> mShapeGhostVector;	 //all shapes in the client world'
 *			          METHODS
 ***************************************/
 //shape
-virtual void          addShape       (bool b, ByteBuffer* byteBuffer);
+virtual void          addShape       (bool b, ByteBuffer* byteBuffer) { }
         void          removeShape    (ByteBuffer* byteBuffer);
         ShapeDynamic* getShapeDynamic(int id);
 

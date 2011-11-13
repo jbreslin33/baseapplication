@@ -33,21 +33,6 @@ void Game::interpolateTick()
 	}
 }
 
-/*********************************
-*		SHAPE
-**********************************/
-void Game::addShape(bool b, ByteBuffer* byteBuffer)
-{
-	/*
-	ShapeDynamic* shapeDynamicOgre = new ShapeDynamicOgre(this,byteBuffer,false);  //you should just need to call this...
-	
-	//ability
-	shapeDynamicOgre->addAbility(new AbilityRotation(shapeDynamicOgre));
-	shapeDynamicOgre->addAbility(new AbilityMove(shapeDynamicOgre));
-	*/
-}
-
-
 void Game::removeShape(ByteBuffer* byteBuffer)
 {
 	int index = byteBuffer->ReadByte();
