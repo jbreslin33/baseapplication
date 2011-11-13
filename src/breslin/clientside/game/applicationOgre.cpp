@@ -27,9 +27,7 @@
 ApplicationOgre::ApplicationOgre(const char* serverIP, int serverPort) : Application(serverIP, serverPort) 
 
 {
-	LogString("ApplicationOgre!!!!!!!!!!!!!!!!");
 	mGame = new GameOgre(this,serverIP,serverPort);
-	//mGame = mGameOgre
 
 	mGraphicsOgre = new GraphicsOgre(this);
 }
