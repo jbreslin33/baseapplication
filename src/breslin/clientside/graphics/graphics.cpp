@@ -17,13 +17,31 @@
 #include "Ogre.h"
 using namespace Ogre;
 
-GraphicsOgre::GraphicsOgre(ApplicationOgre* applicationOgre) : Graphics(applicationOgre)
-{
-	//game
-	mApplicationOgre = applicationOgre;
-}
-
-GraphicsOgre::~GraphicsOgre()
+Graphics::Graphics(Application* application)
 {
 
 }
+
+Graphics::~Graphics()
+{
+
+}
+
+/*********************************
+		GUI
+**********************************/
+void Graphics::initializeGui()
+{
+	if (mInitializeGui == true)
+	{
+		return;
+	}
+	else
+	{
+		loadJoinScreen();
+		mInitializeGui = true;
+	}
+}
+
+
+

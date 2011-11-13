@@ -38,8 +38,8 @@ public:
 //game
 GameOgre* mGameOgre;
 
-//graphics
-GraphicsOgre* mGraphicsOgre;
+//gui
+OgreBites::Button* mJoinButton;
 
 /***************************************
 *			          METHODS
@@ -54,6 +54,24 @@ virtual bool runGraphics();
 virtual void initializeGui();
 
 virtual void processInput();
+
+
+//graphics
+Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
+virtual void        createScene          ();
+virtual bool        frameRenderingQueued (const Ogre::FrameEvent& evt);
+
+
+//gui	
+void hideGui();
+void loadJoinScreen();
+void hideJoinScreen();
+void unloadOtherScreens();
+
+
+	//input
+void buttonHit             (OgreBites::Button *button);
+bool mouseMoved            ( const OIS::MouseEvent &arg );
 
 };
 

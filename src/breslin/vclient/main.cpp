@@ -34,7 +34,7 @@ extern "C" {
 #endif
         try
 		{
-			applicationOgre->mGraphicsOgre->go();
+			applicationOgre->go();
             applicationOgre->gameLoop();
         }
 		catch( Ogre::Exception& e )

@@ -1,5 +1,5 @@
-#ifndef GRAPHICSOGRE_H
-#define GRAPHICSOGRE_H
+#ifndef GRAPHICS_H
+#define GRAPHICS_H
 
 /***************************************
 *   		INCLUDES
@@ -7,28 +7,25 @@
 //standard library
 
 //parents
-#include "graphics.h"
+#include "../game/BaseApplication.h"
 
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
 
 //game
-class ApplicationOgre;
+class Application;
 
-class GraphicsOgre : public Graphics
+class Graphics : public BaseApplication
 {
 public:
 	
-	GraphicsOgre(ApplicationOgre* applicationOgre);
-	~GraphicsOgre();
+	Graphics(Application* applicationOgre);
+	~Graphics();
 
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
-
-
-
 
 
 /***************************************

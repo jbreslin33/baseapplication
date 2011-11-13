@@ -46,6 +46,22 @@ Application::Application(const char* serverIP, int serverPort)
 	mOldTime         = 0;
 
 	mGame = 0;
+
+	//time
+	mRenderTime = 0;
+
+	//keys
+	mKeyUp = 1;
+	mKeyDown = 2;
+	mKeyLeft = 4;
+	mKeyRight = 8;
+	mKeyCounterClockwise = 16;
+	mKeyClockwise = 32;
+
+	//initilize
+	mInitializeGui = false;
+	mJoinGame    = false;
+	mPlayingGame = false;
 }
 
 Application::~Application()

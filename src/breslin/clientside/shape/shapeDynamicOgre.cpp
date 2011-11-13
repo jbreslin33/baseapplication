@@ -92,14 +92,14 @@ void ShapeDynamicOgre::createShape()
 	/*********  create shape ***************/
 	//mMeshName     = mesh;
 	mName         = StringConverter::toString(mIndex);
-	mSceneNode    = mGameOgre->mApplicationOgre->mGraphicsOgre->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+	mSceneNode    = mGameOgre->mApplicationOgre->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 
 	//set Starting position of sceneNode, we will attach our mesh to this. this is all that's needed for static shapes. actually we need to add
 	//rotation for them
 	mSceneNode->setPosition(mPosition->x,mPosition->y,mPosition->z);	
 	
 	//create mesh
-	mEntity = mGameOgre->mApplicationOgre->mGraphicsOgre->getSceneManager()->createEntity(mName, mMeshName);
+	mEntity = mGameOgre->mApplicationOgre->getSceneManager()->createEntity(mName, mMeshName);
 
 	//attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
     mSceneNode->attachObject(mEntity);
@@ -120,7 +120,7 @@ void ShapeDynamicOgre::setupTitle()
 	const Ogre::String& fontName = "SdkTrays/Caption";
 	const Ogre::ColourValue& color = Ogre::ColourValue::White;
 	mObjectTitle = new ObjectTitle
-	(titlename, mEntity, mGameOgre->mApplicationOgre->mGraphicsOgre->getSceneManager()->getCamera("PlayerCam"), title,
+	(titlename, mEntity, mGameOgre->mApplicationOgre->getSceneManager()->getCamera("PlayerCam"), title,
     fontName, color);
 }
 
