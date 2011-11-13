@@ -2,7 +2,7 @@
 #include "gameOgre.h"
 
 //shape
-#include "../shape/shapeDynamicOgre.h"
+#include "../shape/shapeOgre.h"
 
 //ability
 #include "../ability/ability.h"
@@ -33,10 +33,10 @@ GameOgre::~GameOgre()
 **********************************/
 void GameOgre::addShape(bool b, ByteBuffer* byteBuffer)
 {
-	ShapeDynamic* shapeDynamicOgre = new ShapeDynamicOgre(this,byteBuffer,false);  //you should just need to call this...
+	ShapeDynamic* shapeOgre = new ShapeOgre(this,byteBuffer,false);  //you should just need to call this...
 	
 	//ability
-	shapeDynamicOgre->addAbility(new AbilityRotation(shapeDynamicOgre));
-	shapeDynamicOgre->addAbility(new AbilityMove(shapeDynamicOgre));
+	shapeOgre->addAbility(new AbilityRotation(shapeOgre));
+	shapeOgre->addAbility(new AbilityMove(shapeOgre));
 }
 

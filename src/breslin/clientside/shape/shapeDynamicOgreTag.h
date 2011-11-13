@@ -5,7 +5,7 @@
 *          INCLUDES
 **********************************/
 //parent
-#include "shapeDynamicOgre.h"
+#include "shapeOgre.h"
 
 /**********************************
 *          FORWARD DECLARATIONS
@@ -20,12 +20,12 @@ class ByteBuffer;
 /**********************************
 *          CLASS
 **********************************/
-class ShapeDynamicOgreTag : public ShapeDynamicOgre
+class ShapeOgreTag : public ShapeOgre
 {
 
 public:
-ShapeDynamicOgreTag(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost);
-~ShapeDynamicOgreTag();
+ShapeOgreTag(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost);
+~ShapeOgreTag();
 
 /**********************************
 *          VARIABLES

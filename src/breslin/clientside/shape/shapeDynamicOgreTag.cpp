@@ -3,16 +3,16 @@
 *   		INCLUDES
 ***************************************/
 //parent
-#include "shapeDynamicOgreTag.h"
+#include "shapeOgreTag.h"
 
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
 
 
-ShapeDynamicOgreTag::ShapeDynamicOgreTag(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost)
+ShapeOgreTag::ShapeOgreTag(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost)
 :
-	ShapeDynamicOgre         (gameOgre,byteBuffer,isGhost)
+	ShapeOgre         (gameOgre,byteBuffer,isGhost)
 {
 	
 }

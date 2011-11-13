@@ -28,12 +28,12 @@ class ObjectTitle;
 /**********************************
 *          CLASS
 **********************************/
-class ShapeDynamicOgre : public ShapeDynamic //, public OgreAnimation
+class ShapeOgre : public ShapeDynamic //, public OgreAnimation
 {
 
 public:
-ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost);
-~ShapeDynamicOgre();
+ShapeOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost);
+~ShapeOgre();
 
 /**********************************
 *          VARIABLES

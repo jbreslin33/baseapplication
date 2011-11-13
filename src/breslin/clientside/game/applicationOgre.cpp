@@ -14,7 +14,7 @@
 #include "gameOgre.h"
 
 //shape
-#include "../shape/shapeDynamicOgre.h"
+#include "../shape/shapeOgre.h"
 
 //ability
 #include "../ability/rotation/abilityRotation.h"

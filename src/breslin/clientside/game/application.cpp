@@ -5,7 +5,7 @@
 #include "../tdreamsock/dreamSockLog.h"
 
 //shape
-#include "../shape/shapeDynamicOgre.h"
+#include "../shape/shapeOgre.h"
 
 //math
 #include "../../math/vector3D.h"

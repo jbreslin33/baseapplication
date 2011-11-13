@@ -1,4 +1,4 @@
-#include "shapeDynamicOgre.h"
+#include "shapeOgre.h"
 
 //standard library
 #include <string.h>
@@ -22,7 +22,7 @@
 #include "../billboard/objectTitle.h"
 
 
-ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost)
+ShapeOgre::ShapeOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost)
 :
 	ShapeDynamic         ((Game*)gameOgre,byteBuffer)
 {
@@ -55,7 +55,7 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, b
 	if (!mIsGhost) 
 	{
 		//create a ghost for this shape
-		mGhost = new ShapeDynamicOgre(mGameOgre,byteBuffer,true);
+		mGhost = new ShapeOgre(mGameOgre,byteBuffer,true);
 		mGhost->setVisible(true);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
@@ -64,14 +64,14 @@ ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, b
 	}
 }
 
-ShapeDynamicOgre::~ShapeDynamicOgre()
+ShapeOgre::~ShapeOgre()
 {
 	delete mObjectTitle;
 	//delete mEntity;
 	delete mSceneNode;
 }
 
-std::string ShapeDynamicOgre::getMeshString(int meshCode)
+std::string ShapeOgre::getMeshString(int meshCode)
 {
 	if (meshCode == 0)
 		
@@ -87,7 +87,7 @@ std::string ShapeDynamicOgre::getMeshString(int meshCode)
 	}
 }
 
-void ShapeDynamicOgre::createShape()
+void ShapeOgre::createShape()
 {
 	/*********  create shape ***************/
 	//mMeshName     = mesh;
@@ -112,7 +112,7 @@ void ShapeDynamicOgre::createShape()
 	scale(v);
 }
 
-void ShapeDynamicOgre::setupTitle()
+void ShapeOgre::setupTitle()
 {
 	/*********  setup title/billboard ***************/
 	const Ogre::String& titlename = "tn" + StringConverter::toString(mIndex);
@@ -124,12 +124,12 @@ void ShapeDynamicOgre::setupTitle()
     fontName, color);
 }
 
-void ShapeDynamicOgre::scale(Vector3D scaleVector)
+void ShapeOgre::scale(Vector3D scaleVector)
 {
 	getSceneNode()->scale(scaleVector.x, scaleVector.y, scaleVector.z);
 }
 
-void ShapeDynamicOgre::checkExtents(Vector3D min)
+void ShapeOgre::checkExtents(Vector3D min)
 {
 
 	Ogre::Vector3 max;
@@ -142,7 +142,7 @@ void ShapeDynamicOgre::checkExtents(Vector3D min)
 			//mMinimum = min;
 			//mMaximum = max;
 }
-void ShapeDynamicOgre::setRotation(Vector3D* vector3D)
+void ShapeOgre::setRotation(Vector3D* vector3D)
 {
 	Vector3 vec;
 	vec.x = vector3D->x;
@@ -151,7 +151,7 @@ void ShapeDynamicOgre::setRotation(Vector3D* vector3D)
 	getSceneNode()->setDirection(vec,Ogre::Node::TS_WORLD);
 }
 
-Vector3D* ShapeDynamicOgre::getRotation()
+Vector3D* ShapeOgre::getRotation()
 {
 	Vector3D* vector3D = new Vector3D();
 	
@@ -162,7 +162,7 @@ Vector3D* ShapeDynamicOgre::getRotation()
 	return vector3D;
 }
 
-void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
+void ShapeOgre::yaw(float amountToYaw, bool convertToDegree)
 {
 	if (convertToDegree)
 	{
@@ -178,7 +178,7 @@ void ShapeDynamicOgre::yaw(float amountToYaw, bool convertToDegree)
 }
 
 //calculate how far off we are from some vector
-float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
+float ShapeOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 {
 	//get the orientation of shape in the z axis
 	Vector3 orientation;
@@ -196,7 +196,7 @@ float ShapeDynamicOgre::getDegreesToSomething(Vector3D* vectorOfSomething)
 	return degreesToSomething;
 }
 
-void ShapeDynamicOgre::translate(Vector3D* translateVector, int perspective)
+void ShapeOgre::translate(Vector3D* translateVector, int perspective)
 {
 	if (perspective == 1)
 	{
@@ -208,17 +208,17 @@ void ShapeDynamicOgre::translate(Vector3D* translateVector, int perspective)
 	}
 }
 
-void ShapeDynamicOgre::setPosition(Vector3D* position)
+void ShapeOgre::setPosition(Vector3D* position)
 {
 	getSceneNode()->setPosition(converToVector3(position));
 }
 
-void ShapeDynamicOgre::setPosition(float x, float y, float z)
+void ShapeOgre::setPosition(float x, float y, float z)
 {
 	getSceneNode()->setPosition(x,y,z);
 }
 
-Vector3D* ShapeDynamicOgre::getPosition()
+Vector3D* ShapeOgre::getPosition()
 {
 	Vector3D* position = new Vector3D();
 	position->x = getSceneNode()->getPosition().x;
@@ -227,7 +227,7 @@ Vector3D* ShapeDynamicOgre::getPosition()
 	return position;
 }
 
-Ogre::Vector3 ShapeDynamicOgre::converToVector3(Vector3D* vector3d)
+Ogre::Vector3 ShapeOgre::converToVector3(Vector3D* vector3d)
 {
 	Ogre::Vector3 vec3;
 	vec3.x = vector3d->x;
@@ -236,34 +236,34 @@ Ogre::Vector3 ShapeDynamicOgre::converToVector3(Vector3D* vector3d)
 	return vec3;
 }
 
-void ShapeDynamicOgre::setVisible(bool visible)
+void ShapeOgre::setVisible(bool visible)
 {
 	getSceneNode()->setVisible(visible);
 }
 
 //title
 
-void ShapeDynamicOgre::drawTitle()
+void ShapeOgre::drawTitle()
 {
 	mObjectTitle->setTitle(mObjectTitleString); 
 	mObjectTitle->update();
 }
-void ShapeDynamicOgre::appendToTitle(std::string appendage)
+void ShapeOgre::appendToTitle(std::string appendage)
 {
 	mObjectTitleString.append(appendage);
 }
 
-void ShapeDynamicOgre::appendToTitle(int appendage)
+void ShapeOgre::appendToTitle(int appendage)
 {
 	mObjectTitleString.append(StringConverter::toString(appendage));
 }
 
-void ShapeDynamicOgre::clearTitle()
+void ShapeOgre::clearTitle()
 {
 	mObjectTitleString.clear();
 }
 
-Quaternion* ShapeDynamicOgre::getRotationTo(Vector3D* source, Vector3D* dest)
+Quaternion* ShapeOgre::getRotationTo(Vector3D* source, Vector3D* dest)
 {
 	Quaternion* quaternion = new Quaternion();
 

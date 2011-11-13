@@ -5,7 +5,7 @@
 #include "../game/application.h"
 
 //shape
-#include "../shape/shapeDynamicOgre.h"
+#include "../shape/shapeOgre.h"
 
 //bytebuffer
 #include "../bytebuffer/byteBuffer.h"

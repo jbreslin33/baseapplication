@@ -22,6 +22,7 @@ class Time;
 class Network;
 class Parser;
 class Command;
+class Vector3D;
 
 class Application : public BaseApplication
 {
@@ -110,6 +111,10 @@ virtual void initializeGui() { };
 	//input
 //void buttonHit             (OgreBites::Button *button);
 //bool mouseMoved            ( const OIS::MouseEvent &arg );
+
+//shape stuff...
+virtual Vector3D* getRotation(ShapeDynamic* shapeDynamic) { return 0; }
+virtual void createShape() { }
 
 };
 
