@@ -12,6 +12,7 @@
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
+class Game;
 class Client;
 class ByteBuffer;
 class ShapeDynamic;
@@ -30,10 +31,8 @@ public:
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
-
-//Shapes
-std::vector<ShapeDynamic*> mShapeVector;	 //all shapes in the client world
-std::vector<ShapeDynamic*> mShapeGhostVector;	 //all shapes in the client world's ghost 
+//game
+Game* mGame;
 
 //Network
 Network*     mNetwork;
@@ -50,16 +49,11 @@ int   mOldTime;
 
 //Admin
 void shutdown();
-void gameLoop();
-
-//shape
-virtual void          addShape       (bool b, ByteBuffer* byteBuffer);
-        void          removeShape    (ByteBuffer* byteBuffer);
-        ShapeDynamic* getShapeDynamic(int id);
+virtual void gameLoop();
 
 //Ticks
-void readServerTick           (ByteBuffer* byteBuffer);
-void interpolateTick();
+virtual void readServerTick           (ByteBuffer* byteBuffer);
+
 
 //time
 virtual float getRenderTime() {  return 0; }

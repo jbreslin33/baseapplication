@@ -6,8 +6,11 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
-//game
+//application
 #include "../game/applicationOgre.h"
+
+//gameOgre
+#include "../game/gameOgre.h"
 
 //graphics
 #include "../graphics/graphicsOgre.h"
@@ -19,13 +22,13 @@
 #include "../billboard/objectTitle.h"
 
 
-ShapeDynamicOgre::ShapeDynamicOgre(ApplicationOgre* applicationOgre, ByteBuffer* byteBuffer, bool isGhost)
+ShapeDynamicOgre::ShapeDynamicOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost)
 :
-	ShapeDynamic         (applicationOgre,byteBuffer)
+	ShapeDynamic         ((Game*)gameOgre,byteBuffer)
 {
 	//we use this to name shape. as ogre is picky about same names. it also serves as a counter of sorts.
 
-	mApplicationOgre = applicationOgre;
+	mGameOgre = gameOgre;
 
 	mIsGhost = isGhost;
 
@@ -52,12 +55,12 @@ ShapeDynamicOgre::ShapeDynamicOgre(ApplicationOgre* applicationOgre, ByteBuffer*
 	if (!mIsGhost) 
 	{
 		//create a ghost for this shape
-		mGhost = new ShapeDynamicOgre(mApplicationOgre,byteBuffer,true);
+		mGhost = new ShapeDynamicOgre(mGameOgre,byteBuffer,true);
 		mGhost->setVisible(true);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
-		mApplication->mShapeVector.push_back(this);
-		mApplication->mShapeGhostVector.push_back(mGhost);	
+		mGameOgre->mShapeVector.push_back(this);
+		mGameOgre->mShapeGhostVector.push_back(mGhost);	
 	}
 }
 
@@ -89,14 +92,14 @@ void ShapeDynamicOgre::createShape()
 	/*********  create shape ***************/
 	//mMeshName     = mesh;
 	mName         = StringConverter::toString(mIndex);
-	mSceneNode    = mApplicationOgre->mGraphicsOgre->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+	mSceneNode    = mGameOgre->mApplicationOgre->mGraphicsOgre->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 
 	//set Starting position of sceneNode, we will attach our mesh to this. this is all that's needed for static shapes. actually we need to add
 	//rotation for them
 	mSceneNode->setPosition(mPosition->x,mPosition->y,mPosition->z);	
 	
 	//create mesh
-	mEntity = mApplicationOgre->mGraphicsOgre->getSceneManager()->createEntity(mName, mMeshName);
+	mEntity = mGameOgre->mApplicationOgre->mGraphicsOgre->getSceneManager()->createEntity(mName, mMeshName);
 
 	//attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
     mSceneNode->attachObject(mEntity);
@@ -117,7 +120,7 @@ void ShapeDynamicOgre::setupTitle()
 	const Ogre::String& fontName = "SdkTrays/Caption";
 	const Ogre::ColourValue& color = Ogre::ColourValue::White;
 	mObjectTitle = new ObjectTitle
-	(titlename, mEntity, mApplicationOgre->mGraphicsOgre->getSceneManager()->getCamera("PlayerCam"), title,
+	(titlename, mEntity, mGameOgre->mApplicationOgre->mGraphicsOgre->getSceneManager()->getCamera("PlayerCam"), title,
     fontName, color);
 }
 

@@ -10,6 +10,9 @@
 //game
 #include "../../game/application.h"
 
+//game
+#include "../../game/game.h"
+
 //shape
 #include "../../shape/shapeDynamic.h"
 
@@ -196,7 +199,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
   	transVector->copyValuesFrom(abilityMove->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity);
 
 	//get the mulitplier
-	float multipliedRenderTime = abilityMove->mShapeDynamic->mApplication->getRenderTime() * 1000;
+	float multipliedRenderTime = abilityMove->mShapeDynamic->mGame->mApplication->getRenderTime() * 1000;
 
 	//multiply our vector using render values
 	transVector->multiply(multipliedRenderTime); 

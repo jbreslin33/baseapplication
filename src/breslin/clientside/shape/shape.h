@@ -31,9 +31,6 @@ public:
 //id
 int   mIndex;
 
-//game
-Application* mApplication;
-
 //scale
 float mScale;
 

@@ -1,35 +1,31 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAMEOGRE_H
+#define GAMEOGRE_H
 
 /***************************************
 *   		INCLUDES
 ***************************************/
-//standard library
-#include <vector>
+//parent
+#include "game.h"
 
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
-class Application;
+class ApplicationOgre;
 class ByteBuffer;
 class ShapeDynamic;
 
-class Game 
+class GameOgre : public Game
 {
 public:
 	
-	Game(Application* application, const char* serverIP, int serverPort);
-	~Game();
+	GameOgre(ApplicationOgre* applicationOgre, const char* serverIP, int serverPort);
+	~GameOgre();
 
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
 //application
-Application* mApplication;
-
-//Shapes
-std::vector<ShapeDynamic*> mShapeVector;	 //all shapes in the client world
-std::vector<ShapeDynamic*> mShapeGhostVector;	 //all shapes in the client world's ghost 
+ApplicationOgre* mApplicationOgre;
 
 	
 /***************************************
@@ -37,10 +33,6 @@ std::vector<ShapeDynamic*> mShapeGhostVector;	 //all shapes in the client world'
 ***************************************/
 //shape
 virtual void          addShape       (bool b, ByteBuffer* byteBuffer);
-        void          removeShape    (ByteBuffer* byteBuffer);
-        ShapeDynamic* getShapeDynamic(int id);
-
-void interpolateTick();
 
 };
 

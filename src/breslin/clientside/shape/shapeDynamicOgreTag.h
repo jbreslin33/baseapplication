@@ -11,7 +11,7 @@
 *          FORWARD DECLARATIONS
 **********************************/
 
-//game
+//gameOgre
 class GameOgre;
 
 //ByteBuffer
@@ -24,7 +24,7 @@ class ShapeDynamicOgreTag : public ShapeDynamicOgre
 {
 
 public:
-ShapeDynamicOgreTag(ApplicationOgre* applicationOgre, ByteBuffer* byteBuffer, bool isGhost);
+ShapeDynamicOgreTag(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost);
 ~ShapeDynamicOgreTag();
 
 /**********************************

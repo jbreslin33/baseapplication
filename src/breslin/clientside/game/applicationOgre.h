@@ -16,6 +16,9 @@ using namespace Ogre;
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
+//game
+class GameOgre;
+
 //graphics
 class GraphicsOgre;
 
@@ -32,6 +35,8 @@ public:
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
+//game
+GameOgre* mGameOgre;
 
 //graphics
 GraphicsOgre* mGraphicsOgre;
@@ -40,11 +45,8 @@ GraphicsOgre* mGraphicsOgre;
 *			          METHODS
 ***************************************/
 
-//shape
-void addShape(bool b, ByteBuffer* byteBuffer);
-
 //time
-float getRenderTime();
+virtual float getRenderTime();
 
 //graphics
 virtual bool runGraphics();

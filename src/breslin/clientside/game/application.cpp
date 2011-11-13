@@ -26,6 +26,9 @@
 //command
 #include "../command/command.h"
 
+//game
+#include "game.h"
+
 
 /***************************************
 *			          CONSTRUCTORS
@@ -41,6 +44,8 @@ Application::Application(const char* serverIP, int serverPort)
 	mTime = new Time();
 	mFrameTime		 = 0.0f;
 	mOldTime         = 0;
+
+	mGame = 0;
 }
 
 Application::~Application()
@@ -64,7 +69,7 @@ void Application::gameLoop()
 		runNetwork(getRenderTime() * 1000.0f);
 		
 		//move objects
-		interpolateTick();
+		mGame->interpolateTick();
 
 		//draw
 		if (!runGraphics())
@@ -79,63 +84,6 @@ void Application::shutdown()
 	mNetwork->sendDisconnect();
 }
 
-/*********************************
-		SHAPE
-**********************************/
-void Application::addShape(bool b, ByteBuffer* byteBuffer)
-{
-
-}
-
-void Application::removeShape(ByteBuffer* byteBuffer)
-{
-	int index = byteBuffer->ReadByte();
-	
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		if (mShapeVector.at(i)->mIndex == index)
-		{
-			delete mShapeVector.at(i);
-			mShapeVector.erase (mShapeVector.begin()+i);
-		}
-	}
-}
-
-ShapeDynamic* Application::getShapeDynamic(int id)
-{
-	ShapeDynamic* shape = NULL;
-
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		ShapeDynamic* curShape = mShapeVector.at(i);
-		if (curShape->mIndex == id)
-		{
-			shape = curShape;
-		}
-	}
-
-	if(!shape)
-	{
-		return NULL;
-	}
-	else
-	{
-		return shape;
-	}
-}
-
-
-
-/*********************************
-		TICK
-**********************************/
-void Application::interpolateTick()
-{
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		mShapeVector.at(i)->interpolateTick(getRenderTime());
-	}
-}
 
 void Application::readServerTick(ByteBuffer* byteBuffer)
 {
@@ -149,7 +97,7 @@ void Application::readServerTick(ByteBuffer* byteBuffer)
 		int id = byteBuffer->ReadByte();
 
 		ShapeDynamic* shape = NULL;
-		shape = getShapeDynamic(id);
+		shape = mGame->getShapeDynamic(id);
 
 		if (shape)
 		{

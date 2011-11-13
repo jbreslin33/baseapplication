@@ -17,6 +17,9 @@
 #include "abilityRotation.h"
 
 //game
+#include "../../game/game.h"
+
+//application
 #include "../../game/application.h"
 
 /******************************************************
@@ -185,7 +188,7 @@ void Normal_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	//->mObjectTitleString.append("R:Normal");
-	float rotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed * abilityRotation->mShapeDynamic->mApplication->getRenderTime();
+	float rotSpeed = abilityRotation->mShapeDynamic->mCommandToRunOnShape->mRotSpeed * abilityRotation->mShapeDynamic->mGame->mApplication->getRenderTime();
 	abilityRotation->mShapeDynamic->yaw(rotSpeed, true);
 
 	if (abilityRotation->mServerRotSpeed == 0.0 && abs(abilityRotation->getDegreesToServer()) < abilityRotation->mRotInterpLimitLow)

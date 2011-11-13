@@ -7,6 +7,9 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
+//game
+#include "gameOgre.h"
+
 //graphics
 #include "../graphics/graphicsOgre.h"
 
@@ -21,9 +24,13 @@
 /*********************************
 *		CONSTRUCTORS
 **********************************/
-ApplicationOgre::ApplicationOgre(const char* serverIP, int serverPort) : Application(serverIP, serverPort)
+ApplicationOgre::ApplicationOgre(const char* serverIP, int serverPort) : Application(serverIP, serverPort) 
+
 {
 	LogString("ApplicationOgre!!!!!!!!!!!!!!!!");
+	mGame = new GameOgre(this,serverIP,serverPort);
+	//mGame = mGameOgre
+
 	mGraphicsOgre = new GraphicsOgre(this);
 }
 
@@ -38,19 +45,6 @@ float ApplicationOgre::getRenderTime()
 {
 	//LogString("r:%f",mGraphicsOgre->mRenderTime);
 	return mGraphicsOgre->mRenderTime;
-}
-
-
-/*********************************
-*		SHAPE
-**********************************/
-void ApplicationOgre::addShape(bool b, ByteBuffer* byteBuffer)
-{
-	ShapeDynamic* shapeDynamicOgre = new ShapeDynamicOgre(this,byteBuffer,false);  //you should just need to call this...
-	
-	//ability
-	shapeDynamicOgre->addAbility(new AbilityRotation(shapeDynamicOgre));
-	shapeDynamicOgre->addAbility(new AbilityMove(shapeDynamicOgre));
 }
 
 /*********************************

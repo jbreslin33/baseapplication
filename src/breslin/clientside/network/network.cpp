@@ -4,8 +4,11 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
-//game
+//application
 #include "../game/application.h"
+
+//game
+#include "../game/game.h"
 
 //command
 #include "../command/command.h"
@@ -427,11 +430,11 @@ void Network::readPackets()
 			break;
 
 			case mParser->mMessageAddShape:
-				mApplication->addShape(true,byteBuffer);
+				mApplication->mGame->addShape(true,byteBuffer);
 			break;
 
 			case mParser->mMessageRemoveShape:
-				mApplication->removeShape(byteBuffer);
+				mApplication->mGame->removeShape(byteBuffer);
 			break;
 
 			case mParser->mMessageFrame:
