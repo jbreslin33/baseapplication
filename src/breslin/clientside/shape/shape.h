@@ -6,21 +6,24 @@
 **********************************/
 //standard library
 #include <string>
-
-//math
-#include "../../math/vector3D.h"
+#include <vector>
 
 /**********************************
 *          FORWARD DECLARATIONS
 **********************************/
 class Application;
 class Parser;
+class Vector3D;
+class Ability;
+class Game;
+class Command;
+class ByteBuffer;
 
 class Shape
 {
 public:
 
-Shape();
+Shape(ByteBuffer* byteBuffer, bool isGhost);
 ~Shape();
 
 /**************************************************
@@ -28,17 +31,49 @@ Shape();
 **************************************************/
 public:
 
+//shape
+ShapeOgre* mShapeOgre;
+
 //id
 int   mIndex;
 
-//scale
-float mScale;
+//mesh
+int         mMeshCode;
+std::string mMeshName;
 
+//name
+std::string mName;
+
+//animate
+bool mAnimate;
+
+//parser
 Parser* mParser;
+
+//speed
+float mSpeed;
+float mSpeedMax; 
+
+//abilitys
+std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
+
+//this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
+Shape* mGhost;
+
+//basic
+Vector3D* mPosition;
+Vector3D* mMoveVelocity;
+Vector3D* mRotation;
+int mLocal;
+
+//commands
+Command* mServerFrame;					// the latest frame from server
+Command* mCommandToRunOnShape;
 
 /**************************************************
 *			METHODS
 **************************************************/
+
 
 //setting position
 virtual void     setPosition          (Vector3D*                  ) = 0;
@@ -62,6 +97,30 @@ virtual void     drawTitle            (                          ) = 0;
 virtual void     appendToTitle        (std::string appendage     ) = 0;
 virtual void     appendToTitle        (int appendage             ) = 0;
 virtual void     clearTitle           (                          ) = 0;
+
+//dynamic
+//abilitys
+void     addAbility(Ability* ability);
+Ability* getAbility(Ability* ability);
+
+//movement
+virtual float       getDegreesToSomething(Vector3D* something                       ) = 0;
+virtual void        yaw                  (float amountToYaw, bool converToDegree   ) = 0;
+virtual void        translate            (Vector3D* translateVector, int perspective) = 0;
+virtual std::string getName() = 0; 
+
+//ticks
+void processTick();
+void interpolateTick(float renderTime);
+
+//messaging
+void virtual readDeltaMoveCommand(ByteBuffer *mes);
+
+//byteBuffer
+void parseByteBuffer(ByteBuffer* byteBuffer);
+
+//ghost
+void moveGhostShape();
 
 };
 

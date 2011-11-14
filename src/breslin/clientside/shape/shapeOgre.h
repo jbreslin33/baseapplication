@@ -1,11 +1,9 @@
-#ifndef SHAPEDYNAMICOGRE_H
-#define SHAPEDYNAMICOGRE_H
+#ifndef SHAPEOGRE_H
+#define SHAPEOGRE_H
 
 /**********************************
 *          INCLUDES
 **********************************/
-//parent
-#include "shapeDynamic.h"
 
 //Ogre headers
 #include "Ogre.h"
@@ -15,39 +13,44 @@ using namespace Ogre;
 *          FORWARD DECLARATIONS
 **********************************/
 
-//game
-class GameOgre;
+//Application
+class ApplicationOgre;
 
 //title
 class ObjectTitle;
 
-//ability
+//bytebuffer
+class ByteBuffer;
+
+//Vector
+class Vector3D;
+
+//shape
+class Shape;
 
 #include <string>
 
 /**********************************
 *          CLASS
 **********************************/
-class ShapeOgre : public ShapeDynamic //, public OgreAnimation
+class ShapeOgre
 {
 
 public:
-ShapeOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost);
+ShapeOgre(Shape* shape);
 ~ShapeOgre();
 
 /**********************************
 *          VARIABLES
 **********************************/
 
-//game
-GameOgre* mGameOgre;
+//application
+ApplicationOgre* mApplicationOgre;
 
 //ghost
 bool mIsGhost;
 
 //ogre scene stuff
-std::string         mMeshName;
-std::string         mName;
 Entity*             mEntity;
 
 //this is your pointer to move shape, really all you need.
@@ -57,8 +60,10 @@ SceneNode*          mSceneNode;
 ObjectTitle* mObjectTitle;
 std::string  mObjectTitleString;
 
+//scale
+float mScale;
 
-
+Shape* mShape;
 //ability
 
 /**********************************
@@ -66,7 +71,6 @@ std::string  mObjectTitleString;
 **********************************/
 //shape
 void createShape();
-std::string getMeshString(int meshCode);
 
 //debugging
 void checkExtents(Vector3D min);
@@ -97,15 +101,14 @@ void appendToTitle(int appendage);
 void clearTitle   ();
 void setupTitle();
 
-//name
-std::string getName() { return mName; } 
-
 //ogre scene node
 SceneNode*  getSceneNode() { return mSceneNode; }
 
 //utility
 Ogre::Vector3 converToVector3(Vector3D* vector3d);
 
+//mesh
+std::string getMeshString(int meshCode);
 
 
 };

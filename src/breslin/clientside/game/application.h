@@ -17,7 +17,7 @@
 class Game;
 class Client;
 class ByteBuffer;
-class ShapeDynamic;
+class Shape;
 class Time;
 class Network;
 class Parser;
@@ -113,7 +113,7 @@ virtual void initializeGui() { };
 //bool mouseMoved            ( const OIS::MouseEvent &arg );
 
 //shape stuff...
-virtual Vector3D* getRotation(ShapeDynamic* shapeDynamic) { return 0; }
+virtual Vector3D* getRotation(Shape* shapeDynamic) { return 0; }
 virtual void createShape() { }
 
 };

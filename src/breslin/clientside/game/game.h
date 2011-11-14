@@ -12,7 +12,7 @@
 ***************************************/
 class Application;
 class ByteBuffer;
-class ShapeDynamic;
+class Shape;
 
 class Game 
 {
@@ -28,8 +28,8 @@ public:
 Application* mApplication;
 
 //Shapes
-std::vector<ShapeDynamic*> mShapeVector;	 //all shapes in the client world
-std::vector<ShapeDynamic*> mShapeGhostVector;	 //all shapes in the client world's ghost 
+std::vector<Shape*> mShapeVector;	 //all shapes in the client world
+std::vector<Shape*> mShapeGhostVector;	 //all shapes in the client world's ghost 
 
 	
 /***************************************
@@ -38,7 +38,7 @@ std::vector<ShapeDynamic*> mShapeGhostVector;	 //all shapes in the client world'
 //shape
 virtual void          addShape       (bool b, ByteBuffer* byteBuffer) { }
         void          removeShape    (ByteBuffer* byteBuffer);
-        ShapeDynamic* getShapeDynamic(int id);
+        Shape* getShape(int id);
 
 void interpolateTick();
 

@@ -136,10 +136,7 @@ set(HDRS
 	
 	#shape
 	../clientside/shape/shape.h
-	../clientside/shape/shapeDynamic.h
 	../clientside/shape/shapeOgre.h
-		#tag
-	../clientside/shape/shapeTag.h
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.h
@@ -198,10 +195,7 @@ set(SRCS
 	
 	#shape
 	../clientside/shape/shape.cpp
-	../clientside/shape/shapeDynamic.cpp
 	../clientside/shape/shapeOgre.cpp
-		#tag
-	../clientside/shape/shapeTag.cpp
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.cpp
@@ -269,10 +263,7 @@ set(HDRS
 	
 	#shape
 	../clientside/shape/shape.h
-	../clientside/shape/shapeDynamic.h
 	../clientside/shape/shapeOgre.h
-		#tag
-	../clientside/shape/shapeTag.h
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.h
@@ -331,10 +322,7 @@ set(SRCS
 	
 	#shape
 	../clientside/shape/shape.cpp
-	../clientside/shape/shapeDynamic.cpp
 	../clientside/shape/shapeOgre.cpp
-		#tag
-	../clientside/shape/shapeTag.cpp
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.cpp

@@ -9,11 +9,8 @@
 //application
 #include "../game/applicationOgre.h"
 
-//gameOgre
-#include "../game/gameOgre.h"
-
-//graphics
-#include "../graphics/graphicsOgre.h"
+//shape
+#include "shape.h"
 
 //ability
 #include "../ability/animation/abilityAnimationOgre.h"
@@ -21,47 +18,17 @@
 //title
 #include "../billboard/objectTitle.h"
 
+//math
+#include "../../math/vector3D.h"
 
-ShapeOgre::ShapeOgre(GameOgre* gameOgre, ByteBuffer* byteBuffer, bool isGhost)
-:
-	ShapeDynamic         ((Game*)gameOgre,byteBuffer)
+
+ShapeOgre::ShapeOgre(Shape* shape)
 {
 	//we use this to name shape. as ogre is picky about same names. it also serves as a counter of sorts.
+	mShape = shape;
+	mApplicationOgre = 0;
+	//createShape(mShape->mPosition);
 
-	mGameOgre = gameOgre;
-
-	mIsGhost = isGhost;
-
-	if (mIsGhost)
-	{
-		mIndex = mIndex * -1;
-	}	
-
-	//figure out mesh based on code passed in byteBuffer
-	mMeshName = getMeshString(mMeshCode);
-	
-
-	createShape();
-	
-	//animation
-	if (mAnimate)
-	{
-		addAbility(new AbilityAnimationOgre(this));
-	}
-	
-	setupTitle();
-
-	//call create ghost here..
-	if (!mIsGhost) 
-	{
-		//create a ghost for this shape
-		mGhost = new ShapeOgre(mGameOgre,byteBuffer,true);
-		mGhost->setVisible(true);
-
-		//put shape and ghost in game vectors so they can be looped and game now knows of them.
-		mGameOgre->mShapeVector.push_back(this);
-		mGameOgre->mShapeGhostVector.push_back(mGhost);	
-	}
 }
 
 ShapeOgre::~ShapeOgre()
@@ -71,35 +38,18 @@ ShapeOgre::~ShapeOgre()
 	delete mSceneNode;
 }
 
-std::string ShapeOgre::getMeshString(int meshCode)
-{
-	if (meshCode == 0)
-		
-	{
-		//this cube is exactly 1 ogre world unit. Which I take to be 1 meter.
-		mScale = .01f;
-		return "cube.mesh";
-	}
-	if (meshCode == 1)
-	{
-		mScale = .25f;
-		return "sinbad.mesh";
-	}
-}
-
 void ShapeOgre::createShape()
 {
 	/*********  create shape ***************/
-	//mMeshName     = mesh;
-	mName         = StringConverter::toString(mIndex);
-	mSceneNode    = mGameOgre->mApplicationOgre->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+	mShape->mName         = StringConverter::toString(mShape->mIndex);
+	mSceneNode    = mApplicationOgre->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 
 	//set Starting position of sceneNode, we will attach our mesh to this. this is all that's needed for static shapes. actually we need to add
 	//rotation for them
-	mSceneNode->setPosition(mPosition->x,mPosition->y,mPosition->z);	
+	mSceneNode->setPosition(mShape->position->x,mShape->position->y,mShape->position->z);	
 	
 	//create mesh
-	mEntity = mGameOgre->mApplicationOgre->getSceneManager()->createEntity(mName, mMeshName);
+	mEntity = mShape->mApplicationOgre->getSceneManager()->createEntity(mShape->mName, mShape->mMeshName);
 
 	//attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
     mSceneNode->attachObject(mEntity);
@@ -115,12 +65,12 @@ void ShapeOgre::createShape()
 void ShapeOgre::setupTitle()
 {
 	/*********  setup title/billboard ***************/
-	const Ogre::String& titlename = "tn" + StringConverter::toString(mIndex);
-	const Ogre::String& title = "ti" + StringConverter::toString(mIndex);
+	const Ogre::String& titlename = "tn" + StringConverter::toString(mShape->mIndex);
+	const Ogre::String& title = "ti" + StringConverter::toString(mShape->mIndex);
 	const Ogre::String& fontName = "SdkTrays/Caption";
 	const Ogre::ColourValue& color = Ogre::ColourValue::White;
 	mObjectTitle = new ObjectTitle
-	(titlename, mEntity, mGameOgre->mApplicationOgre->getSceneManager()->getCamera("PlayerCam"), title,
+	(titlename, mEntity, mApplicationOgre->getSceneManager()->getCamera("PlayerCam"), title,
     fontName, color);
 }
 
@@ -314,4 +264,20 @@ Quaternion* ShapeOgre::getRotationTo(Vector3D* source, Vector3D* dest)
 		quaternion->normalise();
 	}
 return quaternion;
+}
+
+std::string ShapeOgre::getMeshString(int meshCode)
+{
+	if (meshCode == 0)
+		
+	{
+		//this cube is exactly 1 ogre world unit. Which I take to be 1 meter.
+		mScale = .01f;
+		return "cube.mesh";
+	}
+	if (meshCode == 1)
+	{
+		mScale = .25f;
+		return "sinbad.mesh";
+	}
 }

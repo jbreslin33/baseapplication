@@ -112,8 +112,8 @@ void Application::readServerTick(ByteBuffer* byteBuffer)
 
 		int id = byteBuffer->ReadByte();
 
-		ShapeDynamic* shape = NULL;
-		shape = mGame->getShapeDynamic(id);
+		Shape* shape = NULL;
+		shape = mGame->getShape(id);
 
 		if (shape)
 		{

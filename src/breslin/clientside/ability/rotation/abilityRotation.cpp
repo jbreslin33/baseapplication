@@ -14,9 +14,9 @@
 #include <stdlib.h>
 #endif
 
-AbilityRotation::AbilityRotation(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
+AbilityRotation::AbilityRotation(Shape* shapeDynamic)  : Ability(shapeDynamic)
 {
-	mShapeDynamic = shapeDynamic;
+	mShape = shapeDynamic;
 
 	//process tick rotation states
 	mProcessTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine
@@ -58,7 +58,7 @@ AbilityRotation::~AbilityRotation()
 void AbilityRotation::processTick()
 {
 	mProcessTickStateMachine->update();
-	//LogString("mRotSpeed:%f",mShapeDynamic->mCommandToRunOnShape->mRotSpeed);
+	//LogString("mRotSpeed:%f",mShape->mCommandToRunOnShape->mRotSpeed);
 }
 void AbilityRotation::interpolateTick(float renderTime)
 {
@@ -73,14 +73,14 @@ float AbilityRotation::getDegreesToServer()  //rot
 {
     Vector3D* serverRotNew = new Vector3D();
 
-    serverRotNew->x = mShapeDynamic->mServerFrame->mRot->x;
+    serverRotNew->x = mShape->mServerFrame->mRot->x;
 	serverRotNew->y = 0;
-    serverRotNew->z = mShapeDynamic->mServerFrame->mRot->z;
+    serverRotNew->z = mShape->mServerFrame->mRot->z;
 
     serverRotNew->normalise();
 
     //calculate how far off we are from server
-	float degreesToServer = mShapeDynamic->getDegreesToSomething(serverRotNew);
+	float degreesToServer = mShape->getDegreesToSomething(serverRotNew);
 
 	return degreesToServer;
 }
@@ -90,24 +90,24 @@ void AbilityRotation::calculateServerRotationSpeed()  //rot
     mServerRotOld->zero();
     mServerRotNew->zero();
 
-    mServerRotOld->x = mShapeDynamic->mServerFrame->mRotOld->x;
+    mServerRotOld->x = mShape->mServerFrame->mRotOld->x;
 	mServerRotOld->y = 0;
-    mServerRotOld->z = mShapeDynamic->mServerFrame->mRotOld->z;
+    mServerRotOld->z = mShape->mServerFrame->mRotOld->z;
 
-    mServerRotNew->x = mShapeDynamic->mServerFrame->mRot->x;
+    mServerRotNew->x = mShape->mServerFrame->mRot->x;
 	mServerRotNew->y = 0;
-    mServerRotNew->z = mShapeDynamic->mServerFrame->mRot->z;
+    mServerRotNew->z = mShape->mServerFrame->mRot->z;
 
     mServerRotNew->normalise();
     mServerRotOld->normalise();
 
     //calculate how far off we are from server
-	mDegreesToServer = mShapeDynamic->getDegreesToSomething(mServerRotNew);
+	mDegreesToServer = mShape->getDegreesToSomething(mServerRotNew);
 	
     //calculate server rotation from last tick to new one
 	mServerRotSpeedOld = mServerRotSpeed;
 	
-	float serverRotSpeed = mShapeDynamic->mGhost->getDegreesToSomething(mServerRotNew);
+	float serverRotSpeed = mShape->mGhost->getDegreesToSomething(mServerRotNew);
 	mGhostSpeed = serverRotSpeed;
 	//if it's a tiny value we have an anomoly which I have not solved yet so use mServerRotSpeedOld...
 	if (serverRotSpeed < 1.0f || serverRotSpeed > -1.0f)

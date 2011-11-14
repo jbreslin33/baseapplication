@@ -15,9 +15,9 @@
 
 #include <math.h>
 
-AbilityMove::AbilityMove(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
+AbilityMove::AbilityMove(Shape* shapeDynamic)  : Ability(shapeDynamic)
 {
-	mShapeDynamic = shapeDynamic;
+	mShape = shapeDynamic;
 
 	//move processTick states
 	mProcessTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
@@ -70,9 +70,9 @@ void AbilityMove::interpolateTick(float renderTime)
 void AbilityMove::calculateDeltaPosition()  //mov
 {
 
-	mDeltaX = mShapeDynamic->mServerFrame->mPosition->x - mShapeDynamic->getPosition()->x;
-    mDeltaY = mShapeDynamic->mServerFrame->mPosition->y - mShapeDynamic->getPosition()->y;
-    mDeltaZ = mShapeDynamic->mServerFrame->mPosition->z - mShapeDynamic->getPosition()->z;
+	mDeltaX = mShape->mServerFrame->mPosition->x - mShape->getPosition()->x;
+    mDeltaY = mShape->mServerFrame->mPosition->y - mShape->getPosition()->y;
+    mDeltaZ = mShape->mServerFrame->mPosition->z - mShape->getPosition()->z;
 
     //distance we are off from server
     mDeltaPosition = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));

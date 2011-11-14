@@ -47,13 +47,13 @@ void Game::removeShape(ByteBuffer* byteBuffer)
 	}
 }
 
-ShapeDynamic* Game::getShapeDynamic(int id)
+Shape* Game::getShape(int id)
 {
-	ShapeDynamic* shape = NULL;
+	Shape* shape = NULL;
 
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
-		ShapeDynamic* curShape = mShapeVector.at(i);
+		Shape* curShape = mShapeVector.at(i);
 		if (curShape->mIndex == id)
 		{
 			shape = curShape;

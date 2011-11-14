@@ -31,7 +31,7 @@ void Idle_InterpolateTick_Animation::enter(AbilityAnimation* abilityAnimation)
 
 void Idle_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
 {
-	if (!abilityAnimation->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->isZero())
+	if (!abilityAnimation->mShape->mCommandToRunOnShape->mMoveVelocity->isZero())
 	{
 		abilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Run_InterpolateTick_Animation::Instance());
 	}
@@ -57,7 +57,7 @@ void Run_InterpolateTick_Animation::enter(AbilityAnimation* abilityAnimation)
 }
 void Run_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
 {
-	if (abilityAnimation->mShapeDynamic->mCommandToRunOnShape->mMoveVelocity->isZero())
+	if (abilityAnimation->mShape->mCommandToRunOnShape->mMoveVelocity->isZero())
 	{
 		abilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Idle_InterpolateTick_Animation::Instance());
 	}

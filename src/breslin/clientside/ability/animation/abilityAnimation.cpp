@@ -4,10 +4,10 @@
 #include "abilityAnimationStateMachine.h"
 #include "abilityAnimationStates.h"
 
-AbilityAnimation::AbilityAnimation(ShapeDynamic* shapeDynamic)  : Ability(shapeDynamic)
+AbilityAnimation::AbilityAnimation(Shape* shapeDynamic)  : Ability(shapeDynamic)
 {
 	//shape
-	mShapeDynamic = shapeDynamic;
+	mShape = shapeDynamic;
 
 	//animation interpolateTick states
     mAnimationInterpolateTickStateMachine = new AbilityAnimationStateMachine(this);    //setup the state machine

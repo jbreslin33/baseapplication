@@ -11,7 +11,7 @@
 ********************************************************/
 class AbilityMoveStateMachine;
 class AbilityMoveState;
-class ShapeDynamic;
+class Shape;
 class Vector3D;
 
 /******************************************************
@@ -21,14 +21,14 @@ class AbilityMove : public Ability
 {
 public:
 
-	AbilityMove(ShapeDynamic* shapeDynamic);
+	AbilityMove(Shape* shape);
 	~AbilityMove();
 
 /******************************************************
 *				VARIABLES
 ********************************************************/
 //shapeDynamic
-ShapeDynamic* mShapeDynamic;
+Shape* mShape;
 
 //state machines
 AbilityMoveStateMachine* mProcessTickStateMachine;

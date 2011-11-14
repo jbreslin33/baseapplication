@@ -33,10 +33,20 @@ GameOgre::~GameOgre()
 **********************************/
 void GameOgre::addShape(bool b, ByteBuffer* byteBuffer)
 {
-	ShapeDynamic* shapeOgre = new ShapeOgre(this,byteBuffer,false);  //you should just need to call this...
+	Shape* shape = new Shape(this,byteBuffer,false);  //you should just need to call this...
 	
 	//ability
-	shapeOgre->addAbility(new AbilityRotation(shapeOgre));
-	shapeOgre->addAbility(new AbilityMove(shapeOgre));
+	shape->addAbility(new AbilityRotation(shape));
+	shape->addAbility(new AbilityMove(shape));
+
+	//put shape and ghost in game vectors so they can be looped and game now knows of them.
+	mShapeVector.push_back(shape);
+	mShapeGhostVector.push_back(shape->mGhost);	
+
+	shape->mShapeOgre->mApplicationOgre = mApplicationOgre;
+	shape->mGhost->mShapeOgre->mApplicationOgre = mApplicationOgre;
+
+	shape->mShapeOgre->createShape();
+	shape->mGhost->mShapeOgre->createShape();
 }
 

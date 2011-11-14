@@ -12,7 +12,7 @@
 ***************************************/
 class ApplicationOgre;
 class ByteBuffer;
-class ShapeDynamic;
+class Shape;
 
 class GameOgre : public Game
 {

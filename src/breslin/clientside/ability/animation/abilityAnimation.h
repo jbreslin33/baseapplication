@@ -16,7 +16,7 @@ class AbilityAnimationStateMachine;
 class AbilityAnimationState;
 
 //shape
-class ShapeDynamic;
+class Shape;
 
 /******************************************************
 *				INCLUDES
@@ -25,14 +25,14 @@ class AbilityAnimation : public Ability
 {
 public:
 
-	AbilityAnimation(ShapeDynamic* shape);
+	AbilityAnimation(Shape* shape);
 	~AbilityAnimation();
 
 /******************************************************
 *				VARIABLES
 ********************************************************/
 //shape
-ShapeDynamic* mShapeDynamic;
+Shape* mShape;
 
 //state machine
 AbilityAnimationStateMachine* mAnimationInterpolateTickStateMachine;

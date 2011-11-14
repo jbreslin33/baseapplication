@@ -12,7 +12,7 @@
 ********************************************************/
 class AbilityRotationStateMachine;
 class AbilityRotationState;
-class ShapeDynamic;
+class Shape;
 
 /******************************************************
 *				CLASS
@@ -21,7 +21,7 @@ class AbilityRotation : public Ability
 {
 public:
 
-	AbilityRotation(ShapeDynamic* shapeDynamic);
+	AbilityRotation(Shape* shapeDynamic);
 	~AbilityRotation();
 
 /******************************************************
@@ -31,7 +31,7 @@ AbilityRotationStateMachine* mProcessTickStateMachine;
 AbilityRotationStateMachine* mInterpolateTickStateMachine;
 
 //shape
-ShapeDynamic* mShapeDynamic;
+Shape* mShape;
 
 //rotation
 float mTurnSpeed; 
