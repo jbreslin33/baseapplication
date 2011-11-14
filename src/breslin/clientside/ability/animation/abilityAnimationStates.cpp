@@ -1,11 +1,20 @@
+//parent
 #include "abilityAnimationStates.h"
+
+//state machine
 #include "abilityAnimationStateMachine.h"
 
-#include "../../shape/shapeDynamic.h"
+//shape
+#include "../../shape/shape.h"
 
+//billboard
 #include "../../billboard/objectTitle.h"
+
+//animation
 #include "abilityAnimation.h"
 
+//command
+#include "../../command/command.h"
 
 /******************************************************
 *				INTERPOLATE

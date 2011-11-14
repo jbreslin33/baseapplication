@@ -14,13 +14,16 @@
 #include "../../game/game.h"
 
 //shape
-#include "../../shape/shapeDynamic.h"
+#include "../../shape/shape.h"
 
 //ability
 #include "abilityMove.h"
 
 //utility
 #include <math.h>
+
+//command
+#include "../../command/command.h"
 
 
 /******************** Global_ProcessTick_Move *****************/

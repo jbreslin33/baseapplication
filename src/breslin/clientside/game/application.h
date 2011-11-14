@@ -15,14 +15,10 @@
 *   		FORWARD DECLARATIONS
 ***************************************/
 class Game;
-class Client;
 class ByteBuffer;
 class Shape;
 class Time;
 class Network;
-class Parser;
-class Command;
-class Vector3D;
 
 class Application : public BaseApplication
 {
@@ -44,7 +40,6 @@ Network*     mNetwork;
 Time* mTime;
 float mFrameTime;
 int   mOldTime;
-
 
 //initialize
 bool mInitializeGui;
@@ -109,9 +104,6 @@ void hideJoinScreen();
 void unloadOtherScreens();
 void initializeGui();
 
-//shape stuff...
-Vector3D* getRotation(Shape* shapeDynamic);
-void createShape();
 
 //OGRE_SPECIFIC
 

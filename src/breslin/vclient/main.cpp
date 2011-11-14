@@ -3,10 +3,8 @@
 #include "../clientside/tdreamsock/dreamSockLog.h"
 
 //app
-#include "../clientside/game/applicationOgre.h"
+#include "../clientside/game/application.h"
 
-//graphics
-#include "../clientside/graphics/graphicsOgre.h"
 
 /******************** MAIN ***********************/
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -28,14 +26,14 @@ extern "C" {
        
 		StartLogConsole();
         
-		Application* applicationOgre = new Application(strCmdLine,30004);
+		Application* application = new Application(strCmdLine,30004);
 #else
-        Application* applicationOgre = new Application(argv[1],30004);
+        Application* application = new Application(argv[1],30004);
 #endif
         try
 		{
-			applicationOgre->go();
-            applicationOgre->gameLoop();
+			application->go();
+            application->gameLoop();
         }
 		catch( Ogre::Exception& e )
 		{

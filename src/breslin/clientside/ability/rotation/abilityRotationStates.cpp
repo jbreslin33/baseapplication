@@ -8,7 +8,7 @@
 #include "abilityRotationStateMachine.h"
 
 //shape
-#include "../../shape/shapeDynamic.h"
+#include "../../shape/shape.h"
 
 //title
 #include "../../billboard/objectTitle.h"
@@ -21,6 +21,9 @@
 
 //application
 #include "../../game/application.h"
+
+//command
+#include "../../command/command.h"
 
 /******************************************************
 *				INTERPOLATE
