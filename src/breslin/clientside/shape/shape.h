@@ -8,6 +8,10 @@
 #include <string>
 #include <vector>
 
+//Ogre headers
+#include "Ogre.h"
+using namespace Ogre;
+
 /**********************************
 *          FORWARD DECLARATIONS
 **********************************/
@@ -18,12 +22,13 @@ class Ability;
 class Game;
 class Command;
 class ByteBuffer;
+class ObjectTitle;
 
 class Shape
 {
 public:
 
-Shape(ByteBuffer* byteBuffer, bool isGhost);
+Shape(Application* application, Game* mGame, ByteBuffer* byteBuffer, bool isGhost);
 ~Shape();
 
 /**************************************************
@@ -31,8 +36,11 @@ Shape(ByteBuffer* byteBuffer, bool isGhost);
 **************************************************/
 public:
 
-//shape
-ShapeOgre* mShapeOgre;
+//application
+Application* mApplication;
+
+//game
+Game* mGame;
 
 //id
 int   mIndex;
@@ -70,33 +78,52 @@ int mLocal;
 Command* mServerFrame;					// the latest frame from server
 Command* mCommandToRunOnShape;
 
+//OGRE_SPECIFIC_PRIVATE
+
+//ghost
+bool mIsGhost;
+
+//ogre scene stuff
+Entity*             mEntity;
+
+//this is your pointer to move shape, really all you need.
+SceneNode*          mSceneNode;
+
+//billboard
+ObjectTitle* mObjectTitle;
+std::string  mObjectTitleString;
+
+//scale
+float mScale;
+
+
 /**************************************************
 *			METHODS
 **************************************************/
 
 
 //setting position
-virtual void     setPosition          (Vector3D*                  ) = 0;
-virtual void     setPosition          (float x, float y, float z ) = 0;
+void     setPosition          (Vector3D*                  );
+void     setPosition          (float x, float y, float z );
 
 //setting rotation
-virtual void    setRotation(Vector3D* vector3D) = 0;
+void    setRotation(Vector3D* vector3D) ;
 
 //getting position
-virtual Vector3D* getPosition          (                          ) = 0;
-virtual Vector3D* getRotation          (                          ) = 0;
+Vector3D* getPosition          (                          ) ;
+Vector3D* getRotation          (                          ) ;
 //size
-virtual void     scale                (Vector3D                  ) = 0;
+void     scale                (Vector3D                  ) ;
 
 //visibility
-virtual void     setVisible           (bool b                    ) = 0;
+void     setVisible           (bool b                    ) ;
 
 
 //title
-virtual void     drawTitle            (                          ) = 0;
-virtual void     appendToTitle        (std::string appendage     ) = 0;
-virtual void     appendToTitle        (int appendage             ) = 0;
-virtual void     clearTitle           (                          ) = 0;
+void     drawTitle            (                          ) ;
+void     appendToTitle        (std::string appendage     ) ;
+void     appendToTitle        (int appendage             ) ;
+void     clearTitle           (                          ) ;
 
 //dynamic
 //abilitys
@@ -104,17 +131,15 @@ void     addAbility(Ability* ability);
 Ability* getAbility(Ability* ability);
 
 //movement
-virtual float       getDegreesToSomething(Vector3D* something                       ) = 0;
-virtual void        yaw                  (float amountToYaw, bool converToDegree   ) = 0;
-virtual void        translate            (Vector3D* translateVector, int perspective) = 0;
-virtual std::string getName() = 0; 
+float       getDegreesToSomething(Vector3D* something                       ) ;
+void        translate            (Vector3D* translateVector, int perspective) ;
 
 //ticks
 void processTick();
 void interpolateTick(float renderTime);
 
 //messaging
-void virtual readDeltaMoveCommand(ByteBuffer *mes);
+void readDeltaMoveCommand(ByteBuffer *mes);
 
 //byteBuffer
 void parseByteBuffer(ByteBuffer* byteBuffer);
@@ -122,6 +147,30 @@ void parseByteBuffer(ByteBuffer* byteBuffer);
 //ghost
 void moveGhostShape();
 
+//OGRE_SPECIFIC_PRIVATE
+//shape
+void createShape();
+
+//debugging
+void checkExtents(Vector3D min);
+
+//movement
+void yaw        (float amountToYaw, bool converToDegree   );
+
+//check rotation
+Quaternion* getRotationTo(Vector3D* source, Vector3D* dest);
+
+//title
+void setupTitle();
+
+//ogre scene node
+SceneNode*  getSceneNode() { return mSceneNode; }
+
+//utility
+Ogre::Vector3 converToVector3(Vector3D* vector3d);
+
+//mesh
+std::string getMeshString(int meshCode);
 };
 
 #endif

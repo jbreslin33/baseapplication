@@ -117,9 +117,7 @@ set(HDRS
 	#game
 	../clientside/game/BaseApplication.h
 	../clientside/game/application.h
-	../clientside/game/applicationOgre.h
 	../clientside/game/game.h
-	../clientside/game/gameOgre.h
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
@@ -136,7 +134,6 @@ set(HDRS
 	
 	#shape
 	../clientside/shape/shape.h
-	../clientside/shape/shapeOgre.h
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.h
@@ -176,9 +173,7 @@ set(SRCS
 	#game
 	../clientside/game/BaseApplication.cpp
 	../clientside/game/application.cpp
-	../clientside/game/applicationOgre.cpp
 	../clientside/game/game.cpp
-	../clientside/game/gameOgre.cpp
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp
@@ -195,7 +190,6 @@ set(SRCS
 	
 	#shape
 	../clientside/shape/shape.cpp
-	../clientside/shape/shapeOgre.cpp
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.cpp
@@ -245,9 +239,7 @@ set(HDRS
 	#game
 	../clientside/game/BaseApplication.h
 	../clientside/game/application.h
-	../clientside/game/applicationOgre.h
 	../clientside/game/game.h
-	../clientside/game/gameOgre.h
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
@@ -263,7 +255,6 @@ set(HDRS
 	
 	#shape
 	../clientside/shape/shape.h
-	../clientside/shape/shapeOgre.h
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.h
@@ -303,9 +294,7 @@ set(SRCS
 	#game
 	../clientside/game/BaseApplication.cpp
 	../clientside/game/application.cpp
-	../clientside/game/applicationOgre.cpp
 	../clientside/game/game.cpp
-	../clientside/game/gameOgre.cpp
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp
@@ -322,7 +311,6 @@ set(SRCS
 	
 	#shape
 	../clientside/shape/shape.cpp
-	../clientside/shape/shapeOgre.cpp
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.cpp

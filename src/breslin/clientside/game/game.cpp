@@ -5,10 +5,14 @@
 #include "../game/application.h"
 
 //shape
-#include "../shape/shapeOgre.h"
+#include "../shape/shape.h"
 
 //bytebuffer
 #include "../bytebuffer/byteBuffer.h"
+
+//ability
+#include "../ability/rotation/abilityRotation.h"
+#include "../ability/move/abilityMove.h"
 
 /***************************************
 *			          CONSTRUCTORS
@@ -68,4 +72,32 @@ Shape* Game::getShape(int id)
 	{
 		return shape;
 	}
+}
+
+/*************************************************
+*
+*   OGRE_SPECIFIC
+*
+**************************************************
+
+/*********************************
+*		SHAPE
+**********************************/
+void Game::addShape(bool b, ByteBuffer* byteBuffer)
+{
+	Shape* shape = new Shape(mApplication,this,byteBuffer,false);  //you should just need to call this...
+	
+	//ability
+	shape->addAbility(new AbilityRotation(shape));
+	shape->addAbility(new AbilityMove(shape));
+
+	//put shape and ghost in game vectors so they can be looped and game now knows of them.
+	mShapeVector.push_back(shape);
+	mShapeGhostVector.push_back(shape->mGhost);	
+
+	//shape->mShape->mApplication = mApplication;
+	//shape->mGhost->mShape->mApplication = mApplication;
+
+	//shape->mShape->createShape();
+	//shape->mGhost->mShape->createShape();
 }

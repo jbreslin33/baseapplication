@@ -68,6 +68,11 @@ int mKeyRight;
 int mKeyCounterClockwise;
 int mKeyClockwise;
 	
+//OGRE_SPECIFIC
+
+//gui
+OgreBites::Button* mJoinButton;
+
 	
 /***************************************
 *			          METHODS
@@ -75,46 +80,48 @@ int mKeyClockwise;
 
 //Admin
 void shutdown();
-virtual void gameLoop();
+void gameLoop();
 
 //Ticks
-virtual void readServerTick           (ByteBuffer* byteBuffer);
+void readServerTick           (ByteBuffer* byteBuffer);
 
 
 //time
-virtual float getRenderTime() {  return 0; }
-
-private:
+float getRenderTime();
 
 // Network
 void runNetwork    (float msec);
 
 //input
-virtual void processInput() { }
+void processInput();
 
 //graphics
-virtual bool runGraphics() { return false; }
+bool runGraphics();
 	
 
 //graphics
-//Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
-virtual void        createScene          () { }
-//virtual bool        frameRenderingQueued (const Ogre::FrameEvent& evt);
+void        createScene          ();
 
 //gui	
-virtual void hideGui() { }
-virtual void loadJoinScreen() { }
-virtual void hideJoinScreen() { }
-virtual void unloadOtherScreens() { }
-virtual void initializeGui() { };
-
-	//input
-//void buttonHit             (OgreBites::Button *button);
-//bool mouseMoved            ( const OIS::MouseEvent &arg );
+void hideGui();
+void loadJoinScreen();
+void hideJoinScreen();
+void unloadOtherScreens();
+void initializeGui();
 
 //shape stuff...
-virtual Vector3D* getRotation(Shape* shapeDynamic) { return 0; }
-virtual void createShape() { }
+Vector3D* getRotation(Shape* shapeDynamic);
+void createShape();
+
+//OGRE_SPECIFIC
+
+//graphics
+Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
+virtual bool        frameRenderingQueued (const Ogre::FrameEvent& evt);
+
+//input
+void buttonHit             (OgreBites::Button *button);
+bool mouseMoved            ( const OIS::MouseEvent &arg );
 
 };
 

@@ -2,13 +2,13 @@
 #include "abilityAnimationOgre.h"
 
 //shape
-#include "../../shape/shapeOgre.h"
+#include "../../shape/shape.h"
 
 //application
-#include "../../game/applicationOgre.h"
+#include "../../game/application.h"
 
 //game
-#include "../../game/gameOgre.h"
+#include "../../game/game.h"
 
 //abilitys
 #include "../move/abilityMove.h"
@@ -16,11 +16,11 @@
 //states
 #include "abilityAnimationStates.h"
 
-AbilityAnimationOgre::AbilityAnimationOgre(ShapeOgre* shapeOgre) : AbilityAnimation(shapeOgre)
+AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : AbilityAnimation(shape)
 {
 
 
-	mShapeOgre = shapeOgre;
+	mShape = shape;
 
 	mAnimationFadeSpeed = 7.5;
 
@@ -35,7 +35,7 @@ void AbilityAnimationOgre::setupAnimations()
 {
 	/*********  setup animations ***************/
     // this is very important due to the nature of the exported animations
-    mShapeOgre->mEntity->getSkeleton()->setBlendMode(ANIMBLEND_CUMULATIVE);
+    mShape->mEntity->getSkeleton()->setBlendMode(ANIMBLEND_CUMULATIVE);
     String animNames[] =
     {"IdleBase", "IdleTop", "RunBase", "RunTop", "HandsClosed", "HandsRelaxed", "DrawSwords",
     "SliceVertical", "SliceHorizontal", "Dance", "JumpStart", "JumpLoop", "JumpEnd"};
@@ -43,7 +43,7 @@ void AbilityAnimationOgre::setupAnimations()
 	// populate our animation list
     for (int i = 0; i < mNumberOfAnimations; i++)
     {
-		mAnims[i] = mShapeOgre->mEntity->getAnimationState(animNames[i]);
+		mAnims[i] = mShape->mEntity->getAnimationState(animNames[i]);
         mAnims[i]->setLoop(true);
         mFadingIn[i] = false;
         mFadingOut[i] = false;
@@ -58,9 +58,9 @@ void AbilityAnimationOgre::setupAnimations()
 
 void AbilityAnimationOgre::runAnimations()
 {
-	mAnims[mBaseAnimID]->addTime(mShapeOgre->mGameOgre->mApplicationOgre->getRenderTime() * mShapeOgre->mSpeed * 1000/mShapeOgre->mSpeedMax);
-	mAnims[mTopAnimID]->addTime(mShapeOgre->mGameOgre->mApplicationOgre->getRenderTime() * mShapeOgre->mSpeed * 1000/mShapeOgre->mSpeedMax);
-	fadeAnimations(mShapeOgre->mGameOgre->mApplicationOgre->getRenderTime());
+	mAnims[mBaseAnimID]->addTime(mShape->mGame->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax);
+	mAnims[mTopAnimID]->addTime(mShape->mGame->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax);
+	fadeAnimations(mShape->mGame->mApplication->getRenderTime());
 }
 
 void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAnimationState)

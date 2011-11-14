@@ -28,9 +28,9 @@ extern "C" {
        
 		StartLogConsole();
         
-		ApplicationOgre* applicationOgre = new ApplicationOgre(strCmdLine,30004);
+		Application* applicationOgre = new Application(strCmdLine,30004);
 #else
-        ApplicationOgre* applicationOgre = new ApplicationOgre(argv[1],30004);
+        Application* applicationOgre = new Application(argv[1],30004);
 #endif
         try
 		{
