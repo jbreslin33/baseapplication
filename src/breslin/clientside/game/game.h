@@ -35,12 +35,14 @@ std::vector<Shape*> mShapeGhostVector;	 //all shapes in the client world's ghost
 /***************************************
 *			          METHODS
 ***************************************/
+public:
+
 //shape
 void   addShape       (bool b, ByteBuffer* byteBuffer);
 void   removeShape    (ByteBuffer* byteBuffer);
 Shape* getShape(int id);
 
-void interpolateTick();
+void run();
 
 };
 

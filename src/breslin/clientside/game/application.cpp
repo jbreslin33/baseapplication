@@ -72,9 +72,8 @@ Application::~Application()
 /*********************************
 		START/LOOP/END
 **********************************/
-void Application::gameLoop()
+void Application::run()
 {
-
 	while(true)
     {
 		//input
@@ -84,7 +83,7 @@ void Application::gameLoop()
 		runNetwork(getRenderTime() * 1000.0f);
 		
 		//move objects
-		mGame->interpolateTick();
+		mGame->run();
 
 		//draw
 		if (!runGraphics())
@@ -218,7 +217,6 @@ void Application::initializeGui()
 
 void Application::loadJoinScreen()
 {
-	unloadOtherScreens();
 	mJoinButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "mJoinButton", "Join Game");
 	mTrayMgr->moveWidgetToTray(mJoinButton,OgreBites::TL_CENTER);
 	mTrayMgr->showCursor();
@@ -236,9 +234,6 @@ void Application::hideJoinScreen()
     mJoinButton->hide();
 }
 
-void Application::unloadOtherScreens()
-{
-}
 
 /***************************************
 *			INPUT
@@ -246,23 +241,25 @@ void Application::unloadOtherScreens()
 
 void Application::buttonHit(OgreBites::Button *button)
 {
+	//JOIN
 	if (button == mJoinButton)
 	{
 		mJoinGame = true;
 		if (mJoinGame && !mPlayingGame)
 		{
 			mNetwork->sendConnect();
-			//LogString("sent connect to server");
 			mPlayingGame = true;
 		}
-
 		hideGui();
 	}
 }
 
 bool Application::mouseMoved( const OIS::MouseEvent &arg )
 {
-    if (mTrayMgr->injectMouseMove(arg)) return true;
+    if (mTrayMgr->injectMouseMove(arg))
+	{
+		return true;
+	}
 	if (mPlayingGame)
 	{
 		mCameraMan->injectMouseMove(arg);
@@ -303,8 +300,6 @@ void Application::processInput()
     {
 		mNetwork->mCommandToServer->mKey |= mKeyClockwise;
     }
-
-
 	mNetwork->mCommandToServer->mMilliseconds = (int) (mFrameTime * 1000);
 }
 

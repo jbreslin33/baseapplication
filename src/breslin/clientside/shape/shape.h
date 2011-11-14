@@ -28,7 +28,7 @@ class Shape
 {
 public:
 
-Shape(Application* application, Game* mGame, ByteBuffer* byteBuffer, bool isGhost);
+Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost);
 ~Shape();
 
 /**************************************************

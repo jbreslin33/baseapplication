@@ -29,7 +29,7 @@ Game::~Game()
 /*********************************
 		TICK
 **********************************/
-void Game::interpolateTick()
+void Game::run()
 {
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
@@ -85,7 +85,7 @@ Shape* Game::getShape(int id)
 **********************************/
 void Game::addShape(bool b, ByteBuffer* byteBuffer)
 {
-	Shape* shape = new Shape(mApplication,this,byteBuffer,false);  //you should just need to call this...
+	Shape* shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
 	
 	//ability
 	shape->addAbility(new AbilityRotation(shape));
@@ -94,10 +94,4 @@ void Game::addShape(bool b, ByteBuffer* byteBuffer)
 	//put shape and ghost in game vectors so they can be looped and game now knows of them.
 	mShapeVector.push_back(shape);
 	mShapeGhostVector.push_back(shape->mGhost);	
-
-	//shape->mShape->mApplication = mApplication;
-	//shape->mGhost->mShape->mApplication = mApplication;
-
-	//shape->mShape->createShape();
-	//shape->mGhost->mShape->createShape();
 }

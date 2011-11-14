@@ -8,9 +8,6 @@
 //parents
 #include "../game/BaseApplication.h"
 
-//standard library
-#include <vector>
-
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
@@ -30,8 +27,13 @@ public:
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
+
+public:
+
 //game
 Game* mGame;
+
+private:
 
 //Network
 Network*     mNetwork;
@@ -46,14 +48,8 @@ bool mInitializeGui;
 bool mJoinGame;
 bool mPlayingGame;
 
-//game
-Application* mApplication;
-
 //time
 float mRenderTime;
-
-//gui
-//OgreBites::Button* mJoinButton;
 
 //keys
 int mKeyUp;
@@ -73,16 +69,26 @@ OgreBites::Button* mJoinButton;
 *			          METHODS
 ***************************************/
 
-//Admin
-void shutdown();
-void gameLoop();
+public:
+
+//run
+void run();
+
+//time
+float getRenderTime();
+
+//scene
+Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 
 //Ticks
 void readServerTick           (ByteBuffer* byteBuffer);
 
+//shutdown
+void shutdown();
 
-//time
-float getRenderTime();
+
+
+private:
 
 // Network
 void runNetwork    (float msec);
@@ -93,7 +99,6 @@ void processInput();
 //graphics
 bool runGraphics();
 	
-
 //graphics
 void        createScene          ();
 
@@ -101,14 +106,9 @@ void        createScene          ();
 void hideGui();
 void loadJoinScreen();
 void hideJoinScreen();
-void unloadOtherScreens();
 void initializeGui();
 
-
-//OGRE_SPECIFIC
-
-//graphics
-Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
+//rendering
 virtual bool        frameRenderingQueued (const Ogre::FrameEvent& evt);
 
 //input

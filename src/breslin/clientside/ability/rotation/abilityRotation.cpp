@@ -1,12 +1,20 @@
+//header
 #include "abilityRotation.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
 
-#include "../../shape/shapeDynamic.h"
+//shape
+#include "../../shape/shape.h"
 
+//state machine
 #include "abilityRotationStateMachine.h"
+
+//states
 #include "abilityRotationStates.h"
+
+//command
+#include "../../command/command.h"
 
 #ifdef WIN32
 //do nothing
@@ -14,9 +22,9 @@
 #include <stdlib.h>
 #endif
 
-AbilityRotation::AbilityRotation(Shape* shapeDynamic)  : Ability(shapeDynamic)
+AbilityRotation::AbilityRotation(Shape* shape)  : Ability(shape)
 {
-	mShape = shapeDynamic;
+	mShape = shape;
 
 	//process tick rotation states
 	mProcessTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine

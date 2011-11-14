@@ -33,7 +33,7 @@ extern "C" {
         try
 		{
 			application->go();
-            application->gameLoop();
+            application->run();
         }
 		catch( Ogre::Exception& e )
 		{

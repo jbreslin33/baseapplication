@@ -28,13 +28,10 @@
 //ObjectTitle
 #include "../billboard/objectTitle.h"
 
-Shape::Shape(Application* application, Game* game, ByteBuffer* byteBuffer, bool isGhost)
+Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 {
 	//application
 	mApplication = application;
-
-	//game
-	mGame = game;
 
 	//id
 	mIndex = 0;
@@ -91,7 +88,7 @@ Shape::Shape(Application* application, Game* game, ByteBuffer* byteBuffer, bool 
 	if (!mIsGhost) 
 	{
 		//create a ghost for this shape
-		mGhost = new Shape(mApplication,mGame,byteBuffer,true);
+		mGhost = new Shape(mApplication,byteBuffer,true);
 		mGhost->setVisible(true);
 	}
 

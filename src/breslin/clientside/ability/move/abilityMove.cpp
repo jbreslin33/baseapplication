@@ -4,15 +4,18 @@
 #include "../../tdreamsock/dreamSockLog.h"
 
 //shape
-#include "../../shape/shapeDynamic.h"
+#include "../../shape/shape.h"
 
 //command
 #include "../../command/command.h"
 
 //state machines
 #include "abilityMoveStateMachine.h"
+
+//states
 #include "abilityMoveStates.h"
 
+//std lib
 #include <math.h>
 
 AbilityMove::AbilityMove(Shape* shapeDynamic)  : Ability(shapeDynamic)
