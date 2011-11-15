@@ -20,7 +20,6 @@ float mRotSpeed;
 
 int mKey;               //key pressed
 int mMilliseconds;      //not used
-int mMillisecondsTotal;      //not used
 
 float mClientFrametime;
 };

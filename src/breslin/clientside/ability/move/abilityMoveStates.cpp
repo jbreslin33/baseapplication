@@ -202,7 +202,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
   	transVector->copyValuesFrom(abilityMove->mShape->mCommandToRunOnShape->mMoveVelocity);
 
 	//get the mulitplier
-	float multipliedRenderTime = abilityMove->mShape->mGame->mApplication->getRenderTime() * 1000;
+	float multipliedRenderTime = abilityMove->mShape->mApplication->getRenderTime() * 1000;
 
 	//multiply our vector using render values
 	transVector->multiply(multipliedRenderTime); 

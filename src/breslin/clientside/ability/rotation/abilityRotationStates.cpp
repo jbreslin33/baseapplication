@@ -191,7 +191,7 @@ void Normal_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	//->mObjectTitleString.append("R:Normal");
-	float rotSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed * abilityRotation->mShape->mGame->mApplication->getRenderTime();
+	float rotSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed * abilityRotation->mShape->mApplication->getRenderTime();
 	abilityRotation->mShape->yaw(rotSpeed, true);
 
 	if (abilityRotation->mServerRotSpeed == 0.0 && abs(abilityRotation->getDegreesToServer()) < abilityRotation->mRotInterpLimitLow)

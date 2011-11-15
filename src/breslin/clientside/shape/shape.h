@@ -39,9 +39,6 @@ public:
 //application
 Application* mApplication;
 
-//game
-Game* mGame;
-
 //id
 int   mIndex;
 

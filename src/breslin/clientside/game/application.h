@@ -33,15 +33,23 @@ public:
 //game
 Game* mGame;
 
+//key input
+int mKeyCurrent;         
+int mKeyLast;
+
+int mMillisecondsCurrent;
+int mMillisecondsLast;
+
+//parsers
+static const char mCommandMilliseconds = 2;
+
 private:
 
 //Network
 Network*     mNetwork;
 
 //time
-Time* mTime;
 float mFrameTime;
-int   mOldTime;
 
 //initialize
 bool mInitializeGui;
@@ -64,7 +72,6 @@ int mKeyClockwise;
 //gui
 OgreBites::Button* mJoinButton;
 
-	
 /***************************************
 *			          METHODS
 ***************************************/

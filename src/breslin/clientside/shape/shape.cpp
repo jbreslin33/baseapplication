@@ -225,7 +225,7 @@ void Shape::readDeltaMoveCommand(ByteBuffer *mes)
 	}
 
 	//milliseconds
-	if (flags & mParser->mCommandMilliseconds)
+	if (flags & mApplication->mCommandMilliseconds)
 	{
 		mServerFrame->mMilliseconds = mes->ReadByte();
 		mCommandToRunOnShape->mMilliseconds = mServerFrame->mMilliseconds;

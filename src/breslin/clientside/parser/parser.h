@@ -26,8 +26,6 @@ public:
 ***************************************/
 
 // ByteBufferes
-static const char mCommandKey          = 1;
-static const char mCommandMilliseconds = 2;
 
 static const char mMessageFrame = 1;
 static const char mMessageConnect     = -101;

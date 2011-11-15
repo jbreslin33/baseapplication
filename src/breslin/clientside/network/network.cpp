@@ -53,10 +53,6 @@ Network::Network(Application* application, const char serverIP[32], int serverPo
 	//game
 	mApplication = application;
 
-	//command
-	mCommandToServer     = new Command(); 
-	mLastCommandToServer = new Command();
-
 	//parser
 	mParser = new Parser();
 
@@ -375,34 +371,34 @@ void Network::sendCommand(void)
 	int flags = 0;
 
 	// Check what needs to be updated
-	if(mLastCommandToServer->mKey != mCommandToServer->mKey)
+	if(mApplication->mKeyLast != mApplication->mKeyCurrent)
 	{
-		flags |= mParser->mCommandKey;
+		flags |= mCommandKey;
 	}
 
-	if(mLastCommandToServer->mMilliseconds != mCommandToServer->mMilliseconds)
+	if(mApplication->mMillisecondsLast != mApplication->mMillisecondsCurrent)
 	{
-		flags |= mParser->mCommandMilliseconds;
+		flags |= mApplication->mCommandMilliseconds;
 	}
 	
 	// Add to the message
 	byteBuffer->WriteByte(flags);
 
-	if(flags & mParser->mCommandKey)
+	if(flags & mCommandKey)
 	{
 		//WRITE: key
-		byteBuffer->WriteByte(mCommandToServer->mKey);
+		byteBuffer->WriteByte(mApplication->mKeyCurrent);
 	}
 
-	if(flags & mParser->mCommandMilliseconds)
+	if(flags & mApplication->mCommandMilliseconds)
 	{
 		//WRITE: milliseconds
-		byteBuffer->WriteByte(mCommandToServer->mMilliseconds);
+		byteBuffer->WriteByte(mApplication->mMillisecondsCurrent);
 	}
 	
 	//set 'last' commands for diff
-	mLastCommandToServer->mKey = mCommandToServer->mKey;
-	mLastCommandToServer->mMilliseconds = mCommandToServer->mMilliseconds;
+	mApplication->mKeyLast = mApplication->mKeyCurrent;
+	mApplication->mMillisecondsLast = mApplication->mMillisecondsCurrent;
 
 	// Send the packet
 	send(byteBuffer);

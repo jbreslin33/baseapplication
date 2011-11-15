@@ -13,9 +13,6 @@
 //byteBuffer
 #include "../byteBuffer/byteBuffer.h"
 
-//time
-#include "../time/time.h"
-
 //network
 #include "../network/network.h"
 
@@ -37,11 +34,7 @@ Application::Application(const char* serverIP, int serverPort)
 	mNetwork = new Network(this,serverIP,serverPort);
 
 	//time
-	mTime = new Time();
 	mFrameTime		 = 0.0f;
-	mOldTime         = 0;
-
-	mGame = 0;
 
 	//time
 	mRenderTime = 0;
@@ -59,8 +52,14 @@ Application::Application(const char* serverIP, int serverPort)
 	mJoinGame    = false;
 	mPlayingGame = false;
 
-	//OGRE_SPECIFIC
+	//game
 	mGame = new Game(this,serverIP,serverPort);
+
+	//input
+	mKeyCurrent = 0;
+	mKeyLast;
+	mMillisecondsCurrent = 0;
+	mMillisecondsLast = 0;
 }
 
 Application::~Application()
@@ -269,38 +268,38 @@ bool Application::mouseMoved( const OIS::MouseEvent &arg )
 
 void Application::processInput()
 {
-	mNetwork->mCommandToServer->mKey = 0;
+	mKeyCurrent = 0;
     
 	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     {
-		mNetwork->mCommandToServer->mKey |= mKeyUp;
+		mKeyCurrent |= mKeyUp;
     }
 
     if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
     {
-		mNetwork->mCommandToServer->mKey |= mKeyDown;
+		mKeyCurrent |= mKeyDown;
     }
 
 	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left
     {
-		mNetwork->mCommandToServer->mKey |= mKeyLeft;
+		mKeyCurrent |= mKeyLeft;
     }
 
     if (mKeyboard->isKeyDown(OIS::KC_L)) // Right
     {
-		mNetwork->mCommandToServer->mKey |= mKeyRight;
+		mKeyCurrent |= mKeyRight;
     }
     
 	if (mKeyboard->isKeyDown(OIS::KC_Z)) // Rotate -Yaw(counter-clockwise)
     {
-		mNetwork->mCommandToServer->mKey |= mKeyCounterClockwise;
+		mKeyCurrent |= mKeyCounterClockwise;
     }
 
     if (mKeyboard->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
     {
-		mNetwork->mCommandToServer->mKey |= mKeyClockwise;
+		mKeyCurrent |= mKeyClockwise;
     }
-	mNetwork->mCommandToServer->mMilliseconds = (int) (mFrameTime * 1000);
+	mMillisecondsCurrent = (int) (mFrameTime * 1000);
 }
 
 

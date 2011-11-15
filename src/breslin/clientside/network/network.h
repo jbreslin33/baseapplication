@@ -75,12 +75,10 @@ public:
 //game
 Application* mApplication;
 
-//command
-Command* mCommandToServer; //for the human moves to be sent off to server
-Command* mLastCommandToServer;
-
 //parser
 Parser* mParser;
+static const char mCommandKey          = 1;
+
 
 //server address
 int			 mServerPort;				// Port

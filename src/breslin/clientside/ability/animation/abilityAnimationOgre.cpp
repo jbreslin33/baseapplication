@@ -58,9 +58,9 @@ void AbilityAnimationOgre::setupAnimations()
 
 void AbilityAnimationOgre::runAnimations()
 {
-	mAnims[mBaseAnimID]->addTime(mShape->mGame->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax);
-	mAnims[mTopAnimID]->addTime(mShape->mGame->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax);
-	fadeAnimations(mShape->mGame->mApplication->getRenderTime());
+	mAnims[mBaseAnimID]->addTime(mShape->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax);
+	mAnims[mTopAnimID]->addTime(mShape->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax);
+	fadeAnimations(mShape->mApplication->getRenderTime());
 }
 
 void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAnimationState)

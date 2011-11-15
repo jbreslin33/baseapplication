@@ -11,7 +11,6 @@ Command::Command()
 
 	mKey = 0;
 	mMilliseconds = 0;
-	mMillisecondsTotal = 0;
 	mClientFrametime = 0.0f;
 }
 
