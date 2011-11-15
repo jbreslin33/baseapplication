@@ -59,7 +59,11 @@ static const char mCommandOriginY      = 8;
 static const char mCommandOriginZ      = 16;
 static const char mCommandRotationX    = 32;
 static const char mCommandRotationZ    = 64;
+
 private:
+
+//sequences and packet loss stats
+signed short	mOutgoingSequence;		// OutFgoing packet sequence
 
 //Network
 Network*     mNetwork;

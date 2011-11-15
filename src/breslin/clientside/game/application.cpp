@@ -60,6 +60,9 @@ Application::Application(const char* serverIP, int serverPort)
 	mKeyLast;
 	mMillisecondsCurrent = 0;
 	mMillisecondsLast = 0;
+
+	//sequence
+	mOutgoingSequence		= 1;
 }
 
 Application::~Application()
@@ -319,8 +322,10 @@ void Application::sendCommand(void)
 	byteBuffer->WriteByte(mMessageFrame);					
 	
 	//WRITE: sequence
-	byteBuffer->WriteShort(mNetwork->mOutgoingSequence);
+	byteBuffer->WriteShort(mOutgoingSequence);
 	
+	mOutgoingSequence++; //increase for next time...
+
 	// Build delta-compressed move command
 	int flags = 0;
 

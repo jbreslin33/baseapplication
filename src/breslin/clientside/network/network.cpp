@@ -13,9 +13,6 @@
 //command
 #include "../command/command.h"
 
-//parser
-#include "../parser/parser.h"
-
 //byteBuffer
 #include "../byteBuffer/byteBuffer.h"
 
@@ -58,7 +55,6 @@ Network::Network(Application* application, const char serverIP[32], int serverPo
 	mServerPort = serverPort;
 
 	//sequences
-	mOutgoingSequence		= 1;
 	mIncomingSequence		= 0;
 
 #ifdef WIN32
@@ -195,14 +191,6 @@ void Network::close()
 void Network::send(ByteBuffer* byteBuffer)
 {
 	send(byteBuffer->mSize,byteBuffer->mCharArray,*(struct sockaddr *) &sendToAddress);
-	
-	byteBuffer->BeginReading();
-	int type = byteBuffer->ReadByte();
-
-	if(type > 0)
-	{
-		mOutgoingSequence++;
-	}
 }
 
 void Network::send(int length, char *data,  struct sockaddr addr)
@@ -259,7 +247,7 @@ int Network::checkForByteBuffer(ByteBuffer* byteBuffer)
 		return 0;
 
 	// Parse system messages
-	parsePacket(byteBuffer);
+	checkPacketSequence(byteBuffer);
 
 	if(ret == -1)
 	{
@@ -296,7 +284,7 @@ int Network::checkForByteBuffer(ByteBuffer* byteBuffer)
 }
 
 //i feel like network should handle out of sequence packet warnings...
-void Network::parsePacket(ByteBuffer *mes)
+void Network::checkPacketSequence(ByteBuffer *mes)
 {
 	mes->BeginReading();
 	int type = mes->ReadByte();
@@ -323,7 +311,6 @@ void Network::parsePacket(ByteBuffer *mes)
 
 void Network::reset(void)
 {
-    mOutgoingSequence                = 1;
     mIncomingSequence                = 0;
 }
 

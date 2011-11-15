@@ -70,11 +70,6 @@ Network(Application* application, const char serverIP[32], int serverPort);
 /**********************************
 *          VARIABLES
 **********************************/
-public:
-
-//sequences and packet loss stats
-signed short	mOutgoingSequence;		// OutFgoing packet sequence
-
 private:
 
 //game
@@ -135,8 +130,8 @@ int    setNonBlocking(u_long setMode);
 //send
 void send			 (int length, char *data, struct sockaddr addr);
 
-//parse
-void parsePacket(ByteBuffer *mes);
+//sequence check
+void checkPacketSequence(ByteBuffer *mes);
 
 
 

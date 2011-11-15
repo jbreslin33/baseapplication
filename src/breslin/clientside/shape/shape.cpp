@@ -10,9 +10,6 @@
 //game
 #include "../game/game.h"
 
-//parser
-#include "../parser/parser.h"
-
 //command
 #include "../command/command.h"
 
@@ -35,9 +32,6 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 
 	//id
 	mIndex = 0;
-
-	//parser
-	mParser = new Parser();
 
 	//commands
 	mServerFrame         = new Command();

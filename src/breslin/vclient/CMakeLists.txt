@@ -138,9 +138,6 @@ set(HDRS
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.h
 	
-	#parser
-	../clientside/parser/parser.h
-		
 	#billboard
 	../clientside/billboard/objectTitle.h
 	
@@ -190,9 +187,6 @@ set(SRCS
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.cpp
-	
-	#parser
-	../clientside/parser/parser.cpp
 	
 	#billboard
 	../clientside/billboard/objectTitle.cpp
@@ -252,9 +246,6 @@ set(HDRS
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.h
 	
-	#parser
-	../clientside/parser/parser.h
-	
 	#billboard
 	../clientside/billboard/objectTitle.h
 	
@@ -304,9 +295,6 @@ set(SRCS
 	
 	#byteBuffer
 	../clientside/byteBuffer/byteBuffer.cpp
-	
-	#parser
-	../clientside/parser/parser.cpp
 	
 	#billboard
 	../clientside/billboard/objectTitle.cpp
