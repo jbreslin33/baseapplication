@@ -72,12 +72,13 @@ Network(Application* application, const char serverIP[32], int serverPort);
 **********************************/
 public:
 
+//sequences and packet loss stats
+signed short	mOutgoingSequence;		// OutFgoing packet sequence
+
+private:
+
 //game
 Application* mApplication;
-
-//parser
-Parser* mParser;
-
 
 
 //server address
@@ -86,7 +87,6 @@ const char*  mServerIP;
 
 
 //sequences and packet loss stats
-signed short	mOutgoingSequence;		// OutFgoing packet sequence
 private:
 signed short	mIncomingSequence;		// Incoming packet sequence
 signed short	mDroppedPackets;			// Dropped packets
@@ -117,15 +117,8 @@ void close();
 //reset
 void            reset();
 
-//connect
-void sendConnect   ();
-
-//disconnect
-void sendDisconnect(void);
-
-//packets
-void readPackets   ();
-
+//receive
+int  checkForByteBuffer(ByteBuffer* byteBuffer);
 
 private:
 
@@ -141,9 +134,6 @@ int    setNonBlocking(u_long setMode);
 
 //send
 void send			 (int length, char *data, struct sockaddr addr);
-
-//receive
-int  checkForByteBuffer(ByteBuffer* byteBuffer);
 
 //parse
 void parsePacket(ByteBuffer *mes);

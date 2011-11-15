@@ -94,7 +94,10 @@ void Application::run()
 
 void Application::shutdown()
 {
-	mNetwork->sendDisconnect();
+	ByteBuffer* byteBuffer = new ByteBuffer();
+	byteBuffer->WriteByte(mMessageDisconnect);
+	mNetwork->send(byteBuffer);
+	mNetwork->reset();
 }
 
 
@@ -128,7 +131,7 @@ void Application::runNetwork(float msec)
 	static float time = 0.0f;
 	time += msec;
 
-	mNetwork->readPackets();
+	readPackets();
 	
 	// Framerate is too high
 	if(time > (1000 / 60))
@@ -246,7 +249,7 @@ void Application::buttonHit(OgreBites::Button *button)
 		mJoinGame = true;
 		if (mJoinGame && !mPlayingGame)
 		{
-			mNetwork->sendConnect();
+			sendConnect();
 			mPlayingGame = true;
 		}
 		hideGui();
@@ -317,7 +320,7 @@ void Application::sendCommand(void)
 	
 	//WRITE: sequence
 	byteBuffer->WriteShort(mNetwork->mOutgoingSequence);
-
+	
 	// Build delta-compressed move command
 	int flags = 0;
 
@@ -354,3 +357,55 @@ void Application::sendCommand(void)
 	// Send the packet
 	mNetwork->send(byteBuffer);
 }
+/***************************************************
+*			PACKETS
+***************************************************/
+void Application::readPackets()
+{
+	int type;
+	int ret;
+
+	ByteBuffer* byteBuffer = new ByteBuffer();
+
+	while(ret = mNetwork->checkForByteBuffer(byteBuffer))
+	{
+		byteBuffer->BeginReading();
+
+		type = byteBuffer->ReadByte();
+
+		switch(type)
+		{
+			case mMessageConnect:
+			break;
+
+			case mMessageAddShape:
+				mGame->addShape(true,byteBuffer);
+			break;
+
+			case mMessageRemoveShape:
+				mGame->removeShape(byteBuffer);
+			break;
+
+			case mMessageFrame:
+				readServerTick(byteBuffer);
+			break;
+
+			case mMessageServerExit:
+				shutdown();
+			break;
+		}
+	}
+}
+
+/***************************************************
+*			CONNECT
+***************************************************/
+void Application::sendConnect()
+{
+	ByteBuffer* byteBuffer = new ByteBuffer();
+	byteBuffer->WriteByte(mMessageConnect);
+	mNetwork->send(byteBuffer);
+}
+
+
+

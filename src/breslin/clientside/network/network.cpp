@@ -53,9 +53,6 @@ Network::Network(Application* application, const char serverIP[32], int serverPo
 	//game
 	mApplication = application;
 
-	//parser
-	mParser = new Parser();
-
 	//server address
 	mServerIP = serverIP;
 	mServerPort = serverPort;
@@ -330,65 +327,3 @@ void Network::reset(void)
     mIncomingSequence                = 0;
 }
 
-
-/***************************************************
-*			CONNECT
-***************************************************/
-void Network::sendConnect()
-{
-	ByteBuffer* byteBuffer = new ByteBuffer();
-	byteBuffer->WriteByte(mParser->mMessageConnect);
-	send(byteBuffer);
-}
-
-/***************************************************
-*			DISCONNECT
-***************************************************/
-void Network::sendDisconnect()
-{
-	ByteBuffer* byteBuffer = new ByteBuffer();
-	byteBuffer->WriteByte(mParser->mMessageDisconnect);
-	send(byteBuffer);
-	reset();
-}
-
-
-/***************************************************
-*			PACKETS
-***************************************************/
-void Network::readPackets()
-{
-	int type;
-	int ret;
-
-	ByteBuffer* byteBuffer = new ByteBuffer();
-
-	while(ret = checkForByteBuffer(byteBuffer))
-	{
-		byteBuffer->BeginReading();
-
-		type = byteBuffer->ReadByte();
-
-		switch(type)
-		{
-			case mParser->mMessageConnect:
-			break;
-
-			case mParser->mMessageAddShape:
-				mApplication->mGame->addShape(true,byteBuffer);
-			break;
-
-			case mParser->mMessageRemoveShape:
-				mApplication->mGame->removeShape(byteBuffer);
-			break;
-
-			case mApplication->mMessageFrame:
-				mApplication->readServerTick(byteBuffer);
-			break;
-
-			case mParser->mMessageServerExit:
-				mApplication->shutdown();
-			break;
-		}
-	}
-}

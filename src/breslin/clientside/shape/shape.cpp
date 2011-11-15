@@ -181,7 +181,7 @@ void Shape::readDeltaMoveCommand(ByteBuffer *mes)
 	flags = mes->ReadByte();
 
 	// Origin
-	if(flags & mParser->mCommandOriginX)
+	if(flags & mApplication->mCommandOriginX)
 	{
 		mServerFrame->mPositionOld->x = mServerFrame->mPosition->x;
 		mServerFrame->mPosition->x = mes->ReadFloat();		
@@ -191,7 +191,7 @@ void Shape::readDeltaMoveCommand(ByteBuffer *mes)
 		moveXChanged = false;
 	}
 
-	if(flags & mParser->mCommandOriginY)
+	if(flags & mApplication->mCommandOriginY)
 	{
 		mServerFrame->mPositionOld->y = mServerFrame->mPosition->y;
 		mServerFrame->mPosition->y = mes->ReadFloat();
@@ -201,7 +201,7 @@ void Shape::readDeltaMoveCommand(ByteBuffer *mes)
 		moveYChanged = false;
 	}
 
-	if(flags & mParser->mCommandOriginZ)
+	if(flags & mApplication->mCommandOriginZ)
 	{
 		mServerFrame->mPositionOld->z = mServerFrame->mPosition->z;
 		mServerFrame->mPosition->z = mes->ReadFloat();	
@@ -212,13 +212,13 @@ void Shape::readDeltaMoveCommand(ByteBuffer *mes)
 	}
 
 	//rotation
-	if(flags & mParser->mCommandRotationX)
+	if(flags & mApplication->mCommandRotationX)
 	{
 		mServerFrame->mRotOld->x = mServerFrame->mRot->x;
 		mServerFrame->mRot->x = mes->ReadFloat();
 	}
 
-	if(flags & mParser->mCommandRotationZ)
+	if(flags & mApplication->mCommandRotationZ)
 	{
 		mServerFrame->mRotOld->z = mServerFrame->mRot->z;
 		mServerFrame->mRot->z = mes->ReadFloat();
