@@ -116,8 +116,10 @@ void Application::readServerTick(ByteBuffer* byteBuffer)
 		int id = byteBuffer->ReadByte();
 
 		Shape* shape = NULL;
-		shape = mGame->getShape(id);
-
+		if (mGame)
+		{
+			shape = mGame->getShape(id);
+		}
 		if (shape)
 		{
 			shape->readDeltaMoveCommand(byteBuffer);
@@ -384,11 +386,17 @@ void Application::readPackets()
 			break;
 
 			case mMessageAddShape:
-				mGame->addShape(true,byteBuffer);
+				if (mGame)
+				{
+					mGame->addShape(true,byteBuffer);
+				}
 			break;
 
 			case mMessageRemoveShape:
-				mGame->removeShape(byteBuffer);
+				if (mGame)
+				{
+					mGame->removeShape(byteBuffer);
+				}
 			break;
 
 			case mMessageFrame:

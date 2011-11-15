@@ -1,5 +1,16 @@
 #ifndef GAME_H
 #define GAME_H
+/**************************************
+@Game: This class should handle game specific duties. It should be able to be destroyed without
+the application crashing. You should be able to switch games while the application is running.
+
+Since this is on the client side it does not need any game logic.
+
+It's main duties will be to track objects to be drawn(Shapes). When it is destroyed or
+reset these objects need to be destroyed.
+
+*************************************/
+
 
 /***************************************
 *   		INCLUDES
@@ -24,6 +35,7 @@ public:
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
+private:
 //application
 Application* mApplication;
 
