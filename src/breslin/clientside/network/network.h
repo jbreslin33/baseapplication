@@ -77,7 +77,7 @@ Application* mApplication;
 
 //parser
 Parser* mParser;
-static const char mCommandKey          = 1;
+
 
 
 //server address
@@ -122,9 +122,6 @@ void sendConnect   ();
 
 //disconnect
 void sendDisconnect(void);
-
-//command
-void sendCommand   ();
 
 //packets
 void readPackets   ();

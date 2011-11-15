@@ -133,7 +133,7 @@ void Application::runNetwork(float msec)
 	// Framerate is too high
 	if(time > (1000 / 60))
 	{
-		mNetwork->sendCommand();
+		sendCommand();
 		mFrameTime = time / 1000.0f;
 		time = 0;
 	}
@@ -303,3 +303,54 @@ void Application::processInput()
 }
 
 
+/***************************************************
+*			COMMAND
+***************************************************/
+
+void Application::sendCommand(void)
+{
+	//create byteBuffer
+	ByteBuffer* byteBuffer = new ByteBuffer();
+
+	//WRITE: type
+	byteBuffer->WriteByte(mMessageFrame);					
+	
+	//WRITE: sequence
+	byteBuffer->WriteShort(mNetwork->mOutgoingSequence);
+
+	// Build delta-compressed move command
+	int flags = 0;
+
+	// Check what needs to be updated
+	if(mKeyLast != mKeyCurrent)
+	{
+		flags |= mCommandKey;
+	}
+
+	if(mMillisecondsLast != mMillisecondsCurrent)
+	{
+		flags |= mCommandMilliseconds;
+	}
+	
+	// Add to the message
+	byteBuffer->WriteByte(flags);
+
+	if(flags & mCommandKey)
+	{
+		//WRITE: key
+		byteBuffer->WriteByte(mKeyCurrent);
+	}
+
+	if(flags & mCommandMilliseconds)
+	{
+		//WRITE: milliseconds
+		byteBuffer->WriteByte(mMillisecondsCurrent);
+	}
+	
+	//set 'last' commands for diff
+	mKeyLast = mKeyCurrent;
+	mMillisecondsLast = mMillisecondsCurrent;
+
+	// Send the packet
+	mNetwork->send(byteBuffer);
+}

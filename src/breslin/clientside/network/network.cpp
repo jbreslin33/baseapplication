@@ -352,57 +352,6 @@ void Network::sendDisconnect()
 	reset();
 }
 
-/***************************************************
-*			COMMAND
-***************************************************/
-
-void Network::sendCommand(void)
-{
-	//create byteBuffer
-	ByteBuffer* byteBuffer = new ByteBuffer();
-
-	//WRITE: type
-	byteBuffer->WriteByte(mParser->mMessageFrame);					
-	
-	//WRITE: sequence
-	byteBuffer->WriteShort(mOutgoingSequence);
-
-	// Build delta-compressed move command
-	int flags = 0;
-
-	// Check what needs to be updated
-	if(mApplication->mKeyLast != mApplication->mKeyCurrent)
-	{
-		flags |= mCommandKey;
-	}
-
-	if(mApplication->mMillisecondsLast != mApplication->mMillisecondsCurrent)
-	{
-		flags |= mApplication->mCommandMilliseconds;
-	}
-	
-	// Add to the message
-	byteBuffer->WriteByte(flags);
-
-	if(flags & mCommandKey)
-	{
-		//WRITE: key
-		byteBuffer->WriteByte(mApplication->mKeyCurrent);
-	}
-
-	if(flags & mApplication->mCommandMilliseconds)
-	{
-		//WRITE: milliseconds
-		byteBuffer->WriteByte(mApplication->mMillisecondsCurrent);
-	}
-	
-	//set 'last' commands for diff
-	mApplication->mKeyLast = mApplication->mKeyCurrent;
-	mApplication->mMillisecondsLast = mApplication->mMillisecondsCurrent;
-
-	// Send the packet
-	send(byteBuffer);
-}
 
 /***************************************************
 *			PACKETS
@@ -433,7 +382,7 @@ void Network::readPackets()
 				mApplication->mGame->removeShape(byteBuffer);
 			break;
 
-			case mParser->mMessageFrame:
+			case mApplication->mMessageFrame:
 				mApplication->readServerTick(byteBuffer);
 			break;
 

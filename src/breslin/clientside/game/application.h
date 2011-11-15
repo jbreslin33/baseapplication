@@ -42,6 +42,8 @@ int mMillisecondsLast;
 
 //parsers
 static const char mCommandMilliseconds = 2;
+static const char mMessageFrame = 1;
+static const char mCommandKey          = 1;
 
 private:
 
@@ -122,6 +124,8 @@ virtual bool        frameRenderingQueued (const Ogre::FrameEvent& evt);
 void buttonHit             (OgreBites::Button *button);
 bool mouseMoved            ( const OIS::MouseEvent &arg );
 
+//command
+void sendCommand   ();
 };
 
 #endif
