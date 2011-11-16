@@ -38,8 +38,9 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 	mSpeedMax  = 1.66f;
 
 	//commands
-	mServerFrame         = new Command();
-	mCommandToRunOnShape = new Command();
+	mServerCommandCurrent = new Command();
+	mServerCommandLast    = new Command();
+	mCommandToRunOnShape  = new Command();
 
 	//orientation
 	mPosition     = new Vector3D();
@@ -177,8 +178,8 @@ void Shape::readDeltaMoveCommand(ByteBuffer *mes)
 	// Origin
 	if(flags & mCommandOriginX)
 	{
-		mServerFrame->mPositionOld->x = mServerFrame->mPosition->x;
-		mServerFrame->mPosition->x = mes->ReadFloat();		
+		mServerCommandLast->mPosition->x = mServerCommandCurrent->mPosition->x;
+		mServerCommandCurrent->mPosition->x = mes->ReadFloat();		
 	}
 	else
 	{
@@ -187,8 +188,8 @@ void Shape::readDeltaMoveCommand(ByteBuffer *mes)
 
 	if(flags & mCommandOriginY)
 	{
-		mServerFrame->mPositionOld->y = mServerFrame->mPosition->y;
-		mServerFrame->mPosition->y = mes->ReadFloat();
+		mServerCommandLast->mPosition->y = mServerCommandCurrent->mPosition->y;
+		mServerCommandCurrent->mPosition->y = mes->ReadFloat();
 	}
 	else
 	{
@@ -197,8 +198,8 @@ void Shape::readDeltaMoveCommand(ByteBuffer *mes)
 
 	if(flags & mCommandOriginZ)
 	{
-		mServerFrame->mPositionOld->z = mServerFrame->mPosition->z;
-		mServerFrame->mPosition->z = mes->ReadFloat();	
+		mServerCommandLast->mPosition->z = mServerCommandCurrent->mPosition->z;
+		mServerCommandCurrent->mPosition->z = mes->ReadFloat();	
 	}
 	else
 	{
@@ -208,51 +209,51 @@ void Shape::readDeltaMoveCommand(ByteBuffer *mes)
 	//rotation
 	if(flags & mCommandRotationX)
 	{
-		mServerFrame->mRotOld->x = mServerFrame->mRot->x;
-		mServerFrame->mRot->x = mes->ReadFloat();
+		mServerCommandLast->mRotation->x = mServerCommandCurrent->mRotation->x;
+		mServerCommandCurrent->mRotation->x = mes->ReadFloat();
 	}
 
 	if(flags & mCommandRotationZ)
 	{
-		mServerFrame->mRotOld->z = mServerFrame->mRot->z;
-		mServerFrame->mRot->z = mes->ReadFloat();
+		mServerCommandLast->mRotation->z = mServerCommandCurrent->mRotation->z;
+		mServerCommandCurrent->mRotation->z = mes->ReadFloat();
 	}
 
 	//milliseconds
 	if (flags & mApplication->mCommandMilliseconds)
 	{
-		mServerFrame->mMilliseconds = mes->ReadByte();
-		mCommandToRunOnShape->mMilliseconds = mServerFrame->mMilliseconds;
+		mServerCommandCurrent->mMilliseconds = mes->ReadByte();
+		mCommandToRunOnShape->mMilliseconds = mServerCommandCurrent->mMilliseconds;
 	}
 
-	if (mServerFrame->mMilliseconds != 0) 
+	if (mServerCommandCurrent->mMilliseconds != 0) 
 	{
 		//position
 		if (moveXChanged)
 		{
-			mServerFrame->mMoveVelocity->x = mServerFrame->mPosition->x - mServerFrame->mPositionOld->x;
+			mServerCommandCurrent->mMoveVelocity->x = mServerCommandCurrent->mPosition->x - mServerCommandLast->mPosition->x;
 		}
 		else
 		{
-			mServerFrame->mMoveVelocity->x = 0.0;
+			mServerCommandCurrent->mMoveVelocity->x = 0.0;
 		}
 		
 		if (moveYChanged)
 		{
-			mServerFrame->mMoveVelocity->y = mServerFrame->mPosition->y - mServerFrame->mPositionOld->y;
+			mServerCommandCurrent->mMoveVelocity->y = mServerCommandCurrent->mPosition->y - mServerCommandLast->mPosition->y;
 		}
 		else
 		{
-			mServerFrame->mMoveVelocity->y = 0.0;
+			mServerCommandCurrent->mMoveVelocity->y = 0.0;
 		}
 
 		if (moveZChanged)
 		{
-			mServerFrame->mMoveVelocity->z = mServerFrame->mPosition->z - mServerFrame->mPositionOld->z;
+			mServerCommandCurrent->mMoveVelocity->z = mServerCommandCurrent->mPosition->z - mServerCommandLast->mPosition->z;
 		}
 		else
 		{
-			mServerFrame->mMoveVelocity->z = 0.0;
+			mServerCommandCurrent->mMoveVelocity->z = 0.0;
 		}
 	}
 
@@ -263,9 +264,9 @@ void Shape::moveGhostShape()
 {
 	Vector3D* transVector = new Vector3D();
 
-	transVector->x = mServerFrame->mPosition->x;
+	transVector->x = mServerCommandCurrent->mPosition->x;
 	transVector->y = 0;
-	transVector->z = mServerFrame->mPosition->z;
+	transVector->z = mServerCommandCurrent->mPosition->z;
 
 	if (mGhost)
 	{

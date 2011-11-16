@@ -54,8 +54,11 @@ Vector3D* mMoveVelocity;
 Vector3D* mRotation;
 
 //commands
-Command* mServerFrame;					// the latest frame from server
+Command* mServerCommandCurrent;					// the latest frame from server
 Command* mCommandToRunOnShape;
+
+Command* mServerCommandLast;
+
 
 //ogre scene stuff
 Entity*             mEntity;
