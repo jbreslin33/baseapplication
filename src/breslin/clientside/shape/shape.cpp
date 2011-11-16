@@ -44,7 +44,7 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 
 	//orientation
 	mPosition     = new Vector3D();
-	mMoveVelocity = new Vector3D();
+	//mVelocity = new Vector3D();
 	mRotation     = new Vector3D();
 
 	//mesh
@@ -120,12 +120,11 @@ void Shape::parseByteBuffer(ByteBuffer* byteBuffer)
 	byteBuffer->ReadByte(); //should read -103 to add a shape..
 	mLocal	=    byteBuffer->ReadByte();
 	mIndex		=    byteBuffer->ReadByte();
+
 	mPosition->x =   byteBuffer->ReadFloat();
 	mPosition->y =   byteBuffer->ReadFloat();
 	mPosition->z =   byteBuffer->ReadFloat();
-	mMoveVelocity->x = byteBuffer->ReadFloat();
-	mMoveVelocity->y = byteBuffer->ReadFloat();
-	mMoveVelocity->z = byteBuffer->ReadFloat();
+
 	mRotation->x = byteBuffer->ReadFloat();
 	mRotation->z = byteBuffer->ReadFloat();
 	
@@ -231,29 +230,29 @@ void Shape::readDeltaMoveCommand(ByteBuffer *mes)
 		//position
 		if (moveXChanged)
 		{
-			mServerCommandCurrent->mMoveVelocity->x = mServerCommandCurrent->mPosition->x - mServerCommandLast->mPosition->x;
+			mServerCommandCurrent->mVelocity->x = mServerCommandCurrent->mPosition->x - mServerCommandLast->mPosition->x;
 		}
 		else
 		{
-			mServerCommandCurrent->mMoveVelocity->x = 0.0;
+			mServerCommandCurrent->mVelocity->x = 0.0;
 		}
 		
 		if (moveYChanged)
 		{
-			mServerCommandCurrent->mMoveVelocity->y = mServerCommandCurrent->mPosition->y - mServerCommandLast->mPosition->y;
+			mServerCommandCurrent->mVelocity->y = mServerCommandCurrent->mPosition->y - mServerCommandLast->mPosition->y;
 		}
 		else
 		{
-			mServerCommandCurrent->mMoveVelocity->y = 0.0;
+			mServerCommandCurrent->mVelocity->y = 0.0;
 		}
 
 		if (moveZChanged)
 		{
-			mServerCommandCurrent->mMoveVelocity->z = mServerCommandCurrent->mPosition->z - mServerCommandLast->mPosition->z;
+			mServerCommandCurrent->mVelocity->z = mServerCommandCurrent->mPosition->z - mServerCommandLast->mPosition->z;
 		}
 		else
 		{
-			mServerCommandCurrent->mMoveVelocity->z = 0.0;
+			mServerCommandCurrent->mVelocity->z = 0.0;
 		}
 	}
 

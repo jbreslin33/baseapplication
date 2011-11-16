@@ -269,10 +269,6 @@ void Shape::writeAdd(Client* client)
 	client->mMessage.WriteFloat(mPosition->y);
 	client->mMessage.WriteFloat(mPosition->z);
 
-	client->mMessage.WriteFloat(mPositionVelocity->x);
-	client->mMessage.WriteFloat(mPositionVelocity->y);
-	client->mMessage.WriteFloat(mPositionVelocity->z);
-
 	client->mMessage.WriteFloat(mRotation->x);
 	client->mMessage.WriteFloat(mRotation->z);
 			

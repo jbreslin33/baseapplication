@@ -50,7 +50,7 @@ Shape* mGhost;
 
 //basic
 Vector3D* mPosition;
-Vector3D* mMoveVelocity;
+//Vector3D* mVelocity;
 Vector3D* mRotation;
 
 //commands

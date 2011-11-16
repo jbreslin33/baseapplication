@@ -63,20 +63,20 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 	abilityMove->mShape->appendToTitle("M:Normal");
 
 	// if distance exceeds threshold && server velocity is zero
-	if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShape->mServerCommandCurrent->mMoveVelocity->isZero())
+	if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShape->mServerCommandCurrent->mVelocity->isZero())
 	{
 		abilityMove->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
     }
     else //server stopped or we are in sync so just use server vel as is..
     {
 		Vector3D* serverDest = new Vector3D();
-		serverDest->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mMoveVelocity);
+		serverDest->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
 		serverDest->normalise();
 
         if(abilityMove->mShape->mCommandToRunOnShape->mMilliseconds != 0)
         {
 			abilityMove->mShape->mSpeed = abilityMove->calcuateSpeed(
-			abilityMove->mShape->mServerCommandCurrent->mMoveVelocity,
+			abilityMove->mShape->mServerCommandCurrent->mVelocity,
 			abilityMove->mShape->mCommandToRunOnShape->mMilliseconds);
         }
 
@@ -85,7 +85,7 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 		//keep player from teleporting
 		abilityMove->regulate(serverDest);
 
-		abilityMove->mShape->mCommandToRunOnShape->mMoveVelocity->copyValuesFrom(serverDest);
+		abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(serverDest);
 	}
 }
 void Normal_ProcessTick_Move::exit(AbilityMove* abilityMove)
@@ -107,17 +107,17 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 	abilityMove->mShape->appendToTitle("M:Catchup");
 
 	//if we are back in sync
-    if(abilityMove->mDeltaPosition <= abilityMove->mPosInterpLimitHigh || abilityMove->mShape->mServerCommandCurrent->mMoveVelocity->isZero())
+    if(abilityMove->mDeltaPosition <= abilityMove->mPosInterpLimitHigh || abilityMove->mShape->mServerCommandCurrent->mVelocity->isZero())
     {
 		abilityMove->mProcessTickStateMachine->changeState(Normal_ProcessTick_Move::Instance());
     }
     else
     {
-		//this is what we will set mCommandToRunOnShape->mMoveVelocity to
+		//this is what we will set mCommandToRunOnShape->mVelocity to
 		Vector3D* newVelocity = new Vector3D(); //vector to future server pos
 
 		//first set newVelocity to most recent velocity from server.
- 		newVelocity->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mMoveVelocity);
+ 		newVelocity->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
 
 		//normalise it now we know what direction to head in.
         newVelocity->normalise();
@@ -143,7 +143,7 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 		if(abilityMove->mShape->mCommandToRunOnShape->mMilliseconds != 0)
         {
 			abilityMove->mShape->mSpeed = abilityMove->calcuateSpeed(
-			abilityMove->mShape->mServerCommandCurrent->mMoveVelocity,
+			abilityMove->mShape->mServerCommandCurrent->mVelocity,
 			abilityMove->mShape->mCommandToRunOnShape->mMilliseconds);
 		   
 			abilityMove->mShape->mSpeed = abilityMove->mShape->mSpeed;
@@ -160,18 +160,18 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 			float distTime = predictDist/time;
 			newVelocity->multiply(distTime);
 
-			//set newVelocity to mCommandToRunOnShape->mMoveVelocity which is what interpolateTick uses
+			//set newVelocity to mCommandToRunOnShape->mVelocity which is what interpolateTick uses
 			
 			//keep player from "teleporting"
 			abilityMove->regulate(newVelocity);
 
-			abilityMove->mShape->mCommandToRunOnShape->mMoveVelocity->copyValuesFrom(newVelocity);
+			abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(newVelocity);
 
 		}
 		else
 		{
 			//why would catchup ever need to set velocity to zero, wouldn't we simply leave catchup state??
-			abilityMove->mShape->mCommandToRunOnShape->mMoveVelocity->zero();
+			abilityMove->mShape->mCommandToRunOnShape->mVelocity->zero();
 
 		}
 	}
@@ -197,8 +197,8 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 	//to be used to setPosition
 	Vector3D* transVector = new Vector3D();
 
-	//copy values from mMoveVelocity so we don't make changes to original
-  	transVector->copyValuesFrom(abilityMove->mShape->mCommandToRunOnShape->mMoveVelocity);
+	//copy values from mVelocity so we don't make changes to original
+  	transVector->copyValuesFrom(abilityMove->mShape->mCommandToRunOnShape->mVelocity);
 
 	//get the mulitplier
 	float multipliedRenderTime = abilityMove->mShape->mApplication->getRenderTime() * 1000;
