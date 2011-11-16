@@ -71,9 +71,9 @@ static const char mCommandOriginZ      = 16;
 static const char mCommandRotationX    = 32;
 static const char mCommandRotationZ    = 64;
 
-//basic
-Vector3D* mPosition;
-Vector3D* mRotation;
+//spawn orientation
+Vector3D* mSpawnPosition;
+Vector3D* mSpawnRotation;
 
 //mesh
 int         mMeshCode;

@@ -43,8 +43,8 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 	mCommandToRunOnShape  = new Command();
 
 	//orientation
-	mPosition     = new Vector3D();
-	mRotation     = new Vector3D();
+	mSpawnPosition     = new Vector3D();
+	mSpawnRotation     = new Vector3D();
 
 	//mesh
 	mMeshCode = 0;
@@ -120,12 +120,12 @@ void Shape::parseByteBuffer(ByteBuffer* byteBuffer)
 	mLocal	=    byteBuffer->ReadByte();
 	mIndex		=    byteBuffer->ReadByte();
 
-	mPosition->x =   byteBuffer->ReadFloat();
-	mPosition->y =   byteBuffer->ReadFloat();
-	mPosition->z =   byteBuffer->ReadFloat();
+	mSpawnPosition->x =   byteBuffer->ReadFloat();
+	mSpawnPosition->y =   byteBuffer->ReadFloat();
+	mSpawnPosition->z =   byteBuffer->ReadFloat();
 
-	mRotation->x = byteBuffer->ReadFloat();
-	mRotation->z = byteBuffer->ReadFloat();
+	mSpawnRotation->x = byteBuffer->ReadFloat();
+	mSpawnRotation->z = byteBuffer->ReadFloat();
 	
 	//mesh
 	mMeshCode    = byteBuffer->ReadByte();
@@ -286,7 +286,7 @@ void Shape::createShape()
 
 	//set Starting position of sceneNode, we will attach our mesh to this. this is all that's needed for static shapes. actually we need to add
 	//rotation for them
-	mSceneNode->setPosition(mPosition->x,mPosition->y,mPosition->z);	
+	mSceneNode->setPosition(mSpawnPosition->x,mSpawnPosition->y,mSpawnPosition->z);	
 	
 	//create mesh
 	mEntity = mApplication->getSceneManager()->createEntity(mName, mMeshName);
