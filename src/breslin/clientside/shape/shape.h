@@ -45,12 +45,6 @@ int   mIndex;
 float mSpeed;
 float mSpeedMax; 
 
-//animate
-bool mAnimate;
-
-//abilitys
-std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
-
 //this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
 Shape* mGhost;
 
@@ -58,30 +52,17 @@ Shape* mGhost;
 Vector3D* mPosition;
 Vector3D* mMoveVelocity;
 Vector3D* mRotation;
-int mLocal;
 
 //commands
 Command* mServerFrame;					// the latest frame from server
 Command* mCommandToRunOnShape;
 
-//OGRE_SPECIFIC_PRIVATE
-
-//ghost
-bool mIsGhost;
-
 //ogre scene stuff
 Entity*             mEntity;
-
-//this is your pointer to move shape, really all you need.
-SceneNode*          mSceneNode;
 
 //billboard
 ObjectTitle* mObjectTitle;
 std::string  mObjectTitleString;
-
-//scale
-float mScale;
-
 
 private:
 
@@ -98,6 +79,23 @@ std::string mMeshName;
 
 //name
 std::string mName;
+
+//animate
+bool mAnimate;
+
+//abilitys
+std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
+
+//ghost
+bool mIsGhost;
+
+//scale
+float mScale;
+
+//this is your pointer to move shape, really all you need.
+SceneNode*          mSceneNode;
+
+int mLocal;
 
 /**************************************************
 *			METHODS
