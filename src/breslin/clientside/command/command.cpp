@@ -6,7 +6,7 @@ Command::Command()
 	mMoveVelocity     = new Vector3D();
 
 	mRotation        = new Vector3D();
-	mRotSpeed = 0.0f;
+	mRotationSpeed = 0.0f;
 
 	mMilliseconds = 0;
 }

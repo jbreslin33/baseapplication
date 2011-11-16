@@ -80,20 +80,20 @@ void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
     {
          if (abilityRotation->mServerRotSpeed == 0.0)
          {
-			abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = 0.0;
+			abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = 0.0;
          }
          else
          {
 			// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
             if(abilityRotation->mServerRotSpeed > 0.0)
             {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = abilityRotation->mTurnSpeed;
-				//LogString("N1:%f",abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed);
+				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mTurnSpeed;
+				//LogString("N1:%f",abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed);
             }
 			else //clockwise - set to -mTurnSpeed
             {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = -abilityRotation->mTurnSpeed;
-				//LogString("N2:%f",abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed);
+				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = -abilityRotation->mTurnSpeed;
+				//LogString("N2:%f",abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed);
             }
 		}
 	}
@@ -131,30 +131,30 @@ void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 			// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
             if(abilityRotation->mServerRotSpeed > 0.0)
             {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = abilityRotation->mTurnSpeed;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mTurnSpeed;
             }
             else //clockwise - set to -mTurnSpeed
             {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = -abilityRotation->mTurnSpeed;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = -abilityRotation->mTurnSpeed;
             }
 			if(abilityRotation->mDegreesToServer / abilityRotation->mServerRotSpeed > 0.0)
             {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed * abilityRotation->mRotInterpIncrease;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed * abilityRotation->mRotInterpIncrease;
             }
             else
             {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed * abilityRotation->mRotInterpDecrease;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed * abilityRotation->mRotInterpDecrease;
             }
 		}
         else if(abilityRotation->mServerRotSpeed == 0.0)
         {
 			if (abilityRotation->mDegreesToServer > 0.0)
             {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = abilityRotation->mTurnSpeed;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mTurnSpeed;
             }
             else //clockwise - set to -mTurnSpeed
             {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = -abilityRotation->mTurnSpeed;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = -abilityRotation->mTurnSpeed;
             }
 		}
 	}
@@ -185,7 +185,7 @@ void Normal_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	//->mObjectTitleString.append("R:Normal");
-	float rotSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed * abilityRotation->mShape->mApplication->getRenderTime();
+	float rotSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed * abilityRotation->mShape->mApplication->getRenderTime();
 	abilityRotation->mShape->yaw(rotSpeed, true);
 
 	if (abilityRotation->mServerRotSpeed == 0.0 && abs(abilityRotation->getDegreesToServer()) < abilityRotation->mRotInterpLimitLow)
@@ -208,7 +208,7 @@ Off_InterpolateTick_Rotation* Off_InterpolateTick_Rotation::Instance()
 }
 void Off_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 {
-	abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = 0.0;
+	abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = 0.0;
 }
 void Off_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {		
