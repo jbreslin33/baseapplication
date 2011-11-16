@@ -48,11 +48,6 @@ float mSpeedMax;
 //this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
 Shape* mGhost;
 
-//basic
-Vector3D* mPosition;
-//Vector3D* mVelocity;
-Vector3D* mRotation;
-
 //commands
 Command* mServerCommandCurrent;					// the latest frame from server
 Command* mCommandToRunOnShape;
@@ -75,6 +70,10 @@ static const char mCommandOriginY      = 8;
 static const char mCommandOriginZ      = 16;
 static const char mCommandRotationX    = 32;
 static const char mCommandRotationZ    = 64;
+
+//basic
+Vector3D* mPosition;
+Vector3D* mRotation;
 
 //mesh
 int         mMeshCode;
@@ -99,6 +98,7 @@ float mScale;
 SceneNode*          mSceneNode;
 
 int mLocal;
+
 
 /**************************************************
 *			METHODS

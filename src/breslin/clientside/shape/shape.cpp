@@ -44,7 +44,6 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 
 	//orientation
 	mPosition     = new Vector3D();
-	//mVelocity = new Vector3D();
 	mRotation     = new Vector3D();
 
 	//mesh

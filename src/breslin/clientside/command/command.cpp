@@ -2,10 +2,10 @@
 
 Command::Command()
 {
-	mPosition         = new Vector3D();
-	mVelocity     = new Vector3D();
+	mPosition = new Vector3D();
+	mVelocity = new Vector3D();
+	mRotation = new Vector3D();
 
-	mRotation        = new Vector3D();
 	mRotationSpeed = 0.0f;
 
 	mMilliseconds = 0;
