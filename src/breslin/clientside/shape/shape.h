@@ -94,10 +94,20 @@ std::string  mObjectTitleString;
 float mScale;
 
 
+private:
+
+	//network flags
+static const char mCommandOriginX      = 4;
+static const char mCommandOriginY      = 8;
+static const char mCommandOriginZ      = 16;
+static const char mCommandRotationX    = 32;
+static const char mCommandRotationZ    = 64;
+
 /**************************************************
 *			METHODS
 **************************************************/
 
+public:
 
 //setting position
 void     setPosition          (Vector3D*                  );
@@ -165,6 +175,8 @@ SceneNode*  getSceneNode() { return mSceneNode; }
 
 //utility
 Ogre::Vector3 converToVector3(Vector3D* vector3d);
+
+private:
 
 //mesh
 std::string getMeshString(int meshCode);

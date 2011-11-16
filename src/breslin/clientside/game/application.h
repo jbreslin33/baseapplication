@@ -30,19 +30,13 @@ public:
 
 public:
 
-//game
-Game* mGame;
 
-//key input
-int mKeyCurrent;         
-int mKeyLast;
 
-int mMillisecondsCurrent;
-int mMillisecondsLast;
-
-//parsers
+//constants
 static const char mCommandMilliseconds = 2;
-static const char mMessageFrame = 1;
+
+
+
 static const char mCommandKey          = 1;
 static const char mMessageConnect     = -101;
 static const char mMessageDisconnect  = -102;
@@ -53,20 +47,19 @@ static const char mMessageNonDeltaFrame = 2;
 static const char mMessageServerExit = 3;
 static const char mMessageKeepAlive = 12;
 
-//network flags
-static const char mCommandOriginX      = 4;
-static const char mCommandOriginY      = 8;
-static const char mCommandOriginZ      = 16;
-static const char mCommandRotationX    = 32;
-static const char mCommandRotationZ    = 64;
-
 private:
 
-//sequences and packet loss stats
-signed short	mOutgoingSequence;		// OutFgoing packet sequence
+//constants
+static const char mMessageFrame = 1;
 
 //Network
 Network*     mNetwork;
+
+//game
+Game* mGame;
+
+//sequences and packet loss stats
+signed short	mOutgoingSequence;		// OutFgoing packet sequence
 
 //time
 float mFrameTime;
@@ -87,7 +80,12 @@ int mKeyRight;
 int mKeyCounterClockwise;
 int mKeyClockwise;
 	
-//OGRE_SPECIFIC
+//key input
+int mKeyCurrent;         
+int mKeyLast;
+
+int mMillisecondsCurrent;
+int mMillisecondsLast;
 
 //gui
 OgreBites::Button* mJoinButton;
