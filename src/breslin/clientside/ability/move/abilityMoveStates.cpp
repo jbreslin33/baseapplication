@@ -161,7 +161,6 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 			newVelocity->multiply(distTime);
 
 			//set newVelocity to mCommandToRunOnShape->mMoveVelocity which is what interpolateTick uses
-			//LogString("x:%f",newVelocity->x);
 			
 			//keep player from "teleporting"
 			abilityMove->regulate(newVelocity);

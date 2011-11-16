@@ -132,22 +132,18 @@ void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
             if(abilityRotation->mServerRotSpeed > 0.0)
             {
 				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = abilityRotation->mTurnSpeed;
-				//LogString("C1:%f",abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed);
             }
             else //clockwise - set to -mTurnSpeed
             {
 				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = -abilityRotation->mTurnSpeed;
-				//LogString("C2:%f",abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed);
             }
 			if(abilityRotation->mDegreesToServer / abilityRotation->mServerRotSpeed > 0.0)
             {
 				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed * abilityRotation->mRotInterpIncrease;
-				//LogString("C3:%f",abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed);
             }
             else
             {
 				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed * abilityRotation->mRotInterpDecrease;
-				//LogString("C4:%f",abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed);
             }
 		}
         else if(abilityRotation->mServerRotSpeed == 0.0)
@@ -155,12 +151,10 @@ void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 			if (abilityRotation->mDegreesToServer > 0.0)
             {
 				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = abilityRotation->mTurnSpeed;
-				//LogString("C5:%f",abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed);
             }
             else //clockwise - set to -mTurnSpeed
             {
 				abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = -abilityRotation->mTurnSpeed;
-				//LogString("C6:%f",abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed);
             }
 		}
 	}
@@ -215,7 +209,6 @@ Off_InterpolateTick_Rotation* Off_InterpolateTick_Rotation::Instance()
 void Off_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 {
 	abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed = 0.0;
-	//LogString("OF:%f",abilityRotation->mShape->mCommandToRunOnShape->mRotSpeed);
 }
 void Off_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {		

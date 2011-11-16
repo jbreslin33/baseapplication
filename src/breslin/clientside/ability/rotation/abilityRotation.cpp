@@ -66,7 +66,6 @@ AbilityRotation::~AbilityRotation()
 void AbilityRotation::processTick()
 {
 	mProcessTickStateMachine->update();
-	//LogString("mRotSpeed:%f",mShape->mCommandToRunOnShape->mRotSpeed);
 }
 void AbilityRotation::interpolateTick(float renderTime)
 {
