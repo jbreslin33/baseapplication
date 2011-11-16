@@ -160,7 +160,6 @@ void Application::runNetwork(float msec)
 ***********************************/
 float Application::getRenderTime()
 {
-	//LogString("r:%f",mGraphicsOgre->mRenderTime);
 	return mRenderTime;
 }
 

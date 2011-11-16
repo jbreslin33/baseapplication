@@ -75,12 +75,12 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 
         if(abilityMove->mShape->mCommandToRunOnShape->mMilliseconds != 0)
         {
-			abilityMove->mSpeed = abilityMove->calcuateSpeed(
+			abilityMove->mShape->mSpeed = abilityMove->calcuateSpeed(
 			abilityMove->mShape->mServerFrame->mMoveVelocity,
 			abilityMove->mShape->mCommandToRunOnShape->mMilliseconds);
         }
 
-		serverDest->multiply(abilityMove->mSpeed);
+		serverDest->multiply(abilityMove->mShape->mSpeed);
 		
 		//keep player from teleporting
 		abilityMove->regulate(serverDest);
@@ -142,17 +142,17 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
         //server velocity
 		if(abilityMove->mShape->mCommandToRunOnShape->mMilliseconds != 0)
         {
-			abilityMove->mSpeed = abilityMove->calcuateSpeed(
+			abilityMove->mShape->mSpeed = abilityMove->calcuateSpeed(
 			abilityMove->mShape->mServerFrame->mMoveVelocity,
 			abilityMove->mShape->mCommandToRunOnShape->mMilliseconds);
 		   
-			abilityMove->mShape->mSpeed = abilityMove->mSpeed;
+			abilityMove->mShape->mSpeed = abilityMove->mShape->mSpeed;
 		}
 
-		if(abilityMove->mSpeed != 0.0)
+		if(abilityMove->mShape->mSpeed != 0.0)
 		{
 			//time needed to get to future server pos
-			float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mSpeed;
+			float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mShape->mSpeed;
 
 			newVelocity->normalise();  //?????what the hell why i am normalizing this after all that work above?
 

@@ -34,9 +34,6 @@ Shape* mShape;
 AbilityMoveStateMachine* mProcessTickStateMachine;
 AbilityMoveStateMachine* mInterpolateTickStateMachine;
 
-//speed
-float mSpeed; 
-
 //thresholds
 float mPosInterpLimitHigh; 
 float mPosInterpFactor; 

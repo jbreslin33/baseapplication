@@ -33,13 +33,13 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 	//id
 	mIndex = 0;
 
-	//commands
-	mServerFrame         = new Command();
-	mCommandToRunOnShape = new Command();
-
 	//speed
 	mSpeed = 0.0f;
 	mSpeedMax  = 1.66f;
+
+	//commands
+	mServerFrame         = new Command();
+	mCommandToRunOnShape = new Command();
 
 	//orientation
 	mPosition     = new Vector3D();

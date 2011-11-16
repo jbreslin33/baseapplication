@@ -30,12 +30,13 @@ public:
 
 public:
 
-
-
 //constants
 static const char mCommandMilliseconds = 2;
 
+private:
 
+//constants
+static const char mMessageFrame = 1;
 
 static const char mCommandKey          = 1;
 static const char mMessageConnect     = -101;
@@ -43,14 +44,8 @@ static const char mMessageDisconnect  = -102;
 static const char mMessageAddShape    = -103;
 static const char mMessageRemoveShape = -104;
 
-static const char mMessageNonDeltaFrame = 2;
 static const char mMessageServerExit = 3;
 static const char mMessageKeepAlive = 12;
-
-private:
-
-//constants
-static const char mMessageFrame = 1;
 
 //Network
 Network*     mNetwork;

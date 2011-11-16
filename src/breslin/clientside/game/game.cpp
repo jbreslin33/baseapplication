@@ -41,9 +41,11 @@ void Game::removeShape(ByteBuffer* byteBuffer)
 {
 	int index = byteBuffer->ReadByte();
 	
+	Shape* shape = getShape(index);
+
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
-		if (mShapeVector.at(i)->mIndex == index)
+		if (mShapeVector.at(i) == shape)
 		{
 			delete mShapeVector.at(i);
 			mShapeVector.erase (mShapeVector.begin()+i);

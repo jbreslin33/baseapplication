@@ -16,7 +16,6 @@ using namespace Ogre;
 *          FORWARD DECLARATIONS
 **********************************/
 class Application;
-class Parser;
 class Vector3D;
 class Ability;
 class Game;
@@ -42,22 +41,12 @@ Application* mApplication;
 //id
 int   mIndex;
 
-//mesh
-int         mMeshCode;
-std::string mMeshName;
-
-//name
-std::string mName;
-
-//animate
-bool mAnimate;
-
-//parser
-Parser* mParser;
-
 //speed
 float mSpeed;
 float mSpeedMax; 
+
+//animate
+bool mAnimate;
 
 //abilitys
 std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
@@ -96,12 +85,19 @@ float mScale;
 
 private:
 
-	//network flags
+//constants
 static const char mCommandOriginX      = 4;
 static const char mCommandOriginY      = 8;
 static const char mCommandOriginZ      = 16;
 static const char mCommandRotationX    = 32;
 static const char mCommandRotationZ    = 64;
+
+//mesh
+int         mMeshCode;
+std::string mMeshName;
+
+//name
+std::string mName;
 
 /**************************************************
 *			METHODS

@@ -55,7 +55,7 @@ class DreamLinuxSock;
 class Application;
 class Command;
 class ByteBuffer;
-class Parser;
+
 
 /**********************************
 *          CLASS
