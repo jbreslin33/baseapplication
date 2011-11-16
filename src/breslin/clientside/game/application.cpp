@@ -11,7 +11,7 @@
 #include "../../math/vector3D.h"
 
 //byteBuffer
-#include "../byteBuffer/byteBuffer.h"
+#include "../bytebuffer/byteBuffer.h"
 
 //network
 #include "../network/network.h"

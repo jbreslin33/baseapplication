@@ -20,7 +20,7 @@
 #include "../ability/animation/abilityAnimationOgre.h"
 
 //byteBuffer
-#include "../byteBuffer/byteBuffer.h"
+#include "../bytebuffer/byteBuffer.h"
 
 //ObjectTitle
 #include "../billboard/objectTitle.h"

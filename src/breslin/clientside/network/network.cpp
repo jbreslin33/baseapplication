@@ -14,7 +14,7 @@
 #include "../command/command.h"
 
 //byteBuffer
-#include "../byteBuffer/byteBuffer.h"
+#include "../bytebuffer/byteBuffer.h"
 
 //sockets
 #ifdef WIN32
@@ -183,7 +183,7 @@ void Network::close()
 #ifdef WIN32
 		closesocket(mSocket);
 #else
-		close(mSocket);
+		//close(mSocket);
 #endif
 }
 
