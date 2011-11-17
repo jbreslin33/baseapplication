@@ -129,7 +129,6 @@ Ability* getAbility(Ability* ability);
 
 //movement
 float       getDegreesToSomething(Vector3D* something                       ) ;
-void        translate            (Vector3D* translateVector, int perspective) ;
 
 //ticks
 void processTick();
@@ -180,6 +179,9 @@ void     drawTitle            (                          ) ;
 
 //mesh
 std::string getMeshString(int meshCode);
+
+//translate
+void        translate            (Vector3D* translateVector, int perspective) ;
 };
 
 #endif
