@@ -116,21 +116,14 @@ void    setRotation(Vector3D* vector3D) ;
 //getting position
 Vector3D* getPosition          (                          ) ;
 Vector3D* getRotation          (                          ) ;
-//size
-void     scale                (Vector3D                  ) ;
-
-//visibility
-void     setVisible           (bool b                    ) ;
-
 
 //title
-void     drawTitle            (                          ) ;
 void     appendToTitle        (std::string appendage     ) ;
 void     appendToTitle        (int appendage             ) ;
 void     clearTitle           (                          ) ;
 
 //dynamic
-//abilitys
+//abilitysf
 void     addAbility(Ability* ability);
 Ability* getAbility(Ability* ability);
 
@@ -174,6 +167,16 @@ SceneNode*  getSceneNode() { return mSceneNode; }
 Ogre::Vector3 converToVector3(Vector3D* vector3d);
 
 private:
+
+//size
+void     scale                (Vector3D                  ) ;
+
+//visibility
+void     setVisible           (bool b                    ) ;
+
+
+//title
+void     drawTitle            (                          ) ;
 
 //mesh
 std::string getMeshString(int meshCode);
