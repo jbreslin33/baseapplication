@@ -27,6 +27,8 @@
 
 Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 {
+	mIsGhost = isGhost;
+
 	//application
 	mApplication = application;
 
@@ -52,24 +54,14 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 	//animate
 	mAnimate = false;
 
-	//byteBuffer
-	parseByteBuffer(byteBuffer);
+	//process Spawn ByteBuffer
+	processSpawnByteBuffer(byteBuffer);
 
 	//ghost
 	mGhost = NULL;
 
-	mIsGhost = isGhost;
 
-	if (mIsGhost)
-	{
-		mIndex = mIndex * -1;
-	}	
 
-	//figure out mesh based on code passed in byteBuffer
-	mMeshName = getMeshString(mMeshCode);
-	
-	createShape();
-	
 	//animation
 	if (mAnimate)
 	{
@@ -112,13 +104,23 @@ Ability* Shape::getAbility(Ability* ability)
 	}
 	return 0;
 }
+/*********************************
+		SPAWN
+******************************/
 
-void Shape::parseByteBuffer(ByteBuffer* byteBuffer)
+void Shape::processSpawnByteBuffer(ByteBuffer* byteBuffer)
+{
+	parseSpawnByteBuffer(byteBuffer);
+	spawnShape(mSpawnPosition);
+}
+
+void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 {
 	byteBuffer->BeginReading();
 	byteBuffer->ReadByte(); //should read -103 to add a shape..
+
 	mLocal	=    byteBuffer->ReadByte();
-	mIndex		=    byteBuffer->ReadByte();
+	mIndex	=    byteBuffer->ReadByte();
 
 	mSpawnPosition->x =   byteBuffer->ReadFloat();
 	mSpawnPosition->y =   byteBuffer->ReadFloat();
@@ -129,13 +131,47 @@ void Shape::parseByteBuffer(ByteBuffer* byteBuffer)
 	
 	//mesh
 	mMeshCode    = byteBuffer->ReadByte();
+	
+	//figure out mesh based on code passed in byteBuffer
+	mMeshName = getMeshString(mMeshCode);
 
 	//animate
 	mAnimate = byteBuffer->ReadByte();
 }
 
-void Shape::processTick()
+void Shape::spawnShape(Vector3D* position)
 {
+	/*********  create shape ***************/
+	if (mIsGhost)
+	{
+		mIndex = mIndex * -1;
+	}	
+
+	mName         = StringConverter::toString(mIndex);
+	mSceneNode    = mApplication->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+
+	//set Starting position of sceneNode, we will attach our mesh to this. this is all that's needed for static shapes. actually we need to add
+	//rotation for them
+	mSceneNode->setPosition(position->x,position->y,position->z);	
+	
+	//create mesh
+	mEntity = mApplication->getSceneManager()->createEntity(mName, mMeshName);
+
+	//attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
+    mSceneNode->attachObject(mEntity);
+
+	//for scale, won't be needed in future hopefully...
+	Vector3D v;
+	v.x = mScale;
+	v.y = mScale;
+	v.z = mScale;
+	scale(v);
+}
+
+void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
+{
+	parseDeltaByteBuffer(byteBuffer);
+
 	clearTitle(); //empty title string so it can be filled anew
 
 	//process ticks on abilitys
@@ -147,23 +183,9 @@ void Shape::processTick()
 	//run billboard here for now.
 	drawTitle();
 }
-void Shape::interpolateTick(float renderTime)
-{
-	//interpolate ticks on abilitys
-	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
-	{
-		mAbilityVector.at(i)->interpolateTick(renderTime);
-	}
-}
 
-//this is all shapes coming to client game from server
-//should a shape be responsible to read it's own command?????
-//once we determine it's about him shouldn't we pass it off to
-//shape object to handle?
-void Shape::readDeltaMoveCommand(ByteBuffer *mes)
+void Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 {
-	//Shape* shape = NULL;
-
 	int flags = 0;
 
 	bool moveXChanged = true;
@@ -257,6 +279,17 @@ void Shape::readDeltaMoveCommand(ByteBuffer *mes)
 
 }
 
+void Shape::interpolateTick(float renderTime)
+{
+	//interpolate ticks on abilitys
+	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+	{
+		mAbilityVector.at(i)->interpolateTick(renderTime);
+	}
+}
+
+
+
 
 void Shape::moveGhostShape()
 {
@@ -277,30 +310,6 @@ void Shape::moveGhostShape()
 *
 *********************************************************/
 
-
-void Shape::createShape()
-{
-	/*********  create shape ***************/
-	mName         = StringConverter::toString(mIndex);
-	mSceneNode    = mApplication->getSceneManager()->getRootSceneNode()->createChildSceneNode();
-
-	//set Starting position of sceneNode, we will attach our mesh to this. this is all that's needed for static shapes. actually we need to add
-	//rotation for them
-	mSceneNode->setPosition(mSpawnPosition->x,mSpawnPosition->y,mSpawnPosition->z);	
-	
-	//create mesh
-	mEntity = mApplication->getSceneManager()->createEntity(mName, mMeshName);
-
-	//attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
-    mSceneNode->attachObject(mEntity);
-
-	//for scale, won't be needed in future hopefully...
-	Vector3D v;
-	v.x = mScale;
-	v.y = mScale;
-	v.z = mScale;
-	scale(v);
-}
 
 void Shape::setupTitle()
 {

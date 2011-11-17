@@ -122,8 +122,7 @@ void Application::readServerTick(ByteBuffer* byteBuffer)
 		}
 		if (shape)
 		{
-			shape->readDeltaMoveCommand(byteBuffer);
-			shape->processTick();
+			shape->processDeltaByteBuffer(byteBuffer);
 		}
 	}
 }

@@ -106,6 +106,9 @@ int mLocal;
 
 public:
 
+//process ByteBuffers
+void processDeltaByteBuffer(ByteBuffer* byteBuffer);
+
 //setting position
 void     setPosition          (Vector3D*                  );
 void     setPosition          (float x, float y, float z );
@@ -130,22 +133,15 @@ Ability* getAbility(Ability* ability);
 //movement
 float       getDegreesToSomething(Vector3D* something                       ) ;
 
-//ticks
-void processTick();
+//interpolation
 void interpolateTick(float renderTime);
-
-//messaging
-void readDeltaMoveCommand(ByteBuffer *mes);
-
-//byteBuffer
-void parseByteBuffer(ByteBuffer* byteBuffer);
 
 //ghost
 void moveGhostShape();
 
 //OGRE_SPECIFIC_PRIVATE
 //shape
-void createShape();
+void spawnShape(Vector3D* position);
 
 //debugging
 void checkExtents(Vector3D min);
@@ -182,6 +178,15 @@ std::string getMeshString(int meshCode);
 
 //translate
 void        translate            (Vector3D* translateVector, int perspective) ;
+
+//process ByteBuffers
+void processSpawnByteBuffer(ByteBuffer* byteBuffer);
+
+// Parse ByteBuffers
+void parseDeltaByteBuffer(ByteBuffer *byteBuffer);
+void parseSpawnByteBuffer(ByteBuffer* byteBuffer);
+
+
 };
 
 #endif
