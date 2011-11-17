@@ -124,8 +124,7 @@ Vector3D* getRotation          (                          ) ;
 void     appendToTitle        (std::string appendage     ) ;
 void     appendToTitle        (int appendage             ) ;
 
-//dynamic
-//abilitysf
+//abilitys
 void     addAbility(Ability* ability);
 Ability* getAbility(Ability* ability);
 
