@@ -115,3 +115,57 @@ Vector3 Vector3D::convertToVector3()
 
 	return vector3;
 }
+
+
+Quaternion* Vector3D::getRotationTo(Vector3D* to)
+{
+	
+	Quaternion* quaternion = new Quaternion();
+
+	Vector3D* fallbackAxis = new Vector3D(0.0f,0.0f,0.0f);
+
+	Vector3D* v0 = new Vector3D();
+	Vector3D* v1 = new Vector3D();
+	v0->copyValuesFrom(this);
+	v1->copyValuesFrom(to);
+
+	v0->normalise();	
+	v1->normalise();
+
+	float d = v0->dot(v1);
+
+    // If dot == 1, vectors are the same
+    if (d >= 1.0f)
+    {
+		//LogString("VECTORS ARE THE SAME!!!!!!!!!!!!!!!!");
+		Quaternion* quaternionIdentity = new Quaternion(1.0,0.0,0.0,0.0);
+		return quaternionIdentity;
+    }
+			
+	if (d < (1e-6f - 1.0f))
+	{
+		// rotate 180 degrees about the fallback axis
+		Vector3 fb;
+		fb.x = fallbackAxis->x;
+		fb.y = fallbackAxis->y;
+		fb.z = fallbackAxis->z;
+		//quaternion->FromAngleAxis(Radian(Math::PI), fb);
+		
+		// rotate 180 degrees about the fallback axis
+		quaternion->FromAngleAxis(Radian(Math::PI), fb);
+	}
+	else
+	{
+		Real s = Math::Sqrt( (1+d)*2 );
+        Real invs = 1 / s;
+
+		Vector3D* c = v0->crossProduct(v1);
+
+   	    quaternion->x = c->x * invs;
+       	quaternion->y = c->y * invs;
+        quaternion->z = c->z * invs;
+        quaternion->w = s * 0.5f;
+		quaternion->normalise();
+	}
+return quaternion;
+}

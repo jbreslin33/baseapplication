@@ -31,5 +31,7 @@ void copyValuesFrom(Vector3D* copyFrom);
 float dot(Vector3D* v2);
 Vector3D* crossProduct(Vector3D* b);
 Vector3 convertToVector3();
+
+Quaternion* getRotationTo(Vector3D* to);
 };
 #endif

@@ -54,7 +54,6 @@ Command* mCommandToRunOnShape;
 
 Command* mServerCommandLast;
 
-
 //ogre scene stuff
 Entity*             mEntity;
 
@@ -146,9 +145,6 @@ void checkExtents(Vector3D min);
 
 //movement
 void yaw        (float amountToYaw, bool converToDegree   );
-
-//check rotation
-Quaternion* getRotationTo(Vector3D* source, Vector3D* dest);
 
 //title
 void setupTitle();
