@@ -123,7 +123,6 @@ Vector3D* getRotation          (                          ) ;
 //title
 void     appendToTitle        (std::string appendage     ) ;
 void     appendToTitle        (int appendage             ) ;
-void     clearTitle           (                          ) ;
 
 //dynamic
 //abilitysf
@@ -154,6 +153,7 @@ Quaternion* getRotationTo(Vector3D* source, Vector3D* dest);
 
 //title
 void setupTitle();
+void clearTitle() ;
 
 //ogre scene node
 SceneNode*  getSceneNode() { return mSceneNode; }
