@@ -32,9 +32,6 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 	//application
 	mApplication = application;
 
-	//id
-	mIndex = 0;
-
 	//speed
 	mSpeed = 0.0f;
 	mSpeedMax  = 1.66f;
@@ -48,19 +45,8 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 	mSpawnPosition     = new Vector3D();
 	mSpawnRotation     = new Vector3D();
 
-	//mesh
-	mMeshCode = 0;
-
-	//animate
-	mAnimate = false;
-
 	//process Spawn ByteBuffer
 	processSpawnByteBuffer(byteBuffer);
-
-	//ghost
-	mGhost = NULL;
-
-
 
 	//animation
 	if (mAnimate)
@@ -70,7 +56,9 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 	
 	setupTitle();
 
-	//call create ghost here..
+	//ghost
+	mGhost = NULL;
+
 	if (!mIsGhost) 
 	{
 		//create a ghost for this shape
@@ -167,6 +155,10 @@ void Shape::spawnShape(Vector3D* position)
 	v.z = mScale;
 	scale(v);
 }
+
+/*********************************
+		DELTA
+******************************/
 
 void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 {
@@ -287,9 +279,6 @@ void Shape::interpolateTick(float renderTime)
 		mAbilityVector.at(i)->interpolateTick(renderTime);
 	}
 }
-
-
-
 
 void Shape::moveGhostShape()
 {
