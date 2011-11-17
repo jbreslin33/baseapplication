@@ -150,9 +150,6 @@ void yaw        (float amountToYaw, bool converToDegree   );
 void setupTitle();
 void clearTitle() ;
 
-//utility
-Ogre::Vector3 converToVector3(Vector3D* vector3d);
-
 private:
 
 //size

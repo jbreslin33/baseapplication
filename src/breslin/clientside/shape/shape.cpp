@@ -340,13 +340,18 @@ void Shape::setRotation(Vector3D* vector3D)
 }
 
 Vector3D* Shape::getRotation()
-{
+{/*
 	Vector3D* vector3D = new Vector3D();
 	
 	vector3D->x = getSceneNode()->_getDerivedOrientation().zAxis().x * -1;
 	vector3D->y = 0.0;
 	vector3D->z = getSceneNode()->_getDerivedOrientation().zAxis().z * -1;
 
+	return vector3D;
+	*/
+		Vector3D* vector3D = new Vector3D();
+	
+		vector3D->convertFromVector3(getSceneNode()->getOrientation().zAxis());
 	return vector3D;
 }
 
@@ -371,17 +376,17 @@ void Shape::translate(Vector3D* translateVector, int perspective)
 {
 	if (perspective == 1)
 	{
-		getSceneNode()->translate(converToVector3(translateVector), Ogre::Node::TS_WORLD);
+		getSceneNode()->translate(translateVector->convertToVector3(), Ogre::Node::TS_WORLD);
 	}
 	if (perspective == 2)
 	{
-		getSceneNode()->translate(converToVector3(translateVector), Ogre::Node::TS_LOCAL);
+		getSceneNode()->translate(translateVector->convertToVector3(), Ogre::Node::TS_LOCAL);
 	}
 }
 
 void Shape::setPosition(Vector3D* position)
 {
-	getSceneNode()->setPosition(converToVector3(position));
+	getSceneNode()->setPosition(position->convertToVector3());
 }
 
 void Shape::setPosition(float x, float y, float z)
@@ -396,15 +401,6 @@ Vector3D* Shape::getPosition()
 	position->y = getSceneNode()->getPosition().y;
 	position->z = getSceneNode()->getPosition().z;
 	return position;
-}
-
-Ogre::Vector3 Shape::converToVector3(Vector3D* vector3d)
-{
-	Ogre::Vector3 vec3;
-	vec3.x = vector3d->x;
-	vec3.y = vector3d->y;
-	vec3.z = vector3d->z;
-	return vec3;
 }
 
 void Shape::setVisible(bool visible)

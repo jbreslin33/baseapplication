@@ -87,10 +87,7 @@ float AbilityRotation::getDegreesToServer()  //rot
     serverRotNew->normalise();
 
     //calculate how far off we are from server
-		Vector3D* from = new Vector3D();
-	from->convertFromVector3( mShape->getSceneNode()->getOrientation().zAxis());
-
-	float degreesToServer = from->getDegreesToSomething(serverRotNew);
+	float degreesToServer = mShape->getRotation()->getDegreesToSomething(serverRotNew);
 
 	return degreesToServer;
 }
@@ -112,17 +109,12 @@ void AbilityRotation::calculateServerRotationSpeed()  //rot
     mServerRotOld->normalise();
 
     //calculate how far off we are from server
-	Vector3D* fromPlayer = new Vector3D();
-	fromPlayer->convertFromVector3( mShape->getSceneNode()->getOrientation().zAxis());
-	mDegreesToServer = 	fromPlayer->getDegreesToSomething(mServerRotNew);
+	mDegreesToServer = 	mShape->getRotation()->getDegreesToSomething(mServerRotNew);
 	
     //calculate server rotation from last tick to new one
 	mServerRotSpeedOld = mServerRotSpeed;
 	
-	Vector3D* fromGhost = new Vector3D();
-	fromGhost->convertFromVector3( mShape->mGhost->getSceneNode()->getOrientation().zAxis());
-
-	float serverRotSpeed = fromGhost->getDegreesToSomething(mServerRotNew);
+	float serverRotSpeed = mShape->mGhost->getRotation()->getDegreesToSomething(mServerRotNew);
 	mGhostSpeed = serverRotSpeed;
 	//if it's a tiny value we have an anomoly which I have not solved yet so use mServerRotSpeedOld...
 	if (serverRotSpeed < 1.0f || serverRotSpeed > -1.0f)
