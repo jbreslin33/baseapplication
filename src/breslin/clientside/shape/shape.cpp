@@ -365,24 +365,7 @@ void Shape::yaw(float amountToYaw, bool convertToDegree)
 	}
 }
 
-//calculate how far off we are from some vector
-float Shape::getDegreesToSomething(Vector3D* vectorOfSomething)
-{
-	//get the orientation of shape in the z axis
-	Vector3 orientation;
-	orientation = getSceneNode()->getOrientation().zAxis();
-	
-	Vector3D* orientation3D = new Vector3D();
-	orientation3D->x = orientation.x;
-	orientation3D->y = orientation.y;
-	orientation3D->z = orientation.z;
-	
-	Quaternion* toSomething = orientation3D->getRotationTo(vectorOfSomething);
-	
-    // convert to degrees
-    Real degreesToSomething = toSomething->getYaw().valueDegrees();
-	return degreesToSomething;
-}
+
 
 void Shape::translate(Vector3D* translateVector, int perspective)
 {

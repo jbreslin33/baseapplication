@@ -105,6 +105,9 @@ int mLocal;
 
 public:
 
+//ogre scene node
+SceneNode*  getSceneNode() { return mSceneNode; }
+
 //process ByteBuffers
 void processDeltaByteBuffer(ByteBuffer* byteBuffer);
 
@@ -127,9 +130,6 @@ void     appendToTitle        (int appendage             ) ;
 void     addAbility(Ability* ability);
 Ability* getAbility(Ability* ability);
 
-//movement
-float       getDegreesToSomething(Vector3D* something                       ) ;
-
 //interpolation
 void interpolateTick(float renderTime);
 
@@ -149,9 +149,6 @@ void yaw        (float amountToYaw, bool converToDegree   );
 //title
 void setupTitle();
 void clearTitle() ;
-
-//ogre scene node
-SceneNode*  getSceneNode() { return mSceneNode; }
 
 //utility
 Ogre::Vector3 converToVector3(Vector3D* vector3d);

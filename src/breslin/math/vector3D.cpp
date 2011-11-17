@@ -169,3 +169,31 @@ Quaternion* Vector3D::getRotationTo(Vector3D* to)
 	}
 return quaternion;
 }
+
+
+//calculate how far off we are from some vector
+float Vector3D::getDegreesToSomething(Vector3D* to)
+{
+	Quaternion* toSomething = this->getRotationTo(to);
+	
+    // convert to degrees
+    Real degreesToSomething = toSomething->getYaw().valueDegrees();
+	return degreesToSomething;
+}
+
+Vector3 Vector3D::getVector3()
+{
+	Vector3 vector3;
+	vector3.x = x;
+	vector3.y = y;
+	vector3.z = z;
+	return vector3;
+}
+
+void Vector3D::convertFromVector3(Vector3 vector3)
+{
+	x = vector3.x;
+	y = vector3.y;
+	z = vector3.z;
+
+}
