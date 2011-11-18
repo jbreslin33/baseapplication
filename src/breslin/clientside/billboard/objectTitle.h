@@ -5,6 +5,7 @@
  
 class ObjectTitle
 {
+private:
     const Ogre::MovableObject* object;
     const Ogre::Camera* camera;
     Ogre::Overlay* overlay;
@@ -22,7 +23,6 @@ public:
     ~ObjectTitle();
  
     void setTitle(const Ogre::String& title);
- 
     void update();
 };
  
