@@ -49,6 +49,8 @@ Vector3D* mServerRotOld;
 Vector3D* mServerRotNew;  
 float    mDegreesToServer;  
 
+float mRotationSpeed;
+
 /******************************************************
 *				METHODS
 ********************************************************/

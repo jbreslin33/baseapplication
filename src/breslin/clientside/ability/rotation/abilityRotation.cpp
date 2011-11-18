@@ -54,6 +54,8 @@ AbilityRotation::AbilityRotation(Shape* shape)  : Ability(shape)
 	mServerRotNew = new Vector3D();
 	mDegreesToServer = 0.0;
 
+	mRotationSpeed = 0.0f;
+
 }
 
 AbilityRotation::~AbilityRotation()

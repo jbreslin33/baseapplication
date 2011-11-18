@@ -15,8 +15,6 @@ Vector3D* mVelocity;	//velocity during frame/tick
 
 Vector3D* mRotation;         //rotation during frame/tick
 
-float mRotationSpeed;
-
 int mMilliseconds;      //not used
 
 };
