@@ -37,8 +37,8 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 	mSpeedMax  = 1.66f;
 
 	//commands
-	mServerCommandCurrent = new Command();
 	mServerCommandLast    = new Command();
+	mServerCommandCurrent = new Command();
 	mCommandToRunOnShape  = new Command();
 
 	//orientation

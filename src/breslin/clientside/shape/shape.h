@@ -49,10 +49,9 @@ float mSpeedMax;
 Shape* mGhost;
 
 //commands
+Command* mServerCommandLast;
 Command* mServerCommandCurrent;					// the latest frame from server
 Command* mCommandToRunOnShape;
-
-Command* mServerCommandLast;
 
 //ogre scene stuff
 Entity*             mEntity;
