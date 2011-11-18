@@ -36,7 +36,6 @@ Shape* mShape;
 //rotation
 float mTurnSpeed; 
 float mServerRotSpeed;  
-float mServerRotSpeedOld;
 float mGhostSpeed;
 
 float mRotInterpLimitHigh;  
@@ -53,6 +52,8 @@ private:
 //rotation
 Vector3D* mServerRotOld;  
 Vector3D* mServerRotNew;  
+
+float mServerRotSpeedOld;
 /******************************************************
 *				METHODS
 ********************************************************/
