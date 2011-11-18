@@ -125,6 +125,11 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 
 	//animate
 	mAnimate = byteBuffer->ReadByte();
+
+	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
+	mServerCommandLast->mPosition->copyValuesFrom(mSpawnPosition);
+	mServerCommandCurrent->mPosition->copyValuesFrom(mSpawnPosition);
+	mCommandToRunOnShape->mPosition->copyValuesFrom(mSpawnPosition);
 }
 
 void Shape::spawnShape(Vector3D* position)
