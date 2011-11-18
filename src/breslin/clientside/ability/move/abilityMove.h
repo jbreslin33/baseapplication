@@ -39,16 +39,20 @@ float mPosInterpLimitHigh;
 float mPosInterpFactor; 
 float mMaximunVelocity;
 
+float mDeltaPosition; 
+
+private:
+
 //deltas
 float mDeltaX;  
 float mDeltaZ;  
 float mDeltaY; 
-float mDeltaPosition; 
+
 
 /******************************************************
 *				METHODS
 ********************************************************/
-
+public:
 //updating
 void processTick();
 void interpolateTick(float renderTime);
