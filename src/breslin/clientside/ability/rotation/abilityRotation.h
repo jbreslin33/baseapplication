@@ -44,16 +44,19 @@ float mRotInterpLimitLow;
 float mRotInterpIncrease;   
 float mRotInterpDecrease;  
 
-//rotation
-Vector3D* mServerRotOld;  
-Vector3D* mServerRotNew;  
 float    mDegreesToServer;  
 
 float mRotationSpeed;
 
+private:
+
+//rotation
+Vector3D* mServerRotOld;  
+Vector3D* mServerRotNew;  
 /******************************************************
 *				METHODS
 ********************************************************/
+public:
 
 //updating
 void processTick();

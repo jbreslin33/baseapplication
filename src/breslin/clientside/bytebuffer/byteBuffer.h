@@ -22,21 +22,25 @@ public:
 /**************************************************
 *			VARIABLES
 **************************************************/
-
-	int				mMaxSize;
+public:
 	int				mSize;
-	int				mReadCount;
 	char*			mCharArray;
+
+private:
+	int				mMaxSize;
+	int				mReadCount;
+
 
 /**************************************************
 *			METHODS
 **************************************************/
-	//admin
+public:
 
+	//admin
 	int             getReadCount() { return mReadCount; }
 	void			BeginReading();
-	char			*GetNewPoint(int length);
-	void			Clear();
+
+	//size
 	int				GetSize()		{ return mSize; }
 	void			SetSize(int s)		{ mSize = s; }
 
@@ -52,6 +56,10 @@ public:
 	short			ReadShort  ();
 	float			ReadFloat  ();
 
+private:
+
+	char			*GetNewPoint(int length);
+	void			Clear();
 };
 
 
