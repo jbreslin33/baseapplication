@@ -108,7 +108,7 @@ public:
 SceneNode*  getSceneNode() { return mSceneNode; }
 
 //process ByteBuffers
-void processDeltaByteBuffer(ByteBuffer* byteBuffer);
+virtual void processDeltaByteBuffer(ByteBuffer* byteBuffer);
 
 //setting position
 void     setPosition          (Vector3D*                  );
@@ -149,6 +149,11 @@ void yaw        (float amountToYaw, bool converToDegree   );
 void setupTitle();
 void clearTitle() ;
 
+protected:
+
+// Parse ByteBuffers
+virtual int parseDeltaByteBuffer(ByteBuffer *byteBuffer);
+
 private:
 
 //size
@@ -171,7 +176,6 @@ void        translate            (Vector3D* translateVector, int perspective) ;
 void processSpawnByteBuffer(ByteBuffer* byteBuffer);
 
 // Parse ByteBuffers
-void parseDeltaByteBuffer(ByteBuffer *byteBuffer);
 void parseSpawnByteBuffer(ByteBuffer* byteBuffer);
 
 

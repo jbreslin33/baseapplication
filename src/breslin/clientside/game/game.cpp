@@ -88,7 +88,7 @@ Shape* Game::getShape(int id)
 void Game::addShape(bool b, ByteBuffer* byteBuffer)
 {
 	Shape* shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
-	
+	kjkj need to make GameTag so you can overide addShape and create a shapeTag
 	//ability
 	shape->addAbility(new AbilityRotation(shape));
 	shape->addAbility(new AbilityMove(shape));

@@ -134,6 +134,7 @@ set(HDRS
 	
 	#shape
 	../clientside/shape/shape.h
+	../clientside/shape/shapeTag.h
 	
 	#byteBuffer
 	../clientside/bytebuffer/byteBuffer.h
@@ -184,6 +185,7 @@ set(SRCS
 	
 	#shape
 	../clientside/shape/shape.cpp
+	../clientside/shape/shapeTag.cpp
 	
 	#byteBuffer
 	../clientside/bytebuffer/byteBuffer.cpp
@@ -242,6 +244,7 @@ set(HDRS
 	
 	#shape
 	../clientside/shape/shape.h
+	../clientside/shape/shapeTag.h
 	
 	#byteBuffer
 	../clientside/bytebuffer/byteBuffer.h
@@ -292,6 +295,7 @@ set(SRCS
 	
 	#shape
 	../clientside/shape/shape.cpp
+	../clientside/shape/shapeTag.cpp
 	
 	#byteBuffer
 	../clientside/bytebuffer/byteBuffer.cpp

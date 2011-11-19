@@ -181,7 +181,7 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 	drawTitle();
 }
 
-void Shape::parseDeltaByteBuffer(ByteBuffer *mes)
+int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 {
 	int flags = 0;
 
@@ -273,7 +273,7 @@ void Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 			mServerCommandCurrent->mVelocity->z = 0.0;
 		}
 	}
-
+	return flags;
 }
 
 void Shape::interpolateTick(float renderTime)

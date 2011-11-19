@@ -24,14 +24,14 @@ ShapeTag::~ShapeTag()
 
 int ShapeTag::setFlag()
 {
-	int flag = Shape::setFlag();
+	int flags = Shape::setFlag();
 	
 	if (mGameTag->mItShape == this)
 	{
-		flag |= mCommandIt;
+		flags |= mCommandIt;
 	}
 	
-	return flag;
+	return flags;
 }
 
 
