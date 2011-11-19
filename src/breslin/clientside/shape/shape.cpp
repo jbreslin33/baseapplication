@@ -167,9 +167,9 @@ void Shape::spawnShape(Vector3D* position)
 
 void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 {
-	parseDeltaByteBuffer(byteBuffer);
-
 	clearTitle(); //empty title string so it can be filled anew
+
+	parseDeltaByteBuffer(byteBuffer);
 
 	//process ticks on abilitys
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
@@ -345,18 +345,10 @@ void Shape::setRotation(Vector3D* vector3D)
 }
 
 Vector3D* Shape::getRotation()
-{/*
+{
 	Vector3D* vector3D = new Vector3D();
+	vector3D->convertFromVector3(getSceneNode()->getOrientation().zAxis());
 	
-	vector3D->x = getSceneNode()->_getDerivedOrientation().zAxis().x * -1;
-	vector3D->y = 0.0;
-	vector3D->z = getSceneNode()->_getDerivedOrientation().zAxis().z * -1;
-
-	return vector3D;
-	*/
-		Vector3D* vector3D = new Vector3D();
-	
-		vector3D->convertFromVector3(getSceneNode()->getOrientation().zAxis());
 	return vector3D;
 }
 

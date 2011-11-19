@@ -41,17 +41,18 @@ void GameTag::createWorld()
 {
 	LogString("createWorld in GameTag");
 	//ai guys, let's make them sinbads
-	for(int i = 0; i < 1; i++)
+	for(int i = 0; i < 5; i++)
 	{                 
 		Vector3D* position = new Vector3D();
 		position->x = 5.0f;
 		position->y = 0.0f;
-		position->z = 2.0f * i;
+		position->z = 3.0f * i;
 
-		Shape* shape = new ShapeTag(getOpenIndex(),this,0,new Vector3D(),new Vector3D(),new Vector3D(),
+		Shape* shape = new ShapeTag(getOpenIndex(),this,0,position,new Vector3D(),new Vector3D(),
 			mRoot,true,true,.66f,1,true); 
 
-		mItShape = mShapeVector.at(0);
+		mShapeIt = shape;
+		mShapeNoTagBack = shape;
 	}
 }
 void GameTag::collision(Shape* shape1, Shape* shape2)
@@ -59,13 +60,15 @@ void GameTag::collision(Shape* shape1, Shape* shape2)
 	Game::collision(shape1,shape2);
 	
 	//let's make someone it
-	if (shape1 == mItShape)
+	if (shape1 == mShapeIt && shape2 != mShapeNoTagBack)
 	{
-		mItShape = shape2;
+		mShapeIt = shape2;
+		mShapeNoTagBack = shape1;
 	}
-	else if (shape2 == mItShape)
+	else if (shape2 == mShapeIt && shape1 != mShapeNoTagBack)
 	{
-		mItShape = shape1;
+		mShapeIt = shape1;
+		mShapeNoTagBack = shape2;
 	}
 }
 

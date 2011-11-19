@@ -26,8 +26,9 @@ int ShapeTag::setFlag()
 {
 	int flags = Shape::setFlag();
 	
-	if (mGameTag->mItShape == this)
+	if (mGameTag->mShapeIt == this)
 	{
+		//LogString("setFlag:%d",mGameTag->mShapeIt->mIndex);
 		flags |= mCommandIt;
 	}
 	

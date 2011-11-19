@@ -21,11 +21,9 @@ ShapeTag::~ShapeTag()
 
 int ShapeTag::parseDeltaByteBuffer(ByteBuffer* byteBuffer)
 {
-	LogString("Check for IT");
 	int flags = Shape::parseDeltaByteBuffer(byteBuffer);
 	if(flags & mCommandIt)
 	{
-		LogString("IT");
 		appendToTitle("IT");
 	}
 	return flags;

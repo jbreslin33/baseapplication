@@ -20,7 +20,7 @@
 #include "../command/command.h"
 
 //game
-#include "game.h"
+#include "gameTag.h"
 
 
 /***************************************
@@ -53,7 +53,7 @@ Application::Application(const char* serverIP, int serverPort)
 	mPlayingGame = false;
 
 	//game
-	mGame = new Game(this,serverIP,serverPort);
+	mGame = new GameTag(this,serverIP,serverPort);
 
 	//input
 	mKeyCurrent = 0;

@@ -27,7 +27,8 @@ virtual void collision(Shape* shape1, Shape* shape2);
 //commands
 virtual void storeCommands(Shape* shape);
 
-Shape* mItShape;
+Shape* mShapeIt;
+Shape* mShapeNoTagBack;
 ServerTag* mServerTag;
   
 

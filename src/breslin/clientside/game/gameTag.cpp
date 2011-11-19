@@ -1,11 +1,11 @@
 //header
-#include "game.h"
+#include "gameTag.h"
 
 //application
 #include "../game/application.h"
 
 //shape
-#include "../shape/shape.h"
+#include "../shape/shapeTag.h"
 
 //bytebuffer
 #include "../bytebuffer/byteBuffer.h"
@@ -17,83 +17,29 @@
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
-Game::Game(Application* application,const char* serverIP, int serverPort)
-{
-	mApplication = application;
-}
-
-Game::~Game()
+GameTag::GameTag(Application* application,const char* serverIP, int serverPort) :
+Game(application,serverIP,serverPort)
 {
 
 }
-/*********************************
-		TICK
-**********************************/
-void Game::run()
+
+GameTag::~GameTag()
 {
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		mShapeVector.at(i)->interpolateTick(mApplication->getRenderTime());
-	}
+
 }
-
-void Game::removeShape(ByteBuffer* byteBuffer)
-{
-	int index = byteBuffer->ReadByte();
-	
-	Shape* shape = getShape(index);
-
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		if (mShapeVector.at(i) == shape)
-		{
-			delete mShapeVector.at(i);
-			mShapeVector.erase (mShapeVector.begin()+i);
-		}
-	}
-}
-
-Shape* Game::getShape(int id)
-{
-	Shape* shape = NULL;
-
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		Shape* curShape = mShapeVector.at(i);
-		if (curShape->mIndex == id)
-		{
-			shape = curShape;
-		}
-	}
-
-	if(!shape)
-	{
-		return NULL;
-	}
-	else
-	{
-		return shape;
-	}
-}
-
-/*************************************************
-*
-*   OGRE_SPECIFIC
-*
-**************************************************
 
 /*********************************
 *		SHAPE
 **********************************/
-void Game::addShape(bool b, ByteBuffer* byteBuffer)
+void GameTag::addShape(bool b, ByteBuffer* byteBuffer)
 {
-	Shape* shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
-	kjkj need to make GameTag so you can overide addShape and create a shapeTag
+	ShapeTag* shapeTag = new ShapeTag(mApplication,byteBuffer,false);  //you should just need to call this...
+
 	//ability
-	shape->addAbility(new AbilityRotation(shape));
-	shape->addAbility(new AbilityMove(shape));
+	shapeTag->addAbility(new AbilityRotation(shapeTag));
+	shapeTag->addAbility(new AbilityMove(shapeTag));
 
 	//put shape and ghost in game vectors so they can be looped and game now knows of them.
-	mShapeVector.push_back(shape);
-	mShapeGhostVector.push_back(shape->mGhost);	
+	mShapeVector.push_back(shapeTag);
+	mShapeGhostVector.push_back(shapeTag->mGhost);	
 }
