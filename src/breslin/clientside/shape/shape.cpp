@@ -63,7 +63,7 @@ Shape::Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost)
 	{
 		//create a ghost for this shape
 		mGhost = new Shape(mApplication,byteBuffer,true);
-		mGhost->setVisible(true);
+		mGhost->setVisible(false);
 	}
 
 }

@@ -44,9 +44,9 @@ void GameTag::createWorld()
 	for(int i = 0; i < 5; i++)
 	{                 
 		Vector3D* position = new Vector3D();
-		position->x = 5.0f;
+		position->x = 3.0f;
 		position->y = 0.0f;
-		position->z = 3.0f * i;
+		position->z = 2.0f * i;
 
 		Shape* shape = new ShapeTag(getOpenIndex(),this,0,position,new Vector3D(),new Vector3D(),
 			mRoot,true,true,.66f,1,true); 
