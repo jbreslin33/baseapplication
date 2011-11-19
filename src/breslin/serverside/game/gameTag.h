@@ -4,6 +4,8 @@
 //parent
 #include "game.h"
 
+class ServerTag;
+
 class GameTag : public Game
 {
 public:
@@ -26,6 +28,7 @@ virtual void collision(Shape* shape1, Shape* shape2);
 virtual void storeCommands(Shape* shape);
 
 Shape* mItShape;
+ServerTag* mServerTag;
   
 
 };

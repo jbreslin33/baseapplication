@@ -33,7 +33,8 @@ GameTag::~GameTag()
 void GameTag::createServer()
 {
 	LogString("createServer in GameTag breslin");
-	mServer = new ServerTag(this,"", 30004);
+	mServerTag = new ServerTag(this,"", 30004);
+	mServer = mServerTag;
 }
 
 void GameTag::createWorld()
@@ -61,12 +62,10 @@ void GameTag::collision(Shape* shape1, Shape* shape2)
 	if (shape1 == mItShape)
 	{
 		mItShape = shape2;
-		//LogString("IT:%d",mItShape->mIndex);
 	}
 	else if (shape2 == mItShape)
 	{
 		mItShape = shape1;
-		//LogString("IT:%d",mItShape->mIndex);
 	}
 }
 

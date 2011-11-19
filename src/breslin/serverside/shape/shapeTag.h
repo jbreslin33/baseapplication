@@ -1,18 +1,37 @@
 #ifndef SHAPETAG_H
 #define SHAPETAG_H
+/******************************************
+*            INCLUDES
+****************************************/
 
 #include "shape.h"
 
+/******************************************
+*            FORWARD DECLARATIONS
+****************************************/
+class GameTag;
+/******************************************
+*            CLASS
+****************************************/
 class ShapeTag : public	Shape
 {
 
 public:
-ShapeTag(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+ShapeTag(unsigned int index, GameTag* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~ShapeTag();
 
-int setFlag();
-virtual void addToMoveMessage(Message* message);
+/******************************************
+*            VARIABLES
+****************************************/
+
+GameTag* mGameTag;
+static const char mCommandIt   = 128;
+
+/******************************************
+*            METHODS
+****************************************/
+virtual int setFlag();
 
 };
 

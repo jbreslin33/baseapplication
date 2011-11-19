@@ -8,18 +8,18 @@
 #include "../shape/shapeTag.h"
 
 //server
-#include "../server/server.h"
+#include "../server/serverTag.h"
 
 //game
-#include "../game/game.h"
+#include "../game/gameTag.h"
 
 //math
 #include "../../math/vector3D.h"
 
 //server side client constructor, many instances will be made, one for each client connected.
-ClientTag::ClientTag(Server* server, struct sockaddr *address) : Client(server,address)
+ClientTag::ClientTag(ServerTag* serverTag, struct sockaddr *address) : Client(serverTag,address)
 {
-	
+	mServerTag = serverTag;
 }
 
 ClientTag::~ClientTag()
@@ -31,7 +31,7 @@ void ClientTag::createShape()
 {
 	//create the shape for this client -- the avatar
 	LogString("create ShapeTagPlayer in ClientTag");
-	mShape = new ShapeTag(mServer->mGame->getOpenIndex(),mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f,1,false); 
+	mShape = new ShapeTag(mServer->mGame->getOpenIndex(),mServerTag->mGameTag,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f,1,false); 
 
 }
 

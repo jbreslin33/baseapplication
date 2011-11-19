@@ -4,12 +4,16 @@
 //parent
 #include "client.h"
 
+class ServerTag;
+
 class ClientTag : public Client
 {
 public:
-	ClientTag(Server* server, struct sockaddr *address);
+	ClientTag(ServerTag* serverTag, struct sockaddr *address);
 
 ~ClientTag();
+
+	ServerTag* mServerTag;
 
 virtual void createShape();
 
