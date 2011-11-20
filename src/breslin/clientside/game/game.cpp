@@ -17,7 +17,7 @@
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
-Game::Game(Application* application,const char* serverIP, int serverPort)
+Game::Game(Application* application)
 {
 	mApplication = application;
 }

@@ -29,7 +29,7 @@ class Game
 {
 public:
 	
-	Game(Application* application, const char* serverIP, int serverPort);
+	Game(Application* application);
 	~Game();
 
 /***************************************

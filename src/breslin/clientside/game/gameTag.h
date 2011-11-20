@@ -29,7 +29,7 @@ class GameTag : public Game
 {
 public:
 	
-	GameTag(Application* application, const char* serverIP, int serverPort);
+	GameTag(Application* application);
 	~GameTag();
 
 /***************************************
