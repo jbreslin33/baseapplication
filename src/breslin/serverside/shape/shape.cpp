@@ -277,20 +277,8 @@ void Shape::writeAdd(Client* client)
 
 	//animation
 	client->mMessage.WriteByte(mAnimated);
-
-	//textCode
-	//client->mMessage.WriteByte(mTextCode);
 }
 
-//does this even care that a client is passed it? other than that it needs it access mShape? which
-//i should already have?
-/*
-void Shape::buildDeltaMoveCommand(Message* mes)
-{
-	int flags = setFlag();
-	buildDeltaMoveMessage(flags,mes);
-}
-*/
 int Shape::setFlag()
 {
 	int flags = 0;

@@ -46,12 +46,6 @@ Client::Client(Server* server, struct sockaddr *address)
 
 	//register this client with server
 	mServer->addClient(this);
-	
-
-	createShape();
-
-	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
-	sendAllShapes();
 }
 
 Client::~Client()

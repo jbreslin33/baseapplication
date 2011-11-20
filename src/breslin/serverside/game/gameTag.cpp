@@ -59,16 +59,24 @@ void GameTag::collision(Shape* shape1, Shape* shape2)
 {
 	Game::collision(shape1,shape2);
 	
+	//LogString("shape1:%d",shape1->mIndex);
+	//LogString("shape2:%d",shape2->mIndex);
 	//let's make someone it
 	if (shape1 == mShapeIt && shape2 != mShapeNoTagBack)
 	{
 		mShapeIt = shape2;
 		mShapeNoTagBack = shape1;
+
+		//LogString("shape1:%d",shape1->mIndex);
+		//LogString("shape2:%d",shape2->mIndex);
 	}
 	else if (shape2 == mShapeIt && shape1 != mShapeNoTagBack)
 	{
 		mShapeIt = shape1;
 		mShapeNoTagBack = shape2;
+
+		//LogString("shape1:%d",shape1->mIndex);
+		//LogString("shape2:%d",shape2->mIndex);
 	}
 }
 

@@ -43,6 +43,10 @@ Server::~Server()
 void Server::createClient(struct sockaddr *address)
 {
 	Client* client = new Client(this, address);
+	
+	client->createShape();
+	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
+	client->sendAllShapes();
 }
 
 void Server::addClient(Client* client)
