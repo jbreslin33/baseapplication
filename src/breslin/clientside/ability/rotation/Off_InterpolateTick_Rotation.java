@@ -7,7 +7,7 @@ package breslin.clientside.ability.rotation;
 import breslin.clientside.ability.rotation.AbilityRotationState;
 
 //shape
-import breslin.clientside.shape.ShapeDynamic;
+import breslin.clientside.shape.Shape;
 import breslin.clientside.shape.Shape;
 
 //math

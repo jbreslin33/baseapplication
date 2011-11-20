@@ -60,30 +60,30 @@ public void execute(AbilityRotation abilityRotation)
 			// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
             if(abilityRotation.mServerRotSpeed > 0.0)
             {
-				abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed = abilityRotation.mTurnSpeed;
+				abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed = abilityRotation.mTurnSpeed;
             }
             else //clockwise - set to -mTurnSpeed
             {
-				abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed = -abilityRotation.mTurnSpeed;
+				abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed = -abilityRotation.mTurnSpeed;
             }
 			if(abilityRotation.mDegreesToServer / abilityRotation.mServerRotSpeed > 0.0)
             {
-				abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed = abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed * abilityRotation.mRotInterpIncrease;
+				abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed = abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed * abilityRotation.mRotInterpIncrease;
             }
             else
             {
-				abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed = abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed * abilityRotation.mRotInterpDecrease;
+				abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed = abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed * abilityRotation.mRotInterpDecrease;
             }
 		}
         else if(abilityRotation.mServerRotSpeed == 0.0)
         {
 			if (abilityRotation.mDegreesToServer > 0.0)
             {
-				abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed = abilityRotation.mTurnSpeed;
+				abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed = abilityRotation.mTurnSpeed;
             }
             else //clockwise - set to -mTurnSpeed
             {
-				abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed = -abilityRotation.mTurnSpeed;
+				abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed = -abilityRotation.mTurnSpeed;
             }
 		}
 	}

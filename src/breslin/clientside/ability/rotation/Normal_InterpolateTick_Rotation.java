@@ -7,7 +7,7 @@ package breslin.clientside.ability.rotation;
 import breslin.clientside.ability.rotation.AbilityRotationState;
 
 //shape
-import breslin.clientside.shape.ShapeDynamic;
+import breslin.clientside.shape.Shape;
 import breslin.clientside.shape.Shape;
 
 //math
@@ -54,8 +54,8 @@ public void enter(AbilityRotation abilityRotation)
 
 public void execute(AbilityRotation abilityRotation)
 {
-	float rotSpeed = abilityRotation.mShapeDynamic.mCommandToRunOnShape.mRotSpeed * abilityRotation.mShapeDynamic.mGame.getRenderTime();
-	abilityRotation.mShapeDynamic.yaw(rotSpeed, true);
+	float rotSpeed = abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed * abilityRotation.mShape.mGame.getRenderTime();
+	abilityRotation.mShape.yaw(rotSpeed, true);
 
 	if (abilityRotation.mServerRotSpeed == 0.0 && java.lang.Math.abs(abilityRotation.getDegreesToServer()) < abilityRotation.mRotInterpLimitLow)
     {

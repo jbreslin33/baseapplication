@@ -11,6 +11,10 @@ import java.nio.ByteBuffer;
 //shape
 import breslin.clientside.shape.Shape;
 
+//ability
+import breslin.clientside.ability.rotation.AbilityRotation;
+import breslin.clientside.ability.move.AbilityMove;
+
 /***************************************
 *           CLASS
 ***************************************/
@@ -27,8 +31,8 @@ public Game(Application application, byte[] serverIP, int serverPort)
 *   		MEMBER VARIABLES
 ***************************************/
 //Shapes
-public ArrayList<ShapeDynamic> mShapeVector = new ArrayList<ShapeDynamic>(); //all shapes in the client world
-public ArrayList<ShapeDynamic> mShapeGhostVector = new ArrayList<ShapeDynamic>(); //all shapes in the client world's ghost
+public ArrayList<Shape> mShapeVector = new ArrayList<Shape>(); //all shapes in the client world
+public ArrayList<Shape> mShapeGhostVector = new ArrayList<Shape>(); //all shapes in the client world's ghost
 
 
 /***************************************
@@ -44,7 +48,7 @@ public void run()
 
 public void addShape(boolean b, ByteBuffer byteBuffer)
 {
-	ShapeDynamic shapeDynamicMonkey = new ShapeDynamicMonkey(this,byteBuffer,false);  //you should just need to call this...
+	Shape shapeDynamicMonkey = new ShapeMonkey(this,byteBuffer,false);  //you should just need to call this...
 
 	//ability
 	shapeDynamicMonkey.addAbility(new AbilityRotation(shapeDynamicMonkey));
@@ -56,13 +60,13 @@ public void removeShape(ByteBuffer byteBuffer)
 
 }
 
-ShapeDynamic getShapeDynamic(int id)
+Shape getShape(int id)
 {
-	ShapeDynamic shape = null;
+	Shape shape = null;
 
 	for (int i = 0; i < mShapeVector.size(); i++)
 	{
-		ShapeDynamic curShape = mShapeVector.get(i);
+		Shape curShape = mShapeVector.get(i);
 		if (curShape.mIndex == id)
 		{
 			shape = curShape;

@@ -35,10 +35,10 @@ import breslin.clientside.command.Command;
 *          CLASS
 **********************************/
 
-public class ShapeDynamic extends Shape
+public class Shape extends Shape
 {
 
-public ShapeDynamic(Game game, ByteBuffer byteBuffer)
+public Shape(Game game, ByteBuffer byteBuffer)
 {
 	super();
 
@@ -99,7 +99,7 @@ public float mSpeedMax;
 ArrayList<Ability> mAbilityVector = new ArrayList<Ability>();
 
 //this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
-public ShapeDynamic mGhost;
+public Shape mGhost;
 
 //basic
 Vector3D mPosition;
@@ -205,7 +205,7 @@ public void interpolateTick(float renderTime)
 //messaging
 public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 {
-	//ShapeDynamic* shape = NULL;
+	//Shape* shape = NULL;
 
 	int flags = 0;
 

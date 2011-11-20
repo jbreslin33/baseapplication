@@ -11,7 +11,7 @@ import breslin.clientside.ability.Ability;
 import breslin.clientside.ability.rotation.AbilityRotationStateMachine;
 
 //shapes
-import breslin.clientside.shape.ShapeDynamic;
+import breslin.clientside.shape.Shape;
 
 //math
 import breslin.math.Vector3D;
@@ -23,9 +23,9 @@ import breslin.math.Vector3D;
 ********************************************************/
 public class AbilityRotation extends Ability
 {
-public AbilityRotation(ShapeDynamic shapeDynamic)
+public AbilityRotation(Shape shapeDynamic)
 {
-	mShapeDynamic = shapeDynamic;
+	mShape = shapeDynamic;
 
 	//Rotation processTick states
 	mProcessTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine
@@ -65,7 +65,7 @@ AbilityRotationStateMachine mProcessTickStateMachine;
 AbilityRotationStateMachine mInterpolateTickStateMachine;
 
 //shape
-ShapeDynamic mShapeDynamic;
+Shape mShape;
 
 //rotation
 float mTurnSpeed;
@@ -104,14 +104,14 @@ float getDegreesToServer()
 {
 	Vector3D serverRotNew = new Vector3D();
 
-    serverRotNew.x = mShapeDynamic.mServerFrame.mRot.x;
+    serverRotNew.x = mShape.mServerFrame.mRot.x;
 	serverRotNew.y = 0;
-    serverRotNew.z = mShapeDynamic.mServerFrame.mRot.z;
+    serverRotNew.z = mShape.mServerFrame.mRot.z;
 
     serverRotNew.normalise();
 
     //calculate how far off we are from server
-	float degreesToServer = mShapeDynamic.getDegreesToSomething(serverRotNew);
+	float degreesToServer = mShape.getDegreesToSomething(serverRotNew);
 
 	return degreesToServer;
 }
@@ -120,24 +120,24 @@ void  calculateServerRotationSpeed()
 	mServerRotOld.zero();
     mServerRotNew.zero();
 
-    mServerRotOld.x = mShapeDynamic.mServerFrame.mRotOld.x;
+    mServerRotOld.x = mShape.mServerFrame.mRotOld.x;
 	mServerRotOld.y = 0;
-    mServerRotOld.z = mShapeDynamic.mServerFrame.mRotOld.z;
+    mServerRotOld.z = mShape.mServerFrame.mRotOld.z;
 
-    mServerRotNew.x = mShapeDynamic.mServerFrame.mRot.x;
+    mServerRotNew.x = mShape.mServerFrame.mRot.x;
 	mServerRotNew.y = 0;
-    mServerRotNew.z = mShapeDynamic.mServerFrame.mRot.z;
+    mServerRotNew.z = mShape.mServerFrame.mRot.z;
 
     mServerRotNew.normalise();
     mServerRotOld.normalise();
 
     //calculate how far off we are from server
-  	mDegreesToServer = mShapeDynamic.getDegreesToSomething(mServerRotNew);
+  	mDegreesToServer = mShape.getDegreesToSomething(mServerRotNew);
 
       //calculate server rotation from last tick to new one
   	mServerRotSpeedOld = mServerRotSpeed;
 
-  	float serverRotSpeed = mShapeDynamic.mGhost.getDegreesToSomething(mServerRotNew);
+  	float serverRotSpeed = mShape.mGhost.getDegreesToSomething(mServerRotNew);
   	mGhostSpeed = serverRotSpeed;
   	//if it's a tiny value we have an anomoly which I have not solved yet so use mServerRotSpeedOld...
   	if (serverRotSpeed < 1.0f || serverRotSpeed > -1.0f)

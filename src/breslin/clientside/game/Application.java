@@ -90,8 +90,28 @@ public Application(GameMonkey gameMonkey)
 	directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
     getRootNode().addLight(directionalLight);
 
+mRenderTime = 0;
+
 }
 
+
+/**************************************
+*			MAIN
+**************************************/
+public static void main(String[] args)
+{
+	byte[] theByteArray;
+	if (args.length > 0)
+	{
+		theByteArray = args[0].getBytes();
+	}
+	else
+	{
+		String s = "192.168.1.104";
+		theByteArray = s.getBytes();
+	}
+	GameMonkey gameMonkey = new GameMonkey(theByteArray,30004);
+}
 
 /***************************************
 *   		MEMBER VARIABLES
@@ -124,6 +144,9 @@ int mKeyClockwise;
 public float mFrameTime;
 public float mRunNetworkTime;
 public int   mOldTime;
+
+//render time
+public float mRenderTime;
 
 /***************************************
 *			          METHODS
@@ -298,8 +321,8 @@ public void readServerTick           (ByteBuffer byteBuffer)
 		int id = byteBuffer.get();
 		//System.out.println("id:" + id);
 
-		ShapeDynamic shape = null;
-		shape = getShapeDynamic(id);
+		Shape shape = null;
+		shape = getShape(id);
 
 		if (shape != null)
 		{
@@ -359,7 +382,8 @@ void processInput()
 ***************************************/
 public boolean runGraphics()
 {
-	return false;
+	mApplication.runGraphics();
+	return true;
 }
 public void shutdown()
 {

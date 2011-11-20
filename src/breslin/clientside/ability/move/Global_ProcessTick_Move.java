@@ -48,7 +48,7 @@ public void enter(AbilityMove abilityMove)
 
 public void execute(AbilityMove abilityMove)
 {
-	abilityMove.mShapeDynamic.moveGhostShape();
+	abilityMove.mShape.moveGhostShape();
 	abilityMove.calculateDeltaPosition();
 }
 

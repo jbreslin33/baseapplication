@@ -11,7 +11,7 @@ import breslin.clientside.ability.Ability;
 import breslin.clientside.ability.move.AbilityMoveStateMachine;
 
 //shapes
-import breslin.clientside.shape.ShapeDynamic;
+import breslin.clientside.shape.Shape;
 
 //math
 import breslin.math.Vector3D;
@@ -23,9 +23,9 @@ import java.lang.Math;
 ********************************************************/
 public class AbilityMove extends Ability
 {
-public AbilityMove(ShapeDynamic shapeDynamic)
+public AbilityMove(Shape shapeDynamic)
 {
-	mShapeDynamic = shapeDynamic;
+	mShape = shapeDynamic;
 
 	//move processTick states
 	mProcessTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
@@ -58,7 +58,7 @@ public AbilityMove(ShapeDynamic shapeDynamic)
 *				VARIABLES
 ********************************************************/
 //shapeDynamic
-ShapeDynamic mShapeDynamic;
+Shape mShape;
 
 //state machines
 AbilityMoveStateMachine mProcessTickStateMachine;
@@ -100,9 +100,9 @@ public void interpolateTick(float renderTime)
 void calculateDeltaPosition()  //mov
 {
 
-	mDeltaX = mShapeDynamic.mServerFrame.mPosition.x - mShapeDynamic.getPosition().x;
-    mDeltaY = mShapeDynamic.mServerFrame.mPosition.y - mShapeDynamic.getPosition().y;
-    mDeltaZ = mShapeDynamic.mServerFrame.mPosition.z - mShapeDynamic.getPosition().z;
+	mDeltaX = mShape.mServerFrame.mPosition.x - mShape.getPosition().x;
+    mDeltaY = mShape.mServerFrame.mPosition.y - mShape.getPosition().y;
+    mDeltaZ = mShape.mServerFrame.mPosition.z - mShape.getPosition().z;
 
     //distance we are off from server
     mDeltaPosition = (float)java.lang.Math.sqrt(

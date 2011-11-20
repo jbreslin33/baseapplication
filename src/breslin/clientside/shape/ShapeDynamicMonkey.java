@@ -4,7 +4,7 @@ package breslin.clientside.shape;
 *          INCLUDES
 **********************************/
 //parent
-import breslin.clientside.shape.ShapeDynamic;
+import breslin.clientside.shape.Shape;
 
 //culling
 import com.jme3.scene.Spatial.CullHint;
@@ -59,11 +59,11 @@ import breslin.clientside.command.Command;
 /**********************************
 *          CLASS
 **********************************/
-public class ShapeDynamicMonkey extends ShapeDynamic //, public OgreAnimation
+public class ShapeMonkey extends Shape //, public OgreAnimation
 {
 
 
-public ShapeDynamicMonkey(GameMonkey gameMonkey, ByteBuffer byteBuffer, boolean isGhost)
+public ShapeMonkey(GameMonkey gameMonkey, ByteBuffer byteBuffer, boolean isGhost)
 {
 	super(gameMonkey,byteBuffer);
 
@@ -97,7 +97,7 @@ public ShapeDynamicMonkey(GameMonkey gameMonkey, ByteBuffer byteBuffer, boolean 
 	if (!mIsGhost)
 	{
 		//create a ghost for this shape
-		mGhost = new ShapeDynamicMonkey(mGameMonkey,byteBuffer,true);
+		mGhost = new ShapeMonkey(mGameMonkey,byteBuffer,true);
 		//mGhost.setVisible(false);
 
 		//put shape and ghost in game vectors so they can be looped and game now knows of them.
