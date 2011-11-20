@@ -148,20 +148,20 @@ public void createShape()
 
 		mSceneNode = geom;
 
-		Material mat = new Material(mGameMonkey.mGraphicsMonkey.getAssetManager(),"generic/pictures/ShowNormals.j3md");
+		Material mat = new Material(mGameMonkey.mApplication.getAssetManager(),"generic/pictures/ShowNormals.j3md");
 		mSceneNode.setMaterial(mat);
-		//mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(geom);
+		//mGameMonkey.mApplication.getRootNode().attachChild(geom);
 
 	}
 
 	if (mMeshCode == 1)
 	{
-		mSceneNode = mGameMonkey.mGraphicsMonkey.getAssetManager().loadModel(getMeshString(mMeshCode));
+		mSceneNode = mGameMonkey.mApplication.getAssetManager().loadModel(getMeshString(mMeshCode));
 		//scale
 		mSceneNode.scale(mScale,mScale,mScale);
 	}
 
-	mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(mSceneNode);
+	mGameMonkey.mApplication.getRootNode().attachChild(mSceneNode);
 
 
 	//move
@@ -182,13 +182,13 @@ public void createShape()
 	}
 	else
 	{
-		mBitmapFont = mGameMonkey.mGraphicsMonkey.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
+		mBitmapFont = mGameMonkey.mApplication.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
 		mBitmapText = new BitmapText(mBitmapFont, false);
 		mBitmapText.setSize(mBitmapFont.getCharSet().getRenderedSize());
 		mBitmapText.setText("Hello World");
 		mBitmapText.setQueueBucket(Bucket.Inherit);
 		mBitmapText.scale(.02f);
-		mGameMonkey.mGraphicsMonkey.getRootNode().attachChild(mBitmapText);
+		mGameMonkey.mApplication.getRootNode().attachChild(mBitmapText);
 	}
 }
 
@@ -234,7 +234,7 @@ public void setPosition(Vector3D position                        )
 		//System.out.println("setPostion");
 	//	Vector3f setPosition = new Vector3f(0.0f,0.0f,0.0f);
 		Vector3f upVector = new Vector3f(0.0f,1.0f,0.0f);
-		mBitmapText.lookAt(mGameMonkey.mGraphicsMonkey.getCameraLocation(),upVector);
+		mBitmapText.lookAt(mGameMonkey.mApplication.getCameraLocation(),upVector);
 	}
 }
 public void setPosition(float x, float y, float z                )

@@ -32,10 +32,10 @@ import com.jme3.light.DirectionalLight;
 *   		FORWARD DECLARATIONS
 ***************************************/
 
-public class GraphicsMonkey extends SimpleApplication
+public class Application extends SimpleApplication
 {
 
-public GraphicsMonkey(GameMonkey gameMonkey)
+public Application(GameMonkey gameMonkey)
 {
 
 	//game

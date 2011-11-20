@@ -7,7 +7,7 @@ package breslin.clientside.game;
 import java.nio.ByteBuffer;
 
 //graphics
-import breslin.clientside.graphics.GraphicsMonkey;
+import breslin.clientside.graphics.Application;
 
 //shape
 import breslin.clientside.shape.ShapeDynamicMonkey;
@@ -31,7 +31,7 @@ public GameMonkey(byte[] serverIP, int serverPort)
 	//time
 	mRenderTime = 0;
 
-	mGraphicsMonkey = new GraphicsMonkey(this);
+	mApplication = new Application(this);
 }
 
 /**************************************
@@ -58,7 +58,7 @@ public static void main(String[] args)
 ***************************************/
 
 //graphics
-public GraphicsMonkey mGraphicsMonkey;
+public Application mApplication;
 
 //render time
 public float mRenderTime;
@@ -88,7 +88,7 @@ public float getRenderTime()
 
 public boolean runGraphics()
 {
-	mGraphicsMonkey.runGraphics();
+	mApplication.runGraphics();
 	return true;
 }
 
