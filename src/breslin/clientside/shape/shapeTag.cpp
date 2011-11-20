@@ -25,6 +25,10 @@ int ShapeTag::parseDeltaByteBuffer(ByteBuffer* byteBuffer)
 	if(flags & mCommandIt)
 	{
 		appendToTitle("IT");
+		if (mLocal == 1)
+		{
+			LogString("localHH");
+		}
 	}
 	return flags;
 }

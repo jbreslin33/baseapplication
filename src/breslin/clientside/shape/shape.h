@@ -60,6 +60,10 @@ Entity*             mEntity;
 ObjectTitle* mObjectTitle;
 std::string  mObjectTitleString;
 
+protected:
+
+int mLocal;
+
 private:
 
 //constants
@@ -95,7 +99,7 @@ float mScale;
 //this is your pointer to move shape, really all you need.
 SceneNode*          mSceneNode;
 
-int mLocal;
+
 
 
 /**************************************************
