@@ -34,6 +34,14 @@ public ArrayList<ShapeDynamic> mShapeGhostVector = new ArrayList<ShapeDynamic>()
 /***************************************
 *   		METHODS
 ***************************************/
+public void run()
+{
+	for (int i = 0; i < mShapeVector.size(); i++)
+	{
+		mShapeVector.get(i).interpolateTick(getRenderTime());
+	}
+}
+
 public void addShape(boolean b, ByteBuffer byteBuffer)
 {
 	ShapeDynamic shapeDynamicMonkey = new ShapeDynamicMonkey(this,byteBuffer,false);  //you should just need to call this...
@@ -70,6 +78,7 @@ ShapeDynamic getShapeDynamic(int id)
 		return shape;
 	}
 }
+
 
 
 }
