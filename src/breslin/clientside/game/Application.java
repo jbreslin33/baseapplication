@@ -1,8 +1,18 @@
-package breslin.clientside.graphics;
+package breslin.clientside.game;
 
 /***************************************
 *   		INCLUDES
 ***************************************/
+
+//parent
+import com.jme3.app.SimpleApplication;
+
+//game
+import breslin.clientside.game.GameMonkey;
+
+//network
+import breslin.clientside.network.Network;
+
 //standard library
 import com.jme3.math.Vector3f;
 
@@ -13,12 +23,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
-//parent
-import com.jme3.app.SimpleApplication;
-
-//game
-import breslin.clientside.game.GameMonkey;
-
 //input
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -26,6 +30,9 @@ import com.jme3.input.controls.KeyTrigger;
 
 //light
 import com.jme3.light.DirectionalLight;
+
+
+
 
 
 /***************************************
@@ -37,6 +44,28 @@ public class Application extends SimpleApplication
 
 public Application(GameMonkey gameMonkey)
 {
+//from game
+	//StartLog();
+
+	try
+	{
+		String serverIPString = new String(serverIP, "UTF8");
+		System.out.println("serverIP:" + serverIPString + " serverPort:" + serverPort);
+
+	}
+	catch (UnsupportedEncodingException e)
+	{
+	    e.printStackTrace();
+	}
+
+	// network
+	mNetwork = new Network(this,serverIP,serverPort);
+
+	//time
+	//mTime = new Time();
+	mFrameTime		 = 0.0f;
+	mOldTime         = 0;
+
 
 	//game
 	mGameMonkey = gameMonkey;
@@ -76,6 +105,9 @@ boolean mPlayingGame;
 //game
 GameMonkey mGameMonkey;
 
+//Network
+public Network     mNetwork;
+
 //gui
 //OgreBites::Button* mJoinButton;
 
@@ -88,6 +120,10 @@ int mKeySpace;
 
 int mKeyCounterClockwise;
 int mKeyClockwise;
+
+public float mFrameTime;
+public float mRunNetworkTime;
+public int   mOldTime;
 
 /***************************************
 *			          METHODS
@@ -104,7 +140,7 @@ public void update()
 	processInput();
 
 	//network
-	mGameMonkey.runNetwork(mGameMonkey.getRenderTime() * 1000.0f);
+	mGameMonkey.runNetwork(getRenderTime() * 1000.0f);
 
 	//move objects
 	mGameMonkey.interpolateTick();
@@ -224,6 +260,113 @@ void processInput()
 public Vector3f getCameraLocation()
 {
 	return cam.getLocation();
+}
+
+public float getRenderTime()
+{
+//	System.out.println("r:" + mRenderTime);
+	return mRenderTime;
+}
+
+/***************************************
+*   		TICKS
+***************************************/
+public void readServerTick           (ByteBuffer byteBuffer)
+{
+	// Skip sequences
+	//short sequence = byteBuffer.get();
+
+	//WRITE: sequence
+	//byteBuffer.putShort(mOutgoingSequence);  //sequence
+	byte one = byteBuffer.get(1);
+	byte two = byteBuffer.get(2);
+	byteBuffer.put(1,two);
+	byteBuffer.put(2,one);
+	byteBuffer.position(1);
+	short sequence = byteBuffer.getShort();
+//	System.out.println("sequence:" + sequence);
+
+
+
+
+
+	while (byteBuffer.hasRemaining())
+	{
+
+		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
+
+		int id = byteBuffer.get();
+		//System.out.println("id:" + id);
+
+		ShapeDynamic shape = null;
+		shape = getShapeDynamic(id);
+
+		if (shape != null)
+		{
+			//System.out.println("got shape");
+			shape.readDeltaMoveCommand(byteBuffer);
+		}
+
+	}
+
+}
+
+
+public void interpolateTick()
+{
+
+	for (int i = 0; i < mShapeVector.size(); i++)
+	{
+		mShapeVector.get(i).interpolateTick(getRenderTime());
+	}
+
+}
+
+/***************************************
+*   		TIME
+***************************************/
+public float getRenderTime()
+{
+	System.out.println("fd");
+	return 0;
+}
+
+/***************************************
+*   		NETWORK
+***************************************/
+public void runNetwork    (float msec)
+{
+	mRunNetworkTime += msec;
+
+	mNetwork.readPackets();
+
+	// Framerate is too high
+	if(mRunNetworkTime > (1000 / 60))
+	{
+		mNetwork.sendCommand();
+		mFrameTime = mRunNetworkTime / 1000.0f;
+		mRunNetworkTime = 0;
+	}
+}
+
+/***************************************
+*   		INPUT
+***************************************/
+void processInput()
+{
+
+}
+
+/***************************************
+*   		GRAPHICS
+***************************************/
+public boolean runGraphics()
+{
+	return false;
+}
+public void shutdown()
+{
+
 }
 
 };

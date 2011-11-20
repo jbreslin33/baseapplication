@@ -1,4 +1,4 @@
-<project name="MonkeyBall" basedir="." default="main">
+<project name="Application" basedir="." default="main">
 
     <property name="src.dir"     value="src"/>
 
@@ -9,7 +9,7 @@
     
     <property name="jar.dir"     value="${build.dir}/jar"/>
 
-    <property name="main-class"  value="breslin.clientside.game.GameMonkey"/>
+    <property name="main-class"  value="breslin.clientside.game.Application"/>
 
 
 
