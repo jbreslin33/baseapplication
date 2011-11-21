@@ -42,7 +42,7 @@ import com.jme3.light.DirectionalLight;
 public class Application extends SimpleApplication
 {
 
-public Application(GameMonkey gameMonkey)
+public Application(byte[] serverIP, int serverPort)
 {
 //from game
 	//StartLog();
@@ -110,7 +110,7 @@ public static void main(String[] args)
 		String s = "192.168.1.104";
 		theByteArray = s.getBytes();
 	}
-	GameMonkey gameMonkey = new GameMonkey(theByteArray,30004);
+	Application application = new Application(theByteArray,30004);
 }
 
 /***************************************
