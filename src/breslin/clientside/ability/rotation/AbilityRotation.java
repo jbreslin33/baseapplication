@@ -23,9 +23,9 @@ import breslin.math.Vector3D;
 ********************************************************/
 public class AbilityRotation extends Ability
 {
-public AbilityRotation(Shape shapeDynamic)
+public AbilityRotation(Shape shape)
 {
-	mShape = shapeDynamic;
+	mShape = shape;
 
 	//Rotation processTick states
 	mProcessTickStateMachine = new AbilityRotationStateMachine(this);    //setup the state machine

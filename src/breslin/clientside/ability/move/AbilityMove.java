@@ -23,9 +23,9 @@ import java.lang.Math;
 ********************************************************/
 public class AbilityMove extends Ability
 {
-public AbilityMove(Shape shapeDynamic)
+public AbilityMove(Shape shape)
 {
-	mShape = shapeDynamic;
+	mShape = shape;
 
 	//move processTick states
 	mProcessTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
@@ -57,7 +57,7 @@ public AbilityMove(Shape shapeDynamic)
 /******************************************************
 *				VARIABLES
 ********************************************************/
-//shapeDynamic
+//shape
 Shape mShape;
 
 //state machines
