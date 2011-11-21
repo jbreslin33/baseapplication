@@ -32,6 +32,7 @@ import com.jme3.input.controls.KeyTrigger;
 import com.jme3.light.DirectionalLight;
 
 
+import java.nio.ByteBuffer;
 
 
 
@@ -342,14 +343,6 @@ public void interpolateTick()
 
 }
 
-/***************************************
-*   		TIME
-***************************************/
-public float getRenderTime()
-{
-	System.out.println("fd");
-	return 0;
-}
 
 /***************************************
 *   		NETWORK
@@ -369,22 +362,6 @@ public void runNetwork    (float msec)
 	}
 }
 
-/***************************************
-*   		INPUT
-***************************************/
-void processInput()
-{
-
-}
-
-/***************************************
-*   		GRAPHICS
-***************************************/
-public boolean runGraphics()
-{
-	mApplication.runGraphics();
-	return true;
-}
 public void shutdown()
 {
 

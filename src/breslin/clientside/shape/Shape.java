@@ -1,33 +1,11 @@
 package breslin.clientside.shape;
 
-public int   mIndex;
-public Game mGame;
 
-//scale
-public float mScale;
 /**********************************
 *          INCLUDES
 **********************************/
 //game
-import breslin.clientside.game.Game;
-
-//math
-import breslin.math.Vector3D;
-
-
-
-/***************************************
-*           INCLUDES
-***************************************/
-//standard library
-import java.util.ArrayList;
-import java.nio.ByteBuffer;
-
-//shape
-import breslin.clientside.shape.Shape;
-
-//game
-import breslin.clientside.game.Game;
+import breslin.clientside.game.Application;
 
 //math
 import breslin.math.Vector3D;
@@ -41,13 +19,6 @@ import breslin.clientside.parser.Parser;
 //command
 import breslin.clientside.command.Command;
 
-
-//JMONKEY
-/**********************************
-*          INCLUDES
-**********************************/
-//parent
-import breslin.clientside.shape.Shape;
 
 //culling
 import com.jme3.scene.Spatial.CullHint;
@@ -79,40 +50,15 @@ import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.renderer.queue.RenderQueue.Bucket;
 
-//shape
-import breslin.clientside.shape.Shape;
-
-//game
-import breslin.clientside.game.GameMonkey;
-
-//math
-import breslin.math.Vector3D;
-
-//ability
-import breslin.clientside.ability.Ability;
-
-//parser
-import breslin.clientside.parser.Parser;
-
-//command
-import breslin.clientside.command.Command;
-
-
-/***************************************
-*           FORWARD DECLARATIONS
-***************************************/
-
-
 /**********************************
 *          CLASS
 **********************************/
 
-public class Shape extends Shape
+public class Shape 
 {
 
-public Shape(Game game, ByteBuffer byteBuffer)
+public Shape(Application application, ByteBuffer byteBuffer, boolean isGhost)
 {
-	super();
 
 	//game
 	mGame = game;
@@ -148,8 +94,6 @@ public Shape(Game game, ByteBuffer byteBuffer)
 	//JMONKEY
 System.out.println("creating a monkey shape in constructor.");
 	//we use this to name shape. as ogre is picky about same names. it also serves as a counter of sorts.
-
-	mGameMonkey = gameMonkey;
 
 	mIsGhost = isGhost;
 
@@ -191,9 +135,12 @@ System.out.println("creating a monkey shape in constructor.");
 *                VARIABLES
 *************************************************/
 
+//scale
+public float mScale;
+public int   mIndex;
 //game
-public Game mGame;
 
+public Game mGame;
 //mesh
 int mMeshCode;
 
@@ -224,8 +171,6 @@ public Command mServerFrame;					// the latest frame from server
 public Command mCommandToRunOnShape;
 
 //JONKEY
-//game
-GameMonkey mGameMonkey;
 
 //ghost
 boolean mIsGhost;
@@ -286,26 +231,6 @@ Ability getAbility(Ability ability)
 	return new Ability();
 }
 
-//movement
-public void   yaw                  (float amountToYaw, boolean converToDegree   )
-{
-
-}
-//movement
-
-public float getDegreesToSomething(Vector3D something                       )
-{
-	return 0;
-}
-void   translate            (Vector3D translateVector, int perspective)
-{
-
-}
-String getName()
-{
-	return new String();
-
-}
 float  getSpeed()
 {
 	return 0;
