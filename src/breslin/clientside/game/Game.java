@@ -3,10 +3,8 @@ package breslin.clientside.game;
 /***************************************
 *           INCLUDES
 ***************************************/
-//standard library
-import java.io.*;
-import java.util.ArrayList;
-import java.nio.ByteBuffer;
+//application
+import breslin.clientside.game.Application;
 
 //shape
 import breslin.clientside.shape.Shape;
@@ -14,6 +12,12 @@ import breslin.clientside.shape.Shape;
 //ability
 import breslin.clientside.ability.rotation.AbilityRotation;
 import breslin.clientside.ability.move.AbilityMove;
+
+//standard library
+import java.io.*;
+import java.util.ArrayList;
+import java.nio.ByteBuffer;
+
 
 /***************************************
 *           CLASS
@@ -30,6 +34,9 @@ public Game(Application application)
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
+//application
+Application mApplication;
+
 //Shapes
 public ArrayList<Shape> mShapeVector = new ArrayList<Shape>(); //all shapes in the client world
 public ArrayList<Shape> mShapeGhostVector = new ArrayList<Shape>(); //all shapes in the client world's ghost
@@ -42,13 +49,13 @@ public void run()
 {
 	for (int i = 0; i < mShapeVector.size(); i++)
 	{
-		mShapeVector.get(i).interpolateTick(getRenderTime());
+		mShapeVector.get(i).interpolateTick(mApplication.getRenderTime());
 	}
 }
 
 public void addShape(boolean b, ByteBuffer byteBuffer)
 {
-	Shape shapeDynamicMonkey = new ShapeMonkey(this,byteBuffer,false);  //you should just need to call this...
+	Shape shape = new Shape(this,byteBuffer,false);  //you should just need to call this...
 
 	//ability
 	shapeDynamicMonkey.addAbility(new AbilityRotation(shapeDynamicMonkey));

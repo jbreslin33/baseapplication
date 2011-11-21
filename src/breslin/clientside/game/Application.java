@@ -13,13 +13,19 @@ import breslin.clientside.game.Game;
 //network
 import breslin.clientside.network.Network;
 
+
+//shape
+import breslin.clientside.shape.Shape;
+
+//parser
+import breslin.clientside.parser.Parser;
+
 //standard library
 import com.jme3.math.Vector3f;
 
 
 //parent
 import com.jme3.app.SimpleApplication;
-
 
 //lwgl
 import org.lwjgl.LWJGLException;
@@ -95,7 +101,7 @@ public Application(byte[] serverIP, int serverPort)
     getRootNode().addLight(directionalLight);
 
 mRenderTime = 0;
-
+mParser = new Parser();
 }
 
 
@@ -152,6 +158,8 @@ public int   mOldTime;
 //render time
 public float mRenderTime;
 
+Parser mParser;
+
 /***************************************
 *			          METHODS
 ***************************************/
@@ -180,7 +188,7 @@ public void update()
 /* This is the update loop */
 public void simpleUpdate(float tpf)
 {
-    mGameMonkey.mRenderTime = tpf;
+    mRenderTime = tpf;
 }
 
 void        createScene          ()
@@ -223,13 +231,13 @@ void initializeGui()
 //input
 void processInput()
 {
-	mGameMonkey.mNetwork.mCommandToServer.mKey = 0;
+	mNetwork.mCommandToServer.mKey = 0;
 
 	if (Keyboard.isKeyDown(Keyboard.KEY_B))
 	{
 		if (!mPlayingGame)
 		{
-			mGameMonkey.mNetwork.sendConnect();
+			mNetwork.sendConnect();
 			mPlayingGame = true;
 
 			//Set Camera to position and to lookat avatar at 0,0,0(this should be same as ogre! if not fix it)
@@ -248,39 +256,39 @@ void processInput()
 	//move
 	if (Keyboard.isKeyDown(Keyboard.KEY_I))
 	{
-		mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyUp;
+		mNetwork.mCommandToServer.mKey |= mKeyUp;
 	}
 
 
 	if (Keyboard.isKeyDown(Keyboard.KEY_K))
 	{
-		mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyDown;
+		mNetwork.mCommandToServer.mKey |= mKeyDown;
 	}
 
 
 	if (Keyboard.isKeyDown(Keyboard.KEY_J))
 	{
-		mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyLeft;
+		mNetwork.mCommandToServer.mKey |= mKeyLeft;
 	}
 
 
 	if (Keyboard.isKeyDown(Keyboard.KEY_L))
 	{
-		mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyRight;
+		mNetwork.mCommandToServer.mKey |= mKeyRight;
 	}
 
 	//rotation
 	if (Keyboard.isKeyDown(Keyboard.KEY_G))
 	{
-		mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyCounterClockwise;
+		mNetwork.mCommandToServer.mKey |= mKeyCounterClockwise;
 	}
 
 	if (Keyboard.isKeyDown(Keyboard.KEY_H))
 	{
-		mGameMonkey.mNetwork.mCommandToServer.mKey |= mKeyClockwise;
+		mNetwork.mCommandToServer.mKey |= mKeyClockwise;
 	}
 
-	mGameMonkey.mNetwork.mCommandToServer.mMilliseconds = (byte) (mGameMonkey.mFrameTime * 1000);
+		mNetwork.mCommandToServer.mMilliseconds = (byte) (mFrameTime * 1000);
 }
 
 
@@ -326,7 +334,7 @@ public void readServerTick           (ByteBuffer byteBuffer)
 		//System.out.println("id:" + id);
 
 		Shape shape = null;
-		shape = getShape(id);
+		shape = mGame.getShape(id);
 
 		if (shape != null)
 		{
@@ -354,7 +362,7 @@ public void runNetwork    (float msec)
 {
 	mRunNetworkTime += msec;
 
-	mNetwork.readPackets();
+	readPackets();
 
 	// Framerate is too high
 	if(mRunNetworkTime > (1000 / 60))
@@ -376,7 +384,7 @@ public void readPackets()
 
 
 	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
-	while(checkForByteBuffer(byteBuffer))
+	while(mNetwork.checkForByteBuffer(byteBuffer))
 	{
 
 		byteBuffer.position(0); //BeginReading() c++ equivalent
@@ -404,7 +412,7 @@ public void readPackets()
 		if (mParser.mMessageFrame == type)
 		{
 			//System.out.println("BRESSAGE: mMessageFrame");
-			mGame.readServerTick(byteBuffer);
+			readServerTick(byteBuffer);
 		}
 
 		if (mParser.mMessageServerExit == type)

@@ -149,7 +149,7 @@ short	mDroppedPackets;			// Dropped packets
 
 
 
-boolean checkForByteBuffer(ByteBuffer byteBuffer)
+public boolean checkForByteBuffer(ByteBuffer byteBuffer)
 {
    try
     {
