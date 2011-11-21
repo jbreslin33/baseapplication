@@ -16,6 +16,11 @@ import breslin.clientside.network.Network;
 //standard library
 import com.jme3.math.Vector3f;
 
+
+//parent
+import com.jme3.app.SimpleApplication;
+
+
 //lwgl
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -35,6 +40,7 @@ import com.jme3.light.DirectionalLight;
 import java.nio.ByteBuffer;
 
 
+import java.io.UnsupportedEncodingException;
 
 /***************************************
 *   		FORWARD DECLARATIONS

@@ -59,9 +59,8 @@ public class Shape
 
 public Shape(Application application, ByteBuffer byteBuffer, boolean isGhost)
 {
-
-	//game
-	mGame = game;
+	//application
+	mApplication = application;
 
 	//parser
 	mParser = new Parser();
@@ -120,12 +119,9 @@ System.out.println("creating a monkey shape in constructor.");
 	if (!mIsGhost)
 	{
 		//create a ghost for this shape
-		mGhost = new ShapeMonkey(mGameMonkey,byteBuffer,true);
+		mGhost = new Shape(mApplication,byteBuffer,true);
 		//mGhost.setVisible(false);
 
-		//put shape and ghost in game vectors so they can be looped and game now knows of them.
-		mGame.mShapeVector.add(this);
-		mGame.mShapeGhostVector.add(mGhost);
 		mGhost.setVisible(true);
 	}
 
@@ -134,13 +130,13 @@ System.out.println("creating a monkey shape in constructor.");
 /************************************************
 *                VARIABLES
 *************************************************/
+//application
+Application mApplication;
 
 //scale
 public float mScale;
 public int   mIndex;
-//game
 
-public Game mGame;
 //mesh
 int mMeshCode;
 
@@ -437,7 +433,7 @@ public void createShape()
 
 		mSceneNode = geom;
 
-		Material mat = new Material(mGameMonkey.mApplication.getAssetManager(),"generic/pictures/ShowNormals.j3md");
+		Material mat = new Material(mApplication.getAssetManager(),"generic/pictures/ShowNormals.j3md");
 		mSceneNode.setMaterial(mat);
 		//mGameMonkey.mApplication.getRootNode().attachChild(geom);
 
@@ -445,12 +441,12 @@ public void createShape()
 
 	if (mMeshCode == 1)
 	{
-		mSceneNode = mGameMonkey.mApplication.getAssetManager().loadModel(getMeshString(mMeshCode));
+		mSceneNode = mApplication.getAssetManager().loadModel(getMeshString(mMeshCode));
 		//scale
 		mSceneNode.scale(mScale,mScale,mScale);
 	}
 
-	mGameMonkey.mApplication.getRootNode().attachChild(mSceneNode);
+	mApplication.getRootNode().attachChild(mSceneNode);
 
 
 	//move
@@ -471,13 +467,13 @@ public void createShape()
 	}
 	else
 	{
-		mBitmapFont = mGameMonkey.mApplication.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
+		mBitmapFont = mApplication.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
 		mBitmapText = new BitmapText(mBitmapFont, false);
 		mBitmapText.setSize(mBitmapFont.getCharSet().getRenderedSize());
 		mBitmapText.setText("Hello World");
 		mBitmapText.setQueueBucket(Bucket.Inherit);
 		mBitmapText.scale(.02f);
-		mGameMonkey.mApplication.getRootNode().attachChild(mBitmapText);
+		mApplication.getRootNode().attachChild(mBitmapText);
 	}
 }
 
@@ -523,7 +519,7 @@ public void setPosition(Vector3D position                        )
 		//System.out.println("setPostion");
 	//	Vector3f setPosition = new Vector3f(0.0f,0.0f,0.0f);
 		Vector3f upVector = new Vector3f(0.0f,1.0f,0.0f);
-		mBitmapText.lookAt(mGameMonkey.mApplication.getCameraLocation(),upVector);
+		mBitmapText.lookAt(mApplication.getCameraLocation(),upVector);
 	}
 }
 public void setPosition(float x, float y, float z                )
