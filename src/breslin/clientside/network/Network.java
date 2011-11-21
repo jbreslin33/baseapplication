@@ -17,7 +17,7 @@ import java.nio.ByteOrder;
 import java.nio.CharBuffer;
 
 //game
-import breslin.clientside.game.Game;
+import breslin.clientside.game.Application;
 
 
 //command
@@ -33,10 +33,10 @@ import breslin.clientside.parser.Parser;
 public class Network
 {
 
-public Network(Game game, byte[] serverIP, int serverPort)
+public Network(Application application, byte[] serverIP, int serverPort)
 {
 	//game
-	mGame = game;
+	mApplication = application;
 
 	//command
 	mCommandToServer     = new Command();
@@ -104,8 +104,8 @@ public Network(Game game, byte[] serverIP, int serverPort)
 *   		MEMBER VARIABLES
 ***************************************/
 
-//game
-Game mGame;
+//Application
+Application mApplication;
 
 //nonblocking recieve
 DatagramChannel mDatagramChannel;
@@ -147,50 +147,7 @@ short	mDroppedPackets;			// Dropped packets
 *   		RECIEVE PACKETS
 ***************************************/
 
-public void readPackets()
-{
 
-
-
-	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
-	while(checkForByteBuffer(byteBuffer))
-	{
-
-		byteBuffer.position(0); //BeginReading() c++ equivalent
-
-		int type = byteBuffer.get();
-
-
-		if (mParser.mMessageConnect == type)
-		{
-			System.out.println("BRESSAGE: mMessageConnect");
-		}
-
-		if (mParser.mMessageAddShape == type)
-		{
-			mGame.addShape(true,byteBuffer);
-			System.out.println("BRESSAGE: mMessageAddShape");
-		}
-
-		if (mParser.mMessageRemoveShape == type)
-		{
-			mGame.removeShape(byteBuffer);
-			System.out.println("BRESSAGE: mMessageRemoveShape");
-		}
-
-		if (mParser.mMessageFrame == type)
-		{
-			//System.out.println("BRESSAGE: mMessageFrame");
-			mGame.readServerTick(byteBuffer);
-		}
-
-		if (mParser.mMessageServerExit == type)
-		{
-			//	mGame.shutdown();
-		}
-		byteBuffer.clear();
-	}
-}
 
 boolean checkForByteBuffer(ByteBuffer byteBuffer)
 {

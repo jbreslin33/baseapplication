@@ -8,7 +8,7 @@ package breslin.clientside.game;
 import com.jme3.app.SimpleApplication;
 
 //game
-import breslin.clientside.game.GameMonkey;
+import breslin.clientside.game.Game;
 
 //network
 import breslin.clientside.network.Network;
@@ -73,10 +73,6 @@ public Application(byte[] serverIP, int serverPort)
 	mFrameTime		 = 0.0f;
 	mOldTime         = 0;
 
-
-	//game
-	mGameMonkey = gameMonkey;
-
 	//keys
 	mKeyUp = 1;
 	mKeyDown = 2;
@@ -90,7 +86,8 @@ public Application(byte[] serverIP, int serverPort)
 	mJoinGame    = false;
 	mPlayingGame = false;
 
-	start();
+	//game
+	mGame = new Game(this);
 
 	//let their be light
 	DirectionalLight directionalLight = new DirectionalLight();
@@ -130,7 +127,7 @@ boolean mJoinGame;
 boolean mPlayingGame;
 
 //game
-GameMonkey mGameMonkey;
+Game mGame;
 
 //Network
 public Network     mNetwork;
@@ -170,10 +167,10 @@ public void update()
 	processInput();
 
 	//network
-	mGameMonkey.runNetwork(getRenderTime() * 1000.0f);
+	runNetwork(getRenderTime() * 1000.0f);
 
 	//move objects
-	mGameMonkey.interpolateTick();
+	interpolateTick();
 
 	//super and other stuff
 	super.update();
@@ -371,6 +368,51 @@ public void runNetwork    (float msec)
 public void shutdown()
 {
 
+}
+
+public void readPackets()
+{
+
+
+
+	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
+	while(checkForByteBuffer(byteBuffer))
+	{
+
+		byteBuffer.position(0); //BeginReading() c++ equivalent
+
+		int type = byteBuffer.get();
+
+
+		if (mParser.mMessageConnect == type)
+		{
+			System.out.println("BRESSAGE: mMessageConnect");
+		}
+
+		if (mParser.mMessageAddShape == type)
+		{
+			mGame.addShape(true,byteBuffer);
+			System.out.println("BRESSAGE: mMessageAddShape");
+		}
+
+		if (mParser.mMessageRemoveShape == type)
+		{
+			mGame.removeShape(byteBuffer);
+			System.out.println("BRESSAGE: mMessageRemoveShape");
+		}
+
+		if (mParser.mMessageFrame == type)
+		{
+			//System.out.println("BRESSAGE: mMessageFrame");
+			mGame.readServerTick(byteBuffer);
+		}
+
+		if (mParser.mMessageServerExit == type)
+		{
+			//	mGame.shutdown();
+		}
+		byteBuffer.clear();
+	}
 }
 
 };

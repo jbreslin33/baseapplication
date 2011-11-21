@@ -53,7 +53,7 @@ Application::Application(const char* serverIP, int serverPort)
 	mPlayingGame = false;
 
 	//game
-	mGame = new Game(this);
+	mGame = new GameTag(this);
 
 	//input
 	mKeyCurrent = 0;

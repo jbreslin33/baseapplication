@@ -22,7 +22,7 @@ public class Game
 {
 
 
-public Game(Application application, byte[] serverIP, int serverPort)
+public Game(Application application)
 {
 	mApplication = application;
 }
