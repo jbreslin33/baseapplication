@@ -55,7 +55,7 @@ public void run()
 
 public void addShape(boolean b, ByteBuffer byteBuffer)
 {
-	Shape shape = new Shape(this,byteBuffer,false);  //you should just need to call this...
+	Shape shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
 
 	//ability
 	shape.addAbility(new AbilityRotation(shape));

@@ -57,9 +57,6 @@ public class Application extends SimpleApplication
 
 public Application(byte[] serverIP, int serverPort)
 {
-//from game
-	//StartLog();
-
 	try
 	{
 		String serverIPString = new String(serverIP, "UTF8");
@@ -75,9 +72,7 @@ public Application(byte[] serverIP, int serverPort)
 	mNetwork = new Network(this,serverIP,serverPort);
 
 	//time
-	//mTime = new Time();
 	mFrameTime		 = 0.0f;
-	mOldTime         = 0;
 
 	//keys
 	mKeyUp = 1;
@@ -100,8 +95,13 @@ public Application(byte[] serverIP, int serverPort)
 	directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
     getRootNode().addLight(directionalLight);
 
-mRenderTime = 0;
-mParser = new Parser();
+	mRenderTime = 0;
+	mParser = new Parser();
+
+	//sequences
+	mOutgoingSequence		= 1;
+
+	start();
 }
 
 
@@ -126,6 +126,9 @@ public static void main(String[] args)
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
+
+//sequences
+short	mOutgoingSequence;		// OutFgoing packet sequence
 
 //initialize
 boolean mInitializeGui;
@@ -153,7 +156,6 @@ int mKeyClockwise;
 
 public float mFrameTime;
 public float mRunNetworkTime;
-public int   mOldTime;
 
 //render time
 public float mRenderTime;
@@ -178,10 +180,12 @@ public void update()
 	runNetwork(getRenderTime() * 1000.0f);
 
 	//move objects
+	mGame.run();
+
+	//move objects
 	interpolateTick();
 
-	//super and other stuff
-	super.update();
+	runGraphics();
 }
 
 //graphics
@@ -200,7 +204,9 @@ void        createScene          ()
 
 public boolean                runGraphics          ()
 {
+	//super and other stuff this is equivalent to c++ runGraphics...
 	super.update();
+
 	return true;
 }
 
@@ -367,7 +373,7 @@ public void runNetwork    (float msec)
 	// Framerate is too high
 	if(mRunNetworkTime > (1000 / 60))
 	{
-		mNetwork.sendCommand();
+		sendCommand();
 		mFrameTime = mRunNetworkTime / 1000.0f;
 		mRunNetworkTime = 0;
 	}
@@ -422,6 +428,72 @@ public void readPackets()
 		byteBuffer.clear();
 	}
 }
+public void sendCommand()
+{
+        //bools
+        boolean sendKey          = false;
+        boolean sendMilliseconds = false;
+
+        //create byteBuffer
+        byte[] mCharArray = new byte[1400];
+        ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
+
+        //WRITE: type
+        byteBuffer.put(mParser.mMessageFrame);  //type
+
+        //WRITE: sequence
+        byteBuffer.putShort(mOutgoingSequence);  //sequence
+        byte one = byteBuffer.get(1);
+        byte two = byteBuffer.get(2);
+        byteBuffer.put(1,two);
+        byteBuffer.put(2,one);
+
+        // Build delta-compressed move command
+        int flags = 0;
+
+        // Check what needs to be updated
+        if(mLastCommandToServer.mKey != mCommandToServer.mKey)
+        {
+                sendKey = true;
+                flags |= mParser.mCommandKey;
+        }
+
+
+        if(mLastCommandToServer.mMilliseconds != mCommandToServer.mMilliseconds)
+        {
+                sendMilliseconds = true;
+
+                flags |= mParser.mCommandMilliseconds;
+        }
+
+
+        // Add to the message
+        byteBuffer.put((byte)flags);
+
+        //int x = flags & mParser.mCommandKey;
+        //if(x == 1)
+        if (sendKey)
+        {
+                byteBuffer.put((byte)mCommandToServer.mKey);
+        }
+
+        //int y = flags & mParser.mCommandMilliseconds;
+        //if(y == 1)
+        if (sendMilliseconds)
+        {
+
+                byteBuffer.put((byte)mCommandToServer.mMilliseconds);
+        }
+
+        //set 'last' commands for diff
+        mLastCommandToServer.mKey = mCommandToServer.mKey;
+        mLastCommandToServer.mMilliseconds = mCommandToServer.mMilliseconds;
+
+        // Send the packet
+        send(byteBuffer);
+}
+
+
 
 };
 

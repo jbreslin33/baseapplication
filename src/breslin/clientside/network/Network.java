@@ -51,7 +51,6 @@ public Network(Application application, byte[] serverIP, int serverPort)
 	mClientPort = 30003;
 
 	//sequences
-	mOutgoingSequence		= 1;
 	mIncomingSequence		= 0;
 
 	//parse
@@ -127,7 +126,6 @@ int mServerPort;
 int mClientPort;
 
 //sequences
-short	mOutgoingSequence;		// OutFgoing packet sequence
 short mIncomingSequence;		// Incoming packet sequence
 short	mDroppedPackets;			// Dropped packets
 
@@ -212,73 +210,6 @@ public void sendConnect()
 	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
 
 	byteBuffer.put(mParser.mMessageConnect);
-	send(byteBuffer);
-}
-
-
-
-public void sendCommand()
-{
-	//bools
-	boolean sendKey          = false;
-	boolean sendMilliseconds = false;
-
-	//create byteBuffer
-   	byte[] mCharArray = new byte[1400];
-	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
-
-	//WRITE: type
-	byteBuffer.put(mParser.mMessageFrame);  //type
-
-	//WRITE: sequence
-	byteBuffer.putShort(mOutgoingSequence);  //sequence
-	byte one = byteBuffer.get(1);
-	byte two = byteBuffer.get(2);
-	byteBuffer.put(1,two);
-	byteBuffer.put(2,one);
-
-	// Build delta-compressed move command
-	int flags = 0;
-
-	// Check what needs to be updated
-	if(mLastCommandToServer.mKey != mCommandToServer.mKey)
-	{
-		sendKey = true;
-		flags |= mParser.mCommandKey;
-	}
-
-
-	if(mLastCommandToServer.mMilliseconds != mCommandToServer.mMilliseconds)
-	{
-		sendMilliseconds = true;
-
-		flags |= mParser.mCommandMilliseconds;
-	}
-
-
-	// Add to the message
-	byteBuffer.put((byte)flags);
-
-	//int x = flags & mParser.mCommandKey;
-	//if(x == 1)
-	if (sendKey)
-	{
-		byteBuffer.put((byte)mCommandToServer.mKey);
-	}
-
-	//int y = flags & mParser.mCommandMilliseconds;
-	//if(y == 1)
-	if (sendMilliseconds)
-	{
-
-		byteBuffer.put((byte)mCommandToServer.mMilliseconds);
-	}
-
-	//set 'last' commands for diff
-	mLastCommandToServer.mKey = mCommandToServer.mKey;
-	mLastCommandToServer.mMilliseconds = mCommandToServer.mMilliseconds;
-
-	// Send the packet
 	send(byteBuffer);
 }
 

@@ -84,10 +84,10 @@ void Application::run()
 		//network
 		runNetwork(getRenderTime() * 1000.0f);
 		
-		//move objects
+		//game
 		mGame->run();
 
-		//draw
+		//graphics
 		if (!runGraphics())
 		{
 			break;

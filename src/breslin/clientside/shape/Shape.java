@@ -54,7 +54,7 @@ import com.jme3.renderer.queue.RenderQueue.Bucket;
 *          CLASS
 **********************************/
 
-public class Shape 
+public class Shape
 {
 
 public Shape(Application application, ByteBuffer byteBuffer, boolean isGhost)
@@ -131,7 +131,7 @@ System.out.println("creating a monkey shape in constructor.");
 *                VARIABLES
 *************************************************/
 //application
-Application mApplication;
+public Application mApplication;
 
 //scale
 public float mScale;
