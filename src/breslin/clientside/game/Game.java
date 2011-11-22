@@ -58,8 +58,8 @@ public void addShape(boolean b, ByteBuffer byteBuffer)
 	Shape shape = new Shape(this,byteBuffer,false);  //you should just need to call this...
 
 	//ability
-	shapeMonkey.addAbility(new AbilityRotation(shapeMonkey));
-	shapeMonkey.addAbility(new AbilityMove    (shapeMonkey));
+	shape.addAbility(new AbilityRotation(shape));
+	shape.addAbility(new AbilityMove    (shape));
 }
 
 public void removeShape(ByteBuffer byteBuffer)
