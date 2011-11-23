@@ -30,7 +30,7 @@ Application::Application(const char* serverIP, int serverPort)
 {
 	StartLog();
 
-	// network
+	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
 	//time
@@ -53,7 +53,7 @@ Application::Application(const char* serverIP, int serverPort)
 	mPlayingGame = false;
 
 	//game
-	mGame = new GameTag(this);
+	mGame = new Game(this);
 
 	//input
 	mKeyCurrent = 0;
@@ -166,7 +166,7 @@ float Application::getRenderTime()
 /*********************************
 		GRAPHICS
 **********************************/
-void Application::createScene(void)
+void Application::createScene()
 {
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
 

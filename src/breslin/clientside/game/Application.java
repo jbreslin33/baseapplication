@@ -57,7 +57,7 @@ public class Application extends SimpleApplication
 
 public Application(byte[] serverIP, int serverPort)
 {
-	// network
+	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
 	//time
