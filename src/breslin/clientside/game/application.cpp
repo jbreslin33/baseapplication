@@ -313,7 +313,7 @@ void Application::processInput()
 *			COMMAND
 ***************************************************/
 
-void Application::sendCommand(void)
+void Application::sendCommand()
 {
 	//create byteBuffer
 	ByteBuffer* byteBuffer = new ByteBuffer();

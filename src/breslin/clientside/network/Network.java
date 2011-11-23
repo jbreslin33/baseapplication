@@ -216,7 +216,6 @@ public void sendConnect()
 
 public void reset()
 {
-    mOutgoingSequence                = 1;
     mIncomingSequence                = 0;
 }
 
@@ -224,35 +223,6 @@ public void send(ByteBuffer byteBuffer)
 {
 	try
   	{
-/*
-     		byteBuffer.position(0);
-
-      		System.out.println("$type:" + byteBuffer.get());
-
-
-			byte one = byteBuffer.get(1);
-			byte two = byteBuffer.get(2);
-			byteBuffer.put(1,two);
-			byteBuffer.put(2,one);
-			byteBuffer.position(1);
-            System.out.println("$seq:" + byteBuffer.getShort());
-
-			byte flags = byteBuffer.get();
-			System.out.println("$flags:" + flags);
-
-			int x = flags & mParser.mCommandKey;
-			if(x == 1)
-			{
-				System.out.println("$key:" + byteBuffer.get());
-			}
-
-
-			x = flags & mParser.mCommandMilliseconds;
-			if(x == 1)
-			{
-				System.out.println("$mil:" + byteBuffer.get());
-			}
-*/
       	byteBuffer.position(0);
 
 		mDatagramChannel.write(byteBuffer); //write to channel you are connecting to.
@@ -263,17 +233,7 @@ public void send(ByteBuffer byteBuffer)
     }
 
 
-
-byteBuffer.position(0);
-
-	int type = byteBuffer.get();
-	// Check if the type is a positive number
-	// = is the packet sequenced
-	if(type > 0)
-	{
-
-		mOutgoingSequence++;
-	}
+	byteBuffer.position(0);
 }
 
 }

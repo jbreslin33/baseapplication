@@ -57,17 +57,6 @@ public class Application extends SimpleApplication
 
 public Application(byte[] serverIP, int serverPort)
 {
-	try
-	{
-		String serverIPString = new String(serverIP, "UTF8");
-		System.out.println("serverIP:" + serverIPString + " serverPort:" + serverPort);
-
-	}
-	catch (UnsupportedEncodingException e)
-	{
-	    e.printStackTrace();
-	}
-
 	// network
 	mNetwork = new Network(this,serverIP,serverPort);
 
@@ -153,6 +142,13 @@ int mKeySpace;
 
 int mKeyCounterClockwise;
 int mKeyClockwise;
+
+//key input
+int mKeyCurrent;
+int mKeyLast;
+
+int mMillisecondsCurrent;
+int mMillisecondsLast;
 
 public float mFrameTime;
 public float mRunNetworkTime;
@@ -428,6 +424,7 @@ public void readPackets()
 		byteBuffer.clear();
 	}
 }
+
 public void sendCommand()
 {
         //bools
@@ -443,6 +440,8 @@ public void sendCommand()
 
         //WRITE: sequence
         byteBuffer.putShort(mOutgoingSequence);  //sequence
+        mOutgoingSequence++; //increase for next time...
+
         byte one = byteBuffer.get(1);
         byte two = byteBuffer.get(2);
         byteBuffer.put(1,two);
@@ -452,14 +451,14 @@ public void sendCommand()
         int flags = 0;
 
         // Check what needs to be updated
-        if(mLastCommandToServer.mKey != mCommandToServer.mKey)
+        if(mKeyLast != mKeyCurrent)
         {
                 sendKey = true;
                 flags |= mParser.mCommandKey;
         }
 
 
-        if(mLastCommandToServer.mMilliseconds != mCommandToServer.mMilliseconds)
+        if(mMillisecondsLast != mMillisecondsCurrent)
         {
                 sendMilliseconds = true;
 
@@ -470,27 +469,23 @@ public void sendCommand()
         // Add to the message
         byteBuffer.put((byte)flags);
 
-        //int x = flags & mParser.mCommandKey;
-        //if(x == 1)
         if (sendKey)
         {
-                byteBuffer.put((byte)mCommandToServer.mKey);
+                byteBuffer.put((byte)mKeyCurrent);
         }
 
-        //int y = flags & mParser.mCommandMilliseconds;
-        //if(y == 1)
         if (sendMilliseconds)
         {
 
-                byteBuffer.put((byte)mCommandToServer.mMilliseconds);
+                byteBuffer.put((byte)mMillisecondsCurrent);
         }
 
         //set 'last' commands for diff
-        mLastCommandToServer.mKey = mCommandToServer.mKey;
-        mLastCommandToServer.mMilliseconds = mCommandToServer.mMilliseconds;
+        mKeyLast = mKeyCurrent;
+        mMillisecondsLast = mMillisecondsCurrent;
 
         // Send the packet
-        send(byteBuffer);
+        mNetwork.send(byteBuffer);
 }
 
 
