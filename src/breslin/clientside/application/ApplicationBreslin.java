@@ -1,4 +1,4 @@
-package breslin.clientside.game;
+package breslin.clientside.application;
 
 /***************************************
 *   		INCLUDES
@@ -52,10 +52,10 @@ import java.io.UnsupportedEncodingException;
 *   		FORWARD DECLARATIONS
 ***************************************/
 
-public class Application extends SimpleApplication
+public class ApplicationBreslin extends SimpleApplication
 {
 
-public Application(byte[] serverIP, int serverPort)
+public ApplicationBreslin(byte[] serverIP, int serverPort)
 {
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
@@ -109,7 +109,7 @@ public static void main(String[] args)
 		String s = "192.168.1.104";
 		theByteArray = s.getBytes();
 	}
-	Application application = new Application(theByteArray,30004);
+	ApplicationBreslin applicationBreslin = new ApplicationBreslin(theByteArray,30004);
 }
 
 /***************************************

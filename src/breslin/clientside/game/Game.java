@@ -3,8 +3,8 @@ package breslin.clientside.game;
 /***************************************
 *           INCLUDES
 ***************************************/
-//application
-import breslin.clientside.game.Application;
+//applicationBreslin
+import breslin.clientside.application.ApplicationBreslin;
 
 //shape
 import breslin.clientside.shape.Shape;
@@ -26,16 +26,16 @@ public class Game
 {
 
 
-public Game(Application application)
+public Game(ApplicationBreslin applicationBreslin)
 {
-	mApplication = application;
+	mApplicationBreslin = applicationBreslin;
 }
 
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
-//application
-Application mApplication;
+//applicationBreslin
+ApplicationBreslin mApplicationBreslin;
 
 //Shapes
 public ArrayList<Shape> mShapeVector = new ArrayList<Shape>(); //all shapes in the client world
@@ -49,13 +49,13 @@ public void run()
 {
 	for (int i = 0; i < mShapeVector.size(); i++)
 	{
-		mShapeVector.get(i).interpolateTick(mApplication.getRenderTime());
+		mShapeVector.get(i).interpolateTick(mApplicationBreslin.getRenderTime());
 	}
 }
 
 public void addShape(boolean b, ByteBuffer byteBuffer)
 {
-	Shape shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
+	Shape shape = new Shape(mApplicationBreslin,byteBuffer,false);  //you should just need to call this...
 
 	//ability
 	shape.addAbility(new AbilityRotation(shape));
@@ -67,7 +67,7 @@ public void removeShape(ByteBuffer byteBuffer)
 
 }
 
-Shape getShape(int id)
+public Shape getShape(int id)
 {
 	Shape shape = null;
 

@@ -9,7 +9,7 @@
     
     <property name="jar.dir"     value="${build.dir}/jar"/>
 
-    <property name="main-class"  value="breslin.clientside.game.Application"/>
+    <property name="main-class"  value="breslin.clientside.application.ApplicationBreslin"/>
 
 
 
@@ -47,7 +47,7 @@
         
     <target name="run" depends="jar">
             <java fork="true" classname="${main-class}">
-            <arg value="192.168.2.112"/>
+            <arg value="192.168.1.103"/>
                 <classpath>
                     <path refid="classpath"/>
                     <path location="${jar.dir}/${ant.project.name}.jar"/>

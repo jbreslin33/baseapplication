@@ -5,7 +5,7 @@ package breslin.clientside.shape;
 *          INCLUDES
 **********************************/
 //game
-import breslin.clientside.game.Application;
+import breslin.clientside.application.ApplicationBreslin;
 
 //math
 import breslin.math.Vector3D;
@@ -57,10 +57,10 @@ import com.jme3.renderer.queue.RenderQueue.Bucket;
 public class Shape
 {
 
-public Shape(Application application, ByteBuffer byteBuffer, boolean isGhost)
+public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boolean isGhost)
 {
-	//application
-	mApplication = application;
+	//applicationBreslin
+	mApplicationBreslin = applicationBreslin;
 
 	//parser
 	mParser = new Parser();
@@ -119,7 +119,7 @@ System.out.println("creating a monkey shape in constructor.");
 	if (!mIsGhost)
 	{
 		//create a ghost for this shape
-		mGhost = new Shape(mApplication,byteBuffer,true);
+		mGhost = new Shape(mApplicationBreslin,byteBuffer,true);
 		//mGhost.setVisible(false);
 
 		mGhost.setVisible(true);
@@ -130,8 +130,8 @@ System.out.println("creating a monkey shape in constructor.");
 /************************************************
 *                VARIABLES
 *************************************************/
-//application
-public Application mApplication;
+//applicationBreslin
+public ApplicationBreslin mApplicationBreslin;
 
 //scale
 public float mScale;
@@ -433,20 +433,20 @@ public void createShape()
 
 		mSceneNode = geom;
 
-		Material mat = new Material(mApplication.getAssetManager(),"generic/pictures/ShowNormals.j3md");
+		Material mat = new Material(mApplicationBreslin.getAssetManager(),"generic/pictures/ShowNormals.j3md");
 		mSceneNode.setMaterial(mat);
-		//mGameMonkey.mApplication.getRootNode().attachChild(geom);
+		//mGameMonkey.mApplicationBreslin.getRootNode().attachChild(geom);
 
 	}
 
 	if (mMeshCode == 1)
 	{
-		mSceneNode = mApplication.getAssetManager().loadModel(getMeshString(mMeshCode));
+		mSceneNode = mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
 		//scale
 		mSceneNode.scale(mScale,mScale,mScale);
 	}
 
-	mApplication.getRootNode().attachChild(mSceneNode);
+	mApplicationBreslin.getRootNode().attachChild(mSceneNode);
 
 
 	//move
@@ -467,13 +467,13 @@ public void createShape()
 	}
 	else
 	{
-		mBitmapFont = mApplication.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
+		mBitmapFont = mApplicationBreslin.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
 		mBitmapText = new BitmapText(mBitmapFont, false);
 		mBitmapText.setSize(mBitmapFont.getCharSet().getRenderedSize());
 		mBitmapText.setText("Hello World");
 		mBitmapText.setQueueBucket(Bucket.Inherit);
 		mBitmapText.scale(.02f);
-		mApplication.getRootNode().attachChild(mBitmapText);
+		mApplicationBreslin.getRootNode().attachChild(mBitmapText);
 	}
 }
 
@@ -519,7 +519,7 @@ public void setPosition(Vector3D position                        )
 		//System.out.println("setPostion");
 	//	Vector3f setPosition = new Vector3f(0.0f,0.0f,0.0f);
 		Vector3f upVector = new Vector3f(0.0f,1.0f,0.0f);
-		mBitmapText.lookAt(mApplication.getCameraLocation(),upVector);
+		mBitmapText.lookAt(mApplicationBreslin.getCameraLocation(),upVector);
 	}
 }
 public void setPosition(float x, float y, float z                )

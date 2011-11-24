@@ -17,7 +17,7 @@ import java.nio.ByteOrder;
 import java.nio.CharBuffer;
 
 //game
-import breslin.clientside.game.Application;
+import breslin.clientside.application.ApplicationBreslin;
 
 
 //command
@@ -33,10 +33,10 @@ import breslin.clientside.parser.Parser;
 public class Network
 {
 
-public Network(Application application, byte[] serverIP, int serverPort)
+public Network(ApplicationBreslin applicationBreslin, byte[] serverIP, int serverPort)
 {
 	//game
-	mApplication = application;
+	mApplicationBreslin = applicationBreslin;
 
 	//command
 	mCommandToServer     = new Command();
@@ -103,8 +103,8 @@ public Network(Application application, byte[] serverIP, int serverPort)
 *   		MEMBER VARIABLES
 ***************************************/
 
-//Application
-Application mApplication;
+//ApplicationBreslin
+ApplicationBreslin mApplicationBreslin;
 
 //nonblocking recieve
 DatagramChannel mDatagramChannel;
