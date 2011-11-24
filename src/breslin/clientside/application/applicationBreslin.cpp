@@ -35,8 +35,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//time
 	mFrameTime		 = 0.0f;
-
-	//time
 	mRenderTime = 0;
 
 	//keys

@@ -62,6 +62,7 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 
 	//time
 	mFrameTime		 = 0.0f;
+	mRenderTime = 0;
 
 	//keys
 	mKeyUp = 1;
@@ -82,9 +83,8 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 	//let their be light
 	DirectionalLight directionalLight = new DirectionalLight();
 	directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
-    getRootNode().addLight(directionalLight);
+        getRootNode().addLight(directionalLight);
 
-	mRenderTime = 0;
 	mParser = new Parser();
 
 	//sequences
