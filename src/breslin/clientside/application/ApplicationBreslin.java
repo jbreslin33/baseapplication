@@ -258,36 +258,36 @@ void processInput()
 	//move
 	if (Keyboard.isKeyDown(Keyboard.KEY_I))
 	{
-		mNetwork.mCommandToServer.mKey |= mKeyUp;
+		mKeyCurrent |= mKeyUp;
 	}
 
 
 	if (Keyboard.isKeyDown(Keyboard.KEY_K))
 	{
-		mNetwork.mCommandToServer.mKey |= mKeyDown;
+		mKeyCurrent |= mKeyDown;
 	}
 
 
 	if (Keyboard.isKeyDown(Keyboard.KEY_J))
 	{
-		mNetwork.mCommandToServer.mKey |= mKeyLeft;
+		mKeyCurrent |= mKeyLeft;
 	}
 
 
 	if (Keyboard.isKeyDown(Keyboard.KEY_L))
 	{
-		mNetwork.mCommandToServer.mKey |= mKeyRight;
+		mKeyCurrent |= mKeyRight;
 	}
 
 	//rotation
 	if (Keyboard.isKeyDown(Keyboard.KEY_G))
 	{
-		mNetwork.mCommandToServer.mKey |= mKeyCounterClockwise;
+		mKeyCurrent |= mKeyCounterClockwise;
 	}
 
 	if (Keyboard.isKeyDown(Keyboard.KEY_H))
 	{
-		mNetwork.mCommandToServer.mKey |= mKeyClockwise;
+		mKeyCurrent |= mKeyClockwise;
 	}
 
 		mMillisecondsCurrent = (byte) (mFrameTime * 1000);
