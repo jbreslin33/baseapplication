@@ -104,9 +104,9 @@ float getDegreesToServer()
 {
 	Vector3D serverRotNew = new Vector3D();
 
-    serverRotNew.x = mShape.mServerFrame.mRot.x;
+    serverRotNew.x = mShape.mServerCommandCurrent.mRot.x;
 	serverRotNew.y = 0;
-    serverRotNew.z = mShape.mServerFrame.mRot.z;
+    serverRotNew.z = mShape.mServerCommandCurrent.mRot.z;
 
     serverRotNew.normalise();
 
@@ -120,13 +120,13 @@ void  calculateServerRotationSpeed()
 	mServerRotOld.zero();
     mServerRotNew.zero();
 
-    mServerRotOld.x = mShape.mServerFrame.mRotOld.x;
+    mServerRotOld.x = mShape.mServerCommandCurrent.mRotOld.x;
 	mServerRotOld.y = 0;
-    mServerRotOld.z = mShape.mServerFrame.mRotOld.z;
+    mServerRotOld.z = mShape.mServerCommandCurrent.mRotOld.z;
 
-    mServerRotNew.x = mShape.mServerFrame.mRot.x;
+    mServerRotNew.x = mShape.mServerCommandCurrent.mRot.x;
 	mServerRotNew.y = 0;
-    mServerRotNew.z = mShape.mServerFrame.mRot.z;
+    mServerRotNew.z = mShape.mServerCommandCurrent.mRot.z;
 
     mServerRotNew.normalise();
     mServerRotOld.normalise();

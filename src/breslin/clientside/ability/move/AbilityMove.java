@@ -100,9 +100,9 @@ public void interpolateTick(float renderTime)
 void calculateDeltaPosition()  //mov
 {
 
-	mDeltaX = mShape.mServerFrame.mPosition.x - mShape.getPosition().x;
-    mDeltaY = mShape.mServerFrame.mPosition.y - mShape.getPosition().y;
-    mDeltaZ = mShape.mServerFrame.mPosition.z - mShape.getPosition().z;
+	mDeltaX = mShape.mServerCommandCurrent.mPosition.x - mShape.getPosition().x;
+    mDeltaY = mShape.mServerCommandCurrent.mPosition.y - mShape.getPosition().y;
+    mDeltaZ = mShape.mServerCommandCurrent.mPosition.z - mShape.getPosition().z;
 
     //distance we are off from server
     mDeltaPosition = (float)java.lang.Math.sqrt(

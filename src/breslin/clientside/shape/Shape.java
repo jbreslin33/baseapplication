@@ -157,8 +157,9 @@ Vector3D mRotation;
 int mLocal;
 
 //commands
-public Command mServerFrame;					// the latest frame from server
-public Command mCommandToRunOnShape;
+Command mServerCommandLast;
+Command mServerCommandCurrent;					// the latest frame from server
+Command mCommandToRunOnShape;
 
 //JONKEY
 
@@ -371,9 +372,9 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 	int i = flags & mCommandOriginX;
 	if(i == 4)
 	{
-		mServerFrame.mPositionOld.x = mServerFrame.mPosition.x;
+		mServerCommandCurrent.mPositionOld.x = mServerCommandCurrent.mPosition.x;
 
-		mServerFrame.mPosition.x = convertIntToFloat(byteBuffer);
+		mServerCommandCurrent.mPosition.x = convertIntToFloat(byteBuffer);
 	}
 	else
 	{
@@ -383,9 +384,9 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 	i = flags & mCommandOriginY;
 	if(i == 8)
 	{
-		mServerFrame.mPositionOld.y = mServerFrame.mPosition.y;
+		mServerCommandCurrent.mPositionOld.y = mServerCommandCurrent.mPosition.y;
 
-		mServerFrame.mPosition.y = convertIntToFloat(byteBuffer);
+		mServerCommandCurrent.mPosition.y = convertIntToFloat(byteBuffer);
 	}
 	else
 	{
@@ -395,9 +396,9 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 	i = flags & mCommandOriginZ;
 	if(i == 16)
 	{
-		mServerFrame.mPositionOld.z = mServerFrame.mPosition.z;
+		mServerCommandCurrent.mPositionOld.z = mServerCommandCurrent.mPosition.z;
 
-		mServerFrame.mPosition.z = convertIntToFloat(byteBuffer);
+		mServerCommandCurrent.mPosition.z = convertIntToFloat(byteBuffer);
 	}
 	else
 	{
@@ -409,56 +410,56 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 	i = flags & mCommandRotationX;
 	if(i == 32)
 	{
-		mServerFrame.mRotOld.x = mServerFrame.mRot.x;
+		mServerCommandCurrent.mRotOld.x = mServerCommandCurrent.mRot.x;
 
-		mServerFrame.mRot.x = convertIntToFloat(byteBuffer);
+		mServerCommandCurrent.mRot.x = convertIntToFloat(byteBuffer);
 	}
 
 	i = flags & mCommandRotationZ;
 	if(i == 64)
 	{
-		mServerFrame.mRotOld.z = mServerFrame.mRot.z;
+		mServerCommandCurrent.mRotOld.z = mServerCommandCurrent.mRot.z;
 
-		mServerFrame.mRot.z = convertIntToFloat(byteBuffer);
+		mServerCommandCurrent.mRot.z = convertIntToFloat(byteBuffer);
 	}
 
 	i = flags & mCommandMilliseconds;
 	//milliseconds
 	if (i == 2)
 	{
-		mServerFrame.mMilliseconds = byteBuffer.get();
-		mCommandToRunOnShape.mMilliseconds = mServerFrame.mMilliseconds;
+		mServerCommandCurrent.mMilliseconds = byteBuffer.get();
+		mCommandToRunOnShape.mMilliseconds = mServerCommandCurrent.mMilliseconds;
 	}
 
 //set rotation direct from here using yaw....
-	if (mServerFrame.mMilliseconds != 0)
+	if (mServerCommandCurrent.mMilliseconds != 0)
 	{
 		//position
 		if (moveXChanged)
 		{
-			mServerFrame.mMoveVelocity.x = mServerFrame.mPosition.x - mServerFrame.mPositionOld.x;
+			mServerCommandCurrent.mMoveVelocity.x = mServerCommandCurrent.mPosition.x - mServerCommandCurrent.mPositionOld.x;
 		}
 		else
 		{
-			mServerFrame.mMoveVelocity.x = 0.0f;
+			mServerCommandCurrent.mMoveVelocity.x = 0.0f;
 		}
 
 		if (moveYChanged)
 		{
-			mServerFrame.mMoveVelocity.y = mServerFrame.mPosition.y - mServerFrame.mPositionOld.y;
+			mServerCommandCurrent.mMoveVelocity.y = mServerCommandCurrent.mPosition.y - mServerCommandCurrent.mPositionOld.y;
 		}
 		else
 		{
-			mServerFrame.mMoveVelocity.y = 0.0f;
+			mServerCommandCurrent.mMoveVelocity.y = 0.0f;
 		}
 
 		if (moveZChanged)
 		{
-			mServerFrame.mMoveVelocity.z = mServerFrame.mPosition.z - mServerFrame.mPositionOld.z;
+			mServerCommandCurrent.mMoveVelocity.z = mServerCommandCurrent.mPosition.z - mServerCommandCurrent.mPositionOld.z;
 		}
 		else
 		{
-			mServerFrame.mMoveVelocity.z = 0.0f;
+			mServerCommandCurrent.mMoveVelocity.z = 0.0f;
 		}
 	}
 	return flags;
@@ -480,9 +481,9 @@ public void moveGhostShape()
 {
 	Vector3D transVector = new Vector3D();
 
-	transVector.x = mServerFrame.mPosition.x;
+	transVector.x = mServerCommandCurrent.mPosition.x;
 	transVector.y = 0;
-	transVector.z = mServerFrame.mPosition.z;
+	transVector.z = mServerCommandCurrent.mPosition.z;
 
 	if (mGhost != null)
 	{

@@ -51,7 +51,7 @@ public void enter(AbilityMove abilityMove)
 public void execute(AbilityMove abilityMove)
 {
 	//if we are back in sync
-    if(abilityMove.mDeltaPosition <= abilityMove.mPosInterpLimitHigh || abilityMove.mShape.mServerFrame.mMoveVelocity.isZero())
+    if(abilityMove.mDeltaPosition <= abilityMove.mPosInterpLimitHigh || abilityMove.mShape.mServerCommandCurrent.mMoveVelocity.isZero())
     {
 		abilityMove.mProcessTickStateMachine.changeState(Normal_ProcessTick_Move.getAbilityMoveState());
     }
@@ -61,7 +61,7 @@ public void execute(AbilityMove abilityMove)
 		Vector3D newVelocity = new Vector3D(); //vector to future server pos
 
 		//first set newVelocity to most recent velocity from server.
- 		newVelocity.copyValuesFrom(abilityMove.mShape.mServerFrame.mMoveVelocity);
+ 		newVelocity.copyValuesFrom(abilityMove.mShape.mServerCommandCurrent.mMoveVelocity);
 
 		//normalise it now we know what direction to head in.
         newVelocity.normalise();
@@ -74,7 +74,7 @@ public void execute(AbilityMove abilityMove)
 		newVelocity.multiply(multiplier);
 
 		//add the latest server position to our newvelocity
-		newVelocity.add(abilityMove.mShape.mServerFrame.mPosition);
+		newVelocity.add(abilityMove.mShape.mServerCommandCurrent.mPosition);
 
 		//now subtract our current position from our new velocity
 		newVelocity.subtract(abilityMove.mShape.getPosition());
@@ -90,7 +90,7 @@ public void execute(AbilityMove abilityMove)
 		if(abilityMove.mShape.mCommandToRunOnShape.mMilliseconds != 0)
         {
 			abilityMove.mSpeed = abilityMove.calcuateSpeed(
-			abilityMove.mShape.mServerFrame.mMoveVelocity,
+			abilityMove.mShape.mServerCommandCurrent.mMoveVelocity,
 			abilityMove.mShape.mCommandToRunOnShape.mMilliseconds);
 
 			abilityMove.mShape.mSpeed = abilityMove.mSpeed;

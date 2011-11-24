@@ -57,20 +57,20 @@ public void enter(AbilityMove abilityMove)
 public void execute(AbilityMove abilityMove)
 {
 	// if distance exceeds threshold && server velocity is zero
-	if(abilityMove.mDeltaPosition > abilityMove.mPosInterpLimitHigh && !abilityMove.mShape.mServerFrame.mMoveVelocity.isZero())
+	if(abilityMove.mDeltaPosition > abilityMove.mPosInterpLimitHigh && !abilityMove.mShape.mServerCommandCurrent.mMoveVelocity.isZero())
 	{
 		abilityMove.mProcessTickStateMachine.changeState(Catchup_ProcessTick_Move.getAbilityMoveState());
     }
     else //server stopped or we are in sync so just use server vel as is..
     {
 		Vector3D serverDest = new Vector3D();
-		serverDest.copyValuesFrom(abilityMove.mShape.mServerFrame.mMoveVelocity);
+		serverDest.copyValuesFrom(abilityMove.mShape.mServerCommandCurrent.mMoveVelocity);
 		serverDest.normalise();
 
         if(abilityMove.mShape.mCommandToRunOnShape.mMilliseconds != 0)
         {
 			abilityMove.mSpeed = abilityMove.calcuateSpeed(
-			abilityMove.mShape.mServerFrame.mMoveVelocity,
+			abilityMove.mShape.mServerCommandCurrent.mMoveVelocity,
 			abilityMove.mShape.mCommandToRunOnShape.mMilliseconds);
         }
 
