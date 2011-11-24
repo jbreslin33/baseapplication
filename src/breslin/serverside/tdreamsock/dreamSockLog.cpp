@@ -53,7 +53,7 @@ wchar_t buf[64];
 #ifdef WIN32
 void StartLogConsole(void)
 {
-	console = new dreamConsole("dreamSock application");
+	console = new dreamConsole("dreamSock applicationBreslin");
 }
 #endif
 

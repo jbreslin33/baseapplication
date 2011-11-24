@@ -15,7 +15,7 @@ class ShapeTag : public Shape
 {
 public:
 
-ShapeTag(Application* application, ByteBuffer* byteBuffer, bool isGhost);
+ShapeTag(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGhost);
 ~ShapeTag();
 
 /**************************************************

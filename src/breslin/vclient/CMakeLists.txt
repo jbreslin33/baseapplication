@@ -114,9 +114,12 @@ set(HDRS
 	../clientside/ability/rotation/abilityRotationStates.h
 	../clientside/ability/rotation/abilityRotationStateMachine.h
 	
-	#game
-	../clientside/game/BaseApplication.h
-	../clientside/game/application.h
+	
+	#application
+	../clientside/application/BaseApplication.h
+	../clientside/application/applicationBreslin.h
+	
+	#game	
 	../clientside/game/game.h
 	../clientside/game/gameTag.h
 	
@@ -166,9 +169,11 @@ set(SRCS
 	../clientside/ability/rotation/abilityRotation.cpp
 	../clientside/ability/rotation/abilityRotationStates.cpp
 
-	#game
-	../clientside/game/BaseApplication.cpp
-	../clientside/game/application.cpp
+	#application
+	../clientside/application/BaseApplication.cpp
+	../clientside/application/applicationBreslin.cpp
+	
+	#game	
 	../clientside/game/game.cpp
 	../clientside/game/gameTag.cpp
 	
@@ -227,9 +232,11 @@ set(HDRS
 	../clientside/ability/rotation/abilityRotationStates.h
 	../clientside/ability/rotation/abilityRotationStateMachine.h
 	
-	#game
-	../clientside/game/BaseApplication.h
-	../clientside/game/application.h
+	#application
+	../clientside/application/BaseApplication.h
+	../clientside/application/applicationBreslin.h
+	
+	#game	
 	../clientside/game/game.h
 	../clientside/game/gameTag.h
 	
@@ -278,9 +285,11 @@ set(SRCS
 	../clientside/ability/rotation/abilityRotation.cpp
 	../clientside/ability/rotation/abilityRotationStates.cpp
 
-	#game
-	../clientside/game/BaseApplication.cpp
-	../clientside/game/application.cpp
+	#application
+	../clientside/application/BaseApplication.cpp
+	../clientside/application/applicationBreslin.cpp
+	
+	#game	
 	../clientside/game/game.cpp
 	../clientside/game/gameTag.cpp
 	

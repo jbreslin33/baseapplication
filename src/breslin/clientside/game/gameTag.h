@@ -21,7 +21,7 @@ shapeTag instance.
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
-class Application;
+class ApplicationBreslin;
 class ByteBuffer;
 class Shape;
 
@@ -29,7 +29,7 @@ class GameTag : public Game
 {
 public:
 	
-	GameTag(Application* application);
+	GameTag(ApplicationBreslin* applicationBreslin);
 	~GameTag();
 
 /***************************************

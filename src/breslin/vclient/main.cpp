@@ -3,7 +3,7 @@
 #include "../clientside/tdreamsock/dreamSockLog.h"
 
 //app
-#include "../clientside/game/application.h"
+#include "../clientside/application/applicationBreslin.h"
 
 
 /******************** MAIN ***********************/
@@ -26,14 +26,14 @@ extern "C" {
        
 		StartLogConsole();
         
-		Application* application = new Application(strCmdLine,30004);
+		ApplicationBreslin* applicationBreslin = new ApplicationBreslin(strCmdLine,30004);
 #else
-        Application* application = new Application(argv[1],30004);
+        ApplicationBreslin* applicationBreslin = new ApplicationBreslin(argv[1],30004);
 #endif
         try
 		{
-			application->go();
-            application->run();
+			applicationBreslin->go();
+            applicationBreslin->run();
         }
 		catch( Ogre::Exception& e )
 		{

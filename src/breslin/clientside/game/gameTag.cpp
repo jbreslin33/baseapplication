@@ -1,8 +1,8 @@
 //header
 #include "gameTag.h"
 
-//application
-#include "../game/application.h"
+//applicationBreslin
+#include "../application/applicationBreslin.h"
 
 //shape
 #include "../shape/shapeTag.h"
@@ -17,8 +17,8 @@
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
-GameTag::GameTag(Application* application) :
-Game(application)
+GameTag::GameTag(ApplicationBreslin* applicationBreslin) :
+Game(applicationBreslin)
 {
 
 }
@@ -33,7 +33,7 @@ GameTag::~GameTag()
 **********************************/
 void GameTag::addShape(bool b, ByteBuffer* byteBuffer)
 {
-	ShapeTag* shapeTag = new ShapeTag(mApplication,byteBuffer,false);  //you should just need to call this...
+	ShapeTag* shapeTag = new ShapeTag(mApplicationBreslin,byteBuffer,false);  //you should just need to call this...
 
 	//ability
 	shapeTag->addAbility(new AbilityRotation(shapeTag));

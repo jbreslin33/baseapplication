@@ -4,8 +4,8 @@
 //shape
 #include "../../shape/shape.h"
 
-//application
-#include "../../game/application.h"
+//applicationBreslin
+#include "../../application/applicationBreslin.h"
 
 //game
 #include "../../game/game.h"
@@ -58,9 +58,9 @@ void AbilityAnimationOgre::setupAnimations()
 
 void AbilityAnimationOgre::runAnimations()
 {
-	mAnims[mBaseAnimID]->addTime(mShape->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax );
-	mAnims[mTopAnimID]->addTime(mShape->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax );
-	fadeAnimations(mShape->mApplication->getRenderTime());
+	mAnims[mBaseAnimID]->addTime(mShape->mApplicationBreslin->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax );
+	mAnims[mTopAnimID]->addTime(mShape->mApplicationBreslin->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax );
+	fadeAnimations(mShape->mApplicationBreslin->getRenderTime());
 }
 
 void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAnimationState)

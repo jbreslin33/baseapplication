@@ -8,7 +8,7 @@
 #include "../../tdreamsock/dreamSockLog.h"
 
 //game
-#include "../../game/application.h"
+#include "../../application/applicationBreslin.h"
 
 //game
 #include "../../game/game.h"
@@ -201,7 +201,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
   	transVector->copyValuesFrom(abilityMove->mShape->mCommandToRunOnShape->mVelocity);
 
 	//get the mulitplier
-	float multipliedRenderTime = abilityMove->mShape->mApplication->getRenderTime() * 1000;
+	float multipliedRenderTime = abilityMove->mShape->mApplicationBreslin->getRenderTime() * 1000;
 
 	//multiply our vector using render values
 	transVector->multiply(multipliedRenderTime); 

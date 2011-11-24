@@ -147,7 +147,7 @@ int Server::checkForTimeout(char *data, struct sockaddr *from)
 			LogString("Client timeout, disconnecting (%d - %d = %d)",
 				currentTime, mClientVector.at(i)->mLastMessageTime, currentTime - mClientVector.at(i)->mLastMessageTime);
 
-			// Build a 'fake' message so the application will also
+			// Build a 'fake' message so the applicationBreslin will also
 			// receive notification of a client disconnecting
 			Message mes;
 			mes.Init(data, sizeof(data));

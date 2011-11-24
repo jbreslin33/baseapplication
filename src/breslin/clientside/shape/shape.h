@@ -15,7 +15,7 @@ using namespace Ogre;
 /**********************************
 *          FORWARD DECLARATIONS
 **********************************/
-class Application;
+class ApplicationBreslin;
 class Vector3D;
 class Ability;
 class Game;
@@ -27,7 +27,7 @@ class Shape
 {
 public:
 
-Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost);
+Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGhost);
 ~Shape();
 
 /**************************************************
@@ -35,8 +35,8 @@ Shape(Application* application, ByteBuffer* byteBuffer, bool isGhost);
 **************************************************/
 public:
 
-//application
-Application* mApplication;
+//applicationBreslin
+ApplicationBreslin* mApplicationBreslin;
 
 //id
 int   mIndex;

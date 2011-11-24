@@ -1,12 +1,12 @@
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#ifndef APPLICATIONBRESLIN_H
+#define APPLICATIONBRESLIN_H
 
 /***************************************
 *   		INCLUDES
 ***************************************/
 
 //parents
-#include "../game/BaseApplication.h"
+#include "BaseApplication.h"
 
 /***************************************
 *   		FORWARD DECLARATIONS
@@ -17,12 +17,12 @@ class Shape;
 class Time;
 class Network;
 
-class Application : public BaseApplication
+class ApplicationBreslin : public BaseApplication
 {
 public:
 	
-	Application(const char* serverIP, int serverPort);
-	~Application();
+	ApplicationBreslin(const char* serverIP, int serverPort);
+	~ApplicationBreslin();
 
 /***************************************
 *   		MEMBER VARIABLES

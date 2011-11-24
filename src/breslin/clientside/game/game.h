@@ -2,7 +2,7 @@
 #define GAME_H
 /**************************************
 @Game: This class should handle game specific duties. It should be able to be destroyed without
-the application crashing. You should be able to switch games while the application is running.
+the applicationBreslin crashing. You should be able to switch games while the applicationBreslin is running.
 
 Since this is on the client side it does not need any game logic.
 
@@ -21,7 +21,7 @@ reset these objects need to be destroyed.
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
-class Application;
+class ApplicationBreslin;
 class ByteBuffer;
 class Shape;
 
@@ -29,15 +29,15 @@ class Game
 {
 public:
 	
-	Game(Application* application);
+	Game(ApplicationBreslin* applicationBreslin);
 	~Game();
 
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
 protected:
-//application
-Application* mApplication;
+//applicationBreslin
+ApplicationBreslin* mApplicationBreslin;
 
 //Shapes
 std::vector<Shape*> mShapeVector;	 //all shapes in the client world

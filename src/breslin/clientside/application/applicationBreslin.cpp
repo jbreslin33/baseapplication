@@ -1,5 +1,5 @@
 //header
-#include "application.h"
+#include "applicationBreslin.h"
 
 //log
 #include "../tdreamsock/dreamSockLog.h"
@@ -20,13 +20,13 @@
 #include "../command/command.h"
 
 //game
-#include "gameTag.h"
+#include "../game/gameTag.h"
 
 
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
-Application::Application(const char* serverIP, int serverPort)
+ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 {
 	StartLog();
 
@@ -65,7 +65,7 @@ Application::Application(const char* serverIP, int serverPort)
 	mOutgoingSequence		= 1;
 }
 
-Application::~Application()
+ApplicationBreslin::~ApplicationBreslin()
 {
 	mNetwork->close();
 	delete mNetwork;
@@ -74,7 +74,7 @@ Application::~Application()
 /*********************************
 		START/LOOP/END
 **********************************/
-void Application::run()
+void ApplicationBreslin::run()
 {
 	while(true)
     {
@@ -95,7 +95,7 @@ void Application::run()
 	}
 }
 
-void Application::shutdown()
+void ApplicationBreslin::shutdown()
 {
 	ByteBuffer* byteBuffer = new ByteBuffer();
 	byteBuffer->WriteByte(mMessageDisconnect);
@@ -104,7 +104,7 @@ void Application::shutdown()
 }
 
 
-void Application::readServerTick(ByteBuffer* byteBuffer)
+void ApplicationBreslin::readServerTick(ByteBuffer* byteBuffer)
 {
 	// Skip sequences
 	byteBuffer->ReadShort();
@@ -130,7 +130,7 @@ void Application::readServerTick(ByteBuffer* byteBuffer)
 /*********************************
 		NETWORK
 **********************************/
-void Application::runNetwork(float msec)
+void ApplicationBreslin::runNetwork(float msec)
 {
 	static float time = 0.0f;
 	time += msec;
@@ -157,7 +157,7 @@ void Application::runNetwork(float msec)
 /*********************************
 *		TIME
 ***********************************/
-float Application::getRenderTime()
+float ApplicationBreslin::getRenderTime()
 {
 	return mRenderTime;
 }
@@ -166,7 +166,7 @@ float Application::getRenderTime()
 /*********************************
 		GRAPHICS
 **********************************/
-void Application::createScene()
+void ApplicationBreslin::createScene()
 {
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
 
@@ -177,7 +177,7 @@ void Application::createScene()
     pointLight->setSpecularColour(Ogre::ColourValue::White);
 }
 
-bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
+bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	mRenderTime = evt.timeSinceLastFrame;
 
@@ -186,7 +186,7 @@ bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	return ret;
 }
 
-bool Application::runGraphics()
+bool ApplicationBreslin::runGraphics()
 {
 	//Pump messages in all registered RenderWindow windows
 	WindowEventUtilities::messagePump();
@@ -207,7 +207,7 @@ bool Application::runGraphics()
 /*********************************
 		GUI
 **********************************/
-void Application::initializeGui()
+void ApplicationBreslin::initializeGui()
 {
 	if (mInitializeGui == true)
 	{
@@ -220,20 +220,20 @@ void Application::initializeGui()
 	}
 }
 
-void Application::loadJoinScreen()
+void ApplicationBreslin::loadJoinScreen()
 {
 	mJoinButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "mJoinButton", "Join Game");
 	mTrayMgr->moveWidgetToTray(mJoinButton,OgreBites::TL_CENTER);
 	mTrayMgr->showCursor();
 }
 
-void Application::hideGui()
+void ApplicationBreslin::hideGui()
 {
 	hideJoinScreen();
 	mTrayMgr->hideCursor();
 }
 
-void Application::hideJoinScreen()
+void ApplicationBreslin::hideJoinScreen()
 {
 	mTrayMgr->removeWidgetFromTray(mJoinButton);
     mJoinButton->hide();
@@ -244,7 +244,7 @@ void Application::hideJoinScreen()
 *			INPUT
 ******************************************/
 
-void Application::buttonHit(OgreBites::Button *button)
+void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 {
 	//JOIN
 	if (button == mJoinButton)
@@ -259,7 +259,7 @@ void Application::buttonHit(OgreBites::Button *button)
 	}
 }
 
-bool Application::mouseMoved( const OIS::MouseEvent &arg )
+bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 {
     if (mTrayMgr->injectMouseMove(arg))
 	{
@@ -272,7 +272,7 @@ bool Application::mouseMoved( const OIS::MouseEvent &arg )
     return true;
 }
 
-void Application::processInput()
+void ApplicationBreslin::processInput()
 {
 	mKeyCurrent = 0;
     
@@ -313,7 +313,7 @@ void Application::processInput()
 *			COMMAND
 ***************************************************/
 
-void Application::sendCommand()
+void ApplicationBreslin::sendCommand()
 {
 	//create byteBuffer
 	ByteBuffer* byteBuffer = new ByteBuffer();
@@ -365,7 +365,7 @@ void Application::sendCommand()
 /***************************************************
 *			PACKETS
 ***************************************************/
-void Application::readPackets()
+void ApplicationBreslin::readPackets()
 {
 	int type;
 	int ret;
@@ -411,7 +411,7 @@ void Application::readPackets()
 /***************************************************
 *			CONNECT
 ***************************************************/
-void Application::sendConnect()
+void ApplicationBreslin::sendConnect()
 {
 	ByteBuffer* byteBuffer = new ByteBuffer();
 	byteBuffer->WriteByte(mMessageConnect);

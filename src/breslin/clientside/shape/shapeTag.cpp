@@ -4,14 +4,14 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
-//application
-#include "../game/application.h"
+//applicationBreslin
+#include "../application/applicationBreslin.h"
 
 //byteBuffer
 #include "../bytebuffer/byteBuffer.h"
 
-ShapeTag::ShapeTag(Application* application, ByteBuffer* byteBuffer, bool isGhost)
-: Shape(application,byteBuffer,isGhost)
+ShapeTag::ShapeTag(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGhost)
+: Shape(applicationBreslin,byteBuffer,isGhost)
 {
 	
 }

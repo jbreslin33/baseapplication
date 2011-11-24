@@ -4,8 +4,8 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
-//application
-#include "../game/application.h"
+//applicationBreslin
+#include "../application/applicationBreslin.h"
 
 //game
 #include "../game/game.h"
@@ -45,10 +45,10 @@
 
 #endif
 
-Network::Network(Application* application, const char serverIP[32], int serverPort )
+Network::Network(ApplicationBreslin* applicationBreslin, const char serverIP[32], int serverPort )
 {
 	//game
-	mApplication = application;
+	mApplicationBreslin = applicationBreslin;
 
 	//server address
 	mServerIP = serverIP;

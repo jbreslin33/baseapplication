@@ -1,8 +1,8 @@
 //header
 #include "game.h"
 
-//application
-#include "../game/application.h"
+//applicationBreslin
+#include "../application/applicationBreslin.h"
 
 //shape
 #include "../shape/shape.h"
@@ -17,9 +17,9 @@
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
-Game::Game(Application* application)
+Game::Game(ApplicationBreslin* applicationBreslin)
 {
-	mApplication = application;
+	mApplicationBreslin = applicationBreslin;
 }
 
 Game::~Game()
@@ -33,7 +33,7 @@ void Game::run()
 {
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
-		mShapeVector.at(i)->interpolateTick(mApplication->getRenderTime());
+		mShapeVector.at(i)->interpolateTick(mApplicationBreslin->getRenderTime());
 	}
 }
 
@@ -87,7 +87,7 @@ Shape* Game::getShape(int id)
 **********************************/
 void Game::addShape(bool b, ByteBuffer* byteBuffer)
 {
-	Shape* shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
+	Shape* shape = new Shape(mApplicationBreslin,byteBuffer,false);  //you should just need to call this...
 
 	//ability
 	shape->addAbility(new AbilityRotation(shape));

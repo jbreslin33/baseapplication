@@ -52,7 +52,7 @@ class DreamWinSock;
 class DreamLinuxSock;
 #endif
 
-class Application;
+class ApplicationBreslin;
 class Command;
 class ByteBuffer;
 
@@ -64,7 +64,7 @@ class ByteBuffer;
 class Network
 {
 public:
-Network(Application* application, const char serverIP[32], int serverPort);
+Network(ApplicationBreslin* applicationBreslin, const char serverIP[32], int serverPort);
 ~Network();
 
 /**********************************
@@ -73,7 +73,7 @@ Network(Application* application, const char serverIP[32], int serverPort);
 private:
 
 //game
-Application* mApplication;
+ApplicationBreslin* mApplicationBreslin;
 
 
 //server address

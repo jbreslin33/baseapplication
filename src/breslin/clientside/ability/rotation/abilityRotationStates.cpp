@@ -19,8 +19,8 @@
 //game
 #include "../../game/game.h"
 
-//application
-#include "../../game/application.h"
+//applicationBreslin
+#include "../../application/applicationBreslin.h"
 
 //command
 #include "../../command/command.h"
@@ -185,7 +185,7 @@ void Normal_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	//->mObjectTitleString.append("R:Normal");
-	float rotSpeed = abilityRotation->mRotationSpeed * abilityRotation->mShape->mApplication->getRenderTime();
+	float rotSpeed = abilityRotation->mRotationSpeed * abilityRotation->mShape->mApplicationBreslin->getRenderTime();
 	abilityRotation->mShape->yaw(rotSpeed, true);
 
 	if (abilityRotation->mServerRotSpeed == 0.0 && abs(abilityRotation->getDegreesToServer()) < abilityRotation->mRotInterpLimitLow)
