@@ -71,7 +71,9 @@ Shape::~Shape()
 {
 }
 
-
+/*********************************
+		ABILITY
+******************************/
 
 void Shape::addAbility(Ability* ability)
 {

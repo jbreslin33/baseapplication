@@ -13,9 +13,6 @@ import breslin.math.Vector3D;
 //ability
 import breslin.clientside.ability.Ability;
 
-//parser
-import breslin.clientside.parser.Parser;
-
 //command
 import breslin.clientside.command.Command;
 
@@ -62,12 +59,10 @@ public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boole
 	//applicationBreslin
 	mApplicationBreslin = applicationBreslin;
 
-	//parser
-	mParser = new Parser();
-
 	//commands
-	mServerFrame         = new Command();
-	mCommandToRunOnShape = new Command();
+	mServerCommandLast    = new Command();
+	mServerCommandCurrent = new Command();
+	mCommandToRunOnShape  = new Command();
 
 	//speed
 	mSpeed     = 0;
@@ -130,6 +125,13 @@ System.out.println("creating a monkey shape in constructor.");
 /************************************************
 *                VARIABLES
 *************************************************/
+//network flags
+public static final byte mCommandOriginX      = 4;
+public static final byte mCommandOriginY      = 8;
+public static final byte mCommandOriginZ      = 16;
+public static final byte mCommandRotationX    = 32;
+public static final byte mCommandRotationZ    = 64;
+
 //applicationBreslin
 public ApplicationBreslin mApplicationBreslin;
 
@@ -142,9 +144,6 @@ int mMeshCode;
 
 //animate
 boolean mAnimate;
-
-//parser
-Parser mParser;
 
 //speed
 public float mSpeed;
@@ -215,7 +214,9 @@ float convertIntToFloat(ByteBuffer byteBuffer)
 		return b;
 }
 
-//abilitys
+/************************************************
+		ABILITY
+**************************************************/
 public void     addAbility(Ability ability)
 {
 	mAbilityVector.add(ability);
@@ -232,7 +233,52 @@ float  getSpeed()
 	return 0;
 }
 
-//ticks
+/*********************************
+		SPAWN
+******************************/
+public void processSpawnByteBuffer(ByteBuffer byteBuffer)
+{
+	parseSpawnByteBuffer(byteBuffer);
+	spawnShape(mSpawnPosition);
+}
+
+void parseSpawnByteBuffer(ByteBuffer byteBuffer)
+{
+	byteBuffer.position(0);
+
+	byteBuffer.get(); //type should be -103
+
+	mLocal	    = byteBuffer.get(); //error
+	mIndex		= byteBuffer.get();
+
+	mSpawnPosition.x = convertIntToFloat(byteBuffer);
+	mSpawnPosition.y = convertIntToFloat(byteBuffer);
+	mSpawnPosition.z = convertIntToFloat(byteBuffer);
+	
+	mSpawnRotation.x = convertIntToFloat(byteBuffer);
+	mSpawnRotation.z = convertIntToFloat(byteBuffer);
+
+	//mesh
+	mMeshCode    = byteBuffer.get();
+
+	//figure out mesh based on code passed in byteBuffer
+	mMeshName = getMeshString(mMeshCode);
+
+	//animate
+	int animate = byteBuffer.get();
+	if (animate == 1)
+	{
+		mAnimate = true;
+	}
+	else
+	{
+		mAnimate = false;
+	}
+}
+
+/*********************************
+		DELTA
+******************************/
 public void processTick()
 {
 	clearTitle(); //empty title string so it can be filled anew
@@ -255,7 +301,7 @@ public void interpolateTick(float renderTime)
 }
 
 //messaging
-public void readDeltaMoveCommand(ByteBuffer byteBuffer)
+public void processDeltaByteBuffer(ByteBuffer byteBuffer)
 {
 	//Shape* shape = NULL;
 
@@ -269,7 +315,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 	flags = byteBuffer.get();
 
 	// Origin
-	int i = flags & mParser.mCommandOriginX;
+	int i = flags & mCommandOriginX;
 	if(i == 4)
 	{
 		mServerFrame.mPositionOld.x = mServerFrame.mPosition.x;
@@ -281,7 +327,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		moveXChanged = false;
 	}
 
-	i = flags & mParser.mCommandOriginY;
+	i = flags & mCommandOriginY;
 	if(i == 8)
 	{
 		mServerFrame.mPositionOld.y = mServerFrame.mPosition.y;
@@ -293,7 +339,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		moveYChanged = false;
 	}
 
-	i = flags & mParser.mCommandOriginZ;
+	i = flags & mCommandOriginZ;
 	if(i == 16)
 	{
 		mServerFrame.mPositionOld.z = mServerFrame.mPosition.z;
@@ -307,7 +353,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 
 
 	//rotation
-	i = flags & mParser.mCommandRotationX;
+	i = flags & mCommandRotationX;
 	if(i == 32)
 	{
 		mServerFrame.mRotOld.x = mServerFrame.mRot.x;
@@ -315,7 +361,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		mServerFrame.mRot.x = convertIntToFloat(byteBuffer);
 	}
 
-	i = flags & mParser.mCommandRotationZ;
+	i = flags & mCommandRotationZ;
 	if(i == 64)
 	{
 		mServerFrame.mRotOld.z = mServerFrame.mRot.z;
@@ -323,7 +369,7 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 		mServerFrame.mRot.z = convertIntToFloat(byteBuffer);
 	}
 
-	i = flags & mParser.mCommandMilliseconds;
+	i = flags & mCommandMilliseconds;
 	//milliseconds
 	if (i == 2)
 	{
@@ -365,41 +411,6 @@ public void readDeltaMoveCommand(ByteBuffer byteBuffer)
 	processTick();
 }
 
-void parseByteBuffer(ByteBuffer byteBuffer)
-{
-	byteBuffer.position(0);
-
-	byteBuffer.get(); //type should be -103
-
-	mLocal	    = byteBuffer.get(); //error
-	mIndex		= byteBuffer.get();
-
-	mPosition.x = convertIntToFloat(byteBuffer);
-	mPosition.y = convertIntToFloat(byteBuffer);
-	mPosition.z = convertIntToFloat(byteBuffer);
-
-	mVelocity.x = convertIntToFloat(byteBuffer);
-	mVelocity.y = convertIntToFloat(byteBuffer);
-	mVelocity.z = convertIntToFloat(byteBuffer);
-	mRotation.x = convertIntToFloat(byteBuffer);
-	mRotation.z = convertIntToFloat(byteBuffer);
-
-
-	//mesh
-	mMeshCode    = byteBuffer.get();
-
-	//animate
-	int animate = byteBuffer.get();
-	if (animate == 1)
-	{
-		mAnimate = true;
-	}
-	else
-	{
-		mAnimate = false;
-	}
-
-}
 
 //ghost
 public void moveGhostShape()
