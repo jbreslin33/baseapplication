@@ -180,7 +180,7 @@ public void update()
 
 	//move objects
 	interpolateTick();
-
+	
 	runGraphics();
 }
 
@@ -290,7 +290,7 @@ void processInput()
 		mNetwork.mCommandToServer.mKey |= mKeyClockwise;
 	}
 
-		mNetwork.mCommandToServer.mMilliseconds = (byte) (mFrameTime * 1000);
+		mMillisecondsCurrent = (byte) (mFrameTime * 1000);
 }
 
 
