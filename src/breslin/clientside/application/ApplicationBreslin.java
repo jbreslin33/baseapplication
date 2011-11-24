@@ -233,7 +233,7 @@ void initializeGui()
 //input
 void processInput()
 {
-	mNetwork.mCommandToServer.mKey = 0;
+	mKeyCurrent = 0;
 
 	if (Keyboard.isKeyDown(Keyboard.KEY_B))
 	{
