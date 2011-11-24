@@ -91,11 +91,6 @@ System.out.println("creating a monkey shape in constructor.");
 
 	mIsGhost = isGhost;
 
-	if (mIsGhost)
-	{
-		mIndex = mIndex * -1;
-	}
-
 	//figure out mesh based on code passed in byteBuffer
 	mMeshName = getMeshString(mMeshCode);
 
@@ -249,7 +244,7 @@ void parseSpawnByteBuffer(ByteBuffer byteBuffer)
 	byteBuffer.get(); //type should be -103
 
 	mLocal	    = byteBuffer.get(); //error
-	mIndex		= byteBuffer.get();
+	mIndex	    = byteBuffer.get();
 
 	mSpawnPosition.x = convertIntToFloat(byteBuffer);
 	mSpawnPosition.y = convertIntToFloat(byteBuffer);
@@ -274,14 +269,81 @@ void parseSpawnByteBuffer(ByteBuffer byteBuffer)
 	{
 		mAnimate = false;
 	}
+	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
+	mServerCommandLast.mPosition.copyValuesFrom(mSpawnPosition);
+	mServerCommandCurrent.mPosition.copyValuesFrom(mSpawnPosition);
+	mCommandToRunOnShape.mPosition.copyValuesFrom(mSpawnPosition);
+}
+
+public void spawnShape()
+{
+	if (mIsGhost)
+	{
+		mIndex = mIndex * -1;
+	}
+
+	if (mMeshCode == 0)
+	{
+
+		Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
+		Geometry geom = new Geometry("A shape", mesh);
+
+		mSceneNode = geom;
+
+		Material mat = new Material(mApplicationBreslin.getAssetManager(),"generic/pictures/ShowNormals.j3md");
+		mSceneNode.setMaterial(mat);
+		//mGameMonkey.mApplicationBreslin.getRootNode().attachChild(geom);
+
+	}
+
+	if (mMeshCode == 1)
+
+	{
+		mSceneNode = mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
+		//scale
+		mSceneNode.scale(mScale,mScale,mScale);
+	}
+
+	mApplicationBreslin.getRootNode().attachChild(mSceneNode);
+
+
+	//move
+	setPosition((float)mPosition.x,(float)mPosition.y,(float)mPosition.z);
+	System.out.println("y:" + (float)mPosition.y);
+
+	if (mIsGhost)
+	{
+		//mSceneNode.setCullHint(CullHint.Always);
+	}
+
+
+	//billboard
+	if (mIsGhost)
+	{
+		mBitmapFont = null;
+		mBitmapText = null;
+	}
+	else
+	{
+		mBitmapFont = mApplicationBreslin.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
+		mBitmapText = new BitmapText(mBitmapFont, false);
+		mBitmapText.setSize(mBitmapFont.getCharSet().getRenderedSize());
+		mBitmapText.setText("Hello World");
+		mBitmapText.setQueueBucket(Bucket.Inherit);
+		mBitmapText.scale(.02f);
+		mApplicationBreslin.getRootNode().attachChild(mBitmapText);
+	}
 }
 
 /*********************************
 		DELTA
 ******************************/
-public void processTick()
+public void processDeltaByteBuffer()
 {
 	clearTitle(); //empty title string so it can be filled anew
+
+	parseDeltaByteBuffer(byteBuffer);
+
 	//process ticks on abilitys
 	for (int i = 0; i < mAbilityVector.size(); i++)
 	{
@@ -291,17 +353,8 @@ public void processTick()
 	drawTitle();
 }
 
-public void interpolateTick(float renderTime)
-{
-	//interpolate ticks on abilitys
-	for (int i = 0; i < mAbilityVector.size(); i++)
-	{
-		mAbilityVector.get(i).interpolateTick(renderTime);
-	}
-}
 
-//messaging
-public void processDeltaByteBuffer(ByteBuffer byteBuffer)
+public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 {
 	//Shape* shape = NULL;
 
@@ -408,7 +461,17 @@ public void processDeltaByteBuffer(ByteBuffer byteBuffer)
 			mServerFrame.mMoveVelocity.z = 0.0f;
 		}
 	}
-	processTick();
+	return flags;
+}
+
+
+public void interpolateTick(float renderTime)
+{
+	//interpolate ticks on abilitys
+	for (int i = 0; i < mAbilityVector.size(); i++)
+	{
+		mAbilityVector.get(i).interpolateTick(renderTime);
+	}
 }
 
 
@@ -428,65 +491,12 @@ public void moveGhostShape()
 }
 
 
-//JMONKEY
-/**********************************
-*          METHODS
-**********************************/
-//shape
-public void createShape()
-{
+/********************************************************
+*
+*		JMONKEY_SPECIFIC PRIVATE
+*
+*********************************************************/
 
-	if (mMeshCode == 0)
-	{
-
-		Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
-		Geometry geom = new Geometry("A shape", mesh);
-
-		mSceneNode = geom;
-
-		Material mat = new Material(mApplicationBreslin.getAssetManager(),"generic/pictures/ShowNormals.j3md");
-		mSceneNode.setMaterial(mat);
-		//mGameMonkey.mApplicationBreslin.getRootNode().attachChild(geom);
-
-	}
-
-	if (mMeshCode == 1)
-	{
-		mSceneNode = mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
-		//scale
-		mSceneNode.scale(mScale,mScale,mScale);
-	}
-
-	mApplicationBreslin.getRootNode().attachChild(mSceneNode);
-
-
-	//move
-	setPosition((float)mPosition.x,(float)mPosition.y,(float)mPosition.z);
-	System.out.println("y:" + (float)mPosition.y);
-
-	if (mIsGhost)
-	{
-		//mSceneNode.setCullHint(CullHint.Always);
-	}
-
-
-	//billboard
-	if (mIsGhost)
-	{
-		mBitmapFont = null;
-		mBitmapText = null;
-	}
-	else
-	{
-		mBitmapFont = mApplicationBreslin.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
-		mBitmapText = new BitmapText(mBitmapFont, false);
-		mBitmapText.setSize(mBitmapFont.getCharSet().getRenderedSize());
-		mBitmapText.setText("Hello World");
-		mBitmapText.setQueueBucket(Bucket.Inherit);
-		mBitmapText.scale(.02f);
-		mApplicationBreslin.getRootNode().attachChild(mBitmapText);
-	}
-}
 
 //debugging
 public void checkExtents(Vector3D min)

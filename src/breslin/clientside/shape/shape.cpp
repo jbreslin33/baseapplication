@@ -153,7 +153,7 @@ void Shape::spawnShape(Vector3D* position)
 	mEntity = mApplicationBreslin->getSceneManager()->createEntity(mName, mMeshName);
 
 	//attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
-    mSceneNode->attachObject(mEntity);
+    	mSceneNode->attachObject(mEntity);
 
 	//for scale, won't be needed in future hopefully...
 	Vector3D v;
