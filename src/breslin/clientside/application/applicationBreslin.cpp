@@ -35,7 +35,8 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//time
 	mFrameTime		 = 0.0f;
-	mRenderTime = 0;
+	mRenderTime = 0.0f;
+	mRunNetworkTime = 0.0f;
 
 	//keys
 	mKeyUp = 1;
@@ -130,17 +131,16 @@ void ApplicationBreslin::readServerTick(ByteBuffer* byteBuffer)
 **********************************/
 void ApplicationBreslin::runNetwork(float msec)
 {
-	static float time = 0.0f;
-	time += msec;
+	mRunNetworkTime += msec;
 
 	readPackets();
 	
 	// Framerate is too high
-	if(time > (1000 / 60))
+	if(mRunNetworkTime > (1000 / 60))
 	{
 		sendCommand();
-		mFrameTime = time / 1000.0f;
-		time = 0;
+		mFrameTime = mRunNetworkTime / 1000.0f;
+		mRunNetworkTime = 0.0f;
 	}
 }
 

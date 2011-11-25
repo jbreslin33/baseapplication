@@ -23,9 +23,6 @@ import breslin.clientside.application.ApplicationBreslin;
 //command
 import breslin.clientside.command.Command;
 
-//parser
-import breslin.clientside.parser.Parser;
-
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
@@ -41,9 +38,6 @@ public Network(ApplicationBreslin applicationBreslin, byte[] serverIP, int serve
 	//command
 	mCommandToServer     = new Command();
 	mLastCommandToServer = new Command();
-
-	//parser
-	mParser = new Parser();
 
 	//server address
 	mServerIP = serverIP;
@@ -115,9 +109,6 @@ InetSocketAddress   mInetSocketAddressServer;
 //command
 public Command mCommandToServer;
 public Command mLastCommandToServer;
-
-//parser
-Parser mParser;
 
 //server address
 byte[] mServerIP;
@@ -204,14 +195,6 @@ void parsePacket(ByteBuffer byteBuffer)
 ***************************************/
 
 
-public void sendConnect()
-{
-	byte[] mCharArray = new byte[1400];
-	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
-
-	byteBuffer.put(mParser.mMessageConnect);
-	send(byteBuffer);
-}
 
 
 public void reset()

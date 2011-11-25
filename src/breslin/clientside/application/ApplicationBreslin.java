@@ -17,9 +17,6 @@ import breslin.clientside.network.Network;
 //shape
 import breslin.clientside.shape.Shape;
 
-//parser
-import breslin.clientside.parser.Parser;
-
 //standard library
 import com.jme3.math.Vector3f;
 
@@ -61,8 +58,9 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 	mNetwork = new Network(this,serverIP,serverPort);
 
 	//time
-	mFrameTime		 = 0.0f;
-	mRenderTime = 0;
+	mFrameTime  = 0.0f;
+	mRenderTime = 0.0f;
+	mRunNetworkTime = 0.0f;	
 
 	//keys
 	mKeyUp = 1;
@@ -123,54 +121,51 @@ public static void main(String[] args)
 //constants
 public static final byte mCommandMilliseconds = 2;
 
-public static final byte mMessageFrame = 1;
-public static final byte mMessageConnect     = -101;
-public static final byte mMessageDisconnect  = -102;
-public static final byte mMessageAddShape    = -103;
-public static final byte mMessageRemoveShape = -104;
+private static final byte mCommandKey          = 1;
 
-public static final byte mMessageServerExit = 3;
-public static final byte mMessageKeepAlive = 12;
+private static final byte mMessageFrame = 1;
 
-//sequences
-short	mOutgoingSequence;		// OutFgoing packet sequence
+private static final byte mMessageConnect     = -101;
+private static final byte mMessageDisconnect  = -102;
+private static final byte mMessageAddShape    = -103;
+private static final byte mMessageRemoveShape = -104;
 
-//initialize
-boolean mInitializeGui;
-boolean mJoinGame;
-boolean mPlayingGame;
+private static final byte mMessageServerExit = 3;
+private static final byte mMessageKeepAlive = 12;
 
-//game
-Game mGame;
 
 //Network
-public Network     mNetwork;
+private Network     mNetwork;
 
-//gui
-//OgreBites::Button* mJoinButton;
+//game
+private Game mGame;
+
+//sequences
+private short	mOutgoingSequence;		// OutFgoing packet sequence
+
+//time
+private float mFrameTime;
+private float mRenderTime;
+private float mRunNetworkTime;
+
+//initialize
+private boolean mInitializeGui;
+private boolean mJoinGame;
+private boolean mPlayingGame;
 
 //keys
-int mKeyUp;
-int mKeyDown;
-int mKeyLeft;
-int mKeyRight;
-int mKeySpace;
-
-int mKeyCounterClockwise;
-int mKeyClockwise;
+private int mKeyUp;
+private int mKeyDown;
+private int mKeyLeft;
+private int mKeyRight;
+private int mKeyCounterClockwise;
+private int mKeyClockwise;
 
 //key input
-int mKeyCurrent;
-int mKeyLast;
-
-int mMillisecondsCurrent;
-int mMillisecondsLast;
-
-public float mFrameTime;
-public float mRunNetworkTime;
-
-//render time
-public float mRenderTime;
+private int mKeyCurrent;
+private int mKeyLast;
+private int mMillisecondsCurrent;
+private int mMillisecondsLast;
 
 
 /***************************************
@@ -192,10 +187,8 @@ public void update()
 
 	//move objects
 	mGame.run();
-
-	//move objects
-	interpolateTick();
 	
+	//graphics
 	runGraphics();
 }
 
@@ -254,7 +247,7 @@ void processInput()
 	{
 		if (!mPlayingGame)
 		{
-			mNetwork.sendConnect();
+			sendConnect();
 			mPlayingGame = true;
 
 			//Set Camera to position and to lookat avatar at 0,0,0(this should be same as ogre! if not fix it)
@@ -356,15 +349,6 @@ public void readServerTick           (ByteBuffer byteBuffer)
 
 }
 
-
-public void interpolateTick()
-{
-
-
-
-}
-
-
 /***************************************
 *   		NETWORK
 ***************************************/
@@ -379,7 +363,7 @@ public void runNetwork    (float msec)
 	{
 		sendCommand();
 		mFrameTime = mRunNetworkTime / 1000.0f;
-		mRunNetworkTime = 0;
+		mRunNetworkTime = 0.0f;
 	}
 }
 
@@ -390,9 +374,6 @@ public void shutdown()
 
 public void readPackets()
 {
-
-
-
 	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
 	while(mNetwork.checkForByteBuffer(byteBuffer))
 	{
@@ -496,6 +477,14 @@ public void sendCommand()
 }
 
 
+public void sendConnect()
+{
+	byte[] mCharArray = new byte[1400];
+	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
+
+	byteBuffer.put(mMessageConnect);
+	mNetwork.send(byteBuffer);
+}
 
 };
 

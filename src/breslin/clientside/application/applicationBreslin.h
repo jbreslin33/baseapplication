@@ -36,9 +36,10 @@ static const char mCommandMilliseconds = 2;
 private:
 
 //constants
+static const char mCommandKey          = 1;
+
 static const char mMessageFrame = 1;
 
-static const char mCommandKey          = 1;
 static const char mMessageConnect     = -101;
 static const char mMessageDisconnect  = -102;
 static const char mMessageAddShape    = -103;
@@ -53,19 +54,18 @@ Network*     mNetwork;
 //game
 Game* mGame;
 
-//sequences and packet loss stats
-signed short	mOutgoingSequence;		// OutFgoing packet sequence
+//sequences 
+signed short	mOutgoingSequence;		
 
 //time
 float mFrameTime;
+float mRenderTime;
+float mRunNetworkTime;
 
 //initialize
 bool mInitializeGui;
 bool mJoinGame;
 bool mPlayingGame;
-
-//time
-float mRenderTime;
 
 //keys
 int mKeyUp;
