@@ -56,6 +56,8 @@ public class Shape
 
 public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boolean isGhost)
 {
+	mIsGhost = isGhost;
+
 	//applicationBreslin
 	mApplicationBreslin = applicationBreslin;
 
@@ -68,42 +70,28 @@ public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boole
 	mSpeed     = 0;
 	mSpeedMax  = 1.66f;
 
-	//orientation
-	mPosition = new Vector3D();
-	mVelocity = new Vector3D();
-	mRotation = new Vector3D();
+	//spawn orientation
+	mSpawnPosition = new Vector3D();
+	mSpawnRotation = new Vector3D();
+
+	//process Spawn ByteBuffer
+	processSpawnByteBuffer(byteBuffer);
+
+        //animate stuff(not done yet so set to false..)
+	//animate
+	mAnimate = false;
+
+	//setupTitle
 
 	//mesh
 	mMeshCode = 0;
 
-	//animate
-	mAnimate = false;
-
-	//byteBuffer
-	parseByteBuffer(byteBuffer);
-
 	//ghost
 	mGhost = null;
 
-	//JMONKEY
-System.out.println("creating a monkey shape in constructor.");
-	//we use this to name shape. as ogre is picky about same names. it also serves as a counter of sorts.
-
-	mIsGhost = isGhost;
 
 	//figure out mesh based on code passed in byteBuffer
 	mMeshName = getMeshString(mMeshCode);
-
-
-	createShape();
-
-	//animation
-	//if (mAnimate)
-	//{
-	//	addAbility(new AbilityAnimationOgre(this));
-	//}
-
-	//setupTitle();
 
 	//call create ghost here..
 	if (!mIsGhost)
@@ -126,6 +114,7 @@ public static final byte mCommandOriginY      = 8;
 public static final byte mCommandOriginZ      = 16;
 public static final byte mCommandRotationX    = 32;
 public static final byte mCommandRotationZ    = 64;
+public static final byte mCommandMilliseconds = 2;
 
 //applicationBreslin
 public ApplicationBreslin mApplicationBreslin;
@@ -150,16 +139,16 @@ ArrayList<Ability> mAbilityVector = new ArrayList<Ability>();
 //this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
 public Shape mGhost;
 
-//basic
-Vector3D mPosition;
-Vector3D mVelocity;
-Vector3D mRotation;
+//spawn orientation
+Vector3D mSpawnPosition;
+Vector3D mSpawnRotation;
+
 int mLocal;
 
 //commands
-Command mServerCommandLast;
-Command mServerCommandCurrent;					// the latest frame from server
-Command mCommandToRunOnShape;
+public Command mServerCommandLast;
+public Command mServerCommandCurrent;					// the latest frame from server
+public Command mCommandToRunOnShape;
 
 //JONKEY
 
@@ -276,7 +265,7 @@ void parseSpawnByteBuffer(ByteBuffer byteBuffer)
 	mCommandToRunOnShape.mPosition.copyValuesFrom(mSpawnPosition);
 }
 
-public void spawnShape()
+public void spawnShape(Vector3D position)
 {
 	if (mIsGhost)
 	{
@@ -309,8 +298,7 @@ public void spawnShape()
 
 
 	//move
-	setPosition((float)mPosition.x,(float)mPosition.y,(float)mPosition.z);
-	System.out.println("y:" + (float)mPosition.y);
+	setPosition((float)position.x,(float)position.y,(float)position.z);
 
 	if (mIsGhost)
 	{
@@ -339,7 +327,7 @@ public void spawnShape()
 /*********************************
 		DELTA
 ******************************/
-public void processDeltaByteBuffer()
+public void processDeltaByteBuffer(ByteBuffer byteBuffer)
 {
 	clearTitle(); //empty title string so it can be filled anew
 

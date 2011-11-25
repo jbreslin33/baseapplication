@@ -32,16 +32,16 @@ Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, boo
 	//applicationBreslin
 	mApplicationBreslin = applicationBreslin;
 
-	//speed
-	mSpeed = 0.0f;
-	mSpeedMax  = 1.66f;
-
 	//commands
 	mServerCommandLast    = new Command();
 	mServerCommandCurrent = new Command();
 	mCommandToRunOnShape  = new Command();
 
-	//orientation
+	//speed
+	mSpeed = 0.0f;
+	mSpeedMax  = 1.66f;
+
+	//spawn orientation
 	mSpawnPosition     = new Vector3D();
 	mSpawnRotation     = new Vector3D();
 
