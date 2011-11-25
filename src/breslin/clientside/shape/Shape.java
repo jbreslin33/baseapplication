@@ -408,7 +408,7 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 		mServerCommandCurrent.mRot.z = convertIntToFloat(byteBuffer);
 	}
 
-	i = flags & mCommandMilliseconds;
+	i = flags & mApplicationBreslin.mCommandMilliseconds;
 	//milliseconds
 	if (i == 2)
 	{

@@ -120,6 +120,18 @@ public static void main(String[] args)
 *   		MEMBER VARIABLES
 ***************************************/
 
+//constants
+public static final byte mCommandMilliseconds = 2;
+
+public static final byte mMessageFrame = 1;
+public static final byte mMessageConnect     = -101;
+public static final byte mMessageDisconnect  = -102;
+public static final byte mMessageAddShape    = -103;
+public static final byte mMessageRemoveShape = -104;
+
+public static final byte mMessageServerExit = 3;
+public static final byte mMessageKeepAlive = 12;
+
 //sequences
 short	mOutgoingSequence;		// OutFgoing packet sequence
 
@@ -160,7 +172,6 @@ public float mRunNetworkTime;
 //render time
 public float mRenderTime;
 
-Parser mParser;
 
 /***************************************
 *			          METHODS
@@ -391,29 +402,29 @@ public void readPackets()
 		int type = byteBuffer.get();
 
 
-		if (mParser.mMessageConnect == type)
+		if (mMessageConnect == type)
 		{
 			System.out.println("BRESSAGE: mMessageConnect");
 		}
 
-		if (mParser.mMessageAddShape == type)
+		if (mMessageAddShape == type)
 		{
 			mGame.addShape(true,byteBuffer);
 			System.out.println("BRESSAGE: mMessageAddShape");
 		}
 
-		if (mParser.mMessageRemoveShape == type)
+		if (mMessageRemoveShape == type)
 		{
 			mGame.removeShape(byteBuffer);
 			System.out.println("BRESSAGE: mMessageRemoveShape");
 		}
 
-		if (mParser.mMessageFrame == type)
+		if (mMessageFrame == type)
 		{
 			readServerTick(byteBuffer);
 		}
 
-		if (mParser.mMessageServerExit == type)
+		if (mMessageServerExit == type)
 		{
 			//	mGame.shutdown();
 		}
@@ -432,7 +443,7 @@ public void sendCommand()
         ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
 
         //WRITE: type
-        byteBuffer.put(mParser.mMessageFrame);  //type
+        byteBuffer.put(mMessageFrame);  //type
 
         //WRITE: sequence
         byteBuffer.putShort(mOutgoingSequence);  //sequence
@@ -450,7 +461,7 @@ public void sendCommand()
         if(mKeyLast != mKeyCurrent)
         {
                 sendKey = true;
-                flags |= mParser.mCommandKey;
+                flags |= mCommandKey;
         }
 
 
@@ -458,7 +469,7 @@ public void sendCommand()
         {
                 sendMilliseconds = true;
 
-                flags |= mParser.mCommandMilliseconds;
+                flags |= mCommandMilliseconds;
         }
 
 
