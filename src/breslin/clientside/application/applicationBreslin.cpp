@@ -55,7 +55,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//input
 	mKeyCurrent = 0;
-	mKeyLast;
+	mKeyLast = 0;
 	mMillisecondsCurrent = 0;
 	mMillisecondsLast = 0;
 

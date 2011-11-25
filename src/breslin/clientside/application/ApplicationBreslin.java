@@ -80,12 +80,16 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 	//game
 	mGame = new Game(this);
 
+	//input
+	mKeyCurrent = 0;
+	mKeyLast = 0;
+	mMillisecondsCurrent = 0;
+	mMillisecondsLast = 0;
+
 	//let their be light
 	DirectionalLight directionalLight = new DirectionalLight();
 	directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
         getRootNode().addLight(directionalLight);
-
-	mParser = new Parser();
 
 	//sequences
 	mOutgoingSequence		= 1;
@@ -248,6 +252,7 @@ void processInput()
 			Vector3f worldDirection   = new Vector3f(0,1,0);
 			cam.setLocation(startCamPosition);
 			cam.lookAt(lookAtVector,worldDirection);
+			System.out.println("Camera is setCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
 		}
 		else
 		{
@@ -315,8 +320,8 @@ public void readServerTick           (ByteBuffer byteBuffer)
 	byte two = byteBuffer.get(2);
 	byteBuffer.put(1,two);
 	byteBuffer.put(2,one);
-	byteBuffer.position(1);
-	short sequence = byteBuffer.getShort();
+	byteBuffer.position(2);
+//	short sequence = byteBuffer.getShort();
 
 	while (byteBuffer.hasRemaining())
 	{
@@ -331,8 +336,9 @@ public void readServerTick           (ByteBuffer byteBuffer)
 
 		if (shape != null)
 		{
-			//System.out.println("got shape");
+			System.out.println("got shape");
 			shape.processDeltaByteBuffer(byteBuffer);
+			
 		}
 
 	}
@@ -404,7 +410,6 @@ public void readPackets()
 
 		if (mParser.mMessageFrame == type)
 		{
-			System.out.println("BRESSAGE: mMessageFrame");
 			readServerTick(byteBuffer);
 		}
 

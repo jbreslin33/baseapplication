@@ -73,7 +73,7 @@ public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boole
 	//spawn orientation
 	mSpawnPosition = new Vector3D();
 	mSpawnRotation = new Vector3D();
-
+	System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
 	//process Spawn ByteBuffer
 	processSpawnByteBuffer(byteBuffer);
 
@@ -88,10 +88,6 @@ public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boole
 
 	//ghost
 	mGhost = null;
-
-
-	//figure out mesh based on code passed in byteBuffer
-	mMeshName = getMeshString(mMeshCode);
 
 	//call create ghost here..
 	if (!mIsGhost)
@@ -114,7 +110,6 @@ public static final byte mCommandOriginY      = 8;
 public static final byte mCommandOriginZ      = 16;
 public static final byte mCommandRotationX    = 32;
 public static final byte mCommandRotationZ    = 64;
-public static final byte mCommandMilliseconds = 2;
 
 //applicationBreslin
 public ApplicationBreslin mApplicationBreslin;
@@ -283,12 +278,14 @@ public void spawnShape(Vector3D position)
 		Material mat = new Material(mApplicationBreslin.getAssetManager(),"generic/pictures/ShowNormals.j3md");
 		mSceneNode.setMaterial(mat);
 		//mGameMonkey.mApplicationBreslin.getRootNode().attachChild(geom);
+		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmesh code 0");
 
 	}
 
 	if (mMeshCode == 1)
 
 	{
+		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmesh code 1");
 		mSceneNode = mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
 		//scale
 		mSceneNode.scale(mScale,mScale,mScale);

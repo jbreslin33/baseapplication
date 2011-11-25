@@ -100,6 +100,7 @@ Ability* Shape::getAbility(Ability* ability)
 
 void Shape::processSpawnByteBuffer(ByteBuffer* byteBuffer)
 {
+
 	parseSpawnByteBuffer(byteBuffer);
 	spawnShape(mSpawnPosition);
 }
@@ -107,7 +108,9 @@ void Shape::processSpawnByteBuffer(ByteBuffer* byteBuffer)
 void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 {
 	byteBuffer->BeginReading();
+
 	byteBuffer->ReadByte(); //should read -103 to add a shape..
+
 
 	mLocal	=    byteBuffer->ReadByte();
 	mIndex	=    byteBuffer->ReadByte();

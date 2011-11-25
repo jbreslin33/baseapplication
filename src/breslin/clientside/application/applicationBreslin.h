@@ -78,7 +78,6 @@ int mKeyClockwise;
 //key input
 int mKeyCurrent;         
 int mKeyLast;
-
 int mMillisecondsCurrent;
 int mMillisecondsLast;
 
