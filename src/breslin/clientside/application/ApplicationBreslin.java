@@ -359,14 +359,16 @@ public void readServerTick(ByteBuffer byteBuffer)
 	short sequence = byteBuffer.getShort();
 	System.out.println("sequence:" + sequence);
 
+	int id = byteBuffer.get();
+	System.out.println("id:" + id);
 
 
-	while (byteBuffer.hasRemaining())
-	{
+//	while (byteBuffer.hasRemaining())
+//	{
 
 		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
-		int id = byteBuffer.get();
+		//int id = byteBuffer.get();
 		//System.out.println("id:" + id);
 
 		Shape shape = null;
@@ -379,7 +381,8 @@ public void readServerTick(ByteBuffer byteBuffer)
 			
 		}
 
-	}
+	//}
+
 }
 
 /*********************************
