@@ -206,167 +206,9 @@ public void shutdown()
 
 public void simpleInitApp()
 {
-
+	createScene();
 }
 
-/*********************************
-		GRAPHICS
-**********************************/
-
-void createScene()
-{
-	//let their be light
-	DirectionalLight directionalLight = new DirectionalLight();
-	directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
-        getRootNode().addLight(directionalLight);
-}
-
-public boolean runGraphics()
-{
-	//super and other stuff this is equivalent to c++ runGraphics...
-	super.update();
-
-	return true;
-}
-
-/*********************************
-		GUI
-**********************************/
-void hideGui()
-{
-
-}
-
-void loadJoinScreen()
-{
-
-}
-
-void hideJoinScreen()
-{
-
-}
-void unloadOtherScreens()
-{
-
-}
-void initializeGui()
-{
-
-}
-
-/***************************************
-*			INPUT
-******************************************/
-void processInput()
-{
-	mKeyCurrent = 0;
-
-	if (Keyboard.isKeyDown(Keyboard.KEY_B))
-	{
-		if (!mPlayingGame)
-		{
-			sendConnect();
-			mPlayingGame = true;
-
-			//Set Camera to position and to lookat avatar at 0,0,0(this should be same as ogre! if not fix it)
-			Vector3f startCamPosition = new Vector3f(0, 20, 20);
-			Vector3f lookAtVector     = new Vector3f(0,0,0);
-			Vector3f worldDirection   = new Vector3f(0,1,0);
-			cam.setLocation(startCamPosition);
-			cam.lookAt(lookAtVector,worldDirection);
-			System.out.println("Camera is setCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
-		}
-		else
-		{
-			System.out.println("slow your roll you already started");
-		}
-	}
-
-	//move
-	if (Keyboard.isKeyDown(Keyboard.KEY_I))
-	{
-		mKeyCurrent |= mKeyUp;
-	}
-
-
-	if (Keyboard.isKeyDown(Keyboard.KEY_K))
-	{
-		mKeyCurrent |= mKeyDown;
-	}
-
-
-	if (Keyboard.isKeyDown(Keyboard.KEY_J))
-	{
-		mKeyCurrent |= mKeyLeft;
-	}
-
-
-	if (Keyboard.isKeyDown(Keyboard.KEY_L))
-	{
-		mKeyCurrent |= mKeyRight;
-	}
-
-	//rotation
-	if (Keyboard.isKeyDown(Keyboard.KEY_G))
-	{
-		mKeyCurrent |= mKeyCounterClockwise;
-	}
-
-	if (Keyboard.isKeyDown(Keyboard.KEY_H))
-	{
-		mKeyCurrent |= mKeyClockwise;
-	}
-
-		mMillisecondsCurrent = (byte) (mFrameTime * 1000);
-}
-
-
-public Vector3f getCameraLocation()
-{
-	return cam.getLocation();
-}
-
-public float getRenderTime()
-{
-//	System.out.println("r:" + mRenderTime);
-	return mRenderTime;
-}
-
-/***************************************
-*   		TICKS
-***************************************/
-public void readServerTick(ByteBuffer byteBuffer)
-{
-	// Skip sequences
-	byte one = byteBuffer.get(1);
-	byte two = byteBuffer.get(2);
-	byteBuffer.put(1,two);
-	byteBuffer.put(2,one);
-	byteBuffer.position(2);
-//	short sequence = byteBuffer.getShort();
-
-	while (byteBuffer.hasRemaining())
-	{
-
-		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
-
-		int id = byteBuffer.get();
-		//System.out.println("id:" + id);
-
-		Shape shape = null;
-		shape = mGame.getShape(id);
-
-		if (shape != null)
-		{
-			System.out.println("got shape");
-			shape.processDeltaByteBuffer(byteBuffer);
-			
-		}
-
-	}
-
-}
 
 /***************************************
 *   		NETWORK
@@ -388,13 +230,17 @@ public void runNetwork(float msec)
 
 public void readPackets()
 {
+
+	int type = 0;
+	
 	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
+
 	while(mNetwork.checkForByteBuffer(byteBuffer))
 	{
 
 		byteBuffer.position(0); //BeginReading() c++ equivalent
 
-		int type = byteBuffer.get();
+		type = byteBuffer.get();
 
 
 		if (mMessageConnect == type)
@@ -499,6 +345,167 @@ public void sendConnect()
 	byteBuffer.put(mMessageConnect);
 	mNetwork.send(byteBuffer);
 }
+
+
+public void readServerTick(ByteBuffer byteBuffer)
+{
+	
+	// Skip sequences
+	byte one = byteBuffer.get(1);
+	byte two = byteBuffer.get(2);
+	byteBuffer.put(1,two);
+	byteBuffer.put(2,one);
+	//byteBuffer.position(2);
+	short sequence = byteBuffer.getShort();
+	System.out.println("sequence:" + sequence);
+	while (byteBuffer.hasRemaining())
+	{
+
+		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
+
+		int id = byteBuffer.get();
+		System.out.println("id:" + id);
+
+		Shape shape = null;
+		shape = mGame.getShape(id);
+
+		if (shape != null)
+		{
+			System.out.println("got shape");
+			shape.processDeltaByteBuffer(byteBuffer);
+			
+		}
+
+	}
+}
+
+/*********************************
+		TIME
+**********************************/
+
+public float getRenderTime()
+{
+	return mRenderTime;
+}
+
+/*********************************
+		GRAPHICS
+**********************************/
+
+void createScene()
+{
+	//let their be light
+	DirectionalLight directionalLight = new DirectionalLight();
+	directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
+        getRootNode().addLight(directionalLight);
+}
+
+public boolean runGraphics()
+{
+	//super and other stuff this is equivalent to c++ runGraphics...
+	super.update();
+
+	return true;
+}
+
+/*********************************
+		GUI
+**********************************/
+void initializeGui()
+{
+
+}
+
+void loadJoinScreen()
+{
+
+}
+
+void hideGui()
+{
+
+}
+
+void hideJoinScreen()
+{
+
+}
+
+/***************************************
+*			INPUT
+******************************************/
+void processInput()
+{
+	mKeyCurrent = 0;
+
+	if (Keyboard.isKeyDown(Keyboard.KEY_B))
+	{
+		if (!mPlayingGame)
+		{
+			sendConnect();
+			mPlayingGame = true;
+
+			//Set Camera to position and to lookat avatar at 0,0,0(this should be same as ogre! if not fix it)
+			Vector3f startCamPosition = new Vector3f(0, 20, 20);
+			Vector3f lookAtVector     = new Vector3f(0,0,0);
+			Vector3f worldDirection   = new Vector3f(0,1,0);
+			cam.setLocation(startCamPosition);
+			cam.lookAt(lookAtVector,worldDirection);
+			System.out.println("Camera is setCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+		}
+		else
+		{
+			System.out.println("slow your roll you already started");
+		}
+	}
+
+	//move
+	if (Keyboard.isKeyDown(Keyboard.KEY_I))
+	{
+		mKeyCurrent |= mKeyUp;
+	}
+
+
+	if (Keyboard.isKeyDown(Keyboard.KEY_K))
+	{
+		mKeyCurrent |= mKeyDown;
+	}
+
+
+	if (Keyboard.isKeyDown(Keyboard.KEY_J))
+	{
+		mKeyCurrent |= mKeyLeft;
+	}
+
+
+	if (Keyboard.isKeyDown(Keyboard.KEY_L))
+	{
+		mKeyCurrent |= mKeyRight;
+	}
+
+	//rotation
+	if (Keyboard.isKeyDown(Keyboard.KEY_G))
+	{
+		mKeyCurrent |= mKeyCounterClockwise;
+	}
+
+	if (Keyboard.isKeyDown(Keyboard.KEY_H))
+	{
+		mKeyCurrent |= mKeyClockwise;
+	}
+
+		mMillisecondsCurrent = (byte) (mFrameTime * 1000);
+}
+
+
+public Vector3f getCameraLocation()
+{
+	return cam.getLocation();
+}
+
+
+
+
 
 };
 

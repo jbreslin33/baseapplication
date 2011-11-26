@@ -153,7 +153,6 @@ boolean mIsGhost;
 //ogre scene stuff
 String        mMeshName;
 String         mName;
-//Entity*             mEntity;
 
 //this is your pointer to move shape, really all you need.
 Spatial          mSceneNode;
@@ -262,12 +261,30 @@ void parseSpawnByteBuffer(ByteBuffer byteBuffer)
 
 public void spawnShape(Vector3D position)
 {
+	//hard code test
+/*
+	Spatial sceneNodeTest;
+
+	Box meshTest = new Box(Vector3f.ZERO, 1, 1, 1);
+	Geometry geomTest = new Geometry("A shape", meshTest);
+
+	sceneNodeTest = geomTest;
+
+	Material matTest = new Material(mApplicationBreslin.getAssetManager(),"generic/pictures/ShowNormals.j3md");
+	sceneNodeTest.setMaterial(matTest);
+	mApplicationBreslin.getRootNode().attachChild(sceneNodeTest);
+*/
+/*
+Spatial sceneNodeTest;
+sceneNodeTest = mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
+mApplicationBreslin.getRootNode().attachChild(sceneNodeTest);
+*/
 	if (mIsGhost)
 	{
 		mIndex = mIndex * -1;
 	}
 
-	if (mMeshCode == 0)
+	if (mMeshCode == 1)
 	{
 
 		Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
@@ -282,19 +299,24 @@ public void spawnShape(Vector3D position)
 
 	}
 
-	if (mMeshCode == 1)
+	if (mMeshCode == 0)
 
 	{
 		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmesh code 1");
 		mSceneNode = mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
 		//scale
 		mSceneNode.scale(mScale,mScale,mScale);
+		System.out.println("scale:" + mScale);
+
+		
+
 	}
 
 	mApplicationBreslin.getRootNode().attachChild(mSceneNode);
 
 
 	//move
+	System.out.println("posx:" + position.x);
 	setPosition((float)position.x,(float)position.y,(float)position.z);
 
 	if (mIsGhost)

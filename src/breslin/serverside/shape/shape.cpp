@@ -321,6 +321,7 @@ void Shape::addToMoveMessage(Message* message)
 	int flags = setFlag();
 
 	message->WriteByte(mIndex);
+	LogString("mIndex:%d",mIndex);
 
 	// Flags
 	message->WriteByte(flags);  

@@ -76,7 +76,7 @@ ApplicationBreslin::~ApplicationBreslin()
 void ApplicationBreslin::run()
 {
 	while(true)
-    {
+    	{
 		//input
 		processInput();
 		
@@ -127,12 +127,11 @@ void ApplicationBreslin::runNetwork(float msec)
 
 void ApplicationBreslin::readPackets()
 {
-	int type;
-	int ret;
+	int type = 0;
 
 	ByteBuffer* byteBuffer = new ByteBuffer();
 
-	while(ret = mNetwork->checkForByteBuffer(byteBuffer))
+	while(mNetwork->checkForByteBuffer(byteBuffer))
 	{
 		byteBuffer->BeginReading();
 
@@ -229,23 +228,31 @@ void ApplicationBreslin::sendConnect()
 void ApplicationBreslin::readServerTick(ByteBuffer* byteBuffer)
 {
 	// Skip sequences
-	byteBuffer->ReadShort();
-
+	short sequence = byteBuffer->ReadShort();
+	LogString("sequence:%d",sequence);
 	while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
 	{
 		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
 		int id = byteBuffer->ReadByte();
-
+		LogString("id:%d",id);
 		Shape* shape = NULL;
 		if (mGame)
 		{
 			shape = mGame->getShape(id);
 		}
+		else
+		{
+			LogString("GAME IS NULL");
+		}
 		if (shape)
 		{
 			shape->processDeltaByteBuffer(byteBuffer);
 		}
+		else
+		{
+			LogString("INVALID SHAPE ID");
+		}	
 	}
 }
 
@@ -265,22 +272,13 @@ float ApplicationBreslin::getRenderTime()
 **********************************/
 void ApplicationBreslin::createScene()
 {
-    mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
+        mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
 
-    Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
-    pointLight->setType(Ogre::Light::LT_POINT);
-    pointLight->setPosition(Ogre::Vector3(250, 150, 250));
-    pointLight->setDiffuseColour(Ogre::ColourValue::White);
-    pointLight->setSpecularColour(Ogre::ColourValue::White);
-}
-
-bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
-{
-	mRenderTime = evt.timeSinceLastFrame;
-
-    bool ret = BaseApplication::frameRenderingQueued(evt);
-	
-	return ret;
+        Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
+        pointLight->setType(Ogre::Light::LT_POINT);
+	pointLight->setPosition(Ogre::Vector3(250, 150, 250));
+	pointLight->setDiffuseColour(Ogre::ColourValue::White);
+	pointLight->setSpecularColour(Ogre::ColourValue::White);
 }
 
 bool ApplicationBreslin::runGraphics()
@@ -299,6 +297,15 @@ bool ApplicationBreslin::runGraphics()
 	}
 
 
+}
+
+bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
+{
+	mRenderTime = evt.timeSinceLastFrame;
+
+	bool ret = BaseApplication::frameRenderingQueued(evt);
+	
+	return ret;
 }
 
 /*********************************
