@@ -73,7 +73,7 @@ public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boole
 	//spawn orientation
 	mSpawnPosition = new Vector3D();
 	mSpawnRotation = new Vector3D();
-	System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+
 	//process Spawn ByteBuffer
 	processSpawnByteBuffer(byteBuffer);
 
@@ -84,7 +84,7 @@ public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boole
 	//setupTitle
 
 	//mesh
-	mMeshCode = 0;
+	//mMeshCode = 0;
 
 	//ghost
 	mGhost = null;
@@ -284,7 +284,7 @@ mApplicationBreslin.getRootNode().attachChild(sceneNodeTest);
 		mIndex = mIndex * -1;
 	}
 
-	if (mMeshCode == 1)
+	if (mMeshCode == 0)
 	{
 
 		Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
@@ -294,22 +294,17 @@ mApplicationBreslin.getRootNode().attachChild(sceneNodeTest);
 
 		Material mat = new Material(mApplicationBreslin.getAssetManager(),"generic/pictures/ShowNormals.j3md");
 		mSceneNode.setMaterial(mat);
-		//mGameMonkey.mApplicationBreslin.getRootNode().attachChild(geom);
-		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmesh code 0");
-
 	}
 
-	if (mMeshCode == 0)
+	if (mMeshCode == 1)
 
 	{
-		System.out.println("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmesh code 1");
+		System.out.println("MESH STRING:" + getMeshString(mMeshCode));
 		mSceneNode = mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
-		//scale
-		mSceneNode.scale(mScale,mScale,mScale);
-		System.out.println("scale:" + mScale);
-
 		
-
+		//scale
+		System.out.println("scale:" + mScale);
+		mSceneNode.scale(mScale,mScale,mScale);
 	}
 
 	mApplicationBreslin.getRootNode().attachChild(mSceneNode);
@@ -321,7 +316,7 @@ mApplicationBreslin.getRootNode().attachChild(sceneNodeTest);
 
 	if (mIsGhost)
 	{
-		//mSceneNode.setCullHint(CullHint.Always);
+		mSceneNode.setCullHint(CullHint.Always);
 	}
 
 

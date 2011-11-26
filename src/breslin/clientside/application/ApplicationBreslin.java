@@ -39,6 +39,8 @@ import com.jme3.input.controls.KeyTrigger;
 //light
 import com.jme3.light.DirectionalLight;
 
+//color
+import com.jme3.math.ColorRGBA;
 
 import java.nio.ByteBuffer;
 
@@ -54,7 +56,7 @@ public class ApplicationBreslin extends SimpleApplication
 
 public ApplicationBreslin(byte[] serverIP, int serverPort)
 {
-	start();
+	//start();
 
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
@@ -88,6 +90,14 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 
 	//sequences
 	mOutgoingSequence		= 1;
+
+    start();
+
+        //let their be light
+        DirectionalLight directionalLight = new DirectionalLight();
+        directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
+    getRootNode().addLight(directionalLight);
+
 }
 
 
@@ -206,7 +216,8 @@ public void shutdown()
 
 public void simpleInitApp()
 {
-	createScene();
+	//createScene();
+    viewPort.setBackgroundColor(ColorRGBA.LightGray);
 }
 
 
@@ -357,10 +368,9 @@ public void readServerTick(ByteBuffer byteBuffer)
 	byteBuffer.put(2,one);
 	byteBuffer.position(1);
 	short sequence = byteBuffer.getShort();
-	System.out.println("sequence:" + sequence);
 
 	int id = byteBuffer.get();
-	System.out.println("id:" + id);
+	//System.out.println("id:" + id);
 
 
 //	while (byteBuffer.hasRemaining())
@@ -376,7 +386,7 @@ public void readServerTick(ByteBuffer byteBuffer)
 
 		if (shape != null)
 		{
-			System.out.println("got shape");
+			//System.out.println("got shape");
 			shape.processDeltaByteBuffer(byteBuffer);
 			
 		}

@@ -77,7 +77,6 @@ public Shape getShape(int id)
 
 	for (int i = 0; i < mShapeVector.size(); i++)
 	{
-		System.out.println("index in getshape:" + mShapeVector.get(i).mIndex);
 		Shape curShape = mShapeVector.get(i);
 		if (curShape.mIndex == id)
 		{
