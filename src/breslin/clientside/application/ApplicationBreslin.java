@@ -54,6 +54,8 @@ public class ApplicationBreslin extends SimpleApplication
 
 public ApplicationBreslin(byte[] serverIP, int serverPort)
 {
+	start();
+
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
@@ -84,15 +86,8 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 	mMillisecondsCurrent = 0;
 	mMillisecondsLast = 0;
 
-	//let their be light
-	DirectionalLight directionalLight = new DirectionalLight();
-	directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
-        getRootNode().addLight(directionalLight);
-
 	//sequences
 	mOutgoingSequence		= 1;
-
-	start();
 }
 
 
@@ -169,13 +164,12 @@ private int mMillisecondsLast;
 
 
 /***************************************
-*			          METHODS
+*	 METHODS
 ***************************************/
 
-public void simpleInitApp()
-{
-
-}
+/***************************************
+*	 LOOP
+***************************************/
 
 public void update()
 {
@@ -192,21 +186,42 @@ public void update()
 	runGraphics();
 }
 
-//graphics
 /* This is the update loop */
 public void simpleUpdate(float tpf)
 {
     mRenderTime = tpf;
 }
 
-void        createScene          ()
+/***************************************
+*	 ADMIN
+***************************************/
+
+public void shutdown()
+{
+	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
+	byteBuffer.put(mMessageDisconnect);
+	mNetwork.send(byteBuffer);
+	mNetwork.reset();
+}
+
+public void simpleInitApp()
 {
 
 }
 
-//boolean        frameRenderingQueued (const Ogre::FrameEvent& evt);
+/*********************************
+		GRAPHICS
+**********************************/
 
-public boolean                runGraphics          ()
+void createScene()
+{
+	//let their be light
+	DirectionalLight directionalLight = new DirectionalLight();
+	directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
+        getRootNode().addLight(directionalLight);
+}
+
+public boolean runGraphics()
 {
 	//super and other stuff this is equivalent to c++ runGraphics...
 	super.update();
@@ -214,7 +229,9 @@ public boolean                runGraphics          ()
 	return true;
 }
 
-//gui
+/*********************************
+		GUI
+**********************************/
 void hideGui()
 {
 
@@ -238,7 +255,9 @@ void initializeGui()
 
 }
 
-//input
+/***************************************
+*			INPUT
+******************************************/
 void processInput()
 {
 	mKeyCurrent = 0;
@@ -317,7 +336,7 @@ public float getRenderTime()
 /***************************************
 *   		TICKS
 ***************************************/
-public void readServerTick           (ByteBuffer byteBuffer)
+public void readServerTick(ByteBuffer byteBuffer)
 {
 	// Skip sequences
 	byte one = byteBuffer.get(1);
@@ -352,7 +371,7 @@ public void readServerTick           (ByteBuffer byteBuffer)
 /***************************************
 *   		NETWORK
 ***************************************/
-public void runNetwork    (float msec)
+public void runNetwork(float msec)
 {
 	mRunNetworkTime += msec;
 
@@ -365,11 +384,6 @@ public void runNetwork    (float msec)
 		mFrameTime = mRunNetworkTime / 1000.0f;
 		mRunNetworkTime = 0.0f;
 	}
-}
-
-public void shutdown()
-{
-
 }
 
 public void readPackets()

@@ -24,7 +24,7 @@
 
 
 /***************************************
-*			          CONSTRUCTORS
+*	CONSTRUCTORS		          
 ***************************************/
 ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 {
@@ -34,7 +34,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mNetwork = new Network(this,serverIP,serverPort);
 
 	//time
-	mFrameTime		 = 0.0f;
+	mFrameTime = 0.0f;
 	mRenderTime = 0.0f;
 	mRunNetworkTime = 0.0f;
 
@@ -71,7 +71,7 @@ ApplicationBreslin::~ApplicationBreslin()
 }
 
 /*********************************
-		START/LOOP/END
+	LOOP
 **********************************/
 void ApplicationBreslin::run()
 {
@@ -94,12 +94,135 @@ void ApplicationBreslin::run()
 	}
 }
 
+/*********************************
+	ADMIN
+**********************************/
+
 void ApplicationBreslin::shutdown()
 {
 	ByteBuffer* byteBuffer = new ByteBuffer();
 	byteBuffer->WriteByte(mMessageDisconnect);
 	mNetwork->send(byteBuffer);
 	mNetwork->reset();
+}
+
+
+/*********************************
+		NETWORK
+**********************************/
+void ApplicationBreslin::runNetwork(float msec)
+{
+	mRunNetworkTime += msec;
+
+	readPackets();
+	
+	// Framerate is too high
+	if(mRunNetworkTime > (1000 / 60))
+	{
+		sendCommand();
+		mFrameTime = mRunNetworkTime / 1000.0f;
+		mRunNetworkTime = 0.0f;
+	}
+}
+
+void ApplicationBreslin::readPackets()
+{
+	int type;
+	int ret;
+
+	ByteBuffer* byteBuffer = new ByteBuffer();
+
+	while(ret = mNetwork->checkForByteBuffer(byteBuffer))
+	{
+		byteBuffer->BeginReading();
+
+		type = byteBuffer->ReadByte();
+
+		switch(type)
+		{
+			case mMessageConnect:
+			break;
+
+			case mMessageAddShape:
+				if (mGame)
+				{
+					mGame->addShape(true,byteBuffer);
+				}
+			break;
+
+			case mMessageRemoveShape:
+				if (mGame)
+				{
+					mGame->removeShape(byteBuffer);
+				}
+			break;
+
+			case mMessageFrame:
+				readServerTick(byteBuffer);
+			break;
+
+			case mMessageServerExit:
+				shutdown();
+			break;
+		}
+	}
+}
+
+void ApplicationBreslin::sendCommand()
+{
+	//create byteBuffer
+	ByteBuffer* byteBuffer = new ByteBuffer();
+
+	//WRITE: type
+	byteBuffer->WriteByte(mMessageFrame);					
+	
+	//WRITE: sequence
+	byteBuffer->WriteShort(mOutgoingSequence);
+	
+	mOutgoingSequence++; //increase for next time...
+
+	// Build delta-compressed move command
+	int flags = 0;
+
+	// Check what needs to be updated
+	if(mKeyLast != mKeyCurrent)
+	{
+		flags |= mCommandKey;
+	}
+
+	if(mMillisecondsLast != mMillisecondsCurrent)
+	{
+		flags |= mCommandMilliseconds;
+	}
+	
+	// Add to the message
+	byteBuffer->WriteByte(flags);
+
+	if(flags & mCommandKey)
+	{
+		//WRITE: key
+		byteBuffer->WriteByte(mKeyCurrent);
+	}
+
+	if(flags & mCommandMilliseconds)
+	{
+		//WRITE: milliseconds
+		byteBuffer->WriteByte(mMillisecondsCurrent);
+	}
+	
+	//set 'last' commands for diff
+	mKeyLast = mKeyCurrent;
+	mMillisecondsLast = mMillisecondsCurrent;
+
+	// Send the packet
+	mNetwork->send(byteBuffer);
+}
+
+void ApplicationBreslin::sendConnect()
+{
+	ByteBuffer* byteBuffer = new ByteBuffer();
+	byteBuffer->WriteByte(mMessageConnect);
+	mNetwork->send(byteBuffer);
 }
 
 
@@ -126,33 +249,9 @@ void ApplicationBreslin::readServerTick(ByteBuffer* byteBuffer)
 	}
 }
 
-/*********************************
-		NETWORK
-**********************************/
-void ApplicationBreslin::runNetwork(float msec)
-{
-	mRunNetworkTime += msec;
-
-	readPackets();
-	
-	// Framerate is too high
-	if(mRunNetworkTime > (1000 / 60))
-	{
-		sendCommand();
-		mFrameTime = mRunNetworkTime / 1000.0f;
-		mRunNetworkTime = 0.0f;
-	}
-}
-
-/**********************************************
-*
-*		OGRE_SPECIFIC
-*
-**************************************************
-
-
 
 /*********************************
+
 *		TIME
 ***********************************/
 float ApplicationBreslin::getRenderTime()
@@ -242,33 +341,6 @@ void ApplicationBreslin::hideJoinScreen()
 *			INPUT
 ******************************************/
 
-void ApplicationBreslin::buttonHit(OgreBites::Button *button)
-{
-	//JOIN
-	if (button == mJoinButton)
-	{
-		mJoinGame = true;
-		if (mJoinGame && !mPlayingGame)
-		{
-			sendConnect();
-			mPlayingGame = true;
-		}
-		hideGui();
-	}
-}
-
-bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
-{
-    if (mTrayMgr->injectMouseMove(arg))
-	{
-		return true;
-	}
-	if (mPlayingGame)
-	{
-		mCameraMan->injectMouseMove(arg);
-	}
-    return true;
-}
 
 void ApplicationBreslin::processInput()
 {
@@ -306,115 +378,31 @@ void ApplicationBreslin::processInput()
 	mMillisecondsCurrent = (int) (mFrameTime * 1000);
 }
 
-
-/***************************************************
-*			COMMAND
-***************************************************/
-
-void ApplicationBreslin::sendCommand()
+void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 {
-	//create byteBuffer
-	ByteBuffer* byteBuffer = new ByteBuffer();
-
-	//WRITE: type
-	byteBuffer->WriteByte(mMessageFrame);					
-	
-	//WRITE: sequence
-	byteBuffer->WriteShort(mOutgoingSequence);
-	
-	mOutgoingSequence++; //increase for next time...
-
-	// Build delta-compressed move command
-	int flags = 0;
-
-	// Check what needs to be updated
-	if(mKeyLast != mKeyCurrent)
+	//JOIN
+	if (button == mJoinButton)
 	{
-		flags |= mCommandKey;
-	}
-
-	if(mMillisecondsLast != mMillisecondsCurrent)
-	{
-		flags |= mCommandMilliseconds;
-	}
-	
-	// Add to the message
-	byteBuffer->WriteByte(flags);
-
-	if(flags & mCommandKey)
-	{
-		//WRITE: key
-		byteBuffer->WriteByte(mKeyCurrent);
-	}
-
-	if(flags & mCommandMilliseconds)
-	{
-		//WRITE: milliseconds
-		byteBuffer->WriteByte(mMillisecondsCurrent);
-	}
-	
-	//set 'last' commands for diff
-	mKeyLast = mKeyCurrent;
-	mMillisecondsLast = mMillisecondsCurrent;
-
-	// Send the packet
-	mNetwork->send(byteBuffer);
-}
-/***************************************************
-*			PACKETS
-***************************************************/
-void ApplicationBreslin::readPackets()
-{
-	int type;
-	int ret;
-
-	ByteBuffer* byteBuffer = new ByteBuffer();
-
-	while(ret = mNetwork->checkForByteBuffer(byteBuffer))
-	{
-		byteBuffer->BeginReading();
-
-		type = byteBuffer->ReadByte();
-
-		switch(type)
+		mJoinGame = true;
+		if (mJoinGame && !mPlayingGame)
 		{
-			case mMessageConnect:
-			break;
-
-			case mMessageAddShape:
-				if (mGame)
-				{
-					mGame->addShape(true,byteBuffer);
-				}
-			break;
-
-			case mMessageRemoveShape:
-				if (mGame)
-				{
-					mGame->removeShape(byteBuffer);
-				}
-			break;
-
-			case mMessageFrame:
-				readServerTick(byteBuffer);
-			break;
-
-			case mMessageServerExit:
-				shutdown();
-			break;
+			sendConnect();
+			mPlayingGame = true;
 		}
+		hideGui();
 	}
 }
 
-/***************************************************
-*			CONNECT
-***************************************************/
-void ApplicationBreslin::sendConnect()
+bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 {
-	ByteBuffer* byteBuffer = new ByteBuffer();
-	byteBuffer->WriteByte(mMessageConnect);
-	mNetwork->send(byteBuffer);
+    if (mTrayMgr->injectMouseMove(arg))
+	{
+		return true;
+	}
+	if (mPlayingGame)
+	{
+		mCameraMan->injectMouseMove(arg);
+	}
+    return true;
 }
-
-
 
