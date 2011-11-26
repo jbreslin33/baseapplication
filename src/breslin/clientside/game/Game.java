@@ -60,6 +60,10 @@ public void addShape(boolean b, ByteBuffer byteBuffer)
 	//ability
 	shape.addAbility(new AbilityRotation(shape));
 	shape.addAbility(new AbilityMove    (shape));
+
+	//put shape and ghost in game vectors so they can be looped and game now knows of them.
+	mShapeVector.add(shape);
+	mShapeGhostVector.add(shape.mGhost);
 }
 
 public void removeShape(ByteBuffer byteBuffer)
@@ -73,6 +77,7 @@ public Shape getShape(int id)
 
 	for (int i = 0; i < mShapeVector.size(); i++)
 	{
+		System.out.println("index in getshape:" + mShapeVector.get(i).mIndex);
 		Shape curShape = mShapeVector.get(i);
 		if (curShape.mIndex == id)
 		{
