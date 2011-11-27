@@ -68,6 +68,7 @@ public class ApplicationBreslin extends SimpleApplication
 
 public ApplicationBreslin(byte[] serverIP, int serverPort)
 {
+
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
@@ -103,12 +104,10 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 
 	start();
 
-        //let their be light
+	viewPort.setBackgroundColor(ColorRGBA.LightGray);
         DirectionalLight directionalLight = new DirectionalLight();
         directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
 	getRootNode().addLight(directionalLight);
-
-
 }
 
 
@@ -194,6 +193,7 @@ private int mMillisecondsLast;
 
 public void update()
 {
+
 	//input
 	processInput();
 
@@ -227,7 +227,6 @@ public void shutdown()
 
 public void simpleInitApp()
 {
-
 
 }
 
@@ -469,6 +468,7 @@ void processInput()
 	{
 		if (!mPlayingGame)
 		{
+
 			sendConnect();
 			mPlayingGame = true;
 
@@ -479,6 +479,7 @@ void processInput()
 			cam.setLocation(startCamPosition);
 			cam.lookAt(lookAtVector,worldDirection);
 			System.out.println("Camera is setCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+
 		}
 		else
 		{

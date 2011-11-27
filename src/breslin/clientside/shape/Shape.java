@@ -274,7 +274,7 @@ public void spawnShape(Vector3D position)
 		mIndex = mIndex * -1;
 	}
 
-	if (mMeshCode == 0)
+	if (mMeshCode == 1)
 	{
 
 		Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
@@ -285,21 +285,17 @@ public void spawnShape(Vector3D position)
 		Material mat = new Material(mApplicationBreslin.getAssetManager(),"generic/pictures/ShowNormals.j3md");
 		mSceneNode.setMaterial(mat);
 	}
-
-	if (mMeshCode == 1)
+/*
+	if (mMeshCode == 0)
 
 	{
-	   mSceneNode = (Node) mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
-                //scale
+	   	mSceneNode = (Node) mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
+                
+		//scale
                 mSceneNode.scale(mScale,mScale,mScale);
-
-
-
-
 	}
-
-	 mApplicationBreslin.getRootNode().attachChild(mSceneNode);
-
+*/
+	mApplicationBreslin.getRootNode().attachChild(mSceneNode);
 
 	//move
 	System.out.println("posx:" + position.x);
@@ -399,7 +395,6 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 	}
 
 
-	//rotation
 	i = flags & mCommandRotationX;
 	if(i == 32)
 	{
@@ -472,8 +467,7 @@ public void interpolateTick(float renderTime)
 //ghost
 public void moveGhostShape()
 {
-	Vector3D transVector = new Vector3D();
-
+	Vector3D transVector = new Vector3D(); 
 	transVector.x = mServerCommandCurrent.mPosition.x;
 	transVector.y = 0;
 	transVector.z = mServerCommandCurrent.mPosition.z;
@@ -662,7 +656,7 @@ Quaternion getRotationTo(Vector3D source, Vector3D dest)
 	v0.copyValuesFrom(source);
 	v1.copyValuesFrom(dest);
 
-	v0.normalise();
+	v0.normalise(); 
 	v1.normalise();
 
 	//Real d = v0.dotProduct(v1);
