@@ -104,7 +104,7 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 
 	start();
 
-	viewPort.setBackgroundColor(ColorRGBA.LightGray);
+	//viewPort.setBackgroundColor(ColorRGBA.LightGray);
         DirectionalLight directionalLight = new DirectionalLight();
         directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
 	getRootNode().addLight(directionalLight);

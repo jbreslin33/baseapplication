@@ -274,7 +274,7 @@ public void spawnShape(Vector3D position)
 		mIndex = mIndex * -1;
 	}
 
-	if (mMeshCode == 1)
+	if (mMeshCode == 0)
 	{
 
 		Box mesh = new Box(Vector3f.ZERO, 1, 1, 1);
@@ -285,8 +285,8 @@ public void spawnShape(Vector3D position)
 		Material mat = new Material(mApplicationBreslin.getAssetManager(),"generic/pictures/ShowNormals.j3md");
 		mSceneNode.setMaterial(mat);
 	}
-/*
-	if (mMeshCode == 0)
+
+	if (mMeshCode == 1)
 
 	{
 	   	mSceneNode = (Node) mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
@@ -294,7 +294,7 @@ public void spawnShape(Vector3D position)
 		//scale
                 mSceneNode.scale(mScale,mScale,mScale);
 	}
-*/
+
 	mApplicationBreslin.getRootNode().attachChild(mSceneNode);
 
 	//move
