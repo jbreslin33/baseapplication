@@ -42,6 +42,13 @@ import com.jme3.math.Transform;
 import com.jme3.texture.Texture;
 import com.jme3.asset.TextureKey;
 
+//light
+import com.jme3.light.DirectionalLight;
+import com.jme3.light.AmbientLight;
+import com.jme3.light.PointLight;
+//import com.jme3.light.SpotLight;
+
+
 //billboards
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
@@ -94,7 +101,7 @@ public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boole
 	{
 		//create a ghost for this shape
 		mGhost = new Shape(mApplicationBreslin,byteBuffer,true);
-		//mGhost.setVisible(false);
+		//mGhost.setVisible(false);Display
 
 		mGhost.setVisible(true);
 	}
@@ -176,7 +183,7 @@ float convertIntToFloat(ByteBuffer byteBuffer)
 		byte three = byteBuffer.get(p +2);
 		byte four = byteBuffer.get(p + 3);
 
-		//flip them
+		//flip themcom.jme3.scene.control.LightControl
 		byteBuffer.put(p,four);
 		byteBuffer.put(p + 1,three);
 		byteBuffer.put(p + 2,two);
@@ -261,24 +268,7 @@ void parseSpawnByteBuffer(ByteBuffer byteBuffer)
 
 public void spawnShape(Vector3D position)
 {
-	//hard code test
-/*
-	Spatial sceneNodeTest;
-
-	Box meshTest = new Box(Vector3f.ZERO, 1, 1, 1);
-	Geometry geomTest = new Geometry("A shape", meshTest);
-
-	sceneNodeTest = geomTest;
-
-	Material matTest = new Material(mApplicationBreslin.getAssetManager(),"generic/pictures/ShowNormals.j3md");
-	sceneNodeTest.setMaterial(matTest);
-	mApplicationBreslin.getRootNode().attachChild(sceneNodeTest);
-*/
-/*
-Spatial sceneNodeTest;
-sceneNodeTest = mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
-mApplicationBreslin.getRootNode().attachChild(sceneNodeTest);
-*/
+	
 	if (mIsGhost)
 	{
 		mIndex = mIndex * -1;
@@ -299,15 +289,16 @@ mApplicationBreslin.getRootNode().attachChild(sceneNodeTest);
 	if (mMeshCode == 1)
 
 	{
-		System.out.println("MESH STRING:" + getMeshString(mMeshCode));
-		mSceneNode = mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
-		
-		//scale
-		System.out.println("scale:" + mScale);
-		mSceneNode.scale(mScale,mScale,mScale);
+	   mSceneNode = (Node) mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
+                //scale
+                mSceneNode.scale(mScale,mScale,mScale);
+
+
+
+
 	}
 
-	mApplicationBreslin.getRootNode().attachChild(mSceneNode);
+	 mApplicationBreslin.getRootNode().attachChild(mSceneNode);
 
 
 	//move
@@ -379,7 +370,7 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 		mServerCommandCurrent.mPosition.x = convertIntToFloat(byteBuffer);
 	}
 	else
-	{
+	{https://launchpad.net/~gezakovacs/+archive/ppa
 		moveXChanged = false;
 	}
 

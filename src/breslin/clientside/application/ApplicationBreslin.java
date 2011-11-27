@@ -38,6 +38,9 @@ import com.jme3.input.controls.KeyTrigger;
 
 //light
 import com.jme3.light.DirectionalLight;
+import com.jme3.light.AmbientLight;
+import com.jme3.light.PointLight;
+//import com.jme3.light.SpotLight;
 
 //color
 import com.jme3.math.ColorRGBA;
@@ -46,6 +49,15 @@ import java.nio.ByteBuffer;
 
 
 import java.io.UnsupportedEncodingException;
+
+//tut
+ 
+import com.jme3.font.BitmapText;
+import com.jme3.material.Material;
+import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.Spatial;
+import com.jme3.scene.shape.Box;
 
 /***************************************
 *   		FORWARD DECLARATIONS
@@ -56,8 +68,6 @@ public class ApplicationBreslin extends SimpleApplication
 
 public ApplicationBreslin(byte[] serverIP, int serverPort)
 {
-	//start();
-
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
@@ -91,12 +101,13 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 	//sequences
 	mOutgoingSequence		= 1;
 
-    start();
+	start();
 
         //let their be light
         DirectionalLight directionalLight = new DirectionalLight();
         directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
-    getRootNode().addLight(directionalLight);
+	getRootNode().addLight(directionalLight);
+
 
 }
 
@@ -150,7 +161,7 @@ private short	mOutgoingSequence;		// OutFgoing packet sequence
 
 //time
 private float mFrameTime;
-private float mRenderTime;
+private float mRenderTime; 
 private float mRunNetworkTime;
 
 //initialize
@@ -216,8 +227,8 @@ public void shutdown()
 
 public void simpleInitApp()
 {
-	//createScene();
-    viewPort.setBackgroundColor(ColorRGBA.LightGray);
+
+
 }
 
 
