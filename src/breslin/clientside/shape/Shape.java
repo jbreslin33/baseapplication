@@ -111,62 +111,71 @@ public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boole
 /************************************************
 *                VARIABLES
 *************************************************/
-//network flags
-public static final byte mCommandOriginX      = 4;
-public static final byte mCommandOriginY      = 8;
-public static final byte mCommandOriginZ      = 16;
-public static final byte mCommandRotationX    = 32;
-public static final byte mCommandRotationZ    = 64;
+
+//PUBLIC:
 
 //applicationBreslin
 public ApplicationBreslin mApplicationBreslin;
 
-//scale
-public float mScale;
+//id
 public int   mIndex;
-
-//mesh
-int mMeshCode;
-
-//animate
-boolean mAnimate;
 
 //speed
 public float mSpeed;
 public float mSpeedMax;
 
-//abilitys
-ArrayList<Ability> mAbilityVector = new ArrayList<Ability>();
-
-//this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
+//ghost
 public Shape mGhost;
-
-//spawn orientation
-Vector3D mSpawnPosition;
-Vector3D mSpawnRotation;
-
-int mLocal;
 
 //commands
 public Command mServerCommandLast;
-public Command mServerCommandCurrent;					// the latest frame from server
+public Command mServerCommandCurrent;
 public Command mCommandToRunOnShape;
 
-//JONKEY
-
-//ghost
-boolean mIsGhost;
-
-//ogre scene stuff
-String        mMeshName;
-String         mName;
-
-//this is your pointer to move shape, really all you need.
-Spatial          mSceneNode;
+//Jmonkey 
+public Spatial          mSceneNode;
 
 //billboard
-BitmapFont mBitmapFont;
-BitmapText mBitmapText;
+public BitmapFont mBitmapFont;
+public BitmapText mBitmapText;
+
+//PROTECTED:
+
+//local
+protected int mLocal;
+
+//PRIVATE:
+
+//network flags
+private static final byte mCommandOriginX      = 4;
+private static final byte mCommandOriginY      = 8;
+private static final byte mCommandOriginZ      = 16;
+private static final byte mCommandRotationX    = 32;
+private  static final byte mCommandRotationZ    = 64;
+
+//spawn orientation
+private Vector3D mSpawnPosition;
+private Vector3D mSpawnRotation;
+
+//mesh
+private int    mMeshCode;
+private String mMeshName;
+
+//name
+private String mName;
+
+//animate
+private boolean mAnimate;
+
+//scale
+private float mScale;
+
+//abilitys
+private ArrayList<Ability> mAbilityVector = new ArrayList<Ability>();
+
+//ghost
+private boolean mIsGhost;
+
 
 /*************************************************
 *				METHODS

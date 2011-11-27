@@ -370,35 +370,27 @@ private void readServerTick(ByteBuffer byteBuffer)
 	byteBuffer.position(1);
 	short sequence = byteBuffer.getShort();
 
-	//int id = byteBuffer.get();
-	//System.out.println("id:" + id);
-	//System.out.println("readServerTick called");
 	boolean validShape = true;
+
 	while (byteBuffer.hasRemaining() && validShape)
 	{
 
 		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
 		int id = byteBuffer.get();
-		//System.out.println("id:" + id);
 
 		Shape shape = null;
 		shape = mGame.getShape(id);
 
 		if (shape != null)
 		{
-		//	System.out.println("valid shape id");
 			shape.processDeltaByteBuffer(byteBuffer);
 		}
 		else
 		{
 			validShape = false;
-			//System.out.println("invalid shape id");
-			
-			
 		}
 	}
-
 }
 
 /*********************************
@@ -473,8 +465,6 @@ private void processInput()
 			Vector3f worldDirection   = new Vector3f(0,1,0);
 			cam.setLocation(startCamPosition);
 			cam.lookAt(lookAtVector,worldDirection);
-			System.out.println("Camera is setCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
-
 		}
 		else
 		{
@@ -517,7 +507,7 @@ private void processInput()
 		mKeyCurrent |= mKeyClockwise;
 	}
 
-		mMillisecondsCurrent = (byte) (mFrameTime * 1000);
+	mMillisecondsCurrent = (byte) (mFrameTime * 1000);
 }
 
 /***************************************
@@ -527,10 +517,6 @@ public Vector3f getCameraLocation()
 {
 	return cam.getLocation();
 }
-
-
-
-
 
 };
 
