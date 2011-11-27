@@ -68,7 +68,8 @@ public class ApplicationBreslin extends SimpleApplication
 
 public ApplicationBreslin(byte[] serverIP, int serverPort)
 {
-
+	start();
+	
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
@@ -102,12 +103,7 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 	//sequences
 	mOutgoingSequence		= 1;
 
-	start();
-
-	//viewPort.setBackgroundColor(ColorRGBA.LightGray);
-        DirectionalLight directionalLight = new DirectionalLight();
-        directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
-	getRootNode().addLight(directionalLight);
+	
 }
 
 
@@ -217,7 +213,7 @@ public void simpleUpdate(float tpf)
 *	 ADMIN
 ***************************************/
 
-public void shutdown()
+private void shutdown()
 {
 	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
 	byteBuffer.put(mMessageDisconnect);
@@ -225,16 +221,11 @@ public void shutdown()
 	mNetwork.reset();
 }
 
-public void simpleInitApp()
-{
-
-}
-
 
 /***************************************
 *   		NETWORK
 ***************************************/
-public void runNetwork(float msec)
+private void runNetwork(float msec)
 {
 	mRunNetworkTime += msec;
 
@@ -249,7 +240,7 @@ public void runNetwork(float msec)
 	}
 }
 
-public void readPackets()
+private void readPackets()
 {
 
 	int type = 0;
@@ -294,7 +285,7 @@ public void readPackets()
 	}
 }
 
-public void sendCommand()
+private void sendCommand()
 {
         //bools
         boolean sendKey          = false;
@@ -358,7 +349,7 @@ public void sendCommand()
 }
 
 
-public void sendConnect()
+private void sendConnect()
 {
 	byte[] mCharArray = new byte[1400];
 	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
@@ -368,7 +359,7 @@ public void sendConnect()
 }
 
 
-public void readServerTick(ByteBuffer byteBuffer)
+private void readServerTick(ByteBuffer byteBuffer)
 {
 	
 	// Skip sequences
@@ -383,8 +374,8 @@ public void readServerTick(ByteBuffer byteBuffer)
 	//System.out.println("id:" + id);
 
 
-//	while (byteBuffer.hasRemaining())
-//	{
+	//while (byteBuffer.hasRemaining())
+	//{
 
 		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
@@ -418,15 +409,14 @@ public float getRenderTime()
 		GRAPHICS
 **********************************/
 
-void createScene()
+public void simpleInitApp()
 {
-	//let their be light
-	DirectionalLight directionalLight = new DirectionalLight();
-	directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
-        getRootNode().addLight(directionalLight);
+        DirectionalLight directionalLight = new DirectionalLight();
+        directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
+	getRootNode().addLight(directionalLight);
 }
 
-public boolean runGraphics()
+private boolean runGraphics()
 {
 	//super and other stuff this is equivalent to c++ runGraphics...
 	super.update();
@@ -437,22 +427,22 @@ public boolean runGraphics()
 /*********************************
 		GUI
 **********************************/
-void initializeGui()
+private void initializeGui()
 {
 
 }
 
-void loadJoinScreen()
+private void loadJoinScreen()
 {
 
 }
 
-void hideGui()
+private void hideGui()
 {
 
 }
 
-void hideJoinScreen()
+private void hideJoinScreen()
 {
 
 }
@@ -460,7 +450,7 @@ void hideJoinScreen()
 /***************************************
 *			INPUT
 ******************************************/
-void processInput()
+private void processInput()
 {
 	mKeyCurrent = 0;
 
@@ -525,7 +515,9 @@ void processInput()
 		mMillisecondsCurrent = (byte) (mFrameTime * 1000);
 }
 
-
+/***************************************
+*			CAMERA
+******************************************/
 public Vector3f getCameraLocation()
 {
 	return cam.getLocation();
