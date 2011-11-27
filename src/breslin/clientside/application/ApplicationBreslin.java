@@ -370,16 +370,16 @@ private void readServerTick(ByteBuffer byteBuffer)
 	byteBuffer.position(1);
 	short sequence = byteBuffer.getShort();
 
-	int id = byteBuffer.get();
+	//int id = byteBuffer.get();
 	//System.out.println("id:" + id);
-
-
-	//while (byteBuffer.hasRemaining())
-	//{
+	//System.out.println("readServerTick called");
+	boolean validShape = true;
+	while (byteBuffer.hasRemaining() && validShape)
+	{
 
 		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
-		//int id = byteBuffer.get();
+		int id = byteBuffer.get();
 		//System.out.println("id:" + id);
 
 		Shape shape = null;
@@ -387,12 +387,17 @@ private void readServerTick(ByteBuffer byteBuffer)
 
 		if (shape != null)
 		{
-			//System.out.println("got shape");
+		//	System.out.println("valid shape id");
 			shape.processDeltaByteBuffer(byteBuffer);
+		}
+		else
+		{
+			validShape = false;
+			//System.out.println("invalid shape id");
+			
 			
 		}
-
-	//}
+	}
 
 }
 
