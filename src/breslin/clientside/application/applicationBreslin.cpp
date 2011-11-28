@@ -371,6 +371,19 @@ void ApplicationBreslin::processInput()
 {
 	mKeyCurrent = 0;
     
+	if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
+	{
+		if (mGame)
+		{
+			mGame = NULL;
+			initializeGui();
+		}
+		else
+		{
+			//mShutDown = true;
+		}
+	}
+
 	if (mKeyboard->isKeyDown(OIS::KC_1))
 	{
 		
