@@ -229,13 +229,13 @@ void ApplicationBreslin::readServerTick(ByteBuffer* byteBuffer)
 {
 	// Skip sequences
 	short sequence = byteBuffer->ReadShort();
-	LogString("sequence:%d",sequence);
+
 	while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
 	{
 		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
 		int id = byteBuffer->ReadByte();
-		LogString("id:%d",id);
+
 		Shape* shape = NULL;
 		if (mGame)
 		{
@@ -251,7 +251,7 @@ void ApplicationBreslin::readServerTick(ByteBuffer* byteBuffer)
 		}
 		else
 		{
-			LogString("INVALID SHAPE ID");
+			//LogString("INVALID SHAPE ID");
 		}	
 	}
 }

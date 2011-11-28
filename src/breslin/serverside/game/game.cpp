@@ -178,7 +178,6 @@ void Game::sendCommand(void)
 		//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
 		for (unsigned int j = 0; j < mShapeVector.size(); j++)
 		{                         //the client to send to's message        //the shape command it's about
-			LogString("j:%d",j);
 			mShapeVector.at(j)->addToMoveMessage(&mServer->mClientVector.at(i)->mMessage);
 		}
 	}
@@ -240,7 +239,7 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 	if(flags & mCommandKey)
 	{
 		client->mShape->mKey = mes->ReadByte();
-		LogString("key:%d",client->mShape->mKey);
+		//LogString("key:%d",client->mShape->mKey);
 	}
 
 	// Milliseconds
