@@ -52,7 +52,8 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mPlayingGame = false;
 
 	//game
-	mGame = new Game(this);
+	//mGame = new Game(this);
+	mGame = NULL;
 
 	//input
 	mKeyCurrent = 0;
@@ -76,15 +77,18 @@ ApplicationBreslin::~ApplicationBreslin()
 void ApplicationBreslin::run()
 {
 	while(true)
-    	{
+    {
 		//input
 		processInput();
-		
+
 		//network
 		runNetwork(getRenderTime() * 1000.0f);
-		
-		//game
-		mGame->run();
+
+		if (mGame)
+		{	
+			//game
+			mGame->run();
+		}
 
 		//graphics
 		if (!runGraphics())
@@ -326,9 +330,18 @@ void ApplicationBreslin::initializeGui()
 
 void ApplicationBreslin::loadJoinScreen()
 {
-	mJoinButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "mJoinButton", "Join Game");
-	mTrayMgr->moveWidgetToTray(mJoinButton,OgreBites::TL_CENTER);
+	//Game
+	mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
+	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
+
+	//Tag
+	mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
+	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
+
 	mTrayMgr->showCursor();
+
+
+
 }
 
 void ApplicationBreslin::hideGui()
@@ -339,8 +352,13 @@ void ApplicationBreslin::hideGui()
 
 void ApplicationBreslin::hideJoinScreen()
 {
-	mTrayMgr->removeWidgetFromTray(mJoinButton);
-    mJoinButton->hide();
+	//game
+	mTrayMgr->removeWidgetFromTray(mButtonGame);
+    mButtonGame->hide();
+
+	//tag
+	mTrayMgr->removeWidgetFromTray(mButtonTag);
+    mButtonTag->hide();
 }
 
 
@@ -353,6 +371,11 @@ void ApplicationBreslin::processInput()
 {
 	mKeyCurrent = 0;
     
+	if (mKeyboard->isKeyDown(OIS::KC_1))
+	{
+		
+	}
+
 	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     {
 		mKeyCurrent |= mKeyUp;
@@ -387,17 +410,30 @@ void ApplicationBreslin::processInput()
 
 void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 {
-	//JOIN
-	if (button == mJoinButton)
+	//Game
+	if (button == mButtonGame)
 	{
 		mJoinGame = true;
 		if (mJoinGame && !mPlayingGame)
 		{
 			sendConnect();
+			mGame = new Game(this);
 			mPlayingGame = true;
 		}
 		hideGui();
 	}
+	if (button == mButtonTag)
+	{
+		mJoinGame = true;
+		if (mJoinGame && !mPlayingGame)
+		{
+			sendConnect();
+			mGame = new GameTag(this);
+			mPlayingGame = true;
+		}
+		hideGui();
+	}
+
 }
 
 bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )

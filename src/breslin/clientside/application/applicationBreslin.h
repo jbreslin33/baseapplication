@@ -82,7 +82,8 @@ int mMillisecondsCurrent;
 int mMillisecondsLast;
 
 //gui
-OgreBites::Button* mJoinButton;
+OgreBites::Button* mButtonGame;
+OgreBites::Button* mButtonTag;
 
 /***************************************
 *			          METHODS
