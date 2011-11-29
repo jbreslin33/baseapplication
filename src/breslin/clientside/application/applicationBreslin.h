@@ -128,6 +128,7 @@ void        createScene          ();
 
 //gui	
 void hideGui();
+void showGui();
 void loadJoinScreen();
 void hideJoinScreen();
 void initializeGui();

@@ -84,8 +84,8 @@ void ApplicationBreslin::run()
 		//network
 		runNetwork(getRenderTime() * 1000.0f);
 
-		if (mGame)
-		{	
+		if (mPlayingGame)
+		{
 			//game
 			mGame->run();
 		}
@@ -161,7 +161,10 @@ void ApplicationBreslin::readPackets()
 			break;
 
 			case mMessageFrame:
-				readServerTick(byteBuffer);
+				if (mGame)
+				{
+					readServerTick(byteBuffer);
+				}
 			break;
 
 			case mMessageServerExit:
@@ -350,14 +353,21 @@ void ApplicationBreslin::hideGui()
 	mTrayMgr->hideCursor();
 }
 
+void ApplicationBreslin::showGui()
+{
+	mButtonGame->show();
+	mButtonTag->show();
+	mTrayMgr->showCursor();
+}
+
 void ApplicationBreslin::hideJoinScreen()
 {
 	//game
-	mTrayMgr->removeWidgetFromTray(mButtonGame);
+	//mTrayMgr->removeWidgetFromTray(mButtonGame);
     mButtonGame->hide();
 
 	//tag
-	mTrayMgr->removeWidgetFromTray(mButtonTag);
+	//mTrayMgr->removeWidgetFromTray(mButtonTag);
     mButtonTag->hide();
 }
 
@@ -375,8 +385,11 @@ void ApplicationBreslin::processInput()
 	{
 		if (mGame)
 		{
+			shutdown();
+			mPlayingGame = false;
 			mGame = NULL;
-			initializeGui();
+			//initializeGui();
+			showGui();
 		}
 		else
 		{

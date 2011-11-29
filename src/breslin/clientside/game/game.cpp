@@ -24,7 +24,8 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 
 Game::~Game()
 {
-
+	mShapeVector.clear();
+	mShapeGhostVector.clear();
 }
 /*********************************
 		TICK
