@@ -40,6 +40,6 @@ void GameTag::addShape(bool b, ByteBuffer* byteBuffer)
 	shapeTag->addAbility(new AbilityMove(shapeTag));
 
 	//put shape and ghost in game vectors so they can be looped and game now knows of them.
-	mShapeVector.push_back(shapeTag);
-	mShapeGhostVector.push_back(shapeTag->mGhost);	
+	mShapeVector->push_back(shapeTag);
+	mShapeGhostVector->push_back(shapeTag->mGhost);	
 }

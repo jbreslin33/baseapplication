@@ -27,6 +27,7 @@
 
 Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGhost)
 {
+
 	mIsGhost = isGhost;
 
 	//applicationBreslin

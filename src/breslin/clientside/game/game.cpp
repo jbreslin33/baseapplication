@@ -23,28 +23,31 @@
 Game::Game(ApplicationBreslin* applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
+
+	mShapeVector = new std::vector<Shape*>();
+	mShapeGhostVector = new std::vector<Shape*>();
 }
 
 Game::~Game()
 {
 	LogString("Destructor for Game");
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
-		delete mShapeVector.at(i);
-		delete mShapeGhostVector.at(i);
+		delete mShapeVector->at(i);
+		delete mShapeGhostVector->at(i);
 	}
 
-	//mShapeVector.erase();
-	//mShapeGhostVector.erase();
+//ShapeVector::~mShapeVector();
+//	ShapeGhostVector::VectormShapeGhostVector();
 }
 /*********************************
 		TICK
 **********************************/
 void Game::run()
 {
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
-		mShapeVector.at(i)->interpolateTick(mApplicationBreslin->getRenderTime());
+		mShapeVector->at(i)->interpolateTick(mApplicationBreslin->getRenderTime());
 	}
 }
 
@@ -54,12 +57,12 @@ void Game::removeShape(ByteBuffer* byteBuffer)
 	
 	Shape* shape = getShape(index);
 
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
-		if (mShapeVector.at(i) == shape)
+		if (mShapeVector->at(i) == shape)
 		{
-			delete mShapeVector.at(i);
-			mShapeVector.erase (mShapeVector.begin()+i);
+			delete mShapeVector->at(i);
+			mShapeVector->erase (mShapeVector->begin()+i);
 		}
 	}
 }
@@ -68,9 +71,9 @@ Shape* Game::getShape(int id)
 {
 	Shape* shape = NULL;
 
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
-		Shape* curShape = mShapeVector.at(i);
+		Shape* curShape = mShapeVector->at(i);
 		if (curShape->mIndex == id)
 		{
 			shape = curShape;
@@ -105,6 +108,6 @@ void Game::addShape(bool b, ByteBuffer* byteBuffer)
 	shape->addAbility(new AbilityMove(shape));
 
 	//put shape and ghost in game vectors so they can be looped and game now knows of them.
-	mShapeVector.push_back(shape);
-	mShapeGhostVector.push_back(shape->mGhost);	
+	mShapeVector->push_back(shape);
+	mShapeGhostVector->push_back(shape->mGhost);	
 }
