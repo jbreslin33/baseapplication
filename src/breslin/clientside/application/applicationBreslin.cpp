@@ -383,11 +383,11 @@ void ApplicationBreslin::processInput()
     
 	if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
 	{
-		if (mGame)
+		if (mGame && mPlayingGame)
 		{
 			shutdown();
 			mPlayingGame = false;
-			mGame = NULL;
+			delete mGame;
 			//initializeGui();
 			showGui();
 		}

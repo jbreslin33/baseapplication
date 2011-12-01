@@ -69,6 +69,9 @@ Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, boo
 }
 Shape::~Shape()
 {
+	LogString("Destructor for Shape:%d",mIndex);
+	delete mEntity;
+	delete mSceneNode;
 }
 
 /*********************************

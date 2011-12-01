@@ -1,6 +1,9 @@
 //header
 #include "game.h"
 
+//log
+#include "../tdreamsock/dreamSockLog.h"
+
 //applicationBreslin
 #include "../application/applicationBreslin.h"
 
@@ -24,8 +27,15 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 
 Game::~Game()
 {
-	mShapeVector.clear();
-	mShapeGhostVector.clear();
+	LogString("Destructor for Game");
+	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	{
+		delete mShapeVector.at(i);
+		delete mShapeGhostVector.at(i);
+	}
+
+	//mShapeVector.erase();
+	//mShapeGhostVector.erase();
 }
 /*********************************
 		TICK
