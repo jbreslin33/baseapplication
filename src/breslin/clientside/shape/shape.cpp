@@ -71,7 +71,8 @@ Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, boo
 Shape::~Shape()
 {
 	LogString("Destructor for Shape:%d",mIndex);
-	delete mEntity;
+	//delete mEntity;
+	delete mObjectTitle;
 	delete mSceneNode;
 }
 
@@ -81,7 +82,6 @@ Shape::~Shape()
 
 void Shape::addAbility(Ability* ability)
 {
-	
 	mAbilityVector.push_back(ability);	
 }
 

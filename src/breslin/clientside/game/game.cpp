@@ -33,6 +33,7 @@ Game::~Game()
 	LogString("Destructor for Game");
 	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
+
 		delete mShapeVector->at(i);
 		delete mShapeGhostVector->at(i);
 	}

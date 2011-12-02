@@ -147,21 +147,21 @@ void ApplicationBreslin::readPackets()
 			break;
 
 			case mMessageAddShape:
-				if (mGame)
+				if (mGame && mPlayingGame)
 				{
 					mGame->addShape(true,byteBuffer);
 				}
 			break;
 
 			case mMessageRemoveShape:
-				if (mGame)
+				if (mGame && mPlayingGame)
 				{
 					mGame->removeShape(byteBuffer);
 				}
 			break;
 
 			case mMessageFrame:
-				if (mGame)
+				if (mGame && mPlayingGame)
 				{
 					readServerTick(byteBuffer);
 				}
@@ -288,6 +288,8 @@ void ApplicationBreslin::createScene()
 	pointLight->setSpecularColour(Ogre::ColourValue::White);
 }
 
+
+
 bool ApplicationBreslin::runGraphics()
 {
 	//Pump messages in all registered RenderWindow windows
@@ -385,10 +387,15 @@ void ApplicationBreslin::processInput()
 	{
 		if (mGame && mPlayingGame)
 		{
+			
 			shutdown();
 			mPlayingGame = false;
+			
+			mSceneMgr->destroyAllEntities();
 			delete mGame;
 			//initializeGui();
+			//destroyScene();
+
 			showGui();
 		}
 		else

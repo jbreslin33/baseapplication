@@ -41,7 +41,7 @@ ApplicationBreslin* mApplicationBreslin;
 
 //Shapes
 std::vector<Shape*>* mShapeVector;	 //all shapes in the client world
-std::vector<Shape*> mShapeGhostVector;	 //all shapes in the client world's ghost 
+std::vector<Shape*>* mShapeGhostVector;	 //all shapes in the client world's ghost 
 
 	
 /***************************************
