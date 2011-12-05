@@ -88,6 +88,10 @@ endif()
 set(HDRS
 	
 
+	#statemachine
+	../statemachine/state.h
+	../statemachine/stateMachine.h
+
 	#ability
 	../clientside/ability/ability.h
 	
@@ -206,6 +210,11 @@ endif (WIN32)
 if (UNIX)
 set(HDRS
 
+
+	#statemachine
+	../statemachine/state.h
+	../statemachine/stateMachine.h
+	
 	#ability
 	../clientside/ability/ability.h
 	

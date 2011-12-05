@@ -1,89 +1,92 @@
-#ifndef ABILITYMOVESTATEMACHINE_H
-#define ABILITYMOVESTATEMACHINE_H
+#ifndef STATEMACHINE_H
+#define STATEMACHINE_H
 
 /**********************************
 *          INCLUDES
 **********************************/
 
-#include "abilityMoveState.h"
+#include "State.h"
 
 /**********************************
 *          FORWARD DECLARATIONS
 **********************************/
-class AbilityMove;
+//class AbilityMove;
 
 /**********************************
 *          CLASS
 **********************************/
-class AbilityMoveStateMachine
+
+template <class T*>
+class StateMachine
 {
 public:
 
-AbilityMoveStateMachine(AbilityMove* owner):m_pOwner(owner),
-	                               m_pCurrentState(0),
-                                   m_pPreviousState(0),
-                                   m_pGlobalState(0)
+StateMachine(T* owner):m_pOwner(owner),
+	                           mCurrentState(0),
+                                   mPreviousState(0),
+                                   mGlobalState(0)
 {
 
 }
-virtual ~AbilityMoveStateMachine(){}
+virtual ~StateMachine(){}
 
 /**********************************
 *          VARIABLES
 **********************************/
 private:
   
-AbilityMove*        m_pOwner;
-AbilityMoveState*   m_pCurrentState;
-AbilityMoveState*   m_pPreviousState;
-AbilityMoveState*   m_pGlobalState;
+T*       mOwner;
+State*   mCurrentState;
+State*   mPreviousState;
+State*   mGlobalState;
 
 /**********************************
 *          METHODS
 **********************************/
 public:
 
-void setCurrentState(AbilityMoveState* s)
+void setCurrentState(State* s)
 {
-	m_pCurrentState = s;
+	mCurrentState = s;
 }
-void setGlobalState(AbilityMoveState* s)
+void setGlobalState(State* s)
 {
-	m_pGlobalState = s;
+	mGlobalState = s;
 }
-void setPreviousState(AbilityMoveState* s)
+void setPreviousState(State* s)
 {
-	m_pPreviousState = s;
+	mPreviousState = s;
 }
 
 void  update()const
 {
 	if(m_pGlobalState)
 	{
-		m_pGlobalState->execute(m_pOwner);
+		mGlobalState->execute(mOwner);
 	}
 	if (m_pCurrentState)
 	{
-		m_pCurrentState->execute(m_pOwner);
+		mCurrentState->execute(mOwner);
 	}
  }
 
-void  changeState(AbilityMoveState* pNewState)
+void  changeState(State* pNewState)
 {
-	m_pPreviousState = m_pCurrentState;
+	mPreviousState = mCurrentState;
 
-	if(m_pCurrentState)
+	if(mCurrentState)
 	{
-       m_pCurrentState->exit(m_pOwner);
+       		mCurrentState->exit(mOwner);
 	}
     
-    m_pCurrentState = pNewState;
+    	mCurrentState = pNewState;
 
-	if(m_pCurrentState)
+	if(mCurrentState)
 	{
-       m_pCurrentState->enter(m_pOwner);
+        	mCurrentState->enter(mOwner);
 	}
-  }
+}
+
 };
 #endif
 

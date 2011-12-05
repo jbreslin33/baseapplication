@@ -1,17 +1,17 @@
-#ifndef ABILITMOVESTATE_H
-#define ABILITMOVESTATE_H
+#ifndef STATE_H
+#define STATE_H
 
-class AbilityMove;
+template <class T*>
 
-class AbilityMoveState
+class State
 {
 public:
 
-  virtual ~AbilityMoveState(){}
+  virtual ~State(){}
 
-  virtual void enter  (AbilityMove*)=0;
-  virtual void execute(AbilityMove*)=0;
-  virtual void exit   (AbilityMove*)=0;
+  virtual void enter  (T tAbility*)=0;
+  virtual void execute(T tAbility*)=0;
+  virtual void exit   (T tAbility*)=0;
 };
 
 #endif
