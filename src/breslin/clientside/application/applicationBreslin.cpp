@@ -95,6 +95,9 @@ void ApplicationBreslin::run()
 {
 	while(true)
     {
+
+		mStateMachine->update();
+
 		//input
 		processInput();
 
