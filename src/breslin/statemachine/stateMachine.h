@@ -57,11 +57,11 @@ void setPreviousState(State* s)
 
 void  update()const
 {
-	if(m_pGlobalState)
+	if(mGlobalState)
 	{
 		mGlobalState->execute();
 	}
-	if (m_pCurrentState)
+	if (mCurrentState)
 	{
 		mCurrentState->execute();
 	}

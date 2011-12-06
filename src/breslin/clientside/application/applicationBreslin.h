@@ -16,6 +16,7 @@ class ByteBuffer;
 class Shape;
 class Time;
 class Network;
+class StateMachine;
 
 class ApplicationBreslin : public BaseApplication
 {
@@ -34,6 +35,9 @@ public:
 static const char mCommandMilliseconds = 2;
 
 private:
+
+//state machine
+StateMachine* mStateMachine;
 
 //constants
 static const char mCommandKey          = 1;

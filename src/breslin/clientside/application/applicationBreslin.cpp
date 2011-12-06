@@ -22,6 +22,9 @@
 //game
 #include "../game/gameTag.h"
 
+//state machine
+#include "../../statemachine/stateMachine.h"
+
 
 /***************************************
 *	CONSTRUCTORS		          
@@ -63,6 +66,9 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//sequence
 	mOutgoingSequence		= 1;
+
+	//state machine (Menus)
+	mStateMachine = new StateMachine();
 }
 
 ApplicationBreslin::~ApplicationBreslin()
