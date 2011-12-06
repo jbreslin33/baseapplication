@@ -1,5 +1,5 @@
-#ifndef MAINSCREEN_H
-#define MAINSCREEN_H
+#ifndef SCREENGLOBAL_H
+#define SCREENGLOBAL_H
 
 #include "../../../statemachine/state.h"
 
@@ -15,11 +15,11 @@
 *				GLOBAL
 ********************************************************/
 
-class ScreenMain : public State
+class ScreenGlobal : public State
 {
 public:
 
-ScreenMain() {}
+ScreenGlobal() {}
 
 void enter  ();
 void execute();

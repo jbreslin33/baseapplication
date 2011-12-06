@@ -17,6 +17,7 @@ class Shape;
 class Time;
 class Network;
 class StateMachine;
+class State;
 
 class ApplicationBreslin : public BaseApplication
 {
@@ -38,6 +39,9 @@ private:
 
 //state machine
 StateMachine* mStateMachine;
+State* mScreenGlobal;
+State* mScreenMain;
+State* mScreenPlay;
 
 //constants
 static const char mCommandKey          = 1;

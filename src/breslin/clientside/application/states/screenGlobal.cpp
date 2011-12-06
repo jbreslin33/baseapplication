@@ -1,17 +1,17 @@
-//header
-#include "screenMain.h"
+//headeMr
+#include "screenGlobal.h"
 
 
 /******************** APPLICATION_SCREEN_MAIN *****************/
 
-void ScreenMain::enter()
+void ScreenGlobal::enter()
 {
 
 }
-void ScreenMain::execute()
+void ScreenGlobal::execute()
 {
 
 }
-void ScreenMain::exit()
+void ScreenGlobal::exit()
 {
 }
