@@ -5,7 +5,7 @@
 *          INCLUDES
 **********************************/
 
-#include "State.h"
+#include "state.h"
 
 /**********************************
 *          FORWARD DECLARATIONS

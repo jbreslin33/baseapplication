@@ -1,5 +1,5 @@
-#ifndef PLAYSCREEN_H
-#define PLAYSCREEN_H
+#ifndef MAINSCREEN_H
+#define MAINSCREEN_H
 
 #include "../../../statemachine/state.h"
 
@@ -15,11 +15,11 @@
 *				GLOBAL
 ********************************************************/
 
-class PlayScreen : public State
+class ScreenMain : public State
 {
 public:
 
-PlayScreen() {}
+ScreenMain() {}
 
 void enter  ();
 void execute();
