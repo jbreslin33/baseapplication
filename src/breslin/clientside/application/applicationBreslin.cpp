@@ -71,14 +71,14 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mOutgoingSequence		= 1;
 
 	//state machine (Menus)
-	mStateMachine = new StateMachine();
+	mScreenStateMachine = new StateMachine();
 	mScreenGlobal = new ScreenGlobal();
 	mScreenMain   = new ScreenMain();
 	mScreenPlay   = new ScreenPlay();
 
-	mStateMachine->setCurrentState(mScreenMain);
-	mStateMachine->setPreviousState(mScreenMain);
-	mStateMachine->setGlobalState (mScreenGlobal);
+	mScreenStateMachine->setCurrentState(mScreenMain);
+	mScreenStateMachine->setPreviousState(mScreenMain);
+	mScreenStateMachine->setGlobalState (mScreenGlobal);
 
 }
 
@@ -95,8 +95,9 @@ void ApplicationBreslin::run()
 {
 	while(true)
     {
-
-		mStateMachine->update();
+		
+		//temp screen state machine needs to be renamed to 
+		mScreenStateMachine->update();
 
 		//input
 		processInput();

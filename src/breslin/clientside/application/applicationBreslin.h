@@ -38,7 +38,8 @@ static const char mCommandMilliseconds = 2;
 private:
 
 //state machine
-StateMachine* mStateMachine;
+StateMachine* mScreenStateMachine;
+
 State* mScreenGlobal;
 State* mScreenMain;
 State* mScreenPlay;
