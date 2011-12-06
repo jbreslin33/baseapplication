@@ -122,6 +122,8 @@ set(HDRS
 	#application
 	../clientside/application/BaseApplication.h
 	../clientside/application/applicationBreslin.h
+	../clientside/application/states/mainScreen.h
+	../clientside/application/states/playScreen.h
 	
 	#game	
 	../clientside/game/game.h
@@ -176,6 +178,8 @@ set(SRCS
 	#application
 	../clientside/application/BaseApplication.cpp
 	../clientside/application/applicationBreslin.cpp
+	../clientside/application/states/mainScreen.cpp
+	../clientside/application/states/playScreen.cpp
 	
 	#game	
 	../clientside/game/game.cpp
@@ -244,6 +248,8 @@ set(HDRS
 	#application
 	../clientside/application/BaseApplication.h
 	../clientside/application/applicationBreslin.h
+	../clientside/application/states/mainScreen.h
+	../clientside/application/states/playScreen.h
 	
 	#game	
 	../clientside/game/game.h
@@ -297,6 +303,8 @@ set(SRCS
 	#application
 	../clientside/application/BaseApplication.cpp
 	../clientside/application/applicationBreslin.cpp
+	../clientside/application/states/mainScreen.cpp
+	../clientside/application/states/playScreen.cpp
 	
 	#game	
 	../clientside/game/game.cpp

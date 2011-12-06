@@ -10,19 +10,17 @@
 /**********************************
 *          FORWARD DECLARATIONS
 **********************************/
-//class AbilityMove;
+
 
 /**********************************
 *          CLASS
 **********************************/
 
-template <class T*>
 class StateMachine
 {
 public:
 
-StateMachine(T* owner):m_pOwner(owner),
-	                           mCurrentState(0),
+StateMachine():                    mCurrentState(0),
                                    mPreviousState(0),
                                    mGlobalState(0)
 {
@@ -35,7 +33,6 @@ virtual ~StateMachine(){}
 **********************************/
 private:
   
-T*       mOwner;
 State*   mCurrentState;
 State*   mPreviousState;
 State*   mGlobalState;
@@ -62,11 +59,11 @@ void  update()const
 {
 	if(m_pGlobalState)
 	{
-		mGlobalState->execute(mOwner);
+		mGlobalState->execute();
 	}
 	if (m_pCurrentState)
 	{
-		mCurrentState->execute(mOwner);
+		mCurrentState->execute();
 	}
  }
 
@@ -76,14 +73,14 @@ void  changeState(State* pNewState)
 
 	if(mCurrentState)
 	{
-       		mCurrentState->exit(mOwner);
+       		mCurrentState->exit();
 	}
     
     	mCurrentState = pNewState;
 
 	if(mCurrentState)
 	{
-        	mCurrentState->enter(mOwner);
+        	mCurrentState->enter();
 	}
 }
 
