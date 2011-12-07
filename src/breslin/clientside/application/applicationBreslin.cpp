@@ -98,8 +98,7 @@ void ApplicationBreslin::run()
 	while(true)
     {
 		
-		//temp screen state machine needs to be renamed to 
-		mScreenStateMachine->update();
+
 
 		//input
 		processInput();
@@ -118,6 +117,10 @@ void ApplicationBreslin::run()
 		{
 			break;
 		}
+
+		//temp screen state machine needs to be renamed to 
+		mScreenStateMachine->update();
+
 	}
 }
 

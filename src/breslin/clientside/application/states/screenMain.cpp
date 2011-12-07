@@ -24,7 +24,7 @@ ScreenMain::~ScreenMain()
 
 void ScreenMain::enter()
 {
-
+	//mApplicationBreslin->initializeGui();
 }
 void ScreenMain::execute()
 {
