@@ -80,7 +80,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//mScreenStateMachine->setPreviousState(mScreenMain);
 	mScreenStateMachine->setGlobalState (mScreenGlobal);
 	
-	mScreenStateMachine->changeState(mScreenMain);
+	//mScreenStateMachine->changeState(mScreenMain);
 
 }
 
@@ -322,12 +322,13 @@ bool ApplicationBreslin::runGraphics()
 	WindowEventUtilities::messagePump();
 	if (!mRoot->renderOneFrame())
 	{
-		//initializeGui();
+		initializeGui();
+		//mScreenStateMachine->changeState(mScreenMain);
 		return false;
 	}
 	else
 	{
-		//initializeGui();
+		initializeGui();
 		return true;
 	}
 
@@ -354,7 +355,8 @@ void ApplicationBreslin::initializeGui()
 	}
 	else
 	{
-		loadJoinScreen();
+		//loadJoinScreen();
+		mScreenStateMachine->changeState(mScreenMain);
 		mInitializeGui = true;
 	}
 }

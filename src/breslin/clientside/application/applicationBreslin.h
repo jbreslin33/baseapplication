@@ -111,6 +111,7 @@ Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 
 //gui
 void initializeGui();
+void loadJoinScreen();
 
 private:
 
@@ -141,7 +142,7 @@ void        createScene          ();
 //gui	
 void hideGui();
 void showGui();
-void loadJoinScreen();
+
 void hideJoinScreen();
 
 
