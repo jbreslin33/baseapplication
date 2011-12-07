@@ -8,7 +8,7 @@
 
 void ScreenGlobal::enter()
 {
-
+	initializeGui();
 }
 void ScreenGlobal::execute()
 {

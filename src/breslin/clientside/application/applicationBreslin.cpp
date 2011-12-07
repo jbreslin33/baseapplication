@@ -317,12 +317,12 @@ bool ApplicationBreslin::runGraphics()
 	WindowEventUtilities::messagePump();
 	if (!mRoot->renderOneFrame())
 	{
-		initializeGui();
+		//initializeGui();
 		return false;
 	}
 	else
 	{
-		initializeGui();
+		//initializeGui();
 		return true;
 	}
 
