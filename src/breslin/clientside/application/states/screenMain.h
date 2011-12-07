@@ -23,8 +23,8 @@ public:
 
 ApplicationBreslin* mApplicationBreslin;
 
-ScreenGlobal(ApplicationBreslin* applicationBreslin);
-~ScreenGlobal();
+ScreenMain(ApplicationBreslin* applicationBreslin);
+~ScreenMain();
 
 void enter  ();
 void execute();
