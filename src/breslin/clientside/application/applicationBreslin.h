@@ -109,6 +109,9 @@ float getRenderTime();
 //scene
 Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 
+//gui
+void initializeGui();
+
 private:
 
 //connect
@@ -140,7 +143,7 @@ void hideGui();
 void showGui();
 void loadJoinScreen();
 void hideJoinScreen();
-void initializeGui();
+
 
 //rendering
 virtual bool        frameRenderingQueued (const Ogre::FrameEvent& evt);

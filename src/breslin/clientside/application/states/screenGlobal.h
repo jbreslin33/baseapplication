@@ -1,25 +1,30 @@
 #ifndef SCREENGLOBAL_H
 #define SCREENGLOBAL_H
 
+/***************************************
+*   		INCLUDES
+***************************************/
+
 #include "../../../statemachine/state.h"
 
-/******************************************************
-*				PROCESS TICK
-*
-*				   STATES
-*
-********************************************************/
+/***************************************
+*   		FORWARD DECLARATIONS
+***************************************/
 
-
-/******************************************************
-*				GLOBAL
-********************************************************/
+class ApplicationBreslin;
 
 class ScreenGlobal : public State
 {
 public:
 
-ScreenGlobal() {}
+/***************************************
+*   		MEMBER VARIABLES
+***************************************/
+
+ApplicationBreslin* mApplicationBreslin;
+
+ScreenGlobal(ApplicationBreslin* applicationBreslin);
+~ScreenGlobal();
 
 void enter  ();
 void execute();

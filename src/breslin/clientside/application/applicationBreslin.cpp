@@ -72,13 +72,15 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//state machine (Menus)
 	mScreenStateMachine = new StateMachine();
-	mScreenGlobal = new ScreenGlobal();
-	mScreenMain   = new ScreenMain();
+	mScreenGlobal = new ScreenGlobal(this);
+	mScreenMain   = new ScreenMain  (this);
 	mScreenPlay   = new ScreenPlay();
 
-	mScreenStateMachine->setCurrentState(mScreenMain);
-	mScreenStateMachine->setPreviousState(mScreenMain);
+	//mScreenStateMachine->setCurrentState(mScreenMain);
+	//mScreenStateMachine->setPreviousState(mScreenMain);
 	mScreenStateMachine->setGlobalState (mScreenGlobal);
+	
+	mScreenStateMachine->changeState(mScreenMain);
 
 }
 

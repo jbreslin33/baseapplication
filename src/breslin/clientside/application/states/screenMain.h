@@ -1,25 +1,30 @@
 #ifndef MAINSCREEN_H
 #define MAINSCREEN_H
 
+/***************************************
+*   		INCLUDES
+***************************************/
+
 #include "../../../statemachine/state.h"
 
-/******************************************************
-*				PROCESS TICK
-*
-*				   STATES
-*
-********************************************************/
+/***************************************
+*   		FORWARD DECLARATIONS
+***************************************/
 
-
-/******************************************************
-*				GLOBAL
-********************************************************/
+class ApplicationBreslin;
 
 class ScreenMain : public State
 {
 public:
 
-ScreenMain() {}
+/***************************************
+*   		MEMBER VARIABLES
+***************************************/
+
+ApplicationBreslin* mApplicationBreslin;
+
+ScreenGlobal(ApplicationBreslin* applicationBreslin);
+~ScreenGlobal();
 
 void enter  ();
 void execute();
