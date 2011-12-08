@@ -76,7 +76,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	mApplicationGlobal = new ApplicationGlobal(this);
 	mApplicationInitialize = new ApplicationInitialize(this);
-	mapplicationMain   = new ApplicationMain  (this);
+	mApplicationMain   = new ApplicationMain  (this);
 	mApplicationPlay   = new ApplicationPlay(this);
 
 	//mScreenStateMachine->setCurrentState(mApplicationInitialize);
@@ -366,7 +366,7 @@ void ApplicationBreslin::initializeGui()
 	else
 	{
 		//loadJoinScreen();
-		mScreenStateMachine->changeState(mapplicationMain);
+		mScreenStateMachine->changeState(mApplicationMain);
 		mInitializeGui = true;
 	}
 }
@@ -374,11 +374,17 @@ void ApplicationBreslin::initializeGui()
 void ApplicationBreslin::loadJoinScreen()
 {
 	//Game
-	mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
+	if (!mButtonGame)
+	{
+		mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
+	}
 	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
 
 	//Tag
-	mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
+	if (!mButtonTag)
+	{
+		mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
+	}
 	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
 
 	mTrayMgr->showCursor();
@@ -435,6 +441,8 @@ void ApplicationBreslin::processInput()
 			//destroyScene();
 
 			showGui();
+
+			mScreenStateMachine->changeState(mApplicationMain);
 		}
 		else
 		{
@@ -492,6 +500,9 @@ void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 			mPlayingGame = true;
 		}
 		hideGui();
+
+		mScreenStateMachine->changeState(mApplicationPlay);
+
 	}
 	if (button == mButtonTag)
 	{
@@ -503,6 +514,8 @@ void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 			mPlayingGame = true;
 		}
 		hideGui();
+
+		mScreenStateMachine->changeState(mApplicationPlay);
 	}
 
 }

@@ -42,7 +42,7 @@ StateMachine* mScreenStateMachine;
 
 State* mApplicationGlobal;
 State* mApplicationInitialize;
-State* mapplicationMain;
+State* mApplicationMain;
 State* mApplicationPlay;
 
 //constants

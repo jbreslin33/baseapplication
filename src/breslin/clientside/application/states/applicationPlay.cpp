@@ -7,6 +7,9 @@
 //application
 #include "../applicationBreslin.h"
 
+//game
+#include "../../game/game.h"
+
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
@@ -26,7 +29,11 @@ void ApplicationPlay::enter()
 }
 void ApplicationPlay::execute()
 {
-
+	if (mApplicationBreslin->mPlayingGame)
+	{
+		//game
+		mApplicationBreslin->mGame->run();
+	}
 }
 void ApplicationPlay::exit()
 {

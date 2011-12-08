@@ -29,19 +29,11 @@ void ApplicationGlobal::enter()
 }
 void ApplicationGlobal::execute()
 {
-	//mApplicationBreslin->applicationLogic();
-
 	//input
 	mApplicationBreslin->processInput();
 
 	//network
 	mApplicationBreslin->runNetwork(mApplicationBreslin->getRenderTime() * 1000.0f);
-
-	if (mApplicationBreslin->mPlayingGame)
-	{
-		//game
-		mApplicationBreslin->mGame->run();
-	}
 
 	//graphics
 	if (!mApplicationBreslin->runGraphics())
