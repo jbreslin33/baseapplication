@@ -32,8 +32,8 @@ extern "C" {
 #endif
         try
 		{
-			applicationBreslin->go();
-            applicationBreslin->run();
+			//applicationBreslin->go();
+           // applicationBreslin->run();
         }
 		catch( Ogre::Exception& e )
 		{

@@ -26,7 +26,7 @@
 #include "../../statemachine/stateMachine.h"
 #include "states/screenGlobal.h"
 #include "states/applicationInitialize.h"
-#include "states/screenMain.h"
+#include "states/applicationMain.h"
 #include "states/screenPlay.h"
 
 
@@ -76,14 +76,14 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	mScreenGlobal = new ScreenGlobal(this);
 	mApplicationInitialize = new ApplicationInitialize(this);
-	mScreenMain   = new ScreenMain  (this);
+	mapplicationMain   = new applicationMain  (this);
 	mScreenPlay   = new ScreenPlay(this);
 
-	//mScreenStateMachine->setCurrentState(mScreenMain);
-	//mScreenStateMachine->setPreviousState(mScreenMain);
+	//mScreenStateMachine->setCurrentState(mApplicationInitialize);
+	//mScreenStateMachine->setPreviousState(mApplicationInitialize);
 	mScreenStateMachine->setGlobalState (mScreenGlobal);
 	
-	//mScreenStateMachine->changeState(mScreenMain);
+	mScreenStateMachine->changeState(mApplicationInitialize);
 
 }
 
@@ -326,7 +326,7 @@ bool ApplicationBreslin::runGraphics()
 	if (!mRoot->renderOneFrame())
 	{
 		initializeGui();
-		//mScreenStateMachine->changeState(mScreenMain);
+		//mScreenStateMachine->changeState(mapplicationMain);
 		return false;
 	}
 	else
@@ -359,7 +359,7 @@ void ApplicationBreslin::initializeGui()
 	else
 	{
 		//loadJoinScreen();
-		mScreenStateMachine->changeState(mScreenMain);
+		mScreenStateMachine->changeState(mapplicationMain);
 		mInitializeGui = true;
 	}
 }

@@ -73,14 +73,14 @@ void  changeState(State* pNewState)
 
 	if(mCurrentState)
 	{
-       		mCurrentState->exit();
+       	mCurrentState->exit();
 	}
     
-    	mCurrentState = pNewState;
+    mCurrentState = pNewState;
 
 	if(mCurrentState)
 	{
-        	mCurrentState->enter();
+        mCurrentState->enter();
 	}
 }
 

@@ -23,6 +23,8 @@ ApplicationInitialize::~ApplicationInitialize()
 void ApplicationInitialize::enter()
 {
 	//mApplicationBreslin->loadJoinScreen();
+	mApplicationBreslin->go();
+	
 }
 void ApplicationInitialize::execute()
 {

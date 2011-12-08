@@ -1,5 +1,5 @@
 //header
-#include "screenMain.h"
+#include "applicationMain.h"
 
 
 //log
@@ -11,25 +11,25 @@
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-ScreenMain::ScreenMain(ApplicationBreslin* applicationBreslin)
+ApplicationMain::ApplicationMain(ApplicationBreslin* applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
 }
 
-ScreenMain::~ScreenMain()
+ApplicationMain::~ApplicationMain()
 {
 
 }
 
 
-void ScreenMain::enter()
+void ApplicationMain::enter()
 {
 	mApplicationBreslin->loadJoinScreen();
 }
-void ScreenMain::execute()
+void ApplicationMain::execute()
 {
 
 }
-void ScreenMain::exit()
+void ApplicationMain::exit()
 {
 }
