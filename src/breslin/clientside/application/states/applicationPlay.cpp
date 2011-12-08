@@ -1,5 +1,5 @@
 //header
-#include "screenPlay.h"
+#include "ApplicationPlay.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
@@ -10,24 +10,24 @@
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-ScreenPlay::ScreenPlay(ApplicationBreslin* applicationBreslin)
+ApplicationPlay::ApplicationPlay(ApplicationBreslin* applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
 }
 
-ScreenPlay::~ScreenPlay()
+ApplicationPlay::~ApplicationPlay()
 {
 
 }
 
-void ScreenPlay::enter()
+void ApplicationPlay::enter()
 {
 
 }
-void ScreenPlay::execute()
+void ApplicationPlay::execute()
 {
 
 }
-void ScreenPlay::exit()
+void ApplicationPlay::exit()
 {
 }

@@ -43,7 +43,7 @@ StateMachine* mScreenStateMachine;
 State* mScreenGlobal;
 State* mApplicationInitialize;
 State* mapplicationMain;
-State* mScreenPlay;
+State* mApplicationPlay;
 
 //constants
 static const char mCommandKey          = 1;

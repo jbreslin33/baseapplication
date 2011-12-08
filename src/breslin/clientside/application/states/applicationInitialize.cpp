@@ -24,6 +24,7 @@ void ApplicationInitialize::enter()
 {
 	//mApplicationBreslin->loadJoinScreen();
 	mApplicationBreslin->go();
+	mApplicationBreslin->run();
 	
 }
 void ApplicationInitialize::execute()

@@ -27,7 +27,7 @@
 #include "states/screenGlobal.h"
 #include "states/applicationInitialize.h"
 #include "states/applicationMain.h"
-#include "states/screenPlay.h"
+#include "states/ApplicationPlay.h"
 
 
 /***************************************
@@ -76,8 +76,8 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	mScreenGlobal = new ScreenGlobal(this);
 	mApplicationInitialize = new ApplicationInitialize(this);
-	mapplicationMain   = new applicationMain  (this);
-	mScreenPlay   = new ScreenPlay(this);
+	mapplicationMain   = new ApplicationMain  (this);
+	mApplicationPlay   = new ApplicationPlay(this);
 
 	//mScreenStateMachine->setCurrentState(mApplicationInitialize);
 	//mScreenStateMachine->setPreviousState(mApplicationInitialize);

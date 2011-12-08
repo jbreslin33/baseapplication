@@ -13,7 +13,7 @@
 
 class ApplicationBreslin;
 
-class ScreenPlay : public State
+class ApplicationPlay : public State
 {
 public:
 
@@ -23,8 +23,8 @@ public:
 
 ApplicationBreslin* mApplicationBreslin;
 
-ScreenPlay(ApplicationBreslin* applicationBreslin);
-~ScreenPlay();
+ApplicationPlay(ApplicationBreslin* applicationBreslin);
+~ApplicationPlay();
 
 void enter  ();
 void execute();
