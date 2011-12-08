@@ -30,7 +30,8 @@ void ApplicationGlobal::enter()
 void ApplicationGlobal::execute()
 {
 	//mApplicationBreslin->applicationLogic();
-//input
+
+	//input
 	mApplicationBreslin->processInput();
 
 	//network
