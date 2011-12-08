@@ -113,6 +113,9 @@ Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 void initializeGui();
 void loadJoinScreen();
 
+//input
+OIS::Keyboard* getKeyboard() { return mKeyboard; }
+
 private:
 
 //connect

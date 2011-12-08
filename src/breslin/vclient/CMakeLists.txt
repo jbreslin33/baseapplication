@@ -125,6 +125,7 @@ set(HDRS
 	../clientside/application/states/screenMain.h
 	../clientside/application/states/screenPlay.h
 	../clientside/application/states/screenGlobal.h
+	../clientside/application/states/applicationInitialize.h
 	
 	#game	
 	../clientside/game/game.h
@@ -182,6 +183,7 @@ set(SRCS
 	../clientside/application/states/screenMain.cpp
 	../clientside/application/states/screenPlay.cpp
 	../clientside/application/states/screenGlobal.cpp
+	../clientside/application/states/applicationInitialize.cpp
 	
 	#game	
 	../clientside/game/game.cpp
@@ -253,6 +255,7 @@ set(HDRS
 	../clientside/application/states/screenMain.h
 	../clientside/application/states/screenPlay.h
 	../clientside/application/states/screenGlobal.h
+	../clientside/application/states/applicationInitialize.h
 	
 	#game
 	../clientside/game/game.h
@@ -309,6 +312,7 @@ set(SRCS
 	../clientside/application/states/screenMain.cpp
 	../clientside/application/states/screenPlay.cpp
 	../clientside/application/states/screenGlobal.cpp
+	../clientside/application/states/applicationInitialize.cpp
 
 	#game	
 	../clientside/game/game.cpp
