@@ -94,37 +94,42 @@ ApplicationBreslin::~ApplicationBreslin()
 }
 
 /*********************************
-	LOOP
+			update
 **********************************/
 void ApplicationBreslin::run()
 {
 	while(true)
     {
-		
-
-
-		//input
-		processInput();
-
-		//network
-		runNetwork(getRenderTime() * 1000.0f);
-
-		if (mPlayingGame)
-		{
-			//game
-			mGame->run();
-		}
-
-		//graphics
-		if (!runGraphics())
-		{
-			break;
-		}
-
-		//temp screen state machine needs to be renamed to 
-		mScreenStateMachine->update();
-
+		processUpdate();
 	}
+}
+
+void ApplicationBreslin::applicationLogic()
+{
+	//input
+	processInput();
+
+	//network
+	runNetwork(getRenderTime() * 1000.0f);
+
+	if (mPlayingGame)
+	{
+		//game
+		mGame->run();
+	}
+
+	//graphics
+	if (!runGraphics())
+	{
+		//break;
+	}
+
+}
+
+void ApplicationBreslin::processUpdate()
+{
+	//temp screen state machine needs to be renamed to 
+	mScreenStateMachine->update();
 }
 
 /*********************************

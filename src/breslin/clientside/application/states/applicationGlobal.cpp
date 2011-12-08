@@ -26,7 +26,7 @@ void ApplicationGlobal::enter()
 }
 void ApplicationGlobal::execute()
 {
-
+	mApplicationBreslin->applicationLogic();
 }
 void ApplicationGlobal::exit()
 {

@@ -100,6 +100,11 @@ OgreBites::Button* mButtonTag;
 ***************************************/
 
 public:
+//logic
+void applicationLogic();
+
+//process update
+void processUpdate();
 
 //run
 void run();
