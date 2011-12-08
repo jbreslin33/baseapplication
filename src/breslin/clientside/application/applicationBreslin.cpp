@@ -27,7 +27,7 @@
 #include "states/applicationGlobal.h"
 #include "states/applicationInitialize.h"
 #include "states/applicationMain.h"
-#include "states/ApplicationPlay.h"
+#include "states/applicationPlay.h"
 
 
 /***************************************
@@ -55,6 +55,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//initilize
 	mInitializeGui = false;
+	mGraphicsRunning = false;
 	mJoinGame    = false;
 	mPlayingGame = false;
 
@@ -332,13 +333,12 @@ bool ApplicationBreslin::runGraphics()
 	WindowEventUtilities::messagePump();
 	if (!mRoot->renderOneFrame())
 	{
-		initializeGui();
-		//mScreenStateMachine->changeState(mapplicationMain);
+		mGraphicsRunning = true;
 		return false;
 	}
 	else
 	{
-		initializeGui();
+		mGraphicsRunning = false;
 		return true;
 	}
 
@@ -366,31 +366,24 @@ void ApplicationBreslin::initializeGui()
 	else
 	{
 		//loadJoinScreen();
-		mScreenStateMachine->changeState(mApplicationMain);
-		mInitializeGui = true;
+		//mScreenStateMachine->changeState(mApplicationMain);
+		//mInitializeGui = true;
 	}
+}
+
+void ApplicationBreslin::createJoinButtons()
+{
+	LogString("create buttons");
+	mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
+	mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
 }
 
 void ApplicationBreslin::loadJoinScreen()
 {
-	//Game
-	if (!mButtonGame)
-	{
-		mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
-	}
 	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
-
-	//Tag
-	if (!mButtonTag)
-	{
-		mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
-	}
 	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
 
 	mTrayMgr->showCursor();
-
-
-
 }
 
 void ApplicationBreslin::hideGui()

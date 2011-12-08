@@ -36,10 +36,8 @@ void ApplicationGlobal::execute()
 	mApplicationBreslin->runNetwork(mApplicationBreslin->getRenderTime() * 1000.0f);
 
 	//graphics
-	if (!mApplicationBreslin->runGraphics())
-	{
-		//break;
-	}
+	mApplicationBreslin->runGraphics();
+	
 
 }
 void ApplicationGlobal::exit()

@@ -74,6 +74,7 @@ float mRunNetworkTime;
 
 //initialize
 bool mInitializeGui;
+bool mGraphicsRunning;
 bool mJoinGame;
 bool mPlayingGame;
 
@@ -117,6 +118,7 @@ Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 
 //gui
 void initializeGui();
+void createJoinButtons();
 void loadJoinScreen();
 
 //input

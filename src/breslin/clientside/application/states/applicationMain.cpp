@@ -24,6 +24,7 @@ ApplicationMain::~ApplicationMain()
 
 void ApplicationMain::enter()
 {
+	LogString("enter app main");
 	mApplicationBreslin->loadJoinScreen();
 }
 void ApplicationMain::execute()
@@ -32,4 +33,5 @@ void ApplicationMain::execute()
 }
 void ApplicationMain::exit()
 {
+	//mApplicationBre
 }
