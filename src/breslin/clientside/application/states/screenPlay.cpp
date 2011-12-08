@@ -1,8 +1,24 @@
 //header
 #include "screenPlay.h"
 
+//log
+#include "../../tdreamsock/dreamSockLog.h"
 
-/******************** APPLICATION_SCREEN_MAIN *****************/
+//application
+#include "../applicationBreslin.h"
+
+/***************************************
+*	CONSTRUCTORS		          
+***************************************/
+ScreenPlay::ScreenPlay(ApplicationBreslin* applicationBreslin)
+{
+	mApplicationBreslin = applicationBreslin;
+}
+
+ScreenPlay::~ScreenPlay()
+{
+
+}
 
 void ScreenPlay::enter()
 {

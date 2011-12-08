@@ -1,25 +1,30 @@
 #ifndef PLAYSCREEN_H
 #define PLAYSCREEN_H
 
+/***************************************
+*   		INCLUDES
+***************************************/
+
 #include "../../../statemachine/state.h"
 
-/******************************************************
-*				PROCESS TICK
-*
-*				   STATES
-*
-********************************************************/
+/***************************************
+*   		FORWARD DECLARATIONS
+***************************************/
 
-
-/******************************************************
-*				GLOBAL
-********************************************************/
+class ApplicationBreslin;
 
 class ScreenPlay : public State
 {
 public:
 
-ScreenPlay() {}
+/***************************************
+*   		MEMBER VARIABLES
+***************************************/
+
+ApplicationBreslin* mApplicationBreslin;
+
+ScreenPlay(ApplicationBreslin* applicationBreslin);
+~ScreenPlay();
 
 void enter  ();
 void execute();

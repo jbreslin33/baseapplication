@@ -41,6 +41,7 @@ private:
 StateMachine* mScreenStateMachine;
 
 State* mScreenGlobal;
+State* mApplicationInitialize;
 State* mScreenMain;
 State* mScreenPlay;
 
