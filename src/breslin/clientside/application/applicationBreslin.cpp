@@ -106,6 +106,7 @@ void ApplicationBreslin::run()
 
 void ApplicationBreslin::applicationLogic()
 {
+	/*
 	//input
 	processInput();
 
@@ -123,6 +124,7 @@ void ApplicationBreslin::applicationLogic()
 	{
 		//break;
 	}
+	*/
 
 }
 

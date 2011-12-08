@@ -35,7 +35,7 @@ public:
 //constants
 static const char mCommandMilliseconds = 2;
 
-private:
+//private:
 
 //state machine
 StateMachine* mScreenStateMachine;
@@ -122,7 +122,7 @@ void loadJoinScreen();
 //input
 OIS::Keyboard* getKeyboard() { return mKeyboard; }
 
-private:
+//private:
 
 //connect
 void sendConnect   ();
