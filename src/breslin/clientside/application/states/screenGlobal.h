@@ -13,7 +13,7 @@
 
 class ApplicationBreslin;
 
-class ScreenGlobal : public State
+class ApplicationGlobal : public State
 {
 public:
 
@@ -23,8 +23,8 @@ public:
 
 ApplicationBreslin* mApplicationBreslin;
 
-ScreenGlobal(ApplicationBreslin* applicationBreslin);
-~ScreenGlobal();
+ApplicationGlobal(ApplicationBreslin* applicationBreslin);
+~ApplicationGlobal();
 
 void enter  ();
 void execute();

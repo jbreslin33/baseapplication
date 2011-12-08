@@ -40,7 +40,7 @@ private:
 //state machine
 StateMachine* mScreenStateMachine;
 
-State* mScreenGlobal;
+State* mApplicationGlobal;
 State* mApplicationInitialize;
 State* mapplicationMain;
 State* mApplicationPlay;

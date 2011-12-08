@@ -1,5 +1,5 @@
 //header
-#include "screenGlobal.h"
+#include "applicationGlobal.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
@@ -10,24 +10,24 @@
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-ScreenGlobal::ScreenGlobal(ApplicationBreslin* applicationBreslin)
+ApplicationGlobal::ApplicationGlobal(ApplicationBreslin* applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
 }
 
-ScreenGlobal::~ScreenGlobal()
+ApplicationGlobal::~ApplicationGlobal()
 {
 
 }
 
-void ScreenGlobal::enter()
+void ApplicationGlobal::enter()
 {
 
 }
-void ScreenGlobal::execute()
+void ApplicationGlobal::execute()
 {
 
 }
-void ScreenGlobal::exit()
+void ApplicationGlobal::exit()
 {
 }

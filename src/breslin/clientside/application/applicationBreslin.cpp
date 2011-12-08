@@ -24,7 +24,7 @@
 
 //state machine
 #include "../../statemachine/stateMachine.h"
-#include "states/screenGlobal.h"
+#include "states/applicationGlobal.h"
 #include "states/applicationInitialize.h"
 #include "states/applicationMain.h"
 #include "states/ApplicationPlay.h"
@@ -74,14 +74,14 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//state machine (Menus)
 	mScreenStateMachine = new StateMachine();
 
-	mScreenGlobal = new ScreenGlobal(this);
+	mApplicationGlobal = new ApplicationGlobal(this);
 	mApplicationInitialize = new ApplicationInitialize(this);
 	mapplicationMain   = new ApplicationMain  (this);
 	mApplicationPlay   = new ApplicationPlay(this);
 
 	//mScreenStateMachine->setCurrentState(mApplicationInitialize);
 	//mScreenStateMachine->setPreviousState(mApplicationInitialize);
-	mScreenStateMachine->setGlobalState (mScreenGlobal);
+	mScreenStateMachine->setGlobalState (mApplicationGlobal);
 	
 	mScreenStateMachine->changeState(mApplicationInitialize);
 
