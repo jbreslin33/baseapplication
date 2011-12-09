@@ -30,7 +30,7 @@ void ApplicationInitializeGraphics::enter()
 {
 	LogString("STATE: ApplicationInitializeGraphics");
 	mApplicationBreslin->createJoinButtons();
-	mApplicationBreslin->mScreenStateMachine->changeState(mApplicationBreslin->mApplicationMain);
+	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
 }
 
 void ApplicationInitializeGraphics::execute()

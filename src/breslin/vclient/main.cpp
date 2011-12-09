@@ -24,16 +24,18 @@ extern "C" {
     {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
        
-		StartLogConsole();
+	StartLogConsole();
         
-		ApplicationBreslin* applicationBreslin = new ApplicationBreslin(strCmdLine,30004);
+	ApplicationBreslin* applicationBreslin = new ApplicationBreslin(strCmdLine,30004);
 #else
         ApplicationBreslin* applicationBreslin = new ApplicationBreslin(argv[1],30004);
 #endif
         try
+	{
+		while (true)
 		{
-			//applicationBreslin->go();
-           // applicationBreslin->run();
+       	    		applicationBreslin->processUpdate();
+		}
         }
 		catch( Ogre::Exception& e )
 		{

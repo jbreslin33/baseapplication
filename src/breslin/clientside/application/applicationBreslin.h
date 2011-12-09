@@ -38,7 +38,7 @@ static const char mCommandMilliseconds = 2;
 //private:
 
 //state machine
-StateMachine* mScreenStateMachine;
+StateMachine* mStateMachine;
 
 State* mApplicationGlobal;
 State* mApplicationInitialize;
@@ -103,14 +103,9 @@ OgreBites::Button* mButtonTag;
 ***************************************/
 
 public:
-//logic
-void applicationLogic();
 
 //process update
 void processUpdate();
-
-//run
-void run();
 
 //time
 float getRenderTime();

@@ -37,7 +37,7 @@ void ApplicationInitialize::execute()
 	if (mApplicationBreslin->setup())
 	{
 		mApplicationBreslin->mSetup = true;
-		mApplicationBreslin->mScreenStateMachine->changeState(mApplicationBreslin->mApplicationInitializeGraphics);
+		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationInitializeGraphics);
 	}	
 }
 

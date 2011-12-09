@@ -62,7 +62,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mPlayingGame = false;
 
 	//game
-	//mGame = new Game(this);
 	mGame = NULL;
 
 	//input
@@ -75,7 +74,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mOutgoingSequence		= 1;
 
 	//state machine (Menus)
-	mScreenStateMachine = new StateMachine();
+	mStateMachine = new StateMachine();
 
 	mApplicationGlobal = new ApplicationGlobal(this);
 	mApplicationInitialize = new ApplicationInitialize(this);
@@ -83,17 +82,8 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mApplicationMain   = new ApplicationMain  (this);
 	mApplicationPlay   = new ApplicationPlay(this);
 
-	
-
-	//mScreenStateMachine->setCurrentState(mApplicationInitialize);
-	//mScreenStateMachine->setPreviousState(mApplicationInitialize);
-
-	LogString("!!!!JKJKJKJKJKKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKKKKKKKKKKKKKK");
-	mScreenStateMachine->setGlobalState (mApplicationGlobal);
-	LogString("2");
-	mScreenStateMachine->changeState(mApplicationInitialize);
-	LogString("3");
-run();
+	mStateMachine->setGlobalState (mApplicationGlobal);
+	mStateMachine->changeState(mApplicationInitialize);
 
 }
 
@@ -106,42 +96,10 @@ ApplicationBreslin::~ApplicationBreslin()
 /*********************************
 			update
 **********************************/
-void ApplicationBreslin::run()
-{
-	while(true)
-	{
-		processUpdate();
-	}
-}
-
-void ApplicationBreslin::applicationLogic()
-{
-	/*
-	//input
-	processInput();
-
-	//network
-	runNetwork(getRenderTime() * 1000.0f);
-
-	if (mPlayingGame)
-	{
-		//game
-		mGame->run();
-	}
-
-	//graphics
-	if (!runGraphics())
-	{
-		//break;
-	}
-	*/
-
-}
-
 void ApplicationBreslin::processUpdate()
 {
 	//temp screen state machine needs to be renamed to 
-	mScreenStateMachine->update();
+	mStateMachine->update();
 }
 
 /*********************************
@@ -375,7 +333,7 @@ void ApplicationBreslin::initializeGui()
 	else
 	{
 		//loadJoinScreen();
-		//mScreenStateMachine->changeState(mApplicationMain);
+		//mStateMachine->changeState(mApplicationMain);
 		//mInitializeGui = true;
 	}
 }
@@ -444,7 +402,7 @@ void ApplicationBreslin::processInput()
 
 			showGui();
 
-			mScreenStateMachine->changeState(mApplicationMain);
+			mStateMachine->changeState(mApplicationMain);
 		}
 		else
 		{
@@ -503,7 +461,7 @@ void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 		}
 		hideGui();
 
-		mScreenStateMachine->changeState(mApplicationPlay);
+		mStateMachine->changeState(mApplicationPlay);
 
 	}
 	if (button == mButtonTag)
@@ -517,7 +475,7 @@ void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 		}
 		hideGui();
 
-		mScreenStateMachine->changeState(mApplicationPlay);
+		mStateMachine->changeState(mApplicationPlay);
 	}
 
 }
