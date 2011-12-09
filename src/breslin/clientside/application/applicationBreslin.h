@@ -42,6 +42,7 @@ StateMachine* mScreenStateMachine;
 
 State* mApplicationGlobal;
 State* mApplicationInitialize;
+State* mApplicationInitializeGraphics;
 State* mApplicationMain;
 State* mApplicationPlay;
 
@@ -73,6 +74,7 @@ float mRenderTime;
 float mRunNetworkTime;
 
 //initialize
+bool mSetup;
 bool mInitializeGui;
 bool mGraphicsRunning;
 bool mJoinGame;

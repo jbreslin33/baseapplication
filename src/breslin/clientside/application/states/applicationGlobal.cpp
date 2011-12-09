@@ -29,14 +29,17 @@ void ApplicationGlobal::enter()
 }
 void ApplicationGlobal::execute()
 {
-	//input
-	mApplicationBreslin->processInput();
+	if (mApplicationBreslin->mSetup)
+	{
+		//input
+		mApplicationBreslin->processInput();
 
-	//network
-	mApplicationBreslin->runNetwork(mApplicationBreslin->getRenderTime() * 1000.0f);
+		//network
+		mApplicationBreslin->runNetwork(mApplicationBreslin->getRenderTime() * 1000.0f);
 
-	//graphics
-	mApplicationBreslin->runGraphics();
+		//graphics
+		mApplicationBreslin->runGraphics();
+	}
 	
 
 }

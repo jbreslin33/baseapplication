@@ -4,6 +4,12 @@
 //log
 #include "../../tdreamsock/dreamSockLog.h"
 
+//state machine
+#include "../../../statemachine/stateMachine.h"
+
+//states
+#include "applicationInitializeGraphics.h"
+
 //application
 #include "../applicationBreslin.h"
 
@@ -22,19 +28,19 @@ ApplicationInitialize::~ApplicationInitialize()
 
 void ApplicationInitialize::enter()
 {
-	mApplicationBreslin->go();
-	mApplicationBreslin->run();
+	//mApplicationBreslin->setup();
 	
-	// create all buttons
-	mApplicationBreslin->createJoinButtons();
+	//mApplicationBreslin->run();
 }
 
 void ApplicationInitialize::execute()
 {
-	if (mApplicationBreslin->mGraphicsRunning)
+	LogString("setup......................................................................................................");
+	if (mApplicationBreslin->setup())
 	{
-		//mApplicationBreslin->changeState(m
-	}
+		mApplicationBreslin->mSetup = true;
+		mApplicationBreslin->mScreenStateMachine->changeState(mApplicationBreslin->mApplicationInitializeGraphics);
+	}	
 }
 
 void ApplicationInitialize::exit()

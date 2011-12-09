@@ -25,8 +25,9 @@
 //state machine
 #include "../../statemachine/stateMachine.h"
 #include "states/applicationGlobal.h"
-#include "states/applicationInitialize.h"
 #include "states/applicationMain.h"
+#include "states/applicationInitialize.h"
+#include "states/applicationInitializeGraphics.h"
 #include "states/applicationPlay.h"
 
 
@@ -54,6 +55,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mKeyClockwise = 32;
 
 	//initilize
+	mSetup = false;
 	mInitializeGui = false;
 	mGraphicsRunning = false;
 	mJoinGame    = false;
@@ -77,14 +79,21 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	mApplicationGlobal = new ApplicationGlobal(this);
 	mApplicationInitialize = new ApplicationInitialize(this);
+	mApplicationInitializeGraphics = new ApplicationInitializeGraphics(this);
 	mApplicationMain   = new ApplicationMain  (this);
 	mApplicationPlay   = new ApplicationPlay(this);
 
+	
+
 	//mScreenStateMachine->setCurrentState(mApplicationInitialize);
 	//mScreenStateMachine->setPreviousState(mApplicationInitialize);
+
+	LogString("!!!!JKJKJKJKJKKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKJKKKKKKKKKKKKKK");
 	mScreenStateMachine->setGlobalState (mApplicationGlobal);
-	
+	LogString("2");
 	mScreenStateMachine->changeState(mApplicationInitialize);
+	LogString("3");
+run();
 
 }
 
@@ -100,7 +109,7 @@ ApplicationBreslin::~ApplicationBreslin()
 void ApplicationBreslin::run()
 {
 	while(true)
-    {
+	{
 		processUpdate();
 	}
 }

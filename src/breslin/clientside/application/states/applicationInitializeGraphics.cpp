@@ -1,8 +1,14 @@
 //header
-#include "applicationInitialize.h"
+#include "applicationInitializeGraphics.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
+
+//state machine
+#include "../../../statemachine/stateMachine.h"
+
+//states
+#include "applicationMain.h"
 
 //application
 #include "../applicationBreslin.h"
@@ -10,33 +16,34 @@
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-ApplicationInitialize::ApplicationInitialize(ApplicationBreslin* applicationBreslin)
+ApplicationInitializeGraphics::ApplicationInitializeGraphics(ApplicationBreslin* applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
 }
 
-ApplicationInitialize::~ApplicationInitialize()
+ApplicationInitializeGraphics::~ApplicationInitializeGraphics()
 {
 
 }
 
-void ApplicationInitialize::enter()
+void ApplicationInitializeGraphics::enter()
 {
-	mApplicationBreslin->go();
-	mApplicationBreslin->run();
-	
-	// create all buttons
 	mApplicationBreslin->createJoinButtons();
+		
+		mApplicationBreslin->mScreenStateMachine->changeState(mApplicationBreslin->mApplicationMain);
 }
 
-void ApplicationInitialize::execute()
+void ApplicationInitializeGraphics::execute()
 {
-	if (mApplicationBreslin->mGraphicsRunning)
-	{
-		//mApplicationBreslin->changeState(m
-	}
+	//if (mApplicationBreslin->mGraphicsRunning)
+	//{
+		// create all buttons
+		
+	//}
+
+
 }
 
-void ApplicationInitialize::exit()
+void ApplicationInitializeGraphics::exit()
 {
 }

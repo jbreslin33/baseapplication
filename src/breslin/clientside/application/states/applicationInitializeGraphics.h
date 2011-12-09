@@ -1,5 +1,5 @@
-#ifndef APPLICATIONINITIALIZE_H
-#define APPLICATIONINITIALIZE_H
+#ifndef APPLICATIONINITIALIZEGRAPHICS_H
+#define APPLICATIONINITIALIZEGRAPHICS_H
 
 /***************************************
 *   		INCLUDES
@@ -13,7 +13,7 @@
 
 class ApplicationBreslin;
 
-class ApplicationInitialize : public State
+class ApplicationInitializeGraphics : public State
 {
 public:
 
@@ -23,8 +23,8 @@ public:
 
 ApplicationBreslin* mApplicationBreslin;
 
-ApplicationInitialize(ApplicationBreslin* applicationBreslin);
-~ApplicationInitialize();
+ApplicationInitializeGraphics(ApplicationBreslin* applicationBreslin);
+~ApplicationInitializeGraphics();
 
 void enter  ();
 void execute();

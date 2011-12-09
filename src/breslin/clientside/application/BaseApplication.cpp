@@ -205,6 +205,14 @@ void BaseApplication::loadResources(void)
 //-------------------------------------------------------------------------------------
 void BaseApplication::go(void)
 {
+
+    if (!setup())
+        return;
+}
+//-------------------------------------------------------------------------------------
+bool BaseApplication::setup(void)
+{
+
 #ifdef _DEBUG
     mResourcesCfg = "resources_d.cfg";
     mPluginsCfg = "plugins_d.cfg";
@@ -213,12 +221,6 @@ void BaseApplication::go(void)
     mPluginsCfg = "plugins.cfg";
 #endif
 
-    if (!setup())
-        return;
-}
-//-------------------------------------------------------------------------------------
-bool BaseApplication::setup(void)
-{
     mRoot = new Ogre::Root(mPluginsCfg);
 
     setupResources();
