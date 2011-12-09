@@ -28,19 +28,13 @@ ApplicationInitializeGraphics::~ApplicationInitializeGraphics()
 
 void ApplicationInitializeGraphics::enter()
 {
+	LogString("STATE: ApplicationInitializeGraphics");
 	mApplicationBreslin->createJoinButtons();
-		
-		mApplicationBreslin->mScreenStateMachine->changeState(mApplicationBreslin->mApplicationMain);
+	mApplicationBreslin->mScreenStateMachine->changeState(mApplicationBreslin->mApplicationMain);
 }
 
 void ApplicationInitializeGraphics::execute()
 {
-	//if (mApplicationBreslin->mGraphicsRunning)
-	//{
-		// create all buttons
-		
-	//}
-
 
 }
 

@@ -25,7 +25,7 @@ ApplicationGlobal::~ApplicationGlobal()
 
 void ApplicationGlobal::enter()
 {
-
+	//LogString("STATE: ApplicationGlobal");
 }
 void ApplicationGlobal::execute()
 {

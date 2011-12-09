@@ -25,7 +25,7 @@ ApplicationPlay::~ApplicationPlay()
 
 void ApplicationPlay::enter()
 {
-
+	LogString("STATE: ApplicationPlay");
 }
 void ApplicationPlay::execute()
 {

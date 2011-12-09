@@ -28,9 +28,7 @@ ApplicationInitialize::~ApplicationInitialize()
 
 void ApplicationInitialize::enter()
 {
-	//mApplicationBreslin->setup();
-	
-	//mApplicationBreslin->run();
+	LogString("STATE: ApplicationInitialize");
 }
 
 void ApplicationInitialize::execute()
