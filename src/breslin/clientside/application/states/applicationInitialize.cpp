@@ -33,7 +33,8 @@ void ApplicationInitialize::enter()
 
 void ApplicationInitialize::execute()
 {
-	LogString("setup......................................................................................................");
+	//setup calls ogre specific graphics setup,
+	//when it returns true we can begin our graphics stuff
 	if (mApplicationBreslin->setup())
 	{
 		mApplicationBreslin->mSetup = true;

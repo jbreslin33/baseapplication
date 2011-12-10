@@ -98,7 +98,6 @@ ApplicationBreslin::~ApplicationBreslin()
 **********************************/
 void ApplicationBreslin::processUpdate()
 {
-	//temp screen state machine needs to be renamed to 
 	mStateMachine->update();
 }
 
@@ -324,59 +323,30 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 /*********************************
 		GUI
 **********************************/
-void ApplicationBreslin::initializeGui()
-{
-	if (mInitializeGui == true)
-	{
-		return;
-	}
-	else
-	{
-		//loadJoinScreen();
-		//mStateMachine->changeState(mApplicationMain);
-		//mInitializeGui = true;
-	}
-}
 
-void ApplicationBreslin::createJoinButtons()
+void ApplicationBreslin::createMainScreen()
 {
 	LogString("create buttons");
 	mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
 	mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
 }
 
-void ApplicationBreslin::loadJoinScreen()
+void ApplicationBreslin::showMainScreen()
 {
 	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
-
-	mTrayMgr->showCursor();
-}
-
-void ApplicationBreslin::hideGui()
-{
-	hideJoinScreen();
-	mTrayMgr->hideCursor();
-}
-
-void ApplicationBreslin::showGui()
-{
+	
 	mButtonGame->show();
 	mButtonTag->show();
+	
 	mTrayMgr->showCursor();
 }
 
-void ApplicationBreslin::hideJoinScreen()
+void ApplicationBreslin::hideMainScreen()
 {
-	//game
-	//mTrayMgr->removeWidgetFromTray(mButtonGame);
-    mButtonGame->hide();
-
-	//tag
-	//mTrayMgr->removeWidgetFromTray(mButtonTag);
-    mButtonTag->hide();
+	mButtonGame->hide();
+	mButtonTag->hide();	
 }
-
 
 /***************************************
 *			INPUT
@@ -391,18 +361,8 @@ void ApplicationBreslin::processInput()
 	{
 		if (mGame && mPlayingGame)
 		{
-			
-			shutdown();
+			//let's just set up variable here and let the state machine do the work
 			mPlayingGame = false;
-			
-			mSceneMgr->destroyAllEntities();
-			delete mGame;
-			//initializeGui();
-			//destroyScene();
-
-			showGui();
-
-			mStateMachine->changeState(mApplicationMain);
 		}
 		else
 		{
@@ -459,7 +419,7 @@ void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 			mGame = new Game(this);
 			mPlayingGame = true;
 		}
-		hideGui();
+		hideMainScreen();
 
 		mStateMachine->changeState(mApplicationPlay);
 
@@ -473,7 +433,7 @@ void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 			mGame = new GameTag(this);
 			mPlayingGame = true;
 		}
-		hideGui();
+		hideMainScreen();
 
 		mStateMachine->changeState(mApplicationPlay);
 	}

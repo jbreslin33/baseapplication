@@ -114,9 +114,9 @@ float getRenderTime();
 Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 
 //gui
-void initializeGui();
-void createJoinButtons();
-void loadJoinScreen();
+void createMainScreen();
+void showMainScreen();
+void hideMainScreen();
 
 //input
 OIS::Keyboard* getKeyboard() { return mKeyboard; }
@@ -146,13 +146,6 @@ bool runGraphics();
 	
 //graphics
 void        createScene          ();
-
-//gui	
-void hideGui();
-void showGui();
-
-void hideJoinScreen();
-
 
 //rendering
 virtual bool        frameRenderingQueued (const Ogre::FrameEvent& evt);

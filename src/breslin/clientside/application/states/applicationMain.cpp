@@ -25,7 +25,7 @@ ApplicationMain::~ApplicationMain()
 void ApplicationMain::enter()
 {
 	LogString("STATE: ApplicationGlobal");
-	mApplicationBreslin->loadJoinScreen();
+	mApplicationBreslin->showMainScreen();
 }
 void ApplicationMain::execute()
 {
