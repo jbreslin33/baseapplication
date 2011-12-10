@@ -32,27 +32,25 @@ void ApplicationPlay::enter()
 }
 void ApplicationPlay::execute()
 {
-	
-	
-	
-	if (mApplicationBreslin->mPlayingGame)
+	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_ESCAPE))
+	{
+		mApplicationBreslin->mPlayingGame = false;
+		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
+	}	
+	else
 	{
 		//game
 		mApplicationBreslin->mGame->run();
 	}
-	else
-	{
-		mApplicationBreslin->shutdown();
-			
-			
-		mApplicationBreslin->getSceneManager()->destroyAllEntities();
-		delete mApplicationBreslin->mGame;
-
-		mApplicationBreslin->showMainScreen();
-
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
-	}
+	
 }
+
 void ApplicationPlay::exit()
 {
+	mApplicationBreslin->shutdown();
+			
+	mApplicationBreslin->getSceneManager()->destroyAllEntities();
+	delete mApplicationBreslin->mGame;
+
+	mApplicationBreslin->showMainScreen();
 }

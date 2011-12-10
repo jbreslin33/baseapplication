@@ -333,11 +333,12 @@ void ApplicationBreslin::createMainScreen()
 
 void ApplicationBreslin::showMainScreen()
 {
+
 	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
 	
 	mButtonGame->show();
-	mButtonTag->show();
+	mButtonTag->show();	
 	
 	mTrayMgr->showCursor();
 }
@@ -359,6 +360,8 @@ void ApplicationBreslin::processInput()
     
 	if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
 	{
+		
+		/*
 		if (mGame && mPlayingGame)
 		{
 			//let's just set up variable here and let the state machine do the work
@@ -368,6 +371,7 @@ void ApplicationBreslin::processInput()
 		{
 			//mShutDown = true;
 		}
+		*/
 	}
 
 	if (mKeyboard->isKeyDown(OIS::KC_1))

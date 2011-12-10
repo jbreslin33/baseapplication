@@ -26,6 +26,11 @@ void ApplicationMain::enter()
 {
 	LogString("STATE: ApplicationGlobal");
 	mApplicationBreslin->showMainScreen();
+	
+	//why? i don't know but this is the only way to get it to show right away!
+	mApplicationBreslin->hideMainScreen();
+	mApplicationBreslin->showMainScreen();
+	
 }
 void ApplicationMain::execute()
 {
