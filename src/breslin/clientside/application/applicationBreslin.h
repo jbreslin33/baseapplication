@@ -80,19 +80,7 @@ bool mGraphicsRunning;
 bool mJoinGame;
 bool mPlayingGame;
 
-//keys
-int mKeyUp;
-int mKeyDown;
-int mKeyLeft;
-int mKeyRight;
-int mKeyCounterClockwise;
-int mKeyClockwise;
-	
-//key input
-int mKeyCurrent;         
-int mKeyLast;
-int mMillisecondsCurrent;
-int mMillisecondsLast;
+
 
 //gui
 OgreBites::Button* mButtonHit;
@@ -139,9 +127,6 @@ void readServerTick           (ByteBuffer* byteBuffer);
 
 // Network
 void runNetwork    (float msec);
-
-//input
-void processInput();
 
 //graphics
 bool runGraphics();

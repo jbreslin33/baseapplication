@@ -35,7 +35,7 @@ public:
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
-protected:
+
 //applicationBreslin
 ApplicationBreslin* mApplicationBreslin;
 
@@ -43,6 +43,20 @@ ApplicationBreslin* mApplicationBreslin;
 std::vector<Shape*>* mShapeVector;	 //all shapes in the client world
 std::vector<Shape*>* mShapeGhostVector;	 //all shapes in the client world's ghost 
 
+
+//keys
+int mKeyUp;
+int mKeyDown;
+int mKeyLeft;
+int mKeyRight;
+int mKeyCounterClockwise;
+int mKeyClockwise;
+	
+//key input
+int mKeyCurrent;   
+int mKeyLast;
+int mMillisecondsCurrent;
+int mMillisecondsLast; 
 	
 /***************************************
 *			          METHODS
@@ -53,6 +67,8 @@ public:
 virtual void   addShape       (bool b, ByteBuffer* byteBuffer);
 void   removeShape    (ByteBuffer* byteBuffer);
 Shape* getShape(int id);
+//input
+void processInput();
 
 void run();
 

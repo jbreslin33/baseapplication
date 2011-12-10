@@ -26,6 +26,20 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 
 	mShapeVector = new std::vector<Shape*>();
 	mShapeGhostVector = new std::vector<Shape*>();
+	
+	//keys
+	mKeyUp = 1;
+	mKeyDown = 2;
+	mKeyLeft = 4;
+	mKeyRight = 8;
+	mKeyCounterClockwise = 16;
+	mKeyClockwise = 32;
+	
+	//input
+	mKeyCurrent = 0;
+	mKeyLast = 0;
+	mMillisecondsCurrent = 0;
+	mMillisecondsLast = 0;
 }
 
 Game::~Game()
@@ -110,4 +124,46 @@ void Game::addShape(bool b, ByteBuffer* byteBuffer)
 	//put shape and ghost in game vectors so they can be looped and game now knows of them.
 	mShapeVector->push_back(shape);
 	mShapeGhostVector->push_back(shape->mGhost);	
+}
+
+/***************************************
+*			INPUT
+******************************************/
+
+
+void Game::processInput()
+{
+	mKeyCurrent = 0;
+    
+	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
+   {
+		mKeyCurrent |= mKeyUp;
+   }
+
+   if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_K)) // Backward
+   {
+		mKeyCurrent |= mKeyDown;
+   }
+
+	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_J)) // Left
+   {
+		mKeyCurrent |= mKeyLeft;
+   }
+
+   if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_L)) // Right
+   {
+		mKeyCurrent |= mKeyRight;
+   }
+    
+	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_Z)) // Rotate -Yaw(counter-clockwise)
+   {
+		mKeyCurrent |= mKeyCounterClockwise;
+   }
+
+   if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
+   {
+		mKeyCurrent |= mKeyClockwise;
+   }
+   
+	mMillisecondsCurrent = (int) (mApplicationBreslin->mFrameTime * 1000);
 }

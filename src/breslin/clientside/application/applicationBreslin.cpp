@@ -46,13 +46,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mRenderTime = 0.0f;
 	mRunNetworkTime = 0.0f;
 
-	//keys
-	mKeyUp = 1;
-	mKeyDown = 2;
-	mKeyLeft = 4;
-	mKeyRight = 8;
-	mKeyCounterClockwise = 16;
-	mKeyClockwise = 32;
+
 
 	//initilize
 	mSetup = false;
@@ -64,11 +58,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//game
 	mGame = NULL;
 
-	//input
-	mKeyCurrent = 0;
-	mKeyLast = 0;
-	mMillisecondsCurrent = 0;
-	mMillisecondsLast = 0;
+
 
 	//sequence
 	mOutgoingSequence		= 1;
@@ -187,6 +177,8 @@ void ApplicationBreslin::readPackets()
 
 void ApplicationBreslin::sendCommand()
 {
+	if (mGame)
+{
 	//create byteBuffer
 	ByteBuffer* byteBuffer = new ByteBuffer();
 
@@ -201,38 +193,41 @@ void ApplicationBreslin::sendCommand()
 	// Build delta-compressed move command
 	int flags = 0;
 
+
+
 	// Check what needs to be updated
-	if(mKeyLast != mKeyCurrent)
+	if(mGame->mKeyLast != mGame->mKeyCurrent)
 	{
 		flags |= mCommandKey;
 	}
 
-	if(mMillisecondsLast != mMillisecondsCurrent)
+	if(mGame->mMillisecondsLast != mGame->mMillisecondsCurrent)
 	{
 		flags |= mCommandMilliseconds;
 	}
-	
+
 	// Add to the message
 	byteBuffer->WriteByte(flags);
 
 	if(flags & mCommandKey)
 	{
 		//WRITE: key
-		byteBuffer->WriteByte(mKeyCurrent);
+		byteBuffer->WriteByte(mGame->mKeyCurrent);
 	}
 
 	if(flags & mCommandMilliseconds)
 	{
 		//WRITE: milliseconds
-		byteBuffer->WriteByte(mMillisecondsCurrent);
+		byteBuffer->WriteByte(mGame->mMillisecondsCurrent);
 	}
 	
 	//set 'last' commands for diff
-	mKeyLast = mKeyCurrent;
-	mMillisecondsLast = mMillisecondsCurrent;
+	mGame->mKeyLast = mGame->mKeyCurrent;
+	mGame->mMillisecondsLast = mGame->mMillisecondsCurrent;
 
 	// Send the packet
 	mNetwork->send(byteBuffer);
+}
 }
 
 void ApplicationBreslin::sendConnect()
@@ -361,47 +356,7 @@ void ApplicationBreslin::hideMainScreen()
 	mButtonExit->hide();
 }
 
-/***************************************
-*			INPUT
-******************************************/
 
-
-void ApplicationBreslin::processInput()
-{
-	mKeyCurrent = 0;
-    
-	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
-   {
-		mKeyCurrent |= mKeyUp;
-   }
-
-   if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
-   {
-		mKeyCurrent |= mKeyDown;
-   }
-
-	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left
-   {
-		mKeyCurrent |= mKeyLeft;
-   }
-
-   if (mKeyboard->isKeyDown(OIS::KC_L)) // Right
-   {
-		mKeyCurrent |= mKeyRight;
-   }
-    
-	if (mKeyboard->isKeyDown(OIS::KC_Z)) // Rotate -Yaw(counter-clockwise)
-   {
-		mKeyCurrent |= mKeyCounterClockwise;
-   }
-
-   if (mKeyboard->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
-   {
-		mKeyCurrent |= mKeyClockwise;
-   }
-   
-	mMillisecondsCurrent = (int) (mFrameTime * 1000);
-}
 
 void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 {
