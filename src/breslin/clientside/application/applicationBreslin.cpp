@@ -358,61 +358,43 @@ void ApplicationBreslin::processInput()
 {
 	mKeyCurrent = 0;
     
-	if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
-	{
-		
-		/*
-		if (mGame && mPlayingGame)
-		{
-			//let's just set up variable here and let the state machine do the work
-			mPlayingGame = false;
-		}
-		else
-		{
-			//mShutDown = true;
-		}
-		*/
-	}
-
-	if (mKeyboard->isKeyDown(OIS::KC_1))
-	{
-		
-	}
-
 	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
-    {
+   {
 		mKeyCurrent |= mKeyUp;
-    }
+   }
 
-    if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
-    {
+   if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
+   {
 		mKeyCurrent |= mKeyDown;
-    }
+   }
 
 	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left
-    {
+   {
 		mKeyCurrent |= mKeyLeft;
-    }
+   }
 
-    if (mKeyboard->isKeyDown(OIS::KC_L)) // Right
-    {
+   if (mKeyboard->isKeyDown(OIS::KC_L)) // Right
+   {
 		mKeyCurrent |= mKeyRight;
-    }
+   }
     
 	if (mKeyboard->isKeyDown(OIS::KC_Z)) // Rotate -Yaw(counter-clockwise)
-    {
+   {
 		mKeyCurrent |= mKeyCounterClockwise;
-    }
+   }
 
-    if (mKeyboard->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
-    {
+   if (mKeyboard->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
+   {
 		mKeyCurrent |= mKeyClockwise;
-    }
+   }
+   
 	mMillisecondsCurrent = (int) (mFrameTime * 1000);
 }
 
 void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 {
+	mButtonHit = button;
+	/*
 	//Game
 	if (button == mButtonGame)
 	{
@@ -441,7 +423,7 @@ void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 
 		mStateMachine->changeState(mApplicationPlay);
 	}
-
+*/
 }
 
 bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )

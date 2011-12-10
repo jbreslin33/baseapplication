@@ -8,6 +8,12 @@
 //application
 #include "../applicationBreslin.h"
 
+//game
+#include "../../game/game.h"
+
+//state machine
+#include "../../../statemachine/stateMachine.h"
+
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
@@ -34,7 +40,22 @@ void ApplicationMain::enter()
 }
 void ApplicationMain::execute()
 {
+	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonGame)
+	{
+		mApplicationBreslin->mButtonHit = NULL;	
+		mApplicationBreslin->mJoinGame = true;
+		if (mApplicationBreslin->mJoinGame && !mApplicationBreslin->mPlayingGame)
+		{
+			mApplicationBreslin->sendConnect();
+			mApplicationBreslin->mGame = new Game(mApplicationBreslin);
+			mApplicationBreslin->mPlayingGame = true;
+		}
+		mApplicationBreslin->hideMainScreen();
 
+		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);			
+	}
+
+	
 }
 void ApplicationMain::exit()
 {

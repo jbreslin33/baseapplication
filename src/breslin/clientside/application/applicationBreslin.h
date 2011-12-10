@@ -95,6 +95,7 @@ int mMillisecondsCurrent;
 int mMillisecondsLast;
 
 //gui
+OgreBites::Button *mButtonHit;
 OgreBites::Button* mButtonGame;
 OgreBites::Button* mButtonTag;
 
