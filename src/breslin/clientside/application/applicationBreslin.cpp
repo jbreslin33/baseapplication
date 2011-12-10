@@ -91,6 +91,14 @@ ApplicationBreslin::~ApplicationBreslin()
 {
 	mNetwork->close();
 	delete mNetwork;
+	
+	delete mStateMachine;
+	delete mApplicationInitialize;
+	delete mApplicationInitializeGraphics;
+	delete mApplicationMain;
+	delete mApplicationPlay;	
+	
+	delete mGame;
 }
 
 /*********************************
@@ -329,6 +337,7 @@ void ApplicationBreslin::createMainScreen()
 	LogString("create buttons");
 	mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
 	mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
+	mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
 void ApplicationBreslin::showMainScreen()
@@ -336,9 +345,11 @@ void ApplicationBreslin::showMainScreen()
 
 	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
 	mButtonGame->show();
 	mButtonTag->show();	
+	mButtonExit->show();
 	
 	mTrayMgr->showCursor();
 }
@@ -347,6 +358,7 @@ void ApplicationBreslin::hideMainScreen()
 {
 	mButtonGame->hide();
 	mButtonTag->hide();	
+	mButtonExit->hide();
 }
 
 /***************************************
@@ -394,36 +406,6 @@ void ApplicationBreslin::processInput()
 void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 {
 	mButtonHit = button;
-	/*
-	//Game
-	if (button == mButtonGame)
-	{
-		mJoinGame = true;
-		if (mJoinGame && !mPlayingGame)
-		{
-			sendConnect();
-			mGame = new Game(this);
-			mPlayingGame = true;
-		}
-		hideMainScreen();
-
-		mStateMachine->changeState(mApplicationPlay);
-
-	}
-	if (button == mButtonTag)
-	{
-		mJoinGame = true;
-		if (mJoinGame && !mPlayingGame)
-		{
-			sendConnect();
-			mGame = new GameTag(this);
-			mPlayingGame = true;
-		}
-		hideMainScreen();
-
-		mStateMachine->changeState(mApplicationPlay);
-	}
-*/
 }
 
 bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )

@@ -86,8 +86,12 @@ protected:
     OgreBites::SdkCameraMan* mCameraMan;     // basic camera controller
     OgreBites::ParamsPanel* mDetailsPanel;   // sample details panel
     bool mCursorWasVisible;                  // was cursor visible before dialog appeared
+    
+    public:
     bool mShutDown;
 
+	 protected:
+	 
     //OIS Input devices
     OIS::InputManager* mInputManager;
     OIS::Mouse*    mMouse;

@@ -10,6 +10,7 @@
 
 //game
 #include "../../game/game.h"
+#include "../../game/gameTag.h"
 
 //state machine
 #include "../../../statemachine/stateMachine.h"
@@ -26,7 +27,6 @@ ApplicationMain::~ApplicationMain()
 {
 
 }
-
 
 void ApplicationMain::enter()
 {
@@ -55,6 +55,34 @@ void ApplicationMain::execute()
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);			
 	}
 
+	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonTag)
+	{
+		mApplicationBreslin->mButtonHit = NULL;	
+		mApplicationBreslin->mJoinGame = true;
+		if (mApplicationBreslin->mJoinGame && !mApplicationBreslin->mPlayingGame)
+		{
+			mApplicationBreslin->sendConnect();
+			mApplicationBreslin->mGame = new GameTag(mApplicationBreslin);
+			mApplicationBreslin->mPlayingGame = true;
+		}
+		mApplicationBreslin->hideMainScreen();
+
+		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);			
+	}
+	
+	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
+	{
+		mApplicationBreslin->mButtonHit = NULL;	
+		
+		
+		//if (mApplicationBreslin->mJoinGame && !mApplicationBreslin->mPlayingGame)
+		//{
+			//mApplicationBreslin->sendDisconnect();
+		//}
+		delete mApplicationBreslin;
+		//mApplicationBreslin->mShutDown = true;		
+	}	
+	
 	
 }
 void ApplicationMain::exit()
