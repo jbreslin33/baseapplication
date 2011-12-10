@@ -24,6 +24,8 @@ reset these objects need to be destroyed.
 class ApplicationBreslin;
 class ByteBuffer;
 class Shape;
+class StateMachine;
+class State;
 
 class Game 
 {
@@ -38,6 +40,14 @@ public:
 
 //applicationBreslin
 ApplicationBreslin* mApplicationBreslin;
+
+
+StateMachine* mStateMachine;
+
+State* mGameGlobal;
+State* mGameInitialize;
+State* mGamePlay;
+State* mGamePause;
 
 //Shapes
 std::vector<Shape*>* mShapeVector;	 //all shapes in the client world

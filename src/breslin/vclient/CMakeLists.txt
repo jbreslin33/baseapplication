@@ -131,7 +131,11 @@ set(HDRS
 	#game	
 	../clientside/game/game.h
 	../clientside/game/gameTag.h
-	
+	../clientside/game/states/gameGlobal.h
+	../clientside/game/states/gameInitialize.h
+	../clientside/game/states/gamePlay.h
+	../clientside/game/states/gamePause.h
+
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
 	../clientside/tdreamsock/dreamWinSock.h
@@ -190,6 +194,10 @@ set(SRCS
 	#game	
 	../clientside/game/game.cpp
 	../clientside/game/gameTag.cpp
+	../clientside/game/states/gameGlobal.cpp
+	../clientside/game/states/gameInitialize.cpp
+	../clientside/game/states/gamePlay.cpp
+	../clientside/game/states/gamePause.cpp
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp
@@ -263,6 +271,10 @@ set(HDRS
 	#game
 	../clientside/game/game.h
 	../clientside/game/gameTag.h
+	../clientside/game/states/gameGlobal.h
+	../clientside/game/states/gameInitialize.h
+	../clientside/game/states/gamePlay.h
+	../clientside/game/states/gamePause.h
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
@@ -321,6 +333,10 @@ set(SRCS
 	#game	
 	../clientside/game/game.cpp
 	../clientside/game/gameTag.cpp
+	../clientside/game/states/gameGlobal.cpp
+	../clientside/game/states/gameInitialize.cpp
+	../clientside/game/states/gamePlay.cpp
+	../clientside/game/states/gamePause.cpp
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp

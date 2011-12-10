@@ -1,14 +1,14 @@
 //header
-#include "applicationPlay.h"
+#include "gameInitialize.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
 
 //application
-#include "../applicationBreslin.h"
+#include "../../application/applicationBreslin.h"
 
 //game
-#include "../../game/game.h"
+#include "../game.h"
 
 //state machine
 #include "../../../statemachine/stateMachine.h"
@@ -16,44 +16,26 @@
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-ApplicationPlay::ApplicationPlay(ApplicationBreslin* applicationBreslin)
+GameInitialize::GameInitialize(Game* game)
 {
-	mApplicationBreslin = applicationBreslin;
+	mGame = game;
 }
 
-ApplicationPlay::~ApplicationPlay()
+GameInitialize::~GameInitialize()
 {
 
 }
 
-void ApplicationPlay::enter()
+void GameInitialize::enter()
 {
-	LogString("STATE: ApplicationPlay");
+
 }
-void ApplicationPlay::execute()
+void GameInitialize::execute()
 {
-	//input
-	mApplicationBreslin->mGame->processInput();	
-	
-	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_ESCAPE))
-	{
-		mApplicationBreslin->mPlayingGame = false;
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
-	}	
-	else
-	{
-		//game
-		mApplicationBreslin->mGame->run();
-	}
 	
 }
 
-void ApplicationPlay::exit()
+void GameInitialize::exit()
 {
-	mApplicationBreslin->shutdown();
-			
-	mApplicationBreslin->getSceneManager()->destroyAllEntities();
-	delete mApplicationBreslin->mGame;
-
-	mApplicationBreslin->showMainScreen();
+	
 }

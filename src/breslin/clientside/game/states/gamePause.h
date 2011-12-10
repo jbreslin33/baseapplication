@@ -1,5 +1,5 @@
-#ifndef PLAYSCREEN_H
-#define PLAYSCREEN_H
+#ifndef GAMEPAUSE_H
+#define GAMEPAUSE_H
 
 /***************************************
 *   		INCLUDES
@@ -11,9 +11,9 @@
 *   		FORWARD DECLARATIONS
 ***************************************/
 
-class ApplicationBreslin;
+class Game;
 
-class ApplicationPlay : public State
+class GamePause : public State
 {
 public:
 
@@ -21,10 +21,10 @@ public:
 *   		MEMBER VARIABLES
 ***************************************/
 
-ApplicationBreslin* mApplicationBreslin;
+Game* mGame;
 
-ApplicationPlay(ApplicationBreslin* applicationBreslin);
-~ApplicationPlay();
+GamePause(Game* game);
+~GamePause();
 
 void enter  ();
 void execute();

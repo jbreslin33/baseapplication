@@ -17,6 +17,14 @@
 #include "../ability/rotation/abilityRotation.h"
 #include "../ability/move/abilityMove.h"
 
+//state machine
+#include "../../statemachine/stateMachine.h"
+#include "states/gameGlobal.h"
+#include "states/gameInitialize.h"
+#include "states/gamePlay.h"
+#include "states/gamePause.h"
+
+
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
@@ -40,6 +48,15 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 	mKeyLast = 0;
 	mMillisecondsCurrent = 0;
 	mMillisecondsLast = 0;
+
+	mStateMachine = new StateMachine();
+	mGameGlobal = new GameGlobal(this);
+	mGameInitialize = new GameInitialize(this);
+	mGamePlay = new GamePlay(this);
+	mGamePause = new GamePause(this);
+	
+	mStateMachine->setGlobalState(mGameGlobal);
+	mStateMachine->changeState(mGamePlay);
 }
 
 Game::~Game()
@@ -59,6 +76,8 @@ Game::~Game()
 **********************************/
 void Game::run()
 {
+	mStateMachine->update();
+
 	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
 		mShapeVector->at(i)->interpolateTick(mApplicationBreslin->getRenderTime());

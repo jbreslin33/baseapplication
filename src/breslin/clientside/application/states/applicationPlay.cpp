@@ -32,8 +32,6 @@ void ApplicationPlay::enter()
 }
 void ApplicationPlay::execute()
 {
-	//input
-	mApplicationBreslin->mGame->processInput();	
 	
 	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_ESCAPE))
 	{

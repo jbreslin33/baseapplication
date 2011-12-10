@@ -1,45 +1,38 @@
 //header
-#include "applicationGlobal.h"
+#include "gameGlobal.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
 
 //application
-#include "../applicationBreslin.h"
+#include "../../application/applicationBreslin.h"
 
 //game
-#include "../../game/game.h"
+#include "../game.h"
 
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-ApplicationGlobal::ApplicationGlobal(ApplicationBreslin* applicationBreslin)
+
+GameGlobal::GameGlobal(Game* game)
 {
-	mApplicationBreslin = applicationBreslin;
+	mGame = game;
 }
 
-ApplicationGlobal::~ApplicationGlobal()
+GameGlobal::~GameGlobal()
 {
 
 }
 
-void ApplicationGlobal::enter()
+void GameGlobal::enter()
 {
-	//LogString("STATE: ApplicationGlobal");
-}
-void ApplicationGlobal::execute()
-{
-	if (mApplicationBreslin->mSetup)
-	{
-		//network
-		mApplicationBreslin->runNetwork(mApplicationBreslin->getRenderTime() * 1000.0f);
-
-		//graphics
-		mApplicationBreslin->runGraphics();
-	}
 	
-
 }
-void ApplicationGlobal::exit()
+void GameGlobal::execute()
 {
+	
+}
+void GameGlobal::exit()
+{
+
 }

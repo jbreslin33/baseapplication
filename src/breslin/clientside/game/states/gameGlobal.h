@@ -1,5 +1,5 @@
-#ifndef SCREENGLOBAL_H
-#define SCREENGLOBAL_H
+#ifndef GAMEGLOBAL_H
+#define GAMEGLOBAL_H
 
 /***************************************
 *   		INCLUDES
@@ -11,9 +11,9 @@
 *   		FORWARD DECLARATIONS
 ***************************************/
 
-class ApplicationBreslin;
+class Game;
 
-class ApplicationGlobal : public State
+class GameGlobal : public State
 {
 public:
 
@@ -21,10 +21,10 @@ public:
 *   		MEMBER VARIABLES
 ***************************************/
 
-ApplicationBreslin* mApplicationBreslin;
+Game* mGame;
 
-ApplicationGlobal(ApplicationBreslin* applicationBreslin);
-~ApplicationGlobal();
+GameGlobal(Game* game);
+~GameGlobal();
 
 void enter  ();
 void execute();
