@@ -73,14 +73,13 @@ void ApplicationMain::execute()
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
 		mApplicationBreslin->mButtonHit = NULL;	
+				
+		mApplicationBreslin->shutdown();
 		
+		mApplicationBreslin->mShutDown = true;			
 		
-		//if (mApplicationBreslin->mJoinGame && !mApplicationBreslin->mPlayingGame)
-		//{
-			//mApplicationBreslin->sendDisconnect();
-		//}
 		delete mApplicationBreslin;
-		//mApplicationBreslin->mShutDown = true;		
+			
 	}	
 	
 	
