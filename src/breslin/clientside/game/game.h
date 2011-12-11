@@ -37,6 +37,9 @@ public:
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
+// constants
+static const char mCommandKey          = 1;
+static const char mCommandMilliseconds = 2;
 
 //applicationBreslin
 ApplicationBreslin* mApplicationBreslin;
@@ -67,7 +70,9 @@ int mKeyCurrent;
 int mKeyLast;
 int mMillisecondsCurrent;
 int mMillisecondsLast; 
-	
+
+signed short	mOutgoingSequence;
+
 /***************************************
 *			          METHODS
 ***************************************/
@@ -77,6 +82,8 @@ public:
 virtual void   addShape       (bool b, ByteBuffer* byteBuffer);
 void   removeShape    (ByteBuffer* byteBuffer);
 Shape* getShape(int id);
+void sendCommand();
+
 //input
 void processInput();
 

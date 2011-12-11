@@ -58,11 +58,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//game
 	mGame = NULL;
 
-
-
-	//sequence
-	mOutgoingSequence		= 1;
-
 	//state machine (Menus)
 	mStateMachine = new StateMachine();
 
@@ -124,7 +119,8 @@ void ApplicationBreslin::runNetwork(float msec)
 	// Framerate is too high
 	if(mRunNetworkTime > (1000 / 60))
 	{
-		sendCommand();
+		if (mGame)
+			mGame->sendCommand();
 		mFrameTime = mRunNetworkTime / 1000.0f;
 		mRunNetworkTime = 0.0f;
 	}
@@ -173,61 +169,6 @@ void ApplicationBreslin::readPackets()
 			break;
 		}
 	}
-}
-
-void ApplicationBreslin::sendCommand()
-{
-	if (mGame)
-{
-	//create byteBuffer
-	ByteBuffer* byteBuffer = new ByteBuffer();
-
-	//WRITE: type
-	byteBuffer->WriteByte(mMessageFrame);					
-	
-	//WRITE: sequence
-	byteBuffer->WriteShort(mOutgoingSequence);
-	
-	mOutgoingSequence++; //increase for next time...
-
-	// Build delta-compressed move command
-	int flags = 0;
-
-
-
-	// Check what needs to be updated
-	if(mGame->mKeyLast != mGame->mKeyCurrent)
-	{
-		flags |= mCommandKey;
-	}
-
-	if(mGame->mMillisecondsLast != mGame->mMillisecondsCurrent)
-	{
-		flags |= mCommandMilliseconds;
-	}
-
-	// Add to the message
-	byteBuffer->WriteByte(flags);
-
-	if(flags & mCommandKey)
-	{
-		//WRITE: key
-		byteBuffer->WriteByte(mGame->mKeyCurrent);
-	}
-
-	if(flags & mCommandMilliseconds)
-	{
-		//WRITE: milliseconds
-		byteBuffer->WriteByte(mGame->mMillisecondsCurrent);
-	}
-	
-	//set 'last' commands for diff
-	mGame->mKeyLast = mGame->mKeyCurrent;
-	mGame->mMillisecondsLast = mGame->mMillisecondsCurrent;
-
-	// Send the packet
-	mNetwork->send(byteBuffer);
-}
 }
 
 void ApplicationBreslin::sendConnect()

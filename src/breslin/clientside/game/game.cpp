@@ -7,6 +7,9 @@
 //applicationBreslin
 #include "../application/applicationBreslin.h"
 
+//network
+#include "../network/network.h"
+
 //shape
 #include "../shape/shape.h"
 
@@ -48,6 +51,9 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 	mKeyLast = 0;
 	mMillisecondsCurrent = 0;
 	mMillisecondsLast = 0;
+
+	//sequence
+        mOutgoingSequence               = 1;
 
 	mStateMachine = new StateMachine();
 	mGameGlobal = new GameGlobal(this);
@@ -122,6 +128,60 @@ Shape* Game::getShape(int id)
 		return shape;
 	}
 }
+
+void Game::sendCommand()
+{
+        //create byteBuffer
+        ByteBuffer* byteBuffer = new ByteBuffer();
+        
+	//WRITE: type
+        byteBuffer->WriteByte(mApplicationBreslin->mMessageFrame);                                   
+        //WRITE: sequence
+        byteBuffer->WriteShort(mOutgoingSequence);
+        
+        mOutgoingSequence++; //increase for next time...
+
+        // Build delta-compressed move command
+        int flags = 0;
+
+
+
+        // Check what needs to be updated
+        if(mKeyLast != mKeyCurrent)
+        {
+                flags |= mCommandKey;
+        }
+
+        if(mMillisecondsLast != mMillisecondsCurrent)
+        {
+                flags |= mCommandMilliseconds;
+        }
+
+        // Add to the message
+        byteBuffer->WriteByte(flags);
+
+        if(flags & mCommandKey)
+        {
+                //WRITE: key
+                byteBuffer->WriteByte(mKeyCurrent);
+        }
+
+        if(flags & mCommandMilliseconds)
+        {
+                //WRITE: milliseconds
+                byteBuffer->WriteByte(mMillisecondsCurrent);
+        }
+        
+        //set 'last' commands for diff
+        mKeyLast = mKeyCurrent;
+        mMillisecondsLast = mMillisecondsCurrent;
+
+        // Send the packet
+        mApplicationBreslin->mNetwork->send(byteBuffer);
+}
+
+
+
 
 /*************************************************
 *

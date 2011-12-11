@@ -246,7 +246,7 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 	}
 
 	//milliseconds
-	if (flags & mApplicationBreslin->mCommandMilliseconds)
+	if (flags & mApplicationBreslin->mGame->mCommandMilliseconds)
 	{
 		mServerCommandCurrent->mMilliseconds = mes->ReadByte();
 		mCommandToRunOnShape->mMilliseconds = mServerCommandCurrent->mMilliseconds;

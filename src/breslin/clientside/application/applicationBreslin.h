@@ -32,9 +32,6 @@ public:
 
 public:
 
-//constants
-static const char mCommandMilliseconds = 2;
-
 //private:
 
 //state machine
@@ -47,8 +44,6 @@ State* mApplicationMain;
 State* mApplicationPlay;
 
 //constants
-static const char mCommandKey          = 1;
-
 static const char mMessageFrame = 1;
 
 static const char mMessageConnect     = -101;
@@ -65,8 +60,6 @@ Network*     mNetwork;
 //game
 Game* mGame;
 
-//sequences 
-signed short	mOutgoingSequence;		
 
 //time
 float mFrameTime;
@@ -141,8 +134,6 @@ virtual bool        frameRenderingQueued (const Ogre::FrameEvent& evt);
 void buttonHit             (OgreBites::Button *button);
 bool mouseMoved            ( const OIS::MouseEvent &arg );
 
-//command
-void sendCommand   ();
 };
 
 #endif
