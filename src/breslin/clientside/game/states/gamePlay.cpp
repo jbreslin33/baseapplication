@@ -21,6 +21,8 @@ GamePlay::GamePlay(Game* game)
 	mGame = game;
 }
 
+
+
 GamePlay::~GamePlay()
 {
 
@@ -32,8 +34,13 @@ void GamePlay::enter()
 }
 void GamePlay::execute()
 {
+
 	//input
 	mGame->processInput();	
+	
+	//network
+        mGame->runNetwork(mGame->mApplicationBreslin->getRenderTime() * 1000.0f);
+
 }
 
 void GamePlay::exit()

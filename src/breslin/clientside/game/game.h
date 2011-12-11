@@ -41,6 +41,15 @@ public:
 static const char mCommandKey          = 1;
 static const char mCommandMilliseconds = 2;
 
+static const char mMessageFrame = 1;
+
+static const char mMessageConnect     = -101;
+static const char mMessageDisconnect  = -102;
+static const char mMessageAddShape    = -103;
+static const char mMessageRemoveShape = -104;
+
+static const char mMessageServerExit = 3;
+
 //applicationBreslin
 ApplicationBreslin* mApplicationBreslin;
 
@@ -83,6 +92,11 @@ virtual void   addShape       (bool b, ByteBuffer* byteBuffer);
 void   removeShape    (ByteBuffer* byteBuffer);
 Shape* getShape(int id);
 void sendCommand();
+
+//packets
+void runNetwork(float msec);
+void readPackets();
+void readServerTick(ByteBuffer* byteBuffer);
 
 //input
 void processInput();

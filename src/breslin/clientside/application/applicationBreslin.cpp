@@ -110,66 +110,6 @@ void ApplicationBreslin::shutdown()
 /*********************************
 		NETWORK
 **********************************/
-void ApplicationBreslin::runNetwork(float msec)
-{
-	mRunNetworkTime += msec;
-
-	readPackets();
-	
-	// Framerate is too high
-	if(mRunNetworkTime > (1000 / 60))
-	{
-		if (mGame)
-			mGame->sendCommand();
-		mFrameTime = mRunNetworkTime / 1000.0f;
-		mRunNetworkTime = 0.0f;
-	}
-}
-
-void ApplicationBreslin::readPackets()
-{
-	int type = 0;
-
-	ByteBuffer* byteBuffer = new ByteBuffer();
-
-	while(mNetwork->checkForByteBuffer(byteBuffer))
-	{
-		byteBuffer->BeginReading();
-
-		type = byteBuffer->ReadByte();
-
-		switch(type)
-		{
-			case mMessageConnect:
-			break;
-
-			case mMessageAddShape:
-				if (mGame && mPlayingGame)
-				{
-					mGame->addShape(true,byteBuffer);
-				}
-			break;
-
-			case mMessageRemoveShape:
-				if (mGame && mPlayingGame)
-				{
-					mGame->removeShape(byteBuffer);
-				}
-			break;
-
-			case mMessageFrame:
-				if (mGame && mPlayingGame)
-				{
-					readServerTick(byteBuffer);
-				}
-			break;
-
-			case mMessageServerExit:
-				shutdown();
-			break;
-		}
-	}
-}
 
 void ApplicationBreslin::sendConnect()
 {
@@ -178,37 +118,6 @@ void ApplicationBreslin::sendConnect()
 	mNetwork->send(byteBuffer);
 }
 
-
-void ApplicationBreslin::readServerTick(ByteBuffer* byteBuffer)
-{
-	// Skip sequences
-	short sequence = byteBuffer->ReadShort();
-
-	while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
-	{
-		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
-
-		int id = byteBuffer->ReadByte();
-
-		Shape* shape = NULL;
-		if (mGame)
-		{
-			shape = mGame->getShape(id);
-		}
-		else
-		{
-			LogString("GAME IS NULL");
-		}
-		if (shape)
-		{
-			shape->processDeltaByteBuffer(byteBuffer);
-		}
-		else
-		{
-			//LogString("INVALID SHAPE ID");
-		}	
-	}
-}
 
 
 /*********************************

@@ -129,6 +129,83 @@ Shape* Game::getShape(int id)
 	}
 }
 
+void Game::runNetwork(float msec)
+{
+        mApplicationBreslin->mRunNetworkTime += msec;
+
+        readPackets();
+
+        // Framerate is too high
+        if(mApplicationBreslin->mRunNetworkTime > (1000 / 60))
+        {
+                sendCommand();
+                mApplicationBreslin->mFrameTime = mApplicationBreslin->mRunNetworkTime / 1000.0f;
+                mApplicationBreslin->mRunNetworkTime = 0.0f;
+        }
+}
+
+
+void Game::readPackets()
+{
+        int type = 0;
+
+        ByteBuffer* byteBuffer = new ByteBuffer();
+
+        while(mApplicationBreslin->mNetwork->checkForByteBuffer(byteBuffer))
+        {
+                byteBuffer->BeginReading();
+
+                type = byteBuffer->ReadByte();
+
+                switch(type)
+                {
+                        case mMessageConnect:
+                        break;
+
+                        case mMessageAddShape:
+                        	addShape(true,byteBuffer);
+                        break;
+
+                        case mMessageRemoveShape:
+                                removeShape(byteBuffer);
+                        break;
+
+                        case mMessageFrame:
+                                readServerTick(byteBuffer);
+                        break;
+
+                        case mMessageServerExit:
+                                //shutdown();
+                        break;
+                }
+        }
+}
+
+void Game::readServerTick(ByteBuffer* byteBuffer)
+{
+        // Skip sequences
+        short sequence = byteBuffer->ReadShort();
+
+        while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
+        {
+                //mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
+
+                int id = byteBuffer->ReadByte();
+
+                Shape* shape = NULL;
+                shape = getShape(id);
+                
+		if (shape)
+                {
+                        shape->processDeltaByteBuffer(byteBuffer);
+                }
+                else
+                {
+                        //LogString("INVALID SHAPE ID");
+                }
+        }
+}
+
 void Game::sendCommand()
 {
         //create byteBuffer
