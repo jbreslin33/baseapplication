@@ -212,7 +212,7 @@ void Game::sendCommand()
         ByteBuffer* byteBuffer = new ByteBuffer();
         
 	//WRITE: type
-        byteBuffer->WriteByte(mApplicationBreslin->mMessageFrame);                                   
+        byteBuffer->WriteByte(mMessageFrame);                                   
         //WRITE: sequence
         byteBuffer->WriteShort(mOutgoingSequence);
         

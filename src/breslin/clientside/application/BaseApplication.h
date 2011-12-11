@@ -41,8 +41,6 @@ public:
     BaseApplication(void);
     virtual ~BaseApplication(void);
 
-    virtual void go(void);
-
     virtual bool setup();
 protected:
     

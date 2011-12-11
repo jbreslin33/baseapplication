@@ -203,13 +203,7 @@ void BaseApplication::loadResources(void)
     Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 //-------------------------------------------------------------------------------------
-void BaseApplication::go(void)
-{
 
-    if (!setup())
-        return;
-}
-//-------------------------------------------------------------------------------------
 bool BaseApplication::setup(void)
 {
 

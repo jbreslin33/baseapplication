@@ -32,19 +32,14 @@ void ApplicationMain::enter()
 {
 	LogString("STATE: ApplicationGlobal");
 	mApplicationBreslin->showMainScreen();
-	
-	//why? i don't know but this is the only way to get it to show right away!
-	mApplicationBreslin->hideMainScreen();
-	mApplicationBreslin->showMainScreen();
-	
 }
+
 void ApplicationMain::execute()
 {
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonGame)
 	{
 		mApplicationBreslin->mButtonHit = NULL;	
-		mApplicationBreslin->mJoinGame = true;
-		if (mApplicationBreslin->mJoinGame && !mApplicationBreslin->mPlayingGame)
+		if (!mApplicationBreslin->mPlayingGame)
 		{
 			mApplicationBreslin->sendConnect();
 			mApplicationBreslin->mGame = new Game(mApplicationBreslin);
@@ -58,8 +53,7 @@ void ApplicationMain::execute()
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonTag)
 	{
 		mApplicationBreslin->mButtonHit = NULL;	
-		mApplicationBreslin->mJoinGame = true;
-		if (mApplicationBreslin->mJoinGame && !mApplicationBreslin->mPlayingGame)
+		if (!mApplicationBreslin->mPlayingGame)
 		{
 			mApplicationBreslin->sendConnect();
 			mApplicationBreslin->mGame = new GameTag(mApplicationBreslin);

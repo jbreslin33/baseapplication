@@ -50,8 +50,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//initilize
 	mSetup = false;
-	mInitializeGui = false;
-	mGraphicsRunning = false;
 	mJoinGame    = false;
 	mPlayingGame = false;
 
@@ -152,12 +150,10 @@ bool ApplicationBreslin::runGraphics()
 	WindowEventUtilities::messagePump();
 	if (!mRoot->renderOneFrame())
 	{
-		mGraphicsRunning = true;
 		return false;
 	}
 	else
 	{
-		mGraphicsRunning = false;
 		return true;
 	}
 

@@ -46,19 +46,15 @@ State* mApplicationPlay;
 //constants
 static const char mMessageServerExit = 3;
 static const char mMessageKeepAlive = 12;
-static const char mMessageFrame = 1;
 
 static const char mMessageConnect     = -101;
 static const char mMessageDisconnect  = -102;
-static const char mMessageAddShape    = -103;
-static const char mMessageRemoveShape = -104;
 
 //Network
 Network*     mNetwork;
 
 //game
 Game* mGame;
-
 
 //time
 float mFrameTime;
@@ -67,12 +63,8 @@ float mRunNetworkTime;
 
 //initialize
 bool mSetup;
-bool mInitializeGui;
-bool mGraphicsRunning;
 bool mJoinGame;
 bool mPlayingGame;
-
-
 
 //gui
 OgreBites::Button* mButtonHit;
@@ -113,9 +105,6 @@ void shutdown();
 
 //Ticks
 void readServerTick           (ByteBuffer* byteBuffer);
-
-// Network
-void runNetwork    (float msec);
 
 //graphics
 bool runGraphics();
