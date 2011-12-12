@@ -12,9 +12,6 @@
 *   		FORWARD DECLARATIONS
 ***************************************/
 class Game;
-class ByteBuffer;
-class Shape;
-class Time;
 class Network;
 class StateMachine;
 class State;
@@ -60,7 +57,6 @@ Game* mGame;
 
 //initialize
 bool mSetup;
-bool mJoinGame;
 bool mPlayingGame;
 
 //gui

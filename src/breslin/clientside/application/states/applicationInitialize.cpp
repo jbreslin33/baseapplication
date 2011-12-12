@@ -38,10 +38,12 @@ void ApplicationInitialize::execute()
 	if (mApplicationBreslin->setup())
 	{
 		mApplicationBreslin->mSetup = true;
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationInitializeGraphics);
+		mApplicationBreslin->createMainScreen();
+        	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
 	}	
 }
 
 void ApplicationInitialize::exit()
 {
+
 }

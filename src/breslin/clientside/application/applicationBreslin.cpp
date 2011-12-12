@@ -43,7 +43,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//initilize
 	mSetup = false;
-	mJoinGame    = false;
 	mPlayingGame = false;
 
 	//time
@@ -207,7 +206,7 @@ void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 
 bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 {
-    if (mTrayMgr->injectMouseMove(arg))
+	if (mTrayMgr->injectMouseMove(arg))
 	{
 		return true;
 	}

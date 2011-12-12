@@ -74,5 +74,4 @@ void ApplicationMain::execute()
 }
 void ApplicationMain::exit()
 {
-	//mApplicationBre
 }
