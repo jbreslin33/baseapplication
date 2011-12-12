@@ -39,12 +39,9 @@ void ApplicationMain::execute()
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonGame)
 	{
 		mApplicationBreslin->mButtonHit = NULL;	
-		if (!mApplicationBreslin->mPlayingGame)
-		{
-			mApplicationBreslin->sendConnect();
-			mApplicationBreslin->mGame = new Game(mApplicationBreslin);
-			mApplicationBreslin->mPlayingGame = true;
-		}
+		mApplicationBreslin->sendConnect();
+		mApplicationBreslin->mGame = new Game(mApplicationBreslin);
+		
 		mApplicationBreslin->hideMainScreen();
 
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);			
@@ -53,12 +50,9 @@ void ApplicationMain::execute()
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonTag)
 	{
 		mApplicationBreslin->mButtonHit = NULL;	
-		if (!mApplicationBreslin->mPlayingGame)
-		{
-			mApplicationBreslin->sendConnect();
-			mApplicationBreslin->mGame = new GameTag(mApplicationBreslin);
-			mApplicationBreslin->mPlayingGame = true;
-		}
+		mApplicationBreslin->sendConnect();
+		mApplicationBreslin->mGame = new GameTag(mApplicationBreslin);
+		
 		mApplicationBreslin->hideMainScreen();
 
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);			

@@ -53,7 +53,6 @@ static const char mMessageDisconnect  = -102;
 //time
 float mRenderTime;
 
-
 //Network
 Network*     mNetwork;
 
@@ -109,10 +108,10 @@ void readServerTick           (ByteBuffer* byteBuffer);
 bool runGraphics();
 	
 //graphics
-void        createScene          ();
+void createScene          ();
 
 //rendering
-virtual bool        frameRenderingQueued (const Ogre::FrameEvent& evt);
+virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);
 
 //input
 void buttonHit             (OgreBites::Button *button);
