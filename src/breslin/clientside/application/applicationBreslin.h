@@ -45,7 +45,6 @@ State* mApplicationPlay;
 
 //constants
 static const char mMessageServerExit = 3;
-static const char mMessageKeepAlive = 12;
 
 static const char mMessageConnect     = -101;
 static const char mMessageDisconnect  = -102;
@@ -101,13 +100,10 @@ void sendConnect   ();
 //shutdown
 void shutdown();
 
-//Ticks
-void readServerTick           (ByteBuffer* byteBuffer);
-
 //graphics
 bool runGraphics();
-	
-//graphics
+
+private:
 void createScene          ();
 
 //rendering

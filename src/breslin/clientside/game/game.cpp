@@ -78,6 +78,7 @@ Game::~Game()
 		delete mShapeVector->at(i);
 		delete mShapeGhostVector->at(i);
 	}
+	
 
 //ShapeVector::~mShapeVector();
 //	ShapeGhostVector::VectormShapeGhostVector();
