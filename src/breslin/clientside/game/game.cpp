@@ -55,6 +55,11 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 	//sequence
         mOutgoingSequence               = 1;
 
+	//time
+        mFrameTime = 0.0f;
+        mRunNetworkTime = 0.0f;
+
+
 	mStateMachine = new StateMachine();
 	mGameGlobal = new GameGlobal(this);
 	mGameInitialize = new GameInitialize(this);
@@ -131,16 +136,16 @@ Shape* Game::getShape(int id)
 
 void Game::runNetwork(float msec)
 {
-        mApplicationBreslin->mRunNetworkTime += msec;
+        mRunNetworkTime += msec;
 
         readPackets();
 
         // Framerate is too high
-        if(mApplicationBreslin->mRunNetworkTime > (1000 / 60))
+        if(mRunNetworkTime > (1000 / 60))
         {
                 sendCommand();
-                mApplicationBreslin->mFrameTime = mApplicationBreslin->mRunNetworkTime / 1000.0f;
-                mApplicationBreslin->mRunNetworkTime = 0.0f;
+                mFrameTime = mRunNetworkTime / 1000.0f;
+                mRunNetworkTime = 0.0f;
         }
 }
 
@@ -321,5 +326,5 @@ void Game::processInput()
 		mKeyCurrent |= mKeyClockwise;
    }
    
-	mMillisecondsCurrent = (int) (mApplicationBreslin->mFrameTime * 1000);
+	mMillisecondsCurrent = (int) (mFrameTime * 1000);
 }

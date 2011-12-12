@@ -50,16 +50,15 @@ static const char mMessageKeepAlive = 12;
 static const char mMessageConnect     = -101;
 static const char mMessageDisconnect  = -102;
 
+//time
+float mRenderTime;
+
+
 //Network
 Network*     mNetwork;
 
 //game
 Game* mGame;
-
-//time
-float mFrameTime;
-float mRenderTime;
-float mRunNetworkTime;
 
 //initialize
 bool mSetup;

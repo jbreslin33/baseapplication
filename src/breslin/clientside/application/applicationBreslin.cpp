@@ -41,17 +41,13 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
-	//time
-	mFrameTime = 0.0f;
-	mRenderTime = 0.0f;
-	mRunNetworkTime = 0.0f;
-
-
-
 	//initilize
 	mSetup = false;
 	mJoinGame    = false;
 	mPlayingGame = false;
+
+	//time
+	mRenderTime = 0.0f;
 
 	//game
 	mGame = NULL;

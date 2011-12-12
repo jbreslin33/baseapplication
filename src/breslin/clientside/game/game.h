@@ -50,6 +50,11 @@ static const char mMessageRemoveShape = -104;
 
 static const char mMessageServerExit = 3;
 
+//time
+float mFrameTime;
+float mRunNetworkTime;
+
+
 //applicationBreslin
 ApplicationBreslin* mApplicationBreslin;
 
