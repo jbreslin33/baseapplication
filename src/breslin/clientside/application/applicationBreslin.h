@@ -42,12 +42,8 @@ State* mApplicationPlay;
 
 //constants
 static const char mMessageServerExit = 3;
-
 static const char mMessageConnect     = -101;
 static const char mMessageDisconnect  = -102;
-
-//time
-float mRenderTime;
 
 //Network
 Network*     mNetwork;
@@ -55,7 +51,7 @@ Network*     mNetwork;
 //game
 Game* mGame;
 
-//initialize
+//state transition variables
 bool mSetup;
 bool mPlayingGame;
 
@@ -64,6 +60,11 @@ OgreBites::Button* mButtonHit;
 OgreBites::Button* mButtonExit;
 OgreBites::Button* mButtonGame;
 OgreBites::Button* mButtonTag;
+
+private:
+
+//time
+float mRenderTime;
 
 /***************************************
 *			          METHODS

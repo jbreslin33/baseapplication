@@ -172,9 +172,6 @@ void Game::readPackets()
 
                 switch(type)
                 {
-                        case mMessageConnect:
-                        break;
-
                         case mMessageAddShape:
                         	addShape(true,byteBuffer);
                         break;
@@ -185,10 +182,6 @@ void Game::readPackets()
 
                         case mMessageFrame:
                                 readServerTick(byteBuffer);
-                        break;
-
-                        case mMessageServerExit:
-                                //shutdown();
                         break;
                 }
         }
