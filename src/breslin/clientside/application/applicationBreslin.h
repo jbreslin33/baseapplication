@@ -36,7 +36,6 @@ StateMachine* mStateMachine;
 
 State* mApplicationGlobal;
 State* mApplicationInitialize;
-State* mApplicationInitializeGraphics;
 State* mApplicationMain;
 State* mApplicationPlay;
 

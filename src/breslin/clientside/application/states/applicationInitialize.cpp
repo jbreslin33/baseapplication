@@ -7,9 +7,6 @@
 //state machine
 #include "../../../statemachine/stateMachine.h"
 
-//states
-#include "applicationInitializeGraphics.h"
-
 //application
 #include "../applicationBreslin.h"
 

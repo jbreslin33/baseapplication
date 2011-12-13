@@ -27,7 +27,6 @@
 #include "states/applicationGlobal.h"
 #include "states/applicationMain.h"
 #include "states/applicationInitialize.h"
-#include "states/applicationInitializeGraphics.h"
 #include "states/applicationPlay.h"
 
 
@@ -56,7 +55,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	mApplicationGlobal = new ApplicationGlobal(this);
 	mApplicationInitialize = new ApplicationInitialize(this);
-	mApplicationInitializeGraphics = new ApplicationInitializeGraphics(this);
 	mApplicationMain   = new ApplicationMain  (this);
 	mApplicationPlay   = new ApplicationPlay(this);
 
@@ -72,7 +70,6 @@ ApplicationBreslin::~ApplicationBreslin()
 	
 	delete mStateMachine;
 	delete mApplicationInitialize;
-	delete mApplicationInitializeGraphics;
 	delete mApplicationMain;
 	delete mApplicationPlay;	
 	
