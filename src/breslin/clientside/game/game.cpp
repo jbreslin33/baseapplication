@@ -141,6 +141,9 @@ Shape* Game::getShape(int id)
 		return shape;
 	}
 }
+
+//network
+
 void Game::checkForByteBuffer()
 {
         int type = 0;
@@ -160,11 +163,11 @@ void Game::checkForByteBuffer()
                         break;
 
                         case mMessageRemoveShape:
-                                removeShape(byteBuffer);
+                            removeShape(byteBuffer);
                         break;
 
                         case mMessageFrame:
-                                readServerTick(byteBuffer);
+							readServerTick(byteBuffer);
                         break;
                 }
         }
