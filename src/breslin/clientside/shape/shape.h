@@ -139,13 +139,6 @@ void interpolateTick(float renderTime);
 //ghost
 void moveGhostShape();
 
-//OGRE_SPECIFIC_PRIVATE
-//shape
-void spawnShape(Vector3D* position);
-
-//debugging
-void checkExtents(Vector3D min);
-
 //movement
 void yaw        (float amountToYaw, bool converToDegree   );
 
@@ -154,6 +147,12 @@ void setupTitle();
 void clearTitle() ;
 
 protected:
+
+//shape
+void spawnShape(Vector3D* position);
+
+//debugging
+void checkExtents(Vector3D min);
 
 // Parse ByteBuffers
 virtual int parseDeltaByteBuffer(ByteBuffer *byteBuffer);
