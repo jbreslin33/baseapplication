@@ -96,10 +96,12 @@ public:
 void processUpdate();
 
 //network
-void runNetwork();
+void sendByteBuffer();
+void checkForByteBuffer();
 
 //input
 void processInput();
+
 
 
 private:
@@ -110,7 +112,7 @@ void removeShape    (ByteBuffer* byteBuffer);
 Shape* getShape(int id);
 
 //network
-void readPackets();
+
 void readServerTick(ByteBuffer* byteBuffer);
 void sendCommand();
 };

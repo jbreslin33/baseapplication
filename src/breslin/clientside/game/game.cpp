@@ -141,24 +141,7 @@ Shape* Game::getShape(int id)
 		return shape;
 	}
 }
-
-void Game::runNetwork()
-{
-        mRunNetworkTime += mApplicationBreslin->getRenderTime() * 1000.0f;
-
-        readPackets();
-
-        // Framerate is too high
-        if(mRunNetworkTime > (1000 / 60))
-        {
-                sendCommand();
-                mFrameTime = mRunNetworkTime / 1000.0f;
-                mRunNetworkTime = 0.0f;
-        }
-}
-
-
-void Game::readPackets()
+void Game::checkForByteBuffer()
 {
         int type = 0;
 
@@ -212,22 +195,27 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
         }
 }
 
-void Game::sendCommand()
+void Game::sendByteBuffer()
 {
-        //create byteBuffer
-        ByteBuffer* byteBuffer = new ByteBuffer();
+	mRunNetworkTime += mApplicationBreslin->getRenderTime() * 1000.0f;
+	mFrameTime = mRunNetworkTime / 1000.0f;
+
+    // Framerate is too high
+    if(mRunNetworkTime > (1000 / 60))
+    {
+		//create byteBuffer
+		ByteBuffer* byteBuffer = new ByteBuffer();
         
-	//WRITE: type
-        byteBuffer->WriteByte(mMessageFrame);                                   
-        //WRITE: sequence
-        byteBuffer->WriteShort(mOutgoingSequence);
+		//WRITE: type
+		byteBuffer->WriteByte(mMessageFrame);                                   
+    
+		//WRITE: sequence
+		byteBuffer->WriteShort(mOutgoingSequence);
         
         mOutgoingSequence++; //increase for next time...
 
         // Build delta-compressed move command
         int flags = 0;
-
-
 
         // Check what needs to be updated
         if(mKeyLast != mKeyCurrent)
@@ -261,6 +249,9 @@ void Game::sendCommand()
 
         // Send the packet
         mApplicationBreslin->mNetwork->send(byteBuffer);
+
+		mRunNetworkTime = 0.0f;
+	}
 }
 
 

@@ -21,8 +21,6 @@ GamePlay::GamePlay(Game* game)
 	mGame = game;
 }
 
-
-
 GamePlay::~GamePlay()
 {
 
@@ -34,13 +32,14 @@ void GamePlay::enter()
 }
 void GamePlay::execute()
 {
-
-	//input
+	//user input
 	mGame->processInput();	
 	
-	//network
-        mGame->runNetwork();
+	//network outgoing
+	mGame->sendByteBuffer();
 
+	//network ingoing
+	mGame->checkForByteBuffer();
 }
 
 void GamePlay::exit()
