@@ -37,24 +37,7 @@ public:
 /***************************************
 *   		MEMBER VARIABLES
 ***************************************/
-// constants
-static const char mCommandKey          = 1;
-static const char mCommandMilliseconds = 2;
-
-static const char mMessageFrame = 1;
-
-static const char mMessageAddShape    = -103;
-static const char mMessageRemoveShape = -104;
-
-
-//time
-float mFrameTime;
-float mRunNetworkTime;
-
-
-//applicationBreslin
-ApplicationBreslin* mApplicationBreslin;
-
+public:
 
 //states
 StateMachine* mStateMachine;
@@ -64,10 +47,24 @@ State* mGameInitialize;
 State* mGamePlay;
 State* mGamePause;
 
+
+// constants
+static const char mCommandKey          = 1;
+static const char mCommandMilliseconds = 2;
+
+static const char mMessageFrame = 1;
+
+static const char mMessageAddShape    = -103;
+static const char mMessageRemoveShape = -104;
+
+public:
+
+//applicationBreslin
+ApplicationBreslin* mApplicationBreslin;
+
 //Shapes
 std::vector<Shape*>* mShapeVector;	 //all shapes in the client world
 std::vector<Shape*>* mShapeGhostVector;	 //all shapes in the client world's ghost 
-
 
 //keys
 int mKeyUp;
@@ -83,7 +80,12 @@ int mKeyLast;
 int mMillisecondsCurrent;
 int mMillisecondsLast; 
 
+//sequences
 signed short	mOutgoingSequence;
+
+//time
+float mFrameTime;
+float mRunNetworkTime;
 
 /***************************************
 *			          METHODS
@@ -94,10 +96,11 @@ public:
 void processUpdate();
 
 //network
-void runNetwork(float msec);
+void runNetwork();
 
 //input
 void processInput();
+
 
 private:
 

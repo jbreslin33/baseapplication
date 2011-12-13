@@ -71,10 +71,10 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 
 	//set Camera
 	// Position it at 500 in Z direction
-    mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(0,20,20));
-    // Look back along -Z
-    mApplicationBreslin->getCamera()->lookAt(Ogre::Vector3(0,0,0));
-    mApplicationBreslin->getCamera()->setNearClipDistance(5);
+    	mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(0,20,20));
+    	// Look back along -Z
+    	mApplicationBreslin->getCamera()->lookAt(Ogre::Vector3(0,0,0));
+    	mApplicationBreslin->getCamera()->setNearClipDistance(5);
 }
 
 Game::~Game()
@@ -142,9 +142,9 @@ Shape* Game::getShape(int id)
 	}
 }
 
-void Game::runNetwork(float msec)
+void Game::runNetwork()
 {
-        mRunNetworkTime += msec;
+        mRunNetworkTime += mApplicationBreslin->getRenderTime() * 1000.0f;
 
         readPackets();
 

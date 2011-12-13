@@ -39,7 +39,7 @@ void GamePlay::execute()
 	mGame->processInput();	
 	
 	//network
-        mGame->runNetwork(mGame->mApplicationBreslin->getRenderTime() * 1000.0f);
+        mGame->runNetwork();
 
 }
 
