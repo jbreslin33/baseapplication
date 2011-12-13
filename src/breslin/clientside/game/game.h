@@ -57,7 +57,7 @@ static const char mMessageFrame = 1;
 static const char mMessageAddShape    = -103;
 static const char mMessageRemoveShape = -104;
 
-public:
+protected:
 
 //applicationBreslin
 ApplicationBreslin* mApplicationBreslin;
