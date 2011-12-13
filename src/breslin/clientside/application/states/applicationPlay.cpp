@@ -41,7 +41,7 @@ void ApplicationPlay::execute()
 	else
 	{
 		//game
-		mApplicationBreslin->mGame->run();
+		mApplicationBreslin->mGame->processUpdate();
 	}
 	
 }

@@ -93,7 +93,7 @@ Game::~Game()
 /*********************************
 		TICK
 **********************************/
-void Game::run()
+void Game::processUpdate()
 {
 	mStateMachine->update();
 
