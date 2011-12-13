@@ -90,22 +90,26 @@ signed short	mOutgoingSequence;
 ***************************************/
 public:
 
-//shape
-virtual void   addShape       (bool b, ByteBuffer* byteBuffer);
-void   removeShape    (ByteBuffer* byteBuffer);
-Shape* getShape(int id);
+//update
+void processUpdate();
 
-//packets
+//network
 void runNetwork(float msec);
-void readPackets();
-void readServerTick(ByteBuffer* byteBuffer);
-void sendCommand();
 
 //input
 void processInput();
 
-void processUpdate();
+private:
 
+//shape
+virtual void addShape       (bool b, ByteBuffer* byteBuffer);
+void removeShape    (ByteBuffer* byteBuffer);
+Shape* getShape(int id);
+
+//network
+void readPackets();
+void readServerTick(ByteBuffer* byteBuffer);
+void sendCommand();
 };
 
 #endif
