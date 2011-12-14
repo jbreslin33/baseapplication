@@ -45,7 +45,7 @@ void Idle_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
 {
 	if (!abilityAnimation->mShape->mCommandToRunOnShape->mVelocity->isZero())
 	{
-		LogString("IDLE");
+		//LogString("IDLE");
 		abilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Run_InterpolateTick_Animation::Instance());
 		
 	}

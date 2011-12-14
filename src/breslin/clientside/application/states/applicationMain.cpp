@@ -60,6 +60,10 @@ void ApplicationMain::execute()
 	
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
+
+mApplicationBreslin->mStateMachine->changeState(NULL);	
+mApplicationBreslin->mStateMachine->setGlobalState(NULL);	
+
 		mApplicationBreslin->mButtonHit = NULL;	
 				
 		mApplicationBreslin->shutdown();
@@ -74,4 +78,5 @@ void ApplicationMain::execute()
 }
 void ApplicationMain::exit()
 {
+	
 }
