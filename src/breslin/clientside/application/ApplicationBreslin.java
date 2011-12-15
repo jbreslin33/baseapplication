@@ -13,7 +13,6 @@ import breslin.clientside.game.Game;
 //network
 import breslin.clientside.network.Network;
 
-
 //shape
 import breslin.clientside.shape.Shape;
 
@@ -51,7 +50,7 @@ import java.nio.ByteBuffer;
 import java.io.UnsupportedEncodingException;
 
 //tut
- 
+
 import com.jme3.font.BitmapText;
 import com.jme3.material.Material;
 import com.jme3.math.Vector3f;
@@ -69,41 +68,32 @@ public class ApplicationBreslin extends SimpleApplication
 public ApplicationBreslin(byte[] serverIP, int serverPort)
 {
 	start();
-	
+
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
-	//time
-	mFrameTime  = 0.0f;
-	mRenderTime = 0.0f;
-	mRunNetworkTime = 0.0f;	
-
-	//keys
-	mKeyUp = 1;
-	mKeyDown = 2;
-	mKeyLeft = 4;
-	mKeyRight = 8;
-	mKeyCounterClockwise = 16;
-	mKeyClockwise = 32;
-
 	//initilize
-	mInitializeGui = false;
-	mJoinGame    = false;
+	mSetup = false;
 	mPlayingGame = false;
 
+	//time
+	mRenderTime = 0.0f;
+
 	//game
-	mGame = new Game(this);
+	mGame = null;
 
-	//input
-	mKeyCurrent = 0;
-	mKeyLast = 0;
-	mMillisecondsCurrent = 0;
-	mMillisecondsLast = 0;
+	//state machine (Menus)
+	mStateMachine = new StateMachine();
 
-	//sequences
-	mOutgoingSequence		= 1;
+	mApplicationGlobal = new ApplicationGlobal(this);
+	mApplicationInitialize = new ApplicationInitialize(this);
+	mApplicationMain   = new ApplicationMain  (this);
+	mApplicationPlay   = new ApplicationPlay(this);
 
-	
+	mStateMachine.setGlobalState (mApplicationGlobal);
+	mStateMachine.changeState(mApplicationInitialize);
+
+
 }
 
 
@@ -129,54 +119,33 @@ public static void main(String[] args)
 *   		MEMBER VARIABLES
 ***************************************/
 
+
+//state machine
+public StateMachine mStateMachine;
+
+public State mApplicationGlobal;
+public State mApplicationInitialize;
+public State mApplicationMain;
+public State mApplicationPlay;
+
 //constants
-public static final byte mCommandMilliseconds = 2;
+public static final byte mMessageServerExit = 3;
 
-private static final byte mCommandKey          = 1;
-
-private static final byte mMessageFrame = 1;
-
-private static final byte mMessageConnect     = -101;
-private static final byte mMessageDisconnect  = -102;
-private static final byte mMessageAddShape    = -103;
-private static final byte mMessageRemoveShape = -104;
-
-private static final byte mMessageServerExit = 3;
-private static final byte mMessageKeepAlive = 12;
-
+public static final byte mMessageConnect     = -101;
+public static final byte mMessageDisconnect  = -102;
 
 //Network
-private Network     mNetwork;
+public Network     mNetwork;
 
 //game
-private Game mGame;
+public Game mGame;
 
-//sequences
-private short	mOutgoingSequence;		// OutFgoing packet sequence
+//state transition variables
+public boolean mSetup;
+public boolean mPlayingGame;
 
 //time
-private float mFrameTime;
-private float mRenderTime; 
-private float mRunNetworkTime;
-
-//initialize
-private boolean mInitializeGui;
-private boolean mJoinGame;
-private boolean mPlayingGame;
-
-//keys
-private int mKeyUp;
-private int mKeyDown;
-private int mKeyLeft;
-private int mKeyRight;
-private int mKeyCounterClockwise;
-private int mKeyClockwise;
-
-//key input
-private int mKeyCurrent;
-private int mKeyLast;
-private int mMillisecondsCurrent;
-private int mMillisecondsLast;
+private float mRenderTime;
 
 
 /***************************************
@@ -198,7 +167,7 @@ public void update()
 
 	//move objects
 	mGame.run();
-	
+
 	//graphics
 	runGraphics();
 }
@@ -220,6 +189,80 @@ private void shutdown()
 	mNetwork.send(byteBuffer);
 	mNetwork.reset();
 }
+
+/*********************************
+		NETWORK
+**********************************/
+
+private void sendConnect()
+{
+	byte[] mCharArray = new byte[1400];
+	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
+
+	byteBuffer.put(mMessageConnect);
+	mNetwork.send(byteBuffer);
+}
+
+/*********************************
+		TIME
+**********************************/
+
+public float getRenderTime()
+{
+	return mRenderTime;
+}
+
+/*********************************
+		GRAPHICS
+**********************************/
+
+public void simpleInitApp()
+{
+        DirectionalLight directionalLight = new DirectionalLight();
+        directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
+	getRootNode().addLight(directionalLight);
+}
+
+private boolean runGraphics()
+{
+	//super and other stuff this is equivalent to c++ runGraphics...
+	super.update();
+
+	return true;
+}
+
+/*********************************
+		GUI
+**********************************/
+private void createMainScreen()
+{
+
+}
+
+private void showMainScreen()
+{
+
+}
+
+private void hideMainScreen()
+{
+
+}
+
+/***************************************
+*			CAMERA
+******************************************/
+public Vector3f getCameraLocation()
+{
+	return cam.getLocation();
+}
+
+
+
+
+
+
+
 
 
 /***************************************
@@ -244,7 +287,7 @@ private void readPackets()
 {
 
 	int type = 0;
-	
+
 	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
 
 	while(mNetwork.checkForByteBuffer(byteBuffer))
@@ -349,19 +392,12 @@ private void sendCommand()
 }
 
 
-private void sendConnect()
-{
-	byte[] mCharArray = new byte[1400];
-	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
 
-	byteBuffer.put(mMessageConnect);
-	mNetwork.send(byteBuffer);
-}
 
 
 private void readServerTick(ByteBuffer byteBuffer)
 {
-	
+
 	// Skip sequences
 	byte one = byteBuffer.get(1);
 	byte two = byteBuffer.get(2);
@@ -393,56 +429,7 @@ private void readServerTick(ByteBuffer byteBuffer)
 	}
 }
 
-/*********************************
-		TIME
-**********************************/
 
-public float getRenderTime()
-{
-	return mRenderTime;
-}
-
-/*********************************
-		GRAPHICS
-**********************************/
-
-public void simpleInitApp()
-{
-        DirectionalLight directionalLight = new DirectionalLight();
-        directionalLight.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
-	getRootNode().addLight(directionalLight);
-}
-
-private boolean runGraphics()
-{
-	//super and other stuff this is equivalent to c++ runGraphics...
-	super.update();
-
-	return true;
-}
-
-/*********************************
-		GUI
-**********************************/
-private void initializeGui()
-{
-
-}
-
-private void loadJoinScreen()
-{
-
-}
-
-private void hideGui()
-{
-
-}
-
-private void hideJoinScreen()
-{
-
-}
 
 /***************************************
 *			INPUT
@@ -510,13 +497,6 @@ private void processInput()
 	mMillisecondsCurrent = (byte) (mFrameTime * 1000);
 }
 
-/***************************************
-*			CAMERA
-******************************************/
-public Vector3f getCameraLocation()
-{
-	return cam.getLocation();
-}
 
 };
 

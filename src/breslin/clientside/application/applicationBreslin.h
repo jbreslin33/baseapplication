@@ -29,8 +29,6 @@ public:
 
 public:
 
-//private:
-
 //state machine
 StateMachine* mStateMachine;
 

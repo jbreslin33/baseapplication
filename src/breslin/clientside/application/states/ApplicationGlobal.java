@@ -27,7 +27,13 @@ public void enter()
 
 public void execute()
 {
-
+	/*
+	if (mApplicationBreslin.mSetup)
+	{
+		//graphics
+		mApplicationBreslin.runGraphics();
+	}
+	*/
 }
 
 public void exit()

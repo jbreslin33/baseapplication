@@ -14,7 +14,7 @@
 #include "../../../statemachine/stateMachine.h"
 
 /***************************************
-*	CONSTRUCTORS		          
+*	CONSTRUCTORS
 ***************************************/
 ApplicationPlay::ApplicationPlay(ApplicationBreslin* applicationBreslin)
 {
@@ -32,24 +32,24 @@ void ApplicationPlay::enter()
 }
 void ApplicationPlay::execute()
 {
-	
+
 	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_ESCAPE))
 	{
 		mApplicationBreslin->mPlayingGame = false;
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
-	}	
+	}
 	else
 	{
 		//game
 		mApplicationBreslin->mGame->processUpdate();
 	}
-	
+
 }
 
 void ApplicationPlay::exit()
 {
 	mApplicationBreslin->shutdown();
-			
+
 	mApplicationBreslin->getSceneManager()->destroyAllEntities();
 	delete mApplicationBreslin->mGame;
 

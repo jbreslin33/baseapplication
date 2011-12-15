@@ -16,7 +16,7 @@
 #include "../../../statemachine/stateMachine.h"
 
 /***************************************
-*	CONSTRUCTORS		          
+*	CONSTRUCTORS
 ***************************************/
 ApplicationMain::ApplicationMain(ApplicationBreslin* applicationBreslin)
 {
@@ -38,45 +38,44 @@ void ApplicationMain::execute()
 {
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonGame)
 	{
-		mApplicationBreslin->mButtonHit = NULL;	
+		mApplicationBreslin->mButtonHit = NULL;
 		mApplicationBreslin->sendConnect();
 		mApplicationBreslin->mGame = new Game(mApplicationBreslin);
-		
+
 		mApplicationBreslin->hideMainScreen();
 
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);			
+		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}
 
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonTag)
 	{
-		mApplicationBreslin->mButtonHit = NULL;	
+		mApplicationBreslin->mButtonHit = NULL;
 		mApplicationBreslin->sendConnect();
 		mApplicationBreslin->mGame = new GameTag(mApplicationBreslin);
-		
+
 		mApplicationBreslin->hideMainScreen();
 
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);			
+		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}
-	
+
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
 
-mApplicationBreslin->mStateMachine->changeState(NULL);	
-mApplicationBreslin->mStateMachine->setGlobalState(NULL);	
+		mApplicationBreslin->mStateMachine->changeState(NULL);
+		mApplicationBreslin->mStateMachine->setGlobalState(NULL);
 
-		mApplicationBreslin->mButtonHit = NULL;	
-				
+		mApplicationBreslin->mButtonHit = NULL;
+
 		mApplicationBreslin->shutdown();
-		
-		mApplicationBreslin->mShutDown = true;			
-		
+
+		mApplicationBreslin->mShutDown = true;
+
 		delete mApplicationBreslin;
-			
-	}	
-	
-	
+
+	}
 }
+
 void ApplicationMain::exit()
 {
-	
+
 }

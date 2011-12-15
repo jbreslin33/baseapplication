@@ -11,7 +11,7 @@
 #include "../../game/game.h"
 
 /***************************************
-*	CONSTRUCTORS		          
+*	CONSTRUCTORS
 ***************************************/
 ApplicationGlobal::ApplicationGlobal(ApplicationBreslin* applicationBreslin)
 {
@@ -34,8 +34,6 @@ void ApplicationGlobal::execute()
 		//graphics
 		mApplicationBreslin->runGraphics();
 	}
-	
-
 }
 void ApplicationGlobal::exit()
 {
