@@ -41,7 +41,7 @@ void GameTag::createWorld()
 {
 	LogString("createWorld in GameTag");
 	//ai guys, let's make them sinbads
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < 2; i++)
 	{                 
 		Vector3D* position = new Vector3D();
 		position->x = 1.5f * i;
