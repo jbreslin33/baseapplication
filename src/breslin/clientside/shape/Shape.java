@@ -132,7 +132,7 @@ public Command mServerCommandLast;
 public Command mServerCommandCurrent;
 public Command mCommandToRunOnShape;
 
-//Jmonkey 
+//Jmonkey
 public Spatial          mSceneNode;
 
 //billboard
@@ -249,7 +249,7 @@ void parseSpawnByteBuffer(ByteBuffer byteBuffer)
 	mSpawnPosition.x = convertIntToFloat(byteBuffer);
 	mSpawnPosition.y = convertIntToFloat(byteBuffer);
 	mSpawnPosition.z = convertIntToFloat(byteBuffer);
-	
+
 	mSpawnRotation.x = convertIntToFloat(byteBuffer);
 	mSpawnRotation.z = convertIntToFloat(byteBuffer);
 
@@ -277,7 +277,7 @@ void parseSpawnByteBuffer(ByteBuffer byteBuffer)
 
 public void spawnShape(Vector3D position)
 {
-	
+
 	if (mIsGhost)
 	{
 		mIndex = mIndex * -1;
@@ -299,7 +299,7 @@ public void spawnShape(Vector3D position)
 
 	{
 	   	mSceneNode = (Node) mApplicationBreslin.getAssetManager().loadModel(getMeshString(mMeshCode));
-                
+
 		//scale
                 mSceneNode.scale(mScale,mScale,mScale);
 	}
@@ -420,7 +420,7 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 		mServerCommandCurrent.mRot.z = convertIntToFloat(byteBuffer);
 	}
 
-	i = flags & mApplicationBreslin.mCommandMilliseconds;
+	i = flags & mApplicationBreslin.mGame.mCommandMilliseconds;
 	//milliseconds
 	if (i == 2)
 	{
@@ -476,7 +476,7 @@ public void interpolateTick(float renderTime)
 //ghost
 public void moveGhostShape()
 {
-	Vector3D transVector = new Vector3D(); 
+	Vector3D transVector = new Vector3D();
 	transVector.x = mServerCommandCurrent.mPosition.x;
 	transVector.y = 0;
 	transVector.z = mServerCommandCurrent.mPosition.z;
@@ -665,7 +665,7 @@ Quaternion getRotationTo(Vector3D source, Vector3D dest)
 	v0.copyValuesFrom(source);
 	v1.copyValuesFrom(dest);
 
-	v0.normalise(); 
+	v0.normalise();
 	v1.normalise();
 
 	//Real d = v0.dotProduct(v1);

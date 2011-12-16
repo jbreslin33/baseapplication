@@ -13,10 +13,10 @@ package breslin.statemachine;
           CLASS
 */
 
-class StateMachine
+public class StateMachine
 {
 
-public StateMachine() 
+public StateMachine()
 {
 
 }
@@ -35,16 +35,18 @@ public void setCurrentState(State s)
 {
 	mCurrentState = s;
 }
-void setGlobalState(State s)
+
+public void setGlobalState(State s)
 {
 	mGlobalState = s;
 }
-void setPreviousState(State s)
+
+public void setPreviousState(State s)
 {
 	mPreviousState = s;
 }
 
-void  update()
+public void  update()
 {
 	if(mGlobalState != null)
 	{
@@ -56,7 +58,7 @@ void  update()
 	}
  }
 
-void  changeState(State pNewState)
+public void  changeState(State pNewState)
 {
 	mPreviousState = mCurrentState;
 
@@ -64,7 +66,7 @@ void  changeState(State pNewState)
 	{
        	mCurrentState.exit();
 	}
-    
+
     mCurrentState = pNewState;
 
 	if(mCurrentState != null)

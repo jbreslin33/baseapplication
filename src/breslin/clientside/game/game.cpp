@@ -37,7 +37,7 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 
 	mShapeVector = new std::vector<Shape*>();
 	mShapeGhostVector = new std::vector<Shape*>();
-	
+
 	//keys
 	mKeyUp = 1;
 	mKeyDown = 2;
@@ -45,7 +45,7 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 	mKeyRight = 8;
 	mKeyCounterClockwise = 16;
 	mKeyClockwise = 32;
-	
+
 	//input
 	mKeyCurrent = 0;
 	mKeyLast = 0;
@@ -56,8 +56,8 @@ Game::Game(ApplicationBreslin* applicationBreslin)
         mOutgoingSequence               = 1;
 
 	//time
-        mFrameTime = 0.0f;
-        mRunNetworkTime = 0.0f;
+    mFrameTime = 0.0f;
+    mRunNetworkTime = 0.0f;
 
 
 	mStateMachine = new StateMachine();
@@ -65,7 +65,7 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 	mGameInitialize = new GameInitialize(this);
 	mGamePlay = new GamePlay(this);
 	mGamePause = new GamePause(this);
-	
+
 	mStateMachine->setGlobalState(mGameGlobal);
 	mStateMachine->changeState(mGamePlay);
 
@@ -93,7 +93,7 @@ Game::~Game()
 //	ShapeGhostVector::VectormShapeGhostVector();
 }
 /*********************************
-		TICK
+		Update
 **********************************/
 void Game::processUpdate()
 {
@@ -105,10 +105,26 @@ void Game::processUpdate()
 	}
 }
 
+/*********************************
+*		SHAPE
+**********************************/
+void Game::addShape(bool b, ByteBuffer* byteBuffer)
+{
+	Shape* shape = new Shape(mApplicationBreslin,byteBuffer,false);  //you should just need to call this...
+
+	//ability
+	shape->addAbility(new AbilityRotation(shape));
+	shape->addAbility(new AbilityMove(shape));
+
+	//put shape and ghost in game vectors so they can be looped and game now knows of them.
+	mShapeVector->push_back(shape);
+	mShapeGhostVector->push_back(shape->mGhost);
+}
+
 void Game::removeShape(ByteBuffer* byteBuffer)
 {
 	int index = byteBuffer->ReadByte();
-	
+
 	Shape* shape = getShape(index);
 
 	for (unsigned int i = 0; i < mShapeVector->size(); i++)
@@ -144,7 +160,9 @@ Shape* Game::getShape(int id)
 	}
 }
 
-//network
+/*********************************
+		Network
+**********************************/
 
 void Game::checkForByteBuffer()
 {
@@ -188,8 +206,8 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
 
                 Shape* shape = NULL;
                 shape = getShape(id);
-                
-		if (shape)
+
+				if (shape)
                 {
                         shape->processDeltaByteBuffer(byteBuffer);
                 }
@@ -210,13 +228,13 @@ void Game::sendByteBuffer()
     {
 		//create byteBuffer
 		ByteBuffer* byteBuffer = new ByteBuffer();
-        
+
 		//WRITE: type
-		byteBuffer->WriteByte(mMessageFrame);                                   
-    
+		byteBuffer->WriteByte(mMessageFrame);
+
 		//WRITE: sequence
 		byteBuffer->WriteShort(mOutgoingSequence);
-        
+
         mOutgoingSequence++; //increase for next time...
 
         // Build delta-compressed move command
@@ -247,7 +265,7 @@ void Game::sendByteBuffer()
                 //WRITE: milliseconds
                 byteBuffer->WriteByte(mMillisecondsCurrent);
         }
-        
+
         //set 'last' commands for diff
         mKeyLast = mKeyCurrent;
         mMillisecondsLast = mMillisecondsCurrent;
@@ -268,21 +286,7 @@ void Game::sendByteBuffer()
 *
 **************************************************
 
-/*********************************
-*		SHAPE
-**********************************/
-void Game::addShape(bool b, ByteBuffer* byteBuffer)
-{
-	Shape* shape = new Shape(mApplicationBreslin,byteBuffer,false);  //you should just need to call this...
 
-	//ability
-	shape->addAbility(new AbilityRotation(shape));
-	shape->addAbility(new AbilityMove(shape));
-
-	//put shape and ghost in game vectors so they can be looped and game now knows of them.
-	mShapeVector->push_back(shape);
-	mShapeGhostVector->push_back(shape->mGhost);	
-}
 
 /***************************************
 *			INPUT
@@ -292,7 +296,7 @@ void Game::addShape(bool b, ByteBuffer* byteBuffer)
 void Game::processInput()
 {
 	mKeyCurrent = 0;
-    
+
 	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
    {
 		mKeyCurrent |= mKeyUp;
@@ -312,7 +316,7 @@ void Game::processInput()
    {
 		mKeyCurrent |= mKeyRight;
    }
-    
+
 	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_Z)) // Rotate -Yaw(counter-clockwise)
    {
 		mKeyCurrent |= mKeyCounterClockwise;
@@ -322,6 +326,6 @@ void Game::processInput()
    {
 		mKeyCurrent |= mKeyClockwise;
    }
-   
+
 	mMillisecondsCurrent = (int) (mFrameTime * 1000);
 }

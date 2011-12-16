@@ -5,7 +5,18 @@ package breslin.clientside.application;
 ***************************************/
 
 //parent
-import com.jme3.app.SimpleApplication;
+import com.jme3.app.
+SimpleApplication;
+
+//state machine
+import breslin.statemachine.StateMachine;
+import breslin.statemachine.State;
+
+//states
+import breslin.clientside.application.states.ApplicationGlobal;
+import breslin.clientside.application.states.ApplicationInitialize;
+import breslin.clientside.application.states.ApplicationMain;
+import breslin.clientside.application.states.ApplicationPlay;
 
 //game
 import breslin.clientside.game.Game;
@@ -152,24 +163,13 @@ private float mRenderTime;
 *	 METHODS
 ***************************************/
 
-/***************************************
-*	 LOOP
-***************************************/
+/*********************************
+			update
+**********************************/
 
-public void update()
+public void processUpdate()
 {
-
-	//input
-	processInput();
-
-	//network
-	runNetwork(getRenderTime() * 1000.0f);
-
-	//move objects
-	mGame.run();
-
-	//graphics
-	runGraphics();
+	mStateMachine.update();
 }
 
 /* This is the update loop */
@@ -268,6 +268,9 @@ public Vector3f getCameraLocation()
 /***************************************
 *   		NETWORK
 ***************************************/
+
+
+/*
 private void runNetwork(float msec)
 {
 	mRunNetworkTime += msec;
@@ -282,6 +285,10 @@ private void runNetwork(float msec)
 		mRunNetworkTime = 0.0f;
 	}
 }
+
+
+
+
 
 private void readPackets()
 {
@@ -328,69 +335,6 @@ private void readPackets()
 	}
 }
 
-private void sendCommand()
-{
-        //bools
-        boolean sendKey          = false;
-        boolean sendMilliseconds = false;
-
-        //create byteBuffer
-        byte[] mCharArray = new byte[1400];
-        ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
-
-        //WRITE: type
-        byteBuffer.put(mMessageFrame);  //type
-
-        //WRITE: sequence
-        byteBuffer.putShort(mOutgoingSequence);  //sequence
-        mOutgoingSequence++; //increase for next time...
-
-        byte one = byteBuffer.get(1);
-        byte two = byteBuffer.get(2);
-        byteBuffer.put(1,two);
-        byteBuffer.put(2,one);
-
-        // Build delta-compressed move command
-        int flags = 0;
-
-        // Check what needs to be updated
-        if(mKeyLast != mKeyCurrent)
-        {
-                sendKey = true;
-                flags |= mCommandKey;
-        }
-
-
-        if(mMillisecondsLast != mMillisecondsCurrent)
-        {
-                sendMilliseconds = true;
-
-                flags |= mCommandMilliseconds;
-        }
-
-
-        // Add to the message
-        byteBuffer.put((byte)flags);
-
-        if (sendKey)
-        {
-                byteBuffer.put((byte)mKeyCurrent);
-        }
-
-        if (sendMilliseconds)
-        {
-
-                byteBuffer.put((byte)mMillisecondsCurrent);
-        }
-
-        //set 'last' commands for diff
-        mKeyLast = mKeyCurrent;
-        mMillisecondsLast = mMillisecondsCurrent;
-
-        // Send the packet
-        mNetwork.send(byteBuffer);
-}
-
 
 
 
@@ -429,11 +373,13 @@ private void readServerTick(ByteBuffer byteBuffer)
 	}
 }
 
-
+*/
 
 /***************************************
 *			INPUT
 ******************************************/
+
+/*
 private void processInput()
 {
 	mKeyCurrent = 0;
@@ -496,7 +442,7 @@ private void processInput()
 
 	mMillisecondsCurrent = (byte) (mFrameTime * 1000);
 }
-
+*/
 
 };
 
