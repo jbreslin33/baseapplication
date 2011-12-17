@@ -10,6 +10,13 @@ import breslin.statemachine.State;
 //application
 import breslin.clientside.application.ApplicationBreslin;
 
+//game
+import breslin.clientside.game.Game;
+//import breslin.clientside.game.GameTag;
+
+//keyboard
+import org.lwjgl.input.Keyboard;
+
 public class ApplicationMain extends State
 {
 
@@ -27,45 +34,35 @@ public void enter()
 
 public void execute()
 {
-	/*
-	if (mApplicationBreslin.mButtonHit == mApplicationBreslin.mButtonGame)
+	
+	if (Keyboard.isKeyDown(Keyboard.KEY_G))
 	{
-		mApplicationBreslin.mButtonHit = null;
 		mApplicationBreslin.sendConnect();
 		mApplicationBreslin.mGame = new Game(mApplicationBreslin);
 
-		mApplicationBreslin.hideMainScreen();
-
 		mApplicationBreslin.mStateMachine.changeState(mApplicationBreslin.mApplicationPlay);
 	}
 
-	if (mApplicationBreslin.mButtonHit == mApplicationBreslin.mButtonTag)
+
+	if (Keyboard.isKeyDown(Keyboard.KEY_T))
 	{
-		mApplicationBreslin.mButtonHit = null;
+/*
 		mApplicationBreslin.sendConnect();
 		mApplicationBreslin.mGame = new GameTag(mApplicationBreslin);
 
-		mApplicationBreslin.hideMainScreen();
-
 		mApplicationBreslin.mStateMachine.changeState(mApplicationBreslin.mApplicationPlay);
+*/
 	}
 
-	if (mApplicationBreslin.mButtonHit == mApplicationBreslin.mButtonExit)
+	if (Keyboard.isKeyDown(Keyboard.KEY_E))
 	{
 
 		mApplicationBreslin.mStateMachine.changeState(null);
 		mApplicationBreslin.mStateMachine.setGlobalState(null);
-
-		mApplicationBreslin.mButtonHit = null;
-
 		mApplicationBreslin.shutdown();
 
-		mApplicationBreslin.mShutDown = true;
-
-		delete mApplicationBreslin;
-
 	}
-	*/
+
 }
 
 public void exit()

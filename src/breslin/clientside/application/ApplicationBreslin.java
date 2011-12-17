@@ -182,7 +182,7 @@ public void simpleUpdate(float tpf)
 *	 ADMIN
 ***************************************/
 
-private void shutdown()
+public void shutdown()
 {
 	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
 	byteBuffer.put(mMessageDisconnect);
@@ -194,7 +194,7 @@ private void shutdown()
 		NETWORK
 **********************************/
 
-private void sendConnect()
+public void sendConnect()
 {
 	byte[] mCharArray = new byte[1400];
 	ByteBuffer byteBuffer = ByteBuffer.wrap(mCharArray);
