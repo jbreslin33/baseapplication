@@ -103,8 +103,6 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 
 	mStateMachine.setGlobalState (mApplicationGlobal);
 	mStateMachine.changeState(mApplicationInitialize);
-
-
 }
 
 
