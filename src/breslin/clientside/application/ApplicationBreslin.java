@@ -259,7 +259,25 @@ public Vector3f getCameraLocation()
 
 
 
+public void processInput()
+{
+        if (Keyboard.isKeyDown(Keyboard.KEY_B))
+        {
+                sendConnect();
+                mPlayingGame = true;
 
+                //Set Camera to position and to lookat avatar at 0,0,0(this should be same as ogre! if not fix it)
+                Vector3f startCamPosition = new Vector3f(0, 20, 20);                    
+                Vector3f lookAtVector     = new Vector3f(0,0,0);
+                Vector3f worldDirection   = new Vector3f(0,1,0);
+                cam.setLocation(startCamPosition);
+                cam.lookAt(lookAtVector,worldDirection);
+        }       
+        else    
+        {       
+                System.out.println("slow your roll you already started");
+        }       
+}
 
 
 

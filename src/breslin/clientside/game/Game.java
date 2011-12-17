@@ -29,6 +29,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.nio.ByteBuffer;
 
+//keyboard
+import org.lwjgl.input.Keyboard;
 
 /***************************************
 *           CLASS
@@ -69,13 +71,13 @@ mShapeGhostVector = new ArrayList<Shape>(); //all shapes in the client world's g
 
 
 	mStateMachine = new StateMachine();
-	mGameGlobal = new GameGlobal(this);
-	mGameInitialize = new GameInitialize(this);
-	mGamePlay = new GamePlay(this);
-	mGamePause = new GamePause(this);
+	lobal = new GameGlobal(this);
+	nitialize = new GameInitialize(this);
+	lay = new GamePlay(this);
+	ause = new GamePause(this);
 
-	mStateMachine.setGlobalState(mGameGlobal);
-	mStateMachine.changeState(mGamePlay);
+	mStateMachine.setGlobalState(lobal);
+	mStateMachine.changeState(lay);
 
 	//set Camera
 	// Position it at 500 in Z direction
@@ -89,10 +91,10 @@ mShapeGhostVector = new ArrayList<Shape>(); //all shapes in the client world's g
 //states
 StateMachine mStateMachine;
 
-State mGameGlobal;
-State mGameInitialize;
-State mGamePlay;
-State mGamePause;
+State lobal;
+State nitialize;
+State lay;
+State ause;
 
 public static final byte mCommandKey          = 1;
 public static final byte mCommandMilliseconds = 2;
@@ -216,12 +218,12 @@ private void checkForByteBuffer()
 
 	if (mMessageAddShape == type)
 	{
-		mGame.addShape(true,byteBuffer);
+		addShape(true,byteBuffer);
 	}
 
 	if (mMessageRemoveShape == type)
 	{
-		mGame.removeShape(byteBuffer);
+		removeShape(byteBuffer);
 	}
 
 	if (mMessageFrame == type)
@@ -329,7 +331,7 @@ private void sendByteBuffer()
         mMillisecondsLast = mMillisecondsCurrent;
 
         // Send the packet
-        mNetwork.send(byteBuffer);
+        mApplicationBreslin.mNetwork.send(byteBuffer);
 }
 
 /***************************************
@@ -338,27 +340,6 @@ private void sendByteBuffer()
 private void processInput()
 {
 	mKeyCurrent = 0;
-
-	if (Keyboard.isKeyDown(Keyboard.KEY_B))
-	{
-		if (!mPlayingGame)
-		{
-
-			sendConnect();
-			mPlayingGame = true;
-
-			//Set Camera to position and to lookat avatar at 0,0,0(this should be same as ogre! if not fix it)
-			Vector3f startCamPosition = new Vector3f(0, 20, 20);
-			Vector3f lookAtVector     = new Vector3f(0,0,0);
-			Vector3f worldDirection   = new Vector3f(0,1,0);
-			cam.setLocation(startCamPosition);
-			cam.lookAt(lookAtVector,worldDirection);
-		}
-		else
-		{
-			System.out.println("slow your roll you already started");
-		}
-	}
 
 	//move
 	if (Keyboard.isKeyDown(Keyboard.KEY_I))
