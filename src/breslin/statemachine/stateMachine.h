@@ -32,7 +32,7 @@ virtual ~StateMachine(){}
 *          VARIABLES
 **********************************/
 private:
-  
+
 State*   mCurrentState;
 State*   mPreviousState;
 State*   mGlobalState;
@@ -75,7 +75,7 @@ void  changeState(State* pNewState)
 	{
        	mCurrentState->exit();
 	}
-    
+
     mCurrentState = pNewState;
 
 	if(mCurrentState)

@@ -48,12 +48,15 @@ public void setPreviousState(State s)
 
 public void  update()
 {
+
 	if(mGlobalState != null)
 	{
+		//System.out.println("mGlobalState.execute");
 		mGlobalState.execute();
 	}
 	if (mCurrentState != null)
 	{
+		//System.out.println("mCurrentState.execute");
 		mCurrentState.execute();
 	}
  }

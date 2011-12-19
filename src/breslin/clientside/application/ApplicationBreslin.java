@@ -79,7 +79,7 @@ public class ApplicationBreslin extends SimpleApplication
 public ApplicationBreslin(byte[] serverIP, int serverPort)
 {
 	start();
-System.out.println("starestsddddddddddddddddddd");
+
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
@@ -93,7 +93,6 @@ System.out.println("starestsddddddddddddddddddd");
 	//game
 	mGame = null;
 
-System.out.println("ffffffffffffffffffffffffff");
 	//state machine (Menus)
 	mStateMachine = new StateMachine();
 
@@ -103,8 +102,12 @@ System.out.println("ffffffffffffffffffffffffff");
 	mApplicationPlay   = new ApplicationPlay(this);
 
 	mStateMachine.setGlobalState (mApplicationGlobal);
-	mStateMachine.changeState(mApplicationInitialize);
-	System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCC");
+	//mStateMachine.changeState(mApplicationInitialize);
+	mStateMachine.setPreviousState(mApplicationInitialize);
+	mStateMachine.setCurrentState(mApplicationInitialize);
+	System.out.println("end of constructor for ApplicationBreslin");
+	//mApplicationInitialize.execute();
+
 }
 
 
@@ -126,7 +129,6 @@ public static void main(String[] args)
 	ApplicationBreslin applicationBreslin = new ApplicationBreslin(theByteArray,30004);
 	while (true)
 	{
-		System.out.println("main");
 		applicationBreslin.processUpdate();
 	}
 }
@@ -174,13 +176,12 @@ private float mRenderTime;
 
 public void processUpdate()
 {
-System.out.println("processUpdate");
-	mStateMachine.update();
+	//mStateMachine.update();
 }
 
-/* This is the update loop */
 public void simpleUpdate(float tpf)
 {
+	mStateMachine.update();
     mRenderTime = tpf;
 }
 
@@ -242,17 +243,14 @@ private boolean runGraphics()
 **********************************/
 private void createMainScreen()
 {
-
 }
 
 private void showMainScreen()
 {
-
 }
 
 private void hideMainScreen()
 {
-
 }
 
 /***************************************
@@ -263,8 +261,6 @@ public Vector3f getCameraLocation()
 	return cam.getLocation();
 }
 
-
-
 public void processInput()
 {
         if (Keyboard.isKeyDown(Keyboard.KEY_B))
@@ -273,200 +269,16 @@ public void processInput()
                 mPlayingGame = true;
 
                 //Set Camera to position and to lookat avatar at 0,0,0(this should be same as ogre! if not fix it)
-                Vector3f startCamPosition = new Vector3f(0, 20, 20);                    
+                Vector3f startCamPosition = new Vector3f(0, 20, 20);
                 Vector3f lookAtVector     = new Vector3f(0,0,0);
                 Vector3f worldDirection   = new Vector3f(0,1,0);
                 cam.setLocation(startCamPosition);
                 cam.lookAt(lookAtVector,worldDirection);
-        }       
-        else    
-        {       
+        }
+        else
+        {
                 System.out.println("slow your roll you already started");
-        }       
+        }
 }
 
-
-
-
-
-/***************************************
-*   		NETWORK
-***************************************/
-
-
-/*
-private void runNetwork(float msec)
-{
-	mRunNetworkTime += msec;
-
-	readPackets();
-
-	// Framerate is too high
-	if(mRunNetworkTime > (1000 / 60))
-	{
-		sendCommand();
-		mFrameTime = mRunNetworkTime / 1000.0f;
-		mRunNetworkTime = 0.0f;
-	}
 }
-
-
-
-
-
-private void readPackets()
-{
-
-	int type = 0;
-
-	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
-
-	while(mNetwork.checkForByteBuffer(byteBuffer))
-	{
-
-		byteBuffer.position(0); //BeginReading() c++ equivalent
-
-		type = byteBuffer.get();
-
-
-		if (mMessageConnect == type)
-		{
-			System.out.println("BRESSAGE: mMessageConnect");
-		}
-
-		if (mMessageAddShape == type)
-		{
-			mGame.addShape(true,byteBuffer);
-			System.out.println("BRESSAGE: mMessageAddShape");
-		}
-
-		if (mMessageRemoveShape == type)
-		{
-			mGame.removeShape(byteBuffer);
-			System.out.println("BRESSAGE: mMessageRemoveShape");
-		}
-
-		if (mMessageFrame == type)
-		{
-			readServerTick(byteBuffer);
-		}
-
-		if (mMessageServerExit == type)
-		{
-			//	mGame.shutdown();
-		}
-		byteBuffer.clear();
-	}
-}
-
-
-
-
-
-private void readServerTick(ByteBuffer byteBuffer)
-{
-
-	// Skip sequences
-	byte one = byteBuffer.get(1);
-	byte two = byteBuffer.get(2);
-	byteBuffer.put(1,two);
-	byteBuffer.put(2,one);
-	byteBuffer.position(1);
-	short sequence = byteBuffer.getShort();
-
-	boolean validShape = true;
-
-	while (byteBuffer.hasRemaining() && validShape)
-	{
-
-		//mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
-
-		int id = byteBuffer.get();
-
-		Shape shape = null;
-		shape = mGame.getShape(id);
-
-		if (shape != null)
-		{
-			shape.processDeltaByteBuffer(byteBuffer);
-		}
-		else
-		{
-			validShape = false;
-		}
-	}
-}
-
-*/
-
-/***************************************
-*			INPUT
-******************************************/
-
-/*
-private void processInput()
-{
-	mKeyCurrent = 0;
-
-	if (Keyboard.isKeyDown(Keyboard.KEY_B))
-	{
-		if (!mPlayingGame)
-		{
-
-			sendConnect();
-			mPlayingGame = true;
-
-			//Set Camera to position and to lookat avatar at 0,0,0(this should be same as ogre! if not fix it)
-			Vector3f startCamPosition = new Vector3f(0, 20, 20);
-			Vector3f lookAtVector     = new Vector3f(0,0,0);
-			Vector3f worldDirection   = new Vector3f(0,1,0);
-			cam.setLocation(startCamPosition);
-			cam.lookAt(lookAtVector,worldDirection);
-		}
-		else
-		{
-			System.out.println("slow your roll you already started");
-		}
-	}
-
-	//move
-	if (Keyboard.isKeyDown(Keyboard.KEY_I))
-	{
-		mKeyCurrent |= mKeyUp;
-	}
-
-
-	if (Keyboard.isKeyDown(Keyboard.KEY_K))
-	{
-		mKeyCurrent |= mKeyDown;
-	}
-
-
-	if (Keyboard.isKeyDown(Keyboard.KEY_J))
-	{
-		mKeyCurrent |= mKeyLeft;
-	}
-
-
-	if (Keyboard.isKeyDown(Keyboard.KEY_L))
-	{
-		mKeyCurrent |= mKeyRight;
-	}
-
-	//rotation
-	if (Keyboard.isKeyDown(Keyboard.KEY_G))
-	{
-		mKeyCurrent |= mKeyCounterClockwise;
-	}
-
-	if (Keyboard.isKeyDown(Keyboard.KEY_H))
-	{
-		mKeyCurrent |= mKeyClockwise;
-	}
-
-	mMillisecondsCurrent = (byte) (mFrameTime * 1000);
-}
-*/
-
-};
-
