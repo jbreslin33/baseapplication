@@ -33,24 +33,21 @@ public ApplicationMain(ApplicationBreslin applicationBreslin)
 public void enter()
 {
 	//mApplicationBreslin.showMainScreen();
-		System.out.println("Main:enter");
+	System.out.println("STATE: ApplicationMain");
 }
 
 public void execute()
 {
-	System.out.println("Main:execute");
-	/*
-System.out.println("HHHHHHHHHHHHHHH");
+//System.out.println("execute main");	
         if (Keyboard.isKeyDown(Keyboard.KEY_G))
         {
-
-System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
                 mApplicationBreslin.mPlayingGame = true;
 
-		mApplicationBreslin.sendConnect();
 		mApplicationBreslin.mGame = new Game(mApplicationBreslin);
-                //Set Camera to position and to lookat avatar at 0,0,0(this should be same as ogre! if not fix it)
-                Vector3f startCamPosition = new Vector3f(0, 20, 20);
+		
+                
+		Vector3f startCamPosition = new Vector3f(0, 20, 20);
                 Vector3f lookAtVector     = new Vector3f(0,0,0);
                 Vector3f worldDirection   = new Vector3f(0,1,0);
                 mApplicationBreslin.getCamera().setLocation(startCamPosition);
@@ -64,12 +61,10 @@ System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 		mApplicationBreslin.mStateMachine.setGlobalState(null);
 		mApplicationBreslin.shutdown();
 	}
-*/
 }
 
 public void exit()
 {
-	System.out.println("Main:exit");
 }
 
 }

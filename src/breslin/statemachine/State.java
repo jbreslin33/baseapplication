@@ -7,13 +7,14 @@ public State()
 {
 }
 
-void enter()
+public void enter()
 {
 
 }
-void execute()
+public void execute()
 {
-System.out.println("stddddddddddddd");
 }
-void exit() { }
+public void exit()
+{
+}
 }

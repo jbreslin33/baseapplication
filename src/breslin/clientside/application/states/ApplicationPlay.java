@@ -25,12 +25,11 @@ public ApplicationPlay(ApplicationBreslin applicationBreslin)
 
 public void enter()
 {
-	System.out.println("Play:enter");
+		mApplicationBreslin.sendConnect();
 }
 
 public void execute()
 {
-	System.out.println("Play:execute");
 	if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE))
 	{
 		mApplicationBreslin.mPlayingGame = false;
@@ -45,7 +44,6 @@ public void execute()
 
 public void exit()
 {
-	System.out.println("Play:exit");
 	mApplicationBreslin.shutdown();
 }
 

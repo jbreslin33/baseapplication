@@ -22,19 +22,17 @@ public ApplicationInitialize(ApplicationBreslin applicationBreslin)
 
 public void enter()
 {
-	System.out.println("Init:enter");
+	System.out.println("STATE: ApplicationInitialize");
 }
 
 public void execute()
 {
-	System.out.println("Init:execute");
-	//mApplicationBreslin.mSetup = true;
-   // mApplicationBreslin.mStateMachine.changeState(mApplicationBreslin.mApplicationMain);
+	mApplicationBreslin.mSetup = true;
+   	mApplicationBreslin.mStateMachine.changeState(mApplicationBreslin.mApplicationMain);
 }
 
 public void exit()
 {
-	System.out.println("Init:exit");
 }
 
 }

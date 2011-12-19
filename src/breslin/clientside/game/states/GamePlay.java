@@ -28,6 +28,10 @@ public void enter()
 public void execute()
 {
 
+	for (int i = 0; i < mGame.mShapeVector.size(); i++)
+	{
+		mGame.mShapeVector.get(i).interpolateTick(mGame.mApplicationBreslin.getRenderTime());
+	}
 }
 
 public void exit()

@@ -127,10 +127,12 @@ public static void main(String[] args)
 		theByteArray = s.getBytes();
 	}
 	ApplicationBreslin applicationBreslin = new ApplicationBreslin(theByteArray,30004);
+/*
 	while (true)
 	{
-		applicationBreslin.processUpdate();
+//		applicationBreslin.processUpdate();
 	}
+*/
 }
 
 /***************************************
@@ -176,11 +178,12 @@ private float mRenderTime;
 
 public void processUpdate()
 {
-	//mStateMachine.update();
+//	mStateMachine.update();
 }
 
 public void simpleUpdate(float tpf)
 {
+//	System.out.println("ren:" + tpf);
 	mStateMachine.update();
     mRenderTime = tpf;
 }

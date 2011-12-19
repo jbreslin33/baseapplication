@@ -22,12 +22,10 @@ public ApplicationGlobal(ApplicationBreslin applicationBreslin)
 
 public void enter()
 {
-	System.out.println("Global:enter");
 }
 
 public void execute()
 {
-	System.out.println("Global:execute");
 	if (mApplicationBreslin.mSetup)
 	{
 		//graphics
@@ -37,7 +35,6 @@ public void execute()
 
 public void exit()
 {
-	System.out.println("Global:exit");
 }
 
 }

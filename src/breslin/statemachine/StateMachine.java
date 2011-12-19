@@ -56,7 +56,6 @@ public void  update()
 	}
 	if (mCurrentState != null)
 	{
-		//System.out.println("mCurrentState.execute");
 		mCurrentState.execute();
 	}
  }

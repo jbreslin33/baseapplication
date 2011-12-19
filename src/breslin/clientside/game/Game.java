@@ -148,10 +148,6 @@ public void processUpdate()
 {
 	mStateMachine.update();
 
-	for (int i = 0; i < mShapeVector.size(); i++)
-	{
-		mShapeVector.get(i).interpolateTick(mApplicationBreslin.getRenderTime());
-	}
 }
 
 
