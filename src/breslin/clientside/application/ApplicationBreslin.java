@@ -79,7 +79,7 @@ public class ApplicationBreslin extends SimpleApplication
 public ApplicationBreslin(byte[] serverIP, int serverPort)
 {
 	start();
-
+System.out.println("starestsddddddddddddddddddd");
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
@@ -93,6 +93,7 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 	//game
 	mGame = null;
 
+System.out.println("ffffffffffffffffffffffffff");
 	//state machine (Menus)
 	mStateMachine = new StateMachine();
 
@@ -103,6 +104,7 @@ public ApplicationBreslin(byte[] serverIP, int serverPort)
 
 	mStateMachine.setGlobalState (mApplicationGlobal);
 	mStateMachine.changeState(mApplicationInitialize);
+	System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCC");
 }
 
 
@@ -122,6 +124,11 @@ public static void main(String[] args)
 		theByteArray = s.getBytes();
 	}
 	ApplicationBreslin applicationBreslin = new ApplicationBreslin(theByteArray,30004);
+	while (true)
+	{
+		System.out.println("main");
+		applicationBreslin.processUpdate();
+	}
 }
 
 /***************************************
@@ -167,6 +174,7 @@ private float mRenderTime;
 
 public void processUpdate()
 {
+System.out.println("processUpdate");
 	mStateMachine.update();
 }
 

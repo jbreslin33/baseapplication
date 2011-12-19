@@ -89,7 +89,7 @@ public Network(ApplicationBreslin applicationBreslin, byte[] serverIP, int serve
 	{
 		System.out.println("ERROR in nonblocking socket in network constructor");
 	}
-
+System.out.println("end of netsssssssssssssssssssssssssssssssssssss");
 }
 
 
