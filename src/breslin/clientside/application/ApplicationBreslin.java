@@ -30,7 +30,6 @@ import breslin.clientside.shape.Shape;
 //standard library
 import com.jme3.math.Vector3f;
 
-
 //parent
 import com.jme3.app.SimpleApplication;
 
@@ -263,7 +262,7 @@ public Vector3f getCameraLocation()
 {
 	return cam.getLocation();
 }
-
+/*
 public void processInput()
 {
         if (Keyboard.isKeyDown(Keyboard.KEY_B))
@@ -283,5 +282,5 @@ public void processInput()
                 System.out.println("slow your roll you already started");
         }
 }
-
+*/
 }

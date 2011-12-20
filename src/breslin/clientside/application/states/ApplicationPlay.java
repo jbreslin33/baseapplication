@@ -25,7 +25,7 @@ public ApplicationPlay(ApplicationBreslin applicationBreslin)
 
 public void enter()
 {
-		mApplicationBreslin.sendConnect();
+
 }
 
 public void execute()

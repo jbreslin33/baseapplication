@@ -52,6 +52,7 @@ void Server::createClient(struct sockaddr *address)
 void Server::addClient(Client* client)
 {
 	mClientVector.push_back(client);
+	LogString("Adding Client");
 }
 
 void Server::sendRemoveShape(Shape* shape)

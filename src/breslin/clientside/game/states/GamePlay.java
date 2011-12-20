@@ -27,11 +27,14 @@ public void enter()
 
 public void execute()
 {
+	//user input
+	mGame.processInput();
 
-	for (int i = 0; i < mGame.mShapeVector.size(); i++)
-	{
-		mGame.mShapeVector.get(i).interpolateTick(mGame.mApplicationBreslin.getRenderTime());
-	}
+	//network outgoing
+	mGame.sendByteBuffer();
+
+	//network ingoing
+	mGame.checkForByteBuffer();
 }
 
 public void exit()

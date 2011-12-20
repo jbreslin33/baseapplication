@@ -34,24 +34,18 @@ public void enter()
 {
 	//mApplicationBreslin.showMainScreen();
 	System.out.println("STATE: ApplicationMain");
+
 }
 
 public void execute()
 {
-//System.out.println("execute main");	
-        if (Keyboard.isKeyDown(Keyboard.KEY_G))
-        {
-System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
-                mApplicationBreslin.mPlayingGame = true;
+	if (Keyboard.isKeyDown(Keyboard.KEY_G))
+    {
+		System.out.println("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 
+		mApplicationBreslin.sendConnect();
 		mApplicationBreslin.mGame = new Game(mApplicationBreslin);
-		
-                
-		Vector3f startCamPosition = new Vector3f(0, 20, 20);
-                Vector3f lookAtVector     = new Vector3f(0,0,0);
-                Vector3f worldDirection   = new Vector3f(0,1,0);
-                mApplicationBreslin.getCamera().setLocation(startCamPosition);
-                mApplicationBreslin.getCamera().lookAt(lookAtVector,worldDirection);
+
 		mApplicationBreslin.mStateMachine.changeState(mApplicationBreslin.mApplicationPlay);
 	}
 

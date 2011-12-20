@@ -28,9 +28,12 @@ import breslin.clientside.ability.move.AbilityMove;
 import java.io.*;
 import java.util.ArrayList;
 import java.nio.ByteBuffer;
+import com.jme3.math.Vector3f;
 
 //keyboard
 import org.lwjgl.input.Keyboard;
+
+
 
 /***************************************
 *           CLASS
@@ -71,16 +74,21 @@ mShapeGhostVector = new ArrayList<Shape>(); //all shapes in the client world's g
 
 
 	mStateMachine = new StateMachine();
-	lobal = new GameGlobal(this);
-	nitialize = new GameInitialize(this);
-	lay = new GamePlay(this);
-	ause = new GamePause(this);
+	mGameGlobal = new GameGlobal(this);
+	mGameInitialize = new GameInitialize(this);
+	mGamePlay = new GamePlay(this);
+	mGamePause = new GamePause(this);
 
-	mStateMachine.setGlobalState(lobal);
-	mStateMachine.changeState(lay);
+	mStateMachine.setGlobalState(mGameGlobal);
+	mStateMachine.changeState(mGamePlay);
 
 	//set Camera
 	// Position it at 500 in Z direction
+	Vector3f startCamPosition = new Vector3f(0, 20, 20);
+    Vector3f lookAtVector     = new Vector3f(0,0,0);
+    Vector3f worldDirection   = new Vector3f(0,1,0);
+    mApplicationBreslin.getCamera().setLocation(startCamPosition);
+    mApplicationBreslin.getCamera().lookAt(lookAtVector,worldDirection);
 
 }
 
@@ -91,10 +99,10 @@ mShapeGhostVector = new ArrayList<Shape>(); //all shapes in the client world's g
 //states
 StateMachine mStateMachine;
 
-State lobal;
-State nitialize;
-State lay;
-State ause;
+State mGameGlobal;
+State mGameInitialize;
+State mGamePlay;
+State mGamePause;
 
 public static final byte mCommandKey          = 1;
 public static final byte mCommandMilliseconds = 2;
@@ -104,7 +112,7 @@ public static final byte mMessageRemoveShape = -104;
 
 
 //applicationBreslin
-ApplicationBreslin mApplicationBreslin;
+public ApplicationBreslin mApplicationBreslin;
 
 //Shapes
 public ArrayList<Shape> mShapeVector = new ArrayList<Shape>(); //all shapes in the client world
@@ -148,6 +156,10 @@ public void processUpdate()
 {
 	mStateMachine.update();
 
+	for (int i = 0; i < mShapeVector.size(); i++)
+	{
+		mShapeVector.get(i).interpolateTick(mApplicationBreslin.getRenderTime());
+	}
 }
 
 
@@ -200,7 +212,7 @@ public void removeShape(ByteBuffer byteBuffer)
 		Network
 **********************************/
 
-private void checkForByteBuffer()
+public void checkForByteBuffer()
 {
 
 	int type = 0;
@@ -267,7 +279,7 @@ private void readServerTick(ByteBuffer byteBuffer)
 	}
 }
 
-private void sendByteBuffer()
+public void sendByteBuffer()
 {
         //bools
         boolean sendKey          = false;
@@ -333,7 +345,7 @@ private void sendByteBuffer()
 /***************************************
 *			INPUT
 ******************************************/
-private void processInput()
+public void processInput()
 {
 	mKeyCurrent = 0;
 
