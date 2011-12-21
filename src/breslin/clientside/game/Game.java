@@ -169,6 +169,7 @@ public void processUpdate()
 
 public void addShape(boolean b, ByteBuffer byteBuffer)
 {
+	System.out.println("addShape");
 	Shape shape = new Shape(mApplicationBreslin,byteBuffer,false);  //you should just need to call this...
 
 	//ability
@@ -219,28 +220,29 @@ public void checkForByteBuffer()
 
 	ByteBuffer byteBuffer = ByteBuffer.allocate(1400);
 
-	byteBuffer.position(0); //BeginReading() c++ equivalent
+	while(mApplicationBreslin.mNetwork.checkForByteBuffer(byteBuffer))
+    {
+		byteBuffer.position(0); //BeginReading() c++ equivalent
 
-	type = byteBuffer.get();
+		type = byteBuffer.get();
 
+		if (mMessageAddShape == type)
+		{
+			addShape(true,byteBuffer);
+		}
 
-	if (mMessageAddShape == type)
-	{
-		addShape(true,byteBuffer);
+		if (mMessageRemoveShape == type)
+		{
+			removeShape(byteBuffer);
+		}
+
+		if (mMessageFrame == type)
+		{
+			readServerTick(byteBuffer);
+		}
+
+		byteBuffer.clear();
 	}
-
-	if (mMessageRemoveShape == type)
-	{
-		removeShape(byteBuffer);
-	}
-
-	if (mMessageFrame == type)
-	{
-		readServerTick(byteBuffer);
-	}
-
-	byteBuffer.clear();
-
 }
 
 
