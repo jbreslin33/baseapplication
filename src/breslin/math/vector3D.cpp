@@ -72,11 +72,18 @@ void Vector3D::add(Vector3D* vectorToAddtoThisOne)
 }
 
 //subtract another vector from this one
-void Vector3D::subtract(Vector3D* vectorToAddtoThisOne)
+void Vector3D::subtract(Vector3D* vectorToSubtract)
 {
-	x = x - vectorToAddtoThisOne->x;
-	y = y - vectorToAddtoThisOne->y;
-	z = z - vectorToAddtoThisOne->z;
+	x = x - vectorToSubtract->x;
+	y = y - vectorToSubtract->y;
+	z = z - vectorToSubtract->z;
+}
+
+void Vector3D::subtract(Vector3D* sub1, Vector3D* sub2)
+{
+	x = sub1->x - sub2->x;
+	y = sub1->y - sub2->y;
+	z = sub1->z - sub2->z;	
 }
 
 //copy values

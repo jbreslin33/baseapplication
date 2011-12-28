@@ -283,7 +283,7 @@ void Server::readPackets()
 						if(memcmp(&mGame->mShapeVector.at(i)->mClient->mMyaddress, &address, sizeof(address)) == 0)
 						{
 							mGame->readDeltaMoveCommand(&mes, mGame->mShapeVector.at(i)->mClient);
-							mGame->mShapeVector.at(i)->processTick();
+							//mGame->mShapeVector.at(i)->processTick();
 
 							break;
 						}

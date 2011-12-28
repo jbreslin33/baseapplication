@@ -49,8 +49,6 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 	//input
 	mKeyCurrent = 0;
 	mKeyLast = 0;
-	mMillisecondsCurrent = 0;
-	mMillisecondsLast = 0;
 
 	//sequence
         mOutgoingSequence               = 1;
@@ -187,7 +185,7 @@ void Game::checkForByteBuffer()
                         break;
 
                         case mMessageFrame:
-							readServerTick(byteBuffer);
+				readServerTick(byteBuffer);
                         break;
                 }
         }
@@ -226,14 +224,14 @@ void Game::sendByteBuffer()
     // Framerate is too high
     if(mRunNetworkTime > (1000 / 60))
     {
-		//create byteBuffer
-		ByteBuffer* byteBuffer = new ByteBuffer();
+	//create byteBuffer
+	ByteBuffer* byteBuffer = new ByteBuffer();
 
-		//WRITE: type
-		byteBuffer->WriteByte(mMessageFrame);
+	//WRITE: type
+	byteBuffer->WriteByte(mMessageFrame);
 
-		//WRITE: sequence
-		byteBuffer->WriteShort(mOutgoingSequence);
+	//WRITE: sequence
+	byteBuffer->WriteShort(mOutgoingSequence);
 
         mOutgoingSequence++; //increase for next time...
 
@@ -246,11 +244,6 @@ void Game::sendByteBuffer()
                 flags |= mCommandKey;
         }
 
-        if(mMillisecondsLast != mMillisecondsCurrent)
-        {
-                flags |= mCommandMilliseconds;
-        }
-
         // Add to the message
         byteBuffer->WriteByte(flags);
 
@@ -260,21 +253,14 @@ void Game::sendByteBuffer()
                 byteBuffer->WriteByte(mKeyCurrent);
         }
 
-        if(flags & mCommandMilliseconds)
-        {
-                //WRITE: milliseconds
-                byteBuffer->WriteByte(mMillisecondsCurrent);
-        }
-
         //set 'last' commands for diff
         mKeyLast = mKeyCurrent;
-        mMillisecondsLast = mMillisecondsCurrent;
 
         // Send the packet
         mApplicationBreslin->mNetwork->send(byteBuffer);
 
-		mRunNetworkTime = 0.0f;
-	}
+	mRunNetworkTime = 0.0f;
+    }
 }
 
 
@@ -327,5 +313,4 @@ void Game::processInput()
 		mKeyCurrent |= mKeyClockwise;
    }
 
-	mMillisecondsCurrent = (int) (mFrameTime * 1000);
 }

@@ -36,11 +36,12 @@ Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, boo
 	//commands
 	mServerCommandLast    = new Command();
 	mServerCommandCurrent = new Command();
-	mCommandToRunOnShape  = new Command();
 
 	//speed
 	mSpeed = 0.0f;
 	mSpeedMax  = 1.66f;
+
+	mVelocity = new Vector3D();
 
 	//spawn orientation
 	mSpawnPosition     = new Vector3D();
@@ -64,7 +65,7 @@ Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, boo
 	{
 		//create a ghost for this shape
 		mGhost = new Shape(mApplicationBreslin,byteBuffer,true);
-		mGhost->setVisible(false);
+		mGhost->setVisible(true);
 	}
 
 }
@@ -138,7 +139,6 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
 	mServerCommandLast->mPosition->copyValuesFrom(mSpawnPosition);
 	mServerCommandCurrent->mPosition->copyValuesFrom(mSpawnPosition);
-	mCommandToRunOnShape->mPosition->copyValuesFrom(mSpawnPosition);
 }
 
 void Shape::spawnShape(Vector3D* position)
@@ -194,10 +194,6 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 {
 	int flags = 0;
 
-	bool moveXChanged = true;
-	bool moveYChanged = true;
-	bool moveZChanged = true;
-
 	// Flags
 	flags = mes->ReadByte();
 
@@ -205,11 +201,7 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 	if(flags & mCommandOriginX)
 	{
 		mServerCommandLast->mPosition->x = mServerCommandCurrent->mPosition->x;
-		mServerCommandCurrent->mPosition->x = mes->ReadFloat();		
-	}
-	else
-	{
-		moveXChanged = false;
+		mServerCommandCurrent->mPosition->x = mes->ReadFloat();	
 	}
 
 	if(flags & mCommandOriginY)
@@ -217,19 +209,11 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 		mServerCommandLast->mPosition->y = mServerCommandCurrent->mPosition->y;
 		mServerCommandCurrent->mPosition->y = mes->ReadFloat();
 	}
-	else
-	{
-		moveYChanged = false;
-	}
 
 	if(flags & mCommandOriginZ)
 	{
 		mServerCommandLast->mPosition->z = mServerCommandCurrent->mPosition->z;
 		mServerCommandCurrent->mPosition->z = mes->ReadFloat();	
-	}
-	else
-	{
-		moveZChanged = false;
 	}
 
 	//rotation
@@ -245,43 +229,13 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 		mServerCommandCurrent->mRotation->z = mes->ReadFloat();
 	}
 
-	//milliseconds
-	if (flags & mApplicationBreslin->mGame->mCommandMilliseconds)
+	//frame time
+	if (flags & mApplicationBreslin->mGame->mCommandFrameTime)
 	{
-		mServerCommandCurrent->mMilliseconds = mes->ReadByte();
-		mCommandToRunOnShape->mMilliseconds = mServerCommandCurrent->mMilliseconds;
+		mServerCommandLast->mFrameTime = mServerCommandCurrent->mFrameTime;
+		mServerCommandCurrent->mFrameTime = mes->ReadByte();
 	}
 
-	if (mServerCommandCurrent->mMilliseconds != 0) 
-	{
-		//position
-		if (moveXChanged)
-		{
-			mServerCommandCurrent->mVelocity->x = mServerCommandCurrent->mPosition->x - mServerCommandLast->mPosition->x;
-		}
-		else
-		{
-			mServerCommandCurrent->mVelocity->x = 0.0;
-		}
-		
-		if (moveYChanged)
-		{
-			mServerCommandCurrent->mVelocity->y = mServerCommandCurrent->mPosition->y - mServerCommandLast->mPosition->y;
-		}
-		else
-		{
-			mServerCommandCurrent->mVelocity->y = 0.0;
-		}
-
-		if (moveZChanged)
-		{
-			mServerCommandCurrent->mVelocity->z = mServerCommandCurrent->mPosition->z - mServerCommandLast->mPosition->z;
-		}
-		else
-		{
-			mServerCommandCurrent->mVelocity->z = 0.0;
-		}
-	}
 	return flags;
 }
 
@@ -309,7 +263,7 @@ void Shape::moveGhostShape()
 }
 /********************************************************
 *
-*				OGRE_SPECIFIC PRIVATE
+*		OGRE_SPECIFIC PRIVATE
 *
 *********************************************************/
 

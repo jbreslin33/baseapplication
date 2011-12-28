@@ -32,7 +32,7 @@ Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector
 ********************************************************/
 
 // ByteBufferes
-static const char mCommandMilliseconds = 2;
+static const char mCommandFrameTime = 2;
 
 
 static const char mMessageAddShape    = -103;
@@ -93,25 +93,15 @@ int mKeyRight;
 int mKeyCounterClockwise;
 int mKeyClockwise;
 
-Vector3D* mPosition;            //finish origin of frame/tick
 Vector3D* mPositionLast;
 
 Vector3D* mPositionBeforeCollision;            //origin of last frame/tick
-
-Vector3D* mPositionVelocity;	         //velocity during frame/tick
 
 Vector3D* mRotation; //rotation during frame/tick
 Vector3D* mRotationLast;
 
 int mKey;               //key pressed
 int mKeyLast; 
-
-int mMilliseconds;      //not used
-
-int mMillisecondsTotal;      //not used
-int mMillisecondsTotalLast;
-
-float mClientFrametime;
 
 /******************************************************
 *				METHODS

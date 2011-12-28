@@ -38,6 +38,7 @@ void normalise();
 void multiply(float num);
 void add     (Vector3D* vectorToAddtoThisOne);
 void subtract(Vector3D* vectorToAddtoThisOne);
+void subtract(Vector3D* sub1, Vector3D* sub2);
 void copyValuesFrom(Vector3D* copyFrom);
 float dot(Vector3D* v2);
 Vector3D* crossProduct(Vector3D* b);

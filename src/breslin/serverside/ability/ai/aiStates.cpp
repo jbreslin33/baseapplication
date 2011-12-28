@@ -43,13 +43,14 @@ Random_AI* Random_AI::Instance()
   static Random_AI instance;
   return &instance;
 }
+
 void Random_AI::enter(AI* ai)
 {
 
 }
+
 void Random_AI::execute(AI* ai)
 {
-
 	srand ( (short)time(NULL) + ai->mShape->mIndex);	/* initialize random seed: */
 	ai->mShape->mKey = rand() % 16 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
 
@@ -61,14 +62,8 @@ void Random_AI::execute(AI* ai)
 	{
 		ai->mShape->mKey = 4;
 	}
-
-	//let's set them both because right now brian uses both. but for us ai guys they should be the same number???
-	ai->mShape->mMillisecondsTotal = ai->mShape->mGame->mFrameTime;
-	ai->mShape->mMilliseconds = ai->mShape->mGame->mFrameTime;
-
-	ai->mShape->mClientFrametime = ai->mShape->mMillisecondsTotal / 1000.0f;
-
 }
+
 void Random_AI::exit(AI* ai)
 {
 }
@@ -78,12 +73,15 @@ No_AI* No_AI::Instance()
 	static No_AI instance;
 	return &instance;
 }
+
 void No_AI::enter(AI* ai)
 {
 }
+
 void No_AI::execute(AI* ai)
 {
 }
+
 void No_AI::exit(AI* ai)
 {
 }

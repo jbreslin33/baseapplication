@@ -24,7 +24,7 @@ public:
 
 //statics
 static const char mCommandKey          = 1;
-static const char mCommandMilliseconds = 2;
+static const char mCommandFrameTime = 2;
 static const char mMessageServerExit = 3;
 
 	Ogre::Root* mRoot;
@@ -32,11 +32,9 @@ static const char mMessageServerExit = 3;
 	Server	*mServer;  //go between for game(contains game logic) and Network(handles sending message across internets)
 
 	//time
-	int		mRealTime;				// Real server up-time in ms
-	int		mServerTime;				// Server frame * 100 ms
-	long	mFramenum;
-	int     mFrameTime;
-
+	int mTickLength;
+	int mFrameTime;
+	int mFrameTimeLast;
 	//shapes
 	std::vector<Shape*> mShapeVector;	//every tangible item in game world..
 

@@ -60,32 +60,41 @@ void Normal_ProcessTick_Move::enter(AbilityMove* abilityMove)
 }
 void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
-	//abilityMove->mShape->appendToTitle("M:Normal");
+	//	abilityMove->mShape->appendToTitle("M:Normal");
 
-	// if distance exceeds threshold && server velocity is zero
-	if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShape->mServerCommandCurrent->mVelocity->isZero())
+	// if distance exceeds threshold && server has a non-zero velocity
+	
+ 	Vector3D* positionDiff = new Vector3D();
+        positionDiff->subtract(abilityMove->mShape->mServerCommandCurrent->mPosition, abilityMove->mShape->mServerCommandLast->mPosition);  
+	
+	if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !positionDiff->isZero())
 	{
 		abilityMove->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
-    }
-    else //server stopped or we are in sync so just use server vel as is..
-    {
-		Vector3D* serverDest = new Vector3D();
-		serverDest->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
-		serverDest->normalise();
+    	}
+    	else //server stopped or we are in sync so just use server vel as is..
+    	{
+		Vector3D* positionDiff = new Vector3D();
 
-        if(abilityMove->mShape->mCommandToRunOnShape->mMilliseconds != 0)
-        {
+		positionDiff->subtract(abilityMove->mShape->mServerCommandCurrent->mPosition, abilityMove->mShape->mServerCommandLast->mPosition);
+		
+        	if(abilityMove->mShape->mServerCommandCurrent->mFrameTime != 0)
+        	{
 			abilityMove->mShape->mSpeed = abilityMove->calcuateSpeed(
-			abilityMove->mShape->mServerCommandCurrent->mVelocity,
-			abilityMove->mShape->mCommandToRunOnShape->mMilliseconds);
-        }
-
-		serverDest->multiply(abilityMove->mShape->mSpeed);
+			positionDiff,
+			abilityMove->mShape->mServerCommandCurrent->mFrameTime);
+        	}
+		else
+		{
+			LogString("mFrameTime == 0");
+		}
+		positionDiff->normalise();
+		positionDiff->multiply(abilityMove->mShape->mSpeed);
 		
 		//keep player from teleporting
-		abilityMove->regulate(serverDest);
-
-		abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(serverDest);
+		abilityMove->regulate(positionDiff);
+		
+		abilityMove->mShape->mVelocity->copyValuesFrom(positionDiff);
+		//abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(serverDest);
 	}
 }
 void Normal_ProcessTick_Move::exit(AbilityMove* abilityMove)
@@ -104,47 +113,55 @@ void Catchup_ProcessTick_Move::enter(AbilityMove* abilityMove)
 }
 void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
-	//abilityMove->mShape->appendToTitle("M:Catchup");
+ 	Vector3D* positionDiff = new Vector3D();
+        positionDiff->subtract(abilityMove->mShape->mServerCommandCurrent->mPosition, abilityMove->mShape->mServerCommandLast->mPosition);  
+	//	abilityMove->mShape->appendToTitle("M:Catchup");
 
 	//if we are back in sync
-    if(abilityMove->mDeltaPosition <= abilityMove->mPosInterpLimitHigh || abilityMove->mShape->mServerCommandCurrent->mVelocity->isZero())
-    {
+    	if(abilityMove->mDeltaPosition <= abilityMove->mPosInterpLimitHigh || positionDiff->isZero())
+    	{
 		abilityMove->mProcessTickStateMachine->changeState(Normal_ProcessTick_Move::Instance());
-    }
-    else
-    {
+    	}
+    	else
+    	{
 		//this is what we will set mCommandToRunOnShape->mVelocity to
-		Vector3D* newVelocity = new Vector3D(); //vector to future server pos
+		Vector3D* positionDiff = new Vector3D(); //vector to future server pos
 
 		//first set newVelocity to most recent velocity from server.
- 		newVelocity->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
+ 		positionDiff->subtract(abilityMove->mShape->mServerCommandCurrent->mPosition, abilityMove->mShape->mServerCommandLast->mPosition);
 
 		//normalise it now we know what direction to head in.
-        newVelocity->normalise();
+        	positionDiff->normalise();
 
 		//le'ts find out how fast
 		//change in position times our interp factor
-        float multiplier = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor;
+        	float multiplier = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor;
 		
 		//multiply our normalized velocity by multiplier(change * interpfactor)
-		newVelocity->multiply(multiplier);
+		positionDiff->multiply(multiplier);
 		
 		//add the latest server position to our newvelocity
-		newVelocity->add(abilityMove->mShape->mServerCommandCurrent->mPosition);
+		positionDiff->add(abilityMove->mShape->mServerCommandCurrent->mPosition);
 
 		//now subtract our current position from our new velocity
-		newVelocity->subtract(abilityMove->mShape->getPosition());
+		positionDiff->subtract(abilityMove->mShape->getPosition());
 
-        //dist from client pos to future server pos
-        float predictDist = pow(newVelocity->x, 2) + pow(newVelocity->y, 2) + pow(newVelocity->z, 2);
-        predictDist = sqrt(predictDist);
+        	//dist from client pos to future server pos
+        	float predictDist = pow(positionDiff->x, 2) + pow(positionDiff->y, 2) + pow(positionDiff->z, 2);
+        	predictDist = sqrt(predictDist);
 
-        //server velocity
-		if(abilityMove->mShape->mCommandToRunOnShape->mMilliseconds != 0)
-        {
+		//this is what we will set mCommandToRunOnShape->mVelocity to
+		Vector3D* positionDiff2 = new Vector3D(); //vector to future server pos
+
+		//first set newVelocity to most recent velocity from server.
+ 		positionDiff2->subtract(abilityMove->mShape->mServerCommandCurrent->mPosition, abilityMove->mShape->mServerCommandLast->mPosition);
+
+        	//server velocity
+		if(abilityMove->mShape->mServerCommandCurrent->mFrameTime != 0)
+        	{
 			abilityMove->mShape->mSpeed = abilityMove->calcuateSpeed(
-			abilityMove->mShape->mServerCommandCurrent->mVelocity,
-			abilityMove->mShape->mCommandToRunOnShape->mMilliseconds);
+			positionDiff2,
+			abilityMove->mShape->mServerCommandCurrent->mFrameTime);
 		   
 			abilityMove->mShape->mSpeed = abilityMove->mShape->mSpeed;
 		}
@@ -154,24 +171,24 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 			//time needed to get to future server pos
 			float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mShape->mSpeed;
 
-			newVelocity->normalise();  //?????what the hell why i am normalizing this after all that work above?
+			positionDiff->normalise();  //?????what the hell why i am normalizing this after all that work above?
 
 			//client vel needed to get to future server pos in time
 			float distTime = predictDist/time;
-			newVelocity->multiply(distTime);
+			positionDiff->multiply(distTime);
 
 			//set newVelocity to mCommandToRunOnShape->mVelocity which is what interpolateTick uses
 			
 			//keep player from "teleporting"
-			abilityMove->regulate(newVelocity);
-
-			abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(newVelocity);
+			abilityMove->regulate(positionDiff);
+			abilityMove->mShape->mVelocity->copyValuesFrom(positionDiff);
+			//abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(newVelocity);
 
 		}
 		else
 		{
 			//why would catchup ever need to set velocity to zero, wouldn't we simply leave catchup state??
-			abilityMove->mShape->mCommandToRunOnShape->mVelocity->zero();
+			//abilityMove->mShape->mCommandToRunOnShape->mVelocity->zero();
 
 		}
 	}
@@ -198,7 +215,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 	Vector3D* transVector = new Vector3D();
 
 	//copy values from mVelocity so we don't make changes to original
-  	transVector->copyValuesFrom(abilityMove->mShape->mCommandToRunOnShape->mVelocity);
+  	transVector->copyValuesFrom(abilityMove->mShape->mVelocity);
 
 	//get the mulitplier
 	float multipliedRenderTime = abilityMove->mShape->mApplicationBreslin->getRenderTime() * 1000;

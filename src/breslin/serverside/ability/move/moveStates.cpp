@@ -10,6 +10,9 @@
 //ability
 #include "move.h"
 
+//game
+#include "../../game/game.h"
+
 //shape
 #include "../../shape/shape.h"
 
@@ -51,9 +54,9 @@ void Normal_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mClientFrametime * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mGame->mFrameTime / 1000.0f * move->mRunSpeed,
 		0,
-		move->mShape->mKeyDirection.z  * move->mShape->mClientFrametime * move->mRunSpeed,
+		move->mShape->mKeyDirection.z  * move->mShape->mGame->mFrameTime / 1000.0f * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Normal_Move::exit(Move* move)
@@ -137,9 +140,9 @@ void Accelerate_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mClientFrametime * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mGame->mFrameTime / 1000.0f * move->mRunSpeed,
 		0,
-		move->mShape->mKeyDirection.z  * move->mShape->mClientFrametime * move->mRunSpeed,
+		move->mShape->mKeyDirection.z  * move->mShape->mGame->mFrameTime / 1000.0f * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Accelerate_Move::exit(Move* move)
@@ -183,9 +186,9 @@ void Decelerate_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mClientFrametime * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mKeyDirection.x * move->mShape->mGame->mFrameTime / 1000.0f * move->mRunSpeed,
 		0,
-		move->mShape->mKeyDirection.z  * move->mShape->mClientFrametime * move->mRunSpeed,
+		move->mShape->mKeyDirection.z  * move->mShape->mGame->mFrameTime / 1000.0f * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Decelerate_Move::exit(Move* move)

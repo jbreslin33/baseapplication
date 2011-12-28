@@ -27,11 +27,9 @@ Game::Game()
 #else
 	mRoot = new Ogre::Root("plugins.cfg");
 #endif
-
-	mRealTime	= 0;
-	mServerTime	= 0;
-	mFramenum	= 0;
+	mTickLength = 32;	
 	mFrameTime  = 0;
+	mFrameTimeLast  = 0;
 }
 
 Game::~Game()
@@ -53,44 +51,36 @@ void Game::createWorld()
 
 void Game::frame(int msec)
 {
-	mRealTime += msec;
-
 	mFrameTime += msec;
-
-	// Read packets from clients
+	
+	// Read packets from clients, this should just for now add bits to mKey representing any keys that have 
+	// been hit we don't care about client time or exact order of keystrokes just how many were recieve in
+	//the time it takes to run a 32ms frame on the server....the client get's what it can in and then the
+	//server runs it and sends it.
 	mServer->readPackets();
 
-	//just processtick for ai guys because their moves come from ai class/states
+	//ok now that the 32ms have elapsed with have our client commands let's process the last tick and
+	// then send the update to clients.
+	//this is where they want to move
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
-		if (mShapeVector.at(i)->mClient == NULL) //your an ai guy
-		{
-			mShapeVector.at(i)->processTick();
-		}
+		mShapeVector.at(i)->processTick();
 	}
-
-	checkCollisions();
-
+	
 	// Wait full 32 ms before allowing to send
-	if(mRealTime < mServerTime)
+	if(mFrameTime < mTickLength)
 	{
-		// never let the time get too far off
-		if(mServerTime - mRealTime > 32)
-		{
-			mRealTime = mServerTime - 32;
-		}
-
 		return;
 	}
+	
 
-	// Bump frame number, and calculate new mServerTime
-	mFramenum++;
-	mServerTime = mFramenum * 32;
-
-	if(mServerTime < mRealTime)
-		mRealTime = mServerTime;
-
+	//this is where they can move..	
+	//checkCollisions();
+	
+	//send positions and exact frame time the calcs where done on which is mFrameTime 
 	sendCommand();
+	mFrameTimeLast = mFrameTime;
+	//LogString("mFrameTime in frame:%d",mFrameTime);	
 	mFrameTime = 0;
 }
 /*
@@ -129,6 +119,7 @@ void Game::checkCollisions()
 
 void Game::collision(Shape* shape1, Shape* shape2)
 {
+/*	
 	shape1->mPosition->copyValuesFrom(shape1->mPositionBeforeCollision);
 	shape2->mPosition->copyValuesFrom(shape2->mPositionBeforeCollision);
 
@@ -139,6 +130,7 @@ void Game::collision(Shape* shape1, Shape* shape2)
 
 	shape1->mSceneNode->setPosition(x3,0.0,z3);
 	shape2->mSceneNode->setPosition(x4,0.0,z4);
+*/
 }
 
 bool Game::checkScope(Client* client, Shape* shape)
@@ -189,26 +181,16 @@ void Game::sendCommand(void)
 	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
 	{
 		storeCommands(mServer->mGame->mShapeVector.at(i));
-		
-		mServer->mGame->mShapeVector.at(i)->mMillisecondsTotal = 0;
 	}
 }
 
 void Game::storeCommands(Shape* shape)
 {
-	shape->mClientFrametime = shape->mClientFrametime;
+	shape->mKeyLast = shape->mKey;
 
-	shape->mKey = shape->mKey;
+	shape->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
 
-	shape->mMilliseconds = shape->mMilliseconds;
-
-	shape->mPosition->copyValuesFrom(shape->mPosition);
-
-	shape->mPositionBeforeCollision->copyValuesFrom(shape->mPositionBeforeCollision);
-
-	shape->mPositionVelocity->copyValuesFrom(shape->mPositionVelocity);
-
-	shape->mRotation->copyValuesFrom(shape->mRotation);
+	shape->mRotationLast->copyValuesFrom(shape->mRotation);
 }
 
 //this is the whole shabang server exit not a player or shape exit
@@ -239,20 +221,7 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 	if(flags & mCommandKey)
 	{
 		client->mShape->mKey = mes->ReadByte();
-		//LogString("key:%d",client->mShape->mKey);
 	}
-
-	// Milliseconds
-	if(flags & mCommandMilliseconds)
-	{
-		client->mShape->mMilliseconds = mes->ReadByte();
-		
-	}
-	//let's keep a tally called mMillisecondsTotal by adding up everytime we ReadDeltaMove...
-	client->mShape->mMillisecondsTotal += client->mShape->mMilliseconds;
-
-	//let's set the shape's clientFrameTime right here.....
-	client->mShape->mClientFrametime = client->mShape->mMilliseconds / 1000.0f;
 }
 
 

@@ -45,13 +45,14 @@ int   mIndex;
 float mSpeed;
 float mSpeedMax; 
 
+Vector3D* mVelocity;
+
 //this is used to rotate to and for debugging. it goes right to lates serverFrame from net.
 Shape* mGhost;
 
 //commands
 Command* mServerCommandLast;
 Command* mServerCommandCurrent;					// the latest frame from server
-Command* mCommandToRunOnShape;
 
 //ogre scene stuff
 Entity*             mEntity;

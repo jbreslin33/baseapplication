@@ -88,12 +88,12 @@ void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
             if(abilityRotation->mServerRotSpeed > 0.0)
             {
 				abilityRotation->mRotationSpeed = abilityRotation->mTurnSpeed;
-				//LogString("N1:%f",abilityRotation->mRotationSpeed);
+				LogString("N1:%f",abilityRotation->mRotationSpeed);
             }
 			else //clockwise - set to -mTurnSpeed
             {
 				abilityRotation->mRotationSpeed = -abilityRotation->mTurnSpeed;
-				//LogString("N2:%f",abilityRotation->mRotationSpeed);
+				LogString("N2:%f",abilityRotation->mRotationSpeed);
             }
 		}
 	}

@@ -10,12 +10,8 @@ Command();
 ~Command();
 	
 Vector3D* mPosition;      //finish origin of frame/tick
-
-Vector3D* mVelocity;	//velocity during frame/tick
-
 Vector3D* mRotation;         //rotation during frame/tick
-
-int mMilliseconds;      //not used
+int mFrameTime;      //not used
 
 };
 #endif

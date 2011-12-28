@@ -43,11 +43,12 @@ void Idle_InterpolateTick_Animation::enter(AbilityAnimation* abilityAnimation)
 
 void Idle_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
 {
-	if (!abilityAnimation->mShape->mCommandToRunOnShape->mVelocity->isZero())
 	{
-		//LogString("IDLE");
+	Vector3D* positionDiff = new Vector3D();
+	positionDiff->subtract(abilityAnimation->mShape->mServerCommandCurrent->mPosition, abilityAnimation->mShape->mServerCommandLast->mPosition);
+ 	
+	if (!positionDiff->isZero())
 		abilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Run_InterpolateTick_Animation::Instance());
-		
 	}
 
 	abilityAnimation->runAnimations();
@@ -71,7 +72,11 @@ void Run_InterpolateTick_Animation::enter(AbilityAnimation* abilityAnimation)
 }
 void Run_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
 {
-	if (abilityAnimation->mShape->mCommandToRunOnShape->mVelocity->isZero())
+		
+	Vector3D* positionDiff = new Vector3D();
+	positionDiff->subtract(abilityAnimation->mShape->mServerCommandCurrent->mPosition, abilityAnimation->mShape->mServerCommandLast->mPosition);
+ 	
+	if (positionDiff->isZero())
 	{
 		abilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Idle_InterpolateTick_Animation::Instance());
 	}
