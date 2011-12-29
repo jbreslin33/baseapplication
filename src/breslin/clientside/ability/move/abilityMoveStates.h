@@ -42,6 +42,19 @@ public:
   void exit   (AbilityMove* abilityMove);
 };
 
+/******************************************************
+*				NORMAL
+********************************************************/
+class Stop_ProcessTick_Move : public AbilityMoveState
+{
+private:
+  Stop_ProcessTick_Move(){}
+public:
+  static Stop_ProcessTick_Move* Instance();
+  void enter  (AbilityMove* abilityMove);
+  void execute(AbilityMove* abilityMove);
+  void exit   (AbilityMove* abilityMove);
+};
 
 /******************************************************
 *				CATCHUP
