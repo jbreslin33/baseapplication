@@ -59,7 +59,7 @@ void Normal_ProcessTick_Move::enter(AbilityMove* abilityMove)
 }
 void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
- //       abilityMove->mShape->appendToTitle("M:Normal");
+        abilityMove->mShape->appendToTitle("M:Normal");
 
         // if distance exceeds threshold && server velocity is zero
         if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShape->mServerCommandCurrent->mVelocity->isZero())
@@ -67,9 +67,9 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
                 abilityMove->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
 	}                
 
-	Vector3D* serverDest = new Vector3D();
-       	serverDest->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
-        serverDest->normalise();
+	Vector3D* serverVelocity = new Vector3D();
+       	serverVelocity->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
+        serverVelocity->normalise();
 
         if(abilityMove->mShape->mCommandToRunOnShape->mFrameTime != 0)
         {
@@ -78,13 +78,14 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
                 abilityMove->mShape->mCommandToRunOnShape->mFrameTime);
         }
 
+//	abilityMove->mShape->mSpeed = abilityMove->mShape->mSpeed * 1.1;
 	//LogString("s:%f",abilityMove->mShape->mSpeed);
-       	serverDest->multiply(abilityMove->mShape->mSpeed);
+       	serverVelocity->multiply(abilityMove->mShape->mSpeed);
                 
         //keep player from teleporting
-        abilityMove->regulate(serverDest);
+ //       abilityMove->regulate(serverVelocity);
 
-        abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(serverDest);
+        abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(serverVelocity);
 }
 void Normal_ProcessTick_Move::exit(AbilityMove* abilityMove)
 {
@@ -103,14 +104,39 @@ void Catchup_ProcessTick_Move::enter(AbilityMove* abilityMove)
 void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
 
-//	abilityMove->mShape->appendToTitle("M:Catchup");
+	abilityMove->mShape->appendToTitle("M:Catchup");
 
         //if we are back in sync
     	if(abilityMove->mDeltaPosition <= abilityMove->mPosInterpLimitHigh || abilityMove->mShape->mServerCommandCurrent->mVelocity->isZero())
     	{
                 abilityMove->mProcessTickStateMachine->changeState(Normal_ProcessTick_Move::Instance());
     	}
-          
+/*
+	Vector3D* serverVelocity = new Vector3D();
+       	serverVelocity->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mPosition);
+	serverVelocity->subtract(abilityMove->mShape->getPosition());
+		
+
+	
+//	serverVelocity->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
+ 
+       serverVelocity->normalise();
+
+        if(abilityMove->mShape->mCommandToRunOnShape->mFrameTime != 0)
+        {
+        	abilityMove->mShape->mSpeed = abilityMove->calcuateSpeed(
+                abilityMove->mShape->mServerCommandCurrent->mVelocity,
+                abilityMove->mShape->mCommandToRunOnShape->mFrameTime);
+        }
+//	abilityMove->mShape->mSpeed = abilityMove->mShape->mSpeed * 1.5;
+	//LogString("s:%f",abilityMove->mShape->mSpeed);
+       	serverVelocity->multiply(abilityMove->mShape->mSpeed);
+                
+        //keep player from teleporting
+ //       abilityMove->regulate(serverVelocity);
+
+        abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(serverVelocity);
+*/          
       //this is what we will set mCommandToRunOnShape->mVelocity to
                 Vector3D* newVelocity = new Vector3D(); //vector to future server pos
 
@@ -161,7 +187,7 @@ abilityMove->mShape->mServerCommandCurrent->mVelocity,
                         //set newVelocity to mCommandToRunOnShape->mVelocity which is what interpolateTick uses
                         
                         //keep player from "teleporting"
-                        abilityMove->regulate(newVelocity);
+//                        abilityMove->regulate(newVelocity);
 
                         abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(newVelocity);
 
