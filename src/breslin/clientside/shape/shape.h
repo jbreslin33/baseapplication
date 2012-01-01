@@ -53,6 +53,7 @@ Shape* mGhost;
 //commands
 Command* mServerCommandLast;
 Command* mServerCommandCurrent;					// the latest frame from server
+Command* mCommandToRunOnShape;
 
 //ogre scene stuff
 Entity*             mEntity;
@@ -61,7 +62,6 @@ Entity*             mEntity;
 ObjectTitle* mObjectTitle;
 std::string  mObjectTitleString;
 
-protected:
 
 int mLocal;
 

@@ -25,7 +25,6 @@ Normal_Move* Normal_Move::Instance()
 }
 void Normal_Move::enter(Move* move)
 {
-
 }
 void Normal_Move::execute(Move* move)
 {

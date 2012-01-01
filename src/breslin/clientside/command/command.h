@@ -11,7 +11,9 @@ Command();
 	
 Vector3D* mPosition;      //finish origin of frame/tick
 Vector3D* mRotation;         //rotation during frame/tick
-int mFrameTime;      //not used
+Vector3D* mVelocity; //this is calculated on the client side and not passed across the network. 
+
+int mFrameTime;      //server frame time i.e time it took for shape to move from point to point.
 
 };
 #endif

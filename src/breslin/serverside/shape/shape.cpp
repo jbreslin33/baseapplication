@@ -233,13 +233,15 @@ void Shape::writeAdd(Client* client)
 
 	client->mMessage.WriteByte(mGame->mServer->mAddShape); // type
 
-	if (client->mShape == this)
+	if (client == mClient)
 	{
 		client->mMessage.WriteByte(1);
+		LogString("write 1");
 	}
 	else
 	{
 		client->mMessage.WriteByte(0);
+		LogString("write 0");
 	}
 	client->mMessage.WriteByte(mIndex);
 			
@@ -329,7 +331,7 @@ void Shape::addToMoveMessage(Message* message)
 	if(flags & mGame->mCommandFrameTime)
 	{
 		message->WriteByte(mGame->mFrameTime);
-		LogString("mFrameTime:%d",mGame->mFrameTime);
+		//LogString("mFrameTime:%d",mGame->mFrameTime);
 	}
 }
 

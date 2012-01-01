@@ -36,7 +36,7 @@ Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, boo
 	//commands
 	mServerCommandLast    = new Command();
 	mServerCommandCurrent = new Command();
-
+	mCommandToRunOnShape  = new Command();
 	//speed
 	mSpeed = 0.0f;
 	mSpeedMax  = 1.66f;
@@ -65,7 +65,7 @@ Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, boo
 	{
 		//create a ghost for this shape
 		mGhost = new Shape(mApplicationBreslin,byteBuffer,true);
-		mGhost->setVisible(true);
+		mGhost->setVisible(false);
 	}
 
 }
@@ -192,51 +192,100 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 
 int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 {
-	int flags = 0;
+        int flags = 0;
 
-	// Flags
-	flags = mes->ReadByte();
+        bool moveXChanged = true;
+        bool moveYChanged = true;
+        bool moveZChanged = true;
 
-	// Origin
-	if(flags & mCommandOriginX)
-	{
-		mServerCommandLast->mPosition->x = mServerCommandCurrent->mPosition->x;
-		mServerCommandCurrent->mPosition->x = mes->ReadFloat();	
-	}
+        // Flags
+        flags = mes->ReadByte();
 
-	if(flags & mCommandOriginY)
-	{
-		mServerCommandLast->mPosition->y = mServerCommandCurrent->mPosition->y;
-		mServerCommandCurrent->mPosition->y = mes->ReadFloat();
-	}
+        // Origin
+        if(flags & mCommandOriginX)
+        {
+                mServerCommandLast->mPosition->x = mServerCommandCurrent->mPosition->x;
+                mServerCommandCurrent->mPosition->x = mes->ReadFloat();         
+        }
+        else
+        {
+                moveXChanged = false;
+        }
 
-	if(flags & mCommandOriginZ)
-	{
-		mServerCommandLast->mPosition->z = mServerCommandCurrent->mPosition->z;
-		mServerCommandCurrent->mPosition->z = mes->ReadFloat();	
-	}
+        if(flags & mCommandOriginY)
+        {
+                mServerCommandLast->mPosition->y = mServerCommandCurrent->mPosition->y;
+                mServerCommandCurrent->mPosition->y = mes->ReadFloat();
+        }
+        else
+        {
+                moveYChanged = false;
+        }
 
-	//rotation
-	if(flags & mCommandRotationX)
-	{
-		mServerCommandLast->mRotation->x = mServerCommandCurrent->mRotation->x;
-		mServerCommandCurrent->mRotation->x = mes->ReadFloat();
-	}
+        if(flags & mCommandOriginZ)
+        {
+                mServerCommandLast->mPosition->z = mServerCommandCurrent->mPosition->z;
+                mServerCommandCurrent->mPosition->z = mes->ReadFloat(); 
+        }
+        else
+        {
+                moveZChanged = false;
+        }
 
-	if(flags & mCommandRotationZ)
-	{
-		mServerCommandLast->mRotation->z = mServerCommandCurrent->mRotation->z;
-		mServerCommandCurrent->mRotation->z = mes->ReadFloat();
-	}
+        //rotation
+        if(flags & mCommandRotationX)
+        {
+                mServerCommandLast->mRotation->x = mServerCommandCurrent->mRotation->x;
+                mServerCommandCurrent->mRotation->x = mes->ReadFloat();
+        }
 
-	//frame time
-	if (flags & mApplicationBreslin->mGame->mCommandFrameTime)
-	{
-		mServerCommandLast->mFrameTime = mServerCommandCurrent->mFrameTime;
-		mServerCommandCurrent->mFrameTime = mes->ReadByte();
-	}
+        if(flags & mCommandRotationZ)
+        {
+                mServerCommandLast->mRotation->z = mServerCommandCurrent->mRotation->z;
+                mServerCommandCurrent->mRotation->z = mes->ReadFloat();
+        }
 
-	return flags;
+        //frame time
+        if (flags & mApplicationBreslin->mGame->mCommandFrameTime)
+        {
+                mServerCommandCurrent->mFrameTime = mes->ReadByte();
+                mCommandToRunOnShape->mFrameTime = mServerCommandCurrent->mFrameTime;
+        }
+
+        if (mServerCommandCurrent->mFrameTime != 0) 
+        {
+                //position
+                if (moveXChanged)
+                {
+                        mServerCommandCurrent->mVelocity->x = mServerCommandCurrent->mPosition->x - mServerCommandLast->mPosition->x;
+	       }
+                else
+                {
+                        mServerCommandCurrent->mVelocity->x = 0.0;
+                }
+                
+                if (moveYChanged)
+                {
+                        mServerCommandCurrent->mVelocity->y = mServerCommandCurrent->mPosition->y - mServerCommandLast->mPosition->y;
+                }
+                else
+                {
+                        mServerCommandCurrent->mVelocity->y = 0.0;
+                }
+
+                if (moveZChanged)
+                {
+                        mServerCommandCurrent->mVelocity->z = mServerCommandCurrent->mPosition->z - mServerCommandLast->mPosition->z;
+                }
+                else
+                {
+                        mServerCommandCurrent->mVelocity->z = 0.0;
+                }
+        }
+	
+	mCommandToRunOnShape->mVelocity->copyValuesFrom(mServerCommandCurrent->mVelocity);
+
+        return flags;
 }
 
 void Shape::interpolateTick(float renderTime)
