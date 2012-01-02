@@ -38,7 +38,7 @@ AbilityRotation::AbilityRotation(Shape* shape)  : Ability(shape)
 	mInterpolateTickStateMachine->setPreviousState     (Normal_InterpolateTick_Rotation::Instance());
 
 	//////rotation
-    mTurnSpeed = 200.0;
+    mTurnSpeed = 250.0;
 
 	mServerRotSpeed = 0.0f;
 	mServerRotSpeedOld = 0.0f;

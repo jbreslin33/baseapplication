@@ -105,7 +105,7 @@ public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boole
 		mGhost = new Shape(mApplicationBreslin,byteBuffer,true);
 		//mGhost.setVisible(false);Display
 
-		mGhost.setVisible(true);
+		mGhost.setVisible(false);
 	}
 
 }
