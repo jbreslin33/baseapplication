@@ -15,7 +15,7 @@
 //shape
 #include "../../shape/shape.h"
 
-#define MAX_TURN_SPEED 250     // character turning in degrees per second
+#define MAX_TURN_SPEED 100     // character turning in degrees per second
 
 Normal_Rotation* Normal_Rotation::Instance()
 {
@@ -104,7 +104,7 @@ void Accelerate_Rotation::execute(Rotation* rotation)
 	}
 
 	//actual rotate
-//	LogString("N:%f",rotation->mRotationSpeed);
+//	LogString("A:%f",rotation->mRotationSpeed);
 	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mGame->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
 }
 void Accelerate_Rotation::exit(Rotation* rotation)
@@ -154,6 +154,7 @@ void Decelerate_Rotation::execute(Rotation* rotation)
 		}
 	}
 
+//	LogString("D:%f",rotation->mRotationSpeed);
 	//actual rotate
 	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mGame->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
 
