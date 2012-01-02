@@ -27,10 +27,8 @@
 GameTag::GameTag()
 {
 	LogString("Hosting GameTag");
-	mBounds->a = new Vector3D(-40.0,0.0f,-40.0f);
-	mBounds->b = new Vector3D(-40.0,0.0f,40.0f);
-	mBounds->c = new Vector3D(40.0,0.0f,40.0f);
-	mBounds->d = new Vector3D(40.0,0.0f,-40.0f);
+	mBounds->a = new Vector3D(-50.0,0.0f,-43.0f);
+	mBounds->c = new Vector3D(50.0,0.0f,57.0f);
 }
 
 GameTag::~GameTag()
@@ -64,28 +62,22 @@ void GameTag::createWorld()
 }
 void GameTag::collision(Shape* shape1, Shape* shape2)
 {
+	//run standard collision code from parent, we don't want players passing thru each other!		
 	Game::collision(shape1,shape2);
 	
-	//LogString("shape1:%d",shape1->mIndex);
-	//LogString("shape2:%d",shape2->mIndex);
 	//let's make someone it
 	if (shape1 == mShapeIt && shape2 != mShapeNoTagBack)
 	{
 		mShapeIt = shape2;
 		mShapeNoTagBack = shape1;
-
-		//LogString("shape1:%d",shape1->mIndex);
-		//LogString("shape2:%d",shape2->mIndex);
 	}
 	else if (shape2 == mShapeIt && shape1 != mShapeNoTagBack)
 	{
 		mShapeIt = shape1;
 		mShapeNoTagBack = shape2;
-
-		//LogString("shape1:%d",shape1->mIndex);
-		//LogString("shape2:%d",shape2->mIndex);
 	}
 }
+
 void GameTag::checkBounds(Shape* shape)
 {
 	if (shape->mSceneNode->getPosition().x < mBounds->a->x)
@@ -108,31 +100,6 @@ void GameTag::checkBounds(Shape* shape)
 	{
 		shape->mSceneNode->setPosition(shape->mSceneNode->getPosition().x, shape->mSceneNode->getPosition().y, mBounds->c->z); 
 	}
-
-/*	
-	if (shape->mSceneNode->getPosition().x > bounds)
-	{
-		shape->mSceneNode->setPosition(bounds, shape->mSceneNode->getPosition().y, shape->mSceneNode->getPosition().z);
-
-	}
-	if (shape->mSceneNode->getPosition().x < bounds * -1)
-	{
-
-		shape->mSceneNode->setPosition(bounds * -1, shape->mSceneNode->getPosition().y, shape->mSceneNode->getPosition().z);
-	}
-	
-	if (shape->mSceneNode->getPosition().z > bounds)
-	{
-
-		shape->mSceneNode->setPosition(shape->mSceneNode->getPosition().x, shape->mSceneNode->getPosition().y, bounds);
-	}
-
-	if (shape->mSceneNode->getPosition().z < bounds * -1)
-	{
-
-		shape->mSceneNode->setPosition(shape->mSceneNode->getPosition().x, shape->mSceneNode->getPosition().y, bounds * -1);
-	}
-*/
 }
 void GameTag::storeCommands(Shape* shape)
 {
