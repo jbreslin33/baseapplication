@@ -196,7 +196,7 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
 
         while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
         {
-                //mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
+                mApplicationBreslin->mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
                 int id = byteBuffer->ReadByte();
 
