@@ -65,7 +65,7 @@ Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, boo
 	{
 		//create a ghost for this shape
 		mGhost = new Shape(mApplicationBreslin,byteBuffer,true);
-		mGhost->setVisible(true);
+		mGhost->setVisible(false);
 	}
 
 }
