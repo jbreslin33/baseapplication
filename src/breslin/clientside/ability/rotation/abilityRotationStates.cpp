@@ -69,34 +69,28 @@ void Normal_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	//->mObjectTitleString.append("R:Normal");
- abilityRotation->mShape->appendToTitle("R:Normal");
+	// abilityRotation->mShape->appendToTitle("R:Normal");
 	
 	// are we too far off you need to change to catchup state
-    if(abs(abilityRotation->mDegreesToServer) > abilityRotation->mRotInterpLimitHigh)
-    {
+    	if(abs(abilityRotation->mDegreesToServer) > abilityRotation->mRotInterpLimitHigh)
+    	{
 		abilityRotation->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Rotation::Instance());
-		return;
-    }
-    else
-    {
-         if (abilityRotation->mServerRotSpeed == 0.0)
-         {
-			abilityRotation->mRotationSpeed = 0.0;
-         }
-         else
-         {
-			// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
-            if(abilityRotation->mServerRotSpeed > 0.0)
-            {
-				abilityRotation->mRotationSpeed = abilityRotation->mTurnSpeed;
-				LogString("N1:%f",abilityRotation->mRotationSpeed);
-            }
-			else //clockwise - set to -mTurnSpeed
-            {
-				abilityRotation->mRotationSpeed = -abilityRotation->mTurnSpeed;
-				LogString("N2:%f",abilityRotation->mRotationSpeed);
-            }
-		}
+    	}
+	if (abilityRotation->mServerRotSpeed == 0.0)
+        {
+		abilityRotation->mRotationSpeed = 0.0;
+        }
+        else
+        {
+		// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
+            	if(abilityRotation->mServerRotSpeed > 0.0)
+            	{
+			abilityRotation->mRotationSpeed = abilityRotation->mTurnSpeed;
+            	}
+		else //clockwise - set to -mTurnSpeed
+            	{
+			abilityRotation->mRotationSpeed = -abilityRotation->mTurnSpeed;
+            	}
 	}
 }
 void Normal_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
@@ -117,46 +111,44 @@ void Catchup_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
- abilityRotation->mShape->appendToTitle("R:Catchup");
+	// abilityRotation->mShape->appendToTitle("R:Catchup");
 	// are we back on track
-    if(abs(abilityRotation->mDegreesToServer) < abilityRotation->mRotInterpLimitLow)
-    {
-       abilityRotation->mProcessTickStateMachine->changeState(Normal_ProcessTick_Rotation::Instance());
-		return;
-    }
-    else
-    {
-		if(abilityRotation->mServerRotSpeed != 0.0)
+    	if(abs(abilityRotation->mDegreesToServer) < abilityRotation->mRotInterpLimitLow)
+    	{
+       		abilityRotation->mProcessTickStateMachine->changeState(Normal_ProcessTick_Rotation::Instance());
+    	}
+	
+	if(abilityRotation->mServerRotSpeed != 0.0)
         {
 			// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
-            if(abilityRotation->mServerRotSpeed > 0.0)
-            {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mTurnSpeed;
-            }
-            else //clockwise - set to -mTurnSpeed
-            {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = -abilityRotation->mTurnSpeed;
-            }
-			if(abilityRotation->mDegreesToServer / abilityRotation->mServerRotSpeed > 0.0)
-            {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed * abilityRotation->mRotInterpIncrease;
-            }
-            else
-            {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed * abilityRotation->mRotInterpDecrease;
-            }
-		}
-        else if(abilityRotation->mServerRotSpeed == 0.0)
+        	if(abilityRotation->mServerRotSpeed > 0.0)
+            	{
+			abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mTurnSpeed;
+            	}
+            	else //clockwise - set to -mTurnSpeed
+            	{
+			abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = -abilityRotation->mTurnSpeed;
+            	}
+		
+		if(abilityRotation->mDegreesToServer / abilityRotation->mServerRotSpeed > 0.0)
+            	{
+			abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed * abilityRotation->mRotInterpIncrease;
+            	}
+            	else
+            	{
+			abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed * abilityRotation->mRotInterpDecrease;
+       	     	}
+	}
+        else if (abilityRotation->mServerRotSpeed == 0.0)
         {
-			if (abilityRotation->mDegreesToServer > 0.0)
-            {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mTurnSpeed;
-            }
-            else //clockwise - set to -mTurnSpeed
-            {
-				abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = -abilityRotation->mTurnSpeed;
-            }
-		}
+		if (abilityRotation->mDegreesToServer > 0.0)
+            	{
+			abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = abilityRotation->mTurnSpeed;
+            	}
+            	else //clockwise - set to -mTurnSpeed
+            	{
+			abilityRotation->mShape->mCommandToRunOnShape->mRotationSpeed = -abilityRotation->mTurnSpeed;
+            	}
 	}
 }
 void Catchup_ProcessTick_Rotation::exit(AbilityRotation* abilityRotation)
@@ -189,9 +181,9 @@ void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 	abilityRotation->mShape->yaw(rotSpeed, true);
 
 	if (abilityRotation->mServerRotSpeed == 0.0 && abs(abilityRotation->getDegreesToServer()) < abilityRotation->mRotInterpLimitLow)
-    {
+    	{
 		abilityRotation->mInterpolateTickStateMachine->changeState(Off_InterpolateTick_Rotation::Instance());
-    }
+    	}
 }
 void Normal_InterpolateTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
@@ -214,9 +206,9 @@ void Off_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {		
 	//->mObjectTitleString.append("R:Off");
 	if (abs(abilityRotation->getDegreesToServer()) > abilityRotation->mRotInterpLimitLow)
-    {
+    	{
 		abilityRotation->mInterpolateTickStateMachine->changeState(Normal_InterpolateTick_Rotation::Instance());
-    }
+    	}
 }
 void Off_InterpolateTick_Rotation::exit(AbilityRotation* abilityRotation)
 {
