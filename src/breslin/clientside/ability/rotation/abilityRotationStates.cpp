@@ -69,6 +69,7 @@ void Normal_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Normal_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	//->mObjectTitleString.append("R:Normal");
+ abilityRotation->mShape->appendToTitle("R:Normal");
 	
 	// are we too far off you need to change to catchup state
     if(abs(abilityRotation->mDegreesToServer) > abilityRotation->mRotInterpLimitHigh)
@@ -116,8 +117,7 @@ void Catchup_ProcessTick_Rotation::enter(AbilityRotation* abilityRotation)
 }
 void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
-	//->mObjectTitleString.append("R:Catchup");
-
+ abilityRotation->mShape->appendToTitle("R:Catchup");
 	// are we back on track
     if(abs(abilityRotation->mDegreesToServer) < abilityRotation->mRotInterpLimitLow)
     {

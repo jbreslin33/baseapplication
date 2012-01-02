@@ -38,7 +38,7 @@ AbilityRotation::AbilityRotation(Shape* shape)  : Ability(shape)
 	mInterpolateTickStateMachine->setPreviousState     (Normal_InterpolateTick_Rotation::Instance());
 
 	//////rotation
-    mTurnSpeed = 250.0;
+    mTurnSpeed = 750.0;
 
 	mServerRotSpeed = 0.0f;
 	mServerRotSpeedOld = 0.0f;
@@ -46,7 +46,7 @@ AbilityRotation::AbilityRotation(Shape* shape)  : Ability(shape)
 
     mRotInterpLimitHigh = 6.0; //how far away from server till we try to catch up
     mRotInterpLimitLow  = 4.0; //how close to server till we are in sync
-    mRotInterpIncrease  = 1.20f; //rot factor used to catchup to server
+    mRotInterpIncrease  = 50.40f; //rot factor used to catchup to server
     mRotInterpDecrease  = 0.80f; //rot factor used to allow server to catchup to client
 
 	//rotation
@@ -67,7 +67,9 @@ AbilityRotation::~AbilityRotation()
 ********************************************************/
 void AbilityRotation::processTick()
 {
-	mProcessTickStateMachine->update();
+//	LogString("rb:%f",mRotationSpeed);
+		mProcessTickStateMachine->update();
+//	LogString("ra:%f",mRotationSpeed);
 }
 void AbilityRotation::interpolateTick(float renderTime)
 {
