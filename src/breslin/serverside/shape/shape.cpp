@@ -166,15 +166,16 @@ void Shape::processTick()
 {
 	setKeyDirection();
 
+	mPositionBeforeCollision->x = mSceneNode->getPosition().x;
+    	mPositionBeforeCollision->y = mSceneNode->getPosition().y;
+    	mPositionBeforeCollision->z = mSceneNode->getPosition().z;
+	
 	//process ticks on abilitys
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
 		mAbilityVector.at(i)->processTick();
 	}
 	
-	//mPositionBeforeCollision->x = mSceneNode->getPosition().x;
-    	//mPositionBeforeCollision->y = mSceneNode->getPosition().y;
-    	//mPositionBeforeCollision->z = mSceneNode->getPosition().z;
 
 	Ogre::Quaternion orientation = mSceneNode->getOrientation();
     	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;

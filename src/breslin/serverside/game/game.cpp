@@ -67,15 +67,14 @@ void Game::frame(int msec)
 		mShapeVector.at(i)->processTick();
 	}
 	
+	//this is where they can move..	
+	checkCollisions();
+	
 	// Wait full 32 ms before allowing to send
 	if(mFrameTime < mTickLength)
 	{
 		return;
 	}
-	
-
-	//this is where they can move..	
-	//checkCollisions();
 	
 	//send positions and exact frame time the calcs where done on which is mFrameTime 
 	sendCommand();
@@ -119,9 +118,9 @@ void Game::checkCollisions()
 
 void Game::collision(Shape* shape1, Shape* shape2)
 {
-/*	
-	shape1->mPosition->copyValuesFrom(shape1->mPositionBeforeCollision);
-	shape2->mPosition->copyValuesFrom(shape2->mPositionBeforeCollision);
+	
+//	shape1->mPosition->copyValuesFrom(shape1->mPositionBeforeCollision);
+//	shape2->mPosition->copyValuesFrom(shape2->mPositionBeforeCollision);
 
 	float x3 = shape1->mPositionBeforeCollision->x;
 	float z3 = shape1->mPositionBeforeCollision->z;
@@ -130,7 +129,7 @@ void Game::collision(Shape* shape1, Shape* shape2)
 
 	shape1->mSceneNode->setPosition(x3,0.0,z3);
 	shape2->mSceneNode->setPosition(x4,0.0,z4);
-*/
+
 }
 
 bool Game::checkScope(Client* client, Shape* shape)
