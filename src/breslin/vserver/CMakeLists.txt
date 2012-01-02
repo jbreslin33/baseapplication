@@ -138,6 +138,9 @@ set(HDRS
 	
 	#math
 	../math/vector3D.h
+
+	#bounds
+	../serverside/bounds/bounds.h	
 	
 	#message
 	../serverside/message/message.h
@@ -199,6 +202,9 @@ set(SRCS
 	
 	#math
 	../math/vector3D.cpp
+	
+	#bounds
+	../serverside/bounds/bounds.cpp	
 	
 	#message
 	../serverside/message/message.cpp
@@ -270,6 +276,9 @@ set(HDRS
 		
 	#math
 	../math/vector3D.h
+
+	#bounds
+	../serverside/bounds/bounds.h
 	
 	#message
 	../serverside/message/message.h
@@ -331,6 +340,9 @@ set(SRCS
 	
 	#math
 	../math/vector3D.cpp
+	
+	#bounds
+	../serverside/bounds/bounds.cpp
 	
 	#message
 	../serverside/message/message.cpp
