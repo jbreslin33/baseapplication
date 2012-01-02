@@ -17,7 +17,7 @@ class Server;
 class Client;
 class Shape;
 class Vector3D;
-
+class Bounds;
 class Game
 {
 public:
@@ -32,11 +32,7 @@ static const char mMessageServerExit = 3;
 	Server	*mServer;  //go between for game(contains game logic) and Network(handles sending message across internets)
 
 	//bounds
-	float bounds;	
-
-	//boundary
-	Ogre::Rectangle* boundaryRectangle;
-
+	Bounds* mBounds;	
 
 	//time
 	int mTickLength;

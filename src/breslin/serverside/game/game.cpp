@@ -18,6 +18,9 @@
 //math
 #include "../../math/vector3D.h"
 
+//bounds
+#include "../bounds/bounds.h"
+
 Game::Game()
 {
 	StartLog();
@@ -31,8 +34,7 @@ Game::Game()
 	mFrameTime  = 0;
 	mFrameTimeLast  = 0;
 
-	bounds = 40.0f;
-	//boundaryRectangle(	
+	mBounds = new Bounds();
 }
 
 Game::~Game()
