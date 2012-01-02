@@ -30,6 +30,9 @@ Game::Game()
 	mTickLength = 32;	
 	mFrameTime  = 0;
 	mFrameTimeLast  = 0;
+
+	bounds = 40.0f;
+	//boundaryRectangle(	
 }
 
 Game::~Game()
@@ -65,6 +68,8 @@ void Game::frame(int msec)
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
 		mShapeVector.at(i)->processTick();
+	
+		checkBounds(mShapeVector.at(i));
 	}
 	
 	//this is where they can move..	
@@ -115,7 +120,10 @@ void Game::checkCollisions()
 		}
 	}
 }
+void Game::checkBounds(Shape* shape)
+{
 
+}
 void Game::collision(Shape* shape1, Shape* shape2)
 {
 	

@@ -79,8 +79,31 @@ void GameTag::collision(Shape* shape1, Shape* shape2)
 		//LogString("shape2:%d",shape2->mIndex);
 	}
 }
+void GameTag::checkBounds(Shape* shape)
+{
+	if (shape->mSceneNode->getPosition().x > bounds)
+	{
+		shape->mSceneNode->setPosition(bounds, shape->mSceneNode->getPosition().y, shape->mSceneNode->getPosition().z);
 
+	}
+	if (shape->mSceneNode->getPosition().x < bounds * -1)
+	{
 
+		shape->mSceneNode->setPosition(bounds * -1, shape->mSceneNode->getPosition().y, shape->mSceneNode->getPosition().z);
+	}
+	
+	if (shape->mSceneNode->getPosition().z > bounds)
+	{
+
+		shape->mSceneNode->setPosition(shape->mSceneNode->getPosition().x, shape->mSceneNode->getPosition().y, bounds);
+	}
+
+	if (shape->mSceneNode->getPosition().z < bounds * -1)
+	{
+
+		shape->mSceneNode->setPosition(shape->mSceneNode->getPosition().x, shape->mSceneNode->getPosition().y, bounds * -1);
+	}
+}
 void GameTag::storeCommands(Shape* shape)
 {
 	Game::storeCommands(shape);

@@ -31,6 +31,13 @@ static const char mMessageServerExit = 3;
 
 	Server	*mServer;  //go between for game(contains game logic) and Network(handles sending message across internets)
 
+	//bounds
+	float bounds;	
+
+	//boundary
+	Ogre::Rectangle* boundaryRectangle;
+
+
 	//time
 	int mTickLength;
 	int mFrameTime;
@@ -62,7 +69,8 @@ public:
 	//collision detection
 	virtual void checkCollisions();
 	virtual void collision(Shape* shape1, Shape* shape2);
-	
+	virtual void checkBounds(Shape* shape);
+		
 	//scope
  	bool    checkScope(Client* client, Shape* shape);
 
