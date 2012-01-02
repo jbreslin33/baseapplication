@@ -73,6 +73,8 @@ public Shape(ApplicationBreslin applicationBreslin, ByteBuffer byteBuffer, boole
 	mServerCommandCurrent = new Command();
 	mCommandToRunOnShape  = new Command();
 
+	mVelocity = new Vector3D();
+
 	//speed
 	mSpeed     = 0;
 	mSpeedMax  = 1.66f;
@@ -123,6 +125,8 @@ public int   mIndex;
 //speed
 public float mSpeed;
 public float mSpeedMax;
+
+public Vector3D mVelocity;
 
 //ghost
 public Shape mGhost;
@@ -370,7 +374,7 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 	int i = flags & mCommandOriginX;
 	if(i == 4)
 	{
-		mServerCommandCurrent.mPositionOld.x = mServerCommandCurrent.mPosition.x;
+		mServerCommandLast.mPosition.x = mServerCommandCurrent.mPosition.x;
 
 		mServerCommandCurrent.mPosition.x = convertIntToFloat(byteBuffer);
 	}
@@ -382,7 +386,7 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 	i = flags & mCommandOriginY;
 	if(i == 8)
 	{
-		mServerCommandCurrent.mPositionOld.y = mServerCommandCurrent.mPosition.y;
+		mServerCommandLast.mPosition.y = mServerCommandCurrent.mPosition.y;
 
 		mServerCommandCurrent.mPosition.y = convertIntToFloat(byteBuffer);
 	}
@@ -394,7 +398,7 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 	i = flags & mCommandOriginZ;
 	if(i == 16)
 	{
-		mServerCommandCurrent.mPositionOld.z = mServerCommandCurrent.mPosition.z;
+		mServerCommandLast.mPosition.z = mServerCommandCurrent.mPosition.z;
 
 		mServerCommandCurrent.mPosition.z = convertIntToFloat(byteBuffer);
 	}
@@ -407,56 +411,56 @@ public int parseDeltaByteBuffer(ByteBuffer byteBuffer)
 	i = flags & mCommandRotationX;
 	if(i == 32)
 	{
-		mServerCommandCurrent.mRotOld.x = mServerCommandCurrent.mRot.x;
+		mServerCommandLast.mRotation.x = mServerCommandCurrent.mRotation.x;
 
-		mServerCommandCurrent.mRot.x = convertIntToFloat(byteBuffer);
+		mServerCommandCurrent.mRotation.x = convertIntToFloat(byteBuffer);
 	}
 
 	i = flags & mCommandRotationZ;
 	if(i == 64)
 	{
-		mServerCommandCurrent.mRotOld.z = mServerCommandCurrent.mRot.z;
+		mServerCommandLast.mRotation.z = mServerCommandCurrent.mRotation.z;
 
-		mServerCommandCurrent.mRot.z = convertIntToFloat(byteBuffer);
+		mServerCommandCurrent.mRotation.z = convertIntToFloat(byteBuffer);
 	}
 
-	i = flags & mApplicationBreslin.mGame.mCommandMilliseconds;
+	i = flags & mApplicationBreslin.mGame.mCommandFrameTime;
 	//milliseconds
 	if (i == 2)
 	{
-		mServerCommandCurrent.mMilliseconds = byteBuffer.get();
-		mCommandToRunOnShape.mMilliseconds = mServerCommandCurrent.mMilliseconds;
+		mServerCommandCurrent.mFrameTime = byteBuffer.get();
+		mCommandToRunOnShape.mFrameTime = mServerCommandCurrent.mFrameTime;
 	}
 
 //set rotation direct from here using yaw....
-	if (mServerCommandCurrent.mMilliseconds != 0)
+	if (mServerCommandCurrent.mFrameTime != 0)
 	{
 		//position
 		if (moveXChanged)
 		{
-			mServerCommandCurrent.mMoveVelocity.x = mServerCommandCurrent.mPosition.x - mServerCommandCurrent.mPositionOld.x;
+			mServerCommandCurrent.mVelocity.x = mServerCommandCurrent.mPosition.x - mServerCommandLast.mPosition.x;
 		}
 		else
 		{
-			mServerCommandCurrent.mMoveVelocity.x = 0.0f;
+			mServerCommandCurrent.mVelocity.x = 0.0f;
 		}
 
 		if (moveYChanged)
 		{
-			mServerCommandCurrent.mMoveVelocity.y = mServerCommandCurrent.mPosition.y - mServerCommandCurrent.mPositionOld.y;
+			mServerCommandCurrent.mVelocity.y = mServerCommandCurrent.mPosition.y - mServerCommandLast.mPosition.y;
 		}
 		else
 		{
-			mServerCommandCurrent.mMoveVelocity.y = 0.0f;
+			mServerCommandCurrent.mVelocity.y = 0.0f;
 		}
 
 		if (moveZChanged)
 		{
-			mServerCommandCurrent.mMoveVelocity.z = mServerCommandCurrent.mPosition.z - mServerCommandCurrent.mPositionOld.z;
+			mServerCommandCurrent.mVelocity.z = mServerCommandCurrent.mPosition.z - mServerCommandLast.mPosition.z;
 		}
 		else
 		{
-			mServerCommandCurrent.mMoveVelocity.z = 0.0f;
+			mServerCommandCurrent.mVelocity.z = 0.0f;
 		}
 	}
 	return flags;

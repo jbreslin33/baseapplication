@@ -58,7 +58,7 @@ public void execute(AbilityMove abilityMove)
 	Vector3D transVector = new Vector3D();
 
 	//copy values from mMoveVelocity so we don't make changes to original
-  	transVector.copyValuesFrom(abilityMove.mShape.mCommandToRunOnShape.mMoveVelocity);
+  	transVector.copyValuesFrom(abilityMove.mShape.mCommandToRunOnShape.mVelocity);
 
 	//get the mulitplier
 	float multipliedRenderTime = abilityMove.mShape.mApplicationBreslin.getRenderTime() * 1000;

@@ -68,18 +68,18 @@ public void execute(AbilityRotation abilityRotation)
 
          if (abilityRotation.mServerRotSpeed == 0.0)
          {
-			abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed = 0.0f;
+			abilityRotation.mShape.mCommandToRunOnShape.mRotationSpeed = 0.0f;
          }
          else
          {
 			// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
             if(abilityRotation.mServerRotSpeed > 0.0)
             {
-				abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed = abilityRotation.mTurnSpeed;
+				abilityRotation.mShape.mCommandToRunOnShape.mRotationSpeed = abilityRotation.mTurnSpeed;
             }
 			else //clockwise - set to -mTurnSpeed
             {
-				abilityRotation.mShape.mCommandToRunOnShape.mRotSpeed = -abilityRotation.mTurnSpeed;
+				abilityRotation.mShape.mCommandToRunOnShape.mRotationSpeed = -abilityRotation.mTurnSpeed;
             }
 		}
 	}

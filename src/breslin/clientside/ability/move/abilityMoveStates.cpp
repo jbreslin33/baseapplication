@@ -170,7 +170,6 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 abilityMove->mShape->mServerCommandCurrent->mVelocity,
                         abilityMove->mShape->mCommandToRunOnShape->mFrameTime);
                    
-                        abilityMove->mShape->mSpeed = abilityMove->mShape->mSpeed;
                 }
 
                 if(abilityMove->mShape->mSpeed != 0.0)

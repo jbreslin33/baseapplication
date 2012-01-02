@@ -54,9 +54,7 @@ Game::Game(ApplicationBreslin* applicationBreslin)
         mOutgoingSequence               = 1;
 
 	//time
-    mFrameTime = 0.0f;
-    mRunNetworkTime = 0.0f;
-
+    	mRunNetworkTime = 0.0f;
 
 	mStateMachine = new StateMachine();
 	mGameGlobal = new GameGlobal(this);
@@ -219,7 +217,6 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
 void Game::sendByteBuffer()
 {
 	mRunNetworkTime += mApplicationBreslin->getRenderTime() * 1000.0f;
-	mFrameTime = mRunNetworkTime / 1000.0f;
 
     // Framerate is too high
     if(mRunNetworkTime > (1000 / 60))

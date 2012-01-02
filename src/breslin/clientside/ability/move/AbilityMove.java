@@ -39,8 +39,6 @@ public AbilityMove(Shape shape)
 	mInterpolateTickStateMachine.setPreviousState     (Normal_InterpolateTick_Move.getAbilityMoveState());
 	mInterpolateTickStateMachine.setGlobalState       (null);
 
-	//speed
-	mSpeed     = 0.0f;
 
     //thresholds
     mPosInterpLimitHigh = .066f; //how far away from server till we try to catch up
@@ -63,9 +61,6 @@ Shape mShape;
 //state machines
 AbilityMoveStateMachine mProcessTickStateMachine;
 AbilityMoveStateMachine mInterpolateTickStateMachine;
-
-//speed
-public float mSpeed;
 
 //thresholds
 public float mPosInterpLimitHigh;

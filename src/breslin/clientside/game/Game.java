@@ -46,9 +46,9 @@ public Game(ApplicationBreslin applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
 
-//Shapes
-mShapeVector = new ArrayList<Shape>(); //all shapes in the client world
-mShapeGhostVector = new ArrayList<Shape>(); //all shapes in the client world's ghost
+	//Shapes
+	mShapeVector = new ArrayList<Shape>(); //all shapes in the client world
+	mShapeGhostVector = new ArrayList<Shape>(); //all shapes in the client world's ghost
 
 
 	//keys
@@ -62,16 +62,12 @@ mShapeGhostVector = new ArrayList<Shape>(); //all shapes in the client world's g
 	//input
 	mKeyCurrent = 0;
 	mKeyLast = 0;
-	mMillisecondsCurrent = 0;
-	mMillisecondsLast = 0;
 
 	//sequence
         mOutgoingSequence               = 1;
 
 	//time
-    mFrameTime = 0.0f;
-    mRunNetworkTime = 0.0f;
-
+    	mRunNetworkTime = 0.0f;
 
 	mStateMachine = new StateMachine();
 	mGameGlobal = new GameGlobal(this);
@@ -85,10 +81,10 @@ mShapeGhostVector = new ArrayList<Shape>(); //all shapes in the client world's g
 	//set Camera
 	// Position it at 500 in Z direction
 	Vector3f startCamPosition = new Vector3f(0, 20, 20);
-    Vector3f lookAtVector     = new Vector3f(0,0,0);
-    Vector3f worldDirection   = new Vector3f(0,1,0);
-    mApplicationBreslin.getCamera().setLocation(startCamPosition);
-    mApplicationBreslin.getCamera().lookAt(lookAtVector,worldDirection);
+    	Vector3f lookAtVector     = new Vector3f(0,0,0);
+    	Vector3f worldDirection   = new Vector3f(0,1,0);
+   	mApplicationBreslin.getCamera().setLocation(startCamPosition);
+    	mApplicationBreslin.getCamera().lookAt(lookAtVector,worldDirection);
 
 }
 
@@ -105,7 +101,7 @@ State mGamePlay;
 State mGamePause;
 
 public static final byte mCommandKey          = 1;
-public static final byte mCommandMilliseconds = 2;
+public static final byte mCommandFrameTime = 2;
 public static final byte mMessageFrame = 1;
 public static final byte mMessageAddShape    = -103;
 public static final byte mMessageRemoveShape = -104;
@@ -130,8 +126,6 @@ int mKeyClockwise;
 //key input
 int mKeyCurrent;
 int mKeyLast;
-int mMillisecondsCurrent;
-int mMillisecondsLast;
 
 //sequences
 short	mOutgoingSequence;
@@ -285,7 +279,6 @@ public void sendByteBuffer()
 {
         //bools
         boolean sendKey          = false;
-        boolean sendMilliseconds = false;
 
         //create byteBuffer
         byte[] mCharArray = new byte[1400];
@@ -298,11 +291,6 @@ public void sendByteBuffer()
         byteBuffer.putShort(mOutgoingSequence);  //sequence
         mOutgoingSequence++; //increase for next time...
 
-        byte one = byteBuffer.get(1);
-        byte two = byteBuffer.get(2);
-        byteBuffer.put(1,two);
-        byteBuffer.put(2,one);
-
         // Build delta-compressed move command
         int flags = 0;
 
@@ -314,14 +302,6 @@ public void sendByteBuffer()
         }
 
 
-        if(mMillisecondsLast != mMillisecondsCurrent)
-        {
-                sendMilliseconds = true;
-
-                flags |= mCommandMilliseconds;
-        }
-
-
         // Add to the message
         byteBuffer.put((byte)flags);
 
@@ -330,15 +310,8 @@ public void sendByteBuffer()
                 byteBuffer.put((byte)mKeyCurrent);
         }
 
-        if (sendMilliseconds)
-        {
-
-                byteBuffer.put((byte)mMillisecondsCurrent);
-        }
-
         //set 'last' commands for diff
         mKeyLast = mKeyCurrent;
-        mMillisecondsLast = mMillisecondsCurrent;
 
         // Send the packet
         mApplicationBreslin.mNetwork.send(byteBuffer);
@@ -386,7 +359,6 @@ public void processInput()
 		mKeyCurrent |= mKeyClockwise;
 	}
 
-	mMillisecondsCurrent = (byte) (mFrameTime * 1000);
 }
 
 

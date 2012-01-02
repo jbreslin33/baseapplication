@@ -82,7 +82,6 @@ int mKeyLast;
 signed short	mOutgoingSequence;
 
 //time
-float mFrameTime;
 float mRunNetworkTime;
 
 /***************************************

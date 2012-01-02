@@ -51,17 +51,15 @@ public void enter(AbilityMove abilityMove)
 public void execute(AbilityMove abilityMove)
 {
 	//if we are back in sync
-    if(abilityMove.mDeltaPosition <= abilityMove.mPosInterpLimitHigh || abilityMove.mShape.mServerCommandCurrent.mMoveVelocity.isZero())
+    if(abilityMove.mDeltaPosition <= abilityMove.mPosInterpLimitHigh || abilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())
     {
 		abilityMove.mProcessTickStateMachine.changeState(Normal_ProcessTick_Move.getAbilityMoveState());
     }
-    else
-    {
 		//this is what we will set mCommandToRunOnShape.mMoveVelocity to
 		Vector3D newVelocity = new Vector3D(); //vector to future server pos
 
 		//first set newVelocity to most recent velocity from server.
- 		newVelocity.copyValuesFrom(abilityMove.mShape.mServerCommandCurrent.mMoveVelocity);
+ 		newVelocity.copyValuesFrom(abilityMove.mShape.mServerCommandCurrent.mVelocity);
 
 		//normalise it now we know what direction to head in.
         newVelocity.normalise();
@@ -87,19 +85,18 @@ public void execute(AbilityMove abilityMove)
         predictDist = (float)java.lang.Math.sqrt(predictDist);
 
         //server velocity
-		if(abilityMove.mShape.mCommandToRunOnShape.mMilliseconds != 0)
+		if(abilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
-			abilityMove.mSpeed = abilityMove.calcuateSpeed(
-			abilityMove.mShape.mServerCommandCurrent.mMoveVelocity,
-			abilityMove.mShape.mCommandToRunOnShape.mMilliseconds);
+			abilityMove.mShape.mSpeed = abilityMove.calcuateSpeed(
+			abilityMove.mShape.mServerCommandCurrent.mVelocity,
+			abilityMove.mShape.mCommandToRunOnShape.mFrameTime);
 
-			abilityMove.mShape.mSpeed = abilityMove.mSpeed;
 		}
 
-		if(abilityMove.mSpeed != 0.0)
+		if(abilityMove.mShape.mSpeed != 0.0)
 		{
 			//time needed to get to future server pos
-			float time = abilityMove.mDeltaPosition * abilityMove.mPosInterpFactor/abilityMove.mSpeed;
+			float time = abilityMove.mDeltaPosition * abilityMove.mPosInterpFactor/abilityMove.mShape.mSpeed;
 
 			newVelocity.normalise();  //?????what the hell why i am normalizing this after all that work above?
 
@@ -111,18 +108,17 @@ public void execute(AbilityMove abilityMove)
 			//LogString("x:%f",newVelocity.x);
 
 			//keep player from "teleporting"
-			abilityMove.regulate(newVelocity);
+			//abilityMove.regulate(newVelocity);
 
-			abilityMove.mShape.mCommandToRunOnShape.mMoveVelocity.copyValuesFrom(newVelocity);
+			abilityMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(newVelocity);
 
 		}
 		else
 		{
 			//why would catchup ever need to set velocity to zero, wouldn't we simply leave catchup state??
-			abilityMove.mShape.mCommandToRunOnShape.mMoveVelocity.zero();
+			abilityMove.mShape.mCommandToRunOnShape.mVelocity.zero();
 
 		}
-	}
 }
 
 public void exit(AbilityMove abilityMove)

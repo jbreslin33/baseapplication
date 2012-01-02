@@ -131,30 +131,30 @@ void Catchup_ProcessTick_Rotation::execute(AbilityRotation* abilityRotation)
 			// if server rot counter-clockwise hardcode server rot to +mTurnSpeed
             if(abilityRotation->mServerRotSpeed > 0.0)
             {
-				abilityRotation->mRotationSpeed = abilityRotation->mTurnSpeed;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotation = abilityRotation->mTurnSpeed;
             }
             else //clockwise - set to -mTurnSpeed
             {
-				abilityRotation->mRotationSpeed = -abilityRotation->mTurnSpeed;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotation = -abilityRotation->mTurnSpeed;
             }
 			if(abilityRotation->mDegreesToServer / abilityRotation->mServerRotSpeed > 0.0)
             {
-				abilityRotation->mRotationSpeed = abilityRotation->mRotationSpeed * abilityRotation->mRotInterpIncrease;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotation = abilityRotation->mShape->mCommandToRunOnShape->mRotation * abilityRotation->mRotInterpIncrease;
             }
             else
             {
-				abilityRotation->mRotationSpeed = abilityRotation->mRotationSpeed * abilityRotation->mRotInterpDecrease;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotation = abilityRotation->mShape->mCommandToRunOnShape->mRotation * abilityRotation->mRotInterpDecrease;
             }
 		}
         else if(abilityRotation->mServerRotSpeed == 0.0)
         {
 			if (abilityRotation->mDegreesToServer > 0.0)
             {
-				abilityRotation->mRotationSpeed = abilityRotation->mTurnSpeed;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotation = abilityRotation->mTurnSpeed;
             }
             else //clockwise - set to -mTurnSpeed
             {
-				abilityRotation->mRotationSpeed = -abilityRotation->mTurnSpeed;
+				abilityRotation->mShape->mCommandToRunOnShape->mRotation = -abilityRotation->mTurnSpeed;
             }
 		}
 	}
@@ -185,7 +185,7 @@ void Normal_InterpolateTick_Rotation::enter(AbilityRotation* abilityRotation)
 void Normal_InterpolateTick_Rotation::execute(AbilityRotation* abilityRotation)
 {
 	//->mObjectTitleString.append("R:Normal");
-	float rotSpeed = abilityRotation->mRotationSpeed * abilityRotation->mShape->mApplicationBreslin->getRenderTime();
+	float rotSpeed = abilityRotation->mShape->mCommandToRunOnShape->mRotation * abilityRotation->mShape->mApplicationBreslin->getRenderTime();
 	abilityRotation->mShape->yaw(rotSpeed, true);
 
 	if (abilityRotation->mServerRotSpeed == 0.0 && abs(abilityRotation->getDegreesToServer()) < abilityRotation->mRotInterpLimitLow)

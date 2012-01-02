@@ -57,30 +57,27 @@ public void enter(AbilityMove abilityMove)
 public void execute(AbilityMove abilityMove)
 {
 	// if distance exceeds threshold && server velocity is zero
-	if(abilityMove.mDeltaPosition > abilityMove.mPosInterpLimitHigh && !abilityMove.mShape.mServerCommandCurrent.mMoveVelocity.isZero())
+	if(abilityMove.mDeltaPosition > abilityMove.mPosInterpLimitHigh && !abilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())
 	{
 		abilityMove.mProcessTickStateMachine.changeState(Catchup_ProcessTick_Move.getAbilityMoveState());
     }
-    else //server stopped or we are in sync so just use server vel as is..
-    {
-		Vector3D serverDest = new Vector3D();
-		serverDest.copyValuesFrom(abilityMove.mShape.mServerCommandCurrent.mMoveVelocity);
-		serverDest.normalise();
+		Vector3D serverVelocity = new Vector3D();
+		serverVelocity.copyValuesFrom(abilityMove.mShape.mServerCommandCurrent.mVelocity);
+		serverVelocity.normalise();
 
-        if(abilityMove.mShape.mCommandToRunOnShape.mMilliseconds != 0)
+        if(abilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
-			abilityMove.mSpeed = abilityMove.calcuateSpeed(
-			abilityMove.mShape.mServerCommandCurrent.mMoveVelocity,
-			abilityMove.mShape.mCommandToRunOnShape.mMilliseconds);
+			abilityMove.mShape.mSpeed = abilityMove.calcuateSpeed(
+			abilityMove.mShape.mServerCommandCurrent.mVelocity,
+			abilityMove.mShape.mCommandToRunOnShape.mFrameTime);
         }
 
-		serverDest.multiply(abilityMove.mSpeed);
+		serverVelocity.multiply(abilityMove.mShape.mSpeed);
 
 		//keep player from teleporting
-		abilityMove.regulate(serverDest);
+		//abilityMove.regulate(serverDest);
 
-		abilityMove.mShape.mCommandToRunOnShape.mMoveVelocity.copyValuesFrom(serverDest);
-	}
+		abilityMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(serverVelocity);
 }
 
 public void exit(AbilityMove abilityMove)
