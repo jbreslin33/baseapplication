@@ -56,7 +56,8 @@ void GameTag::createWorld()
 		Shape* shape = new ShapeTag(getOpenIndex(),this,0,position,new Vector3D(),new Vector3D(),
 			mRoot,true,true,.66f,1,true); 
 
-		mItVector.push_back(shape);
+		mShapeIt = shape;
+		mShapeNoTagBack = shape;
 	}
 }
 void GameTag::collision(Shape* shape1, Shape* shape2)
@@ -65,16 +66,16 @@ void GameTag::collision(Shape* shape1, Shape* shape2)
 	Game::collision(shape1,shape2);
 	
 	//let's make someone it
-	if (shape1 == mItVector.at(0) && shape2 != mNoTagVector.at(0))
+	if (shape1 == mShapeIt && shape2 != mShapeNoTagBack)
 	{
-		mItVector.pop_back();
-		mItVector.push_back(shape2);
+		mShapeIt = shape2;
+		mShapeNoTagBack = shape1;
 	}
-	else if (shape2 == mItVector.at(0) && shape1 != mNoTagVector.at(0))
+	else if (shape2 == mShapeIt && shape1 != mShapeNoTagBack)
 	{
-		mItVector.pop_back();
-		mItVector.push_back(shape1);
-	}	
+		mShapeIt = shape1;
+		mShapeNoTagBack = shape2;
+	}
 }
 
 void GameTag::checkBounds(Shape* shape)
