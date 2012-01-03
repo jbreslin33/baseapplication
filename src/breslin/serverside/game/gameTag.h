@@ -28,11 +28,10 @@ virtual void collision(Shape* shape1, Shape* shape2);
 virtual void storeCommands(Shape* shape);
 virtual void checkBounds(Shape* shape);
 
-
-Shape* mShapeIt;
-Shape* mShapeNoTagBack;
 ServerTag* mServerTag;
-  
+
+std::vector<Shape*> mItVector;  
+std::vector<Shape*> mNoTagVector;
 
 };
 
