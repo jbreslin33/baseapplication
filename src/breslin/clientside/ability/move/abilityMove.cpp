@@ -96,24 +96,28 @@ void AbilityMove::regulate(Vector3D* velocityToRegulate)
 	//x
 	if (velocityToRegulate->x > mMaximunVelocity)
 	{
-		velocityToRegulate->x = mMaximunVelocity;
+		//velocityToRegulate->x = mMaximunVelocity;
+		LogString("x>");
 
 	}
 	
 	if (velocityToRegulate->x < mMaximunVelocity * -1)
 	{
-		velocityToRegulate->x = mMaximunVelocity * -1;
+		//velocityToRegulate->x = mMaximunVelocity * -1;
+		LogString("x<");
 	}
 	
 
 	//z
 	if (velocityToRegulate->z > mMaximunVelocity)
 	{
-		velocityToRegulate->z = mMaximunVelocity;
+		//velocityToRegulate->z = mMaximunVelocity;
+		LogString("z>");
 	}
 
 	if (velocityToRegulate->z < mMaximunVelocity * -1)
 	{
-		velocityToRegulate->z = mMaximunVelocity * -1;
+		//velocityToRegulate->z = mMaximunVelocity * -1;
+		LogString("z<");
 	}
 }

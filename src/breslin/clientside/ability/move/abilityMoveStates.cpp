@@ -59,7 +59,7 @@ void Normal_ProcessTick_Move::enter(AbilityMove* abilityMove)
 }
 void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
-        abilityMove->mShape->appendToTitle("M:Normal");
+        //abilityMove->mShape->appendToTitle("M:Normal");
 
         // if distance exceeds threshold && server velocity is zero
         if(abilityMove->mDeltaPosition > abilityMove->mPosInterpLimitHigh && !abilityMove->mShape->mServerCommandCurrent->mVelocity->isZero())
@@ -79,7 +79,7 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
         }
 
        	serverVelocity->multiply(abilityMove->mShape->mSpeed);
-                
+        //abilityMove->regulate(serverVelocity);
         abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(serverVelocity);
 }
 void Normal_ProcessTick_Move::exit(AbilityMove* abilityMove)
@@ -99,7 +99,7 @@ void Catchup_ProcessTick_Move::enter(AbilityMove* abilityMove)
 void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
 {
 
-	abilityMove->mShape->appendToTitle("M:Catchup");
+	//abilityMove->mShape->appendToTitle("M:Catchup");
 
         //if we are back in sync
     	if(abilityMove->mDeltaPosition <= abilityMove->mPosInterpLimitHigh || abilityMove->mShape->mServerCommandCurrent->mVelocity->isZero())
@@ -153,7 +153,7 @@ abilityMove->mShape->mServerCommandCurrent->mVelocity,
                 newVelocity->multiply(distTime);
 
                 //set newVelocity to mCommandToRunOnShape->mVelocity which is what interpolateTick uses
-                        
+				//abilityMove->regulate(newVelocity);
                 abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(newVelocity);
 	}
         else
