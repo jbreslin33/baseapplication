@@ -46,6 +46,9 @@ void GameTagAll::createWorld()
 {
 	LogString("createWorld in GameTagAll");
 	//ai guys, let's make them sinbads
+
+	Shape* shapeIt;
+
 	for(int i = 0; i < 24; i++)
 	{                 
 		Vector3D* position = new Vector3D();
@@ -58,7 +61,12 @@ void GameTagAll::createWorld()
 
 		mShapeIt = shape;
 		mShapeNoTagBack = shape;
+
+		shapeIt = shape;
 	}
+	mShapeItVector.push_back(shapeIt);
+	mShapeNoTagVector.push_back(shapeIt);
+
 }
 void GameTagAll::collision(Shape* shape1, Shape* shape2)
 {
