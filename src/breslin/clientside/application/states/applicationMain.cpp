@@ -58,6 +58,17 @@ void ApplicationMain::execute()
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}
 
+	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonTagAll)
+	{
+		mApplicationBreslin->mButtonHit = NULL;
+		mApplicationBreslin->sendConnect();
+		mApplicationBreslin->mGame = new GameTag(mApplicationBreslin);
+
+		mApplicationBreslin->hideMainScreen();
+
+		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
+	}
+	
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
 
