@@ -57,6 +57,7 @@ OgreBites::Button* mButtonHit;
 OgreBites::Button* mButtonExit;
 OgreBites::Button* mButtonGame;
 OgreBites::Button* mButtonTag;
+OgreBites::Button* mButtonTagAll;
 
 private:
 

@@ -21,6 +21,7 @@
 
 //game
 #include "../game/gameTag.h"
+#include "../game/gameTagAll.h"
 
 //state machine
 #include "../../statemachine/stateMachine.h"
@@ -140,7 +141,7 @@ void ApplicationBreslin::createScene()
 
                 // create a floor entity, give it a material, and place it at the origin
         Entity* floor = mSceneMgr->createEntity("Floor", "floor");
-        floor->setMaterialName("rockwall");
+        floor->setMaterialName("Examples/Rockwall");
         floor->setCastShadows(false);
         mSceneMgr->getRootSceneNode()->attachObject(floor);
 
@@ -182,6 +183,7 @@ void ApplicationBreslin::createMainScreen()
 	LogString("create buttons");
 	mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
 	mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
+	mButtonTagAll = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTagAll", "Join TagAll");
 	mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
@@ -190,10 +192,12 @@ void ApplicationBreslin::showMainScreen()
 
 	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonTagAll,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
 	mButtonGame->show();
 	mButtonTag->show();	
+	mButtonTagAll->show();	
 	mButtonExit->show();
 	
 	mTrayMgr->showCursor();
@@ -203,6 +207,7 @@ void ApplicationBreslin::hideMainScreen()
 {
 	mButtonGame->hide();
 	mButtonTag->hide();	
+	mButtonTagAll->hide();	
 	mButtonExit->hide();
 }
 

@@ -71,7 +71,6 @@ void ApplicationMain::execute()
 		mApplicationBreslin->mShutDown = true;
 
 		delete mApplicationBreslin;
-
 	}
 }
 
