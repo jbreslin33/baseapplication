@@ -74,6 +74,7 @@ void GameTagAll::collision(Shape* shape1, Shape* shape2)
 	Game::collision(shape1,shape2);
 	
 	//let's make someone it
+	/*
 	if (shape1 == mShapeIt && shape2 != mShapeNoTagBack)
 	{
 		mShapeIt = shape2;
@@ -83,6 +84,14 @@ void GameTagAll::collision(Shape* shape1, Shape* shape2)
 	{
 		mShapeIt = shape1;
 		mShapeNoTagBack = shape2;
+	}
+	*/
+	for (unsigned int i = 0; i < mItVector.size(); i++)
+	{
+		if (shape1 == mShapeItVector.at(i))
+		{
+			
+		}
 	}
 }
 

@@ -25,7 +25,7 @@ virtual void storeCommands(Shape* shape);
 virtual void checkBounds(Shape* shape);
 
 std::vector<Shape*> mShapeItVector;
-std::vector<Shape*> mShapeNoTagVector;
+
 };
 
 #endif
