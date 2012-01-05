@@ -1,31 +1,31 @@
-#ifndef SHAPETAG_H
-#define SHAPETAG_H
+#ifndef SHAPETAGALL_H
+#define SHAPETAGALL_H
 /******************************************
 *            INCLUDES
 ****************************************/
 
-#include "shape.h"
+#include "shapeTag.h"
 
 /******************************************
 *            FORWARD DECLARATIONS
 ****************************************/
-class GameTag;
+class GameTagAll;
 /******************************************
 *            CLASS
 ****************************************/
-class ShapeTag : public	Shape
+class ShapeTagAll : public	ShapeTag
 {
 
 public:
-ShapeTag(unsigned int index, GameTag* gameTag, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+ShapeTagAll(unsigned int index, GameTagAll* gameTagAll, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
-~ShapeTag();
+~ShapeTagAll();
 
 /******************************************
 *            VARIABLES
 ****************************************/
 
-GameTag* mGameTag;
+GameTagAll* mGameTagAll;
 static const char mCommandIt   = 128;
 
 /******************************************

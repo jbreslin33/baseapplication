@@ -111,6 +111,7 @@ set(HDRS
 	../serverside/shape/shape.h
 		#tag
 	../serverside/shape/shapeTag.h
+	../serverside/shape/shapeTagAll.h
 		
 	#move
 	../serverside/ability/move/move.h
@@ -151,12 +152,13 @@ set(HDRS
 	../serverside/server/server.h
 		#tag
 	../serverside/server/serverTag.h
+	../serverside/server/serverTagAll.h
 	
 	#client
 	../serverside/client/client.h
 		#tag
 	../serverside/client/clientTag.h
-	
+	../serverside/client/clientTagAll.h
 )
  
 set(SRCS
@@ -184,6 +186,7 @@ set(SRCS
 	../serverside/shape/shape.cpp
 		#tag
 	../serverside/shape/shapeTag.cpp
+	../serverside/shape/shapeTagAll.cpp
 	
 	#move
 	../serverside/ability/move/move.cpp
@@ -216,11 +219,13 @@ set(SRCS
 	../serverside/server/server.cpp
 		#tag
 	../serverside/server/serverTag.cpp
+	../serverside/server/serverTagAll.cpp
 	
 	#client
 	../serverside/client/client.cpp
 		#tag
 	../serverside/client/clientTag.cpp
+	../serverside/client/clientTagAll.cpp
 
 )
 endif (WIN32)
@@ -251,6 +256,7 @@ set(HDRS
 	../serverside/shape/shape.h
 		#tag
 	../serverside/shape/shapeTag.h
+	../serverside/shape/shapeTagAll.h
 	
 	#move
 	../serverside/ability/move/move.h
@@ -291,11 +297,13 @@ set(HDRS
 	../serverside/server/server.h
 		#tag
 	../serverside/server/serverTag.h
+	../serverside/server/serverTagAll.h
 	
 	#client
 	../serverside/client/client.h
 		#tag
 	../serverside/client/clientTag.h
+	../serverside/client/clientTagAll.h
 	
 )
  
@@ -324,6 +332,7 @@ set(SRCS
 	../serverside/shape/shape.cpp
 		#tag
 	../serverside/shape/shapeTag.cpp
+	../serverside/shape/shapeTagAll.cpp
 	
 	#move
 	../serverside/ability/move/move.cpp
@@ -356,11 +365,13 @@ set(SRCS
 	../serverside/server/server.cpp
 		#tag
 	../serverside/server/serverTag.cpp
+	../serverside/server/serverTagAll.cpp
 	
 	#client
 	../serverside/client/client.cpp
 		#tag
 	../serverside/client/clientTag.cpp
+	../serverside/client/clientTagAll.cpp
 
 )
 endif (UNIX)

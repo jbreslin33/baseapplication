@@ -65,8 +65,6 @@ void GameTagAll::createWorld()
 		shapeIt = shape;
 	}
 	mShapeItVector.push_back(shapeIt);
-	mShapeNoTagVector.push_back(shapeIt);
-
 }
 void GameTagAll::collision(Shape* shape1, Shape* shape2)
 {
@@ -86,12 +84,26 @@ void GameTagAll::collision(Shape* shape1, Shape* shape2)
 		mShapeNoTagBack = shape2;
 	}
 	*/
-	for (unsigned int i = 0; i < mItVector.size(); i++)
+	bool shape1It = false;
+	bool shape2It = false;
+	for (unsigned int i = 0; i < mShapeItVector.size(); i++)
 	{
 		if (shape1 == mShapeItVector.at(i))
 		{
-			
+			shape1It = true;
 		}
+		if (shape2 == mShapeItVector.at(i))
+		{
+			shape2It = true;
+		}
+	}
+	if (shape1It && !shape2It)
+	{
+		mShapeItVector.push_back(shape2);
+	}
+	else if (!shape1It && shape2)
+	{
+		mShapeItVector.push_back(shape1);
 	}
 }
 
