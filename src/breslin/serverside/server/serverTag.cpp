@@ -22,7 +22,6 @@ ServerTag::~ServerTag()
 
 void ServerTag::createClient(struct sockaddr *address)
 {
-	LogString("client ClientTag in ServerTag");
 	Client* client = new ClientTag(this, address);
 	client->createShape();
 	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)

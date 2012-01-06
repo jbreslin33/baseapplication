@@ -45,7 +45,6 @@ Game::~Game()
 
 void Game::createServer()
 {
-	LogString("createServer in Game");
 	mServer = new Server(this,"", 30004);
 }
 
@@ -128,10 +127,6 @@ void Game::checkBounds(Shape* shape)
 }
 void Game::collision(Shape* shape1, Shape* shape2)
 {
-	
-//	shape1->mPosition->copyValuesFrom(shape1->mPositionBeforeCollision);
-//	shape2->mPosition->copyValuesFrom(shape2->mPositionBeforeCollision);
-
 	float x3 = shape1->mPositionBeforeCollision->x;
 	float z3 = shape1->mPositionBeforeCollision->z;
 	float x4 = shape2->mPositionBeforeCollision->x;
@@ -139,7 +134,6 @@ void Game::collision(Shape* shape1, Shape* shape2)
 
 	shape1->mSceneNode->setPosition(x3,0.0,z3);
 	shape2->mSceneNode->setPosition(x4,0.0,z4);
-
 }
 
 bool Game::checkScope(Client* client, Shape* shape)

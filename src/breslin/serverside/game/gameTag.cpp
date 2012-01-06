@@ -26,7 +26,6 @@
 
 GameTag::GameTag()
 {
-	LogString("Hosting GameTag");
 	mBounds->a = new Vector3D(-50.0,0.0f,-43.0f);
 	mBounds->c = new Vector3D(50.0,0.0f,57.0f);
 }
@@ -37,14 +36,12 @@ GameTag::~GameTag()
 
 void GameTag::createServer()
 {
-	LogString("createServer in GameTag breslin");
 	mServerTag = new ServerTag(this,"", 30004);
 	mServer = mServerTag;
 }
 
 void GameTag::createWorld()
 {
-	LogString("createWorld in GameTag");
 	//ai guys, let's make them sinbads
 	for(int i = 0; i < 24; i++)
 	{                 

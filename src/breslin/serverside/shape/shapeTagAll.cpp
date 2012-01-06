@@ -16,7 +16,6 @@ ShapeTagAll::ShapeTagAll(unsigned int index, GameTagAll* gameTagAll, ClientTagAl
 			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 	:
 		ShapeTag(index, gameTagAll,clientTagAll,position,velocity,rotation,root,animated,collidable,collisionRadius,meshCode,ai)
-
 {
 	mGameTagAll = gameTagAll;
 }

@@ -18,7 +18,6 @@
 
 GameTagAll::GameTagAll()
 {
-	LogString("Hosting GameTagAll");
 	mBounds->a = new Vector3D(-50.0,0.0f,-43.0f);
 	mBounds->c = new Vector3D(50.0,0.0f,57.0f);
 }
@@ -29,18 +28,14 @@ GameTagAll::~GameTagAll()
 
 void GameTagAll::createServer()
 {
-	LogString("createServer in GameTagAll breslin");
 	mServerTagAll = new ServerTagAll(this,"", 30004);
 	mServerTag = mServerTagAll;
 	mServer = mServerTag;
-	//mServerTagAll = mServerTag;
 }
 
 void GameTagAll::createWorld()
 {
-	LogString("createWorld in GameTagAll");
 	//ai guys, let's make them sinbads
-
 	Shape* shapeIt;
 
 	for(int i = 0; i < 24; i++)
