@@ -70,6 +70,7 @@ void GameTagAll::collision(Shape* shape1, Shape* shape2)
 			shape2It = true;
 		}
 	}
+
 	if (shape1It && !shape2It)
 	{
 		mShapeItVector.push_back(shape2);
@@ -78,6 +79,13 @@ void GameTagAll::collision(Shape* shape1, Shape* shape2)
 	{
 		mShapeItVector.push_back(shape1);
 	}
+
+	//check for game end
+	if (mShapeItVector.size() == mShapeVector.size())
+	{
+		LogString("Game over");	
+	}
+
 }
 
 void GameTagAll::checkBounds(Shape* shape)
