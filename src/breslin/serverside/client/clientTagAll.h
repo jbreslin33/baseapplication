@@ -13,6 +13,8 @@ public:
 
 ~ClientTagAll();
 
+ServerTagAll* mServerTagAll;
+
 virtual void createShape();
 
 };

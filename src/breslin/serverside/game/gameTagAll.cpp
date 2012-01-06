@@ -5,18 +5,10 @@
 #include "../tdreamsock/dreamSockLog.h"
 
 //server
-#include "../server/serverTag.h"
+#include "../server/serverTagAll.h"
 
 //shape
-#include "../shape/shapeTag.h"
-
-//client
-#include "../client/client.h"
-
-//abilitys
-#include "../ability/rotation/rotation.h"
-#include "../ability/move/move.h"
-#include "../ability/ai/ai.h"
+#include "../shape/shapeTagAll.h"
 
 //math
 #include "../../math/vector3D.h"
@@ -38,8 +30,10 @@ GameTagAll::~GameTagAll()
 void GameTagAll::createServer()
 {
 	LogString("createServer in GameTagAll breslin");
-	mServerTag = new ServerTag(this,"", 30004);
+	mServerTagAll = new ServerTagAll(this,"", 30004);
+	mServerTag = mServerTagAll;
 	mServer = mServerTag;
+	//mServerTagAll = mServerTag;
 }
 
 void GameTagAll::createWorld()
@@ -56,11 +50,8 @@ void GameTagAll::createWorld()
 		position->y = 0.0f;
 		position->z = 1.5f * i;
 
-		Shape* shape = new ShapeTag(getOpenIndex(),this,0,position,new Vector3D(),new Vector3D(),
+		Shape* shape = new ShapeTagAll(getOpenIndex(),this,0,position,new Vector3D(),new Vector3D(),
 			mRoot,true,true,.66f,1,true); 
-
-		mShapeIt = shape;
-		mShapeNoTagBack = shape;
 
 		shapeIt = shape;
 	}

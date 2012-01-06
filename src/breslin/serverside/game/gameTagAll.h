@@ -4,6 +4,8 @@
 //parent
 #include "gameTag.h"
 
+class ServerTagAll;
+
 class GameTagAll : public GameTag
 {
 public:
@@ -24,8 +26,9 @@ virtual void collision(Shape* shape1, Shape* shape2);
 virtual void storeCommands(Shape* shape);
 virtual void checkBounds(Shape* shape);
 
-std::vector<Shape*> mShapeItVector;
 
+std::vector<Shape*> mShapeItVector;
+ServerTagAll* mServerTagAll;
 };
 
 #endif

@@ -6,13 +6,16 @@
 //game
 #include "../game/gameTagAll.h"
 
+//client
+#include "../client/clientTagAll.h"
+
 //math
 #include "../../math/vector3D.h"
 
-ShapeTagAll::ShapeTagAll(unsigned int index, GameTagAll* gameTagAll, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+ShapeTagAll::ShapeTagAll(unsigned int index, GameTagAll* gameTagAll, ClientTagAll* clientTagAll, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 	:
-		ShapeTag(index, gameTagAll,client,position,velocity,rotation,root,animated,collidable,collisionRadius,meshCode,ai)
+		ShapeTag(index, gameTagAll,clientTagAll,position,velocity,rotation,root,animated,collidable,collisionRadius,meshCode,ai)
 
 {
 	mGameTagAll = gameTagAll;
@@ -26,11 +29,15 @@ int ShapeTagAll::setFlag()
 {
 	int flags = Shape::setFlag();
 	
-	if (mGameTag->mShapeIt == this)
+	for (unsigned int i = 0; i < mGameTagAll->mShapeItVector.size(); i++)
 	{
-		flags |= mCommandIt;
+		if (mGameTagAll->mShapeItVector.at(i) == this)
+		{
+			flags |= mCommandIt;
+			LogString("it:%d",mGameTagAll->mShapeItVector.at(i)->mIndex);
+		}
+
 	}
-	
 	return flags;
 }
 
