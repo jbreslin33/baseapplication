@@ -34,7 +34,6 @@ int ShapeTagAll::setFlag()
 		if (mGameTagAll->mShapeItVector.at(i) == this)
 		{
 			flags |= mCommandIt;
-			LogString("it:%d",mGameTagAll->mShapeItVector.at(i)->mIndex);
 		}
 
 	}

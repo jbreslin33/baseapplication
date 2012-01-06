@@ -61,20 +61,7 @@ void GameTagAll::collision(Shape* shape1, Shape* shape2)
 {
 	//run standard collision code from parent, we don't want players passing thru each other!		
 	Game::collision(shape1,shape2);
-	
-	//let's make someone it
-	/*
-	if (shape1 == mShapeIt && shape2 != mShapeNoTagBack)
-	{
-		mShapeIt = shape2;
-		mShapeNoTagBack = shape1;
-	}
-	else if (shape2 == mShapeIt && shape1 != mShapeNoTagBack)
-	{
-		mShapeIt = shape1;
-		mShapeNoTagBack = shape2;
-	}
-	*/
+		
 	bool shape1It = false;
 	bool shape2It = false;
 	for (unsigned int i = 0; i < mShapeItVector.size(); i++)
@@ -92,7 +79,7 @@ void GameTagAll::collision(Shape* shape1, Shape* shape2)
 	{
 		mShapeItVector.push_back(shape2);
 	}
-	else if (!shape1It && shape2)
+	else if (!shape1It && shape2It)
 	{
 		mShapeItVector.push_back(shape1);
 	}
