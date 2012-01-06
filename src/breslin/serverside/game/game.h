@@ -54,6 +54,9 @@ public:
 	//index
 	unsigned int getOpenIndex      ();
 
+	//end game
+	virtual void checkEndOfGame(); { }
+
 	// Network
 	void	sendCommand();
 	void	sendExitNotification();

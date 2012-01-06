@@ -87,6 +87,9 @@ void Game::frame(int msec)
 	mFrameTimeLast = mFrameTime;
 	//LogString("mFrameTime in frame:%d",mFrameTime);	
 	mFrameTime = 0;
+
+	//check for end of game
+	checkEndOfGame();
 }
 /*
 game is tag but what should i do here i think this is where we need to extend classes.
