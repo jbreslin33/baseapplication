@@ -55,7 +55,7 @@ public:
 	unsigned int getOpenIndex      ();
 
 	//end game
-	virtual void checkEndOfGame(); { }
+	virtual void checkEndOfGame() { }
 
 	// Network
 	void	sendCommand();
