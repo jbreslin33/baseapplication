@@ -153,8 +153,6 @@ int Server::checkForTimeout(char *data, struct sockaddr *from)
 			mes.Init(data, sizeof(data));
 			mes.WriteByte(mDisconnect);
 
-			*(struct sockaddr *) from = *mClientVector.at(i)->GetSocketAddress();
-
 			mClientVector.at(i)->remove();
 
 			return mes.GetSize();
