@@ -51,7 +51,6 @@ Client::Client(Server* server, struct sockaddr *address)
 Client::~Client()
 {
 	mServer->mNetwork->dreamSock_CloseSocket(mServer->mNetwork->mSocket);
-	//delete mNetwork;
 }
 
 void Client::sendConnect()

@@ -21,6 +21,11 @@
 //bounds
 #include "../bounds/bounds.h"
 
+//postgresql
+#include <stdio.h>
+#include <postgresql/libpq-fe.h>
+#include <string>
+
 Game::Game()
 {
 	StartLog();
@@ -35,6 +40,8 @@ Game::Game()
 	mFrameTimeLast  = 0;
 
 	mBounds = new Bounds();
+	
+	dbTest();
 }
 
 Game::~Game()
@@ -53,9 +60,19 @@ void Game::createWorld()
 
 }
 
+void Game::dbTest()
+{
+	PGconn          *conn;
+	LogString("declared Connection");
+}
+
 void Game::frame(int msec)
 {
 	mFrameTime += msec;
+
+	// is this where i should interject for browser clients?
+	//if so should i read db or a file to communicate
+
 	
 	// Read packets from clients, this should just for now add bits to mKey representing any keys that have 
 	// been hit we don't care about client time or exact order of keystrokes just how many were recieve in

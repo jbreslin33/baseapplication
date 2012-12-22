@@ -45,6 +45,9 @@ public:
 	Game();
 	~Game();
 
+	//db
+	void dbTest();
+
 	//server
 	virtual void createServer();
 
