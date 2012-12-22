@@ -260,17 +260,16 @@ void Server::readPackets()
 				{
 					if(memcmp(&mClientVector.at(i)->mMyaddress, &address, sizeof(address)) == 0)
 					{
-						//mClientVector.erase(
+						//don't know why i don't do anything here i assume that I am just using
+						//checkForTimeout fallback.	
 					}
 				}
 				break;
 
 			case mMessageFrame:
-			//LogString("Got frame (size: %d bytes)", ret);
-
 				// Skip sequences
 				signed short seq = mes.ReadShort();
-				//LogString("seq:%d",seq);
+				
 				//let's try this with shapes instead.....
 				for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
 				{
@@ -279,8 +278,6 @@ void Server::readPackets()
 						if(memcmp(&mGame->mShapeVector.at(i)->mClient->mMyaddress, &address, sizeof(address)) == 0)
 						{
 							mGame->readDeltaMoveCommand(&mes, mGame->mShapeVector.at(i)->mClient);
-							//mGame->mShapeVector.at(i)->processTick();
-
 							break;
 						}
 					}
