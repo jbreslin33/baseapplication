@@ -63,6 +63,10 @@ void Game::createWorld()
 void Game::dbTest()
 {
 	PGconn          *conn;
+ 	PGresult        *res;
+ 	int             rec_count;
+ 	int             row;
+	int             col;
 	LogString("declared Connection");
 }
 
