@@ -635,4 +635,8 @@ if(WIN32)
 # Need to link this for timeGetTime windows function.
 target_link_libraries (Server winmm) 
 endif(WIN32)
+
+if(UNIX)
+#need this to link to postgresql 
 target_link_libraries (Server pq) 
+endif(UNIX)
