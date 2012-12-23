@@ -225,6 +225,11 @@ void Server::sendPackets()
 	}
 }
 
+void Server::readDB()
+{
+
+}
+
 void Server::readPackets()
 {
 	char data[1400];

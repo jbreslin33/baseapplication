@@ -75,6 +75,7 @@ public:
 	//packets
 	int	 getPacket(char *data, struct sockaddr *from);
 	void sendPackets();
+	void readDB();
 	void readPackets();
 	void parsePacket(Message *mes, struct sockaddr *address);
 	
