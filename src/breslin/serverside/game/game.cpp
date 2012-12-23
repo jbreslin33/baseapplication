@@ -22,9 +22,12 @@
 #include "../bounds/bounds.h"
 
 //postgresql
-#include <stdio.h>
+//#include <stdio.h>
 #include <postgresql/libpq-fe.h>
-#include <string>
+//#include <string>
+
+//#include "polibpq-fe.h"
+//#include "libpq/libpq-fs.h"
 
 Game::Game()
 {
@@ -67,6 +70,7 @@ void Game::dbTest()
  	int             rec_count;
  	int             row;
 	int             col;
+	conn = PQconnectdb("dbname=ljdata host=localhost user=dataman password=supersecret");
 	LogString("declared Connection");
 }
 
