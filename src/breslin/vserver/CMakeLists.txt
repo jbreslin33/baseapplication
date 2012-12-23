@@ -33,17 +33,6 @@ if(UNIX)
 endif(UNIX)
 
 #POSTGRES..........................................
-# - Find the PostgreSQL installation.
-# In Windows, we make the assumption that, if the PostgreSQL files are installed, the default directory
-# will be C:\Program Files\PostgreSQL.
-#
-# This module defines
-#  PostgreSQL_LIBRARIES - the PostgreSQL libraries needed for linking
-#  PostgreSQL_INCLUDE_DIRS - the directories of the PostgreSQL headers
-#  PostgreSQL_VERSION_STRING - the version of PostgreSQL found (since CMake 2.8.8)
-
-#=============================================================================
-# Copyright 2004-2009 Kitware, Inc.
 #
 # Distributed under the OSI-approved BSD License (the "License");
 # see accompanying file Copyright.txt for details.
@@ -646,3 +635,4 @@ if(WIN32)
 # Need to link this for timeGetTime windows function.
 target_link_libraries (Server winmm) 
 endif(WIN32)
+target_link_libraries (Server pq) 
