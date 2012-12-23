@@ -19,6 +19,10 @@
 //game
 #include "../game/game.h"
 
+//postgresql
+#include <stdio.h>
+#include <postgresql/libpq-fe.h>
+
 Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 {
 	init			= false;
@@ -80,7 +84,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	if (type == mConnect)
 	{
 		createClient(address);
-		//LogString("LIBRARY: Server: a client connected succesfully");
+		LogString("LIBRARY: Server: a client connected succesfully");
 	}
 	else
 	{
@@ -227,6 +231,37 @@ void Server::sendPackets()
 
 void Server::readDB()
 {
+        PGconn          *conn;
+        PGresult        *res;
+        int             rec_count;
+        int             row;
+        int             col;
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+        res = PQexec(conn,
+       "select * from users");
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                puts("We did not get any data!");
+                //exit(0);
+        }
+        rec_count = PQntuples(res);
+/*
+        printf("We received %d records.\n", rec_count);
+        puts("==========================");
+        for (row=0; row<rec_count; row++)
+        {
+                for (col=0; col<3; col++)
+                {
+                        printf("%s\t", PQgetvalue(res, row, col));
+                }
+                puts("");
+        }
+
+        puts("==========================");
+*/
+        PQclear(res);
+
+        PQfinish(conn);
 
 }
 

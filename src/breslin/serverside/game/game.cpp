@@ -100,7 +100,7 @@ void Game::frame(int msec)
 
 	// is this where i should interject for browser clients?
 	//if so should i read db or a file to communicate
-	mServer->readDB();
+	//mServer->readDB();
 	
 	// Read packets from clients, this should just for now add bits to mKey representing any keys that have 
 	// been hit we don't care about client time or exact order of keystrokes just how many were recieve in
