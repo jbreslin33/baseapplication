@@ -250,22 +250,6 @@ void Server::readPackets()
 			// Check the type of the message
 			switch(type)
 			{
-			case mConnect:
-
-				break;
-
-			case mDisconnect:
-
-				for (unsigned int i = 0; i < mClientVector.size(); i++)
-				{
-					if(memcmp(&mClientVector.at(i)->mMyaddress, &address, sizeof(address)) == 0)
-					{
-						//don't know why i don't do anything here i assume that I am just using
-						//checkForTimeout fallback.	
-					}
-				}
-				break;
-
 			case mMessageFrame:
 				// Skip sequences
 				signed short seq = mes.ReadShort();
