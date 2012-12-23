@@ -74,6 +74,23 @@ void Game::dbTest()
 		puts("We did not get any data!");
                 //exit(0);
       	}
+	rec_count = PQntuples(res);
+	printf("We received %d records.\n", rec_count);
+        puts("==========================");
+        for (row=0; row<rec_count; row++)
+	{
+        	for (col=0; col<3; col++)
+		{
+              		printf("%s\t", PQgetvalue(res, row, col));
+              	}
+        	puts("");
+      	}
+ 
+        puts("==========================");
+ 
+        PQclear(res);
+ 
+        PQfinish(conn);
 	LogString("declared Connection");
 }
 
