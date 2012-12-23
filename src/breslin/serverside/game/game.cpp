@@ -22,12 +22,8 @@
 #include "../bounds/bounds.h"
 
 //postgresql
-//#include <stdio.h>
+#include <stdio.h>
 #include <postgresql/libpq-fe.h>
-//#include <string>
-
-//#include "polibpq-fe.h"
-//#include "libpq/libpq-fs.h"
 
 Game::Game()
 {
@@ -70,7 +66,14 @@ void Game::dbTest()
  	int             rec_count;
  	int             row;
 	int             col;
-	conn = PQconnectdb("dbname=ljdata host=localhost user=dataman password=supersecret");
+	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+	res = PQexec(conn,
+       "select * from users");
+	if (PQresultStatus(res) != PGRES_TUPLES_OK) 
+	{
+		puts("We did not get any data!");
+                //exit(0);
+      	}
 	LogString("declared Connection");
 }
 
