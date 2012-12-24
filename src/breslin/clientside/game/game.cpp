@@ -218,46 +218,46 @@ void Game::sendByteBuffer()
 {
 	mRunNetworkTime += mApplicationBreslin->getRenderTime() * 1000.0f;
 
-    // Framerate is too high
-    if(mRunNetworkTime > (1000 / 60))
-    {
-	//create byteBuffer
-	ByteBuffer* byteBuffer = new ByteBuffer();
+    	// Framerate is too high
+    	if(mRunNetworkTime > (1000 / 60))
+    	{
+		//create byteBuffer
+		ByteBuffer* byteBuffer = new ByteBuffer();
 
-	//WRITE: type
-	byteBuffer->WriteByte(mMessageFrame);
+		//WRITE: type
+		byteBuffer->WriteByte(mMessageFrame);
 
-	//WRITE: sequence
-	byteBuffer->WriteShort(mOutgoingSequence);
+		//WRITE: sequence
+		byteBuffer->WriteShort(mOutgoingSequence);
 
-        mOutgoingSequence++; //increase for next time...
+        	mOutgoingSequence++; //increase for next time...
 
-        // Build delta-compressed move command
-        int flags = 0;
+        	// Build delta-compressed move command
+        	int flags = 0;
 
-        // Check what needs to be updated
-        if(mKeyLast != mKeyCurrent)
-        {
-                flags |= mCommandKey;
-        }
+        	// Check what needs to be updated
+        	if(mKeyLast != mKeyCurrent)
+        	{
+                	flags |= mCommandKey;
+        	}
 
-        // Add to the message
-        byteBuffer->WriteByte(flags);
+        	// Add to the message
+        	byteBuffer->WriteByte(flags);
 
-        if(flags & mCommandKey)
-        {
-                //WRITE: key
-                byteBuffer->WriteByte(mKeyCurrent);
-        }
+        	if(flags & mCommandKey)
+        	{
+                	//WRITE: key
+                	byteBuffer->WriteByte(mKeyCurrent);
+        	}
 
-        //set 'last' commands for diff
-        mKeyLast = mKeyCurrent;
+        	//set 'last' commands for diff
+        	mKeyLast = mKeyCurrent;
 
-        // Send the packet
-        mApplicationBreslin->mNetwork->send(byteBuffer);
+        	// Send the packet
+        	mApplicationBreslin->mNetwork->send(byteBuffer);
 
-	mRunNetworkTime = 0.0f;
-    }
+		mRunNetworkTime = 0.0f;
+    	}
 }
 
 
