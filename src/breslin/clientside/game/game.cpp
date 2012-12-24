@@ -221,17 +221,6 @@ void Game::sendByteBuffer()
     	// Framerate is too high
     	if(mRunNetworkTime > (1000 / 60))
     	{
-		//create byteBuffer
-		ByteBuffer* byteBuffer = new ByteBuffer();
-
-		//WRITE: type
-		byteBuffer->WriteByte(mMessageFrame);
-
-		//WRITE: sequence
-		byteBuffer->WriteShort(mOutgoingSequence);
-
-        	mOutgoingSequence++; //increase for next time...
-
         	// Build delta-compressed move command
         	int flags = 0;
 
@@ -244,6 +233,17 @@ void Game::sendByteBuffer()
 		{
 			return;
 		}
+
+		//create byteBuffer
+		ByteBuffer* byteBuffer = new ByteBuffer();
+
+		//WRITE: type
+		byteBuffer->WriteByte(mMessageFrame);
+
+		//WRITE: sequence
+		byteBuffer->WriteShort(mOutgoingSequence);
+
+        	mOutgoingSequence++; //increase for next time...
 
         	// Add to the message
         	byteBuffer->WriteByte(flags);
