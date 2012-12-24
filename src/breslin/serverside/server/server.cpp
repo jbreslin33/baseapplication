@@ -80,7 +80,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	mes->BeginReading();
 
 	int type = mes->ReadByte();
-
+	LogString("type:%d",type);
+	
 	if (type == mConnect)
 	{
 		createClient(address);
