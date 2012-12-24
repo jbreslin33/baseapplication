@@ -240,6 +240,10 @@ void Game::sendByteBuffer()
         	{
                 	flags |= mCommandKey;
         	}
+		else
+		{
+			return;
+		}
 
         	// Add to the message
         	byteBuffer->WriteByte(flags);
