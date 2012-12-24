@@ -1,3 +1,2 @@
-cd ../vserver/dist/bin
-/dist/bin
-./Server 1
+cd ../vclient/dist/bin
+./Client 192.168.1.100

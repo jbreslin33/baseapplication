@@ -91,7 +91,6 @@ void Game::dbTest()
         PQclear(res);
  
         PQfinish(conn);
-	LogString("declared Connection");
 }
 
 void Game::frame(int msec)
@@ -130,7 +129,6 @@ void Game::frame(int msec)
 	//send positions and exact frame time the calcs where done on which is mFrameTime 
 	sendCommand();
 	mFrameTimeLast = mFrameTime;
-	//LogString("mFrameTime in frame:%d",mFrameTime);	
 	mFrameTime = 0;
 
 	//check for end of game
@@ -272,7 +270,6 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 	if(flags & mCommandKey)
 	{
 		client->mShape->mKey = mes->ReadByte();
-		//LogString("mKey:%d",client->mShape->mKey);
 	}
 }
 

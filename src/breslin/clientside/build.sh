@@ -1,2 +1,2 @@
-cd ../vserver
+cd ../vclient
 make

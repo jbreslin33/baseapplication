@@ -121,8 +121,6 @@ char *Message::Read(int s)
 char Message::ReadByte(void)
 {
 	char c;
-	LogString("reading:%d",c);
-//LogString("mKey:%d",client->mShape->mKey);
 	if(readCount+1 > size)
 		c = -1;
 	else

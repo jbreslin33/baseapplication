@@ -272,7 +272,6 @@ int Network::dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
 	fromlen = sizeof(tempFrom);
 
 	ret = recvfrom(sock, data, 1400, 0, (struct sockaddr *) &tempFrom, &fromlen);
-	LogString("data:");
 	// Copy the address to the from pointer
 	if(from != NULL)
 		*(struct sockaddr *) from = tempFrom;
