@@ -92,8 +92,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		// Find the correct client by comparing addresses
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
+			LogString("sa_family:%d",address->sa_family);
+			LogString("sa_data 0:%d 1:%d 3:%d",address->sa_data[0],address->sa_data[1], address->sa_data[2]);
 			if(memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
+				LogString("memcmp == true");
 				mClientVector.at(i)->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
 
 				// Check if the type is a positive number
@@ -101,6 +104,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				if(type > 0)
 				{
 					signed short sequence         = mes->ReadShort();
+					LogString("sequence:%d",sequence);
 
 					if(sequence <= mClientVector.at(i)->mIncomingSequence)
 					{
@@ -289,6 +293,7 @@ void Server::readPackets()
 			mes.BeginReading();
 
 			type = mes.ReadByte();
+			//LogString("type:%d",type);
 			
 			// Check the type of the message
 			switch(type)
@@ -296,6 +301,7 @@ void Server::readPackets()
 			case mMessageFrame:
 				// Skip sequences
 				signed short seq = mes.ReadShort();
+				//LogString("seq:%d",seq);
 				
 				//let's try this with shapes instead.....
 				for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)

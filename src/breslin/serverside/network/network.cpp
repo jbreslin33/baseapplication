@@ -26,6 +26,9 @@
 
 #include "../client/client.h"
 
+//for string
+#include <string>
+using namespace std;
 
 Network::Network()
 {
@@ -274,8 +277,13 @@ int Network::dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
 	ret = recvfrom(sock, data, 1400, 0, (struct sockaddr *) &tempFrom, &fromlen);
 	// Copy the address to the from pointer
 	if(from != NULL)
+	{
 		*(struct sockaddr *) from = tempFrom;
-
+	}
+	else
+	{
+		LogString("from is NULL");
+	}
 	if(ret == -1)
 	{
 #ifdef WIN32
