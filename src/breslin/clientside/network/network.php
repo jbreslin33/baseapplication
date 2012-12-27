@@ -55,7 +55,7 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("demo").innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("POST","/breslin/clientside/network/ajax_info.txt",true);
+xmlhttp.open("POST","/breslin/clientside/network/join.php",true);
 xmlhttp.send();
 
 }
