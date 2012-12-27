@@ -32,7 +32,7 @@ log: function(msg)
 // this should call ajax function on server to create a socket
 open: function()
 {
-	
+	this.log('open socket on server');
 },
 
 //this should call ajax function on server to send
