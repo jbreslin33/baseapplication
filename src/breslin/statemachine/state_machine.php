@@ -1,7 +1,7 @@
 var StateMachine = new Class(
 {
 
-initialize: function(x,y)
+initialize: function()
 {
 	this.mCurrentState = 0;
 	this.mPreviousState = 0;
@@ -33,7 +33,7 @@ update: function()
 	}
 	if (this.mCurrentState)
 	{
-		mCurrentState.execute();
+		this.mCurrentState.execute();
 	}
 },
 

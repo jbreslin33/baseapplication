@@ -26,8 +26,19 @@ initialize: function(serverIP, serverPort)
         this.mApplicationPlay   = new ApplicationPlay(this);
 
         this.mStateMachine.setGlobalState (this.mApplicationGlobal);
+        this.mStateMachine.setCurrentState(this.mApplicationInitialize);
         this.mStateMachine.changeState(this.mApplicationInitialize);	
-	
+
+/*
+        mStateMachine->setGlobalState (mApplicationGlobal);
+        mStateMachine->changeState(mApplicationInitialize);
+
+        mStateMachine.setGlobalState (mApplicationGlobal);
+        //mStateMachine.changeState(mApplicationInitialize);
+        mStateMachine.setPreviousState(mApplicationInitialize);
+        mStateMachine.setCurrentState(mApplicationInitialize);
+
+*/	
 	document.getElementById("demo").innerHTML="My First JavaScript";	
 },
 
