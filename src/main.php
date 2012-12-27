@@ -1,3 +1,9 @@
+<?php
+	//create a socket that can be re-used with sock session variable
+        $sock = socket_create(AF_INET, SOCK_DGRAM,0);
+        $_SESSION["sock"] = $sock;
+?>
+
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <html>
 <head>
@@ -32,6 +38,7 @@
 
 <!-- include ByteBuffer -->
 <script type="text/javascript" src="/breslin/clientside/bytebuffer/byte_buffer.php"></script>
+
 
 </head>
 
