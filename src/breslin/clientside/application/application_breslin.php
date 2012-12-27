@@ -31,16 +31,23 @@ initialize: function(serverIP, serverPort)
         this.mStateMachine.changeState(mApplicationInitialize);	
 */
 		document.getElementById("demo").innerHTML="My First JavaScript";	
-	},
+},
 
-        log: function(msg)
+log: function(msg)
+{
+	setTimeout(function()
         {
-                setTimeout(function()
-                {
-                        throw new Error(msg);
-                }, 0);
-        },
+        	throw new Error(msg);
+        }, 0);
+},
 
+/*********************************
+                GRAPHICS
+**********************************/
+runGraphics: function()
+{
+	//no idea what to do here for browser code so i will leave blank since it's called from states
+}
 	
 
 

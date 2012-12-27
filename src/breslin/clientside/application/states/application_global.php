@@ -13,13 +13,11 @@ enter: function()
 
 execute: function()
 {
-/*
-	if (this.mApplicationBreslin->mSetup)
+	if (this.mApplicationBreslin.mSetup)
 	{
 		//graphics
-		this.mApplicationBreslin->runGraphics();
+		this.mApplicationBreslin.runGraphics();
 	}
-*/
 },
 
 exit: function()
