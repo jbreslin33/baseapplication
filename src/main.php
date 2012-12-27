@@ -18,6 +18,9 @@
 <!-- include StateMachine -->
 <script type="text/javascript" src="/breslin/statemachine/state_machine.php"></script>
 
+<!-- include ApplicationGlobal -->
+<script type="text/javascript" src="/breslin/clientside/application/states/application_global.php"></script>
+
 </head>
 
 <body bgcolor="grey">

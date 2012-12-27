@@ -20,9 +20,10 @@ initialize: function(serverIP, serverPort)
         //state machine (Menus)
         this.mStateMachine = new StateMachine();
 
-/*
         this.mApplicationGlobal = new ApplicationGlobal(this);
-        this.mApplicationInitialize = new ApplicationInitialize(this);
+       
+/* 
+	this.mApplicationInitialize = new ApplicationInitialize(this);
         this.mApplicationMain   = new ApplicationMain  (this);
         this.mApplicationPlay   = new ApplicationPlay(this);
 
