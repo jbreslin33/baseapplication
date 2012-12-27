@@ -224,7 +224,7 @@ void Game::sendByteBuffer()
         	// Build delta-compressed move command
         	int flags = 0;
 
-        	// Check what needs to be updated
+        	//if key has not been changed return having done nothing 
         	if(mKeyLast != mKeyCurrent)
         	{
                 	flags |= mCommandKey;
