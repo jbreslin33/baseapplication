@@ -1,46 +1,33 @@
-//header
-#include "applicationInitialize.h"
-
-//log
-#include "../../tdreamsock/dreamSockLog.h"
-
-//state machine
-#include "../../../statemachine/stateMachine.h"
-
-//application
-#include "../applicationBreslin.h"
-
-/***************************************
-*	CONSTRUCTORS		          
-***************************************/
-ApplicationInitialize::ApplicationInitialize(ApplicationBreslin* applicationBreslin)
+var ApplicationInitialize = new Class(
 {
-	mApplicationBreslin = applicationBreslin;
-}
+	
+initialize: function(applicationBreslin)
+{
+	this.mApplicationBreslin = applicationBreslin;
+},
 
-ApplicationInitialize::~ApplicationInitialize()
+enter: function()
 {
 
-}
+},
 
-void ApplicationInitialize::enter()
-{
-	LogString("STATE: ApplicationInitialize");
-}
-
-void ApplicationInitialize::execute()
+execute: function()
 {
 	//setup calls ogre specific graphics setup,
-	//when it returns true we can begin our graphics stuff
-	if (mApplicationBreslin->setup())
-	{
-		mApplicationBreslin->mSetup = true;
-		mApplicationBreslin->createMainScreen();
-        mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
-	}	
-}
+        //when it returns true we can begin our graphics stuff
+/*
+        if (mApplicationBreslin.setup())
+        {
+        	mApplicationBreslin.mSetup = true;
+                mApplicationBreslin.createMainScreen();
+        	mApplicationBreslin.mStateMachine.changeState(mApplicationBreslin.mApplicationMain);
+        }
+*/
+},
 
-void ApplicationInitialize::exit()
+exit: function()
 {
 
 }
+
+});

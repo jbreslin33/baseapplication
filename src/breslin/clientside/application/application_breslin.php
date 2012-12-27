@@ -21,16 +21,16 @@ initialize: function(serverIP, serverPort)
         this.mStateMachine = new StateMachine();
 
         this.mApplicationGlobal = new ApplicationGlobal(this);
-       
-/* 
 	this.mApplicationInitialize = new ApplicationInitialize(this);
+
+/*
         this.mApplicationMain   = new ApplicationMain  (this);
         this.mApplicationPlay   = new ApplicationPlay(this);
 
         this.mStateMachine.setGlobalState (mApplicationGlobal);
         this.mStateMachine.changeState(mApplicationInitialize);	
 */
-		document.getElementById("demo").innerHTML="My First JavaScript";	
+	document.getElementById("demo").innerHTML="My First JavaScript";	
 },
 
 log: function(msg)

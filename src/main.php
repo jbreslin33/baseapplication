@@ -21,6 +21,9 @@
 <!-- include ApplicationGlobal -->
 <script type="text/javascript" src="/breslin/clientside/application/states/application_global.php"></script>
 
+<!-- include ApplicationInitialize -->
+<script type="text/javascript" src="/breslin/clientside/application/states/application_initialize.php"></script>
+
 </head>
 
 <body bgcolor="grey">
