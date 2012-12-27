@@ -30,6 +30,9 @@
 <!-- include ApplicationPlay -->
 <script type="text/javascript" src="/breslin/clientside/application/states/application_play.php"></script>
 
+<!-- include ByteBuffer -->
+<script type="text/javascript" src="/breslin/clientside/bytebuffer/byte_buffer.php"></script>
+
 </head>
 
 <body bgcolor="grey">

@@ -38,7 +38,7 @@ open: function()
 //this should call ajax function on server to send
 send: function(byteBuffer)
 {
-
+	this.log('send:' + byteBuffer.mBuffer);
 }
 
 });

@@ -5,6 +5,12 @@ initialize: function(serverIP, serverPort)
 {
 	//StartLog ...don't need to just need log function	
 
+	//constants
+	this.mMessageServerExit = 3;
+	this.mMessageConnect     = -101;
+	this.mMessageDisconnect  = -102;
+
+	//network
 	this.mNetwork = new Network(this,serverIP,serverPort);
         
 	//initilize
@@ -91,6 +97,9 @@ sendConnect: function()
         byteBuffer->WriteByte(mMessageConnect);
         mNetwork->send(byteBuffer);
 */
+	byteBuffer = new ByteBuffer();
+	byteBuffer.writeByte(this.mMessageConnect);	
+	this.mNetwork.send(byteBuffer);
 },
 
 
