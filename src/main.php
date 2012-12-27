@@ -12,6 +12,12 @@
 <!-- include Network -->
 <script type="text/javascript" src="/breslin/clientside/network/network.php"></script>
 
+<!-- include State -->
+<script type="text/javascript" src="/breslin/statemachine/state.php"></script>
+
+<!-- include StateMachine -->
+<script type="text/javascript" src="/breslin/statemachine/state_machine.php"></script>
+
 </head>
 
 <body bgcolor="grey">
