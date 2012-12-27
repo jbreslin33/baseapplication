@@ -39,6 +39,52 @@ log: function(msg)
         }, 0);
 },
 
+/*********************************
+                        update
+**********************************/
+processUpdate: function()
+{
+        this.mStateMachine.update();
+},
+
+/*********************************
+        ADMIN
+**********************************/
+
+shutdown: function()
+{
+/*
+        ByteBuffer* byteBuffer = new ByteBuffer();
+        byteBuffer->WriteByte(mMessageDisconnect);
+        mNetwork->send(byteBuffer);
+        mNetwork->reset();
+*/
+},
+
+/*********************************
+                NETWORK
+**********************************/
+
+sendConnect: function()
+{
+/*
+        ByteBuffer* byteBuffer = new ByteBuffer();
+        byteBuffer->WriteByte(mMessageConnect);
+        mNetwork->send(byteBuffer);
+*/
+},
+
+
+/*********************************
+
+*               TIME
+***********************************/
+
+getRenderTime: function()
+{
+	return this.mRenderTime;
+},
+
 /*******************************
 
 ******************************/
@@ -55,11 +101,21 @@ createMainScreen: function()
 {
 	//make buttons
 /*
+var btn=document.createElement("BUTTON");
+var t=document.createTextNode("CLICK ME");
+btn.appendChild(t);
+document.body.appendChild(btn);
         mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
         mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
         mButtonTagAll = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTagAll", "Join TagAll");
         mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 */
+this.log('create join game button');
+//create Join Game button
+var btn=document.createElement("BUTTON");
+var t=document.createTextNode("Join Game");
+btn.appendChild(t);
+document.body.appendChild(btn);
 },
 
 showMainScreen: function()
