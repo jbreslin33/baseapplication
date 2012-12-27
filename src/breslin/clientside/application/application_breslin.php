@@ -62,6 +62,24 @@ createMainScreen: function()
 */
 },
 
+showMainScreen: function()
+{
+/*
+     mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mButtonTagAll,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
+        
+        mButtonGame->show();
+        mButtonTag->show();
+        mButtonTagAll->show();
+        mButtonExit->show();
+
+        mTrayMgr->showCursor();
+*/
+},
+
+
 /*********************************
                 GRAPHICS
 **********************************/
