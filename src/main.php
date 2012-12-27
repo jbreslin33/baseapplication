@@ -6,8 +6,11 @@
 <!-- include mootools -->
 <script type="text/javascript" src="/mootools/mootools-core-1.4.5-full-compat.js"></script>
 
-<!-- include application -->
+<!-- include ApplicationBreslin -->
 <script type="text/javascript" src="/breslin/clientside/application/application_breslin.php"></script>
+
+<!-- include Network -->
+<script type="text/javascript" src="/breslin/clientside/network/network.php"></script>
 
 </head>
 
