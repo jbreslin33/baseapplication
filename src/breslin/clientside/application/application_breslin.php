@@ -17,6 +17,13 @@ initialize: function(serverIP, serverPort)
         //game
         this.mGame = 0;
 
+	//gui
+	this.mButtonHit = 0;
+	this.mButtonExit = 0;
+	this.mButtonGame = 0;
+	this.mButtonTag = 0;
+	this.mButtonTagAll = 0;
+
         //state machine (Menus)
         this.mStateMachine = new StateMachine();
 
@@ -78,6 +85,7 @@ shutdown: function()
 
 sendConnect: function()
 {
+	this.log('sending connect...');
 /*
         ByteBuffer* byteBuffer = new ByteBuffer();
         byteBuffer->WriteByte(mMessageConnect);
@@ -121,12 +129,18 @@ document.body.appendChild(btn);
         mButtonTagAll = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTagAll", "Join TagAll");
         mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 */
-this.log('create join game button');
-//create Join Game button
-var btn=document.createElement("BUTTON");
-var t=document.createTextNode("Join Game");
-btn.appendChild(t);
-document.body.appendChild(btn);
+
+	//create Join Game button
+	this.mButtonGame = document.createElement("BUTTON");
+	var t=document.createTextNode("Join Game");
+	this.mButtonGame.appendChild(t);
+	document.body.appendChild(this.mButtonGame);
+	
+	this.mButtonGame.onclick = function()
+	{
+		mApplication.mButtonHit = mApplication.mButtonGame;	
+	};
+
 },
 
 showMainScreen: function()

@@ -8,11 +8,20 @@ initialize: function(applicationBreslin)
 
 enter: function()
 {
+	this.mApplicationBreslin.log('ApplicationMain: enter');
         this.mApplicationBreslin.showMainScreen();
 },
 
 execute: function()
 {
+//	this.mApplicationBreslin.log('ApplicationMain: execute');
+
+  	//this.mApplicationBreslin.log(this.mApplicationBreslin.mButtonGame.getTextNode());	
+	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonGame)
+	{
+		this.mApplicationBreslin.log('button JoinGame hit');
+	}
+
 /*
   if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonGame)
         {
@@ -66,7 +75,7 @@ execute: function()
 
 exit: function()
 {
-
+	this.mApplicationBreslin.log('ApplicationMain: exit');
 }
 
 });
