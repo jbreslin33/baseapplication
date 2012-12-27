@@ -22,14 +22,12 @@ initialize: function(serverIP, serverPort)
 
         this.mApplicationGlobal = new ApplicationGlobal(this);
 	this.mApplicationInitialize = new ApplicationInitialize(this);
-
-/*
         this.mApplicationMain   = new ApplicationMain  (this);
         this.mApplicationPlay   = new ApplicationPlay(this);
 
-        this.mStateMachine.setGlobalState (mApplicationGlobal);
-        this.mStateMachine.changeState(mApplicationInitialize);	
-*/
+        this.mStateMachine.setGlobalState (this.mApplicationGlobal);
+        this.mStateMachine.changeState(this.mApplicationInitialize);	
+	
 	document.getElementById("demo").innerHTML="My First JavaScript";	
 },
 
@@ -39,6 +37,29 @@ log: function(msg)
         {
         	throw new Error(msg);
         }, 0);
+},
+
+/*******************************
+
+******************************/
+setup: function()
+{
+	return true;
+},
+
+/*********************************
+                GUI
+**********************************/
+
+createMainScreen: function()
+{
+	//make buttons
+/*
+        mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
+        mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
+        mButtonTagAll = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTagAll", "Join TagAll");
+        mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+*/
 },
 
 /*********************************

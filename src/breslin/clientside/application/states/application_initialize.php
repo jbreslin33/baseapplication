@@ -15,14 +15,12 @@ execute: function()
 {
 	//setup calls ogre specific graphics setup,
         //when it returns true we can begin our graphics stuff
-/*
-        if (mApplicationBreslin.setup())
+        if (this.mApplicationBreslin.setup())
         {
-        	mApplicationBreslin.mSetup = true;
-                mApplicationBreslin.createMainScreen();
-        	mApplicationBreslin.mStateMachine.changeState(mApplicationBreslin.mApplicationMain);
+        	this.mApplicationBreslin.mSetup = true;
+                this.mApplicationBreslin.createMainScreen();
+        	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationMain);
         }
-*/
 },
 
 exit: function()
