@@ -17,10 +17,10 @@ initialize: function(serverIP, serverPort)
         //game
         this.mGame = 0;
 
-/*
         //state machine (Menus)
         this.mStateMachine = new StateMachine();
 
+/*
         this.mApplicationGlobal = new ApplicationGlobal(this);
         this.mApplicationInitialize = new ApplicationInitialize(this);
         this.mApplicationMain   = new ApplicationMain  (this);
