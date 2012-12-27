@@ -19,7 +19,13 @@ execute: function()
   	//this.mApplicationBreslin.log(this.mApplicationBreslin.mButtonGame.getTextNode());	
 	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonGame)
 	{
-		this.mApplicationBreslin.log('button JoinGame hit');
+	        this.mApplicationBreslin.mButtonHit = 0;
+                this.mApplicationBreslin.sendConnect();
+                //this.mApplicationBreslin->mGame = new Game(mApplicationBreslin);
+
+                //mApplicationBreslin->hideMainScreen();
+
+                //mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}
 
 /*
