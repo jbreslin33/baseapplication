@@ -37,6 +37,11 @@ else if ($bytebuffer == 1)
 {
 	echo 'should send data'; 
 }
+else 
+{
+	echo $bytebuffer;
+	echo 'something else';
+}
 
 //have to create this every time because it cannot be save in a session variable as it's a resource
 $sock = socket_create(AF_INET, SOCK_DGRAM,0);

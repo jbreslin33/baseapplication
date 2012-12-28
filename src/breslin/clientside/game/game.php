@@ -146,7 +146,7 @@ sendByteBuffer: function()
                 this.mKeyLast = this.mKeyCurrent;
 
                 // Send the packet
-                this.mApplicationBreslin.mNetwork.send(byteBuffer);
+                this.mApplicationBreslin.mNetwork.sendMove(this.mMessageFrame,this.mOutgoingSequence,flags,this.mKeyCurrent);
 
 		//reset network time so we can start count anew
 		this.mRunNetworkTime = 0.0;

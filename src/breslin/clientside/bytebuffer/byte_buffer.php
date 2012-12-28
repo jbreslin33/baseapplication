@@ -3,7 +3,7 @@ var ByteBuffer = new Class(
 	
 initialize: function()
 {
-	this.mBuffer = '';
+	this.mBuffer = 0;
 },
 
 writeByte: function(b)
