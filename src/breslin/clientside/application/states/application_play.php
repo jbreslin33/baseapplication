@@ -13,7 +13,7 @@ enter: function()
 
 execute: function()
 {
-//	this.mApplicationBreslin.log('ApplicationPlay: execute');
+	this.mApplicationBreslin.log('ApplicationPlay: execute');
 /*
        if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_ESCAPE))
         {

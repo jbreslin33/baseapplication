@@ -42,17 +42,15 @@ initialize: function(serverIP, serverPort)
         this.mStateMachine.setCurrentState(this.mApplicationInitialize);
         this.mStateMachine.changeState(this.mApplicationInitialize);	
 
-/*
-        mStateMachine->setGlobalState (mApplicationGlobal);
-        mStateMachine->changeState(mApplicationInitialize);
-
-        mStateMachine.setGlobalState (mApplicationGlobal);
-        //mStateMachine.changeState(mApplicationInitialize);
-        mStateMachine.setPreviousState(mApplicationInitialize);
-        mStateMachine.setCurrentState(mApplicationInitialize);
-
-*/	
 	document.getElementById("demo").innerHTML="My First JavaScript";	
+
+	//input
+	this.mKey_up = false;
+	this.mKey_down = false;
+	this.mKey_right = false;
+	this.mKey_right = false;
+	this.mKey_counterclockwise = false;
+	this.mKey_clockwise = false;
 },
 
 log: function(msg)
@@ -181,8 +179,88 @@ hideMainScreen: function()
 runGraphics: function()
 {
 	//no idea what to do here for browser code so i will leave blank since it's called from states
+},
+
+/*********************************
+                INPUT 
+**********************************/
+keyDown: function(event)
+{
+	//left
+        if (event.key == 'left')
+        {
+        	mApplication.mKey_left = true;
+        }
+
+        //right
+        if (event.key == 'right')
+        {
+                mApplication.mKey_right = true;
+        }
+
+        //up
+        if (event.key == 'up')
+        {
+                mApplication.mKey_up = true;
+        }
+
+        //down
+        if (event.key == 'down')
+        {
+                mApplication.mKey_down = true;
+        }
+
+	//counterclockwise
+        if (event.key == 'z')
+        {
+                mApplication.mKey_counterclockwise = true;
+	}
+
+	//clockwise
+        if (event.key == 'x')
+        {
+                mApplication.mKey_clockwise = true;
+	}
+},
+
+keyUp: function(event)
+{
+	//left
+        if (event.key == 'left')
+        {
+                mApplication.mKey_left = false;
+        }
+
+        //right
+        if (event.key == 'right')
+        {
+                mApplication.mKey_right = false;
+        }
+
+        //up
+        if (event.key == 'up')
+        {
+                mApplication.mKey_up = false;
+        }
+
+        //down
+        if (event.key == 'down')
+        {
+                mApplication.mKey_down = false;
+        }
+        
+	//counterclockwise
+        if (event.key == 'z')
+        {
+                mApplication.mKey_counterclockwise = false;
+	}
+
+	//clockwise
+        if (event.key == 'x')
+        {
+                mApplication.mKey_clockwise = false;
+	}
 }
-	
 
 
 });

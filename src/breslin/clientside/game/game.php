@@ -60,17 +60,6 @@ log: function(msg)
 /*********************************
                 Update
 **********************************/
-/*
-void Game::processUpdate()
-{
-        mStateMachine->update();
-
-        for (unsigned int i = 0; i < mShapeVector->size(); i++)
-        {
-                mShapeVector->at(i)->interpolateTick(mApplicationBreslin->getRenderTime());
-        }
-}
-*/
 
 processUpdate: function()
 {
@@ -80,9 +69,43 @@ processUpdate: function()
 	{
 		this.mShapeVector[i].interpolateTick(this.mApplicationBreslin.getRenderTime());
 	}
+},
+
+/***************************************
+*                       INPUT
+******************************************/
+
+processInput: function()
+{
+	this.mKeyCurrent = 0;
+
+	if (mApplicationBreslin.mKey_up)
+	{
+		this.mKeyCurrent |= this.mKeyUp;
+	}
+	if (mApplicationBreslin.mKey_down)
+	{
+		this.mKeyCurrent |= this.mKeyDown;
+	}
+	if (mApplicationBreslin.mKey_left)
+	{
+		this.log('l');
+		this.mKeyCurrent |= this.mKeyLeft;
+	}
+	if (mApplicationBreslin.mKey_right)
+	{
+		this.mKeyCurrent |= this.mKeyRight;
+	}
+
+	if (mApplicationBreslin.mKey_z)
+	{
+		this.mKeyCurrent |= this.mKeyCounterClockwise;
+	}
+	if (mApplicationBreslin.mKey_x)
+	{
+		this.mKeyCurrent |= this.mKeyClockwise;
+	}
 }
-
-
 
 });
 

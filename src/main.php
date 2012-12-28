@@ -60,7 +60,11 @@ window.addEvent('domready', function()
 {
 	mApplication = new ApplicationBreslin('192.168.1.100', 30004);
 
-       	//loop 
+	//input
+        document.addEvent("keydown", mApplication.keyDown);
+        document.addEvent("keyup", mApplication.keyUp);
+
+       	//main loop 
         var t=setInterval("mApplication.processUpdate()",32)
 }
 
