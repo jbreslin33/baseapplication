@@ -55,9 +55,8 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("demo").innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("POST","/breslin/clientside/network/join.php",true);
+xmlhttp.open("POST","/breslin/clientside/network/send.php",true);
 xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-//xmlhttp.send("bytebuffer=b");
 xmlhttp.send("bytebuffer=" + b.mBuffer);
 }
 
