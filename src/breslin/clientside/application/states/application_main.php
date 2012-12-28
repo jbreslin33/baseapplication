@@ -23,7 +23,7 @@ execute: function()
                 this.mApplicationBreslin.sendConnect();
                 //this.mApplicationBreslin->mGame = new Game(mApplicationBreslin);
 
-                //mApplicationBreslin->hideMainScreen();
+                this.mApplicationBreslin.hideMainScreen();
 
                 //mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}

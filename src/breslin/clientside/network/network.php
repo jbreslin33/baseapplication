@@ -41,7 +41,6 @@ open: function()
 //this should call ajax function on server to send
 send: function(b)
 {
-	this.log('send before xmlHttprequest');
 	var xmlhttp;
 	if (window.XMLHttpRequest)
   	{
