@@ -1,9 +1,9 @@
 var GamePlay = new Class(
 {
 
-initialize: function(applicationBreslin)
+initialize: function(game)
 {
-	this.mApplicationBreslin = applicationBreslin;
+	this.mGame = game; 
 },
 
 enter: function()
@@ -13,7 +13,14 @@ enter: function()
 
 execute: function()
 {
+	//user input
+        this.mGame.processInput();
 
+        //network outgoing
+        //this.mGame->sendByteBuffer();
+
+        //network ingoing
+        //this.mGame->checkForByteBuffer();
 },
 
 exit: function()

@@ -56,6 +56,30 @@ log: function(msg)
         {
         	throw new Error(msg);
         }, 0);
+},
+/*********************************
+                Update
+**********************************/
+/*
+void Game::processUpdate()
+{
+        mStateMachine->update();
+
+        for (unsigned int i = 0; i < mShapeVector->size(); i++)
+        {
+                mShapeVector->at(i)->interpolateTick(mApplicationBreslin->getRenderTime());
+        }
+}
+*/
+
+processUpdate: function()
+{
+	this.mStateMachine.update();
+
+	for (i = 0; i < this.mShapeVector.length; i++)
+	{
+		this.mShapeVector[i].interpolateTick(this.mApplicationBreslin.getRenderTime());
+	}
 }
 
 

@@ -12,8 +12,23 @@ log: function(msg)
         {
         	throw new Error(msg);
         }, 0);
-}
+},
 
+/*
+void Shape::interpolateTick(float renderTime)
+{
+        //interpolate ticks on abilitys
+        for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+        {
+                mAbilityVector.at(i)->interpolateTick(renderTime);
+        }
+}
+*/
+
+interpolateTick: function(renderTime)
+{
+
+}
 
 
 });
