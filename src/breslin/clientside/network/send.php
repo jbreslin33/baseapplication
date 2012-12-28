@@ -8,6 +8,8 @@ $bytebuffer = $_POST["bytebuffer"];
 //then send back the client_id...
 //and tell db that you got it.
 
+$client_id = 0;
+
 if ($bytebuffer == -101)
 {
 	echo 'mMessageConnect';
@@ -21,7 +23,16 @@ if ($bytebuffer == -101)
 	$result = pg_query($conn,$query);
  	$row = pg_fetch_array($result, 0);
 	
-	echo $row["client_id"];
+	//echo $row["client_id"];
+	$client_id = $row["client_id"];
+
+	//now update the record
+	$new_client_id = $client_id + 1;
+	$query = "update client set client_id = ";
+	$query .= $new_client_id;
+	$query .= " where id = 1";	
+
+	$result = pg_query($conn,$query);
 
 	
 
