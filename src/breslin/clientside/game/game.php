@@ -120,34 +120,14 @@ sendByteBuffer: function()
                         return;
                 }
 
-                //create byteBuffer
-                byteBuffer = new ByteBuffer();
-
-                //WRITE: type
-                byteBuffer.writeByte(this.mMessageFrame);
-
-                //WRITE: sequence
-/***********WARNING IN C++ this was write short!!!!!!!!!!!!!!!!*/
-                //byteBuffer->WriteShort(mOutgoingSequence);
-                byteBuffer.writeByte(this.mOutgoingSequence);
-
-                this.mOutgoingSequence++; //increase for next time...
-
-                // Add to the message
-                byteBuffer.writeByte(flags);
-
-                if(flags & this.mCommandKey)
-                {
-                        //WRITE: key
-                        byteBuffer.writeByte(this.mKeyCurrent);
-                }
-
-                //set 'last' commands for diff
-                this.mKeyLast = this.mKeyCurrent;
-
                 // Send the packet
                 this.mApplicationBreslin.mNetwork.sendMove(this.mMessageFrame,this.mOutgoingSequence,flags,this.mKeyCurrent);
 
+                //set 'last' commands for diff
+                this.mKeyLast = this.mKeyCurrent;
+                
+		this.mOutgoingSequence++; //increase for next time...
+		
 		//reset network time so we can start count anew
 		this.mRunNetworkTime = 0.0;
 	}

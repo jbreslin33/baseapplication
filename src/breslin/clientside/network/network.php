@@ -69,6 +69,7 @@ send: function(b)
 // send the move that is new 
 sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
 {
+	this.log('outgoingSequence:' + outgoingSequence);
         var xmlhttp;
         if (window.XMLHttpRequest)
         {
