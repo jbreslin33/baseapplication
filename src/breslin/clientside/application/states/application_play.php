@@ -8,11 +8,12 @@ initialize: function(applicationBreslin)
 
 enter: function()
 {
-
+	this.mApplicationBreslin.log('ApplicationPlay: enter');
 },
 
 execute: function()
 {
+	this.mApplicationBreslin.log('ApplicationPlay: execute');
 /*
        if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_ESCAPE))
         {
@@ -29,6 +30,7 @@ execute: function()
 
 exit: function()
 {
+	this.mApplicationBreslin.log('ApplicationPlay: exit');
 /*
      mApplicationBreslin->shutdown();
 

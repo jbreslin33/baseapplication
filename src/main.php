@@ -33,6 +33,9 @@
 <!-- include ByteBuffer -->
 <script type="text/javascript" src="/breslin/clientside/bytebuffer/byte_buffer.php"></script>
 
+<!-- include Game -->
+<script type="text/javascript" src="/breslin/clientside/game/game.php"></script>
+
 
 </head>
 

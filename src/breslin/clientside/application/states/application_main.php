@@ -21,11 +21,11 @@ execute: function()
 	{
 	        this.mApplicationBreslin.mButtonHit = 0;
                 this.mApplicationBreslin.sendConnect();
-                //this.mApplicationBreslin->mGame = new Game(mApplicationBreslin);
+                this.mApplicationBreslin.mGame = new Game(this.mApplicationBreslin);
 
                 this.mApplicationBreslin.hideMainScreen();
 
-                //mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
+                this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationPlay);
 	}
 
 /*
