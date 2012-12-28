@@ -3,17 +3,19 @@ var Game = new Class(
 
 initialize: function(applicationBreslin)
 {
-/*
-        //set Camera
-        // Position it at 500 in Z direction
-        mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(0,20,20));
-        // Look back along -Z
-        mApplicationBreslin->getCamera()->lookAt(Ogre::Vector3(0,0,0));
-        mApplicationBreslin->getCamera()->setNearClipDistance(5);
-*/
-	
+	// constants
+	this.mCommandKey          = 1;
+	this.mCommandFrameTime = 2;
+
+	this.mMessageFrame = 1;
+
+	this.mMessageAddShape    = -103;
+	this.mMessageRemoveShape = -104;
+
+	//application	
 	this.mApplicationBreslin = applicationBreslin;	
 
+	//shapes
 	this.mShapeVector      = new Array();
 	this.mShapeGhostVector = new Array();
 
@@ -46,7 +48,14 @@ initialize: function(applicationBreslin)
         this.mStateMachine.setGlobalState(this.mGameGlobal);
         this.mStateMachine.changeState(this.mGamePlay);
 
-
+/*
+        //set Camera
+        // Position it at 500 in Z direction
+        mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(0,20,20));
+        // Look back along -Z
+        mApplicationBreslin->getCamera()->lookAt(Ogre::Vector3(0,0,0));
+        mApplicationBreslin->getCamera()->setNearClipDistance(5);
+*/
 
 },
 
