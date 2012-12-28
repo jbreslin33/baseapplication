@@ -83,55 +83,23 @@ processUpdate: function()
 /*********************************
                NETWORK 
 **********************************/
-/*
-void Game::sendByteBuffer()
-{
-        mRunNetworkTime += mApplicationBreslin->getRenderTime() * 1000.0f;
+pack: function(bytes) {
+    var chars = [];
+    for(var i = 0, n = bytes.length; i < n;) {
+        chars.push(((bytes[i++] & 0xff) << 8) | (bytes[i++] & 0xff));
+    }
+    return String.fromCharCode.apply(null, chars);
+},
 
-        // Framerate is too high
-        if(mRunNetworkTime > (1000 / 60))
-        {
-                // Build delta-compressed move command
-                int flags = 0;
+unpack: function(str) {
+    var bytes = [];
+    for(var i = 0, n = str.length; i < n; i++) {
+        var char = str.charCodeAt(i);
+        bytes.push(char >>> 8, char & 0xFF);
+    }
+    return bytes;
+},
 
-                //if key has not been changed return having done nothing
-                if(mKeyLast != mKeyCurrent)
-                {
-                        flags |= mCommandKey;
-                }
-                else
-                {
-                        return;
-                }
-
-                //create byteBuffer
-                ByteBuffer* byteBuffer = new ByteBuffer();
-
-                //WRITE: type
-                byteBuffer->WriteByte(mMessageFrame);
-
-                //WRITE: sequence
-                byteBuffer->WriteShort(mOutgoingSequence);
-
-                mOutgoingSequence++; //increase for next time...
-
-                // Add to the message
-                byteBuffer->WriteByte(flags);
-
-                if(flags & mCommandKey)
-                {
-                        //WRITE: key
-                        byteBuffer->WriteByte(mKeyCurrent);
-                }
-
-                //set 'last' commands for diff
-                mKeyLast = mKeyCurrent;
-
-                // Send the packet
-                mApplicationBreslin->mNetwork->send(byteBuffer);
-
-                mRunNetworkTime = 0.0f;
-*/
 sendByteBuffer: function()
 {
         this.mRunNetworkTime += this.mApplicationBreslin.getRenderTime() * 1000.0;
