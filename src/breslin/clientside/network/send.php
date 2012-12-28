@@ -12,8 +12,6 @@ $client_id = 0;
 
 if ($bytebuffer == -101)
 {
-	echo 'mMessageConnect';
-	
 	//get current client id then update record 
 	$conn = pg_connect("host=localhost dbname=abcandyou user=postgres password=mibesfat")
         or die('Could not connect: ' . pg_last_error());
@@ -33,16 +31,12 @@ if ($bytebuffer == -101)
 	$query .= " where id = 1";	
 
 	$result = pg_query($conn,$query);
-
-	
-
+	echo $client_id;
 }
-else
+else if ($bytebuffer == 1)
 {
-	echo 'somethingElse';
+	echo 'should send data'; 
 }
-
-
 
 //have to create this every time because it cannot be save in a session variable as it's a resource
 $sock = socket_create(AF_INET, SOCK_DGRAM,0);
