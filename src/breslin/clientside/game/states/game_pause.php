@@ -1,4 +1,4 @@
-var GameGlobal = new Class(
+var GamePause = new Class(
 {
 
 initialize: function(applicationBreslin)

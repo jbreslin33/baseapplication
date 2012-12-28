@@ -36,6 +36,17 @@
 <!-- include Game -->
 <script type="text/javascript" src="/breslin/clientside/game/game.php"></script>
 
+<!-- include GameGlobal -->
+<script type="text/javascript" src="/breslin/clientside/game/states/game_global.php"></script>
+
+<!-- include GameInitialize -->
+<script type="text/javascript" src="/breslin/clientside/game/states/game_initialize.php"></script>
+
+<!-- include GamePause -->
+<script type="text/javascript" src="/breslin/clientside/game/states/game_pause.php"></script>
+
+<!-- include GamePlay -->
+<script type="text/javascript" src="/breslin/clientside/game/states/game_play.php"></script>
 
 </head>
 

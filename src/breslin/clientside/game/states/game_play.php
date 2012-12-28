@@ -1,4 +1,4 @@
-var GameGlobal = new Class(
+var GamePlay = new Class(
 {
 
 initialize: function(applicationBreslin)

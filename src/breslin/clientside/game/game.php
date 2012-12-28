@@ -4,15 +4,6 @@ var Game = new Class(
 initialize: function(applicationBreslin)
 {
 /*
-        mStateMachine = new StateMachine();
-        mGameGlobal = new GameGlobal(this);
-        mGameInitialize = new GameInitialize(this);
-        mGamePlay = new GamePlay(this);
-        mGamePause = new GamePause(this);
-
-        mStateMachine->setGlobalState(mGameGlobal);
-        mStateMachine->changeState(mGamePlay);
-
         //set Camera
         // Position it at 500 in Z direction
         mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(0,20,20));
@@ -46,6 +37,15 @@ initialize: function(applicationBreslin)
 
        	//states 
 	this.mStateMachine = new StateMachine();
+        
+        this.mGameGlobal = new GameGlobal(this);
+        this.mGameInitialize = new GameInitialize(this);
+        this.mGamePlay = new GamePlay(this);
+        this.mGamePause = new GamePause(this);
+
+        this.mStateMachine.setGlobalState(this.mGameGlobal);
+        this.mStateMachine.changeState(this.mGamePlay);
+
 
 
 },
