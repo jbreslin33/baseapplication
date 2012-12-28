@@ -13,7 +13,6 @@ enter: function()
 
 execute: function()
 {
-	this.mGame.log('GamePlay execute');
 	//user input
         this.mGame.processInput();
 

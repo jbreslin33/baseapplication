@@ -8,12 +8,11 @@ initialize: function(applicationBreslin)
 
 enter: function()
 {
-//	this.mApplicationBreslin.log('ApplicationPlay: enter');
+
 },
 
 execute: function()
 {
-//	this.mApplicationBreslin.log('ApplicationPlay: execute');
 	if (this.mApplicationBreslin.mKey_esc)
         {
                 this.mApplicationBreslin.mPlayingGame = false;

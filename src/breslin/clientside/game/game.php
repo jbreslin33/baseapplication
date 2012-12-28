@@ -89,7 +89,6 @@ processInput: function()
 	}
 	if (this.mApplicationBreslin.mKey_left)
 	{
-		this.log('l');
 		this.mKeyCurrent |= this.mKeyLeft;
 	}
 	if (this.mApplicationBreslin.mKey_right)
