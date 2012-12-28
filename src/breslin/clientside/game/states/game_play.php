@@ -17,7 +17,7 @@ execute: function()
         this.mGame.processInput();
 
         //network outgoing
-        //this.mGame->sendByteBuffer();
+        this.mGame.sendByteBuffer();
 
         //network ingoing
         //this.mGame->checkForByteBuffer();

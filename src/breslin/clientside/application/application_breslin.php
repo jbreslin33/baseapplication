@@ -19,6 +19,8 @@ initialize: function(serverIP, serverPort)
 
         //time
         this.mRenderTime = 0.0;
+        this.mTimeSinceEpoch = 0;
+        this.mLastTimeSinceEpoch = 0;
 
         //game
         this.mGame = 0;
@@ -67,8 +69,18 @@ log: function(msg)
 **********************************/
 processUpdate: function()
 {
+	//get time since epoch and set lasttime
+        e = new Date();
+        this.mLastTimeSinceEpoch = this.mTimeSinceEpoch;
+        this.mTimeSinceEpoch = e.getTime();
+
+        //set RenderTime as function of timeSinceEpoch and LastTimeSinceEpoch diff
+        this.mRenderTime = this.mTimeSinceEpoch - this.mLastTimeSinceEpoch;
+
         this.mStateMachine.update();
 },
+
+
 
 /*********************************
         ADMIN
