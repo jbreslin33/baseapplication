@@ -126,10 +126,54 @@ void Game::sendByteBuffer()
 sendByteBuffer: function()
 {
         this.mRunNetworkTime += this.mApplicationBreslin.getRenderTime() * 1000.0;
-	this.log('renderTime:' + this.mApplicationBreslin.getRenderTime());
+  	
+	// Framerate is too high
+        if(this.mRunNetworkTime > (1000 / 60))
+        {
+                // Build delta-compressed move command
+                flags = 0;
 
-	
-	this.mRunNetworkTime = 0.0;
+                //if key has not been changed return having done nothing
+                if(this.mKeyLast != this.mKeyCurrent)
+                {
+                        flags |= this.mCommandKey;
+                }
+                else
+                {
+                        return;
+                }
+
+                //create byteBuffer
+                byteBuffer = new ByteBuffer();
+
+                //WRITE: type
+                byteBuffer.writeByte(this.mMessageFrame);
+
+                //WRITE: sequence
+/***********WARNING IN C++ this was write short!!!!!!!!!!!!!!!!*/
+                //byteBuffer->WriteShort(mOutgoingSequence);
+                byteBuffer.writeByte(this.mOutgoingSequence);
+
+                this.mOutgoingSequence++; //increase for next time...
+
+                // Add to the message
+                byteBuffer.writeByte(flags);
+
+                if(flags & this.mCommandKey)
+                {
+                        //WRITE: key
+                        byteBuffer.writeByte(this.mKeyCurrent);
+                }
+
+                //set 'last' commands for diff
+                this.mKeyLast = this.mKeyCurrent;
+
+                // Send the packet
+                this.mApplicationBreslin.mNetwork.send(byteBuffer);
+
+		//reset network time so we can start count anew
+		this.mRunNetworkTime = 0.0;
+	}
 },
 
 
