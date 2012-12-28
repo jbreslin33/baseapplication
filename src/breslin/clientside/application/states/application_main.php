@@ -8,7 +8,7 @@ initialize: function(applicationBreslin)
 
 enter: function()
 {
-	this.mApplicationBreslin.log('ApplicationMain: enter');
+//	this.mApplicationBreslin.log('ApplicationMain: enter');
         this.mApplicationBreslin.showMainScreen();
 },
 
@@ -81,7 +81,7 @@ execute: function()
 
 exit: function()
 {
-	this.mApplicationBreslin.log('ApplicationMain: exit');
+//	this.mApplicationBreslin.log('ApplicationMain: exit');
 }
 
 });

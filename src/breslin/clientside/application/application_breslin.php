@@ -171,7 +171,6 @@ showMainScreen: function()
 
 hideMainScreen: function()
 {
-	this.log('hiding mButtonGame');
 	this.mButtonGame.style.display="none";
 },
 
