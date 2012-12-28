@@ -8,38 +8,35 @@ initialize: function(applicationBreslin)
 
 enter: function()
 {
-	this.mApplicationBreslin.log('ApplicationPlay: enter');
+//	this.mApplicationBreslin.log('ApplicationPlay: enter');
 },
 
 execute: function()
 {
-	this.mApplicationBreslin.log('ApplicationPlay: execute');
-/*
-       if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_ESCAPE))
+//	this.mApplicationBreslin.log('ApplicationPlay: execute');
+	if (this.mApplicationBreslin.mKey_esc)
         {
-                mApplicationBreslin->mPlayingGame = false;
-                mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
+                this.mApplicationBreslin.mPlayingGame = false;
+                this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationMain);
         }
         else
         {
                 //game
-                mApplicationBreslin->mGame->processUpdate();
+                this.mApplicationBreslin.mGame.processUpdate();
         }
-*/
 },
 
 exit: function()
 {
 	this.mApplicationBreslin.log('ApplicationPlay: exit');
-/*
-     mApplicationBreslin->shutdown();
+     	
+	this.mApplicationBreslin.shutdown();
 
-        mApplicationBreslin->getSceneManager()->destroyAllEntities();
-        delete mApplicationBreslin->mGame;
+        //mApplicationBreslin->getSceneManager()->destroyAllEntities();
+        //delete mApplicationBreslin->mGame;
 
-        mApplicationBreslin->showMainScreen();
+        this.mApplicationBreslin.showMainScreen();
 
-*/
 }
 
 });

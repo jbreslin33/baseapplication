@@ -51,6 +51,7 @@ initialize: function(serverIP, serverPort)
 	this.mKey_right = false;
 	this.mKey_counterclockwise = false;
 	this.mKey_clockwise = false;
+	this.mKey_esc = false;
 },
 
 log: function(msg)
@@ -152,6 +153,7 @@ document.body.appendChild(btn);
 
 showMainScreen: function()
 {
+	this.mButtonGame.style.display="block";
 /*
      mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
         mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
@@ -221,6 +223,12 @@ keyDown: function(event)
         {
                 mApplication.mKey_clockwise = true;
 	}
+	
+	//escape
+        if (event.key == 'esc')
+        {
+                mApplication.mKey_esc = true;
+	}
 },
 
 keyUp: function(event)
@@ -259,6 +267,12 @@ keyUp: function(event)
         if (event.key == 'x')
         {
                 mApplication.mKey_clockwise = false;
+	}
+	
+	//escape
+        if (event.key == 'esc')
+        {
+                mApplication.mKey_esc = false;
 	}
 }
 

@@ -79,29 +79,29 @@ processInput: function()
 {
 	this.mKeyCurrent = 0;
 
-	if (mApplicationBreslin.mKey_up)
+	if (this.mApplicationBreslin.mKey_up)
 	{
 		this.mKeyCurrent |= this.mKeyUp;
 	}
-	if (mApplicationBreslin.mKey_down)
+	if (this.mApplicationBreslin.mKey_down)
 	{
 		this.mKeyCurrent |= this.mKeyDown;
 	}
-	if (mApplicationBreslin.mKey_left)
+	if (this.mApplicationBreslin.mKey_left)
 	{
 		this.log('l');
 		this.mKeyCurrent |= this.mKeyLeft;
 	}
-	if (mApplicationBreslin.mKey_right)
+	if (this.mApplicationBreslin.mKey_right)
 	{
 		this.mKeyCurrent |= this.mKeyRight;
 	}
 
-	if (mApplicationBreslin.mKey_z)
+	if (this.mApplicationBreslin.mKey_z)
 	{
 		this.mKeyCurrent |= this.mKeyCounterClockwise;
 	}
-	if (mApplicationBreslin.mKey_x)
+	if (this.mApplicationBreslin.mKey_x)
 	{
 		this.mKeyCurrent |= this.mKeyClockwise;
 	}
