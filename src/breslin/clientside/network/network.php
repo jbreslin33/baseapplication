@@ -3,6 +3,9 @@ var Network = new Class(
 
 initialize: function(application,serverIP, serverPort)
 {
+	//client id
+	this.mClientID = 0;
+
         //application
         this.mApplicationBreslin = application;
 
@@ -55,6 +58,7 @@ send: function(b)
   		if (xmlhttp.readyState==4 && xmlhttp.status==200)
     		{
     			document.getElementById("demo").innerHTML=xmlhttp.responseText;
+			this.mClientID = xmlhttp.responseText;
     		}
   	}
 	xmlhttp.open("POST","/breslin/clientside/network/send.php",true);
