@@ -16,6 +16,12 @@ if ($bytebuffer == -101)
 	$conn = pg_connect("host=localhost dbname=abcandyou user=postgres password=mibesfat")
         or die('Could not connect: ' . pg_last_error());
 
+	$query = "select client_id from client where id = 1;";
+
+	$result = pg_query($conn,$query);
+ 	$row = pg_fetch_array($result, 0);
+	
+	echo $row["client_id"];
 
 	
 
