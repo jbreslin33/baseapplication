@@ -171,7 +171,7 @@ void Server::checkClientSequence(int type, Client* client, Message* mes)
 
 }
 
-int Server::checkForTimeout(char *data, struct sockaddr *from)
+int Server::checkForTimeout()
 {
 	int currentTime = mNetwork->dreamSock_GetCurrentSystemTime();
 
@@ -192,13 +192,13 @@ int Server::checkForTimeout(char *data, struct sockaddr *from)
 
 			// Build a 'fake' message so the applicationBreslin will also
 			// receive notification of a client disconnecting
-			Message mes;
-			mes.Init(data, sizeof(data));
-			mes.WriteByte(mDisconnect);
+			//Message mes;
+			//mes.Init(data, sizeof(data));
+			//mes.WriteByte(mDisconnect);
 
 			mClientVector.at(i)->remove();
 
-			return mes.GetSize();
+			//return mes.GetSize();
 		}
 	}
 	return 0;
@@ -210,12 +210,13 @@ int Server::getPacket(char *data, struct sockaddr *from)
 	if(!mNetwork->mSocket)
 		return 0;
 
+	/*
 	// Check for timeout
 	int timeout = checkForTimeout(data, from);
 
 	if(timeout)
 		return timeout;
-
+*/
 	// Wait for a while or incoming data
 	int maxfd = mNetwork->mSocket;
 	fd_set allset;

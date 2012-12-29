@@ -68,7 +68,7 @@ public:
 	~Server();
 
 	//timeout
-	int  checkForTimeout(char *data, struct sockaddr *from);
+	int  checkForTimeout();
 
 	//client
 	virtual void createClient(struct sockaddr *address); //c++ java

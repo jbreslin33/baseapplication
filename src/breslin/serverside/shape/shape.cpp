@@ -149,7 +149,6 @@ Ability* Shape::getAbility(Ability* ability)
 	return 0;
 }
 
-
 void Shape::remove()
 {
 	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
@@ -175,7 +174,6 @@ void Shape::processTick()
 	{
 		mAbilityVector.at(i)->processTick();
 	}
-	
 
 	Ogre::Quaternion orientation = mSceneNode->getOrientation();
     	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
