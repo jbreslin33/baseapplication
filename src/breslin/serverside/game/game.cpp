@@ -135,8 +135,7 @@ void Game::frame(int msec)
 	checkEndOfGame();
 
 	//checkForTimeouts
-       	// Check for timeout
-        mServer->checkForTimeout();
+        //mServer->checkForTimeout();
 }
 /*
 game is tag but what should i do here i think this is where we need to extend classes.

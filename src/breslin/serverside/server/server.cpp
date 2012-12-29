@@ -210,13 +210,6 @@ int Server::getPacket(char *data, struct sockaddr *from)
 	if(!mNetwork->mSocket)
 		return 0;
 
-	/*
-	// Check for timeout
-	int timeout = checkForTimeout(data, from);
-
-	if(timeout)
-		return timeout;
-*/
 	// Wait for a while or incoming data
 	int maxfd = mNetwork->mSocket;
 	fd_set allset;
