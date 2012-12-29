@@ -328,14 +328,16 @@ void Server::readPackets()
 			mes.BeginReading();
 
 			type = mes.ReadByte();
-			
+	
+			//sequence variable			
+			signed short seq = 0;
+
 			// Check the type of the message
 			switch(type)
 			{
 			case mMessageFrame:
 				// Skip sequences
-				signed short seq = mes.ReadShort();
-				//LogString("seq:%d",seq);
+				seq = mes.ReadShort();
 				
 				//let's try this with shapes instead.....
 				for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
@@ -350,7 +352,29 @@ void Server::readPackets()
 					}
 				}
 				break;
-			}
+		 	
+			case mMessageFrameBrowser:
+				//grab clientID
+				int clientID = mes.ReadByte();
+                                
+				// Skip sequences
+                                seq = mes.ReadShort();
+                               
+				 //let's try this with shapes instead.....
+                                for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
+                                {
+                                        if (mGame->mShapeVector.at(i)->mClient != NULL)
+                                        {
+                                               	if (mGame->mShapeVector.at(i)->mClient->mClientID == clientID) 
+						{
+                                                        mGame->readDeltaMoveCommand(&mes, mGame->mShapeVector.at(i)->mClient);
+                                                        break;
+                                                }
+                                        }
+                                }
+                                break;
+                        }
+
 		}
 	}
 	catch(...)
