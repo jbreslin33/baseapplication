@@ -89,7 +89,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		createClient(address);
 		LogString("LIBRARY: Server: a client connected succesfully");
 	}
-	if (type == mConnectBrowser)
+	
+	else if (type == mConnectBrowser)
 	{
 
 	}
