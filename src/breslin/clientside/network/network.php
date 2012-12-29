@@ -87,10 +87,12 @@ sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
         }
         xmlhttp.onreadystatechange=function()
         {
+/*
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
                         document.getElementById("mMessageFrame").innerHTML=xmlhttp.responseText;
                 }
+*/
         }
         xmlhttp.open("POST","/breslin/clientside/network/send_move.php",true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
