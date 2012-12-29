@@ -106,8 +106,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	
 	else if (type == mConnectBrowser)
 	{
-		createClient(address);
-		LogString("LIBRARY: Server: a browser client connected succesfully");
+		int clientID = mes->ReadByte();
+
+		createClient(address,clientID);
+
+		LogString("LIBRARY: Server: a browser client connected succesfully with mClientID:%d",clientID);
 	}
 
 	else if (type == mMessageFrame || type == mDisconnect)
