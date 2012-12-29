@@ -101,12 +101,13 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	if (type == mConnect)
 	{
 		createClient(address);
-		LogString("LIBRARY: Server: a client connected succesfully");
+		LogString("LIBRARY: Server: a c++ or java client connected succesfully");
 	}
 	
 	else if (type == mConnectBrowser)
 	{
-
+		createClient(address);
+		LogString("LIBRARY: Server: a browser client connected succesfully");
 	}
 
 	else if (type == mMessageFrame || type == mDisconnect)

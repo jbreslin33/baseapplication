@@ -10,7 +10,7 @@ $bytebuffer = $_POST["bytebuffer"];
 
 $client_id = 0;
 
-if ($bytebuffer == -101)
+if ($bytebuffer == -111)
 {
 	//get current client id then update record 
 	$conn = pg_connect("host=localhost dbname=abcandyou user=postgres password=mibesfat")

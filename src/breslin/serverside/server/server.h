@@ -55,10 +55,10 @@ public:
 	static const int mMessageFrameBrowser = 2;
 
 	static const int mConnect            = -101;
-	static const int mConnectBrowser     = -201;
+	static const int mConnectBrowser     = -111;
 	
 	static const int mDisconnect         = -102;
-	static const int mDisconnectBrowser  = -202;
+	static const int mDisconnectBrowser  = -112;
 	
 	static const int mAddShape    	     = -103;
 	static const int mRemoveShape 	     = -104;

@@ -7,8 +7,8 @@ initialize: function(serverIP, serverPort)
 
 	//constants
 	this.mMessageServerExit = 3;
-	this.mMessageConnect     = -101;
-	this.mMessageDisconnect  = -102;
+	this.mMessageConnect     = -111; //browser code
+	this.mMessageDisconnect  = -112; //browser code
 
 	//network
 	this.mNetwork = new Network(this,serverIP,serverPort);

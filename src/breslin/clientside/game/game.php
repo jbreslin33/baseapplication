@@ -7,7 +7,7 @@ initialize: function(applicationBreslin)
 	this.mCommandKey          = 1;
 	this.mCommandFrameTime = 2;
 
-	this.mMessageFrame = 1;
+	this.mMessageFrame = 2;  //changed this to browser code
 
 	this.mMessageAddShape    = -103;
 	this.mMessageRemoveShape = -104;
