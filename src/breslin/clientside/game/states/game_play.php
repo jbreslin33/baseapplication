@@ -20,7 +20,7 @@ execute: function()
         this.mGame.sendByteBuffer();
 
         //network ingoing
-        //this.mGame->checkForByteBuffer();
+        this.mGame.checkForByteBuffer();
 },
 
 exit: function()

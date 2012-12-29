@@ -44,8 +44,6 @@ initialize: function(serverIP, serverPort)
         this.mStateMachine.setCurrentState(this.mApplicationInitialize);
         this.mStateMachine.changeState(this.mApplicationInitialize);	
 
-	document.getElementById("demo").innerHTML="My First JavaScript";	
-
 	//input
 	this.mKey_up = false;
 	this.mKey_down = false;

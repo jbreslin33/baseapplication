@@ -76,8 +76,9 @@ window.onresize = function(event)
 }
 </script>
 
-<p id="demo">My First Paragraph</p>
-<p id="demo2">My 2nd Paragraph</p>
+<p id="mClientID">mClientID</p>
+<p id="mMessageAddShape">mMessageAddShape</p>
+<p id="mMessageRemoveShape">mMessageRemoveShape</p>
+<p id="mMessageFrame">mMessageFrame</p>
 </body>
 </html>
-

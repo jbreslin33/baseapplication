@@ -56,7 +56,7 @@ sendConnect: function()
         {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
-                        document.getElementById("demo").innerHTML=xmlhttp.responseText;
+                        document.getElementById("mClientID").innerHTML=xmlhttp.responseText;
 		}
         }
         xmlhttp.open("POST","/breslin/clientside/network/send_connect.php",true);
@@ -71,7 +71,7 @@ sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
 	//temp fix because i am having trouble setting vars in readystate above
 	if (this.mClientID == 0)
 	{
- 		this.mClientID = document.getElementById("demo").innerHTML;
+ 		this.mClientID = document.getElementById("mClientID").innerHTML;
 	}
         
 	var xmlhttp;
@@ -89,7 +89,7 @@ sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
         {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
-                        document.getElementById("demo2").innerHTML=xmlhttp.responseText;
+                        document.getElementById("mMessageFrame").innerHTML=xmlhttp.responseText;
                 }
         }
         xmlhttp.open("POST","/breslin/clientside/network/send_move.php",true);

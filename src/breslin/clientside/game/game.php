@@ -83,23 +83,67 @@ processUpdate: function()
 /*********************************
                NETWORK 
 **********************************/
-pack: function(bytes) {
-    var chars = [];
-    for(var i = 0, n = bytes.length; i < n;) {
-        chars.push(((bytes[i++] & 0xff) << 8) | (bytes[i++] & 0xff));
-    }
-    return String.fromCharCode.apply(null, chars);
-},
+/*
+void Game::checkForByteBuffer()
+{
+        int type = 0;
 
-unpack: function(str) {
-    var bytes = [];
-    for(var i = 0, n = str.length; i < n; i++) {
-        var char = str.charCodeAt(i);
-        bytes.push(char >>> 8, char & 0xFF);
-    }
-    return bytes;
-},
+        ByteBuffer* byteBuffer = new ByteBuffer();
 
+        while(mApplicationBreslin->mNetwork->checkForByteBuffer(byteBuffer))
+        {
+                byteBuffer->BeginReading();
+
+                type = byteBuffer->ReadByte();
+
+                switch(type)
+                {
+                        case mMessageAddShape:
+                                addShape(true,byteBuffer);
+                        break;
+
+                        case mMessageRemoveShape:
+                            removeShape(byteBuffer);
+                        break;
+
+                        case mMessageFrame:
+                                readServerTick(byteBuffer);
+                        break;
+                }
+        }
+}
+*/
+checkForByteBuffer: function()
+{
+	//mApplicationBreslin->mNetwork->checkForByteBuffer();
+
+},
+/*
+void Game::readServerTick(ByteBuffer* byteBuffer)
+{
+        // Skip sequences
+        short sequence = byteBuffer->ReadShort();
+
+        while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
+        {
+                mApplicationBreslin->mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
+
+                int id = byteBuffer->ReadByte();
+
+                Shape* shape = NULL;
+                shape = getShape(id);
+
+                                if (shape)
+                {
+                        shape->processDeltaByteBuffer(byteBuffer);
+                }
+                else
+                {
+                        //LogString("INVALID SHAPE ID");
+                }
+        }
+}
+*/
 sendByteBuffer: function()
 {
         this.mRunNetworkTime += this.mApplicationBreslin.getRenderTime() * 1000.0;
