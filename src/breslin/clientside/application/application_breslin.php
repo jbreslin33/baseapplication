@@ -103,14 +103,7 @@ shutdown: function()
 sendConnect: function()
 {
 	this.log('sending connect...');
-/*
-        ByteBuffer* byteBuffer = new ByteBuffer();
-        byteBuffer->WriteByte(mMessageConnect);
-        mNetwork->send(byteBuffer);
-*/
-	byteBuffer = new ByteBuffer();
-	byteBuffer.writeByte(this.mMessageConnect);	
-	this.mNetwork.send(byteBuffer);
+	this.mNetwork.sendConnect();
 },
 
 
