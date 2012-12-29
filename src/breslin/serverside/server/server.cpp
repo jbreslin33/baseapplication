@@ -82,15 +82,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	int type = mes->ReadByte();
 	LogString("type:%d",type);
 	
-//	signed short sequence         = mes->ReadShort();
-//	LogString("sequence:%d",sequence);
-
-//	int flag         = mes->ReadByte();
-//	LogString("flag:%d",flag);
-	
-//	int currentKey         = mes->ReadByte();
-//	LogString("currentKey:%d",currentKey);
-	
 	if (type == mConnect)
 	{
 		createClient(address);
@@ -101,9 +92,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		// Find the correct client by comparing addresses
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
-		//	LogString("sa_family:%d",address->sa_family);
-		//	LogString("sa_data 0:%d 1:%d 2:%d 3:%d, 4:%d, 5:%d 6:%d 7:%d 8:%d 9:%d 10:%d 11:%d 12:%d 13:%d",address->sa_data[0],address->sa_data[1], address->sa_data[2], address->sa_data[3], address->sa_data[4], address->sa_data[5], address->sa_data[6], address->sa_data[7], address->sa_data[8], address->sa_data[9], address->sa_data[10], address->sa_data[11], address->sa_data[11], address->sa_data[12], address->sa_data[13]);
-//inet_ntoa((struct sockaddr_in)saddr.sin_addr))
 			if(memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				LogString("memcmp == true");
