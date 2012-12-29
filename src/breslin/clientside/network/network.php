@@ -69,7 +69,7 @@ sendConnect: function()
 sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
 {
 	//temp fix because i am having trouble setting vars in readystate above
-	if (this.mClient == 0)
+	if (this.mClientID == 0)
 	{
  		this.mClientID = document.getElementById("demo").innerHTML;
 	}
@@ -89,6 +89,7 @@ sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
         {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
+                        document.getElementById("demo2").innerHTML=xmlhttp.responseText;
                 }
         }
         xmlhttp.open("POST","/breslin/clientside/network/send_move.php",true);

@@ -77,6 +77,7 @@ window.onresize = function(event)
 </script>
 
 <p id="demo">My First Paragraph</p>
+<p id="demo2">My 2nd Paragraph</p>
 </body>
 </html>
 
