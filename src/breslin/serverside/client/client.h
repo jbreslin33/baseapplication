@@ -58,8 +58,13 @@ class Client
 {
 public:
 	Client(Server* server, struct sockaddr *address);
+	Client(Server* server, struct sockaddr *address, int clientID);
 
 ~Client();
+
+
+	//id used just for browser clients for now, if it's 0 then we know it's a c++ java client.
+	int mClientID;
 
 	int				mConnectionState;		// Connecting, connected, disconnecting, disconnected
 

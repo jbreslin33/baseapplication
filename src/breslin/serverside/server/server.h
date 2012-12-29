@@ -71,7 +71,9 @@ public:
 	int  checkForTimeout(char *data, struct sockaddr *from);
 
 	//client
-	virtual void createClient(struct sockaddr *address);
+	virtual void createClient(struct sockaddr *address); //c++ java
+	virtual void createClient(struct sockaddr *address, int clientID); //browser
+
 	void addClient(Client* client);
 	
 	//shapes

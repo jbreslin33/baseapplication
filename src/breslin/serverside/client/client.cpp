@@ -34,6 +34,29 @@
 //server side client constructor, many instances will be made, one for each client connected.
 Client::Client(Server* server, struct sockaddr *address)
 {
+	//set client id to 0 as this will identify it as a c++ or java client
+	mClientID = 0;	
+
+	//server
+	mServer = server;
+
+	mLastMessageTime  = 0;
+	mConnectionState  = DREAMSOCK_CONNECTING;
+	mOutgoingSequence = 1;
+	mIncomingSequence = 0;
+
+	SetSocketAddress(address);
+
+	//register this client with server
+	mServer->addClient(this);
+}
+
+//server side client constructor, many instances will be made, one for each client connected.
+Client::Client(Server* server, struct sockaddr *address, int clientID)
+{
+	//set client id as this is going to be a browser client
+	mClientID = clientID;
+
 	//server
 	mServer = server;
 

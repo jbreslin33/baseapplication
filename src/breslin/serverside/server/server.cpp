@@ -44,6 +44,7 @@ Server::~Server()
 	mNetwork->dreamSock_CloseSocket(mNetwork->mSocket);
 }
 
+//for c++ and java
 void Server::createClient(struct sockaddr *address)
 {
 	Client* client = new Client(this, address);
@@ -52,6 +53,19 @@ void Server::createClient(struct sockaddr *address)
 	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
 	client->sendAllShapes();
 }
+
+//browser
+void Server::createClient(struct sockaddr * address, int clientID)
+{
+	Client* client = new Client(this, address, clientID);
+	
+	client->createShape();
+	
+	// that's that as we cannot communicate back to the browser from here..unless this is where we change db or whatever medium we will use to communicate with browser.
+}
+
+
+
 
 void Server::addClient(Client* client)
 {
