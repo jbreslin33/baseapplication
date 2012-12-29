@@ -19,8 +19,18 @@ execute: function()
         //network outgoing
         this.mGame.sendByteBuffer();
 
-        //network ingoing
-        this.mGame.checkForByteBuffer();
+	/********** let's try to do this every 1 sec *****/
+       	if (this.mGame.mPollDelayCounter > this.mGame.mPollDelay)
+	{ 
+		//network ingoing
+        	this.mGame.checkForByteBuffer();
+		
+		//reset counter
+		this.mGame.mPollDelayCounter = 0;
+	}
+	
+	//increment counter
+	this.mGame.mPollDelayCounter++;	
 },
 
 exit: function()
