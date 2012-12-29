@@ -51,12 +51,14 @@ public:
 	const char *mLocalIP;
 
 	//codes
-static const int mMessageFrame = 1;
+	static const int mMessageFrame 	      = 1;
+	static const int mMessageFrameBrowser = 2;
 
-	static const int mConnect     = -101;
-	static const int mDisconnect  = -102;
-	static const int mAddShape    = -103;
-	static const int mRemoveShape = -104;
+	static const int mConnect            = -101;
+	static const int mDisconnect         = -102;
+	static const int mDisconnectBrowser  = -202;
+	static const int mAddShape    	     = -103;
+	static const int mRemoveShape 	     = -104;
 
 public:
 	Server(Game* serverSideGame,const char *localIP, int serverPort);
@@ -78,6 +80,7 @@ public:
 	void readDB();
 	void readPackets();
 	void parsePacket(Message *mes, struct sockaddr *address);
+	void checkClientSequence(int type, Client* client, Message* mes);
 	
 	//port
 	int	getPort() { return port; }

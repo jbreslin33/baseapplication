@@ -77,7 +77,9 @@ void Server::sendRemoveShape(Shape* shape)
 
 void Server::parsePacket(Message *mes, struct sockaddr *address)
 {
+	Client* client;
 	mes->BeginReading();
+
 
 	int type = mes->ReadByte();
 	LogString("type:%d",type);
@@ -87,51 +89,54 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		createClient(address);
 		LogString("LIBRARY: Server: a client connected succesfully");
 	}
-	else
+	else if (type == mMessageFrame || type == mDisconnect)
 	{
 		// Find the correct client by comparing addresses
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
-			if(memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
-				LogString("memcmp == true");
-				mClientVector.at(i)->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
-
-				// Check if the type is a positive number
-				// -> is the packet sequenced
-				if(type > 0)
-				{
-					signed short sequence         = mes->ReadShort();
-					LogString("sequence:%d",sequence);
-
-					if(sequence <= mClientVector.at(i)->mIncomingSequence)
-					{
-						LogString("LIB: Server: Sequence mismatch (sequence: %ld <= incoming seq: %ld)",
-						sequence, mClientVector.at(i)->mIncomingSequence);
-					}
-
-					mClientVector.at(i)->mDroppedPackets  = sequence - mClientVector.at(i)->mIncomingSequence - 1;
-					//set mIncomingSequence to current one that just came in for next time comparison...
-					mClientVector.at(i)->mIncomingSequence = sequence;
-				}
-
-				// Wait for one message before setting state to connected
-				if(mClientVector.at(i)->mConnectionState == DREAMSOCK_CONNECTING)
-				{
-					mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
-				}
-
-				// Parse through the system messages
-				switch(type)
-				{
-					case mDisconnect:
-						mClientVector.at(i)->remove();
-						LogString("LIBRARY: Server: a client disconnected");
-						break;
-				}
+				client = mClientVector.at(i);
+				checkClientSequence(type,client,mes);
 			}
 		}
 	}
+	else if (type == mMessageFrameBrowser == mDisconnectBrowser)
+	{
+
+	} 
+
+}
+
+void Server::checkClientSequence(int type, Client* client, Message* mes)
+{
+	if (type == mDisconnect || type == mDisconnectBrowser)
+	{
+		client->remove();
+               	LogString("LIBRARY: Server: a client disconnected");
+                return;
+	}
+	client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
+
+       	signed short sequence         = mes->ReadShort();
+        LogString("sequence:%d",sequence);
+
+        if(sequence <= client->mIncomingSequence)
+        {
+             	LogString("LIB: Server: Sequence mismatch (sequence: %ld <= incoming seq: %ld)",
+                       		sequence, client->mIncomingSequence);
+        }
+
+        client->mDroppedPackets  = sequence - client->mIncomingSequence - 1;
+        //set mIncomingSequence to current one that just came in for next time comparison...
+        client->mIncomingSequence = sequence;
+
+       	// Wait for one message before setting state to connected
+       	if(client->mConnectionState == DREAMSOCK_CONNECTING)
+       	{
+       		client->mConnectionState = DREAMSOCK_CONNECTED;
+	}
+
 }
 
 int Server::checkForTimeout(char *data, struct sockaddr *from)
