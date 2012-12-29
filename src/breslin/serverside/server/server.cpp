@@ -129,6 +129,15 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		int clientID = mes->ReadByte();
 		LogString("mClientID is attempt move:%d",clientID);
+		
+		for (unsigned int i = 0; i < mClientVector.size(); i++)
+		{
+			if (mClientVector.at(i)->mClientID == clientID)
+			{
+				client = mClientVector.at(i);
+				checkClientSequence(type,client,mes);
+			}
+		}
 
 	} 
 
