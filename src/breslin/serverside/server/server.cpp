@@ -74,7 +74,6 @@ void Server::addClient(Client* client)
 
 void Server::sendRemoveShape(Shape* shape)
 {
-	
 	int index = shape->mIndex;
 
 	// Send 'DREAMSOCK_MES_REMOVESHAPE' message to every client
@@ -93,7 +92,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 {
 	Client* client;
 	mes->BeginReading();
-
 
 	int type = mes->ReadByte();
 	LogString("type:%d",type);
@@ -140,7 +138,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		}
 
 	} 
-
 }
 
 void Server::checkClientSequence(int type, Client* client, Message* mes)
@@ -331,7 +328,6 @@ void Server::readPackets()
 			mes.BeginReading();
 
 			type = mes.ReadByte();
-			//LogString("type:%d",type);
 			
 			// Check the type of the message
 			switch(type)
