@@ -39,33 +39,6 @@ open: function()
 },
 
 //this should call ajax function on server to send
-send: function(b)
-{
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-  	{
-		// code for IE7+, Firefox, Chrome, Opera, Safari
-  		xmlhttp=new XMLHttpRequest();
-  	}
-	else
-  	{
-		// code for IE6, IE5
-  		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  	}
-	xmlhttp.onreadystatechange=function()
-  	{
-  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    		{
-    			document.getElementById("demo").innerHTML=xmlhttp.responseText;
-			this.mClientID = xmlhttp.responseText;
-    		}
-  	}
-	xmlhttp.open("POST","/breslin/clientside/network/send.php",true);
-	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	xmlhttp.send("bytebuffer=" + b.mBuffer);
-},
-
-//this should call ajax function on server to send
 sendConnect: function()
 {
         var xmlhttp;
@@ -84,7 +57,6 @@ sendConnect: function()
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
                         document.getElementById("demo").innerHTML=xmlhttp.responseText;
-                        this.mClientID = xmlhttp.responseText;
                 }
         }
         xmlhttp.open("POST","/breslin/clientside/network/send_connect.php",true);
@@ -96,7 +68,6 @@ sendConnect: function()
 // send the move that is new 
 sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
 {
-	this.log('outgoingSequence:' + outgoingSequence);
         var xmlhttp;
         if (window.XMLHttpRequest)
         {
@@ -113,13 +84,14 @@ sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
                         document.getElementById("demo").innerHTML=xmlhttp.responseText;
-                        this.mClientID = xmlhttp.responseText;
                 }
         }
         xmlhttp.open("POST","/breslin/clientside/network/send_move.php",true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xmlhttp.send("messageFrame=" + messageFrame + "&outgoingSequence=" + outgoingSequence + "&flags=" + flags + "&keyCurrent=" + keyCurrent);
+        xmlhttp.send("messageframe=" + messageFrame + "&clientid=" + this.mClientID + "&outgoingsequence=" + outgoingSequence + "&flags=" + flags + "&keycurrent=" + keyCurrent);
 
+	this.log('type:' +  messageFrame);
+	this.log('clientID:' +  this.mClientID);
 }
 
 

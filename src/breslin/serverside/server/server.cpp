@@ -127,6 +127,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	}
 	else if (type == mMessageFrameBrowser == mDisconnectBrowser)
 	{
+		int clientID = mes->ReadByte();
+		LogString("mClientID is attempt move:%d",clientID);
 
 	} 
 
