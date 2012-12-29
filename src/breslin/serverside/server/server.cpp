@@ -70,7 +70,7 @@ void Server::sendRemoveShape(Shape* shape)
 			sizeof(mClientVector.at(i)->mMessage.outgoingData));
 
 		mClientVector.at(i)->mMessage.WriteByte(mRemoveShape);	// type
-		mClientVector.at(i)->mMessage.WriteByte(index);							// index
+		mClientVector.at(i)->mMessage.WriteByte(index);		// index
 	}
 	sendPackets();
 }
@@ -89,6 +89,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		createClient(address);
 		LogString("LIBRARY: Server: a client connected succesfully");
 	}
+	if (type == mConnectBrowser)
+	{
+
+	}
+
 	else if (type == mMessageFrame || type == mDisconnect)
 	{
 		// Find the correct client by comparing addresses
