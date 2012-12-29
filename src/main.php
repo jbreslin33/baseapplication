@@ -77,6 +77,7 @@ window.onresize = function(event)
 </script>
 
 <p id="mClientID">mClientID</p>
+<p id="mByteBuffer">mByteBuffer</p>
 <p id="mMessageAddShape">mMessageAddShape</p>
 <p id="mMessageRemoveShape">mMessageRemoveShape</p>
 <p id="mMessageFrame">mMessageFrame</p>

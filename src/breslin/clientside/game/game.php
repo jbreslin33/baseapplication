@@ -115,7 +115,7 @@ void Game::checkForByteBuffer()
 */
 checkForByteBuffer: function()
 {
-	//mApplicationBreslin->mNetwork->checkForByteBuffer();
+	this.mApplicationBreslin.mNetwork.checkForByteBuffer();
 
 },
 /*
