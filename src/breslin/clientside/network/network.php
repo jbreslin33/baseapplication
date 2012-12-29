@@ -57,7 +57,7 @@ sendConnect: function()
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
                         document.getElementById("demo").innerHTML=xmlhttp.responseText;
-                }
+		}
         }
         xmlhttp.open("POST","/breslin/clientside/network/send_connect.php",true);
         xmlhttp.send();
@@ -68,7 +68,13 @@ sendConnect: function()
 // send the move that is new 
 sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
 {
-        var xmlhttp;
+	//temp fix because i am having trouble setting vars in readystate above
+	if (this.mClient == 0)
+	{
+ 		this.mClientID = document.getElementById("demo").innerHTML;
+	}
+        
+	var xmlhttp;
         if (window.XMLHttpRequest)
         {
                 // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -83,15 +89,12 @@ sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
         {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
-                        document.getElementById("demo").innerHTML=xmlhttp.responseText;
                 }
         }
         xmlhttp.open("POST","/breslin/clientside/network/send_move.php",true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         xmlhttp.send("messageframe=" + messageFrame + "&clientid=" + this.mClientID + "&outgoingsequence=" + outgoingSequence + "&flags=" + flags + "&keycurrent=" + keyCurrent);
 
-	this.log('type:' +  messageFrame);
-	this.log('clientID:' +  this.mClientID);
 }
 
 
