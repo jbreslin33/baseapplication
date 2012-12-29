@@ -12,8 +12,8 @@ $sock = socket_create(AF_INET, SOCK_DGRAM,0);
 
 $packed = pack("c",$messageFrame); //signed integer
 $packed .= pack("s",$outgoingSequence); //signed short mOutgoingSequence
-$packed .= pack("i",$flags); //signed integer
-$packed .= pack("i",$keyCurrent); //signed integer
+$packed .= pack("c",$flags); //signed integer
+$packed .= pack("c",$keyCurrent); //signed integer
 
 $len = strlen($packed);
 

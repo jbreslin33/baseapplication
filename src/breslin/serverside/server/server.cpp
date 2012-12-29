@@ -81,9 +81,15 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	int type = mes->ReadByte();
 	LogString("type:%d",type);
-	signed short sequence         = mes->ReadShort();
-	//int sequence         = mes->ReadByte();
-	LogString("sequence:%d",sequence);
+	
+//	signed short sequence         = mes->ReadShort();
+//	LogString("sequence:%d",sequence);
+
+//	int flag         = mes->ReadByte();
+//	LogString("flag:%d",flag);
+	
+//	int currentKey         = mes->ReadByte();
+//	LogString("currentKey:%d",currentKey);
 	
 	if (type == mConnect)
 	{
