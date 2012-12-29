@@ -85,16 +85,8 @@ sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
                 // code for IE6, IE5
                 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xmlhttp.onreadystatechange=function()
-        {
-/*
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-                        document.getElementById("mMessageFrame").innerHTML=xmlhttp.responseText;
-                }
-*/
-        }
-        xmlhttp.open("POST","/breslin/clientside/network/send_move.php",true);
+        
+	xmlhttp.open("POST","/breslin/clientside/network/send_move.php",true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         xmlhttp.send("messageframe=" + messageFrame + "&clientid=" + this.mClientID + "&outgoingsequence=" + outgoingSequence + "&flags=" + flags + "&keycurrent=" + keyCurrent);
 
