@@ -94,7 +94,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	mes->BeginReading();
 
 	int type = mes->ReadByte();
-	LogString("type:%d",type);
 	
 	if (type == mConnect)
 	{
@@ -126,7 +125,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageFrameBrowser ||  type == mDisconnectBrowser)
 	{
 		int clientID = mes->ReadByte();
-		LogString("mClientID is attempt move:%d",clientID);
 		
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
@@ -151,7 +149,6 @@ void Server::checkClientSequence(int type, Client* client, Message* mes)
 	client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
 
        	signed short sequence         = mes->ReadShort();
-        LogString("sequence:%d",sequence);
 
         if(sequence <= client->mIncomingSequence)
         {
