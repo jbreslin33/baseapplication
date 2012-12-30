@@ -221,6 +221,8 @@ void Game::frame(int msec)
 	
 	//send positions and exact frame time the calcs where done on which is mFrameTime 
 	sendCommand();
+	updateShapeTable();
+
 	mFrameTimeLast = mFrameTime;
 	mFrameTime = 0;
 
@@ -296,6 +298,11 @@ bool Game::checkScope(Client* client, Shape* shape)
 	{
 		return false;
 	}
+}
+
+void Game::updateShapeTable()
+{
+	sqlQuery("UPDATE shapes SET position_x = CASE id WHEN 1 THEN 10 WHEN 2 THEN 20 END, position_z = CASE id WHEN 1 THEN 30 WHEN 2 THEN 40 END");
 }
 
 //send to updates to all clients about all shapes

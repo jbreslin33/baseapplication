@@ -74,6 +74,7 @@ public:
 	virtual void checkEndOfGame() { }
 
 	// Network
+	void	updateShapeTable();
 	void	sendCommand();
 	void	sendExitNotification();
 	void	readDeltaMoveCommand(Message *mes, Client *client);

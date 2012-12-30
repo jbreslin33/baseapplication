@@ -409,12 +409,5 @@ void Shape::addToMoveMessage(Message* message)
 		message->WriteByte(mGame->mFrameTime);
 		//LogString("mFrameTime:%d",mGame->mFrameTime);
 	}
-
-	//update db if x or z flag is set
-	if (flags & mCommandOriginX || flags & mCommandOriginZ)
-	{
-		addMoveToDB();
-	}
-
 }
 
