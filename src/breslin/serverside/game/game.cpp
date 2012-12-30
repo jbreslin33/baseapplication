@@ -23,7 +23,7 @@
 
 //postgresql
 #include <stdio.h>
-#include <postgresql/libpq-fe.h>
+//#include <postgresql/libpq-fe.h>
 
 Game::Game()
 {
@@ -39,12 +39,19 @@ Game::Game()
 	mFrameTimeLast  = 0;
 
 	mBounds = new Bounds();
+
+	mDBConnection = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");	
 	
 	dbTest();
+	purgeShapeTable();
+	//purgeClientTable();
+
+
 }
 
 Game::~Game()
 {
+        PQfinish(mDBConnection);
 	StopLog();
 	delete mServer;
 }
@@ -55,6 +62,11 @@ void Game::createServer()
 }
 
 void Game::createWorld()
+{
+
+}
+
+void Game::runSqlQuery(char* query)
 {
 
 }
@@ -91,6 +103,20 @@ void Game::dbTest()
         PQclear(res);
  
         PQfinish(conn);
+}
+
+void Game::purgeShapeTable()
+{
+  	PGconn          *conn;
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+        PQexec(conn, "delete * from shapes");
+
+        puts("=============================");
+	puts("delete * from shapes");
+        puts("=============================");
+
+        PQfinish(conn);
+	
 }
 
 void Game::frame(int msec)

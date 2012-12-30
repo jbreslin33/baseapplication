@@ -9,6 +9,11 @@
 #include "Ogre.h"
 using namespace Ogre;
 
+//postgres
+#include <postgresql/libpq-fe.h>
+
+
+
 #define COMMAND_HISTORY_SIZE		64
 
 //class Network;
@@ -18,6 +23,7 @@ class Client;
 class Shape;
 class Vector3D;
 class Bounds;
+
 class Game
 {
 public:
@@ -40,6 +46,10 @@ static const char mMessageServerExit = 3;
 	int mFrameTimeLast;
 	//shapes
 	std::vector<Shape*> mShapeVector;	//every tangible item in game world..
+	
+	//db
+     	PGconn* mDBConnection;
+
 
 public:
 	Game();
@@ -47,6 +57,8 @@ public:
 
 	//db
 	void dbTest();
+	void purgeShapeTable();
+	void runSqlQuery(char* query);
 
 	//server
 	virtual void createServer();
