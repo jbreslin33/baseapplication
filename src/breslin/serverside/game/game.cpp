@@ -42,13 +42,7 @@ Game::Game()
 
 	mDBConnection = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");	
 	
-	//dbTest();
-	//purgeShapeTable();
-	//purgeClientTable();
-	//runSqlQuery("delete from passwords");
 	sqlQuery("delete from passwords");
-
-
 }
 
 Game::~Game()
@@ -70,13 +64,11 @@ void Game::createWorld()
 
 PGresult* Game::sqlQuery(const char* query)
 {
-	PGconn          *conn;
         PGresult        *res;
         int             rec_count;
         int             row;
         int             col;
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,query);
+        res = PQexec(mDBConnection,query);
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
@@ -95,11 +87,9 @@ PGresult* Game::sqlQuery(const char* query)
         }
 
         puts("==========================");
+	return res;
 
-        PQclear(res);
-
-        PQfinish(conn);
-
+        //PQclear(res);
 }
 
 void Game::runSqlQuery(const char* query)
