@@ -23,7 +23,6 @@ $query = "select client_id from client where id = 1;";
 $result = pg_query($conn,$query);
 $row = pg_fetch_array($result, 0);
 	
-//echo $row["client_id"];
 $client_id = $row["client_id"];
 
 //now update the record
