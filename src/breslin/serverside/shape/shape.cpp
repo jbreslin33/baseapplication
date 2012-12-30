@@ -85,6 +85,8 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 
 	sendShapeToClients();
 	
+	mGame->sqlQuery("insert into shapes values (1,0.0,0.0,0.0,0.0,0.0)");
+	
 }
 
 Shape::~Shape()
