@@ -42,8 +42,9 @@ Game::Game()
 
 	mDBConnection = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");	
 	
-	sqlQuery("delete from passwords");
-	sqlQuery("select * from levels_standards_clusters_domains_grades");
+	sqlQuery("delete from shapes");
+	sqlQuery("update client set client_id = 1");
+	//sqlQuery("select * from levels_standards_clusters_domains_grades");
 }
 
 Game::~Game()
