@@ -55,6 +55,7 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 
 	//time
     	mRunNetworkTime = 0.0f;
+	mFrameTimeServer = 0.0f;
 
 	mStateMachine = new StateMachine();
 	mGameGlobal = new GameGlobal(this);
@@ -193,6 +194,7 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
 {
         // Skip sequences
         short sequence = byteBuffer->ReadShort();
+        mFrameTimeServer = byteBuffer->ReadByte();
 
         while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
         {

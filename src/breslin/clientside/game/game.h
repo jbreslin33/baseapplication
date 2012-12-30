@@ -84,6 +84,9 @@ signed short	mOutgoingSequence;
 //time
 float mRunNetworkTime;
 
+public:
+float mFrameTimeServer;
+
 /***************************************
 *			          METHODS
 ***************************************/

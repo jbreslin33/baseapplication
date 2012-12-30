@@ -305,10 +305,10 @@ int Shape::setFlag()
 		flags |= mCommandRotationZ;
 	}
 
-	if(mGame->mFrameTime != mGame->mFrameTimeLast)
-	{
-		flags |= mCommandFrameTime;
-	}		
+	//if(mGame->mFrameTime != mGame->mFrameTimeLast)
+	//{
+	//	flags |= mCommandFrameTime;
+	//}		
 	return flags;
 }
 
@@ -346,9 +346,9 @@ void Shape::addToMoveMessage(Message* message)
 	}
 
 	//frameTime
-	if(flags & mGame->mCommandFrameTime)
-	{
-		message->WriteByte(mGame->mFrameTime);
-	}
+	//if(flags & mGame->mCommandFrameTime)
+	//{
+	//	message->WriteByte(mGame->mFrameTime);
+	//}
 }
 

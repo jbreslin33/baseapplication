@@ -351,7 +351,6 @@ void Game::updateShapeTable()
 		query.append(t);
 		query.append(x);
 		
-		LogString("mFrameTime:%d",mFrameTime);
 	}
 	std::string e1 = " END, position_z = CASE id";
 	query.append(e1);
@@ -404,6 +403,10 @@ void Game::sendCommand(void)
 		//start filling said mMessage that belongs to client
 		mServer->mClientVector.at(i)->mMessage.WriteByte(mServer->mMessageFrame);			// type
 		mServer->mClientVector.at(i)->mMessage.WriteShort(mServer->mClientVector.at(i)->mOutgoingSequence);
+		
+//right here you should write the mFrameTime
+//ddddd or even above outgoing sequence
+		mServer->mClientVector.at(i)->mMessage.WriteByte(mFrameTime);
 
 		//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
 		for (unsigned int j = 0; j < mShapeVector.size(); j++)

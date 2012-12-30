@@ -246,11 +246,11 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
         }
 
         //frame time
-        if (flags & mApplicationBreslin->mGame->mCommandFrameTime)
-        {
-                mServerCommandCurrent->mFrameTime = mes->ReadByte();
+       // if (flags & mApplicationBreslin->mGame->mCommandFrameTime)
+        //{
+                mServerCommandCurrent->mFrameTime = mApplicationBreslin->mGame->mFrameTimeServer;
                 mCommandToRunOnShape->mFrameTime = mServerCommandCurrent->mFrameTime;
-        }
+       // }
 
         if (mServerCommandCurrent->mFrameTime != 0) 
         {
