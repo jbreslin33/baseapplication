@@ -27,17 +27,8 @@ execute: function()
 		
 		//reset counter
 		this.mGame.mPollDelayCounter = 0;
-
-		//reset
-		this.mGame.mPasswordCounter++; 
-		
-		if (this.mGame.mPasswordCounter > this.mGame.mPasswordLimit)
-		{
-			this.mGame.mPasswordCounter = 0;
-		}
 	}
 	
-	//increment counter
 	this.mGame.mPollDelayCounter++;	
 },
 

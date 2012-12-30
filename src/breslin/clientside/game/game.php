@@ -38,9 +38,6 @@ initialize: function(applicationBreslin)
         this.mRunNetworkTime = 0.0;
 	this.mPollDelay = 200;
 	this.mPollDelayCounter = 0;
-	this.mPollDelayCounter = 0;
-	this.mPasswordCounter = 0;
-	this.mPasswordLimit = 25;
 
        	//states 
 	this.mStateMachine = new StateMachine();
