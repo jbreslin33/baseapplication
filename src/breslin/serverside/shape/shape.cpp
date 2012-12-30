@@ -311,64 +311,6 @@ int Shape::setFlag()
 	}		
 	return flags;
 }
-        //*********add shape to db ****************/
-/*
-        std::string one = "insert into shapes values (";
-
-        stringstream ss;//create a stringstream
-        ss << mIndex;//add number to the stream
-        std::string two = ss.str();//return a string with the contents of the stream
-
-        std::string three = ",0.0,0.0,0.0,0.0,0.0)";
-
-        std::string str;
-        str.append(one);
-        str.append(two);
-        str.append(three);
-
-        const char * c = str.c_str();
-        mGame->sqlQuery(c);
-*/
-
-void Shape::addMoveToDB()
-{
-	std::string one = "update shapes set position_x=";
-
-	stringstream ss_pX;
-        ss_pX << mSceneNode->getPosition().x;
-        std::string two = ss_pX.str();
-	
-	std::string three = ", position_y=";
-
-	stringstream ss_pZ;
-        ss_pZ << mSceneNode->getPosition().z;
-        std::string four = ss_pZ.str();
-
-	std::string five = ", frame_time=";
-        stringstream ss_ft;
-        ss_ft << mGame->mFrameTime;
-        std::string six = ss_ft.str();
-
-	std::string seven = " where id=";
-
-        stringstream ss;
-        ss << mIndex;
-        std::string eight = ss.str();
-
-        std::string str;
-        str.append(one);
-        str.append(two);
-        str.append(three);
-        str.append(four);
-        str.append(five);
-        str.append(six);
-        str.append(seven);
-        str.append(eight);
-
-        const char * c = str.c_str();
-        mGame->sqlQuery(c);
-
-}
 
 void Shape::addToMoveMessage(Message* message)
 {
