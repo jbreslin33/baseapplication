@@ -86,10 +86,16 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	sendShapeToClients();
 
 	const char* one = "insert into shapes values (";
-	const char* two = (char*) mIndex;
+	//const char* two = (char*) mIndex;
+	const char* two = "1";
 	const char* three = ",0.0,0.0,0.0,0.0,0.0)";
- 	
-	std::string str="insert into shapes values (1,0.0,0.0,0.0,0.0,0.0)";
+ 
+	std::string str;
+	str.append(one);
+	str.append(two);
+	str.append(three);
+	
+	//std::string str="insert into shapes values (1,0.0,0.0,0.0,0.0,0.0)";
 	const char * c = str.c_str();
 	mGame->sqlQuery(c);
 
