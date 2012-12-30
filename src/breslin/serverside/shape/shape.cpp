@@ -349,7 +349,6 @@ void Shape::addToMoveMessage(Message* message)
 	if(flags & mGame->mCommandFrameTime)
 	{
 		message->WriteByte(mGame->mFrameTime);
-		//LogString("mFrameTime:%d",mGame->mFrameTime);
 	}
 }
 

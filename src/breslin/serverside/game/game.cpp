@@ -350,6 +350,8 @@ void Game::updateShapeTable()
 		query.append(id);
 		query.append(t);
 		query.append(x);
+		
+		LogString("mFrameTime:%d",mFrameTime);
 	}
 	std::string e1 = " END, position_z = CASE id";
 	query.append(e1);
