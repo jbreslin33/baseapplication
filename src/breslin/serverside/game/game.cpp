@@ -343,7 +343,7 @@ void Game::updateShapeTable()
 	for (int i = 0; i < mShapeVector.size(); i++)
 	{
 		std::string w = " WHEN ";	
-		std::string id  = toString(i);
+		std::string id  = toString(mShapeVector.at(i)->mIndex);
 		std::string t   = " THEN ";
 		std::string x    = toString(mShapeVector.at(i)->mSceneNode->getPosition().x);
 		query.append(w);
@@ -356,7 +356,7 @@ void Game::updateShapeTable()
 	for (int i = 0; i < mShapeVector.size(); i++)
 	{
 		std::string w = " WHEN ";	
-		std::string id  = toString(i);
+		std::string id  = toString(mShapeVector.at(i)->mIndex);
 		std::string t   = " THEN ";
 		std::string z    = toString(mShapeVector.at(i)->mSceneNode->getPosition().z);
 		query.append(w);
