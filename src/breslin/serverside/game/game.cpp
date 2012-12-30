@@ -342,7 +342,7 @@ sqlQuery("UPDATE shapes SET position_x = CASE id WHEN 1 THEN 10 WHEN 2 THEN 20 E
 void Game::updateShapeTable()
 {
 	std::string query     = "UPDATE shapes SET position_x = CASE id";
-	for (int i = 0; i < mShapeVector.size(); i++)
+	for (int i = 0; i < mShapeVector.size() + 1; i++)
 	{
 		if (i == 0)
 		{
@@ -370,7 +370,7 @@ void Game::updateShapeTable()
 	}
 	std::string e1 = " END, position_z = CASE id";
 	query.append(e1);
-	for (int i = 0; i < mShapeVector.size(); i++)
+	for (int i = 0; i < mShapeVector.size() + 1; i++)
 	{
 		if (i == 0)
 		{
