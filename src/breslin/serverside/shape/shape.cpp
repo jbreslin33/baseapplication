@@ -86,13 +86,14 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 
 	sendShapeToClients();
 
- stringstream ss;//create a stringstream
-   ss << mIndex;//add number to the stream
-    std::string two = ss.str();//return a string with the contents of the stream
 
+	//*********add shape to db ****************/
 	std::string one = "insert into shapes values (";
-	//const char* two = (char*) mIndex;
-	//std::string two = "1";
+	
+ 	stringstream ss;//create a stringstream
+   	ss << mIndex;//add number to the stream
+    	std::string two = ss.str();//return a string with the contents of the stream
+
 	std::string three = ",0.0,0.0,0.0,0.0,0.0)";
  
 	std::string str;
@@ -103,8 +104,6 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	//std::string str="insert into shapes values (1,0.0,0.0,0.0,0.0,0.0)";
 	const char * c = str.c_str();
 	mGame->sqlQuery(c);
-
-//	mGame->sqlQuery("insert into shapes values (1,0.0,0.0,0.0,0.0,0.0)");
 	
 }
 
