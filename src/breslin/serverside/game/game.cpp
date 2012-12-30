@@ -74,8 +74,8 @@ void Game::runSqlQuery(const char* query)
         int             row;
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        //res = PQexec(conn,query);
-        res = PQexec(conn,"delete from passwords");
+        res = PQexec(conn,query);
+        //res = PQexec(conn,"delete from passwords");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
