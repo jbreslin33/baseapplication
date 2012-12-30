@@ -347,7 +347,8 @@ CREATE TABLE shapes (
     position_y double precision,
     position_z double precision,
     rotation_x double precision,
-    rotation_z double precision	
+    rotation_z double precision,
+    frame_time double precision	
 );
 
 --==================================================================

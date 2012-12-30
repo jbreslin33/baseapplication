@@ -131,6 +131,7 @@ void sendShapeToClients();
 	//delta move command
 virtual int  setFlag();
 virtual void addToMoveMessage(Message* message);
+virtual void addMoveToDB();
 };
 
 #endif
