@@ -44,6 +44,9 @@ Game::Game()
 	
 	sqlQuery("delete from shapes");
 	sqlQuery("update client set client_id = 1");
+	sqlQuery("update client set client_id = 1");
+	sqlQuery("insert into shapes (id) values (0)");
+
 }
 
 Game::~Game()
