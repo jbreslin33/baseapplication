@@ -13,7 +13,6 @@ using namespace Ogre;
 #include <postgresql/libpq-fe.h>
 
 
-
 #define COMMAND_HISTORY_SIZE		64
 
 //class Network;
@@ -92,6 +91,10 @@ public:
 
 	//commands
 	virtual void storeCommands(Shape* shape);
+
+	//utility
+	std::string toString(float f);
+	std::string toString(int i);
 
 };
 

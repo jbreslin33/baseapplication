@@ -299,11 +299,95 @@ bool Game::checkScope(Client* client, Shape* shape)
 		return false;
 	}
 }
+/*
+sqlQuery("UPDATE shapes SET position_x = CASE id WHEN 1 THEN 10 WHEN 2 THEN 20 END, position_z = CASE id WHEN 1 THEN 30 WHEN 2 THEN 40 END");
+ std::string one = "update shapes set position_x=";
 
+        stringstream ss_pX;
+        ss_pX << mSceneNode->getPosition().x;
+        std::string two = ss_pX.str();
+
+        std::string three = ", position_y=";
+
+        stringstream ss_pZ;
+        ss_pZ << mSceneNode->getPosition().z;
+        std::string four = ss_pZ.str();
+
+        std::string five = ", frame_time=";
+        stringstream ss_ft;
+        ss_ft << mGame->mFrameTime;
+        std::string six = ss_ft.str();
+
+        std::string seven = " where id=";
+
+        stringstream ss;
+        ss << mIndex;
+        std::string eight = ss.str();
+
+        std::string str;
+        str.append(one);
+        str.append(two);
+        str.append(three);
+        str.append(four);
+        str.append(five);
+        str.append(six);
+        str.append(seven);
+        str.append(eight);
+
+        const char * c = str.c_str();
+        mGame->sqlQuery(c);
+*/
 void Game::updateShapeTable()
 {
-	sqlQuery("UPDATE shapes SET position_x = CASE id WHEN 1 THEN 10 WHEN 2 THEN 20 END, position_z = CASE id WHEN 1 THEN 30 WHEN 2 THEN 40 END");
+	std::string query     = "UPDATE shapes SET position_x = CASE id";
+	for (int i = 0; i < mShapeVector.size(); i++)
+	{
+		std::string w = " WHEN ";	
+		std::string id  = toString(i);
+		std::string t   = " THEN ";
+		std::string x    = toString(mShapeVector.at(i)->mSceneNode->getPosition().x);
+		query.append(w);
+		query.append(id);
+		query.append(t);
+		query.append(x);
+	}
+	std::string e1 = " END, position_z = CASE id";
+	query.append(e1);
+	for (int i = 0; i < mShapeVector.size(); i++)
+	{
+		std::string w = " WHEN ";	
+		std::string id  = toString(i);
+		std::string t   = " THEN ";
+		std::string z    = toString(mShapeVector.at(i)->mSceneNode->getPosition().z);
+		query.append(w);
+		query.append(id);
+		query.append(t);
+		query.append(z);
+	}
+	std::string e2 = " END";
+	query.append(e2);
+
+        const char * c = query.c_str();
+	sqlQuery(c);	
+
 }
+
+std::string Game::toString(float f)
+{
+        stringstream ss;
+        ss << f;
+        std::string str = ss.str();
+	return str;
+}
+
+std::string Game::toString(int i)
+{
+        stringstream ss;
+        ss << i;
+        std::string str = ss.str();
+	return str;
+}
+
 
 //send to updates to all clients about all shapes
 void Game::sendCommand(void)
