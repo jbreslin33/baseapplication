@@ -58,8 +58,8 @@ public:
 	//db
 	void dbTest();
 	void purgeShapeTable();
-	void runSqlQuery(char* query);
-
+	void runSqlQuery(const char* query);
+	
 	//server
 	virtual void createServer();
 
