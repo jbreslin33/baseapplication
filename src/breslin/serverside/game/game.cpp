@@ -44,7 +44,6 @@ Game::Game()
 	
 	sqlQuery("delete from shapes");
 	sqlQuery("update client set client_id = 1");
-	//sqlQuery("select * from levels_standards_clusters_domains_grades");
 }
 
 Game::~Game()
@@ -342,6 +341,7 @@ void Game::updateShapeTable()
 	std::string query     = "UPDATE shapes SET position_x = CASE id";
 	for (int i = 0; i < mShapeVector.size(); i++)
 	{
+		//LogString("mIndex:%d",mShapeVector.at(i)->mIndex);
 		std::string w = " WHEN ";	
 		std::string id  = toString(mShapeVector.at(i)->mIndex);
 		std::string t   = " THEN ";
@@ -370,6 +370,7 @@ void Game::updateShapeTable()
 
         const char * c = query.c_str();
 	sqlQuery(c);	
+	LogString("q:%s",c);
 
 }
 
