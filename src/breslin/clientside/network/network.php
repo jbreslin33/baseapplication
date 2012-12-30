@@ -90,7 +90,6 @@ sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
 
 checkForByteBuffer: function(id)
 {
-	this.log('call check with id:' + id);
 	var xmlhttp;
         if (window.XMLHttpRequest)
         {
