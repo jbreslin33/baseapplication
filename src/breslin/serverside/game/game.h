@@ -59,6 +59,7 @@ public:
 	void dbTest();
 	void purgeShapeTable();
 	void runSqlQuery(const char* query);
+	PGresult* sqlQuery(const char* query);
 	
 	//server
 	virtual void createServer();

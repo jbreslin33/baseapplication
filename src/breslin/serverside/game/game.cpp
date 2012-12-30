@@ -45,7 +45,8 @@ Game::Game()
 	//dbTest();
 	//purgeShapeTable();
 	//purgeClientTable();
-	runSqlQuery("delete from passwords");
+	//runSqlQuery("delete from passwords");
+	sqlQuery("delete from passwords");
 
 
 }
@@ -66,6 +67,41 @@ void Game::createWorld()
 {
 
 }
+
+PGresult* Game::sqlQuery(const char* query)
+{
+	PGconn          *conn;
+        PGresult        *res;
+        int             rec_count;
+        int             row;
+        int             col;
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+        res = PQexec(conn,query);
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                puts("We did not get any data!");
+                //exit(0);
+        }
+        rec_count = PQntuples(res);
+        printf("We received %d records.\n", rec_count);
+        puts("==========================");
+        for (row=0; row<rec_count; row++)
+        {
+                for (col=0; col<3; col++)
+                {
+                        printf("%s\t", PQgetvalue(res, row, col));
+                }
+                puts("");
+        }
+
+        puts("==========================");
+
+        PQclear(res);
+
+        PQfinish(conn);
+
+}
+
 void Game::runSqlQuery(const char* query)
 {
   	PGconn          *conn;
@@ -97,8 +133,7 @@ void Game::runSqlQuery(const char* query)
 
         PQclear(res);
 
-        PQfinish(conn);
-
+       	PQfinish(conn);
 }
 
 void Game::dbTest()
