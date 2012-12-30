@@ -43,6 +43,7 @@ Game::Game()
 	mDBConnection = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");	
 	
 	sqlQuery("delete from passwords");
+	sqlQuery("select * from levels_standards_clusters_domains_grades");
 }
 
 Game::~Game()
@@ -66,6 +67,7 @@ PGresult* Game::sqlQuery(const char* query)
 {
         PGresult        *res;
         int             rec_count;
+        int             col_count;
         int             row;
         int             col;
         res = PQexec(mDBConnection,query);
@@ -75,11 +77,14 @@ PGresult* Game::sqlQuery(const char* query)
                 //exit(0);
         }
         rec_count = PQntuples(res);
+	col_count = PQnfields(res);
+
         printf("We received %d records.\n", rec_count);
+        printf("We received %d columns.\n", col_count);
         puts("==========================");
         for (row=0; row<rec_count; row++)
         {
-                for (col=0; col<3; col++)
+                for (col=0; col<col_count; col++)
                 {
                         printf("%s\t", PQgetvalue(res, row, col));
                 }
