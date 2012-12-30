@@ -344,28 +344,57 @@ void Game::updateShapeTable()
 	std::string query     = "UPDATE shapes SET position_x = CASE id";
 	for (int i = 0; i < mShapeVector.size(); i++)
 	{
-		std::string w = " WHEN ";	
-		std::string id  = toString(mShapeVector.at(i)->mIndex);
-		std::string t   = " THEN ";
-		std::string x    = toString(mShapeVector.at(i)->mSceneNode->getPosition().x);
-		query.append(w);
-		query.append(id);
-		query.append(t);
-		query.append(x);
+		if (i == 0)
+		{
+			std::string w = " WHEN ";	
+			std::string id  = toString(i);
+			std::string t   = " THEN ";
+			std::string x    = toString(mFrameTime);
+			query.append(w);
+			query.append(id);
+			query.append(t);
+			query.append(x);
+		}
+		else
+		{
+			std::string w = " WHEN ";	
+			std::string id  = toString(mShapeVector.at(i-1)->mIndex);
+			std::string t   = " THEN ";
+			std::string x    = toString(mShapeVector.at(i-1)->mSceneNode->getPosition().x);
+			query.append(w);
+			query.append(id);
+			query.append(t);
+			query.append(x);
+		}
 		
 	}
 	std::string e1 = " END, position_z = CASE id";
 	query.append(e1);
 	for (int i = 0; i < mShapeVector.size(); i++)
 	{
-		std::string w = " WHEN ";	
-		std::string id  = toString(mShapeVector.at(i)->mIndex);
-		std::string t   = " THEN ";
-		std::string z    = toString(mShapeVector.at(i)->mSceneNode->getPosition().z);
-		query.append(w);
-		query.append(id);
-		query.append(t);
-		query.append(z);
+		if (i == 0)
+		{
+			std::string w = " WHEN ";	
+			std::string id  = toString(i);
+			std::string t   = " THEN ";
+			std::string z    = toString(mFrameTimeLast);
+			query.append(w);
+			query.append(id);
+			query.append(t);
+			query.append(z);
+
+		}
+		else
+		{
+			std::string w = " WHEN ";	
+			std::string id  = toString(mShapeVector.at(i-1)->mIndex);
+			std::string t   = " THEN ";
+			std::string z    = toString(mShapeVector.at(i-1)->mSceneNode->getPosition().z);
+			query.append(w);
+			query.append(id);
+			query.append(t);
+			query.append(z);
+		}
 	}
 	std::string e2 = " END";
 	query.append(e2);
