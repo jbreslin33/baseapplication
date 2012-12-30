@@ -25,6 +25,7 @@
 //math
 #include "../../math/vector3D.h"
 
+#include <iostream>
 
 #include <string>
 
@@ -85,9 +86,13 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 
 	sendShapeToClients();
 
+ stringstream ss;//create a stringstream
+   ss << mIndex;//add number to the stream
+    std::string two = ss.str();//return a string with the contents of the stream
+
 	std::string one = "insert into shapes values (";
 	//const char* two = (char*) mIndex;
-	std::string two = "1";
+	//std::string two = "1";
 	std::string three = ",0.0,0.0,0.0,0.0,0.0)";
  
 	std::string str;
