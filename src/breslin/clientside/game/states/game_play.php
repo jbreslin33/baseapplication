@@ -19,7 +19,7 @@ execute: function()
         //network outgoing
         this.mGame.sendByteBuffer();
 
-	/********** let's try to do this every 1 sec *****/
+	/********** let's try to do this with delay *****/
        	if (this.mGame.mPollDelayCounter > this.mGame.mPollDelay)
 	{ 
 		//network ingoing
@@ -27,6 +27,14 @@ execute: function()
 		
 		//reset counter
 		this.mGame.mPollDelayCounter = 0;
+
+		//reset
+		this.mGame.mPasswordCounter++; 
+		
+		if (this.mGame.mPasswordCounter > this.mGame.mPasswordLimit)
+		{
+			this.mGame.mPasswordCounter = 0;
+		}
 	}
 	
 	//increment counter

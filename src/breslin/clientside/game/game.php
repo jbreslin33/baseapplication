@@ -36,8 +36,11 @@ initialize: function(applicationBreslin)
 
         //time
         this.mRunNetworkTime = 0.0;
-	this.mPollDelay = 100;
+	this.mPollDelay = 200;
 	this.mPollDelayCounter = 0;
+	this.mPollDelayCounter = 0;
+	this.mPasswordCounter = 0;
+	this.mPasswordLimit = 25;
 
        	//states 
 	this.mStateMachine = new StateMachine();
@@ -117,7 +120,7 @@ void Game::checkForByteBuffer()
 */
 checkForByteBuffer: function()
 {
-	this.mApplicationBreslin.mNetwork.checkForByteBuffer();
+	this.mApplicationBreslin.mNetwork.checkForByteBuffer(this.mPasswordCounter);
 
 },
 /*

@@ -1,23 +1,27 @@
 <?php
-
+$id = $_POST["id"];
 
 //*****************DATABASE
-
+/*
 //create connection
 $conn = pg_connect("host=localhost dbname=abcandyou user=postgres password=mibesfat")
        or die('Could not connect: ' . pg_last_error());
 
-$query = "select client_id from client where id = 1;";
+$query = "select password from passwords where id = "
+$query .= $id; 
+$query .= ";";
 
 $result = pg_query($conn,$query);
 $row = pg_fetch_array($result, 0);
+$numrows = pg_numrows($result);
 	
-$client_id = $row["client_id"];
+$password = $row["password"];
 
-//send client id back to client browser
-
-echo $client_id;
-
+//send password  back to browser
+$numrows = "g";
+echo $numrows;
+*/
+echo $id;
 
 ?>
 

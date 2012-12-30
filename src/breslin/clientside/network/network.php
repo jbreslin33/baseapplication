@@ -88,8 +88,9 @@ sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
 
 },
 
-checkForByteBuffer: function()
+checkForByteBuffer: function(id)
 {
+	this.log('call check with id:' + id);
 	var xmlhttp;
         if (window.XMLHttpRequest)
         {
@@ -107,7 +108,8 @@ checkForByteBuffer: function()
                 }
         }
         xmlhttp.open("POST","/breslin/clientside/network/check_for_byte_buffer.php",true);
-        xmlhttp.send();
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("id=" + id);
 }
 
 });
