@@ -84,8 +84,33 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	mGame->mShapeVector.push_back(this);
 
 	sendShapeToClients();
+
+	const char* one = "insert into shapes values (";
+	const char* two = (char*) mIndex;
+	const char* three = ",0.0,0.0,0.0,0.0,0.0)";
+/*
+	std::string query;
+	query.append(one);
+	query.append(two);
+	query.append(three);
+	LogString("s:%s",query);
+	const char * c = query.c_str();
+	mGame->sqlQuery(c);
+*/
+ 	std::string str="insert into shapes values (1,0.0,0.0,0.0,0.0,0.0)";
+	const char * c = str.c_str();
+	mGame->sqlQuery(c);
+
+/*
+	char* catString = malloc(strlen(one)+strlen(two)+strlen(three)+1);
 	
-	mGame->sqlQuery("insert into shapes values (1,0.0,0.0,0.0,0.0,0.0)");
+	strcpy(catstring,one);
+	strcpy(catstring,two);
+	strcpy(catstring,three);
+
+	mGame->sqlQuery(catstring);	
+*/
+//	mGame->sqlQuery("insert into shapes values (1,0.0,0.0,0.0,0.0,0.0)");
 	
 }
 
