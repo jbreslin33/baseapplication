@@ -48,6 +48,9 @@
 <!-- include GamePlay -->
 <script type="text/javascript" src="/breslin/clientside/game/states/game_play.php"></script>
 
+<!-- include Shape -->
+<script type="text/javascript" src="/breslin/clientside/shape/shape.php"></script>
+
 
 <script type="text/javascript">
 function addRow(dataArr)

@@ -118,6 +118,39 @@ void Game::checkForByteBuffer()
 checkForByteBuffer: function()
 {
 	this.mApplicationBreslin.mNetwork.checkForByteBuffer();
+
+ 	var positionTable = document.getElementById('position_table');
+
+    	var rowLength = positionTable.rows.length;
+
+	for (i = 1; i < rowLength; i++)
+	{
+		foundMatch = false;			
+		
+		for (s = 0; s < this.mShapeVector.length; s++)
+		{
+			if (this.mShapeVector[s].mIndex == positionTable.rows.item(i).cells.item(0).innerHTML)	
+			{
+				foundMatch = true;
+			}
+		}	
+		if (foundMatch)
+		{
+			//do nothing or set vars
+		}
+		else
+		{
+			this.log('create shape');
+			//no match we don't know about this shape
+			byteBuffer = new ByteBuffer();
+			shape = new Shape(this.mApplicationBreslin,byteBuffer,false);
+			shape.mIndex =  positionTable.rows.item(i).cells.item(0).innerHTML; 
+			this.mShapeVector.push(shape);
+		}
+	}
+	
+	
+
 },
 /*
 void Game::readServerTick(ByteBuffer* byteBuffer)

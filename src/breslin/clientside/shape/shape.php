@@ -1,8 +1,59 @@
 var Shape = new Class(
 {
 
-initialize: function()
+//Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGhost);
+
+initialize: function(applicationBreslin, byteBuffer, isGhost)
 {
+/*
+ 	mIsGhost = isGhost;
+
+        //applicationBreslin
+        mApplicationBreslin = applicationBreslin;
+
+        //commands
+        mServerCommandLast    = new Command();
+        mServerCommandCurrent = new Command();
+        mCommandToRunOnShape  = new Command();
+        //speed
+        mSpeed = 0.0f;
+        mSpeedMax  = 1.66f;
+
+        mVelocity = new Vector3D();
+
+        //spawn orientation
+        mSpawnPosition     = new Vector3D();
+        mSpawnRotation     = new Vector3D();
+
+        //process Spawn ByteBuffer
+        processSpawnByteBuffer(byteBuffer);
+
+        //animation
+        if (mAnimate)
+        {
+                addAbility(new AbilityAnimationOgre(this));
+        }
+
+        setupTitle();
+
+        //ghost
+        mGhost = NULL;
+
+        if (!mIsGhost)
+        {
+                //create a ghost for this shape
+                mGhost = new Shape(mApplicationBreslin,byteBuffer,true);
+                mGhost->setVisible(false);
+        }
+*/	
+
+	//let's deal with mIndex first
+	this.mIndex = 0;	
+
+	this.mIsGhost = isGhost;
+
+
+	
 
 },
 
