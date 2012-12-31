@@ -342,13 +342,22 @@ CREATE TABLE questions (
 
 --SHAPES
 CREATE TABLE shapes (
-    id integer NOT NULL,
-    position_x double precision,
-    position_y double precision,
-    position_z double precision,
-    rotation_x double precision,
-    rotation_z double precision,
-    frame_time double precision	
+	id integer NOT NULL,
+    	position_x double precision,
+    	position_y double precision,
+    	position_z double precision,
+    	rotation_x double precision,
+    	rotation_z double precision,
+    	frame_time double precision,
+   	client integer, 
+	spawnPostion_x double precision,
+	spawnPostion_y double precision,
+	spawnPostion_z double precision,
+	spawnRotation_x double precision,
+	spawnRotation_z double precision,
+	meshCode integer,	
+	animated integer	
+
 );
 
 --==================================================================
