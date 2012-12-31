@@ -123,7 +123,7 @@ checkForByteBuffer: function()
 
     	var rowLength = positionTable.rows.length;
 
-	for (i = 1; i < rowLength; i++)
+	for (i = 2; i < rowLength; i++)
 	{
 		foundMatch = false;			
 		
