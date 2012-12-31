@@ -51,6 +51,9 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
 	this.mIndex = 0;	
 
 	this.mIsGhost = isGhost;
+        
+	//applicationBreslin
+        this.mApplicationBreslin = applicationBreslin;
 
 
 	
