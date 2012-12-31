@@ -48,6 +48,22 @@
 <!-- include GamePlay -->
 <script type="text/javascript" src="/breslin/clientside/game/states/game_play.php"></script>
 
+
+<script type="text/javascript">
+function addRow(dataArr)
+{
+	var tr=document.createElement('tr');
+        var len=dataArr.length;
+        for(var i=0;i<len;i++)
+	{
+       		var td=document.createElement('td');
+                td.appendChild(document.createTextNode(dataArr[i]));
+                tr.appendChild(td);
+        }
+        document.getElementById('position_table').appendChild(tr);
+}
+</script>
+
 </head>
 
 <body bgcolor="grey">
@@ -81,5 +97,6 @@ window.onresize = function(event)
 <p id="mMessageAddShape">mMessageAddShape</p>
 <p id="mMessageRemoveShape">mMessageRemoveShape</p>
 <p id="mMessageFrame">mMessageFrame</p>
+
 </body>
 </html>
