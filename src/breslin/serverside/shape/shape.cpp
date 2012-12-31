@@ -86,7 +86,7 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 
 	sendShapeToClients();
 
-
+//client | spawnpostion_x | spawnpostion_y | spawnpostion_z | spawnrotation_x | spawnrotation_z | meshcode | animated 
 	//*********add shape to db ****************/
 	std::string one = "insert into shapes values (";
 	
@@ -94,14 +94,68 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
    	ss << mIndex;//add number to the stream
     	std::string two = ss.str();//return a string with the contents of the stream
 
-	std::string three = ",0.0,0.0,0.0,0.0,0.0,0.0)";
+	std::string three = ",0.0,0.0,0.0,0.0,0.0,0.0,";
+
+	std::string four;
+	if (mClient)
+	{
+		four = mGame->toString(1); 
+	}
+	else
+	{
+		four = mGame->toString(0);
+	}
+
+	std::string five = ",";
+	std::string six = mGame->toString(position->x); 
+	std::string seven = ",";
+	std::string eight = mGame->toString(position->y); 
+	std::string nine = ",";
+	std::string ten = mGame->toString(position->z); 
+	std::string eleven = ",";
+	std::string twelve = mGame->toString(rotation->x); 
+	std::string thirteen = ",";
+	std::string fourteen = mGame->toString(rotation->z); 
+	std::string fifteen = ",";
+	std::string sixteen = mGame->toString(mMeshCode); 
+	std::string seventeen = ",";
+
+	std::string eightteen;
+	if (mAnimated)
+	{
+		eightteen = "1"; 
+	}
+	else
+	{
+		eightteen = "0";
+	}
+	std::string nineteen = ")";
  
 	std::string str;
 	str.append(one);
 	str.append(two);
 	str.append(three);
+	str.append(four);
+	str.append(five);
+	str.append(six);
+	str.append(seven);
+	str.append(eight);
+	str.append(nine);
+	str.append(ten);
+	str.append(eleven);
+	str.append(twelve);
+	str.append(thirteen);
+	str.append(fourteen);
+	str.append(fifteen);
+	str.append(sixteen);
+	str.append(seventeen);
+	str.append(eightteen);
+	str.append(nineteen);
 	
 	const char * c = str.c_str();
+
+	LogString("q:%s",c);
+	
 	mGame->sqlQuery(c);
 	
 }
