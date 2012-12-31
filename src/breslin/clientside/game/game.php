@@ -117,8 +117,7 @@ void Game::checkForByteBuffer()
 */
 checkForByteBuffer: function()
 {
-	this.mApplicationBreslin.mNetwork.checkForByteBuffer(this.mPasswordCounter);
-
+	this.mApplicationBreslin.mNetwork.checkForByteBuffer();
 },
 /*
 void Game::readServerTick(ByteBuffer* byteBuffer)
