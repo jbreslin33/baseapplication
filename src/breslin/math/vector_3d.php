@@ -47,14 +47,55 @@ normalise: function()
 	{
 		return;
 	}
-	x /= len;
-	y /= len;
-	z /= len;
-}
+	this.x /= len;
+	this.y /= len;
+	this.z /= len;
+},
 
+multiply: function(num)
+{
+	this.x = this.x * num;
+	this.y = this.y * num;
+	this.z = this.z * num;
+},
+
+add: function(vectorToAddtoThisOne)
+{
+	this.x = this.x + vectorToAddtoThisOne.x;
+	this.y = this.y + vectorToAddtoThisOne.y;
+	this.z = this.z + vectorToAddtoThisOne.z;
+},
+
+subtract: function(vectorToSubtract)
+{
+        this.x = this.x - vectorToSubtract.x;
+        this.y = this.y - vectorToSubtract.y;
+        this.z = this.z - vectorToSubtract.z;
+
+},
+
+subtract: function(sub1,sub2)
+{
+	this.x = sub1.x - sub2.x;
+	this.y = sub1.y - sub2.y;
+	this.z = sub1.z - sub2.z;
+},
+
+copyValuesFrom: function(copyFrom)
+{
+	this.x = copyFrom.x;
+	this.y = copyFrom.y;
+	this.z = copyFrom.z;
+},
+
+dot: function(v2)
+{
+	d = this.x * v2.x + this.y * v2.y + this.z * v2.z;
+}
 
 });
 /*
+
 
 
 */
