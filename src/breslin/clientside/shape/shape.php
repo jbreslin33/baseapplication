@@ -83,7 +83,7 @@ interpolateTick: function(renderTime)
 processSpawnByteBuffer: function(byteBuffer)
 {
         this.parseSpawnByteBuffer(byteBuffer);
-        this.spawnShape(mSpawnPosition);
+        //this.spawnShape(mSpawnPosition);
 },
 
 /*
@@ -126,8 +126,10 @@ parseSpawnByteBuffer: function(byteBuffer)
 /*
 void Shape::spawnShape(Vector3D* position)
 {
+*/
         /*********  create shape ***************/
-        if (mIsGhost)
+/* 
+       if (mIsGhost)
         {
                 mIndex = mIndex * -1;
         }
