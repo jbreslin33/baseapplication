@@ -275,6 +275,14 @@ void Shape::writeAdd(Client* client)
 
 	//animation
 	client->mMessage.WriteByte(mAnimated);
+
+	//for the browsers
+	insertIntoDB();
+}
+
+void Shape::insertIntoDB()
+{
+	
 }
 
 int Shape::setFlag()
