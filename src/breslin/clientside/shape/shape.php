@@ -76,8 +76,85 @@ interpolateTick: function(renderTime)
 
 },
 
+/*********************************
+                SPAWN
+******************************/
 
 processSpawnByteBuffer: function(byteBuffer)
+{
+        this.parseSpawnByteBuffer(byteBuffer);
+        this.spawnShape(mSpawnPosition);
+},
+
+/*
+void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
+{
+        byteBuffer->BeginReading();
+
+        byteBuffer->ReadByte(); //should read -103 to add a shape..
+
+
+        mLocal  =    byteBuffer->ReadByte();
+        mIndex  =    byteBuffer->ReadByte();
+
+        mSpawnPosition->x =   byteBuffer->ReadFloat();
+        mSpawnPosition->y =   byteBuffer->ReadFloat();
+        mSpawnPosition->z =   byteBuffer->ReadFloat();
+
+        mSpawnRotation->x = byteBuffer->ReadFloat();
+        mSpawnRotation->z = byteBuffer->ReadFloat();
+
+        //mesh
+        mMeshCode    = byteBuffer->ReadByte();
+
+        //figure out mesh based on code passed in byteBuffer
+        mMeshName = getMeshString(mMeshCode);
+
+        //animate
+        mAnimate = byteBuffer->ReadByte();
+
+        //should I set the commands mServerCommandLast and mServerCommandCurrent here?
+        mServerCommandLast->mPosition->copyValuesFrom(mSpawnPosition);
+        mServerCommandCurrent->mPosition->copyValuesFrom(mSpawnPosition);
+}
+*/
+parseSpawnByteBuffer: function(byteBuffer)
+{
+
+},
+
+/*
+void Shape::spawnShape(Vector3D* position)
+{
+        /*********  create shape ***************/
+        if (mIsGhost)
+        {
+                mIndex = mIndex * -1;
+        }
+
+        mName         = StringConverter::toString(mIndex);
+        mSceneNode    = mApplicationBreslin->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+
+        //set Starting position of sceneNode, we will attach our mesh to this. this is all that's needed for static shapes. actually we need to add
+        //rotation for them
+        mSceneNode->setPosition(position->x,position->y,position->z);
+
+        //create mesh
+        mEntity = mApplicationBreslin->getSceneManager()->createEntity(mName, mMeshName);
+
+        //attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
+        mSceneNode->attachObject(mEntity);
+
+        //for scale, won't be needed in future hopefully...
+        Vector3D v;
+        v.x = mScale;
+        v.y = mScale;
+        v.z = mScale;
+        scale(v);
+}
+*/
+
+spawnShape: function(position)
 {
 
 },
@@ -91,6 +168,8 @@ setVisible: function(b)
 {
 
 }
+
+
 
 });
 
