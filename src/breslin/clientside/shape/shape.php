@@ -5,59 +5,51 @@ var Shape = new Class(
 
 initialize: function(applicationBreslin, byteBuffer, isGhost)
 {
-/*
- 	mIsGhost = isGhost;
-
-        //applicationBreslin
-        mApplicationBreslin = applicationBreslin;
-
-        //commands
-        mServerCommandLast    = new Command();
-        mServerCommandCurrent = new Command();
-        mCommandToRunOnShape  = new Command();
-        //speed
-        mSpeed = 0.0f;
-        mSpeedMax  = 1.66f;
-
-        mVelocity = new Vector3D();
-
-        //spawn orientation
-        mSpawnPosition     = new Vector3D();
-        mSpawnRotation     = new Vector3D();
-
-        //process Spawn ByteBuffer
-        processSpawnByteBuffer(byteBuffer);
-
-        //animation
-        if (mAnimate)
-        {
-                addAbility(new AbilityAnimationOgre(this));
-        }
-
-        setupTitle();
-
-        //ghost
-        mGhost = NULL;
-
-        if (!mIsGhost)
-        {
-                //create a ghost for this shape
-                mGhost = new Shape(mApplicationBreslin,byteBuffer,true);
-                mGhost->setVisible(false);
-        }
-*/	
-
-	//let's deal with mIndex first
+	//let's deal with mIndex first and animate as it appears this is done later
 	this.mIndex = 0;	
+	this.mAnimate = false;
 
 	this.mIsGhost = isGhost;
         
 	//applicationBreslin
         this.mApplicationBreslin = applicationBreslin;
 
+        //commands
+        this.mServerCommandLast    = new Command();
+        this.mServerCommandCurrent = new Command();
+        this.mCommandToRunOnShape  = new Command();
+        
+        //speed
+        this.mSpeed = 0.0;
+        this.mSpeedMax  = 1.66;
 
-	
+        this.mVelocity = new Vector3D();
 
+        //spawn orientation
+        this.mSpawnPosition     = new Vector3D();
+        this.mSpawnRotation     = new Vector3D();
+
+        //process Spawn ByteBuffer
+        this.processSpawnByteBuffer(byteBuffer);
+
+        //animation
+        if (this.mAnimate)
+        {
+          //      addAbility(new AbilityAnimationOgre(this));
+        }
+
+        this.setupTitle();
+
+        //ghost
+        this.mGhost = 0;
+
+        if (!this.mIsGhost)
+        {
+                //create a ghost for this shape
+		byteBuffer = new ByteBuffer();
+                this.mGhost = new Shape(this.mApplicationBreslin,byteBuffer,true);
+                this.mGhost.setVisible(false);
+        }
 },
 
 log: function(msg)
@@ -82,8 +74,23 @@ void Shape::interpolateTick(float renderTime)
 interpolateTick: function(renderTime)
 {
 
-}
+},
 
+
+processSpawnByteBuffer: function(byteBuffer)
+{
+
+},
+
+setupTitle: function()
+{
+
+},
+
+setVisible: function(b)
+{
+
+}
 
 });
 

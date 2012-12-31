@@ -51,11 +51,12 @@
 <!-- include Shape -->
 <script type="text/javascript" src="/breslin/clientside/shape/shape.php"></script>
 
+<!-- include Vector3D -->
+<script type="text/javascript" src="/breslin/math/vector_3d.php"></script>
+
 <!-- include Command -->
 <script type="text/javascript" src="/breslin/clientside/command/command.php"></script>
 
-<!-- include Vector3D -->
-<script type="text/javascript" src="/breslin/clientside/math/vector_3d.php"></script>
 
 
 <script type="text/javascript">
