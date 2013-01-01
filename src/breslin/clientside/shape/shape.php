@@ -61,7 +61,8 @@ initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
 
 
         //background
-        this.mBackgroundColor = 'yellow'; 
+        //this.mBackgroundColor = "yellow"; 
+        this.mBackgroundColor="#f3f3f3"; 
 
 	//spawn shape
 	this.spawnShape(this.mSpawnPosition);	
@@ -222,7 +223,7 @@ getMeshString: function(meshCode)
         }
         if (meshCode == 1)
         {
-                this.mScale = .25;
+                this.mScale = 1;
 		return "/breslin/vclient/dist/media/materials/textures/wizard.png";
         }
 },
