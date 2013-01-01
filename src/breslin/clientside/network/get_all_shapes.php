@@ -3,7 +3,7 @@
 $conn = pg_connect("host=localhost dbname=abcandyou user=postgres password=mibesfat")
        or die('Could not connect: ' . pg_last_error());
 
-$query = "select id, position_x, position_z from shapes;";
+$query = "select id, client, spawnposition_x, spawnposition_z, spawnrotation_x, spawnrotation_z, meshcode, animated from shapes;";
 
 $result = pg_query($conn,$query);
 $numrows = pg_numrows($result);
