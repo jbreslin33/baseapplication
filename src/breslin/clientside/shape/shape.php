@@ -72,7 +72,7 @@ initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
         {
                 //create a ghost for this shape
 		byteBuffer = new ByteBuffer();
-                this.mGhost = new Shape(this.mApplicationBreslin,byteBuffer,true);
+		this.mGhost = new Shape(this.mApplicationBreslin,true,index,client,x,z,rx,rz,m,a)
                 this.mGhost.setVisible(false);
         }
 },

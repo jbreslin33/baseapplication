@@ -117,15 +117,13 @@ void Game::checkForByteBuffer()
 */
 checkForByteBuffer: function()
 {
-
 	this.mApplicationBreslin.mNetwork.getAllShapes();
  	var shapesTable = document.getElementById('shapes_table');
     	var rowLength = shapesTable.rows.length;
-        
+       
+	var foundMatch = false; 
 	for (i = 2; i < rowLength; i++)
         {
-                foundMatch = false;
-
                 for (s = 0; s < this.mShapeVector.length; s++)
                 {
                         if (this.mShapeVector[s].mIndex == shapesTable.rows.item(i).cells.item(0).innerHTML)
@@ -133,13 +131,29 @@ checkForByteBuffer: function()
                                 foundMatch = true;
                         }
                 }
-                if (foundMatch)
-                {
-                        //do nothing or set vars
-                }
-                else
-                {
-	
+
+		if (foundMatch)
+		{
+
+		}
+		else
+		{
+                        if (shapesTable)
+                        {
+				this.log('create missing shape');
+                        	//create this...
+                               	byteBuffer = new ByteBuffer();
+                        	id     = shapesTable.rows.item(i).cells.item(0).innerHTML;
+                                client = shapesTable.rows.item(i).cells.item(5).innerHTML;
+                                x      = shapesTable.rows.item(i).cells.item(6).innerHTML;
+                                z      = shapesTable.rows.item(i).cells.item(7).innerHTML;
+                                rx     = shapesTable.rows.item(i).cells.item(8).innerHTML;
+                               	rz     = shapesTable.rows.item(i).cells.item(9).innerHTML;
+                                m      = shapesTable.rows.item(i).cells.item(10).innerHTML;
+                                a      = shapesTable.rows.item(i).cells.item(11).innerHTML;
+                                shape = new Shape(this.mApplicationBreslin,false,id,client,x,z,rx,rz,m,a);
+                                this.mShapeVector.push(shape);
+                        }
 		}
 	}
 /*
