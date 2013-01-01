@@ -41,7 +41,12 @@ initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
         this.mSpawnRotation.x = rx;
         this.mSpawnRotation.z = rz;
 
+	//div
+	this.mDiv = new Div(this);
+
         //mesh
+        this.mSrc = this.mMeshName;
+	this.mMesh = 0;
         this.mMeshCode    = m;
 
         //figure out mesh based on code passed in byteBuffer
@@ -195,7 +200,6 @@ spawnShape: function(position)
 	//create the movable div that will be used to move image around.
         this.mDiv = new Div(this);
 
-        this.mMesh;
 	this.mSrc = this.mMeshName;
 
         //create clientImage
@@ -204,11 +208,14 @@ spawnShape: function(position)
         	//image to attach to our div "vessel"
                 this.mMesh  = document.createElement("IMG");
                 this.mMesh.src  = this.mSrc;
-                this.mMesh.style.width = this.mWidth+'px';
-                this.mMesh.style.height = this.mHeight+'px';
+                //this.mMesh.style.width = this.mWidth+'px';
+                //this.mMesh.style.height = this.mHeight+'px';
+		this.log('w:' + this.mMesh.style.width);
         }
         //back to div
         this.mDiv.mDiv.appendChild(this.mMesh);
+	
+	this.scale();
 
 },
 getMeshString: function(meshCode)
@@ -224,6 +231,18 @@ getMeshString: function(meshCode)
                 this.mScale = .25;
 		return "/breslin/vclient/dist/media/materials/textures/wizard.png";
         }
+},
+
+scale: function()
+{
+      //  getSceneNode()->scale(scaleVector.x, scaleVector.y, scaleVector.z);
+               //this.log('w:' + this.mMesh.style.width);
+                this.mMesh.style.width = 20+'px';
+                this.mMesh.style.height = 20+'px';
+
+                this.mDiv.mDiv.style.width = 20+'px';
+                this.mDiv.mDiv.style.height = 20+'px';
+	this.log('h:' + this.mMesh.height);
 },
 
 setupTitle: function()
