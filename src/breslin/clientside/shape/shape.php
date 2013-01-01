@@ -255,7 +255,31 @@ setVisible: function(b)
 {
 
 }
+/*
+void Shape::moveGhostShape()
+{
+        Vector3D* transVector = new Vector3D();
 
+        transVector->x = mServerCommandCurrent->mPosition->x;
+        transVector->y = 0;
+        transVector->z = mServerCommandCurrent->mPosition->z;
+
+        if (mGhost)
+        {
+                mGhost->setPosition(transVector);
+        }
+}
+*/
+moveGhostShape: function()
+{
+	transVector = new Vector3D();
+
+	transVector.x = mServerCommandCurrent.mPosition.x;
+	transVector.y = 0;
+	transVector.x = mServerCommandCurrent.mPosition.z;
+		
+	mGhost->setPosition(transVector);
+}
 
 
 });
