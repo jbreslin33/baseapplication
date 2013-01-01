@@ -12,8 +12,8 @@ var Div = new Class(
                 this.mDiv.style.position="absolute";
                 this.mDiv.style.visibility = 'visible';
         
-                this.mDiv.style.width = this.mShape.mWidth;
-                this.mDiv.style.height = this.mShape.mHeight;
+                //this.mDiv.style.width = this.mShape.mWidth;
+                //this.mDiv.style.height = this.mShape.mHeight;
         
                 //move it to initial spawn spot
                 this.mDiv.style.left = this.mShape.mSpawnPosition.x+'px';

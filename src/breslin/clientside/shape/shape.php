@@ -41,6 +41,10 @@ initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
         this.mSpawnRotation.x = rx;
         this.mSpawnRotation.z = rz;
 
+        //should I set the commands mServerCommandLast and mServerCommandCurrent here?
+        this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
+        this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
+	
 	//div
 	this.mDiv = new Div(this);
 
@@ -55,15 +59,6 @@ initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
         //animate
         mAnimate = m;
 
-        //should I set the commands mServerCommandLast and mServerCommandCurrent here?
-        this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
-        this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
-
-
-	//old web game stuff
-        //size
-        this.mWidth = 50;
-        this.mHeight = 50;
 
         //background
         this.mBackgroundColor = 'yellow'; 
@@ -210,7 +205,6 @@ spawnShape: function(position)
                 this.mMesh.src  = this.mSrc;
                 //this.mMesh.style.width = this.mWidth+'px';
                 //this.mMesh.style.height = this.mHeight+'px';
-		this.log('w:' + this.mMesh.style.width);
         }
         //back to div
         this.mDiv.mDiv.appendChild(this.mMesh);
@@ -235,14 +229,20 @@ getMeshString: function(meshCode)
 
 scale: function()
 {
-      //  getSceneNode()->scale(scaleVector.x, scaleVector.y, scaleVector.z);
-               //this.log('w:' + this.mMesh.style.width);
-                this.mMesh.style.width = 20+'px';
-                this.mMesh.style.height = 20+'px';
+	var h = this.mMesh.height;
+	var w = this.mMesh.width;
 
-                this.mDiv.mDiv.style.width = 20+'px';
-                this.mDiv.mDiv.style.height = 20+'px';
-	this.log('h:' + this.mMesh.height);
+	h = h * this.mScale;
+	w = w * this.mScale;
+	
+	//scale image 
+        this.mMesh.style.width = w+'px';
+        this.mMesh.style.height = h+'px';
+
+	//scale div
+        this.mDiv.mDiv.style.width = w+'px';
+        this.mDiv.mDiv.style.height = h+'px';
+	//this.log('h:' + this.mDiv.mDiv.height);
 },
 
 setupTitle: function()
