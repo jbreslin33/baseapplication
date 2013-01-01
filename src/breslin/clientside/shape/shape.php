@@ -42,10 +42,10 @@ initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
         this.mSpawnRotation.z = rz;
 
         //mesh
-        mMeshCode    = m;
+        this.mMeshCode    = m;
 
         //figure out mesh based on code passed in byteBuffer
-        //mMeshName = getMeshString(mMeshCode);
+        this.mMeshName = this.getMeshString(this.mMeshCode);
 
         //animate
         mAnimate = m;
@@ -196,7 +196,7 @@ spawnShape: function(position)
         this.mDiv = new Div(this);
 
         this.mMesh;
-	this.mSrc = "/images/monster/red_monster.png";
+	this.mSrc = this.mMeshName;
 
         //create clientImage
         if (this.mSrc)
@@ -210,6 +210,20 @@ spawnShape: function(position)
         //back to div
         this.mDiv.mDiv.appendChild(this.mMesh);
 
+},
+getMeshString: function(meshCode)
+{
+        if (meshCode == 0)
+        {
+                //this cube is exactly 1 ogre world unit. Which I take to be 1 meter.
+                this.mScale = .01;
+		return "/breslin/vclient/dist/media/materials/textures/red_monster.png";
+        }
+        if (meshCode == 1)
+        {
+                this.mScale = .25;
+		return "/breslin/vclient/dist/media/materials/textures/wizard.png";
+        }
 },
 
 setupTitle: function()
