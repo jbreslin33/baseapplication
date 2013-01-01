@@ -2,12 +2,14 @@ var Shape = new Class(
 {
 
 //Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGhost);
-
-initialize: function(applicationBreslin, byteBuffer, isGhost)
+//this.mApplicationBreslin,false,index,client,x,z,rx,rz,m,a)
+initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
 {
+	this.log('createShape');
+
 	//let's deal with mIndex first and animate as it appears this is done later
-	this.mIndex = 0;	
-	this.mAnimate = false;
+	this.mIndex = index;	
+	this.mAnimate = a;
 
 	this.mIsGhost = isGhost;
         
@@ -30,7 +32,30 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
         this.mSpawnRotation     = new Vector3D();
 
         //process Spawn ByteBuffer
-        this.processSpawnByteBuffer(byteBuffer);
+//        this.processSpawnByteBuffer(byteBuffer);
+ 	this.mLocal  =    client;
+
+        this.mSpawnPosition.x = x;
+        this.mSpawnPosition.z = z;
+
+        this.mSpawnRotation.x = rx;
+        this.mSpawnRotation.z = rz;
+
+        //mesh
+        mMeshCode    = m;
+
+        //figure out mesh based on code passed in byteBuffer
+        //mMeshName = getMeshString(mMeshCode);
+
+        //animate
+        mAnimate = m;
+
+        //should I set the commands mServerCommandLast and mServerCommandCurrent here?
+        this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
+        this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
+
+	//spawn shape
+	this.spawnShape(this.mSpawnPosition);	
 
         //animation
         if (this.mAnimate)

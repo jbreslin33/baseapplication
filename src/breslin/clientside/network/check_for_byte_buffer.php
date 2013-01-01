@@ -10,7 +10,7 @@ $numrows = pg_numrows($result);
 
 
 //send client id back to client browser
-echo "<table id=\"position_table\" border='1'>
+echo "<table id=\"shapes_table\" border='1'>
 <tr>
 <th>id</th>
 <th>x</th>

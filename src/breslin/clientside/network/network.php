@@ -126,7 +126,7 @@ getAllShapes: function()
         {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200)
                 {
-                        document.getElementById("mMessageAddShape").innerHTML=xmlhttp.responseText;
+                        document.getElementById("mByteBuffer").innerHTML=xmlhttp.responseText;
                 }
         }
         xmlhttp.open("POST","/breslin/clientside/network/get_all_shapes.php",true);

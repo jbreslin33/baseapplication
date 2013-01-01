@@ -117,9 +117,45 @@ void Game::checkForByteBuffer()
 */
 checkForByteBuffer: function()
 {
-	this.mApplicationBreslin.mNetwork.checkForByteBuffer();
 
- 	var positionTable = document.getElementById('position_table');
+	this.mApplicationBreslin.mNetwork.getAllShapes();
+ 	var shapesTable = document.getElementById('shapes_table');
+    	var rowLength = shapesTable.rows.length;
+        
+	for (i = 2; i < rowLength; i++)
+        {
+                foundMatch = false;
+
+                for (s = 0; s < this.mShapeVector.length; s++)
+                {
+                        if (this.mShapeVector[s].mIndex == shapesTable.rows.item(i).cells.item(0).innerHTML)
+                        {
+                                foundMatch = true;
+                        }
+                }
+                if (foundMatch)
+                {
+                        //do nothing or set vars
+                }
+                else
+                {
+	
+		}
+	}
+/*
+	if (this.mMissingID == false)
+	{
+		this.mApplicationBreslin.mNetwork.checkForByteBuffer();
+	}
+	else
+	{
+		//call for shape_table table 
+		this.mApplicationBreslin.mNetwork.getAllShapes();
+	}
+	
+	this.mMissingID = false;
+
+ 	var positionTable = document.getElementById('shapes_table');
 
     	var rowLength = positionTable.rows.length;
 
@@ -140,41 +176,36 @@ checkForByteBuffer: function()
 		}
 		else
 		{
-			//no match we don't know about this shape
-			/*
-			byteBuffer = new ByteBuffer();
-			shape = new Shape(this.mApplicationBreslin,byteBuffer,false);
-			shape.mIndex =  positionTable.rows.item(i).cells.item(0).innerHTML; 
-			this.mShapeVector.push(shape);
-			*/
-
-			//do we hav this shape in the getAllShapes table?
-			//if so create it
+			this.mMissingID = true;
 			missingId = positionTable.rows.item(i).cells.item(0).innerHTML;
-			this.log('missingID:' + missingId);	
- 			var getAllShapesTable = document.getElementById('get_all_shapes_table');
+ 			var getAllShapesTable = document.getElementById('shapes_table');
 
-    			var l = positionTable.rows.length;
-			//let's create any shapes we don't have yet		
-			/*
-			for (a = 0; a < l; a++)
+			if (getAllShapesTable)
 			{
-				for (s = 0; s < this.mShapeVector.length; s++)
-				{
-			 		if (this.mShapeVector[s].mIndex == positionTable.rows.item(i).cells.item(0).innerHTML)				
-					{
+    				var allshapeslength = positionTable.rows.length;
 
+				//let's create any shapes we don't have yet		
+				for (a = 2; a < allshapeslength; a++)
+				{
+			 		if (missingId == positionTable.rows.item(a).cells.item(0).innerHTML)
+					{
+						//create this...
+						byteBuffer = new ByteBuffer();
+						client = getAllShapesTable.rows.item(a).cells.item(5).innerHTML;	
+						x      = getAllShapesTable.rows.item(a).cells.item(6).innerHTML;	
+						z      = getAllShapesTable.rows.item(a).cells.item(7).innerHTML;	
+						rx     = getAllShapesTable.rows.item(a).cells.item(8).innerHTML;	
+						rz     = getAllShapesTable.rows.item(a).cells.item(9).innerHTML;	
+						m      = getAllShapesTable.rows.item(a).cells.item(10).innerHTML;	
+						a      = getAllShapesTable.rows.item(a).cells.item(11).innerHTML;	
+						shape = new Shape(this.mApplicationBreslin,false,missingId,client,x,z,rx,rz,m,a);
+						this.mShapeVector.push(shape);
 					}
 				}
 			} 
-			*/
-				
-				
-			//call for shape_table table 
-			this.mApplicationBreslin.mNetwork.getAllShapes();
 		}
 	}
-	
+*/	
 	
 
 },
