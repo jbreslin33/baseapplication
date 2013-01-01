@@ -109,7 +109,31 @@ checkForByteBuffer: function()
         xmlhttp.open("POST","/breslin/clientside/network/check_for_byte_buffer.php",true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         xmlhttp.send();
+},
+
+getAllShapes: function()
+{
+	var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+                xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                        document.getElementById("mMessageAddShape").innerHTML=xmlhttp.responseText;
+                }
+        }
+        xmlhttp.open("POST","/breslin/clientside/network/get_all_shapes.php",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send();
 }
+
 
 });
 

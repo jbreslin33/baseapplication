@@ -140,12 +140,38 @@ checkForByteBuffer: function()
 		}
 		else
 		{
-			this.log('create shape');
 			//no match we don't know about this shape
+			/*
 			byteBuffer = new ByteBuffer();
 			shape = new Shape(this.mApplicationBreslin,byteBuffer,false);
 			shape.mIndex =  positionTable.rows.item(i).cells.item(0).innerHTML; 
 			this.mShapeVector.push(shape);
+			*/
+
+			//do we hav this shape in the getAllShapes table?
+			//if so create it
+			missingId = positionTable.rows.item(i).cells.item(0).innerHTML;
+			this.log('missingID:' + missingId);	
+ 			//var getAllShapesTable = document.getElementById('get_all_shapes_table');
+
+    			//l = positionTable.rows.length;
+			//let's create any shapes we don't have yet		
+			/*
+			for (a = 0; a < l; a++)
+			{
+				for (s = 0; s < this.mShapeVector.length; s++)
+				{
+			 		if (this.mShapeVector[s].mIndex == positionTable.rows.item(i).cells.item(0).innerHTML)				
+					{
+
+					}
+				}
+			} 
+			*/
+				
+				
+			//call for shape_table table 
+			this.mApplicationBreslin.mNetwork.getAllShapes();
 		}
 	}
 	
