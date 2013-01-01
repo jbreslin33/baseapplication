@@ -3,12 +3,24 @@ var ByteBuffer = new Class(
 	
 initialize: function()
 {
-	this.mBuffer = 0;
+	this.mBuffer = new Array();
+	this.mReadCount = 0;	
 },
 
 writeByte: function(b)
 {
-	this.mBuffer += b;
+	this.mBuffer[this.mReadCount] = b;
+	this.mReadCount++
+},
+
+beginReading: function()
+{
+        this.mReadCount = 0;
+},
+
+readByte: function()
+{
+	return this.mBuffer[mReadCount];
 }
 
 

@@ -152,9 +152,9 @@ checkForByteBuffer: function()
 			//if so create it
 			missingId = positionTable.rows.item(i).cells.item(0).innerHTML;
 			this.log('missingID:' + missingId);	
- 			//var getAllShapesTable = document.getElementById('get_all_shapes_table');
+ 			var getAllShapesTable = document.getElementById('get_all_shapes_table');
 
-    			//l = positionTable.rows.length;
+    			var l = positionTable.rows.length;
 			//let's create any shapes we don't have yet		
 			/*
 			for (a = 0; a < l; a++)
