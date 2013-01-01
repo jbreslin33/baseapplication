@@ -54,6 +54,15 @@ initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
         this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
 
+
+	//old web game stuff
+        //size
+        this.mWidth = 50;
+        this.mHeight = 50;
+
+        //background
+        this.mBackgroundColor = 'yellow'; 
+
 	//spawn shape
 	this.spawnShape(this.mSpawnPosition);	
 
@@ -183,6 +192,23 @@ void Shape::spawnShape(Vector3D* position)
 
 spawnShape: function(position)
 {
+	//create the movable div that will be used to move image around.
+        this.mDiv = new Div(this);
+
+        this.mMesh;
+	this.mSrc = "/images/monster/red_monster.png";
+
+        //create clientImage
+        if (this.mSrc)
+        {
+        	//image to attach to our div "vessel"
+                this.mMesh  = document.createElement("IMG");
+                this.mMesh.src  = this.mSrc;
+                this.mMesh.style.width = this.mWidth+'px';
+                this.mMesh.style.height = this.mHeight+'px';
+        }
+        //back to div
+        this.mDiv.mDiv.appendChild(this.mMesh);
 
 },
 

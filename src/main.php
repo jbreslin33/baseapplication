@@ -57,6 +57,9 @@
 <!-- include Command -->
 <script type="text/javascript" src="/breslin/clientside/command/command.php"></script>
 
+<!-- include Div -->
+<script type="text/javascript" src="/breslin/clientside/div/div.php"></script>
+
 
 
 <script type="text/javascript">
