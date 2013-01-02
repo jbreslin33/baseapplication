@@ -60,6 +60,11 @@
 <!-- include Div -->
 <script type="text/javascript" src="/breslin/clientside/div/div.php"></script>
 
+<!-- include Ability -->
+<script type="text/javascript" src="/breslin/clientside/ability/ability.php"></script>
+
+
+
 
 
 <script type="text/javascript">
