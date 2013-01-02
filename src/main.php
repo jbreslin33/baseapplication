@@ -63,9 +63,8 @@
 <!-- include Ability -->
 <script type="text/javascript" src="/breslin/clientside/ability/ability.php"></script>
 
-
-
-
+<!-- include AbilityMove -->
+<script type="text/javascript" src="/breslin/clientside/ability/ability_move.php"></script>
 
 <script type="text/javascript">
 function addRow(dataArr)
