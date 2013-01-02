@@ -36,7 +36,7 @@ initialize: function(applicationBreslin)
 
         //time
         this.mRunNetworkTime = 0.0;
-	this.mPollDelay = 32;
+	this.mPollDelay = 100;
 	this.mPollDelayCounter = 0;
 
        	//states 

@@ -254,7 +254,7 @@ setupTitle: function()
 setVisible: function(b)
 {
 
-}
+},
 /*
 void Shape::moveGhostShape()
 {
@@ -272,13 +272,15 @@ void Shape::moveGhostShape()
 */
 moveGhostShape: function()
 {
+/*
 	transVector = new Vector3D();
 
 	transVector.x = mServerCommandCurrent.mPosition.x;
 	transVector.y = 0;
 	transVector.x = mServerCommandCurrent.mPosition.z;
 		
-	mGhost->setPosition(transVector);
+	mGhost.setPosition(transVector);
+*/
 }
 
 
