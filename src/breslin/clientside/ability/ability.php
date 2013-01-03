@@ -7,12 +7,12 @@ initialize: function (shape)
         this.mShape = shape;      
 },
 
-processTick(): function()
+processTick: function()
 {
 
 },
 
-interpolateTick: (renderTime)
+interpolateTick: function(renderTime)
 {
 
 }
