@@ -38,6 +38,9 @@ Game::Game()
 	mFrameTime  = 0;
 	mFrameTimeLast  = 0;
 
+	//sequence
+	mOutgoingSequence = 1;
+
 	mBounds = new Bounds();
 
 	mDBConnection = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");	
@@ -456,8 +459,22 @@ void Game::sendCommand(void)
 		}
 	}
 
-	// Send messages to all clients
-	mServer->sendPackets();
+	//randomly don't send command packets.... 
+	short randomNumber = 0;	
+	srand ( (short)time(NULL) + mOutgoingSequence);
+      	randomNumber = rand() % 8;  
+
+	mOutgoingSequence++;
+
+	if (randomNumber == 2)
+	{
+		LogString("skip send command packet");
+	}
+	else
+	{
+		LogString("sendPackets");
+		mServer->sendPackets();
+	}
 
 	// Store the sent command in 
 	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)

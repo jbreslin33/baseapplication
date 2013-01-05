@@ -45,6 +45,9 @@ static const char mMessageServerExit = 3;
 	int mFrameTimeLast;
 	//shapes
 	std::vector<Shape*> mShapeVector;	//every tangible item in game world..
+
+	//sequence
+	signed short	mOutgoingSequence;
 	
 	//db
      	PGconn* mDBConnection;
