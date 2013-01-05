@@ -459,23 +459,25 @@ void Game::sendCommand(void)
 		}
 	}
 
+/*
 	//randomly don't send command packets.... 
 	short randomNumber = 0;	
 	srand ( (short)time(NULL) + mOutgoingSequence);
-      	randomNumber = rand() % 8;  
+      	randomNumber = rand() % 16;  
 
 	mOutgoingSequence++;
 
 	if (randomNumber == 2)
 	{
-		LogString("skip send command packet");
+		//LogString("skip send command packet");
 	}
 	else
 	{
-		LogString("sendPackets");
 		mServer->sendPackets();
 	}
-
+*/
+	mServer->sendPackets();
+	
 	// Store the sent command in 
 	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
 	{
