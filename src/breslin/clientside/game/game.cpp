@@ -184,7 +184,10 @@ void Game::checkForByteBuffer()
                         break;
 
                         case mMessageFrame:
-				readServerTick(byteBuffer);
+				if (!mApplicationBreslin->mNetwork->mIgnorePacket)
+				{
+					readServerTick(byteBuffer);
+				}
                         break;
                 }
         }

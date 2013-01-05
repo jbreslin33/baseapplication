@@ -49,7 +49,7 @@ $packed .= pack("c",$client_id);
 
 $len = strlen($packed);
 
-socket_sendto($sock, $packed, $len, 0, '192.168.1.100', 30004);
+socket_sendto($sock, $packed, $len, 0, '192.168.1.101', 30004);
 socket_close($sock);
 
 

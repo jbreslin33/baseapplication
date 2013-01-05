@@ -75,6 +75,7 @@ Network::Network(ApplicationBreslin* applicationBreslin, const char serverIP[32]
 	//parse
 	mIncomingSequence = 0;
 	mDroppedPackets = 0;
+	mIgnorePacket = false;
 
 	//LogString("Server's information: IP address: %s, port: %d", mServerIP, mServerPort);
 }
@@ -286,11 +287,13 @@ int Network::checkForByteBuffer(ByteBuffer* byteBuffer)
 //i feel like network should handle out of sequence packet warnings...
 void Network::checkPacketSequence(ByteBuffer *mes)
 {
+	mIgnorePacket = false;	
 	mes->BeginReading();
 	int type = mes->ReadByte();
 
 	// Check if the type is a positive number
 	// = is the packet sequenced
+
 	if(type > 0)
 	{
 		signed short sequence		= mes->ReadShort();
@@ -299,8 +302,7 @@ void Network::checkPacketSequence(ByteBuffer *mes)
 		{
 			LogString("Client: (sequence: %d <= incoming seq: %d)",
 				sequence, mIncomingSequence);
-
-			LogString("Client: Sequence mismatch");
+			mIgnorePacket = true;	
 		}
 
 		mDroppedPackets = sequence - mIncomingSequence + 1;

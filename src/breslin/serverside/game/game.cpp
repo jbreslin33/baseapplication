@@ -63,7 +63,7 @@ void Game::createServer()
 
 void Game::createWorld()
 {
-  	for(int i = 0; i < 12; i++)
+  	for(int i = 0; i < 0; i++)
         {
                 Vector3D* position = new Vector3D();
                 position->x = 1.5f * i;

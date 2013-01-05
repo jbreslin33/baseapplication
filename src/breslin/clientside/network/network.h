@@ -85,7 +85,10 @@ const char*  mServerIP;
 private:
 signed short	mIncomingSequence;		// Incoming packet sequence
 signed short	mDroppedPackets;			// Dropped packets
+public:
+bool 		mIgnorePacket; 
 
+private:
 //socket
 SOCKET mSocket;
 
