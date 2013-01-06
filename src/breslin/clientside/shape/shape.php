@@ -251,7 +251,7 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 }
 */
 
-processDeltaByteBuffer: function()
+processDeltaByteBuffer: function(byteBuffer)
 {
 	this.log('shape:processDeltaByteBuffer:' + this.mAbilityVector.length);
  	this.parseDeltaByteBuffer();
@@ -264,7 +264,7 @@ processDeltaByteBuffer: function()
         //drawTitle();
 },
 
-parseDeltaByteBuffer: function()
+parseDeltaByteBuffer: function(byteBuffer)
 {
 
 },
