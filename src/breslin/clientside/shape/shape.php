@@ -273,12 +273,15 @@ parseDeltaByteBuffer: function(byteBuffer)
 	//x
        	this.mServerCommandLast.mPosition.x = this.mServerCommandCurrent.mPosition.x;
        	this.mServerCommandCurrent.mPosition.x = byteBuffer.readByte();
-
+        this.mServerCommandCurrent.mVelocity.x = this.mServerCommandCurrent.mPosition.x - this.mServerCommandLast.mPosition.x;
+	
 	//z
        	this.mServerCommandLast.mPosition.z = this.mServerCommandCurrent.mPosition.z;
        	this.mServerCommandCurrent.mPosition.z = byteBuffer.readByte();
+        this.mServerCommandCurrent.mVelocity.z = this.mServerCommandCurrent.mPosition.z - this.mServerCommandLast.mPosition.z;
 
 
+        this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
 },
 /*
 int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
