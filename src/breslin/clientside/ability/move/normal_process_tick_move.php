@@ -54,9 +54,9 @@ execute: function()
                 this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime);
         }
 
-/*
-        serverVelocity->multiply(abilityMove->mShape->mSpeed);
+        serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
         //abilityMove->regulate(serverVelocity);
+/*
         abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(serverVelocity);
 */
 
