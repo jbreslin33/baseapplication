@@ -356,6 +356,9 @@ parseDeltaByteBuffer: function(shapesTable)
        	this.mServerCommandCurrent.mPosition.z = shapesTable.rows.item(i).cells.item(2).innerHTML; 
         this.mServerCommandCurrent.mVelocity.z = this.mServerCommandCurrent.mPosition.z - this.mServerCommandLast.mPosition.z;
 
+        this.mServerCommandCurrent.mFrameTime = this.mApplicationBreslin.mGame.mFrameTimeServer;
+        this.mCommandToRunOnShape.mFrameTime = this.mServerCommandCurrent.mFrameTime;
+
         this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
 },
 /*

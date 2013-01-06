@@ -38,6 +38,7 @@ initialize: function(applicationBreslin)
         this.mRunNetworkTime = 0.0;
 	this.mPollDelay = 100;
 	this.mPollDelayCounter = 0;
+	this.mFrameTimeServer = 0;
 
        	//states 
 	this.mStateMachine = new StateMachine();
