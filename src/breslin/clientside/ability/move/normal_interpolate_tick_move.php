@@ -2,22 +2,30 @@ var NormalInterpolateTickMove = new Class(
 {
 
 Extends: AbilityMoveState,
-initialize: function ()
+initialize: function (abilityMove)
+{
+	this.mAbilityMove = abilityMove;
+},
+
+log: function(msg)
+{
+        setTimeout(function()
+        {
+                throw new Error(msg);
+        }, 0);
+},
+
+enter: function()
 {
 
 },
 
-enter: function(abilityMove)
+execute: function()
 {
 
 },
 
-execute: function(abilityMove)
-{
-
-},
-
-exit: function(abilityMove)
+exit: function()
 {
 
 }
