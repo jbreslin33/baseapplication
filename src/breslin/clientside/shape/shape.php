@@ -23,6 +23,9 @@ initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
         this.mServerCommandLast    = new Command();
         this.mServerCommandCurrent = new Command();
         this.mCommandToRunOnShape  = new Command();
+
+	//position
+	this.mPosition = new Vector3D();
         
         //speed
         this.mSpeed = 0.0;
@@ -127,6 +130,77 @@ addAbility: function(ability)
 	this.mAbilityVector.push(ability);
 },
 
+/*********************************
+               MOVE 
+******************************/
+
+
+/*
+Shape::translate(Vector3D* translateVector, int perspective)
+{
+        if (perspective == 1)
+        {
+                getSceneNode()->translate(translateVector->convertToVector3(), Ogre::Node::TS_WORLD);
+        }
+        if (perspective == 2)
+        {
+                getSceneNode()->translate(translateVector->convertToVector3(), Ogre::Node::TS_LOCAL);
+        }
+}
+*/
+
+/*
+void Shape::setPosition(Vector3D* position)
+{
+        getSceneNode()->setPosition(position->convertToVector3());
+}
+*/
+setPosition: function(position)
+{
+	//set a member position because we are going to have to modify the div's position
+	this.mPosition.x = position.x;
+	this.mPosition.z = position.z;
+
+	modx = position.x+'px'; 
+	mody = position.z+'px'; 
+
+       	this.mDiv.mDiv.style.left = modx;
+      	this.mDiv.mDiv.style.top = mody;
+},
+setPosition: function(x,z)
+{
+	//set a member position because we are going to have to modify the div's position
+	this.mPosition.x = x;
+	this.mPosition.z = z;
+	
+	modx = x+'px'; 
+	mody = z+'px'; 
+
+       	this.mDiv.mDiv.style.left = modx;
+      	this.mDiv.mDiv.style.top = mody;
+},
+
+/*
+Vector3D* Shape::getPosition()
+{
+        Vector3D* position = new Vector3D();
+        position->x = getSceneNode()->getPosition().x;
+        position->y = getSceneNode()->getPosition().y;
+        position->z = getSceneNode()->getPosition().z;
+        return position;
+}
+*/
+getPosition: function()
+{
+	//just return mPosition for now
+	return this.mPosition;
+},
+/*
+void Shape::setVisible(bool visible)
+{
+        getSceneNode()->setVisible(visible);
+}
+*/
 
 /*********************************
                 SPAWN
@@ -280,8 +354,8 @@ parseDeltaByteBuffer: function(shapesTable)
        	this.mServerCommandCurrent.mPosition.z = shapesTable.rows.item(i).cells.item(2).innerHTML; 
         this.mServerCommandCurrent.mVelocity.z = this.mServerCommandCurrent.mPosition.z - this.mServerCommandLast.mPosition.z;
 
-	this.log('x:' + this.mServerCommandCurrent.mPosition.x)
-	this.log('z:' + this.mServerCommandCurrent.mPosition.z)
+//	this.log('x:' + this.mServerCommandCurrent.mPosition.x)
+//	this.log('z:' + this.mServerCommandCurrent.mPosition.z)
 
         this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
 },
@@ -446,15 +520,13 @@ void Shape::moveGhostShape()
 */
 moveGhostShape: function()
 {
-/*
 	transVector = new Vector3D();
 
-	transVector.x = mServerCommandCurrent.mPosition.x;
+	transVector.x = this.mServerCommandCurrent.mPosition.x;
 	transVector.y = 0;
-	transVector.x = mServerCommandCurrent.mPosition.z;
+	transVector.x = this.mServerCommandCurrent.mPosition.z;
 		
-	mGhost.setPosition(transVector);
-*/
+	this.mGhost.setPosition(transVector);
 }
 
 

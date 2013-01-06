@@ -52,13 +52,13 @@ log: function(msg)
 processTick: function()
 {
 	this.log('abilityMove:processTick');
-//        this.mProcessTickStateMachine.update();
+        this.mProcessTickStateMachine.update();
 },
 
 interpolateTick: function(renderTime)
 {
 //	this.log('abilityMove:interpolateTick');
- ///       this.mInterpolateTickStateMachine.update();
+        this.mInterpolateTickStateMachine.update();
 },
 
 /******************************************************
@@ -71,7 +71,7 @@ calculateDeltaPosition: function()
         this.mDeltaZ = this.mShape.mServerCommandCurrent.mPosition.z - this.mShape.getPosition().z;
 
         //distance we are off from server
-        //mDeltaPosition = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));
+        mDeltaPosition = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));
 },
 
 calculateSpeed: function(velocity,frameTime)
