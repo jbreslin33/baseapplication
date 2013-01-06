@@ -163,10 +163,12 @@ setPosition: function(position)
 
 	modx = position.x+'px'; 
 	mody = position.z+'px'; 
-
-       	this.mDiv.mDiv.style.left = modx;
-      	this.mDiv.mDiv.style.top = mody;
+this.log('modx:' + modx);
+this.log('mody:' + mody);
+       	//this.mDiv.mDiv.style.left = modx;
+      	//this.mDiv.mDiv.style.top = mody;
 },
+/*
 setPosition: function(x,z)
 {
 	//set a member position because we are going to have to modify the div's position
@@ -176,10 +178,10 @@ setPosition: function(x,z)
 	modx = x+'px'; 
 	mody = z+'px'; 
 
-       	this.mDiv.mDiv.style.left = modx;
-      	this.mDiv.mDiv.style.top = mody;
+       	//this.mDiv.mDiv.style.left = modx;
+      	//this.mDiv.mDiv.style.top = mody;
 },
-
+*/
 /*
 Vector3D* Shape::getPosition()
 {
@@ -524,7 +526,7 @@ moveGhostShape: function()
 
 	transVector.x = this.mServerCommandCurrent.mPosition.x;
 	transVector.y = 0;
-	transVector.x = this.mServerCommandCurrent.mPosition.z;
+	transVector.z = this.mServerCommandCurrent.mPosition.z;
 		
 	this.mGhost.setPosition(transVector);
 }
