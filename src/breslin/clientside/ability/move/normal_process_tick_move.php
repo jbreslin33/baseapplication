@@ -43,11 +43,11 @@ execute: function()
         {
                 this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mCatchupProcessTickMove);
         }
-/*
-        Vector3D* serverVelocity = new Vector3D();
-        serverVelocity->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
-        serverVelocity->normalise();
+        serverVelocity = new Vector3D();
+        serverVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
+        serverVelocity.normalise();
 
+/*
         if(abilityMove->mShape->mCommandToRunOnShape->mFrameTime != 0)
         {
                 abilityMove->mShape->mSpeed = abilityMove->calcuateSpeed(
