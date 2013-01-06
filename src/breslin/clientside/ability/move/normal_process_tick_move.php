@@ -47,14 +47,14 @@ execute: function()
         serverVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
         serverVelocity.normalise();
 
-/*
-        if(abilityMove->mShape->mCommandToRunOnShape->mFrameTime != 0)
+        if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
-                abilityMove->mShape->mSpeed = abilityMove->calcuateSpeed(
-                abilityMove->mShape->mServerCommandCurrent->mVelocity,
-                abilityMove->mShape->mCommandToRunOnShape->mFrameTime);
+                this.mAbilityMove.mShape.mSpeed = abilityMove.calcuateSpeed(
+                this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity,
+                this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime);
         }
 
+/*
         serverVelocity->multiply(abilityMove->mShape->mSpeed);
         //abilityMove->regulate(serverVelocity);
         abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(serverVelocity);
