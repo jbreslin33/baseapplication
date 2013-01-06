@@ -196,6 +196,7 @@ addShape: function(shapesTable,i)
 	abilityMove = new AbilityMove(shape);
 	shape.addAbility(abilityMove);
        	this.mShapeVector.push(shape);
+       	this.mShapeGhostVector.push(shape.mGhost);
 
 },
 
