@@ -7,6 +7,14 @@ initialize: function ()
 
 },
 
+log: function(msg)
+{
+        setTimeout(function()
+        {
+                throw new Error(msg);
+        }, 0);
+},
+
 enter: function(abilityMove)
 {
 
@@ -14,7 +22,7 @@ enter: function(abilityMove)
 
 execute: function(abilityMove)
 {
-
+	this.log('Global:execute');
 },
 
 exit: function(abilityMove)
