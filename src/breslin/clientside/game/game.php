@@ -140,9 +140,16 @@ checkForByteBuffer: function()
 		{
                         if (shapesTable)
                         {
+				this.addShape(shapesTable,i);
+                        }
+		}
+	}
+},
+
+addShape: function(shapesTable,i)
+{
 				this.log('create missing shape');
                         	//create this...
-                               	byteBuffer = new ByteBuffer();
                         	id     = shapesTable.rows.item(i).cells.item(0).innerHTML;
                                 client = shapesTable.rows.item(i).cells.item(5).innerHTML;
                                 x      = shapesTable.rows.item(i).cells.item(6).innerHTML;
@@ -153,10 +160,10 @@ checkForByteBuffer: function()
                                 a      = shapesTable.rows.item(i).cells.item(11).innerHTML;
                                 shape = new Shape(this.mApplicationBreslin,false,id,client,x,z,rx,rz,m,a);
                                 this.mShapeVector.push(shape);
-                        }
-		}
-	}
+
 },
+
+
 /*
 void Game::readServerTick(ByteBuffer* byteBuffer)
 {
