@@ -129,6 +129,13 @@ checkForByteBuffer: function()
                         if (this.mShapeVector[s].mIndex == shapesTable.rows.item(i).cells.item(0).innerHTML)
                         {
                                 foundMatch = true;
+				byteBuffer = new ByteBuffer();
+                        	//byteBuffer.writeByte(shapesTable.rows.item(i).cells.item(0).innerHTML);
+                        	//byteBuffer.writeByte(shapesTable.rows.item(i).cells.item(1).innerHTML);
+                        	//byteBuffer.writeByte(shapesTable.rows.item(i).cells.item(2).innerHTML);
+                        
+				//skipping read Server tick	
+				this.mShapeVector[s].processDeltaByteBuffer(byteBuffer);
                         }
                 }
 
@@ -201,6 +208,11 @@ addShape: function(shapesTable,i)
 },
 
 
+readServerTick: function()
+{
+	//this.processDeltaByteBuffer(byteBuffer);
+},
+
 /*
 void Game::readServerTick(ByteBuffer* byteBuffer)
 {
@@ -216,7 +228,7 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
                 Shape* shape = NULL;
                 shape = getShape(id);
 
-                                if (shape)
+                if (shape)
                 {
                         shape->processDeltaByteBuffer(byteBuffer);
                 }

@@ -230,6 +230,55 @@ spawnShape: function(position)
 	this.scale();
 
 },
+/*********************************
+                DELTA
+******************************/
+/*
+void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
+{
+        clearTitle(); //empty title string so it can be filled anew
+
+        parseDeltaByteBuffer(byteBuffer);
+
+        //process ticks on abilitys
+        for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+        {
+                mAbilityVector.at(i)->processTick();
+        }
+
+        //run billboard here for now.
+        drawTitle();
+}
+*/
+
+processDeltaByteBuffer: function()
+{
+	this.log('shape:processDeltaByteBuffer');
+ 	this.parseDeltaByteBuffer();
+        /*        
+        //process ticks on abilitys
+        for (i = 0; i < this.mAbilityVector.length; i++)
+        {
+                //this.mAbilityVector[i].processTick();
+        }       
+ */       
+        //run billboard here for now.
+        //drawTitle();
+},
+
+parseDeltaByteBuffer: function()
+{
+
+},
+
+/*
+int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
+{
+
+}
+*/
+
+
 getMeshString: function(meshCode)
 {
         if (meshCode == 0)

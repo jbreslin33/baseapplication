@@ -51,14 +51,14 @@ log: function(msg)
 ********************************************************/
 processTick: function()
 {
-	this.log('abilityMove:processTick');
-        this.mProcessTickStateMachine.update();
+//	this.log('abilityMove:processTick');
+//        this.mProcessTickStateMachine.update();
 },
 
 interpolateTick: function(renderTime)
 {
-	this.log('abilityMove:interpolateTick');
-        this.mInterpolateTickStateMachine.update();
+//	this.log('abilityMove:interpolateTick');
+ ///       this.mInterpolateTickStateMachine.update();
 },
 
 /******************************************************
