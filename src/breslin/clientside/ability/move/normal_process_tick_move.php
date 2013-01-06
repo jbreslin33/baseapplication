@@ -41,7 +41,7 @@ execute: function()
         // if distance exceeds threshold && server velocity is zero
         if(this.mAbilityMove.mDeltaPosition > this.mAbilityMove.mPosInterpLimitHigh && !this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())
         {
-                //this.abilityMove.mProcessTickStateMachine.changeState(this.mAbility.mCatchupProcessTickMove);
+                this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mCatchupProcessTickMove);
         }
 /*
         Vector3D* serverVelocity = new Vector3D();
