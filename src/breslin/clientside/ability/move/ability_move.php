@@ -16,7 +16,6 @@ initialize: function (shapeDynamic)
         mInterpolateTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
         mInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Move::Instance());
         mInterpolateTickStateMachine->setPreviousState     (Normal_InterpolateTick_Move::Instance());
-        //mInterpolateTickStateMachine->setGlobalState       (Global_InterpolateTick_Move::Instance());
         mInterpolateTickStateMachine->setGlobalState       (NULL);
 
 
@@ -43,6 +42,14 @@ initialize: function (shapeDynamic)
         this.mProcessTickStateMachine.setPreviousState     (this.mAbilityNormalProcessTickMove);
         this.mProcessTickStateMachine.setGlobalState       (this.mAbilityGlobalProcessTickMove);
 
+	//interpolate
+	this.mAbilityNormalInterpolateTickMove  = new AbilityNormalInterpolateTickMove(this); 
+       
+	//move interpolateTick states
+        this.mInterpolateTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
+        this.mInterpolateTickStateMachine.setCurrentState      (this.mAbilityNormalInterpolateTickMove);
+        this.mInterpolateTickStateMachine.setPreviousState     (this.mAbilityNormalInterpolateTickMove);
+        this.mInterpolateTickStateMachine.setGlobalState       (0);
 },
 
 log: function(msg)
@@ -60,7 +67,7 @@ processTick: function()
 
 interpolateTick: function(renderTime)
 {
-	this.log('intermove:' + renderTime);
+//	this.log('intermove:' + renderTime);
 }
 
 });
