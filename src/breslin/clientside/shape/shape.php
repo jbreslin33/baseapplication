@@ -356,9 +356,6 @@ parseDeltaByteBuffer: function(shapesTable)
        	this.mServerCommandCurrent.mPosition.z = shapesTable.rows.item(i).cells.item(2).innerHTML; 
         this.mServerCommandCurrent.mVelocity.z = this.mServerCommandCurrent.mPosition.z - this.mServerCommandLast.mPosition.z;
 
-//	this.log('x:' + this.mServerCommandCurrent.mPosition.x)
-//	this.log('z:' + this.mServerCommandCurrent.mPosition.z)
-
         this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
 },
 /*
@@ -505,21 +502,7 @@ setVisible: function(b)
 {
 
 },
-/*
-void Shape::moveGhostShape()
-{
-        Vector3D* transVector = new Vector3D();
 
-        transVector->x = mServerCommandCurrent->mPosition->x;
-        transVector->y = 0;
-        transVector->z = mServerCommandCurrent->mPosition->z;
-
-        if (mGhost)
-        {
-                mGhost->setPosition(transVector);
-        }
-}
-*/
 moveGhostShape: function()
 {
 	transVector = new Vector3D();
