@@ -163,10 +163,9 @@ setPosition: function(position)
 
 	modx = position.x+'px'; 
 	mody = position.z+'px'; 
-this.log('modx:' + modx);
-this.log('mody:' + mody);
-       	//this.mDiv.mDiv.style.left = modx;
-      	//this.mDiv.mDiv.style.top = mody;
+       	
+	this.mDiv.mDiv.style.left = modx;
+      	this.mDiv.mDiv.style.top = mody;
 },
 /*
 setPosition: function(x,z)
@@ -214,75 +213,10 @@ processSpawnByteBuffer: function(byteBuffer)
         //this.spawnShape(mSpawnPosition);
 },
 
-/*
-void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
-{
-        byteBuffer->BeginReading();
-
-        byteBuffer->ReadByte(); //should read -103 to add a shape..
-
-
-        mLocal  =    byteBuffer->ReadByte();
-        mIndex  =    byteBuffer->ReadByte();
-
-        mSpawnPosition->x =   byteBuffer->ReadFloat();
-        mSpawnPosition->y =   byteBuffer->ReadFloat();
-        mSpawnPosition->z =   byteBuffer->ReadFloat();
-
-        mSpawnRotation->x = byteBuffer->ReadFloat();
-        mSpawnRotation->z = byteBuffer->ReadFloat();
-
-        //mesh
-        mMeshCode    = byteBuffer->ReadByte();
-
-        //figure out mesh based on code passed in byteBuffer
-        mMeshName = getMeshString(mMeshCode);
-
-        //animate
-        mAnimate = byteBuffer->ReadByte();
-
-        //should I set the commands mServerCommandLast and mServerCommandCurrent here?
-        mServerCommandLast->mPosition->copyValuesFrom(mSpawnPosition);
-        mServerCommandCurrent->mPosition->copyValuesFrom(mSpawnPosition);
-}
-*/
 parseSpawnByteBuffer: function(byteBuffer)
 {
 
 },
-
-/*
-void Shape::spawnShape(Vector3D* position)
-{
-*/
-        /*********  create shape ***************/
-/* 
-       if (mIsGhost)
-        {
-                mIndex = mIndex * -1;
-        }
-
-        mName         = StringConverter::toString(mIndex);
-        mSceneNode    = mApplicationBreslin->getSceneManager()->getRootSceneNode()->createChildSceneNode();
-
-        //set Starting position of sceneNode, we will attach our mesh to this. this is all that's needed for static shapes. actually we need to add
-        //rotation for them
-        mSceneNode->setPosition(position->x,position->y,position->z);
-
-        //create mesh
-        mEntity = mApplicationBreslin->getSceneManager()->createEntity(mName, mMeshName);
-
-        //attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
-        mSceneNode->attachObject(mEntity);
-
-        //for scale, won't be needed in future hopefully...
-        Vector3D v;
-        v.x = mScale;
-        v.y = mScale;
-        v.z = mScale;
-        scale(v);
-}
-*/
 
 spawnShape: function(position)
 {
@@ -297,8 +231,6 @@ spawnShape: function(position)
         	//image to attach to our div "vessel"
                 this.mMesh  = document.createElement("IMG");
                 this.mMesh.src  = this.mSrc;
-                //this.mMesh.style.width = this.mWidth+'px';
-                //this.mMesh.style.height = this.mHeight+'px';
         }
         //back to div
         this.mDiv.mDiv.appendChild(this.mMesh);
@@ -309,34 +241,11 @@ spawnShape: function(position)
 /*********************************
                 DELTA
 ******************************/
-/*
-void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
-{
-        clearTitle(); //empty title string so it can be filled anew
-
-        parseDeltaByteBuffer(byteBuffer);
-
-        //process ticks on abilitys
-        for (unsigned int i = 0; i < mAbilityVector.size(); i++)
-        {
-                mAbilityVector.at(i)->processTick();
-        }
-
-        //run billboard here for now.
-        drawTitle();
-}
-*/
 
 processDeltaByteBuffer: function(shapesTable)
 {
  	this.parseDeltaByteBuffer(shapesTable);
-        //process ticks on abilitys
-       // for (i = 0; i < this.mAbilityVector.length; i++)
-        //{
-        	this.mAbilityVector[0].processTick();
-        //}       
-	//run billboard here for now.
-        //drawTitle();
+        this.mAbilityVector[0].processTick();
 },
 
 parseDeltaByteBuffer: function(shapesTable)
@@ -361,107 +270,6 @@ parseDeltaByteBuffer: function(shapesTable)
 
         this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
 },
-/*
-int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
-{
-        int flags = 0;
-
-        bool moveXChanged = true;
-        bool moveYChanged = true;
-        bool moveZChanged = true;
-
-        // Flags
-        flags = mes->ReadByte();
-
-        // Origin
-        if(flags & mCommandOriginX)
-        {
-                mServerCommandLast->mPosition->x = mServerCommandCurrent->mPosition->x;
-                mServerCommandCurrent->mPosition->x = mes->ReadFloat();
-        }
-        else
-        {
-                moveXChanged = false;
-        }
-
-        if(flags & mCommandOriginY)
-        {
-                mServerCommandLast->mPosition->y = mServerCommandCurrent->mPosition->y;
-                mServerCommandCurrent->mPosition->y = mes->ReadFloat();
-        }
-        else
-        {
-                moveYChanged = false;
-        }
-
-        if(flags & mCommandOriginZ)
-        {
-                mServerCommandLast->mPosition->z = mServerCommandCurrent->mPosition->z;
-                mServerCommandCurrent->mPosition->z = mes->ReadFloat();
-        }
-        else
-        {
-                moveZChanged = false;
-        }
-
-        //rotation
-        if(flags & mCommandRotationX)
-        {
-                mServerCommandLast->mRotation->x = mServerCommandCurrent->mRotation->x;
-                mServerCommandCurrent->mRotation->x = mes->ReadFloat();
-        }
-
-        if(flags & mCommandRotationZ)
-        {
-                mServerCommandLast->mRotation->z = mServerCommandCurrent->mRotation->z;
-                mServerCommandCurrent->mRotation->z = mes->ReadFloat();
-        }
-
-        //frame time
-       // if (flags & mApplicationBreslin->mGame->mCommandFrameTime)
-        //{
-                mServerCommandCurrent->mFrameTime = mApplicationBreslin->mGame->mFrameTimeServer;
-                mCommandToRunOnShape->mFrameTime = mServerCommandCurrent->mFrameTime;
-       // }
-
-        if (mServerCommandCurrent->mFrameTime != 0)
-        {
-                //position
-                if (moveXChanged)
-                {
-                        mServerCommandCurrent->mVelocity->x = mServerCommandCurrent->mPosition->x - mServerCommandLast->mPosition->x;
-               }
-                else
-                {
-                        mServerCommandCurrent->mVelocity->x = 0.0;
-                }
-
-                if (moveYChanged)
-                {
-                        mServerCommandCurrent->mVelocity->y = mServerCommandCurrent->mPosition->y - mServerCommandLast->mPosition->y;
-                }
-                else
-                {
-                        mServerCommandCurrent->mVelocity->y = 0.0;
-                }
-
-                if (moveZChanged)
-                {
-                        mServerCommandCurrent->mVelocity->z = mServerCommandCurrent->mPosition->z - mServerCommandLast->mPosition->z;
-                }
-                else
-                {
-                        mServerCommandCurrent->mVelocity->z = 0.0;
-                }
-        }
-
-        mCommandToRunOnShape->mVelocity->copyValuesFrom(mServerCommandCurrent->mVelocity);
-
-        return flags;
-}
-
-*/
-
 
 getMeshString: function(meshCode)
 {
