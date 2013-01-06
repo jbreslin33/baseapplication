@@ -256,12 +256,10 @@ processDeltaByteBuffer: function()
 	this.log('shape:processDeltaByteBuffer:' + this.mAbilityVector.length);
  	this.parseDeltaByteBuffer();
         //process ticks on abilitys
-/*
-        for (i = 0; i < this.mAbilityVector.length; i++)
-        {
-        //        this.mAbilityVector[i].processTick();
-        }       
- */       
+       // for (i = 0; i < this.mAbilityVector.length; i++)
+        //{
+        	this.mAbilityVector[0].processTick();
+        //}       
 	//run billboard here for now.
         //drawTitle();
 },
