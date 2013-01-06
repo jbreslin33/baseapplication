@@ -74,15 +74,13 @@ calculateDeltaPosition: function()
 
 calculateSpeed: function(velocity,frameTime)
 {
-/*
-        float speed = sqrt(
-        pow(velocity->x, 2) +
-        pow(velocity->y, 2) +
-        pow(velocity->z, 2)) /
+        speed = Math.sqrt(
+        Math.pow(velocity.x, 2) +
+        Math.pow(velocity.y, 2) +
+        Math.pow(velocity.z, 2)) /
         frameTime;
 
         return speed;
-*/
 }
 
 });
