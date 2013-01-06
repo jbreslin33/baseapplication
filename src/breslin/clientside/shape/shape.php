@@ -253,7 +253,7 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 
 processDeltaByteBuffer: function()
 {
-	this.log('shape:processDeltaByteBuffer');
+	this.log('shape:processDeltaByteBuffer:' + this.mAbilityVector.length);
  	this.parseDeltaByteBuffer();
         //process ticks on abilitys
 /*
