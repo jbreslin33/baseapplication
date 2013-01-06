@@ -81,6 +81,9 @@
 <!-- include AbilityNormalInterpolateTickMove -->
 <script type="text/javascript" src="/breslin/clientside/ability/move/ability_normal_interpolate_tick_move.php"></script>
 
+<!-- include AbilityMoveStateMachine -->
+<script type="text/javascript" src="/breslin/clientside/ability/move/ability_move_state_machine.php"></script>
+
 <script type="text/javascript">
 function addRow(dataArr)
 {

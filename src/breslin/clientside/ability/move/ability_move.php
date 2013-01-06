@@ -32,6 +32,17 @@ initialize: function (shapeDynamic)
         mDeltaZ        = 0.0f;
         mDeltaPosition = 0.0f;
 */
+	this.mAbilityGlobalProcessTickMove  = new AbilityGlobalProcessTickMove(this); 
+	this.mAbilityCatchupProcessTickMove = new AbilityCatchupProcessTickMove(this); 
+	this.mAbilityNormalProcessTickMove  = new AbilityNormalProcessTickMove(this); 
+        
+	//move processTick states
+        this.mProcessTickStateMachine       = new AbilityMoveStateMachine(this);    //setup the state machine
+
+        this.mProcessTickStateMachine.setCurrentState      (this.mAbilityNormalProcessTickMove);
+        this.mProcessTickStateMachine.setPreviousState     (this.mAbilityNormalProcessTickMove);
+        this.mProcessTickStateMachine.setGlobalState       (this.mAbilityGlobalProcessTickMove);
+
 },
 
 log: function(msg)
