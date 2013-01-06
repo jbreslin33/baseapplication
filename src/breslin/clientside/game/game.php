@@ -145,21 +145,54 @@ checkForByteBuffer: function()
 		}
 	}
 },
+/*********************************
+*               SHAPE
+**********************************/
+/*
+void Game::addShape(bool b, ByteBuffer* byteBuffer)
+{
+        Shape* shape = new Shape(mApplicationBreslin,byteBuffer,false);  //you should just need to call this...
 
+        //ability
+        shape->addAbility(new AbilityRotation(shape));
+        shape->addAbility(new AbilityMove(shape));
+
+        //put shape and ghost in game vectors so they can be looped and game now knows of them.
+        mShapeVector->push_back(shape);
+        mShapeGhostVector->push_back(shape->mGhost);
+}
+
+void Game::removeShape(ByteBuffer* byteBuffer)
+{
+        int index = byteBuffer->ReadByte();
+
+        Shape* shape = getShape(index);
+
+        for (unsigned int i = 0; i < mShapeVector->size(); i++)
+        {
+                if (mShapeVector->at(i) == shape)
+                {
+                        delete mShapeVector->at(i);
+                        mShapeVector->erase (mShapeVector->begin()+i);
+                }
+        }
+}
+
+*/
 addShape: function(shapesTable,i)
 {
-				this.log('create missing shape');
-                        	//create this...
-                        	id     = shapesTable.rows.item(i).cells.item(0).innerHTML;
-                                client = shapesTable.rows.item(i).cells.item(5).innerHTML;
-                                x      = shapesTable.rows.item(i).cells.item(6).innerHTML;
-                                z      = shapesTable.rows.item(i).cells.item(7).innerHTML;
-                                rx     = shapesTable.rows.item(i).cells.item(8).innerHTML;
-                               	rz     = shapesTable.rows.item(i).cells.item(9).innerHTML;
-                                m      = shapesTable.rows.item(i).cells.item(10).innerHTML;
-                                a      = shapesTable.rows.item(i).cells.item(11).innerHTML;
-                                shape = new Shape(this.mApplicationBreslin,false,id,client,x,z,rx,rz,m,a);
-                                this.mShapeVector.push(shape);
+	this.log('create missing shape');
+       	//create this...
+       	id     = shapesTable.rows.item(i).cells.item(0).innerHTML;
+        client = shapesTable.rows.item(i).cells.item(5).innerHTML;
+        x      = shapesTable.rows.item(i).cells.item(6).innerHTML;
+        z      = shapesTable.rows.item(i).cells.item(7).innerHTML;
+        rx     = shapesTable.rows.item(i).cells.item(8).innerHTML;
+       	rz     = shapesTable.rows.item(i).cells.item(9).innerHTML;
+        m      = shapesTable.rows.item(i).cells.item(10).innerHTML;
+        a      = shapesTable.rows.item(i).cells.item(11).innerHTML;
+        shape = new Shape(this.mApplicationBreslin,false,id,client,x,z,rx,rz,m,a);
+       	this.mShapeVector.push(shape);
 
 },
 
