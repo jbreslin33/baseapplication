@@ -20,7 +20,7 @@ beginReading: function()
 
 readByte: function()
 {
-	return this.mBuffer[mReadCount];
+	return this.mBuffer[this.mReadCount];
 }
 
 

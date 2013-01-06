@@ -253,8 +253,7 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 
 processDeltaByteBuffer: function(byteBuffer)
 {
-	this.log('shape:processDeltaByteBuffer:' + this.mAbilityVector.length);
- 	this.parseDeltaByteBuffer();
+ 	this.parseDeltaByteBuffer(byteBuffer);
         //process ticks on abilitys
        // for (i = 0; i < this.mAbilityVector.length; i++)
         //{
@@ -266,14 +265,120 @@ processDeltaByteBuffer: function(byteBuffer)
 
 parseDeltaByteBuffer: function(byteBuffer)
 {
+	byteBuffer.beginReading();
+
+	moveXChanged = true;
+	moveZChanged = true;
+
+	//x
+       	this.mServerCommandLast.mPosition.x = this.mServerCommandCurrent.mPosition.x;
+       	this.mServerCommandCurrent.mPosition.x = byteBuffer.readByte();
+
+	//z
+       	this.mServerCommandLast.mPosition.z = this.mServerCommandCurrent.mPosition.z;
+       	this.mServerCommandCurrent.mPosition.z = byteBuffer.readByte();
+
 
 },
-
 /*
 int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 {
+        int flags = 0;
 
+        bool moveXChanged = true;
+        bool moveYChanged = true;
+        bool moveZChanged = true;
+
+        // Flags
+        flags = mes->ReadByte();
+
+        // Origin
+        if(flags & mCommandOriginX)
+        {
+                mServerCommandLast->mPosition->x = mServerCommandCurrent->mPosition->x;
+                mServerCommandCurrent->mPosition->x = mes->ReadFloat();
+        }
+        else
+        {
+                moveXChanged = false;
+        }
+
+        if(flags & mCommandOriginY)
+        {
+                mServerCommandLast->mPosition->y = mServerCommandCurrent->mPosition->y;
+                mServerCommandCurrent->mPosition->y = mes->ReadFloat();
+        }
+        else
+        {
+                moveYChanged = false;
+        }
+
+        if(flags & mCommandOriginZ)
+        {
+                mServerCommandLast->mPosition->z = mServerCommandCurrent->mPosition->z;
+                mServerCommandCurrent->mPosition->z = mes->ReadFloat();
+        }
+        else
+        {
+                moveZChanged = false;
+        }
+
+        //rotation
+        if(flags & mCommandRotationX)
+        {
+                mServerCommandLast->mRotation->x = mServerCommandCurrent->mRotation->x;
+                mServerCommandCurrent->mRotation->x = mes->ReadFloat();
+        }
+
+        if(flags & mCommandRotationZ)
+        {
+                mServerCommandLast->mRotation->z = mServerCommandCurrent->mRotation->z;
+                mServerCommandCurrent->mRotation->z = mes->ReadFloat();
+        }
+
+        //frame time
+       // if (flags & mApplicationBreslin->mGame->mCommandFrameTime)
+        //{
+                mServerCommandCurrent->mFrameTime = mApplicationBreslin->mGame->mFrameTimeServer;
+                mCommandToRunOnShape->mFrameTime = mServerCommandCurrent->mFrameTime;
+       // }
+
+        if (mServerCommandCurrent->mFrameTime != 0)
+        {
+                //position
+                if (moveXChanged)
+                {
+                        mServerCommandCurrent->mVelocity->x = mServerCommandCurrent->mPosition->x - mServerCommandLast->mPosition->x;
+               }
+                else
+                {
+                        mServerCommandCurrent->mVelocity->x = 0.0;
+                }
+
+                if (moveYChanged)
+                {
+                        mServerCommandCurrent->mVelocity->y = mServerCommandCurrent->mPosition->y - mServerCommandLast->mPosition->y;
+                }
+                else
+                {
+                        mServerCommandCurrent->mVelocity->y = 0.0;
+                }
+
+                if (moveZChanged)
+                {
+                        mServerCommandCurrent->mVelocity->z = mServerCommandCurrent->mPosition->z - mServerCommandLast->mPosition->z;
+                }
+                else
+                {
+                        mServerCommandCurrent->mVelocity->z = 0.0;
+                }
+        }
+
+        mCommandToRunOnShape->mVelocity->copyValuesFrom(mServerCommandCurrent->mVelocity);
+
+        return flags;
 }
+
 */
 
 
