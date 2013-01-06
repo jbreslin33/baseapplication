@@ -66,6 +66,21 @@
 <!-- include AbilityMove -->
 <script type="text/javascript" src="/breslin/clientside/ability/move/ability_move.php"></script>
 
+<!-- include AbilityMoveState -->
+<script type="text/javascript" src="/breslin/clientside/ability/move/ability_move_state.php"></script>
+
+<!-- include AbilityGlobalProcessTickMove -->
+<script type="text/javascript" src="/breslin/clientside/ability/move/ability_global_process_tick_move.php"></script>
+
+<!-- include AbilityCatchupProcessTickMove -->
+<script type="text/javascript" src="/breslin/clientside/ability/move/ability_catchup_process_tick_move.php"></script>
+
+<!-- include AbilityNormalProcessTickMove -->
+<script type="text/javascript" src="/breslin/clientside/ability/move/ability_normal_process_tick_move.php"></script>
+
+<!-- include AbilityNormalInterpolateTickMove -->
+<script type="text/javascript" src="/breslin/clientside/ability/move/ability_normal_interpolate_tick_move.php"></script>
+
 <script type="text/javascript">
 function addRow(dataArr)
 {

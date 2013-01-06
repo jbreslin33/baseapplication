@@ -54,3 +54,45 @@ interpolateTick: function(renderTime)
 
 });
 
+
+/******************************************************
+*                               UPDATING
+********************************************************/
+/*
+void AbilityMove::processTick()
+{
+        mProcessTickStateMachine->update();
+}
+void AbilityMove::interpolateTick(float renderTime)
+{
+        mInterpolateTickStateMachine->update();
+}
+*/
+/******************************************************
+*                               MOVE
+********************************************************/
+/*
+void AbilityMove::calculateDeltaPosition()  //mov
+{
+
+        mDeltaX = mShape->mServerCommandCurrent->mPosition->x - mShape->getPosition()->x;
+        mDeltaY = mShape->mServerCommandCurrent->mPosition->y - mShape->getPosition()->y;
+        mDeltaZ = mShape->mServerCommandCurrent->mPosition->z - mShape->getPosition()->z;
+
+        //distance we are off from server
+        mDeltaPosition = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));
+}
+
+float AbilityMove::calcuateSpeed(Vector3D* velocity, int frameTime)
+{
+        float speed = sqrt(
+        pow(velocity->x, 2) +
+        pow(velocity->y, 2) +
+        pow(velocity->z, 2)) /
+        frameTime;
+
+        return speed;
+}
+
+*/
+
