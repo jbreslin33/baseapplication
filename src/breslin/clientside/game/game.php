@@ -129,13 +129,9 @@ checkForByteBuffer: function()
                         if (this.mShapeVector[s].mIndex == shapesTable.rows.item(i).cells.item(0).innerHTML)
                         {
                                 foundMatch = true;
-				byteBuffer = new ByteBuffer();
-                        	byteBuffer.writeByte(shapesTable.rows.item(i).cells.item(0).innerHTML);
-                        	byteBuffer.writeByte(shapesTable.rows.item(i).cells.item(1).innerHTML);
-                        	byteBuffer.writeByte(shapesTable.rows.item(i).cells.item(2).innerHTML);
                         
 				//skipping read Server tick	
-				this.mShapeVector[s].processDeltaByteBuffer(byteBuffer);
+				this.mShapeVector[s].processDeltaByteBuffer(shapesTable);
                         }
                 }
 

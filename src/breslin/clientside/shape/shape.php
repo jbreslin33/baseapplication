@@ -251,9 +251,9 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 }
 */
 
-processDeltaByteBuffer: function(byteBuffer)
+processDeltaByteBuffer: function(shapesTable)
 {
- 	this.parseDeltaByteBuffer(byteBuffer);
+ 	this.parseDeltaByteBuffer(shapesTable);
         //process ticks on abilitys
        // for (i = 0; i < this.mAbilityVector.length; i++)
         //{
@@ -263,23 +263,25 @@ processDeltaByteBuffer: function(byteBuffer)
         //drawTitle();
 },
 
-parseDeltaByteBuffer: function(byteBuffer)
+parseDeltaByteBuffer: function(shapesTable)
 {
 	byteBuffer.beginReading();
 
 	moveXChanged = true;
 	moveZChanged = true;
-
+                                
 	//x
        	this.mServerCommandLast.mPosition.x = this.mServerCommandCurrent.mPosition.x;
-       	this.mServerCommandCurrent.mPosition.x = byteBuffer.readByte();
+       	this.mServerCommandCurrent.mPosition.x = shapesTable.rows.item(i).cells.item(1).innerHTML; 
         this.mServerCommandCurrent.mVelocity.x = this.mServerCommandCurrent.mPosition.x - this.mServerCommandLast.mPosition.x;
 	
 	//z
        	this.mServerCommandLast.mPosition.z = this.mServerCommandCurrent.mPosition.z;
-       	this.mServerCommandCurrent.mPosition.z = byteBuffer.readByte();
+       	this.mServerCommandCurrent.mPosition.z = shapesTable.rows.item(i).cells.item(2).innerHTML; 
         this.mServerCommandCurrent.mVelocity.z = this.mServerCommandCurrent.mPosition.z - this.mServerCommandLast.mPosition.z;
 
+	this.log('x:' + this.mServerCommandCurrent.mPosition.x)
+	this.log('z:' + this.mServerCommandCurrent.mPosition.z)
 
         this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
 },
