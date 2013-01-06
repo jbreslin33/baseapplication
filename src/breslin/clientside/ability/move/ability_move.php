@@ -34,6 +34,14 @@ initialize: function (shapeDynamic)
 */
 },
 
+log: function(msg)
+{
+        setTimeout(function()
+        {
+                throw new Error(msg);
+        }, 0);
+},
+
 processTick: function()
 {
 
@@ -41,7 +49,7 @@ processTick: function()
 
 interpolateTick: function(renderTime)
 {
-
+	this.log('intermove:' + renderTime);
 }
 
 });

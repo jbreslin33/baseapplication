@@ -112,8 +112,6 @@ void Shape::interpolateTick(float renderTime)
 
 interpolateTick: function(renderTime)
 {
-	this.log('interpolate:' + renderTime);
-        
 	//interpolate ticks on abilitys
         for (i = 0; i < this.mAbilityVector.length; i++)
         {
