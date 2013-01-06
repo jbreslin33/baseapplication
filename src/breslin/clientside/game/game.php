@@ -191,6 +191,11 @@ addShape: function(shapesTable,i)
        	rz     = shapesTable.rows.item(i).cells.item(9).innerHTML;
         m      = shapesTable.rows.item(i).cells.item(10).innerHTML;
         a      = shapesTable.rows.item(i).cells.item(11).innerHTML;
+
+	//abilityMove = new AbilityMove(this);
+
+//	shape.addAbility(abilityMove);
+
         shape = new Shape(this.mApplicationBreslin,false,id,client,x,z,rx,rz,m,a);
        	this.mShapeVector.push(shape);
 

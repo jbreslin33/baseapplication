@@ -34,12 +34,12 @@ initialize: function (shapeDynamic)
 */
 },
 
-processTick(): function()
+processTick: function()
 {
 
 },
 
-interpolateTick: (renderTime)
+interpolateTick: function(renderTime)
 {
 
 }

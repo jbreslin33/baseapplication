@@ -12,6 +12,9 @@ initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
 	this.mAnimate = a;
 
 	this.mIsGhost = isGhost;
+
+	//abilitys
+	this.mAbilityVector = new Array();
         
 	//applicationBreslin
         this.mApplicationBreslin = applicationBreslin;
@@ -110,6 +113,14 @@ interpolateTick: function(renderTime)
 {
 
 },
+/*********************************
+               ABILITY 
+******************************/
+addAbility: function(ability)
+{
+	this.mAbilityVector.push(ability);
+},
+
 
 /*********************************
                 SPAWN
