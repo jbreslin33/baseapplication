@@ -31,25 +31,36 @@ initialize: function (shapeDynamic)
         mDeltaZ        = 0.0f;
         mDeltaPosition = 0.0f;
 */
-	this.mAbilityGlobalProcessTickMove  = new AbilityGlobalProcessTickMove(this); 
-	this.mAbilityCatchupProcessTickMove = new AbilityCatchupProcessTickMove(this); 
-	this.mAbilityNormalProcessTickMove  = new AbilityNormalProcessTickMove(this); 
+	this.mGlobalProcessTickMove  = new GlobalProcessTickMove(this); 
+	this.mCatchupProcessTickMove = new CatchupProcessTickMove(this); 
+	this.mNormalProcessTickMove  = new NormalProcessTickMove(this); 
         
 	//move processTick states
         this.mProcessTickStateMachine       = new AbilityMoveStateMachine(this);    //setup the state machine
 
-        this.mProcessTickStateMachine.setCurrentState      (this.mAbilityNormalProcessTickMove);
-        this.mProcessTickStateMachine.setPreviousState     (this.mAbilityNormalProcessTickMove);
-        this.mProcessTickStateMachine.setGlobalState       (this.mAbilityGlobalProcessTickMove);
+        this.mProcessTickStateMachine.setCurrentState      (this.mNormalProcessTickMove);
+        this.mProcessTickStateMachine.setPreviousState     (this.mNormalProcessTickMove);
+        this.mProcessTickStateMachine.setGlobalState       (this.mGlobalProcessTickMove);
 
 	//interpolate
-	this.mAbilityNormalInterpolateTickMove  = new AbilityNormalInterpolateTickMove(this); 
+	this.mNormalInterpolateTickMove  = new NormalInterpolateTickMove(this); 
        
 	//move interpolateTick states
         this.mInterpolateTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
-        this.mInterpolateTickStateMachine.setCurrentState      (this.mAbilityNormalInterpolateTickMove);
-        this.mInterpolateTickStateMachine.setPreviousState     (this.mAbilityNormalInterpolateTickMove);
+        this.mInterpolateTickStateMachine.setCurrentState      (this.mNormalInterpolateTickMove);
+        this.mInterpolateTickStateMachine.setPreviousState     (this.mNormalInterpolateTickMove);
         this.mInterpolateTickStateMachine.setGlobalState       (0);
+    
+	//thresholds
+    	this.mPosInterpLimitHigh = .066; //how far away from server till we try to catch up
+    	this.mPosInterpFactor    = 4.0;
+        this.mMaximunVelocity    = .003083; //do not let velocity go above this in any direction.
+
+        //deltas
+        this.mDeltaX        = 0.0;
+        this.mDeltaY        = 0.0;
+        this.mDeltaZ        = 0.0;
+        this.mDeltaPosition = 0.0;
 },
 
 log: function(msg)

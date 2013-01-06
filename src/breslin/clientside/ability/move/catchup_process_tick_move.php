@@ -1,4 +1,4 @@
-var AbilityNormalProcessTickMove = new Class(
+var CatchupProcessTickMove = new Class(
 {
 
 Extends: AbilityMoveState,

@@ -1,4 +1,4 @@
-var AbilityGlobalProcessTickMove = new Class(
+var GlobalProcessTickMove = new Class(
 {
 
 Extends: AbilityMoveState,

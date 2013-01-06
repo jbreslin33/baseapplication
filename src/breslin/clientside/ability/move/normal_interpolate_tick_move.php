@@ -1,4 +1,4 @@
-var AbilityCatchupProcessTickMove = new Class(
+var NormalInterpolateTickMove = new Class(
 {
 
 Extends: AbilityMoveState,
