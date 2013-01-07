@@ -32,9 +32,9 @@ execute: function()
         serverVelocity = new Vector3D();
 
         serverVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
-	this.log('x:' + serverVelocity.x); 
-	this.log('z:' + serverVelocity.z); 
         serverVelocity.normalise();
+//	this.log('x:' + serverVelocity.x); 
+//	this.log('z:' + serverVelocity.z); 
 
         if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {

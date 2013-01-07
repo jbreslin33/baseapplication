@@ -8,6 +8,14 @@ initialize: function()
 	this.z = 0;
 },
 
+log: function(msg)
+{
+        setTimeout(function()
+        {
+                throw new Error(msg);
+        }, 0);
+},
+
 initialize: function(x1,y1,z1)
 {
 	this.x = x1;
@@ -17,7 +25,10 @@ initialize: function(x1,y1,z1)
 
 length: function()
 {
-        //return sqrt(x*x + y*y + z*z);
+	this.log('lx:' + this.x);
+	this.log('ly:' + this.y);
+	this.log('lz:' + this.z);
+        return Math.sqrt(this.x*this.x + this.y*this.y + this.z*this.z);
 },
 
 isZero: function()
@@ -43,6 +54,7 @@ zero: function()
 normalise: function()
 {
 	len = this.length();
+//	this.log('l:' + len);
 	if (len == 0)
 	{
 		return;
