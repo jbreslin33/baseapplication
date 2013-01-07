@@ -163,9 +163,11 @@ setPosition: function(position)
 
 	modx = position.x+'px'; 
 	mody = position.z+'px'; 
+	//this.log('x:' + modx);
+//	this.log('z:' + mody);
        	
-	this.mDiv.mDiv.style.left = modx;
-      	this.mDiv.mDiv.style.top = mody;
+//	this.mDiv.mDiv.style.left = modx;
+ //     	this.mDiv.mDiv.style.top = mody;
 },
 /*
 setPosition: function(x,z)
@@ -259,16 +261,21 @@ parseDeltaByteBuffer: function(shapesTable)
        	this.mServerCommandLast.mPosition.x = this.mServerCommandCurrent.mPosition.x;
        	this.mServerCommandCurrent.mPosition.x = shapesTable.rows.item(i).cells.item(1).innerHTML; 
         this.mServerCommandCurrent.mVelocity.x = this.mServerCommandCurrent.mPosition.x - this.mServerCommandLast.mPosition.x;
+	//this.log('vx:' + this.mServerCommandCurrent.mVelocity.x); 
 	
 	//z
        	this.mServerCommandLast.mPosition.z = this.mServerCommandCurrent.mPosition.z;
        	this.mServerCommandCurrent.mPosition.z = shapesTable.rows.item(i).cells.item(2).innerHTML; 
         this.mServerCommandCurrent.mVelocity.z = this.mServerCommandCurrent.mPosition.z - this.mServerCommandLast.mPosition.z;
+	//this.log('vz:' + this.mServerCommandCurrent.mVelocity.z); 
 
         this.mServerCommandCurrent.mFrameTime = this.mApplicationBreslin.mGame.mFrameTimeServer;
         this.mCommandToRunOnShape.mFrameTime = this.mServerCommandCurrent.mFrameTime;
 
         this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
+	//this.log('cvx:' + this.mCommandToRunOnShape.mVelocity.x); 
+	//this.log('cvz:' + this.mCommandToRunOnShape.mVelocity.z); 
+	
 },
 
 getMeshString: function(meshCode)
@@ -321,7 +328,9 @@ moveGhostShape: function()
 	transVector.x = this.mServerCommandCurrent.mPosition.x;
 	transVector.y = 0;
 	transVector.z = this.mServerCommandCurrent.mPosition.z;
-		
+	
+	//this.log('x:' + transVector.x);	
+	//this.log('z:' + transVector.z);	
 	this.mGhost.setPosition(transVector);
 }
 
