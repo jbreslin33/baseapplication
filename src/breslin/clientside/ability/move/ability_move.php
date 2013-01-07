@@ -76,7 +76,6 @@ calculateSpeed: function(velocity,frameTime)
 {
         speed = Math.sqrt(
         Math.pow(velocity.x, 2) +
-        Math.pow(velocity.y, 2) +
         Math.pow(velocity.z, 2)) /
         frameTime;
 

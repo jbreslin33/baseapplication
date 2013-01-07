@@ -34,14 +34,14 @@ execute: function()
         serverVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
         serverVelocity.normalise();
 
-        this.log('mFrameTime:' + this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime)
+//        this.log('mFrameTime:' + this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime)
         if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
                 v = this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity;
                 f = this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime;
 		
                 this.mAbilityMove.mShape.mSpeed = this.mAbilityMove.calculateSpeed(v,f);
-//		this.log('speed:' + this.mAbilityMove.mShape.mSpeed);
+		this.log('speed:' + this.mAbilityMove.mShape.mSpeed);
         }
         serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
 //	this.log('x:' + serverVelocity.x); 
