@@ -7,6 +7,14 @@ initialize: function (abilityMove)
 	this.mAbilityMove = abilityMove;
 },
 
+log: function(msg)
+{
+        setTimeout(function()
+        {
+                throw new Error(msg);
+        }, 0);
+},
+
 enter: function()
 {
 
@@ -19,7 +27,10 @@ execute: function()
         {
                 this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mCatchupProcessTickMove);
         }
+	this.log('x:' + this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.x); 
+	this.log('z:' + this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.z); 
         serverVelocity = new Vector3D();
+
         serverVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
         serverVelocity.normalise();
 
