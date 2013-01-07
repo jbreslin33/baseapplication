@@ -37,9 +37,10 @@ execute: function()
         this.log('mFrameTime:' + this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime)
         if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
-                this.mAbilityMove.mShape.mSpeed = this.mAbilityMove.calcuateSpeed(
-                this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity,
-                this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime);
+                v = this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity;
+                f = this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime;
+		
+                this.mAbilityMove.mShape.mSpeed = this.mAbilityMove.calculateSpeed(v,f);
 //		this.log('speed:' + this.mAbilityMove.mShape.mSpeed);
         }
         serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
