@@ -36,14 +36,14 @@ execute: function()
 
         if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
-                this.mAbilityMove.mShape.mSpeed = abilityMove.calcuateSpeed(
+                this.mAbilityMove.mShape.mSpeed = this.mAbilityMove.calcuateSpeed(
                 this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity,
                 this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime);
+		this.log('speed:' + this.mAbilityMove.mShape.mSpeed);
         }
-
         serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
-	this.log('x:' + serverVelocity.x); 
-	this.log('z:' + serverVelocity.z); 
+//	this.log('x:' + serverVelocity.x); 
+//	this.log('z:' + serverVelocity.z); 
         //abilityMove->regulate(serverVelocity);
         this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(serverVelocity);
 },
