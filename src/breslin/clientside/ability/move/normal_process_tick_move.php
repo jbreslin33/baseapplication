@@ -27,11 +27,13 @@ execute: function()
         {
                 this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mCatchupProcessTickMove);
         }
-	this.log('x:' + this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.x); 
-	this.log('z:' + this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.z); 
+//	this.log('x:' + this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.x); 
+//	this.log('z:' + this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.z); 
         serverVelocity = new Vector3D();
 
         serverVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
+	this.log('x:' + serverVelocity.x); 
+	this.log('z:' + serverVelocity.z); 
         serverVelocity.normalise();
 
         if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
