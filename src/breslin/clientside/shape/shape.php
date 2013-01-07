@@ -269,6 +269,7 @@ parseDeltaByteBuffer: function(shapesTable)
         this.mServerCommandCurrent.mVelocity.z = this.mServerCommandCurrent.mPosition.z - this.mServerCommandLast.mPosition.z;
 	//this.log('vz:' + this.mServerCommandCurrent.mVelocity.z); 
 
+	//frametime
         this.mServerCommandCurrent.mFrameTime = this.mApplicationBreslin.mGame.mFrameTimeServer;
         this.mCommandToRunOnShape.mFrameTime = this.mServerCommandCurrent.mFrameTime;
 

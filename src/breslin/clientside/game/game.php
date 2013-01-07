@@ -91,7 +91,11 @@ checkForByteBuffer: function()
 	this.mApplicationBreslin.mNetwork.getAllShapes();
  	var shapesTable = document.getElementById('shapes_table');
     	var rowLength = shapesTable.rows.length;
-       
+
+	//mFrameTimeServer
+        this.mFrameTimeServer = shapesTable.rows.item(1).cells.item(1).innerHTML;
+	       
+	
 	var foundMatch = false; 
 	for (i = 2; i < rowLength; i++)
         {
