@@ -33,8 +33,6 @@ execute: function()
 
         serverVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
         serverVelocity.normalise();
-	this.log('x:' + serverVelocity.x); 
-	this.log('z:' + serverVelocity.z); 
 
         if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
@@ -44,6 +42,8 @@ execute: function()
         }
 
         serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
+	this.log('x:' + serverVelocity.x); 
+	this.log('z:' + serverVelocity.z); 
         //abilityMove->regulate(serverVelocity);
         this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(serverVelocity);
 },
