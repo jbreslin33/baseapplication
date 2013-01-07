@@ -25,10 +25,14 @@ initialize: function(x1,y1,z1)
 
 length: function()
 {
+/*
 	this.log('lx:' + this.x);
 	this.log('ly:' + this.y);
 	this.log('lz:' + this.z);
-        return Math.sqrt(this.x*this.x + this.y*this.y + this.z*this.z);
+*/
+        return Math.sqrt(this.x*this.x + this.z*this.z);
+
+
 },
 
 isZero: function()
@@ -60,7 +64,7 @@ normalise: function()
 		return;
 	}
 	this.x /= len;
-	this.y /= len;
+	this.y = 0;
 	this.z /= len;
 },
 
