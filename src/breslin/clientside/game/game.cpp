@@ -198,6 +198,7 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
         // Skip sequences
         short sequence = byteBuffer->ReadShort();
         mFrameTimeServer = byteBuffer->ReadByte();
+        //LogString("mFrameTimeServer:%f",mFrameTimeServer);
 
         while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
         {
