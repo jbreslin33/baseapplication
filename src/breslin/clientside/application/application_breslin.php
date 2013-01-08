@@ -74,7 +74,7 @@ processUpdate: function()
 
         //set RenderTime as function of timeSinceEpoch and LastTimeSinceEpoch diff
         this.mRenderTime = this.mTimeSinceEpoch - this.mLastTimeSinceEpoch;
-
+	this.mRenderTime = this.mRenderTime / 1000;
         this.mStateMachine.update();
 },
 

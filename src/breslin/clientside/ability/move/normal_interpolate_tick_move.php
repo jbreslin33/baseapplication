@@ -28,14 +28,15 @@ execute: function()
         //copy values from mVelocity so we don't make changes to original
         transVector.copyValuesFrom(this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity);
 //	crap value here	       
-	this.log('x:' + this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.x);
-        this.log('z:' + this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.z);
+//	this.log('x:' + this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.x);
+ //       this.log('z:' + this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.z);
         
         
 	
         //get the mulitplier
         multipliedRenderTime = this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime() * 1000;
-//	this.log('r:' + multipliedRenderTime);
+	//this.log('r:' + multipliedRenderTime);
+	this.log('r:' + this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime());
 
 
         //multiply our vector using render values

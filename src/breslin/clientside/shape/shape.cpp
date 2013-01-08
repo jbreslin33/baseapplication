@@ -289,8 +289,8 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 	
 	mCommandToRunOnShape->mVelocity->copyValuesFrom(mServerCommandCurrent->mVelocity);
 
-       	LogString("x:%f",mServerCommandCurrent->mVelocity->x);         
-       	LogString("z:%f",mServerCommandCurrent->mVelocity->z);         
+       //	LogString("x:%f",mServerCommandCurrent->mVelocity->x);         
+       	//LogString("z:%f",mServerCommandCurrent->mVelocity->z);         
 
         return flags;
 }
