@@ -36,8 +36,10 @@ execute: function()
         //get the mulitplier
         multipliedRenderTime = this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime() * 1000;
 	//this.log('r:' + multipliedRenderTime);
-	this.log('r:' + this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime());
+//	this.log('r:' + this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime());
 
+	this.log('x:' + transVector.x);
+	this.log('z:' + transVector.z);
 
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);
@@ -48,6 +50,7 @@ execute: function()
 
 	//set new position
 //ALERT THIS IS GARBAGE VALUE        this.mAbilityMove.mShape.setPosition(transVector);
+//	   this.mAbilityMove.mShape.setPosition(transVector);
 
 /*
         if (abilityMove->mShape->mLocal == 1)
