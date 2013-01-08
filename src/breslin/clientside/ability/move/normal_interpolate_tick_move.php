@@ -31,8 +31,13 @@ execute: function()
         //get the mulitplier
         multipliedRenderTime = this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime() * 1000;
 
+	//MAJOR HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	multipliedRenderTime = multipliedRenderTime / 125;
+
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);
+
+	
        
 	this.log('bx:' + transVector.x);
 	this.log('bz:' + transVector.z);
@@ -59,6 +64,8 @@ execute: function()
 
 	this.log('ax:' + transVector.x);
 	this.log('az:' + transVector.z);
+
+	
 
 	//set new position
 //ALERT THIS IS GARBAGE VALUE        this.mAbilityMove.mShape.setPosition(transVector);
