@@ -392,7 +392,7 @@ void Game::updateShapeTable()
 			std::string w = " WHEN ";	
 			std::string id  = toString(i);
 			std::string t   = " THEN ";
-			std::string z    = toString(mFrameTimeLast);
+			std::string z    = toString(mGameTime);
 			query.append(w);
 			query.append(id);
 			query.append(t);
@@ -416,7 +416,6 @@ void Game::updateShapeTable()
 
         const char * c = query.c_str();
 	sqlQuery(c);	
-	LogString("mGameTime:%d",mGameTime);
 
 }
 

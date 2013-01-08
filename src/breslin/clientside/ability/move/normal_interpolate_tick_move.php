@@ -32,16 +32,11 @@ execute: function()
         multipliedRenderTime = this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime() * 1000;
 
 	//MAJOR HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	multipliedRenderTime = multipliedRenderTime / 125;
+	multipliedRenderTime = multipliedRenderTime / 75;
 
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);
 
-	
-       
-	this.log('bx:' + transVector.x);
-	this.log('bz:' + transVector.z);
-//mystring = mystring.replace('/r','/');	
 	position = this.mAbilityMove.mShape.getPosition(); 
 	x = position.x; 
 	y = 0; 
@@ -50,26 +45,16 @@ execute: function()
 	x = x.replace("px","");
 	z = z.replace("px","");
 
-
 	actualPosition = new Vector3D();
 	actualPosition.x = x; 
 	actualPosition.y = 0; 
 	actualPosition.z = z; 
 
-	this.log('mx:' + actualPosition.x);	
-	this.log('mz:' + actualPosition.z);	
- 
 	//add our velocity to current position
         transVector.add(actualPosition);
 
-	this.log('ax:' + transVector.x);
-	this.log('az:' + transVector.z);
-
-	
-
 	//set new position
-//ALERT THIS IS GARBAGE VALUE        this.mAbilityMove.mShape.setPosition(transVector);
-	   this.mAbilityMove.mShape.setPosition(transVector);
+	this.mAbilityMove.mShape.setPosition(transVector);
 
 /*
         if (abilityMove->mShape->mLocal == 1)

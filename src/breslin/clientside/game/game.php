@@ -94,6 +94,7 @@ checkForByteBuffer: function()
 
 	//mFrameTimeServer
         this.mFrameTimeServer = shapesTable.rows.item(1).cells.item(1).innerHTML;
+        this.mGameTimeServer  = shapesTable.rows.item(1).cells.item(2).innerHTML;
 	       
 	
 	var foundMatch = false; 
