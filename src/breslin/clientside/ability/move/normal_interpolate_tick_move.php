@@ -44,7 +44,7 @@ execute: function()
         transVector.add(this.mAbilityMove.mShape.getPosition());
 
 	//set new position
-        this.mAbilityMove.mShape.setPosition(transVector);
+//ALERT THIS IS GARBAGE VALUE        this.mAbilityMove.mShape.setPosition(transVector);
 
 /*
         if (abilityMove->mShape->mLocal == 1)

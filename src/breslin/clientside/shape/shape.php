@@ -149,14 +149,10 @@ Shape::translate(Vector3D* translateVector, int perspective)
 }
 */
 
-/*
-void Shape::setPosition(Vector3D* position)
-{
-        getSceneNode()->setPosition(position->convertToVector3());
-}
-*/
 setPosition: function(position)
 {
+	this.log('x:' + position.x);
+	this.log('y:' + position.y);
 	//set a member position because we are going to have to modify the div's position
 	this.mPosition.x = position.x;
 	this.mPosition.z = position.z;
@@ -169,20 +165,6 @@ setPosition: function(position)
 	//this.mDiv.mDiv.style.left = modx;
       	//this.mDiv.mDiv.style.top = mody;
 },
-/*
-setPosition: function(x,z)
-{
-	//set a member position because we are going to have to modify the div's position
-	this.mPosition.x = x;
-	this.mPosition.z = z;
-	
-	modx = x+'px'; 
-	mody = z+'px'; 
-
-       	//this.mDiv.mDiv.style.left = modx;
-      	//this.mDiv.mDiv.style.top = mody;
-},
-*/
 /*
 Vector3D* Shape::getPosition()
 {
@@ -330,9 +312,9 @@ moveGhostShape: function()
 	transVector.y = 0;
 	transVector.z = this.mServerCommandCurrent.mPosition.z;
 	
-	this.log('x:' + transVector.x);	
-	this.log('z:' + transVector.z);	
-	this.mGhost.setPosition(transVector);
+	//this.log('x:' + transVector.x);	
+	//this.log('z:' + transVector.z);	
+//	this.mGhost.setPosition(transVector);
 }
 
 
