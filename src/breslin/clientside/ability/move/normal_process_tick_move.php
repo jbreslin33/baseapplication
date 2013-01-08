@@ -41,7 +41,7 @@ execute: function()
                 f = this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime;
 		
                 this.mAbilityMove.mShape.mSpeed = this.mAbilityMove.calculateSpeed(v,f);
-		this.log('speed:' + this.mAbilityMove.mShape.mSpeed);
+//		this.log('speed:' + this.mAbilityMove.mShape.mSpeed);
         }
         serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
 //	this.log('x:' + serverVelocity.x); 

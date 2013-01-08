@@ -161,13 +161,13 @@ setPosition: function(position)
 	this.mPosition.x = position.x;
 	this.mPosition.z = position.z;
 
-	modx = position.x+'px'; 
-	mody = position.z+'px'; 
-	//this.log('x:' + modx);
-//	this.log('z:' + mody);
+	//modx = position.x+"px"; 
+	//mody = position.z+"px"; 
+	//this.log('x:' + position.x);
+	//this.log('z:' + position.z);
        	
-//	this.mDiv.mDiv.style.left = modx;
- //     	this.mDiv.mDiv.style.top = mody;
+	//this.mDiv.mDiv.style.left = modx;
+      	//this.mDiv.mDiv.style.top = mody;
 },
 /*
 setPosition: function(x,z)
@@ -307,8 +307,8 @@ scale: function()
         this.mMesh.style.height = h+'px';
 
 	//scale div
-        this.mDiv.mDiv.style.width = w+'px';
-        this.mDiv.mDiv.style.height = h+'px';
+        this.mDiv.mDiv.style.width = w+"px";
+        this.mDiv.mDiv.style.height = h+"px";
 	//this.log('h:' + this.mDiv.mDiv.height);
 },
 
@@ -330,8 +330,8 @@ moveGhostShape: function()
 	transVector.y = 0;
 	transVector.z = this.mServerCommandCurrent.mPosition.z;
 	
-	//this.log('x:' + transVector.x);	
-	//this.log('z:' + transVector.z);	
+	this.log('x:' + transVector.x);	
+	this.log('z:' + transVector.z);	
 	this.mGhost.setPosition(transVector);
 }
 
