@@ -173,7 +173,10 @@ Vector3D* Shape::getPosition()
 */
 getPosition: function()
 {
-	//just return mPosition for now
+	this.mPosition.x =  this.mDiv.mDiv.style.left;
+	this.mPosition.y =  0;
+	this.mPosition.z =   this.mDiv.mDiv.style.top;
+
 	return this.mPosition;
 },
 /*

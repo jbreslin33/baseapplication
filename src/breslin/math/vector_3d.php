@@ -75,11 +75,11 @@ multiply: function(num)
 	this.z = this.z * num;
 },
 
-add: function(vectorToAddtoThisOne)
+add: function(v)
 {
-	this.x = this.x + vectorToAddtoThisOne.x;
-	this.y = this.y + vectorToAddtoThisOne.y;
-	this.z = this.z + vectorToAddtoThisOne.z;
+	this.x = parseFloat(this.x) + parseFloat(v.x);
+	this.y = 0;
+	this.z = parseFloat(this.z) + parseFloat(v.z);
 },
 
 subtract: function(vectorToSubtract)
