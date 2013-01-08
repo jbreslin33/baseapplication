@@ -36,6 +36,7 @@ Game::Game()
 #endif
 	mTickLength = 32;	
 	mFrameTime  = 0;
+	mGameTime   = 0;
 	mFrameTimeLast  = 0;
 
 	//sequence
@@ -204,7 +205,8 @@ void Game::purgeShapeTable()
 void Game::frame(int msec)
 {
 	mFrameTime += msec;
-
+	mGameTime += msec;
+	
 	// is this where i should interject for browser clients?
 	//if so should i read db or a file to communicate
 	//mServer->readDB();
@@ -414,6 +416,7 @@ void Game::updateShapeTable()
 
         const char * c = query.c_str();
 	sqlQuery(c);	
+	LogString("mGameTime:%d",mGameTime);
 
 }
 
