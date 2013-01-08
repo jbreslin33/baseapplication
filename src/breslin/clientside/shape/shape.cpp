@@ -253,8 +253,8 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
        // }
 
 	
-       	LogString("x:%f",mServerCommandCurrent->mPosition->x);         
-       	LogString("z:%f",mServerCommandCurrent->mPosition->z);         
+       	//LogString("x:%f",mServerCommandCurrent->mPosition->x);         
+       	//LogString("z:%f",mServerCommandCurrent->mPosition->z);         
 
         if (mServerCommandCurrent->mFrameTime != 0) 
         {
@@ -288,6 +288,9 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
         }
 	
 	mCommandToRunOnShape->mVelocity->copyValuesFrom(mServerCommandCurrent->mVelocity);
+
+       	LogString("x:%f",mServerCommandCurrent->mVelocity->x);         
+       	LogString("z:%f",mServerCommandCurrent->mVelocity->z);         
 
         return flags;
 }
