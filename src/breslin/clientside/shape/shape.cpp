@@ -252,6 +252,10 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
                 mCommandToRunOnShape->mFrameTime = mServerCommandCurrent->mFrameTime;
        // }
 
+	
+       	LogString("x:%f",mServerCommandCurrent->mPosition->x);         
+       	LogString("z:%f",mServerCommandCurrent->mPosition->z);         
+
         if (mServerCommandCurrent->mFrameTime != 0) 
         {
                 //position

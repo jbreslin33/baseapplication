@@ -254,7 +254,10 @@ parseDeltaByteBuffer: function(shapesTable)
         this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
 	//this.log('cvx:' + this.mCommandToRunOnShape.mVelocity.x); 
 	//this.log('cvz:' + this.mCommandToRunOnShape.mVelocity.z); 
-	
+
+
+	this.log('x:' + this.mServerCommandCurrent.mPosition.x); 	
+	this.log('z:' + this.mServerCommandCurrent.mPosition.z); 	
 },
 
 getMeshString: function(meshCode)

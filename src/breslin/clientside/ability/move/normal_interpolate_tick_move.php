@@ -40,8 +40,8 @@ execute: function()
 
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);
-	this.log('x:' + transVector.x);
-	this.log('z:' + transVector.z);
+//	this.log('x:' + transVector.x);
+//	this.log('z:' + transVector.z);
         //add our velocity to current position
         transVector.add(this.mAbilityMove.mShape.getPosition());
 
