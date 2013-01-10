@@ -12,6 +12,10 @@ using namespace Ogre;
 //postgres
 #include <postgresql/libpq-fe.h>
 
+// basic file operations
+#include <iostream>
+#include <fstream>
+using namespace std;
 
 #define COMMAND_HISTORY_SIZE		64
 
@@ -53,6 +57,8 @@ static const char mMessageServerExit = 3;
 	//db
      	PGconn* mDBConnection;
 
+	//messagefile
+	ofstream mMessageFile;
 
 public:
 	Game();

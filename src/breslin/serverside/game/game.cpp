@@ -25,6 +25,7 @@
 #include <stdio.h>
 //#include <postgresql/libpq-fe.h>
 
+
 Game::Game()
 {
 	StartLog();
@@ -442,23 +443,36 @@ void Game::sendCommand(void)
 	// Fill messages..for all clients
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
+		mMessageFile.open ("message.txt");  
+
 		//standard initialize of mMessage for client in this case
 		mServer->mClientVector.at(i)->mMessage.Init(mServer->mClientVector.at(i)->mMessage.outgoingData,
 			sizeof(mServer->mClientVector.at(i)->mMessage.outgoingData));
 
 		//start filling said mMessage that belongs to client
 		mServer->mClientVector.at(i)->mMessage.WriteByte(mServer->mMessageFrame);			// type
-		mServer->mClientVector.at(i)->mMessage.WriteShort(mServer->mClientVector.at(i)->mOutgoingSequence);
+  		//add to file for browser clients	
+		mMessageFile << mServer->mMessageFrame;
+  		mMessageFile << ",";
 		
-//right here you should write the mFrameTime
-//ddddd or even above outgoing sequence
+		mServer->mClientVector.at(i)->mMessage.WriteShort(mServer->mClientVector.at(i)->mOutgoingSequence);
+  		//add to file for browser clients	
+		mMessageFile << mServer->mClientVector.at(i)->mOutgoingSequence; 
+  		mMessageFile << ",";
+	
+		//frame time	
 		mServer->mClientVector.at(i)->mMessage.WriteByte(mFrameTime);
+  		//add to file for browser clients	
+		mMessageFile << mFrameTime; 
+  		mMessageFile << ",";
 
 		//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
 		for (unsigned int j = 0; j < mShapeVector.size(); j++)
 		{                         //the client to send to's message        //the shape command it's about
 			mShapeVector.at(j)->addToMoveMessage(&mServer->mClientVector.at(i)->mMessage);
 		}
+		
+ 	 	mMessageFile.close();
 	}
 
 /*
