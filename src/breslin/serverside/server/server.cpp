@@ -319,7 +319,7 @@ void Server::readPackets()
 			mes.BeginReading();
 
 			type = mes.ReadByte();
-	
+			LogString("type:%d",type);	
 			//sequence variable			
 			signed short seq = 0;
 

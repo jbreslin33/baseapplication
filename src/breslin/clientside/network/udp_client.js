@@ -1,11 +1,15 @@
-var PORT = 33333;
+var PORT = 30004;
 var HOST = '192.168.1.101';
 
 var dgram = require('dgram');
-var message = new Buffer('My KungFu is Good!');
+//var buf = new Buffer('-101');
+var buf = new Buffer(1);
+buf.writeInt8(-101,0);
+
+
 
 var client = dgram.createSocket('udp4');
-client.send(message, 0, message.length, PORT, HOST, function(err, bytes) {
+client.send(buf, 0, buf.length, PORT, HOST, function(err, bytes) {
     if (err) throw err;
     console.log('UDP message sent to ' + HOST +':'+ PORT);
     client.close();
