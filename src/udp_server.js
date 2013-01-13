@@ -34,9 +34,13 @@ io.sockets.on('connection', function (socket)
 });
 
 
-server.on("message", function (msg, rinfo) {
-  console.log("server got: " + msg + " from " +
-    rinfo.address + ":" + rinfo.port);
+server.on("message", function (msg, rinfo)
+{
+//console.log("server got: " + msg + " from " +
+ //   rinfo.address + ":" + rinfo.port);
+
+        var type = msg.readInt8(0);
+	console.log('type:' + type);
 });
 
 server.on("listening", function () {
