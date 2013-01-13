@@ -14,6 +14,7 @@ server.on('message', function (message, remote) {
 	
     console.log(remote.address + ':' + remote.port +' - ' + type);
 
+//need to broadcast here.
 });
 
 server.bind(PORT, HOST);
