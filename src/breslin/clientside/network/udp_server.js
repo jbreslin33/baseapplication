@@ -10,7 +10,9 @@ server.on('listening', function () {
 });
 
 server.on('message', function (message, remote) {
-    console.log(remote.address + ':' + remote.port +' - ' + message);
+	var type = message.readInt8(0);
+	
+    console.log(remote.address + ':' + remote.port +' - ' + type);
 
 });
 
