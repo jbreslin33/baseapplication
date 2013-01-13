@@ -68,7 +68,7 @@ sendConnect: function()
 */
 sendConnect: function()
 {
-	this.mSocket.emit('message', '-101');
+	this.mSocket.emit('browser_message', '-101');
 },
 
 
