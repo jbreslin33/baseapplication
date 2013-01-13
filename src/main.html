@@ -1,8 +1,13 @@
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<html>
+<head>
+<title>ABC AND YOU</title>
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 <script src="http://localhost/mootools/mootools-core-1.4.5-full-compat.js"></script>
 <script src="http://localhost/breslin/clientside/application/application_breslin.php"></script>
-<script src="http://localhost/breslin/breslin/clientside/network/network.php"></script>
+<script src="http://localhost/breslin/clientside/network/network.php"></script>
 <script src="http://localhost/breslin/breslin/statemachine/state.php"></script>
 <script src="http://localhost/breslin/statemachine/state_machine.php"></script>
 <script src="http://localhost/breslin/clientside/application/states/application_global.php"></script>
@@ -29,17 +34,34 @@
 <script src="http://localhost/breslin/clientside/ability/move/ability_move_state_machine.php"></script>
 
 <script>
-	var socket = io.connect('192.168.1.101:8000');
+
+
+//var mSocket = io.connect('192.168.1.101:8000');
 </script>
 
-<!--
-<div style="float:left;width:100px;border-right:1px solid black;height:300px;padding:10px;overflow:scroll-y;">
-	<b>ROOMS</b>
-	<div id="rooms"></div>
-</div>
-<div style="float:left;width:300px;height:250px;overflow:scroll-y;padding:10px;">
-	<div id="conversation"></div>
-	<input id="data" style="width:200px;" />
-	<input type="button" id="datasend" value="send" />
-</div>
--->
+</head>
+
+<body bgcolor="grey">
+
+<script>
+
+var mApplication;
+
+window.addEvent('domready', function()
+{
+        mApplication = new ApplicationBreslin('192.168.1.100', 30004);
+
+        //input
+        document.addEvent("keydown", mApplication.keyDown);
+        document.addEvent("keyup", mApplication.keyUp);
+
+        //main loop
+        var t=setInterval("mApplication.processUpdate()",32)
+}
+
+);
+
+</script>
+</body>
+</html>
+

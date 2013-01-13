@@ -36,9 +36,12 @@ log: function(msg)
 open: function()
 {
 	//this.log('open socket on server');
+	return io.connect('192.168.1.101:8000');
+	
 },
 
 //this should call ajax function on server to send
+/*
 sendConnect: function()
 {
         var xmlhttp;
@@ -60,7 +63,11 @@ sendConnect: function()
         xmlhttp.open("POST","/breslin/clientside/network/send_connect.php",true);
         xmlhttp.send();
 },
-
+*/
+sendConnect: function()
+{
+	//this.mSocket.emit('connect', -101);
+},
 
 
 // send the move that is new 
