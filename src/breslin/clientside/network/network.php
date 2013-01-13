@@ -37,7 +37,7 @@ log: function(msg)
 // this should call ajax function on server to create a socket
 open: function()
 {
-	//this.log('open socket on server');
+	this.log('open socket on server');
 	return io.connect('192.168.1.101:8000');
 	
 },
