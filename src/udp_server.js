@@ -1,6 +1,8 @@
 var app = require('express').createServer()
 var io = require('socket.io').listen(app);
 
+var mMessage = 0;
+
 app.listen(8000);
 
 // routing
@@ -13,7 +15,21 @@ io.sockets.on('connection', function (socket)
         console.log('xxx connection');
  	socket.on('message', function(message,remote)
 	{
-        	console.log('xxx message');
+		mMessage = message;
+        	console.log('xxx message' + mMessage);
+		//send to c++ server
+		var PORT = 33333;
+		var HOST = '192.168.1.101';
+
+		var dgram = require('dgram');
+		var server = dgram.createSocket('udp4');
+	
+		var buf = new Buffer(1);
+		buf.writeInt8(-101,0);
+		server.send(buf, 0, buf.length, 30004, HOST, function(err, bytes)
+		{
+        		console.log('sent connect');
+		});
 	});
 });
 
