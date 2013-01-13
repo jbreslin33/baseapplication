@@ -15,3 +15,12 @@ server.on('message', function (message, remote) {
 });
 
 server.bind(PORT, HOST);
+
+//send connect
+var buf = new Buffer(1);
+buf.writeInt8(-101,0);
+
+server.send(buf, 0, buf.length, 30004, HOST, function(err, bytes) {
+  //client.close();
+});
+
