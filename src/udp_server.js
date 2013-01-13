@@ -19,20 +19,16 @@ io.sockets.on('connection', function (socket)
  	socket.on('browser_message', function(message,remote)
 	{
 		mMessage = message;
-        	console.log('xxx message' + mMessage);
+		
 		//send to c++ server
-		var PORT = 33333;
-		var HOST = '192.168.1.101';
-
 		var buf = new Buffer(1);
 		buf.writeInt8(-101,0);
-		server.send(buf, 0, buf.length, 30004, HOST, function(err, bytes)
+		server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
 		{
         		console.log('sent connect');
 		});
 	});
 });
-
 
 server.on("message", function (msg, rinfo)
 {
