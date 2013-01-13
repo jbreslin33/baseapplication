@@ -5,9 +5,8 @@ app.listen(8080);
 
 // routing
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
+  res.sendfile(__dirname + '/main.html');
 });
-
 
 
 var PORT = 33333;
@@ -34,8 +33,9 @@ server.bind(PORT, HOST);
 //send connect
 var buf = new Buffer(1);
 buf.writeInt8(-101,0);
-
+/*
 server.send(buf, 0, buf.length, 30004, HOST, function(err, bytes) {
 	console.log('sent connect');
 });
+*/
 
