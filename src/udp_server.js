@@ -8,11 +8,36 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/main.html');
 });
 
-app.on('connection', function ()
+io.sockets.on('connection', function (socket) 
 {
-        console.log('successfully established a working connection \o/');
+        console.log('xxx connection');
+ 	socket.on('message', function(message,remote)
+	{
+        	console.log('xxx message');
+	});
 });
 
+
+/*
+	app.on('message', function (message, remote)
+	{
+        	//var type = message.readInt8(0);
+
+        	//console.log(remote.address + ':' + remote.port +' - ' + type);
+		console.log('against the wind');
+	});
+*/
+
+//});
+/*
+app.on('message', function (message, remote)
+{
+        //var type = message.readInt8(0);
+
+        //console.log(remote.address + ':' + remote.port +' - ' + type);
+	console.log('against the wind');
+});
+*/
 
 
 
