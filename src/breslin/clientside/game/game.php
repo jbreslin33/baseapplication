@@ -86,6 +86,7 @@ processUpdate: function()
 /*********************************
                NETWORK 
 **********************************/
+/*
 checkForByteBuffer: function()
 {
 	this.mApplicationBreslin.mNetwork.getAllShapes();
@@ -124,6 +125,12 @@ checkForByteBuffer: function()
 		}
 	}
 },
+*/
+checkForByteBuffer: function()
+{
+
+},
+
 /*********************************
 *               SHAPE
 **********************************/

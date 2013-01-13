@@ -18,6 +18,8 @@ initialize: function(application,serverIP, serverPort)
 
 	this.mSocket = this.open();
 
+//	this.mSocket.emit('message', 33);
+
 	//parse
         this.mIncomingSequence = 0;
         this.mDroppedPackets = 0;
@@ -66,7 +68,7 @@ sendConnect: function()
 */
 sendConnect: function()
 {
-	//this.mSocket.emit('connect', -101);
+	this.mSocket.emit('message', '-101');
 },
 
 
