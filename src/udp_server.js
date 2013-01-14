@@ -34,6 +34,9 @@ server.on("message", function (msg, rinfo)
 {
         var type = msg.readInt8(0);
 	console.log('type:' + type);
+
+	io.sockets.emit('news', 'hello')
+
 });
 
 server.on("listening", function ()

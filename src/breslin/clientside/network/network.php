@@ -70,8 +70,13 @@ sendConnect: function()
 {
 	this.mSocket.emit('browser_message', '-101');
 },
-
-
+/*
+ 	this.mSocket.on('news', function (data)
+	{
+    		console.log(data);
+    		socket.emit('my other event', { my: 'data' });
+  	});
+*/
 // send the move that is new 
 sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
 {

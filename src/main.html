@@ -33,12 +33,6 @@
 <script src="http://localhost/breslin/clientside/ability/move/normal_interpolate_tick_move.php"></script>
 <script src="http://localhost/breslin/clientside/ability/move/ability_move_state_machine.php"></script>
 
-<script>
-
-
-//var mSocket = io.connect('192.168.1.101:8000');
-</script>
-
 </head>
 
 <body bgcolor="grey">
@@ -57,6 +51,13 @@ window.addEvent('domready', function()
 
         //main loop
         var t=setInterval("mApplication.processUpdate()",32)
+        
+	mApplication.mNetwork.mSocket.on('news', function (data)
+        {
+            //    console.log(data);
+             //   socket.emit('my other event', { my: 'data' });
+		mApplication.log('hhhhhh');
+        });
 }
 
 );
