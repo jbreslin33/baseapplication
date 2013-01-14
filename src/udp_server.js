@@ -15,7 +15,6 @@ app.get('/', function (req, res) {
 
 io.sockets.on('connection', function (socket) 
 {
-        console.log('xxx connection');
  	socket.on('browser_message', function(message,remote)
 	{
 		mMessage = message;
