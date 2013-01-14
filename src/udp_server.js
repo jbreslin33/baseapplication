@@ -32,7 +32,7 @@ io.sockets.on('connection', function (socket)
 
 server.on("message", function (msg, rinfo)
 {
-       // var type = msg.readInt8(0);
+        var type = msg.readInt8(0);
 	//console.log('type:' + type);
 
 	//let's just pass off data msg to browsers
