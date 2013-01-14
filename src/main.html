@@ -57,7 +57,8 @@ window.addEvent('domready', function()
             //    console.log(data);
              //   socket.emit('my other event', { my: 'data' });
 		var typeView = new Int8Array(data,0,1);		
-		mApplication.log('message:' + typeView[0]);
+		var outgoingSequenceView = new Int8Array(data,1,2);		
+		mApplication.log('message:' + typeView[0] + ':' + outgoingSequenceView[0]);
         });
 }
 
