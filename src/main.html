@@ -56,7 +56,7 @@ window.addEvent('domready', function()
         {
             //    console.log(data);
              //   socket.emit('my other event', { my: 'data' });
-		var typeView = new Uint32Array(data,0,1);		
+		var typeView = new Int8Array(data,0,1);		
 		mApplication.log('message:' + typeView[0]);
         });
 }
