@@ -6,7 +6,7 @@ var server = dgram.createSocket("udp4");
 
 var mMessage = 0;
 
-app.listen(8000);
+app.listen(10000);
 
 // routing
 app.get('/', function (req, res) {
