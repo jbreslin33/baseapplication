@@ -29,10 +29,43 @@ io.sockets.on('connection', function (socket)
 	});
 });
 
+
+/*
+client->mMessage.WriteByte(mIndex);
+
+        client->mMessage.WriteFloat(mSceneNode->getPosition().x);
+        client->mMessage.WriteFloat(mSceneNode->getPosition().y);
+        client->mMessage.WriteFloat(mSceneNode->getPosition().z);
+
+        client->mMessage.WriteFloat(mRotation->x);
+        client->mMessage.WriteFloat(mRotation->z);
+
+        //mesh
+        client->mMessage.WriteByte(mMeshCode);
+
+        //animation
+        client->mMessage.WriteByte(mAnimated);
+
+*/
 server.on("message", function (msg, rinfo)
 {
-        var type = msg.readInt8(0);
-	//console.log('type:' + type);
+        var type   = msg.readInt8(0);
+	
+	//add shape
+	if (type == -103)
+	{ 
+        	var client = msg.readInt8(1);
+        	var index = msg.readInt8(2);
+        	var xpos = msg.readFloatBE(3);
+        	var ypos = msg.readFloatBE(4);
+		console.log('t:' + type + 'c:' + client + 'i:' + index + 'x:' + xpos + 'y:' + ypos);
+	}
+
+	if (type == 1)
+	{
+
+
+	}
 
 	//let's just pass off data msg to browsers
 	io.sockets.emit('news', msg)
