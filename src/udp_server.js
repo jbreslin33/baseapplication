@@ -60,7 +60,11 @@ server.on("message", function (msg, rinfo)
         	var xpos   = msg.readFloatLE(3);
         	var ypos   = msg.readFloatLE(7);
         	var zpos   = msg.readFloatLE(11);
-		console.log('t:' + type + 'c:' + client + 'i:' + index + 'x:' + xpos + 'y:' + ypos + 'z:' + zpos);
+        	var xrot   = msg.readFloatLE(15);
+        	var zrot   = msg.readFloatLE(19);
+        	var mesh   = msg.readInt8(23);
+        	var anim   = msg.readInt8(24);
+		console.log('t:' + type + 'c:' + client + 'i:' + index + 'x:' + xpos + 'y:' + ypos + 'z:' + zpos + 'x:' + xrot + 'z:' + zrot + 'm:' + mesh + 'a:' + anim);
 	}
 
 	if (type == 1)
