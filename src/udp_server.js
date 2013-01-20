@@ -54,11 +54,13 @@ server.on("message", function (msg, rinfo)
 	//add shape
 	if (type == -103)
 	{ 
+		console.log('length:' + msg.length);
         	var client = msg.readInt8(1);
-        	var index = msg.readInt8(2);
-        	var xpos = msg.readFloatLE(3);
-        	var ypos = msg.readFloatLE(4);
-		console.log('t:' + type + 'c:' + client + 'i:' + index + 'x:' + xpos + 'y:' + ypos);
+        	var index  = msg.readInt8(2);
+        	var xpos   = msg.readFloatLE(3);
+        	var ypos   = msg.readFloatLE(7);
+        	var zpos   = msg.readFloatLE(11);
+		console.log('t:' + type + 'c:' + client + 'i:' + index + 'x:' + xpos + 'y:' + ypos + 'z:' + zpos);
 	}
 
 	if (type == 1)
