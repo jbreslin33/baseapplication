@@ -74,6 +74,8 @@ function unpack(str) {
  
 	mApplication.mNetwork.mSocket.on('news', function (data)
         {
+		mApplication.log('datastring:' + data);
+/*
 var mask = 1 << 7;
 if (data[0] & mask != 0) {
   // bit is set
@@ -82,6 +84,7 @@ if (data[0] & mask != 0) {
   // bit is not set
 			mApplication.log('nobit');
 }
+*/
 /*
 		var char = data[i] << 8;
 		var a = ~data[0];

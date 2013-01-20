@@ -68,7 +68,8 @@ server.on("message", function (msg, rinfo)
 	}
 
 	//let's just pass off data msg to browsers
-	io.sockets.emit('news', msg)
+	var datastring = type + "," + client + "," + index + "," + xpos + "'" + ypos; 
+	io.sockets.emit('news', datastring)
 
 });
 
