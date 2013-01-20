@@ -53,57 +53,14 @@ window.addEvent('domready', function()
         //main loop
         var t=setInterval("mApplication.processUpdate()",32)
        
-
-function pack(bytes) {
-    var chars = [];
-    for(var i = 0, n = bytes.length; i < n;) {
-        chars.push(((bytes[i++] & 0xff) << 8) | (bytes[i++] & 0xff));
-    }
-    return String.fromCharCode.apply(null, chars);
-}
-
-function unpack(str) {
-    var bytes = [];
-    for(var i = 0, n = str.length; i < n; i++) {
-        var char = str.charCodeAt(i);
-        bytes.push(char >>> 8, char & 0xFF);
-    }
-    return bytes;
-}
-
- 
 	mApplication.mNetwork.mSocket.on('news', function (data)
         {
-		mApplication.log('datastring:' + data);
-/*
-var mask = 1 << 7;
-if (data[0] & mask != 0) {
-  // bit is set
-			mApplication.log('yesbit');
-} else {
-  // bit is not set
-			mApplication.log('nobit');
-}
-*/
-/*
-		var char = data[i] << 8;
-		var a = ~data[0];
-		var b = a>>1;
-		mApplication.log('a:' + a);
-		mApplication.log('b:' + b);
-		mApplication.log('char:' + char);
-*/		
-/*
-		if (data[0] == -101)
+		var myArray = data.split(','); 
+		if (myArray[0] == -103)
 		{
-			mApplication.log('message:' + data[0]);
+			mApplication.log('yeah baby');
+			
 		}
-*/
-            //    console.log(data);
-             //   socket.emit('my other event', { my: 'data' });
-	//	var typeView = new Int8Array(data,0,1);		
-	//	var outgoingSequenceView = new Int8Array(data,1,2);		
-	//	mApplication.log('message:' + typeView[0] + ':' + outgoingSequenceView[0]);
         });
 }
 
