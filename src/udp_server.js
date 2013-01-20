@@ -65,6 +65,10 @@ server.on("message", function (msg, rinfo)
         	var mesh   = msg.readInt8(23);
         	var anim   = msg.readInt8(24);
 		console.log('t:' + type + 'c:' + client + 'i:' + index + 'x:' + xpos + 'y:' + ypos + 'z:' + zpos + 'x:' + xrot + 'z:' + zrot + 'm:' + mesh + 'a:' + anim);
+	
+		//let's just pass off data msg to browsers
+		var datastring = type + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
+		io.sockets.emit('news', datastring)
 	}
 
 	if (type == 1)
@@ -73,9 +77,6 @@ server.on("message", function (msg, rinfo)
 
 	}
 
-	//let's just pass off data msg to browsers
-	var datastring = type + "," + client + "," + index + "," + xpos + "," + ypos; 
-	io.sockets.emit('news', datastring)
 
 });
 
