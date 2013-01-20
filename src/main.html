@@ -3,7 +3,6 @@
 <head>
 <title>ABC AND YOU</title>
 
-<script src="http://192.168.1.101/typedarray.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 <script src="http://192.168.1.101/mootools/mootools-core-1.4.5-full-compat.js"></script>
@@ -55,11 +54,10 @@ window.addEvent('domready', function()
        
 	mApplication.mNetwork.mSocket.on('news', function (data)
         {
-		var myArray = data.split(','); 
-		if (myArray[0] == -103)
+		var a = data.split(','); 
+		if (a[0] == -103)
 		{
-			mApplication.log('yeah baby');
-			
+			mApplication.log('t:' + a[0] + 'c:' + a[1] + 'i:' + a[2] + 'x:' + a[3] + 'y:' + a[4]);
 		}
         });
 }

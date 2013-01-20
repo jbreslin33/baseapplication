@@ -56,8 +56,8 @@ server.on("message", function (msg, rinfo)
 	{ 
         	var client = msg.readInt8(1);
         	var index = msg.readInt8(2);
-        	var xpos = msg.readFloatBE(3);
-        	var ypos = msg.readFloatBE(4);
+        	var xpos = msg.readFloatLE(3);
+        	var ypos = msg.readFloatLE(4);
 		console.log('t:' + type + 'c:' + client + 'i:' + index + 'x:' + xpos + 'y:' + ypos);
 	}
 
