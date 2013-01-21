@@ -209,7 +209,7 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
                 Shape* shape = NULL;
                 shape = getShape(id);
 
-				if (shape)
+		if (shape)
                 {
                         shape->processDeltaByteBuffer(byteBuffer);
                 }

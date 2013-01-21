@@ -29,24 +29,6 @@ io.sockets.on('connection', function (socket)
 	});
 });
 
-
-/*
-client->mMessage.WriteByte(mIndex);
-
-        client->mMessage.WriteFloat(mSceneNode->getPosition().x);
-        client->mMessage.WriteFloat(mSceneNode->getPosition().y);
-        client->mMessage.WriteFloat(mSceneNode->getPosition().z);
-
-        client->mMessage.WriteFloat(mRotation->x);
-        client->mMessage.WriteFloat(mRotation->z);
-
-        //mesh
-        client->mMessage.WriteByte(mMeshCode);
-
-        //animation
-        client->mMessage.WriteByte(mAnimated);
-
-*/
 server.on("message", function (msg, rinfo)
 {
         var type   = msg.readInt8(0);
@@ -73,7 +55,8 @@ server.on("message", function (msg, rinfo)
 
 	if (type == 1)
 	{
-
+        	var seq = msg.readUInt16LE(1);
+		console.log('seq:' + seq);	
 
 	}
 
