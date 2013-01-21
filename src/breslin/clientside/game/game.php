@@ -148,9 +148,10 @@ addShape: function(byteBuffer)
 
 },
 
-readServerTick: function()
+readServerTick: function(byteBuffer)
 {
-	//this.processDeltaByteBuffer(byteBuffer);
+	this.processDeltaByteBuffer(byteBuffer);
+	this.log('proc');
 },
 
 /*

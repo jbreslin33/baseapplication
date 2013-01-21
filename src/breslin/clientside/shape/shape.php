@@ -246,28 +246,14 @@ Shape::translate(Vector3D* translateVector, int perspective)
 
 setPosition: function(position)
 {
- //set a member position because we are going to have to modify the div's position
-	this.log('x:' + position.x);
-	this.log('y:' + position.y);
-	this.log('z:' + position.z);
-
-        this.mPosition.x = position.x;
-        this.mPosition.z = position.z;
-
+	//set a member position because we are going to have to modify the div's position
         modx = position.x+"px"; 
         mody = position.z+"px"; 
         
         this.mDiv.mDiv.style.left = modx;
         this.mDiv.mDiv.style.top = mody;
-	//set a member position because we are going to have to modify the div's position
-/*
-	modx = position.x+'px'; 
-	mody = position.z+'px'; 
-       	
-	this.mDiv.mDiv.style.left = modx;
-      	this.mDiv.mDiv.style.top = mody;
-*/
 },
+
 /*
 Vector3D* Shape::getPosition()
 {
@@ -278,6 +264,7 @@ Vector3D* Shape::getPosition()
         return position;
 }
 */
+
 getPosition: function()
 {
 	x = this.mDiv.mDiv.style.left;
@@ -291,12 +278,11 @@ getPosition: function()
 
 	return v;
 },
-/*
-void Shape::setVisible(bool visible)
+
+setVisible: function(b)
 {
-        getSceneNode()->setVisible(visible);
-}
-*/
+
+},
 
 /*********************************
                 SPAWN
@@ -349,20 +335,36 @@ spawnShape: function(position)
 
 	v = new Vector3D();	
 	this.scale(v);
-
 },
 /*********************************
                 DELTA
 ******************************/
-
-processDeltaByteBuffer: function(shapesTable)
+/*
+void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 {
- 	this.parseDeltaByteBuffer(shapesTable);
+        clearTitle(); //empty title string so it can be filled anew
+
+        parseDeltaByteBuffer(byteBuffer);
+
+        //process ticks on abilitys
+        for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+        {
+                mAbilityVector.at(i)->processTick();
+        }
+
+        //run billboard here for now.
+        drawTitle();
+}
+*/
+processDeltaByteBuffer: function(byteBuffer)
+{
+ 	this.parseDeltaByteBuffer(byteBuffer);
         this.mAbilityVector[0].processTick();
 },
 
-parseDeltaByteBuffer: function(shapesTable)
+parseDeltaByteBuffer: function(byteBuffer)
 {
+/*
 	byteBuffer.beginReading();
 
 	moveXChanged = true;
@@ -393,8 +395,116 @@ parseDeltaByteBuffer: function(shapesTable)
 //	this.log('z:' + this.mServerCommandCurrent.mPosition.z); 	
 	//this.log('x:' + this.mServerCommandCurrent.mVelocity.x); 	
 	//this.log('z:' + this.mServerCommandCurrent.mVelocity.z); 	
+*/
 },
+/*
 
+int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
+{
+        int flags = 0;
+
+        bool moveXChanged = true;
+        bool moveYChanged = true;
+        bool moveZChanged = true;
+
+        // Flags
+        flags = mes->ReadByte();
+
+        // Origin
+        if(flags & mCommandOriginX)
+        {
+                mServerCommandLast->mPosition->x = mServerCommandCurrent->mPosition->x;
+                mServerCommandCurrent->mPosition->x = mes->ReadFloat();         
+        }
+        else
+        {
+                moveXChanged = false;
+        }
+
+        if(flags & mCommandOriginY)
+        {
+                mServerCommandLast->mPosition->y = mServerCommandCurrent->mPosition->y;
+                mServerCommandCurrent->mPosition->y = mes->ReadFloat();
+        }
+        else
+        {
+                moveYChanged = false;
+        }
+
+        if(flags & mCommandOriginZ)
+        {
+                mServerCommandLast->mPosition->z = mServerCommandCurrent->mPosition->z;
+                mServerCommandCurrent->mPosition->z = mes->ReadFloat(); 
+        }
+        else
+        {
+                moveZChanged = false;
+        }
+
+        //rotation
+        if(flags & mCommandRotationX)
+        {
+                mServerCommandLast->mRotation->x = mServerCommandCurrent->mRotation->x;
+                mServerCommandCurrent->mRotation->x = mes->ReadFloat();
+        }
+
+        if(flags & mCommandRotationZ)
+        {
+                mServerCommandLast->mRotation->z = mServerCommandCurrent->mRotation->z;
+                mServerCommandCurrent->mRotation->z = mes->ReadFloat();
+        }
+
+        //frame time
+       // if (flags & mApplicationBreslin->mGame->mCommandFrameTime)
+        //{
+                mServerCommandCurrent->mFrameTime = mApplicationBreslin->mGame->mFrameTimeServer;
+                mCommandToRunOnShape->mFrameTime = mServerCommandCurrent->mFrameTime;
+       // }
+
+	
+       	//LogString("x:%f",mServerCommandCurrent->mPosition->x);         
+       	//LogString("z:%f",mServerCommandCurrent->mPosition->z);         
+
+        if (mServerCommandCurrent->mFrameTime != 0) 
+        {
+                //position
+                if (moveXChanged)
+                {
+                        mServerCommandCurrent->mVelocity->x = mServerCommandCurrent->mPosition->x - mServerCommandLast->mPosition->x;
+	       }
+                else
+                {
+                        mServerCommandCurrent->mVelocity->x = 0.0;
+                }
+                
+                if (moveYChanged)
+                {
+                        mServerCommandCurrent->mVelocity->y = mServerCommandCurrent->mPosition->y - mServerCommandLast->mPosition->y;
+                }
+                else
+                {
+                        mServerCommandCurrent->mVelocity->y = 0.0;
+                }
+
+                if (moveZChanged)
+                {
+                        mServerCommandCurrent->mVelocity->z = mServerCommandCurrent->mPosition->z - mServerCommandLast->mPosition->z;
+                }
+                else
+                {
+                        mServerCommandCurrent->mVelocity->z = 0.0;
+                }
+        }
+	
+	mCommandToRunOnShape->mVelocity->copyValuesFrom(mServerCommandCurrent->mVelocity);
+
+       //	LogString("x:%f",mServerCommandCurrent->mVelocity->x);         
+       	//LogString("z:%f",mServerCommandCurrent->mVelocity->z);         
+
+        return flags;
+}
+
+*/
 getMeshString: function(meshCode)
 {
         if (meshCode == 0)
