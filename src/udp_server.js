@@ -55,8 +55,10 @@ server.on("message", function (msg, rinfo)
 
 	if (type == 1)
 	{
-        	var seq = msg.readUInt16LE(1);
-		console.log('seq:' + seq);	
+        	var s = msg.readUInt16LE(1);
+        	var f = msg.readInt8(3);
+		console.log('s:' + s);	
+		console.log('f:' + f);	
 
 	}
 
