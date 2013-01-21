@@ -55,10 +55,72 @@ server.on("message", function (msg, rinfo)
 
 	if (type == 1)
 	{
+		
+		//constants
+		mCommandOriginX      = 4;
+		mCommandOriginY      = 8;
+		mCommandOriginZ      = 16;
+		mCommandRotationX    = 32;
+		mCommandRotationZ    = 64;
+
+
         	var s = msg.readUInt16LE(1);
-        	var f = msg.readInt8(3);
-		console.log('s:' + s);	
-		console.log('f:' + f);	
+		var dataString = s;  
+        	
+		var f = msg.readInt8(3);
+		dataString = dataString + f;
+		
+		var id = msg.readInt8(4);
+		dataString = dataString + id;
+		
+		var flags = msg.readInt8(5);
+		dataString = dataString + flags;
+
+        	// Origin
+        	if(flags & mCommandOriginX)
+        	{
+                	//mServerCommandLast->mPosition->x = mServerCommandCurrent->mPosition->x;
+                	//mServerCommandCurrent->mPosition->x = mes->ReadFloat();
+        		var xpos   = msg.readFloatLE(6);
+			dataString
+        	}
+        	else
+        	{
+                	moveXChanged = false;
+        	}
+
+        	if(flags & mCommandOriginY)
+        	{
+                	mServerCommandLast->mPosition->y = mServerCommandCurrent->mPosition->y;
+                	mServerCommandCurrent->mPosition->y = mes->ReadFloat();
+        	}
+        	else
+        	{
+                	moveYChanged = false;
+        	}
+
+        	if(flags & mCommandOriginZ)
+        	{
+                	mServerCommandLast->mPosition->z = mServerCommandCurrent->mPosition->z;
+                	mServerCommandCurrent->mPosition->z = mes->ReadFloat();
+        	}
+        	else
+        	{
+                	moveZChanged = false;
+        	}
+
+        	//rotation
+        	if(flags & mCommandRotationX)
+        	{
+                	mServerCommandLast->mRotation->x = mServerCommandCurrent->mRotation->x;
+                	mServerCommandCurrent->mRotation->x = mes->ReadFloat();
+        	}
+
+        	if(flags & mCommandRotationZ)
+        	{
+                	mServerCommandLast->mRotation->z = mServerCommandCurrent->mRotation->z;
+                	mServerCommandCurrent->mRotation->z = mes->ReadFloat();
+        	}
 
 	}
 
