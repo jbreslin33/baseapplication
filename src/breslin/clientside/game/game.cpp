@@ -105,7 +105,7 @@ void Game::processUpdate()
 /*********************************
 *		SHAPE
 **********************************/
-void Game::addShape(bool b, ByteBuffer* byteBuffer)
+void Game::addShape(ByteBuffer* byteBuffer)
 {
 	Shape* shape = new Shape(mApplicationBreslin,byteBuffer,false);  //you should just need to call this...
 
@@ -176,7 +176,7 @@ void Game::checkForByteBuffer()
                 switch(type)
                 {
                         case mMessageAddShape:
-                        	addShape(true,byteBuffer);
+                        	addShape(byteBuffer);
                         break;
 
                         case mMessageRemoveShape:

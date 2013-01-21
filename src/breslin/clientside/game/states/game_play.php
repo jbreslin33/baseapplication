@@ -6,6 +6,14 @@ initialize: function(game)
 	this.mGame = game; 
 },
 
+log: function(msg)
+{
+        setTimeout(function()
+        {
+                throw new Error(msg);
+        }, 0);
+},
+
 enter: function()
 {
 
@@ -18,9 +26,11 @@ execute: function()
 
         //network outgoing
         this.mGame.sendByteBuffer();
+	
 
-	/********** let's try to do this with delay *****/
-       	if (this.mGame.mPollDelayCounter > this.mGame.mPollDelay)
+	//don't need to do this as it's being done in main.html
+       	/*	
+	if (this.mGame.mPollDelayCounter > this.mGame.mPollDelay)
 	{ 
 		//network ingoing
         	this.mGame.checkForByteBuffer();
@@ -30,7 +40,7 @@ execute: function()
 	}
 	
 	this.mGame.mPollDelayCounter++;	
-
+	*/
 
 },
 

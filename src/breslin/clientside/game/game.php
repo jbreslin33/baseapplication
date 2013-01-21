@@ -134,28 +134,19 @@ checkForByteBuffer: function()
 /*********************************
 *               SHAPE
 **********************************/
-
-addShape: function(shapesTable,i)
+addShape: function(byteBuffer)
 {
-	this.log('create missing shape');
-       	//create this...
-       	id     = shapesTable.rows.item(i).cells.item(0).innerHTML;
-        client = shapesTable.rows.item(i).cells.item(5).innerHTML;
-        x      = shapesTable.rows.item(i).cells.item(6).innerHTML;
-        z      = shapesTable.rows.item(i).cells.item(7).innerHTML;
-        rx     = shapesTable.rows.item(i).cells.item(8).innerHTML;
-       	rz     = shapesTable.rows.item(i).cells.item(9).innerHTML;
-        m      = shapesTable.rows.item(i).cells.item(10).innerHTML;
-        a      = shapesTable.rows.item(i).cells.item(11).innerHTML;
+	shape = new Shape(this.mApplicationBreslin,byteBuffer,false);
 
-        shape = new Shape(this.mApplicationBreslin,false,id,client,x,z,rx,rz,m,a);
-	abilityMove = new AbilityMove(shape);
-	shape.addAbility(abilityMove);
-       	this.mShapeVector.push(shape);
-       	this.mShapeGhostVector.push(shape.mGhost);
+	//ability
+        abilityMove = new AbilityMove(shape);
+        shape.addAbility(abilityMove);
+        
+	//put shape and ghost in game vectors so they can be looped and game now knows of them.
+        this.mShapeVector.push(shape);
+        this.mShapeGhostVector.push(shape.mGhost);
 
 },
-
 
 readServerTick: function()
 {

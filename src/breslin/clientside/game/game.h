@@ -107,7 +107,7 @@ void processInput();
 private:
 
 //shape
-virtual void addShape       (bool b, ByteBuffer* byteBuffer);
+virtual void addShape       (ByteBuffer* byteBuffer);
 void removeShape    (ByteBuffer* byteBuffer);
 Shape* getShape(int id);
 

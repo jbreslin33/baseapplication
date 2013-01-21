@@ -105,7 +105,6 @@ Ability* Shape::getAbility(Ability* ability)
 
 void Shape::processSpawnByteBuffer(ByteBuffer* byteBuffer)
 {
-
 	parseSpawnByteBuffer(byteBuffer);
 	spawnShape(mSpawnPosition);
 }

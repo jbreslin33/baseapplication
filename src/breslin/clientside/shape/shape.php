@@ -3,8 +3,102 @@ var Shape = new Class(
 
 //Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGhost);
 //this.mApplicationBreslin,false,index,client,x,z,rx,rz,m,a)
-initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
+initialize: function(applicationBreslin, byteBuffer, isGhost)
 {
+ 	this.mIsGhost = isGhost;
+	this.mAnimate = false;
+	this.mName = 0;
+	
+	//div
+	this.mDiv = 0;
+	this.mPosition = new Vector3D();
+	
+	//abilitys
+	this.mAbilityVector = new Array();
+
+        //applicationBreslin
+        this.mApplicationBreslin = applicationBreslin;
+
+        //commands
+        this.mServerCommandLast    = new Command();
+        this.mServerCommandCurrent = new Command();
+        this.mCommandToRunOnShape  = new Command();
+
+        //speed
+        this.mSpeed = 0.0;
+        this.mSpeedMax  = 1.66;
+
+        this.mVelocity = new Vector3D();
+
+        //spawn orientation
+        this.mSpawnPosition     = new Vector3D();
+        this.mSpawnRotation     = new Vector3D();
+
+        //process Spawn ByteBuffer
+        this.processSpawnByteBuffer(byteBuffer);
+        
+	//animation
+        if (this.mAnimate)
+        {
+                //this.addAbility(new AbilityAnimationOgre(this));
+        }
+
+        this.setupTitle();
+
+        //ghost
+        this.mGhost = 0;
+
+        if (!this.mIsGhost)
+        {
+                //create a ghost for this shape
+                this.mGhost = new Shape(this.mApplicationBreslin,byteBuffer,true);
+                this.mGhost.setVisible(false);
+        }
+
+/*
+ 	mIsGhost = isGhost;
+
+        //applicationBreslin
+        mApplicationBreslin = applicationBreslin;
+
+        //commands
+        mServerCommandLast    = new Command();
+        mServerCommandCurrent = new Command();
+        mCommandToRunOnShape  = new Command();
+        //speed
+        mSpeed = 0.0f;
+        mSpeedMax  = 1.66f;
+
+        mVelocity = new Vector3D();
+
+        //spawn orientation
+        mSpawnPosition     = new Vector3D();
+        mSpawnRotation     = new Vector3D();
+
+        //process Spawn ByteBuffer
+        processSpawnByteBuffer(byteBuffer);
+
+        //animation
+        if (mAnimate)
+        {
+                addAbility(new AbilityAnimationOgre(this));
+        }
+
+        setupTitle();
+
+        //ghost
+        mGhost = NULL;
+
+        if (!mIsGhost)
+        {
+                //create a ghost for this shape
+                mGhost = new Shape(mApplicationBreslin,byteBuffer,true);
+                mGhost->setVisible(false);
+        }
+
+*/
+
+/*
 	this.log('createShape');
 
 	//let's deal with mIndex first and animate as it appears this is done later
@@ -91,6 +185,7 @@ initialize: function(applicationBreslin, isGhost,index,client,x,z,rx,rz,m,a)
 		this.mGhost = new Shape(this.mApplicationBreslin,true,index,client,x,z,rx,rz,m,a)
                 this.mGhost.setVisible(false);
         }
+*/
 },
 
 log: function(msg)
@@ -151,15 +246,27 @@ Shape::translate(Vector3D* translateVector, int perspective)
 
 setPosition: function(position)
 {
-	//set a member position because we are going to have to modify the div's position
-	this.mPosition.x = position.x;
-	this.mPosition.z = position.z;
+ //set a member position because we are going to have to modify the div's position
+	this.log('x:' + position.x);
+	this.log('y:' + position.y);
+	this.log('z:' + position.z);
 
-	modx = position.x+"px"; 
-	mody = position.z+"px"; 
+        this.mPosition.x = position.x;
+        this.mPosition.z = position.z;
+
+        modx = position.x+"px"; 
+        mody = position.z+"px"; 
+        
+        this.mDiv.mDiv.style.left = modx;
+        this.mDiv.mDiv.style.top = mody;
+	//set a member position because we are going to have to modify the div's position
+/*
+	modx = position.x+'px'; 
+	mody = position.z+'px'; 
        	
 	this.mDiv.mDiv.style.left = modx;
       	this.mDiv.mDiv.style.top = mody;
+*/
 },
 /*
 Vector3D* Shape::getPosition()
@@ -173,11 +280,16 @@ Vector3D* Shape::getPosition()
 */
 getPosition: function()
 {
-	this.mPosition.x =  this.mDiv.mDiv.style.left;
-	this.mPosition.y =  0;
-	this.mPosition.z =   this.mDiv.mDiv.style.top;
+	x = this.mDiv.mDiv.style.left;
+	y = 0; 
+        z = this.mDiv.mDiv.style.top;
 
-	return this.mPosition;
+	x = x.replace(/\D/g,'');	
+	z = z.replace(/\D/g,'');	
+	
+	v = new Vector3D(x,y,z);
+
+	return v;
 },
 /*
 void Shape::setVisible(bool visible)
@@ -189,21 +301,38 @@ void Shape::setVisible(bool visible)
 /*********************************
                 SPAWN
 ******************************/
-
 processSpawnByteBuffer: function(byteBuffer)
 {
         this.parseSpawnByteBuffer(byteBuffer);
-        //this.spawnShape(mSpawnPosition);
+        this.spawnShape(this.mSpawnPosition);
 },
 
 parseSpawnByteBuffer: function(byteBuffer)
 {
-
+	this.mLocal           = byteBuffer[1];
+	this.mIndex           = byteBuffer[2];
+	this.mSpawnPosition.x = byteBuffer[3];
+	this.mSpawnPosition.y = byteBuffer[4];
+	this.mSpawnPosition.z = byteBuffer[5];
+	this.mSpawnRotation.x = byteBuffer[6];
+	this.mSpawnRotation.z = byteBuffer[7];
+	this.mMeshName        = byteBuffer[8];
+	this.mAnimate         = byteBuffer[9];
+        
+	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
+        this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
+        this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
 },
 
 spawnShape: function(position)
 {
-	//create the movable div that will be used to move image around.
+     	if (this.mIsGhost)
+        {
+                this.mIndex = this.mIndex * -1;
+        }
+        this.mName         = this.mIndex;
+	
+	//create the movable div that will be used to move image around. c++ this is the sceneNode
         this.mDiv = new Div(this);
 
 	this.mSrc = this.mMeshName;
@@ -217,8 +346,9 @@ spawnShape: function(position)
         }
         //back to div
         this.mDiv.mDiv.appendChild(this.mMesh);
-	
-	this.scale();
+
+	v = new Vector3D();	
+	this.scale(v);
 
 },
 /*********************************
