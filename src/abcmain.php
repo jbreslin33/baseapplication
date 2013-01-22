@@ -1,6 +1,3 @@
-<?php
-$_GET["ip"]
-?>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 <html>
 <head>
