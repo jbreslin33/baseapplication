@@ -22,7 +22,7 @@ io.sockets.on('connection', function (socket)
 		//send to c++ server
 		var buf = new Buffer(1);
 		buf.writeInt8(-101,0);
-		server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
+		server.send(buf, 0, buf.length, 30004, '192.168.2.77', function(err, bytes)
 		{
         		console.log('sent connect');
 		});
