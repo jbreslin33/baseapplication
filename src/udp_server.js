@@ -43,6 +43,7 @@ server.on("message", function (msg, rinfo)
 	var length = msg.length;
 	var count = 0;
 
+	//type
         var type   = msg.readInt8(count);
 	var dataString = type;  
 
@@ -83,20 +84,24 @@ server.on("message", function (msg, rinfo)
 		
 			dataString = type;  
 
+			//sequence
         		dataString = dataString + "," + msg.readUInt16LE(count);
 			count = count + 2;
-        	
+        
+			//frametime			
 			dataString = dataString + "," + msg.readInt8(count);
 			count++;
-		
+	
+			//index(id)	
 			dataString = dataString + "," +  msg.readInt8(count);
 			count++;
-		
-			dataString = dataString + "," +  msg.readInt8(count);
+	
+			//flag	
+			flags = msg.readInt8(count);
+			dataString = dataString + "," + flags;
 			count++;
 
         		// Origin
-/*
         		if(flags & mCommandOriginX)
         		{
         			dataString = dataString + "," + msg.readFloatLE(count);
@@ -139,7 +144,7 @@ server.on("message", function (msg, rinfo)
         			dataString = dataString + "," + msg.readFloatLE(count);
 				count = count + 4;
         		}
-*/
+		
 		//} //end if
 		console.log("dataString:" + dataString);	
 		io.sockets.emit('news', datastring)
