@@ -73,8 +73,8 @@ server.on("message", function (msg, rinfo)
 	{
 
 
-		//while(count < length)
-		//{
+		while(count < length)
+		{
 			
 			var flags = 0;
 
@@ -145,7 +145,7 @@ server.on("message", function (msg, rinfo)
 				count = count + 4;
         		}
 		
-		//} //end if
+		} //end if
 		console.log("dataString:" + dataString);	
 		io.sockets.emit('news', datastring)
 
