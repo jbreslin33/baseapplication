@@ -22,6 +22,7 @@ else
 {
 	console.log('no ip match');
 }
+
 io.sockets.on('connection', function (socket) 
 {
  	socket.on('browser_message', function(message,remote)
