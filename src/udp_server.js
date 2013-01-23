@@ -70,8 +70,13 @@ server.on("message", function (msg, rinfo)
 
 	if (type == 1)
 	{
-		while(count < length)
-		{
+
+
+		//while(count < length)
+		//{
+			
+			var flags = 0;
+
         		moveXChanged = true;
         		moveYChanged = true;
         		moveZChanged = true;
@@ -91,6 +96,7 @@ server.on("message", function (msg, rinfo)
 			count++;
 
         		// Origin
+/*
         		if(flags & mCommandOriginX)
         		{
         			dataString = dataString + "," + msg.readFloatLE(count);
@@ -133,8 +139,8 @@ server.on("message", function (msg, rinfo)
         			dataString = dataString + "," + msg.readFloatLE(count);
 				count = count + 4;
         		}
-
-		} //end if
+*/
+		//} //end if
 		console.log("dataString:" + dataString);	
 		io.sockets.emit('news', datastring)
 

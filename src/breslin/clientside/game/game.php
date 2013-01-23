@@ -79,7 +79,7 @@ processUpdate: function()
 
 	for (i = 0; i < this.mShapeVector.length; i++)
 	{
-		this.mShapeVector[i].interpolateTick(this.mApplicationBreslin.getRenderTime());
+		//this.mShapeVector[i].interpolateTick(this.mApplicationBreslin.getRenderTime());
 	}
 },
 
