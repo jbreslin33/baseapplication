@@ -10,10 +10,18 @@ var mMessage = 0;
 app.listen(10000);
 
 // routing
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/main.html');
-});
-
+if (ip == '192.168.2.234')
+{
+	console.log('ip match with tp');
+	app.get('/', function (req, res) 
+	{
+  		res.sendfile(__dirname + '/tp.html');
+	});
+}
+else
+{
+	console.log('no ip match');
+}
 io.sockets.on('connection', function (socket) 
 {
  	socket.on('browser_message', function(message,remote)
