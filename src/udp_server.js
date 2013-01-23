@@ -1,4 +1,3 @@
-var ip = process.argv[2];
 var app = require('express').createServer()
 var io = require('socket.io').listen(app);
 
@@ -9,19 +8,11 @@ var mMessage = 0;
 
 app.listen(10000);
 
-// routing
-if (ip == '192.168.2.234')
-{
 	console.log('ip match with tp');
 	app.get('/', function (req, res) 
 	{
-  		res.sendfile(__dirname + '/tp.html');
+  		res.sendfile(__dirname + '/main.html');
 	});
-}
-else
-{
-	console.log('no ip match');
-}
 
 io.sockets.on('connection', function (socket) 
 {
@@ -32,7 +23,7 @@ io.sockets.on('connection', function (socket)
 		//send to c++ server
 		var buf = new Buffer(1);
 		buf.writeInt8(-101,0);
-		server.send(buf, 0, buf.length, 30004, ip, function(err, bytes)
+		server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
 		{
         		console.log('sent connect');
 		});
