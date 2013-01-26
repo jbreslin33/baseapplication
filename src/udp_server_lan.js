@@ -11,7 +11,7 @@ app.listen(10000);
 	console.log('ip match with tp');
 	app.get('/', function (req, res) 
 	{
-  		res.sendfile(__dirname + '/main.html');
+  		res.sendfile(__dirname + '/main_lan.html');
 	});
 
 io.sockets.on('connection', function (socket) 
