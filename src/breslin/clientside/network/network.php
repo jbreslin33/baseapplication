@@ -38,7 +38,8 @@ log: function(msg)
 open: function()
 {
 	this.log('open socket on server');
-	return io.connect('71.23.229.73:10000');
+	//return io.connect('71.23.229.73:10000');
+	return io.connect('192.168.1.101:10000');
 	
 },
 

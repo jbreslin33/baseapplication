@@ -74,37 +74,44 @@ server.on("message", function (msg, rinfo)
 
 	if (type == 1)
 	{
+		console.log('length:' + msg.length);
+		
+		//sequence
+        	dataString = dataString + "," + msg.readUInt16LE(count);
+		count = count + 2;
+       		console.log('count:' + count); 
+
+		//frametime			
+		dataString = dataString + "," + msg.readInt8(count);
+		count++;
+       		console.log('count:' + count); 
+	
+	
 		while(count < length)
 		{
-			
 			var flags = 0;
 
         		moveXChanged = true;
         		moveYChanged = true;
         		moveZChanged = true;
 		
-			//sequence
-        		dataString = dataString + "," + msg.readUInt16LE(count);
-			count = count + 2;
-        
-			//frametime			
-			dataString = dataString + "," + msg.readInt8(count);
-			count++;
-	
 			//index(id)	
 			dataString = dataString + "," +  msg.readInt8(count);
 			count++;
+       			console.log('count:' + count); 
 	
 			//flag	
 			flags = msg.readInt8(count);
 			dataString = dataString + "," + flags;
 			count++;
+       			console.log('count:' + count); 
 
         		// Origin
         		if(flags & mCommandOriginX)
         		{
         			dataString = dataString + "," + msg.readFloatLE(count);
 				count = count + 4;
+       				console.log('count:' + count); 
         		}
         		else
         		{
@@ -115,6 +122,7 @@ server.on("message", function (msg, rinfo)
         		{
         			dataString = dataString + "," + msg.readFloatLE(count);
 				count = count + 4;
+       				console.log('count:' + count); 
 			}
         		else
         		{
@@ -125,6 +133,7 @@ server.on("message", function (msg, rinfo)
         		{
         			dataString = dataString + "," + msg.readFloatLE(count);
 				count = count + 4;
+       				console.log('count:' + count); 
         		}
         		else
         		{
@@ -136,16 +145,18 @@ server.on("message", function (msg, rinfo)
         		{
         			dataString = dataString + "," + msg.readFloatLE(count);
 				count = count + 4;
+       				console.log('count:' + count); 
         		}
 
         		if(flags & mCommandRotationZ)
         		{
         			dataString = dataString + "," + msg.readFloatLE(count);
 				count = count + 4;
+       				console.log('count:' + count); 
         		}
+			console.log("dataString:" + dataString);	
 		
 		} //end if
-		console.log("dataString:" + dataString);	
 		io.sockets.emit('news', datastring)
 	}
 });
