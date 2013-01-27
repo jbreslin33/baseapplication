@@ -1,13 +1,13 @@
 var app = require('express').createServer()
 var io = require('socket.io').listen(app);
-
+io.set('log level', 1); //reduce logging
 var dgram = require("dgram");
 var server = dgram.createSocket("udp4");
 
 var mMessage = 0;
 
 var skipCounter = 0; 
-var fireNumber = 1; 
+var fireNumber = 0; //no skipping of frames
 
 //constants
 mCommandOriginX      = 4;
