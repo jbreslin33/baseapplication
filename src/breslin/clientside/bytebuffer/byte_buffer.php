@@ -1,15 +1,15 @@
 var ByteBuffer = new Class(
 {
 	
-initialize: function()
+initialize: function(byteBuffer)
 {
-	this.mBuffer = new Array();
+	this.mBufferArray = byteBuffer;
 	this.mReadCount = 0;	
 },
 
 writeByte: function(b)
 {
-	this.mBuffer[this.mReadCount] = b;
+	this.mBufferArray[this.mReadCount] = b;
 	this.mReadCount++
 },
 
@@ -20,7 +20,9 @@ beginReading: function()
 
 readByte: function()
 {
-	return this.mBuffer[this.mReadCount];
+	var returnValue = this.mBufferArray[this.mReadCount]; 
+	this.mReadCount++
+	return returnValue;
 }
 
 

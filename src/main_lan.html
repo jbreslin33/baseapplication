@@ -56,14 +56,15 @@ window.addEvent('domready', function()
         //main loop
         var t=setInterval("mApplication.processUpdate()",32)
        
-	mApplication.mNetwork.mSocket.on('news', function (byteBuffer)
+	mApplication.mNetwork.mSocket.on('news', function (data)
         {
-		var a = byteBuffer.split(','); 
-		if (a[0] == -103)
+		var s = data.split(','); 
+		var byteBuffer = new ByteBuffer(s);
+		if (byteBuffer.readByte() == -103)
 		{
 			mApplication.mGame.addShape(byteBuffer);
 		}
-		if (a[0] == 1)
+		if (byteBuffer.readByte() == 1)
 		{
 			mApplication.mGame.readServerTick(byteBuffer);
 		}

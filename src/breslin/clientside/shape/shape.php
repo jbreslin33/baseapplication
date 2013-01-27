@@ -54,138 +54,6 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
                 this.mGhost = new Shape(this.mApplicationBreslin,byteBuffer,true);
                 this.mGhost.setVisible(false);
         }
-
-/*
- 	mIsGhost = isGhost;
-
-        //applicationBreslin
-        mApplicationBreslin = applicationBreslin;
-
-        //commands
-        mServerCommandLast    = new Command();
-        mServerCommandCurrent = new Command();
-        mCommandToRunOnShape  = new Command();
-        //speed
-        mSpeed = 0.0f;
-        mSpeedMax  = 1.66f;
-
-        mVelocity = new Vector3D();
-
-        //spawn orientation
-        mSpawnPosition     = new Vector3D();
-        mSpawnRotation     = new Vector3D();
-
-        //process Spawn ByteBuffer
-        processSpawnByteBuffer(byteBuffer);
-
-        //animation
-        if (mAnimate)
-        {
-                addAbility(new AbilityAnimationOgre(this));
-        }
-
-        setupTitle();
-
-        //ghost
-        mGhost = NULL;
-
-        if (!mIsGhost)
-        {
-                //create a ghost for this shape
-                mGhost = new Shape(mApplicationBreslin,byteBuffer,true);
-                mGhost->setVisible(false);
-        }
-
-*/
-
-/*
-	this.log('createShape');
-
-	//let's deal with mIndex first and animate as it appears this is done later
-	this.mIndex = index;	
-	this.mAnimate = a;
-
-	this.mIsGhost = isGhost;
-
-	//abilitys
-	this.mAbilityVector = new Array();
-        
-	//applicationBreslin
-        this.mApplicationBreslin = applicationBreslin;
-
-        //commands
-        this.mServerCommandLast    = new Command();
-        this.mServerCommandCurrent = new Command();
-        this.mCommandToRunOnShape  = new Command();
-
-	//position
-	this.mPosition = new Vector3D();
-        
-        //speed
-        this.mSpeed = 0.0;
-        this.mSpeedMax  = 1.66;
-
-        this.mVelocity = new Vector3D();
-
-        //spawn orientation
-        this.mSpawnPosition     = new Vector3D();
-        this.mSpawnRotation     = new Vector3D();
-
-        //process Spawn ByteBuffer
-//        this.processSpawnByteBuffer(byteBuffer);
- 	this.mLocal  =    client;
-
-        this.mSpawnPosition.x = x;
-        this.mSpawnPosition.z = z;
-
-        this.mSpawnRotation.x = rx;
-        this.mSpawnRotation.z = rz;
-
-        //should I set the commands mServerCommandLast and mServerCommandCurrent here?
-        this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
-        this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
-	
-	//div
-	this.mDiv = new Div(this);
-
-        //mesh
-        this.mSrc = this.mMeshName;
-	this.mMesh = 0;
-        this.mMeshCode    = m;
-
-        //figure out mesh based on code passed in byteBuffer
-        this.mMeshName = this.getMeshString(this.mMeshCode);
-
-        //animate
-        mAnimate = m;
-
-
-        //background
-        //this.mBackgroundColor = "yellow"; 
-        this.mBackgroundColor="#f3f3f3"; 
-
-	//spawn shape
-	this.spawnShape(this.mSpawnPosition);	
-
-        //animation
-        if (this.mAnimate)
-        {
-          //      addAbility(new AbilityAnimationOgre(this));
-        }
-
-        this.setupTitle();
-
-        //ghost
-        this.mGhost = 0;
-
-        if (!this.mIsGhost)
-        {
-                //create a ghost for this shape
-		byteBuffer = new ByteBuffer();
-		this.mGhost = new Shape(this.mApplicationBreslin,true,index,client,x,z,rx,rz,m,a)
-                this.mGhost.setVisible(false);
-        }
-*/
 },
 
 log: function(msg)
@@ -195,18 +63,6 @@ log: function(msg)
         	throw new Error(msg);
         }, 0);
 },
-
-/*
-void Shape::interpolateTick(float renderTime)
-{
-
-        //interpolate ticks on abilitys
-        for (unsigned int i = 0; i < mAbilityVector.size(); i++)
-        {
-                mAbilityVector.at(i)->interpolateTick(renderTime);
-        }
-}
-*/
 
 interpolateTick: function(renderTime)
 {
@@ -297,16 +153,20 @@ processSpawnByteBuffer: function(byteBuffer)
 
 parseSpawnByteBuffer: function(byteBuffer)
 {
-	this.mLocal           = byteBuffer[1];
-	this.mIndex           = byteBuffer[2];
-	this.mSpawnPosition.x = byteBuffer[3];
-	this.mSpawnPosition.y = byteBuffer[4];
-	this.mSpawnPosition.z = byteBuffer[5];
-	this.mSpawnRotation.x = byteBuffer[6];
-	this.mSpawnRotation.z = byteBuffer[7];
-	this.mMeshName        = byteBuffer[8];
-	this.mAnimate         = byteBuffer[9];
-        
+	byteBuffer.beginReading();
+	this.log('b:' + byteBuffer.readByte());
+	this.mLocal           = byteBuffer.readByte();
+	this.mIndex           = byteBuffer.readByte();
+	this.mSpawnPosition.x = byteBuffer.readByte();
+	this.mSpawnPosition.y = byteBuffer.readByte();
+	this.mSpawnPosition.z = byteBuffer.readByte();
+	this.mSpawnRotation.x = byteBuffer.readByte();
+	this.mSpawnRotation.z = byteBuffer.readByte();
+	this.mMeshName        = byteBuffer.readByte();
+	this.mAnimate         = byteBuffer.readByte();
+       
+this.log('l:' + this.mLocal);
+ 
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
         this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
@@ -341,13 +201,13 @@ spawnShape: function(position)
 /*********************************
                 DELTA
 ******************************/
-processDeltaByteBuffer: function(byteBuffer,count)
+processDeltaByteBuffer: function(byteBuffer)
 {
- 	this.parseDeltaByteBuffer(byteBuffer,count);
+ 	this.parseDeltaByteBuffer(byteBuffer);
         this.mAbilityVector[0].processTick();
 },
 
-parseDeltaByteBuffer: function(byteBuffer,count)
+parseDeltaByteBuffer: function(byteBuffer)
 {
 	var flags = 0;
 
@@ -355,9 +215,10 @@ parseDeltaByteBuffer: function(byteBuffer,count)
         var moveYChanged = true;
        	var moveZChanged = true;
 
-	flags = byteBuffer[count];
-	document.getElementById('mMessageFrame').innerHTML=flags;	
+	flags = byteBuffer.readByte();
+	document.getElementById('mMessageFrame').innerHTML='flags:' + flags;	
  	
+/*
 	// Origin
         if(flags & this.mCommandOriginX)
         {
@@ -445,6 +306,7 @@ parseDeltaByteBuffer: function(byteBuffer,count)
         }
 	this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
 	
+*/
 	return flags;
 },
 
@@ -499,8 +361,8 @@ moveGhostShape: function()
 	transVector.y = 0;
 	transVector.z = this.mServerCommandCurrent.mPosition.z;
 
-//	var pos = 'x:' + transVector.x + 'z:' + transVector.z;
-//	document.getElementById('mMessageFrame').innerHTML=pos;	
+	var pos = 'x:' + transVector.x + 'z:' + transVector.z;
+	document.getElementById('mMessageFrame').innerHTML=pos;	
 	this.mGhost.setPosition(transVector);
 }
 

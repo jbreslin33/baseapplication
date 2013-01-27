@@ -22,7 +22,7 @@ enter: function()
 
 execute: function()
 {
-	//this.log('Global:execute');
+	this.log('Global:execute');
         this.mAbilityMove.mShape.moveGhostShape();
         this.mAbilityMove.calculateDeltaPosition();
 

@@ -19,6 +19,9 @@ initialize: function(applicationBreslin)
 	this.mShapeVector      = new Array();
 	this.mShapeGhostVector = new Array();
 
+	//byteBuffer
+	this.mByteBuffer = new ByteBuffer();
+
         //keys
         this.mKeyUp = 1;
         this.mKeyDown = 2;
@@ -86,46 +89,6 @@ processUpdate: function()
 /*********************************
                NETWORK 
 **********************************/
-/*
-checkForByteBuffer: function()
-{
-	this.mApplicationBreslin.mNetwork.getAllShapes();
- 	var shapesTable = document.getElementById('shapes_table');
-    	var rowLength = shapesTable.rows.length;
-
-	//mFrameTimeServer
-        this.mFrameTimeServer = shapesTable.rows.item(1).cells.item(1).innerHTML;
-        this.mGameTimeServer  = shapesTable.rows.item(1).cells.item(2).innerHTML;
-	       
-	
-	var foundMatch = false; 
-	for (i = 2; i < rowLength; i++)
-        {
-                for (s = 0; s < this.mShapeVector.length; s++)
-                {
-                        if (this.mShapeVector[s].mIndex == shapesTable.rows.item(i).cells.item(0).innerHTML)
-                        {
-                                foundMatch = true;
-                        
-				//skipping read Server tick	
-				this.mShapeVector[s].processDeltaByteBuffer(shapesTable);
-                        }
-                }
-
-		if (foundMatch)
-		{
-
-		}
-		else
-		{
-                        if (shapesTable)
-                        {
-				this.addShape(shapesTable,i);
-                        }
-		}
-	}
-},
-*/
 checkForByteBuffer: function()
 {
 
@@ -136,6 +99,7 @@ checkForByteBuffer: function()
 **********************************/
 addShape: function(byteBuffer)
 {
+	this.log('addShape');
 	shape = new Shape(this.mApplicationBreslin,byteBuffer,false);
 
 	//ability
@@ -150,25 +114,18 @@ addShape: function(byteBuffer)
 
 readServerTick: function(byteBuffer)
 {
-	var count = 0;
-
-	count++; //skip type
-
-	count++; //skip sequence 
-
-	this.mFrameTimeServer = byteBuffer[count];
-	count++;
-
-	while (count < byteBuffer.length)
-	{
-		var id = byteBuffer[count];
-		count++;
+	byteBuffer.readByte(); //seq
+	this.mFrameTimeServer = byteBuffer.readByte(); //time
 	
+	while (byteBuffer.readCount < byteBuffer.mBufferArray.length)
+	{
+		var id = byteBuffer.readByte();
+		
 		var shape = this.getShape(id);
 		
 		if (shape != 0)
 		{
-			shape.processDeltaByteBuffer(byteBuffer,count);
+			shape.processDeltaByteBuffer(byteBuffer);
 		}
 		else
 		{
