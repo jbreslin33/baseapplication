@@ -58,7 +58,7 @@ window.addEvent('domready', function()
        
 	mApplication.mNetwork.mSocket.on('news', function (byteBuffer)
         {
-		mApplication.log('r');
+		//mApplication.log('r');
 		var a = byteBuffer.split(','); 
 		if (a[0] == -103)
 		{
@@ -67,6 +67,7 @@ window.addEvent('domready', function()
 		}
 		if (a[0] == 1)
 		{
+			mApplication.log('a:' + a[0] + 'b:' + a[1] + 'c:' + a[2]);
 			//mApplication.log('length:' + a.length);	
 			//mApplication.mGame.readServerTick(byteBuffer);
 		}

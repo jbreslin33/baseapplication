@@ -6,6 +6,9 @@ var server = dgram.createSocket("udp4");
 
 var mMessage = 0;
 
+var skipCounter = 0;
+var fireNumber = 10;
+
 app.listen(10000);
 
 	console.log('ip match with tp');
@@ -72,6 +75,9 @@ server.on("message", function (msg, rinfo)
 
 	if (type == 1)
 	{
+		skipCounter++;
+		if (skipCounter > fireNumber)
+		{
 		//sequence
         	dataString = dataString + "," + msg.readUInt16LE(count);
 		count = count + 2;
@@ -142,6 +148,8 @@ server.on("message", function (msg, rinfo)
         		}
 		
 		} //end if
+		skipCounter = 0;
+		}
 //		console.log("dataString:" + dataString);	
 		io.sockets.emit('news', datastring)
 	}
