@@ -154,9 +154,9 @@ server.on("message", function (msg, rinfo)
 				count = count + 4;
        				console.log('count:' + count); 
         		}
-			console.log("dataString:" + dataString);	
 		
 		} //end if
+		console.log("dataString:" + dataString);	
 		io.sockets.emit('news', datastring)
 	}
 });
