@@ -142,7 +142,7 @@ server.on("message", function (msg, rinfo)
         		}
 		
 		} //end if
-		console.log("dataString:" + dataString);	
+//		console.log("dataString:" + dataString);	
 		io.sockets.emit('news', datastring)
 	}
 });

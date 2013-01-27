@@ -67,30 +67,27 @@ server.on("message", function (msg, rinfo)
 		//let's just pass off data msg to browsers
 		datastring = dataString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
 
-		console.log('dataString:' + dataString);
-
 		io.sockets.emit('news', datastring)
 	}
 
 	if (type == 1)
 	{
+		//sequence
+        	dataString = dataString + "," + msg.readUInt16LE(count);
+		count = count + 2;
+
+		//frametime			
+		dataString = dataString + "," + msg.readInt8(count);
+		count++;
+	
 		while(count < length)
 		{
-			
 			var flags = 0;
 
         		moveXChanged = true;
         		moveYChanged = true;
         		moveZChanged = true;
 		
-			//sequence
-        		dataString = dataString + "," + msg.readUInt16LE(count);
-			count = count + 2;
-        
-			//frametime			
-			dataString = dataString + "," + msg.readInt8(count);
-			count++;
-	
 			//index(id)	
 			dataString = dataString + "," +  msg.readInt8(count);
 			count++;
