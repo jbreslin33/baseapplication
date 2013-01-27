@@ -47,6 +47,7 @@ var mApplication;
 
 window.addEvent('domready', function()
 {
+
         mApplication = new ApplicationBreslin('192.168.1.101', 30004);
 
         //input
@@ -58,13 +59,18 @@ window.addEvent('domready', function()
        
 	mApplication.mNetwork.mSocket.on('news', function (data)
         {
-		var s = data.split(','); 
-		var byteBuffer = new ByteBuffer(s);
-		if (byteBuffer.readByte() == -103)
+		s = data.split(','); 
+		
+		byteBuffer = new ByteBuffer(s);
+
+		type = byteBuffer.readByte();
+
+		if (type == -103)
 		{
 			mApplication.mGame.addShape(byteBuffer);
 		}
-		if (byteBuffer.readByte() == 1)
+
+		if (type == 1)
 		{
 			mApplication.mGame.readServerTick(byteBuffer);
 		}

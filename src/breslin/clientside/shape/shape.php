@@ -218,7 +218,6 @@ parseDeltaByteBuffer: function(byteBuffer)
 	flags = byteBuffer.readByte();
 	document.getElementById('mMessageFrame').innerHTML='flags:' + flags;	
  	
-/*
 	// Origin
         if(flags & this.mCommandOriginX)
         {
@@ -306,7 +305,6 @@ parseDeltaByteBuffer: function(byteBuffer)
         }
 	this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
 	
-*/
 	return flags;
 },
 

@@ -114,7 +114,8 @@ addShape: function(byteBuffer)
 
 readServerTick: function(byteBuffer)
 {
-	byteBuffer.readByte(); //seq
+	seq = byteBuffer.readByte(); //seq
+	this.log('seq:' + seq);
 	this.mFrameTimeServer = byteBuffer.readByte(); //time
 	
 	while (byteBuffer.readCount < byteBuffer.mBufferArray.length)
