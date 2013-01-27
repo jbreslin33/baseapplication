@@ -67,7 +67,8 @@ window.addEvent('domready', function()
 		}
 		if (a[0] == 1)
 		{
-			mApplication.log('a:' + a[0] + 'b:' + a[1] + 'c:' + a[2]);
+			//mApplication.log('a:' + a[0] + 'b:' + a[1] + 'c:' + a[2]);
+			document.getElementById('mMessageFrame').innerHTML=a[1];
 			//mApplication.log('length:' + a.length);	
 			//mApplication.mGame.readServerTick(byteBuffer);
 		}
@@ -77,6 +78,8 @@ window.addEvent('domready', function()
 );
 
 </script>
+<p id="mMessageFrame">mMessageFrame</p>
+
 </body>
 </html>
 
