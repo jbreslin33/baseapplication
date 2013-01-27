@@ -246,14 +246,14 @@ Shape::translate(Vector3D* translateVector, int perspective)
 
 setPosition: function(position)
 {
-/*
+
 	//set a member position because we are going to have to modify the div's position
         modx = position.x+"px"; 
         mody = position.z+"px"; 
         
         this.mDiv.mDiv.style.left = modx;
         this.mDiv.mDiv.style.top = mody;
-*/
+
 },
 
 /*
@@ -341,172 +341,113 @@ spawnShape: function(position)
 /*********************************
                 DELTA
 ******************************/
-/*
-void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
+processDeltaByteBuffer: function(byteBuffer,count)
 {
-        clearTitle(); //empty title string so it can be filled anew
-
-        parseDeltaByteBuffer(byteBuffer);
-
-        //process ticks on abilitys
-        for (unsigned int i = 0; i < mAbilityVector.size(); i++)
-        {
-                mAbilityVector.at(i)->processTick();
-        }
-
-        //run billboard here for now.
-        drawTitle();
-}
-*/
-processDeltaByteBuffer: function(byteBuffer)
-{
- 	this.parseDeltaByteBuffer(byteBuffer);
+ 	this.parseDeltaByteBuffer(byteBuffer,count);
         this.mAbilityVector[0].processTick();
 },
 
-parseDeltaByteBuffer: function(byteBuffer)
+parseDeltaByteBuffer: function(byteBuffer,count)
 {
-/*
-	byteBuffer.beginReading();
+	var flags = 0;
 
-	moveXChanged = true;
-	moveZChanged = true;
-                                
-	//x
-       	this.mServerCommandLast.mPosition.x = this.mServerCommandCurrent.mPosition.x;
-       	this.mServerCommandCurrent.mPosition.x = shapesTable.rows.item(i).cells.item(1).innerHTML; 
-        this.mServerCommandCurrent.mVelocity.x = this.mServerCommandCurrent.mPosition.x - this.mServerCommandLast.mPosition.x;
-	//this.log('vx:' + this.mServerCommandCurrent.mVelocity.x); 
-	
-	//z
-       	this.mServerCommandLast.mPosition.z = this.mServerCommandCurrent.mPosition.z;
-       	this.mServerCommandCurrent.mPosition.z = shapesTable.rows.item(i).cells.item(2).innerHTML; 
-        this.mServerCommandCurrent.mVelocity.z = this.mServerCommandCurrent.mPosition.z - this.mServerCommandLast.mPosition.z;
-	//this.log('vz:' + this.mServerCommandCurrent.mVelocity.z); 
+        var moveXChanged = true;
+        var moveYChanged = true;
+       	var moveZChanged = true;
 
-	//frametime
-        this.mServerCommandCurrent.mFrameTime = this.mApplicationBreslin.mGame.mFrameTimeServer;
-        this.mCommandToRunOnShape.mFrameTime = this.mServerCommandCurrent.mFrameTime;
-
-        this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
-	//this.log('cvx:' + this.mCommandToRunOnShape.mVelocity.x); 
-	//this.log('cvz:' + this.mCommandToRunOnShape.mVelocity.z); 
-
-
-//	this.log('x:' + this.mServerCommandCurrent.mPosition.x); 	
-//	this.log('z:' + this.mServerCommandCurrent.mPosition.z); 	
-	//this.log('x:' + this.mServerCommandCurrent.mVelocity.x); 	
-	//this.log('z:' + this.mServerCommandCurrent.mVelocity.z); 	
-*/
-},
-/*
-
-int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
-{
-        int flags = 0;
-
-        bool moveXChanged = true;
-        bool moveYChanged = true;
-        bool moveZChanged = true;
-
-        // Flags
-        flags = mes->ReadByte();
-
-        // Origin
-        if(flags & mCommandOriginX)
+	flags = byteBuffer[count];
+	document.getElementById('mMessageFrame').innerHTML=flags;	
+ 	
+	// Origin
+        if(flags & this.mCommandOriginX)
         {
-                mServerCommandLast->mPosition->x = mServerCommandCurrent->mPosition->x;
-                mServerCommandCurrent->mPosition->x = mes->ReadFloat();         
+                this.mServerCommandLast.mPosition.x = this.mServerCommandCurrent.mPosition.x;
+                this.mServerCommandCurrent.mPosition.x = byteBuffer[count];
+                this.log(this.mServerCommandCurrent.mPosition.x);
+		count++;
         }
         else
         {
                 moveXChanged = false;
         }
 
-        if(flags & mCommandOriginY)
+        if(flags & this.mCommandOriginY)
         {
-                mServerCommandLast->mPosition->y = mServerCommandCurrent->mPosition->y;
-                mServerCommandCurrent->mPosition->y = mes->ReadFloat();
+                this.mServerCommandLast.mPosition.y = this.mServerCommandCurrent.mPosition.y;
+                this.mServerCommandCurrent.mPosition.y = byteBuffer[count];
+                this.log(this.mServerCommandCurrent.mPosition.y);
+		count++;
         }
         else
         {
                 moveYChanged = false;
         }
 
-        if(flags & mCommandOriginZ)
+        if(flags & this.mCommandOriginZ)
         {
-                mServerCommandLast->mPosition->z = mServerCommandCurrent->mPosition->z;
-                mServerCommandCurrent->mPosition->z = mes->ReadFloat(); 
+                this.mServerCommandLast.mPosition.z = this.mServerCommandCurrent.mPosition.z;
+                this.mServerCommandCurrent.mPosition.z = byteBuffer[count];
+                this.log(this.mServerCommandCurrent.mPosition.z);
+		count++;
         }
         else
         {
                 moveZChanged = false;
         }
 
-        //rotation
-        if(flags & mCommandRotationX)
+ 	//rotation
+        if(flags & this.mCommandRotationX)
         {
-                mServerCommandLast->mRotation->x = mServerCommandCurrent->mRotation->x;
-                mServerCommandCurrent->mRotation->x = mes->ReadFloat();
+                this.mServerCommandLast.mRotation.x = this.mServerCommandCurrent.mRotation.x;
+                this.mServerCommandCurrent.mRotation.x = byteBuffer[count];
+		count++;
         }
 
-        if(flags & mCommandRotationZ)
+        if(flags & this.mCommandRotationZ)
         {
-                mServerCommandLast->mRotation->z = mServerCommandCurrent->mRotation->z;
-                mServerCommandCurrent->mRotation->z = mes->ReadFloat();
+                this.mServerCommandLast.mRotation.z = this.mServerCommandCurrent.mRotation.z;
+                this.mServerCommandCurrent.mRotation.z = byteBuffer[count];
+		count++;
         }
 
-        //frame time
-       // if (flags & mApplicationBreslin->mGame->mCommandFrameTime)
-        //{
-                mServerCommandCurrent->mFrameTime = mApplicationBreslin->mGame->mFrameTimeServer;
-                mCommandToRunOnShape->mFrameTime = mServerCommandCurrent->mFrameTime;
-       // }
+        this.mServerCommandCurrent.mFrameTime = this.mApplicationBreslin.mGame.mFrameTimeServer;
+        this.mCommandToRunOnShape.mFrameTime = this.mServerCommandCurrent.mFrameTime;
 
-	
-       	//LogString("x:%f",mServerCommandCurrent->mPosition->x);         
-       	//LogString("z:%f",mServerCommandCurrent->mPosition->z);         
-
-        if (mServerCommandCurrent->mFrameTime != 0) 
+        if (this.mServerCommandCurrent.mFrameTime != 0)
         {
                 //position
                 if (moveXChanged)
                 {
-                        mServerCommandCurrent->mVelocity->x = mServerCommandCurrent->mPosition->x - mServerCommandLast->mPosition->x;
-	       }
+                        this.mServerCommandCurrent.mVelocity.x = this.mServerCommandCurrent.mPosition.x - this.mServerCommandLast.mPosition.x;
+               }
                 else
                 {
-                        mServerCommandCurrent->mVelocity->x = 0.0;
+                        this.mServerCommandCurrent.mVelocity.x = 0.0;
                 }
-                
+
                 if (moveYChanged)
                 {
-                        mServerCommandCurrent->mVelocity->y = mServerCommandCurrent->mPosition->y - mServerCommandLast->mPosition->y;
+                        this.mServerCommandCurrent.mVelocity.y = this.mServerCommandCurrent.mPosition.y - this.mServerCommandLast.mPosition.y;
                 }
                 else
                 {
-                        mServerCommandCurrent->mVelocity->y = 0.0;
+                        this.mServerCommandCurrent.mVelocity.y = 0.0;
                 }
 
                 if (moveZChanged)
                 {
-                        mServerCommandCurrent->mVelocity->z = mServerCommandCurrent->mPosition->z - mServerCommandLast->mPosition->z;
+                        this.mServerCommandCurrent.mVelocity.z = this.mServerCommandCurrent.mPosition.z - this.mServerCommandLast.mPosition.z;
                 }
                 else
                 {
-                        mServerCommandCurrent->mVelocity->z = 0.0;
+                        this.mServerCommandCurrent.mVelocity.z = 0.0;
                 }
         }
+	this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
 	
-	mCommandToRunOnShape->mVelocity->copyValuesFrom(mServerCommandCurrent->mVelocity);
+	return flags;
+},
 
-       //	LogString("x:%f",mServerCommandCurrent->mVelocity->x);         
-       	//LogString("z:%f",mServerCommandCurrent->mVelocity->z);         
-
-        return flags;
-}
-
-*/
 getMeshString: function(meshCode)
 {
         if (meshCode == 0)
@@ -557,9 +498,9 @@ moveGhostShape: function()
 	transVector.x = this.mServerCommandCurrent.mPosition.x;
 	transVector.y = 0;
 	transVector.z = this.mServerCommandCurrent.mPosition.z;
-	
-	//this.log('x:' + transVector.x);	
-	//this.log('z:' + transVector.z);	
+
+//	var pos = 'x:' + transVector.x + 'z:' + transVector.z;
+//	document.getElementById('mMessageFrame').innerHTML=pos;	
 	this.mGhost.setPosition(transVector);
 }
 

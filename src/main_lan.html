@@ -58,19 +58,14 @@ window.addEvent('domready', function()
        
 	mApplication.mNetwork.mSocket.on('news', function (byteBuffer)
         {
-		//mApplication.log('r');
 		var a = byteBuffer.split(','); 
 		if (a[0] == -103)
 		{
-			//mApplication.log('t:' + a[0] + 'c:' + a[1] + 'i:' + a[2] + 'x:' + a[3] + 'y:' + a[4] + 'z:' + a[5] + 'x:' + a[6] + 'z:' + a[7] + 'm:' + a[8] + 'a:' + a[9]);
 			mApplication.mGame.addShape(byteBuffer);
 		}
 		if (a[0] == 1)
 		{
-			//mApplication.log('a:' + a[0] + 'b:' + a[1] + 'c:' + a[2]);
-			document.getElementById('mMessageFrame').innerHTML=a[1];
-			//mApplication.log('length:' + a.length);	
-			//mApplication.mGame.readServerTick(byteBuffer);
+			mApplication.mGame.readServerTick(byteBuffer);
 		}
         });
 }

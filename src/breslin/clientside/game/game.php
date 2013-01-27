@@ -150,36 +150,55 @@ addShape: function(byteBuffer)
 
 readServerTick: function(byteBuffer)
 {
-	this.processDeltaByteBuffer(byteBuffer);
-	this.log('proc');
+	var count = 0;
+
+	count++; //skip type
+
+	count++; //skip sequence 
+
+	this.mFrameTimeServer = byteBuffer[count];
+	count++;
+
+	while (count < byteBuffer.length)
+	{
+		var id = byteBuffer[count];
+		count++;
+	
+		var shape = this.getShape(id);
+		
+		if (shape != 0)
+		{
+			shape.processDeltaByteBuffer(byteBuffer,count);
+		}
+		else
+		{
+			//do nothing
+		}
+	}
 },
 
-/*
-void Game::readServerTick(ByteBuffer* byteBuffer)
+getShape: function(id)
 {
-        // Skip sequences
-        short sequence = byteBuffer->ReadShort();
+	var shape = 0;
 
-        while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
-        {
-                mApplicationBreslin->mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
+	for (i=0; i < this.mShapeVector.length; i++)
+	{
+		var curShape = this.mShapeVector[i];	
+		if (curShape.mIndex == id)
+		{
+			shape = curShape;
+		}
+	}
+	if (shape == 0)
+	{
+		return 0;
+	}
+	else
+	{
+		return shape;
+	}
+},
 
-                int id = byteBuffer->ReadByte();
-
-                Shape* shape = NULL;
-                shape = getShape(id);
-
-                if (shape)
-                {
-                        shape->processDeltaByteBuffer(byteBuffer);
-                }
-                else
-                {
-                        //LogString("INVALID SHAPE ID");
-                }
-        }
-}
-*/
 sendByteBuffer: function()
 {
         this.mRunNetworkTime += this.mApplicationBreslin.getRenderTime() * 1000.0;
