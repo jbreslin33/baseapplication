@@ -5,6 +5,13 @@ var Shape = new Class(
 //this.mApplicationBreslin,false,index,client,x,z,rx,rz,m,a)
 initialize: function(applicationBreslin, byteBuffer, isGhost)
 {
+	//constants
+	this.mCommandOriginX   = 4;
+	this.mCommandOriginY   = 8;
+	this.mCommandOriginZ   = 16;
+	this.mCommandRotationX = 32;
+	this.mCommandRotationZ = 64;
+
  	this.mIsGhost = isGhost;
 	this.mAnimate = false;
 	this.mName = 0;
