@@ -112,17 +112,6 @@ setPosition: function(position)
 
 },
 
-/*
-Vector3D* Shape::getPosition()
-{
-        Vector3D* position = new Vector3D();
-        position->x = getSceneNode()->getPosition().x;
-        position->y = getSceneNode()->getPosition().y;
-        position->z = getSceneNode()->getPosition().z;
-        return position;
-}
-*/
-
 getPosition: function()
 {
 	x = this.mDiv.mDiv.style.left;
@@ -203,14 +192,12 @@ spawnShape: function(position)
 ******************************/
 processDeltaByteBuffer: function(byteBuffer)
 {
-	this.log('processDeltaByteBuffer');
  	this.parseDeltaByteBuffer(byteBuffer);
         this.mAbilityVector[0].processTick();
 },
 
 parseDeltaByteBuffer: function(byteBuffer)
 {
-	this.log('parseDeltaByteBuffer');
 	var flags = 0;
 
         var moveXChanged = true;
@@ -218,15 +205,17 @@ parseDeltaByteBuffer: function(byteBuffer)
        	var moveZChanged = true;
 
 	flags = byteBuffer.readByte();
-	document.getElementById('mMessageFrame').innerHTML='flags:' + flags;	
+	if (this.mIndex == 1)
+	{
+		document.getElementById('mMessageFrame').innerHTML='flags:' + flags;	
+	}
  	
 	// Origin
         if(flags & this.mCommandOriginX)
         {
                 this.mServerCommandLast.mPosition.x = this.mServerCommandCurrent.mPosition.x;
-                this.mServerCommandCurrent.mPosition.x = byteBuffer[count];
+                this.mServerCommandCurrent.mPosition.x = byteBuffer.readByte();
                 this.log(this.mServerCommandCurrent.mPosition.x);
-		count++;
         }
         else
         {
@@ -236,9 +225,8 @@ parseDeltaByteBuffer: function(byteBuffer)
         if(flags & this.mCommandOriginY)
         {
                 this.mServerCommandLast.mPosition.y = this.mServerCommandCurrent.mPosition.y;
-                this.mServerCommandCurrent.mPosition.y = byteBuffer[count];
+                this.mServerCommandCurrent.mPosition.y = byteBuffer.readByte();
                 this.log(this.mServerCommandCurrent.mPosition.y);
-		count++;
         }
         else
         {
@@ -248,9 +236,8 @@ parseDeltaByteBuffer: function(byteBuffer)
         if(flags & this.mCommandOriginZ)
         {
                 this.mServerCommandLast.mPosition.z = this.mServerCommandCurrent.mPosition.z;
-                this.mServerCommandCurrent.mPosition.z = byteBuffer[count];
+                this.mServerCommandCurrent.mPosition.z = byteBuffer.readByte();
                 this.log(this.mServerCommandCurrent.mPosition.z);
-		count++;
         }
         else
         {
@@ -261,15 +248,13 @@ parseDeltaByteBuffer: function(byteBuffer)
         if(flags & this.mCommandRotationX)
         {
                 this.mServerCommandLast.mRotation.x = this.mServerCommandCurrent.mRotation.x;
-                this.mServerCommandCurrent.mRotation.x = byteBuffer[count];
-		count++;
+                this.mServerCommandCurrent.mRotation.x = byteBuffer.readByte();
         }
 
         if(flags & this.mCommandRotationZ)
         {
                 this.mServerCommandLast.mRotation.z = this.mServerCommandCurrent.mRotation.z;
-                this.mServerCommandCurrent.mRotation.z = byteBuffer[count];
-		count++;
+                this.mServerCommandCurrent.mRotation.z = byteBuffer.readByte();
         }
 
         this.mServerCommandCurrent.mFrameTime = this.mApplicationBreslin.mGame.mFrameTimeServer;
@@ -361,8 +346,8 @@ moveGhostShape: function()
 	transVector.y = 0;
 	transVector.z = this.mServerCommandCurrent.mPosition.z;
 
-	var pos = 'x:' + transVector.x + 'z:' + transVector.z;
-	document.getElementById('mMessageFrame').innerHTML=pos;	
+	//var pos = 'x:' + transVector.x + 'z:' + transVector.z;
+	//document.getElementById('mMessageFrame').innerHTML=pos;	
 	this.mGhost.setPosition(transVector);
 }
 

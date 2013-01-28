@@ -120,13 +120,11 @@ readServerTick: function(byteBuffer)
 	while (byteBuffer.mReadCount < byteBuffer.mBufferArray.length)
 	{
 		var id = byteBuffer.readByte();
-		this.log('id:' + id);
 		
 		var shape = this.getShape(id);
 		
 		if (shape != 0)
 		{
-			this.log('found shape');
 			shape.processDeltaByteBuffer(byteBuffer);
 		}
 		else
