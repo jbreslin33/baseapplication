@@ -22,11 +22,14 @@ enter: function()
 
 execute: function()
 {
+	this.log('ex normal process tick');
         // if distance exceeds threshold && server velocity is zero
+/*
         if(this.mAbilityMove.mDeltaPosition > this.mAbilityMove.mPosInterpLimitHigh && !this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())
         {
                 this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mCatchupProcessTickMove);
         }
+*/
 //	this.log('x:' + this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.x); 
 //	this.log('z:' + this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.z); 
         serverVelocity = new Vector3D();
