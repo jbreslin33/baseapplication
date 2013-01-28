@@ -222,7 +222,6 @@ parseDeltaByteBuffer: function(byteBuffer)
         {
                 this.mServerCommandLast.mPosition.x = this.mServerCommandCurrent.mPosition.x;
                 this.mServerCommandCurrent.mPosition.x = byteBuffer.readByte();
-                this.log(this.mServerCommandCurrent.mPosition.x);
         }
         else
         {
@@ -233,7 +232,6 @@ parseDeltaByteBuffer: function(byteBuffer)
         {
                 this.mServerCommandLast.mPosition.y = this.mServerCommandCurrent.mPosition.y;
                 this.mServerCommandCurrent.mPosition.y = byteBuffer.readByte();
-                this.log(this.mServerCommandCurrent.mPosition.y);
         }
         else
         {
@@ -244,7 +242,6 @@ parseDeltaByteBuffer: function(byteBuffer)
         {
                 this.mServerCommandLast.mPosition.z = this.mServerCommandCurrent.mPosition.z;
                 this.mServerCommandCurrent.mPosition.z = byteBuffer.readByte();
-                this.log(this.mServerCommandCurrent.mPosition.z);
         }
         else
         {
