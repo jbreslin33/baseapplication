@@ -115,17 +115,18 @@ addShape: function(byteBuffer)
 readServerTick: function(byteBuffer)
 {
 	seq = byteBuffer.readByte(); //seq
-	this.log('seq:' + seq);
 	this.mFrameTimeServer = byteBuffer.readByte(); //time
 	
-	while (byteBuffer.readCount < byteBuffer.mBufferArray.length)
+	while (byteBuffer.mReadCount < byteBuffer.mBufferArray.length)
 	{
 		var id = byteBuffer.readByte();
+		this.log('id:' + id);
 		
 		var shape = this.getShape(id);
 		
 		if (shape != 0)
 		{
+			this.log('found shape');
 			shape.processDeltaByteBuffer(byteBuffer);
 		}
 		else

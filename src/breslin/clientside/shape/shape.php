@@ -203,12 +203,14 @@ spawnShape: function(position)
 ******************************/
 processDeltaByteBuffer: function(byteBuffer)
 {
+	this.log('processDeltaByteBuffer');
  	this.parseDeltaByteBuffer(byteBuffer);
         this.mAbilityVector[0].processTick();
 },
 
 parseDeltaByteBuffer: function(byteBuffer)
 {
+	this.log('parseDeltaByteBuffer');
 	var flags = 0;
 
         var moveXChanged = true;
