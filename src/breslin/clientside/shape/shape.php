@@ -295,7 +295,8 @@ parseDeltaByteBuffer: function(byteBuffer)
                 }
         }
 	this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
-	this.mServerCommandCurrent.mVelocity.printValues();
+	//this.mServerCommandCurrent.mVelocity.printValues();
+	this.mCommandToRunOnShape.mVelocity.printValues();
 	
 	return flags;
 },
