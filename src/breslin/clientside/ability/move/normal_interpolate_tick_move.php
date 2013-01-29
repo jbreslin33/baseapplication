@@ -22,9 +22,7 @@ enter: function()
 
 execute: function()
 {
-//	this.log('bres execute interploat');
         //to be used to setPosition
-/*
         transVector = new Vector3D();
 
         //copy values from mVelocity so we don't make changes to original
@@ -32,9 +30,6 @@ execute: function()
 	
         //get the mulitplier
         multipliedRenderTime = this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime() * 1000;
-
-	//MAJOR HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	multipliedRenderTime = multipliedRenderTime / 75;
 
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);
@@ -57,7 +52,6 @@ execute: function()
 
 	//set new position
 	this.mAbilityMove.mShape.setPosition(transVector);
-*/
 /*
         if (abilityMove->mShape->mLocal == 1)
         {
