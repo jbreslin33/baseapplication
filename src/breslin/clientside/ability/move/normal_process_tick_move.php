@@ -43,6 +43,7 @@ execute: function()
         serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
         
 	this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(serverVelocity);
+	this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.printValues();
 },
 
 exit: function()
