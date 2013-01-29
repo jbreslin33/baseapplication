@@ -69,7 +69,7 @@ calculateDeltaPosition: function()
         this.mDeltaZ = this.mShape.mServerCommandCurrent.mPosition.z - this.mShape.getPosition().z;
 
         //distance we are off from server
-        mDeltaPosition = Math.sqrt(Math.pow(this.mDeltaX, 2) + Math.pow(this.mDeltaY, 2) +  Math.pow(this.mDeltaZ, 2));
+        this.mDeltaPosition = Math.sqrt(Math.pow(this.mDeltaX, 2) + Math.pow(this.mDeltaY, 2) +  Math.pow(this.mDeltaZ, 2));
 },
 
 calculateSpeed: function(velocity,frameTime)
