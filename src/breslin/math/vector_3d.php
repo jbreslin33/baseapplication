@@ -16,6 +16,11 @@ log: function(msg)
         }, 0);
 },
 
+printValues: function()
+{
+	this.log('x: ' + this.x + 'y: ' + this.y + 'z: ' + this.z); 	
+},
+
 initialize: function(x1,y1,z1)
 {
 	this.x = x1;
