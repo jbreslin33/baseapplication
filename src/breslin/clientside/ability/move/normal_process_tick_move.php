@@ -22,7 +22,9 @@ enter: function()
 
 execute: function()
 {
-	this.log('ex normal process tick');
+        this.log(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime);
+	
+//	this.log('ex normal process tick');
         // if distance exceeds threshold && server velocity is zero
 /*
         if(this.mAbilityMove.mDeltaPosition > this.mAbilityMove.mPosInterpLimitHigh && !this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())

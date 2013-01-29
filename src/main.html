@@ -53,28 +53,34 @@ window.addEvent('domready', function()
         document.addEvent("keydown", mApplication.keyDown);
         document.addEvent("keyup", mApplication.keyUp);
 
-        //main loop
+ 	//main loop
         var t=setInterval("mApplication.processUpdate()",32)
-       
-	mApplication.mNetwork.mSocket.on('news', function (byteBuffer)
+
+        mApplication.mNetwork.mSocket.on('news', function (data)
         {
-		var a = byteBuffer.split(','); 
-		if (a[0] == -103)
-		{
-			mApplication.log('t:' + a[0] + 'c:' + a[1] + 'i:' + a[2] + 'x:' + a[3] + 'y:' + a[4] + 'z:' + a[5] + 'x:' + a[6] + 'z:' + a[7] + 'm:' + a[8] + 'a:' + a[9]);
-			mApplication.mGame.addShape(byteBuffer);
-		}
-		if (a[0] == 1)
-		{
-			mApplication.log('length:' + a.length);	
-			mApplication.mGame.readServerTick(byteBuffer);
-		}
+                s = data.split(',');
+
+                byteBuffer = new ByteBuffer(s);
+
+                type = byteBuffer.readByte();
+
+                if (type == -103)
+                {
+                        mApplication.mGame.addShape(byteBuffer);
+                }
+
+                if (type == 1)
+                {
+                        mApplication.mGame.readServerTick(byteBuffer);
+                }
         });
 }
 
 );
 
 </script>
+<p id="mMessageFrame">mMessageFrame</p>
+
 </body>
 </html>
 
