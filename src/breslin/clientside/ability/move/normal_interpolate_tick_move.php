@@ -22,6 +22,8 @@ enter: function()
 
 execute: function()
 {
+        this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.printValues();
+
         //to be used to setPosition
         transVector = new Vector3D();
 
