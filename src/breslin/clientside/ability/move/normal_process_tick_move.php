@@ -43,10 +43,9 @@ execute: function()
 		//this.log('speed:' + this.mAbilityMove.mShape.mSpeed);
         }
         serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
-        serverVelocity.printValues();
-       	
  
 	this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(serverVelocity);
+	this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.printValues();
 },
 
 exit: function()
