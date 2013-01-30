@@ -72,7 +72,15 @@ normalise: function()
 	this.y = 0;
 	this.z /= len;
 },
-
+//multiply this vector by a scalar
+/*
+void Vector3D::multiply(float num)
+{
+        x = x * num;
+        y = y * num;
+        z = z * num;
+}
+*/
 multiply: function(num)
 {
 	this.x = this.x * num;

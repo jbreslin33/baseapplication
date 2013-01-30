@@ -31,10 +31,8 @@ execute: function()
 	serverVelocity = new Vector3D();
 
         serverVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
-        // this prints out valid value ....this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.printValues();
 	
         serverVelocity.normalise();
-        //serverVelocity.printValues();
 
         if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
@@ -42,12 +40,13 @@ execute: function()
                 f = this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime;
 		
                 this.mAbilityMove.mShape.mSpeed = this.mAbilityMove.calculateSpeed(v,f);
-		this.log('speed:' + this.mAbilityMove.mShape.mSpeed);
+		//this.log('speed:' + this.mAbilityMove.mShape.mSpeed);
         }
         serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
-        
+        serverVelocity.printValues();
+       	
+ 
 	this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(serverVelocity);
-	//this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.printValues();
 },
 
 exit: function()
