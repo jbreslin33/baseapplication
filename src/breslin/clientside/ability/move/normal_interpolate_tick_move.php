@@ -22,8 +22,6 @@ enter: function()
 
 execute: function()
 {
-        this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.printValues();
-
         //to be used to setPosition
         transVector = new Vector3D();
 
@@ -33,6 +31,8 @@ execute: function()
 	
         //get the mulitplier
         multipliedRenderTime = this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime() * 1000;
+
+	this.log(multipledRenderTime);
 
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);
