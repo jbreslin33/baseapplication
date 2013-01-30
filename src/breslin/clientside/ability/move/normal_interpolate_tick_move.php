@@ -26,7 +26,6 @@ execute: function()
         transVector = new Vector3D();
 
         //copy values from mVelocity so we don't make changes to original
-        this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.printValues();
         transVector.copyValuesFrom(this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity);
 
 	
