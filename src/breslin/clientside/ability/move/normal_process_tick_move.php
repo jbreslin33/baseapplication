@@ -32,9 +32,9 @@ execute: function()
 
         serverVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
         // this prints out valid value ....this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.printValues();
-        serverVelocity.printValues();
 	
         serverVelocity.normalise();
+        serverVelocity.printValues();
 
         if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
