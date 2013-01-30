@@ -25,12 +25,15 @@ execute: function()
         // if distance exceeds threshold && server velocity is zero
         if(this.mAbilityMove.mDeltaPosition > this.mAbilityMove.mPosInterpLimitHigh && !this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())
         {
-       //         this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mCatchupProcessTickMove);
+       		//this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mCatchupProcessTickMove);
         }
         
 	serverVelocity = new Vector3D();
 
         serverVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
+        // this prints out valid value ....this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.printValues();
+        serverVelocity.printValues();
+	
         serverVelocity.normalise();
 
         if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
@@ -43,7 +46,7 @@ execute: function()
         serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
         
 	this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(serverVelocity);
-	this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.printValues();
+	//this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.printValues();
 },
 
 exit: function()

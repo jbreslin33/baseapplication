@@ -7,7 +7,7 @@ var server = dgram.createSocket("udp4");
 var mMessage = 0;
 
 var skipCounter = 0; 
-var fireNumber = 5; //no skipping of frames
+var fireNumber = 0; //no skipping of frames
 
 //constants
 mCommandOriginX      = 4;
