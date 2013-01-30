@@ -34,7 +34,7 @@ execute: function()
         // this prints out valid value ....this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.printValues();
 	
         serverVelocity.normalise();
-        serverVelocity.printValues();
+        //serverVelocity.printValues();
 
         if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
@@ -42,6 +42,7 @@ execute: function()
                 f = this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime;
 		
                 this.mAbilityMove.mShape.mSpeed = this.mAbilityMove.calculateSpeed(v,f);
+		this.log('speed:' + this.mAbilityMove.mShape.mSpeed);
         }
         serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
         
