@@ -26,6 +26,7 @@ execute: function()
         transVector = new Vector3D();
 
         //copy values from mVelocity so we don't make changes to original
+//        this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.printValues();
         transVector.copyValuesFrom(this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity);
 
 	
@@ -34,7 +35,7 @@ execute: function()
 
         //multiply our vector using render values
 	
-	transVector.printValues();
+	//transVector.printValues();
         transVector.multiply(multipliedRenderTime);
 
 	position = this.mAbilityMove.mShape.getPosition(); 

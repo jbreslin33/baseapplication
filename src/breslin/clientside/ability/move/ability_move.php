@@ -29,7 +29,6 @@ initialize: function (shapeDynamic)
 	this.mNormalInterpolateTickMove  = new NormalInterpolateTickMove(this); 
        
 	//move interpolateTick states
-        this.mInterpolateTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
         this.mInterpolateTickStateMachine.setCurrentState      (this.mNormalInterpolateTickMove);
         this.mInterpolateTickStateMachine.setPreviousState     (this.mNormalInterpolateTickMove);
         this.mInterpolateTickStateMachine.setGlobalState       (0);
