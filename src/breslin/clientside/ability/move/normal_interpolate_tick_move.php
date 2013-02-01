@@ -32,9 +32,9 @@ execute: function()
         //get the mulitplier
         multipliedRenderTime = this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime() * 1000;
 
-	this.log(multipledRenderTime);
-
         //multiply our vector using render values
+	
+	transVector.printValues();
         transVector.multiply(multipliedRenderTime);
 
 	position = this.mAbilityMove.mShape.getPosition(); 
