@@ -6,8 +6,7 @@ initialize: function (shapeDynamic)
 	//shape
     	this.mShape = shapeDynamic;
 
-	/*** Process **/
-	
+	/******************************** Process **/
 	//processTick StateMachine
         this.mProcessTickStateMachine       = new AbilityMoveStateMachine(this);    //setup the state machine
 
@@ -20,21 +19,19 @@ initialize: function (shapeDynamic)
         this.mProcessTickStateMachine.setPreviousState     (this.mNormalProcessTickMove);
         this.mProcessTickStateMachine.setGlobalState       (this.mGlobalProcessTickMove);
 
-	/*** Interpolate **/
-	
+	/************************************ Interpolate **/
 	//interpolateTick StateMachine
         this.mInterpolateTickStateMachine       = new AbilityMoveStateMachine(this);    //setup the state machine
 
 	//interpolate states
 	this.mNormalInterpolateTickMove  = new NormalInterpolateTickMove(this); 
        
-	//move interpolateTick states
+	//interpolateTick states
         this.mInterpolateTickStateMachine.setCurrentState      (this.mNormalInterpolateTickMove);
         this.mInterpolateTickStateMachine.setPreviousState     (this.mNormalInterpolateTickMove);
         this.mInterpolateTickStateMachine.setGlobalState       (0);
    
-	/** variables **/
-	 
+	/***************************************** variables **/
 	//thresholds
     	this.mPosInterpLimitHigh = .066; //how far away from server till we try to catch up
     	this.mPosInterpFactor    = 4.0;
