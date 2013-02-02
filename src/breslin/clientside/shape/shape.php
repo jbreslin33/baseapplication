@@ -74,10 +74,10 @@ log: function(msg)
 interpolateTick: function(renderTime)
 {
 	//interpolate ticks on abilitys
-        for (i = 0; i < this.mAbilityVector.length; i++)
-        {
-                this.mAbilityVector[i].interpolateTick(renderTime);
-        }
+        //for (i = 0; i < this.mAbilityVector.length; i++)
+        //{
+                this.mAbilityVector[0].interpolateTick(renderTime);
+        //}
 
 },
 /*********************************

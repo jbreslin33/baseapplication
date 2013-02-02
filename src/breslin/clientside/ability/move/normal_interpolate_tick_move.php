@@ -22,9 +22,6 @@ enter: function()
 
 execute: function()
 {
-        //this.log('index:' + this.mAbilityMove.mShape.mIndex);
-	//this is only printing out mIndex of last shape created that is the problem...	
-
         //to be used to setPosition
         transVector = new Vector3D();
 
