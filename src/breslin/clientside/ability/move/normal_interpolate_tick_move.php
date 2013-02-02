@@ -22,11 +22,13 @@ enter: function()
 
 execute: function()
 {
+        //this.log('index:' + this.mAbilityMove.mShape.mIndex);
+	//this is only printing out mIndex of last shape created that is the problem...	
+
         //to be used to setPosition
         transVector = new Vector3D();
 
         //copy values from mVelocity so we don't make changes to original
-//        this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.printValues();
         transVector.copyValuesFrom(this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity);
 
 	
