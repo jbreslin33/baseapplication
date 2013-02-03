@@ -125,7 +125,7 @@ getPosition: function()
 	y = 0; 
         z = this.mDiv.mDiv.style.top;
 
-	this.log('divX:' + x + ' divY:' + y + ' divZ:' + z); 
+	//this.log('divX:' + x + ' divY:' + y + ' divZ:' + z); 
 
 	x = x.replace(/\D/g,'');	
 	z = z.replace(/\D/g,'');	
@@ -172,6 +172,8 @@ this.log('l:' + this.mLocal);
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
         this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
+        //this.mServerCommandCurrent.mPosition.printValues();
+	//good here
 },
 
 spawnShape: function(position)
