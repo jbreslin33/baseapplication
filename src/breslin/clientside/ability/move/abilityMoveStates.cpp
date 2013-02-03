@@ -187,14 +187,15 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 
         //copy values from mVelocity so we don't make changes to original
         transVector->copyValuesFrom(abilityMove->mShape->mCommandToRunOnShape->mVelocity);
-	transVector->printValues();
 	//LogString("x:%d",transVector->x);
 	//LogString("z:%d",transVector->z);
         //get the mulitplier
         float multipliedRenderTime = abilityMove->mShape->mApplicationBreslin->getRenderTime() * 1000;
+//	LogString("m:%f",multipliedRenderTime);
 
         //multiply our vector using render values
         transVector->multiply(multipliedRenderTime); 
+	transVector->printValues();
 	//LogString("r:%f",multipliedRenderTime);
 	//LogString("r:%f",abilityMove->mShape->mApplicationBreslin->getRenderTime());
 

@@ -83,9 +83,14 @@ void Vector3D::multiply(float num)
 */
 multiply: function(num)
 {
+	this.x = parseFloat(this.x) * num;
+	this.y = parseFloat(this.y) * num;
+	this.z = parseFloat(this.z) * num;
+	/*	
 	this.x = this.x * num;
 	this.y = this.y * num;
 	this.z = this.z * num;
+*/
 },
 
 add: function(v)
