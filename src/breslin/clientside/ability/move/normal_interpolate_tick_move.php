@@ -39,7 +39,8 @@ execute: function()
         //multiply our vector using render values
 	
         transVector.multiply(multipliedRenderTime);
-	transVector.printValues();
+	//transVector.printValues();
+	//good thru here
 
 	position = this.mAbilityMove.mShape.getPosition(); 
 	x = position.x; 
@@ -56,6 +57,7 @@ execute: function()
 
 	//add our velocity to current position
         transVector.add(actualPosition);
+	transVector.printValues();
 
 	//set new position
 	this.mAbilityMove.mShape.setPosition(transVector);

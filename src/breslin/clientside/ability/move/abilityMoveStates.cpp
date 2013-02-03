@@ -195,7 +195,6 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 
         //multiply our vector using render values
         transVector->multiply(multipliedRenderTime); 
-	transVector->printValues();
 	//LogString("r:%f",multipliedRenderTime);
 	//LogString("r:%f",abilityMove->mShape->mApplicationBreslin->getRenderTime());
 
@@ -203,6 +202,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 //	LogString("z:%f",transVector->x);
         //add our velocity to current position
         transVector->add(abilityMove->mShape->getPosition());
+	transVector->printValues();
         //set new position
         
 	abilityMove->mShape->setPosition(transVector);
