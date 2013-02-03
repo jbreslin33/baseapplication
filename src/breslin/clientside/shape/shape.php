@@ -125,6 +125,8 @@ getPosition: function()
 	y = 0; 
         z = this.mDiv.mDiv.style.top;
 
+	this.log('divX:' + x + ' divY:' + y + ' divZ:' + z); 
+
 	x = x.replace(/\D/g,'');	
 	z = z.replace(/\D/g,'');	
 	
