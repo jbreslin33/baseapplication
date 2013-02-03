@@ -187,6 +187,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 
         //copy values from mVelocity so we don't make changes to original
         transVector->copyValuesFrom(abilityMove->mShape->mCommandToRunOnShape->mVelocity);
+	transVector->printValues();
 	//LogString("x:%d",transVector->x);
 	//LogString("z:%d",transVector->z);
         //get the mulitplier

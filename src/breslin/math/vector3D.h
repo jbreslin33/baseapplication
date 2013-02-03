@@ -33,6 +33,8 @@ float length();
 bool isZero();
 void zero();
 
+void printValues();
+
 void normalise();
 
 void multiply(float num);

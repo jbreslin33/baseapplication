@@ -1,5 +1,7 @@
 #include "vector3D.h"
 
+//log
+#include "../clientside/tdreamsock/dreamSockLog.h"
 
 #include <math.h>
 
@@ -36,6 +38,12 @@ bool Vector3D::isZero()
 	{
 		return false;
 	}
+}
+
+void Vector3D::printValues()
+{
+	LogString("x:%f",x);
+	LogString("z:%f",z);
 }
 
 void Vector3D::zero()

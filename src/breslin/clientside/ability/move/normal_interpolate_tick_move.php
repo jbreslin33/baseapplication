@@ -27,13 +27,14 @@ execute: function()
 
         //copy values from mVelocity so we don't make changes to original
         transVector.copyValuesFrom(this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity);
-
+	transVector.printValues();
+	
         //get the mulitplier
-        multipliedRenderTime = this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime() * 1000;
+        parsedRenderTime = parseFloat(this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime());
+	multipliedRenderTime = parsedRenderTime * 1000;
 
         //multiply our vector using render values
 	
-	//transVector.printValues();
         transVector.multiply(multipliedRenderTime);
 
 	position = this.mAbilityMove.mShape.getPosition(); 
@@ -55,7 +56,6 @@ execute: function()
 	//set new position
 	this.mAbilityMove.mShape.setPosition(transVector);
 	
-	transVector.printValues();
 /*
         if (abilityMove->mShape->mLocal == 1)
         {
