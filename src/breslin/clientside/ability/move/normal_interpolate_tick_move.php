@@ -40,30 +40,9 @@ execute: function()
 	
         transVector.multiply(multipliedRenderTime);
 	//transVector.printValues();
-	//good thru here
 
-/*
-	position = this.mAbilityMove.mShape.getPosition(); 
-	x = position.x; 
-	y = 0; 
-	z = position.z;	
-
-	x = x.replace("px","");
-	z = z.replace("px","");
-
-	actualPosition = new Vector3D();
-	actualPosition.x = x; 
-	actualPosition.y = 0; 
-	actualPosition.z = z; 
-
-	//add our velocity to current position
-        transVector.add(actualPosition);
-*/
-	//this.mAbilityMove.mShape.getPosition().printValues();
 	transVector.add(this.mAbilityMove.mShape.getPosition());
 	//add our velocity to current position
-
-	//transVector.printValues();
 
 	//set new position
 	this.mAbilityMove.mShape.setPosition(transVector);

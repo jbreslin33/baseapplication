@@ -109,14 +109,13 @@ Shape::translate(Vector3D* translateVector, int perspective)
 
 setPosition: function(position)
 {
-
+	position.printValues();
 	//set a member position because we are going to have to modify the div's position
         modx = position.x+"px"; 
         mody = position.z+"px"; 
         
         this.mDiv.mDiv.style.left = modx;
         this.mDiv.mDiv.style.top = mody;
-
 },
 
 getPosition: function()
