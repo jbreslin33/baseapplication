@@ -202,7 +202,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 //	LogString("z:%f",transVector->x);
         //add our velocity to current position
         transVector->add(abilityMove->mShape->getPosition());
-	transVector->printValues();
+        abilityMove->mShape->getPosition()->printValues();
         //set new position
         
 	abilityMove->mShape->setPosition(transVector);
