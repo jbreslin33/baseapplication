@@ -21,13 +21,6 @@ printValues: function()
 	this.log('x: ' + this.x + 'y: ' + this.y + 'z: ' + this.z); 	
 },
 
-initialize: function(x1,y1,z1)
-{
-	this.x = x1;
-	this.y = y1;
-	this.z = z1;
-},
-
 length: function()
 {
 /*
@@ -98,6 +91,9 @@ add: function(v)
 	this.x = parseFloat(this.x) + parseFloat(v.x);
 	this.y = 0;
 	this.z = parseFloat(this.z) + parseFloat(v.z);
+
+	this.x = parseFloat(this.x);
+	this.z = parseFloat(this.z);
 },
 
 subtract: function(vectorToSubtract)

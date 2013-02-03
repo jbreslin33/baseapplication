@@ -42,6 +42,7 @@ execute: function()
 	//transVector.printValues();
 	//good thru here
 
+/*
 	position = this.mAbilityMove.mShape.getPosition(); 
 	x = position.x; 
 	y = 0; 
@@ -57,6 +58,10 @@ execute: function()
 
 	//add our velocity to current position
         transVector.add(actualPosition);
+*/
+	transVector.add(this.mAbilityMove.mShape.getPosition());
+	//add our velocity to current position
+
 	transVector.printValues();
 
 	//set new position

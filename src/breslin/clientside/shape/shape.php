@@ -128,7 +128,11 @@ getPosition: function()
 	x = x.replace(/\D/g,'');	
 	z = z.replace(/\D/g,'');	
 	
-	v = new Vector3D(x,y,z);
+	v = new Vector3D();
+
+	v.x = x;	
+	v.y = y;	
+	v.z = z;	
 
 	return v;
 },
