@@ -28,10 +28,14 @@ io.sockets.on('connection', function (socket)
         socket.on('browser_message', function(message,remote)
         {
                 mMessage = message;
-                
+               
+		console.log('mMessage:' + mMessage);
+
+		mess = parseInt(mMessage);
+ 
                 //send to c++ server
                 var buf = new Buffer(1);
-                buf.writeInt8(-101,0);
+                buf.writeInt8(mess,0);
                 server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
                 {
                         console.log('sent connect');
@@ -151,7 +155,6 @@ server.on("message", function (msg, rinfo)
 		
 			} //  end while count < length
 
-			console.log("dataString:" + dataString);	
 			io.sockets.emit('news', dataString)
 			skipCounter = 0;
 

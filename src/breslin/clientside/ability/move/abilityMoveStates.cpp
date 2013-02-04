@@ -69,8 +69,6 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
 
 	Vector3D* serverVelocity = new Vector3D();
        	serverVelocity->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
-//	LogString("sx:%d",serverVelocity->x);
-//	LogString("sz:%d",serverVelocity->z);
         serverVelocity->normalise();
 
         if(abilityMove->mShape->mCommandToRunOnShape->mFrameTime != 0)
@@ -81,7 +79,6 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
         }
 
        	serverVelocity->multiply(abilityMove->mShape->mSpeed);
-        //abilityMove->regulate(serverVelocity);
         abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(serverVelocity);
 }
 void Normal_ProcessTick_Move::exit(AbilityMove* abilityMove)
@@ -187,30 +184,24 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 
         //copy values from mVelocity so we don't make changes to original
         transVector->copyValuesFrom(abilityMove->mShape->mCommandToRunOnShape->mVelocity);
-	//LogString("x:%d",transVector->x);
-	//LogString("z:%d",transVector->z);
-        //get the mulitplier
+        
+	//get the mulitplier
         float multipliedRenderTime = abilityMove->mShape->mApplicationBreslin->getRenderTime() * 1000;
-//	LogString("m:%f",multipliedRenderTime);
 
         //multiply our vector using render values
         transVector->multiply(multipliedRenderTime); 
-	//LogString("r:%f",multipliedRenderTime);
-	//LogString("r:%f",abilityMove->mShape->mApplicationBreslin->getRenderTime());
 
-//	LogString("x:%f",transVector->x);
-//	LogString("z:%f",transVector->x);
         //add our velocity to current position
         transVector->add(abilityMove->mShape->getPosition());
-        //abilityMove->mShape->getPosition()->printValues();
-        //set new position
         
+	//set new position
 	abilityMove->mShape->setPosition(transVector);
 	//abliityMove->mShape->mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(0,20,20));
- // Position it at 500 in Z direction
- //   mCamera->setPosition(Ogre::Vector3(0,20,20));
-    // Look back along -Z
-  //  mCamera->lookAt(Ogre::Vector3(0,0,0));
+ 	// Position it at 500 in Z direction
+ 	//   mCamera->setPosition(Ogre::Vector3(0,20,20));
+    	// Look back along -Z
+  	//  mCamera->lookAt(Ogre::Vector3(0,0,0));
+
 	if (abilityMove->mShape->mLocal == 1)
 	{
 		abilityMove->mShape->mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(transVector->x,transVector->y + 20,transVector->z + 20));

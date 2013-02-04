@@ -70,7 +70,7 @@ sendConnect: function()
 */
 sendConnect: function()
 {
-	this.mSocket.emit('browser_message', '-101');
+	this.mSocket.emit('browser_message', '-111');
 },
 /*
  	this.mSocket.on('news', function (data)
