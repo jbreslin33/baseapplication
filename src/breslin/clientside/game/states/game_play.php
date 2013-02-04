@@ -26,23 +26,7 @@ execute: function()
 
         //network outgoing
         this.mGame.sendByteBuffer();
-	
-
-	//don't need to do this as it's being done in main.html
-       	/*	
-	if (this.mGame.mPollDelayCounter > this.mGame.mPollDelay)
-	{ 
-		//network ingoing
-        	this.mGame.checkForByteBuffer();
-		
-		//reset counter
-		this.mGame.mPollDelayCounter = 0;
-	}
-	
-	this.mGame.mPollDelayCounter++;	
-	*/
-
-},
+},	
 
 exit: function()
 {
