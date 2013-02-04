@@ -347,7 +347,9 @@ void Server::readPackets()
 			case mMessageFrameBrowser:
 				//grab clientID
 				int clientID = mes.ReadByte();
-                                
+                               
+				LogString("clientID:%d",clientID);
+ 
 				// Skip sequences
                                 seq = mes.ReadShort();
                                
