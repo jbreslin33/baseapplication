@@ -39,13 +39,17 @@ io.sockets.on('connection', function (socket)
 		mess = parseInt(mMessage);
  
                 //send to c++ server
-                var buf = new Buffer(1);
+                var buf = new Buffer(22);
                 buf.writeInt8(mess,0);
+
+		mClientIDCounter++;
+		socket.mClientID = mClientIDCounter;
+                
+		buf.writeInt8(socket.mClientID,1);
+
                 server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
                 {
-			mClientIDCounter++;
-			socket.mClientID = mClientIDCounter;
-                        console.log('sent connect from mClientID' + socket.mClientID);
+                	console.log('sent connect from mClientID' + socket.mClientID);
                 });
         });
 });
