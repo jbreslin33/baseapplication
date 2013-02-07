@@ -25,7 +25,7 @@ app.get('/', function (req, res) {
 
 io.sockets.on('connection', function (socket) 
 {
-        socket.on('browser_message', function(message,remote)
+        socket.on('send_connect', function(message,remote)
         {
                 mMessage = message;
                

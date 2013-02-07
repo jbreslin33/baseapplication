@@ -23,9 +23,11 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/main.html');
 });
 
+//when a browser client first connects, this get's called.
+//then we parlay that into a send to the c++ server
 io.sockets.on('connection', function (socket) 
 {
-        socket.on('browser_message', function(message,remote)
+        socket.on('send_connect', function(message,remote)
         {
                 mMessage = message;
                
