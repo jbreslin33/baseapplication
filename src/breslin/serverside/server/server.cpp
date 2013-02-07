@@ -247,6 +247,7 @@ int Server::getPacket(char *data, struct sockaddr *from)
 }
 
 //this loops thru each client instance and then calls their sendPacket(mess) function
+//we are right here I need to just send to one client for all browsers then he should broadcast
 void Server::sendPackets()
 {
 	// Check if the server is set up
