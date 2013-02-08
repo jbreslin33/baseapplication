@@ -438,12 +438,12 @@ std::string Game::toString(int i)
 
 
 //send to updates to all clients about all shapes
+//do I need to loop this for every client????
 void Game::sendCommand(void)
 {
 	// Fill messages..for all clients
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
-
 		//standard initialize of mMessage for client in this case
 		mServer->mClientVector.at(i)->mMessage.Init(mServer->mClientVector.at(i)->mMessage.outgoingData,
 			sizeof(mServer->mClientVector.at(i)->mMessage.outgoingData));

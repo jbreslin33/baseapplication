@@ -55,6 +55,9 @@ Client::Client(Server* server, struct sockaddr *address)
 Client::Client(Server* server, struct sockaddr *address, int clientID)
 {
 	//set client id as this is going to be a browser client
+	//-1 = browser client to udp_server.js, no shape 
+	//0 = c++ client, obviously a shape 
+	//1 or greater than client represents a browser client and should have a shape
 	mClientID = clientID;
 
 	//server
