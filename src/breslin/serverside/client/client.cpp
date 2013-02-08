@@ -108,6 +108,22 @@ void Client::sendAllShapes()
 	}
 }
 
+void Client::sendAllShapesBrowser()
+{
+	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
+	{
+		if (mShape != mServer->mGame->mShapeVector.at(i))
+		{
+			//write it
+			mServer->mGame->mShapeVector.at(i)->writeAdd(this);
+		
+			//send it
+			SendPacket(&mServer->mMessage);
+		}
+	}
+}
+
+
 void Client::SendPacket(Message *theMes)
 {
 	// Check that everything is set up
