@@ -190,7 +190,7 @@ void Shape::sendShapeToClients()
 		writeAdd(clientToSendTo);
 		
 		//send it
-		clientToSendTo->SendPacket(&clientToSendTo->mMessage);
+		clientToSendTo->SendPacket(&mGame->mServer->mMessage);
 	}
 }
 
@@ -301,34 +301,34 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 
 void Shape::writeAdd(Client* client)
 {
-	client->mMessage.Init(client->mMessage.outgoingData, sizeof(client->mMessage.outgoingData));
+	mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
 
-	client->mMessage.WriteByte(mGame->mServer->mAddShape); // type
+	mGame->mServer->mMessage.WriteByte(mGame->mServer->mAddShape); // type
 
 	if (client == mClient)
 	{
-		client->mMessage.WriteByte(1);
+		mGame->mServer->mMessage.WriteByte(1);
 		LogString("write 1");
 	}
 	else
 	{
-		client->mMessage.WriteByte(0);
+		mGame->mServer->mMessage.WriteByte(0);
 		LogString("write 0");
 	}
-	client->mMessage.WriteByte(mIndex);
+	mGame->mServer->mMessage.WriteByte(mIndex);
 			
-	client->mMessage.WriteFloat(mSceneNode->getPosition().x);
-	client->mMessage.WriteFloat(mSceneNode->getPosition().y);
-	client->mMessage.WriteFloat(mSceneNode->getPosition().z);
+	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().x);
+	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().y);
+	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().z);
 
-	client->mMessage.WriteFloat(mRotation->x);
-	client->mMessage.WriteFloat(mRotation->z);
+	mGame->mServer->mMessage.WriteFloat(mRotation->x);
+	mGame->mServer->mMessage.WriteFloat(mRotation->z);
 			
 	//mesh
-	client->mMessage.WriteByte(mMeshCode);
+	mGame->mServer->mMessage.WriteByte(mMeshCode);
 
 	//animation
-	client->mMessage.WriteByte(mAnimated);
+	mGame->mServer->mMessage.WriteByte(mAnimated);
 
 	//for the browsers
 	insertIntoDB();

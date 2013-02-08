@@ -442,6 +442,7 @@ std::string Game::toString(int i)
 void Game::sendCommand(void)
 {
 	// Fill messages..for all clients
+/*
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
 		//standard initialize of mMessage for client in this case
@@ -462,7 +463,25 @@ void Game::sendCommand(void)
 			mShapeVector.at(j)->addToMoveMessage(&mServer->mClientVector.at(i)->mMessage);
 		}
 	}
+*/
 
+		//standard initialize of mMessage for client in this case
+		mServer->mMessage.Init(mServer->mMessage.outgoingData,
+			sizeof(mServer->mMessage.outgoingData));
+
+		//start filling said mMessage that belongs to client
+		mServer->mMessage.WriteByte(mServer->mMessageFrame);			// type
+		
+		mServer->mMessage.WriteShort(mOutgoingSequence);
+	
+		//frame time	
+		mServer->mMessage.WriteByte(mFrameTime);
+
+		//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
+		for (unsigned int j = 0; j < mShapeVector.size(); j++)
+		{                         //the client to send to's message        //the shape command it's about
+			mShapeVector.at(j)->addToMoveMessage(&mServer->mMessage);
+		}
 /*
 	//randomly don't send command packets.... 
 	short randomNumber = 0;	
@@ -504,11 +523,11 @@ void Game::sendExitNotification()
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
 
-		mServer->mClientVector.at(i)->mMessage.Init(mServer->mClientVector.at(i)->mMessage.outgoingData,
-			sizeof(mServer->mClientVector.at(i)->mMessage.outgoingData));
+		mServer->mMessage.Init(mServer->mMessage.outgoingData,
+			sizeof(mServer->mMessage.outgoingData));
 
-		mServer->mClientVector.at(i)->mMessage.WriteByte(mMessageServerExit);	// type
-		mServer->mClientVector.at(i)->mMessage.WriteShort(mServer->mClientVector.at(i)->mOutgoingSequence);
+		mServer->mMessage.WriteByte(mMessageServerExit);	// type
+		mServer->mMessage.WriteShort(mOutgoingSequence);
 	}
 
 	mServer->sendPackets();

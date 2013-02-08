@@ -25,6 +25,7 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/main_lan.html');
 });
 
+
 //when a browser client first connects, this get's called.
 //then we parlay that into a send to the c++ server
 //could i not just assign an id here and then pass that to c++ as it's just going to be a browser id and no one else will use it.
@@ -39,7 +40,7 @@ io.sockets.on('connection', function (socket)
 		mess = parseInt(mMessage);
  
                 //send to c++ server
-                var buf = new Buffer(22);
+                var buf = new Buffer(2);
                 buf.writeInt8(mess,0);
 
 		mClientIDCounter++;
@@ -57,11 +58,13 @@ io.sockets.on('connection', function (socket)
 server.on("message", function (msg, rinfo)
 {
 
+
 	//to break out of message when it's over
 	var length = msg.length;
 	var count = 0;
 
         var type   = msg.readInt8(0);
+	console.log('type:' + type);
 	count++
        
         //add shape
@@ -182,3 +185,12 @@ server.on("listening", function ()
 });
 
 server.bind(41234);
+
+//send initial connection to c++ server
+//send to c++ server
+var buf = new Buffer(1);
+buf.writeInt8(-121,0);
+server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
+{
+	console.log('sent connect from node');
+});

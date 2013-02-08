@@ -42,8 +42,6 @@ Client::Client(Server* server, struct sockaddr *address)
 
 	mLastMessageTime  = 0;
 	mConnectionState  = DREAMSOCK_CONNECTING;
-	mOutgoingSequence = 1;
-	mIncomingSequence = 0;
 
 	SetSocketAddress(address);
 
@@ -65,8 +63,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 
 	mLastMessageTime  = 0;
 	mConnectionState  = DREAMSOCK_CONNECTING;
-	mOutgoingSequence = 1;
-	mIncomingSequence = 0;
 
 	SetSocketAddress(address);
 
@@ -79,19 +75,10 @@ Client::~Client()
 	mServer->mNetwork->dreamSock_CloseSocket(mServer->mNetwork->mSocket);
 }
 
-void Client::sendConnect()
-{
-	//send a connect message
-	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-	mMessage.WriteByte(mServer->mConnect);	// type
-	SendPacket(&mMessage);
-}
-
 void Client::createShape()
 {
 	//create the shape for this client -- the avatar
 	mShape = new Shape(mServer->mGame->getOpenIndex(),mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f,1,false); 
-	
 }
 
 void Client::remove()
@@ -116,7 +103,7 @@ void Client::sendAllShapes()
 			mServer->mGame->mShapeVector.at(i)->writeAdd(this);
 		
 			//send it
-			SendPacket(&mMessage);
+			SendPacket(&mServer->mMessage);
 		}
 	}
 }
@@ -145,7 +132,7 @@ void Client::SendPacket(Message *theMes)
 
 	if(type > 0)
 	{
-		mOutgoingSequence++;
+		mServer->mGame->mOutgoingSequence++;
 	}
 }
 

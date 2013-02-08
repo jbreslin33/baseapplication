@@ -47,6 +47,12 @@ public:
 	//network
 	Network* mNetwork;
 
+	//Message
+	Message mMessage;
+
+	//incoming
+	signed short mIncomingSequence;
+
 	//address
 	const char *mLocalIP;
 
@@ -56,6 +62,7 @@ public:
 
 	static const int mConnect            = -101;
 	static const int mConnectBrowser     = -111;
+	static const int mConnectNode        = -121;
 	
 	static const int mDisconnect         = -102;
 	static const int mDisconnectBrowser  = -112;

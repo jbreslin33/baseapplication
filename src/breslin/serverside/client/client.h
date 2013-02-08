@@ -68,8 +68,6 @@ public:
 
 	int				mConnectionState;		// Connecting, connected, disconnecting, disconnected
 
-	signed short	mOutgoingSequence;		// OutFgoing packet sequence
-	signed short	mIncomingSequence;		// Incoming packet sequence
 	signed short	mDroppedPackets;			// Dropped packets
 
 	struct sockaddr	mMyaddress;				// Socket address
@@ -78,7 +76,6 @@ public:
 
 public:
 	virtual void createShape();
-	void sendConnect();
 	void remove();
 	void			SendPacket(Message *message);
 	void sendAllShapes();
@@ -86,7 +83,6 @@ public:
 	struct sockaddr *GetSocketAddress(void) { return &mMyaddress; }
 	void			SetSocketAddress(struct sockaddr *address) { memcpy(&mMyaddress, address, sizeof(struct sockaddr)); }
 
-	Message	mMessage;
 
     Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the clients personal avatar..
 

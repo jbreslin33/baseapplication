@@ -35,6 +35,8 @@ Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 	// Create network
 	mNetwork = new Network(localIP, port);
 
+	mIncomingSequence = 0;
+
 	init = true;
 }
 
@@ -58,8 +60,11 @@ void Server::createClient(struct sockaddr *address)
 void Server::createClient(struct sockaddr * address, int clientID)
 {
 	Client* client = new Client(this, address, clientID);
-	
-	client->createShape();
+
+	if (clientID != -1)
+	{	
+		client->createShape();
+	}
 	
 	// that's that as we cannot communicate back to the browser from here..unless this is where we change db or whatever medium we will use to communicate with browser.
 }
@@ -79,13 +84,14 @@ void Server::sendRemoveShape(Shape* shape)
 	// Send 'DREAMSOCK_MES_REMOVESHAPE' message to every client
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
-		mClientVector.at(i)->mMessage.Init(mClientVector.at(i)->mMessage.outgoingData,
-			sizeof(mClientVector.at(i)->mMessage.outgoingData));
+		mMessage.Init(mMessage.outgoingData,
+			sizeof(mMessage.outgoingData));
 
-		mClientVector.at(i)->mMessage.WriteByte(mRemoveShape);	// type
-		mClientVector.at(i)->mMessage.WriteByte(index);		// index
+		mMessage.WriteByte(mRemoveShape);	// type
+		mMessage.WriteByte(index);		// index
 	}
 	sendPackets();
+
 }
 
 void Server::parsePacket(Message *mes, struct sockaddr *address)
@@ -101,6 +107,15 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		LogString("LIBRARY: Server: a c++ or java client connected succesfully");
 	}
 	
+	else if (type == mConnectNode)
+	{
+		int clientID = mes->ReadByte();
+
+		createClient(address,-1);
+
+		LogString("LIBRARY: Server: a node.js client connected succesfully");
+	}	
+
 	else if (type == mConnectBrowser)
 	{
 		int clientID = mes->ReadByte();
@@ -150,15 +165,15 @@ void Server::checkClientSequence(int type, Client* client, Message* mes)
 
        	signed short sequence         = mes->ReadShort();
 
-        if(sequence <= client->mIncomingSequence)
+        if(sequence <= mIncomingSequence)
         {
              	LogString("LIB: Server: Sequence mismatch (sequence: %ld <= incoming seq: %ld)",
-                       		sequence, client->mIncomingSequence);
+                       		sequence, mIncomingSequence);
         }
 
-        client->mDroppedPackets  = sequence - client->mIncomingSequence - 1;
+        client->mDroppedPackets  = sequence - mIncomingSequence - 1;
         //set mIncomingSequence to current one that just came in for next time comparison...
-        client->mIncomingSequence = sequence;
+        mIncomingSequence = sequence;
 
        	// Wait for one message before setting state to connected
        	if(client->mConnectionState == DREAMSOCK_CONNECTING)
@@ -256,10 +271,14 @@ void Server::sendPackets()
 
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
-		if(mClientVector.at(i)->mMessage.GetSize() == 0)
+		if(mMessage.GetSize() == 0)
 			continue;
 
-		mClientVector.at(i)->SendPacket(&mClientVector.at(i)->mMessage);
+		//is the a browser client but not THE browser client which is -1 normal c++ clients are 0 if so skip
+		if(mClientVector.at(i)->mClientID > 0)
+			continue; 
+
+		mClientVector.at(i)->SendPacket(&mMessage);
 	}
 }
 
