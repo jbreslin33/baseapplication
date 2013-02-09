@@ -50,9 +50,6 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 	mKeyCurrent = 0;
 	mKeyLast = 0;
 
-	//sequence
-        mOutgoingSequence               = 1;
-
 	//time
     	mRunNetworkTime = 0.0f;
 	mFrameTimeServer = 0.0f;
@@ -246,19 +243,8 @@ void Game::sendByteBuffer()
 		//WRITE: type
 		byteBuffer->WriteByte(mMessageFrame);
 
-		//WRITE: sequence
-		byteBuffer->WriteShort(mOutgoingSequence);
-
-        	mOutgoingSequence++; //increase for next time...
-
-        	// Add to the message
-        	//byteBuffer->WriteByte(flags);
-
-        	//if(flags & mCommandKey)
-        	//{
-                	//WRITE: key
-                	byteBuffer->WriteByte(mKeyCurrent);
-        	//}
+                //WRITE: key
+               	byteBuffer->WriteByte(mKeyCurrent);
 
         	//set 'last' commands for diff
         	mKeyLast = mKeyCurrent;

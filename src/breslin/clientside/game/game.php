@@ -34,9 +34,6 @@ initialize: function(applicationBreslin)
         this.mKeyCurrent = 0;
         this.mKeyLast = 0;
 
-        //sequence
-        this.mOutgoingSequence               = 1;
-
         //time
         this.mRunNetworkTime = 0.0;
 	this.mPollDelay = 100;
@@ -177,72 +174,17 @@ sendByteBuffer: function()
                 }
 
                 // Send the packet
-        	message = '1 ' + this.mOutgoingSequence + ' ' + this.mKeyCurrent;
+        	message = '1 ' + this.mKeyCurrent;
         	this.mApplicationBreslin.mNetwork.mSocket.emit('send_move', message);
         	this.log('message:' + message);
 
                 //set 'last' commands for diff
                 this.mKeyLast = this.mKeyCurrent;
                 
-		this.mOutgoingSequence++; //increase for next time...
-		
 		//reset network time so we can start count anew
 		this.mRunNetworkTime = 0.0;
 	}
 },
-/*
-void Game::sendByteBuffer()
-{
-        mRunNetworkTime += mApplicationBreslin->getRenderTime() * 1000.0f;
-
-        // Framerate is too high
-        if(mRunNetworkTime > (1000 / 60))
-        {
-                // Build delta-compressed move command
-                int flags = 0;
-
-                //if key has not been changed return having done nothing
-                if(mKeyLast != mKeyCurrent)
-                {
-                        flags |= mCommandKey;
-                }
-                else
-                {
-                        return;
-                }
-
-                //create byteBuffer
-                ByteBuffer* byteBuffer = new ByteBuffer();
-
-                //WRITE: type
-                byteBuffer->WriteByte(mMessageFrame);
-
-                //WRITE: sequence
-                byteBuffer->WriteShort(mOutgoingSequence);
-
-                mOutgoingSequence++; //increase for next time...
-
-                // Add to the message
-                byteBuffer->WriteByte(flags);
-
-                if(flags & mCommandKey)
-                {
-                        //WRITE: key
-                        byteBuffer->WriteByte(mKeyCurrent);
-                }
-
-                //set 'last' commands for diff
-                mKeyLast = mKeyCurrent;
-
-                // Send the packet
-                mApplicationBreslin->mNetwork->send(byteBuffer);
-
-                mRunNetworkTime = 0.0f;
-        }
-}
-
-
-*/
 
 /***************************************
 *                       INPUT

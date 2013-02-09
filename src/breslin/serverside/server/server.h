@@ -50,9 +50,6 @@ public:
 	//Message
 	Message mMessage;
 
-	//incoming
-	signed short mIncomingSequence;
-
 	//address
 	const char *mLocalIP;
 
@@ -92,7 +89,7 @@ public:
 	void readDB();
 	void readPackets();
 	void parsePacket(Message *mes, struct sockaddr *address);
-	void checkClientSequence(int type, Client* client, Message* mes);
+	void checkClientQuit(int type, Client* client, Message* mes);
 	
 	//port
 	int	getPort() { return port; }

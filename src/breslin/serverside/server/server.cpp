@@ -35,8 +35,6 @@ Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 	// Create network
 	mNetwork = new Network(localIP, port);
 
-	mIncomingSequence = 0;
-
 	init = true;
 }
 
@@ -136,7 +134,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				client = mClientVector.at(i);
-				checkClientSequence(type,client,mes);
+				checkClientQuit(type,client,mes);
 			}
 		}
 	}
@@ -149,14 +147,14 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
 				client = mClientVector.at(i);
-				checkClientSequence(type,client,mes);
+				checkClientQuit(type,client,mes);
 			}
 		}
 
 	} 
 }
 
-void Server::checkClientSequence(int type, Client* client, Message* mes)
+void Server::checkClientQuit(int type, Client* client, Message* mes)
 {
 	if (type == mDisconnect || type == mDisconnectBrowser)
 	{
@@ -165,18 +163,6 @@ void Server::checkClientSequence(int type, Client* client, Message* mes)
                 return;
 	}
 	client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
-
-       	signed short sequence         = mes->ReadShort();
-
-        if(sequence <= mIncomingSequence)
-        {
-             	LogString("LIB: Server: Sequence mismatch (sequence: %ld <= incoming seq: %ld)",
-                       		sequence, mIncomingSequence);
-        }
-
-        client->mDroppedPackets  = sequence - mIncomingSequence - 1;
-        //set mIncomingSequence to current one that just came in for next time comparison...
-        mIncomingSequence = sequence;
 
        	// Wait for one message before setting state to connected
        	if(client->mConnectionState == DREAMSOCK_CONNECTING)
@@ -343,15 +329,11 @@ void Server::readPackets()
 
 			type = mes.ReadByte();
 			LogString("type:%d",type);	
-			//sequence variable			
-			signed short seq = 0;
 
 			// Check the type of the message
 			switch(type)
 			{
 			case mMessageFrame:
-				// Skip sequences
-				seq = mes.ReadShort();
 				
 				//let's try this with shapes instead.....
 				for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
@@ -373,9 +355,6 @@ void Server::readPackets()
                                
 				LogString("clientID:%d",clientID);
  
-				// Skip sequences
-                                seq = mes.ReadShort();
-                               
 				 //let's try this with shapes instead.....
                                 for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
                                 {
