@@ -185,9 +185,18 @@ void Shape::sendShapeToClients()
 	for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
 	{
 		Client* clientToSendTo = mGame->mServer->mClientVector.at(i);
-		
-		//write it
-		writeAdd(clientToSendTo);
+	
+		LogString("clientID in sendShapeToClients:%d",mGame->mServer->mClientVector.at(i)->mClientID);
+		if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
+		{
+			LogString("writeAddBrowser!!!!!!!!!!!!");
+			writeAddBrowser(clientToSendTo);
+		}
+		if (mGame->mServer->mClientVector.at(i)->mClientID == 0)
+		{	
+			LogString("writeAdd!!!!!!!!!!!!!!!");
+			writeAdd(clientToSendTo);
+		}		
 		
 		//send it
 		clientToSendTo->SendPacket(&mGame->mServer->mMessage);
@@ -329,14 +338,40 @@ void Shape::writeAdd(Client* client)
 
 	//animation
 	mGame->mServer->mMessage.WriteByte(mAnimated);
-
-	//for the browsers
-	insertIntoDB();
 }
 
-void Shape::insertIntoDB()
+void Shape::writeAddBrowser(Client* client)
 {
+	mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
+
+	mGame->mServer->mMessage.WriteByte(mGame->mServer->mAddShape); // type
 	
+	mGame->mServer->mMessage.WriteByte(client->mClientID); //client id for browsers 
+
+	if (client == mClient)
+	{
+		mGame->mServer->mMessage.WriteByte(1);
+		LogString("write 1");
+	}
+	else
+	{
+		mGame->mServer->mMessage.WriteByte(0);
+		LogString("write 0");
+	}
+	mGame->mServer->mMessage.WriteByte(mIndex);
+			
+	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().x);
+	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().y);
+	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().z);
+
+	mGame->mServer->mMessage.WriteFloat(mRotation->x);
+	mGame->mServer->mMessage.WriteFloat(mRotation->z);
+			
+	//mesh
+	mGame->mServer->mMessage.WriteByte(mMeshCode);
+
+	//animation
+	mGame->mServer->mMessage.WriteByte(mAnimated);
 }
 
 int Shape::setFlag()

@@ -115,7 +115,7 @@ void Client::sendAllShapesBrowser()
 		if (mShape != mServer->mGame->mShapeVector.at(i))
 		{
 			//write it
-			mServer->mGame->mShapeVector.at(i)->writeAdd(this);
+			mServer->mGame->mShapeVector.at(i)->writeAddBrowser(this);
 		
 			//send it
 			SendPacket(&mServer->mMessage);

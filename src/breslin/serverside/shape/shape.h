@@ -123,6 +123,7 @@ void setKeyDirection();
 void setValues();
 
 void writeAdd(Client* client);
+void writeAddBrowser(Client* client);
 void insertIntoDB();
 
 void sendShapeToClients();

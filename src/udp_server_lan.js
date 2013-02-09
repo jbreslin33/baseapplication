@@ -109,21 +109,23 @@ server.on("message", function (msg, rinfo)
 	//this is getting called 2 times for some reason
         if (type == -103)
         { 
-                var client = msg.readInt8(1);
-                var index  = msg.readInt8(2);
-                var xpos   = msg.readFloatLE(3);
-                var ypos   = msg.readFloatLE(7);
-                var zpos   = msg.readFloatLE(11);
-                var xrot   = msg.readFloatLE(15);
-                var zrot   = msg.readFloatLE(19);
-                var mesh   = msg.readInt8(23);
-                var anim   = msg.readInt8(24);
+                var clientID = msg.readInt8(1);
+                var client   = msg.readInt8(2);
+                var index    = msg.readInt8(3);
+                var xpos     = msg.readFloatLE(4);
+                var ypos     = msg.readFloatLE(8);
+                var zpos     = msg.readFloatLE(12);
+                var xrot     = msg.readFloatLE(16);
+                var zrot     = msg.readFloatLE(20);
+                var mesh     = msg.readInt8(24);
+                var anim     = msg.readInt8(25);
                 console.log('t:' + type + 'c:' + client + 'i:' + index + 'x:' + xpos + 'y:' + ypos + 'z:' + zpos + 'x:' + xrot + 'z:' + zrot + 'm:' + mesh + 'a:' + anim);
         
                 //let's just pass off data msg to browsers
-		var joinString = type;
-                joinString = joinString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
-                io.sockets.emit('news', joinString)
+		var addShapeString = type;
+                addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
+		//you need to not send this to clientID????
+                io.sockets.emit('news', addShapeString)
         }
 
 	if (type == 1)
