@@ -18,8 +18,6 @@ initialize: function(application,serverIP, serverPort)
 
 	this.mSocket = this.open();
 
-//	this.mSocket.emit('message', 33);
-
 	//parse
         this.mIncomingSequence = 0;
         this.mDroppedPackets = 0;
@@ -44,117 +42,18 @@ open: function()
 	
 },
 
-//this should call ajax function on server to send
-/*
-sendConnect: function()
-{
-        var xmlhttp;
-        if (window.XMLHttpRequest)
-        {
-                xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-                        document.getElementById("mClientID").innerHTML=xmlhttp.responseText;
-		}
-        }
-        xmlhttp.open("POST","/breslin/clientside/network/send_connect.php",true);
-        xmlhttp.send();
-},
-*/
 sendConnect: function()
 {
 	this.mSocket.emit('send_connect', '-111');
 },
-/*
- 	this.mSocket.on('news', function (data)
-	{
-    		console.log(data);
-    		socket.emit('my other event', { my: 'data' });
-  	});
-*/
-// send the move that is new 
+
 sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
 {
-	//this.mSocket.emit('send_connect', '-111');
-	message = "1" + this.mClientID + "" + outgoingSequence + "" + flags + "" + keyCurrent;
-	this.mSocket.emit('send_move', '1');
-	this.log('message:' + message); 	
-/*
-	//temp fix because i am having trouble setting vars in readystate above
-	if (this.mClientID == 0)
-	{
- 		this.mClientID = document.getElementById("mClientID").innerHTML;
-	}
-        
-	var xmlhttp;
-        if (window.XMLHttpRequest)
-        {
-                xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        
-	xmlhttp.open("POST","/breslin/clientside/network/send_move.php",true);
-        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xmlhttp.send("messageframe=" + messageFrame + "&clientid=" + this.mClientID + "&outgoingsequence=" + outgoingSequence + "&flags=" + flags + "&keycurrent=" + keyCurrent);
-*/
-},
-
-checkForByteBuffer: function()
-{
-	var xmlhttp;
-        if (window.XMLHttpRequest)
-        {
-                xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-                        document.getElementById("mByteBuffer").innerHTML=xmlhttp.responseText;
-                }
-        }
-        xmlhttp.open("POST","/breslin/clientside/network/check_for_byte_buffer.php",true);
-        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xmlhttp.send();
-},
-
-getAllShapes: function()
-{
-	var xmlhttp;
-        if (window.XMLHttpRequest)
-        {
-                xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-                        document.getElementById("mByteBuffer").innerHTML=xmlhttp.responseText;
-                }
-        }
-        xmlhttp.open("POST","/breslin/clientside/network/get_all_shapes.php",true);
-        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xmlhttp.send();
+	message = '1 ' + outgoingSequence + ' ' + flags + ' ' + keyCurrent;
+	this.mSocket.emit('send_move', message);
+	this.log('message:' + message);
+	//this.mSocket.emit('send_move', '1 ' + this.mClientID + ' ' + outgoingSequence + ' ' + flags + ' ' + keyCurrent);
 }
-
 
 });
 

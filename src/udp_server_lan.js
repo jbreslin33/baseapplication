@@ -53,12 +53,17 @@ io.sockets.on('connection', function (socket)
                 	console.log('sent connect from mClientID' + socket.mClientID);
                 });
         });
+
         socket.on('send_move', function(message,remote)
         {
                 mMessage = message;
-               
-		console.log('mMessage:' + mMessage);
+		var messageArray = message.split(" ");
 
+		var type     = parseInt(messageArray[0]);	               
+		var sequence = parseInt(messageArray[1]);	               
+
+
+		console.log('type: ' + type + ' sequence: ' + sequence);
 /*
 		mess = parseInt(mMessage);
  
