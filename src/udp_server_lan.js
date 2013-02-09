@@ -106,6 +106,7 @@ server.on("message", function (msg, rinfo)
 	count++
        
         //add shape
+	//this is getting called 2 times for some reason
         if (type == -103)
         { 
                 var client = msg.readInt8(1);
