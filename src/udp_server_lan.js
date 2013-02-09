@@ -53,12 +53,34 @@ io.sockets.on('connection', function (socket)
                 	console.log('sent connect from mClientID' + socket.mClientID);
                 });
         });
+        socket.on('send_move', function(message,remote)
+        {
+                mMessage = message;
+               
+		console.log('mMessage:' + mMessage);
+
+/*
+		mess = parseInt(mMessage);
+ 
+                //send to c++ server
+                var buf = new Buffer(2);
+                buf.writeInt8(mess,0);
+
+		mClientIDCounter++;
+		socket.mClientID = mClientIDCounter;
+                
+		buf.writeInt8(socket.mClientID,1);
+
+                server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
+                {
+                	console.log('sent connect from mClientID' + socket.mClientID);
+                });
+*/
+        });
 });
 
 server.on("message", function (msg, rinfo)
 {
-
-
 	//to break out of message when it's over
 	var length = msg.length;
 	var count = 0;

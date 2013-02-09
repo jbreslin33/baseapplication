@@ -82,6 +82,11 @@ sendConnect: function()
 // send the move that is new 
 sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
 {
+	//this.mSocket.emit('send_connect', '-111');
+	message = "1" + this.mClientID + "" + outgoingSequence + "" + flags + "" + keyCurrent;
+	this.mSocket.emit('send_move', '1');
+	this.log('message:' + message); 	
+/*
 	//temp fix because i am having trouble setting vars in readystate above
 	if (this.mClientID == 0)
 	{
@@ -101,7 +106,7 @@ sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
 	xmlhttp.open("POST","/breslin/clientside/network/send_move.php",true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         xmlhttp.send("messageframe=" + messageFrame + "&clientid=" + this.mClientID + "&outgoingsequence=" + outgoingSequence + "&flags=" + flags + "&keycurrent=" + keyCurrent);
-
+*/
 },
 
 checkForByteBuffer: function()
