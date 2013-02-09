@@ -141,6 +141,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageFrameBrowser ||  type == mDisconnectBrowser)
 	{
 		int clientID = mes->ReadByte();
+		LogString("clientID: %d",clientID);
 		
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{

@@ -59,10 +59,21 @@ io.sockets.on('connection', function (socket)
                 mMessage = message;
 		var messageArray = message.split(" ");
 
-		var type       = parseInt(messageArray[0]);	               
 		var currentKey = parseInt(messageArray[1]);	               
 
-		console.log('type: ' + type + ' key: ' + currentKey);
+		type = 2;
+
+                //send to c++ server
+                var buf = new Buffer(3);
+                buf.writeInt8(type,0);
+                buf.writeInt8(socket.mClientID,1);
+                buf.writeInt8(currentKey,2);
+
+                server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
+                {
+                	console.log('sent move from mClientID' + socket.mClientID);
+                });
+		
 
 /*
 		mess = parseInt(mMessage);
