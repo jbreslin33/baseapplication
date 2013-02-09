@@ -536,16 +536,16 @@ void Game::sendExitNotification()
 //this is just for clients right now, should i make another or hijack this function??
 void Game::readDeltaMoveCommand(Message *mes, Client *client)
 {
-	int flags = 0;
+	//int flags = 0;
 
 	// Flags
-	flags = mes->ReadByte();
+	//flags = mes->ReadByte();
 
 	// Key
-	if(flags & mCommandKey)
-	{
+	//if(flags & mCommandKey)
+	//{
 		client->mShape->mKey = mes->ReadByte();
-	}
+	//}
 }
 
 

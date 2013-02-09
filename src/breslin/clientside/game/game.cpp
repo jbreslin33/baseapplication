@@ -252,13 +252,13 @@ void Game::sendByteBuffer()
         	mOutgoingSequence++; //increase for next time...
 
         	// Add to the message
-        	byteBuffer->WriteByte(flags);
+        	//byteBuffer->WriteByte(flags);
 
-        	if(flags & mCommandKey)
-        	{
+        	//if(flags & mCommandKey)
+        	//{
                 	//WRITE: key
                 	byteBuffer->WriteByte(mKeyCurrent);
-        	}
+        	//}
 
         	//set 'last' commands for diff
         	mKeyLast = mKeyCurrent;

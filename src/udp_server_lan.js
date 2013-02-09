@@ -99,7 +99,6 @@ server.on("message", function (msg, rinfo)
         //add shape
         if (type == -103)
         { 
-
                 var client = msg.readInt8(1);
                 var index  = msg.readInt8(2);
                 var xpos   = msg.readFloatLE(3);
