@@ -176,7 +176,6 @@ sendByteBuffer: function()
                 // Send the packet
         	message = '1 ' + this.mKeyCurrent;
         	this.mApplicationBreslin.mNetwork.mSocket.emit('send_move', message);
-        	this.log('message:' + message);
 
                 //set 'last' commands for diff
                 this.mKeyLast = this.mKeyCurrent;

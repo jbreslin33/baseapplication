@@ -21,7 +21,6 @@ initialize: function(application,serverIP, serverPort)
 	//parse
         this.mIncomingSequence = 0;
         this.mDroppedPackets = 0;
-			
 },
 
 log: function(msg)
@@ -39,7 +38,6 @@ open: function()
 	//return io.connect('71.23.229.73:10000');
 	return io.connect('192.168.1.101:10000');
 	//return io.connect('192.168.2.234:10000');
-	
 },
 
 sendConnect: function()
@@ -47,13 +45,4 @@ sendConnect: function()
 	this.mSocket.emit('send_connect', '-111');
 },
 
-sendMove: function(messageFrame,outgoingSequence,flags,keyCurrent)
-{
-	message = '1 ' + outgoingSequence + ' ' + flags + ' ' + keyCurrent;
-	this.mSocket.emit('send_move', message);
-	this.log('message:' + message);
-	//this.mSocket.emit('send_move', '1 ' + this.mClientID + ' ' + outgoingSequence + ' ' + flags + ' ' + keyCurrent);
-}
-
 });
-
