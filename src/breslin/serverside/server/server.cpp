@@ -64,7 +64,8 @@ void Server::createClient(struct sockaddr * address, int clientID)
 	{	
 		client->createShape();
 	}
-	
+
+	//this has to not send shape to the client as it got it from above	
 	client->sendAllShapesBrowser();
 	
 	// that's that as we cannot communicate back to the browser from here..unless this is where we change db or whatever medium we will use to communicate with browser.

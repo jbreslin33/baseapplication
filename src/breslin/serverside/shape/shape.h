@@ -34,8 +34,6 @@ Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector
 // ByteBufferes
 static const char mCommandFrameTime = 2;
 
-
-static const char mMessageAddShape    = -103;
 static const char mMessageRemoveShape = -104;
 
 static const char mMessageNonDeltaFrame = 2;
