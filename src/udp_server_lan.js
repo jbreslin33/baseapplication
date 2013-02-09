@@ -60,11 +60,10 @@ io.sockets.on('connection', function (socket)
 		var messageArray = message.split(" ");
 
 		var type       = parseInt(messageArray[0]);	               
-		var sequence   = parseInt(messageArray[1]);	               
-		var currentKey = parseInt(messageArray[2]);	               
+		var currentKey = parseInt(messageArray[1]);	               
 
+		console.log('type: ' + type + ' key: ' + currentKey);
 
-		console.log('type: ' + type + ' sequence: ' + sequence + ' key: ' + currentKey);
 /*
 		mess = parseInt(mMessage);
  
