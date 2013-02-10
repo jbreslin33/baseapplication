@@ -144,7 +144,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageFrameBrowser ||  type == mDisconnectBrowser)
 	{
 		int clientID = mes->ReadByte();
-		LogString("clientID: %d",clientID);
 		
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
@@ -332,7 +331,6 @@ void Server::readPackets()
 			mes.BeginReading();
 
 			type = mes.ReadByte();
-			LogString("type:%d",type);	
 
 			// Check the type of the message
 			switch(type)
@@ -357,7 +355,6 @@ void Server::readPackets()
 				//grab clientID
 				int clientID = mes.ReadByte();
                                
-				LogString("clientID:%d",clientID);
  
 				 //let's try this with shapes instead.....
                                 for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)

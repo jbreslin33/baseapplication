@@ -88,6 +88,7 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 
 //client | spawnpostion_x | spawnpostion_y | spawnpostion_z | spawnrotation_x | spawnrotation_z | meshcode | animated 
 	//*********add shape to db ****************/
+/*
 	std::string one = "insert into shapes values (";
 	
  	stringstream ss;//create a stringstream
@@ -154,10 +155,8 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	
 	const char * c = str.c_str();
 
-	LogString("q:%s",c);
-	
 	mGame->sqlQuery(c);
-	
+*/	
 }
 
 Shape::~Shape()

@@ -35,8 +35,6 @@ io.sockets.on('connection', function (socket)
         {
                 mMessage = message;
                
-		console.log('mMessage:' + mMessage);
-
 		mess = parseInt(mMessage);
  
                 //send to c++ server
@@ -50,7 +48,6 @@ io.sockets.on('connection', function (socket)
 
                 server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
                 {
-                	console.log('sent connect from mClientID' + socket.mClientID);
                 });
         });
 
@@ -71,27 +68,7 @@ io.sockets.on('connection', function (socket)
 
                 server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
                 {
-                	console.log('sent move from mClientID' + socket.mClientID);
                 });
-		
-
-/*
-		mess = parseInt(mMessage);
- 
-                //send to c++ server
-                var buf = new Buffer(2);
-                buf.writeInt8(mess,0);
-
-		mClientIDCounter++;
-		socket.mClientID = mClientIDCounter;
-                
-		buf.writeInt8(socket.mClientID,1);
-
-                server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
-                {
-                	console.log('sent connect from mClientID' + socket.mClientID);
-                });
-*/
         });
 });
 
@@ -102,7 +79,6 @@ server.on("message", function (msg, rinfo)
 	var count = 0;
 
         var type   = msg.readInt8(0);
-	//console.log('type:' + type);
 	count++
        
         //add shape
@@ -120,18 +96,17 @@ server.on("message", function (msg, rinfo)
                 var zrot     = msg.readFloatLE(20);
                 var mesh     = msg.readInt8(24);
                 var anim     = msg.readInt8(25);
-                console.log('t:' + type + 'c:' + client + 'i:' + index + 'x:' + xpos + 'y:' + ypos + 'z:' + zpos + 'x:' + xrot + 'z:' + zrot + 'm:' + mesh + 'a:' + anim);
         
                 //let's just pass off data msg to browsers
 		var addShapeString = type;
                 addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
-		//you need to not send this to clientID????
 	
-       //         io.sockets.emit('news', addShapeString)
-		//socket.clients[message.key].send('Hello world');
 		io.sockets.clients().forEach(function (socket)
 		{
-			console.log('id from io.sockets.clients: ' + socket.mClientID); 
+			if (socket.mClientID == clientID)
+			{
+       				socket.emit('news', addShapeString)
+			} 
 		});
         }
 
