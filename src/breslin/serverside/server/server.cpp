@@ -62,6 +62,7 @@ void Server::createClient(struct sockaddr * address, int clientID)
 	Client* client = new Client(this, address, clientID);
 
 	//give this client all current shapes	
+	//for this first client this should no times for the 2nd once.
 	client->sendAllShapesBrowser();
 
 	//create the shape for this client at that point we send this shape to all clients	

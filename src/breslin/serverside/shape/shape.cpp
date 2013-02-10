@@ -188,12 +188,10 @@ void Shape::sendShapeToClients()
 		LogString("clientID in sendShapeToClients:%d",mGame->mServer->mClientVector.at(i)->mClientID);
 		if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
 		{
-			LogString("writeAddBrowser!!!!!!!!!!!!");
 			writeAddBrowser(clientToSendTo);
 		}
 		if (mGame->mServer->mClientVector.at(i)->mClientID == 0)
 		{	
-			LogString("writeAdd!!!!!!!!!!!!!!!");
 			writeAdd(clientToSendTo);
 		}		
 		
@@ -309,6 +307,7 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 
 void Shape::writeAdd(Client* client)
 {
+	LogString("writeAdd for clientID: %d",client->mClientID);
 	mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
 
 	mGame->mServer->mMessage.WriteByte(mGame->mServer->mAddShape); // type
@@ -341,6 +340,7 @@ void Shape::writeAdd(Client* client)
 
 void Shape::writeAddBrowser(Client* client)
 {
+	LogString("writeAddBrowser for clientID: %d",client->mClientID);
 	mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
 
 	mGame->mServer->mMessage.WriteByte(mGame->mServer->mAddShape); // type
