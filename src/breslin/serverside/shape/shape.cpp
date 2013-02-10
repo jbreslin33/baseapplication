@@ -84,7 +84,7 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	//register with shape vector
 	mGame->mShapeVector.push_back(this);
 
-	sendShapeToClients();
+	//sendShapeToClients();
 
 //client | spawnpostion_x | spawnpostion_y | spawnpostion_z | spawnrotation_x | spawnrotation_z | meshcode | animated 
 	//*********add shape to db ****************/

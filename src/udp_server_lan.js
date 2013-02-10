@@ -110,6 +110,7 @@ server.on("message", function (msg, rinfo)
         if (type == -103)
         { 
                 var clientID = msg.readInt8(1);
+		console.log('for clientID: ' + clientID);
                 var client   = msg.readInt8(2);
                 var index    = msg.readInt8(3);
                 var xpos     = msg.readFloatLE(4);
@@ -125,7 +126,13 @@ server.on("message", function (msg, rinfo)
 		var addShapeString = type;
                 addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
 		//you need to not send this to clientID????
-                io.sockets.emit('news', addShapeString)
+	
+       //         io.sockets.emit('news', addShapeString)
+		//socket.clients[message.key].send('Hello world');
+		io.sockets.clients().forEach(function (socket)
+		{
+			console.log('id from io.sockets.clients: ' + socket.mClientID); 
+		});
         }
 
 	if (type == 1)

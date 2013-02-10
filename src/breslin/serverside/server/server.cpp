@@ -48,11 +48,12 @@ Server::~Server()
 void Server::createClient(struct sockaddr *address)
 {
 	Client* client = new Client(this, address);
-	
-	client->createShape();
 
 	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
 	client->sendAllShapes();
+	
+	//create the shape for this client at that point we send this shape to all clients	
+	client->createShape();
 }
 
 //browser
@@ -60,13 +61,14 @@ void Server::createClient(struct sockaddr * address, int clientID)
 {
 	Client* client = new Client(this, address, clientID);
 
+	//give this client all current shapes	
+	client->sendAllShapesBrowser();
+
+	//create the shape for this client at that point we send this shape to all clients	
 	if (clientID != -1)
 	{	
 		client->createShape();
 	}
-
-	//this has to not send shape to the client as it got it from above	
-	client->sendAllShapesBrowser();
 	
 	// that's that as we cannot communicate back to the browser from here..unless this is where we change db or whatever medium we will use to communicate with browser.
 }
