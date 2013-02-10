@@ -189,14 +189,16 @@ void Shape::sendShapeToClients()
 		if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
 		{
 			writeAddBrowser(clientToSendTo);
+			//send it
+			clientToSendTo->SendPacket(&mGame->mServer->mMessage);
 		}
 		if (mGame->mServer->mClientVector.at(i)->mClientID == 0)
 		{	
 			writeAdd(clientToSendTo);
+			//send it
+			clientToSendTo->SendPacket(&mGame->mServer->mMessage);
 		}		
 		
-		//send it
-		clientToSendTo->SendPacket(&mGame->mServer->mMessage);
 	}
 }
 

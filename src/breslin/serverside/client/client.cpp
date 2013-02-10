@@ -81,8 +81,6 @@ void Client::createShape()
 	mShape = new Shape(mServer->mGame->getOpenIndex(),mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f,1,false); 
 	
 	mShape->sendShapeToClients();
-
-
 }
 
 void Client::remove()
