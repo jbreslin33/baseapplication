@@ -5,6 +5,9 @@ var Shape = new Class(
 //this.mApplicationBreslin,false,index,client,x,z,rx,rz,m,a)
 initialize: function(applicationBreslin, byteBuffer, isGhost)
 {
+
+	this.mIndex = 0;
+
 	//constants
 	this.mCommandOriginX   = 4;
 	this.mCommandOriginY   = 8;
@@ -115,6 +118,9 @@ setPosition: function(position)
         
         this.mDiv.mDiv.style.left = modx;
         this.mDiv.mDiv.style.top = mody;
+
+
+	//position.printValues();	
 },
 
 getPosition: function()
@@ -218,9 +224,12 @@ parseDeltaByteBuffer: function(byteBuffer)
 	flags = byteBuffer.readByte();
 	if (this.mIndex == 1)
 	{
-		document.getElementById('mMessageFrame').innerHTML='flags:' + flags;	
+	//	document.getElementById('mMessageFrame').innerHTML='flags:' + flags;	
 	}
  	
+	
+	//document.getElementById('mMessageFrame').innerHTML='mIndex:' + this.mIndex;	
+
 	// Origin
         if(flags & this.mCommandOriginX)
         {
@@ -358,6 +367,7 @@ moveGhostShape: function()
 	//var pos = 'x:' + transVector.x + 'z:' + transVector.z;
 	//document.getElementById('mMessageFrame').innerHTML=pos;	
 	this.mGhost.setPosition(transVector);
+	document.getElementById('mMessageFrame').innerHTML='x: ' + transVector.x;	
 }
 
 
