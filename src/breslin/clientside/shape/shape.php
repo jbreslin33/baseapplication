@@ -328,8 +328,8 @@ scale: function()
 	w = w * this.mScale;
 	
 	//scale image 
-        this.mMesh.style.width = w+'px';
-        this.mMesh.style.height = h+'px';
+        //this.mMesh.style.width = w+'px';
+       	//this.mMesh.style.height = h+'px';
 
 	//scale div
         this.mDiv.mDiv.style.width = w+"px";
