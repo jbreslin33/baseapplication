@@ -109,7 +109,7 @@ server.on("message", function (msg, rinfo)
 			} 
 		});
         }
-/*
+
 	if (type == 1)
 	{
 		skipCounter++;
@@ -190,14 +190,20 @@ server.on("message", function (msg, rinfo)
         			}
 		
 			} //  end while count < length
+		
+		       	io.sockets.clients().forEach(function (socket)
+                        {
+				if (socket.mClientID > 0)
+				{
+                       			socket.emit('news', dataString)
+				}
+                        });
 
-			io.sockets.emit('news', dataString)
+			//io.sockets.emit('news', dataString)
 			skipCounter = 0;
 
 		} //end skip check	
 	} //if type
-
-*/
 });
 
 server.on("listening", function ()
