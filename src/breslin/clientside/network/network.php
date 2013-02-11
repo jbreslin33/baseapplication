@@ -35,14 +35,14 @@ log: function(msg)
 open: function()
 {
 	this.log('open socket on server');
-	//return io.connect('71.23.229.73:10000');
-	return io.connect('192.168.1.101:10000');
+	return io.connect('71.23.229.73:10000');
+	//return io.connect('192.168.1.101:10000');
 	//return io.connect('192.168.2.234:10000');
 },
 
 sendConnect: function()
 {
 	this.mSocket.emit('send_connect', '-111');
-},
+}
 
 });

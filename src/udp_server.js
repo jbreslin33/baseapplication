@@ -35,8 +35,6 @@ io.sockets.on('connection', function (socket)
         {
                 mMessage = message;
                
-		console.log('mMessage:' + mMessage);
-
 		mess = parseInt(mMessage);
  
                 //send to c++ server
@@ -50,44 +48,68 @@ io.sockets.on('connection', function (socket)
 
                 server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
                 {
-                	console.log('sent connect from mClientID' + socket.mClientID);
+                });
+        });
+
+        socket.on('send_move', function(message,remote)
+        {
+                mMessage = message;
+		var messageArray = message.split(" ");
+
+		var currentKey = parseInt(messageArray[1]);	               
+
+		type = 2;
+
+                //send to c++ server
+                var buf = new Buffer(3);
+                buf.writeInt8(type,0);
+                buf.writeInt8(socket.mClientID,1);
+                buf.writeInt8(currentKey,2);
+
+                server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
+                {
                 });
         });
 });
 
 server.on("message", function (msg, rinfo)
 {
-
-
 	//to break out of message when it's over
 	var length = msg.length;
 	var count = 0;
 
         var type   = msg.readInt8(0);
-	console.log('type:' + type);
 	count++
        
         //add shape
+	//this is getting called 2 times for some reason
         if (type == -103)
         { 
-
-                var client = msg.readInt8(1);
-                var index  = msg.readInt8(2);
-                var xpos   = msg.readFloatLE(3);
-                var ypos   = msg.readFloatLE(7);
-                var zpos   = msg.readFloatLE(11);
-                var xrot   = msg.readFloatLE(15);
-                var zrot   = msg.readFloatLE(19);
-                var mesh   = msg.readInt8(23);
-                var anim   = msg.readInt8(24);
-                console.log('t:' + type + 'c:' + client + 'i:' + index + 'x:' + xpos + 'y:' + ypos + 'z:' + zpos + 'x:' + xrot + 'z:' + zrot + 'm:' + mesh + 'a:' + anim);
+                var clientID = msg.readInt8(1);
+		console.log('for clientID: ' + clientID);
+                var client   = msg.readInt8(2);
+                var index    = msg.readInt8(3);
+                var xpos     = msg.readFloatLE(4);
+                var ypos     = msg.readFloatLE(8);
+                var zpos     = msg.readFloatLE(12);
+                var xrot     = msg.readFloatLE(16);
+                var zrot     = msg.readFloatLE(20);
+                var mesh     = msg.readInt8(24);
+                var anim     = msg.readInt8(25);
         
                 //let's just pass off data msg to browsers
-		var joinString = type;
-                joinString = joinString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
-                io.sockets.emit('news', joinString)
+		var addShapeString = type;
+                addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
+	
+		io.sockets.clients().forEach(function (socket)
+		{
+			if (socket.mClientID == clientID)
+			{
+       				socket.emit('news', addShapeString)
+			} 
+		});
         }
-
+/*
 	if (type == 1)
 	{
 		skipCounter++;
@@ -175,6 +197,7 @@ server.on("message", function (msg, rinfo)
 		} //end skip check	
 	} //if type
 
+*/
 });
 
 server.on("listening", function ()
