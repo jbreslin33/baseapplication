@@ -367,7 +367,7 @@ moveGhostShape: function()
 	//var pos = 'x:' + transVector.x + 'z:' + transVector.z;
 	//document.getElementById('mMessageFrame').innerHTML=pos;	
 	this.mGhost.setPosition(transVector);
-	document.getElementById('mMessageFrame').innerHTML='x: ' + transVector.x;	
+//	document.getElementById('mMessageFrame').innerHTML='x: ' + transVector.x;	
 }
 
 
