@@ -33,10 +33,11 @@ execute: function()
         parsedRenderTime = parseFloat(this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime());
 	
 	multipliedRenderTime = parsedRenderTime * 1000;
-	document.getElementById('mMessageFrame').innerHTML='mrt: ' + multipliedRenderTime;
+	//document.getElementById('mMessageFrame').innerHTML='mrt: ' + multipliedRenderTime;
 
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);
+	document.getElementById('mMessageFrame').innerHTML='mx_p: ' + transVector.x + ' mz: ' + transVector.z;
 
 	transVector.add(this.mAbilityMove.mShape.getPosition());
 	//add our velocity to current position
