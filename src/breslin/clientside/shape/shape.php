@@ -112,9 +112,14 @@ Shape::translate(Vector3D* translateVector, int perspective)
 
 setPosition: function(position)
 {
-	if (!this.mIsGhost)
+	if (this.mIsGhost)
 	{
-		document.getElementById('mMessageFrame').innerHTML='posx: ' + position.x + ' posz: '  + position.z;  
+		document.getElementById('mMessageFrameA').innerHTML='GHOST     x: ' + position.x + ' z: '  + position.z;  
+
+	}
+	else
+	{
+		document.getElementById('mMessageFrameB').innerHTML='PLAYER    x: ' + position.x + ' z: '  + position.z;  
 
 	}
 
@@ -124,10 +129,6 @@ setPosition: function(position)
         
         this.mDiv.mDiv.style.left = modx;
         this.mDiv.mDiv.style.top = mody;
-	
-
-
-	//position.printValues();	
 },
 
 getPosition: function()
