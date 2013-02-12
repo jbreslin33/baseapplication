@@ -37,9 +37,12 @@ execute: function()
 
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);
-	document.getElementById('mMessageFrame').innerHTML='mx_p: ' + transVector.x + ' mz: ' + transVector.z;
+	document.getElementById('mMessageFrame').innerHTML='xx: ' + transVector.x + ' zz: ' + transVector.z;
+//	transVector.printValues();
 
 	transVector.add(this.mAbilityMove.mShape.getPosition());
+
+//	document.getElementById('mMessageFrame').innerHTML='spx: ' + this.mAbilityMove.mShape.getPosition().x + ' spz: ' + this.mAbilityMove.mShape.getPosition().z;
 	//add our velocity to current position
 
 	//set new position

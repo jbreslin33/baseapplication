@@ -18,7 +18,7 @@ log: function(msg)
 
 printValues: function()
 {
-	this.log('x: ' + this.x + 'y: ' + this.y + 'z: ' + this.z); 	
+	this.log('xx: ' + this.x + 'yy: ' + this.y + 'zz: ' + this.z); 	
 },
 
 length: function()
