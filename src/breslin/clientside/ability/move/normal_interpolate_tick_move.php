@@ -37,8 +37,7 @@ execute: function()
 
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);
-	document.getElementById('mMessageFrame').innerHTML='xx: ' + transVector.x + ' zz: ' + transVector.z;
-//	transVector.printValues();
+//	document.getElementById('mMessageFrame').innerHTML='xx: ' + transVector.x + ' zz: ' + transVector.z;
 
 	transVector.add(this.mAbilityMove.mShape.getPosition());
 

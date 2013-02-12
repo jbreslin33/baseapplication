@@ -88,12 +88,15 @@ multiply: function(num)
 
 add: function(v)
 {
-	this.x = parseFloat(this.x) + parseFloat(v.x);
-	this.y = 0;
-	this.z = parseFloat(this.z) + parseFloat(v.z);
+// 	document.getElementById('mMessageFrame').innerHTML='t_x: ' + this.x + ' t_z: ' + this.z;
 
-	this.x = parseFloat(this.x);
-	this.z = parseFloat(this.z);
+	x = parseFloat(this.x) + parseFloat(v.x);
+	y = 0;
+	z = parseFloat(this.z) + parseFloat(v.z);
+ 	document.getElementById('mMessageFrame').innerHTML='a: ' + x + ' b: ' + z;
+
+	this.x = parseFloat(x);
+	this.z = parseFloat(z);
 },
 
 subtract: function(vectorToSubtract)
