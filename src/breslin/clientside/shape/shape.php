@@ -115,20 +115,36 @@ setPosition: function(position)
 	if (this.mIsGhost)
 	{
 		document.getElementById('mMessageFrameA').innerHTML='GHOST     x: ' + position.x + ' z: '  + position.z;  
-
 	}
 	else
 	{
 		document.getElementById('mMessageFrameB').innerHTML='PLAYER    x: ' + position.x + ' z: '  + position.z;  
-
 	}
 
 	//set a member position because we are going to have to modify the div's position
         modx = position.x+"px"; 
         mody = position.z+"px"; 
+	
+	if (this.mIsGhost)
+	{
+		document.getElementById('mMessageFrameC').innerHTML='GHOST     x: ' + modx + ' z: '  + mody;  
+	}
+	else
+	{
+		document.getElementById('mMessageFrameD').innerHTML='PLAYER    x: ' + position.x + ' z: '  + position.z;  
+	}
         
         this.mDiv.mDiv.style.left = modx;
         this.mDiv.mDiv.style.top = mody;
+
+	if (this.mIsGhost)
+	{
+		document.getElementById('mMessageFrameE').innerHTML='GHOST     x: ' + this.mDiv.mDiv.style.left + ' z: '  + this.mDiv.mDiv.style.top;  
+	}
+	else
+	{
+		document.getElementById('mMessageFrameF').innerHTML='PLAYER    x: ' + this.mDiv.mDiv.style.left + ' z: '  + this.mDiv.mDiv.style.top;  
+	}
 },
 
 getPosition: function()
