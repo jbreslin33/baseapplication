@@ -122,9 +122,21 @@ setPosition: function(position)
 	}
 
 	//set a member position because we are going to have to modify the div's position
-        modx = position.x+"px"; 
-        mody = position.z+"px"; 
-	
+
+	var modx;
+	var mody;
+
+	if (Browser.firefox)
+	{
+        	modx = position.x+"px"; 
+        	mody = position.z+"px"; 
+	}	
+	else if (Browser.ie)
+	{
+        	modx = position.x+'px'; 
+        	mody = position.z+'px'; 
+	}
+
 	if (this.mIsGhost)
 	{
 		document.getElementById('mMessageFrameC').innerHTML='GHOST     x: ' + modx + ' z: '  + mody;  
