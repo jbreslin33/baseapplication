@@ -114,7 +114,7 @@ setPosition: function(position)
 {
 	if (!this.mIsGhost)
 	{
-		document.getElementById('mMessageFrame').innerHTML='posx: ' + position.x + ' posy: '  + position.y;  
+		document.getElementById('mMessageFrame').innerHTML='posx: ' + position.x + ' posz: '  + position.z;  
 
 	}
 
