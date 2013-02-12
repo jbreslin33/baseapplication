@@ -25,21 +25,16 @@ execute: function()
         //to be used to setPosition
         transVector = new Vector3D();
 
+	document.getElementById('mMessageFrame').innerHTML='ax_p: ' + transVector.x + ' az: ' + transVector.z;
+
         //copy values from mVelocity so we don't make changes to original
         transVector.copyValuesFrom(this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity);
-	//transVector.printValues();
-	//good to here
-	
         //get the mulitplier
         parsedRenderTime = parseFloat(this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime());
 	multipliedRenderTime = parsedRenderTime * 1000;
-	//this.log('m:' + multipliedRenderTime);
-	//multipliedRenderTime is nice.
 
         //multiply our vector using render values
-	
         transVector.multiply(multipliedRenderTime);
-	//transVector.printValues();
 
 	transVector.add(this.mAbilityMove.mShape.getPosition());
 	//add our velocity to current position

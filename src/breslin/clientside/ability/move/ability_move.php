@@ -57,7 +57,6 @@ log: function(msg)
 ********************************************************/
 processTick: function()
 {
-	this.log('processTick in abilityMove');
         this.mProcessTickStateMachine.update();
 },
 

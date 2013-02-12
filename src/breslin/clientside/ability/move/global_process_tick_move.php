@@ -22,7 +22,6 @@ enter: function()
 
 execute: function()
 {
-	this.log('GlobalProcessTickMove: execute');
         this.mAbilityMove.mShape.moveGhostShape();
         this.mAbilityMove.calculateDeltaPosition();
 

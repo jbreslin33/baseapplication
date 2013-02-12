@@ -158,7 +158,6 @@ processSpawnByteBuffer: function(byteBuffer)
 parseSpawnByteBuffer: function(byteBuffer)
 {
 	byteBuffer.beginReading();
-	this.log('b:' + byteBuffer.readByte());
 	this.mLocal           = byteBuffer.readByte();
 	this.mIndex           = byteBuffer.readByte();
 	this.mSpawnPosition.x = byteBuffer.readByte();
@@ -168,8 +167,6 @@ parseSpawnByteBuffer: function(byteBuffer)
 	this.mSpawnRotation.z = byteBuffer.readByte();
 	this.mMeshName        = byteBuffer.readByte();
 	this.mAnimate         = byteBuffer.readByte();
-       
-this.log('l:' + this.mLocal);
  
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
@@ -365,9 +362,8 @@ moveGhostShape: function()
 	transVector.z = this.mServerCommandCurrent.mPosition.z;
 
 	//var pos = 'x:' + transVector.x + 'z:' + transVector.z;
-	//document.getElementById('mMessageFrame').innerHTML=pos;	
 	this.mGhost.setPosition(transVector);
-//	document.getElementById('mMessageFrame').innerHTML='x: ' + transVector.x;	
+	//document.getElementById('mMessageFrame').innerHTML='x: ' + transVector.x + ' z: ' + transVector.z;	
 }
 
 

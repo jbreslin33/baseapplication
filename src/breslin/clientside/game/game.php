@@ -96,7 +96,6 @@ checkForByteBuffer: function()
 **********************************/
 addShape: function(byteBuffer)
 {
-	this.log('addShape');
 	shape = new Shape(this.mApplicationBreslin,byteBuffer,false);
 
 	//ability
