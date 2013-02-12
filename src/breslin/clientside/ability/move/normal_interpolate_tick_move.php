@@ -28,10 +28,12 @@ execute: function()
 
         //copy values from mVelocity so we don't make changes to original
         transVector.copyValuesFrom(this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity);
-	document.getElementById('mMessageFrame').innerHTML='bx_p: ' + transVector.x + ' bz: ' + transVector.z;
+//	document.getElementById('mMessageFrame').innerHTML='bx_p: ' + transVector.x + ' bz: ' + transVector.z;
         //get the mulitplier
         parsedRenderTime = parseFloat(this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime());
+	
 	multipliedRenderTime = parsedRenderTime * 1000;
+	document.getElementById('mMessageFrame').innerHTML='mrt: ' + multipliedRenderTime;
 
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);
