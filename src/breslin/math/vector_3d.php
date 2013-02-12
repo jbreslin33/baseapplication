@@ -93,10 +93,12 @@ add: function(v)
 	x = parseFloat(this.x) + parseFloat(v.x);
 	y = 0;
 	z = parseFloat(this.z) + parseFloat(v.z);
- 	document.getElementById('mMessageFrame').innerHTML='a: ' + x + ' b: ' + z;
+
 
 	this.x = parseFloat(x);
 	this.z = parseFloat(z);
+ 	
+//	document.getElementById('mMessageFrame').innerHTML='a: ' + x + ' b: ' + z + 'this.x: ' + this.x + 'this.z: ' + this.z;
 },
 
 subtract: function(vectorToSubtract)

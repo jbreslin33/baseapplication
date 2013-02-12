@@ -112,12 +112,19 @@ Shape::translate(Vector3D* translateVector, int perspective)
 
 setPosition: function(position)
 {
+	if (!this.mIsGhost)
+	{
+		document.getElementById('mMessageFrame').innerHTML='posx: ' + position.x + ' posy: '  + position.y;  
+
+	}
+
 	//set a member position because we are going to have to modify the div's position
         modx = position.x+"px"; 
         mody = position.z+"px"; 
         
         this.mDiv.mDiv.style.left = modx;
         this.mDiv.mDiv.style.top = mody;
+	
 
 
 	//position.printValues();	
@@ -125,20 +132,42 @@ setPosition: function(position)
 
 getPosition: function()
 {
-	x = this.mDiv.mDiv.style.left;
-	y = 0; 
-        z = this.mDiv.mDiv.style.top;
+	if (Browser.firefox)
+	{
+		x = this.mDiv.mDiv.style.left;
+		y = 0; 
+        	z = this.mDiv.mDiv.style.top;
 
-	x = x.replace("px","");	
-	z = z.replace("px","");
+		x = x.replace("px","");	
+		z = z.replace("px","");
 
-	v = new Vector3D();
+		v = new Vector3D();
 
-	v.x = x;	
-	v.y = y;	
-	v.z = z;	
+		v.x = x;	
+		v.y = y;	
+		v.z = z;	
 
-	return v;
+		return v;
+	}
+	if (Browser.ie)
+	{
+		x = this.mDiv.mDiv.style.left;
+		y = 0; 
+        	z = this.mDiv.mDiv.style.top;
+
+//		document.getElementById('mMessageFrame').innerHTML='x: ' + x + ' z: ' + z;
+
+		x = x.replace("px","");	
+		z = z.replace("px","");
+
+		v = new Vector3D();
+
+		v.x = x;	
+		v.y = y;	
+		v.z = z;	
+
+		return v;
+	}
 },
 
 setVisible: function(b)
