@@ -13,7 +13,10 @@ var Div = new Class(
                 //move it to initial spawn spot
                 this.mDiv.style.left = this.mShape.mSpawnPosition.x+'px';
                 this.mDiv.style.top  = this.mShape.mSpawnPosition.z+'px';
-                
+       
+		shape.log('divX: ' + this.mShape.mSpawnPosition.x);        
+		shape.log('divZ: ' + this.mShape.mSpawnPosition.z);        
+ 
 		document.body.appendChild(this.mDiv);
         }
 });

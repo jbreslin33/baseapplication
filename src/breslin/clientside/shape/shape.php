@@ -116,52 +116,12 @@ setPosition: function(position)
 	this.mPosition.y = position.y;
 	this.mPosition.z = position.z;
 
-	if (this.mIsGhost)
-	{
-		document.getElementById('mMessageFrameA').innerHTML='GHOST     x: ' + position.x + ' z: '  + position.z;  
-	}
-	else
-	{
-		document.getElementById('mMessageFrameB').innerHTML='PLAYER    x: ' + position.x + ' z: '  + position.z;  
-	}
-
 	//set a member position because we are going to have to modify the div's position
-
-	var modx;
-	var mody;
-
-	if (Browser.firefox)
-	{
-        	modx = position.x+"px"; 
-        	mody = position.z+"px"; 
-	}	
-	else if (Browser.ie)
-	{
-        	modx = position.x+'px'; 
-        	mody = position.z+'px'; 
-	}
-
-	if (this.mIsGhost)
-	{
-		document.getElementById('mMessageFrameC').innerHTML='GHOST     x: ' + modx + ' z: '  + mody;  
-	}
-	else
-	{
-		document.getElementById('mMessageFrameD').innerHTML='PLAYER    x: ' + modx + ' z: '  + mody;  
-
-	}
+       	modx = position.x+"px"; 
+       	mody = position.z+"px"; 
         
         this.mDiv.mDiv.style.left = modx;
         this.mDiv.mDiv.style.top = mody;
-
-	if (this.mIsGhost)
-	{
-		document.getElementById('mMessageFrameE').innerHTML='GHOST     x: ' + this.mDiv.mDiv.style.left + ' z: '  + this.mDiv.mDiv.style.top;  
-	}
-	else
-	{
-		document.getElementById('mMessageFrameF').innerHTML='PLAYER    x: ' + this.mDiv.mDiv.style.left + ' z: '  + this.mDiv.mDiv.style.top;  
-	}
 },
 
 getPosition: function()
@@ -231,7 +191,18 @@ parseSpawnByteBuffer: function(byteBuffer)
 	this.mSpawnRotation.z = byteBuffer.readByte();
 	this.mMeshName        = byteBuffer.readByte();
 	this.mAnimate         = byteBuffer.readByte();
+
+	this.log('mLocal:' + this.mLocal);
+	this.log('mIndex:' + this.mIndex);
+	this.log('mSpawnPosition.x:' + this.mSpawnPosition.x);
+	this.log('mSpawnPosition.y:' + this.mSpawnPosition.y);
+	this.log('mSpawnPosition.z:' + this.mSpawnPosition.z);
+	this.log('mSpawnRotation.x:' + this.mSpawnRotation.x);
+	this.log('mSpawnRotation.z:' + this.mSpawnRotation.z);
+	this.log('mMeshName:' + this.mMeshName);
+	this.log('mAnimate:' + this.mAnimate);
  
+
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
         this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
