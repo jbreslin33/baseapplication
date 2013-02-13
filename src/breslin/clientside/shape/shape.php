@@ -182,6 +182,7 @@ processSpawnByteBuffer: function(byteBuffer)
 parseSpawnByteBuffer: function(byteBuffer)
 {
 	byteBuffer.beginReading();
+	typenow           = byteBuffer.readByte();
 	this.mLocal           = byteBuffer.readByte();
 	this.mIndex           = byteBuffer.readByte();
 	this.mSpawnPosition.x = byteBuffer.readByte();
@@ -192,6 +193,7 @@ parseSpawnByteBuffer: function(byteBuffer)
 	this.mMeshName        = byteBuffer.readByte();
 	this.mAnimate         = byteBuffer.readByte();
 
+	this.log('typenow:' + typenow);
 	this.log('mLocal:' + this.mLocal);
 	this.log('mIndex:' + this.mIndex);
 	this.log('mSpawnPosition.x:' + this.mSpawnPosition.x);
