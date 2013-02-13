@@ -112,6 +112,10 @@ Shape::translate(Vector3D* translateVector, int perspective)
 
 setPosition: function(position)
 {
+	this.mPosition.x = position.x;
+	this.mPosition.y = position.y;
+	this.mPosition.z = position.z;
+
 	if (this.mIsGhost)
 	{
 		document.getElementById('mMessageFrameA').innerHTML='GHOST     x: ' + position.x + ' z: '  + position.z;  
@@ -143,7 +147,8 @@ setPosition: function(position)
 	}
 	else
 	{
-		document.getElementById('mMessageFrameD').innerHTML='PLAYER    x: ' + position.x + ' z: '  + position.z;  
+		document.getElementById('mMessageFrameD').innerHTML='PLAYER    x: ' + modx + ' z: '  + mody;  
+
 	}
         
         this.mDiv.mDiv.style.left = modx;
@@ -161,6 +166,8 @@ setPosition: function(position)
 
 getPosition: function()
 {
+	return this.mPosition;
+/*
 	if (Browser.firefox)
 	{
 		x = this.mDiv.mDiv.style.left;
@@ -184,8 +191,6 @@ getPosition: function()
 		y = 0; 
         	z = this.mDiv.mDiv.style.top;
 
-//		document.getElementById('mMessageFrame').innerHTML='x: ' + x + ' z: ' + z;
-
 		x = x.replace("px","");	
 		z = z.replace("px","");
 
@@ -197,6 +202,7 @@ getPosition: function()
 
 		return v;
 	}
+*/
 },
 
 setVisible: function(b)
