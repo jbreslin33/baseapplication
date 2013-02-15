@@ -54,7 +54,28 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
         }
 
         this.setupTitle();
+ 	
+	this.mMesh = 0;
+/*
+        //create clientImage
+	this.mSrc = this.getMeshString( 
+        if (this.mSrc)
+        {
+        	//image to attach to our div "vessel"
+               	this.mMesh  = document.createElement("IMG");
+                this.mMesh.src  = this.mSrc;
+                this.mMesh.style.width = this.mWidth+'px';
+                this.mMesh.style.height = this.mHeight+'px';
+        }
 
+        if (this.mSrc == "")//create paragraph
+        {
+                this.mMesh = document.createElement("p");
+        }
+
+        //back to div
+        this.mDiv.mDiv.appendChild(this.mMesh);
+*/
         //ghost
         this.mGhost = 0;
 
@@ -64,6 +85,8 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
                 this.mGhost = new Shape(this.mApplicationBreslin,byteBuffer,true);
                 this.mGhost.setVisible(false);
         }
+
+
 },
 
 log: function(msg)
@@ -190,7 +213,7 @@ parseSpawnByteBuffer: function(byteBuffer)
 	this.mSpawnPosition.z = byteBuffer.readByte();
 	this.mSpawnRotation.x = byteBuffer.readByte();
 	this.mSpawnRotation.z = byteBuffer.readByte();
-	this.mMeshName        = byteBuffer.readByte();
+	this.mMeshCode        = byteBuffer.readByte();
 	this.mAnimate         = byteBuffer.readByte();
 
 	this.log('typenow:' + typenow);
@@ -201,9 +224,8 @@ parseSpawnByteBuffer: function(byteBuffer)
 	this.log('mSpawnPosition.z:' + this.mSpawnPosition.z);
 	this.log('mSpawnRotation.x:' + this.mSpawnRotation.x);
 	this.log('mSpawnRotation.z:' + this.mSpawnRotation.z);
-	this.log('mMeshName:' + this.mMeshName);
+	this.log('mMeshCode:' + this.mMeshCode);
 	this.log('mAnimate:' + this.mAnimate);
- 
 
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
@@ -223,7 +245,7 @@ spawnShape: function(position)
 	//create the movable div that will be used to move image around. c++ this is the sceneNode
         this.mDiv = new Div(this);
 
-	this.mSrc = this.mMeshName;
+	this.mSrc = this.getMeshString(this.mMeshCode);
 
         //create clientImage
         if (this.mSrc)
@@ -353,12 +375,15 @@ getMeshString: function(meshCode)
         {
                 //this cube is exactly 1 ogre world unit. Which I take to be 1 meter.
                 this.mScale = .01;
-		return "/breslin/vclient/dist/media/materials/textures/red_monster.png";
+//http://71.23.229.73/breslin/clientside/bytebuffer/byte_buffer.php
+		return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/red_monster.png";
+	//	return "breslin/vclient/dist/media/materials/textures/red_monster.png";
         }
         if (meshCode == 1)
         {
                 this.mScale = 1;
-		return "/breslin/vclient/dist/media/materials/textures/wizard.png";
+		//return "breslin/vclient/dist/media/materials/textures/wizard.png";
+		return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/wizard.png";
         }
 },
 
