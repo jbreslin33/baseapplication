@@ -108,14 +108,14 @@ subtract: function(vectorToSubtract)
         this.z = this.z - vectorToSubtract.z;
 
 },
-
+/*
 subtract: function(sub1,sub2)
 {
 	this.x = sub1.x - sub2.x;
 	this.y = sub1.y - sub2.y;
 	this.z = sub1.z - sub2.z;
 },
-
+*/
 copyValuesFrom: function(copyFrom)
 {
 	this.x = copyFrom.x;

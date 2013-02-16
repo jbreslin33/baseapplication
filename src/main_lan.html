@@ -47,7 +47,6 @@ var mApplication;
 
 window.addEvent('domready', function()
 {
-
         mApplication = new ApplicationBreslin('192.168.1.101', 30004);
 
         //input
@@ -56,32 +55,40 @@ window.addEvent('domready', function()
 
         //main loop
         var t=setInterval("mApplication.processUpdate()",32)
-       
-	mApplication.mNetwork.mSocket.on('news', function (data)
+
+        mApplication.mNetwork.mSocket.on('news', function (data)
         {
-		s = data.split(','); 
-		
-		byteBuffer = new ByteBuffer(s);
+                s = data.split(',');
 
-		type = byteBuffer.readByte();
+                byteBuffer = new ByteBuffer(s);
 
-		if (type == -103)
-		{
-			mApplication.mGame.addShape(byteBuffer);
-		}
+                type = byteBuffer.readByte();
 
-		if (type == 1)
-		{
-			mApplication.mGame.readServerTick(byteBuffer);
-		}
+                if (type == -103)
+                {
+                        mApplication.log('type:' + type);
+                        mApplication.mGame.addShape(byteBuffer);
+                }
+
+                if (type == 1)
+                {
+                        mApplication.mGame.readServerTick(byteBuffer);
+                }
         });
 }
 
 );
 
 </script>
-<p id="mMessageFrame">mMessageFrame</p>
+<p id="mMessageFrameA">mMessageFrameA</p>
+<p id="mMessageFrameB">mMessageFrameB</p>
+<p id="mMessageFrameC">mMessageFrameC</p>
+<p id="mMessageFrameD">mMessageFrameD</p>
+<p id="mMessageFrameE">mMessageFrameE</p>
+<p id="mMessageFrameF">mMessageFrameF</p>
+<p id="mMessageFrameG">mMessageFrameG</p>
+<p id="mMessageFrameH">mMessageFrameH</p>
+<p id="mMessageFrameI">mMessageFrameI</p>
 
 </body>
 </html>
-
