@@ -58,27 +58,8 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
         this.setupTitle();
  	
 	this.mMesh = 0;
-/*
-        //create clientImage
-	this.mSrc = this.getMeshString( 
-        if (this.mSrc)
-        {
-        	//image to attach to our div "vessel"
-               	this.mMesh  = document.createElement("IMG");
-                this.mMesh.src  = this.mSrc;
-                this.mMesh.style.width = this.mWidth+'px';
-                this.mMesh.style.height = this.mHeight+'px';
-        }
-
-        if (this.mSrc == "")//create paragraph
-        {
-                this.mMesh = document.createElement("p");
-        }
-
-        //back to div
-        this.mDiv.mDiv.appendChild(this.mMesh);
-*/
-        //ghost
+        
+	//ghost
         this.mGhost = 0;
 
         if (!this.mIsGhost)
@@ -256,7 +237,12 @@ spawnShape: function(position)
                 this.mMesh  = document.createElement("IMG");
                 this.mMesh.src  = this.mSrc;
         }
-        //back to div
+        if (this.mSrc == "")//create paragraph
+        {
+                this.mMesh = document.createElement("p");
+        }
+        
+	//back to div
         this.mDiv.mDiv.appendChild(this.mMesh);
 
 	v = new Vector3D();	
