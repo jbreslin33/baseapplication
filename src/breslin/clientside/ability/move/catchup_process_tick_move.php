@@ -4,7 +4,7 @@ var CatchupProcessTickMove = new Class(
 Extends: AbilityMoveState,
 initialize: function (abilityMove)
 {
-	this.mAbilityMove = abilityMove;
+        this.mAbilityMove = abilityMove;
 },
 
 log: function(msg)
@@ -84,8 +84,8 @@ abilityMove->mShape->mServerCommandCurrent->mVelocity,
                 abilityMove->mShape->mCommandToRunOnShape->mVelocity->zero();
         }
 */
-	this.log('catchup');        
-	//if we are back in sync
+        this.log('catchup');        
+        //if we are back in sync
         if(this.mAbilityMove.mDeltaPosition <= this.mAbilityMove.mPosInterpLimitHigh || this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())
         {
                 this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mNormalProcessTickMove);
@@ -142,7 +142,7 @@ this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity,
         else
         {
                 //why would catchup ever need to set velocity to zero, wouldn't we simply leave catchup state??
-		this.log('zeroing');
+                this.log('zeroing');
                 this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.zero();
         }
 },
