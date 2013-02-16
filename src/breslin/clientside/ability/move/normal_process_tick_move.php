@@ -23,7 +23,6 @@ enter: function()
 execute: function()
 {
 	this.mAbilityMove.mShape.mMesh.innerHTML='n:' + this.mAbilityMove.mShape.mIndex;
-	this.log('normal');
 
         // if distance exceeds threshold && server velocity is zero
         if(this.mAbilityMove.mDeltaPosition > this.mAbilityMove.mPosInterpLimitHigh && !this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())

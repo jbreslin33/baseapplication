@@ -183,7 +183,7 @@ spawnShape: function(position)
 	if (this.mSrc == 3)	
 	{
                 this.mMesh = document.createElement("p");
-		this.mMesh.innerHTML='s:' + this.mIndex;
+		this.mMesh.innerHTML='' + this.mIndex;
 	}
 	else 
 	{
