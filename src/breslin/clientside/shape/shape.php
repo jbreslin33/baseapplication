@@ -316,7 +316,7 @@ getMeshString: function(meshCode)
         }
         if (meshCode == 1)
         {
-                this.mScale = 1;
+                this.mScale = .5;
 		if (this.mGhost)
 		{
 			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/wizard.png";
