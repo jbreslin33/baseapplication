@@ -44,6 +44,8 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
         this.mSpawnPosition     = new Vector3D();
         this.mSpawnRotation     = new Vector3D();
 
+	this.mScale = 1;
+
         //process Spawn ByteBuffer
         this.processSpawnByteBuffer(byteBuffer);
         
@@ -258,7 +260,7 @@ spawnShape: function(position)
         this.mDiv.mDiv.appendChild(this.mMesh);
 
 	v = new Vector3D();	
-	this.scale(v);
+	this.scale();
 },
 /*********************************
                 DELTA
@@ -402,12 +404,12 @@ scale: function(v)
 	w = w * this.mScale;
 	
 	//scale image 
-        //this.mMesh.style.width = w+'px';
-       	//this.mMesh.style.height = h+'px';
+       	this.mMesh.style.height = h+'px';
+        this.mMesh.style.width = w+'px';
 
 	//scale div
-        //this.mDiv.mDiv.style.width = w+"px";
-        //this.mDiv.mDiv.style.height = h+"px";
+        this.mDiv.mDiv.style.height = h+"px";
+        this.mDiv.mDiv.style.width = w+"px";
 	//this.log('h:' + this.mDiv.mDiv.height);
 },
 
