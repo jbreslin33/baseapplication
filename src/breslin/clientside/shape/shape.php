@@ -44,6 +44,7 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
         this.mSpawnPosition     = new Vector3D();
         this.mSpawnRotation     = new Vector3D();
 
+	this.mMesh = 0;
 	this.mScale = 1;
 
         //process Spawn ByteBuffer
@@ -57,7 +58,6 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
 
         this.setupTitle();
  	
-	this.mMesh = 0;
         
 	//ghost
         this.mGhost = 0;
@@ -183,9 +183,7 @@ spawnShape: function(position)
 	if (this.mSrc == 3)	
 	{
                 this.mMesh = document.createElement("p");
-		this.mMesh.innerHTML='i:' + this.mIndex;
-
-
+		this.mMesh.innerHTML='s:' + this.mIndex;
 	}
 	else 
 	{
@@ -196,12 +194,6 @@ spawnShape: function(position)
                 	this.mMesh  = document.createElement("IMG");
                 	this.mMesh.src  = this.mSrc;
         	}
-		/*
-       	 	if (this.mSrc == "")//create paragraph
-        	{
-                	this.mMesh = document.createElement("p");
-        	}
-		*/
 	}
         
 	//back to div
