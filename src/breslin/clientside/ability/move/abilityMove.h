@@ -59,7 +59,7 @@ void interpolateTick(float renderTime);
 
 //move
 void calculateDeltaPosition();  
-float calcuateSpeed(Vector3D* velocity, int frameTime);
+float calculateSpeed(Vector3D* velocity, int frameTime);
 void regulate(Vector3D* velocityToRegulate);
 };
 

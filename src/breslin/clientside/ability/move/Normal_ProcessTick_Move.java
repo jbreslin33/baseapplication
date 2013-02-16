@@ -67,7 +67,7 @@ public void execute(AbilityMove abilityMove)
 
         if(abilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
-			abilityMove.mShape.mSpeed = abilityMove.calcuateSpeed(
+			abilityMove.mShape.mSpeed = abilityMove.calculateSpeed(
 			abilityMove.mShape.mServerCommandCurrent.mVelocity,
 			abilityMove.mShape.mCommandToRunOnShape.mFrameTime);
         }

@@ -80,7 +80,7 @@ void AbilityMove::calculateDeltaPosition()  //mov
     	mDeltaPosition = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));
 }
 
-float AbilityMove::calcuateSpeed(Vector3D* velocity, int frameTime)
+float AbilityMove::calculateSpeed(Vector3D* velocity, int frameTime)
 {
 	float speed = sqrt(
 	pow(velocity->x, 2) + 

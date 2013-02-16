@@ -107,7 +107,7 @@ void calculateDeltaPosition()  //mov
 }
 
 
-float calcuateSpeed(Vector3D velocity, int milliseconds)
+float calculateSpeed(Vector3D velocity, int milliseconds)
 {
 	float speed = (float)java.lang.Math.sqrt(
 	java.lang.Math.pow(velocity.x, 2) +

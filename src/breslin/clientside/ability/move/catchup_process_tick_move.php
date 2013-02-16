@@ -58,7 +58,7 @@ execute: function()
         //server velocity
         if(abilityMove->mShape->mCommandToRunOnShape->mFrameTime != 0)
         {
-                abilityMove->mShape->mSpeed = abilityMove->calcuateSpeed(
+                abilityMove->mShape->mSpeed = abilityMove->calculateSpeed(
 abilityMove->mShape->mServerCommandCurrent->mVelocity,
                abilityMove->mShape->mCommandToRunOnShape->mFrameTime);
         }
@@ -119,7 +119,7 @@ abilityMove->mShape->mServerCommandCurrent->mVelocity,
         //server velocity
         if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
-                this.mAbilityMove.mShape.mSpeed = abilityMove.calcuateSpeed(
+                this.mAbilityMove.mShape.mSpeed = abilityMove.calculateSpeed(
 this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity,
                this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime);
         }
