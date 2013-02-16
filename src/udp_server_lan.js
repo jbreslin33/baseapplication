@@ -86,7 +86,6 @@ server.on("message", function (msg, rinfo)
         if (type == -103)
         { 
                 var clientID = msg.readInt8(1);
-		console.log('for clientID: ' + clientID);
                 var client   = msg.readInt8(2);
                 var index    = msg.readInt8(3);
                 var xpos     = msg.readFloatLE(4);
@@ -100,11 +99,12 @@ server.on("message", function (msg, rinfo)
                 //let's just pass off data msg to browsers
 		var addShapeString = type;
                 addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
-	
+
 		io.sockets.clients().forEach(function (socket)
 		{
 			if (socket.mClientID == clientID)
 			{
+				console.log('addShapeString: ' + addShapeString);
        				socket.emit('news', addShapeString)
 			} 
 		});
@@ -190,13 +190,20 @@ server.on("message", function (msg, rinfo)
         			}
 		
 			} //  end while count < length
+		
+		       	io.sockets.clients().forEach(function (socket)
+                        {
+				if (socket.mClientID > 0)
+				{
+                       			socket.emit('news', dataString)
+				}
+                        });
 
-			io.sockets.emit('news', dataString)
+			//io.sockets.emit('news', dataString)
 			skipCounter = 0;
 
 		} //end skip check	
 	} //if type
-
 });
 
 server.on("listening", function ()

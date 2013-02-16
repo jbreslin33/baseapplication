@@ -375,19 +375,25 @@ getMeshString: function(meshCode)
         {
                 //this cube is exactly 1 ogre world unit. Which I take to be 1 meter.
                 this.mScale = .01;
-//http://71.23.229.73/breslin/clientside/bytebuffer/byte_buffer.php
-		return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/red_monster.png";
-	//	return "breslin/vclient/dist/media/materials/textures/red_monster.png";
         }
         if (meshCode == 1)
         {
                 this.mScale = 1;
-		//return "breslin/vclient/dist/media/materials/textures/wizard.png";
-		return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/wizard.png";
+		if (this.mGhost)
+		{
+			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/wizard.png";
+			return "http://192.168.1.101/breslin/vclient/dist/media/materials/textures/wizard.png";
+		}
+		else
+		{
+			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/red_monster.png";
+			return "http://192.168.1.101/breslin/vclient/dist/media/materials/textures/red_monster.png";
+
+		}
         }
 },
 
-scale: function()
+scale: function(v)
 {
 	var h = this.mMesh.height;
 	var w = this.mMesh.width;
