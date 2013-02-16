@@ -68,8 +68,6 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
                 this.mGhost = new Shape(this.mApplicationBreslin,byteBuffer,true);
                 this.mGhost.setVisible(false);
         }
-
-
 },
 
 log: function(msg)
@@ -133,42 +131,6 @@ setPosition: function(position)
 getPosition: function()
 {
 	return this.mPosition;
-/*
-	if (Browser.firefox)
-	{
-		x = this.mDiv.mDiv.style.left;
-		y = 0; 
-        	z = this.mDiv.mDiv.style.top;
-
-		x = x.replace("px","");	
-		z = z.replace("px","");
-
-		v = new Vector3D();
-
-		v.x = x;	
-		v.y = y;	
-		v.z = z;	
-
-		return v;
-	}
-	if (Browser.ie)
-	{
-		x = this.mDiv.mDiv.style.left;
-		y = 0; 
-        	z = this.mDiv.mDiv.style.top;
-
-		x = x.replace("px","");	
-		z = z.replace("px","");
-
-		v = new Vector3D();
-
-		v.x = x;	
-		v.y = y;	
-		v.z = z;	
-
-		return v;
-	}
-*/
 },
 
 setVisible: function(b)
@@ -199,22 +161,10 @@ parseSpawnByteBuffer: function(byteBuffer)
 	this.mMeshCode        = byteBuffer.readByte();
 	this.mAnimate         = byteBuffer.readByte();
 
-	this.log('typenow:' + typenow);
-	this.log('mLocal:' + this.mLocal);
-	this.log('mIndex:' + this.mIndex);
-	this.log('mSpawnPosition.x:' + this.mSpawnPosition.x);
-	this.log('mSpawnPosition.y:' + this.mSpawnPosition.y);
-	this.log('mSpawnPosition.z:' + this.mSpawnPosition.z);
-	this.log('mSpawnRotation.x:' + this.mSpawnRotation.x);
-	this.log('mSpawnRotation.z:' + this.mSpawnRotation.z);
-	this.log('mMeshCode:' + this.mMeshCode);
-	this.log('mAnimate:' + this.mAnimate);
-
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
         this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
         //this.mServerCommandCurrent.mPosition.printValues();
-	//good here
 },
 
 spawnShape: function(position)
@@ -396,7 +346,6 @@ scale: function(v)
 	//scale div
         this.mDiv.mDiv.style.height = h+"px";
         this.mDiv.mDiv.style.width = w+"px";
-	//this.log('h:' + this.mDiv.mDiv.height);
 },
 
 setupTitle: function()
