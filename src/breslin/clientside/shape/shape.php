@@ -179,18 +179,30 @@ spawnShape: function(position)
         this.mDiv = new Div(this);
 
 	this.mSrc = this.getMeshString(this.mMeshCode);
-
-        //create clientImage
-        if (this.mSrc)
-        {
-        	//image to attach to our div "vessel"
-                this.mMesh  = document.createElement("IMG");
-                this.mMesh.src  = this.mSrc;
-        }
-        if (this.mSrc == "")//create paragraph
-        {
+	
+	if (this.mSrc == 3)	
+	{
                 this.mMesh = document.createElement("p");
-        }
+		this.mMesh.innerHTML='i:' + this.mIndex;
+
+
+	}
+	else 
+	{
+        	//create clientImage
+        	if (this.mSrc)
+        	{
+        		//image to attach to our div "vessel"
+                	this.mMesh  = document.createElement("IMG");
+                	this.mMesh.src  = this.mSrc;
+        	}
+		/*
+       	 	if (this.mSrc == "")//create paragraph
+        	{
+                	this.mMesh = document.createElement("p");
+        	}
+		*/
+	}
         
 	//back to div
         this.mDiv.mDiv.appendChild(this.mMesh);
@@ -317,6 +329,9 @@ getMeshString: function(meshCode)
         if (meshCode == 1)
         {
                 this.mScale = .5;
+	
+		return 3;		
+	
 		if (this.mGhost)
 		{
 			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/wizard.png";
