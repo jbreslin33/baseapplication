@@ -165,7 +165,6 @@ parseSpawnByteBuffer: function(byteBuffer)
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
         this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
-        //this.mServerCommandCurrent.mPosition.printValues();
 },
 
 spawnShape: function(position)
@@ -177,6 +176,7 @@ spawnShape: function(position)
         this.mName         = this.mIndex;
 	
 	//create the movable div that will be used to move image around. c++ this is the sceneNode
+	this.mPosition.copyValuesFrom(this.mSpawnPosition);  
         this.mDiv = new Div(this);
 
 	this.mSrc = this.getMeshString(this.mMeshCode);
