@@ -150,17 +150,17 @@ processSpawnByteBuffer: function(byteBuffer)
 parseSpawnByteBuffer: function(byteBuffer)
 {
 	byteBuffer.beginReading();
-	typenow           = byteBuffer.readByte();
-	this.mLocal           = byteBuffer.readByte();
-	this.mIndex           = byteBuffer.readByte();
-	this.mSpawnPosition.x = byteBuffer.readByte();
-	this.mSpawnPosition.y = byteBuffer.readByte();
-	this.mSpawnPosition.z = byteBuffer.readByte();
-	this.log('spawnPosition:' + this.mSpawnPosition.printValues());
-	this.mSpawnRotation.x = byteBuffer.readByte();
-	this.mSpawnRotation.z = byteBuffer.readByte();
-	this.mMeshCode        = byteBuffer.readByte();
-	this.mAnimate         = byteBuffer.readByte();
+	typenow               = parseInt(byteBuffer.readByte());
+	this.mLocal           = parseInt(byteBuffer.readByte());
+	this.mIndex           = parseInt(byteBuffer.readByte());
+	this.mSpawnPosition.x = parseFloat(byteBuffer.readByte());
+	this.mSpawnPosition.y = parseFloat(byteBuffer.readByte());
+	this.mSpawnPosition.z = parseFloat(byteBuffer.readByte());
+	this.mSpawnPosition.printValues();
+	this.mSpawnRotation.x = parseFloat(byteBuffer.readByte());
+	this.mSpawnRotation.z = parseFloat(byteBuffer.readByte());
+	this.mMeshCode        = parseInt(byteBuffer.readByte());
+	this.mAnimate         = parseInt(byteBuffer.readByte());
 
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
