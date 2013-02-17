@@ -109,7 +109,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	if (type == mConnect)
 	{
 		createClient(address);
-		LogString("LIBRARY: Server: a c++ or java client connected succesfully");
 	}
 	
 	else if (type == mConnectNode)
@@ -118,7 +117,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 		createClient(address,-1);
 
-		LogString("LIBRARY: Server: a node.js client connected succesfully");
 	}	
 
 	else if (type == mConnectBrowser)
@@ -127,7 +125,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 		createClient(address,clientID);
 
-		LogString("LIBRARY: Server: a browser client connected succesfully with mClientID:%d",clientID);
 	}
 
 	else if (type == mMessageFrame || type == mDisconnect)
