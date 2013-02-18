@@ -174,6 +174,7 @@ sendByteBuffer: function()
 
                 // Send the packet
         	message = '1 ' + this.mKeyCurrent;
+		document.getElementById('mMessageFrameB').innerHTML='mKeyCurrent: ' + this.mKeyCurrent;	
         	this.mApplicationBreslin.mNetwork.mSocket.emit('send_move', message);
 
                 //set 'last' commands for diff
@@ -217,6 +218,7 @@ processInput: function()
 	{
 		this.mKeyCurrent |= this.mKeyClockwise;
 	}
+	document.getElementById('mMessageFrameC').innerHTML='mKeyCurrent: ' + this.mKeyCurrent;
 }
 
 });
