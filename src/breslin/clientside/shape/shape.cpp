@@ -236,6 +236,7 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
         {
                 mServerCommandLast->mRotation->x = mServerCommandCurrent->mRotation->x;
                 mServerCommandCurrent->mRotation->x = mes->ReadFloat();
+		
         }
 
         if(flags & mCommandRotationZ)

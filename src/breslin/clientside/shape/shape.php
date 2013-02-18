@@ -223,11 +223,8 @@ parseDeltaByteBuffer: function(byteBuffer)
 	flags = byteBuffer.readByte();
 	if (this.mIndex == 1)
 	{
-	//	document.getElementById('mMessageFrame').innerHTML='flags:' + flags;	
-	}
- 	
 	
-	//document.getElementById('mMessageFrame').innerHTML='mIndex:' + this.mIndex;	
+	}
 
 	// Origin
         if(flags & this.mCommandOriginX)
@@ -265,12 +262,14 @@ parseDeltaByteBuffer: function(byteBuffer)
         {
                 this.mServerCommandLast.mRotation.x = this.mServerCommandCurrent.mRotation.x;
                 this.mServerCommandCurrent.mRotation.x = byteBuffer.readByte();
+		document.getElementById('mMessageFrameB').innerHTML='X:' + this.mServerCommandCurrent.mRotation.x;
         }
 
         if(flags & this.mCommandRotationZ)
         {
                 this.mServerCommandLast.mRotation.z = this.mServerCommandCurrent.mRotation.z;
                 this.mServerCommandCurrent.mRotation.z = byteBuffer.readByte();
+		document.getElementById('mMessageFrameC').innerHTML='Z:' + this.mServerCommandCurrent.mRotation.z;
         }
 
         this.mServerCommandCurrent.mFrameTime = this.mApplicationBreslin.mGame.mFrameTimeServer;

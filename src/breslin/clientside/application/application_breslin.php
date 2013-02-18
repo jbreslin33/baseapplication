@@ -219,7 +219,6 @@ keyDown: function(event)
         if (event.key == 'z')
         {
                 mApplication.mKey_counterclockwise = true;
-		document.getElementById('mMessageFrameD').innerHTML='DOWN';		
 	}
 
 	//clockwise
@@ -265,7 +264,6 @@ keyUp: function(event)
         if (event.key == 'z')
         {
                 mApplication.mKey_counterclockwise = false;
-		document.getElementById('mMessageFrameD').innerHTML='UP';		
 	}
 
 	//clockwise
