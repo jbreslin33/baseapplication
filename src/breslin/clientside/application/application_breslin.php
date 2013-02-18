@@ -48,7 +48,7 @@ initialize: function(serverIP, serverPort)
 	this.mKey_up = false;
 	this.mKey_down = false;
 	this.mKey_right = false;
-	this.mKey_right = false;
+	this.mKey_left = false;
 	this.mKey_counterclockwise = false;
 	this.mKey_clockwise = false;
 	this.mKey_esc = false;

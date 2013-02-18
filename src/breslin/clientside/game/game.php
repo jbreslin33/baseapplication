@@ -210,11 +210,11 @@ processInput: function()
 		this.mKeyCurrent |= this.mKeyRight;
 	}
 
-	if (this.mApplicationBreslin.mKey_z)
+	if (this.mApplicationBreslin.mKey_counterclockwise)
 	{
 		this.mKeyCurrent |= this.mKeyCounterClockwise;
 	}
-	if (this.mApplicationBreslin.mKey_x)
+	if (this.mApplicationBreslin.mKey_clockwise)
 	{
 		this.mKeyCurrent |= this.mKeyClockwise;
 	}
@@ -222,4 +222,3 @@ processInput: function()
 }
 
 });
-
