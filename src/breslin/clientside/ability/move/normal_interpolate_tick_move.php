@@ -32,7 +32,7 @@ execute: function()
         parsedRenderTime = parseFloat(this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime());
 	
 	multipliedRenderTime = parsedRenderTime * 1000;
-	//document.getElementById('mMessageFrame').innerHTML='mrt: ' + multipliedRenderTime;
+	document.getElementById('mMessageFrameA').innerHTML=transVector.returnValues();
 
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);

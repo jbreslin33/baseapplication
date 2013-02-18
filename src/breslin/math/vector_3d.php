@@ -21,6 +21,11 @@ printValues: function()
 	this.log('xx: ' + this.x + 'yy: ' + this.y + 'zz: ' + this.z); 	
 },
 
+returnValues: function()
+{
+	return 'xx: ' + this.x + 'yy: ' + this.y + 'zz: ' + this.z; 	
+},
+
 length: function()
 {
 /*
