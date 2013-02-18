@@ -537,7 +537,6 @@ void Game::sendExitNotification()
 void Game::readDeltaMoveCommand(Message *mes, Client *client)
 {
 	client->mShape->mKey = mes->ReadByte();
-	LogString("mKey: %d",client->mShape->mKey);
 }
 
 

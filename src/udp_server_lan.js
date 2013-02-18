@@ -57,7 +57,6 @@ io.sockets.on('connection', function (socket)
 		var messageArray = message.split(" ");
 
 		var currentKey = parseInt(messageArray[1]);	               
-		console.log('currentKey: ' + currentKey); 
 		type = 2;
 
                 //send to c++ server
