@@ -335,13 +335,15 @@ getMeshString: function(meshCode)
 		if (this.mGhost)
 		{
 
-			return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/wizard.png";
+			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/wizard.png";
 			//return "http://192.168.1.101/breslin/vclient/dist/media/materials/textures/wizard.png";
+			return "http://192.168.2.88/breslin/vclient/dist/media/materials/textures/wizard.png";
 		}
 		else
 		{
-			return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/red_monster.png";
+			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/red_monster.png";
 			//return "http://192.168.1.101/breslin/vclient/dist/media/materials/textures/red_monster.png";
+			return "http://192.168.2.88/breslin/vclient/dist/media/materials/textures/red_monster.png";
 
 		}
         }
