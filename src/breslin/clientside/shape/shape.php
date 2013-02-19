@@ -142,10 +142,6 @@ getPosition: function()
 	return this.mPosition;
 },
 
-setVisible: function(b)
-{
-
-},
 
 /*********************************
                 SPAWN
@@ -341,6 +337,7 @@ getMeshString: function(meshCode)
 		}
 		else
 		{
+                	//this.mScale = .1;
 			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/red_monster.png";
 			//return "http://192.168.1.101/breslin/vclient/dist/media/materials/textures/red_monster.png";
 			return "http://192.168.2.88/breslin/vclient/dist/media/materials/textures/red_monster.png";
@@ -373,8 +370,23 @@ setupTitle: function()
 
 setVisible: function(b)
 {
-
+	if (b)
+        {
+        	if (this.mDiv.mDiv.style.visibility != 'visible')
+        	{
+        		this.mDiv.mDiv.style.visibility = 'visible';
+        	}
+        }
+        else
+        {
+               	if (this.mDiv.mDiv.style.visibility != 'hidden')
+                {
+			this.log('hiding!!!!!!!!!!!');
+                        this.mDiv.mDiv.style.visibility = 'hidden';
+               	}
+        }
 },
+
 
 moveGhostShape: function()
 {

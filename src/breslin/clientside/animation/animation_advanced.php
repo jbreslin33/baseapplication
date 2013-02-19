@@ -54,10 +54,12 @@ Extends: Animation,
 		if (x > -.25 && x < .25 && z < -.75)  
 		{
 			document.getElementById('mMessageFrameB').innerHTML='P:1';
+			this.mAnimation = 1;
 		}
 		else
 		{
 			document.getElementById('mMessageFrameB').innerHTML='P:2';
+			this.mAnimation = 2;
 		}
 /*
 		//north 
