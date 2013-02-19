@@ -43,12 +43,22 @@ Extends: Animation,
 		//so  we will simply use direction keys
 
 		//now we have to loop thru based on timer and mAnimationArray[]
+		var x = this.mShape.mServerCommandCurrent.mRotation.x; 
+		var z = this.mShape.mServerCommandCurrent.mRotation.z; 
 /*
 		if (this.mShape.mKey.mX == 0 && this.mShape.mKey.mY == 0)
 		{
 			//this.mAnimation = 0;
 		}
 */
+		if (x > -.25 && x < .25 && z < -.75)  
+		{
+			document.getElementById('mMessageFrameB').innerHTML='P:1';
+		}
+		else
+		{
+			document.getElementById('mMessageFrameB').innerHTML='P:2';
+		}
 /*
 		//north 
 		if (this.mShape.mKey.mX == 0 && this.mShape.mKey.mY == -1)
