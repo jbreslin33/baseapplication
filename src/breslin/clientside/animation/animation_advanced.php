@@ -27,6 +27,8 @@ Extends: Animation,
 		this.mAnimationAdvanced = 0;
 		this.mAnimationAdvancedDelay = 10;
 		this.mAnimationAdvancedDelayCounter = 0;
+	
+		shape.log('helo animo');
         },
 
 /******************** PUBLIC METHODS *************/
@@ -35,6 +37,9 @@ Extends: Animation,
 
         update: function()
         {
+		//document.getElementById('mMessageFrameB').innerHTML='X:' + this.mServerCommandCurrent.mRotation.x;
+		//document.getElementById('mMessageFrameC').innerHTML='Z:' + this.mServerCommandCurrent.mRotation.z;
+/*
 		//animation--let's play a certain animation base on velocity. but for now let's do it on keystroke?
 		//scratch that. velocity should determine if run or walk animation is played.
 		//so  we will simply use direction keys
@@ -86,10 +91,12 @@ Extends: Animation,
 		}
 
 		this.animate();
+*/
 	},
 	
 	animate: function()
 	{
+/*
 		//if that animation array exists 	
 		if (this.mAnimationArray[this.mAnimation])
 		{
@@ -118,5 +125,6 @@ Extends: Animation,
 		}
 		//increment the advanced delay counter
 		this.mAnimationAdvancedDelayCounter++;
+*/
 	}
 });

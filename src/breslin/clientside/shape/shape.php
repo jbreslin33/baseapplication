@@ -47,14 +47,17 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
 	this.mMesh = 0;
 	this.mScale = 1;
 
-        //process Spawn ByteBuffer
-        this.processSpawnByteBuffer(byteBuffer);
-        
 	//animation
+	this.mAnimation = 0;        
         if (this.mAnimate)
         {
                 //this.addAbility(new AbilityAnimationOgre(this));
         }
+
+        //process Spawn ByteBuffer
+        this.processSpawnByteBuffer(byteBuffer);
+
+
 
         this.setupTitle();
  	
@@ -80,13 +83,20 @@ log: function(msg)
 
 interpolateTick: function(renderTime)
 {
+	/********* ANIMATION ******************/
+        if (this.mAnimation)
+        {
+		this.log('updating');
+                this.mAnimation.update();
+        }
 	//interpolate ticks on abilitys
         //for (i = 0; i < this.mAbilityVector.length; i++)
         //{
                 this.mAbilityVector[0].interpolateTick(renderTime);
         //}
-
+	
 },
+
 /*********************************
                ABILITY 
 ******************************/
@@ -194,6 +204,9 @@ spawnShape: function(position)
         		//image to attach to our div "vessel"
                 	this.mMesh  = document.createElement("IMG");
                 	this.mMesh.src  = this.mSrc;
+ 			//set animation instance
+                	this.mAnimation = new AnimationAdvanced(this);
+                	this.mAnimation.addAnimations('http://192.168.1.101/breslin/vclient/dist/media/materials/textures/wizard_','.png');
         	}
 	}
         
@@ -262,14 +275,12 @@ parseDeltaByteBuffer: function(byteBuffer)
         {
                 this.mServerCommandLast.mRotation.x = this.mServerCommandCurrent.mRotation.x;
                 this.mServerCommandCurrent.mRotation.x = byteBuffer.readByte();
-		document.getElementById('mMessageFrameB').innerHTML='X:' + this.mServerCommandCurrent.mRotation.x;
         }
 
         if(flags & this.mCommandRotationZ)
         {
                 this.mServerCommandLast.mRotation.z = this.mServerCommandCurrent.mRotation.z;
                 this.mServerCommandCurrent.mRotation.z = byteBuffer.readByte();
-		document.getElementById('mMessageFrameC').innerHTML='Z:' + this.mServerCommandCurrent.mRotation.z;
         }
 
         this.mServerCommandCurrent.mFrameTime = this.mApplicationBreslin.mGame.mFrameTimeServer;
@@ -322,10 +333,9 @@ getMeshString: function(meshCode)
         {
                 this.mScale = .5;
 	
-		return 3;		
-	
 		if (this.mGhost)
 		{
+
 			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/wizard.png";
 			return "http://192.168.1.101/breslin/vclient/dist/media/materials/textures/wizard.png";
 		}
@@ -375,7 +385,6 @@ moveGhostShape: function()
 
 	//var pos = 'x:' + transVector.x + 'z:' + transVector.z;
 	this.mGhost.setPosition(transVector);
-	//document.getElementById('mMessageFrame').innerHTML='x: ' + transVector.x + ' z: ' + transVector.z;	
 }
 
 

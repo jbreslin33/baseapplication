@@ -34,6 +34,7 @@ var Animation = new Class(
 
         update: function()
         {
+/*
 		//animation--let's play a certain animation base on velocity. but for now let's do it on keystroke?
 		//scratch that. velocity should determine if run or walk animation is played.
 		//so  we will simply use direction keys
@@ -85,10 +86,12 @@ var Animation = new Class(
 		}
 
 		this.animate();
+*/
 	},
 	
 	animate: function()
 	{
+/*
 		//if that animation exists 	
 		if (this.mAnimationArray[this.mAnimation])
 		{
@@ -98,14 +101,17 @@ var Animation = new Class(
 				this.mShape.setSrc(this.mAnimationArray[this.mAnimation]);
 			}	
 		}
+*/
 	},
 
 	addAnimations: function(pic,extension)
 	{
+/*
         	for (i = 0; i < 9; i++)
 		{
         		this.mShape.mAnimation.mAnimationArray[i] = new Array();
                 	this.mShape.mAnimation.mAnimationArray[i][0] = pic + i + extension;
 		}	
+*/
 	}
 });
