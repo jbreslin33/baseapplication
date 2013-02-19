@@ -37,21 +37,26 @@ Extends: Animation,
         {
 		document.getElementById('mMessageFrameB').innerHTML='X:' + this.mShape.mServerCommandCurrent.mRotation.x;
 		document.getElementById('mMessageFrameC').innerHTML='Z:' + this.mShape.mServerCommandCurrent.mRotation.z;
-/*
+		
 		//animation--let's play a certain animation base on velocity. but for now let's do it on keystroke?
 		//scratch that. velocity should determine if run or walk animation is played.
 		//so  we will simply use direction keys
 
 		//now we have to loop thru based on timer and mAnimationArray[]
+/*
 		if (this.mShape.mKey.mX == 0 && this.mShape.mKey.mY == 0)
 		{
 			//this.mAnimation = 0;
 		}
+*/
+/*
 		//north 
 		if (this.mShape.mKey.mX == 0 && this.mShape.mKey.mY == -1)
 		{
 			this.mAnimation = 1;
 		} 
+*/
+/*
 		//north east
 		if (this.mShape.mKey.mX == .5 && this.mShape.mKey.mY == -.5)
 		{
@@ -87,14 +92,12 @@ Extends: Animation,
 		{
 			this.mAnimation = 8;
 		}
-
-		this.animate();
 */
+		this.animate();
 	},
 	
 	animate: function()
 	{
-/*
 		//if that animation array exists 	
 		if (this.mAnimationArray[this.mAnimation])
 		{
@@ -110,7 +113,7 @@ Extends: Animation,
 				//then switch to it if we are not already there.
 				if (this.mShape.mSrc != this.mAnimationArray[this.mAnimation][this.mAnimationAdvanced])
 				{
-					this.mShape.setSrc(this.mAnimationArray[this.mAnimation][this.mAnimationAdvanced]);
+					this.mShape.mSrc = this.mAnimationArray[this.mAnimation][this.mAnimationAdvanced];
 				}	
 			}
 		}
@@ -123,6 +126,5 @@ Extends: Animation,
 		}
 		//increment the advanced delay counter
 		this.mAnimationAdvancedDelayCounter++;
-*/
 	}
 });
