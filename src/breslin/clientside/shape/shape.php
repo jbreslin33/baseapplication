@@ -7,6 +7,9 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
 {
 
 	this.mIndex = 0;
+	
+	//ghost
+        this.mGhost = 0;
 
 	//constants
 	this.mCommandOriginX   = 4;
@@ -57,19 +60,12 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
         //process Spawn ByteBuffer
         this.processSpawnByteBuffer(byteBuffer);
 
-
-
         this.setupTitle();
- 	
-        
-	//ghost
-        this.mGhost = 0;
 
         if (!this.mIsGhost)
         {
                 //create a ghost for this shape
                 this.mGhost = new Shape(this.mApplicationBreslin,byteBuffer,true);
-                this.mGhost.setVisible(false);
         }
 },
 
@@ -210,6 +206,7 @@ spawnShape: function(position)
 
 	v = new Vector3D();	
 	this.scale();
+
 },
 /*********************************
                 DELTA
@@ -328,7 +325,7 @@ getMeshString: function(meshCode)
         {
                 this.mScale = .5;
 	
-		if (this.mGhost)
+		if (!this.mIsGhost)
 		{
 
 			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/wizard.png";
