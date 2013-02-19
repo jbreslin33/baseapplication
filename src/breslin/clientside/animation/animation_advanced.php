@@ -27,8 +27,6 @@ Extends: Animation,
 		this.mAnimationAdvanced = 0;
 		this.mAnimationAdvancedDelay = 10;
 		this.mAnimationAdvancedDelayCounter = 0;
-	
-		shape.log('helo animo');
         },
 
 /******************** PUBLIC METHODS *************/
@@ -37,8 +35,8 @@ Extends: Animation,
 
         update: function()
         {
-		//document.getElementById('mMessageFrameB').innerHTML='X:' + this.mServerCommandCurrent.mRotation.x;
-		//document.getElementById('mMessageFrameC').innerHTML='Z:' + this.mServerCommandCurrent.mRotation.z;
+		document.getElementById('mMessageFrameB').innerHTML='X:' + this.mShape.mServerCommandCurrent.mRotation.x;
+		document.getElementById('mMessageFrameC').innerHTML='Z:' + this.mShape.mServerCommandCurrent.mRotation.z;
 /*
 		//animation--let's play a certain animation base on velocity. but for now let's do it on keystroke?
 		//scratch that. velocity should determine if run or walk animation is played.

@@ -57,7 +57,6 @@ io.sockets.on('connection', function (socket)
 		var messageArray = message.split(" ");
 
 		var currentKey = parseInt(messageArray[1]);	               
-
 		type = 2;
 
                 //send to c++ server
@@ -104,7 +103,7 @@ server.on("message", function (msg, rinfo)
 		{
 			if (socket.mClientID == clientID)
 			{
-				console.log('addShapeString: ' + addShapeString);
+				console.log('sendTo: ' + clientID + 'message:' + addShapeString);
        				socket.emit('news', addShapeString)
 			} 
 		});

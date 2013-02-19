@@ -36,6 +36,8 @@
 <script src="http://71.23.229.73/breslin/clientside/ability/move/normal_process_tick_move.php"></script>
 <script src="http://71.23.229.73/breslin/clientside/ability/move/normal_interpolate_tick_move.php"></script>
 <script src="http://71.23.229.73/breslin/clientside/ability/move/ability_move_state_machine.php"></script>
+<script src="http://71.23.229.73/breslin/clientside/animation/animation.php"></script>
+<script src="http://71.23.229.73/breslin/clientside/animation/animation_advanced.php"></script>
 
 </head>
 
@@ -53,7 +55,7 @@ window.addEvent('domready', function()
         document.addEvent("keydown", mApplication.keyDown);
         document.addEvent("keyup", mApplication.keyUp);
 
- 	//main loop
+        //main loop
         var t=setInterval("mApplication.processUpdate()",32)
 
         mApplication.mNetwork.mSocket.on('news', function (data)
@@ -66,7 +68,13 @@ window.addEvent('domready', function()
 
                 if (type == -103)
                 {
-			mApplication.log('type:' + type);
+                        /*
+                        byteBuffer.beginReading();
+                        for (i = 0; i < byteBuffer.mBufferArray.length; i++)
+                        {
+                                mApplication.log('byte: ' + i + ' = ' + byteBuffer.readByte());
+                        }
+                        */
                         mApplication.mGame.addShape(byteBuffer);
                 }
 
