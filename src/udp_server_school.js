@@ -46,7 +46,7 @@ io.sockets.on('connection', function (socket)
                 
 		buf.writeInt8(socket.mClientID,1);
 
-                server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
+                server.send(buf, 0, buf.length, 30004, '192.168.2.88', function(err, bytes)
                 {
                 });
         });
@@ -65,7 +65,7 @@ io.sockets.on('connection', function (socket)
                 buf.writeInt8(socket.mClientID,1);
                 buf.writeInt8(currentKey,2);
 
-                server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
+                server.send(buf, 0, buf.length, 30004, '192.168.2.88', function(err, bytes)
                 {
                 });
         });
@@ -218,7 +218,7 @@ server.bind(41234);
 //send to c++ server
 var buf = new Buffer(1);
 buf.writeInt8(-121,0);
-server.send(buf, 0, buf.length, 30004, '192.168.1.101', function(err, bytes)
+server.send(buf, 0, buf.length, 30004, '192.168.2.88', function(err, bytes)
 {
 	console.log('sent connect from node');
 });
