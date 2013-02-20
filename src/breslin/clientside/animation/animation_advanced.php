@@ -110,6 +110,7 @@ Extends: Animation,
 	
 	animate: function()
 	{
+		document.getElementById('mMessageFrameE').innerHTML='A: ' + this.mAnimation;
 		//if that animation array exists 	
 		if (this.mAnimationArray[this.mAnimation])
 		{
@@ -125,7 +126,9 @@ Extends: Animation,
 				//then switch to it if we are not already there.
 				if (this.mShape.mSrc != this.mAnimationArray[this.mAnimation][this.mAnimationAdvanced])
 				{
-					this.mShape.mSrc = this.mAnimationArray[this.mAnimation][this.mAnimationAdvanced];
+					this.mShape.setSrc(this.mAnimationArray[this.mAnimation][this.mAnimationAdvanced]);
+					document.getElementById('mMessageFrameF').innerHTML='mSrc: ' + this.mShape.mSrc; 
+					
 				}	
 			}
 		}

@@ -181,7 +181,10 @@ spawnShape: function(position)
         this.mDiv = new Div(this);
 
 	this.mSrc = this.getMeshString(this.mMeshCode);
-	
+	if (this.mSrc == 99)
+	{
+
+	}
 	if (this.mSrc == 3)	
 	{
                 this.mMesh = document.createElement("p");
@@ -195,9 +198,6 @@ spawnShape: function(position)
         		//image to attach to our div "vessel"
                 	this.mMesh  = document.createElement("IMG");
                 	this.mMesh.src  = this.mSrc;
- 			//set animation instance
-                	this.mAnimation = new AnimationAdvanced(this);
-                	this.mAnimation.addAnimations('http://192.168.1.101/breslin/vclient/dist/media/materials/textures/wizard_','.png');
         	}
 	}
         
@@ -207,6 +207,11 @@ spawnShape: function(position)
 	v = new Vector3D();	
 	this.scale();
 
+},
+setSrc: function(src)
+{
+	this.mSrc = src;
+	this.mMesh.src = src;
 },
 /*********************************
                 DELTA
@@ -330,7 +335,10 @@ getMeshString: function(meshCode)
 
 			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/wizard.png";
 			//return "http://192.168.1.101/breslin/vclient/dist/media/materials/textures/wizard.png";
-			return "http://192.168.2.88/breslin/vclient/dist/media/materials/textures/wizard.png";
+ 			//set animation instance
+                	this.mAnimation = new AnimationAdvanced(this);
+                	this.mAnimation.addAnimations('http://192.168.2.88/breslin/vclient/dist/media/materials/textures/wizard_','.png');
+			return 99;
 		}
 		else
 		{
