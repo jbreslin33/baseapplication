@@ -333,19 +333,14 @@ getMeshString: function(meshCode)
 		if (!this.mIsGhost)
 		{
 
-			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/wizard.png";
-			//return "http://192.168.1.101/breslin/vclient/dist/media/materials/textures/wizard.png";
  			//set animation instance
                 	this.mAnimation = new AnimationAdvanced(this);
-                	this.mAnimation.addAnimations('http://192.168.2.88/breslin/vclient/dist/media/materials/textures/wizard_','.png');
+                	this.mAnimation.addAnimations('http://' + this.mApplicationBreslin.mNetwork.mServerIP + '/breslin/vclient/dist/media/materials/textures/wizard_','.png');
 			return 99;
 		}
 		else
 		{
-                	//this.mScale = .1;
-			//return "http://71.23.229.73/breslin/vclient/dist/media/materials/textures/red_monster.png";
-			//return "http://192.168.1.101/breslin/vclient/dist/media/materials/textures/red_monster.png";
-			return "http://192.168.2.88/breslin/vclient/dist/media/materials/textures/red_monster.png";
+			return "http://" + this.mApplicationBreslin.mNetwork.mServerIP + "/breslin/vclient/dist/media/materials/textures/red_monster.png";
 
 		}
         }
