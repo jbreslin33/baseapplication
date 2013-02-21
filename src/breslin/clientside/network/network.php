@@ -37,10 +37,6 @@ open: function()
 	ip_port = this.mServerIP + ':' + this.mServerPort; 
 	this.log('open socket on:' + ip_port);
 	return io.connect(ip_port);
-	//return io.connect('71.23.229.73:10000');
-	//return io.connect('192.168.1.101:10000');
-	//return io.connect('192.168.2.88:10000');
-	//return io.connect('192.168.2.234:10000');
 },
 
 sendConnect: function()
