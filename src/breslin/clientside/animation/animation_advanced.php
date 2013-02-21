@@ -35,8 +35,8 @@ Extends: Animation,
 
         update: function()
         {
-		document.getElementById('mMessageFrameB').innerHTML='X:' + this.mShape.mServerCommandCurrent.mRotation.x;
-		document.getElementById('mMessageFrameC').innerHTML='Z:' + this.mShape.mServerCommandCurrent.mRotation.z;
+		//document.getElementById('mMessageFrameB').innerHTML='X:' + this.mShape.mServerCommandCurrent.mRotation.x;
+		//document.getElementById('mMessageFrameC').innerHTML='Z:' + this.mShape.mServerCommandCurrent.mRotation.z;
 		
 		//animation--let's play a certain animation base on velocity. but for now let's do it on keystroke?
 		//scratch that. velocity should determine if run or walk animation is played.
@@ -53,12 +53,12 @@ Extends: Animation,
 */
 		if (x > -.25 && x < .25 && z < -.75)  
 		{
-			document.getElementById('mMessageFrameD').innerHTML='P:1';
+			//document.getElementById('mMessageFrameD').innerHTML='P:1';
 			this.mAnimation = 1;
 		}
 		else
 		{
-			document.getElementById('mMessageFrameD').innerHTML='P:2';
+			//document.getElementById('mMessageFrameD').innerHTML='P:2';
 			this.mAnimation = 2;
 		}
 /*
@@ -110,7 +110,7 @@ Extends: Animation,
 	
 	animate: function()
 	{
-		document.getElementById('mMessageFrameE').innerHTML='A: ' + this.mAnimation;
+		//document.getElementById('mMessageFrameE').innerHTML='A: ' + this.mAnimation;
 		//if that animation array exists 	
 		if (this.mAnimationArray[this.mAnimation])
 		{
@@ -127,7 +127,7 @@ Extends: Animation,
 				if (this.mShape.mSrc != this.mAnimationArray[this.mAnimation][this.mAnimationAdvanced])
 				{
 					this.mShape.setSrc(this.mAnimationArray[this.mAnimation][this.mAnimationAdvanced]);
-					document.getElementById('mMessageFrameF').innerHTML='mSrc: ' + this.mShape.mSrc; 
+					//document.getElementById('mMessageFrameF').innerHTML='mSrc: ' + this.mShape.mSrc; 
 					
 				}	
 			}

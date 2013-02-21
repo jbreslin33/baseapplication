@@ -22,7 +22,7 @@ enter: function()
 
 execute: function()
 {
-        this.mAbilityMove.mShape.mMesh.innerHTML='C:' + this.mAbilityMove.mShape.mIndex;
+        //this.mAbilityMove.mShape.mMesh.innerHTML='C:' + this.mAbilityMove.mShape.mIndex;
 
 	//if we are back in sync
         if(this.mAbilityMove.mDeltaPosition <= this.mAbilityMove.mPosInterpLimitHigh || this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())
@@ -75,7 +75,6 @@ this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity,
                 newVelocity.multiply(distTime);
 
                 //set newVelocity to mCommandToRunOnShape->mVelocity which is what interpolateTick uses
-                                //abilityMove->regulate(newVelocity);
                 this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(newVelocity);
         }
         else
