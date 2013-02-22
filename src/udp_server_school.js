@@ -37,6 +37,7 @@ io.sockets.on('connection', function (socket)
 {
         socket.on('send_connect', function(message,remote)
         {
+		socket.join('game1');
                 mMessage = message;
                
 		mess = parseInt(mMessage);
@@ -101,8 +102,12 @@ server.on("message", function (msg, rinfo)
         
                 //let's just pass off data msg to browsers
 		var addShapeString = type;
+
                 addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
 
+	
+
+/*
 		io.sockets.clients().forEach(function (socket)
 		{
 			if (socket.mClientID == clientID)
@@ -110,7 +115,8 @@ server.on("message", function (msg, rinfo)
 				console.log('sendTo: ' + clientID + 'message:' + addShapeString);
        				socket.emit('news', addShapeString)
 			} 
-		});
+*/		});
+
         }
 
 	if (type == 1)
