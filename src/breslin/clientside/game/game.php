@@ -112,6 +112,7 @@ addShape: function(byteBuffer)
 readServerTick: function(byteBuffer)
 {
 	seq = byteBuffer.readByte(); //seq
+	document.getElementById('mMessageFrameF').innerHTML='seq: ' + seq;
 	this.mFrameTimeServer = byteBuffer.readByte(); //time
 	
 	while (byteBuffer.mReadCount < byteBuffer.mBufferArray.length)
