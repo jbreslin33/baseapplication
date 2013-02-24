@@ -37,7 +37,7 @@ io.sockets.on('connection', function (socket)
 {
         socket.on('send_connect', function(message,remote)
         {
-//		socket.join('game1');
+		socket.join('game1');
                 mMessage = message;
                
 		mess = parseInt(mMessage);
@@ -104,9 +104,6 @@ server.on("message", function (msg, rinfo)
 		var addShapeString = type;
 
                 addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
-
-	
-
 
 		io.sockets.clients().forEach(function (socket)
 		{
@@ -200,6 +197,9 @@ server.on("message", function (msg, rinfo)
 		
 			} //  end while count < length
 		
+		
+			io.sockets.in('game1').emit('news',dataString)	
+			/*
 		       	io.sockets.clients().forEach(function (socket)
                         {
 				if (socket.mClientID > 0)
@@ -207,7 +207,7 @@ server.on("message", function (msg, rinfo)
                        			socket.emit('news', dataString)
 				}
                         });
-
+*/
 			//io.sockets.emit('news', dataString)
 			skipCounter = 0;
 
