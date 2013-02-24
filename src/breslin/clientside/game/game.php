@@ -3,6 +3,9 @@ var Game = new Class(
 
 initialize: function(applicationBreslin)
 {
+	this.mDelayClick = 100;
+	this.mDelayClickCounter = 0;
+
 	// constants
 	this.mCommandKey          = 1;
 	this.mCommandFrameTime = 2;
@@ -72,9 +75,21 @@ log: function(msg)
 /*********************************
                 Update
 **********************************/
-
 processUpdate: function()
 {
+	if (Browser.ie)
+	{
+		this.mDelayClickCounter++;
+		if (this.mDelayClickCounter > this.mDelayClick)
+		{
+			//document.getElementById('mButtonfake').click();
+			//document.getElementById('mButtonfake').click();
+			//document.click();
+
+			this.mDelayClickCounter = 0;
+		}
+	}
+ 
 	this.mStateMachine.update();
 
 	for (i = 0; i < this.mShapeVector.length; i++)
