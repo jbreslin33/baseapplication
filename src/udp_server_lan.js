@@ -197,7 +197,10 @@ server.on("message", function (msg, rinfo)
 		
 			} //  end while count < length
 		
-		
+	
+			//console.log('clients in room: ' + io.sockets.clients('game1'));
+			//console.log('rooms: ' + io.sockets.manager.rooms);
+	
 			io.sockets.in('game1').emit('news',dataString)	
 			/*
 		       	io.sockets.clients().forEach(function (socket)

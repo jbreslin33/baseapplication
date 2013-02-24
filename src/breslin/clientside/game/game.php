@@ -83,9 +83,13 @@ processUpdate: function()
 		if (this.mDelayClickCounter > this.mDelayClick)
 		{
 			//document.getElementById('mButtonfake').click();
-			//document.getElementById('mButtonfake').click();
+			//document.getElementById('mButtonFake').click();
 			//document.click();
-
+ 	//		var evt = window.createEvent("Events");
+  	//		evt.initEvent("click", true, true);
+  	//		window.dispatchEvent(evt);
+	//		document.click();
+	//		document.fireEvent("onclick");
 			this.mDelayClickCounter = 0;
 		}
 	}
