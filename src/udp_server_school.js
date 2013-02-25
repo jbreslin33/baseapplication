@@ -33,6 +33,8 @@ app.get('/', function (req, res) {
 //when a browser client first connects, this get's called.
 //then we parlay that into a send to the c++ server
 //could i not just assign an id here and then pass that to c++ as it's just going to be a browser id and no one else will use it.
+
+
 io.sockets.on('connection', function (socket) 
 {
         socket.on('send_connect', function(message,remote)
@@ -105,9 +107,6 @@ server.on("message", function (msg, rinfo)
 
                 addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
 
-	
-
-/*
 		io.sockets.clients().forEach(function (socket)
 		{
 			if (socket.mClientID == clientID)
@@ -115,7 +114,7 @@ server.on("message", function (msg, rinfo)
 				console.log('sendTo: ' + clientID + 'message:' + addShapeString);
        				socket.emit('news', addShapeString)
 			} 
-*/		});
+		});
 
         }
 
@@ -200,6 +199,12 @@ server.on("message", function (msg, rinfo)
 		
 			} //  end while count < length
 		
+	
+			//console.log('clients in room: ' + io.sockets.clients('game1'));
+			//console.log('rooms: ' + io.sockets.manager.rooms);
+	
+			io.sockets.in('game1').emit('news',dataString)	
+			/*
 		       	io.sockets.clients().forEach(function (socket)
                         {
 				if (socket.mClientID > 0)
@@ -207,7 +212,7 @@ server.on("message", function (msg, rinfo)
                        			socket.emit('news', dataString)
 				}
                         });
-
+*/
 			//io.sockets.emit('news', dataString)
 			skipCounter = 0;
 

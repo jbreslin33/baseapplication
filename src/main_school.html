@@ -49,7 +49,7 @@ var mApplication;
 
 window.addEvent('domready', function()
 {
-        mApplication = new ApplicationBreslin('192.168.2.88', '10000');
+        mApplication = new ApplicationBreslin('192.168.2.88','10000');
 
         //input
         document.addEvent("keydown", mApplication.keyDown);
@@ -57,8 +57,8 @@ window.addEvent('domready', function()
 
         //main loop
         var t=setInterval("mApplication.processUpdate()",32)
-
-        mApplication.mNetwork.mSocket.on('news', function (data)
+        
+	mApplication.mNetwork.mSocket.on('news', function (data)
         {
                 s = data.split(',');
 
@@ -68,19 +68,22 @@ window.addEvent('domready', function()
 
                 if (type == -103)
                 {
-                        /*
-                        byteBuffer.beginReading();
-                        for (i = 0; i < byteBuffer.mBufferArray.length; i++)
-                        {
-                                mApplication.log('byte: ' + i + ' = ' + byteBuffer.readByte());
-                        }
-                        */
-                        mApplication.mGame.addShape(byteBuffer);
+			if (Browser.ie)
+			{
+				window.clearInterval(t)
+			}
+                        
+			mApplication.mGame.addShape(byteBuffer);
                 }
 
                 if (type == 1)
                 {
+				
                         mApplication.mGame.readServerTick(byteBuffer);
+			if (Browser.ie)
+			{
+				mApplication.processUpdate();
+			}
                 }
         });
 }
@@ -100,4 +103,3 @@ window.addEvent('domready', function()
 
 </body>
 </html>
-
