@@ -39,6 +39,14 @@ open: function()
 	return io.connect(ip_port);
 },
 
+reopen: function()
+{
+	ip_port = this.mServerIP + ':' + this.mServerPort; 
+	this.log('reopen socket on:' + ip_port);
+	return io.connect(ip_port);
+},
+
+
 sendConnect: function()
 {
 	this.mSocket.emit('send_connect', '-111');

@@ -42,7 +42,7 @@ execute: function()
 
 	//set new position
 	this.mAbilityMove.mShape.setPosition(transVector);
-	
+	document.getElementById('mMessageFrameG').innerHTML=':mSequence ' + this.mAbilityMove.mShape.mApplicationBreslin.mGame.mSequence;	
 /*
         if (abilityMove->mShape->mLocal == 1)
         {

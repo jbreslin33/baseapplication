@@ -10,6 +10,8 @@ initialize: function(applicationBreslin)
 	this.mCommandKey          = 1;
 	this.mCommandFrameTime = 2;
 
+	this.mSequence = 0;
+
 	this.mMessageFrame = 2;  //changed this to browser code
 
 	this.mMessageAddShape    = -103;
@@ -90,6 +92,7 @@ processUpdate: function()
   	//		window.dispatchEvent(evt);
 	//		document.click();
 	//		document.fireEvent("onclick");
+	//		this.mApplicationBreslin.mNetwork.reopen();
 			this.mDelayClickCounter = 0;
 		}
 	}
@@ -132,6 +135,7 @@ readServerTick: function(byteBuffer)
 {
 	seq = byteBuffer.readByte(); //seq
 	document.getElementById('mMessageFrameF').innerHTML='seq: ' + seq;
+	this.mSequence = seq;
 	this.mFrameTimeServer = byteBuffer.readByte(); //time
 	
 	while (byteBuffer.mReadCount < byteBuffer.mBufferArray.length)
