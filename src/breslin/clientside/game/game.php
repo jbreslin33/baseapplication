@@ -79,6 +79,8 @@ log: function(msg)
 **********************************/
 processUpdate: function()
 {
+	document.getElementById('mMessageFrameH').innerHTML='mSequence pu:' + this.mSequence;
+/*
 	if (Browser.ie)
 	{
 		this.mDelayClickCounter++;
@@ -96,7 +98,7 @@ processUpdate: function()
 			this.mDelayClickCounter = 0;
 		}
 	}
- 
+*/ 
 	this.mStateMachine.update();
 
 	for (i = 0; i < this.mShapeVector.length; i++)

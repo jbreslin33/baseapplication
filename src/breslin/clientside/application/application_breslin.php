@@ -77,6 +77,7 @@ processUpdate: function()
         this.mRenderTime = this.mTimeSinceEpoch - this.mLastTimeSinceEpoch;
 	this.mRenderTime = this.mRenderTime / 1000;
         this.mStateMachine.update();
+	document.getElementById('mMessageFrameI').innerHTML=':mSequence ' + this.mGame.mSequence;
 },
 
 

@@ -80,10 +80,12 @@ log: function(msg)
 interpolateTick: function(renderTime)
 {
 	/********* ANIMATION ******************/
+/*
         if (this.mAnimation)
         {
                 this.mAnimation.update();
         }
+*/
 	//interpolate ticks on abilitys
         //for (i = 0; i < this.mAbilityVector.length; i++)
         //{
