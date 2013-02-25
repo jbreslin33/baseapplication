@@ -3,6 +3,8 @@ var ApplicationBreslin = new Class(
 
 initialize: function(serverIP, serverPort)
 {
+	this.mIntervalCount = 0;
+	this.mIntervalCountLast = 0;
 	//StartLog ...don't need to just need log function	
 
 	//constants

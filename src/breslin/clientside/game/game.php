@@ -135,6 +135,9 @@ addShape: function(byteBuffer)
 
 readServerTick: function(byteBuffer)
 {
+	this.mApplicationBreslin.mIntervalCountLast = this.mApplicationBreslin.mIntervalCount;
+	this.mApplicationBreslin.mIntervalCount++;
+
 	seq = byteBuffer.readByte(); //seq
 	document.getElementById('mMessageFrameF').innerHTML='seq: ' + seq;
 	this.mSequence = seq;
