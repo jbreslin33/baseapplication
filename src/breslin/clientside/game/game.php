@@ -79,26 +79,11 @@ log: function(msg)
 **********************************/
 processUpdate: function()
 {
+	//set intervalCount back to zero to signify we are still running game loop
+	mIntervalCount = 0;
+
 	document.getElementById('mMessageFrameH').innerHTML='mSequence pu:' + this.mSequence;
-/*
-	if (Browser.ie)
-	{
-		this.mDelayClickCounter++;
-		if (this.mDelayClickCounter > this.mDelayClick)
-		{
-			//document.getElementById('mButtonfake').click();
-			//document.getElementById('mButtonFake').click();
-			//document.click();
- 	//		var evt = window.createEvent("Events");
-  	//		evt.initEvent("click", true, true);
-  	//		window.dispatchEvent(evt);
-	//		document.click();
-	//		document.fireEvent("onclick");
-	//		this.mApplicationBreslin.mNetwork.reopen();
-			this.mDelayClickCounter = 0;
-		}
-	}
-*/ 
+	
 	this.mStateMachine.update();
 
 	for (i = 0; i < this.mShapeVector.length; i++)
@@ -129,7 +114,7 @@ addShape: function(byteBuffer)
 	//put shape and ghost in game vectors so they can be looped and game now knows of them.
         this.mShapeVector.push(shape);
         this.mShapeGhostVector.push(shape.mGhost);
-	shape.mGhost.setVisible(false);
+	//shape.mGhost.setVisible(false);
 
 },
 
