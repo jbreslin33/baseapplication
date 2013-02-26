@@ -115,7 +115,6 @@ server.on("message", function (msg, rinfo)
        				socket.emit('news', addShapeString)
 			} 
 		});
-
         }
 
 	if (type == 1)
@@ -203,8 +202,8 @@ server.on("message", function (msg, rinfo)
 			//console.log('clients in room: ' + io.sockets.clients('game1'));
 			//console.log('rooms: ' + io.sockets.manager.rooms);
 	
-			io.sockets.in('game1').emit('news',dataString)	
-			/*
+//			io.sockets.in('game1').emit('news',dataString)	
+			
 		       	io.sockets.clients().forEach(function (socket)
                         {
 				if (socket.mClientID > 0)
@@ -212,7 +211,7 @@ server.on("message", function (msg, rinfo)
                        			socket.emit('news', dataString)
 				}
                         });
-*/
+
 			//io.sockets.emit('news', dataString)
 			skipCounter = 0;
 
