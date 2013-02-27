@@ -56,7 +56,8 @@ window.addEvent('domready', function()
         document.addEvent("keyup", mApplication.keyUp);
 
         //main loop
-        var t=setInterval("mApplication.processUpdate()",32)
+	mIntervalCount = 0;
+        mInterval=setInterval("mApplication.processUpdate()",32)
         
 	mApplication.mNetwork.mSocket.on('news', function (data)
         {
@@ -68,22 +69,29 @@ window.addEvent('domready', function()
 
                 if (type == -103)
                 {
-			if (Browser.ie)
-			{
-				window.clearInterval(t)
-			}
-                        
 			mApplication.mGame.addShape(byteBuffer);
                 }
 
                 if (type == 1)
                 {
+			mIntervalCount++;
+		
+			//check if we stopped game loop	
+			if (mIntervalCount > 25)
+			{
+				//game loop stopped so let's clear interval and start a new one.	
+
+				//clear it
+				clearInterval(mInterval);
+
+				//set it again
+        			mInterval=setInterval("mApplication.processUpdate()",32)
+
+				mIntervalCount = 0;
+
+			}
 				
                         mApplication.mGame.readServerTick(byteBuffer);
-			if (Browser.ie)
-			{
-				mApplication.processUpdate();
-			}
                 }
         });
 }
