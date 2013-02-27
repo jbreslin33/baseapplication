@@ -45,66 +45,61 @@ Extends: Animation,
 		//now we have to loop thru based on timer and mAnimationArray[]
 		var x = this.mShape.mServerCommandCurrent.mRotation.x; 
 		var z = this.mShape.mServerCommandCurrent.mRotation.z; 
+
 /*
 		if (this.mShape.mKey.mX == 0 && this.mShape.mKey.mY == 0)
 		{
 			//this.mAnimation = 0;
 		}
 */
+		//north 
 		if (x > -.25 && x < .25 && z < -.75)  
 		{
 			//document.getElementById('mMessageFrameD').innerHTML='P:1';
 			this.mAnimation = 1;
 		}
-		else
-		{
-			//document.getElementById('mMessageFrameD').innerHTML='P:2';
-			this.mAnimation = 2;
-		}
-/*
-		//north 
-		if (this.mShape.mKey.mX == 0 && this.mShape.mKey.mY == -1)
-		{
-			this.mAnimation = 1;
-		} 
-*/
-/*
+
 		//north east
-		if (this.mShape.mKey.mX == .5 && this.mShape.mKey.mY == -.5)
+		if (x > .25 && x < .75 && z > -.75 && z < .75)  
 		{
 			this.mAnimation = 2;
 		} 
+		
 		//east
-		if (this.mShape.mKey.mX == 1 && this.mShape.mKey.mY == 0)
+		if (x > .75 && z > -.25 && z < .25)  
 		{
 			this.mAnimation = 3;
 		} 
+
 		//south east
-		if (this.mShape.mKey.mX == .5 && this.mShape.mKey.mY == .5)
+		if (x > .25 && x < .75 && z > -.25 && z < .75)  
 		{
 			this.mAnimation = 4;
 		} 
+		
 		//south
-		if (this.mShape.mKey.mX == 0 && this.mShape.mKey.mY == 1)
+		if (x > -.25 && x < .25 && z > .75)  
 		{
 			this.mAnimation = 5;
 		} 
+
 		//south west
-		if (this.mShape.mKey.mX == -.5 && this.mShape.mKey.mY == .5)
+		if (x > -.75 && x < -.25 && z > .25 && z < .75)  
 		{
 			this.mAnimation = 6;
 		} 
+
 		//west
-		if (this.mShape.mKey.mX == -1 && this.mShape.mKey.mY == 0)
+		if (x < -.75 && z > -.25 && z < .25)  
 		{
 			this.mAnimation = 7;
 		}
+
 		//north west
-		if (this.mShape.mKey.mX == -.5 && this.mShape.mKey.mY == -.5)
+		if (x > -.75 && x < -.25 && z > -.75 && z < -.25)  
 		{
 			this.mAnimation = 8;
 		}
-*/
 		this.animate();
 	},
 	
