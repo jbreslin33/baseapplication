@@ -82,8 +82,6 @@ processUpdate: function()
 	//set intervalCount back to zero to signify we are still running game loop
 	mIntervalCount = 0;
 
-	document.getElementById('mMessageFrameH').innerHTML='mSequence pu:' + this.mSequence;
-	
 	this.mStateMachine.update();
 
 	for (i = 0; i < this.mShapeVector.length; i++)
@@ -124,7 +122,6 @@ readServerTick: function(byteBuffer)
 	this.mApplicationBreslin.mIntervalCount++;
 
 	seq = byteBuffer.readByte(); //seq
-	document.getElementById('mMessageFrameF').innerHTML='seq: ' + seq;
 	this.mSequence = seq;
 	this.mFrameTimeServer = byteBuffer.readByte(); //time
 	
