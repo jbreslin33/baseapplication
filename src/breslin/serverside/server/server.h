@@ -56,6 +56,9 @@ public:
 	//codes
 	static const int mMessageFrame 	      = 1;
 	static const int mMessageFrameBrowser = 2;
+	
+	static const int mMessageQuestion     = 3;
+	static const int mMessageAnswer	      = 4;
 
 	static const int mConnect            = -101;
 	static const int mConnectBrowser     = -111;
