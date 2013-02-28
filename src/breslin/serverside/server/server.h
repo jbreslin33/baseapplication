@@ -54,21 +54,30 @@ public:
 	const char *mLocalIP;
 
 	//codes
-	static const int mMessageFrame 	      = 1;
-	static const int mMessageFrameBrowser = 2;
-	
-	static const int mMessageQuestion     = 3;
-	static const int mMessageAnswer	      = 4;
+	//frames
+	static const int mMessageFrame 	          = 1;
+	static const int mMessageFrameBrowser     = 2;
 
-	static const int mConnect            = -101;
-	static const int mConnectBrowser     = -111;
-	static const int mConnectNode        = -121;
-	
-	static const int mDisconnect         = -102;
-	static const int mDisconnectBrowser  = -112;
-	
-	static const int mAddShape    	     = -103;
-	static const int mRemoveShape 	     = -104;
+	//questions	
+	static const int mMessageQuestion        = -105;
+	static const int mMessageQuestionBrowser = -115;
+
+	//answer
+	static const int mMessageAnswer          = -106;
+	static const int mMessageAnswerBrowser   = -116;
+
+	//connect
+	static const int mConnect                = -101;
+	static const int mConnectBrowser         = -111;
+	static const int mConnectNode            = -121;
+
+	//disconnect	
+	static const int mDisconnect             = -102;
+	static const int mDisconnectBrowser      = -112;
+
+	//add shape	
+	static const int mAddShape    	         = -103;
+	static const int mRemoveShape 	         = -104;
 
 public:
 	Server(Game* serverSideGame,const char *localIP, int serverPort);

@@ -139,6 +139,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			}
 		}
 	}
+
 	else if (type == mMessageFrameBrowser ||  type == mDisconnectBrowser)
 	{
 		int clientID = mes->ReadByte();
