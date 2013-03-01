@@ -46,6 +46,8 @@
 <script>
 
 var mApplication;
+var mSize;
+var mMiddleOfViewPort = new Vector3D();;
 
 window.addEvent('domready', function()
 {
@@ -95,8 +97,18 @@ window.addEvent('domready', function()
                 }
         });
 }
-
 );
+
+window.onresize = function(event)
+{
+	mSize = window.getSize();	
+
+        //let's move control object to middle of screen
+        this.mMiddleOfViewPort.x =  this.mSize.x;
+        this.mMiddleOfViewPort.y =  0;
+        this.mMiddleOfViewPort.z =  mSize.y / 2;
+}
+
 
 </script>
 <p id="mMessageFrameA">mMessageFrameA</p>

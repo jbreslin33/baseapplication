@@ -23,6 +23,7 @@ initialize: function(applicationBreslin)
 	//shapes
 	this.mShapeVector      = new Array();
 	this.mShapeGhostVector = new Array();
+	this.mControlObject    = 0; 
 
 	//byteBuffer
 	this.mByteBuffer = new ByteBuffer();

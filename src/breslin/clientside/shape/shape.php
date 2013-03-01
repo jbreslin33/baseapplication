@@ -21,10 +21,13 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
  	this.mIsGhost = isGhost;
 	this.mAnimate = false;
 	this.mName = 0;
-	
+
 	//div
 	this.mDiv = 0;
-	this.mPosition = new Vector3D();
+
+	//position
+	this.mPosition       = new Vector3D();
+	this.mPositionRender = new Vector3D();
 	
 	//abilitys
 	this.mAbilityVector = new Array();
@@ -127,12 +130,12 @@ setPosition: function(position)
 	this.mPosition.y = position.y;
 	this.mPosition.z = position.z;
 
-	//set a member position because we are going to have to modify the div's position
-       	modx = position.x+"px"; 
-       	mody = position.z+"px"; 
-        
-        this.mDiv.mDiv.style.left = modx;
-        this.mDiv.mDiv.style.top = mody;
+        //set a member position because we are going to have to modify the div's position
+        modx = position.x+"px"; 
+        mody = position.z+"px"; 
+        
+        this.mDiv.mDiv.style.left = modx;
+        this.mDiv.mDiv.style.top = mody;
 },
 
 getPosition: function()
@@ -140,6 +143,21 @@ getPosition: function()
 	return this.mPosition;
 },
 
+//relative movement
+render: function()
+{
+	//center image relative to position set it to mPositionRender
+	this.mPositionRender.x = this.mPosition.x - (this.mMesh.height / 2);
+	this.mPositionRender.y = 0; 
+	this.mPositionRender.z = this.mPosition.z - (this.mMesh.width / 2);
+	
+	//set a member position because we are going to have to modify the div's position
+       	modx = position.x+"px"; 
+       	mody = position.z+"px"; 
+        
+        this.mDiv.mDiv.style.left = modx;
+        this.mDiv.mDiv.style.top = mody;
+},
 
 /*********************************
                 SPAWN
@@ -168,6 +186,13 @@ parseSpawnByteBuffer: function(byteBuffer)
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
         this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
+
+
+	//set control object
+	if (this.mLocal == 1)
+	{
+		this.mApplicationBreslin.mGame.mControlObject = this;
+	} 
 },
 
 spawnShape: function(position)
