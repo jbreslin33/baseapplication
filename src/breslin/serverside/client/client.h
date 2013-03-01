@@ -80,6 +80,12 @@ public:
 	void			SendPacket(Message *message);
 	void sendAllShapes();
 	void sendAllShapesBrowser();
+
+	//questions
+	void sendQuestion();
+	void writeQuestion();
+	void writeQuestionBrowser();
+
 	//clients address to send back messages to
 	struct sockaddr *GetSocketAddress(void) { return &mMyaddress; }
 	void			SetSocketAddress(struct sockaddr *address) { memcpy(&mMyaddress, address, sizeof(struct sockaddr)); }

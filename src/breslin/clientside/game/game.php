@@ -112,7 +112,14 @@ addShape: function(byteBuffer)
 	//put shape and ghost in game vectors so they can be looped and game now knows of them.
         this.mShapeVector.push(shape);
         this.mShapeGhostVector.push(shape.mGhost);
-	shape.mGhost.setVisible(false);
+	if (shape.mLocal == 1)
+	{
+		shape.mGhost.setVisible(true);
+	}
+	else
+	{
+		shape.mGhost.setVisible(false);
+	}
 
 },
 

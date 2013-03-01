@@ -110,6 +110,59 @@ void Client::sendAllShapes()
 	}
 }
 
+void Client::sendQuestion()
+{
+	//generate question based on level etc
+	
+	
+	//send it
+	//SendPacket(...
+//	you could actually just SendPacket in writeQuestion and writeQuestionBrowser because we are not looping
+//but we will not because it confuses this.
+}
+
+void Client::writeQuestion()
+{
+
+}
+
+void Client::writeQuestionBrowser()
+{
+/*
+        mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
+
+        mGame->mServer->mMessage.WriteByte(mGame->mServer->mAddShape); // type
+
+        mGame->mServer->mMessage.WriteByte(client->mClientID); //client id for browsers
+
+        if (client == mClient)
+        {
+                mGame->mServer->mMessage.WriteByte(1);
+        }
+        else
+        {
+                mGame->mServer->mMessage.WriteByte(0);
+        }
+        mGame->mServer->mMessage.WriteByte(mIndex);
+
+        mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().x);
+        LogString("x:%f",mSceneNode->getPosition().x);
+        mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().y);
+        mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().z);
+
+        mGame->mServer->mMessage.WriteFloat(mRotation->x);
+        mGame->mServer->mMessage.WriteFloat(mRotation->z);
+
+        //mesh
+        mGame->mServer->mMessage.WriteByte(mMeshCode);
+
+        //animation
+        mGame->mServer->mMessage.WriteByte(mAnimated);
+*/
+}
+
+
+
 void Client::sendAllShapesBrowser()
 {
 	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
