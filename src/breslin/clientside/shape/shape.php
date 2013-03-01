@@ -130,7 +130,6 @@ setPosition: function(position)
 	this.mPosition.y = position.y;
 	this.mPosition.z = position.z;
 
-		//this.mApplicationBreslin.mGame.mControlObject = this;
 	if (this.mApplicationBreslin.mGame.mControlObject == this)
 	{
 		this.mPositionRender.x = mMiddleOfViewPort.x;	

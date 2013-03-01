@@ -51,8 +51,15 @@ var mMiddleOfViewPort = new Vector3D();;
 
 window.addEvent('domready', function()
 {
-        mApplication = new ApplicationBreslin('192.168.2.88','10000');
+       	mSize = window.getSize();
 
+        //let's move control object to middle of screen
+        mMiddleOfViewPort.x =  mSize.x /2;
+        mMiddleOfViewPort.y =  0;
+        mMiddleOfViewPort.z =  mSize.y / 2;
+
+        mApplication = new ApplicationBreslin('192.168.2.88','10000');
+       	
         //input
         document.addEvent("keydown", mApplication.keyDown);
         document.addEvent("keyup", mApplication.keyUp);
@@ -104,9 +111,9 @@ window.onresize = function(event)
 	mSize = window.getSize();	
 
         //let's move control object to middle of screen
-        this.mMiddleOfViewPort.x =  this.mSize.x;
-        this.mMiddleOfViewPort.y =  0;
-        this.mMiddleOfViewPort.z =  mSize.y / 2;
+        mMiddleOfViewPort.x =  this.mSize.x /2;
+        mMiddleOfViewPort.y =  0;
+        mMiddleOfViewPort.z =  mSize.y / 2;
 }
 
 
