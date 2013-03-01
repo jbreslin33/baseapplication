@@ -134,7 +134,7 @@ setPosition: function(position)
 	{
 		this.mPositionRender.x = mMiddleOfViewPort.x;	
 		this.mPositionRender.y = 0;	
-		this.mPositionRender.x = mMiddleOfViewPort.z;	
+		this.mPositionRender.z = mMiddleOfViewPort.z;	
 	}
 	else
 	{
