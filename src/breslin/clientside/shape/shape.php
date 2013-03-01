@@ -130,12 +130,25 @@ setPosition: function(position)
 	this.mPosition.y = position.y;
 	this.mPosition.z = position.z;
 
-        //set a member position because we are going to have to modify the div's position
-        modx = position.x+"px"; 
-        mody = position.z+"px"; 
-        
-        this.mDiv.mDiv.style.left = modx;
-        this.mDiv.mDiv.style.top = mody;
+		//this.mApplicationBreslin.mGame.mControlObject = this;
+	if (this.mApplicationBreslin.mGame.mControlObject == this)
+	{
+		this.mPositionRender.x = mMiddleOfViewPort.x;	
+		this.mPositionRender.y = 0;	
+		this.mPositionRender.x = mMiddleOfViewPort.z;	
+	}
+	else
+	{
+		this.mPositionRender.x = this.mPosition.x;
+		this.mPositionRender.y = this.mPosition.y;
+		this.mPositionRender.z = this.mPosition.z;
+	}
+
+	//set a member position because we are going to have to modify the div's position
+	modx = this.mPositionRender.x+"px";
+	mody = this.mPositionRender.z+"px";
+	this.mDiv.mDiv.style.left = modx;
+	this.mDiv.mDiv.style.top = mody;
 },
 
 getPosition: function()
@@ -189,7 +202,7 @@ parseSpawnByteBuffer: function(byteBuffer)
 
 
 	//set control object
-	if (this.mLocal == 1)
+	if (this.mLocal == 1 && this.mIsGhost == false)
 	{
 		this.mApplicationBreslin.mGame.mControlObject = this;
 	} 
