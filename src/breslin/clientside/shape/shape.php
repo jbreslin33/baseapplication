@@ -138,16 +138,15 @@ setPosition: function(position)
 		
 		//let's tell game about the offset so we only calc once
 		//figure diff between rendered control object and server control object
-		this.mApplicationBreslin.mGame.mOffset.x = this.mPositionRender.x - this.mPosition.x;
-		this.mApplicationBreslin.mGame.mOffset.y = 0;
-		this.mApplicationBreslin.mGame.mOffset.z = this.mPositionRender.z - this.mPosition.z;
-		
+		this.mApplicationBreslin.mGame.mOffSet.x = this.mPositionRender.x - this.mPosition.x;
+		this.mApplicationBreslin.mGame.mOffSet.y = 0;
+		this.mApplicationBreslin.mGame.mOffSet.z = this.mPositionRender.z - this.mPosition.z;
 	}
 	else
 	{
-		this.mPositionRender.x = this.mApplication.mGame.mOffset.x + this.mPosition.x;
+		this.mPositionRender.x = this.mApplication.mGame.mOffSet.x + this.mPosition.x;
 		this.mPositionRender.y = 0;
-		this.mPositionRender.z = this.mApplication.mGame.mOffset.z + this.mPosition.z;
+		this.mPositionRender.z = this.mApplication.mGame.mOffSet.z + this.mPosition.z;
 	}
 
 	//set a member position because we are going to have to modify the div's position

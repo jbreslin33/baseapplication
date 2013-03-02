@@ -24,7 +24,7 @@ initialize: function(applicationBreslin)
 	this.mShapeVector      = new Array();
 	this.mShapeGhostVector = new Array();
 	this.mControlObject    = 0; 
-	this.mOffset = new Vector3D();
+	this.mOffSet = new Vector3D();
 
 	//byteBuffer
 	this.mByteBuffer = new ByteBuffer();
