@@ -34,6 +34,9 @@ initialize: function(serverIP, serverPort)
 	this.mButtonTag = 0;
 	this.mButtonTagAll = 0;
 
+	//border
+	this.mEastBorder = 0;
+
         //state machine (Menus)
         this.mStateMachine = new StateMachine();
 
@@ -155,23 +158,35 @@ document.body.appendChild(btn);
 		mApplication.mButtonHit = mApplication.mButtonGame;	
 	};
 	
-	this.showBorders();
+	this.createBorders();
+},
+
+
+createBorders: function()
+{
+	this.mEastBorder = document.createElement("div");
+	this.mEastBorder.style.position = "absolute";
+	this.mEastBorder.style.width = "10px";
+	this.mEastBorder.style.height = "400px";
+	this.mEastBorder.style.background = "red";
+	this.mEastBorder.style.color = "white";
+	this.mEastBorder.innerHTML = "Hello";
+	this.mEastBorder.style.left = "0px";
+	this.mEastBorder.style.top = "0px";
+
+	document.body.appendChild(this.mEastBorder);
 },
 
 showBorders: function()
 {
-	var div = document.createElement("div");
-	div.style.position = "absolute";
-	div.style.width = "100px";
-	div.style.height = "100px";
-	div.style.background = "red";
-	div.style.color = "white";
-	div.innerHTML = "Hello";
-	div.style.left = "300px";
-	div.style.top = "300px";
 
-	document.body.appendChild(div);
 },
+
+hideBorders: function()
+{
+
+},
+
 
 showMainScreen: function()
 {
