@@ -154,6 +154,23 @@ document.body.appendChild(btn);
 	{
 		mApplication.mButtonHit = mApplication.mButtonGame;	
 	};
+	
+	this.showBorders();
+},
+
+showBorders: function()
+{
+	var div = document.createElement("div");
+	div.style.position = "absolute";
+	div.style.width = "100px";
+	div.style.height = "100px";
+	div.style.background = "red";
+	div.style.color = "white";
+	div.innerHTML = "Hello";
+	div.style.left = "300px";
+	div.style.top = "300px";
+
+	document.body.appendChild(div);
 },
 
 showMainScreen: function()
