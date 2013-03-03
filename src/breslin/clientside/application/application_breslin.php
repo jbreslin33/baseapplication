@@ -31,7 +31,6 @@ initialize: function(serverIP, serverPort)
 	this.mButtonHit = 0;
 	this.mButtonExit = 0;
 	this.mButtonGame = 0;
-	this.mButtonFake = 0;
 	this.mButtonTag = 0;
 	this.mButtonTagAll = 0;
 
@@ -79,7 +78,7 @@ processUpdate: function()
         this.mRenderTime = this.mTimeSinceEpoch - this.mLastTimeSinceEpoch;
 	this.mRenderTime = this.mRenderTime / 1000;
         this.mStateMachine.update();
-	document.getElementById('mMessageFrameI').innerHTML=':mSequence ' + this.mGame.mSequence;
+	//document.getElementById('mMessageFrameI').innerHTML=':mSequence ' + this.mGame.mSequence;
 },
 
 
@@ -151,25 +150,10 @@ document.body.appendChild(btn);
 	this.mButtonGame.appendChild(t);
 	document.body.appendChild(this.mButtonGame);
 
-	//create Fake button
-	this.mButtonFake = document.createElement("BUTTON");
-	this.mButtonFake.setAttribute("id", "mButtonFake");
-	var t=document.createTextNode("Fake");
-	this.mButtonFake.appendChild(t);
-	document.body.appendChild(this.mButtonFake);
-
-	
 	this.mButtonGame.onclick = function()
 	{
 		mApplication.mButtonHit = mApplication.mButtonGame;	
 	};
-	
-	this.mButtonFake.onclick = function()
-	{
-		//mApplication.mButtonHit = mApplication.mButtonGame;	
-		//this.log('fake hit');	
-	};
-
 },
 
 showMainScreen: function()
