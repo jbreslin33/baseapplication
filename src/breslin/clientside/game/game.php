@@ -23,7 +23,8 @@ initialize: function(applicationBreslin)
 	//shapes
 	this.mShapeVector      = new Array();
 	this.mShapeGhostVector = new Array();
-	this.mControlObject    = 0; 
+	this.mControlObject      = 0; 
+	this.mControlObjectGhost = 0; 
 	this.mOffSet = new Vector3D();
 
 	//byteBuffer
@@ -114,6 +115,7 @@ addShape: function(byteBuffer)
 	//put shape and ghost in game vectors so they can be looped and game now knows of them.
         this.mShapeVector.push(shape);
         this.mShapeGhostVector.push(shape.mGhost);
+/*
 	if (shape.mLocal == 1)
 	{
 		shape.mGhost.setVisible(true);
@@ -122,6 +124,8 @@ addShape: function(byteBuffer)
 	{
 		shape.mGhost.setVisible(false);
 	}
+*/
+	shape.mGhost.setVisible(false);
 
 },
 

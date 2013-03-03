@@ -69,6 +69,11 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
         {
                 //create a ghost for this shape
                 this.mGhost = new Shape(this.mApplicationBreslin,byteBuffer,true);
+	
+		if (this.mLocal == 1)
+		{
+			this.mApplicationBreslin.mGame.mControlObjectGhost = this.mGhost;
+		}
         }
 },
 
@@ -130,7 +135,8 @@ setPosition: function(position)
 	this.mPosition.y = position.y;
 	this.mPosition.z = position.z;
 
-	if (this.mApplicationBreslin.mGame.mControlObject == this)
+	if (this.mApplicationBreslin.mGame.mControlObject == this ||
+		this.mApplicationBreslin.mGame.mControlObjectGhost == this)
 	{
 		this.mPositionRender.x = mMiddleOfViewPort.x;	
 		this.mPositionRender.y = 0;	
@@ -138,15 +144,28 @@ setPosition: function(position)
 		
 		//let's tell game about the offset so we only calc once
 		//figure diff between rendered control object and server control object
-		this.mApplicationBreslin.mGame.mOffSet.x = this.mPositionRender.x - this.mPosition.x;
+		this.mApplicationBreslin.mGame.mOffSet.x = parseInt(this.mPositionRender.x) - parseInt(this.mPosition.x);
 		this.mApplicationBreslin.mGame.mOffSet.y = 0;
 		this.mApplicationBreslin.mGame.mOffSet.z = this.mPositionRender.z - this.mPosition.z;
+		//this should equal 200 by 200 
 	}
 	else
 	{
-		this.mPositionRender.x = this.mApplication.mGame.mOffSet.x + this.mPosition.x;
+		this.mPositionRender.x = this.mPosition.x + this.mApplicationBreslin.mGame.mOffSet.x;
 		this.mPositionRender.y = 0;
-		this.mPositionRender.z = this.mApplication.mGame.mOffSet.z + this.mPosition.z;
+		this.mPositionRender.z = this.mPosition.z + this.mApplicationBreslin.mGame.mOffSet.z;
+	}
+	
+	//print values to message on screen
+	if (this.mIndex == 1)
+	{ 
+		document.getElementById('mMessageFrameA').innerHTML='mIndex 1 x:' + this.mPositionRender.x;
+		document.getElementById('mMessageFrameB').innerHTML='mIndex 1 z:' + this.mPositionRender.z;
+	}
+	else if (this.mIndex == 2)
+	{
+		document.getElementById('mMessageFrameC').innerHTML='mIndex 2 x:' + this.mPositionRender.x;
+		document.getElementById('mMessageFrameD').innerHTML='mIndex 2 z:' + this.mPositionRender.z;
 	}
 
 	//set a member position because we are going to have to modify the div's position
