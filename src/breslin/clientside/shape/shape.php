@@ -146,8 +146,7 @@ setPosition: function(position)
 		//figure diff between rendered control object and server control object
 		this.mApplicationBreslin.mGame.mOffSet.x = parseInt(this.mPositionRender.x) - parseInt(this.mPosition.x);
 		this.mApplicationBreslin.mGame.mOffSet.y = 0;
-		this.mApplicationBreslin.mGame.mOffSet.z = this.mPositionRender.z - this.mPosition.z;
-		//this should equal 200 by 200 
+		this.mApplicationBreslin.mGame.mOffSet.z = parseInt(this.mPositionRender.z) - parseInt(this.mPosition.z);
 	}
 	else
 	{
@@ -156,18 +155,6 @@ setPosition: function(position)
 		this.mPositionRender.z = this.mPosition.z + this.mApplicationBreslin.mGame.mOffSet.z;
 	}
 	
-	//print values to message on screen
-	if (this.mIndex == 1)
-	{ 
-		document.getElementById('mMessageFrameA').innerHTML='mIndex 1 x:' + this.mPositionRender.x;
-		document.getElementById('mMessageFrameB').innerHTML='mIndex 1 z:' + this.mPositionRender.z;
-	}
-	else if (this.mIndex == 2)
-	{
-		document.getElementById('mMessageFrameC').innerHTML='mIndex 2 x:' + this.mPositionRender.x;
-		document.getElementById('mMessageFrameD').innerHTML='mIndex 2 z:' + this.mPositionRender.z;
-	}
-
 	//set a member position because we are going to have to modify the div's position
 	modx = this.mPositionRender.x+"px";
 	mody = this.mPositionRender.z+"px";
