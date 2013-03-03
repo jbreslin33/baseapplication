@@ -35,7 +35,10 @@ initialize: function(serverIP, serverPort)
 	this.mButtonTagAll = 0;
 
 	//border
-	this.mEastBorder = 0;
+	this.mNorthBorder = 0;
+	this.mEastBorder  = 0;
+	this.mSouthBorder = 0;
+	this.mWestBorder  = 0;
 
         //state machine (Menus)
         this.mStateMachine = new StateMachine();
@@ -161,20 +164,26 @@ document.body.appendChild(btn);
 	this.createBorders();
 },
 
+createBorder: function(w,h,b,i,x,z)
+{
+	border = document.createElement("div");
+	border.style.position = "absolute";
+	border.style.width = w;
+	border.style.height = h;
+	border.style.background = b;
+	border.style.color = "white";
+	border.innerHTML = i;
+	border.style.left = x;
+	border.style.top = z;
+	
+	document.body.appendChild(border);
+
+	return border;
+},
 
 createBorders: function()
 {
-	this.mEastBorder = document.createElement("div");
-	this.mEastBorder.style.position = "absolute";
-	this.mEastBorder.style.width = "10px";
-	this.mEastBorder.style.height = "400px";
-	this.mEastBorder.style.background = "red";
-	this.mEastBorder.style.color = "white";
-	this.mEastBorder.innerHTML = "Hello";
-	this.mEastBorder.style.left = "0px";
-	this.mEastBorder.style.top = "0px";
-
-	document.body.appendChild(this.mEastBorder);
+	this.mEastBorder = this.createBorder("10px","400px","blue","Ya","0px","0px");
 },
 
 showBorders: function()
