@@ -24,7 +24,7 @@ execute: function()
 
                 this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationPlay);
 	}
-	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonTest)
+	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonExit)
 	{
 	
 	}

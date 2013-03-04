@@ -141,44 +141,37 @@ createMainScreen: function()
 {
 	//make buttons
 /*
-var btn=document.createElement("BUTTON");
-var t=document.createTextNode("CLICK ME");
-btn.appendChild(t);
-document.body.appendChild(btn);
         mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
         mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
         mButtonTagAll = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTagAll", "Join TagAll");
         mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 */
-	this.mButtonGame = this.createButton(200,200,100,50,"red","Join Game");
+	//create Buttons
+
+	//game
+	this.mButtonGame = this.createButton(200,200,100,50,"green","Join Game");
 	this.mButtonGame.onclick = function()
 	{
 		mApplication.mButtonHit = mApplication.mButtonGame;	
 	};
 
-	this.mButtonTest = this.createButton(200,200,100,50,"green","Test");
-	this.mButtonTest.onclick = function()
+	//exit
+	this.mButtonExit = this.createButton(300,300,100,50,"red","Exit");
+	this.mButtonExit.onclick = function()
 	{
-		mApplication.mButtonHit = mApplication.mButtonTest;	
+		mApplication.mButtonHit = mApplication.mButtonExit;	
 	};
-/*
-	//create Join Game button
-	this.mButtonGame = document.createElement("BUTTON");
-	var t=document.createTextNode("Join Game");
-	this.mButtonGame.appendChild(t);
-	document.body.appendChild(this.mButtonGame);
-/*
-	this.mButtonGame.onclick = function()
-	{
-		mApplication.mButtonHit = mApplication.mButtonGame;	
-	};
-*/
+
+	//create Borders	
 	this.createBorders();
 },
 
 createButton: function(x,z,w,h,b,i)
 {
 	button = document.createElement("BUTTON");
+	button.style.position = "absolute";
+	button.style.left = x;
+	button.style.top = z;
 	var t=document.createTextNode(i);
 	button.appendChild(t);
 	document.body.appendChild(button);
