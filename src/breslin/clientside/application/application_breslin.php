@@ -172,6 +172,7 @@ createButton: function(x,z,w,h,b,i)
 	button.style.position = "absolute";
 	button.style.left = x;
 	button.style.top = z;
+	button.style.background = b;
 	var t=document.createTextNode(i);
 	button.appendChild(t);
 	document.body.appendChild(button);
