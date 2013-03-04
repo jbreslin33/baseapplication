@@ -14,9 +14,6 @@ enter: function()
 
 execute: function()
 {
-//	this.mApplicationBreslin.log('ApplicationMain: execute');
-
-  	//this.mApplicationBreslin.log(this.mApplicationBreslin.mButtonGame.getTextNode());	
 	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonGame)
 	{
 	        this.mApplicationBreslin.mButtonHit = 0;
@@ -27,6 +24,11 @@ execute: function()
 
                 this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationPlay);
 	}
+	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonTest)
+	{
+	
+	}
+
 
 /*
   if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonGame)

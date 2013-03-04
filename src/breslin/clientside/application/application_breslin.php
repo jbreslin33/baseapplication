@@ -31,6 +31,7 @@ initialize: function(serverIP, serverPort)
 	this.mButtonHit = 0;
 	this.mButtonExit = 0;
 	this.mButtonGame = 0;
+	this.mButtonTest = 0;
 	this.mButtonTag = 0;
 	this.mButtonTagAll = 0;
 
@@ -149,24 +150,45 @@ document.body.appendChild(btn);
         mButtonTagAll = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTagAll", "Join TagAll");
         mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 */
+	this.mButtonGame = this.createButton(200,200,100,50,"red","Join Game");
+	this.mButtonGame.onclick = function()
+	{
+		mApplication.mButtonHit = mApplication.mButtonGame;	
+	};
 
+	this.mButtonTest = this.createButton(200,200,100,50,"green","Test");
+	this.mButtonTest.onclick = function()
+	{
+		mApplication.mButtonHit = mApplication.mButtonTest;	
+	};
+/*
 	//create Join Game button
 	this.mButtonGame = document.createElement("BUTTON");
 	var t=document.createTextNode("Join Game");
 	this.mButtonGame.appendChild(t);
 	document.body.appendChild(this.mButtonGame);
-
+/*
 	this.mButtonGame.onclick = function()
 	{
 		mApplication.mButtonHit = mApplication.mButtonGame;	
 	};
-	
+*/
 	this.createBorders();
 },
 
 createButton: function(x,z,w,h,b,i)
 {
+	button = document.createElement("BUTTON");
+	var t=document.createTextNode(i);
+	button.appendChild(t);
+	document.body.appendChild(button);
+	
+	button.onclick = function()
+	{
+		mApplication.mButtonHit = button;	
+	};
 
+	return button;
 },
 
 createBorder: function(x,z,w,h,b,i)
