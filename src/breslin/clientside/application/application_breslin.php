@@ -149,14 +149,14 @@ createMainScreen: function()
 	//create Buttons
 
 	//game
-	this.mButtonGame = this.createButton(200,200,100,50,"green","Join Game");
+	this.mButtonGame = this.createButton(300,100,100,50,"green","Join Game");
 	this.mButtonGame.onclick = function()
 	{
 		mApplication.mButtonHit = mApplication.mButtonGame;	
 	};
 
 	//exit
-	this.mButtonExit = this.createButton(300,300,100,50,"red","Exit");
+	this.mButtonExit = this.createButton(300,200,100,50,"red","Exit");
 	this.mButtonExit.onclick = function()
 	{
 		mApplication.mButtonHit = mApplication.mButtonExit;	
@@ -172,6 +172,8 @@ createButton: function(x,z,w,h,b,i)
 	button.style.position = "absolute";
 	button.style.left = x;
 	button.style.top = z;
+	button.style.width = w;
+	button.style.height = h;
 	button.style.background = b;
 	var t=document.createTextNode(i);
 	button.appendChild(t);
@@ -224,6 +226,7 @@ hideBorders: function()
 showMainScreen: function()
 {
 	this.mButtonGame.style.display="block";
+	this.mButtonExit.style.display="block";
 /*
      mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
         mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
@@ -242,6 +245,7 @@ showMainScreen: function()
 hideMainScreen: function()
 {
 	this.mButtonGame.style.display="none";
+	this.mButtonExit.style.display="none";
 },
 
 
