@@ -183,10 +183,10 @@ createBorder: function(w,h,b,i,x,z)
 
 createBorders: function()
 {
-	this.mNorthBorder = this.createBorder("400px","30px","blue","","0px","0px");
+	this.mNorthBorder = this.createBorder("760px","30px","blue","","0px","0px");
 	this.mEastBorder  = this.createBorder("10px","400px","blue","","760px","0px");
-	//this.mEastBorder  = this.createBorder("10px","400px","blue","","0px","0px");
-	//this.mEastBorder  = this.createBorder("10px","400px","blue","","0px","0px");
+	this.mSouthBorder = this.createBorder("760px","30px","blue","","0px","370px");
+	this.mWestBorder  = this.createBorder("10px","400px","blue","","0px","0px");
 },
 
 showBorders: function()
