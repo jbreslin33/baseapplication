@@ -164,7 +164,12 @@ document.body.appendChild(btn);
 	this.createBorders();
 },
 
-createBorder: function(w,h,b,i,x,z)
+createButton: function(x,z,w,h,b,i)
+{
+
+},
+
+createBorder: function(x,z,w,h,b,i)
 {
 	border = document.createElement("div");
 	border.style.position = "absolute";
@@ -183,10 +188,10 @@ createBorder: function(w,h,b,i,x,z)
 
 createBorders: function()
 {
-	this.mNorthBorder = this.createBorder("760px","30px","blue","","0px","0px");
-	this.mEastBorder  = this.createBorder("10px","400px","blue","","760px","0px");
-	this.mSouthBorder = this.createBorder("760px","30px","blue","","0px","370px");
-	this.mWestBorder  = this.createBorder("10px","400px","blue","","0px","0px");
+	this.mNorthBorder = this.createBorder("0px","0px","760px","30px","blue","");
+	this.mEastBorder  = this.createBorder("760px","0px","10px","400px","blue","");
+	this.mSouthBorder = this.createBorder("0px","370px","760px","30px","blue","");
+	this.mWestBorder  = this.createBorder("0px","0px","10px","400px","blue","");
 },
 
 showBorders: function()
