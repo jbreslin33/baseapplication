@@ -154,6 +154,14 @@ setPosition: function(position)
 		this.mPositionRender.y = 0;
 		this.mPositionRender.z = this.mPosition.z + this.mApplicationBreslin.mGame.mOffSet.z;
 	}
+
+	if (this.mPositionRender.x > 600 || this.mPositionRender.z > 300)
+	{
+		this.mPositionRender.x = -150;
+		this.mPositionRender.y = 0;
+		this.mPositionRender.z = -150;
+	} 
+
 	
 	//set a member position because we are going to have to modify the div's position
 	modx = this.mPositionRender.x+"px";
