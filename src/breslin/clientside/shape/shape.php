@@ -155,7 +155,7 @@ setPosition: function(position)
 		this.mPositionRender.z = this.mPosition.z + this.mApplicationBreslin.mGame.mOffSet.z;
 	}
 
-	if (this.mPositionRender.x > 600 || this.mPositionRender.z > 300)
+	if (this.mPositionRender.x > 760 || this.mPositionRender.z > 360)
 	{
 		this.mPositionRender.x = -150;
 		this.mPositionRender.y = 0;
