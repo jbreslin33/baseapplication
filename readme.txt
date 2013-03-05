@@ -1,3 +1,7 @@
+set permissions of /upload file or it won't work:
+sudo chmod -R 777 web/insert/upload
+
+
 to compile:
 
 cd src/breslin/vserver
