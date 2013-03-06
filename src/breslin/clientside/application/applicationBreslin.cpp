@@ -43,6 +43,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//initilize
 	mSetup = false;
 	mPlayingGame = false;
+	mFake = true;
 
 	//time
 	mRenderTime = 0.0f;
@@ -82,6 +83,20 @@ ApplicationBreslin::~ApplicationBreslin()
 void ApplicationBreslin::processUpdate()
 {
 	mStateMachine->update();
+
+	if (mFake == true)
+	{
+		//after first update let's fake a switch...
+		mButtonHit = NULL;
+        	//	sendConnect();
+       		mGame = new Game(this);
+
+		hideMainScreen();
+
+       		mStateMachine->changeState(mApplicationPlay);
+
+		mFake = false;
+	}
 }
 
 /*********************************
@@ -160,8 +175,6 @@ bool ApplicationBreslin::runGraphics()
 	{
 		return true;
 	}
-
-
 }
 
 bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)

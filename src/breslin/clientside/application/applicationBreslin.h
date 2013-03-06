@@ -51,6 +51,7 @@ Game* mGame;
 //state transition variables
 bool mSetup;
 bool mPlayingGame;
+bool mFake;
 
 //gui
 OgreBites::Button* mButtonHit;
