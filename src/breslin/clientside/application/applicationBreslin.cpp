@@ -86,7 +86,7 @@ void ApplicationBreslin::processUpdate()
 
 	if (mFake == true)
 	{
-		//after first update let's fake a switch...
+		//after first update let's fake going to game with no sendCnnect...
 		mButtonHit = NULL;
         	//	sendConnect();
        		mGame = new Game(this);
@@ -95,6 +95,13 @@ void ApplicationBreslin::processUpdate()
 
        		mStateMachine->changeState(mApplicationPlay);
 
+		//sneak an update in
+		mStateMachine->update();
+
+		//fake esc from game
+  		mPlayingGame = false;
+                mStateMachine->changeState(mApplicationMain);
+		
 		mFake = false;
 	}
 }
