@@ -60,12 +60,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	mStateMachine->setGlobalState (mApplicationGlobal);
 	mStateMachine->changeState(mApplicationInitialize);
-/*
-        mStateMachine.setGlobalState (mApplicationGlobal);
-        //mStateMachine.changeState(mApplicationInitialize);
-        mStateMachine.setPreviousState(mApplicationInitialize);
-        mStateMachine.setCurrentState(mApplicationInitialize);
-*/
+        mStateMachine->setPreviousState(mApplicationInitialize);
 }
 
 ApplicationBreslin::~ApplicationBreslin()
