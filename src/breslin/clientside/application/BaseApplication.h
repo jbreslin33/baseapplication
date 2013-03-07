@@ -42,6 +42,7 @@ public:
     virtual ~BaseApplication(void);
 
     virtual bool setup();
+    Ogre::SceneManager* mSceneMgr;
 protected:
     
     virtual bool configure(void);
@@ -74,7 +75,6 @@ protected:
 
     Ogre::Root *mRoot;
     Ogre::Camera* mCamera;
-    Ogre::SceneManager* mSceneMgr;
     Ogre::RenderWindow* mWindow;
     Ogre::String mResourcesCfg;
     Ogre::String mPluginsCfg;

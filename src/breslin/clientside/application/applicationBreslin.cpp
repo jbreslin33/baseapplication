@@ -147,6 +147,7 @@ float ApplicationBreslin::getRenderTime()
 **********************************/
 void ApplicationBreslin::createScene()
 {
+/*
         mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
 
         Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
@@ -165,7 +166,7 @@ void ApplicationBreslin::createScene()
         floor->setMaterialName("Examples/Rockwall");
         floor->setCastShadows(false);
         mSceneMgr->getRootSceneNode()->attachObject(floor);
-
+*/
 }
 
 

@@ -69,6 +69,9 @@ Game::Game(ApplicationBreslin* applicationBreslin)
     	// Look back along -Z
     	mApplicationBreslin->getCamera()->lookAt(Ogre::Vector3(0,0,0));
     	mApplicationBreslin->getCamera()->setNearClipDistance(5);
+
+	createScene();
+
 }
 
 Game::~Game()
@@ -79,12 +82,18 @@ Game::~Game()
 		for (unsigned int i = 0; i < mShapeVector->size(); i++)
 		{
 			delete mShapeVector->at(i);
-			//delete mShapeGhostVector->at(i);
+			delete mShapeGhostVector->at(i);
 		}
 	}
 
 //ShapeVector::~mShapeVector();
 //	ShapeGhostVector::VectormShapeGhostVector();
+
+
+	//delete scene
+	//delete mPointLight;		
+	mApplicationBreslin->mSceneMgr->destroyLight(mPointLight);
+		
 }
 /*********************************
 		Update
@@ -113,6 +122,29 @@ void Game::addShape(ByteBuffer* byteBuffer)
 	//put shape and ghost in game vectors so they can be looped and game now knows of them.
 	mShapeVector->push_back(shape);
 	mShapeGhostVector->push_back(shape->mGhost);
+}
+
+void Game::createScene()
+{
+        mApplicationBreslin->mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
+
+        mPointLight = mApplicationBreslin->mSceneMgr->createLight("pointLight");
+        mPointLight->setType(Ogre::Light::LT_POINT);
+        mPointLight->setPosition(Ogre::Vector3(250, 150, 250));
+        mPointLight->setDiffuseColour(Ogre::ColourValue::White);
+        mPointLight->setSpecularColour(Ogre::ColourValue::White);
+
+// create a floor mesh resource
+
+        MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+               Plane(Vector3::UNIT_Y, -10), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
+
+                // create a floor entity, give it a material, and place it at the origin
+        mFloor = mApplicationBreslin->mSceneMgr->createEntity("Floor", "floor");
+        mFloor->setMaterialName("Examples/Rockwall");
+        mFloor->setCastShadows(false);
+        mApplicationBreslin->mSceneMgr->getRootSceneNode()->attachObject(mFloor);
+
 }
 
 void Game::removeShape(ByteBuffer* byteBuffer)

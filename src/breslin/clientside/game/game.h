@@ -120,6 +120,9 @@ virtual void addShape       (ByteBuffer* byteBuffer);
 void removeShape    (ByteBuffer* byteBuffer);
 Shape* getShape(int id);
 
+//scene
+void createScene();
+
 //network
 
 void readServerTick(ByteBuffer* byteBuffer);
