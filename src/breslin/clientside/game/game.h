@@ -15,6 +15,10 @@ reset these objects need to be destroyed.
 /***************************************
 *   		INCLUDES
 ***************************************/
+//Ogre
+#include <OgreEntity.h>
+
+
 //standard library
 #include <vector>
 
@@ -86,6 +90,11 @@ float mRunNetworkTime;
 
 public:
 float mFrameTimeServer;
+
+//scene
+Ogre::Light* mPointLight;
+Ogre::Entity* mFloor;
+
 
 /***************************************
 *			          METHODS
