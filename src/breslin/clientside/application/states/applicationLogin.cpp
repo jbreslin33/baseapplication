@@ -1,5 +1,5 @@
 //header
-#include "applicationMain.h"
+#include "applicationLogin.h"
 
 
 //log
@@ -18,64 +18,39 @@
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
-ApplicationMain::ApplicationMain(ApplicationBreslin* applicationBreslin)
+ApplicationLogin::ApplicationLogin(ApplicationBreslin* applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
 }
 
-ApplicationMain::~ApplicationMain()
+ApplicationLogin::~ApplicationMain()
 {
 
 }
 
-void ApplicationMain::enter()
+void ApplicationLogin::enter()
 {
-	LogString("STATE: ApplicationGlobal");
-	mApplicationBreslin->showMainScreen();
+	LogString("STATE: ApplicationLogin");
+	mApplicationBreslin->showLoginScreen();
 }
 
-/*
-should you authenticate in application and then you can join a game? yes
-
-
-*/
-void ApplicationMain::execute()
+void ApplicationLogin::execute()
 {
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonGame)
+	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogin)
 	{
+/*
 		mApplicationBreslin->mButtonHit = NULL;
 		//is this the first c++ server knows of you? if so that is what i want? Or do I want a connection
 		//right away? but without username? then we give username and a different connection.... 
 		mApplicationBreslin->sendConnect();
 		mApplicationBreslin->mGame = new Game(mApplicationBreslin);
 
-		mApplicationBreslin->hideMainScreen();
+		mApplicationBreslin->hideLoginScreen();
 
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
+*/
 	}
 
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonTag)
-	{
-		mApplicationBreslin->mButtonHit = NULL;
-		mApplicationBreslin->sendConnect();
-		mApplicationBreslin->mGame = new GameTag(mApplicationBreslin);
-
-		mApplicationBreslin->hideMainScreen();
-
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
-	}
-
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonTagAll)
-	{
-		mApplicationBreslin->mButtonHit = NULL;
-		mApplicationBreslin->sendConnect();
-		mApplicationBreslin->mGame = new GameTag(mApplicationBreslin);
-
-		mApplicationBreslin->hideMainScreen();
-
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
-	}
-	
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
 

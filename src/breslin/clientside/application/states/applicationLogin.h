@@ -1,5 +1,5 @@
-#ifndef MAINSCREEN_H
-#define MAINSCREEN_H
+#ifndef LOGINSCREEN_H
+#define LOGINSCREEN_H
 
 /***************************************
 *   		INCLUDES
@@ -13,7 +13,7 @@
 
 class ApplicationBreslin;
 
-class ApplicationMain : public State
+class ApplicationLogin : public State
 {
 public:
 
@@ -23,8 +23,8 @@ public:
 
 ApplicationBreslin* mApplicationBreslin;
 
-ApplicationMain(ApplicationBreslin* applicationBreslin);
-~ApplicationMain();
+ApplicationLogin(ApplicationBreslin* applicationBreslin);
+~ApplicationLogin();
 
 void enter  ();
 void execute();
