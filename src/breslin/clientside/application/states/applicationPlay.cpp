@@ -53,5 +53,12 @@ void ApplicationPlay::exit()
 	mApplicationBreslin->getSceneManager()->destroyAllEntities();
 	delete mApplicationBreslin->mGame;
 
-	mApplicationBreslin->showMainScreen();
+	if (mApplicationBreslin->mFake == true)
+	{
+		mApplicationBreslin->showLoginScreen();
+	}
+	else
+	{
+		mApplicationBreslin->showMainScreen();
+	}
 }

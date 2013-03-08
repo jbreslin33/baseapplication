@@ -27,6 +27,7 @@
 #include "states/applicationGlobal.h"
 #include "states/applicationMain.h"
 #include "states/applicationInitialize.h"
+#include "states/applicationLogin.h"
 #include "states/applicationPlay.h"
 
 
@@ -54,10 +55,11 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//state machine (Menus)
 	mStateMachine = new StateMachine();
 
-	mApplicationGlobal = new ApplicationGlobal(this);
+	mApplicationGlobal     = new ApplicationGlobal    (this);
 	mApplicationInitialize = new ApplicationInitialize(this);
-	mApplicationMain   = new ApplicationMain  (this);
-	mApplicationPlay   = new ApplicationPlay(this);
+	mApplicationMain       = new ApplicationMain      (this);
+	mApplicationPlay       = new ApplicationPlay      (this);
+	mApplicationLogin      = new ApplicationLogin     (this);
 
 	mStateMachine->setGlobalState (mApplicationGlobal);
 	mStateMachine->changeState(mApplicationInitialize);
@@ -71,6 +73,7 @@ ApplicationBreslin::~ApplicationBreslin()
 	
 	delete mStateMachine;
 	delete mApplicationInitialize;
+	delete mApplicationLogin;
 	delete mApplicationMain;
 	delete mApplicationPlay;	
 	
@@ -91,7 +94,7 @@ void ApplicationBreslin::processUpdate()
         	//	sendConnect();
        		mGame = new Game(this);
 
-		hideMainScreen();
+		hideLoginScreen();
 
        		mStateMachine->changeState(mApplicationPlay);
 
@@ -100,7 +103,7 @@ void ApplicationBreslin::processUpdate()
 
 		//fake esc from game
   		mPlayingGame = false;
-                mStateMachine->changeState(mApplicationMain);
+                mStateMachine->changeState(mApplicationLogin);
 		
 		mFake = false;
 	}
@@ -130,6 +133,14 @@ void ApplicationBreslin::sendConnect()
 	mNetwork->send(byteBuffer);
 }
 
+void ApplicationBreslin::sendLogin()
+{
+/*
+	ByteBuffer* byteBuffer = new ByteBuffer();
+	byteBuffer->WriteByte(mMessageConnect);
+	mNetwork->send(byteBuffer);
+*/
+}
 
 
 /*********************************
@@ -197,10 +208,48 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 /*********************************
 		GUI
 **********************************/
+//LOGIN
+void ApplicationBreslin::createLoginScreen()
+{
+        LogString("create Login buttons");
+        mButtonLogin    = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonLogin", "Login");
+        mButtonSignup   = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonSignup", "Signup");
+        mButtonPractice = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonPractice", "Practice");
+        mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+}
 
+void ApplicationBreslin::showLoginScreen()
+{
+
+	LogString("move mButtonLogin");
+        mTrayMgr->moveWidgetToTray(mButtonLogin,OgreBites::TL_CENTER);
+	LogString("move mButtonSignup");
+        mTrayMgr->moveWidgetToTray(mButtonSignup,OgreBites::TL_CENTER);
+	LogString("move mButtonPractice");
+        mTrayMgr->moveWidgetToTray(mButtonPractice,OgreBites::TL_CENTER);
+	LogString("move mButtonExit");
+        mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
+
+        mButtonLogin->show();
+        mButtonSignup->show();
+        mButtonPractice->show();
+        mButtonExit->show();
+
+        mTrayMgr->showCursor();
+}
+
+void ApplicationBreslin::hideLoginScreen()
+{
+        mButtonLogin->hide();
+        mButtonSignup->hide();
+        mButtonPractice->hide();
+        mButtonExit->hide();
+}
+
+//MAIN
 void ApplicationBreslin::createMainScreen()
 {
-	LogString("create buttons");
+	LogString("create Main buttons");
 	mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
 	mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
 	mButtonTagAll = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTagAll", "Join TagAll");
@@ -210,9 +259,13 @@ void ApplicationBreslin::createMainScreen()
 void ApplicationBreslin::showMainScreen()
 {
 
+	LogString("move mButtonGame");
 	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
+	LogString("move mButtonTag");
 	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
+	LogString("move mButtonTagAll");
 	mTrayMgr->moveWidgetToTray(mButtonTagAll,OgreBites::TL_CENTER);
+	LogString("move mButtonExit");
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
 	mButtonGame->show();

@@ -34,6 +34,7 @@ StateMachine* mStateMachine;
 
 State* mApplicationGlobal;
 State* mApplicationInitialize;
+State* mApplicationLogin;
 State* mApplicationMain;
 State* mApplicationPlay;
 
@@ -57,6 +58,9 @@ bool mFake;
 OgreBites::Button* mButtonHit;
 OgreBites::Button* mButtonExit;
 OgreBites::Button* mButtonGame;
+OgreBites::Button* mButtonLogin;
+OgreBites::Button* mButtonPractice;
+OgreBites::Button* mButtonSignup;
 OgreBites::Button* mButtonTag;
 OgreBites::Button* mButtonTagAll;
 
@@ -81,6 +85,10 @@ float getRenderTime();
 Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 
 //gui
+void createLoginScreen();
+void showLoginScreen();
+void hideLoginScreen();
+
 void createMainScreen();
 void showMainScreen();
 void hideMainScreen();
@@ -91,7 +99,8 @@ OIS::Keyboard* getKeyboard() { return mKeyboard; }
 //private:
 
 //connect
-void sendConnect   ();
+void sendConnect();
+void sendLogin  ();
 
 //shutdown
 void shutdown();
