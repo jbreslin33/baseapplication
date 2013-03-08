@@ -23,7 +23,7 @@ session_start();
 include(getenv("DOCUMENT_ROOT") . "/src/database/db_connect.php");
 $conn = dbConnect();
 
-include(getenv("DOCUMENT_ROOT") . "/web/navigation/top_links_for_practice.php");
+include(getenv("DOCUMENT_ROOT") . "/web/navigation/top_links_for_practice_games.php");
 echo "<br>";
 ?>
 
