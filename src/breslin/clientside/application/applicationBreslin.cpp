@@ -158,29 +158,8 @@ float ApplicationBreslin::getRenderTime()
 **********************************/
 void ApplicationBreslin::createScene()
 {
-/*
-        mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
 
-        Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
-        pointLight->setType(Ogre::Light::LT_POINT);
-	pointLight->setPosition(Ogre::Vector3(250, 150, 250));
-	pointLight->setDiffuseColour(Ogre::ColourValue::White);
-	pointLight->setSpecularColour(Ogre::ColourValue::White);
-
-// create a floor mesh resource
-	
-        MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-	       Plane(Vector3::UNIT_Y, -10), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
-
-                // create a floor entity, give it a material, and place it at the origin
-        Entity* floor = mSceneMgr->createEntity("Floor", "floor");
-        floor->setMaterialName("Examples/Rockwall");
-        floor->setCastShadows(false);
-        mSceneMgr->getRootSceneNode()->attachObject(floor);
-*/
 }
-
-
 
 bool ApplicationBreslin::runGraphics()
 {
@@ -212,24 +191,24 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 void ApplicationBreslin::createLoginScreen()
 {
         LogString("create Login buttons");
-        mButtonLogin    = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonLogin", "Login");
-        mButtonSignup   = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonSignup", "Signup");
-        mButtonPractice = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonPractice", "Practice");
-        mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+        mLabelUsername = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
+
+        mButtonLogin     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonLogin", "Login");
+        mButtonSignup    = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonSignup", "Signup");
+        mButtonPractice  = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonPractice", "Practice");
+        mButtonExit      = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
 void ApplicationBreslin::showLoginScreen()
 {
 
-	LogString("move mButtonLogin");
+        mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
         mTrayMgr->moveWidgetToTray(mButtonLogin,OgreBites::TL_CENTER);
-	LogString("move mButtonSignup");
         mTrayMgr->moveWidgetToTray(mButtonSignup,OgreBites::TL_CENTER);
-	LogString("move mButtonPractice");
         mTrayMgr->moveWidgetToTray(mButtonPractice,OgreBites::TL_CENTER);
-	LogString("move mButtonExit");
         mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 
+        mLabelUsername->show();
         mButtonLogin->show();
         mButtonSignup->show();
         mButtonPractice->show();
@@ -240,6 +219,7 @@ void ApplicationBreslin::showLoginScreen()
 
 void ApplicationBreslin::hideLoginScreen()
 {
+        mLabelUsername->hide();
         mButtonLogin->hide();
         mButtonSignup->hide();
         mButtonPractice->hide();
@@ -259,13 +239,9 @@ void ApplicationBreslin::createMainScreen()
 void ApplicationBreslin::showMainScreen()
 {
 
-	LogString("move mButtonGame");
 	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
-	LogString("move mButtonTag");
 	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
-	LogString("move mButtonTagAll");
 	mTrayMgr->moveWidgetToTray(mButtonTagAll,OgreBites::TL_CENTER);
-	LogString("move mButtonExit");
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
 	mButtonGame->show();
