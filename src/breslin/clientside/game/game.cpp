@@ -309,33 +309,32 @@ void Game::processInput()
 	mKeyCurrent = 0;
 
 	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
-   {
+   	{
 		mKeyCurrent |= mKeyUp;
-   }
+   	}
 
-   if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_K)) // Backward
-   {
+   	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_K)) // Backward
+   	{
 		mKeyCurrent |= mKeyDown;
-   }
+   	}
 
 	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_J)) // Left
-   {
+   	{
 		mKeyCurrent |= mKeyLeft;
-   }
+   	}
 
-   if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_L)) // Right
-   {
+   	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_L)) // Right
+   	{
 		mKeyCurrent |= mKeyRight;
-   }
+   	}
 
 	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_Z)) // Rotate -Yaw(counter-clockwise)
-   {
+   	{
 		mKeyCurrent |= mKeyCounterClockwise;
-   }
+   	}
 
-   if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
-   {
+   	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
+   	{
 		mKeyCurrent |= mKeyClockwise;
-   }
-
+   	}
 }
