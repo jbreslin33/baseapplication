@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+        <title>Practice</title>
+<link rel="stylesheet" type="text/css" href="<?php getenv("DOCUMENT_ROOT")?>/css/green_block.css" />
+
+
 <script>
 var a = 0;
 var b = 0;
@@ -13,6 +17,15 @@ var totalNeeded = 10;
 </script>
 </head>
 <body>
+<?php
+session_start();
+//db connection
+include(getenv("DOCUMENT_ROOT") . "/src/database/db_connect.php");
+$conn = dbConnect();
+
+include(getenv("DOCUMENT_ROOT") . "/web/navigation/top_links_for_practice.php");
+echo "<br>";
+?>
 
 <p>Multiply!</p>
 

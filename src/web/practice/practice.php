@@ -19,8 +19,8 @@ echo "<br>";
 ?>
 	<p><b> PRACTICE LINKS: </p></b>
 	
-	<a href="multiply.html">Multiply Practice</a>
-	<a href="addition.html">Addition Practice</a>
+	<a href="multiply.php">Multiply Practice</a>
+	<a href="addition.php">Addition Practice</a>
 
 </body>
 
