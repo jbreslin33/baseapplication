@@ -280,3 +280,34 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
     return true;
 }
 
+
+/*************************************************
+*
+*   OGRE_SPECIFIC
+*
+**************************************************
+
+
+
+/***************************************
+*                       INPUT
+******************************************/
+
+
+void ApplicationBreslin::processInput()
+{
+//        mKeyCurrent = 0;
+
+        if (getKeyboard()->isKeyDown(OIS::KC_R)) // Forward
+        {
+		LogString("r");
+               // mKeyCurrent |= mKeyUp;
+        }
+
+        if (getKeyboard()->isKeyDown(OIS::KC_T)) // Backward
+        {
+		LogString("t");
+                //mKeyCurrent |= mKeyDown;
+        }
+}
+

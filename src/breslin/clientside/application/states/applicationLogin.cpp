@@ -30,6 +30,9 @@ void ApplicationLogin::enter()
 
 void ApplicationLogin::execute()
 {
+	//check for input keys ..these will go to username and password for now
+	mApplicationBreslin->processInput();
+
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogin)
 	{
 		LogString("login button hit");
