@@ -30,6 +30,9 @@
 #include "states/applicationLogin.h"
 #include "states/applicationPlay.h"
 
+//input
+#include "../io/editString.h"
+
 
 /***************************************
 *	CONSTRUCTORS		          
@@ -64,6 +67,9 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mStateMachine->setGlobalState (mApplicationGlobal);
 	mStateMachine->changeState(mApplicationInitialize);
         mStateMachine->setPreviousState(mApplicationInitialize);
+
+	//input
+	mEditString = new EditString(); 
 }
 
 ApplicationBreslin::~ApplicationBreslin()
@@ -294,6 +300,16 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 ******************************************/
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
+	if( mEditString->injectKeyPress( arg ) == false )
+	{
+	
+	}
+	else
+	{	
+		//LogString(""mEditString->getText());	
+		mLabelUsername->setCaption(mEditString->getText());
+	}
+	
 	if (arg.key == OIS::KC_A)   // toggle visibility of advanced frame stats
     	{
 		LogString("A");

@@ -15,6 +15,7 @@ class Game;
 class Network;
 class StateMachine;
 class State;
+class EditString;
 
 class ApplicationBreslin : public BaseApplication
 {
@@ -73,6 +74,10 @@ private:
 
 //time
 float mRenderTime;
+
+public:
+//input
+EditString* mEditString;
 
 /***************************************
 *			          METHODS
