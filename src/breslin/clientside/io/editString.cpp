@@ -11,17 +11,17 @@ bool EditString::injectKeyPress( const OIS::KeyEvent arg )
     		{
       			mPosition = mText.insert( mPosition, arg.text );
     		}
-    	else
-    	{
-      		*mPosition = arg.text;
-    	}
-    	mPosition++;
-    	mCaret++;        
-}
-else
-{
+    		else
+    		{
+      			*mPosition = arg.text;
+    		}
+    		mPosition++;
+    		mCaret++;        
+	}
+	else
+	{
 	switch( arg.key )
-    	{
+    		{
       	case OIS::KC_BACK:
         	if( mPosition != mText.begin() )
         	{
@@ -69,6 +69,6 @@ else
        		keyUsed = false;
         	break;
     	}
- }
+}
 	return keyUsed;
 }

@@ -292,11 +292,20 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 /***************************************
 *                       INPUT
 ******************************************/
+bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
+{
+	if (arg.key == OIS::KC_A)   // toggle visibility of advanced frame stats
+    	{
+		LogString("A");
+        	//mTrayMgr->toggleAdvancedFrameStats();
+    	}
+}
 
 
 void ApplicationBreslin::processInput()
 {
 //        mKeyCurrent = 0;
+/*
 
         if (getKeyboard()->isKeyDown(OIS::KC_R)) // Forward
         {
@@ -309,5 +318,6 @@ void ApplicationBreslin::processInput()
 		LogString("t");
                 //mKeyCurrent |= mKeyDown;
         }
+*/
 }
 
