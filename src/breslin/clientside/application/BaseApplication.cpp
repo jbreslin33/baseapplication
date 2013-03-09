@@ -279,11 +279,11 @@ bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
 {
     if (mTrayMgr->isDialogVisible()) return true;   // don't process any more keys if dialog is up
 
-    if (arg.key == OIS::KC_F)   // toggle visibility of advanced frame stats
+    if (arg.key == OIS::KC_F1)   // toggle visibility of advanced frame stats
     {
         mTrayMgr->toggleAdvancedFrameStats();
     }
-    else if (arg.key == OIS::KC_G)   // toggle visibility of even rarer debugging details
+    else if (arg.key == OIS::KC_F2)   // toggle visibility of even rarer debugging details
     {
         if (mDetailsPanel->getTrayLocation() == OgreBites::TL_NONE)
         {
@@ -296,7 +296,7 @@ bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
             mDetailsPanel->hide();
         }
     }
-    else if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
+    else if (arg.key == OIS::KC_F3)   // cycle polygon rendering mode
     {
         Ogre::String newVal;
         Ogre::TextureFilterOptions tfo;
@@ -329,7 +329,7 @@ bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
         Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
         mDetailsPanel->setParamValue(9, newVal);
     }
-    else if (arg.key == OIS::KC_R)   // cycle polygon rendering mode
+    else if (arg.key == OIS::KC_F4)   // cycle polygon rendering mode
     {
         Ogre::String newVal;
         Ogre::PolygonMode pm;
