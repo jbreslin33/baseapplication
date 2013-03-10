@@ -92,7 +92,6 @@ bool mCursorWasVisible;                  // was cursor visible before dialog app
     public:
     bool mShutDown;
 
-	 protected:
 	 
     //OIS Input devices
     OIS::InputManager* mInputManager;
