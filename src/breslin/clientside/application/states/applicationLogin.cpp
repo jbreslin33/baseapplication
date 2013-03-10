@@ -10,6 +10,9 @@
 //state machine
 #include "../../../statemachine/stateMachine.h"
 
+//input
+#include "../../io/editString.h"
+
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
@@ -31,7 +34,9 @@ void ApplicationLogin::enter()
 void ApplicationLogin::execute()
 {
 	//check for input keys ..these will go to username and password for now
-	mApplicationBreslin->processInput();
+	//mApplicationBreslin->processInput();
+ 	mApplicationBreslin->mLabelUsername->setCaption(mApplicationBreslin->mEditString->getText());
+ //mLabelUsername->setCaption(mEditString->getText());
 
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogin)
 	{

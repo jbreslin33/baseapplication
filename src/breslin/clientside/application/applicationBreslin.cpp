@@ -306,17 +306,9 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 	}
 	else
 	{	
-		//LogString(""mEditString->getText());	
-		mLabelUsername->setCaption(mEditString->getText());
+		//mLabelUsername->setCaption(mEditString->getText());
 	}
-	
-	if (arg.key == OIS::KC_A)   // toggle visibility of advanced frame stats
-    	{
-		LogString("A");
-        	//mTrayMgr->toggleAdvancedFrameStats();
-    	}
 }
-
 
 void ApplicationBreslin::processInput()
 {
