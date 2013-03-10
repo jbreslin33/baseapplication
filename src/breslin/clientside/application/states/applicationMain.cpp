@@ -34,11 +34,6 @@ void ApplicationMain::enter()
 	mApplicationBreslin->showMainScreen();
 }
 
-/*
-should you authenticate in application and then you can join a game? yes
-
-
-*/
 void ApplicationMain::execute()
 {
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonGame)
@@ -54,28 +49,6 @@ void ApplicationMain::execute()
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}
 
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonTag)
-	{
-		mApplicationBreslin->mButtonHit = NULL;
-		mApplicationBreslin->sendConnect();
-		mApplicationBreslin->mGame = new GameTag(mApplicationBreslin);
-
-		mApplicationBreslin->hideMainScreen();
-
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
-	}
-
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonTagAll)
-	{
-		mApplicationBreslin->mButtonHit = NULL;
-		mApplicationBreslin->sendConnect();
-		mApplicationBreslin->mGame = new GameTag(mApplicationBreslin);
-
-		mApplicationBreslin->hideMainScreen();
-
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
-	}
-	
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
 

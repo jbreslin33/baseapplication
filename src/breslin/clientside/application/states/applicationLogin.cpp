@@ -34,32 +34,10 @@ void ApplicationLogin::enter()
 void ApplicationLogin::execute()
 {
 	//check for input keys ..these will go to username and password for now
-	//mApplicationBreslin->processInput();
- 	mApplicationBreslin->mLabelUsername->setCaption(mApplicationBreslin->mEditString->getText());
- //mLabelUsername->setCaption(mEditString->getText());
+ 	mApplicationBreslin->mLabelLoginEdit->setCaption(mApplicationBreslin->mEditString->getText());
 
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogin)
-	{
-		LogString("login button hit");
-		mApplicationBreslin->mButtonHit = NULL;
-	}
-	
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonSignup)
-	{
-		mApplicationBreslin->mButtonHit = NULL;
-		LogString("signup button hit");
-	
-	}
-
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonPractice)
-	{
-		mApplicationBreslin->mButtonHit = NULL;
-		LogString("practice button hit");
-	}
-	
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
-
 		mApplicationBreslin->mStateMachine->changeState(NULL);
 		mApplicationBreslin->mStateMachine->setGlobalState(NULL);
 
@@ -75,4 +53,5 @@ void ApplicationLogin::execute()
 
 void ApplicationLogin::exit()
 {
+ 	mApplicationBreslin->mEditString->clear();
 }

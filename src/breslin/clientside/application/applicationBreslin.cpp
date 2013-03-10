@@ -196,28 +196,22 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 //LOGIN
 void ApplicationBreslin::createLoginScreen()
 {
-        LogString("create Login buttons");
-        mLabelUsername = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
+        mLabelLogin     = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelLogin", "Username:");
+        mLabelLoginEdit = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelLoginEdit", "");
 
-        mButtonLogin     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonLogin", "Login");
-        mButtonSignup    = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonSignup", "Signup");
-        mButtonPractice  = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonPractice", "Practice");
         mButtonExit      = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
 void ApplicationBreslin::showLoginScreen()
 {
+        mTrayMgr->moveWidgetToTray(mLabelLogin,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mLabelLoginEdit,OgreBites::TL_CENTER);
 
-        mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
-        mTrayMgr->moveWidgetToTray(mButtonLogin,OgreBites::TL_CENTER);
-        mTrayMgr->moveWidgetToTray(mButtonSignup,OgreBites::TL_CENTER);
-        mTrayMgr->moveWidgetToTray(mButtonPractice,OgreBites::TL_CENTER);
         mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 
-        mLabelUsername->show();
-        mButtonLogin->show();
-        mButtonSignup->show();
-        mButtonPractice->show();
+        mLabelLogin->show();
+        mLabelLoginEdit->show();
+
         mButtonExit->show();
 
         mTrayMgr->showCursor();
@@ -225,10 +219,9 @@ void ApplicationBreslin::showLoginScreen()
 
 void ApplicationBreslin::hideLoginScreen()
 {
-        mLabelUsername->hide();
-        mButtonLogin->hide();
-        mButtonSignup->hide();
-        mButtonPractice->hide();
+        mLabelLogin->hide();
+        mLabelLoginEdit->hide();
+
         mButtonExit->hide();
 }
 
@@ -237,8 +230,6 @@ void ApplicationBreslin::createMainScreen()
 {
 	LogString("create Main buttons");
 	mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
-	mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
-	mButtonTagAll = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTagAll", "Join TagAll");
 	mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
@@ -246,13 +237,9 @@ void ApplicationBreslin::showMainScreen()
 {
 
 	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
-	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
-	mTrayMgr->moveWidgetToTray(mButtonTagAll,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
 	mButtonGame->show();
-	mButtonTag->show();	
-	mButtonTagAll->show();	
 	mButtonExit->show();
 	
 	mTrayMgr->showCursor();
@@ -261,12 +248,8 @@ void ApplicationBreslin::showMainScreen()
 void ApplicationBreslin::hideMainScreen()
 {
 	mButtonGame->hide();
-	mButtonTag->hide();	
-	mButtonTagAll->hide();	
 	mButtonExit->hide();
 }
-
-
 
 void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 {
@@ -306,26 +289,6 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 	}
 	else
 	{	
-		//mLabelUsername->setCaption(mEditString->getText());
 	}
-}
-
-void ApplicationBreslin::processInput()
-{
-//        mKeyCurrent = 0;
-/*
-
-        if (getKeyboard()->isKeyDown(OIS::KC_R)) // Forward
-        {
-		LogString("r");
-               // mKeyCurrent |= mKeyUp;
-        }
-
-        if (getKeyboard()->isKeyDown(OIS::KC_T)) // Backward
-        {
-		LogString("t");
-                //mKeyCurrent |= mKeyDown;
-        }
-*/
 }
 

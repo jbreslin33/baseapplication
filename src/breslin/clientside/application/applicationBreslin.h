@@ -56,18 +56,19 @@ bool mPlayingGame;
 bool mFake;
 
 /*****GUI ********************/
- 
+
+//button 
 OgreBites::Button* mButtonHit;
+
+//exit
 OgreBites::Button* mButtonExit;
+
+//game
 OgreBites::Button* mButtonGame;
-OgreBites::Button* mButtonLogin;
-OgreBites::Button* mButtonPractice;
-OgreBites::Button* mButtonSignup;
-OgreBites::Button* mButtonTag;
-OgreBites::Button* mButtonTagAll;
 
 //login
-OgreBites::Label* mLabelUsername;
+OgreBites::Label* mLabelLogin;
+OgreBites::Label* mLabelLoginEdit;
 
 
 private:
