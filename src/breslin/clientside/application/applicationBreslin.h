@@ -68,9 +68,6 @@ OgreBites::Button* mButtonExit;
 OgreBites::Button* mButtonGame;
 
 //login
-OgreBites::Label* mLabelUsername;
-OgreBites::Label* mLabelUsernameEdit;
-
 OgreBites::Label* mLabelPassword;
 OgreBites::Label* mLabelPasswordEdit;
 
@@ -103,10 +100,6 @@ float getRenderTime();
 Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 
 //gui
-void createUsernameScreen();
-void showUsernameScreen();
-void hideUsernameScreen();
-
 void createPasswordScreen();
 void showPasswordScreen();
 void hidePasswordScreen();

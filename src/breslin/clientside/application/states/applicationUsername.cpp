@@ -19,6 +19,8 @@
 ApplicationUsername::ApplicationUsername(ApplicationBreslin* applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
+	mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mApplicationBreslin->mWindow, mApplicationBreslin->mMouse, mApplicationBreslin);
+
 }
 
 ApplicationUsername::~ApplicationUsername()
@@ -55,3 +57,36 @@ void ApplicationUsername::exit()
 {
  	mApplicationBreslin->mEditString->clear();
 }
+
+//USERNAME
+void ApplicationUsername::createUsernameScreen()
+{
+        mLabelUsername     = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
+        mLabelUsernameEdit = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsernameEdit", "");
+
+        mApplicationBreslin->mButtonExit      = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+}
+
+void ApplicationUsername::showUsernameScreen()
+{
+        mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mLabelUsernameEdit,OgreBites::TL_CENTER);
+
+        mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
+
+        mLabelUsername->show();
+        mLabelUsernameEdit->show();
+
+        mButtonExit->show();
+
+        mTrayMgr->showCursor();
+}
+
+void ApplicationUsername::hideUsernameScreen()
+{
+        mLabelUsername->hide();
+        mLabelUsernameEdit->hide();
+
+        mApplicationBreslin->mButtonExit->hide();
+}
+

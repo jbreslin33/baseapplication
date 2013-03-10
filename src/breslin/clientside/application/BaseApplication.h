@@ -75,7 +75,9 @@ protected:
 
     Ogre::Root *mRoot;
     Ogre::Camera* mCamera;
+public:
     Ogre::RenderWindow* mWindow;
+protected:
     Ogre::String mResourcesCfg;
     Ogre::String mPluginsCfg;
 
