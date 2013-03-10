@@ -80,6 +80,10 @@ public:
 //input
 EditString* mEditString;
 
+//login
+std::string mUsername;
+std::string mPassword;
+
 /***************************************
 *			          METHODS
 ***************************************/

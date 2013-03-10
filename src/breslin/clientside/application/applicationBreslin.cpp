@@ -70,6 +70,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//input
 	mEditString = new EditString(); 
+
 }
 
 ApplicationBreslin::~ApplicationBreslin()
