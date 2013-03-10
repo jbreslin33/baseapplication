@@ -19,7 +19,7 @@
 ApplicationUsername::ApplicationUsername(ApplicationBreslin* applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
-	mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mApplicationBreslin->mWindow, mApplicationBreslin->mMouse, mApplicationBreslin);
+	//mApplicationBreslin->mTrayMgr = new OgreBites::SdkTrayManager("UsernameInterface", mApplicationBreslin->mWindow, mApplicationBreslin->mMouse, mApplicationBreslin);
 
 }
 
@@ -36,7 +36,7 @@ void ApplicationUsername::enter()
 void ApplicationUsername::execute()
 {
 	//check for input keys ..these will go to username and password for now
- 	mApplicationBreslin->mLabelUsernameEdit->setCaption(mApplicationBreslin->mEditString->getText());
+ 	//mLabelUsernameEdit->setCaption(mApplicationBreslin->mEditString->getText());
 
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
@@ -61,25 +61,25 @@ void ApplicationUsername::exit()
 //USERNAME
 void ApplicationUsername::createUsernameScreen()
 {
-        mLabelUsername     = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
-        mLabelUsernameEdit = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsernameEdit", "");
+        mLabelUsername     = mApplicationBreslin->mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
+        mLabelUsernameEdit = mApplicationBreslin->mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsernameEdit", "");
 
-        mApplicationBreslin->mButtonExit      = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+        mApplicationBreslin->mButtonExit      = mApplicationBreslin->mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
 void ApplicationUsername::showUsernameScreen()
 {
-        mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
-        mTrayMgr->moveWidgetToTray(mLabelUsernameEdit,OgreBites::TL_CENTER);
+        mApplicationBreslin->mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
+        mApplicationBreslin->mTrayMgr->moveWidgetToTray(mLabelUsernameEdit,OgreBites::TL_CENTER);
 
-        mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
+        mApplicationBreslin->mTrayMgr->moveWidgetToTray(mApplicationBreslin->mButtonExit,OgreBites::TL_CENTER);
 
         mLabelUsername->show();
         mLabelUsernameEdit->show();
 
-        mButtonExit->show();
+        mApplicationBreslin->mButtonExit->show();
 
-        mTrayMgr->showCursor();
+        mApplicationBreslin->mTrayMgr->showCursor();
 }
 
 void ApplicationUsername::hideUsernameScreen()
