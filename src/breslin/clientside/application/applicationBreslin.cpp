@@ -27,7 +27,8 @@
 #include "states/applicationGlobal.h"
 #include "states/applicationMain.h"
 #include "states/applicationInitialize.h"
-#include "states/applicationLogin.h"
+#include "states/applicationUsername.h"
+#include "states/applicationPassword.h"
 #include "states/applicationPlay.h"
 
 //input
@@ -62,7 +63,8 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mApplicationInitialize = new ApplicationInitialize(this);
 	mApplicationMain       = new ApplicationMain      (this);
 	mApplicationPlay       = new ApplicationPlay      (this);
-	mApplicationLogin      = new ApplicationLogin     (this);
+	mApplicationUsername   = new ApplicationUsername  (this);
+	mApplicationPassword   = new ApplicationPassword  (this);
 
 	mStateMachine->setGlobalState (mApplicationGlobal);
 	mStateMachine->changeState(mApplicationInitialize);
@@ -80,7 +82,8 @@ ApplicationBreslin::~ApplicationBreslin()
 	
 	delete mStateMachine;
 	delete mApplicationInitialize;
-	delete mApplicationLogin;
+	delete mApplicationUsername;
+	delete mApplicationPassword;
 	delete mApplicationMain;
 	delete mApplicationPlay;	
 	
@@ -101,7 +104,7 @@ void ApplicationBreslin::processUpdate()
         	//	sendConnect();
        		mGame = new Game(this);
 
-		hideLoginScreen();
+		hideUsernameScreen();
 
        		mStateMachine->changeState(mApplicationPlay);
 
@@ -110,7 +113,7 @@ void ApplicationBreslin::processUpdate()
 
 		//fake esc from game
   		mPlayingGame = false;
-                mStateMachine->changeState(mApplicationLogin);
+                mStateMachine->changeState(mApplicationUsername);
 		
 		mFake = false;
 	}
@@ -194,34 +197,66 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 /*********************************
 		GUI
 **********************************/
-//LOGIN
-void ApplicationBreslin::createLoginScreen()
+//USERNAME
+void ApplicationBreslin::createUsernameScreen()
 {
-        mLabelLogin     = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelLogin", "Username:");
-        mLabelLoginEdit = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelLoginEdit", "");
+        mLabelUsername     = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
+        mLabelUsernameEdit = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsernameEdit", "");
 
         mButtonExit      = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
-void ApplicationBreslin::showLoginScreen()
+void ApplicationBreslin::showUsernameScreen()
 {
-        mTrayMgr->moveWidgetToTray(mLabelLogin,OgreBites::TL_CENTER);
-        mTrayMgr->moveWidgetToTray(mLabelLoginEdit,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mLabelUsernameEdit,OgreBites::TL_CENTER);
 
         mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 
-        mLabelLogin->show();
-        mLabelLoginEdit->show();
+        mLabelUsername->show();
+        mLabelUsernameEdit->show();
 
         mButtonExit->show();
 
         mTrayMgr->showCursor();
 }
 
-void ApplicationBreslin::hideLoginScreen()
+void ApplicationBreslin::hideUsernameScreen()
 {
-        mLabelLogin->hide();
-        mLabelLoginEdit->hide();
+        mLabelUsername->hide();
+        mLabelUsernameEdit->hide();
+
+        mButtonExit->hide();
+}
+
+//PASSWORD
+void ApplicationBreslin::createPasswordScreen()
+{
+        mLabelPassword     = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelPassword", "Password:");
+        mLabelPasswordEdit = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelPasswordEdit", "");
+
+        mButtonExit      = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+}
+
+void ApplicationBreslin::showPasswordScreen()
+{
+        mTrayMgr->moveWidgetToTray(mLabelPassword,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mLabelPasswordEdit,OgreBites::TL_CENTER);
+
+        mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
+
+        mLabelPassword->show();
+        mLabelPasswordEdit->show();
+
+        mButtonExit->show();
+
+        mTrayMgr->showCursor();
+}
+
+void ApplicationBreslin::hidePasswordScreen()
+{
+        mLabelPassword->hide();
+        mLabelPasswordEdit->hide();
 
         mButtonExit->hide();
 }

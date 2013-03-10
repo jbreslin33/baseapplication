@@ -35,7 +35,8 @@ StateMachine* mStateMachine;
 
 State* mApplicationGlobal;
 State* mApplicationInitialize;
-State* mApplicationLogin;
+State* mApplicationUsername;
+State* mApplicationPassword;
 State* mApplicationMain;
 State* mApplicationPlay;
 
@@ -67,9 +68,11 @@ OgreBites::Button* mButtonExit;
 OgreBites::Button* mButtonGame;
 
 //login
-OgreBites::Label* mLabelLogin;
-OgreBites::Label* mLabelLoginEdit;
+OgreBites::Label* mLabelUsername;
+OgreBites::Label* mLabelUsernameEdit;
 
+OgreBites::Label* mLabelPassword;
+OgreBites::Label* mLabelPasswordEdit;
 
 private:
 
@@ -100,9 +103,13 @@ float getRenderTime();
 Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 
 //gui
-void createLoginScreen();
-void showLoginScreen();
-void hideLoginScreen();
+void createUsernameScreen();
+void showUsernameScreen();
+void hideUsernameScreen();
+
+void createPasswordScreen();
+void showPasswordScreen();
+void hidePasswordScreen();
 
 void createMainScreen();
 void showMainScreen();

@@ -122,7 +122,8 @@ set(HDRS
 	#application
 	../clientside/application/BaseApplication.h
 	../clientside/application/applicationBreslin.h
-	../clientside/application/states/applicationLogin.h
+	../clientside/application/states/applicationUsername.h
+	../clientside/application/states/applicationPassord.h
 	../clientside/application/states/applicationMain.h
 	../clientside/application/states/applicationPlay.h
 	../clientside/application/states/applicationGlobal.h
@@ -188,7 +189,8 @@ set(SRCS
 	#application
 	../clientside/application/BaseApplication.cpp
 	../clientside/application/applicationBreslin.cpp
-	../clientside/application/states/applicationLogin.cpp
+	../clientside/application/states/applicationUsername.cpp
+	../clientside/application/states/applicationPassword.cpp
 	../clientside/application/states/applicationMain.cpp
 	../clientside/application/states/applicationPlay.cpp
 	../clientside/application/states/applicationGlobal.cpp
@@ -268,7 +270,8 @@ set(HDRS
 	#application
 	../clientside/application/BaseApplication.h
 	../clientside/application/applicationBreslin.h
-	../clientside/application/states/applicationLogin.h
+	../clientside/application/states/applicationUsername.h
+	../clientside/application/states/applicationPassword.h
 	../clientside/application/states/applicationMain.h
 	../clientside/application/states/applicationPlay.h
 	../clientside/application/states/applicationGlobal.h
@@ -333,7 +336,8 @@ set(SRCS
 	#application
 	../clientside/application/BaseApplication.cpp
 	../clientside/application/applicationBreslin.cpp
-	../clientside/application/states/applicationLogin.cpp
+	../clientside/application/states/applicationUsername.cpp
+	../clientside/application/states/applicationPassword.cpp
 	../clientside/application/states/applicationMain.cpp
 	../clientside/application/states/applicationPlay.cpp
 	../clientside/application/states/applicationGlobal.cpp
