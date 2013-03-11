@@ -28,16 +28,7 @@ ApplicationUsername::~ApplicationUsername()
 void ApplicationUsername::enter()
 {
 	LogString("STATE: ApplicationUsername");
-	//mApplicationBreslin->showUsernameScreen();
-
-	if (mLabelUsername)
-	{
-
-	}
-	else
-	{
-		createUsernameScreen();
-	}
+	createUsernameScreen();
 	showUsernameScreen();
 }
 
@@ -52,13 +43,22 @@ void ApplicationUsername::exit()
  	mApplicationBreslin->mEditString->clear();
 	hideUsernameScreen();
 }
+
 //USERNAME
 void ApplicationUsername::createUsernameScreen()
 {
-        mLabelUsername     = mApplicationBreslin->getTrayManager()->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
-        mLabelUsernameEdit = mApplicationBreslin->getTrayManager()->createLabel(OgreBites::TL_CENTER, "mLabelUsernameEdit", "");
-
-        mApplicationBreslin->mButtonExit      = mApplicationBreslin->getTrayManager()->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+	if (!mLabelUsername)
+	{
+        	mLabelUsername     = mApplicationBreslin->getTrayManager()->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
+	}
+	if (!mLabelUsernameEdit)
+	{
+        	mLabelUsernameEdit = mApplicationBreslin->getTrayManager()->createLabel(OgreBites::TL_CENTER, "mLabelUsernameEdit", "");
+	}
+	if (!mApplicationBreslin->mButtonExit)
+	{
+        	mApplicationBreslin->mButtonExit      = mApplicationBreslin->getTrayManager()->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+	}
 }
 
 void ApplicationUsername::showUsernameScreen()
