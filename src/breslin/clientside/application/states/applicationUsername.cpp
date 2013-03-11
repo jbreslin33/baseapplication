@@ -45,20 +45,6 @@ void ApplicationUsername::execute()
 {
 	//check for input keys ..these will go to username and password for now
  	mLabelUsernameEdit->setCaption(mApplicationBreslin->mEditString->getText());
-
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
-	{
-		mApplicationBreslin->mStateMachine->changeState(NULL);
-		mApplicationBreslin->mStateMachine->setGlobalState(NULL);
-
-		mApplicationBreslin->mButtonHit = NULL;
-
-		mApplicationBreslin->shutdown();
-
-		mApplicationBreslin->mShutDown = true;
-
-		delete mApplicationBreslin;
-	}
 }
 
 void ApplicationUsername::exit()
