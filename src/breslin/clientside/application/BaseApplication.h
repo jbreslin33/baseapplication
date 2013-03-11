@@ -41,6 +41,10 @@ public:
     BaseApplication(void);
     virtual ~BaseApplication(void);
 
+	OgreBites::SdkTrayManager* getTrayManager()
+	{
+		return mTrayMgr;
+	}
     virtual bool setup();
     Ogre::SceneManager* mSceneMgr;
 protected:
@@ -80,12 +84,7 @@ protected:
     Ogre::String mPluginsCfg;
 
     // OgreBites
-public:
     OgreBites::SdkTrayManager* mTrayMgr;
-	OgreBites::SdkTrayManager* getTrayManager()
-{
-return mTrayMgr;
-}
 protected:
     OgreBites::SdkCameraMan* mCameraMan;     // basic camera controller
 public:    
