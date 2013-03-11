@@ -55,10 +55,10 @@ void ApplicationPlay::exit()
 
 	if (mApplicationBreslin->mFake == true)
 	{
-		mApplicationBreslin->showUsernameScreen();
+		//mApplicationBreslin->showUsernameScreen();
 	}
 	else
 	{
-		mApplicationBreslin->showMainScreen();
+		//mApplicationBreslin->showMainScreen();
 	}
 }

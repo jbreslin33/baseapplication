@@ -105,10 +105,6 @@ Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 void createTrayManager();
 
 //gui
-void createUsernameScreen();
-void showUsernameScreen();
-void hideUsernameScreen();
-
 void createPasswordScreen();
 void showPasswordScreen();
 void hidePasswordScreen();

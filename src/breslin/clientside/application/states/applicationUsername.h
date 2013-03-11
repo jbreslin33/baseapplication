@@ -30,6 +30,10 @@ void enter  ();
 void execute();
 void exit   ();
 
+void createUsernameScreen();
+void showUsernameScreen();
+void hideUsernameScreen();
+
 };
 
 #endif

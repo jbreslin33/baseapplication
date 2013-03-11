@@ -80,7 +80,9 @@ protected:
     Ogre::String mPluginsCfg;
 
     // OgreBites
+public:
     OgreBites::SdkTrayManager* mTrayMgr;
+protected:
     OgreBites::SdkCameraMan* mCameraMan;     // basic camera controller
 public:    
 OgreBites::ParamsPanel* mDetailsPanel;   // sample details panel
