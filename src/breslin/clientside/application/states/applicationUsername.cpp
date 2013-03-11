@@ -49,7 +49,7 @@ void ApplicationUsername::createUsernameScreen()
 {
 	if (!mLabelUsername)
 	{
-        	mLabelUsername     = mApplicationBreslin->getTrayManager()->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
+        	mLabelUsername = mApplicationBreslin->getTrayManager()->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
 	}
 	if (!mLabelUsernameEdit)
 	{
@@ -57,7 +57,7 @@ void ApplicationUsername::createUsernameScreen()
 	}
 	if (!mApplicationBreslin->mButtonExit)
 	{
-        	mApplicationBreslin->mButtonExit      = mApplicationBreslin->getTrayManager()->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+        	mApplicationBreslin->mButtonExit = mApplicationBreslin->getTrayManager()->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 	}
 }
 
