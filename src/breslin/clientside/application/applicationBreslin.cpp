@@ -104,7 +104,7 @@ void ApplicationBreslin::processUpdate()
         	//	sendConnect();
        		mGame = new Game(this);
 
-		//mApplicationUsername->hideUsernameScreen();
+		hideUsernameScreen();
 
        		mStateMachine->changeState(mApplicationPlay);
 
@@ -197,6 +197,38 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 /*********************************
 		GUI
 **********************************/
+//USERNAME
+void ApplicationBreslin::createUsernameScreen()
+{
+        mLabelUsername     = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
+        mLabelUsernameEdit = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsernameEdit", "");
+
+        mButtonExit      = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+}
+
+void ApplicationBreslin::showUsernameScreen()
+{
+        mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mLabelUsernameEdit,OgreBites::TL_CENTER);
+
+        mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
+
+        mLabelUsername->show();
+        mLabelUsernameEdit->show();
+
+        mButtonExit->show();
+
+        mTrayMgr->showCursor();
+}
+
+void ApplicationBreslin::hideUsernameScreen()
+{
+        mLabelUsername->hide();
+        mLabelUsernameEdit->hide();
+
+        mButtonExit->hide();
+}
+
 //PASSWORD
 void ApplicationBreslin::createPasswordScreen()
 {

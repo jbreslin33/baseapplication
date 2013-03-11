@@ -43,6 +43,7 @@ public:
 
     virtual bool setup();
     Ogre::SceneManager* mSceneMgr;
+protected:
     
     virtual bool configure(void);
     virtual void chooseSceneManager(void);
@@ -71,22 +72,25 @@ public:
     virtual void windowResized(Ogre::RenderWindow* rw);
     //Unattach OIS before window shutdown (very important under Linux)
     virtual void windowClosed(Ogre::RenderWindow* rw);
-    
-	Ogre::Root *mRoot;
+
+    Ogre::Root *mRoot;
     Ogre::Camera* mCamera;
-    
-	Ogre::RenderWindow* mWindow;
+    Ogre::RenderWindow* mWindow;
     Ogre::String mResourcesCfg;
     Ogre::String mPluginsCfg;
 
     // OgreBites
     OgreBites::SdkTrayManager* mTrayMgr;
     OgreBites::SdkCameraMan* mCameraMan;     // basic camera controller
+public:    
 OgreBites::ParamsPanel* mDetailsPanel;   // sample details panel
+protected:    
 bool mCursorWasVisible;                  // was cursor visible before dialog appeared
     
+    public:
     bool mShutDown;
 
+	 protected:
 	 
     //OIS Input devices
     OIS::InputManager* mInputManager;

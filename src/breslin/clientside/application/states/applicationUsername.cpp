@@ -19,8 +19,6 @@
 ApplicationUsername::ApplicationUsername(ApplicationBreslin* applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
-	//mApplicationBreslin->mTrayMgr = new OgreBites::SdkTrayManager("UsernameInterface", mApplicationBreslin->mWindow, mApplicationBreslin->mMouse, mApplicationBreslin);
-
 }
 
 ApplicationUsername::~ApplicationUsername()
@@ -36,7 +34,7 @@ void ApplicationUsername::enter()
 void ApplicationUsername::execute()
 {
 	//check for input keys ..these will go to username and password for now
- 	//mLabelUsernameEdit->setCaption(mApplicationBreslin->mEditString->getText());
+ 	mApplicationBreslin->mLabelUsernameEdit->setCaption(mApplicationBreslin->mEditString->getText());
 
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
@@ -57,36 +55,3 @@ void ApplicationUsername::exit()
 {
  	mApplicationBreslin->mEditString->clear();
 }
-
-//USERNAME
-void ApplicationUsername::createUsernameScreen()
-{
-        mLabelUsername     = mApplicationBreslin->mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
-        mLabelUsernameEdit = mApplicationBreslin->mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsernameEdit", "");
-
-        mApplicationBreslin->mButtonExit      = mApplicationBreslin->mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
-}
-
-void ApplicationUsername::showUsernameScreen()
-{
-        mApplicationBreslin->mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
-        mApplicationBreslin->mTrayMgr->moveWidgetToTray(mLabelUsernameEdit,OgreBites::TL_CENTER);
-
-        mApplicationBreslin->mTrayMgr->moveWidgetToTray(mApplicationBreslin->mButtonExit,OgreBites::TL_CENTER);
-
-        mLabelUsername->show();
-        mLabelUsernameEdit->show();
-
-        mApplicationBreslin->mButtonExit->show();
-
-        mApplicationBreslin->mTrayMgr->showCursor();
-}
-
-void ApplicationUsername::hideUsernameScreen()
-{
-        mLabelUsername->hide();
-        mLabelUsernameEdit->hide();
-
-        mApplicationBreslin->mButtonExit->hide();
-}
-
