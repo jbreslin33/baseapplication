@@ -68,8 +68,6 @@ OgreBites::Button* mButtonExit;
 OgreBites::Button* mButtonGame;
 
 //login
-OgreBites::Label* mLabelUsername;
-OgreBites::Label* mLabelUsernameEdit;
 
 OgreBites::Label* mLabelPassword;
 OgreBites::Label* mLabelPasswordEdit;

@@ -1,6 +1,17 @@
 #ifndef USERNAMESCREEN_H
 #define USERNAMESCREEN_H
 
+//Ogre headers
+#include "Ogre.h"
+using namespace Ogre;
+#include <OISEvents.h>
+#include <OISInputManager.h>
+#include <OISKeyboard.h>
+#include <OISMouse.h>
+#include <SdkTrays.h>
+#include <SdkCameraMan.h>
+
+
 /***************************************
 *   		INCLUDES
 ***************************************/
@@ -25,6 +36,10 @@ ApplicationBreslin* mApplicationBreslin;
 
 ApplicationUsername(ApplicationBreslin* applicationBreslin);
 ~ApplicationUsername();
+
+//username labels
+OgreBites::Label* mLabelUsername;
+OgreBites::Label* mLabelUsernameEdit;
 
 void enter  ();
 void execute();

@@ -30,7 +30,7 @@ void ApplicationUsername::enter()
 	LogString("STATE: ApplicationUsername");
 	//mApplicationBreslin->showUsernameScreen();
 
-	if (mApplicationBreslin->mLabelUsername)
+	if (mLabelUsername)
 	{
 
 	}
@@ -44,7 +44,7 @@ void ApplicationUsername::enter()
 void ApplicationUsername::execute()
 {
 	//check for input keys ..these will go to username and password for now
- 	mApplicationBreslin->mLabelUsernameEdit->setCaption(mApplicationBreslin->mEditString->getText());
+ 	mLabelUsernameEdit->setCaption(mApplicationBreslin->mEditString->getText());
 
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
@@ -69,21 +69,21 @@ void ApplicationUsername::exit()
 //USERNAME
 void ApplicationUsername::createUsernameScreen()
 {
-        mApplicationBreslin->mLabelUsername     = mApplicationBreslin->mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
-        mApplicationBreslin->mLabelUsernameEdit = mApplicationBreslin->mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsernameEdit", "");
+        mLabelUsername     = mApplicationBreslin->mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
+        mLabelUsernameEdit = mApplicationBreslin->mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsernameEdit", "");
 
         mApplicationBreslin->mButtonExit      = mApplicationBreslin->mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
 void ApplicationUsername::showUsernameScreen()
 {
-        mApplicationBreslin->mTrayMgr->moveWidgetToTray(mApplicationBreslin->mLabelUsername,OgreBites::TL_CENTER);
-        mApplicationBreslin->mTrayMgr->moveWidgetToTray(mApplicationBreslin->mLabelUsernameEdit,OgreBites::TL_CENTER);
+        mApplicationBreslin->mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
+        mApplicationBreslin->mTrayMgr->moveWidgetToTray(mLabelUsernameEdit,OgreBites::TL_CENTER);
 
         mApplicationBreslin->mTrayMgr->moveWidgetToTray(mApplicationBreslin->mButtonExit,OgreBites::TL_CENTER);
 
-        mApplicationBreslin->mLabelUsername->show();
-        mApplicationBreslin->mLabelUsernameEdit->show();
+        mLabelUsername->show();
+        mLabelUsernameEdit->show();
 
         mApplicationBreslin->mButtonExit->show();
 
@@ -92,8 +92,8 @@ void ApplicationUsername::showUsernameScreen()
 
 void ApplicationUsername::hideUsernameScreen()
 {
-        mApplicationBreslin->mLabelUsername->hide();
-        mApplicationBreslin->mLabelUsernameEdit->hide();
+        mLabelUsername->hide();
+        mLabelUsernameEdit->hide();
 
         mApplicationBreslin->mButtonExit->hide();
 }
