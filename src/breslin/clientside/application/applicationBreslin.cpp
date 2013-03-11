@@ -90,6 +90,11 @@ ApplicationBreslin::~ApplicationBreslin()
 	delete mGame;
 }
 
+void ApplicationBreslin::createTrayManager()
+{
+
+}
+
 /*********************************
 			update
 **********************************/

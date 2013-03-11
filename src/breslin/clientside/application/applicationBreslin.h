@@ -102,6 +102,8 @@ float getRenderTime();
 //scene
 Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 
+void createTrayManager();
+
 //gui
 void createUsernameScreen();
 void showUsernameScreen();
