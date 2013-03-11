@@ -36,6 +36,8 @@
 <script src="http://192.168.2.234/breslin/clientside/ability/move/normal_process_tick_move.php"></script>
 <script src="http://192.168.2.234/breslin/clientside/ability/move/normal_interpolate_tick_move.php"></script>
 <script src="http://192.168.2.234/breslin/clientside/ability/move/ability_move_state_machine.php"></script>
+<script src="http://192.168.2.234/breslin/clientside/animation/animation.php"></script>
+<script src="http://192.168.2.234/breslin/clientside/animation/animation_advanced.php"></script>
 
 </head>
 
@@ -44,44 +46,78 @@
 <script>
 
 var mApplication;
+var mSize = 0;
+var mMiddleOfViewPort = new Vector3D();;
 
 window.addEvent('domready', function()
 {
+       	mSize = window.getSize();
 
-        mApplication = new ApplicationBreslin('192.168.2.234', 30004);
+        //let's move control object to middle of screen
+        mMiddleOfViewPort.x =  mSize.x / 2;
+        mMiddleOfViewPort.y =  0;
+        mMiddleOfViewPort.z =  mSize.y / 2;
 
+        mApplication = new ApplicationBreslin('192.168.2.234','10000');
+       	
         //input
         document.addEvent("keydown", mApplication.keyDown);
         document.addEvent("keyup", mApplication.keyUp);
 
         //main loop
-        var t=setInterval("mApplication.processUpdate()",32)
-       
+	mIntervalCount = 0;
+        mInterval=setInterval("mApplication.processUpdate()",32)
+        
 	mApplication.mNetwork.mSocket.on('news', function (data)
         {
-		s = data.split(','); 
-		
-		byteBuffer = new ByteBuffer(s);
+                s = data.split(',');
 
-		type = byteBuffer.readByte();
+                byteBuffer = new ByteBuffer(s);
 
-		if (type == -103)
-		{
+                type = byteBuffer.readByte();
+
+                if (type == -103)
+                {
 			mApplication.mGame.addShape(byteBuffer);
-		}
+                }
 
-		if (type == 1)
-		{
-			mApplication.mGame.readServerTick(byteBuffer);
-		}
+                if (type == 1)
+                {
+			mIntervalCount++;
+		
+			//check if we stopped game loop	
+			if (mIntervalCount > 25)
+			{
+				//game loop stopped so let's clear interval and start a new one.	
+
+				//clear it
+				clearInterval(mInterval);
+
+				//set it again
+        			mInterval=setInterval("mApplication.processUpdate()",32)
+
+				mIntervalCount = 0;
+
+			}
+				
+                        mApplication.mGame.readServerTick(byteBuffer);
+                }
         });
 }
-
 );
 
+window.onresize = function(event)
+{
+	mSize = window.getSize();	
+
+        //let's move control object to middle of screen
+        mMiddleOfViewPort.x =  mSize.x / 2;
+        mMiddleOfViewPort.y =  0;
+        mMiddleOfViewPort.z =  mSize.y / 2;
+}
+
+
 </script>
-<p id="mMessageFrame">mMessageFrame</p>
 
 </body>
 </html>
-
