@@ -82,6 +82,10 @@ protected:
     // OgreBites
 public:
     OgreBites::SdkTrayManager* mTrayMgr;
+	OgreBites::SdkTrayManager* getTrayManager()
+{
+return mTrayMgr;
+}
 protected:
     OgreBites::SdkCameraMan* mCameraMan;     // basic camera controller
 public:    
