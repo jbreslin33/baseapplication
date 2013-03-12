@@ -141,6 +141,8 @@ bool mouseMoved            ( const OIS::MouseEvent &arg );
 public:
 virtual bool keyPressed( const OIS::KeyEvent &arg );
 
+EditString* getEditString() { return mEditString; }
+
 };
 
 #endif

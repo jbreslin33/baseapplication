@@ -41,13 +41,16 @@ ApplicationUsername(ApplicationBreslin* applicationBreslin);
 OgreBites::Label* mLabelUsername;
 OgreBites::Label* mLabelUsernameEdit;
 
+//actual usnerame string
+std::string mUsername;
+
 void enter  ();
 void execute();
 void exit   ();
 
-void createUsernameScreen();
-void showUsernameScreen();
-void hideUsernameScreen();
+void createScreen();
+void showScreen();
+void hideScreen();
 
 };
 

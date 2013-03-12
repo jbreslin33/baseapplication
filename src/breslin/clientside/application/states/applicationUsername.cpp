@@ -28,8 +28,8 @@ ApplicationUsername::~ApplicationUsername()
 void ApplicationUsername::enter()
 {
 	LogString("STATE: ApplicationUsername");
-	createUsernameScreen();
-	showUsernameScreen();
+	createScreen();
+	showScreen();
 }
 
 void ApplicationUsername::execute()
@@ -38,22 +38,26 @@ void ApplicationUsername::execute()
 	if (mApplicationBreslin->mEditString->getIsFinal())
 	{
 		LogString("mFinal = true");
-		//change state to password
-			
+		
+		//set username string
+		mUsername = mApplicationBreslin->getEditString()->getText();
+
+		//change state to password state
+		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPassword);
 	}
 
 	//check for input keys ..these will go to username and password for now
- 	mLabelUsernameEdit->setCaption(mApplicationBreslin->mEditString->getText());
+ 	mLabelUsernameEdit->setCaption(mApplicationBreslin->getEditString()->getText());
 }
 
 void ApplicationUsername::exit()
 {
  	mApplicationBreslin->mEditString->clear();
-	hideUsernameScreen();
+	hideScreen();
 }
 
 //USERNAME
-void ApplicationUsername::createUsernameScreen()
+void ApplicationUsername::createScreen()
 {
 	if (!mLabelUsername)
 	{
@@ -69,7 +73,7 @@ void ApplicationUsername::createUsernameScreen()
 	}
 }
 
-void ApplicationUsername::showUsernameScreen()
+void ApplicationUsername::showScreen()
 {
         mApplicationBreslin->getTrayManager()->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
         mApplicationBreslin->getTrayManager()->moveWidgetToTray(mLabelUsernameEdit,OgreBites::TL_CENTER);
@@ -84,7 +88,7 @@ void ApplicationUsername::showUsernameScreen()
         mApplicationBreslin->getTrayManager()->showCursor();
 }
 
-void ApplicationUsername::hideUsernameScreen()
+void ApplicationUsername::hideScreen()
 {
         mLabelUsername->hide();
         mLabelUsernameEdit->hide();
