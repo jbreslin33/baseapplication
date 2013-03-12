@@ -293,6 +293,7 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 ******************************************/
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
+	//injectKeyPress to current State???
 	if( mEditString->injectKeyPress( arg ) == false )
 	{
 	

@@ -64,6 +64,14 @@ bool EditString::injectKeyPress( const OIS::KeyEvent arg )
         	if( mPosition != mText.end() )
           	mPosition = mText.erase( mPosition );
         	break;
+	
+	case OIS::KC_RETURN:
+          	mFinal = true;
+        	break;
+      
+	case OIS::KC_F8:
+          	mFinal = true;
+        	break;
       
 	default:
        		keyUsed = false;

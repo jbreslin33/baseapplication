@@ -35,7 +35,6 @@ void ApplicationInitialize::execute()
 	if (mApplicationBreslin->setup())
 	{
 		mApplicationBreslin->mSetup = true;
-//		mApplicationBreslin->createUsernameScreen();
         	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationUsername);
 	}	
 }

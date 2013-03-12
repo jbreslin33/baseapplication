@@ -9,7 +9,7 @@ class EditString
 {
 public:
 
-EditString(void) : mInsert(true), mPosition(mText.begin()), mCaret(0)
+EditString(void) : mInsert(true), mPosition(mText.begin()), mCaret(0), mFinal(false)
 {
 	
 }
@@ -34,6 +34,10 @@ protected:
 
   	// Caret Position - for positioning the cursor.
   	int mCaret;
+
+	//frozen
+	bool mFinal;
+
 public:
 void setText( std::string & newText ) 
 { 
@@ -43,6 +47,8 @@ void setText( std::string & newText )
 }
 
 std::string & getText() { return mText; }
+bool getIsFinal() { return mFinal; }
+
 
 void clear()
 {

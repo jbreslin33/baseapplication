@@ -34,6 +34,14 @@ void ApplicationUsername::enter()
 
 void ApplicationUsername::execute()
 {
+	//check for mFinal
+	if (mApplicationBreslin->mEditString->getIsFinal())
+	{
+		LogString("mFinal = true");
+		//change state to password
+			
+	}
+
 	//check for input keys ..these will go to username and password for now
  	mLabelUsernameEdit->setCaption(mApplicationBreslin->mEditString->getText());
 }
