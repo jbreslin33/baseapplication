@@ -45,6 +45,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 	sendConnect();
+	sendLogin();
 
 	//initilize
 	mSetup = false;
@@ -143,6 +144,7 @@ void ApplicationBreslin::sendConnect()
 	ByteBuffer* byteBuffer = new ByteBuffer();
 	byteBuffer->WriteByte(mMessageConnect);
 	mNetwork->send(byteBuffer);
+	LogString("client sending sendConnect");
 }
 
 void ApplicationBreslin::sendLogin()

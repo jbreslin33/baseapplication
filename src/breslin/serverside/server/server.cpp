@@ -115,6 +115,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	mes->BeginReading();
 
 	int type = mes->ReadByte();
+	LogString("type:%d",type);
 	
 	if (type == mConnect)
 	{
@@ -352,6 +353,7 @@ void Server::readPackets()
 			mes.BeginReading();
 
 			type = mes.ReadByte();
+			LogString("readPackets type:%d",type);
 
 			// Check the type of the message
 			switch(type)

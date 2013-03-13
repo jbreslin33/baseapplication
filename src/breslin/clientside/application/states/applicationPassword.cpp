@@ -51,7 +51,7 @@ void ApplicationPassword::execute()
 			//mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPassword);
 			//let's send login info then decide what state to go to....
 		
-			mApplicationBreslin->sendLogin();
+			mApplicationBreslin->sendConnect();
 	
 			mLoginSent = true;	
 		}

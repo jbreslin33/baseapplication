@@ -199,6 +199,7 @@ void Network::send(int length, char *data,  struct sockaddr addr)
 	int	ret;
 
 	ret = sendto(mSocket, data, length, 0, &addr, sizeof(addr));
+	LogString("sendto");
 
 	if(ret == -1)
 	{
