@@ -91,6 +91,9 @@ void ApplicationUsername::showScreen()
 
 void ApplicationUsername::hideScreen()
 {
+	mApplicationBreslin->getTrayManager()->removeWidgetFromTray(mLabelUsername);
+	mApplicationBreslin->getTrayManager()->removeWidgetFromTray(mLabelUsernameEdit);
+
         mLabelUsername->hide();
         mLabelUsernameEdit->hide();
 
