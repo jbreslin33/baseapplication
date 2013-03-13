@@ -69,10 +69,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mStateMachine->setGlobalState (mApplicationGlobal);
 	mStateMachine->changeState(mApplicationInitialize);
         mStateMachine->setPreviousState(mApplicationInitialize);
-
-	//input
-	mEditString = new EditString(); 
-
 }
 
 ApplicationBreslin::~ApplicationBreslin()
@@ -294,7 +290,7 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	//injectKeyPress to current State???
-	if( mEditString->injectKeyPress( arg ) == false )
+	if ( mStateMachine->getCurrentState()->getEditString()->injectKeyPress(arg) == false) 	
 	{
 	
 	}

@@ -19,6 +19,9 @@
 ApplicationUsername::ApplicationUsername(ApplicationBreslin* applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
+	//input
+        mEditString = new EditString();
+
 }
 
 ApplicationUsername::~ApplicationUsername()
@@ -35,24 +38,24 @@ void ApplicationUsername::enter()
 void ApplicationUsername::execute()
 {
 	//check for mFinal
-	if (mApplicationBreslin->mEditString->getIsFinal())
+	if (getEditString()->getIsFinal())
 	{
 		LogString("mFinal = true");
 		
 		//set username string
-		mUsername = mApplicationBreslin->getEditString()->getText();
+		mUsername = getEditString()->getText();
 
 		//change state to password state
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPassword);
 	}
 
 	//check for input keys ..these will go to username and password for now
- 	mLabelUsernameEdit->setCaption(mApplicationBreslin->getEditString()->getText());
+ 	mLabelUsernameEdit->setCaption(getEditString()->getText());
 }
 
 void ApplicationUsername::exit()
 {
- 	mApplicationBreslin->mEditString->clear();
+ 	getEditString()->clear();
 	hideScreen();
 }
 

@@ -84,6 +84,11 @@ void  changeState(State* pNewState)
 	}
 }
 
+State* getCurrentState()
+{
+	return mCurrentState;
+}
+
 };
 #endif
 
