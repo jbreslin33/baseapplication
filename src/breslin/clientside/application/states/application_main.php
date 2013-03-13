@@ -17,7 +17,7 @@ execute: function()
 	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonGame)
 	{
 	        this.mApplicationBreslin.mButtonHit = 0;
-                this.mApplicationBreslin.sendConnect();
+//                this.mApplicationBreslin.sendConnect();
                 this.mApplicationBreslin.mGame = new Game(this.mApplicationBreslin);
 
                 this.mApplicationBreslin.hideMainScreen();

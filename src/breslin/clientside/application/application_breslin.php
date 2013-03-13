@@ -14,6 +14,7 @@ initialize: function(serverIP, serverPort)
 
 	//network
 	this.mNetwork = new Network(this,serverIP,serverPort);
+	this.sendConnect();
         
 	//initilize
         this.mSetup = false;

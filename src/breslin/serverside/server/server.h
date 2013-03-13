@@ -70,6 +70,10 @@ public:
 	static const int mConnect                = -101;
 	static const int mConnectBrowser         = -111;
 	static const int mConnectNode            = -121;
+	
+	//login
+	static const int mLogin                = -107;
+	static const int mLoginBrowser         = -117;
 
 	//disconnect	
 	static const int mDisconnect             = -102;

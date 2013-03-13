@@ -21,6 +21,7 @@ ApplicationPassword::ApplicationPassword(ApplicationBreslin* applicationBreslin)
 	mApplicationBreslin = applicationBreslin;
 	//input
         mEditString = new EditString();
+	mLoginSent = false;
 
 }
 
@@ -38,17 +39,23 @@ void ApplicationPassword::enter()
 void ApplicationPassword::execute()
 {
 	//check for mFinal
-	if (getEditString()->getIsFinal())
+	if (mLoginSent == false)
 	{
-		LogString("mFinal = true");
+		if (getEditString()->getIsFinal())
+		{
 		
-		//set username string
-		mPassword = getEditString()->getText();
+			//set username string
+			mPassword = getEditString()->getText();
 
-		//change state to password state
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPassword);
+			//change state to ???? state
+			//mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPassword);
+			//let's send login info then decide what state to go to....
+		
+			mApplicationBreslin->sendLogin();
+	
+			mLoginSent = true;	
+		}
 	}
-
 	//check for input keys ..these will go to username and password for now
  	mLabelPasswordEdit->setCaption(getEditString()->getText());
 }

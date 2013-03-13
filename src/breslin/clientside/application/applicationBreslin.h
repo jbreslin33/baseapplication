@@ -45,6 +45,8 @@ static const char mMessageServerExit = 3;
 static const char mMessageConnect     = -101;
 static const char mMessageDisconnect  = -102;
 
+static const char mMessageLogin = -107;
+
 //Network
 Network*     mNetwork;
 

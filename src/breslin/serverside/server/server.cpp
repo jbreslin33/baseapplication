@@ -137,6 +137,18 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	}
 
+	else if (type == mLogin)
+	{
+		LogString("login detected");
+
+	}
+
+	else if (type == mLoginBrowser)
+	{
+		int clientID = mes->ReadByte();
+
+	}
+
 	else if (type == mMessageFrame || type == mDisconnect)
 	{
 		// Find the correct client by comparing addresses

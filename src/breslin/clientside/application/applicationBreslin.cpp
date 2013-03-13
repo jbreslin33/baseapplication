@@ -147,11 +147,10 @@ void ApplicationBreslin::sendConnect()
 
 void ApplicationBreslin::sendLogin()
 {
-/*
 	ByteBuffer* byteBuffer = new ByteBuffer();
-	byteBuffer->WriteByte(mMessageConnect);
+	byteBuffer->WriteByte(mMessageLogin);
 	mNetwork->send(byteBuffer);
-*/
+	LogString("client sending sendLogin");
 }
 
 

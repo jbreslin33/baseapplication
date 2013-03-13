@@ -43,6 +43,7 @@ OgreBites::Label* mLabelPasswordEdit;
 
 //actual usnerame string
 std::string mPassword;
+bool mLoginSent;
 
 void enter  ();
 void execute();
