@@ -44,6 +44,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
+	sendConnect();
 
 	//initilize
 	mSetup = false;
