@@ -3,6 +3,9 @@
 
 #include "../message/message.h"
 
+//std
+#include <string>
+
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")
 #pragma message ("Auto linking WinSock2 library")
@@ -95,5 +98,10 @@ public:
 
 	Server* mServer;
 
+	//login
+	std::string mSchool;
+	std::string mUsername;
+	std::string mPassword;
+	bool mLoggedIn;
 };
 #endif
