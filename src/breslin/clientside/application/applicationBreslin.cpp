@@ -202,8 +202,6 @@ void ApplicationBreslin::createMainScreen()
 {
 	LogString("create buttons");
 	mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
-	mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
-	mButtonTagAll = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTagAll", "Join TagAll");
 	mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
@@ -211,13 +209,9 @@ void ApplicationBreslin::showMainScreen()
 {
 
 	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
-	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
-	mTrayMgr->moveWidgetToTray(mButtonTagAll,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
 	mButtonGame->show();
-	mButtonTag->show();	
-	mButtonTagAll->show();	
 	mButtonExit->show();
 	
 	mTrayMgr->showCursor();
@@ -226,8 +220,6 @@ void ApplicationBreslin::showMainScreen()
 void ApplicationBreslin::hideMainScreen()
 {
 	mButtonGame->hide();
-	mButtonTag->hide();	
-	mButtonTagAll->hide();	
 	mButtonExit->hide();
 }
 
