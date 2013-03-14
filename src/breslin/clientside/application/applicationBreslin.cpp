@@ -201,17 +201,20 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 void ApplicationBreslin::createMainScreen()
 {
 	LogString("create buttons");
-	mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
-	mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+	mButtonConnect  = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonConnect", "Connect");
+	mButtonJoinGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
+	mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
 void ApplicationBreslin::showMainScreen()
 {
 
-	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonConnect,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonJoinGame,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
-	mButtonGame->show();
+	mButtonConnect->show();
+	mButtonJoinGame->show();
 	mButtonExit->show();
 	
 	mTrayMgr->showCursor();
@@ -219,7 +222,8 @@ void ApplicationBreslin::showMainScreen()
 
 void ApplicationBreslin::hideMainScreen()
 {
-	mButtonGame->hide();
+	mButtonConnect->hide();
+	mButtonJoinGame->hide();
 	mButtonExit->hide();
 }
 

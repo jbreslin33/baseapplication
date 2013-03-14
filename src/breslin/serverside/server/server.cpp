@@ -47,13 +47,13 @@ Server::~Server()
 //for c++ and java
 void Server::createClient(struct sockaddr *address)
 {
-	Client* client = new Client(this, address);
-
+/*
 	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
 	client->sendAllShapes();
 	
 	//create the shape for this client at that point we send this shape to all clients	
 	client->createShape();
+*/
 }
 
 //browser
@@ -108,7 +108,9 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	
 	if (type == mConnect)
 	{
-		createClient(address);
+		//createClient(address);
+		Client* client = new Client(this, address);
+		LogString("connected c++ client!!!!!!!!!!!!");
 	}
 	
 	else if (type == mConnectNode)
@@ -124,6 +126,28 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		int clientID = mes->ReadByte();
 
 		createClient(address,clientID);
+
+	}
+
+	else if (type == mJoinGame)
+	{
+		LogString("JOIN GAME!!!!!!!!!!!");
+		for (unsigned int i = 0; i < mClientVector.size(); i++)
+		{
+			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+			{
+				client = mClientVector.at(i);
+				//let this client know about all shapes
+				client->sendAllShapes();
+	
+				//create the shape for this client at that point we send this shape to all clients	
+				client->createShape();
+			}
+		}
+	}
+	
+	else if (type == mJoinGameBrowser)
+	{
 
 	}
 

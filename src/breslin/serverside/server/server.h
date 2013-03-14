@@ -71,6 +71,11 @@ public:
 	static const int mConnectBrowser         = -111;
 	static const int mConnectNode            = -121;
 
+	//join game
+	static const int mJoinGame               = -107;
+	static const int mJoinGameBrowser        = -117;
+
+
 	//disconnect	
 	static const int mDisconnect             = -102;
 	static const int mDisconnectBrowser      = -112;

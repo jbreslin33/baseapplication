@@ -36,12 +36,21 @@ void ApplicationMain::enter()
 
 void ApplicationMain::execute()
 {
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonGame)
+	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonConnect)
 	{
+		LogString("CONNNNNNNNNect");
 		mApplicationBreslin->mButtonHit = NULL;
-		//is this the first c++ server knows of you? if so that is what i want? Or do I want a connection
-		//right away? but without username? then we give username and a different connection.... 
+
 		mApplicationBreslin->sendConnect();
+		
+
+	}
+
+	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGame)
+	{
+		LogString("button joing ame.....");
+		mApplicationBreslin->mButtonHit = NULL;
+
 		mApplicationBreslin->mGame = new Game(mApplicationBreslin);
 
 		mApplicationBreslin->hideMainScreen();

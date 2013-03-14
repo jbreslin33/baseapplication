@@ -56,7 +56,8 @@ bool mFake;
 //gui
 OgreBites::Button* mButtonHit;
 OgreBites::Button* mButtonExit;
-OgreBites::Button* mButtonGame;
+OgreBites::Button* mButtonConnect;
+OgreBites::Button* mButtonJoinGame;
 
 private:
 
