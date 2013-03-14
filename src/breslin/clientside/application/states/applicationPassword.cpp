@@ -43,6 +43,7 @@ void ApplicationPassword::execute()
 	{
 		if (getEditString()->getIsFinal())
 		{
+			mApplicationBreslin->sendLogin();
 		
 			//set username string
 			mPassword = getEditString()->getText();
@@ -50,8 +51,6 @@ void ApplicationPassword::execute()
 			//change state to ???? state
 			//mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPassword);
 			//let's send login info then decide what state to go to....
-		
-			mApplicationBreslin->sendConnect();
 	
 			mLoginSent = true;	
 		}

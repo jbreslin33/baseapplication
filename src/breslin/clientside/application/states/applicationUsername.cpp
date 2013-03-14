@@ -42,6 +42,9 @@ void ApplicationUsername::execute()
 	{
 		//set username string
 		mUsername = getEditString()->getText();
+			
+		mApplicationBreslin->sendLogin();
+
 
 		//change state to password state
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPassword);
