@@ -22,10 +22,6 @@ sudo vi node/lib/path.js +360
 comment out line 360
 it will complain about strings if not.... 
 
-then run:
-yes | sudo ./compile.sh 
-
-
 run:
 cd /src/breslin/serverside
 ./runserver1.sh

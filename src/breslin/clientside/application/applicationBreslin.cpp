@@ -27,12 +27,7 @@
 #include "states/applicationGlobal.h"
 #include "states/applicationMain.h"
 #include "states/applicationInitialize.h"
-#include "states/applicationUsername.h"
-#include "states/applicationPassword.h"
 #include "states/applicationPlay.h"
-
-//input
-#include "../io/editString.h"
 
 
 /***************************************
@@ -44,8 +39,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
-	sendConnect();
-	sendLogin();
 
 	//initilize
 	mSetup = false;
@@ -61,12 +54,10 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//state machine (Menus)
 	mStateMachine = new StateMachine();
 
-	mApplicationGlobal     = new ApplicationGlobal    (this);
+	mApplicationGlobal = new ApplicationGlobal(this);
 	mApplicationInitialize = new ApplicationInitialize(this);
-	mApplicationMain       = new ApplicationMain      (this);
-	mApplicationPlay       = new ApplicationPlay      (this);
-	mApplicationUsername   = new ApplicationUsername  (this);
-	mApplicationPassword   = new ApplicationPassword  (this);
+	mApplicationMain   = new ApplicationMain  (this);
+	mApplicationPlay   = new ApplicationPlay(this);
 
 	mStateMachine->setGlobalState (mApplicationGlobal);
 	mStateMachine->changeState(mApplicationInitialize);
@@ -80,17 +71,10 @@ ApplicationBreslin::~ApplicationBreslin()
 	
 	delete mStateMachine;
 	delete mApplicationInitialize;
-	delete mApplicationUsername;
-	delete mApplicationPassword;
 	delete mApplicationMain;
 	delete mApplicationPlay;	
 	
 	delete mGame;
-}
-
-void ApplicationBreslin::createTrayManager()
-{
-
 }
 
 /*********************************
@@ -107,7 +91,7 @@ void ApplicationBreslin::processUpdate()
         	//	sendConnect();
        		mGame = new Game(this);
 
-		//hideUsernameScreen();
+		hideMainScreen();
 
        		mStateMachine->changeState(mApplicationPlay);
 
@@ -116,7 +100,7 @@ void ApplicationBreslin::processUpdate()
 
 		//fake esc from game
   		mPlayingGame = false;
-                mStateMachine->changeState(mApplicationUsername);
+                mStateMachine->changeState(mApplicationMain);
 		
 		mFake = false;
 	}
@@ -144,16 +128,8 @@ void ApplicationBreslin::sendConnect()
 	ByteBuffer* byteBuffer = new ByteBuffer();
 	byteBuffer->WriteByte(mMessageConnect);
 	mNetwork->send(byteBuffer);
-	LogString("client sending sendConnect");
 }
 
-void ApplicationBreslin::sendLogin()
-{
-	ByteBuffer* byteBuffer = new ByteBuffer();
-	byteBuffer->WriteByte(mMessageLogin);
-	mNetwork->send(byteBuffer);
-	LogString("client sending sendLogin");
-}
 
 
 /*********************************
@@ -171,8 +147,29 @@ float ApplicationBreslin::getRenderTime()
 **********************************/
 void ApplicationBreslin::createScene()
 {
+/*
+        mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
 
+        Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
+        pointLight->setType(Ogre::Light::LT_POINT);
+	pointLight->setPosition(Ogre::Vector3(250, 150, 250));
+	pointLight->setDiffuseColour(Ogre::ColourValue::White);
+	pointLight->setSpecularColour(Ogre::ColourValue::White);
+
+// create a floor mesh resource
+	
+        MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	       Plane(Vector3::UNIT_Y, -10), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
+
+                // create a floor entity, give it a material, and place it at the origin
+        Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+        floor->setMaterialName("Examples/Rockwall");
+        floor->setCastShadows(false);
+        mSceneMgr->getRootSceneNode()->attachObject(floor);
+*/
 }
+
+
 
 bool ApplicationBreslin::runGraphics()
 {
@@ -201,63 +198,40 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		GUI
 **********************************/
 
-//PASSWORD
-void ApplicationBreslin::createPasswordScreen()
-{
-        mLabelPassword     = getTrayManager()->createLabel(OgreBites::TL_CENTER, "mLabelPassword", "Password:");
-        mLabelPasswordEdit = getTrayManager()->createLabel(OgreBites::TL_CENTER, "mLabelPasswordEdit", "");
-
-        mButtonExit      = getTrayManager()->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
-}
-
-void ApplicationBreslin::showPasswordScreen()
-{
-        getTrayManager()->moveWidgetToTray(mLabelPassword,OgreBites::TL_CENTER);
-        getTrayManager()->moveWidgetToTray(mLabelPasswordEdit,OgreBites::TL_CENTER);
-
-        getTrayManager()->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
-
-        mLabelPassword->show();
-        mLabelPasswordEdit->show();
-
-        mButtonExit->show();
-
-        getTrayManager()->showCursor();
-}
-
-void ApplicationBreslin::hidePasswordScreen()
-{
-        mLabelPassword->hide();
-        mLabelPasswordEdit->hide();
-
-        mButtonExit->hide();
-}
-
-//MAIN
 void ApplicationBreslin::createMainScreen()
 {
-	LogString("create Main buttons");
-	mButtonGame = getTrayManager()->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
-	mButtonExit = getTrayManager()->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+	LogString("create buttons");
+	mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
+	mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
+	mButtonTagAll = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTagAll", "Join TagAll");
+	mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
 void ApplicationBreslin::showMainScreen()
 {
 
-	getTrayManager()->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
-	getTrayManager()->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonTagAll,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
 	mButtonGame->show();
+	mButtonTag->show();	
+	mButtonTagAll->show();	
 	mButtonExit->show();
 	
-	getTrayManager()->showCursor();
+	mTrayMgr->showCursor();
 }
 
 void ApplicationBreslin::hideMainScreen()
 {
 	mButtonGame->hide();
+	mButtonTag->hide();	
+	mButtonTagAll->hide();	
 	mButtonExit->hide();
 }
+
+
 
 void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 {
@@ -266,7 +240,7 @@ void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 
 bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 {
-	if (getTrayManager()->injectMouseMove(arg))
+	if (mTrayMgr->injectMouseMove(arg))
 	{
 		return true;
 	}
@@ -275,29 +249,5 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 		mCameraMan->injectMouseMove(arg);
 	}
     return true;
-}
-
-
-/*************************************************
-*
-*   OGRE_SPECIFIC
-*
-**************************************************
-
-
-
-/***************************************
-*                       INPUT
-******************************************/
-bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
-{
-	//injectKeyPress to current State???
-	if ( mStateMachine->getCurrentState()->getEditString()->injectKeyPress(arg) == false) 	
-	{
-	
-	}
-	else
-	{	
-	}
 }
 

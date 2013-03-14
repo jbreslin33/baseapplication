@@ -14,7 +14,6 @@ initialize: function(serverIP, serverPort)
 
 	//network
 	this.mNetwork = new Network(this,serverIP,serverPort);
-	this.sendConnect();
         
 	//initilize
         this.mSetup = false;
@@ -228,6 +227,19 @@ showMainScreen: function()
 {
 	this.mButtonGame.style.display="block";
 	this.mButtonExit.style.display="block";
+/*
+     mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mButtonTagAll,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
+        
+        mButtonGame->show();
+        mButtonTag->show();
+        mButtonTagAll->show();
+        mButtonExit->show();
+
+        mTrayMgr->showCursor();
+*/
 },
 
 hideMainScreen: function()

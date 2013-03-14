@@ -47,11 +47,6 @@ Client::Client(Server* server, struct sockaddr *address)
 
 	//register this client with server
 	mServer->addClient(this);
-
-	//login
-	mLoggedIn = false;
-	
-	LogString("create c++/java client");
 }
 
 //server side client constructor, many instances will be made, one for each client connected.
@@ -73,8 +68,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 
 	//register this client with server
 	mServer->addClient(this);
-
-	LogString("create browser client");
 }
 
 Client::~Client()

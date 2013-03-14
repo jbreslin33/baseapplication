@@ -15,7 +15,6 @@ class Game;
 class Network;
 class StateMachine;
 class State;
-class EditString;
 
 class ApplicationBreslin : public BaseApplication
 {
@@ -35,8 +34,6 @@ StateMachine* mStateMachine;
 
 State* mApplicationGlobal;
 State* mApplicationInitialize;
-State* mApplicationUsername;
-State* mApplicationPassword;
 State* mApplicationMain;
 State* mApplicationPlay;
 
@@ -44,8 +41,6 @@ State* mApplicationPlay;
 static const char mMessageServerExit = 3;
 static const char mMessageConnect     = -101;
 static const char mMessageDisconnect  = -102;
-
-static const char mMessageLogin = -107;
 
 //Network
 Network*     mNetwork;
@@ -58,34 +53,17 @@ bool mSetup;
 bool mPlayingGame;
 bool mFake;
 
-/*****GUI ********************/
-
-//button 
+//gui
 OgreBites::Button* mButtonHit;
-
-//exit
 OgreBites::Button* mButtonExit;
-
-//game
 OgreBites::Button* mButtonGame;
-
-//login
-
-OgreBites::Label* mLabelPassword;
-OgreBites::Label* mLabelPasswordEdit;
+OgreBites::Button* mButtonTag;
+OgreBites::Button* mButtonTagAll;
 
 private:
 
 //time
 float mRenderTime;
-
-public:
-//input
-EditString* mEditString;
-
-//login
-std::string mUsername;
-std::string mPassword;
 
 /***************************************
 *			          METHODS
@@ -102,13 +80,7 @@ float getRenderTime();
 //scene
 Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 
-void createTrayManager();
-
 //gui
-void createPasswordScreen();
-void showPasswordScreen();
-void hidePasswordScreen();
-
 void createMainScreen();
 void showMainScreen();
 void hideMainScreen();
@@ -119,8 +91,7 @@ OIS::Keyboard* getKeyboard() { return mKeyboard; }
 //private:
 
 //connect
-void sendConnect();
-void sendLogin  ();
+void sendConnect   ();
 
 //shutdown
 void shutdown();
@@ -140,10 +111,8 @@ virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);
 //input
 void buttonHit             (OgreBites::Button *button);
 bool mouseMoved            ( const OIS::MouseEvent &arg );
-public:
-virtual bool keyPressed( const OIS::KeyEvent &arg );
 
-EditString* getEditString() { return mEditString; }
+
 
 };
 

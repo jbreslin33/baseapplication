@@ -44,25 +44,16 @@ Server::~Server()
 	mNetwork->dreamSock_CloseSocket(mNetwork->mSocket);
 }
 
-/*
-for now on createClient should only create a client no shape? could we have clients not playing a game? sure why not. therefore
-do not create and assign shapes unless the client is 
-1: connected
-2: logged in
-3: joined a game.
-*/
-
 //for c++ and java
 void Server::createClient(struct sockaddr *address)
 {
 	Client* client = new Client(this, address);
-/*
+
 	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
 	client->sendAllShapes();
 	
 	//create the shape for this client at that point we send this shape to all clients	
 	client->createShape();
-*/
 }
 
 //browser
@@ -72,7 +63,6 @@ void Server::createClient(struct sockaddr * address, int clientID)
 
 	//give this client all current shapes	
 	//for this first client this should no times for the 2nd once.
-/*
 	client->sendAllShapesBrowser();
 
 	//create the shape for this client at that point we send this shape to all clients	
@@ -80,7 +70,7 @@ void Server::createClient(struct sockaddr * address, int clientID)
 	{	
 		client->createShape();
 	}
-*/	
+	
 	// that's that as we cannot communicate back to the browser from here..unless this is where we change db or whatever medium we will use to communicate with browser.
 }
 
@@ -115,7 +105,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	mes->BeginReading();
 
 	int type = mes->ReadByte();
-	LogString("type:%d",type);
 	
 	if (type == mConnect)
 	{
@@ -135,18 +124,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		int clientID = mes->ReadByte();
 
 		createClient(address,clientID);
-
-	}
-
-	else if (type == mLogin)
-	{
-		LogString("login detected");
-
-	}
-
-	else if (type == mLoginBrowser)
-	{
-		int clientID = mes->ReadByte();
 
 	}
 
@@ -353,7 +330,6 @@ void Server::readPackets()
 			mes.BeginReading();
 
 			type = mes.ReadByte();
-			LogString("readPackets type:%d",type);
 
 			// Check the type of the message
 			switch(type)

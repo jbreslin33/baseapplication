@@ -7,9 +7,6 @@
 //application
 #include "../applicationBreslin.h"
 
-//state machine
-#include "../../../statemachine/stateMachine.h"
-
 //game
 #include "../../game/game.h"
 
@@ -36,20 +33,6 @@ void ApplicationGlobal::execute()
 	{
 		//graphics
 		mApplicationBreslin->runGraphics();
-
-		if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
-        	{
-                	mApplicationBreslin->mStateMachine->changeState(NULL);
-                	mApplicationBreslin->mStateMachine->setGlobalState(NULL);
-
-                	mApplicationBreslin->mButtonHit = NULL;
-
-                	mApplicationBreslin->shutdown();
-
-                	mApplicationBreslin->mShutDown = true;
-
-                	delete mApplicationBreslin;
-        	}
 	}
 }
 void ApplicationGlobal::exit()
