@@ -53,6 +53,7 @@ Game* mGame;
 bool mSetup;
 bool mPlayingGame;
 bool mFake;
+bool mConnectSent;
 
 //gui
 OgreBites::Button* mButtonHit;

@@ -44,6 +44,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mSetup = false;
 	mPlayingGame = false;
 	mFake = true;
+	mConnectSent = false;
 
 	//time
 	mRenderTime = 0.0f;
@@ -104,6 +105,14 @@ void ApplicationBreslin::processUpdate()
 		
 		mFake = false;
 	}
+	
+	//did you sendConnect if not do so
+	if (!mConnectSent)
+	{
+		mConnectSent = true; 
+		sendConnect();
+	}
+
 }
 
 /*********************************
