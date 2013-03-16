@@ -36,6 +36,8 @@ Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 	mNetwork = new Network(localIP, port);
 
 	init = true;
+
+	readDB();
 }
 
 Server::~Server()
@@ -345,14 +347,13 @@ void Server::readDB()
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
         res = PQexec(conn,
-       "select * from users");
+       "select * from schools");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
                 //exit(0);
         }
         rec_count = PQntuples(res);
-/*
         printf("We received %d records.\n", rec_count);
         puts("==========================");
         for (row=0; row<rec_count; row++)
@@ -365,7 +366,6 @@ void Server::readDB()
         }
 
         puts("==========================");
-*/
         PQclear(res);
 
         PQfinish(conn);
