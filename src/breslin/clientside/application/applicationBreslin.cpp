@@ -45,6 +45,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mPlayingGame = false;
 	mFake = true;
 	mConnectSent = false;
+	mButtonHit = NULL;
 
 	//time
 	mRenderTime = 0.0f;
@@ -88,9 +89,8 @@ void ApplicationBreslin::processUpdate()
 	if (mFake == true)
 	{
 		//after first update let's fake going to game with no sendCnnect...
-		mButtonHit = NULL;
-        	//	sendConnect();
-       		mGame = new Game(this);
+       		
+		mGame = new Game(this);
 
 		hideMainScreen();
 
