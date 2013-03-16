@@ -75,6 +75,9 @@ public:
 	static const int mJoinGame               = -107;
 	static const int mJoinGameBrowser        = -117;
 
+	//quit game
+	static const int mQuitGame               = -108;
+	static const int mQuitGameBrowser        = -118;
 
 	//disconnect	
 	static const int mDisconnect             = -102;
@@ -107,6 +110,7 @@ public:
 	void readPackets();
 	void parsePacket(Message *mes, struct sockaddr *address);
 	void checkClientQuit(int type, Client* client, Message* mes);
+	void checkClientQuitGame(int type, Client* client, Message* mes);
 	
 	//port
 	int	getPort() { return port; }

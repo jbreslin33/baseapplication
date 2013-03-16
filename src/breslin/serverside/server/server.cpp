@@ -131,7 +131,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	else if (type == mJoinGame)
 	{
-		LogString("JOIN GAME!!!!!!!!!!!");
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
@@ -150,6 +149,25 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 
 	}
+	
+	else if (type == mQuitGame)
+	{
+		// Find the correct client by comparing addresses
+		for (unsigned int i = 0; i < mClientVector.size(); i++)
+		{
+			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+			{
+				client = mClientVector.at(i);
+				checkClientQuitGame(type,client,mes);
+			}
+		}
+	}
+
+	else if (type == mQuitGameBrowser)
+	{
+
+	}
+
 
 	else if (type == mMessageFrame || type == mDisconnect)
 	{
@@ -180,6 +198,28 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	} 
 }
 
+void Server::checkClientQuitGame(int type, Client* client, Message* mes)
+{
+	if (type == mQuitGame || type == mQuitGameBrowser)
+	{
+		if (client->mShape)
+		{
+			client->mShape->remove();
+		}
+               	LogString("LIBRARY: Server: a client disconnected");
+                return;
+	}
+	/*
+	client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
+
+       	// Wait for one message before setting state to connected
+       	if(client->mConnectionState == DREAMSOCK_CONNECTING)
+       	{
+       		client->mConnectionState = DREAMSOCK_CONNECTED;
+	}
+*/
+}
+
 void Server::checkClientQuit(int type, Client* client, Message* mes)
 {
 	if (type == mDisconnect || type == mDisconnectBrowser)
@@ -195,7 +235,6 @@ void Server::checkClientQuit(int type, Client* client, Message* mes)
        	{
        		client->mConnectionState = DREAMSOCK_CONNECTED;
 	}
-
 }
 
 int Server::checkForTimeout()

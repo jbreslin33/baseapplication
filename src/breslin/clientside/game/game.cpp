@@ -73,9 +73,17 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 	createScene();
 
 }
+/*
 
+
+*/
 Game::~Game()
 {
+	//send quit game
+        ByteBuffer* byteBuffer = new ByteBuffer();
+        byteBuffer->WriteByte(mMessageQuitGame);
+        mApplicationBreslin->mNetwork->send(byteBuffer);
+
 	LogString("Destructor for Game");
 	if (mShapeVector)
 	{

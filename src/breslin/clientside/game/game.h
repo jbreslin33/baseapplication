@@ -61,6 +61,8 @@ static const char mMessageFrame = 1;
 static const char mMessageAddShape    = -103;
 static const char mMessageRemoveShape = -104;
 
+static const char mMessageQuitGame = -108;
+
 protected:
 
 //applicationBreslin

@@ -48,7 +48,7 @@ void ApplicationPlay::execute()
 
 void ApplicationPlay::exit()
 {
-	mApplicationBreslin->shutdown();
+//	mApplicationBreslin->shutdown();
 
 	mApplicationBreslin->getSceneManager()->destroyAllEntities();
 	delete mApplicationBreslin->mGame;
