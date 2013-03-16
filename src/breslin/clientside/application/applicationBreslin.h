@@ -58,7 +58,6 @@ bool mConnectSent;
 //gui
 OgreBites::Button* mButtonHit;
 OgreBites::Button* mButtonExit;
-OgreBites::Button* mButtonConnect;
 OgreBites::Button* mButtonJoinGame;
 
 private:

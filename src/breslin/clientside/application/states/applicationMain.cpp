@@ -36,14 +36,6 @@ void ApplicationMain::enter()
 
 void ApplicationMain::execute()
 {
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonConnect)
-	{
-		LogString("CONNNNNNNNNect");
-		mApplicationBreslin->mButtonHit = NULL;
-
-		mApplicationBreslin->sendConnect();
-	}
-
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGame)
 	{
 		LogString("button joing ame.....");

@@ -88,8 +88,6 @@ void ApplicationBreslin::processUpdate()
 
 	if (mFake == true)
 	{
-		//after first update let's fake going to game with no sendCnnect...
-       		
 		mGame = new Game(this);
 
 		hideMainScreen();
@@ -217,7 +215,6 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 void ApplicationBreslin::createMainScreen()
 {
 	LogString("create buttons");
-	mButtonConnect  = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonConnect", "Connect");
 	mButtonJoinGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
 	mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
@@ -225,11 +222,9 @@ void ApplicationBreslin::createMainScreen()
 void ApplicationBreslin::showMainScreen()
 {
 
-	mTrayMgr->moveWidgetToTray(mButtonConnect,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonJoinGame,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
-	mButtonConnect->show();
 	mButtonJoinGame->show();
 	mButtonExit->show();
 	
@@ -238,7 +233,6 @@ void ApplicationBreslin::showMainScreen()
 
 void ApplicationBreslin::hideMainScreen()
 {
-	mButtonConnect->hide();
 	mButtonJoinGame->hide();
 	mButtonExit->hide();
 }
