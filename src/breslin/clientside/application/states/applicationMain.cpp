@@ -42,8 +42,6 @@ void ApplicationMain::execute()
 		mApplicationBreslin->mButtonHit = NULL;
 
 		mApplicationBreslin->sendConnect();
-		
-
 	}
 
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGame)
@@ -51,6 +49,8 @@ void ApplicationMain::execute()
 		LogString("button joing ame.....");
 		mApplicationBreslin->mButtonHit = NULL;
 
+		mApplicationBreslin->sendJoinGame();
+		
 		mApplicationBreslin->mGame = new Game(mApplicationBreslin);
 
 		mApplicationBreslin->hideMainScreen();

@@ -130,6 +130,13 @@ void ApplicationBreslin::sendConnect()
 	mNetwork->send(byteBuffer);
 }
 
+void ApplicationBreslin::sendJoinGame()
+{
+	ByteBuffer* byteBuffer = new ByteBuffer();
+	byteBuffer->WriteByte(mMessageJoinGame);
+	mNetwork->send(byteBuffer);
+}
+
 
 
 /*********************************
