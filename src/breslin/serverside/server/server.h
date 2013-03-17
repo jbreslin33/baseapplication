@@ -4,6 +4,7 @@
 #include "../message/message.h"
 
 #include <vector>
+#include <string>
 
 // Connection states
 #define DREAMSOCK_CONNECTING			0
@@ -107,6 +108,7 @@ public:
 	int	 getPacket(char *data, struct sockaddr *from);
 	void sendPackets();
 	void readDB();
+	std::string getSchools();
 	void readPackets();
 	void parsePacket(Message *mes, struct sockaddr *address);
 	void checkClientQuit(int type, Client* client, Message* mes);

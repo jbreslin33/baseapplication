@@ -372,6 +372,43 @@ void Server::readDB()
 
 }
 
+std::string Server::getSchools()
+{
+	std::string schools;
+
+ 	PGconn          *conn;
+        PGresult        *res;
+        int             rec_count;
+        int             row;
+        int             col;
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+        res = PQexec(conn,
+       "select * from schools");
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                puts("We did not get any data!");
+        }
+        rec_count = PQntuples(res);
+        printf("We received %d records.\n", rec_count);
+        puts("==========================");
+        for (row=0; row<rec_count; row++)
+        {
+                for (col=0; col; col++)
+                {
+                        printf("%s\t", PQgetvalue(res, row, col));
+                        schools.append(PQgetvalue(res, row, col));
+				
+                }
+                puts("");
+        }
+
+        puts("==========================");
+        PQclear(res);
+
+        PQfinish(conn);
+	
+}
+
 void Server::readPackets()
 {
 	char data[1400];
