@@ -92,6 +92,9 @@ public:
 	Server(Game* serverSideGame,const char *localIP, int serverPort);
 	~Server();
 
+	//schools
+	std::string schoolArray[]; 
+
 	//timeout
 	int  checkForTimeout();
 

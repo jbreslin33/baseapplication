@@ -37,7 +37,7 @@ Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 
 	init = true;
 
-	readDB();
+	getSchools();
 }
 
 Server::~Server()
@@ -340,6 +340,7 @@ void Server::sendPackets()
 
 void Server::readDB()
 {
+
         PGconn          *conn;
         PGresult        *res;
         int             rec_count;
@@ -369,14 +370,12 @@ void Server::readDB()
         PQclear(res);
 
         PQfinish(conn);
-
 }
 
 std::string Server::getSchools()
 {
-	std::string schools;
-
- 	PGconn          *conn;
+	
+        PGconn          *conn;
         PGresult        *res;
         int             rec_count;
         int             row;
@@ -387,18 +386,16 @@ std::string Server::getSchools()
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
+                //exit(0);
         }
         rec_count = PQntuples(res);
         printf("We received %d records.\n", rec_count);
         puts("==========================");
         for (row=0; row<rec_count; row++)
         {
-                for (col=0; col; col++)
-                {
-                        printf("%s\t", PQgetvalue(res, row, col));
-                        schools.append(PQgetvalue(res, row, col));
+                printf("%s\t", PQgetvalue(res, row, 1));
+                //f("%s\t", PQgetvalue(res, row, col));
 				
-                }
                 puts("");
         }
 
@@ -406,7 +403,6 @@ std::string Server::getSchools()
         PQclear(res);
 
         PQfinish(conn);
-	
 }
 
 void Server::readPackets()
