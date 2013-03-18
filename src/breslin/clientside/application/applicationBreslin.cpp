@@ -161,21 +161,26 @@ void ApplicationBreslin::checkForByteBuffer()
                 {
                 	case mAddSchool:
                               	LogString("adding school!!!!!!!!!FFFFFF");
-				int length = byteBuffer->ReadByte();
-				LogString("length of school:%d",length);
 				
+				int length = byteBuffer->ReadByte();
+				
+				std::string school; 
+				char charArray[length];
+
 				for (int i = 0; i < length; i++)
 				{
-					int b =  byteBuffer->ReadByte(); 
-				
-					char c = b;
-	
-					LogString("char:%c",c);	
-
+					char c =  byteBuffer->ReadByte(); 
+					charArray[i] = c;	
 				}			
+			
+				//now print out string
+				school = charArray;				
+		
+				LogString("school:%c",school[0]);
 
 				break;
 		}
+	
 
 
 		//pass on to game if there is one....
