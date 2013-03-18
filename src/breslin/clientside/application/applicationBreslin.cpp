@@ -163,6 +163,14 @@ void ApplicationBreslin::checkForByteBuffer()
                               	LogString("adding school!!!!!!!!!FFFFFF");
 				int length = byteBuffer->ReadByte();
 				LogString("length of school:%d",length);
+				
+				for (int i = 0; i < length; i++)
+				{
+				//	char asciiChar = static_cast<char>(asciiVal);
+					LogString("char:%c",byteBuffer->ReadByte());	
+
+				}			
+
 				break;
 		}
 
