@@ -261,6 +261,8 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 void ApplicationBreslin::createMainScreen()
 {
 	LogString("create buttons");
+ 	mSelectMenuSchool = mTrayMgr->createThickSelectMenu(TL_CENTER, "mSelectMenuSchool", "Select School", 120, 10);
+
 	mButtonJoinGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
 	mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }

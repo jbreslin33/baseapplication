@@ -57,6 +57,7 @@ bool mFake;
 bool mConnectSent;
 
 //gui
+OgreBites::SelectMenu* mSelectMenuSchool;
 OgreBites::Button* mButtonHit;
 OgreBites::Button* mButtonExit;
 OgreBites::Button* mButtonJoinGame;
