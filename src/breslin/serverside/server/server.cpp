@@ -397,6 +397,8 @@ std::string Server::getSchools()
                 //f("%s\t", PQgetvalue(res, row, col));
 		const char* s = PQgetvalue(res, row, 1);  
 		std::string tempSchool(s);
+		int size = tempSchool.size();
+		LogString("size:%d",size);
 	//	mSchoolArray[row] = tempSchool; 		
 		
 	/*	
