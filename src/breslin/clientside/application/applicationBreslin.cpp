@@ -166,8 +166,11 @@ void ApplicationBreslin::checkForByteBuffer()
 				
 				for (int i = 0; i < length; i++)
 				{
-				//	char asciiChar = static_cast<char>(asciiVal);
-					LogString("char:%c",byteBuffer->ReadByte());	
+					int b =  byteBuffer->ReadByte(); 
+				
+					char c = b;
+	
+					LogString("char:%c",c);	
 
 				}			
 
