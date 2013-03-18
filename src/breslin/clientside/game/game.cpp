@@ -246,8 +246,6 @@ void Game::checkForByteBuffer()
 
 void Game::checkByteBuffer(ByteBuffer* byteBuffer)
 {
-	LogString("in checkByteBuffer game");	
-	
 	byteBuffer->BeginReading();
 
         int type = byteBuffer->ReadByte();

@@ -161,6 +161,8 @@ void ApplicationBreslin::checkForByteBuffer()
                 {
                 	case mAddSchool:
                               	LogString("adding school!!!!!!!!!FFFFFF");
+				int length = byteBuffer->ReadByte();
+				LogString("length of school:%d",length);
 				break;
 		}
 
