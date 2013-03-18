@@ -93,7 +93,7 @@ public:
 	~Server();
 
 	//schools
-	std::string schoolArray[]; 
+	std::string mSchoolArray[]; 
 
 	//timeout
 	int  checkForTimeout();

@@ -393,8 +393,17 @@ std::string Server::getSchools()
         puts("==========================");
         for (row=0; row<rec_count; row++)
         {
-                printf("%s\t", PQgetvalue(res, row, 1));
+                //printf("%s\t", PQgetvalue(res, row, 1));
                 //f("%s\t", PQgetvalue(res, row, col));
+		const char* s = PQgetvalue(res, row, 1);  
+		std::string tempSchool(s);
+	//	mSchoolArray[row] = tempSchool; 		
+		
+	/*	
+		printf("%s\t", school);
+		std::string schoolString = school;
+		printf("%s\t", schoolString);
+*/
 				
                 puts("");
         }
