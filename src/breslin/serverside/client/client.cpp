@@ -95,6 +95,29 @@ void Client::remove()
 	}
 }
 
+void Client::sendSchools()
+{
+        mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+
+        mServer->mMessage.WriteByte(mServer->mAddSchool); // type
+        
+	for (unsigned int i = 0; i < mServer->mSchoolVector.size(); i++)
+	{
+	
+		int size = mServer->mSchoolVector.at(i).size(); 
+		mServer->mMessage.WriteByte(size);
+		for (int b=0; b < size; b++)
+		{
+			mServer->mMessage.WriteByte(mServer->mSchoolVector.at(i).at(b));		
+		}
+	}
+
+	//send it
+	SendPacket(&mServer->mMessage);
+
+	
+}
+
 void Client::sendAllShapes()
 {
 	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
@@ -109,6 +132,8 @@ void Client::sendAllShapes()
 		}
 	}
 }
+
+
 
 void Client::sendQuestion()
 {

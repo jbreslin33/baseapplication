@@ -37,7 +37,7 @@ Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 
 	init = true;
 
-	getSchools();
+	getSchools();	
 }
 
 Server::~Server()
@@ -113,6 +113,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		//createClient(address);
 		Client* client = new Client(this, address);
 		LogString("connected c++ client!!!!!!!!!!!!");
+		
+		client->sendSchools();
 	}
 	
 	else if (type == mConnectNode)
@@ -120,7 +122,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		int clientID = mes->ReadByte();
 
 		createClient(address,-1);
-
 	}	
 
 	else if (type == mConnectBrowser)
@@ -374,6 +375,7 @@ void Server::readDB()
 
 std::string Server::getSchools()
 {
+
 	
         PGconn          *conn;
         PGresult        *res;
@@ -390,27 +392,14 @@ std::string Server::getSchools()
         }
         rec_count = PQntuples(res);
         printf("We received %d records.\n", rec_count);
-        puts("==========================");
         for (row=0; row<rec_count; row++)
         {
-                //printf("%s\t", PQgetvalue(res, row, 1));
-                //f("%s\t", PQgetvalue(res, row, col));
-		const char* s = PQgetvalue(res, row, 1);  
-		std::string tempSchool(s);
-		int size = tempSchool.size();
-		LogString("size:%d",size);
-	//	mSchoolArray[row] = tempSchool; 		
+		const char* c = PQgetvalue(res, row, 1);  
+		std::string school(c);
 		
-	/*	
-		printf("%s\t", school);
-		std::string schoolString = school;
-		printf("%s\t", schoolString);
-*/
-				
-                puts("");
+		mSchoolVector.push_back(school);
         }
 
-        puts("==========================");
         PQclear(res);
 
         PQfinish(conn);
@@ -476,7 +465,6 @@ void Server::readPackets()
                                 }
                                 break;
                         }
-
 		}
 	}
 	catch(...)

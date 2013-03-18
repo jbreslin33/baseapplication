@@ -29,6 +29,9 @@ ApplicationPlay::~ApplicationPlay()
 void ApplicationPlay::enter()
 {
 	LogString("STATE: ApplicationPlay");
+	LogString("create new Game");
+        mApplicationBreslin->mGame = new Game(mApplicationBreslin);
+
 }
 void ApplicationPlay::execute()
 {
@@ -51,7 +54,10 @@ void ApplicationPlay::exit()
 //	mApplicationBreslin->shutdown();
 
 	mApplicationBreslin->getSceneManager()->destroyAllEntities();
-	delete mApplicationBreslin->mGame;
+	mApplicationBreslin->mGame->quit();
+	mApplicationBreslin->mGame = NULL;
+	
+//	delete mApplicationBreslin->mGame;
 
 	mApplicationBreslin->showMainScreen();
 }

@@ -94,15 +94,29 @@ Game::~Game()
 		}
 	}
 
-//ShapeVector::~mShapeVector();
-//	ShapeGhostVector::VectormShapeGhostVector();
-
-
-	//delete scene
-	//delete mPointLight;		
 	mApplicationBreslin->mSceneMgr->destroyLight(mPointLight);
-		
 }
+
+void Game::quit()
+{
+ 	//send quit game
+        ByteBuffer* byteBuffer = new ByteBuffer();
+        byteBuffer->WriteByte(mMessageQuitGame);
+        mApplicationBreslin->mNetwork->send(byteBuffer);
+
+        LogString("Destructor for Game");
+        if (mShapeVector)
+        {
+                for (unsigned int i = 0; i < mShapeVector->size(); i++)
+                {
+                        delete mShapeVector->at(i);
+                        delete mShapeGhostVector->at(i);
+                }
+        }
+
+        mApplicationBreslin->mSceneMgr->destroyLight(mPointLight);
+}
+
 /*********************************
 		Update
 **********************************/
@@ -228,6 +242,33 @@ void Game::checkForByteBuffer()
                         break;
                 }
         }
+}
+
+void Game::checkByteBuffer(ByteBuffer* byteBuffer)
+{
+	LogString("in checkByteBuffer game");	
+	
+	byteBuffer->BeginReading();
+
+        int type = byteBuffer->ReadByte();
+
+        switch(type)
+        {
+        	case mMessageAddShape:
+                	addShape(byteBuffer);
+                        break;
+
+                case mMessageRemoveShape:
+                 	removeShape(byteBuffer);
+                        break;
+
+                case mMessageFrame:
+                       	if (!mApplicationBreslin->mNetwork->mIgnorePacket)
+			{
+                        	readServerTick(byteBuffer);
+                        }
+                        break;
+	}
 }
 
 void Game::readServerTick(ByteBuffer* byteBuffer)

@@ -88,7 +88,7 @@ void ApplicationBreslin::processUpdate()
 
 	if (mFake == true)
 	{
-		mGame = new Game(this);
+		//mGame = new Game(this);
 
 		hideMainScreen();
 
@@ -144,6 +144,34 @@ void ApplicationBreslin::sendJoinGame()
 	mNetwork->send(byteBuffer);
 }
 
+void ApplicationBreslin::checkForByteBuffer()
+{
+        int type = 0;
+
+        ByteBuffer* byteBuffer = new ByteBuffer();
+
+        while(mNetwork->checkForByteBuffer(byteBuffer))
+        {
+                byteBuffer->BeginReading();
+
+                type = byteBuffer->ReadByte();
+
+                
+		switch(type)
+                {
+                	case mAddSchool:
+                              	LogString("adding school!!!!!!!!!FFFFFF");
+				break;
+		}
+
+
+		//pass on to game if there is one....
+		if (mGame)
+		{
+			mGame->checkByteBuffer(byteBuffer);
+		}
+        }
+}
 
 
 /*********************************

@@ -31,6 +31,9 @@ void ApplicationGlobal::execute()
 {
 	if (mApplicationBreslin->mSetup)
 	{
+		//check network
+		mApplicationBreslin->checkForByteBuffer();
+
 		//graphics
 		mApplicationBreslin->runGraphics();
 	}

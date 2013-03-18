@@ -103,12 +103,15 @@ Ogre::Entity* mFloor;
 ***************************************/
 public:
 
+void quit();
+
 //update
 void processUpdate();
 
 //network
 void sendByteBuffer();
 void checkForByteBuffer();
+void checkByteBuffer(ByteBuffer* byteBuffer);
 
 //input
 void processInput();

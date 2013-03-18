@@ -79,6 +79,7 @@ public:
 	void remove();
 	void			SendPacket(Message *message);
 	void sendAllShapes();
+	void sendSchools();
 	void sendAllShapesBrowser();
 
 	//questions

@@ -84,6 +84,9 @@ public:
 	static const int mDisconnect             = -102;
 	static const int mDisconnectBrowser      = -112;
 
+	//add school
+	static const int mAddSchool              = -109;
+
 	//add shape	
 	static const int mAddShape    	         = -103;
 	static const int mRemoveShape 	         = -104;
@@ -93,7 +96,7 @@ public:
 	~Server();
 
 	//schools
-	std::string mSchoolArray[]; 
+	std::vector<std::string> mSchoolVector;  
 
 	//timeout
 	int  checkForTimeout();

@@ -40,6 +40,7 @@ State* mApplicationPlay;
 //constants
 static const char mMessageServerExit = 3;
 static const char mMessageConnect     = -101;
+static const char mAddSchool          = -109;
 static const char mMessageJoinGame    = -107;
 static const char mMessageDisconnect  = -102;
 
@@ -88,7 +89,8 @@ void hideMainScreen();
 //input
 OIS::Keyboard* getKeyboard() { return mKeyboard; }
 
-//private:
+/********* NETWORK *******/
+void checkForByteBuffer();
 
 //connect
 void sendConnect   ();

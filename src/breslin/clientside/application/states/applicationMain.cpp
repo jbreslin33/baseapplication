@@ -43,8 +43,6 @@ void ApplicationMain::execute()
 
 		mApplicationBreslin->sendJoinGame();
 		
-		mApplicationBreslin->mGame = new Game(mApplicationBreslin);
-
 		mApplicationBreslin->hideMainScreen();
 
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
