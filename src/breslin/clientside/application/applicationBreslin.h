@@ -71,6 +71,10 @@ OgreBites::Label*      mLabelFocus;
 EditString*            mEditStringUsername;
 EditString*            mEditStringPassword;
 
+//login
+std::string mStringUsername;
+std::string mStringPassword;
+
 private:
 
 //time

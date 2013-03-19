@@ -156,6 +156,22 @@ void ApplicationBreslin::sendLogin()
 {
 	ByteBuffer* byteBuffer = new ByteBuffer();
 	byteBuffer->WriteByte(mMessageLogin);
+
+	mStringUsername = mEditStringUsername->getText();	
+	byteBuffer->WriteByte(mStringUsername.length());
+
+		
+	
+
+
+
+
+	mStringPassword = mEditStringPassword->getText();	
+	
+	
+		
+
+
 	mNetwork->send(byteBuffer);
 }
 

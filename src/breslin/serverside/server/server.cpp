@@ -136,7 +136,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/*** LOGIN ***/
 	else if (type == mMessageLogin)
 	{
-		LogString("login c++");
+		int lengthOfUsername = mes->ReadByte();
+		LogString("lengthOfUsername:%d",lengthOfUsername);
 	}
 	else if (type == mMessageLoginBrowser)
 	{
