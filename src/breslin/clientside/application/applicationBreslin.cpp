@@ -67,6 +67,11 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mStateMachine->setGlobalState (mApplicationGlobal);
 	mStateMachine->changeState(mApplicationInitialize);
         mStateMachine->setPreviousState(mApplicationInitialize);
+
+	//login stuff
+	mEditStringUsername = new EditString();
+	mEditStringPassword = new EditString();
+
 }
 
 ApplicationBreslin::~ApplicationBreslin()
@@ -274,7 +279,6 @@ void ApplicationBreslin::createMainScreen()
 
 void ApplicationBreslin::showMainScreen()
 {
-
 	mTrayMgr->moveWidgetToTray(mSelectMenuSchool,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mLabelPassword,OgreBites::TL_CENTER);
@@ -332,6 +336,24 @@ void ApplicationBreslin::itemSelected (OgreBites::SelectMenu* menu)
 void ApplicationBreslin::labelHit(OgreBites::Label* label)
 {
 	LogString("label hit");
+	
+	mLabelFocus = label;
 }
 
+bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
+{
+        //injectKeyPress to current State???
+	if (mLabelFocus == mLabelUsername)
+	{
+        	mEditStringUsername->injectKeyPress(arg);
+	}
+	if (mLabelFocus == mLabelPassword)
+	{
+        	mEditStringPassword->injectKeyPress(arg);
+	}
+
+   	mLabelUsername->setCaption(mEditStringUsername->getText());
+   	mLabelPassword->setCaption(mEditStringPassword->getText());
+
+}
 

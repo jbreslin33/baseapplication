@@ -36,21 +36,43 @@ void ApplicationMain::enter()
 
 void ApplicationMain::execute()
 {
+	/**********LOGIN*************/
+        //mLabelUsernameEdit->setCaption(getEditString()->getText());
+
+
+
+
+/*
+	//check for mFinal
+        if (mApplicationBreslin->mEditStringUsername()->getIsFinal())
+        {
+                //set username string
+                mUsername = getEditString()->getText();
+
+                mApplicationBreslin->sendLogin();
+
+                //change state to password state
+                mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPassword);
+        }
+
+        //check for input keys ..these will go to username and password for now
+        mLabelUsernameEdit->setCaption(getEditString()->getText());
+*/
+
+	/************JOIN GAME**********/
+
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGame)
 	{
-		LogString("button joing ame.....");
 		mApplicationBreslin->mButtonHit = NULL;
 
 		mApplicationBreslin->sendJoinGame();
 		
-		mApplicationBreslin->hideMainScreen();
-
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}
 
+	/************JOIN GAME**********/
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
-
 		mApplicationBreslin->mStateMachine->changeState(NULL);
 		mApplicationBreslin->mStateMachine->setGlobalState(NULL);
 
@@ -66,5 +88,5 @@ void ApplicationMain::execute()
 
 void ApplicationMain::exit()
 {
-
+	mApplicationBreslin->hideMainScreen();
 }

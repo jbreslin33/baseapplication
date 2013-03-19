@@ -65,6 +65,10 @@ OgreBites::Button*     mButtonHit;
 OgreBites::Button*     mButtonExit;
 OgreBites::Button*     mButtonJoinGame;
 
+OgreBites::Label*      mLabelFocus;
+EditString*            mEditStringUsername;
+EditString*            mEditStringPassword;
+
 private:
 
 //time
@@ -122,6 +126,7 @@ void buttonHit    (OgreBites::Button *button);
 bool mouseMoved   (const OIS::MouseEvent &arg );
 void itemSelected (OgreBites::SelectMenu* menu);
 void labelHit     (OgreBites::Label* label);
+bool keyPressed   (const OIS::KeyEvent &arg );
 
 };
 
