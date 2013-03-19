@@ -141,7 +141,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 		for (int i = 0; i < lengthOfUsername; i++)
 		{
-			LogString("char:%d",mes->ReadByte());
+			//char c = mes->ReadByte();
+			//client->mStringUsername.append(&c);
 		}
 	}
 	else if (type == mMessageLoginBrowser)
