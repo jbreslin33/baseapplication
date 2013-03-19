@@ -312,3 +312,7 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
     return true;
 }
 
+void ApplicationBreslin::itemSelected (OgreBites::SelectMenu* menu)
+{
+	LogString("selected menu");
+}
