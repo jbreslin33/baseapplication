@@ -271,9 +271,11 @@ void ApplicationBreslin::createMainScreen()
 void ApplicationBreslin::showMainScreen()
 {
 
+	mTrayMgr->moveWidgetToTray(mSelectMenuSchool,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonJoinGame,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
+	mSelectMenuSchool->show();
 	mButtonJoinGame->show();
 	mButtonExit->show();
 	
@@ -282,11 +284,15 @@ void ApplicationBreslin::showMainScreen()
 
 void ApplicationBreslin::hideMainScreen()
 {
+	mTrayMgr->removeWidgetFromTray(mSelectMenuSchool);	
+	mTrayMgr->removeWidgetFromTray(mButtonJoinGame);	
+	mTrayMgr->removeWidgetFromTray(mButtonExit);	
+
+	mSelectMenuSchool->hide();
 	mButtonJoinGame->hide();
 	mButtonExit->hide();
+
 }
-
-
 
 void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 {
