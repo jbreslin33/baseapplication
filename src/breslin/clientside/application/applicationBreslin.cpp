@@ -177,7 +177,8 @@ void ApplicationBreslin::checkForByteBuffer()
 				school = charArray;				
 		
 				LogString("school:%c",school[0]);
-
+		
+				mSelectMenuSchool->addItem(school);
 				break;
 		}
 	
