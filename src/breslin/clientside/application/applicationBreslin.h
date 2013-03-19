@@ -15,6 +15,7 @@ class Game;
 class Network;
 class StateMachine;
 class State;
+class EditString;
 
 class ApplicationBreslin : public BaseApplication
 {
@@ -58,9 +59,11 @@ bool mConnectSent;
 
 //gui
 OgreBites::SelectMenu* mSelectMenuSchool;
-OgreBites::Button* mButtonHit;
-OgreBites::Button* mButtonExit;
-OgreBites::Button* mButtonJoinGame;
+OgreBites::Label*      mLabelUsername;
+OgreBites::Label*      mLabelPassword;
+OgreBites::Button*     mButtonHit;
+OgreBites::Button*     mButtonExit;
+OgreBites::Button*     mButtonJoinGame;
 
 private:
 

@@ -22,6 +22,9 @@
 //game
 #include "../game/gameTag.h"
 
+//edit string
+#include "../io/editString.h"
+
 //state machine
 #include "../../statemachine/stateMachine.h"
 #include "states/applicationGlobal.h"
@@ -263,19 +266,24 @@ void ApplicationBreslin::createMainScreen()
 {
 	LogString("create buttons");
  	mSelectMenuSchool = mTrayMgr->createThickSelectMenu(OgreBites::TL_CENTER, "mSelectMenuSchool", "Select School", 120, 10);
-
-	mButtonJoinGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
-	mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+ 	mLabelUsername    = mTrayMgr->createLabel          (OgreBites::TL_CENTER, "mLabelUsername", "Username:", 180);
+ 	mLabelPassword    = mTrayMgr->createLabel          (OgreBites::TL_CENTER, "mLabelPassword", "Password:", 180);
+	mButtonJoinGame   = mTrayMgr->createButton         (OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
+	mButtonExit       = mTrayMgr->createButton         (OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
 void ApplicationBreslin::showMainScreen()
 {
 
 	mTrayMgr->moveWidgetToTray(mSelectMenuSchool,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mLabelPassword,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonJoinGame,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
 	mSelectMenuSchool->show();
+	mLabelUsername->show();
+	mLabelPassword->show();
 	mButtonJoinGame->show();
 	mButtonExit->show();
 	
@@ -285,10 +293,14 @@ void ApplicationBreslin::showMainScreen()
 void ApplicationBreslin::hideMainScreen()
 {
 	mTrayMgr->removeWidgetFromTray(mSelectMenuSchool);	
+	mTrayMgr->removeWidgetFromTray(mLabelUsername);	
+	mTrayMgr->removeWidgetFromTray(mLabelPassword);	
 	mTrayMgr->removeWidgetFromTray(mButtonJoinGame);	
 	mTrayMgr->removeWidgetFromTray(mButtonExit);	
 
 	mSelectMenuSchool->hide();
+	mLabelUsername->hide();
+	mLabelPassword->hide();
 	mButtonJoinGame->hide();
 	mButtonExit->hide();
 
