@@ -108,6 +108,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	int type = mes->ReadByte();
 	
+	/***** CONNECT ****/	
 	if (type == mConnect)
 	{
 		//createClient(address);
@@ -116,7 +117,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		
 		client->sendSchools();
 	}
-	
+
 	else if (type == mConnectNode)
 	{
 		int clientID = mes->ReadByte();
@@ -132,6 +133,18 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	}
 
+	/*** LOGIN ***/
+	else if (type == mMessageLogin)
+	{
+		LogString("login c++");
+	}
+	else if (type == mMessageLoginBrowser)
+	{
+
+	}
+
+
+	/*** JOIN GAME ***/
 	else if (type == mJoinGame)
 	{
 		for (unsigned int i = 0; i < mClientVector.size(); i++)

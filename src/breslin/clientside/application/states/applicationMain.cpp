@@ -37,27 +37,13 @@ void ApplicationMain::enter()
 void ApplicationMain::execute()
 {
 	/**********LOGIN*************/
-        //mLabelUsernameEdit->setCaption(getEditString()->getText());
+	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogin)
+	{
+		mApplicationBreslin->mButtonHit = NULL;
 
+		mApplicationBreslin->sendLogin();
+	}
 
-
-
-/*
-	//check for mFinal
-        if (mApplicationBreslin->mEditStringUsername()->getIsFinal())
-        {
-                //set username string
-                mUsername = getEditString()->getText();
-
-                mApplicationBreslin->sendLogin();
-
-                //change state to password state
-                mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPassword);
-        }
-
-        //check for input keys ..these will go to username and password for now
-        mLabelUsernameEdit->setCaption(getEditString()->getText());
-*/
 
 	/************JOIN GAME**********/
 
