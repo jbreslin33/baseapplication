@@ -121,7 +121,7 @@ virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);
 void buttonHit    (OgreBites::Button *button);
 bool mouseMoved   (const OIS::MouseEvent &arg );
 void itemSelected (OgreBites::SelectMenu* menu);
-
+void labelHit     (OgreBites::Label* label);
 
 };
 

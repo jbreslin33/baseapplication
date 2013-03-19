@@ -328,3 +328,10 @@ void ApplicationBreslin::itemSelected (OgreBites::SelectMenu* menu)
 {
 	LogString("selected menu");
 }
+
+void ApplicationBreslin::labelHit(OgreBites::Label* label)
+{
+	LogString("label hit");
+}
+
+
