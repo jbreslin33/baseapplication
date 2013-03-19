@@ -384,7 +384,7 @@ std::string Server::getSchools()
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
         res = PQexec(conn,
-       "select * from schools");
+       "select * from schools order by school_name");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
