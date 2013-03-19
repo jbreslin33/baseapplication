@@ -138,6 +138,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		int lengthOfUsername = mes->ReadByte();
 		LogString("lengthOfUsername:%d",lengthOfUsername);
+
+		for (int i = 0; i < lengthOfUsername; i++)
+		{
+			LogString("char:%d",mes->ReadByte());
+		}
 	}
 	else if (type == mMessageLoginBrowser)
 	{

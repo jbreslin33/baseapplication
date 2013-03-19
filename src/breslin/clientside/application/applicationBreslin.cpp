@@ -160,10 +160,10 @@ void ApplicationBreslin::sendLogin()
 	mStringUsername = mEditStringUsername->getText();	
 	byteBuffer->WriteByte(mStringUsername.length());
 
-		
-	
-
-
+	for (int i = 0; i < mStringUsername.length(); i++)
+	{
+		byteBuffer->WriteByte(mStringUsername.at(i));
+	} 
 
 
 	mStringPassword = mEditStringPassword->getText();	
