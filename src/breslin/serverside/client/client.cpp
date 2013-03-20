@@ -47,6 +47,8 @@ Client::Client(Server* server, struct sockaddr *address)
 
 	//register this client with server
 	mServer->addClient(this);
+
+	//login
 }
 
 //server side client constructor, many instances will be made, one for each client connected.

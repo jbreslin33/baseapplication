@@ -3,7 +3,7 @@
 
 #include "../message/message.h"
 
-#include <string>
+#include <vector>
 
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")
@@ -99,8 +99,7 @@ public:
 	Server* mServer;
 
 	//login
-	std::string mStringUsername;
-	std::string mStringPassword;
-
+ 	std::vector<char> mCharUsernameVector;  
+ 	std::vector<char> mCharPasswordVector;  
 };
 #endif

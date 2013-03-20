@@ -136,14 +136,18 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/*** LOGIN ***/
 	else if (type == mMessageLogin)
 	{
-		int lengthOfUsername = mes->ReadByte();
-		LogString("lengthOfUsername:%d",lengthOfUsername);
+		int length = mes->ReadByte();
+                std::string username;
+                char charArray[length];
 
-		for (int i = 0; i < lengthOfUsername; i++)
+		for (int i = 0; i < length; i++)
 		{
-			//char c = mes->ReadByte();
-			//client->mStringUsername.append(&c);
+                                        char c =  mes->ReadByte();
+                                        charArray[i] = c;
 		}
+                //now print out string
+                username = charArray;
+               	LogString("username:%c",username[0]);
 	}
 	else if (type == mMessageLoginBrowser)
 	{
