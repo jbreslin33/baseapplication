@@ -191,11 +191,8 @@ void ApplicationBreslin::checkForByteBuffer()
 		switch(type)
                 {
                 	case mAddSchool:
-                              	LogString("adding school!!!!!!!!!FFFFFF");
-				
 				int length = byteBuffer->ReadByte();
 				
-				std::string school; 
 				char charArray[length];
 
 				for (int i = 0; i < length; i++)
@@ -203,13 +200,10 @@ void ApplicationBreslin::checkForByteBuffer()
 					char c =  byteBuffer->ReadByte(); 
 					charArray[i] = c;	
 				}			
-			
-				//now print out string
-				school = charArray;				
-		
-				LogString("school:%c",school[0]);
-		
-				mSelectMenuSchool->addItem(school);
+				//std::string s = charArray;	
+				//LogString("school:%c",charArray);
+				std::string test = "hello";	
+				mSelectMenuSchool->addItem(test);
 				break;
 		}
 	
