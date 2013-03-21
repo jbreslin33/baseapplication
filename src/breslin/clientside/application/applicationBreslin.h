@@ -41,6 +41,7 @@ State* mApplicationPlay;
 static const char mMessageServerExit = 3;
 static const char mMessageConnect     = -101;
 static const char mAddSchool          = -109;
+static const char mMessageLogin       = -110;
 static const char mMessageJoinGame    = -107;
 static const char mMessageDisconnect  = -102;
 
@@ -59,8 +60,10 @@ bool mConnectSent;
 //gui
 OgreBites::SelectMenu* mSelectMenuSchool;
 OgreBites::Button* mButtonHit;
-OgreBites::Button* mButtonExit;
+
+OgreBites::Button* mButtonLogin;
 OgreBites::Button* mButtonJoinGame;
+OgreBites::Button* mButtonExit;
 
 private:
 
@@ -98,6 +101,9 @@ void sendConnect   ();
 
 //join game
 void sendJoinGame();
+
+//login 
+void sendLogin();
 
 //shutdown
 void shutdown();

@@ -137,6 +137,13 @@ void ApplicationBreslin::sendConnect()
 	mNetwork->send(byteBuffer);
 }
 
+void ApplicationBreslin::sendLogin()
+{
+	ByteBuffer* byteBuffer = new ByteBuffer();
+	byteBuffer->WriteByte(mMessageLogin);
+	mNetwork->send(byteBuffer);
+}
+
 void ApplicationBreslin::sendJoinGame()
 {
 	ByteBuffer* byteBuffer = new ByteBuffer();
@@ -264,6 +271,7 @@ void ApplicationBreslin::createMainScreen()
 	LogString("create buttons");
  	mSelectMenuSchool = mTrayMgr->createThickSelectMenu(OgreBites::TL_CENTER, "mSelectMenuSchool", "Select School", 120, 10);
 
+	mButtonLogin    = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonLogin", "Login");
 	mButtonJoinGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
 	mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
@@ -272,10 +280,12 @@ void ApplicationBreslin::showMainScreen()
 {
 
 	mTrayMgr->moveWidgetToTray(mSelectMenuSchool,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonLogin,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonJoinGame,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
 	mSelectMenuSchool->show();
+	mButtonLogin->show();
 	mButtonJoinGame->show();
 	mButtonExit->show();
 	
@@ -285,9 +295,12 @@ void ApplicationBreslin::showMainScreen()
 void ApplicationBreslin::hideMainScreen()
 {
 	mSelectMenuSchool->hide();
+	mButtonLogin->hide();
 	mButtonJoinGame->hide();
 	mButtonExit->hide();
+
 	mTrayMgr->removeWidgetFromTray(mSelectMenuSchool);
+	mTrayMgr->removeWidgetFromTray(mButtonLogin);
 	mTrayMgr->removeWidgetFromTray(mButtonJoinGame);
 	mTrayMgr->removeWidgetFromTray(mButtonExit);
 }

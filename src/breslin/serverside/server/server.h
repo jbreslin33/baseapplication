@@ -87,9 +87,13 @@ public:
 	//add school
 	static const int mAddSchool              = -109;
 
+	//login
+	static const int mLogin              	 = -110;
+	
 	//add shape	
 	static const int mAddShape    	         = -103;
 	static const int mRemoveShape 	         = -104;
+
 
 public:
 	Server(Game* serverSideGame,const char *localIP, int serverPort);

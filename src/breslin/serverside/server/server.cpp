@@ -108,6 +108,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	int type = mes->ReadByte();
 	
+	/***CONNECT TO SERVER********/
 	if (type == mConnect)
 	{
 		//createClient(address);
@@ -132,6 +133,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	}
 
+	/***JOIN GAME********/
 	else if (type == mJoinGame)
 	{
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
@@ -152,7 +154,15 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 
 	}
+
+	/******* LOGIN **********/
+	else if (type == mLogin)
+	{
+		LogString("LOGIN!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	}
+
 	
+	/***QUIT GAME********/
 	else if (type == mQuitGame)
 	{
 		// Find the correct client by comparing addresses
