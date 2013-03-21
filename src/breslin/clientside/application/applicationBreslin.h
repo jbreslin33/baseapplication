@@ -63,6 +63,7 @@ OgreBites::Button* mButtonHit;
 
 OgreBites::Label* mLabelUsername;
 OgreBites::Label* mLabelPassword;
+OgreBites::Label* mLabelFocus;
 
 OgreBites::Button* mButtonLogin;
 OgreBites::Button* mButtonJoinGame;

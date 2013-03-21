@@ -337,6 +337,9 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
-
+	if (mLabelFocus == mLabelUsername)
+	{
+		LogString("username hit");
+	}
 }
 
