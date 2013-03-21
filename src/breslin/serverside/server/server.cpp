@@ -108,7 +108,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	int type = mes->ReadByte();
 	
-	/***** CONNECT ****/	
 	if (type == mConnect)
 	{
 		//createClient(address);
@@ -117,7 +116,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		
 		client->sendSchools();
 	}
-
+	
 	else if (type == mConnectNode)
 	{
 		int clientID = mes->ReadByte();
@@ -133,29 +132,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	}
 
-	/*** LOGIN ***/
-	else if (type == mMessageLogin)
-	{
-		int length = mes->ReadByte();
-                std::string username;
-                char charArray[length];
-
-		for (int i = 0; i < length; i++)
-		{
-                                        char c =  mes->ReadByte();
-                                        charArray[i] = c;
-		}
-                //now print out string
-                username = charArray;
-               	LogString("username:%c",username[0]);
-	}
-	else if (type == mMessageLoginBrowser)
-	{
-
-	}
-
-
-	/*** JOIN GAME ***/
 	else if (type == mJoinGame)
 	{
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
@@ -408,7 +384,7 @@ std::string Server::getSchools()
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
         res = PQexec(conn,
-       "select * from schools order by school_name");
+       "select * from schools");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");

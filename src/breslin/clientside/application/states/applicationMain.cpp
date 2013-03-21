@@ -36,29 +36,21 @@ void ApplicationMain::enter()
 
 void ApplicationMain::execute()
 {
-	/**********LOGIN*************/
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogin)
-	{
-		mApplicationBreslin->mButtonHit = NULL;
-
-		mApplicationBreslin->sendLogin();
-	}
-
-
-	/************JOIN GAME**********/
-
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGame)
 	{
+		LogString("button joing ame.....");
 		mApplicationBreslin->mButtonHit = NULL;
 
 		mApplicationBreslin->sendJoinGame();
 		
+		mApplicationBreslin->hideMainScreen();
+
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}
 
-	/************JOIN GAME**********/
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
 	{
+
 		mApplicationBreslin->mStateMachine->changeState(NULL);
 		mApplicationBreslin->mStateMachine->setGlobalState(NULL);
 
@@ -74,5 +66,5 @@ void ApplicationMain::execute()
 
 void ApplicationMain::exit()
 {
-	mApplicationBreslin->hideMainScreen();
+
 }

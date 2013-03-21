@@ -22,9 +22,6 @@
 //game
 #include "../game/gameTag.h"
 
-//edit string
-#include "../io/editString.h"
-
 //state machine
 #include "../../statemachine/stateMachine.h"
 #include "states/applicationGlobal.h"
@@ -67,11 +64,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mStateMachine->setGlobalState (mApplicationGlobal);
 	mStateMachine->changeState(mApplicationInitialize);
         mStateMachine->setPreviousState(mApplicationInitialize);
-
-	//login stuff
-	mEditStringUsername = new EditString();
-	mEditStringPassword = new EditString();
-
 }
 
 ApplicationBreslin::~ApplicationBreslin()
@@ -152,29 +144,6 @@ void ApplicationBreslin::sendJoinGame()
 	mNetwork->send(byteBuffer);
 }
 
-void ApplicationBreslin::sendLogin()
-{
-	ByteBuffer* byteBuffer = new ByteBuffer();
-	byteBuffer->WriteByte(mMessageLogin);
-
-	mStringUsername = mEditStringUsername->getText();	
-	byteBuffer->WriteByte(mStringUsername.length());
-
-	for (int i = 0; i < mStringUsername.length(); i++)
-	{
-		byteBuffer->WriteByte(mStringUsername.at(i));
-	} 
-
-
-	mStringPassword = mEditStringPassword->getText();	
-	
-	
-		
-
-
-	mNetwork->send(byteBuffer);
-}
-
 void ApplicationBreslin::checkForByteBuffer()
 {
         int type = 0;
@@ -191,8 +160,11 @@ void ApplicationBreslin::checkForByteBuffer()
 		switch(type)
                 {
                 	case mAddSchool:
+                              	LogString("adding school!!!!!!!!!FFFFFF");
+				
 				int length = byteBuffer->ReadByte();
 				
+				std::string school; 
 				char charArray[length];
 
 				for (int i = 0; i < length; i++)
@@ -200,10 +172,13 @@ void ApplicationBreslin::checkForByteBuffer()
 					char c =  byteBuffer->ReadByte(); 
 					charArray[i] = c;	
 				}			
-				//std::string s = charArray;	
-				//LogString("school:%c",charArray);
-				std::string test = "hello";	
-				mSelectMenuSchool->addItem(test);
+			
+				//now print out string
+				school = charArray;				
+		
+				LogString("school:%c",school[0]);
+		
+				mSelectMenuSchool->addItem(school);
 				break;
 		}
 	
@@ -288,27 +263,18 @@ void ApplicationBreslin::createMainScreen()
 {
 	LogString("create buttons");
  	mSelectMenuSchool = mTrayMgr->createThickSelectMenu(OgreBites::TL_CENTER, "mSelectMenuSchool", "Select School", 120, 10);
- 	mLabelUsername    = mTrayMgr->createLabel          (OgreBites::TL_CENTER, "mLabelUsername", "Username:", 180);
- 	mLabelPassword    = mTrayMgr->createLabel          (OgreBites::TL_CENTER, "mLabelPassword", "Password:", 180);
-	mButtonLogin      = mTrayMgr->createButton         (OgreBites::TL_CENTER, "mButtonLogin", "Login");
-	mButtonJoinGame   = mTrayMgr->createButton         (OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
-	mButtonExit       = mTrayMgr->createButton         (OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+
+	mButtonJoinGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
+	mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 }
 
 void ApplicationBreslin::showMainScreen()
 {
-	mTrayMgr->moveWidgetToTray(mSelectMenuSchool,OgreBites::TL_CENTER);
-	mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
-	mTrayMgr->moveWidgetToTray(mLabelPassword,OgreBites::TL_CENTER);
-	mTrayMgr->moveWidgetToTray(mButtonLogin,OgreBites::TL_CENTER);
+
 	mTrayMgr->moveWidgetToTray(mButtonJoinGame,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
-	mSelectMenuSchool->show();
-	mLabelUsername->show();
-	mLabelPassword->show();
 	mButtonJoinGame->show();
-	mButtonLogin->show();
 	mButtonExit->show();
 	
 	mTrayMgr->showCursor();
@@ -316,21 +282,11 @@ void ApplicationBreslin::showMainScreen()
 
 void ApplicationBreslin::hideMainScreen()
 {
-	mTrayMgr->removeWidgetFromTray(mSelectMenuSchool);	
-	mTrayMgr->removeWidgetFromTray(mLabelUsername);	
-	mTrayMgr->removeWidgetFromTray(mLabelPassword);	
-	mTrayMgr->removeWidgetFromTray(mButtonLogin);	
-	mTrayMgr->removeWidgetFromTray(mButtonJoinGame);	
-	mTrayMgr->removeWidgetFromTray(mButtonExit);	
-
-	mSelectMenuSchool->hide();
-	mLabelUsername->hide();
-	mLabelPassword->hide();
-	mButtonLogin->hide();
 	mButtonJoinGame->hide();
 	mButtonExit->hide();
-
 }
+
+
 
 void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 {
@@ -348,34 +304,5 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 		mCameraMan->injectMouseMove(arg);
 	}
     return true;
-}
-
-void ApplicationBreslin::itemSelected (OgreBites::SelectMenu* menu)
-{
-	LogString("selected menu");
-}
-
-void ApplicationBreslin::labelHit(OgreBites::Label* label)
-{
-	LogString("label hit");
-	
-	mLabelFocus = label;
-}
-
-bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
-{
-        //injectKeyPress to current State???
-	if (mLabelFocus == mLabelUsername)
-	{
-        	mEditStringUsername->injectKeyPress(arg);
-	}
-	if (mLabelFocus == mLabelPassword)
-	{
-        	mEditStringPassword->injectKeyPress(arg);
-	}
-
-   	mLabelUsername->setCaption(mEditStringUsername->getText());
-   	mLabelPassword->setCaption(mEditStringPassword->getText());
-
 }
 

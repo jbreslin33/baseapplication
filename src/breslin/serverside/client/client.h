@@ -3,8 +3,6 @@
 
 #include "../message/message.h"
 
-#include <vector>
-
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")
 #pragma message ("Auto linking WinSock2 library")
@@ -94,12 +92,9 @@ public:
 	void			SetSocketAddress(struct sockaddr *address) { memcpy(&mMyaddress, address, sizeof(struct sockaddr)); }
 
 
-    	Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the clients personal avatar..
+    Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the clients personal avatar..
 
 	Server* mServer;
 
-	//login
- 	std::vector<char> mCharUsernameVector;  
- 	std::vector<char> mCharPasswordVector;  
 };
 #endif

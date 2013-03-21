@@ -67,7 +67,6 @@ protected:
     virtual bool mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
     virtual bool mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
 
-
     // Ogre::WindowEventListener
     //Adjust mouse clipping area
     virtual void windowResized(Ogre::RenderWindow* rw);

@@ -15,7 +15,6 @@ class Game;
 class Network;
 class StateMachine;
 class State;
-class EditString;
 
 class ApplicationBreslin : public BaseApplication
 {
@@ -43,7 +42,6 @@ static const char mMessageServerExit = 3;
 static const char mMessageConnect     = -101;
 static const char mAddSchool          = -109;
 static const char mMessageJoinGame    = -107;
-static const char mMessageLogin       = -110;
 static const char mMessageDisconnect  = -102;
 
 //Network
@@ -60,20 +58,9 @@ bool mConnectSent;
 
 //gui
 OgreBites::SelectMenu* mSelectMenuSchool;
-OgreBites::Label*      mLabelUsername;
-OgreBites::Label*      mLabelPassword;
-OgreBites::Button*     mButtonHit;
-OgreBites::Button*     mButtonExit;
-OgreBites::Button*     mButtonLogin;
-OgreBites::Button*     mButtonJoinGame;
-
-OgreBites::Label*      mLabelFocus;
-EditString*            mEditStringUsername;
-EditString*            mEditStringPassword;
-
-//login
-std::string mStringUsername;
-std::string mStringPassword;
+OgreBites::Button* mButtonHit;
+OgreBites::Button* mButtonExit;
+OgreBites::Button* mButtonJoinGame;
 
 private:
 
@@ -112,9 +99,6 @@ void sendConnect   ();
 //join game
 void sendJoinGame();
 
-//loging
-void sendLogin();
-
 //shutdown
 void shutdown();
 
@@ -131,11 +115,10 @@ void createScene          ();
 virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);
 
 //input
-void buttonHit    (OgreBites::Button *button);
-bool mouseMoved   (const OIS::MouseEvent &arg );
-void itemSelected (OgreBites::SelectMenu* menu);
-void labelHit     (OgreBites::Label* label);
-bool keyPressed   (const OIS::KeyEvent &arg );
+void buttonHit             (OgreBites::Button *button);
+bool mouseMoved            ( const OIS::MouseEvent &arg );
+
+
 
 };
 
