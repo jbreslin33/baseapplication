@@ -157,7 +157,9 @@ set(HDRS
 	
 	#billboard
 	../clientside/billboard/objectTitle.h
-	
+
+	#editString
+	../clientside/io/editString.h	
 )
  
 set(SRCS
@@ -220,6 +222,8 @@ set(SRCS
 	#billboard
 	../clientside/billboard/objectTitle.cpp
 	
+	#editString
+	../clientside/io/editString.cpp
 )
 endif (WIN32)
 
@@ -295,6 +299,8 @@ set(HDRS
 	#billboard
 	../clientside/billboard/objectTitle.h
 	
+	#editString
+	../clientside/io/editString.h
 )
  
 set(SRCS
@@ -357,6 +363,8 @@ set(SRCS
 	#billboard
 	../clientside/billboard/objectTitle.cpp
 	
+	#editString
+	../clientside/io/editString.cpp
 )
 endif (UNIX)
 
