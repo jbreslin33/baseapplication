@@ -343,7 +343,11 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	if (mLabelFocus == mLabelUsername)
 	{
-		LogString("username hit");
+		LogString("username typed");
+	}
+	if (mLabelFocus == mLabelPassword)
+	{
+		LogString("password typed");
 	}
 }
 
