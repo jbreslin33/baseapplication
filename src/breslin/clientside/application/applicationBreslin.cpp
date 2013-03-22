@@ -188,8 +188,6 @@ void ApplicationBreslin::checkForByteBuffer()
 				mSelectMenuSchool->addItem(school);
 				break;
 		}
-	
-
 
 		//pass on to game if there is one....
 		if (mGame)
@@ -343,7 +341,7 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	if (mLabelFocus == mLabelUsername)
 	{
-		LogString("username typed");
+		LogString("mLabelUsername");
 	}
 	if (mLabelFocus == mLabelPassword)
 	{

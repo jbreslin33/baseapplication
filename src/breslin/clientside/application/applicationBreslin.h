@@ -69,6 +69,9 @@ OgreBites::Button* mButtonLogin;
 OgreBites::Button* mButtonJoinGame;
 OgreBites::Button* mButtonExit;
 
+std::string* mStringUsername;
+std::string* mStringPassword;
+
 private:
 
 //time
