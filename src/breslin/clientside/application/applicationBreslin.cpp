@@ -29,6 +29,8 @@
 #include "states/applicationInitialize.h"
 #include "states/applicationPlay.h"
 
+//editstring
+#include "../io/editString.h"
 
 /***************************************
 *	CONSTRUCTORS		          
@@ -64,6 +66,11 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mStateMachine->setGlobalState (mApplicationGlobal);
 	mStateMachine->changeState(mApplicationInitialize);
         mStateMachine->setPreviousState(mApplicationInitialize);
+	
+	//editStrings
+	mEditStringUsername = new EditString();
+	mEditStringPassword = new EditString();
+
 }
 
 ApplicationBreslin::~ApplicationBreslin()
@@ -344,6 +351,7 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 	if (mLabelFocus == mLabelUsername)
 	{
 		LogString("username typed");
+		
 	}
 	if (mLabelFocus == mLabelPassword)
 	{
