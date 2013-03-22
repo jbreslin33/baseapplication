@@ -125,9 +125,10 @@ void createScene          ();
 virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);
 
 //input
-void buttonHit             (OgreBites::Button *button);
-bool mouseMoved            ( const OIS::MouseEvent &arg );
-bool keyPressed( const OIS::KeyEvent &arg );
+void buttonHit  (OgreBites::Button *button);
+void labelHit   (OgreBites::Label* label );
+bool mouseMoved (const OIS::MouseEvent &arg );
+bool keyPressed ( const OIS::KeyEvent &arg );
 
 };
 

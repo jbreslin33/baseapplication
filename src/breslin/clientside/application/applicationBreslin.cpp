@@ -343,3 +343,8 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 	}
 }
 
+void ApplicationBreslin::labelHit( OgreBites::Label* label )
+{
+	LogString("label hit");
+}
+
