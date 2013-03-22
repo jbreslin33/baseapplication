@@ -29,6 +29,7 @@
 #include "states/applicationInitialize.h"
 #include "states/applicationPlay.h"
 
+#include "../io/editString.h"
 
 /***************************************
 *	CONSTRUCTORS		          
@@ -36,7 +37,7 @@
 ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 {
 	StartLog();
-
+	
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 

@@ -8,6 +8,9 @@
 //parents
 #include "BaseApplication.h"
 
+//editString
+#include "../io/editString.h"
+
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
@@ -71,6 +74,9 @@ OgreBites::Button* mButtonExit;
 
 std::string* mStringUsername;
 std::string* mStringPassword;
+
+EditString mEditStringUsername;
+EditString mEditStringPassword;
 
 private:
 
