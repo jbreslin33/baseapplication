@@ -29,7 +29,6 @@
 #include "states/applicationInitialize.h"
 #include "states/applicationPlay.h"
 
-#include "../io/editString.h"
 
 /***************************************
 *	CONSTRUCTORS		          
@@ -342,7 +341,8 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	if (mLabelFocus == mLabelUsername)
 	{
-		LogString("mLabelUsername");
+		int i = arg.text;	
+		LogString("i:%d",i);	
 	}
 	if (mLabelFocus == mLabelPassword)
 	{
