@@ -15,7 +15,6 @@ class Game;
 class Network;
 class StateMachine;
 class State;
-class EditString;
 
 class ApplicationBreslin : public BaseApplication
 {
@@ -69,9 +68,6 @@ OgreBites::Label* mLabelFocus;
 OgreBites::Button* mButtonLogin;
 OgreBites::Button* mButtonJoinGame;
 OgreBites::Button* mButtonExit;
-
-EditString* mEditStringUsername;
-EditString* mEditStringPassword;
 
 private:
 
