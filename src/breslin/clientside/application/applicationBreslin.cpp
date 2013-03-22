@@ -296,6 +296,10 @@ void ApplicationBreslin::showMainScreen()
 	mButtonExit->show();
 	
 	mTrayMgr->showCursor();
+
+	//set intial focus on username
+	mLabelFocus = mLabelUsername;
+
 }
 
 void ApplicationBreslin::hideMainScreen()
@@ -345,6 +349,8 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 
 void ApplicationBreslin::labelHit( OgreBites::Label* label )
 {
+	//set pointer to label that is focused so you can write keypressed to it 
+	mLabelFocus = label;
 	LogString("label hit");
 }
 
