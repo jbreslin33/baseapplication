@@ -347,13 +347,19 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 		int numeric = arg.text;
 		char ascii = (char)numeric;	
 
-		if (numeric == 8)
+		if (numeric == 8) //backspace
 		{
 			int size = mStringUsername.size();
 			mStringUsername.resize(size - 1);
 			mLabelUsername->setCaption(mStringUsername);
 		}
-		else
+
+		if (numeric == 9) //tab
+		{
+			mLabelFocus = mLabelPassword;
+		}
+			
+		if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
 		{
 			mStringUsername.append(1,ascii);
 			mLabelUsername->setCaption(mStringUsername);
