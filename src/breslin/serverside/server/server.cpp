@@ -160,6 +160,15 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		int sizeOfUsername = mes->ReadByte();
 		LogString("sizeOfUsername:%d",sizeOfUsername);
+
+		//loop thru and set mStringUsername from client
+		for (int i = 0; i < sizeOfUsername; i++)
+		{
+			char c = mes->ReadByte();
+			printf("c:%c",c);
+			//client->mStringUsername.append(1,c);		 
+		}
+	
 	}
 
 	

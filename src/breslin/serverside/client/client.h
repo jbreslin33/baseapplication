@@ -76,6 +76,9 @@ public:
 
 	int				mLastMessageTime;
 
+	std::string mStringUsername;
+	std::string mStringPassword;
+
 public:
 	virtual void createShape();
 	void remove();
