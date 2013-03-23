@@ -158,19 +158,24 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/******* LOGIN **********/
 	else if (type == mLogin)
 	{
-		int sizeOfUsername = mes->ReadByte();
-		LogString("sizeOfUsername:%d",sizeOfUsername);
+ 		for (unsigned int i = 0; i < mClientVector.size(); i++)
+                {
+                        if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+                        {
+                                client = mClientVector.at(i);
+				int sizeOfUsername = mes->ReadByte();
+				LogString("sizeOfUsername:%d",sizeOfUsername);
 
-		//loop thru and set mStringUsername from client
-		for (int i = 0; i < sizeOfUsername; i++)
-		{
-			char c = mes->ReadByte();
-			printf("c:%c",c);
-			//client->mStringUsername.append(1,c);		 
-		}
-	
+				//loop thru and set mStringUsername from client
+				for (int i = 0; i < sizeOfUsername; i++)
+				{
+					char c = mes->ReadByte();
+					client->mStringUsername.append(1,c);		 
+					printf("c:%c",c);
+				}
+			}
+                }
 	}
-
 	
 	/***QUIT GAME********/
 	else if (type == mQuitGame)
