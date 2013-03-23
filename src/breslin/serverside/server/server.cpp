@@ -158,7 +158,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/******* LOGIN **********/
 	else if (type == mLogin)
 	{
-		LogString("LOGIN!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		int sizeOfUsername = mes->ReadByte();
+		LogString("sizeOfUsername:%d",sizeOfUsername);
 	}
 
 	
