@@ -195,6 +195,16 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 					printf("%c",c);
 				}
 				printf("\n");
+	
+				//check against db
+				if (getPasswordMatch(client->mStringUsername,client->mStringPassword))
+				{
+					LogString("MATCH!");
+				}					
+				else
+				{	
+					LogString("TRY AGAIN!");
+				}
 			}
                 }
 	}
@@ -422,8 +432,6 @@ void Server::readDB()
 
 std::string Server::getSchools()
 {
-
-	
         PGconn          *conn;
         PGresult        *res;
         int             rec_count;
@@ -451,6 +459,54 @@ std::string Server::getSchools()
 
         PQfinish(conn);
 }
+
+bool Server::getPasswordMatch(std::string username,std::string password)
+{
+        PGconn          *conn;
+        PGresult        *res;
+        int             rec_count;
+        int             row;
+        int             col;
+	bool match = false;
+	//std::string query = "select password from users"; 
+	std::string query = "select password from users where username = '"; 
+	query.append(username);	
+	std::string a = "'";	
+	query.append(a);
+	const char * c = query.c_str();
+	printf("query:%s",c);
+
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+        res = PQexec(conn,c);
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                puts("We did not get any data!");
+                //exit(0);
+        }
+        rec_count = PQntuples(res);
+        printf("We received %d records.\n", rec_count);
+        for (row=0; row<rec_count; row++)
+        {
+                const char* c = PQgetvalue(res, row, 1);
+                std::string p(c);
+		if (password == p)
+		{
+			match = true;
+		}
+		else
+		{
+			match = false;
+		}
+        }
+
+        PQclear(res);
+
+        PQfinish(conn);
+	
+	return match;
+}
+
 
 void Server::readPackets()
 {
