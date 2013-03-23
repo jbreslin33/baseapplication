@@ -336,10 +336,7 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 	}
     return true;
 }
-/*
-char keyCode = (char)keyCode;
-String keyCode = "" + keyCode;
-*/
+
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	if (mLabelFocus == mLabelUsername)
@@ -394,6 +391,5 @@ void ApplicationBreslin::labelHit( OgreBites::Label* label )
 {
 	//set pointer to label that is focused so you can write keypressed to it 
 	mLabelFocus = label;
-	LogString("label hit");
 }
 
