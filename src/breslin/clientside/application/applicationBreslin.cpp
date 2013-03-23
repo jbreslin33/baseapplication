@@ -343,8 +343,8 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 	{
 		int i = arg.text;	
 		LogString("i:%d",i);	
-		std::string s = StringConverter::toString(i);
-		mLabelUsername->setCaption(s);
+		mStringUsername.append(StringConverter::toString(i));
+		mLabelUsername->setCaption(mStringUsername);
 	}
 	if (mLabelFocus == mLabelPassword)
 	{
