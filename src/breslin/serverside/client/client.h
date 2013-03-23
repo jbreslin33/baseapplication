@@ -1,6 +1,8 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+#include <string>
+
 #include "../message/message.h"
 
 #ifdef WIN32

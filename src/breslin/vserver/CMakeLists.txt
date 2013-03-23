@@ -260,10 +260,6 @@ set(HDRS
 	
 	#game
 	../serverside/game/game.h
-		#tag
-	../serverside/game/gameTag.h
-	../serverside/game/gameTagAll.h
-	
 
 	#tdreamsock
 	../serverside/tdreamsock/dreamSockLog.h
@@ -274,9 +270,6 @@ set(HDRS
 	
 	#shape
 	../serverside/shape/shape.h
-		#tag
-	../serverside/shape/shapeTag.h
-	../serverside/shape/shapeTagAll.h
 		
 	#move
 	../serverside/ability/move/move.h
@@ -315,15 +308,9 @@ set(HDRS
 	
 	#server
 	../serverside/server/server.h
-		#tag
-	../serverside/server/serverTag.h
-	../serverside/server/serverTagAll.h
 	
 	#client
 	../serverside/client/client.h
-		#tag
-	../serverside/client/clientTag.h
-	../serverside/client/clientTagAll.h
 )
  
 set(SRCS
@@ -336,9 +323,6 @@ set(SRCS
 
 	#game
 	../serverside/game/game.cpp
-		#tag
-	../serverside/game/gameTag.cpp
-	../serverside/game/gameTagAll.cpp
 	
 	#dreamsock
 	../serverside/tdreamsock/dreamSockLog.cpp
@@ -349,9 +333,6 @@ set(SRCS
 	
 	#shape
 	../serverside/shape/shape.cpp
-		#tag
-	../serverside/shape/shapeTag.cpp
-	../serverside/shape/shapeTagAll.cpp
 	
 	#move
 	../serverside/ability/move/move.cpp
@@ -382,15 +363,9 @@ set(SRCS
 	
 	#server
 	../serverside/server/server.cpp
-		#tag
-	../serverside/server/serverTag.cpp
-	../serverside/server/serverTagAll.cpp
 	
 	#client
 	../serverside/client/client.cpp
-		#tag
-	../serverside/client/clientTag.cpp
-	../serverside/client/clientTagAll.cpp
 
 )
 endif (WIN32)
@@ -406,9 +381,6 @@ set(HDRS
 	
 	#game
 	../serverside/game/game.h
-		#tag
-	../serverside/game/gameTag.h
-	../serverside/game/gameTagAll.h
 	
 	#network
 	../serverside/network/network.h
@@ -419,9 +391,6 @@ set(HDRS
 	
 		#shape
 	../serverside/shape/shape.h
-		#tag
-	../serverside/shape/shapeTag.h
-	../serverside/shape/shapeTagAll.h
 	
 	#move
 	../serverside/ability/move/move.h
@@ -460,16 +429,9 @@ set(HDRS
 	
 	#server
 	../serverside/server/server.h
-		#tag
-	../serverside/server/serverTag.h
-	../serverside/server/serverTagAll.h
 	
 	#client
 	../serverside/client/client.h
-		#tag
-	../serverside/client/clientTag.h
-	../serverside/client/clientTagAll.h
-	
 )
  
 set(SRCS
@@ -482,9 +444,6 @@ set(SRCS
 	
 	#game
 	../serverside/game/game.cpp
-		#tag
-	../serverside/game/gameTag.cpp
-	../serverside/game/gameTagAll.cpp
 
 	#dreamsock
 	../serverside/tdreamsock/dreamSockLog.cpp
@@ -495,9 +454,6 @@ set(SRCS
 	
 	#shape
 	../serverside/shape/shape.cpp
-		#tag
-	../serverside/shape/shapeTag.cpp
-	../serverside/shape/shapeTagAll.cpp
 	
 	#move
 	../serverside/ability/move/move.cpp
@@ -528,15 +484,9 @@ set(SRCS
 	
 	#server
 	../serverside/server/server.cpp
-		#tag
-	../serverside/server/serverTag.cpp
-	../serverside/server/serverTagAll.cpp
 	
 	#client
 	../serverside/client/client.cpp
-		#tag
-	../serverside/client/clientTag.cpp
-	../serverside/client/clientTagAll.cpp
 
 )
 endif (UNIX)

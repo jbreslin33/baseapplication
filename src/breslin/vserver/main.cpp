@@ -27,9 +27,6 @@
 
 //possible games
 #include "../serverside/game/game.h"
-#include "../serverside/game/gameTag.h"
-#include "../serverside/game/gameTagAll.h"
-#include "../serverside/game/gameGhostInTheGraveyard.h"
 
 #include "../serverside/server/server.h"
 #include "../serverside/network/network.h"
@@ -114,9 +111,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	const char* cmdLine = lpCmdLine;
 
 	const char* aGame    = "1";
-	const char* aGameTag = "2";
-	const char* aGameTagAll = "3";
-	const char* aGameGhostInTheGraveyard = "4";
 
 	if (strcmp (cmdLine,aGame) == 0)
 	{
@@ -129,39 +123,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		game->createWorld();
 	}
 
-	if (strcmp (cmdLine,aGameTag) == 0)
-	{
-		game = new GameTag();
-		
-		//server
-		game->createServer();
-
-		//world
-		game->createWorld();
-	}
-
-	if (strcmp (cmdLine,aGameTagAll) == 0)
-	{
-		game = new GameTagAll();
-		
-		//server
-		game->createServer();
-
-		//world
-		game->createWorld();
-	}
-	
-	if (strcmp (cmdLine,aGameGhostInTheGraveyard) == 0)
-	{
-//		game = new GameGhostInTheGraveyard();
-
-		//server
-		game->createServer();
-
-		//world
-		game->createWorld();
-	}
-	
 	MSG WinMsg;
 	bool done = false;
 	int time, oldTime, newTime;
@@ -283,8 +244,6 @@ int main(int argc, char **argv)
 {
 
 	const char* aGame    = "1";
-	const char* aGameTag = "2";
-	const char* aGameTagAll = "3";
 
 	if (strcmp (argv[1],aGame) == 0)
 	{
@@ -297,29 +256,7 @@ int main(int argc, char **argv)
 		game->createWorld();
 	}
 
-	if (strcmp (argv[1],aGameTag) == 0)
-	{
-		game = new GameTag();
-
-		//server
-		game->createServer();
-
-		//world
-		game->createWorld();
-	}
-
-	if (strcmp (argv[1],aGameTagAll) == 0)
-	{
-		game = new GameTagAll();
-
-		//server
-		game->createServer();
-
-		//world
-		game->createWorld();
-	}
-	
-	LogString("Welcome to Army War Server v2.0");
+	LogString("Learning Game Server");
 	LogString("-------------------------------\n");
 
 
