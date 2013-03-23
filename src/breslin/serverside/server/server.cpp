@@ -158,11 +158,20 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/******* LOGIN **********/
 	else if (type == mLogin)
 	{
- 		for (unsigned int i = 0; i < mClientVector.size(); i++)
+ 		//get client	
+		for (unsigned int i = 0; i < mClientVector.size(); i++)
                 {
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
+				printf("\n");
+				printf("\n");
+				//set client to pointer
                                 client = mClientVector.at(i);
+	
+				//clear username and password strings
+				client->mStringUsername.clear();
+				client->mStringPassword.clear();
+
 				int sizeOfUsername = mes->ReadByte();
 				LogString("sizeOfUsername:%d",sizeOfUsername);
 
@@ -171,8 +180,21 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				{
 					char c = mes->ReadByte();
 					client->mStringUsername.append(1,c);		 
-					printf("c:%c",c);
+					printf("%c",c);
 				}
+				printf("\n");
+			
+				int sizeOfPassword = mes->ReadByte();
+				LogString("sizeOfPassword:%d",sizeOfPassword);
+
+				//loop thru and set mStringPassword from client
+				for (int i = 0; i < sizeOfPassword; i++)
+				{
+					char c = mes->ReadByte();
+					client->mStringPassword.append(1,c);		 
+					printf("%c",c);
+				}
+				printf("\n");
 			}
                 }
 	}
