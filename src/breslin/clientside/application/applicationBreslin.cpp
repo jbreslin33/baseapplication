@@ -336,14 +336,18 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 	}
     return true;
 }
-
+/*
+char keyCode = (char)keyCode;
+String keyCode = "" + keyCode;
+*/
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	if (mLabelFocus == mLabelUsername)
 	{
-		int i = arg.text;	
-		LogString("i:%d",i);	
-		mStringUsername.append(StringConverter::toString(i));
+		int numeric = arg.text;
+		char ascii = (char)numeric;	
+//(StringConverter::toString(i)
+		mStringUsername.append(1,ascii);
 		mLabelUsername->setCaption(mStringUsername);
 	}
 	if (mLabelFocus == mLabelPassword)
