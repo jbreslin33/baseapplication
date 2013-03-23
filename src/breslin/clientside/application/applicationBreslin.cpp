@@ -346,9 +346,16 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 	{
 		int numeric = arg.text;
 		char ascii = (char)numeric;	
-//(StringConverter::toString(i)
-		mStringUsername.append(1,ascii);
-		mLabelUsername->setCaption(mStringUsername);
+
+		if (numeric == 8)
+		{
+			
+		}
+		else
+		{
+			mStringUsername.append(1,ascii);
+			mLabelUsername->setCaption(mStringUsername);
+		}
 	}
 	if (mLabelFocus == mLabelPassword)
 	{
