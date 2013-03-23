@@ -1,7 +1,6 @@
 set permissions of /upload file or it won't work:
 sudo chmod -R 777 web/insert/upload
 
-
 to compile:
 
 cd src/breslin/vserver
@@ -22,7 +21,10 @@ sudo vi node/lib/path.js +360
 comment out line 360
 it will complain about strings if not.... 
 
+then run:
+yes | sudo ./setup.sh
+
+
 run:
 cd /src/breslin/serverside
 ./runserver1.sh
-
