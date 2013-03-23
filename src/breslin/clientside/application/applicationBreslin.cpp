@@ -349,7 +349,9 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 
 		if (numeric == 8)
 		{
-			
+			int size = mStringUsername.size();
+			mStringUsername.resize(size - 1);
+			mLabelUsername->setCaption(mStringUsername);
 		}
 		else
 		{
