@@ -367,7 +367,26 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 	}
 	if (mLabelFocus == mLabelPassword)
 	{
-		LogString("password typed");
+ 		int numeric = arg.text;
+                char ascii = (char)numeric;
+
+                if (numeric == 8) //backspace
+                {
+                        int size = mStringPassword.size();
+                        mStringPassword.resize(size - 1);
+                        mLabelPassword->setCaption(mStringPassword);
+                }
+
+                if (numeric == 9) //tab
+                {
+                        //mLabelFocus = mButtonLogin;
+                }
+
+                if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
+                {
+                        mStringPassword.append(1,ascii);
+                        mLabelPassword->setCaption(mStringPassword);
+                }
 	}
 }
 
