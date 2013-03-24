@@ -446,51 +446,62 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
-	if (mLabelFocus == mLabelUsername)
+	if (mStateMachine->getCurrentState() == mApplicationLogin)
 	{
-		int numeric = arg.text;
-		char ascii = (char)numeric;	
 
-		if (numeric == 8) //backspace
+		if (mLabelFocus == mLabelUsername)
 		{
-			int size = mStringUsername.size();
-			mStringUsername.resize(size - 1);
-			mLabelUsername->setCaption(mStringUsername);
-		}
+			int numeric = arg.text;
+			char ascii = (char)numeric;	
 
-		if (numeric == 9) //tab
-		{
-			mLabelFocus = mLabelPassword;
-		}
+			if (numeric == 8) //backspace
+			{
+				int size = mStringUsername.size();
+				if (size > 0)
+				{
+					mStringUsername.resize(size - 1);
+				}
+				mLabelUsername->setCaption(mStringUsername);
+			}
+
+			if (numeric == 9) //tab
+			{
+				mLabelFocus = mLabelPassword;
+			}
 			
-		if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
-		{
-			mStringUsername.append(1,ascii);
-			mLabelUsername->setCaption(mStringUsername);
+			if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
+			{
+				mStringUsername.append(1,ascii);
+				mLabelUsername->setCaption(mStringUsername);
+			}
 		}
-	}
-	if (mLabelFocus == mLabelPassword)
-	{
- 		int numeric = arg.text;
-                char ascii = (char)numeric;
 
-                if (numeric == 8) //backspace
-                {
-                        int size = mStringPassword.size();
-                        mStringPassword.resize(size - 1);
-                        mLabelPassword->setCaption(mStringPassword);
-                }
+		if (mLabelFocus == mLabelPassword)
+		{
+ 			int numeric = arg.text;
+                	char ascii = (char)numeric;
 
-                if (numeric == 9) //tab
-                {
-                        //mLabelFocus = mButtonLogin;
-                }
+                	if (numeric == 8) //backspace
+                	{
+                        	int size = mStringPassword.size();
+				if (size > 0)
+				{
+                        		mStringPassword.resize(size - 1);
+				}
+                        	mLabelPassword->setCaption(mStringPassword);
+                	}
 
-                if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
-                {
-                        mStringPassword.append(1,ascii);
-                        mLabelPassword->setCaption(mStringPassword);
-                }
+                	if (numeric == 9) //tab
+                	{
+                        	//mLabelFocus = mButtonLogin;
+                	}
+
+                	if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
+                	{
+                        	mStringPassword.append(1,ascii);
+                        	mLabelPassword->setCaption(mStringPassword);
+                	}
+		}
 	}
 }
 

@@ -40,7 +40,10 @@ void ApplicationLogin::execute()
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogin)
 	{
 		mApplicationBreslin->mButtonHit = NULL;
-		mApplicationBreslin->sendLogin();
+		if (mApplicationBreslin->mStringUsername.size() > 0) 
+		{
+			mApplicationBreslin->sendLogin();
+		}
 	}
 
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
@@ -64,3 +67,4 @@ void ApplicationLogin::exit()
 
 	mApplicationBreslin->hideLoginScreen();
 }
+
