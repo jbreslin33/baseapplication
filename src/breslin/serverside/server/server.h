@@ -89,6 +89,8 @@ public:
 
 	//login
 	static const int mLogin              	 = -110;
+	static const int mLoggedIn             	 = -113;
+	static const int mLoggedOut            	 = -114;
 	
 	//add shape	
 	static const int mAddShape    	         = -103;

@@ -76,6 +76,7 @@ public:
 
 	int				mLastMessageTime;
 
+	bool mLoggedIn;
 	std::string mStringUsername;
 	std::string mStringPassword;
 
@@ -86,6 +87,10 @@ public:
 	void sendAllShapes();
 	void sendSchools();
 	void sendAllShapesBrowser();
+
+	//loggedIn
+	void sendLoggedIn();
+	void sendLoggedOut();
 
 	//questions
 	void sendQuestion();

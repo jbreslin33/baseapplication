@@ -193,31 +193,49 @@ void ApplicationBreslin::checkForByteBuffer()
 
                 type = byteBuffer->ReadByte();
 
-                
+		if (type == mAddSchool)
+		{
+			LogString("adding school..");
+			std::string school;
+			int length = byteBuffer->ReadByte();
+			for (int i = 0; i < length; i++)
+			{
+				char c =  byteBuffer->ReadByte(); 
+                                school.append(1,c);
+			}			
+			mSelectMenuSchool->addItem(school);
+		}
+
+		if (type == mMessageLoggedIn)
+		{
+			LogString("LoggedIn");
+		}
+
+
+/*                
 		switch(type)
                 {
                 	case mAddSchool:
-                              	LogString("adding school!!!!!!!!!FFFFFF");
-				
+				//mStringSchool.clear();		
+
+				std::string school;		
+
 				int length = byteBuffer->ReadByte();
 				
-				std::string school; 
 				char charArray[length];
 
 				for (int i = 0; i < length; i++)
 				{
 					char c =  byteBuffer->ReadByte(); 
-					charArray[i] = c;	
+                                        school.append(1,c);
 				}			
 			
-				//now print out string
-				school = charArray;				
-		
-				LogString("school:%c",school[0]);
-		
+				//now add string to select menu 
 				mSelectMenuSchool->addItem(school);
 				break;
+
 		}
+*/
 
 		//pass on to game if there is one....
 		if (mGame)

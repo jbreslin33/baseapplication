@@ -199,11 +199,13 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				//check against db
 				if (getPasswordMatch(client->mStringUsername,client->mStringPassword))
 				{
-					LogString("MATCH!");
+					client->mLoggedIn = true;
+					client->sendLoggedIn();
 				}					
 				else
 				{	
-					LogString("TRY AGAIN!");
+					client->mLoggedIn = false;
+					client->sendLoggedOut();
 				}
 			}
                 }

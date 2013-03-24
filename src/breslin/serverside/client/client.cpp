@@ -34,6 +34,9 @@
 //server side client constructor, many instances will be made, one for each client connected.
 Client::Client(Server* server, struct sockaddr *address)
 {
+	//loggedIn
+	mLoggedIn = false;
+
 	//set client id to 0 as this will identify it as a c++ or java client
 	mClientID = 0;	
 
@@ -52,6 +55,8 @@ Client::Client(Server* server, struct sockaddr *address)
 //server side client constructor, many instances will be made, one for each client connected.
 Client::Client(Server* server, struct sockaddr *address, int clientID)
 {
+	mLoggedIn = false;
+
 	//set client id as this is going to be a browser client
 	//-1 = browser client to udp_server.js, no shape 
 	//0 = c++ client, obviously a shape 
@@ -142,6 +147,21 @@ void Client::sendQuestion()
 	//SendPacket(...
 //	you could actually just SendPacket in writeQuestion and writeQuestionBrowser because we are not looping
 //but we will not because it confuses this.
+}
+
+void Client::sendLoggedIn()
+{
+        mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+        mServer->mMessage.WriteByte(mServer->mLoggedIn); // add type
+	SendPacket(&mServer->mMessage);
+
+}
+
+void Client::sendLoggedOut()
+{
+        mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+        mServer->mMessage.WriteByte(mServer->mLoggedOut); // add type
+	SendPacket(&mServer->mMessage);
 }
 
 void Client::writeQuestion()
