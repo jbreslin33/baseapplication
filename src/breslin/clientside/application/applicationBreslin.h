@@ -34,6 +34,7 @@ StateMachine* mStateMachine;
 
 State* mApplicationGlobal;
 State* mApplicationInitialize;
+State* mApplicationLogin;
 State* mApplicationMain;
 State* mApplicationPlay;
 
@@ -98,6 +99,12 @@ float getRenderTime();
 Ogre::SceneManager* getSceneManager      () { return mSceneMgr; }
 
 //gui
+//login
+void createLoginScreen();
+void showLoginScreen();
+void hideLoginScreen();
+
+//main
 void createMainScreen();
 void showMainScreen();
 void hideMainScreen();

@@ -1,6 +1,5 @@
 //header
-#include "applicationMain.h"
-
+#include "applicationLogin.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
@@ -8,54 +7,40 @@
 //application
 #include "../applicationBreslin.h"
 
-//game
-#include "../../game/game.h"
-#include "../../game/gameTag.h"
-
 //state machine
 #include "../../../statemachine/stateMachine.h"
 
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
-ApplicationMain::ApplicationMain(ApplicationBreslin* applicationBreslin)
+ApplicationLogin::ApplicationLogin(ApplicationBreslin* applicationBreslin)
 {
 	mApplicationBreslin = applicationBreslin;
 }
 
-ApplicationMain::~ApplicationMain()
+ApplicationLogin::~ApplicationLogin()
 {
 
 }
 
-void ApplicationMain::enter()
+void ApplicationLogin::enter()
 {
-	LogString("STATE: ApplicationGlobal");
-	mApplicationBreslin->createMainScreen();
-	mApplicationBreslin->showMainScreen();
+	LogString("STATE: ApplicationLogin");
+	mApplicationBreslin->createLoginScreen();
+	mApplicationBreslin->showLoginScreen();
 }
 
-void ApplicationMain::execute()
+void ApplicationLogin::execute()
 {
-/*
-	if (mApplication->mLoggedIn == true)
+	if (mApplicationBreslin->mLoggedIn == true)
 	{
-		mApplicationBreslin->
-		mApplicationBreslin->showMainScreen();
+		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
 	}
-*/
 
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogin)
 	{
 		mApplicationBreslin->mButtonHit = NULL;
 		mApplicationBreslin->sendLogin();
-	}
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGame)
-	{
-		mApplicationBreslin->mButtonHit = NULL;
-		mApplicationBreslin->sendJoinGame();
-		mApplicationBreslin->hideMainScreen();
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}
 
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
@@ -69,8 +54,7 @@ void ApplicationMain::execute()
 	}
 }
 
-void ApplicationMain::exit()
+void ApplicationLogin::exit()
 {
-
+	mApplicationBreslin->hideLoginScreen();
 }
-

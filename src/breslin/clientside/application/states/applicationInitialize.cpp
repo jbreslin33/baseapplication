@@ -35,8 +35,7 @@ void ApplicationInitialize::execute()
 	if (mApplicationBreslin->setup())
 	{
 		mApplicationBreslin->mSetup = true;
-		mApplicationBreslin->createMainScreen();
-        	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
+        	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationLogin);
 	}	
 }
 

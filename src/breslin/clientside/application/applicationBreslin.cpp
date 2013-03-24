@@ -20,11 +20,12 @@
 #include "../command/command.h"
 
 //game
-#include "../game/gameTag.h"
+#include "../game/game.h"
 
 //state machine
 #include "../../statemachine/stateMachine.h"
 #include "states/applicationGlobal.h"
+#include "states/applicationLogin.h"
 #include "states/applicationMain.h"
 #include "states/applicationInitialize.h"
 #include "states/applicationPlay.h"
@@ -59,6 +60,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	mApplicationGlobal = new ApplicationGlobal(this);
 	mApplicationInitialize = new ApplicationInitialize(this);
+	mApplicationLogin   = new ApplicationLogin  (this);
 	mApplicationMain   = new ApplicationMain  (this);
 	mApplicationPlay   = new ApplicationPlay(this);
 
@@ -74,6 +76,7 @@ ApplicationBreslin::~ApplicationBreslin()
 	
 	delete mStateMachine;
 	delete mApplicationInitialize;
+	delete mApplicationLogin;
 	delete mApplicationMain;
 	delete mApplicationPlay;	
 	
@@ -91,7 +94,7 @@ void ApplicationBreslin::processUpdate()
 	{
 		//mGame = new Game(this);
 
-		hideMainScreen();
+		hideLoginScreen();
 
        		mStateMachine->changeState(mApplicationPlay);
 
@@ -100,7 +103,7 @@ void ApplicationBreslin::processUpdate()
 
 		//fake esc from game
   		mPlayingGame = false;
-                mStateMachine->changeState(mApplicationMain);
+                mStateMachine->changeState(mApplicationLogin);
 		
 		mFake = false;
 	}
@@ -294,32 +297,95 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		GUI
 **********************************/
 
+//LOGIN
+void ApplicationBreslin::createLoginScreen()
+{
+	LogString("createLoginScreen");
+	if (!mSelectMenuSchool)
+	{
+        	mSelectMenuSchool = mTrayMgr->createThickSelectMenu(OgreBites::TL_CENTER, "mSelectMenuSchool", "Select School", 120, 10);
+	}
+	
+	if (!mLabelUsername)
+	{
+        	mLabelUsername  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
+	}
+
+	if (!mLabelPassword)
+	{
+        	mLabelPassword  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelPassword", "Password:");
+	}
+
+	if (!mButtonLogin)
+	{
+        	mButtonLogin    = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonLogin", "Login");
+	}
+		
+	if (!mButtonExit)
+	{
+        	mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+	}
+}
+
+void ApplicationBreslin::showLoginScreen()
+{
+	LogString("showLoginScreen");
+        mTrayMgr->moveWidgetToTray(mSelectMenuSchool,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mLabelPassword,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mButtonLogin,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
+
+        mSelectMenuSchool->show();
+        mLabelUsername->show();
+        mLabelPassword->show();
+        mButtonLogin->show();
+        mButtonExit->show();
+
+        mTrayMgr->showCursor();
+
+        //set intial focus on username
+        mLabelFocus = mLabelUsername;
+}
+
+void ApplicationBreslin::hideLoginScreen()
+{
+	LogString("hideLoginScreen");
+        mSelectMenuSchool->hide();
+        mLabelUsername->hide();
+        mLabelPassword->hide();
+        mButtonLogin->hide();
+        mButtonExit->hide();
+
+        mTrayMgr->removeWidgetFromTray(mSelectMenuSchool);
+        mTrayMgr->removeWidgetFromTray(mLabelUsername);
+        mTrayMgr->removeWidgetFromTray(mLabelPassword);
+        mTrayMgr->removeWidgetFromTray(mButtonLogin);
+        mTrayMgr->removeWidgetFromTray(mButtonExit);
+}
+
+
+//MAIN
 void ApplicationBreslin::createMainScreen()
 {
-	LogString("create buttons");
- 	mSelectMenuSchool = mTrayMgr->createThickSelectMenu(OgreBites::TL_CENTER, "mSelectMenuSchool", "Select School", 120, 10);
+	LogString("createMainScreen");
+	if (!mButtonJoinGame)
+	{
+		mButtonJoinGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
+	}
 
-	mLabelUsername  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelUsername", "Username:");
-	mLabelPassword  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelPassword", "Password:");
-	mButtonLogin    = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonLogin", "Login");
-	mButtonJoinGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
-	mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+	if (!mButtonExit)
+	{
+		mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
+	}
 }
 
 void ApplicationBreslin::showMainScreen()
 {
-
-	mTrayMgr->moveWidgetToTray(mSelectMenuSchool,OgreBites::TL_CENTER);
-	mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
-	mTrayMgr->moveWidgetToTray(mLabelPassword,OgreBites::TL_CENTER);
-	mTrayMgr->moveWidgetToTray(mButtonLogin,OgreBites::TL_CENTER);
+	LogString("showMainScreen");
 	mTrayMgr->moveWidgetToTray(mButtonJoinGame,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
-	mSelectMenuSchool->show();
-	mLabelUsername->show();
-	mLabelPassword->show();
-	mButtonLogin->show();
 	mButtonJoinGame->show();
 	mButtonExit->show();
 	
@@ -332,17 +398,10 @@ void ApplicationBreslin::showMainScreen()
 
 void ApplicationBreslin::hideMainScreen()
 {
-	mSelectMenuSchool->hide();
-	mLabelUsername->hide();
-	mLabelPassword->hide();
-	mButtonLogin->hide();
+	LogString("hideMainScreen");
 	mButtonJoinGame->hide();
 	mButtonExit->hide();
 
-	mTrayMgr->removeWidgetFromTray(mSelectMenuSchool);
-	mTrayMgr->removeWidgetFromTray(mLabelUsername);
-	mTrayMgr->removeWidgetFromTray(mLabelPassword);
-	mTrayMgr->removeWidgetFromTray(mButtonLogin);
 	mTrayMgr->removeWidgetFromTray(mButtonJoinGame);
 	mTrayMgr->removeWidgetFromTray(mButtonExit);
 }

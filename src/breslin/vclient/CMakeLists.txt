@@ -122,6 +122,8 @@ set(HDRS
 	#application
 	../clientside/application/BaseApplication.h
 	../clientside/application/applicationBreslin.h
+	../clientside/application/states/applicationLogin.h
+	../clientside/application/states/applicationLogin.h
 	../clientside/application/states/applicationMain.h
 	../clientside/application/states/applicationPlay.h
 	../clientside/application/states/applicationGlobal.h
@@ -129,7 +131,6 @@ set(HDRS
 	
 	#game	
 	../clientside/game/game.h
-	../clientside/game/gameTag.h
 	../clientside/game/states/gameGlobal.h
 	../clientside/game/states/gameInitialize.h
 	../clientside/game/states/gamePlay.h
@@ -150,7 +151,6 @@ set(HDRS
 	
 	#shape
 	../clientside/shape/shape.h
-	../clientside/shape/shapeTag.h
 	
 	#byteBuffer
 	../clientside/bytebuffer/byteBuffer.h
@@ -186,6 +186,7 @@ set(SRCS
 	#application
 	../clientside/application/BaseApplication.cpp
 	../clientside/application/applicationBreslin.cpp
+	../clientside/application/states/applicationLogin.cpp
 	../clientside/application/states/applicationMain.cpp
 	../clientside/application/states/applicationPlay.cpp
 	../clientside/application/states/applicationGlobal.cpp
@@ -193,7 +194,6 @@ set(SRCS
 	
 	#game	
 	../clientside/game/game.cpp
-	../clientside/game/gameTag.cpp
 	../clientside/game/states/gameGlobal.cpp
 	../clientside/game/states/gameInitialize.cpp
 	../clientside/game/states/gamePlay.cpp
@@ -214,7 +214,6 @@ set(SRCS
 	
 	#shape
 	../clientside/shape/shape.cpp
-	../clientside/shape/shapeTag.cpp
 	
 	#byteBuffer
 	../clientside/bytebuffer/byteBuffer.cpp
@@ -264,6 +263,7 @@ set(HDRS
 	#application
 	../clientside/application/BaseApplication.h
 	../clientside/application/applicationBreslin.h
+	../clientside/application/states/applicationLogin.h
 	../clientside/application/states/applicationMain.h
 	../clientside/application/states/applicationPlay.h
 	../clientside/application/states/applicationGlobal.h
@@ -271,7 +271,6 @@ set(HDRS
 	
 	#game
 	../clientside/game/game.h
-	../clientside/game/gameTag.h
 	../clientside/game/states/gameGlobal.h
 	../clientside/game/states/gameInitialize.h
 	../clientside/game/states/gamePlay.h
@@ -291,7 +290,6 @@ set(HDRS
 	
 	#shape
 	../clientside/shape/shape.h
-	../clientside/shape/shapeTag.h
 	
 	#byteBuffer
 	../clientside/bytebuffer/byteBuffer.h
@@ -327,6 +325,7 @@ set(SRCS
 	#application
 	../clientside/application/BaseApplication.cpp
 	../clientside/application/applicationBreslin.cpp
+	../clientside/application/states/applicationLogin.cpp
 	../clientside/application/states/applicationMain.cpp
 	../clientside/application/states/applicationPlay.cpp
 	../clientside/application/states/applicationGlobal.cpp
@@ -334,7 +333,6 @@ set(SRCS
 
 	#game	
 	../clientside/game/game.cpp
-	../clientside/game/gameTag.cpp
 	../clientside/game/states/gameGlobal.cpp
 	../clientside/game/states/gameInitialize.cpp
 	../clientside/game/states/gamePlay.cpp
@@ -355,7 +353,6 @@ set(SRCS
 	
 	#shape
 	../clientside/shape/shape.cpp
-	../clientside/shape/shapeTag.cpp
 	
 	#byteBuffer
 	../clientside/bytebuffer/byteBuffer.cpp

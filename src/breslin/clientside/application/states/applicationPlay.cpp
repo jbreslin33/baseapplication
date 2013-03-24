@@ -35,29 +35,28 @@ void ApplicationPlay::enter()
 }
 void ApplicationPlay::execute()
 {
-
 	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_ESCAPE))
 	{
 		mApplicationBreslin->mPlayingGame = false;
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
+		if (mApplicationBreslin->mLoggedIn)
+		{
+			mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
+		}
+		else
+		{
+			mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationLogin);
+		}
 	}
 	else
 	{
 		//game
 		mApplicationBreslin->mGame->processUpdate();
 	}
-
 }
 
 void ApplicationPlay::exit()
 {
-//	mApplicationBreslin->shutdown();
-
 	mApplicationBreslin->getSceneManager()->destroyAllEntities();
 	mApplicationBreslin->mGame->quit();
 	mApplicationBreslin->mGame = NULL;
-	
-//	delete mApplicationBreslin->mGame;
-
-	mApplicationBreslin->showMainScreen();
 }
