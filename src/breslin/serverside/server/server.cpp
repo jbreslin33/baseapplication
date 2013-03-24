@@ -468,17 +468,24 @@ bool Server::getPasswordMatch(std::string username,std::string password)
         int             row;
         int             col;
 	bool match = false;
-	//std::string query = "select password from users"; 
-	std::string query = "select password from users where username = '"; 
+	std::string query = "select username,password from users where username = '"; 
+	std::string a = "' ";	
+	std::string b = "and password = '";
+	std::string c = "'";	
+
 	query.append(username);	
-	std::string a = "'";	
 	query.append(a);
-	const char * c = query.c_str();
-	printf("query:%s",c);
+	query.append(b);
+	query.append(password);	
+	query.append(c);
+
+	const char * q = query.c_str();
+
+	printf("query:%s",q);
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-        res = PQexec(conn,c);
+        res = PQexec(conn,q);
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
@@ -486,18 +493,9 @@ bool Server::getPasswordMatch(std::string username,std::string password)
         }
         rec_count = PQntuples(res);
         printf("We received %d records.\n", rec_count);
-        for (row=0; row<rec_count; row++)
-        {
-                const char* c = PQgetvalue(res, row, 1);
-                std::string p(c);
-		if (password == p)
-		{
-			match = true;
-		}
-		else
-		{
-			match = false;
-		}
+	if (rec_count > 0)
+	{
+		match = true;
         }
 
         PQclear(res);
