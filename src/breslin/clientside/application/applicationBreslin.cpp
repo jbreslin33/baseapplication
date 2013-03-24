@@ -178,6 +178,15 @@ void ApplicationBreslin::sendLogin()
 	mNetwork->send(byteBuffer);
 }
 
+void ApplicationBreslin::sendLogout()
+{
+	ByteBuffer* byteBuffer = new ByteBuffer();
+	byteBuffer->WriteByte(mMessageLogout);
+	
+	//send it off to server
+	mNetwork->send(byteBuffer);
+}
+
 void ApplicationBreslin::sendJoinGame()
 {
 	ByteBuffer* byteBuffer = new ByteBuffer();
@@ -374,6 +383,11 @@ void ApplicationBreslin::createMainScreen()
 		mButtonJoinGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
 	}
 
+	if (!mButtonLogout)
+	{
+        	mButtonLogout    = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonLogout", "Logout");
+	}
+
 	if (!mButtonExit)
 	{
 		mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
@@ -384,9 +398,11 @@ void ApplicationBreslin::showMainScreen()
 {
 	LogString("showMainScreen");
 	mTrayMgr->moveWidgetToTray(mButtonJoinGame,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonLogout,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
 	mButtonJoinGame->show();
+	mButtonLogout->show();
 	mButtonExit->show();
 	
 	mTrayMgr->showCursor();
@@ -400,9 +416,11 @@ void ApplicationBreslin::hideMainScreen()
 {
 	LogString("hideMainScreen");
 	mButtonJoinGame->hide();
+	mButtonLogout->hide();
 	mButtonExit->hide();
 
 	mTrayMgr->removeWidgetFromTray(mButtonJoinGame);
+	mTrayMgr->removeWidgetFromTray(mButtonLogout);
 	mTrayMgr->removeWidgetFromTray(mButtonExit);
 }
 

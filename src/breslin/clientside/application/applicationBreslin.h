@@ -43,6 +43,7 @@ static const char mMessageServerExit  = 3;
 static const char mMessageConnect     = -101;
 static const char mAddSchool          = -109;
 static const char mMessageLogin       = -110;
+static const char mMessageLogout      = -120;
 static const char mMessageLoggedIn    = -113;
 static const char mMessageLoggedOut   = -114;
 static const char mMessageJoinGame    = -107;
@@ -70,6 +71,7 @@ OgreBites::Label* mLabelPassword;
 OgreBites::Label* mLabelFocus;
 
 OgreBites::Button* mButtonLogin;
+OgreBites::Button* mButtonLogout;
 OgreBites::Button* mButtonJoinGame;
 OgreBites::Button* mButtonExit;
 
@@ -123,6 +125,7 @@ void sendJoinGame();
 
 //login 
 void sendLogin();
+void sendLogout();
 
 //shutdown
 void shutdown();
