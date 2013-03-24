@@ -25,7 +25,6 @@ ApplicationLogin::~ApplicationLogin()
 
 void ApplicationLogin::enter()
 {
-	LogString("STATE: ApplicationLogin");
 	mApplicationBreslin->createLoginScreen();
 	mApplicationBreslin->showLoginScreen();
 }

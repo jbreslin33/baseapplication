@@ -12,12 +12,22 @@ initialize: function(serverIP, serverPort)
 	this.mMessageConnect     = -111; //browser code
 	this.mMessageDisconnect  = -112; //browser code
 
+	this.mAddSchool          = -109;
+	this.mMessageLogin       = -125; //broswer
+	this.mMessageLogout      = -126; //browser
+	this.mMessageLoggedIn    = -113; 
+	this.mMessageLoggedOut   = -114; 
+
+	this.mMessageJoinGame    = -117; //browser
+
 	//network
 	this.mNetwork = new Network(this,serverIP,serverPort);
         
-	//initilize
+	//state transition variables
         this.mSetup = false;
         this.mPlayingGame = false;
+	this.mConnectSent = false;
+	this.mLoggedIn = false;	
 
         //time
         this.mRenderTime = 0.0;
@@ -27,13 +37,16 @@ initialize: function(serverIP, serverPort)
         //game
         this.mGame = 0;
 
-	//gui
+	/*****GUI******/
+	//all
 	this.mButtonHit = 0;
 	this.mButtonExit = 0;
-	this.mButtonGame = 0;
-	this.mButtonTest = 0;
-	this.mButtonTag = 0;
-	this.mButtonTagAll = 0;
+
+	//main screen
+	this.mButtonJoinGame = 0;
+	
+	this.mStringUsername = '';
+	this.mStringPassword = '';
 
 	//border
 	this.mNorthBorder = 0;
@@ -44,10 +57,11 @@ initialize: function(serverIP, serverPort)
         //state machine (Menus)
         this.mStateMachine = new StateMachine();
 
-        this.mApplicationGlobal = new ApplicationGlobal(this);
+        this.mApplicationGlobal     = new ApplicationGlobal    (this);
 	this.mApplicationInitialize = new ApplicationInitialize(this);
-        this.mApplicationMain   = new ApplicationMain  (this);
-        this.mApplicationPlay   = new ApplicationPlay(this);
+	this.mApplicationLogin      = new ApplicationLogin     (this);
+        this.mApplicationMain       = new ApplicationMain      (this);
+        this.mApplicationPlay       = new ApplicationPlay      (this);
 
         this.mStateMachine.setGlobalState (this.mApplicationGlobal);
         this.mStateMachine.setCurrentState(this.mApplicationInitialize);
@@ -61,6 +75,7 @@ initialize: function(serverIP, serverPort)
 	this.mKey_counterclockwise = false;
 	this.mKey_clockwise = false;
 	this.mKey_esc = false;
+
 },
 
 log: function(msg)
@@ -96,12 +111,7 @@ processUpdate: function()
 
 shutdown: function()
 {
-/*
-        ByteBuffer* byteBuffer = new ByteBuffer();
-        byteBuffer->WriteByte(mMessageDisconnect);
-        mNetwork->send(byteBuffer);
-        mNetwork->reset();
-*/
+
 },
 
 /*********************************
@@ -114,6 +124,21 @@ sendConnect: function()
 	this.mNetwork.sendConnect();
 },
 
+
+/*********************************
+               LOGIN 
+**********************************/
+sendLogin: function()
+{
+	message = 'v1301 ' + 'ahh';
+	this.mNetwork.mSocket.emit('send_login', message);
+},
+
+sendLogout: function()
+{
+	message = '';
+	this.mNetwork.mSocket.emit('send_logout', message);
+},
 
 /*********************************
 
@@ -136,36 +161,7 @@ setup: function()
 /*********************************
                 GUI
 **********************************/
-
-createMainScreen: function()
-{
-	//make buttons
-/*
-        mButtonGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonGame", "Join Game");
-        mButtonTag = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTag", "Join Tag");
-        mButtonTagAll = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonTagAll", "Join TagAll");
-        mButtonExit = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
-*/
-	//create Buttons
-
-	//game
-	this.mButtonGame = this.createButton(300,100,100,50,"green","Join Game");
-	this.mButtonGame.onclick = function()
-	{
-		mApplication.mButtonHit = mApplication.mButtonGame;	
-	};
-
-	//exit
-	this.mButtonExit = this.createButton(300,200,100,50,"red","Exit");
-	this.mButtonExit.onclick = function()
-	{
-		mApplication.mButtonHit = mApplication.mButtonExit;	
-	};
-
-	//create Borders	
-	this.createBorders();
-},
-
+//CREATE BUTTON CONVIENCE FUNCTION
 createButton: function(x,z,w,h,b,i)
 {
 	button = document.createElement("BUTTON");
@@ -187,6 +183,7 @@ createButton: function(x,z,w,h,b,i)
 	return button;
 },
 
+//BORDERS
 createBorder: function(x,z,w,h,b,i)
 {
 	border = document.createElement("div");
@@ -222,30 +219,59 @@ hideBorders: function()
 
 },
 
+//LOGIN SCREEN
+createLoginScreen: function()
+{
+	//logout game
+        this.mButtonLogin = this.createButton(300,100,100,50,"green","Login");
+        this.mButtonLogin.onclick = function()
+        {
+                mApplication.mButtonHit = mApplication.mButtonLogin;
+        };
+},
+
+showLoginScreen: function()
+{       
+        this.mButtonLogin.style.display="block";
+},
+
+hideLoginScreen: function()
+{       
+        this.mButtonLogin.style.display="none";
+},
+
+
+//MAIN SCREEN
+createMainScreen: function()
+{
+	//join game
+	this.mButtonJoinGame = this.createButton(300,100,100,50,"green","Join Game");
+	this.mButtonJoinGame.onclick = function()
+	{
+		mApplication.mButtonHit = mApplication.mButtonJoinGame;	
+	};
+
+	//logout 
+	this.mButtonLogout = this.createButton(300,100,100,50,"green","Logout");
+	this.mButtonLogout.onclick = function()
+	{
+		mApplication.mButtonHit = mApplication.mButtonLogout;	
+	};
+
+	//create Borders	
+	this.createBorders();
+},
 
 showMainScreen: function()
 {
-	this.mButtonGame.style.display="block";
-	this.mButtonExit.style.display="block";
-/*
-     mTrayMgr->moveWidgetToTray(mButtonGame,OgreBites::TL_CENTER);
-        mTrayMgr->moveWidgetToTray(mButtonTag,OgreBites::TL_CENTER);
-        mTrayMgr->moveWidgetToTray(mButtonTagAll,OgreBites::TL_CENTER);
-        mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
-        
-        mButtonGame->show();
-        mButtonTag->show();
-        mButtonTagAll->show();
-        mButtonExit->show();
-
-        mTrayMgr->showCursor();
-*/
+	this.mButtonJoinGame.style.display="block";
+	this.mButtonLogout.style.display="block";
 },
 
 hideMainScreen: function()
 {
-	this.mButtonGame.style.display="none";
-	this.mButtonExit.style.display="none";
+	this.mButtonJoinGame.style.display="none";
+	this.mButtonLogout.style.display="none";
 },
 
 
