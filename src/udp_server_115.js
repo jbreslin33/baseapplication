@@ -26,7 +26,7 @@ app.listen(10000);
 
 // routing
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/main_school.html');
+  res.sendfile(__dirname + '/main_115.html');
 });
 
 
