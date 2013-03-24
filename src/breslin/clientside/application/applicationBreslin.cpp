@@ -211,6 +211,11 @@ void ApplicationBreslin::checkForByteBuffer()
 			LogString("LoggedIn");
 		}
 
+		if (type == mMessageLoggedOut)
+		{
+			LogString("LoggedOut");
+		}
+
 
 /*                
 		switch(type)
