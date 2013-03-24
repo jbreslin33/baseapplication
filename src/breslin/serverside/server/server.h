@@ -89,6 +89,8 @@ public:
 
 	//login
 	static const int mLogin              	 = -110;
+	static const int mLoginBrowser        	 = -125;
+	static const int mLogout        	 = -120;
 	static const int mLoggedIn             	 = -113;
 	static const int mLoggedOut            	 = -114;
 	

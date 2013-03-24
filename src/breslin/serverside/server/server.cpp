@@ -210,6 +210,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			}
                 }
 	}
+
+	else if (type == mLoginBrowser)
+	{
+		LogString("loginBrowser");
+	}
 	
 	/***QUIT GAME********/
 	else if (type == mQuitGame)
