@@ -36,13 +36,18 @@ void ApplicationMain::enter()
 
 void ApplicationMain::execute()
 {
+/*
+	if (mApplication->mLoggedIn == true)
+	{
+		mApplicationBreslin->
+		mApplicationBreslin->showMainScreen();
+	}
+*/
+
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogin)
 	{
 		mApplicationBreslin->mButtonHit = NULL;
 		mApplicationBreslin->sendLogin();
-				
-		//mApplicationBreslin->hideMainScreen();
-		//mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGame)
 	{

@@ -46,6 +46,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mFake = true;
 	mConnectSent = false;
 	mButtonHit = NULL;
+	mLoggedIn = false;
 
 	//time
 	mRenderTime = 0.0f;
@@ -209,38 +210,14 @@ void ApplicationBreslin::checkForByteBuffer()
 		if (type == mMessageLoggedIn)
 		{
 			LogString("LoggedIn");
+			mLoggedIn = true;
 		}
 
 		if (type == mMessageLoggedOut)
 		{
 			LogString("LoggedOut");
+			mLoggedIn = false;
 		}
-
-
-/*                
-		switch(type)
-                {
-                	case mAddSchool:
-				//mStringSchool.clear();		
-
-				std::string school;		
-
-				int length = byteBuffer->ReadByte();
-				
-				char charArray[length];
-
-				for (int i = 0; i < length; i++)
-				{
-					char c =  byteBuffer->ReadByte(); 
-                                        school.append(1,c);
-				}			
-			
-				//now add string to select menu 
-				mSelectMenuSchool->addItem(school);
-				break;
-
-		}
-*/
 
 		//pass on to game if there is one....
 		if (mGame)

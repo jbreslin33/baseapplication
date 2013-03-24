@@ -58,6 +58,7 @@ bool mSetup;
 bool mPlayingGame;
 bool mFake;
 bool mConnectSent;
+bool mLoggedIn;
 
 //gui
 OgreBites::SelectMenu* mSelectMenuSchool;
