@@ -56,5 +56,11 @@ void ApplicationLogin::execute()
 
 void ApplicationLogin::exit()
 {
+	mApplicationBreslin->mStringUsername.clear();
+	mApplicationBreslin->mStringPassword.clear();
+
+	mApplicationBreslin->mLabelUsername->setCaption("Username");
+	mApplicationBreslin->mLabelPassword->setCaption("Password");
+
 	mApplicationBreslin->hideLoginScreen();
 }
