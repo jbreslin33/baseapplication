@@ -76,6 +76,47 @@ io.sockets.on('connection', function (socket)
                 {
                 });
         });
+
+ 	socket.on('send_login', function(message,remote)
+        {
+                mMessage = message;
+                var messageArray = message.split(" ");
+
+                var username = messageArray[0];                    
+		var usernameArray = username.split("");
+
+                var password = messageArray[1];                    
+		var passwordArray = password.split("");
+
+		var sizeOfUsername = parseInt(usernameArray.length);	
+		var sizeOfPassword = parseInt(passwordArray.length);	
+
+		var sizeOfBuffer = 4 + sizeOfUsername + sizeOfPassword; 
+		console.log('sizeOfBuffer:' + sizeOfBuffer);
+
+                //send to c++ server
+                var buf = new Buffer(sizeOfBuffer);
+		type = -125;
+                buf.writeInt8(type,0);
+                buf.writeInt8(socket.mClientID,1);
+
+                buf.writeInt8(sizeOfUsername,2);
+		for (i = 0; i < sizeOfUsername; i++)
+		{
+                	buf.writeInt8(usernameArray[i],i+3);
+		}
+
+                buf.writeInt8(sizeOfPassword,2);
+		for (b = 0; b < sizeOfPassword; b++)
+		{
+                	buf.writeInt8(passwordArray[b],b+4+sizeOfUsername);
+		}
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+        });
+
 });
 
 server.on("message", function (msg, rinfo)
