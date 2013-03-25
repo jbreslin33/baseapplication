@@ -94,10 +94,13 @@ io.sockets.on('connection', function (socket)
 		var sizeOfBuffer = 4 + sizeOfUsername + sizeOfPassword; 
 		console.log('sizeOfBuffer:' + sizeOfBuffer);
 
-                //send to c++ server
-                var buf = new Buffer(sizeOfBuffer);
 		type = -125;
+
+                //send to c++ server
+                //var buf = new Buffer(parseInt(sizeOfBuffer));
+                var buf = new Buffer(1);
                 buf.writeInt8(type,0);
+/*
                 buf.writeInt8(socket.mClientID,1);
 
                 buf.writeInt8(sizeOfUsername,2);
@@ -111,7 +114,7 @@ io.sockets.on('connection', function (socket)
 		{
                 	buf.writeInt8(passwordArray[b],b+4+sizeOfUsername);
 		}
-
+*/
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
                 });
