@@ -76,6 +76,9 @@ initialize: function(serverIP, serverPort)
 	this.mKey_clockwise = false;
 	this.mKey_esc = false;
 
+	this.log('sendingConnect....................');
+	this.sendConnect();	
+
 },
 
 log: function(msg)
@@ -124,13 +127,9 @@ sendConnect: function()
 	this.mNetwork.sendConnect();
 },
 
-
-/*********************************
-               LOGIN 
-**********************************/
 sendLogin: function()
 {
-	message = 'v1301 ' + 'ahh';
+	message = 'v1301 ahh';
 	this.mNetwork.mSocket.emit('send_login', message);
 },
 
@@ -138,6 +137,11 @@ sendLogout: function()
 {
 	message = '';
 	this.mNetwork.mSocket.emit('send_logout', message);
+},
+
+sendJoinGame: function()
+{
+	this.log('sendJoinGame is empty');
 },
 
 /*********************************

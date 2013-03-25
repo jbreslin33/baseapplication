@@ -49,6 +49,7 @@ io.sockets.on('connection', function (socket)
                 buf.writeInt8(mess,0);
 
 		mClientIDCounter++;
+		console.log('clientID socket connect:' + socket.mClientID);
 		socket.mClientID = mClientIDCounter;
                 
 		buf.writeInt8(socket.mClientID,1);
@@ -77,6 +78,28 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
+        socket.on('send_login', function(message,remote)
+        {
+                mMessage = message;
+                var messageArray = message.split(" ");
+
+                var currentKey = parseInt(messageArray[1]);                    
+                type = -125;
+
+                //send to c++ server
+                var buf = new Buffer(3);
+                buf.writeInt8(type,0);
+		console.log('clientID socket login:' + socket.mClientID);
+                buf.writeInt8(socket.mClientID,1);
+                buf.writeInt8(2,2);
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+        });
+
+
+/*
  	socket.on('send_login', function(message,remote)
         {
                 mMessage = message;
@@ -98,9 +121,9 @@ io.sockets.on('connection', function (socket)
 
                 //send to c++ server
                 //var buf = new Buffer(parseInt(sizeOfBuffer));
-                var buf = new Buffer(1);
+                var buf = new Buffer(2);
                 buf.writeInt8(type,0);
-/*
+                buf.writeInt8(socket.mClientID,1);
                 buf.writeInt8(socket.mClientID,1);
 
                 buf.writeInt8(sizeOfUsername,2);
@@ -114,11 +137,12 @@ io.sockets.on('connection', function (socket)
 		{
                 	buf.writeInt8(passwordArray[b],b+4+sizeOfUsername);
 		}
-*/
+
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
                 });
         });
+*/
 
 });
 
