@@ -94,7 +94,8 @@ io.sockets.on('connection', function (socket)
                 type = -125;
 
                 //send to c++ server
-                var buf = new Buffer(2);
+		var bufLength = parseInt(4 + usernameArraySize + passwordArraySize);  
+                var buf = new Buffer(bufLength);
                 buf.writeInt8(type,0);
                 buf.writeInt8(socket.mClientID,1);
 
