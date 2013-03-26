@@ -77,7 +77,7 @@ io.sockets.on('connection', function (socket)
                 {
                 });
         });
-
+/*
         socket.on('send_login', function(message,remote)
         {
                 mMessage = message;
@@ -97,9 +97,9 @@ io.sockets.on('connection', function (socket)
                 {
                 });
         });
+*/
 
 
-/*
  	socket.on('send_login', function(message,remote)
         {
                 mMessage = message;
@@ -142,7 +142,7 @@ io.sockets.on('connection', function (socket)
                 {
                 });
         });
-*/
+
 
 });
 

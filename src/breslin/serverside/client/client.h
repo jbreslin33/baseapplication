@@ -90,7 +90,9 @@ public:
 
 	//loggedIn
 	void sendLoggedIn();
+	void sendLoggedInBrowser();
 	void sendLoggedOut();
+	void sendLoggedOutBrowser();
 
 	//questions
 	void sendQuestion();

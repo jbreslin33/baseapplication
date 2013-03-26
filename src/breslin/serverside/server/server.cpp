@@ -61,6 +61,7 @@ void Server::createClient(struct sockaddr *address)
 //browser
 void Server::createClient(struct sockaddr * address, int clientID)
 {
+/*
 	Client* client = new Client(this, address, clientID);
 
 	//give this client all current shapes	
@@ -72,7 +73,7 @@ void Server::createClient(struct sockaddr * address, int clientID)
 	{	
 		client->createShape();
 	}
-	
+*/	
 	// that's that as we cannot communicate back to the browser from here..unless this is where we change db or whatever medium we will use to communicate with browser.
 }
 
@@ -128,8 +129,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mConnectBrowser)
 	{
 		int clientID = mes->ReadByte();
+ 		Client* client = new Client(this, address, clientID);
+		LogString("connected browser client!!!!!!!!!!!!");
 
-		createClient(address,clientID);
+		client->sendSchools();
+		//createClient(address,clientID);
 
 	}
 
@@ -214,6 +218,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mLoginBrowser)
 	{
 		LogString("loginBrowser");
+		int clientID = mes->ReadByte(); //client id
+		LogString("clientID:%d",clientID);
+		int usernameSize = mes->ReadByte();
+		LogString("usernameSize:%d",usernameSize);
+		client->sendLoggedInBrowser();
+	
 	}
 	
 	/***QUIT GAME********/

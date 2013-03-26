@@ -154,7 +154,14 @@ void Client::sendLoggedIn()
         mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
         mServer->mMessage.WriteByte(mServer->mLoggedIn); // add type
 	SendPacket(&mServer->mMessage);
+}
 
+void Client::sendLoggedInBrowser()
+{
+        mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+        mServer->mMessage.WriteByte(mServer->mLoggedIn); // add type
+        mServer->mMessage.WriteByte(mClientID); //client id for browsers
+	SendPacket(&mServer->mMessage);
 }
 
 void Client::sendLoggedOut()
@@ -164,6 +171,14 @@ void Client::sendLoggedOut()
 	SendPacket(&mServer->mMessage);
 }
 
+void Client::sendLoggedOutBrowser()
+{
+        mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+        mServer->mMessage.WriteByte(mServer->mLoggedOut); // add type
+        mServer->mMessage.WriteByte(mClientID); //client id for browsers
+        SendPacket(&mServer->mMessage);
+}
+
 void Client::writeQuestion()
 {
 
@@ -171,37 +186,6 @@ void Client::writeQuestion()
 
 void Client::writeQuestionBrowser()
 {
-/*
-        mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
-
-        mGame->mServer->mMessage.WriteByte(mGame->mServer->mAddShape); // type
-
-        mGame->mServer->mMessage.WriteByte(client->mClientID); //client id for browsers
-
-        if (client == mClient)
-        {
-                mGame->mServer->mMessage.WriteByte(1);
-        }
-        else
-        {
-                mGame->mServer->mMessage.WriteByte(0);
-        }
-        mGame->mServer->mMessage.WriteByte(mIndex);
-
-        mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().x);
-        LogString("x:%f",mSceneNode->getPosition().x);
-        mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().y);
-        mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().z);
-
-        mGame->mServer->mMessage.WriteFloat(mRotation->x);
-        mGame->mServer->mMessage.WriteFloat(mRotation->z);
-
-        //mesh
-        mGame->mServer->mMessage.WriteByte(mMeshCode);
-
-        //animation
-        mGame->mServer->mMessage.WriteByte(mAnimated);
-*/
 }
 
 

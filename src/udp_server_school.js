@@ -87,11 +87,11 @@ io.sockets.on('connection', function (socket)
                 type = -125;
 
                 //send to c++ server
-                var buf = new Buffer(3);
+                var buf = new Buffer(1);
                 buf.writeInt8(type,0);
 		console.log('clientID socket login:' + socket.mClientID);
-                buf.writeInt8(socket.mClientID,1);
-                buf.writeInt8(2,2);
+                //buf.writeInt8(socket.mClientID,1);
+                //buf.writeInt8(2,2);
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
@@ -124,7 +124,6 @@ io.sockets.on('connection', function (socket)
                 var buf = new Buffer(2);
                 buf.writeInt8(type,0);
                 buf.writeInt8(socket.mClientID,1);
-                buf.writeInt8(socket.mClientID,1);
 
                 buf.writeInt8(sizeOfUsername,2);
 		for (i = 0; i < sizeOfUsername; i++)
@@ -143,7 +142,6 @@ io.sockets.on('connection', function (socket)
                 });
         });
 */
-
 });
 
 server.on("message", function (msg, rinfo)
