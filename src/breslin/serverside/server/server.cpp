@@ -224,6 +224,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
  				printf("\n");
                                 printf("\n");
+				printf("browser i am");
                                 //set client to pointer
                                 client = mClientVector.at(i);
 
@@ -237,9 +238,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 //loop thru and set mStringUsername from client
                                 for (int i = 0; i < sizeOfUsername; i++)
                                 {
-                                        char c = mes->ReadByte();
-                                        client->mStringUsername.append(1,c);
-                                        printf("%c",c);
+                                        int numeric = mes->ReadByte();
+ 					char ascii = (char)numeric;
+
+                                        client->mStringUsername.append(1,ascii);
+                                        printf("%c",ascii);
                                 }
                                 printf("\n");
 
@@ -249,9 +252,10 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 //loop thru and set mStringPassword from client
                                 for (int i = 0; i < sizeOfPassword; i++)
                                 {
-                                        char c = mes->ReadByte();
-                                        client->mStringPassword.append(1,c);
-                                        printf("%c",c);
+                                        int numeric = mes->ReadByte();
+ 					char ascii = (char)numeric;
+                                        client->mStringPassword.append(1,ascii);
+                                        printf("%c",ascii);
                                 }
                                 printf("\n");
 

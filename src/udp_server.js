@@ -103,9 +103,28 @@ io.sockets.on('connection', function (socket)
 		for (u = 0; u < usernameArraySize; u++)
 		{
 			var index = parseInt(u + 3);
+/*
+			if (usernameArray[u] == '0')
+			{
+				usernameArray[u] = '48';
+			}
+			if (usernameArray[u] == '1')
+			{
+				usernameArray[u] = '49'; 
+			}
+			if (usernameArray[u] == '2')
+			{
+				usernameArray[u] = '50'; 
+			}
+			if (usernameArray[u] == '3')
+			{
+				usernameArray[u] = '51'; 
+			}
+*/
+
 			var charCode = usernameArray[u].charCodeAt(0);
-			buf.writeInt8(parseInt(charCode),index);
-			console.log(usernameArray[u]);
+			buf.writeInt8(charCode,index);
+			console.log(charCode);
 		} 
 
 		var passwordIndex  = parseInt(3 + usernameArraySize);
@@ -114,8 +133,8 @@ io.sockets.on('connection', function (socket)
 		{
 			var index = parseInt(4 + p);
 			var charCode = passwordArray[p].charCodeAt(0);
-			buf.writeInt8(parseInt(charCode),index);
-			console.log(passwordArray[p]);
+			buf.writeInt8(charCode,index);
+			console.log(charCode);
 		} 
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
