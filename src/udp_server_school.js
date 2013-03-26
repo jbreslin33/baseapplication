@@ -87,11 +87,9 @@ io.sockets.on('connection', function (socket)
                 type = -125;
 
                 //send to c++ server
-                var buf = new Buffer(2);
+                var buf = new Buffer(3);
                 buf.writeInt8(type,0);
-		console.log('clientID socket login:' + socket.mClientID);
                 buf.writeInt8(socket.mClientID,1);
-                //buf.writeInt8(2,2);
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {

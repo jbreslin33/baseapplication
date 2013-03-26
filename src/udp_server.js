@@ -124,8 +124,7 @@ io.sockets.on('connection', function (socket)
                 var buf = new Buffer(2);
                 buf.writeInt8(type,0);
                 buf.writeInt8(socket.mClientID,1);
-                buf.writeInt8(socket.mClientID,1);
-
+/*
                 buf.writeInt8(sizeOfUsername,2);
 		for (i = 0; i < sizeOfUsername; i++)
 		{
@@ -137,7 +136,7 @@ io.sockets.on('connection', function (socket)
 		{
                 	buf.writeInt8(passwordArray[b],b+4+sizeOfUsername);
 		}
-
+*/
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
                 });
