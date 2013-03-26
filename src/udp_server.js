@@ -105,6 +105,7 @@ io.sockets.on('connection', function (socket)
 			var index = parseInt(u + 3);
 			var charCode = usernameArray[u].charCodeAt(0);
 			buf.writeInt8(parseInt(charCode),index);
+			console.log(usernameArray[u]);
 		} 
 
 		var passwordIndex  = parseInt(3 + usernameArraySize);
@@ -114,6 +115,7 @@ io.sockets.on('connection', function (socket)
 			var index = parseInt(4 + p);
 			var charCode = passwordArray[p].charCodeAt(0);
 			buf.writeInt8(parseInt(charCode),index);
+			console.log(passwordArray[p]);
 		} 
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
