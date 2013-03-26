@@ -220,8 +220,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		LogString("loginBrowser");
 		int clientID = mes->ReadByte(); //client id
 		LogString("clientID:%d",clientID);
-		int usernameSize = mes->ReadByte();
-		LogString("usernameSize:%d",usernameSize);
+		//int usernameSize = mes->ReadByte();
+		//LogString("usernameSize:%d",usernameSize);
 		client->sendLoggedInBrowser();
 	
 	}
