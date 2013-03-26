@@ -87,16 +87,14 @@ io.sockets.on('connection', function (socket)
                 var usernameArray = username.split("");
 		var usernameArraySize = usernameArray.length;
 
-		for (i = 0; i < usernameArraySize; i++)
-		{
-			console.log(usernameArray[i]);
-		}
+             	var password = messageArray[1];                    
+                var passwordArray = password.split("");
+		var passwordArraySize = passwordArray.length;
 
-                var currentKey = parseInt(messageArray[1]);                    
                 type = -125;
 
                 //send to c++ server
-                var buf = new Buffer(3);
+                var buf = new Buffer(2);
                 buf.writeInt8(type,0);
                 buf.writeInt8(socket.mClientID,1);
 
