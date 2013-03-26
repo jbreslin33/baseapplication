@@ -95,10 +95,25 @@ io.sockets.on('connection', function (socket)
 
                 //send to c++ server
 		var bufLength = parseInt(4 + usernameArraySize + passwordArraySize);  
+		console.log('bufLength:' + bufLength);
                 var buf = new Buffer(bufLength);
+		console.log('type:' + type);
                 buf.writeInt8(type,0);
+		console.log('socket.mClientID:' + socket.mClientID);
                 buf.writeInt8(socket.mClientID,1);
+			
 		buf.writeInt8(usernameArraySize,2);
+		console.log('usernameArraySize:' + usernameArraySize);
+
+		for (u = 0; u < usernameArraySize; u++)
+		{
+			var index = parseInt(u + 3);
+			console.log('index:' + index);
+			//"ABC".charCodeAt(0)
+			var charCode = usernameArray[u].charCodeAt(0);
+			console.log('G:' + charCode + ':G');
+			buf.writeInt8(parseInt(charCode),index);
+		} 
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
