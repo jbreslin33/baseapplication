@@ -98,6 +98,7 @@ io.sockets.on('connection', function (socket)
                 var buf = new Buffer(bufLength);
                 buf.writeInt8(type,0);
                 buf.writeInt8(socket.mClientID,1);
+		buf.writeInt8(usernameArraySize,2);
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
