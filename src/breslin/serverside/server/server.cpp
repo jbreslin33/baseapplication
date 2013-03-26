@@ -245,7 +245,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                         printf("%c",ascii);
                                 }
                                 printf("\n");
-
+/*
                                 int sizeOfPassword = mes->ReadByte();
                                 LogString("sizeOfPassword:%d",sizeOfPassword);
 
@@ -258,7 +258,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                         printf("%c",ascii);
                                 }
                                 printf("\n");
-
+*/
                                 //check against db
                                 if (getPasswordMatch(client->mStringUsername,client->mStringPassword))
                                 {
