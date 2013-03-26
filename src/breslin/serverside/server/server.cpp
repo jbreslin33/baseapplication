@@ -217,13 +217,57 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	else if (type == mLoginBrowser)
 	{
-		LogString("loginBrowser");
-		int clientID = mes->ReadByte(); //client id
-		LogString("clientID:%d",clientID);
-		int usernameSize = mes->ReadByte();
-		LogString("usernameSize:%d",usernameSize);
-		client->sendLoggedInBrowser();
-	
+                int clientID = mes->ReadByte();
+		for (int i = 0; i < mClientVector.size(); i++)
+		{
+			if (mClientVector.at(i)->mClientID == clientID)
+			{
+ 				printf("\n");
+                                printf("\n");
+                                //set client to pointer
+                                client = mClientVector.at(i);
+
+                                //clear username and password strings
+                                client->mStringUsername.clear();
+                                client->mStringPassword.clear();
+
+                                int sizeOfUsername = mes->ReadByte();
+                                LogString("sizeOfUsername:%d",sizeOfUsername);
+
+                                //loop thru and set mStringUsername from client
+                                for (int i = 0; i < sizeOfUsername; i++)
+                                {
+                                        char c = mes->ReadByte();
+                                        client->mStringUsername.append(1,c);
+                                        printf("%c",c);
+                                }
+                                printf("\n");
+
+                                int sizeOfPassword = mes->ReadByte();
+                                LogString("sizeOfPassword:%d",sizeOfPassword);
+
+                                //loop thru and set mStringPassword from client
+                                for (int i = 0; i < sizeOfPassword; i++)
+                                {
+                                        char c = mes->ReadByte();
+                                        client->mStringPassword.append(1,c);
+                                        printf("%c",c);
+                                }
+                                printf("\n");
+
+                                //check against db
+                                if (getPasswordMatch(client->mStringUsername,client->mStringPassword))
+                                {
+                                        client->mLoggedIn = true;
+                                        client->sendLoggedInBrowser();
+                                }
+                                else
+                                {
+                                        client->mLoggedIn = false;
+                                        client->sendLoggedOutBrowser();
+                                }
+			}
+		}	
 	}
 	
 	/***QUIT GAME********/
