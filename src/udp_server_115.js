@@ -49,6 +49,7 @@ io.sockets.on('connection', function (socket)
                 buf.writeInt8(mess,0);
 
 		mClientIDCounter++;
+		console.log('clientID socket connect:' + socket.mClientID);
 		socket.mClientID = mClientIDCounter;
                 
 		buf.writeInt8(socket.mClientID,1);
@@ -77,46 +78,83 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
- 	socket.on('send_login', function(message,remote)
+        socket.on('send_login', function(message,remote)
         {
+		console.log('message:' + message[0]);
+		console.log('message:' + message[1]);
+		console.log('message:' + message[2]);
+		buffy = new Buffer(message.length);
+		
+		for (var i = 0; i < message.length ; i++)
+		{
+  			buffy[i] = message.charCodeAt(i);
+		}
+
+		console.log(buffy);	
+
                 mMessage = message;
                 var messageArray = message.split(" ");
 
-                var username = messageArray[0];                    
-		var usernameArray = username.split("");
+             	var username = messageArray[0];                    
+                var usernameArray = username.split("");
+		var usernameArraySize = usernameArray.length;
 
-                var password = messageArray[1];                    
-		var passwordArray = password.split("");
+             	var password = messageArray[1];                    
+                var passwordArray = password.split("");
+		var passwordArraySize = passwordArray.length;
 
-		var sizeOfUsername = parseInt(usernameArray.length);	
-		var sizeOfPassword = parseInt(passwordArray.length);	
-
-		var sizeOfBuffer = 4 + sizeOfUsername + sizeOfPassword; 
-		console.log('sizeOfBuffer:' + sizeOfBuffer);
+                type = -125;
 
                 //send to c++ server
-                var buf = new Buffer(sizeOfBuffer);
-		type = -125;
+		var bufLength = parseInt(4 + usernameArraySize + passwordArraySize);  
+                var buf = new Buffer(bufLength);
                 buf.writeInt8(type,0);
+		console.log(type);
+		console.log(buf.readInt8(0));
                 buf.writeInt8(socket.mClientID,1);
-
-                buf.writeInt8(sizeOfUsername,2);
-		for (i = 0; i < sizeOfUsername; i++)
+		console.log(socket.mClientID);
+		console.log(buf.readInt8(1));
+			
+		var usernameSizeIndex  = parseInt(2);
+		buf.writeInt8(usernameArraySize,usernameSizeIndex);
+		console.log(usernameArraySize);
+		console.log(buf.readInt8(usernameSizeIndex));
+		for (u = 0; u < usernameArraySize; u++)
 		{
-                	buf.writeInt8(usernameArray[i],i+3);
-		}
+			var bufIndex = parseInt(3 + u);
+			var charCode = usernameArray[u].charCodeAt(0);
+			buf.writeInt8(charCode,bufIndex);
+			console.log(charCode);
+			console.log(buf.readInt8(bufIndex));
+		} 
 
-                buf.writeInt8(sizeOfPassword,2);
-		for (b = 0; b < sizeOfPassword; b++)
+		var passwordSizeIndex  = parseInt(3 + usernameArraySize);
+		buf.writeInt8(passwordArraySize,passwordSizeIndex);
+		console.log(passwordArraySize);
+		console.log(buf.readInt8(passwordSizeIndex));
+		for (p = 0; p < passwordArraySize; p++)
 		{
-                	buf.writeInt8(passwordArray[b],b+4+sizeOfUsername);
-		}
+			var bufIndex = parseInt(4 + p);
+			var charCode = passwordArray[p].charCodeAt(0);
+			buf.writeInt8(charCode,bufIndex);
+			console.log(charCode);
+			console.log(buf.readInt8(bufIndex));
+		} 
+		console.log(buf.readInt8(0));	
+		console.log(buf.readInt8(1));	
+
+		for (b = 2; b < buf.length; b++)
+		{
+			console.log(buf.readInt8(b));	
+		}	
+		console.log('the buf');
+		console.log(buf);
+	
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
                 });
         });
-
 });
 
 server.on("message", function (msg, rinfo)
