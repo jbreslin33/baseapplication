@@ -234,8 +234,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
                                 int sizeOfUsername = mes->ReadByte();
                                 LogString("sizeOfUsername:%d",sizeOfUsername);
+                                
+				int sizeOfPassword = mes->ReadByte();
+                                LogString("sizeOfPassword:%d",sizeOfPassword);
 
-                                //loop thru and set mStringUsername from client
+                               
+				 //loop thru and set mStringUsername from client
                                 for (int i = 0; i < sizeOfUsername; i++)
                                 {
                                         int numeric = mes->ReadByte();
@@ -246,8 +250,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 }
                                 printf("\n");
 
-                                int sizeOfPassword = mes->ReadByte();
-                                LogString("sizeOfPassword:%d",sizeOfPassword);
 
                                 //loop thru and set mStringPassword from client
                                 for (int i = 0; i < sizeOfPassword; i++)

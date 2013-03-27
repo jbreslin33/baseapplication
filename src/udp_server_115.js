@@ -78,8 +78,63 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
+	
         socket.on('send_login', function(message,remote)
         {
+		var messageLength = message.length;
+		var blankSpot = 0;	
+	
+		for (i = 0; i < messageLength; i++)
+		{
+			if (message[i] == ' ')	
+			{
+				console.log('message:' + i + ' is null'); 
+				blankSpot = i;
+			}
+		}
+
+
+                //send to c++ server
+	
+		//buf
+                var bufLength = parseInt(3 + messageLength); // 4 items minus blankspot + messageLength
+                var buf = new Buffer(bufLength);
+
+		//type
+                type = -125;
+                buf.writeInt8(type,0);
+                console.log(type);
+                console.log(buf.readInt8(0));
+
+		//mClientID
+                buf.writeInt8(socket.mClientID,1);
+                console.log(socket.mClientID);
+                console.log(buf.readInt8(1));
+
+		//usernameLength
+		var usernameLength = parseInt(blankSpot - 1);
+                buf.writeInt8(usernameLength,2);
+                console.log(usernameLength);
+                console.log(buf.readInt8(2));
+
+		//passwordLength
+		var passwordLength = parseInt(messageLength - blankSpot - 1);
+                buf.writeInt8(passwordLength,3);
+                console.log(passwordLength);
+                console.log(buf.readInt8(3));
+
+
+		
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+
+		
+        });
+/*
+        socket.on('send_login', function(message,remote)
+        {
+		console.log('messageLength:' + message.length)
 		console.log('message:' + message[0]);
 		console.log('message:' + message[1]);
 		console.log('message:' + message[2]);
@@ -155,6 +210,7 @@ io.sockets.on('connection', function (socket)
                 {
                 });
         });
+*/
 });
 
 server.on("message", function (msg, rinfo)
