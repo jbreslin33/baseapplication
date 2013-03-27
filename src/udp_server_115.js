@@ -112,7 +112,7 @@ io.sockets.on('connection', function (socket)
                 console.log(buf.readInt8(1));
 
 		//usernameLength
-		var usernameLength = parseInt(blankSpot - 1);
+		var usernameLength = parseInt(blankSpot);
                 buf.writeInt8(usernameLength,2);
                 console.log(usernameLength);
                 console.log(buf.readInt8(2));
