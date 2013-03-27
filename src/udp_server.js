@@ -97,26 +97,44 @@ io.sockets.on('connection', function (socket)
 		var bufLength = parseInt(4 + usernameArraySize + passwordArraySize);  
                 var buf = new Buffer(bufLength);
                 buf.writeInt8(type,0);
+		console.log(type);
+		console.log(buf.readInt8(0));
                 buf.writeInt8(socket.mClientID,1);
+		console.log(socket.mClientID);
+		console.log(buf.readInt8(1));
 			
-		buf.writeInt8(usernameArraySize,2);
+		var usernameSizeIndex  = parseInt(2);
+		buf.writeInt8(usernameArraySize,usernameSizeIndex);
+		console.log(usernameArraySize);
+		console.log(buf.readInt8(usernameSizeIndex));
 		for (u = 0; u < usernameArraySize; u++)
 		{
-			var index = parseInt(u + 3);
+			var bufIndex = parseInt(3 + u);
 			var charCode = usernameArray[u].charCodeAt(0);
-			buf.writeInt8(charCode,index);
+			buf.writeInt8(charCode,bufIndex);
 			console.log(charCode);
+			console.log(buf.readInt8(bufIndex));
 		} 
 
-		var passwordIndex  = parseInt(3 + usernameArraySize);
-		buf.writeInt8(passwordArraySize,passwordIndex);
+		var passwordSizeIndex  = parseInt(3 + usernameArraySize);
+		buf.writeInt8(passwordArraySize,passwordSizeIndex);
+		console.log(passwordArraySize);
+		console.log(buf.readInt8(passwordSizeIndex));
 		for (p = 0; p < passwordArraySize; p++)
 		{
-			var index = parseInt(4 + p);
+			var bufIndex = parseInt(4 + p);
 			var charCode = passwordArray[p].charCodeAt(0);
-			buf.writeInt8(charCode,index);
+			buf.writeInt8(charCode,bufIndex);
 			console.log(charCode);
+			console.log(buf.readInt8(bufIndex));
 		} 
+		console.log(buf.readInt8(0));	
+		console.log(buf.readInt8(1));	
+
+		for (b = 2; b < buf.length; b++)
+		{
+			console.log(buf.readInt8(b));	
+		}	
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
