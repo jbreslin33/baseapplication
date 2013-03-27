@@ -80,6 +80,15 @@ io.sockets.on('connection', function (socket)
 
         socket.on('send_login', function(message,remote)
         {
+		buffy = new Buffer(message.length);
+		
+		for (var i = 0; i < message.length ; i++)
+		{
+  			buffy[i] = message.charCodeAt(i);
+		}
+
+		console.log(buffy);	
+
                 mMessage = message;
                 var messageArray = message.split(" ");
 
@@ -135,6 +144,9 @@ io.sockets.on('connection', function (socket)
 		{
 			console.log(buf.readInt8(b));	
 		}	
+		console.log('the buf');
+		console.log(buf);
+	
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
