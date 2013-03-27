@@ -252,13 +252,17 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 
                                 //loop thru and set mStringPassword from client
+				
                                 for (int i = 0; i < sizeOfPassword; i++)
                                 {
                                         int numeric = mes->ReadByte();
  					char ascii = (char)numeric;
+
                                         client->mStringPassword.append(1,ascii);
                                         printf("%c",ascii);
                                 }
+				
+				
                                 printf("\n");
 
                                 //check against db

@@ -126,9 +126,14 @@ io.sockets.on('connection', function (socket)
 
 		for (u = 0; u < usernameLength; u++)
 		{
+			console.log(message[parseInt(u)].charCodeAt(0));
   			buf.writeInt8(message[u].charCodeAt(0),parseInt(u + 4));
-			//buf.writeInt8(parseInt(message[u]),parseInt(u + 4));	
-			//buf.writeInt8(message[u],4);	
+		}
+
+		for (p = 0; p < passwordLength; p++)
+		{
+			console.log(message[parseInt(p + blankSpot + 1)].charCodeAt(0));
+  			buf.writeInt8(message[parseInt(p + blankSpot + 1)].charCodeAt(0),parseInt(usernameLength + 4 + p));
 		}
 
 		
