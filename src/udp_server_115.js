@@ -124,6 +124,13 @@ io.sockets.on('connection', function (socket)
                 console.log(buf.readInt8(3));
 
 
+		for (u = 0; u < usernameLength; u++)
+		{
+  			buf.writeInt8(message[u].charCodeAt(0),parseInt(u + 4));
+			//buf.writeInt8(parseInt(message[u]),parseInt(u + 4));	
+			//buf.writeInt8(message[u],4);	
+		}
+
 		
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
