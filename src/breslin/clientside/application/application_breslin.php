@@ -44,7 +44,8 @@ initialize: function(serverIP, serverPort)
 
 	//main screen
 	this.mButtonJoinGame = 0;
-	
+
+	//login	
 	this.mStringUsername = '';
 	this.mStringPassword = '';
 
@@ -120,7 +121,6 @@ shutdown: function()
 /*********************************
                 NETWORK
 **********************************/
-
 sendConnect: function()
 {
 	this.log('sending connect...');

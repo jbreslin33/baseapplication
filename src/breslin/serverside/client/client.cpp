@@ -158,6 +158,7 @@ void Client::sendLoggedIn()
 
 void Client::sendLoggedInBrowser()
 {
+	LogString("sendLoggedInBrowser dude");
         mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
         mServer->mMessage.WriteByte(mServer->mLoggedIn); // add type
         mServer->mMessage.WriteByte(mClientID); //client id for browsers

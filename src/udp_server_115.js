@@ -143,86 +143,6 @@ io.sockets.on('connection', function (socket)
 
 		
         });
-/*
-        socket.on('send_login', function(message,remote)
-        {
-		console.log('messageLength:' + message.length)
-		console.log('message:' + message[0]);
-		console.log('message:' + message[1]);
-		console.log('message:' + message[2]);
-		buffy = new Buffer(message.length);
-		
-		for (var i = 0; i < message.length ; i++)
-		{
-  			buffy[i] = message.charCodeAt(i);
-		}
-
-		console.log(buffy);	
-
-                mMessage = message;
-                var messageArray = message.split(" ");
-
-             	var username = messageArray[0];                    
-                var usernameArray = username.split("");
-		var usernameArraySize = usernameArray.length;
-
-             	var password = messageArray[1];                    
-                var passwordArray = password.split("");
-		var passwordArraySize = passwordArray.length;
-
-                type = -125;
-
-                //send to c++ server
-		var bufLength = parseInt(4 + usernameArraySize + passwordArraySize);  
-                var buf = new Buffer(bufLength);
-                buf.writeInt8(type,0);
-		console.log(type);
-		console.log(buf.readInt8(0));
-                buf.writeInt8(socket.mClientID,1);
-		console.log(socket.mClientID);
-		console.log(buf.readInt8(1));
-			
-		var usernameSizeIndex  = parseInt(2);
-		buf.writeInt8(usernameArraySize,usernameSizeIndex);
-		console.log(usernameArraySize);
-		console.log(buf.readInt8(usernameSizeIndex));
-		for (u = 0; u < usernameArraySize; u++)
-		{
-			var bufIndex = parseInt(3 + u);
-			var charCode = usernameArray[u].charCodeAt(0);
-			buf.writeInt8(charCode,bufIndex);
-			console.log(charCode);
-			console.log(buf.readInt8(bufIndex));
-		} 
-
-		var passwordSizeIndex  = parseInt(3 + usernameArraySize);
-		buf.writeInt8(passwordArraySize,passwordSizeIndex);
-		console.log(passwordArraySize);
-		console.log(buf.readInt8(passwordSizeIndex));
-		for (p = 0; p < passwordArraySize; p++)
-		{
-			var bufIndex = parseInt(4 + p);
-			var charCode = passwordArray[p].charCodeAt(0);
-			buf.writeInt8(charCode,bufIndex);
-			console.log(charCode);
-			console.log(buf.readInt8(bufIndex));
-		} 
-		console.log(buf.readInt8(0));	
-		console.log(buf.readInt8(1));	
-
-		for (b = 2; b < buf.length; b++)
-		{
-			console.log(buf.readInt8(b));	
-		}	
-		console.log('the buf');
-		console.log(buf);
-	
-
-                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
-                {
-                });
-        });
-*/
 });
 
 server.on("message", function (msg, rinfo)
@@ -263,6 +183,28 @@ server.on("message", function (msg, rinfo)
 			} 
 		});
         }
+
+
+        if (type == -113)
+	{
+                var clientID = msg.readInt8(1);
+		var loginString = type;
+		loginString = loginString + "," + clientID; 
+
+		io.sockets.clients().forEach(function (socket)
+		{
+			if (socket.mClientID == clientID)
+			{
+       				socket.emit('news', loginString)
+			} 
+		});
+	}
+
+        if (type == -114)
+	{
+		console.log('udp logout');
+		socket.emit('news','-114');
+	}
 
 	if (type == 1)
 	{

@@ -82,6 +82,19 @@ window.addEvent('domready', function()
 			mApplication.mGame.addShape(byteBuffer);
                 }
 
+		if (type == mApplication.mMessageLoggedIn)
+                {
+                        mApplication.log('LoggedIn');
+                        mApplication.mLoggedIn = true;
+                }
+
+                if (type == mApplication.mMessageLoggedOut)
+                {
+                        mApplication.log('LoggedOut');
+                        mApplication.mLoggedIn = false;
+                }
+
+
                 if (type == 1)
                 {
 			mIntervalCount++;
@@ -100,7 +113,6 @@ window.addEvent('domready', function()
 				mIntervalCount = 0;
 
 			}
-				
                         mApplication.mGame.readServerTick(byteBuffer);
                 }
         });
