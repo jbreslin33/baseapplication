@@ -266,7 +266,7 @@ createMainScreen: function()
 	//logout 
 	if (this.mButtonLogout == 0)
 	{
-		this.mButtonLogout = this.createButton(300,100,100,50,"green","Logout");
+		this.mButtonLogout = this.createButton(300,200,100,50,"green","Logout");
 		this.mButtonLogout.onclick = function()
 		{
 			mApplication.mButtonHit = mApplication.mButtonLogout;	
