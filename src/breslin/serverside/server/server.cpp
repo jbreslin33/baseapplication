@@ -156,7 +156,20 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	
 	else if (type == mJoinGameBrowser)
 	{
-		LogString("mJoinGameBrowser detected");
+                int clientID = mes->ReadByte();
+		for (int i = 0; i < mClientVector.size(); i++)
+		{
+			if (mClientVector.at(i)->mClientID == clientID)
+			{
+                                client = mClientVector.at(i);
+                                //let this client know about all shapes
+                                client->sendAllShapesBrowser();
+
+                                //create the shape for this client at that point we send this shape to all clients
+                                client->createShape();
+                        }
+                }
+
 	}
 
 	/******* LOGIN **********/
