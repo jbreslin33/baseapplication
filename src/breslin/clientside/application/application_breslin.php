@@ -44,8 +44,10 @@ initialize: function(serverIP, serverPort)
 
 	//main screen
 	this.mButtonJoinGame = 0;
+	this.mButtonLogout = 0;
 
 	//login	
+	this.mButtonLogin = 0;
 	this.mStringUsername = '';
 	this.mStringPassword = '';
 
@@ -227,11 +229,14 @@ hideBorders: function()
 createLoginScreen: function()
 {
 	//logout game
-        this.mButtonLogin = this.createButton(300,100,100,50,"green","Login");
-        this.mButtonLogin.onclick = function()
-        {
-                mApplication.mButtonHit = mApplication.mButtonLogin;
-        };
+	if (this.mButtonLogin == 0)
+	{
+        	this.mButtonLogin = this.createButton(300,100,100,50,"green","Login");
+        	this.mButtonLogin.onclick = function()
+        	{
+                	mApplication.mButtonHit = mApplication.mButtonLogin;
+        	};
+	}
 },
 
 showLoginScreen: function()
@@ -249,18 +254,24 @@ hideLoginScreen: function()
 createMainScreen: function()
 {
 	//join game
-	this.mButtonJoinGame = this.createButton(300,100,100,50,"green","Join Game");
-	this.mButtonJoinGame.onclick = function()
+	if (this.mButtonJoinGame == 0)
 	{
-		mApplication.mButtonHit = mApplication.mButtonJoinGame;	
-	};
-
+		this.mButtonJoinGame = this.createButton(300,100,100,50,"green","Join Game");
+		this.mButtonJoinGame.onclick = function()
+		{
+			mApplication.mButtonHit = mApplication.mButtonJoinGame;	
+		};
+	}
+	
 	//logout 
-	this.mButtonLogout = this.createButton(300,100,100,50,"green","Logout");
-	this.mButtonLogout.onclick = function()
+	if (this.mButtonLogout == 0)
 	{
-		mApplication.mButtonHit = mApplication.mButtonLogout;	
-	};
+		this.mButtonLogout = this.createButton(300,100,100,50,"green","Logout");
+		this.mButtonLogout.onclick = function()
+		{
+			mApplication.mButtonHit = mApplication.mButtonLogout;	
+		};
+	}
 
 	//create Borders	
 	this.createBorders();
