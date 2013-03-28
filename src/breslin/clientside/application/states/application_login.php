@@ -16,7 +16,7 @@ execute: function()
 {
 	if (this.mApplicationBreslin.mLoggedIn == true)
 	{	
-                this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationPlay);
+                this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationMain);
 	}
 
 	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonLogin)

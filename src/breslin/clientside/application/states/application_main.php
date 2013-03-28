@@ -8,7 +8,6 @@ initialize: function(applicationBreslin)
 
 enter: function()
 {
-//	this.mApplicationBreslin.log('ApplicationMain: enter');
         this.mApplicationBreslin.showMainScreen();
 },
 
