@@ -97,23 +97,26 @@ window.addEvent('domready', function()
 
                 if (type == 1)
                 {
-			mIntervalCount++;
-		
-			//check if we stopped game loop	
-			if (mIntervalCount > 25)
+			if (mApplication.mGame)
 			{
-				//game loop stopped so let's clear interval and start a new one.	
+				mIntervalCount++;
+		
+				//check if we stopped game loop	
+				if (mIntervalCount > 25)
+				{
+					//game loop stopped so let's clear interval and start a new one.	
 
-				//clear it
-				clearInterval(mInterval);
+					//clear it
+					clearInterval(mInterval);
 
-				//set it again
-        			mInterval=setInterval("mApplication.processUpdate()",32)
+					//set it again
+        				mInterval=setInterval("mApplication.processUpdate()",32)
 
-				mIntervalCount = 0;
+					mIntervalCount = 0;
 
+				}
+                        	mApplication.mGame.readServerTick(byteBuffer);
 			}
-                        mApplication.mGame.readServerTick(byteBuffer);
                 }
         });
 }

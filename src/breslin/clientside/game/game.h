@@ -110,7 +110,6 @@ void processUpdate();
 
 //network
 void sendByteBuffer();
-void checkForByteBuffer();
 void checkByteBuffer(ByteBuffer* byteBuffer);
 
 //input

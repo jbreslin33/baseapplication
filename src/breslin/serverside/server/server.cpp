@@ -46,40 +46,6 @@ Server::~Server()
 	mNetwork->dreamSock_CloseSocket(mNetwork->mSocket);
 }
 
-//for c++ and java
-void Server::createClient(struct sockaddr *address)
-{
-/*
-	//let this client know about all shapes(it will sending add for it's avatar as that is done right above.)
-	client->sendAllShapes();
-	
-	//create the shape for this client at that point we send this shape to all clients	
-	client->createShape();
-*/
-}
-
-//browser
-void Server::createClient(struct sockaddr * address, int clientID)
-{
-/*
-	Client* client = new Client(this, address, clientID);
-
-	//give this client all current shapes	
-	//for this first client this should no times for the 2nd once.
-	client->sendAllShapesBrowser();
-
-	//create the shape for this client at that point we send this shape to all clients	
-	if (clientID != -1)
-	{	
-		client->createShape();
-	}
-*/	
-	// that's that as we cannot communicate back to the browser from here..unless this is where we change db or whatever medium we will use to communicate with browser.
-}
-
-
-
-
 void Server::addClient(Client* client)
 {
 	mClientVector.push_back(client);
@@ -122,8 +88,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mConnectNode)
 	{
 		int clientID = mes->ReadByte();
-
-		createClient(address,-1);
+ 		Client* client = new Client(this, address, -1);
 	}	
 
 	else if (type == mConnectBrowser)
@@ -133,8 +98,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		LogString("connected browser client!!!!!!!!!!!!");
 
 		client->sendSchools();
-		//createClient(address,clientID);
-
 	}
 
 	/***JOIN GAME********/

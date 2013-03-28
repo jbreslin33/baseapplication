@@ -136,7 +136,20 @@ void Client::sendAllShapes()
 	}
 }
 
-
+void Client::sendAllShapesBrowser()
+{
+	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
+	{
+		if (mShape != mServer->mGame->mShapeVector.at(i))
+		{
+			//write it
+			mServer->mGame->mShapeVector.at(i)->writeAddBrowser(this);
+		
+			//send it
+			SendPacket(&mServer->mMessage);
+		}
+	}
+}
 
 void Client::sendQuestion()
 {
@@ -190,21 +203,6 @@ void Client::writeQuestionBrowser()
 }
 
 
-
-void Client::sendAllShapesBrowser()
-{
-	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
-	{
-		if (mShape != mServer->mGame->mShapeVector.at(i))
-		{
-			//write it
-			mServer->mGame->mShapeVector.at(i)->writeAddBrowser(this);
-		
-			//send it
-			SendPacket(&mServer->mMessage);
-		}
-	}
-}
 
 
 void Client::SendPacket(Message *theMes)

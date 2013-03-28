@@ -212,38 +212,6 @@ Shape* Game::getShape(int id)
 		Network
 **********************************/
 
-void Game::checkForByteBuffer()
-{
-        int type = 0;
-
-        ByteBuffer* byteBuffer = new ByteBuffer();
-
-        while(mApplicationBreslin->mNetwork->checkForByteBuffer(byteBuffer))
-        {
-                byteBuffer->BeginReading();
-
-                type = byteBuffer->ReadByte();
-
-                switch(type)
-                {
-                        case mMessageAddShape:
-                        	addShape(byteBuffer);
-                        break;
-
-                        case mMessageRemoveShape:
-                            removeShape(byteBuffer);
-                        break;
-
-                        case mMessageFrame:
-				if (!mApplicationBreslin->mNetwork->mIgnorePacket)
-				{
-					readServerTick(byteBuffer);
-				}
-                        break;
-                }
-        }
-}
-
 void Game::checkByteBuffer(ByteBuffer* byteBuffer)
 {
 	byteBuffer->BeginReading();

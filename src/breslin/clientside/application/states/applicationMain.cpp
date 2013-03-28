@@ -10,7 +10,6 @@
 
 //game
 #include "../../game/game.h"
-#include "../../game/gameTag.h"
 
 //state machine
 #include "../../../statemachine/stateMachine.h"

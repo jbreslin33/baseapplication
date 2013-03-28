@@ -73,6 +73,8 @@ io.sockets.on('connection', function (socket)
                 buf.writeInt8(socket.mClientID,1);
                 buf.writeInt8(currentKey,2);
 
+		console.log('send_move udp' + socket.mClientID);
+
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
                 });
@@ -187,7 +189,7 @@ server.on("message", function (msg, rinfo)
 		{
 			if (socket.mClientID == clientID)
 			{
-				console.log('sendTo: ' + clientID + 'message:' + addShapeString);
+				console.log('sendToUdp: ' + clientID + 'message:' + addShapeString);
        				socket.emit('news', addShapeString)
 			} 
 		});

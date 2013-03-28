@@ -200,7 +200,7 @@ server.on("message", function (msg, rinfo)
 		{
 			if (socket.mClientID == clientID)
 			{
-				console.log('sendTo: ' + clientID + 'message:' + addShapeString);
+				console.log('addShape-sendToUDP: ' + clientID + 'message:' + addShapeString);
        				socket.emit('news', addShapeString)
 			} 
 		});
