@@ -156,7 +156,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	
 	else if (type == mJoinGameBrowser)
 	{
-
+		LogString("mJoinGameBrowser detected");
 	}
 
 	/******* LOGIN **********/

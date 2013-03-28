@@ -143,7 +143,8 @@ sendLogout: function()
 
 sendJoinGame: function()
 {
-	this.log('sendJoinGame is empty');
+	message = '';
+	this.mNetwork.mSocket.emit('send_join_game', message);
 },
 
 /*********************************
