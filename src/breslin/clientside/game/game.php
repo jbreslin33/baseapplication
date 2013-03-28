@@ -77,6 +77,14 @@ log: function(msg)
         	throw new Error(msg);
         }, 0);
 },
+
+quit: function()
+{
+        message = '';
+        this.mApplicationBreslin.mNetwork.mSocket.emit('send_quit_game', message);
+},
+
+
 /*********************************
                 Update
 **********************************/

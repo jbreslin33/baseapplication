@@ -147,6 +147,8 @@ sendJoinGame: function()
 	this.mNetwork.mSocket.emit('send_join_game', message);
 },
 
+
+
 /*********************************
 
 *               TIME

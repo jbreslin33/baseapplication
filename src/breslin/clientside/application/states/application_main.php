@@ -18,7 +18,6 @@ execute: function()
 	{
 	        this.mApplicationBreslin.mButtonHit = 0;
                 this.mApplicationBreslin.sendJoinGame();
-                this.mApplicationBreslin.mGame = new Game(this.mApplicationBreslin);
 
                 this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationPlay);
 	}

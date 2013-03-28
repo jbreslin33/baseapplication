@@ -8,7 +8,7 @@ initialize: function(applicationBreslin)
 
 enter: function()
 {
-
+	this.mApplicationBreslin.mGame = new Game(this.mApplicationBreslin);
 },
 
 execute: function()
@@ -16,7 +16,15 @@ execute: function()
 	if (this.mApplicationBreslin.mKey_esc)
         {
                 this.mApplicationBreslin.mPlayingGame = false;
-                this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationMain);
+
+		if (this.mApplicationBreslin.mLoggedIn)
+		{
+                	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationMain);
+		}
+		else
+		{
+                	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationLogin);
+		}
         }
         else
         {
@@ -27,15 +35,8 @@ execute: function()
 
 exit: function()
 {
-	this.mApplicationBreslin.log('ApplicationPlay: exit');
-     	
-	this.mApplicationBreslin.shutdown();
-
-        //mApplicationBreslin->getSceneManager()->destroyAllEntities();
-        //delete mApplicationBreslin->mGame;
-
-        this.mApplicationBreslin.showMainScreen();
-
+	this.mApplicationBreslin.mGame.quit();
+	this.mApplicationBreslin.mGame = 0;
 }
 
 });

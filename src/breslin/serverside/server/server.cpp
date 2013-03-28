@@ -272,7 +272,15 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	else if (type == mQuitGameBrowser)
 	{
-
+                int clientID = mes->ReadByte();
+		for (int i = 0; i < mClientVector.size(); i++)
+		{
+			if (mClientVector.at(i)->mClientID == clientID)
+			{
+				client = mClientVector.at(i);
+				checkClientQuitGame(type,client,mes);
+			}
+		}
 	}
 
 
@@ -313,7 +321,7 @@ void Server::checkClientQuitGame(int type, Client* client, Message* mes)
 		{
 			client->mShape->remove();
 		}
-               	LogString("LIBRARY: Server: a client disconnected");
+               	LogString("LIBRARY: Server: a client disconnected from GAME");
                 return;
 	}
 	/*
@@ -332,7 +340,7 @@ void Server::checkClientQuit(int type, Client* client, Message* mes)
 	if (type == mDisconnect || type == mDisconnectBrowser)
 	{
 		client->remove();
-               	LogString("LIBRARY: Server: a client disconnected");
+               	LogString("LIBRARY: Server: a client disconnected from SERVER");
                 return;
 	}
 	client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();

@@ -81,6 +81,30 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
+        socket.on('send_quit_game', function(message,remote)
+	{
+                //send to c++ server
+                var buf = new Buffer(2);
+
+		//type
+                type = -118;
+                buf.writeInt8(type,0);
+                console.log(type);
+                console.log(buf.readInt8(0));
+
+		//mClientID
+                buf.writeInt8(socket.mClientID,1);
+                console.log(socket.mClientID);
+                console.log(buf.readInt8(1));
+
+		console.log('mClientID:' + socket.mClientID + ' disconnecting');
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+
+        });
+
         socket.on('send_move', function(message,remote)
         {
                 mMessage = message;
