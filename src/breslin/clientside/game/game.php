@@ -80,10 +80,7 @@ log: function(msg)
 
 quit: function()
 {
-        message = '';
-        //this.mApplicationBreslin.mNetwork.mSocket.emit('send_quit_game', message);
-	this.log('quiting in game');
-
+	//set shapes to not visible and clear shapeArrays
 	if (this.mShapeVector)
 	{
 		for (i = 0; i < this.mShapeVector.length; i++)
@@ -91,6 +88,7 @@ quit: function()
 			this.mShapeVector[i].setVisible(false);
 		}
 		this.mShapeVector.length = 0;
+		this.mShapeGhostVector.length = 0;
 	}
 },
 
