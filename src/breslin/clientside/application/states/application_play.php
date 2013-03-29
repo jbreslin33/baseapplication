@@ -49,6 +49,7 @@ exit: function()
 {
         this.mApplicationBreslin.mPlayingGame = false;
 	this.mApplicationBreslin.mLeaveGame = false;
+	this.mApplicationBreslin.mGame.quit();
 }
 
 });
