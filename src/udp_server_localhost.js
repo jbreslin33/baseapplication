@@ -231,6 +231,12 @@ server.on("message", function (msg, rinfo)
         }
 
 
+        if (type == -114)
+	{
+		console.log('udp logout');
+		socket.emit('news','-114');
+	}
+
         if (type == -113)
 	{
                 var clientID = msg.readInt8(1);
@@ -246,11 +252,21 @@ server.on("message", function (msg, rinfo)
 		});
 	}
 
-        if (type == -114)
+        if (type == -99)
 	{
-		console.log('udp logout');
-		socket.emit('news','-114');
+                var clientID = msg.readInt8(1);
+		var loginString = type;
+		loginString = loginString + "," + clientID; 
+
+		io.sockets.clients().forEach(function (socket)
+		{
+			if (socket.mClientID == clientID)
+			{
+       				socket.emit('news', loginString)
+			} 
+		});
 	}
+
 
 	if (type == 1)
 	{
