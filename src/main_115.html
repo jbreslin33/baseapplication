@@ -84,16 +84,18 @@ window.addEvent('domready', function()
 
 		if (type == mApplication.mMessageLoggedIn)
                 {
-                        mApplication.log('LoggedIn');
                         mApplication.mLoggedIn = true;
                 }
 
                 if (type == mApplication.mMessageLoggedOut)
                 {
-                        mApplication.log('LoggedOut');
                         mApplication.mLoggedIn = false;
                 }
 
+                if (type == mApplication.mMessageLeaveGame)
+                {
+                        mApplication.mLeaveGame = true;
+                }
 
                 if (type == 1)
                 {

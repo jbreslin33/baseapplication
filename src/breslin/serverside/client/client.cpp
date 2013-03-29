@@ -80,6 +80,15 @@ Client::~Client()
 	mServer->mNetwork->dreamSock_CloseSocket(mServer->mNetwork->mSocket);
 }
 
+void Client::leaveGame()
+{
+        mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+        mServer->mMessage.WriteByte(mServer->mMessageLeaveGame); // add type
+        mServer->mMessage.WriteByte(mClientID); //client id for browsers
+	SendPacket(&mServer->mMessage);
+	
+}
+
 void Client::createShape()
 {
 	//create the shape for this client -- the avatar

@@ -22,7 +22,6 @@ execute: function()
 	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonLogin)
 	{
 	        this.mApplicationBreslin.mButtonHit = 0;
-		this.mApplicationBreslin.log('sendLogin!!!');
 		this.mApplicationBreslin.sendLogin();	
 	}
 },

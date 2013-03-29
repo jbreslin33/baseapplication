@@ -28,14 +28,7 @@ returnValues: function()
 
 length: function()
 {
-/*
-	this.log('lx:' + this.x);
-	this.log('ly:' + this.y);
-	this.log('lz:' + this.z);
-*/
         return Math.sqrt(this.x*this.x + this.z*this.z);
-
-
 },
 
 isZero: function()
@@ -61,7 +54,6 @@ zero: function()
 normalise: function()
 {
 	len = this.length();
-//	this.log('l:' + len);
 	if (len == 0)
 	{
 		return;
@@ -70,31 +62,17 @@ normalise: function()
 	this.y = 0;
 	this.z /= len;
 },
+
 //multiply this vector by a scalar
-/*
-void Vector3D::multiply(float num)
-{
-        x = x * num;
-        y = y * num;
-        z = z * num;
-}
-*/
 multiply: function(num)
 {
 	this.x = parseFloat(this.x) * num;
 	this.y = parseFloat(this.y) * num;
 	this.z = parseFloat(this.z) * num;
-	/*	
-	this.x = this.x * num;
-	this.y = this.y * num;
-	this.z = this.z * num;
-*/
 },
 
 add: function(v)
 {
-// 	document.getElementById('mMessageFrame').innerHTML='t_x: ' + this.x + ' t_z: ' + this.z;
-
 	x = parseFloat(this.x) + parseFloat(v.x);
 	y = 0;
 	z = parseFloat(this.z) + parseFloat(v.z);
@@ -102,8 +80,6 @@ add: function(v)
 
 	this.x = parseFloat(x);
 	this.z = parseFloat(z);
- 	
-//	document.getElementById('mMessageFrame').innerHTML='a: ' + x + ' b: ' + z + 'this.x: ' + this.x + 'this.z: ' + this.z;
 },
 
 subtract: function(vectorToSubtract)
@@ -111,16 +87,8 @@ subtract: function(vectorToSubtract)
         this.x = this.x - vectorToSubtract.x;
         this.y = this.y - vectorToSubtract.y;
         this.z = this.z - vectorToSubtract.z;
+},
 
-},
-/*
-subtract: function(sub1,sub2)
-{
-	this.x = sub1.x - sub2.x;
-	this.y = sub1.y - sub2.y;
-	this.z = sub1.z - sub2.z;
-},
-*/
 copyValuesFrom: function(copyFrom)
 {
 	this.x = copyFrom.x;
@@ -134,8 +102,3 @@ dot: function(v2)
 }
 
 });
-/*
-
-
-
-*/

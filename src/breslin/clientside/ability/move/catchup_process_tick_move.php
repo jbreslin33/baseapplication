@@ -80,7 +80,6 @@ this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity,
         else
         {
                 //why would catchup ever need to set velocity to zero, wouldn't we simply leave catchup state??
-                this.log('zeroing');
                 this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.zero();
         }
 },

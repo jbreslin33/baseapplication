@@ -322,6 +322,7 @@ void Server::checkClientQuitGame(int type, Client* client, Message* mes)
 			client->mShape->remove();
 		}
                	LogString("LIBRARY: Server: a client disconnected from GAME");
+		client->leaveGame();
                 return;
 	}
 	/*

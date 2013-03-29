@@ -88,6 +88,9 @@ public:
 	void sendSchools();
 	void sendAllShapesBrowser();
 
+	//game
+	void leaveGame();
+
 	//loggedIn
 	void sendLoggedIn();
 	void sendLoggedInBrowser();

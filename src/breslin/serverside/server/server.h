@@ -75,6 +75,7 @@ public:
 	//join game
 	static const int mJoinGame               = -107;
 	static const int mJoinGameBrowser        = -117;
+	static const int mMessageLeaveGame       = -99;
 
 	//quit game
 	static const int mQuitGame               = -108;

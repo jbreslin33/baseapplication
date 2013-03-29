@@ -9,14 +9,26 @@ initialize: function(applicationBreslin)
 enter: function()
 {
 	this.mApplicationBreslin.mGame = new Game(this.mApplicationBreslin);
+	this.mApplicationBreslin.mPlayingGame = true;
+	this.mApplicationBreslin.mSentLeaveGame = false;
 },
 
 execute: function()
 {
-	if (this.mApplicationBreslin.mKey_esc)
-        {
-                this.mApplicationBreslin.mPlayingGame = false;
 
+	if (this.mApplicationBreslin.mKey_q && this.mApplicationBreslin.mSentLeaveGame == false)
+        {
+		
+       		message = '';
+        	this.mApplicationBreslin.mNetwork.mSocket.emit('send_quit_game', message);
+		this.mApplicationBreslin.log('send_quit_game');
+		this.mApplicationBreslin.mSentLeaveGame = true;
+        }
+
+	if (this.mApplicationBreslin.mLeaveGame)
+	{
+		this.mApplicationBreslin.mSentLeaveGame = false;
+		this.mApplicationBreslin.log('got mLeaveGame var change');
 		if (this.mApplicationBreslin.mLoggedIn)
 		{
                 	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationMain);
@@ -25,7 +37,7 @@ execute: function()
 		{
                 	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationLogin);
 		}
-        }
+	}
         else
         {
                 //game
@@ -35,8 +47,8 @@ execute: function()
 
 exit: function()
 {
-	this.mApplicationBreslin.mGame.quit();
-	this.mApplicationBreslin.mGame = 0;
+        this.mApplicationBreslin.mPlayingGame = false;
+	this.mApplicationBreslin.mLeaveGame = false;
 }
 
 });

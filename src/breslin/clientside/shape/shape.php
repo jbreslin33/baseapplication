@@ -209,7 +209,6 @@ parseSpawnByteBuffer: function(byteBuffer)
 	this.mSpawnPosition.x = parseFloat(byteBuffer.readByte());
 	this.mSpawnPosition.y = parseFloat(byteBuffer.readByte());
 	this.mSpawnPosition.z = parseFloat(byteBuffer.readByte());
-	this.mSpawnPosition.printValues();
 	this.mSpawnRotation.x = parseFloat(byteBuffer.readByte());
 	this.mSpawnRotation.z = parseFloat(byteBuffer.readByte());
 	this.mMeshCode        = parseInt(byteBuffer.readByte());
@@ -440,7 +439,6 @@ setVisible: function(b)
         {
                	if (this.mDiv.mDiv.style.visibility != 'hidden')
                 {
-			this.log('hiding!!!!!!!!!!!');
                         this.mDiv.mDiv.style.visibility = 'hidden';
                	}
         }

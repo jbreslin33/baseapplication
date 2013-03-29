@@ -19,6 +19,8 @@ initialize: function(serverIP, serverPort)
 	this.mMessageLoggedOut   = -114; 
 
 	this.mMessageJoinGame    = -117; //browser
+	this.mMessageLeaveGame   = -99; //browser
+	this.mSentLeaveGame      = false; 
 
 	//network
 	this.mNetwork = new Network(this,serverIP,serverPort);
@@ -28,6 +30,7 @@ initialize: function(serverIP, serverPort)
         this.mPlayingGame = false;
 	this.mConnectSent = false;
 	this.mLoggedIn = false;	
+	this.mLeaveGame = false;	
 
         //time
         this.mRenderTime = 0.0;
@@ -78,8 +81,8 @@ initialize: function(serverIP, serverPort)
 	this.mKey_counterclockwise = false;
 	this.mKey_clockwise = false;
 	this.mKey_esc = false;
+	this.mKey_q = false;
 
-	this.log('sendingConnect....................');
 	this.sendConnect();	
 
 },
@@ -125,7 +128,6 @@ shutdown: function()
 **********************************/
 sendConnect: function()
 {
-	this.log('sending connect...');
 	this.mNetwork.sendConnect();
 },
 
@@ -347,6 +349,12 @@ keyDown: function(event)
         {
                 mApplication.mKey_esc = true;
 	}
+
+	//quit game
+        if (event.key == 'q')
+        {
+                mApplication.mKey_q = true;
+	}
 },
 
 keyUp: function(event)
@@ -391,6 +399,12 @@ keyUp: function(event)
         if (event.key == 'esc')
         {
                 mApplication.mKey_esc = false;
+	}
+
+	//quit game
+        if (event.key == 'q')
+        {
+                mApplication.mKey_q = false;
 	}
 }
 
