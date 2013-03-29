@@ -81,14 +81,19 @@ public:
 	std::string mStringPassword;
 
 public:
-	virtual void createShape();
-	void remove();
-	void			SendPacket(Message *message);
+	//shape
 	void sendAllShapes();
-	void sendSchools();
 	void sendAllShapesBrowser();
 
+	//client
+	void remove();
+	void			SendPacket(Message *message);
+
+	//schools
+	void sendSchools();
+
 	//game
+	void joinGame();
 	void leaveGame();
 
 	//loggedIn

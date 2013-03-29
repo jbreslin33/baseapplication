@@ -124,9 +124,12 @@ void setValues();
 
 void writeAdd(Client* client);
 void writeAddBrowser(Client* client);
+void writeRemoveShape();
+void writeRemoveShapeBrowser(Client* client);
 void insertIntoDB();
 
 void sendShapeToClients();
+void sendRemoveShapeToClients();
 
 	//delta move command
 virtual int  setFlag();

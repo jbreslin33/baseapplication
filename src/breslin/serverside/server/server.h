@@ -97,7 +97,7 @@ public:
 	
 	//add shape	
 	static const int mAddShape    	         = -103;
-	static const int mRemoveShape 	         = -104;
+	static const int mMessageRemoveShape     = -104;
 
 
 public:

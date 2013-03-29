@@ -80,21 +80,50 @@ Client::~Client()
 	mServer->mNetwork->dreamSock_CloseSocket(mServer->mNetwork->mSocket);
 }
 
-void Client::leaveGame()
-{
-        mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
-        mServer->mMessage.WriteByte(mServer->mMessageLeaveGame); // add type
-        mServer->mMessage.WriteByte(mClientID); //client id for browsers
-	SendPacket(&mServer->mMessage);
-	
-}
+//it's only fair to send a remove shape to everybody as well.....
 
-void Client::createShape()
+void Client::joinGame()
 {
+	//let this client know about all shapes
+	if (mClientID > 0)
+	{
+        	sendAllShapesBrowser();
+	}
+	else
+	{
+        	sendAllShapes();
+	}
+
 	//create the shape for this client -- the avatar
 	mShape = new Shape(mServer->mGame->getOpenIndex(),mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f,1,false); 
 	
-	mShape->sendShapeToClients();
+}
+
+void Client::leaveGame()
+{
+
+	//you gotta delete the shape here...and tell everyone about it. i would tell them in shape class
+	if (mShape)
+	{
+		mShape->remove();
+	}	
+
+	//tell human client that it has left game 
+
+	if (mClientID > 0)
+	{	
+        	mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+        	mServer->mMessage.WriteByte(mServer->mMessageLeaveGame); // add type
+        	mServer->mMessage.WriteByte(mClientID); //client id for browsers
+	
+	}
+	else
+	{
+        	mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+        	mServer->mMessage.WriteByte(mServer->mMessageLeaveGame); // add type
+	}
+
+	SendPacket(&mServer->mMessage);
 }
 
 void Client::remove()
@@ -103,7 +132,6 @@ void Client::remove()
 	{
 		if (mServer->mClientVector.at(i) == this)
 		{
-			mShape->remove();
 			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
 		}
 	}

@@ -179,6 +179,7 @@ void Game::removeShape(ByteBuffer* byteBuffer)
 	{
 		if (mShapeVector->at(i) == shape)
 		{
+			LogString("removeShape in game:%d",i);
 			delete mShapeVector->at(i);
 			mShapeVector->erase (mShapeVector->begin()+i);
 		}

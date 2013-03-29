@@ -61,7 +61,7 @@ void Server::sendRemoveShape(Shape* shape)
 		mMessage.Init(mMessage.outgoingData,
 			sizeof(mMessage.outgoingData));
 
-		mMessage.WriteByte(mRemoveShape);	// type
+		mMessage.WriteByte(mMessageRemoveShape);	// type
 		mMessage.WriteByte(index);		// index
 	}
 	sendPackets();
@@ -108,11 +108,17 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				client = mClientVector.at(i);
+
+				client->joinGame(); //now call everything else inside client...
+
 				//let this client know about all shapes
+/*
 				client->sendAllShapes();
 	
 				//create the shape for this client at that point we send this shape to all clients	
-				client->createShape();
+				
+				client->createControlObject();
+*/
 			}
 		}
 	}
@@ -125,11 +131,14 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
                                 client = mClientVector.at(i);
+				client->joinGame();
+/*
                                 //let this client know about all shapes
                                 client->sendAllShapesBrowser();
 
                                 //create the shape for this client at that point we send this shape to all clients
-                                client->createShape();
+                                client->createControlObject();
+*/
                         }
                 }
 
@@ -317,10 +326,6 @@ void Server::checkClientQuitGame(int type, Client* client, Message* mes)
 {
 	if (type == mQuitGame || type == mQuitGameBrowser)
 	{
-		if (client->mShape)
-		{
-			client->mShape->remove();
-		}
                	LogString("LIBRARY: Server: a client disconnected from GAME");
 		client->leaveGame();
                 return;
