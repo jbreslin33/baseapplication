@@ -82,7 +82,7 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 Game::~Game()
 {
 }
-
+//i am guessing i am not clearing the shape arrray???
 void Game::remove()
 {
  	//send quit game
@@ -90,17 +90,23 @@ void Game::remove()
         byteBuffer->WriteByte(mMessageQuitGame);
         mApplicationBreslin->mNetwork->send(byteBuffer);
 
-	LogString("Game::remove()");
+	LogString("Game::remove(1)");
 
         if (mShapeVector)
         {
                 for (unsigned int i = 0; i < mShapeVector->size(); i++)
                 {
+			LogString("Game::remove(2)");
 			Shape* shape = mShapeVector->at(i);
 
         		//delete objectTitles
-        		delete shape->mGhost->mObjectTitle;
-        		delete shape->mObjectTitle;
+			LogString("Game::remove(3)");
+			if (shape)
+			{
+        			delete shape->mGhost->mObjectTitle;
+				LogString("Game::remove(4)");
+        			delete shape->mObjectTitle;
+			}
 
         		//delete entities by name
         		//mApplicationBreslin->getSceneManager()->destroyEntity(shape->mGhost->mName);
@@ -111,8 +117,17 @@ void Game::remove()
                 }
         }
 
+	LogString("Game::remove(5)");
 	mApplicationBreslin->getSceneManager()->destroyAllEntities();
+	LogString("Game::remove(6)");
         mApplicationBreslin->mSceneMgr->destroyLight(mPointLight);
+
+	//clear the vectors....	
+	LogString("Game::remove(7)");
+	mShapeVector->clear();
+	LogString("Game::remove(8)");
+	mShapeGhostVector->clear();
+	
 }
 
 /*********************************
@@ -146,18 +161,29 @@ void Game::addShape(ByteBuffer* byteBuffer)
 
 void Game::removeShape(ByteBuffer* byteBuffer)
 {
+	//get the index which is the mIndex...
 	int index = byteBuffer->ReadByte();
+	
+	//let's loop so we can also get index of vector where shape resides so we can erase it as well as deleting other parts of shape.
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
+	{
+		if (mShapeVector->at(i)->mIndex == index)
+		{
+			Shape* shape = mShapeVector->at(i);
+			
+			//delete objectTitles
+ 			delete shape->mGhost->mObjectTitle;
+ 			delete shape->mObjectTitle;
 
-	Shape* shape = getShape(index);
+			//delete entities by name
+ 			mApplicationBreslin->getSceneManager()->destroyEntity(shape->mGhost->mName);
+ 			mApplicationBreslin->getSceneManager()->destroyEntity(shape->mName);
 
-	//delete objectTitles
- 	delete shape->mGhost->mObjectTitle;
- 	delete shape->mObjectTitle;
-
-	//delete entities by name
- 	mApplicationBreslin->getSceneManager()->destroyEntity(shape->mGhost->mName);
- 	mApplicationBreslin->getSceneManager()->destroyEntity(shape->mName);
-
+			//erase shapes from vectors
+			mShapeVector->erase(mShapeVector->begin()+i);
+			mShapeGhostVector->erase(mShapeGhostVector->begin()+i);
+		}
+	}
 }
 
 /*
