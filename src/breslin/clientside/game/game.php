@@ -156,7 +156,8 @@ removeShape: function(byteBuffer)
                 if (index == this.mShapeVector[i].mIndex)
 		{
 			this.mShapeVector[i].setVisible(false);
-			this.mShapeVector[i] = 0;
+			this.mShapeVector.splice(i,1);
+			this.mShapeGhostVector.splice(i,1);
 			this.log('setVisible false to:' + index);
 		}
 	}
