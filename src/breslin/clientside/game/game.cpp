@@ -27,6 +27,8 @@
 #include "states/gamePlay.h"
 #include "states/gamePause.h"
 
+//ObjectTitle
+#include "../billboard/objectTitle.h"
 
 /***************************************
 *			          CONSTRUCTORS
@@ -104,6 +106,7 @@ void Game::quit()
         byteBuffer->WriteByte(mMessageQuitGame);
         mApplicationBreslin->mNetwork->send(byteBuffer);
 
+
         LogString("Destructor for Game");
         if (mShapeVector)
         {
@@ -165,7 +168,12 @@ void Game::removeShape(ByteBuffer* byteBuffer)
                         //delete mShapeGhostVector->at(i);
 		}
 	}
+ 	delete shape->mGhost->mObjectTitle;
+ 	delete shape->mObjectTitle;
+        //delete shape->mSceneNode;
+ 	mApplicationBreslin->getSceneManager()->destroyEntity(shape->mGhost->mName);
  	mApplicationBreslin->getSceneManager()->destroyEntity(shape->mName);
+
 }
 
 /*

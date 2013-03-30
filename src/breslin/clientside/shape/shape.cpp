@@ -73,8 +73,8 @@ Shape::~Shape()
 {
 	LogString("Destructor for Shape:%d",mIndex);
 	//delete mEntity;
-	delete mObjectTitle;
-	delete mSceneNode;
+//	delete mObjectTitle;
+//	delete mSceneNode;
 }
 
 /*********************************
