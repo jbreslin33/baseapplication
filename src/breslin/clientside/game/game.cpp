@@ -91,8 +91,7 @@ void Game::remove()
         mApplicationBreslin->mNetwork->send(byteBuffer);
 
 	LogString("Game::remove()");
-	mApplicationBreslin->getSceneManager()->destroyAllEntities();
-/*
+
         if (mShapeVector)
         {
                 for (unsigned int i = 0; i < mShapeVector->size(); i++)
@@ -107,11 +106,12 @@ void Game::remove()
         		//mApplicationBreslin->getSceneManager()->destroyEntity(shape->mGhost->mName);
         		//mApplicationBreslin->getSceneManager()->destroyEntity(shape->mName);
 
-                        delete mShapeVector->at(i);
-                        delete mShapeGhostVector->at(i);
+                        //delete mShapeVector->at(i);
+                        //delete mShapeGhostVector->at(i);
                 }
         }
-*/
+
+	mApplicationBreslin->getSceneManager()->destroyAllEntities();
         mApplicationBreslin->mSceneMgr->destroyLight(mPointLight);
 }
 
