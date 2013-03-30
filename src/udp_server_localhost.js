@@ -230,7 +230,7 @@ server.on("message", function (msg, rinfo)
 		});
         }
 
-
+	
         if (type == -114)
 	{
 		console.log('udp logout');
@@ -251,6 +251,24 @@ server.on("message", function (msg, rinfo)
 			} 
 		});
 	}
+
+	//mMessageRemoveShape
+	if (type == -104)
+	{
+ 		var clientID = msg.readInt8(1);
+ 		var index    = msg.readInt8(1);
+                var removeShapeString = type;
+                removeShapeString = removeShapeString + "," + clientID + "," + index;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', removeShapeString)
+                        }
+                });
+	}
+
 
         if (type == -99)
 	{

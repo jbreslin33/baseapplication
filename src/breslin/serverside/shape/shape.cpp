@@ -130,29 +130,6 @@ void Shape::sendShapeToClients()
 	}
 }
 
-void Shape::sendRemoveShapeToClients()
-{
-        //send this shape to all clients
-        for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
-        {
-                Client* clientToSendTo = mGame->mServer->mClientVector.at(i);
-
-                if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
-                {
-                        writeRemoveShapeBrowser(clientToSendTo);
-                        //send it
-                        clientToSendTo->SendPacket(&mGame->mServer->mMessage);
-                }
-                if (mGame->mServer->mClientVector.at(i)->mClientID == 0)
-                {
-                        writeRemoveShape();
-                        //send it
-                        clientToSendTo->SendPacket(&mGame->mServer->mMessage);
-                }
-
-        }
-}
-
 
 void Shape::addAbility(Ability* ability)
 {
@@ -302,14 +279,6 @@ void Shape::writeAdd(Client* client)
 	mGame->mServer->mMessage.WriteByte(mAnimated);
 }
 
-void Shape::writeRemoveShape()
-{
-        mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
-
-        mGame->mServer->mMessage.WriteByte(mGame->mServer->mMessageRemoveShape); // type
-        mGame->mServer->mMessage.WriteByte(mIndex);
-}
-
 void Shape::writeAddBrowser(Client* client)
 {
 	mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
@@ -343,14 +312,6 @@ void Shape::writeAddBrowser(Client* client)
 	mGame->mServer->mMessage.WriteByte(mAnimated);
 }
 
-void Shape::writeRemoveShapeBrowser(Client* client)
-{
-        mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
-
-        mGame->mServer->mMessage.WriteByte(mGame->mServer->mMessageRemoveShape); // type
-	mGame->mServer->mMessage.WriteByte(client->mClientID); //client id for browsers 
-        mGame->mServer->mMessage.WriteByte(mIndex);
-}
 
 int Shape::setFlag()
 {

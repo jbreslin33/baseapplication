@@ -144,6 +144,44 @@ addShape: function(byteBuffer)
 
 },
 
+removeShape: function(byteBuffer)
+{
+ 	byteBuffer.beginReading();
+        type     = byteBuffer.readByte();
+        clientID = byteBuffer.readByte();
+        index    = byteBuffer.readByte();
+	
+  	for (i=0; i < this.mShapeVector.length; i++)
+        {
+                if (index == this.mShapeVector[i].mIndex)
+		{
+			this.mShapeVector[i].setVisible(false);
+			this.mShapeVector[i] = 0;
+			this.log('setVisible false to:' + index);
+		}
+	}
+		
+
+},
+
+/*
+void Game::removeShape(ByteBuffer* byteBuffer)
+{
+        int index = byteBuffer->ReadByte();
+
+        Shape* shape = getShape(index);
+
+        for (unsigned int i = 0; i < mShapeVector->size(); i++)
+        {
+                if (mShapeVector->at(i) == shape)
+                {
+                        LogString("removeShape in game:%d",i);
+                        delete mShapeVector->at(i);
+                        mShapeVector->erase (mShapeVector->begin()+i);
+                }
+        }
+}
+*/
 readServerTick: function(byteBuffer)
 {
 	this.mApplicationBreslin.mIntervalCountLast = this.mApplicationBreslin.mIntervalCount;
