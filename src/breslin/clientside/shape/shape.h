@@ -81,10 +81,10 @@ Vector3D* mSpawnRotation;
 //mesh
 int         mMeshCode;
 std::string mMeshName;
-
+public:
 //name
 std::string mName;
-
+private:
 //animate
 bool mAnimate;
 

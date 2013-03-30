@@ -152,16 +152,33 @@ void Game::removeShape(ByteBuffer* byteBuffer)
 
 	Shape* shape = getShape(index);
 
+
 	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
 		if (mShapeVector->at(i) == shape)
 		{
 			LogString("Game::removeShape():%d",index);
-			delete mShapeVector->at(i);
-			mShapeVector->erase (mShapeVector->begin()+i);
+			//delete mShapeVector->at(i);
+		//	mShapeVector->erase (mShapeVector->begin()+i);
+		//	mShapeGhostVector->erase (mShapeVector->begin()+i);
+                        //delete mShapeVector->at(i);
+                        //delete mShapeGhostVector->at(i);
 		}
 	}
+ 	mApplicationBreslin->getSceneManager()->destroyEntity(shape->mName);
 }
+
+/*
+        if (mShapeVector)
+        {
+                for (unsigned int i = 0; i < mShapeVector->size(); i++)
+                {
+                        delete mShapeVector->at(i);
+                        delete mShapeGhostVector->at(i);
+                }
+        }
+
+*/
 
 Shape* Game::getShape(int id)
 {
