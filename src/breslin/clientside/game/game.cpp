@@ -81,42 +81,37 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 */
 Game::~Game()
 {
-	//send quit game
-        ByteBuffer* byteBuffer = new ByteBuffer();
-        byteBuffer->WriteByte(mMessageQuitGame);
-        mApplicationBreslin->mNetwork->send(byteBuffer);
-
-	LogString("Destructor for Game");
-	if (mShapeVector)
-	{
-		for (unsigned int i = 0; i < mShapeVector->size(); i++)
-		{
-			delete mShapeVector->at(i);
-			delete mShapeGhostVector->at(i);
-		}
-	}
-
-	mApplicationBreslin->mSceneMgr->destroyLight(mPointLight);
 }
 
-void Game::quit()
+void Game::remove()
 {
  	//send quit game
         ByteBuffer* byteBuffer = new ByteBuffer();
         byteBuffer->WriteByte(mMessageQuitGame);
         mApplicationBreslin->mNetwork->send(byteBuffer);
 
-
-        LogString("Destructor for Game");
+	LogString("Game::remove()");
+	mApplicationBreslin->getSceneManager()->destroyAllEntities();
+/*
         if (mShapeVector)
         {
                 for (unsigned int i = 0; i < mShapeVector->size(); i++)
                 {
+			Shape* shape = mShapeVector->at(i);
+
+        		//delete objectTitles
+        		delete shape->mGhost->mObjectTitle;
+        		delete shape->mObjectTitle;
+
+        		//delete entities by name
+        		//mApplicationBreslin->getSceneManager()->destroyEntity(shape->mGhost->mName);
+        		//mApplicationBreslin->getSceneManager()->destroyEntity(shape->mName);
+
                         delete mShapeVector->at(i);
                         delete mShapeGhostVector->at(i);
                 }
         }
-
+*/
         mApplicationBreslin->mSceneMgr->destroyLight(mPointLight);
 }
 
@@ -155,22 +150,11 @@ void Game::removeShape(ByteBuffer* byteBuffer)
 
 	Shape* shape = getShape(index);
 
-
-	for (unsigned int i = 0; i < mShapeVector->size(); i++)
-	{
-		if (mShapeVector->at(i) == shape)
-		{
-			LogString("Game::removeShape():%d",index);
-			//delete mShapeVector->at(i);
-		//	mShapeVector->erase (mShapeVector->begin()+i);
-		//	mShapeGhostVector->erase (mShapeVector->begin()+i);
-                        //delete mShapeVector->at(i);
-                        //delete mShapeGhostVector->at(i);
-		}
-	}
+	//delete objectTitles
  	delete shape->mGhost->mObjectTitle;
  	delete shape->mObjectTitle;
-        //delete shape->mSceneNode;
+
+	//delete entities by name
  	mApplicationBreslin->getSceneManager()->destroyEntity(shape->mGhost->mName);
  	mApplicationBreslin->getSceneManager()->destroyEntity(shape->mName);
 
@@ -185,7 +169,6 @@ void Game::removeShape(ByteBuffer* byteBuffer)
                         delete mShapeGhostVector->at(i);
                 }
         }
-
 */
 
 Shape* Game::getShape(int id)

@@ -103,7 +103,7 @@ Ogre::Entity* mFloor;
 ***************************************/
 public:
 
-void quit();
+void remove();
 
 //update
 void processUpdate();
