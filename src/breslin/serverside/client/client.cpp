@@ -96,7 +96,6 @@ void Client::joinGame()
 
 	//create the shape for this client -- the avatar
 	mShape = new Shape(mServer->mGame->getOpenIndex(),mServer->mGame,this,new Vector3D(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f,1,false); 
-	
 }
 
 void Client::leaveGame()
@@ -115,7 +114,6 @@ void Client::leaveGame()
         	mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
         	mServer->mMessage.WriteByte(mServer->mMessageLeaveGame); // add type
         	mServer->mMessage.WriteByte(mClientID); //client id for browsers
-	
 	}
 	else
 	{

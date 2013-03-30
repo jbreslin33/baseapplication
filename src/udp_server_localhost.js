@@ -224,7 +224,7 @@ server.on("message", function (msg, rinfo)
 		{
 			if (socket.mClientID == clientID)
 			{
-				console.log('addShape-sendToUDP: ' + clientID + 'message:' + addShapeString);
+		//		console.log('addShape-sendToBrowser: ' + clientID + 'message:' + addShapeString);
        				socket.emit('news', addShapeString)
 			} 
 		});

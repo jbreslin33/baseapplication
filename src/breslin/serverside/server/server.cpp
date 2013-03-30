@@ -51,23 +51,6 @@ void Server::addClient(Client* client)
 	mClientVector.push_back(client);
 }
 
-void Server::sendRemoveShape(Shape* shape)
-{
-	int index = shape->mIndex;
-
-	// Send 'DREAMSOCK_MES_REMOVESHAPE' message to every client
-	for (unsigned int i = 0; i < mClientVector.size(); i++)
-	{
-		mMessage.Init(mMessage.outgoingData,
-			sizeof(mMessage.outgoingData));
-
-		mMessage.WriteByte(mMessageRemoveShape);	// type
-		mMessage.WriteByte(index);		// index
-	}
-	sendPackets();
-
-}
-
 void Server::parsePacket(Message *mes, struct sockaddr *address)
 {
 	Client* client;
@@ -110,15 +93,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				client = mClientVector.at(i);
 
 				client->joinGame(); //now call everything else inside client...
-
-				//let this client know about all shapes
-/*
-				client->sendAllShapes();
-	
-				//create the shape for this client at that point we send this shape to all clients	
-				
-				client->createControlObject();
-*/
 			}
 		}
 	}
@@ -132,16 +106,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
                                 client = mClientVector.at(i);
 				client->joinGame();
-/*
-                                //let this client know about all shapes
-                                client->sendAllShapesBrowser();
-
-                                //create the shape for this client at that point we send this shape to all clients
-                                client->createControlObject();
-*/
                         }
                 }
-
 	}
 
 	/******* LOGIN **********/

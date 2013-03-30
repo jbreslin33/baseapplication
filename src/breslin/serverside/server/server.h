@@ -113,9 +113,6 @@ public:
 	//client
 	void addClient(Client* client);
 	
-	//shapes
-	void sendRemoveShape(Shape* shape);
-
 	//packets
 	int	 getPacket(char *data, struct sockaddr *from);
 	void sendPackets();
