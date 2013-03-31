@@ -148,6 +148,7 @@ void Client::sendSchools()
         		mServer->mMessage.WriteByte(mClientID); // add mClientID for browsers 
 		}
 		int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school 
+		LogString("lengthinsendsch:%d",length);
 		mServer->mMessage.WriteByte(length); //send length 
 
 		//loop thru length and write it 

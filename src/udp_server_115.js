@@ -269,32 +269,30 @@ server.on("message", function (msg, rinfo)
                 });
 	}
 
-/*
+
         if (type == -109)
         {
-		console.log('1999999');
                 var clientID = msg.readInt8(1);
-                var length = msg.readInt8(1);
+                var length = msg.readInt8(2);
+
                 var string = type;
 		string = string + "," + length;
 
  		for (i = 0; i < length; i++)
                 {
-                        //buf.writeInt8(message[u].charCodeAt(0),i+);
-			string = "," + msg.readInt8(1);	
+			string = string + "," + msg.readInt8(parseInt(2 + i));	
                 }
-
 
                 io.sockets.clients().forEach(function (socket)
                 {
                         if (socket.mClientID == clientID)
                         {
-				console.log('emitting 109');
                                 socket.emit('news', string)
                         }
                 });
         }
-*/
+
+/*
         if (type == -109)
         {
                 var clientID = msg.readInt8(1);
@@ -311,7 +309,7 @@ server.on("message", function (msg, rinfo)
                         }
                 });
         }
-
+*/
 
         if (type == -99)
 	{
