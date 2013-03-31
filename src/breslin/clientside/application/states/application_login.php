@@ -16,11 +16,13 @@ execute: function()
 {
 	if (this.mApplicationBreslin.mLoggedIn == true)
 	{	
+		this.mApplicationBreslin.log('mLoggedIn == true!!');
                 this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationMain);
 	}
 
 	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonLogin)
 	{
+		this.mApplicationBreslin.log('mButtonLogin hit!');
 	        this.mApplicationBreslin.mButtonHit = 0;
 		this.mApplicationBreslin.sendLogin();	
 	}

@@ -43,6 +43,8 @@ initialize: function(serverIP, serverPort)
 	/*****GUI******/
 	//all
 	this.mButtonHit = 0;
+	this.mSelectMenuHit = 0;
+	this.mLabelHit = 0;
 	this.mButtonExit = 0;
 
 	//main screen
@@ -50,7 +52,11 @@ initialize: function(serverIP, serverPort)
 	this.mButtonLogout = 0;
 
 	//login	
+	this.mSelectMenuSchool = 0;
+	this.mLabelUsername = 0;
+	this.mLabelPassword = 0;
 	this.mButtonLogin = 0;
+	this.mButtonExit = 0;
 	this.mStringUsername = '';
 	this.mStringPassword = '';
 
@@ -175,24 +181,65 @@ setup: function()
 //CREATE BUTTON CONVIENCE FUNCTION
 createButton: function(x,z,w,h,b,i)
 {
-	button = document.createElement("BUTTON");
-	button.style.position = "absolute";
-	button.style.left = x;
-	button.style.top = z;
-	button.style.width = w;
-	button.style.height = h;
-	button.style.background = b;
+	e = document.createElement("BUTTON");
+	e.style.position = "absolute";
+	e.style.left = x;
+	e.style.top = z;
+	e.style.width = w;
+	e.style.height = h;
+	e.style.background = b;
 	var t=document.createTextNode(i);
-	button.appendChild(t);
-	document.body.appendChild(button);
+	e.appendChild(t);
+	document.body.appendChild(e);
 	
-	button.onclick = function()
+	e.onclick = function()
 	{
-		mApplication.mButtonHit = button;	
+		mApplication.mButtonHit = e;	
 	};
 
-	return button;
+	return e;
 },
+
+//CREATE SELECTMenu CONVIENCE FUNCTION
+createSelectMenu: function(x,z,w,h,b,i)
+{
+        e = document.createElement("SELECT");
+        e.style.position = "absolute";
+        e.style.left = x;
+        e.style.top = z;
+        e.style.width = w;
+        e.style.height = h;
+        e.style.background = b;
+        document.body.appendChild(e);
+
+        e.onclick = function()
+        {
+                mApplication.mSelectMenuHit = e;     
+        };
+
+        return e;
+},
+
+//CREATE Label CONVIENCE FUNCTION
+createLabel: function(x,z,w,h,b,i)
+{
+        e = document.createElement("INPUT");
+        e.style.position = "absolute";
+        e.style.left = x;
+        e.style.top = z;
+        e.style.width = w;
+        e.style.height = h;
+        e.style.background = b;
+        document.body.appendChild(e);
+
+        e.onclick = function()
+        {
+                mApplication.mLabelHit = e;
+        };
+
+        return e;
+},
+
 
 //BORDERS
 createBorder: function(x,z,w,h,b,i)
@@ -233,25 +280,56 @@ hideBorders: function()
 //LOGIN SCREEN
 createLoginScreen: function()
 {
-	//logout game
+  	if (this.mSelectMenuSchool == 0)
+        {
+                this.mSelectMenuSchool = this.createSelectMenu(300,50,100,25,"green","Schools");
+	}
+
+  	if (this.mLabelUsername == 0)
+	{
+                this.mLabelUsername = this.createLabel(300,75,100,25,"green","Username");
+	}
+
+  	if (this.mLabelPassword == 0)
+	{
+                this.mLabelPassword = this.createLabel(300,100,100,25,"green","Password");
+	}
+
 	if (this.mButtonLogin == 0)
 	{
-        	this.mButtonLogin = this.createButton(300,100,100,50,"green","Login");
+        	this.mButtonLogin = this.createButton(300,125,100,50,"green","Login");
         	this.mButtonLogin.onclick = function()
         	{
                 	mApplication.mButtonHit = mApplication.mButtonLogin;
         	};
 	}
+ 	if (this.mButtonExit == 0)
+        {
+                this.mButtonExit = this.createButton(300,175,100,50,"green","Exit");
+                this.mButtonExit.onclick = function()
+                {
+                        mApplication.mButtonHit = mApplication.mButtonExit;
+                };
+        }
+
 },
 
 showLoginScreen: function()
 {       
+        this.mSelectMenuSchool.style.display="block";
+        this.mLabelUsername.style.display="block";
+        this.mLabelPassword.style.display="block";
         this.mButtonLogin.style.display="block";
+        this.mButtonExit.style.display="block";
 },
 
 hideLoginScreen: function()
 {       
+        this.mSelectMenuSchool.style.display="none";
+        this.mLabelUsername.style.display="none";
+        this.mLabelPassword.style.display="none";
         this.mButtonLogin.style.display="none";
+        this.mButtonExit.style.display="none";
 },
 
 
