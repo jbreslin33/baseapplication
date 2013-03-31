@@ -144,6 +144,7 @@ void Client::sendSchools()
         	mServer->mMessage.WriteByte(mServer->mMessageAddSchool); // add type
 		if (mClientID > 0)
 		{
+			LogString("sending mAddSchool to browser");
         		mServer->mMessage.WriteByte(mClientID); // add mClientID for browsers 
 		}
 		int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school 

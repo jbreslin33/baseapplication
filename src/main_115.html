@@ -87,10 +87,10 @@ window.addEvent('domready', function()
                         }
                         mSelectMenuSchool->addItem(school);
 */
-		mApplication.log('type:' + type);			
 		if (type == -109)
 		{
-			mApplication.log('109 recieced in main');			
+                	length = byteBuffer.readByte();
+			mApplication.log('length:' + length);			
 		}
 	
                 if (type == -103)

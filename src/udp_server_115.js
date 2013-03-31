@@ -299,7 +299,9 @@ server.on("message", function (msg, rinfo)
         {
                 var clientID = msg.readInt8(1);
                 var string = type;
-                string = string + "," + clientID;
+                var length = msg.readInt8(1);
+		console.log('lengthSchool:' + length);
+                string = string + "," + length;
 
                 io.sockets.clients().forEach(function (socket)
                 {
