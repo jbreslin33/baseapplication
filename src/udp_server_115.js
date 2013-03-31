@@ -224,12 +224,18 @@ server.on("message", function (msg, rinfo)
 		{
 			if (socket.mClientID == clientID)
 			{
-				console.log('addShape-sendToUDP: ' + clientID + 'message:' + addShapeString);
+		//		console.log('addShape-sendToBrowser: ' + clientID + 'message:' + addShapeString);
        				socket.emit('news', addShapeString)
 			} 
 		});
         }
 
+	
+        if (type == -114)
+	{
+		console.log('udp logout');
+		socket.emit('news','-114');
+	}
 
         if (type == -113)
 	{
@@ -246,11 +252,39 @@ server.on("message", function (msg, rinfo)
 		});
 	}
 
-        if (type == -114)
+	//mMessageRemoveShape
+	if (type == -104)
 	{
-		console.log('udp logout');
-		socket.emit('news','-114');
+ 		var clientID = msg.readInt8(1);
+ 		var index    = msg.readInt8(1);
+                var removeShapeString = type;
+                removeShapeString = removeShapeString + "," + clientID + "," + index;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', removeShapeString)
+                        }
+                });
 	}
+
+
+        if (type == -99)
+	{
+                var clientID = msg.readInt8(1);
+		var loginString = type;
+		loginString = loginString + "," + clientID; 
+
+		io.sockets.clients().forEach(function (socket)
+		{
+			if (socket.mClientID == clientID)
+			{
+       				socket.emit('news', loginString)
+			} 
+		});
+	}
+
 
 	if (type == 1)
 	{

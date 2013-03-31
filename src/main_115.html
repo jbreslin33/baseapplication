@@ -81,6 +81,12 @@ window.addEvent('domready', function()
                 {
 			mApplication.mGame.addShape(byteBuffer);
                 }
+	
+                if (type == -104)
+		{
+			mApplication.mGame.removeShape(byteBuffer);
+			console.log('in udp have a game and sending removeShape to browswer');
+		}
 
 		if (type == mApplication.mMessageLoggedIn)
                 {
