@@ -254,7 +254,7 @@ void Shape::writeAdd(Client* client)
 {
 	mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
 
-	mGame->mServer->mMessage.WriteByte(mGame->mServer->mAddShape); // type
+	mGame->mServer->mMessage.WriteByte(mGame->mServer->mMessageAddShape); // type
 
 	if (client == mClient)
 	{
@@ -284,7 +284,7 @@ void Shape::writeAddBrowser(Client* client)
 {
 	mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
 
-	mGame->mServer->mMessage.WriteByte(mGame->mServer->mAddShape); // type
+	mGame->mServer->mMessage.WriteByte(mGame->mServer->mMessageAddShape); // type
 	
 	mGame->mServer->mMessage.WriteByte(client->mClientID); //client id for browsers 
 

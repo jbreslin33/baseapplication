@@ -59,7 +59,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	int type = mes->ReadByte();
 	
 	/***CONNECT TO SERVER********/
-	if (type == mConnect)
+	if (type == mMessageConnect)
 	{
 		//createClient(address);
 		Client* client = new Client(this, address);
@@ -68,13 +68,13 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		client->sendSchools();
 	}
 	
-	else if (type == mConnectNode)
+	else if (type == mMessageConnectNode)
 	{
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, -1);
 	}	
 
-	else if (type == mConnectBrowser)
+	else if (type == mMessageConnectBrowser)
 	{
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, clientID);
@@ -84,7 +84,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	}
 
 	/***JOIN GAME********/
-	else if (type == mJoinGame)
+	else if (type == mMessageJoinGame)
 	{
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
@@ -97,7 +97,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		}
 	}
 	
-	else if (type == mJoinGameBrowser)
+	else if (type == mMessageJoinGameBrowser)
 	{
                 int clientID = mes->ReadByte();
 		for (int i = 0; i < mClientVector.size(); i++)
@@ -111,7 +111,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	}
 
 	/******* LOGIN **********/
-	else if (type == mLogin)
+	else if (type == mMessageLogin)
 	{
  		//get client	
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
@@ -166,7 +166,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 }
 	}
 
-	else if (type == mLoginBrowser)
+	else if (type == mMessageLoginBrowser)
 	{
                 int clientID = mes->ReadByte();
 		for (int i = 0; i < mClientVector.size(); i++)
@@ -232,7 +232,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	}
 	
 	/***QUIT GAME********/
-	else if (type == mQuitGame)
+	else if (type == mMessageQuitGame)
 	{
 		// Find the correct client by comparing addresses
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
@@ -245,7 +245,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		}
 	}
 
-	else if (type == mQuitGameBrowser)
+	else if (type == mMessageQuitGameBrowser)
 	{
                 int clientID = mes->ReadByte();
 		for (int i = 0; i < mClientVector.size(); i++)
@@ -259,7 +259,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	}
 
 
-	else if (type == mMessageFrame || type == mDisconnect)
+	else if (type == mMessageFrame || type == mMessageDisconnect)
 	{
 		// Find the correct client by comparing addresses
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
@@ -272,7 +272,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		}
 	}
 
-	else if (type == mMessageFrameBrowser ||  type == mDisconnectBrowser)
+	else if (type == mMessageFrameBrowser ||  type == mMessageDisconnectBrowser)
 	{
 		int clientID = mes->ReadByte();
 		
@@ -290,7 +290,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 void Server::checkClientQuitGame(int type, Client* client, Message* mes)
 {
-	if (type == mQuitGame || type == mQuitGameBrowser)
+	if (type == mMessageQuitGame || type == mMessageQuitGameBrowser)
 	{
                	LogString("LIBRARY: Server: a client disconnected from GAME");
 		client->leaveGame();
@@ -309,7 +309,7 @@ void Server::checkClientQuitGame(int type, Client* client, Message* mes)
 
 void Server::checkClientQuit(int type, Client* client, Message* mes)
 {
-	if (type == mDisconnect || type == mDisconnectBrowser)
+	if (type == mMessageDisconnect || type == mMessageDisconnectBrowser)
 	{
 		client->remove();
                	LogString("LIBRARY: Server: a client disconnected from SERVER");

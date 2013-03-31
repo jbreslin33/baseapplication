@@ -68,35 +68,35 @@ public:
 	static const int mMessageAnswerBrowser   = -116;
 
 	//connect
-	static const int mConnect                = -101;
-	static const int mConnectBrowser         = -111;
-	static const int mConnectNode            = -121;
+	static const int mMessageConnect                = -101;
+	static const int mMessageConnectBrowser         = -111;
+	static const int mMessageConnectNode            = -121;
 
 	//join game
-	static const int mJoinGame               = -107;
-	static const int mJoinGameBrowser        = -117;
+	static const int mMessageJoinGame               = -107;
+	static const int mMessageJoinGameBrowser        = -117;
 	static const int mMessageLeaveGame       = -99;
 
 	//quit game
-	static const int mQuitGame               = -108;
-	static const int mQuitGameBrowser        = -118;
+	static const int mMessageQuitGame               = -108;
+	static const int mMessageQuitGameBrowser        = -118;
 
 	//disconnect	
-	static const int mDisconnect             = -102;
-	static const int mDisconnectBrowser      = -112;
+	static const int mMessageDisconnect             = -102;
+	static const int mMessageDisconnectBrowser      = -112;
 
 	//add school
-	static const int mAddSchool              = -109;
+	static const int mMessageAddSchool              = -109;
 
 	//login
-	static const int mLogin              	 = -110;
-	static const int mLoginBrowser        	 = -125;
-	static const int mLogout        	 = -120;
-	static const int mLoggedIn             	 = -113;
-	static const int mLoggedOut            	 = -114;
+	static const int mMessageLogin              	 = -110;
+	static const int mMessageLoginBrowser        	 = -125;
+	static const int mMessageLogout        	 = -120;
+	static const int mMessageLoggedIn             	 = -113;
+	static const int mMessageLoggedOut            	 = -114;
 	
 	//add shape	
-	static const int mAddShape    	         = -103;
+	static const int mMessageAddShape    	         = -103;
 	static const int mMessageRemoveShape     = -104;
 
 

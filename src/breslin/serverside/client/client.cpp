@@ -141,11 +141,15 @@ void Client::sendSchools()
 	for (unsigned int i = 0; i < mServer->mSchoolVector.size(); i++)
 	{
         	mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
-        	mServer->mMessage.WriteByte(mServer->mAddSchool); // add type
+        	mServer->mMessage.WriteByte(mServer->mMessageAddSchool); // add type
+		if (mClientID > 0)
+		{
+        		mServer->mMessage.WriteByte(mClientID); // add mClientID for browsers 
+		}
 		int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school 
 		mServer->mMessage.WriteByte(length); //send length 
 
-		//	loop thru length and write it 
+		//loop thru length and write it 
 		for (int b=0; b < length; b++)
 		{
 			mServer->mMessage.WriteByte(mServer->mSchoolVector.at(i).at(b));		
@@ -200,7 +204,7 @@ void Client::sendQuestion()
 void Client::sendLoggedIn()
 {
         mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
-        mServer->mMessage.WriteByte(mServer->mLoggedIn); // add type
+        mServer->mMessage.WriteByte(mServer->mMessageLoggedIn); // add type
 	SendPacket(&mServer->mMessage);
 }
 
@@ -208,7 +212,7 @@ void Client::sendLoggedInBrowser()
 {
 	LogString("sendLoggedInBrowser dude");
         mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
-        mServer->mMessage.WriteByte(mServer->mLoggedIn); // add type
+        mServer->mMessage.WriteByte(mServer->mMessageLoggedIn); // add type
         mServer->mMessage.WriteByte(mClientID); //client id for browsers
 	SendPacket(&mServer->mMessage);
 }
@@ -216,14 +220,14 @@ void Client::sendLoggedInBrowser()
 void Client::sendLoggedOut()
 {
         mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
-        mServer->mMessage.WriteByte(mServer->mLoggedOut); // add type
+        mServer->mMessage.WriteByte(mServer->mMessageLoggedOut); // add type
 	SendPacket(&mServer->mMessage);
 }
 
 void Client::sendLoggedOutBrowser()
 {
         mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
-        mServer->mMessage.WriteByte(mServer->mLoggedOut); // add type
+        mServer->mMessage.WriteByte(mServer->mMessageLoggedOut); // add type
         mServer->mMessage.WriteByte(mClientID); //client id for browsers
         SendPacket(&mServer->mMessage);
 }
