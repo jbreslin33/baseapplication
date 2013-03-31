@@ -48,6 +48,7 @@ static const char mMessageLoggedIn    = -113;
 static const char mMessageLoggedOut   = -114;
 static const char mMessageJoinGame    = -107;
 static const char mMessageDisconnect  = -102;
+static const char mMessageLeaveGame   =  -99;
 
 //Network
 Network*     mNetwork;
@@ -61,6 +62,8 @@ bool mPlayingGame;
 bool mFake;
 bool mConnectSent;
 bool mLoggedIn;
+bool mLeaveGame;
+bool mSentLeaveGame;
 
 //gui
 OgreBites::SelectMenu* mSelectMenuSchool;

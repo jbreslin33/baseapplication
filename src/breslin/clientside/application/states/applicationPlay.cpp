@@ -13,6 +13,12 @@
 //state machine
 #include "../../../statemachine/stateMachine.h"
 
+//byteBuffer
+#include "../../bytebuffer/byteBuffer.h"
+
+//byteBuffer
+#include "../../network/network.h"
+
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
@@ -28,34 +34,47 @@ ApplicationPlay::~ApplicationPlay()
 
 void ApplicationPlay::enter()
 {
-	LogString("STATE: ApplicationPlay");
-	LogString("create new Game");
         mApplicationBreslin->mGame = new Game(mApplicationBreslin);
-
+        mApplicationBreslin->mPlayingGame = true;
+        mApplicationBreslin->mSentLeaveGame = false;
 }
 void ApplicationPlay::execute()
 {
-	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_ESCAPE))
+	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_ESCAPE) && mApplicationBreslin->mSentLeaveGame == false)
 	{
-		mApplicationBreslin->mPlayingGame = false;
-		if (mApplicationBreslin->mLoggedIn)
-		{
-			mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
-		}
-		else
-		{
-			mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationLogin);
-		}
+		//send quit game
+        	ByteBuffer* byteBuffer = new ByteBuffer();
+        	byteBuffer->WriteByte(mApplicationBreslin->mGame->mMessageQuitGame);
+        	mApplicationBreslin->mNetwork->send(byteBuffer);
+		LogString("send quit game");
+
+                mApplicationBreslin->mSentLeaveGame = true;
 	}
-	else
-	{
-		//game
-		mApplicationBreslin->mGame->processUpdate();
+
+	if (mApplicationBreslin->mLeaveGame)
+       	{
+               	mApplicationBreslin->mSentLeaveGame = false;
+               	LogString("got mLeaveGame var change");
+               	if (mApplicationBreslin->mLoggedIn)
+               	{
+                       	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
+               	}
+               	else
+               	{
+                       	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationLogin);
+               	}
+       	}
+       	else
+       	{
+              	//game
+               	mApplicationBreslin->mGame->processUpdate();
 	}
 }
 
 void ApplicationPlay::exit()
 {
-	mApplicationBreslin->mGame->remove();
+	mApplicationBreslin->mPlayingGame = false;
+        mApplicationBreslin->mLeaveGame = false;
+        mApplicationBreslin->mGame->remove();
 	mApplicationBreslin->mGame = NULL;
 }

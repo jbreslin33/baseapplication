@@ -85,49 +85,27 @@ Game::~Game()
 //i am guessing i am not clearing the shape arrray???
 void Game::remove()
 {
- 	//send quit game
-        ByteBuffer* byteBuffer = new ByteBuffer();
-        byteBuffer->WriteByte(mMessageQuitGame);
-        mApplicationBreslin->mNetwork->send(byteBuffer);
-
-	LogString("Game::remove(1)");
-
         if (mShapeVector)
         {
                 for (unsigned int i = 0; i < mShapeVector->size(); i++)
                 {
-			LogString("Game::remove(2)");
 			Shape* shape = mShapeVector->at(i);
 
         		//delete objectTitles
-			LogString("Game::remove(3)");
 			if (shape)
 			{
         			delete shape->mGhost->mObjectTitle;
-				LogString("Game::remove(4)");
         			delete shape->mObjectTitle;
 			}
-
-        		//delete entities by name
-        		//mApplicationBreslin->getSceneManager()->destroyEntity(shape->mGhost->mName);
-        		//mApplicationBreslin->getSceneManager()->destroyEntity(shape->mName);
-
-                        //delete mShapeVector->at(i);
-                        //delete mShapeGhostVector->at(i);
                 }
         }
-
-	LogString("Game::remove(5)");
+	
 	mApplicationBreslin->getSceneManager()->destroyAllEntities();
-	LogString("Game::remove(6)");
         mApplicationBreslin->mSceneMgr->destroyLight(mPointLight);
 
 	//clear the vectors....	
-	LogString("Game::remove(7)");
 	mShapeVector->clear();
-	LogString("Game::remove(8)");
 	mShapeGhostVector->clear();
-	
 }
 
 /*********************************

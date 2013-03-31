@@ -42,12 +42,15 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mNetwork = new Network(this,serverIP,serverPort);
 
 	//initilize
+	//state transition variables
 	mSetup = false;
 	mPlayingGame = false;
 	mFake = true;
 	mConnectSent = false;
 	mButtonHit = NULL;
 	mLoggedIn = false;
+        mLeaveGame = false;
+        mSentLeaveGame = false;
 
 	//time
 	mRenderTime = 0.0f;
@@ -229,6 +232,11 @@ void ApplicationBreslin::checkForByteBuffer()
 		{
 			LogString("LoggedOut");
 			mLoggedIn = false;
+		}
+
+		if (type == mMessageLeaveGame)
+		{
+			mLeaveGame = true;
 		}
 
 		//pass on to game if there is one....
