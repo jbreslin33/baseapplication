@@ -53,8 +53,8 @@ State* mGamePause;
 
 
 // constants
-static const char mCommandKey          = 1;
-static const char mCommandFrameTime = 2;
+static const char mMessageKey       = 1;
+static const char mMessageFrameTime = 2;
 
 static const char mMessageFrame = 1;
 

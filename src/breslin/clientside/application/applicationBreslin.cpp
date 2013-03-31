@@ -209,7 +209,7 @@ void ApplicationBreslin::checkForByteBuffer()
 
                 type = byteBuffer->ReadByte();
 
-		if (type == mAddSchool)
+		if (type == mMessageAddSchool)
 		{
 			LogString("adding school..");
 			std::string school;

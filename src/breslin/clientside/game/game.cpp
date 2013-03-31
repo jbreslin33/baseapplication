@@ -289,7 +289,7 @@ void Game::sendByteBuffer()
         	//if key has not been changed return having done nothing 
         	if(mKeyLast != mKeyCurrent)
         	{
-                	flags |= mCommandKey;
+                	flags |= mMessageKey;
         	}
 		else
 		{
