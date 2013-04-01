@@ -9,6 +9,7 @@ initialize: function(serverIP, serverPort)
 
 	//constants
 	this.mMessageServerExit = 3;
+	this.mMessageConnected   = -90; //browser code
 	this.mMessageConnect     = -111; //browser code
 	this.mMessageDisconnect  = -112; //browser code
 
@@ -27,6 +28,7 @@ initialize: function(serverIP, serverPort)
         
 	//state transition variables
         this.mSetup = false;
+	this.mConnected = false;
         this.mPlayingGame = false;
 	this.mConnectSent = false;
 	this.mLoggedIn = false;	
@@ -91,6 +93,8 @@ initialize: function(serverIP, serverPort)
 
 	this.sendConnect();	
 
+	this.createLoginScreen();
+	this.hideLoginScreen();
 },
 
 log: function(msg)

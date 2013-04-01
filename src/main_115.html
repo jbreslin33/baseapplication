@@ -77,6 +77,12 @@ window.addEvent('domready', function()
 
                 type = byteBuffer.readByte();
 
+		//mMessageConnected
+  		if (type == -90)
+                {
+                        mApplication.mConnected = true;
+                }
+
 		if (type == -109)
 		{
                 	length = byteBuffer.readByte();

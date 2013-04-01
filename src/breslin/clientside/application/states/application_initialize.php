@@ -15,8 +15,12 @@ execute: function()
         if (this.mApplicationBreslin.setup())
         {
         	this.mApplicationBreslin.mSetup = true;
-        	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationLogin);
         }
+        if (this.mApplicationBreslin.mSetup && this.mApplicationBreslin.mConnected)
+	{
+        	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationLogin);
+
+	}
 },
 
 exit: function()

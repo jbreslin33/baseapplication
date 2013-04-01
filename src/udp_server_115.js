@@ -218,10 +218,26 @@ server.on("message", function (msg, rinfo)
 		});
         }
 
-	
+
+	//mMessageConnected
+ 	if (type == -90)
+        {
+                var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+	}
+
+	//logout	
         if (type == -114)
 	{
-		console.log('udp logout');
 		socket.emit('news','-114');
 	}
 
