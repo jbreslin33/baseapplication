@@ -91,6 +91,24 @@ window.addEvent('domready', function()
 		{
                 	length = byteBuffer.readByte();
 			mApplication.log('length:' + length);			
+			var string = "";
+			for (i = 0; i < length; i++)
+			{
+				string = string + byteBuffer.readByte();
+			}
+			
+
+			var option=document.createElement("option");
+			option.text=string;
+			try
+  			{
+  				// for IE earlier than version 8
+  				mApplication.mSelectMenuSchool.add(option,x.options[null]);
+  			}
+			catch (e)
+  			{
+  				mApplication.mSelectMenuSchool.add(option,null);
+  			}
 		}
 	
                 if (type == -103)
