@@ -46,7 +46,9 @@ void ApplicationMain::execute()
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogout)
 	{
 		mApplicationBreslin->mButtonHit = NULL;
+		//this does nothing....
 		mApplicationBreslin->sendLogout();
+		//this does...
 		mApplicationBreslin->mLoggedIn = false;
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationLogin);
 	}

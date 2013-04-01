@@ -124,6 +124,22 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
+        socket.on('send_logout', function(message,remote)
+	{
+         	//send to c++ server
+                var buf = new Buffer(2);
+
+                //type
+                type = -98;
+                buf.writeInt8(type,0);
+
+                //mClientID
+                buf.writeInt8(socket.mClientID,1);
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+        });
 	
         socket.on('send_login', function(message,remote)
         {

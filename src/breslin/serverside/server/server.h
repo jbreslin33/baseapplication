@@ -92,7 +92,8 @@ public:
 	//login
 	static const int mMessageLogin              	 = -110;
 	static const int mMessageLoginBrowser        	 = -125;
-	static const int mMessageLogout        	 = -120;
+	static const int mMessageLogout        	         = -120;
+	static const int mMessageLogoutBrowser        	 = -98;
 	static const int mMessageLoggedIn             	 = -113;
 	static const int mMessageLoggedOut            	 = -114;
 	
