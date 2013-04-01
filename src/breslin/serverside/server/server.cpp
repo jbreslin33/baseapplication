@@ -64,7 +64,9 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		//createClient(address);
 		Client* client = new Client(this, address);
 		LogString("connected c++ client!!!!!!!!!!!!");
-		
+	
+		client->sendConnected();	
+	
 		client->sendSchools();
 	}
 	
@@ -79,6 +81,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, clientID);
 		LogString("connected browser client!!!!!!!!!!!!");
+		client->sendConnected();	
 
 		client->sendSchools();
 	}
@@ -168,6 +171,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	else if (type == mMessageLoginBrowser)
 	{
+		LogString("mMessageLoginBrowswer found");	
                 int clientID = mes->ReadByte();
 		for (int i = 0; i < mClientVector.size(); i++)
 		{

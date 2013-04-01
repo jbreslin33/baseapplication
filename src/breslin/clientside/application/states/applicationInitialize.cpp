@@ -35,8 +35,12 @@ void ApplicationInitialize::execute()
 	if (mApplicationBreslin->setup())
 	{
 		mApplicationBreslin->mSetup = true;
-        	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationLogin);
 	}	
+
+        if (mApplicationBreslin->mSetup && mApplicationBreslin->mConnected)
+	{		
+        	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationLogin);
+	}
 }
 
 void ApplicationInitialize::exit()

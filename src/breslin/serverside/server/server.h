@@ -68,6 +68,7 @@ public:
 	static const int mMessageAnswerBrowser   = -116;
 
 	//connect
+	static const int mMessageConnected              = -90;
 	static const int mMessageConnect                = -101;
 	static const int mMessageConnectBrowser         = -111;
 	static const int mMessageConnectNode            = -121;

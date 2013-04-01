@@ -203,12 +203,26 @@ void Client::sendQuestion()
 //but we will not because it confuses this.
 }
 
+//connected
+void Client::sendConnected()
+{
+        mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+        mServer->mMessage.WriteByte(mServer->mMessageConnected); // add type
+	if (mClientID > 0)
+	{
+        	mServer->mMessage.WriteByte(mClientID); // add mClientID for browsers 
+	}
+	SendPacket(&mServer->mMessage);
+}
+
+//login
 void Client::sendLoggedIn()
 {
         mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
         mServer->mMessage.WriteByte(mServer->mMessageLoggedIn); // add type
 	SendPacket(&mServer->mMessage);
 }
+
 
 void Client::sendLoggedInBrowser()
 {

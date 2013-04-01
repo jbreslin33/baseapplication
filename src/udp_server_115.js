@@ -147,7 +147,7 @@ io.sockets.on('connection', function (socket)
 
 		//type
                 type = -125;
-                console.log(buf.readInt8(0));
+		buf.writeInt8(type,0);
 
 		//mClientID
                 buf.writeInt8(socket.mClientID,1);

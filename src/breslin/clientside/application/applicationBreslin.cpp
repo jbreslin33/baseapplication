@@ -44,6 +44,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//initilize
 	//state transition variables
 	mSetup = false;
+	mConnected = false;
 	mPlayingGame = false;
 	mFake = true;
 	mConnectSent = false;
@@ -96,7 +97,7 @@ void ApplicationBreslin::processUpdate()
 	if (mFake == true)
 	{
 		//mGame = new Game(this);
-
+		createLoginScreen();
 		hideLoginScreen();
 
        		mStateMachine->changeState(mApplicationPlay);
@@ -208,6 +209,12 @@ void ApplicationBreslin::checkForByteBuffer()
                 byteBuffer->BeginReading();
 
                 type = byteBuffer->ReadByte();
+
+		if (type == mMessageConnected)
+		{
+			LogString("mConnected = true");
+			mConnected = true;
+		}
 
 		if (type == mMessageAddSchool)
 		{

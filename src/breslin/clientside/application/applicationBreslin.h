@@ -41,6 +41,7 @@ State* mApplicationPlay;
 //constants
 static const char mMessageServerExit  = 3;
 static const char mMessageConnect     = -101;
+static const char mMessageConnected   = -90;
 static const char mMessageAddSchool   = -109;
 static const char mMessageLogin       = -110;
 static const char mMessageLogout      = -120;
@@ -58,6 +59,7 @@ Game* mGame;
 
 //state transition variables
 bool mSetup;
+bool mConnected;
 bool mPlayingGame;
 bool mFake;
 bool mConnectSent;

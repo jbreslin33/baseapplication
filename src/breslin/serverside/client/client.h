@@ -96,6 +96,9 @@ public:
 	void joinGame();
 	void leaveGame();
 
+	//connect
+	void sendConnected();
+
 	//loggedIn
 	void sendLoggedIn();
 	void sendLoggedInBrowser();
