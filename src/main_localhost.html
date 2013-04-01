@@ -77,6 +77,36 @@ window.addEvent('domready', function()
 
                 type = byteBuffer.readByte();
 
+		//mMessageConnected
+  		if (type == -90)
+                {
+                        mApplication.mConnected = true;
+                }
+
+		if (type == -109)
+		{
+                	length = byteBuffer.readByte();
+			mApplication.log('length:' + length);			
+			var string = "";
+			for (i = 0; i < length; i++)
+			{
+				string = string + byteBuffer.readByte();
+			}
+			
+
+			var option=document.createElement("option");
+			option.text=string;
+			try
+  			{
+  				// for IE earlier than version 8
+  				mApplication.mSelectMenuSchool.add(option,x.options[null]);
+  			}
+			catch (e)
+  			{
+  				mApplication.mSelectMenuSchool.add(option,null);
+  			}
+		}
+	
                 if (type == -103)
                 {
 			mApplication.mGame.addShape(byteBuffer);
@@ -85,7 +115,6 @@ window.addEvent('domready', function()
                 if (type == -104)
 		{
 			mApplication.mGame.removeShape(byteBuffer);
-			console.log('in udp have a game and sending removeShape to browswer');
 		}
 
 		if (type == mApplication.mMessageLoggedIn)

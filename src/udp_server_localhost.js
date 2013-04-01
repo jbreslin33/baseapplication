@@ -134,7 +134,6 @@ io.sockets.on('connection', function (socket)
 		{
 			if (message[i] == ' ')	
 			{
-				console.log('message:' + i + ' is null'); 
 				blankSpot = i;
 			}
 		}
@@ -148,41 +147,30 @@ io.sockets.on('connection', function (socket)
 
 		//type
                 type = -125;
-                buf.writeInt8(type,0);
-                console.log(type);
-                console.log(buf.readInt8(0));
+		buf.writeInt8(type,0);
 
 		//mClientID
                 buf.writeInt8(socket.mClientID,1);
-                console.log(socket.mClientID);
-                console.log(buf.readInt8(1));
 
 		//usernameLength
 		var usernameLength = parseInt(blankSpot);
                 buf.writeInt8(usernameLength,2);
-                console.log(usernameLength);
-                console.log(buf.readInt8(2));
 
 		//passwordLength
 		var passwordLength = parseInt(messageLength - blankSpot - 1);
                 buf.writeInt8(passwordLength,3);
-                console.log(passwordLength);
-                console.log(buf.readInt8(3));
 
 
 		for (u = 0; u < usernameLength; u++)
 		{
-			console.log(message[parseInt(u)].charCodeAt(0));
   			buf.writeInt8(message[u].charCodeAt(0),parseInt(u + 4));
 		}
 
 		for (p = 0; p < passwordLength; p++)
 		{
-			console.log(message[parseInt(p + blankSpot + 1)].charCodeAt(0));
   			buf.writeInt8(message[parseInt(p + blankSpot + 1)].charCodeAt(0),parseInt(usernameLength + 4 + p));
 		}
 
-		
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
                 });
@@ -230,10 +218,26 @@ server.on("message", function (msg, rinfo)
 		});
         }
 
-	
+
+	//mMessageConnected
+ 	if (type == -90)
+        {
+                var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+	}
+
+	//logout	
         if (type == -114)
 	{
-		console.log('udp logout');
 		socket.emit('news','-114');
 	}
 
@@ -269,6 +273,30 @@ server.on("message", function (msg, rinfo)
                 });
 	}
 
+	//mMessageAddSchool
+        if (type == -109)
+        {
+                var clientID = msg.readInt8(1);
+                var length = msg.readInt8(2);
+
+                var string = type;
+		string = string + "," + length;
+
+ 		for (i = 0; i < length; i++)
+                {
+			var n = msg.readInt8(parseInt(3 + i));	
+			var c = String.fromCharCode(n);
+			string = string + "," + c;	
+                }
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+        }
 
         if (type == -99)
 	{
