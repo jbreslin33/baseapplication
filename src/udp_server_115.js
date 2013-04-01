@@ -257,8 +257,7 @@ server.on("message", function (msg, rinfo)
                 });
 	}
 
-
-//			string = string + "," + msg.readInt8(parseInt(2 + i));	
+	//mMessageAddSchool
         if (type == -109)
         {
                 var clientID = msg.readInt8(1);
@@ -269,7 +268,7 @@ server.on("message", function (msg, rinfo)
 
  		for (i = 0; i < length; i++)
                 {
-			var n = msg.readInt8(parseInt(2 + i));	
+			var n = msg.readInt8(parseInt(3 + i));	
 			var c = String.fromCharCode(n);
 			string = string + "," + c;	
                 }
