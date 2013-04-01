@@ -49,6 +49,9 @@ initialize: function(serverIP, serverPort)
 	this.mLabelHit = 0;
 	this.mButtonExit = 0;
 
+	//loading
+	this.mButtonLoading = 0;
+
 	//main screen
 	this.mButtonJoinGame = 0;
 	this.mButtonLogout = 0;
@@ -93,8 +96,14 @@ initialize: function(serverIP, serverPort)
 
 	this.sendConnect();	
 
+	//prep loginScreen for selectMenu
 	this.createLoginScreen();
 	this.hideLoginScreen();
+
+	//show something while waiting for server
+ 	this.createLoadingScreen();
+        this.showLoadingScreen();
+
 },
 
 log: function(msg)
@@ -280,6 +289,26 @@ hideBorders: function()
 {
 
 },
+
+//LOADING SCREEN
+createLoadingScreen: function()
+{
+ 	if (this.mButtonLoading == 0)
+        {
+                this.mButtonLoading = this.createButton(100,100,300,300,"blue","Loading");
+        }
+},
+
+showLoadingScreen: function()
+{
+        this.mButtonLoading.style.display="block";
+},
+
+hideLoadingScreen: function()
+{
+        this.mButtonLoading.style.display="none";
+},
+
 
 //LOGIN SCREEN
 createLoginScreen: function()

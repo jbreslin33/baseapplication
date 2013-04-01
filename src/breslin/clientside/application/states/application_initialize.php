@@ -18,6 +18,7 @@ execute: function()
         }
         if (this.mApplicationBreslin.mSetup && this.mApplicationBreslin.mConnected)
 	{
+		this.mApplicationBreslin.hideLoadingScreen();
         	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationLogin);
 
 	}
