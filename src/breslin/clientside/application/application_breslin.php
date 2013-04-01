@@ -152,8 +152,10 @@ sendConnect: function()
 
 sendLogin: function()
 {
- 	this.log('innerusername:' + this.mLabelUsername.value);
-	message = 'v1301 ahh';
+ 	var username = this.mLabelUsername.value;
+ 	var password = this.mLabelPassword.value;
+	//message = 'v1301 ahh';
+	message = username + ' ' + password;
 	this.mNetwork.mSocket.emit('send_login', message);
 },
 
