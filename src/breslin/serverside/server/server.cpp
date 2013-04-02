@@ -245,7 +245,22 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			}
 		}
 	}
-	
+
+        else if (type == mMessageLogoutBrowser)
+        {
+                LogString("mMessageLogoutBrowswer found");
+                int clientID = mes->ReadByte();
+                for (int i = 0; i < mClientVector.size(); i++)
+                {
+                        if (mClientVector.at(i)->mClientID == clientID)
+                        {
+                                //set client to pointer
+                                client = mClientVector.at(i);
+				client->logout();
+			}
+		}
+	}
+                           	
 	/***QUIT GAME********/
 	else if (type == mMessageQuitGame)
 	{

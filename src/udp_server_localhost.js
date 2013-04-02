@@ -126,6 +126,7 @@ io.sockets.on('connection', function (socket)
 
         socket.on('send_logout', function(message,remote)
 	{
+		console.log('send_logout in udp');
          	//send to c++ server
                 var buf = new Buffer(2);
 
@@ -254,7 +255,17 @@ server.on("message", function (msg, rinfo)
 	//logout	
         if (type == -114)
 	{
-		socket.emit('news','-114');
+ 		var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
 	}
 
         if (type == -113)

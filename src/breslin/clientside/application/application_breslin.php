@@ -154,13 +154,13 @@ sendLogin: function()
 {
  	var username = this.mLabelUsername.value;
  	var password = this.mLabelPassword.value;
-	//message = 'v1301 ahh';
 	message = username + ' ' + password;
 	this.mNetwork.mSocket.emit('send_login', message);
 },
 
 sendLogout: function()
 {
+	this.log('sendLogout app');
 	message = '';
 	this.mNetwork.mSocket.emit('send_logout', message);
 },
