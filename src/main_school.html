@@ -77,31 +77,83 @@ window.addEvent('domready', function()
 
                 type = byteBuffer.readByte();
 
+		//mMessageConnected
+  		if (type == -90)
+                {
+                        mApplication.mConnected = true;
+                }
+
+		if (type == -109)
+		{
+                	length = byteBuffer.readByte();
+			mApplication.log('length:' + length);			
+			var string = "";
+			for (i = 0; i < length; i++)
+			{
+				string = string + byteBuffer.readByte();
+			}
+			
+
+			var option=document.createElement("option");
+			option.text=string;
+			try
+  			{
+  				// for IE earlier than version 8
+  				mApplication.mSelectMenuSchool.add(option,x.options[null]);
+  			}
+			catch (e)
+  			{
+  				mApplication.mSelectMenuSchool.add(option,null);
+  			}
+		}
+	
                 if (type == -103)
                 {
 			mApplication.mGame.addShape(byteBuffer);
                 }
+	
+                if (type == -104)
+		{
+			mApplication.mGame.removeShape(byteBuffer);
+		}
+
+		if (type == mApplication.mMessageLoggedIn)
+                {
+                        mApplication.mLoggedIn = true;
+                }
+
+                if (type == mApplication.mMessageLoggedOut)
+                {
+                        mApplication.mLoggedIn = false;
+                }
+
+                if (type == mApplication.mMessageLeaveGame)
+                {
+                        mApplication.mLeaveGame = true;
+                }
 
                 if (type == 1)
                 {
-			mIntervalCount++;
-		
-			//check if we stopped game loop	
-			if (mIntervalCount > 25)
+			if (mApplication.mGame)
 			{
-				//game loop stopped so let's clear interval and start a new one.	
+				mIntervalCount++;
+		
+				//check if we stopped game loop	
+				if (mIntervalCount > 25)
+				{
+					//game loop stopped so let's clear interval and start a new one.	
 
-				//clear it
-				clearInterval(mInterval);
+					//clear it
+					clearInterval(mInterval);
 
-				//set it again
-        			mInterval=setInterval("mApplication.processUpdate()",32)
+					//set it again
+        				mInterval=setInterval("mApplication.processUpdate()",32)
 
-				mIntervalCount = 0;
+					mIntervalCount = 0;
 
+				}
+                        	mApplication.mGame.readServerTick(byteBuffer);
 			}
-				
-                        mApplication.mGame.readServerTick(byteBuffer);
                 }
         });
 }

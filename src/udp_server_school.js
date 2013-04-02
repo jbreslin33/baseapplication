@@ -59,6 +59,52 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
+        socket.on('send_join_game', function(message,remote)
+	{
+                //send to c++ server
+                var buf = new Buffer(2);
+
+		//type
+                type = -117;
+                buf.writeInt8(type,0);
+                console.log(type);
+                console.log(buf.readInt8(0));
+
+		//mClientID
+                buf.writeInt8(socket.mClientID,1);
+                console.log(socket.mClientID);
+                console.log(buf.readInt8(1));
+
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+        });
+
+        socket.on('send_quit_game', function(message,remote)
+	{
+                //send to c++ server
+                var buf = new Buffer(2);
+
+		//type
+                type = -118;
+                buf.writeInt8(type,0);
+                console.log(type);
+                console.log(buf.readInt8(0));
+
+		//mClientID
+                buf.writeInt8(socket.mClientID,1);
+                console.log(socket.mClientID);
+                console.log(buf.readInt8(1));
+
+		console.log('mClientID:' + socket.mClientID + ' disconnecting');
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+
+        });
+
         socket.on('send_move', function(message,remote)
         {
                 mMessage = message;
@@ -78,82 +124,75 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
-        socket.on('send_login', function(message,remote)
-        {
-		console.log('message:' + message[0]);
-		console.log('message:' + message[1]);
-		console.log('message:' + message[2]);
-		buffy = new Buffer(message.length);
-		
-		for (var i = 0; i < message.length ; i++)
-		{
-  			buffy[i] = message.charCodeAt(i);
-		}
+        socket.on('send_logout', function(message,remote)
+	{
+		console.log('send_logout in udp');
+         	//send to c++ server
+                var buf = new Buffer(2);
 
-		console.log(buffy);	
-
-                mMessage = message;
-                var messageArray = message.split(" ");
-
-             	var username = messageArray[0];                    
-                var usernameArray = username.split("");
-		var usernameArraySize = usernameArray.length;
-
-             	var password = messageArray[1];                    
-                var passwordArray = password.split("");
-		var passwordArraySize = passwordArray.length;
-
-                type = -125;
-
-                //send to c++ server
-		var bufLength = parseInt(4 + usernameArraySize + passwordArraySize);  
-                var buf = new Buffer(bufLength);
+                //type
+                type = -98;
                 buf.writeInt8(type,0);
-		console.log(type);
-		console.log(buf.readInt8(0));
+
+                //mClientID
                 buf.writeInt8(socket.mClientID,1);
-		console.log(socket.mClientID);
-		console.log(buf.readInt8(1));
-			
-		var usernameSizeIndex  = parseInt(2);
-		buf.writeInt8(usernameArraySize,usernameSizeIndex);
-		console.log(usernameArraySize);
-		console.log(buf.readInt8(usernameSizeIndex));
-		for (u = 0; u < usernameArraySize; u++)
-		{
-			var bufIndex = parseInt(3 + u);
-			var charCode = usernameArray[u].charCodeAt(0);
-			buf.writeInt8(charCode,bufIndex);
-			console.log(charCode);
-			console.log(buf.readInt8(bufIndex));
-		} 
-
-		var passwordSizeIndex  = parseInt(3 + usernameArraySize);
-		buf.writeInt8(passwordArraySize,passwordSizeIndex);
-		console.log(passwordArraySize);
-		console.log(buf.readInt8(passwordSizeIndex));
-		for (p = 0; p < passwordArraySize; p++)
-		{
-			var bufIndex = parseInt(4 + p);
-			var charCode = passwordArray[p].charCodeAt(0);
-			buf.writeInt8(charCode,bufIndex);
-			console.log(charCode);
-			console.log(buf.readInt8(bufIndex));
-		} 
-		console.log(buf.readInt8(0));	
-		console.log(buf.readInt8(1));	
-
-		for (b = 2; b < buf.length; b++)
-		{
-			console.log(buf.readInt8(b));	
-		}	
-		console.log('the buf');
-		console.log(buf);
-	
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
                 });
+        });
+	
+        socket.on('send_login', function(message,remote)
+        {
+		var messageLength = message.length;
+		var blankSpot = 0;	
+	
+		for (i = 0; i < messageLength; i++)
+		{
+			if (message[i] == ' ')	
+			{
+				blankSpot = i;
+			}
+		}
+
+
+                //send to c++ server
+	
+		//buf
+                var bufLength = parseInt(3 + messageLength); // 4 items minus blankspot + messageLength
+                var buf = new Buffer(bufLength);
+
+		//type
+                type = -125;
+		buf.writeInt8(type,0);
+
+		//mClientID
+                buf.writeInt8(socket.mClientID,1);
+
+		//usernameLength
+		var usernameLength = parseInt(blankSpot);
+                buf.writeInt8(usernameLength,2);
+
+		//passwordLength
+		var passwordLength = parseInt(messageLength - blankSpot - 1);
+                buf.writeInt8(passwordLength,3);
+
+
+		for (u = 0; u < usernameLength; u++)
+		{
+  			buf.writeInt8(message[u].charCodeAt(0),parseInt(u + 4));
+		}
+
+		for (p = 0; p < passwordLength; p++)
+		{
+  			buf.writeInt8(message[parseInt(p + blankSpot + 1)].charCodeAt(0),parseInt(usernameLength + 4 + p));
+		}
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+
+		
         });
 });
 
@@ -190,11 +229,117 @@ server.on("message", function (msg, rinfo)
 		{
 			if (socket.mClientID == clientID)
 			{
-				console.log('sendTo: ' + clientID + 'message:' + addShapeString);
+		//		console.log('addShape-sendToBrowser: ' + clientID + 'message:' + addShapeString);
        				socket.emit('news', addShapeString)
 			} 
 		});
         }
+
+
+	//mMessageConnected
+ 	if (type == -90)
+        {
+                var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+	}
+
+	//logout	
+        if (type == -114)
+	{
+ 		var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+	}
+
+        if (type == -113)
+	{
+                var clientID = msg.readInt8(1);
+		var loginString = type;
+		loginString = loginString + "," + clientID; 
+
+		io.sockets.clients().forEach(function (socket)
+		{
+			if (socket.mClientID == clientID)
+			{
+       				socket.emit('news', loginString)
+			} 
+		});
+	}
+
+	//mMessageRemoveShape
+	if (type == -104)
+	{
+ 		var clientID = msg.readInt8(1);
+ 		var index    = msg.readInt8(1);
+                var removeShapeString = type;
+                removeShapeString = removeShapeString + "," + clientID + "," + index;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', removeShapeString)
+                        }
+                });
+	}
+
+	//mMessageAddSchool
+        if (type == -109)
+        {
+                var clientID = msg.readInt8(1);
+                var length = msg.readInt8(2);
+
+                var string = type;
+		string = string + "," + length;
+
+ 		for (i = 0; i < length; i++)
+                {
+			var n = msg.readInt8(parseInt(3 + i));	
+			var c = String.fromCharCode(n);
+			string = string + "," + c;	
+                }
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+        }
+
+        if (type == -99)
+	{
+                var clientID = msg.readInt8(1);
+		var loginString = type;
+		loginString = loginString + "," + clientID; 
+
+		io.sockets.clients().forEach(function (socket)
+		{
+			if (socket.mClientID == clientID)
+			{
+       				socket.emit('news', loginString)
+			} 
+		});
+	}
+
 
 	if (type == 1)
 	{
