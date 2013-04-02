@@ -234,9 +234,24 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			}
 		}	
 	}
+	/***LOG OUT********/
+
+	else if (type == mMessageLogout)
+	{
+ 		//get client 
+                for (unsigned int i = 0; i < mClientVector.size(); i++)
+                {
+                        if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+                        {
+                                //set client to pointer
+                                client = mClientVector.at(i);
+				client->logout();
+			}
+		}
+	}
 	
 	/***QUIT GAME********/
-	else if (type == mMessageQuitGame)
+	else if (type == mMessageLogout)
 	{
 		// Find the correct client by comparing addresses
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
@@ -261,7 +276,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			}
 		}
 	}
-
 
 	else if (type == mMessageFrame || type == mMessageDisconnect)
 	{
