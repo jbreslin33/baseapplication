@@ -113,13 +113,13 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 {
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
-				//should we do a checkLogin function?
-				//client->checkLogin();
-
 	
 				//set client to pointer
                                 client = mClientVector.at(i);
-	
+				
+				client->checkLogin(mes);
+
+				/*	
 				//clear username and password strings
 				client->mStringUsername.clear();
 				client->mStringPassword.clear();
@@ -150,6 +150,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				{	
 					client->logout();
 				}
+				*/
+
 			}
                 }
 	}
@@ -163,7 +165,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
                                 //set client to pointer
                                 client = mClientVector.at(i);
-
+				client->checkLogin(mes);
+/*
                                 //clear username and password strings
                                 client->mStringUsername.clear();
                                 client->mStringPassword.clear();
@@ -198,6 +201,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         client->logout();
                                 }
+*/
 			}
 		}	
 	}
@@ -463,49 +467,6 @@ std::string Server::getSchools()
 
         PQfinish(conn);
 }
-
-bool Server::getPasswordMatch(std::string username,std::string password)
-{
-        PGconn          *conn;
-        PGresult        *res;
-        int             rec_count;
-        int             row;
-        int             col;
-	bool match = false;
-	std::string query = "select username,password from users where username = '"; 
-	std::string a = "' ";	
-	std::string b = "and password = '";
-	std::string c = "'";	
-
-	query.append(username);	
-	query.append(a);
-	query.append(b);
-	query.append(password);	
-	query.append(c);
-
-	const char * q = query.c_str();
-
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-
-        res = PQexec(conn,q);
-        if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-                puts("We did not get any data!");
-                //exit(0);
-        }
-        rec_count = PQntuples(res);
-	if (rec_count > 0)
-	{
-		match = true;
-        }
-
-        PQclear(res);
-
-        PQfinish(conn);
-	
-	return match;
-}
-
 
 void Server::readPackets()
 {

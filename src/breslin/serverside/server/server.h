@@ -120,7 +120,6 @@ public:
 	void sendPackets();
 	void readDB();
 	std::string getSchools();
-	bool getPasswordMatch(std::string username,std::string password);	
 	void readPackets();
 	void parsePacket(Message *mes, struct sockaddr *address);
 	void checkClientQuit(int type, Client* client, Message* mes);

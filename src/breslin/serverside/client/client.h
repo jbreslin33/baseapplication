@@ -99,9 +99,11 @@ public:
 	//connect
 	void sendConnected();
 
-	//loggedIn
+	//login
 	void login();
 	void logout();
+	void checkLogin(Message* mes);
+        bool getPasswordMatch(std::string username,std::string password);
 
 	//questions
 	void sendQuestion();

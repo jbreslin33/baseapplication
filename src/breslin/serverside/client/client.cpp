@@ -31,6 +31,11 @@
 #include <arpa/inet.h>
 #endif
 
+//postgresql
+#include <stdio.h>
+#include <postgresql/libpq-fe.h>
+
+
 //server side client constructor, many instances will be made, one for each client connected.
 Client::Client(Server* server, struct sockaddr *address)
 {
@@ -249,6 +254,100 @@ void Client::logout()
         	mServer->mMessage.WriteByte(mClientID); //client id for browsers
 	}	
 	SendPacket(&mServer->mMessage);
+}
+
+void Client::checkLogin(Message* mes)
+{
+	//clear username and password strings
+        mStringUsername.clear();
+        mStringPassword.clear();
+
+        int sizeOfUsername = mes->ReadByte();
+        int sizeOfPassword = mes->ReadByte();
+
+        //loop thru and set mStringUsername from client
+        for (int i = 0; i < sizeOfUsername; i++)
+        {
+		if (mClientID > 0)
+		{
+                	char c = mes->ReadByte();
+                        mStringUsername.append(1,c);
+		}
+		else
+		{
+               		int numeric = mes->ReadByte();
+                        char ascii = (char)numeric;
+                       	mStringUsername.append(1,ascii);
+		}
+	}
+
+        //loop thru and set mStringPassword from client
+        for (int i = 0; i < sizeOfPassword; i++)
+        {
+                if (mClientID > 0)
+                {
+                        char c = mes->ReadByte();
+                        mStringPassword.append(1,c);
+                }
+                else
+                {
+                        int numeric = mes->ReadByte();
+                        char ascii = (char)numeric;
+                        mStringPassword.append(1,ascii);
+                }
+        }
+        
+	//check against db
+        if (getPasswordMatch(mStringUsername,mStringPassword))
+     	{ 
+        	login();
+        }
+        else
+        {
+        	logout();
+        }
+}
+
+bool Client::getPasswordMatch(std::string username,std::string password)
+{
+        PGconn          *conn;
+        PGresult        *res;
+        int             rec_count;
+        int             row;
+        int             col;
+        bool match = false;
+        std::string query = "select username,password from users where username = '";
+        std::string a = "' ";
+        std::string b = "and password = '";
+        std::string c = "'";
+
+        query.append(username);
+        query.append(a);
+        query.append(b);
+        query.append(password);
+        query.append(c);
+
+        const char * q = query.c_str();
+
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+        res = PQexec(conn,q);
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                puts("We did not get any data!");
+                //exit(0);
+        }
+        rec_count = PQntuples(res);
+        if (rec_count > 0)
+        {
+                match = true;
+        }
+
+        PQclear(res);
+
+        PQfinish(conn);
+
+        return match;
 }
 
 void Client::writeQuestion()
