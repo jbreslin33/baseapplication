@@ -113,45 +113,9 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 {
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
-	
 				//set client to pointer
                                 client = mClientVector.at(i);
-				
 				client->checkLogin(mes);
-
-				/*	
-				//clear username and password strings
-				client->mStringUsername.clear();
-				client->mStringPassword.clear();
-
-				int sizeOfUsername = mes->ReadByte();
-				int sizeOfPassword = mes->ReadByte();
-
-				//loop thru and set mStringUsername from client
-				for (int i = 0; i < sizeOfUsername; i++)
-				{
-					char c = mes->ReadByte();
-					client->mStringUsername.append(1,c);		 
-				}
-
-				//loop thru and set mStringPassword from client
-				for (int i = 0; i < sizeOfPassword; i++)
-				{
-					char c = mes->ReadByte();
-					client->mStringPassword.append(1,c);		 
-				}
-	
-				//check against db
-				if (getPasswordMatch(client->mStringUsername,client->mStringPassword))
-				{
-					client->login();
-				}					
-				else
-				{	
-					client->logout();
-				}
-				*/
-
 			}
                 }
 	}
@@ -166,42 +130,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 //set client to pointer
                                 client = mClientVector.at(i);
 				client->checkLogin(mes);
-/*
-                                //clear username and password strings
-                                client->mStringUsername.clear();
-                                client->mStringPassword.clear();
-
-                                int sizeOfUsername = mes->ReadByte();
-				int sizeOfPassword = mes->ReadByte();
-                               
-				 //loop thru and set mStringUsername from client
-                                for (int i = 0; i < sizeOfUsername; i++)
-                                {
-                                        int numeric = mes->ReadByte();
- 					char ascii = (char)numeric;
-
-                                        client->mStringUsername.append(1,ascii);
-                                }
-
-                                //loop thru and set mStringPassword from client
-                                for (int i = 0; i < sizeOfPassword; i++)
-                                {
-                                        int numeric = mes->ReadByte();
- 					char ascii = (char)numeric;
-
-                                        client->mStringPassword.append(1,ascii);
-                                }
-                                
-				//check against db
-                                if (getPasswordMatch(client->mStringUsername,client->mStringPassword))
-                                {
-                                        client->login();
-                                }
-                                else
-                                {
-                                        client->logout();
-                                }
-*/
 			}
 		}	
 	}
