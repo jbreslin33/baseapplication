@@ -100,10 +100,8 @@ public:
 	void sendConnected();
 
 	//loggedIn
-	void sendLoggedIn();
-	void sendLoggedInBrowser();
-	void sendLoggedOut();
-	void sendLoggedOutBrowser();
+	void login();
+	void logout();
 
 	//questions
 	void sendQuestion();

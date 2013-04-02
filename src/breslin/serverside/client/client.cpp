@@ -216,36 +216,30 @@ void Client::sendConnected()
 }
 
 //login
-void Client::sendLoggedIn()
+void Client::login()
 {
+	mLoggedIn = true;
+
         mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
         mServer->mMessage.WriteByte(mServer->mMessageLoggedIn); // add type
+	if (mClientID > 0)
+	{
+        	mServer->mMessage.WriteByte(mClientID); //client id for browsers
+	}	
 	SendPacket(&mServer->mMessage);
 }
 
-
-void Client::sendLoggedInBrowser()
+void Client::logout()
 {
-	LogString("sendLoggedInBrowser dude");
-        mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
-        mServer->mMessage.WriteByte(mServer->mMessageLoggedIn); // add type
-        mServer->mMessage.WriteByte(mClientID); //client id for browsers
-	SendPacket(&mServer->mMessage);
-}
+	mLoggedIn = false;
 
-void Client::sendLoggedOut()
-{
         mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
         mServer->mMessage.WriteByte(mServer->mMessageLoggedOut); // add type
+	if (mClientID > 0)
+	{
+        	mServer->mMessage.WriteByte(mClientID); //client id for browsers
+	}	
 	SendPacket(&mServer->mMessage);
-}
-
-void Client::sendLoggedOutBrowser()
-{
-        mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
-        mServer->mMessage.WriteByte(mServer->mMessageLoggedOut); // add type
-        mServer->mMessage.WriteByte(mClientID); //client id for browsers
-        SendPacket(&mServer->mMessage);
 }
 
 void Client::writeQuestion()

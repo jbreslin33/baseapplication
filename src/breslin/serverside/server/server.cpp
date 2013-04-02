@@ -157,13 +157,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				//check against db
 				if (getPasswordMatch(client->mStringUsername,client->mStringPassword))
 				{
-					client->mLoggedIn = true;
-					client->sendLoggedIn();
+					client->login();
 				}					
 				else
 				{	
-					client->mLoggedIn = false;
-					client->sendLoggedOut();
+					client->logout();
 				}
 			}
                 }
@@ -223,13 +221,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 //check against db
                                 if (getPasswordMatch(client->mStringUsername,client->mStringPassword))
                                 {
-                                        client->mLoggedIn = true;
-                                        client->sendLoggedInBrowser();
+                                        client->login();
                                 }
                                 else
                                 {
-                                        client->mLoggedIn = false;
-                                        client->sendLoggedOutBrowser();
+                                        client->logout();
                                 }
 			}
 		}	
@@ -251,7 +247,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	}
 	
 	/***QUIT GAME********/
-	else if (type == mMessageLogout)
+	else if (type == mMessageQuitGame)
 	{
 		// Find the correct client by comparing addresses
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
