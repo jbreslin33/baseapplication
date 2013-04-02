@@ -156,19 +156,18 @@ void ApplicationBreslin::sendLogin()
 	//write length of username
 	byteBuffer->WriteByte(sizeOfUsername);
 
+	//get length of password
+	int sizeOfPassword = mStringPassword.size();
+	
+	//write length of password 
+	byteBuffer->WriteByte(sizeOfPassword);
+	
 	//loop thru username string
 	for (int i = 0; i < sizeOfUsername; i++)
 	{
 		//write individual char of mStringUsername
 		byteBuffer->WriteByte(mStringUsername.at(i));	
 	}
-       
-
-	//get length of password
-	int sizeOfPassword = mStringPassword.size();
-
-	//write length of password 
-	byteBuffer->WriteByte(sizeOfPassword);
 
 	//loop thru password  string
 	for (int i = 0; i < sizeOfPassword; i++)
@@ -176,7 +175,6 @@ void ApplicationBreslin::sendLogin()
 		//write individual char of mStringPassword
 		byteBuffer->WriteByte(mStringPassword.at(i));	
 	}
-       
 
 	//send it off to server
 	mNetwork->send(byteBuffer);

@@ -58,30 +58,26 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	int type = mes->ReadByte();
 	
-	/***CONNECT TO SERVER********/
+	/***CONNECT********/
+	//this should just create a client then client should do what need be done.
 	if (type == mMessageConnect)
 	{
 		//createClient(address);
 		Client* client = new Client(this, address);
-		client->sendConnected();	
-	
-		client->sendSchools();
 	}
-	
+
+	else if (type == mMessageConnectBrowser)
+	{
+		int clientID = mes->ReadByte();
+ 		Client* client = new Client(this, address, clientID);
+	}
+
 	else if (type == mMessageConnectNode)
 	{
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, -1);
 	}	
 
-	else if (type == mMessageConnectBrowser)
-	{
-		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, clientID);
-		client->sendConnected();	
-
-		client->sendSchools();
-	}
 
 	/***JOIN GAME********/
 	else if (type == mMessageJoinGame)
@@ -91,7 +87,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				client = mClientVector.at(i);
-
 				client->joinGame(); //now call everything else inside client...
 			}
 		}
@@ -118,6 +113,10 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 {
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
+				//should we do a checkLogin function?
+				//client->checkLogin();
+
+	
 				//set client to pointer
                                 client = mClientVector.at(i);
 	
@@ -126,6 +125,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				client->mStringPassword.clear();
 
 				int sizeOfUsername = mes->ReadByte();
+				int sizeOfPassword = mes->ReadByte();
 
 				//loop thru and set mStringUsername from client
 				for (int i = 0; i < sizeOfUsername; i++)
@@ -133,8 +133,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 					char c = mes->ReadByte();
 					client->mStringUsername.append(1,c);		 
 				}
-			
-				int sizeOfPassword = mes->ReadByte();
 
 				//loop thru and set mStringPassword from client
 				for (int i = 0; i < sizeOfPassword; i++)
@@ -171,9 +169,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 client->mStringPassword.clear();
 
                                 int sizeOfUsername = mes->ReadByte();
-                                
 				int sizeOfPassword = mes->ReadByte();
-
                                
 				 //loop thru and set mStringUsername from client
                                 for (int i = 0; i < sizeOfUsername; i++)
@@ -184,9 +180,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                         client->mStringUsername.append(1,ascii);
                                 }
 
-
                                 //loop thru and set mStringPassword from client
-				
                                 for (int i = 0; i < sizeOfPassword; i++)
                                 {
                                         int numeric = mes->ReadByte();
@@ -194,10 +188,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
                                         client->mStringPassword.append(1,ascii);
                                 }
-				
-				
-
-                                //check against db
+                                
+				//check against db
                                 if (getPasswordMatch(client->mStringUsername,client->mStringPassword))
                                 {
                                         client->login();
