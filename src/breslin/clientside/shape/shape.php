@@ -51,6 +51,7 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
         this.mSpawnRotation     = new Vector3D();
 
 	this.mMesh = 0;
+	this.mObjectTitle = 0;
 	this.mScale = 1;
 
 	//animation
@@ -64,6 +65,7 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
         this.processSpawnByteBuffer(byteBuffer);
 
         this.setupTitle();
+
 
         if (!this.mIsGhost)
         {
@@ -261,6 +263,13 @@ spawnShape: function(position)
         
 	//back to div
         this.mDiv.mDiv.appendChild(this.mMesh);
+
+
+	//objectTitle
+        this.mObjectTitle = document.createElement("p");
+	this.mObjectTitle.innerHTML='' + this.mIndex;
+        this.mDiv.mDiv.appendChild(this.mObjectTitle);
+
 
 	v = new Vector3D();	
 	this.scale();
