@@ -180,7 +180,6 @@ void Shape::remove()
        			mGame->mServer->mMessage.WriteByte(mGame->mServer->mClientVector.at(i)->mClientID); //client id for browsers
 		}
        		mGame->mServer->mMessage.WriteByte(mIndex);
-		LogString("Shape::remove() mIndex:%d",mIndex);
  		mGame->mServer->mClientVector.at(i)->SendPacket(&mGame->mServer->mMessage);
         }
 }

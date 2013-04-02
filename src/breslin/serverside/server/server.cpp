@@ -63,8 +63,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		//createClient(address);
 		Client* client = new Client(this, address);
-		LogString("connected c++ client!!!!!!!!!!!!");
-	
 		client->sendConnected();	
 	
 		client->sendSchools();
@@ -80,7 +78,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, clientID);
-		LogString("connected browser client!!!!!!!!!!!!");
 		client->sendConnected();	
 
 		client->sendSchools();
@@ -121,8 +118,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 {
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
-				printf("\n");
-				printf("\n");
 				//set client to pointer
                                 client = mClientVector.at(i);
 	
@@ -131,28 +126,22 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				client->mStringPassword.clear();
 
 				int sizeOfUsername = mes->ReadByte();
-				LogString("sizeOfUsername:%d",sizeOfUsername);
 
 				//loop thru and set mStringUsername from client
 				for (int i = 0; i < sizeOfUsername; i++)
 				{
 					char c = mes->ReadByte();
 					client->mStringUsername.append(1,c);		 
-					printf("%c",c);
 				}
-				printf("\n");
 			
 				int sizeOfPassword = mes->ReadByte();
-				LogString("sizeOfPassword:%d",sizeOfPassword);
 
 				//loop thru and set mStringPassword from client
 				for (int i = 0; i < sizeOfPassword; i++)
 				{
 					char c = mes->ReadByte();
 					client->mStringPassword.append(1,c);		 
-					printf("%c",c);
 				}
-				printf("\n");
 	
 				//check against db
 				if (getPasswordMatch(client->mStringUsername,client->mStringPassword))
@@ -169,15 +158,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	else if (type == mMessageLoginBrowser)
 	{
-		LogString("mMessageLoginBrowswer found");	
                 int clientID = mes->ReadByte();
 		for (int i = 0; i < mClientVector.size(); i++)
 		{
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
- 				printf("\n");
-                                printf("\n");
-				printf("browser i am");
                                 //set client to pointer
                                 client = mClientVector.at(i);
 
@@ -186,10 +171,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 client->mStringPassword.clear();
 
                                 int sizeOfUsername = mes->ReadByte();
-                                LogString("sizeOfUsername:%d",sizeOfUsername);
                                 
 				int sizeOfPassword = mes->ReadByte();
-                                LogString("sizeOfPassword:%d",sizeOfPassword);
 
                                
 				 //loop thru and set mStringUsername from client
@@ -199,9 +182,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
  					char ascii = (char)numeric;
 
                                         client->mStringUsername.append(1,ascii);
-                                        printf("%c",ascii);
                                 }
-                                printf("\n");
 
 
                                 //loop thru and set mStringPassword from client
@@ -212,11 +193,9 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
  					char ascii = (char)numeric;
 
                                         client->mStringPassword.append(1,ascii);
-                                        printf("%c",ascii);
                                 }
 				
 				
-                                printf("\n");
 
                                 //check against db
                                 if (getPasswordMatch(client->mStringUsername,client->mStringPassword))
@@ -248,7 +227,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
         else if (type == mMessageLogoutBrowser)
         {
-                LogString("mMessageLogoutBrowswer found");
                 int clientID = mes->ReadByte();
                 for (int i = 0; i < mClientVector.size(); i++)
                 {
@@ -270,7 +248,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				client = mClientVector.at(i);
-				checkClientQuitGame(type,client,mes);
+				client->leaveGame();
 			}
 		}
 	}
@@ -283,7 +261,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
 				client = mClientVector.at(i);
-				checkClientQuitGame(type,client,mes);
+				client->leaveGame();
 			}
 		}
 	}
@@ -317,31 +295,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	} 
 }
 
-void Server::checkClientQuitGame(int type, Client* client, Message* mes)
-{
-	if (type == mMessageQuitGame || type == mMessageQuitGameBrowser)
-	{
-               	LogString("LIBRARY: Server: a client disconnected from GAME");
-		client->leaveGame();
-                return;
-	}
-	/*
-	client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
-
-       	// Wait for one message before setting state to connected
-       	if(client->mConnectionState == DREAMSOCK_CONNECTING)
-       	{
-       		client->mConnectionState = DREAMSOCK_CONNECTED;
-	}
-*/
-}
-
 void Server::checkClientQuit(int type, Client* client, Message* mes)
 {
 	if (type == mMessageDisconnect || type == mMessageDisconnectBrowser)
 	{
 		client->remove();
-               	LogString("LIBRARY: Server: a client disconnected from SERVER");
                 return;
 	}
 	client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
@@ -469,8 +427,6 @@ void Server::readDB()
                 //exit(0);
         }
         rec_count = PQntuples(res);
-        printf("We received %d records.\n", rec_count);
-        puts("==========================");
         for (row=0; row<rec_count; row++)
         {
                 for (col=0; col<3; col++)
@@ -537,8 +493,6 @@ bool Server::getPasswordMatch(std::string username,std::string password)
 
 	const char * q = query.c_str();
 
-	printf("query:%s",q);
-
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
         res = PQexec(conn,q);
@@ -548,7 +502,6 @@ bool Server::getPasswordMatch(std::string username,std::string password)
                 //exit(0);
         }
         rec_count = PQntuples(res);
-        printf("We received %d records.\n", rec_count);
 	if (rec_count > 0)
 	{
 		match = true;
