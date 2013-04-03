@@ -40,6 +40,7 @@ ApplicationBreslin* mApplicationBreslin;
 
 //id
 int   mIndex;
+std::string mStringUsername;
 
 //speed
 float mSpeed;
@@ -82,8 +83,10 @@ Vector3D* mSpawnRotation;
 int         mMeshCode;
 std::string mMeshName;
 public:
+
 //name
 std::string mName;
+
 private:
 //animate
 bool mAnimate;

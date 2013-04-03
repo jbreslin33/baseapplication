@@ -277,6 +277,16 @@ void Shape::writeAdd(Client* client)
 
 	//animation
 	mGame->mServer->mMessage.WriteByte(mAnimated);
+
+	//username
+ 	int length = mClient->mStringUsername.length();  // get length of string containing school
+        mGame->mServer->mMessage.WriteByte(length); //send length
+
+        //loop thru length and write it
+        for (int b=0; b < length; b++)
+        {
+                mGame->mServer->mMessage.WriteByte(mClient->mStringUsername.at(b));
+        }
 }
 
 void Shape::writeAddBrowser(Client* client)
@@ -310,6 +320,16 @@ void Shape::writeAddBrowser(Client* client)
 
 	//animation
 	mGame->mServer->mMessage.WriteByte(mAnimated);
+
+	//username
+ 	int length = mClient->mStringUsername.length();  // get length of string containing school
+        mGame->mServer->mMessage.WriteByte(length); //send length
+
+        //loop thru length and write it
+        for (int b=0; b < length; b++)
+        {
+                mGame->mServer->mMessage.WriteByte(mClient->mStringUsername.at(b));
+        }
 }
 
 

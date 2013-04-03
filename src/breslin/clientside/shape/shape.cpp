@@ -135,9 +135,21 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 	//animate
 	mAnimate = byteBuffer->ReadByte();
 
+	//username
+        int length = byteBuffer->ReadByte();
+       	for (int i = 0; i < length; i++)
+        {
+        	char c =  byteBuffer->ReadByte();
+                mStringUsername.append(1,c);
+        }
+
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
 	mServerCommandLast->mPosition->copyValuesFrom(mSpawnPosition);
 	mServerCommandCurrent->mPosition->copyValuesFrom(mSpawnPosition);
+
+
+	
+
 }
 
 void Shape::spawnShape(Vector3D* position)
