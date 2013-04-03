@@ -167,8 +167,17 @@ window.onresize = function(event)
         mMiddleOfViewPort.x =  mSize.x / 2;
         mMiddleOfViewPort.y =  0;
         mMiddleOfViewPort.z =  mSize.y / 2;
+    	//mApplication.mNetwork.mSocket.emit('send_disconnect', '');
 }
 
+$(window).bind('beforeunload', function(){
+    	mApplication.mNetwork.mSocket.emit('send_disconnect', '');
+  return 'Are you sure you want to leave?';
+});
+
+$(window).unload(function(){
+    	mApplication.mNetwork.mSocket.emit('send_disconnect', '');
+});
 
 </script>
 

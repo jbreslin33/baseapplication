@@ -281,7 +281,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 {
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
-				//client->remove();
+				LogString("c++ client deleted");
                                 client = mClientVector.at(i);
 				delete client;
 			}
@@ -291,17 +291,17 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	else if (type == mMessageDisconnectBrowser)
 	{
-/*
  		int clientID = mes->ReadByte();
 
                 for (unsigned int i = 0; i < mClientVector.size(); i++)
                 {
                         if (mClientVector.at(i)->mClientID == clientID)
                         {
-				client->remove();
+				LogString("Browser client deleted");
+                                client = mClientVector.at(i);
+				delete client;
 			}
 		}
-*/
 	}
 }
 
