@@ -37,6 +37,7 @@ Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 
 	init = true;
 
+	//this will need updating whenever a new school is added to db...
 	getSchools();	
 }
 
@@ -50,6 +51,53 @@ void Server::addClient(Client* client)
 {
 	mClientVector.push_back(client);
 }
+/*******************************************************
+		PACKETS
+********************************************************/
+int Server::getPacket(char *data, struct sockaddr *from)
+{
+	// Check if the server is set up
+	if(!mNetwork->mSocket)
+		return 0;
+
+	// Wait for a while or incoming data
+	int maxfd = mNetwork->mSocket;
+	fd_set allset;
+	struct timeval waittime;
+
+	waittime.tv_sec = 10 / 1000;
+	waittime.tv_usec = (10 % 1000) * 1000;
+
+	FD_ZERO(&allset); 
+	FD_SET(mNetwork->mSocket, &allset);
+
+	fd_set reading = allset;
+
+	int nready = select(maxfd + 1, &reading, NULL, NULL, &waittime);
+
+	if(!nready)
+		return 0;
+
+	// Read data of the socket
+	int ret = 0;
+
+	Message mes;
+	mes.Init(data, sizeof(data));
+
+	ret = mNetwork->dreamSock_GetPacket(mNetwork->mSocket, mes.data, from);
+
+	if(ret <= 0)
+	{	
+		return 0;
+	}
+
+	mes.SetSize(ret);
+
+	// Parse system messages
+	parsePacket(&mes, from);
+
+	return ret;
+}
 
 void Server::parsePacket(Message *mes, struct sockaddr *address)
 {
@@ -62,7 +110,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	//this should just create a client then client should do what need be done.
 	if (type == mMessageConnect)
 	{
-		//createClient(address);
 		Client* client = new Client(this, address);
 	}
 
@@ -133,8 +180,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			}
 		}	
 	}
-	/***LOG OUT********/
 
+	/***LOG OUT********/
 	else if (type == mMessageLogout)
 	{
  		//get client 
@@ -189,8 +236,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			}
 		}
 	}
-
-	else if (type == mMessageFrame || type == mMessageDisconnect)
+	
+	else if (type == mMessageFrame)
 	{
 		// Find the correct client by comparing addresses
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
@@ -198,12 +245,18 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				client = mClientVector.at(i);
-				checkClientQuit(type,client,mes);
+				client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
+                                mGame->readDeltaMoveCommand(mes,client);
+				// Wait for one message before setting state to connected
+                                if(client->mConnectionState == DREAMSOCK_CONNECTING)
+                                {
+                                        client->mConnectionState = DREAMSOCK_CONNECTED;
+                                }
 			}
 		}
 	}
-
-	else if (type == mMessageFrameBrowser ||  type == mMessageDisconnectBrowser)
+	
+	else if (type == mMessageFrameBrowser)
 	{
 		int clientID = mes->ReadByte();
 		
@@ -212,21 +265,45 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
 				client = mClientVector.at(i);
-				checkClientQuit(type,client,mes);
+				client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
+                                mGame->readDeltaMoveCommand(mes,client);
+  				// Wait for one message before setting state to connected
+        			if(client->mConnectionState == DREAMSOCK_CONNECTING)
+        			{
+                			client->mConnectionState = DREAMSOCK_CONNECTED;
+        			}
 			}
 		}
-
 	} 
+
+	else if (type == mMessageDisconnect)
+	{
+ 		// Find the correct client by comparing addresses
+                for (unsigned int i = 0; i < mClientVector.size(); i++)
+                {
+                        if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+                        {
+				client->remove();
+			}
+		}
+	}
+
+	else if (type == mMessageDisconnectBrowser)
+	{
+ 		int clientID = mes->ReadByte();
+
+                for (unsigned int i = 0; i < mClientVector.size(); i++)
+                {
+                        if (mClientVector.at(i)->mClientID == clientID)
+                        {
+				client->remove();
+			}
+		}
+	}
 }
 
 void Server::checkClientQuit(int type, Client* client, Message* mes)
 {
-	if (type == mMessageDisconnect || type == mMessageDisconnectBrowser)
-	{
-		client->remove();
-                return;
-	}
-	client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
 
        	// Wait for one message before setting state to connected
        	if(client->mConnectionState == DREAMSOCK_CONNECTING)
@@ -266,51 +343,6 @@ int Server::checkForTimeout()
 		}
 	}
 	return 0;
-}
-
-int Server::getPacket(char *data, struct sockaddr *from)
-{
-	// Check if the server is set up
-	if(!mNetwork->mSocket)
-		return 0;
-
-	// Wait for a while or incoming data
-	int maxfd = mNetwork->mSocket;
-	fd_set allset;
-	struct timeval waittime;
-
-	waittime.tv_sec = 10 / 1000;
-	waittime.tv_usec = (10 % 1000) * 1000;
-
-	FD_ZERO(&allset); 
-	FD_SET(mNetwork->mSocket, &allset);
-
-	fd_set reading = allset;
-
-	int nready = select(maxfd + 1, &reading, NULL, NULL, &waittime);
-
-	if(!nready)
-		return 0;
-
-	// Read data of the socket
-	int ret = 0;
-
-	Message mes;
-	mes.Init(data, sizeof(data));
-
-	ret = mNetwork->dreamSock_GetPacket(mNetwork->mSocket, mes.data, from);
-
-	if(ret <= 0)
-	{	
-		return 0;
-	}
-
-	mes.SetSize(ret);
-
-	// Parse system messages
-	parsePacket(&mes, from);
-
-	return ret;
 }
 
 //this loops thru each client instance and then calls their sendPacket(mess) function
@@ -413,49 +445,7 @@ void Server::readPackets()
 	{
 		while(ret = getPacket(mes.data, &address))
 		{
-			mes.SetSize(ret);
-			mes.BeginReading();
-
-			type = mes.ReadByte();
-
-			// Check the type of the message
-			switch(type)
-			{
-			case mMessageFrame:
-				
-				//let's try this with shapes instead.....
-				for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
-				{
-					if (mGame->mShapeVector.at(i)->mClient != NULL)
-					{
-						if(memcmp(&mGame->mShapeVector.at(i)->mClient->mMyaddress, &address, sizeof(address)) == 0)
-						{
-							mGame->readDeltaMoveCommand(&mes, mGame->mShapeVector.at(i)->mClient);
-							break;
-						}
-					}
-				}
-				break;
-		 	
-			case mMessageFrameBrowser:
-				//grab clientID
-				int clientID = mes.ReadByte();
-                               
- 
-				 //let's try this with shapes instead.....
-                                for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
-                                {
-                                        if (mGame->mShapeVector.at(i)->mClient != NULL)
-                                        {
-                                               	if (mGame->mShapeVector.at(i)->mClient->mClientID == clientID) 
-						{
-                                                        mGame->readDeltaMoveCommand(&mes, mGame->mShapeVector.at(i)->mClient);
-                                                        break;
-                                                }
-                                        }
-                                }
-                                break;
-                        }
+			//you could do something here, what i have no idea yet..	
 		}
 	}
 	catch(...)
