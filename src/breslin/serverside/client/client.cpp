@@ -91,7 +91,15 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 
 Client::~Client()
 {
-	mServer->mNetwork->dreamSock_CloseSocket(mServer->mNetwork->mSocket);
+	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+        {
+                if (mServer->mClientVector.at(i) == this)
+		{
+ 			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
+		}
+	}
+
+//	mServer->mNetwork->dreamSock_CloseSocket(mServer->mNetwork->mSocket);
 }
 
 //it's only fair to send a remove shape to everybody as well.....

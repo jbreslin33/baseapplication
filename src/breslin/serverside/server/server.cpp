@@ -285,8 +285,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         {
 				//client->remove();
                                 client = mClientVector.at(i);
-				client = NULL;
-				mClientVector.erase(mClientVector.begin()+i);
+				delete client;
 			}
 		}
 
