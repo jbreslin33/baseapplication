@@ -256,7 +256,7 @@ int main(int argc, char **argv)
 		game->createWorld();
 	}
 
-	LogString("Learning Game Server");
+	LogString("Linux Learning Game Server");
 	LogString("-------------------------------\n");
 
 
@@ -273,18 +273,16 @@ int main(int argc, char **argv)
 	// pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
 
-	LogString("Init successful");
-
 	int time, oldTime, newTime;
 
 	oldTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
+	LogString("Server time began at:%d",oldTime);
 
 	// App main loop
 	try
 	{
 		if(runningDaemon)
 		{
-		LogString("where am i");
 			// Keep server alive
 			while(1)
 			{
@@ -301,16 +299,13 @@ int main(int argc, char **argv)
 		else
 		{
 			// Keep server alive (wait for keypress to kill it)
-			//while(keyPress() == -1)
-			while(true)
+			while(keyPress() == -1)
 			{
 				do
 				{
 					newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
 					time = newTime - oldTime;
-					LogString("time:%d",time);
 				} while (time < 1);
-				LogString("game->frame");
 				game->frame(time);
 
 				oldTime = newTime;

@@ -53,7 +53,6 @@ void Server::addClient(Client* client)
 ********************************************************/
 int Server::getPacket(char *data, struct sockaddr *from)
 {
-	LogString("getPacket server");	
 	// Check if the server is set up
 	if(!mNetwork->mSocket)
 		return 0;
@@ -108,7 +107,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	//this should just create a client then client should do what need be done.
 	if (type == mMessageConnect)
 	{
-		LogString("c++ connected");
 		Client* client = new Client(this, address);
 	}
 
@@ -305,7 +303,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		}
 */
 	}
-	LogString("did i get here");
 }
 
 int Server::checkForTimeout()
@@ -438,12 +435,10 @@ void Server::readPackets()
 
 	// Get the packet from the socket
 	
-	LogString("readPackets");
 	try
 	{
 		while(ret = getPacket(mes.data, &address))
 		{
-			LogString("got packet");	
 			//you could do something here, what i have no idea yet..	
 		}
 	}

@@ -268,7 +268,6 @@ void Network::dreamSock_CloseSocket(SOCKET sock)
 
 int Network::dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
 {
-	LogString("got packet in network");
 	int ret;
 	struct sockaddr tempFrom;
 	socklen_t fromlen;
