@@ -277,16 +277,17 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	else if (type == mMessageDisconnect)
 	{
-	/*
+	
  		// Find the correct client by comparing addresses
                 for (unsigned int i = 0; i < mClientVector.size(); i++)
                 {
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
-				client->remove();
+				//client->remove();
+				client = NULL;
 			}
 		}
-*/
+
 	}
 
 	else if (type == mMessageDisconnectBrowser)

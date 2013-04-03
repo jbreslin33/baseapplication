@@ -144,7 +144,8 @@ void Client::remove()
 	{
 		if (mServer->mClientVector.at(i) == this)
 		{
-			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
+			//mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
+			///delete this;
 		}
 	}
 }
