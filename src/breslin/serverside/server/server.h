@@ -108,6 +108,7 @@ public:
 
 	//schools
 	std::vector<std::string> mSchoolVector;  
+	std::string getSchools();
 
 	//timeout
 	int  checkForTimeout();
@@ -116,14 +117,13 @@ public:
 	void addClient(Client* client);
 	
 	//packets
-	int	 getPacket(char *data, struct sockaddr *from);
+	int  getPacket  (char *data, struct sockaddr *from);
 	void sendPackets();
-	void readDB();
-	std::string getSchools();
 	void readPackets();
 	void parsePacket(Message *mes, struct sockaddr *address);
-	void checkClientQuit(int type, Client* client, Message* mes);
-	void checkClientQuitGame(int type, Client* client, Message* mes);
+
+	//db
+	void readDB();
 	
 	//port
 	int	getPort() { return port; }

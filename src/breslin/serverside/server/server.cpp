@@ -302,16 +302,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	}
 }
 
-void Server::checkClientQuit(int type, Client* client, Message* mes)
-{
-
-       	// Wait for one message before setting state to connected
-       	if(client->mConnectionState == DREAMSOCK_CONNECTING)
-       	{
-       		client->mConnectionState = DREAMSOCK_CONNECTED;
-	}
-}
-
 int Server::checkForTimeout()
 {
 	int currentTime = mNetwork->dreamSock_GetCurrentSystemTime();
