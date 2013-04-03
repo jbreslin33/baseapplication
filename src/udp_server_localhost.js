@@ -59,6 +59,12 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
+	socket.on('disconnect', function ()
+	{
+        	console.log('DISCONNESSO!!! ');
+        	//io.sockets.emit('count', {
+        });
+
         socket.on('send_disconnect', function(message,remote)
         {
 		console.log('got disconnect from browser');
