@@ -284,6 +284,7 @@ int main(int argc, char **argv)
 	{
 		if(runningDaemon)
 		{
+		LogString("where am i");
 			// Keep server alive
 			while(1)
 			{
@@ -300,14 +301,16 @@ int main(int argc, char **argv)
 		else
 		{
 			// Keep server alive (wait for keypress to kill it)
-			while(keyPress() == -1)
+			//while(keyPress() == -1)
+			while(true)
 			{
 				do
 				{
 					newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
 					time = newTime - oldTime;
+					LogString("time:%d",time);
 				} while (time < 1);
-
+				LogString("game->frame");
 				game->frame(time);
 
 				oldTime = newTime;

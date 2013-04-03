@@ -190,7 +190,7 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 {
 	clearTitle(); //empty title string so it can be filled anew
 
-	appendToTitle(mIndex);
+	appendToTitle(mStringUsername);
 
 	parseDeltaByteBuffer(byteBuffer);
 
