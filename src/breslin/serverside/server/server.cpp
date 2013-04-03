@@ -284,6 +284,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
 				//client->remove();
+                                client = mClientVector.at(i);
 				client = NULL;
 				mClientVector.erase(mClientVector.begin()+i);
 			}
