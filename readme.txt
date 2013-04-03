@@ -21,6 +21,16 @@ sudo vi node/lib/path.js +360
 comment out line 360
 it will complain about strings if not.... 
 
+sudo vi node_modules/socket.io/node_modules/socket.io-client/lib/socket.js +37
+change to : 
+var conn_options = {
+  'sync disconnect on unload':false
+};
+
+./compile.sh
+
+
+
 then run:
 yes | sudo ./setup.sh
 
