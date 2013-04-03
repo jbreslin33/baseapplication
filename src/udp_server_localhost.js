@@ -61,8 +61,22 @@ io.sockets.on('connection', function (socket)
 
 	socket.on('disconnect', function ()
 	{
-        	console.log('DISCONNESSO!!! ');
-        	//io.sockets.emit('count', {
+        	console.log('DISCONNESSO also sending to c++!!! ');
+
+                //send to c++ server
+                var buf = new Buffer(2);
+
+                //type
+                type = -112;
+                buf.writeInt8(type,0);
+
+                //mClientID
+                buf.writeInt8(socket.mClientID,1);
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+
         });
 
         socket.on('send_disconnect', function(message,remote)
