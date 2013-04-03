@@ -151,10 +151,7 @@ void Game::runSqlQuery(const char* query)
 
        	PQfinish(conn);
 }
-/*
 
-
-*/
 void Game::dbTest()
 {
 	PGconn          *conn;
@@ -436,69 +433,29 @@ std::string Game::toString(int i)
 	return str;
 }
 
-
 //send to updates to all clients about all shapes
 //do I need to loop this for every client????
 void Game::sendCommand(void)
 {
 	// Fill messages..for all clients
-/*
-	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
-	{
-		//standard initialize of mMessage for client in this case
-		mServer->mClientVector.at(i)->mMessage.Init(mServer->mClientVector.at(i)->mMessage.outgoingData,
-			sizeof(mServer->mClientVector.at(i)->mMessage.outgoingData));
+	//standard initialize of mMessage for client in this case
+	mServer->mMessage.Init(mServer->mMessage.outgoingData,
+		sizeof(mServer->mMessage.outgoingData));
 
-		//start filling said mMessage that belongs to client
-		mServer->mClientVector.at(i)->mMessage.WriteByte(mServer->mMessageFrame);			// type
-		
-		mServer->mClientVector.at(i)->mMessage.WriteShort(mServer->mClientVector.at(i)->mOutgoingSequence);
+	//start filling said mMessage that belongs to client
+	mServer->mMessage.WriteByte(mServer->mMessageFrame);			// type
 	
-		//frame time	
-		mServer->mClientVector.at(i)->mMessage.WriteByte(mFrameTime);
+	mServer->mMessage.WriteShort(mOutgoingSequence);
 
-		//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
-		for (unsigned int j = 0; j < mShapeVector.size(); j++)
-		{                         //the client to send to's message        //the shape command it's about
-			mShapeVector.at(j)->addToMoveMessage(&mServer->mClientVector.at(i)->mMessage);
-		}
+	//frame time	
+	mServer->mMessage.WriteByte(mFrameTime);
+
+	//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
+	for (unsigned int j = 0; j < mShapeVector.size(); j++)
+	{                         //the client to send to's message        //the shape command it's about
+		mShapeVector.at(j)->addToMoveMessage(&mServer->mMessage);
 	}
-*/
 
-		//standard initialize of mMessage for client in this case
-		mServer->mMessage.Init(mServer->mMessage.outgoingData,
-			sizeof(mServer->mMessage.outgoingData));
-
-		//start filling said mMessage that belongs to client
-		mServer->mMessage.WriteByte(mServer->mMessageFrame);			// type
-		
-		mServer->mMessage.WriteShort(mOutgoingSequence);
-	
-		//frame time	
-		mServer->mMessage.WriteByte(mFrameTime);
-
-		//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
-		for (unsigned int j = 0; j < mShapeVector.size(); j++)
-		{                         //the client to send to's message        //the shape command it's about
-			mShapeVector.at(j)->addToMoveMessage(&mServer->mMessage);
-		}
-/*
-	//randomly don't send command packets.... 
-	short randomNumber = 0;	
-	srand ( (short)time(NULL) + mOutgoingSequence);
-      	randomNumber = rand() % 16;  
-
-	mOutgoingSequence++;
-
-	if (randomNumber == 2)
-	{
-		//LogString("skip send command packet");
-	}
-	else
-	{
-		mServer->sendPackets();
-	}
-*/
 	mServer->sendPackets();
 	
 	// Store the sent command in 
@@ -538,7 +495,6 @@ void Game::readDeltaMoveCommand(Message *mes, Client *client)
 {
 	client->mShape->mKey = mes->ReadByte();
 }
-
 
 unsigned int Game::getOpenIndex()
 {

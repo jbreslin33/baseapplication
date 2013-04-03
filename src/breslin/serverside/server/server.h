@@ -37,10 +37,7 @@ public:
 	std::vector<Client*> mClientVector;
 
 	//port
-	int				port;					// Port
-
-	//initialize
-	bool			init;
+	int mPort;					// Port
 
 	//game
 	Game* mGame;
@@ -56,16 +53,16 @@ public:
 
 	//codes
 	//frames
-	static const int mMessageFrame 	          = 1;
-	static const int mMessageFrameBrowser     = 2;
+	static const int mMessageFrame 	                = 1;
+	static const int mMessageFrameBrowser     	= 2;
 
 	//questions	
-	static const int mMessageQuestion        = -105;
-	static const int mMessageQuestionBrowser = -115;
+	static const int mMessageQuestion               = -105;
+	static const int mMessageQuestionBrowser        = -115;
 
 	//answer
-	static const int mMessageAnswer          = -106;
-	static const int mMessageAnswerBrowser   = -116;
+	static const int mMessageAnswer                 = -106;
+	static const int mMessageAnswerBrowser          = -116;
 
 	//connect
 	static const int mMessageConnected              = -90;
@@ -76,7 +73,7 @@ public:
 	//join game
 	static const int mMessageJoinGame               = -107;
 	static const int mMessageJoinGameBrowser        = -117;
-	static const int mMessageLeaveGame       = -99;
+	static const int mMessageLeaveGame              = -99;
 
 	//quit game
 	static const int mMessageQuitGame               = -108;
@@ -99,12 +96,15 @@ public:
 	
 	//add shape	
 	static const int mMessageAddShape    	         = -103;
-	static const int mMessageRemoveShape     = -104;
+	static const int mMessageRemoveShape             = -104;
 
 
 public:
 	Server(Game* serverSideGame,const char *localIP, int serverPort);
 	~Server();
+
+	//port
+	int getPort() { return mPort; }
 
 	//schools
 	std::vector<std::string> mSchoolVector;  
@@ -125,8 +125,6 @@ public:
 	//db
 	void readDB();
 	
-	//port
-	int	getPort() { return port; }
 
 
 };

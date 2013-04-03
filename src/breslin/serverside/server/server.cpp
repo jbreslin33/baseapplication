@@ -25,17 +25,14 @@
 
 Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 {
-	init			= false;
 	mGame = serverSideGame;
 	mLocalIP = localIP;
 	
 	// Store the server IP and port for later use
-	port = serverPort;
+	mPort = serverPort;
 
 	// Create network
-	mNetwork = new Network(localIP, port);
-
-	init = true;
+	mNetwork = new Network(localIP, mPort);
 
 	//this will need updating whenever a new school is added to db...
 	getSchools();	
