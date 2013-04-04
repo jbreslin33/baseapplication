@@ -80,23 +80,12 @@ void Game::frame(int msec)
 	mFrameTime += msec;
 	mGameTime += msec;
 	
-	// is this where i should interject for browser clients?
-	//if so should i read db or a file to communicate
-	//mServer->readDB();
-	
-	// Read packets from clients, this should just for now add bits to mKey representing any keys that have 
-	// been hit we don't care about client time or exact order of keystrokes just how many were recieve in
-	//the time it takes to run a 32ms frame on the server....the client get's what it can in and then the
-	//server runs it and sends it.
 	mServer->readPackets();
 
-	//ok now that the 32ms have elapsed with have our client commands let's process the last tick and
-	// then send the update to clients.
 	//this is where they want to move
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
 		mShapeVector.at(i)->processTick();
-	
 		checkBounds(mShapeVector.at(i));
 	}
 	
@@ -111,16 +100,11 @@ void Game::frame(int msec)
 	
 	//send positions and exact frame time the calcs where done on which is mFrameTime 
 	sendCommand();
-	//updateShapeTable();
 
 	mFrameTimeLast = mFrameTime;
 	mFrameTime = 0;
 
-	//check for end of game
-	checkEndOfGame();
-
-	//checkForTimeouts
-        //mServer->checkForTimeout();
+	checkForEndOfGame();
 }
 
 void Game::checkCollisions()
