@@ -57,9 +57,6 @@ static const char mMessageServerExit = 3;
 	//db
      	PGconn* mDBConnection;
 
-	//messagefile
-	ofstream mMessageFile;
-
 public:
 	Game();
 	~Game();
@@ -74,7 +71,7 @@ public:
 	unsigned int getOpenIndex      ();
 
 	//end game
-	virtual void checkEndOfGame() { }
+	virtual void checkForEndOfGame() { }
 
 	// Network
 	void	sendCommand();
@@ -94,11 +91,6 @@ public:
 
 	//commands
 	virtual void storeCommands(Shape* shape);
-
-	//utility
-	std::string toString(float f);
-	std::string toString(int i);
-
 };
 
 #endif

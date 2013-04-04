@@ -173,24 +173,6 @@ bool Game::checkScope(Client* client, Shape* shape)
 	}
 }
 
-std::string Game::toString(float f)
-{
-        stringstream ss;
-        ss << f;
-        std::string str = ss.str();
-	return str;
-}
-
-std::string Game::toString(int i)
-{
-        stringstream ss;
-        ss << i;
-        std::string str = ss.str();
-	return str;
-}
-
-//send to updates to all clients about all shapes
-//do I need to loop this for every client????
 void Game::sendCommand(void)
 {
 	// Fill messages..for all clients
