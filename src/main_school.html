@@ -8,7 +8,6 @@
 <title>ABC AND YOU</title>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 <script src="http://192.168.2.88/mootools/mootools-core-1.4.5-full-compat.js"></script>
 <script src="http://192.168.2.88/breslin/clientside/application/application_breslin.php"></script>
 <script src="http://192.168.2.88/breslin/clientside/network/network.php"></script>
@@ -167,8 +166,8 @@ window.onresize = function(event)
         mMiddleOfViewPort.x =  mSize.x / 2;
         mMiddleOfViewPort.y =  0;
         mMiddleOfViewPort.z =  mSize.y / 2;
+    	//mApplication.mNetwork.mSocket.emit('send_disconnect', '');
 }
-
 
 </script>
 
