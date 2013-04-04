@@ -297,7 +297,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 {
                         if (mClientVector.at(i)->mClientID == clientID)
                         {
-				LogString("Browser client deleted");
+				LogString("Browser client deleted, you should delete shape too...");
                                 client = mClientVector.at(i);
 				delete client;
 			}
