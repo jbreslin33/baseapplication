@@ -48,6 +48,7 @@ static const char mMessageServerExit = 3;
 	int mFrameTime;
 	int mGameTime;
 	int mFrameTimeLast;
+
 	//shapes
 	std::vector<Shape*> mShapeVector;	//every tangible item in game world..
 
