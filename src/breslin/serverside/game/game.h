@@ -12,9 +12,6 @@ using namespace Ogre;
 //postgres
 #include <postgresql/libpq-fe.h>
 
-// basic file operations
-#include <iostream>
-#include <fstream>
 using namespace std;
 
 #define COMMAND_HISTORY_SIZE		64
