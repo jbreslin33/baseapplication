@@ -140,9 +140,9 @@ setPosition: function(position)
 	if (this.mApplicationBreslin.mGame.mControlObject == this ||
 		this.mApplicationBreslin.mGame.mControlObjectGhost == this)
 	{
-		this.mPositionRender.x = mMiddleOfViewPort.x;	
+		this.mPositionRender.x = 380;	
 		this.mPositionRender.y = 0;	
-		this.mPositionRender.z = mMiddleOfViewPort.z;	
+		this.mPositionRender.z = 185;	
 		
 		//let's tell game about the offset so we only calc once
 		//figure diff between rendered control object and server control object
