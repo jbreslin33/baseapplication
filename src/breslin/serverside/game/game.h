@@ -64,12 +64,6 @@ public:
 	Game();
 	~Game();
 
-	//db
-	void dbTest();
-	void purgeShapeTable();
-	void runSqlQuery(const char* query);
-	PGresult* sqlQuery(const char* query);
-	
 	//server
 	virtual void createServer();
 
@@ -83,7 +77,6 @@ public:
 	virtual void checkEndOfGame() { }
 
 	// Network
-	void	updateShapeTable();
 	void	sendCommand();
 	void	sendExitNotification();
 	void	readDeltaMoveCommand(Message *mes, Client *client);

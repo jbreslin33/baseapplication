@@ -46,12 +46,6 @@ Game::Game()
 	mBounds = new Bounds();
 
 	mDBConnection = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");	
-	
-	sqlQuery("delete from shapes");
-	sqlQuery("update client set client_id = 1");
-	sqlQuery("update client set client_id = 1");
-	sqlQuery("insert into shapes (id) values (0)");
-
 }
 
 Game::~Game()
@@ -79,125 +73,6 @@ void Game::createWorld()
                         mRoot,true,true,.66f,1,true);
 
 	}
-}
-
-PGresult* Game::sqlQuery(const char* query)
-{
-        PGresult        *res;
-        res = PQexec(mDBConnection,query);
-	return res;
-}
-
-//extra stuff...
-/*
-        int             rec_count;
-        int             col_count;
-        int             row;
-        int             col;
-*/
-/*
-        if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-                puts("We did not get any data!");
-                //exit(0);
-        }
-        rec_count = PQntuples(res);
-	col_count = PQnfields(res);
-
-        printf("We received %d records.\n", rec_count);
-        printf("We received %d columns.\n", col_count);
-        puts("==========================");
-        for (row=0; row<rec_count; row++)
-        {
-                for (col=0; col<col_count; col++)
-                {
-                        printf("%s\t", PQgetvalue(res, row, col));
-                }
-                puts("");
-        }
-        puts("==========================");
-*/
-
-void Game::runSqlQuery(const char* query)
-{
-  	PGconn          *conn;
-        PGresult        *res;
-        int             rec_count;
-        int             row;
-        int             col;
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,query);
-        
-	if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-                puts("We did not get any data!");
-                //exit(0);
-        }
-        rec_count = PQntuples(res);
-        printf("We received %d records.\n", rec_count);
-        puts("==========================");
-        for (row=0; row<rec_count; row++)
-        {
-                for (col=0; col<3; col++)
-                {
-                        printf("%s\t", PQgetvalue(res, row, col));
-                }
-                puts("");
-        }
-
-        puts("==========================");
-
-        PQclear(res);
-
-       	PQfinish(conn);
-}
-
-void Game::dbTest()
-{
-	PGconn          *conn;
- 	PGresult        *res;
- 	int             rec_count;
- 	int             row;
-	int             col;
-	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-	res = PQexec(conn,
-       "select * from users");
-	if (PQresultStatus(res) != PGRES_TUPLES_OK) 
-	{
-		puts("We did not get any data!");
-                //exit(0);
-      	}
-	rec_count = PQntuples(res);
-	printf("We received %d records.\n", rec_count);
-        puts("==========================");
-        for (row=0; row<rec_count; row++)
-	{
-        	for (col=0; col<3; col++)
-		{
-              		printf("%s\t", PQgetvalue(res, row, col));
-              	}
-        	puts("");
-      	}
- 
-        puts("==========================");
- 
-        PQclear(res);
- 
-        PQfinish(conn);
-}
-
-void Game::purgeShapeTable()
-{
-  	PGconn          *conn;
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        PQexec(conn, "delete * from shapes");
-
-        puts("=============================");
-	puts("delete * from shapes");
-        puts("=============================");
-
-        PQfinish(conn);
-	
 }
 
 void Game::frame(int msec)
@@ -247,10 +122,7 @@ void Game::frame(int msec)
 	//checkForTimeouts
         //mServer->checkForTimeout();
 }
-/*
-game is tag but what should i do here i think this is where we need to extend classes.
 
-*/
 void Game::checkCollisions()
 {
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
@@ -280,10 +152,12 @@ void Game::checkCollisions()
 		}
 	}
 }
+
 void Game::checkBounds(Shape* shape)
 {
 
 }
+
 void Game::collision(Shape* shape1, Shape* shape2)
 {
 	float x3 = shape1->mPositionBeforeCollision->x;
@@ -313,108 +187,6 @@ bool Game::checkScope(Client* client, Shape* shape)
 	{
 		return false;
 	}
-}
-/*
-sqlQuery("UPDATE shapes SET position_x = CASE id WHEN 1 THEN 10 WHEN 2 THEN 20 END, position_z = CASE id WHEN 1 THEN 30 WHEN 2 THEN 40 END");
- std::string one = "update shapes set position_x=";
-
-        stringstream ss_pX;
-        ss_pX << mSceneNode->getPosition().x;
-        std::string two = ss_pX.str();
-
-        std::string three = ", position_y=";
-
-        stringstream ss_pZ;
-        ss_pZ << mSceneNode->getPosition().z;
-        std::string four = ss_pZ.str();
-
-        std::string five = ", frame_time=";
-        stringstream ss_ft;
-        ss_ft << mGame->mFrameTime;
-        std::string six = ss_ft.str();
-
-        std::string seven = " where id=";
-
-        stringstream ss;
-        ss << mIndex;
-        std::string eight = ss.str();
-
-        std::string str;
-        str.append(one);
-        str.append(two);
-        str.append(three);
-        str.append(four);
-        str.append(five);
-        str.append(six);
-        str.append(seven);
-        str.append(eight);
-
-        const char * c = str.c_str();
-        mGame->sqlQuery(c);
-*/
-void Game::updateShapeTable()
-{
-	std::string query     = "UPDATE shapes SET position_x = CASE id";
-	for (int i = 0; i < mShapeVector.size() + 1; i++)
-	{
-		if (i == 0)
-		{
-			std::string w = " WHEN ";	
-			std::string id  = toString(i);
-			std::string t   = " THEN ";
-			std::string x    = toString(mFrameTime);
-			query.append(w);
-			query.append(id);
-			query.append(t);
-			query.append(x);
-		}
-		else
-		{
-			std::string w = " WHEN ";	
-			std::string id  = toString(mShapeVector.at(i-1)->mIndex);
-			std::string t   = " THEN ";
-			std::string x    = toString(mShapeVector.at(i-1)->mSceneNode->getPosition().x);
-			query.append(w);
-			query.append(id);
-			query.append(t);
-			query.append(x);
-		}
-		
-	}
-	std::string e1 = " END, position_z = CASE id";
-	query.append(e1);
-	for (int i = 0; i < mShapeVector.size() + 1; i++)
-	{
-		if (i == 0)
-		{
-			std::string w = " WHEN ";	
-			std::string id  = toString(i);
-			std::string t   = " THEN ";
-			std::string z    = toString(mGameTime);
-			query.append(w);
-			query.append(id);
-			query.append(t);
-			query.append(z);
-
-		}
-		else
-		{
-			std::string w = " WHEN ";	
-			std::string id  = toString(mShapeVector.at(i-1)->mIndex);
-			std::string t   = " THEN ";
-			std::string z    = toString(mShapeVector.at(i-1)->mSceneNode->getPosition().z);
-			query.append(w);
-			query.append(id);
-			query.append(t);
-			query.append(z);
-		}
-	}
-	std::string e2 = " END";
-	query.append(e2);
-
-        const char * c = query.c_str();
-	sqlQuery(c);	
-
 }
 
 std::string Game::toString(float f)
