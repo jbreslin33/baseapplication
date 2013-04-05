@@ -85,9 +85,28 @@ remove: function()
 	{
 		for (i = 0; i < this.mShapeVector.length; i++)
 		{
-			this.mShapeVector[i].setVisible(false);
-			this.mShapeGhostVector[i].setVisible(false);
+			//remove all shape children of mDiv
+			while (this.mShapeGhostVector[i].mDiv.mDiv.firstChild)
+			{
+				this.mShapeGhostVector[i].mDiv.mDiv.removeChild(this.mShapeGhostVector[i].mDiv.mDiv.firstChild);
+			}	
+			//remove all ghost children of mDiv
+			while (this.mShapeVector[i].mDiv.mDiv.firstChild)
+			{
+				this.mShapeVector[i].mDiv.mDiv.removeChild(this.mShapeVector[i].mDiv.mDiv.firstChild);
+			}	
+			//remove Shape mDiv
+			if (this.mShapeVector[i].mDiv.mDiv.parentNode)
+			{
+  				this.mShapeVector[i].mDiv.mDiv.parentNode.removeChild(this.mShapeVector[i].mDiv.mDiv);
+			}
+			//remove Ghost mDiv
+			if (this.mShapeGhostVector[i].mDiv.mDiv.parentNode)
+			{
+  				this.mShapeGhostVector[i].mDiv.mDiv.parentNode.removeChild(this.mShapeGhostVector[i].mDiv.mDiv);
+			}
 		}
+		//set shape vectors to 0 length...
 		this.mShapeVector.length = 0;
 		this.mShapeGhostVector.length = 0;
 	}
@@ -166,24 +185,6 @@ removeShape: function(byteBuffer)
 
 },
 
-/*
-void Game::removeShape(ByteBuffer* byteBuffer)
-{
-        int index = byteBuffer->ReadByte();
-
-        Shape* shape = getShape(index);
-
-        for (unsigned int i = 0; i < mShapeVector->size(); i++)
-        {
-                if (mShapeVector->at(i) == shape)
-                {
-                        LogString("removeShape in game:%d",i);
-                        delete mShapeVector->at(i);
-                        mShapeVector->erase (mShapeVector->begin()+i);
-                }
-        }
-}
-*/
 readServerTick: function(byteBuffer)
 {
 	this.mApplicationBreslin.mIntervalCountLast = this.mApplicationBreslin.mIntervalCount;

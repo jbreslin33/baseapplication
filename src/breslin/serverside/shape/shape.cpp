@@ -173,14 +173,17 @@ void Shape::remove()
 	//make mMessage on server then send it to each client in turn 
         for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
 	{
- 		mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
-       		mGame->mServer->mMessage.WriteByte(mGame->mServer->mMessageRemoveShape); // type
-		if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
+		if (mGame->mServer->mClientVector.at(i)->mShape != this)
 		{
-       			mGame->mServer->mMessage.WriteByte(mGame->mServer->mClientVector.at(i)->mClientID); //client id for browsers
+ 			mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
+       			mGame->mServer->mMessage.WriteByte(mGame->mServer->mMessageRemoveShape); // type
+			if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
+			{
+       				mGame->mServer->mMessage.WriteByte(mGame->mServer->mClientVector.at(i)->mClientID); //client id for browsers
+			}
+       			mGame->mServer->mMessage.WriteByte(mIndex);
+ 			mGame->mServer->mClientVector.at(i)->SendPacket(&mGame->mServer->mMessage);
 		}
-       		mGame->mServer->mMessage.WriteByte(mIndex);
- 		mGame->mServer->mClientVector.at(i)->SendPacket(&mGame->mServer->mMessage);
         }
 }
 
