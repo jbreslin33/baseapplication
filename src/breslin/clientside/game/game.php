@@ -78,7 +78,7 @@ log: function(msg)
         }, 0);
 },
 
-quit: function()
+remove: function()
 {
 	//set shapes to not visible and clear shapeArrays
 	if (this.mShapeVector)
@@ -86,6 +86,7 @@ quit: function()
 		for (i = 0; i < this.mShapeVector.length; i++)
 		{
 			this.mShapeVector[i].setVisible(false);
+			this.mShapeGhostVector[i].setVisible(false);
 		}
 		this.mShapeVector.length = 0;
 		this.mShapeGhostVector.length = 0;

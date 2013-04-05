@@ -18,7 +18,6 @@ execute: function()
 
 	if (this.mApplicationBreslin.mKey_q && this.mApplicationBreslin.mSentLeaveGame == false)
         {
-		
        		message = '';
         	this.mApplicationBreslin.mNetwork.mSocket.emit('send_quit_game', message);
 		this.mApplicationBreslin.log('send_quit_game');
@@ -28,7 +27,6 @@ execute: function()
 	if (this.mApplicationBreslin.mLeaveGame)
 	{
 		this.mApplicationBreslin.mSentLeaveGame = false;
-		this.mApplicationBreslin.log('got mLeaveGame var change');
 		if (this.mApplicationBreslin.mLoggedIn)
 		{
                 	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationMain);
@@ -49,7 +47,8 @@ exit: function()
 {
         this.mApplicationBreslin.mPlayingGame = false;
 	this.mApplicationBreslin.mLeaveGame = false;
-	this.mApplicationBreslin.mGame.quit();
+	this.mApplicationBreslin.mGame.remove();
+	this.mApplicationBreslin.mGame = 0;
 }
 
 });

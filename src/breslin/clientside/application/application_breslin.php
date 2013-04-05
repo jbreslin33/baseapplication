@@ -3,6 +3,8 @@ var ApplicationBreslin = new Class(
 
 initialize: function(serverIP, serverPort)
 {
+	//timers
+	this.mTimeSinceLastServerTick = 0;
 	this.mIntervalCount = 0;
 	this.mIntervalCountLast = 0;
 	//StartLog ...don't need to just need log function	
@@ -126,9 +128,13 @@ processUpdate: function()
 
         //set RenderTime as function of timeSinceEpoch and LastTimeSinceEpoch diff
         this.mRenderTime = this.mTimeSinceEpoch - this.mLastTimeSinceEpoch;
+	this.mTimeSinceLastServerTick += this.mRenderTime;
+	if (this.mGame)
+	{
+		this.log('t:' + this.mTimeSinceLastServerTick);
+	}
 	this.mRenderTime = this.mRenderTime / 1000;
         this.mStateMachine.update();
-	//document.getElementById('mMessageFrameI').innerHTML=':mSequence ' + this.mGame.mSequence;
 },
 
 
