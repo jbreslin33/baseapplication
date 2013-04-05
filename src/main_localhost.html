@@ -70,6 +70,8 @@ window.addEvent('domready', function()
         
 	mApplication.mNetwork.mSocket.on('news', function (data)
         {
+		mApplication.mTimeSinceLastServerTick = 0;
+
                 s = data.split(',');
 
                 byteBuffer = new ByteBuffer(s);

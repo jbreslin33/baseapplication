@@ -131,7 +131,10 @@ processUpdate: function()
 	this.mTimeSinceLastServerTick += this.mRenderTime;
 	if (this.mGame)
 	{
-		this.log('t:' + this.mTimeSinceLastServerTick);
+		if (this.mTimeSinceLastServerTick > 1000)
+		{
+			this.log('not getting updates since: ' + this.mTimeSinceLastServerTick + ' ms');	
+		}
 	}
 	this.mRenderTime = this.mRenderTime / 1000;
         this.mStateMachine.update();
