@@ -81,35 +81,30 @@ log: function(msg)
 remove: function()
 {
 	//set shapes to not visible and clear shapeArrays
+
+	if (this.mShapeGhostVector)
+	{
+		for (i = 0; i < this.mShapeGhostVector.length; i++)
+		{
+			this.mShapeGhostVector[i].mDiv.mDiv.removeChild(this.mShapeGhostVector[i].mObjectTitle);
+			this.mShapeGhostVector[i].mDiv.mDiv.removeChild(this.mShapeGhostVector[i].mMesh);
+			document.body.removeChild(this.mShapeGhostVector[i].mDiv.mDiv);
+		}
+		//set vector to 0 length...
+		this.mShapeGhostVector.length = 0;
+	}
 	if (this.mShapeVector)
 	{
 		for (i = 0; i < this.mShapeVector.length; i++)
 		{
-			//remove all shape children of mDiv
-			while (this.mShapeGhostVector[i].mDiv.mDiv.firstChild)
-			{
-				this.mShapeGhostVector[i].mDiv.mDiv.removeChild(this.mShapeGhostVector[i].mDiv.mDiv.firstChild);
-			}	
-			//remove all ghost children of mDiv
-			while (this.mShapeVector[i].mDiv.mDiv.firstChild)
-			{
-				this.mShapeVector[i].mDiv.mDiv.removeChild(this.mShapeVector[i].mDiv.mDiv.firstChild);
-			}	
-			//remove Shape mDiv
-			if (this.mShapeVector[i].mDiv.mDiv.parentNode)
-			{
-  				this.mShapeVector[i].mDiv.mDiv.parentNode.removeChild(this.mShapeVector[i].mDiv.mDiv);
-			}
-			//remove Ghost mDiv
-			if (this.mShapeGhostVector[i].mDiv.mDiv.parentNode)
-			{
-  				this.mShapeGhostVector[i].mDiv.mDiv.parentNode.removeChild(this.mShapeGhostVector[i].mDiv.mDiv);
-			}
+			this.mShapeVector[i].mDiv.mDiv.removeChild(this.mShapeVector[i].mObjectTitle);
+			this.mShapeVector[i].mDiv.mDiv.removeChild(this.mShapeVector[i].mMesh);
+			document.body.removeChild(this.mShapeVector[i].mDiv.mDiv);
 		}
-		//set shape vectors to 0 length...
+		//set vector to 0 length...
 		this.mShapeVector.length = 0;
-		this.mShapeGhostVector.length = 0;
 	}
+
 },
 
 /*********************************
@@ -171,19 +166,26 @@ addShape: function(byteBuffer)
 
 removeShape: function(byteBuffer)
 {
- 	byteBuffer.beginReading();
-        type     = byteBuffer.readByte();
-        clientID = byteBuffer.readByte();
-        index    = byteBuffer.readByte();
+	if (this.mApplicationBreslin.mLeaveGame || this.mApplicationBreslin.mSentLeaveGame)
+	{
+		this.log('dont call');
+	}
+	else
+	{
+		this.log('call');	
+ 		byteBuffer.beginReading();
+        	type     = byteBuffer.readByte();
+        	clientID = byteBuffer.readByte();
+        	index    = byteBuffer.readByte();
 	
-  	for (i=0; i < this.mShapeVector.length; i++)
-        {
-                if (index == this.mShapeVector[i].mIndex)
-		{
-			this.mShapeVector[i].setVisible(false);
-			this.mShapeVector.splice(i,1);
-			this.mShapeGhostVector.splice(i,1);
-			this.log('setVisible false to:' + index);
+  		for (i=0; i < this.mShapeVector.length; i++)
+        	{
+                	if (index == this.mShapeVector[i].mIndex)
+			{
+				this.mShapeVector[i].setVisible(false);
+				this.mShapeVector.splice(i,1);
+				this.mShapeGhostVector.splice(i,1);
+			}
 		}
 	}
 		

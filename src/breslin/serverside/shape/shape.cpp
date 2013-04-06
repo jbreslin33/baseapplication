@@ -161,14 +161,6 @@ Ability* Shape::getAbility(Ability* ability)
 
 void Shape::remove()
 {
-	//get rid of shape from games shape vector
-	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
-	{
-		if (mGame->mShapeVector.at(i) == this)
-		{
-			mGame->mShapeVector.erase (mGame->mShapeVector.begin()+i);
-		}
-	}
 
 	//make mMessage on server then send it to each client in turn 
         for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
@@ -184,7 +176,20 @@ void Shape::remove()
        			mGame->mServer->mMessage.WriteByte(mIndex);
  			mGame->mServer->mClientVector.at(i)->SendPacket(&mGame->mServer->mMessage);
 		}
+		else
+		{
+			LogString("don't send to this guy");
+		}
         }
+
+	//get rid of shape from games shape vector
+	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
+	{
+		if (mGame->mShapeVector.at(i) == this)
+		{
+			mGame->mShapeVector.erase (mGame->mShapeVector.begin()+i);
+		}
+	}
 }
 
 void Shape::processTick()

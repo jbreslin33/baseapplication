@@ -20,7 +20,6 @@ execute: function()
         {
        		message = '';
         	this.mApplicationBreslin.mNetwork.mSocket.emit('send_quit_game', message);
-		this.mApplicationBreslin.log('send_quit_game');
 		this.mApplicationBreslin.mSentLeaveGame = true;
         }
 
