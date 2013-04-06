@@ -1,4 +1,4 @@
-var Shape = new Class(
+Shape = new Class(
 {
 
 //Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGhost);
@@ -117,52 +117,35 @@ addAbility: function(ability)
                MOVE 
 ******************************/
 
-
-/*
-Shape::translate(Vector3D* translateVector, int perspective)
-{
-        if (perspective == 1)
-        {
-                getSceneNode()->translate(translateVector->convertToVector3(), Ogre::Node::TS_WORLD);
-        }
-        if (perspective == 2)
-        {
-                getSceneNode()->translate(translateVector->convertToVector3(), Ogre::Node::TS_LOCAL);
-        }
-}
-*/
-
 setPosition: function(position)
 {
-//	this.log('mIndex:' + this.mIndex);
-	this.mPosition.x = position.x;
-	this.mPosition.y = position.y;
-	this.mPosition.z = position.z;
+	this.mPosition.x = parseFloat(position.x);
+	this.mPosition.y = parseFloat(position.y);
+	this.mPosition.z = parseFloat(position.z);
 
 	//you are control object or control ghost
 	if (this.mApplicationBreslin.mGame.mControlObject == this ||
 		this.mApplicationBreslin.mGame.mControlObjectGhost == this)
 	{
-//		this.log('control');
-		this.mPositionRender.x = this.mApplicationBreslin.mScreenCenter.x;	
+		this.mPositionRender.x = parseFloat(this.mApplicationBreslin.mScreenCenter.x);	
 		this.mPositionRender.y = 0;	
-		this.mPositionRender.z = this.mApplicationBreslin.mScreenCenter.z;	
+		this.mPositionRender.z = parseFloat(this.mApplicationBreslin.mScreenCenter.z);	
 	}
 	else //you are not control object
 	{
-//		this.log('else');
-		this.mPositionRender.x = this.mPosition.x + this.mApplicationBreslin.mGame.mOffSet.x;
-		this.mPositionRender.y = 0;
-		this.mPositionRender.z = this.mPosition.z + this.mApplicationBreslin.mGame.mOffSet.z;
+		this.mPositionRender.x = parseFloat(this.mPosition.x) + parseFloat(this.mApplicationBreslin.mGame.mOffSet.x);
+		this.mPositionRender.y = parseFloat(0);
+		this.mPositionRender.z = parseFloat(this.mPosition.z) + parseFloat(this.mApplicationBreslin.mGame.mOffSet.z);
+
+		this.mObjectTitle.innerHTML='' + this.mStringUsername + ':' + this.mPosition.x + ':' + this.mApplicationBreslin.mGame.mOffSet.x + ':' + this.mPositionRender.x;
 	}
 
 	//you are out of visible area 
-	if (this.mPositionRender.x > 760 || this.mPositionRender.z > 360)
+	if (parseFloat(this.mPositionRender.x) > parseFloat(760) || parseFloat(this.mPositionRender.z) > parseFloat(360))
 	{
-//		this('out of bounds');
-		this.mPositionRender.x = -150;
-		this.mPositionRender.y = 0;
-		this.mPositionRender.z = -150;
+		this.mPositionRender.x = parseFloat(-150);
+		this.mPositionRender.y = parseFloat(0);
+		this.mPositionRender.z = parseFloat(-150);
 	} 
 	
 	//set a member position because we are going to have to modify the div's position
@@ -175,22 +158,6 @@ setPosition: function(position)
 getPosition: function()
 {
 	return this.mPosition;
-},
-
-//relative movement
-render: function()
-{
-	//center image relative to position set it to mPositionRender
-	this.mPositionRender.x = this.mPosition.x - (this.mMesh.height / 2);
-	this.mPositionRender.y = 0; 
-	this.mPositionRender.z = this.mPosition.z - (this.mMesh.width / 2);
-	
-	//set a member position because we are going to have to modify the div's position
-       	modx = position.x+"px"; 
-       	mody = position.z+"px"; 
-        
-        this.mDiv.mDiv.style.left = modx;
-        this.mDiv.mDiv.style.top = mody;
 },
 
 /*********************************
