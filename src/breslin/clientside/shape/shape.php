@@ -53,6 +53,7 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
 	this.mMesh = 0;
 	this.mObjectTitle = 0;
 	this.mScale = 1;
+	this.mStringUsername = '';
 
 	//animation
 	this.mAnimation = 0;        
@@ -133,6 +134,7 @@ Shape::translate(Vector3D* translateVector, int perspective)
 
 setPosition: function(position)
 {
+//	this.log('mIndex:' + this.mIndex);
 	this.mPosition.x = position.x;
 	this.mPosition.y = position.y;
 	this.mPosition.z = position.z;
@@ -141,12 +143,14 @@ setPosition: function(position)
 	if (this.mApplicationBreslin.mGame.mControlObject == this ||
 		this.mApplicationBreslin.mGame.mControlObjectGhost == this)
 	{
+//		this.log('control');
 		this.mPositionRender.x = this.mApplicationBreslin.mScreenCenter.x;	
 		this.mPositionRender.y = 0;	
 		this.mPositionRender.z = this.mApplicationBreslin.mScreenCenter.z;	
 	}
 	else //you are not control object
 	{
+//		this.log('else');
 		this.mPositionRender.x = this.mPosition.x + this.mApplicationBreslin.mGame.mOffSet.x;
 		this.mPositionRender.y = 0;
 		this.mPositionRender.z = this.mPosition.z + this.mApplicationBreslin.mGame.mOffSet.z;
@@ -155,6 +159,7 @@ setPosition: function(position)
 	//you are out of visible area 
 	if (this.mPositionRender.x > 760 || this.mPositionRender.z > 360)
 	{
+//		this('out of bounds');
 		this.mPositionRender.x = -150;
 		this.mPositionRender.y = 0;
 		this.mPositionRender.z = -150;
@@ -214,6 +219,13 @@ parseSpawnByteBuffer: function(byteBuffer)
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
         this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
+  	
+	//username
+        var length = byteBuffer.readByte();
+        for (i = 0; i < length; i++)
+        {
+		this.mStringUsername = this.mStringUsername + byteBuffer.readByte();	
+        }
 
 
 	//set control object
@@ -262,7 +274,7 @@ spawnShape: function(position)
 
 	//objectTitle
         this.mObjectTitle = document.createElement("p");
-	this.mObjectTitle.innerHTML='' + this.mIndex;
+	this.mObjectTitle.innerHTML='' + this.mStringUsername + ':' + this.mIndex;
         this.mDiv.mDiv.appendChild(this.mObjectTitle);
 
 

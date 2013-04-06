@@ -252,17 +252,28 @@ server.on("message", function (msg, rinfo)
                 var zrot     = msg.readFloatLE(20);
                 var mesh     = msg.readInt8(24);
                 var anim     = msg.readInt8(25);
+
+  		var length = msg.readInt8(26);
+
+                string = "" + length;
+
+                for (i = 0; i < length; i++)
+                {
+                        var n = msg.readInt8(parseInt(27 + i));
+                        var c = String.fromCharCode(n);
+                        string = string + "," + c;
+                }
+
         
                 //let's just pass off data msg to browsers
 		var addShapeString = type;
 
-                addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim; 
+                addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim + "," + string; 
 
 		io.sockets.clients().forEach(function (socket)
 		{
 			if (socket.mClientID == clientID)
 			{
-		//		console.log('addShape-sendToBrowser: ' + clientID + 'message:' + addShapeString);
        				socket.emit('news', addShapeString)
 			} 
 		});
