@@ -59,6 +59,44 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
+	socket.on('disconnect', function ()
+	{
+        	console.log('DISCONNESSO also sending to c++!!! ');
+
+                //send to c++ server
+                var buf = new Buffer(2);
+
+                //type
+                type = -112;
+                buf.writeInt8(type,0);
+
+                //mClientID
+                buf.writeInt8(socket.mClientID,1);
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+
+        });
+
+        socket.on('send_disconnect', function(message,remote)
+        {
+		console.log('got disconnect from browser');
+		//send to c++ server
+                var buf = new Buffer(2);
+
+                //type
+                type = -112;
+                buf.writeInt8(type,0);
+
+                //mClientID
+                buf.writeInt8(socket.mClientID,1);
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+        });
+
         socket.on('send_join_game', function(message,remote)
 	{
                 //send to c++ server
@@ -67,14 +105,9 @@ io.sockets.on('connection', function (socket)
 		//type
                 type = -117;
                 buf.writeInt8(type,0);
-                console.log(type);
-                console.log(buf.readInt8(0));
 
 		//mClientID
                 buf.writeInt8(socket.mClientID,1);
-                console.log(socket.mClientID);
-                console.log(buf.readInt8(1));
-
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
@@ -124,6 +157,23 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
+        socket.on('send_logout', function(message,remote)
+	{
+		console.log('send_logout in udp');
+         	//send to c++ server
+                var buf = new Buffer(2);
+
+                //type
+                type = -98;
+                buf.writeInt8(type,0);
+
+                //mClientID
+                buf.writeInt8(socket.mClientID,1);
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+                {
+                });
+        });
 	
         socket.on('send_login', function(message,remote)
         {
@@ -238,7 +288,17 @@ server.on("message", function (msg, rinfo)
 	//logout	
         if (type == -114)
 	{
-		socket.emit('news','-114');
+ 		var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
 	}
 
         if (type == -113)

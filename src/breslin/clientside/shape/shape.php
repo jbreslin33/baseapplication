@@ -137,33 +137,28 @@ setPosition: function(position)
 	this.mPosition.y = position.y;
 	this.mPosition.z = position.z;
 
+	//you are control object or control ghost
 	if (this.mApplicationBreslin.mGame.mControlObject == this ||
 		this.mApplicationBreslin.mGame.mControlObjectGhost == this)
 	{
-		this.mPositionRender.x = 380;	
+		this.mPositionRender.x = this.mApplicationBreslin.mScreenCenter.x;	
 		this.mPositionRender.y = 0;	
-		this.mPositionRender.z = 185;	
-		
-		//let's tell game about the offset so we only calc once
-		//figure diff between rendered control object and server control object
-		this.mApplicationBreslin.mGame.mOffSet.x = parseInt(this.mPositionRender.x) - parseInt(this.mPosition.x);
-		this.mApplicationBreslin.mGame.mOffSet.y = 0;
-		this.mApplicationBreslin.mGame.mOffSet.z = parseInt(this.mPositionRender.z) - parseInt(this.mPosition.z);
+		this.mPositionRender.z = this.mApplicationBreslin.mScreenCenter.z;	
 	}
-	else
+	else //you are not control object
 	{
 		this.mPositionRender.x = this.mPosition.x + this.mApplicationBreslin.mGame.mOffSet.x;
 		this.mPositionRender.y = 0;
 		this.mPositionRender.z = this.mPosition.z + this.mApplicationBreslin.mGame.mOffSet.z;
 	}
 
+	//you are out of visible area 
 	if (this.mPositionRender.x > 760 || this.mPositionRender.z > 360)
 	{
 		this.mPositionRender.x = -150;
 		this.mPositionRender.y = 0;
 		this.mPositionRender.z = -150;
 	} 
-
 	
 	//set a member position because we are going to have to modify the div's position
 	modx = this.mPositionRender.x+"px";
@@ -462,7 +457,6 @@ moveGhostShape: function()
 	transVector.y = 0;
 	transVector.z = this.mServerCommandCurrent.mPosition.z;
 
-	//var pos = 'x:' + transVector.x + 'z:' + transVector.z;
 	this.mGhost.setPosition(transVector);
 }
 

@@ -120,6 +120,11 @@ processUpdate: function()
 	//set intervalCount back to zero to signify we are still running game loop
 	mIntervalCount = 0;
 
+	//set the offset
+	this.mOffSet.x = parseInt(this.mApplicationBreslin.mScreenCenter.x) - parseInt(this.mControlObject.mPosition.x);
+        this.mOffSet.y = 0;
+        this.mOffSet.z = parseInt(this.mApplicationBreslin.mScreenCenter.z) - parseInt(this.mControlObject.mPosition.z);
+
 	this.mStateMachine.update();
 
 	for (i = 0; i < this.mShapeVector.length; i++)

@@ -3,6 +3,12 @@ var ApplicationBreslin = new Class(
 
 initialize: function(serverIP, serverPort)
 {
+	//position offsets
+	this.mScreenCenter = new Vector3D();
+	this.mScreenCenter.x = 380;
+        this.mScreenCenter.y = 0;
+        this.mScreenCenter.z = 185;
+
 	//timers
 	this.mTimeSinceLastServerTick = 0;
 	this.mIntervalCount = 0;

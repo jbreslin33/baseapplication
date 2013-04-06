@@ -8,7 +8,6 @@
 <title>ABC AND YOU</title>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 <script src="http://192.168.1.115/mootools/mootools-core-1.4.5-full-compat.js"></script>
 <script src="http://192.168.1.115/breslin/clientside/application/application_breslin.php"></script>
 <script src="http://192.168.1.115/breslin/clientside/network/network.php"></script>
@@ -71,6 +70,8 @@ window.addEvent('domready', function()
         
 	mApplication.mNetwork.mSocket.on('news', function (data)
         {
+		mApplication.mTimeSinceLastServerTick = 0;
+
                 s = data.split(',');
 
                 byteBuffer = new ByteBuffer(s);
@@ -142,7 +143,7 @@ window.addEvent('domready', function()
 				if (mIntervalCount > 25)
 				{
 					//game loop stopped so let's clear interval and start a new one.	
-
+					mApplication.log('gameloop stopped');
 					//clear it
 					clearInterval(mInterval);
 
@@ -167,8 +168,8 @@ window.onresize = function(event)
         mMiddleOfViewPort.x =  mSize.x / 2;
         mMiddleOfViewPort.y =  0;
         mMiddleOfViewPort.z =  mSize.y / 2;
+    	//mApplication.mNetwork.mSocket.emit('send_disconnect', '');
 }
-
 
 </script>
 
