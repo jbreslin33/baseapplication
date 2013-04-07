@@ -136,8 +136,6 @@ setPosition: function(position)
 		this.mPositionRender.x = parseFloat(this.mPosition.x) + parseFloat(this.mApplicationBreslin.mGame.mOffSet.x);
 		this.mPositionRender.y = parseFloat(0);
 		this.mPositionRender.z = parseFloat(this.mPosition.z) + parseFloat(this.mApplicationBreslin.mGame.mOffSet.z);
-
-		this.mObjectTitle.innerHTML='' + this.mStringUsername + ':' + this.mPosition.x + ':' + this.mApplicationBreslin.mGame.mOffSet.x + ':' + this.mPositionRender.x;
 	}
 
 	//you are out of visible area 

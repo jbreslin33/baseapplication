@@ -182,14 +182,25 @@ removeShape: function(byteBuffer)
         	{
                 	if (index == this.mShapeVector[i].mIndex)
 			{
-				this.mShapeVector[i].setVisible(false);
+				this.log('removeChild:' + index);
+ 				this.mShapeVector[i].mDiv.mDiv.removeChild(this.mShapeVector[i].mObjectTitle);
+                        	this.mShapeVector[i].mDiv.mDiv.removeChild(this.mShapeVector[i].mMesh);
+                        	document.body.removeChild(this.mShapeVector[i].mDiv.mDiv);
+
 				this.mShapeVector.splice(i,1);
+			}
+			inverseIndex = index * -1;
+                	if (inverseIndex == this.mShapeGhostVector[i].mIndex)
+			{
+				this.log('removeChild:' + inverseIndex);
+ 				this.mShapeGhostVector[i].mDiv.mDiv.removeChild(this.mShapeGhostVector[i].mObjectTitle);
+                        	this.mShapeGhostVector[i].mDiv.mDiv.removeChild(this.mShapeGhostVector[i].mMesh);
+                        	document.body.removeChild(this.mShapeGhostVector[i].mDiv.mDiv);
+
 				this.mShapeGhostVector.splice(i,1);
 			}
 		}
 	}
-		
-
 },
 
 readServerTick: function(byteBuffer)
