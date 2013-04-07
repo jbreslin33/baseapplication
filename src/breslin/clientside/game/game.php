@@ -116,9 +116,12 @@ processUpdate: function()
 	mIntervalCount = 0;
 
 	//set the offset
-	this.mOffSet.x = parseInt(this.mApplicationBreslin.mScreenCenter.x) - parseInt(this.mControlObject.mPosition.x);
-        this.mOffSet.y = 0;
-        this.mOffSet.z = parseInt(this.mApplicationBreslin.mScreenCenter.z) - parseInt(this.mControlObject.mPosition.z);
+	if (this.mControlObject)
+	{
+		this.mOffSet.x = parseInt(this.mApplicationBreslin.mScreenCenter.x) - parseInt(this.mControlObject.mPosition.x);
+        	this.mOffSet.y = 0;
+        	this.mOffSet.z = parseInt(this.mApplicationBreslin.mScreenCenter.z) - parseInt(this.mControlObject.mPosition.z);
+	}
 
 	this.mStateMachine.update();
 

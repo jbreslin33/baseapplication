@@ -213,25 +213,14 @@ spawnShape: function(position)
         this.mDiv = new Div(this);
 
 	this.mSrc = this.getMeshString(this.mMeshCode);
-	if (this.mSrc == 99)
-	{
-
-	}
-	if (this.mSrc == 3)	
-	{
-                this.mMesh = document.createElement("p");
-		this.mMesh.innerHTML='' + this.mIndex;
-	}
-	else 
-	{
-        	//create clientImage
-        	if (this.mSrc)
-        	{
-        		//image to attach to our div "vessel"
-                	this.mMesh  = document.createElement("IMG");
-                	this.mMesh.src  = this.mSrc;
-        	}
-	}
+      
+  	//create clientImage
+       	if (this.mSrc)
+       	{
+       		//image to attach to our div "vessel"
+               	this.mMesh  = document.createElement("IMG");
+               	this.mMesh.src  = this.mSrc;
+       	}
         
 	//back to div
         this.mDiv.mDiv.appendChild(this.mMesh);
@@ -363,24 +352,22 @@ getMeshString: function(meshCode)
         if (meshCode == 0)
         {
                 //this cube is exactly 1 ogre world unit. Which I take to be 1 meter.
-                this.mScale = .01;
+                this.mScale = parseFloat(.1);
         }
         if (meshCode == 1)
         {
-                this.mScale = .5;
+                this.mScale = parseFloat(.5);
 	
 		if (!this.mIsGhost)
 		{
-
  			//set animation instance
                 	this.mAnimation = new AnimationAdvanced(this);
                 	this.mAnimation.addAnimations('http://' + this.mApplicationBreslin.mNetwork.mServerIP + '/breslin/vclient/dist/media/materials/textures/wizard_','.png');
-			return 99;
+			return "http://" + this.mApplicationBreslin.mNetwork.mServerIP + "/breslin/vclient/dist/media/materials/textures/wizard_1.png";
 		}
 		else
 		{
 			return "http://" + this.mApplicationBreslin.mNetwork.mServerIP + "/breslin/vclient/dist/media/materials/textures/red_monster.png";
-
 		}
         }
 },
