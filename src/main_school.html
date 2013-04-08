@@ -110,7 +110,14 @@ window.addEvent('domready', function()
 	
                 if (type == -103)
                 {
-			mApplication.mGame.addShape(byteBuffer);
+			if (mApplication.mGame)
+			{
+				mApplication.mGame.addShape(byteBuffer);
+			}
+			else
+			{
+				mApplication.log('no game yet on client!');
+			}
                 }
 	
                 if (type == -104)

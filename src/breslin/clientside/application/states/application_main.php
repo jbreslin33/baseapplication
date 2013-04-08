@@ -18,8 +18,6 @@ execute: function()
 	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonJoinGame)
 	{
 	        this.mApplicationBreslin.mButtonHit = 0;
-                this.mApplicationBreslin.sendJoinGame();
-
                 this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationPlay);
 	}
 

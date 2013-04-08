@@ -11,6 +11,7 @@ enter: function()
 	this.mApplicationBreslin.mGame = new Game(this.mApplicationBreslin);
 	this.mApplicationBreslin.mPlayingGame = true;
 	this.mApplicationBreslin.mSentLeaveGame = false;
+	this.mApplicationBreslin.sendJoinGame();
 },
 
 execute: function()
