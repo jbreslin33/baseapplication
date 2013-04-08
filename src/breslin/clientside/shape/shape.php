@@ -123,6 +123,15 @@ setPosition: function(position)
 	this.mPosition.y = parseFloat(position.y);
 	this.mPosition.z = parseFloat(position.z);
 
+
+	x = parseFloat(position.x);
+	y = parseFloat(position.y);
+	z = parseFloat(position.z);
+
+	x = x * 2; 
+	z = z * 2; 
+
+
 	//you are control object or control ghost
 	if (this.mApplicationBreslin.mGame.mControlObject == this ||
 		this.mApplicationBreslin.mGame.mControlObjectGhost == this)
@@ -133,9 +142,9 @@ setPosition: function(position)
 	}
 	else //you are not control object
 	{
-		this.mPositionRender.x = parseFloat(this.mPosition.x) + parseFloat(this.mApplicationBreslin.mGame.mOffSet.x);
+		this.mPositionRender.x = parseFloat(x) + parseFloat(this.mApplicationBreslin.mGame.mOffSet.x);
 		this.mPositionRender.y = parseFloat(0);
-		this.mPositionRender.z = parseFloat(this.mPosition.z) + parseFloat(this.mApplicationBreslin.mGame.mOffSet.z);
+		this.mPositionRender.z = parseFloat(z) + parseFloat(this.mApplicationBreslin.mGame.mOffSet.z);
 	}
 
 	//you are out of visible area 
