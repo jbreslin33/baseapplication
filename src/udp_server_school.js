@@ -331,7 +331,7 @@ server.on("message", function (msg, rinfo)
 	if (type == -104)
 	{
  		var clientID = msg.readInt8(1);
- 		var index    = msg.readInt8(1);
+ 		var index    = msg.readInt8(2);
                 var removeShapeString = type;
                 removeShapeString = removeShapeString + "," + clientID + "," + index;
 
