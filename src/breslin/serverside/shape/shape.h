@@ -75,6 +75,7 @@ int mMeshCode;
 
 //collision
 float mCollisionRadius;
+float mCollisionRadiusSpawn;
 bool  mCollidable;
 
 //animation

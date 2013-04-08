@@ -66,7 +66,8 @@ public:
 	virtual void createWorld();
 
 	//index
-	unsigned int getOpenIndex      ();
+	unsigned int getOpenIndex ();
+	Vector3D* getOpenPoint    ();
 
 	//end game
 	virtual void checkForEndOfGame() { }
