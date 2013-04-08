@@ -8,6 +8,7 @@ initialize: function(applicationBreslin)
 
 enter: function()
 {
+	this.mApplicationBreslin.log('create game');
 	this.mApplicationBreslin.mGame = new Game(this.mApplicationBreslin);
 	this.mApplicationBreslin.mPlayingGame = true;
 	this.mApplicationBreslin.mSentLeaveGame = false;

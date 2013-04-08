@@ -110,8 +110,10 @@ window.addEvent('domready', function()
 	
                 if (type == -103)
                 {
+			mApplication.log('got a -103');
 			if (mApplication.mGame)
 			{
+				
 				mApplication.mGame.addShape(byteBuffer);
 			}
 			else
@@ -122,7 +124,14 @@ window.addEvent('domready', function()
 	
                 if (type == -104)
 		{
-			mApplication.mGame.removeShape(byteBuffer);
+			if (mApplication.mGame)
+			{
+				mApplication.mGame.removeShape(byteBuffer);
+			}
+			else
+			{
+				mApplication.log('no game so cant process -104');
+			}
 		}
 
 		if (type == mApplication.mMessageLoggedIn)
