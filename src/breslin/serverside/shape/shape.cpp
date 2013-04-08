@@ -175,10 +175,11 @@ void Shape::remove()
 			}
        			mGame->mServer->mMessage.WriteByte(mIndex);
  			mGame->mServer->mClientVector.at(i)->SendPacket(&mGame->mServer->mMessage);
+			LogString("send to this guy:%d",mGame->mServer->mClientVector.at(i)->mClientID);
 		}
 		else
 		{
-			LogString("don't send to this guy");
+			LogString("don't send to this guy:%d",mGame->mServer->mClientVector.at(i)->mClientID);
 		}
         }
 

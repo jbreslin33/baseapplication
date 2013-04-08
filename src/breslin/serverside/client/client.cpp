@@ -126,8 +126,6 @@ void Client::leaveGame()
 	//you gotta delete the shape here...and tell everyone about it. i would tell them in shape class
 	if (mShape)
 	{
-		mShape->remove();
-
 		//tell human client that it has left game 
 		if (mClientID > 0)
 		{	
@@ -141,6 +139,8 @@ void Client::leaveGame()
         		mServer->mMessage.WriteByte(mServer->mMessageLeaveGame); // add type
 		}
 		SendPacket(&mServer->mMessage);
+
+		mShape->remove();
 	}	
 }
 
