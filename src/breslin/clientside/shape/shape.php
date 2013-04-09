@@ -246,7 +246,7 @@ spawnShape: function(position)
 
 
 	v = new Vector3D();	
-	//this.scale();
+	this.scale();
 
 },
 setSrc: function(src)
@@ -386,15 +386,13 @@ getMeshString: function(meshCode)
         }
 },
 
-scale: function(v)
+scale: function()
 {
 	var h = this.mMesh.height;
 	var w = this.mMesh.width;
 
 	h = parseFloat(h * this.mScale);
 	w = parseFloat(w * this.mScale);
-
-	
 	
 	//scale image 
        	this.mMesh.style.height = h+'px';
