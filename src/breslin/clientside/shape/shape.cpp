@@ -161,7 +161,6 @@ void Shape::spawnShape(Vector3D* position)
 	}	
 
 	mName         = StringConverter::toString(mIndex);
-	LogString("Shape::spawnShape():%d",mIndex); 
 	mSceneNode    = mApplicationBreslin->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 
 	//set Starting position of sceneNode, we will attach our mesh to this. this is all that's needed for static shapes. actually we need to add

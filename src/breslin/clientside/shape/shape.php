@@ -190,6 +190,10 @@ parseSpawnByteBuffer: function(byteBuffer)
 	this.mMeshCode        = parseInt(byteBuffer.readByte());
 	this.mAnimate         = parseInt(byteBuffer.readByte());
 
+	//parseFloats
+	this.mSpawnPosition.parseFloat();
+	this.mSpawnRotation.parseFloat();
+
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
         this.mServerCommandLast.mPosition.copyValuesFrom(this.mSpawnPosition);
         this.mServerCommandCurrent.mPosition.copyValuesFrom(this.mSpawnPosition);
@@ -386,8 +390,10 @@ scale: function(v)
 	var h = this.mMesh.height;
 	var w = this.mMesh.width;
 
-	h = h * this.mScale;
-	w = w * this.mScale;
+	h = parseFloat(h * this.mScale);
+	w = parseFloat(w * this.mScale);
+
+	
 	
 	//scale image 
        	this.mMesh.style.height = h+'px';

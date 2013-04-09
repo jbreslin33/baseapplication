@@ -63,6 +63,13 @@ normalise: function()
 	this.z /= len;
 },
 
+parseFloat: function()
+{
+	this.x = parseFloat(this.x);
+	this.y = parseFloat(this.y);
+	this.z = parseFloat(this.z);
+},
+
 //multiply this vector by a scalar
 multiply: function(num)
 {
