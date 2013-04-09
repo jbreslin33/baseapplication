@@ -246,7 +246,7 @@ spawnShape: function(position)
 
 
 	v = new Vector3D();	
-	this.scale();
+	//this.scale();
 
 },
 setSrc: function(src)
@@ -354,8 +354,9 @@ parseDeltaByteBuffer: function(byteBuffer)
                         this.mServerCommandCurrent.mVelocity.z = 0.0;
                 }
         }
+
+	this.mServerCommandCurrent.mVelocity.parseFloat();
 	this.mCommandToRunOnShape.mVelocity.copyValuesFrom(this.mServerCommandCurrent.mVelocity);
-	
 	
 	return flags;
 },
