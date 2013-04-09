@@ -388,19 +388,8 @@ getMeshString: function(meshCode)
 
 scale: function()
 {
-	var h = this.mMesh.height;
-	var w = this.mMesh.width;
-
-	h = parseFloat(h * this.mScale);
-	w = parseFloat(w * this.mScale);
-	
-	//scale image 
-       	this.mMesh.style.height = h+'px';
-        this.mMesh.style.width = w+'px';
-
-	//scale div
-        this.mDiv.mDiv.style.height = h+"px";
-        this.mDiv.mDiv.style.width = w+"px";
+       	this.mMesh.style.width = '5%';
+       	this.mMesh.style.height = 'auto';
 },
 
 setupTitle: function()
