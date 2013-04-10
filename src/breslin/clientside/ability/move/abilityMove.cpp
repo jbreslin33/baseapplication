@@ -35,16 +35,14 @@ AbilityMove::AbilityMove(Shape* shapeDynamic)  : Ability(shapeDynamic)
 	//mInterpolateTickStateMachine->setGlobalState       (Global_InterpolateTick_Move::Instance());
 	mInterpolateTickStateMachine->setGlobalState       (NULL);
 
-
-
-    //thresholds
-    mPosInterpLimitHigh = .066f; //how far away from server till we try to catch up
-    mPosInterpFactor    = 4.0f;
-	mMaximunVelocity    = .003083f; //do not let velocity go above this in any direction.
+    	//thresholds
+    	mPosInterpLimitHigh = .066f * 50.5; //how far away from server till we try to catch up
+    	mPosInterpFactor    = 4.0f * 50.5;
+	mMaximunVelocity    = .003083f * 50.5; //do not let velocity go above this in any direction.
 
 	//deltas
 	mDeltaX        = 0.0f; 
-	mDeltaY		   = 0.0f;
+	mDeltaY	       = 0.0f;
 	mDeltaZ        = 0.0f;
 	mDeltaPosition = 0.0f;
 }

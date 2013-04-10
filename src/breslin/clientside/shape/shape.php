@@ -388,7 +388,7 @@ getMeshString: function(meshCode)
 
 scale: function()
 {
-       	this.mMesh.style.width = '5%';
+       	this.mMesh.style.width = '50%';
        	this.mMesh.style.height = 'auto';
 },
 

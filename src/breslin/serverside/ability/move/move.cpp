@@ -3,8 +3,6 @@
 
 #include "../../client/client.h"
 
-#define MAX_RUN_SPEED 1.66           // character running speed in units per second
-
 #include <string>
 
 //Ogre headers
@@ -24,8 +22,8 @@ Move::Move(Shape* shape) : Ability(shape)
 
 
     //run acceleration
-    mRunAccel    = .04166f;
-    mRunDecel    = .04166f;
+    mRunAccel    = .04166f * 50.5;
+    mRunDecel    = .04166f * 50.5;
 
 
  	//move states

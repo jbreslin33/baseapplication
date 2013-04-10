@@ -204,7 +204,8 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 
 	if (abilityMove->mShape->mLocal == 1)
 	{
-		abilityMove->mShape->mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(transVector->x,transVector->y + 20,transVector->z + 20));
+		abilityMove->mShape->mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(transVector->x,transVector->y + 920,transVector->z + 20));
+
 		abilityMove->mShape->mApplicationBreslin->getCamera()->lookAt(Ogre::Vector3(transVector->x,transVector->y,transVector->z));
 	
 	}

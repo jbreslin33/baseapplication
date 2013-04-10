@@ -61,6 +61,9 @@ Vector3 mKeyDirection;
 float   mKeyRotation;
 Vector3 mGoalDirection;
 
+//speed
+float mSpeedMax;
+
 //game
 Game* mGame;
 
