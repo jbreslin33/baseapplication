@@ -39,7 +39,7 @@ Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, boo
 	mCommandToRunOnShape  = new Command();
 	//speed
 	mSpeed = 0.0f;
-	mSpeedMax  = 1.66f * 50.5;
+	mSpeedMax  = 1.66f * 30.5;
 
 	mVelocity = new Vector3D();
 
@@ -477,7 +477,7 @@ std::string Shape::getMeshString(int meshCode)
 	}
 	if (meshCode == 1)
 	{
-		mScale = .25f * 50.5;
+		mScale = .25f * 15.5;
 		return "sinbad.mesh";
 	}
 }
