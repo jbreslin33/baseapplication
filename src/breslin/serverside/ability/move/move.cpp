@@ -22,8 +22,8 @@ Move::Move(Shape* shape) : Ability(shape)
 
 
     //run acceleration
-    mRunAccel    = .04166f * 50.5;
-    mRunDecel    = .04166f * 50.5;
+    mRunAccel    = .04166f * 30.5;
+    mRunDecel    = .04166f * 30.5;
 
 
  	//move states
