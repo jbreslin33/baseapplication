@@ -111,6 +111,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	const char* cmdLine = lpCmdLine;
 
 	const char* aGame    = "1";
+	const char* aGameTag = "2";
 
 	if (strcmp (cmdLine,aGame) == 0)
 	{
@@ -244,7 +245,9 @@ int main(int argc, char **argv)
 {
 
 	const char* aGame    = "1";
+	const char* aGameTag = "2";
 
+	//basic game--just collision detection and multiplayer....
 	if (strcmp (argv[1],aGame) == 0)
 	{
 		game = new Game();
@@ -255,6 +258,20 @@ int main(int argc, char **argv)
 		//world
 		game->createWorld();
 	}
+
+	//basic game--just collision detection and multiplayer....
+	if (strcmp (argv[1],aGameTag) == 0)
+	{
+		game = new GameTag();
+
+		//server
+		game->createServer();
+
+		//world
+		game->createWorld();
+	}
+
+
 
 	LogString("Linux Learning Game Server");
 	LogString("-------------------------------\n");
