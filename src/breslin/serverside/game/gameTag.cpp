@@ -21,7 +21,12 @@
 //bounds
 #include "../bounds/bounds.h"
 
+//server
+#include "../server/server.h"
+
 GameTag::GameTag(Server* server)
+ :
+ Game(server)
 {
 	mBounds->a = new Vector3D(-50.0,0.0f,-43.0f);
 	mBounds->c = new Vector3D(50.0,0.0f,57.0f);
@@ -31,8 +36,10 @@ GameTag::~GameTag()
 {
 }
 
+
 void GameTag::createWorld()
 {
+/*
 	//ai guys, let's make them sinbads
 	for(int i = 0; i < 24; i++)
 	{                 
@@ -47,9 +54,16 @@ void GameTag::createWorld()
 		mShapeIt = shape;
 		mShapeNoTagBack = shape;
 	}
+*/
 }
+void GameTag::checkForEndOfGame()
+{
+
+}
+
 void GameTag::collision(Shape* shape1, Shape* shape2)
 {
+/*
 	//run standard collision code from parent, we don't want players passing thru each other!		
 	Game::collision(shape1,shape2);
 	
@@ -64,10 +78,12 @@ void GameTag::collision(Shape* shape1, Shape* shape2)
 		mShapeIt = shape1;
 		mShapeNoTagBack = shape2;
 	}
+*/
 }
 
 void GameTag::checkBounds(Shape* shape)
 {
+/*
 	if (shape->mSceneNode->getPosition().x < mBounds->a->x)
 	{
 		shape->mSceneNode->setPosition(mBounds->a->x, shape->mSceneNode->getPosition().y, shape->mSceneNode->getPosition().z); 
@@ -88,8 +104,11 @@ void GameTag::checkBounds(Shape* shape)
 	{
 		shape->mSceneNode->setPosition(shape->mSceneNode->getPosition().x, shape->mSceneNode->getPosition().y, mBounds->c->z); 
 	}
+*/
 }
 void GameTag::storeCommands(Shape* shape)
 {
+/*
 	Game::storeCommands(shape);
+*/
 }

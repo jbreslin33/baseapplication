@@ -13,11 +13,11 @@ public:
 GameTag(Server* server);
 ~GameTag();
 
-//server
-virtual void createServer();
-
 //world
 virtual void createWorld();
+
+//
+virtual void checkForEndOfGame();
 
 //collision
 virtual void collision(Shape* shape1, Shape* shape2);

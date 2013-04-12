@@ -35,6 +35,9 @@ Game::Game(Server* server)
 #else
 	mRoot = new Ogre::Root("plugins.cfg");
 #endif
+	
+	mServer = server;
+
 	mTickLength = 32;	
 	mFrameTime  = 0;
 	mGameTime   = 0;
@@ -52,11 +55,6 @@ Game::~Game()
 {
         PQfinish(mDBConnection);
 	StopLog();
-}
-
-void Game::setServer()
-{
-	mServer = server;
 }
 
 void Game::createWorld()

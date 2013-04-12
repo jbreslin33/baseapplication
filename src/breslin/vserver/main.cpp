@@ -175,6 +175,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	}
 
 	return WinMsg.wParam;
+
 }
 
 #else
@@ -250,14 +251,17 @@ int main(int argc, char **argv)
    	server = new Server("", 30004);
 
 	//create Game
+	LogString("a");
 	server->mGameVector.push_back(new Game(server));
+	LogString("b");
 	server->mGameVector.push_back(new GameTag(server));
+	LogString("c");
 
 	//world
 	LogString("creating game worlds");
 	for (unsigned int i = 0; i < server->mGameVector.size(); i++)
         {
-                mGameVector.at(i)->createWorld();
+                server->mGameVector.at(i)->createWorld();
         }
 	
 	LogString("Linux Learning Game Server");
@@ -270,7 +274,7 @@ int main(int argc, char **argv)
 
 	int time, oldTime, newTime;
 
-	oldTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
+	oldTime = server->mNetwork->dreamSock_GetCurrentSystemTime();
 	LogString("Server time began at:%d",oldTime);
 
 	// App main loop
@@ -283,7 +287,7 @@ int main(int argc, char **argv)
 			{
 				do
 				{
-					newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
+					newTime = server->mNetwork->dreamSock_GetCurrentSystemTime();
 					time = newTime - oldTime;
 				} while (time < 1);
 
@@ -298,10 +302,14 @@ int main(int argc, char **argv)
 			{
 				do
 				{
-					newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
+					newTime = server->mNetwork->dreamSock_GetCurrentSystemTime();
 					time = newTime - oldTime;
 				} while (time < 1);
-				game->frame(time);
+				for (unsigned int i = 0; i < server->mGameVector.size(); i++)
+        			{
+					//game->frame(time);
+                			server->mGameVector.at(i)->frame(time);
+        			}
 
 				oldTime = newTime;
 			}
@@ -310,7 +318,7 @@ int main(int argc, char **argv)
 	catch(...)
 	{
 
-		game->mServer->mNetwork->dreamSock_Shutdown();
+		server->mNetwork->dreamSock_Shutdown();
 
 		LogString("Unknown Exception caught in main loop");
 
@@ -320,7 +328,7 @@ int main(int argc, char **argv)
 	LogString("Shutting down everything");
 
 
-	game->mServer->mNetwork->dreamSock_Shutdown();
+	server->mNetwork->dreamSock_Shutdown();
 
 	return 0;
 }
