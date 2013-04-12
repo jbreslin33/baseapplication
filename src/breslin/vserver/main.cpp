@@ -254,7 +254,7 @@ int main(int argc, char **argv)
 	LogString("a");
 	server->mGameVector.push_back(new Game(server));
 	LogString("b");
-	server->mGameVector.push_back(new GameTag(server));
+	//server->mGameVector.push_back(new GameTag(server));
 	LogString("c");
 
 	//world

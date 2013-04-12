@@ -25,16 +25,21 @@
 
 Server::Server(const char *localIP, int serverPort)
 {
+	LogString("va");
 	mLocalIP = localIP;
 	
 	// Store the server IP and port for later use
+	LogString("vb");
 	mPort = serverPort;
 
 	// Create network
+	LogString("vc");
 	mNetwork = new Network(localIP, mPort);
 
 	//this will need updating whenever a new school is added to db...
-	getSchools();	
+	LogString("vd");
+	setSchools();	
+	LogString("ve");
 }
 
 Server::~Server()
@@ -399,7 +404,7 @@ void Server::readDB()
         PQfinish(conn);
 }
 
-std::string Server::getSchools()
+void Server::setSchools()
 {
         PGconn          *conn;
         PGresult        *res;
@@ -418,15 +423,19 @@ std::string Server::getSchools()
         printf("We received %d records.\n", rec_count);
         for (row=0; row<rec_count; row++)
         {
+		LogString("v....");
 		const char* c = PQgetvalue(res, row, 1);  
 		std::string school(c);
 		
 		mSchoolVector.push_back(school);
         }
+	LogString("vf");
 
         PQclear(res);
+	LogString("vg");
 
         PQfinish(conn);
+	LogString("vh");
 }
 
 void Server::readPackets()
