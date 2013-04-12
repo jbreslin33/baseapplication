@@ -110,12 +110,28 @@ window.addEvent('domready', function()
 	
                 if (type == -103)
                 {
-			mApplication.mGame.addShape(byteBuffer);
+			mApplication.log('got a -103');
+			if (mApplication.mGame)
+			{
+				
+				mApplication.mGame.addShape(byteBuffer);
+			}
+			else
+			{
+				mApplication.log('no game yet on client!');
+			}
                 }
 	
                 if (type == -104)
 		{
-			mApplication.mGame.removeShape(byteBuffer);
+			if (mApplication.mGame)
+			{
+				mApplication.mGame.removeShape(byteBuffer);
+			}
+			else
+			{
+				mApplication.log('no game so cant process -104');
+			}
 		}
 
 		if (type == mApplication.mMessageLoggedIn)
@@ -143,7 +159,7 @@ window.addEvent('domready', function()
 				if (mIntervalCount > 25)
 				{
 					//game loop stopped so let's clear interval and start a new one.	
-
+					mApplication.log('gameloop stopped');
 					//clear it
 					clearInterval(mInterval);
 

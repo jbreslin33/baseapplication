@@ -45,6 +45,7 @@ int runningDaemon;
 #endif
 
 Game* game;
+Server* server;
 
 #ifdef WIN32
 
@@ -250,7 +251,9 @@ int main(int argc, char **argv)
 		game = new Game();
 
 		//server
-		game->createServer();
+		//game->createServer();
+		server = new Server(game,"",30004);
+		game->mServer = server;
 
 		//world
 		game->createWorld();
