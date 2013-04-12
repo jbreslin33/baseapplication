@@ -271,6 +271,7 @@ set(HDRS
 	
 	#shape
 	../serverside/shape/shape.h
+	../serverside/shape/shapeTag.h
 		
 	#move
 	../serverside/ability/move/move.h
@@ -335,6 +336,7 @@ set(SRCS
 	
 	#shape
 	../serverside/shape/shape.cpp
+	../serverside/shape/shapeTag.cpp
 	
 	#move
 	../serverside/ability/move/move.cpp
@@ -394,6 +396,7 @@ set(HDRS
 	
 		#shape
 	../serverside/shape/shape.h
+	../serverside/shape/shapeTag.h
 	
 	#move
 	../serverside/ability/move/move.h
@@ -458,6 +461,7 @@ set(SRCS
 	
 	#shape
 	../serverside/shape/shape.cpp
+	../serverside/shape/shapeTag.cpp
 	
 	#move
 	../serverside/ability/move/move.cpp

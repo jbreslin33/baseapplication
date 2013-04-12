@@ -27,6 +27,7 @@
 
 //possible games
 #include "../serverside/game/game.h"
+#include "../serverside/game/gameTag.h"
 
 #include "../serverside/server/server.h"
 #include "../serverside/network/network.h"
@@ -44,7 +45,7 @@
 int runningDaemon;
 #endif
 
-Game* game;
+Server* server;
 
 #ifdef WIN32
 
@@ -244,48 +245,25 @@ int keyPress(void)
 int main(int argc, char **argv)
 {
 
-	const char* aGame    = "1";
-	const char* aGameTag = "2";
+	//server
+	LogString("creating Server with port 30004");
+   	server = new Server("", 30004);
 
-	//basic game--just collision detection and multiplayer....
-	if (strcmp (argv[1],aGame) == 0)
-	{
-		game = new Game();
+	//create Game
+	server->mGameVector.push_back(new Game(server));
+	server->mGameVector.push_back(new GameTag(server));
 
-		//server
-		game->createServer();
-
-		//world
-		game->createWorld();
-	}
-
-	//basic game--just collision detection and multiplayer....
-	if (strcmp (argv[1],aGameTag) == 0)
-	{
-		game = new GameTag();
-
-		//server
-		game->createServer();
-
-		//world
-		game->createWorld();
-	}
-
-
-
+	//world
+	LogString("creating game worlds");
+	for (unsigned int i = 0; i < server->mGameVector.size(); i++)
+        {
+                mGameVector.at(i)->createWorld();
+        }
+	
 	LogString("Linux Learning Game Server");
 	LogString("-------------------------------\n");
 
 
-/*
-	if(argc > 1)
-	{
-		if(strcmp(argv[1], "-daemon") == 0)
-		{
-			daemonInit();
-		}
-	}
-*/
 	// Ignore the SIGPIPE signal, so the program does not terminate if the
 	// pipe gets broken
 	signal(SIGPIPE, SIG_IGN);

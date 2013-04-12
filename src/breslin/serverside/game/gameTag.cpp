@@ -4,9 +4,6 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
-//server
-#include "../server/serverTag.h"
-
 //shape
 #include "../shape/shapeTag.h"
 
@@ -24,7 +21,7 @@
 //bounds
 #include "../bounds/bounds.h"
 
-GameTag::GameTag()
+GameTag::GameTag(Server* server)
 {
 	mBounds->a = new Vector3D(-50.0,0.0f,-43.0f);
 	mBounds->c = new Vector3D(50.0,0.0f,57.0f);
@@ -32,12 +29,6 @@ GameTag::GameTag()
 
 GameTag::~GameTag()
 {
-}
-
-void GameTag::createServer()
-{
-	mServerTag = new ServerTag(this,"", 30004);
-	mServer = mServerTag;
 }
 
 void GameTag::createWorld()

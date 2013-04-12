@@ -26,7 +26,7 @@
 //#include <postgresql/libpq-fe.h>
 
 
-Game::Game()
+Game::Game(Server* server)
 {
 	StartLog();
 
@@ -52,12 +52,11 @@ Game::~Game()
 {
         PQfinish(mDBConnection);
 	StopLog();
-	delete mServer;
 }
 
-void Game::createServer()
+void Game::setServer()
 {
-	mServer = new Server(this,"", 30004);
+	mServer = server;
 }
 
 void Game::createWorld()

@@ -56,11 +56,11 @@ static const char mMessageServerExit = 3;
      	PGconn* mDBConnection;
 
 public:
-	Game();
+	Game(Server* server);
 	~Game();
 
 	//server
-	virtual void createServer();
+	void seServer(Server* server);
 
 	//world
 	virtual void createWorld();

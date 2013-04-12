@@ -10,7 +10,7 @@ class GameTag : public Game
 {
 public:
 
-GameTag();
+GameTag(Server* server);
 ~GameTag();
 
 //server

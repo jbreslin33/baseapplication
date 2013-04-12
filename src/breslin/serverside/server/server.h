@@ -36,6 +36,9 @@ public:
 	//clients
 	std::vector<Client*> mClientVector;
 
+	//games
+	std::vector<Game*> mGameVector;   
+
 	//port
 	int mPort;					// Port
 
@@ -100,7 +103,7 @@ public:
 
 
 public:
-	Server(Game* serverSideGame,const char *localIP, int serverPort);
+	Server(const char *localIP, int serverPort);
 	~Server();
 
 	//port

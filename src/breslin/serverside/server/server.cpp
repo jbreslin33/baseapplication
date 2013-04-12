@@ -23,9 +23,8 @@
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
 
-Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
+Server::Server(const char *localIP, int serverPort)
 {
-	mGame = serverSideGame;
 	mLocalIP = localIP;
 	
 	// Store the server IP and port for later use
@@ -243,7 +242,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
 				client = mClientVector.at(i);
 				client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
-                                mGame->readDeltaMoveCommand(mes,client);
+				for (unsigned int i = 0; i < mGameVector.size(); i++)
+        			{
+                			mGameVector.at(i)->readDeltaMoveCommand(mes,client);
+        			}
+
+                                //mGame->readDeltaMoveCommand(mes,client);
 				// Wait for one message before setting state to connected
                                 if(client->mConnectionState == DREAMSOCK_CONNECTING)
                                 {
@@ -263,7 +267,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
 				client = mClientVector.at(i);
 				client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
-                                mGame->readDeltaMoveCommand(mes,client);
+				for (unsigned int i = 0; i < mGameVector.size(); i++)
+        			{
+                			mGameVector.at(i)->readDeltaMoveCommand(mes,client);
+        			}
+                                //mGame->readDeltaMoveCommand(mes,client);
   				// Wait for one message before setting state to connected
         			if(client->mConnectionState == DREAMSOCK_CONNECTING)
         			{
