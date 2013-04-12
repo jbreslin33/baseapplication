@@ -36,9 +36,6 @@ public:
 	//clients
 	std::vector<Client*> mClientVector;
 
-	//games
-	std::vector<Game*> mGameVector;   
-
 	//port
 	int mPort;					// Port
 
@@ -103,7 +100,7 @@ public:
 
 
 public:
-	Server(const char *localIP, int serverPort);
+	Server(Game* serverSideGame,const char *localIP, int serverPort);
 	~Server();
 
 	//port
@@ -111,7 +108,7 @@ public:
 
 	//schools
 	std::vector<std::string> mSchoolVector;  
-	void setSchools();
+	std::string getSchools();
 
 	//timeout
 	int  checkForTimeout();

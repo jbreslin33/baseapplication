@@ -27,7 +27,6 @@
 
 //possible games
 #include "../serverside/game/game.h"
-#include "../serverside/game/gameTag.h"
 
 #include "../serverside/server/server.h"
 #include "../serverside/network/network.h"
@@ -45,7 +44,7 @@
 int runningDaemon;
 #endif
 
-Server* server;
+Game* game;
 
 #ifdef WIN32
 
@@ -112,7 +111,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	const char* cmdLine = lpCmdLine;
 
 	const char* aGame    = "1";
-	const char* aGameTag = "2";
 
 	if (strcmp (cmdLine,aGame) == 0)
 	{
@@ -175,7 +173,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	}
 
 	return WinMsg.wParam;
-
 }
 
 #else
@@ -246,35 +243,39 @@ int keyPress(void)
 int main(int argc, char **argv)
 {
 
-	//server
-	LogString("creating Server with port 30004");
-   	server = new Server("", 30004);
+	const char* aGame    = "1";
 
-	//create Game
-	LogString("a");
-	server->mGameVector.push_back(new Game(server));
-	LogString("b");
-	//server->mGameVector.push_back(new GameTag(server));
-	LogString("c");
+	if (strcmp (argv[1],aGame) == 0)
+	{
+		game = new Game();
 
-	//world
-	LogString("creating game worlds");
-	for (unsigned int i = 0; i < server->mGameVector.size(); i++)
-        {
-                server->mGameVector.at(i)->createWorld();
-        }
-	
+		//server
+		game->createServer();
+
+		//world
+		game->createWorld();
+	}
+
 	LogString("Linux Learning Game Server");
 	LogString("-------------------------------\n");
 
 
+/*
+	if(argc > 1)
+	{
+		if(strcmp(argv[1], "-daemon") == 0)
+		{
+			daemonInit();
+		}
+	}
+*/
 	// Ignore the SIGPIPE signal, so the program does not terminate if the
 	// pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
 
 	int time, oldTime, newTime;
 
-	oldTime = server->mNetwork->dreamSock_GetCurrentSystemTime();
+	oldTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
 	LogString("Server time began at:%d",oldTime);
 
 	// App main loop
@@ -287,7 +288,7 @@ int main(int argc, char **argv)
 			{
 				do
 				{
-					newTime = server->mNetwork->dreamSock_GetCurrentSystemTime();
+					newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
 					time = newTime - oldTime;
 				} while (time < 1);
 
@@ -302,14 +303,10 @@ int main(int argc, char **argv)
 			{
 				do
 				{
-					newTime = server->mNetwork->dreamSock_GetCurrentSystemTime();
+					newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
 					time = newTime - oldTime;
 				} while (time < 1);
-				for (unsigned int i = 0; i < server->mGameVector.size(); i++)
-        			{
-					//game->frame(time);
-                			server->mGameVector.at(i)->frame(time);
-        			}
+				game->frame(time);
 
 				oldTime = newTime;
 			}
@@ -318,7 +315,7 @@ int main(int argc, char **argv)
 	catch(...)
 	{
 
-		server->mNetwork->dreamSock_Shutdown();
+		game->mServer->mNetwork->dreamSock_Shutdown();
 
 		LogString("Unknown Exception caught in main loop");
 
@@ -328,7 +325,7 @@ int main(int argc, char **argv)
 	LogString("Shutting down everything");
 
 
-	server->mNetwork->dreamSock_Shutdown();
+	game->mServer->mNetwork->dreamSock_Shutdown();
 
 	return 0;
 }

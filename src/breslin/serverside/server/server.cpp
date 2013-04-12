@@ -23,23 +23,19 @@
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
 
-Server::Server(const char *localIP, int serverPort)
+Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
 {
-	LogString("va");
+	mGame = serverSideGame;
 	mLocalIP = localIP;
 	
 	// Store the server IP and port for later use
-	LogString("vb");
 	mPort = serverPort;
 
 	// Create network
-	LogString("vc");
 	mNetwork = new Network(localIP, mPort);
 
 	//this will need updating whenever a new school is added to db...
-	LogString("vd");
-	setSchools();	
-	LogString("ve");
+	getSchools();	
 }
 
 Server::~Server()
@@ -247,12 +243,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
 				client = mClientVector.at(i);
 				client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
-				for (unsigned int i = 0; i < mGameVector.size(); i++)
-        			{
-                			mGameVector.at(i)->readDeltaMoveCommand(mes,client);
-        			}
-
-                                //mGame->readDeltaMoveCommand(mes,client);
+                                mGame->readDeltaMoveCommand(mes,client);
 				// Wait for one message before setting state to connected
                                 if(client->mConnectionState == DREAMSOCK_CONNECTING)
                                 {
@@ -272,11 +263,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
 				client = mClientVector.at(i);
 				client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
-				for (unsigned int i = 0; i < mGameVector.size(); i++)
-        			{
-                			mGameVector.at(i)->readDeltaMoveCommand(mes,client);
-        			}
-                                //mGame->readDeltaMoveCommand(mes,client);
+                                mGame->readDeltaMoveCommand(mes,client);
   				// Wait for one message before setting state to connected
         			if(client->mConnectionState == DREAMSOCK_CONNECTING)
         			{
@@ -404,7 +391,7 @@ void Server::readDB()
         PQfinish(conn);
 }
 
-void Server::setSchools()
+std::string Server::getSchools()
 {
         PGconn          *conn;
         PGresult        *res;
@@ -423,19 +410,15 @@ void Server::setSchools()
         printf("We received %d records.\n", rec_count);
         for (row=0; row<rec_count; row++)
         {
-		LogString("v....");
 		const char* c = PQgetvalue(res, row, 1);  
 		std::string school(c);
 		
 		mSchoolVector.push_back(school);
         }
-	LogString("vf");
 
         PQclear(res);
-	LogString("vg");
 
         PQfinish(conn);
-	LogString("vh");
 }
 
 void Server::readPackets()

@@ -260,7 +260,6 @@ set(HDRS
 	
 	#game
 	../serverside/game/game.h
-	../serverside/game/gameTag.h
 
 	#tdreamsock
 	../serverside/tdreamsock/dreamSockLog.h
@@ -271,7 +270,6 @@ set(HDRS
 	
 	#shape
 	../serverside/shape/shape.h
-	../serverside/shape/shapeTag.h
 		
 	#move
 	../serverside/ability/move/move.h
@@ -325,7 +323,6 @@ set(SRCS
 
 	#game
 	../serverside/game/game.cpp
-	../serverside/game/gameTag.cpp
 	
 	#dreamsock
 	../serverside/tdreamsock/dreamSockLog.cpp
@@ -336,7 +333,6 @@ set(SRCS
 	
 	#shape
 	../serverside/shape/shape.cpp
-	../serverside/shape/shapeTag.cpp
 	
 	#move
 	../serverside/ability/move/move.cpp
@@ -385,7 +381,6 @@ set(HDRS
 	
 	#game
 	../serverside/game/game.h
-	../serverside/game/gameTag.h
 	
 	#network
 	../serverside/network/network.h
@@ -396,7 +391,6 @@ set(HDRS
 	
 		#shape
 	../serverside/shape/shape.h
-	../serverside/shape/shapeTag.h
 	
 	#move
 	../serverside/ability/move/move.h
@@ -450,7 +444,6 @@ set(SRCS
 	
 	#game
 	../serverside/game/game.cpp
-	../serverside/game/gameTag.cpp
 
 	#dreamsock
 	../serverside/tdreamsock/dreamSockLog.cpp
@@ -461,7 +454,6 @@ set(SRCS
 	
 	#shape
 	../serverside/shape/shape.cpp
-	../serverside/shape/shapeTag.cpp
 	
 	#move
 	../serverside/ability/move/move.cpp

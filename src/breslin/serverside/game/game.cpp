@@ -26,7 +26,7 @@
 //#include <postgresql/libpq-fe.h>
 
 
-Game::Game(Server* server)
+Game::Game()
 {
 	StartLog();
 
@@ -35,9 +35,6 @@ Game::Game(Server* server)
 #else
 	mRoot = new Ogre::Root("plugins.cfg");
 #endif
-	
-	mServer = server;
-
 	mTickLength = 32;	
 	mFrameTime  = 0;
 	mGameTime   = 0;
@@ -55,6 +52,12 @@ Game::~Game()
 {
         PQfinish(mDBConnection);
 	StopLog();
+	delete mServer;
+}
+
+void Game::createServer()
+{
+	mServer = new Server(this,"", 30004);
 }
 
 void Game::createWorld()

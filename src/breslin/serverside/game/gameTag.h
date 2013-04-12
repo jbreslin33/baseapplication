@@ -10,14 +10,14 @@ class GameTag : public Game
 {
 public:
 
-GameTag(Server* server);
+GameTag();
 ~GameTag();
+
+//server
+virtual void createServer();
 
 //world
 virtual void createWorld();
-
-//
-virtual void checkForEndOfGame();
 
 //collision
 virtual void collision(Shape* shape1, Shape* shape2);
