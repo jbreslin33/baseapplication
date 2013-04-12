@@ -252,7 +252,8 @@ int main(int argc, char **argv)
 
 		//server
 		//game->createServer();
-		server = new Server(game,"",30004);
+		server = new Server("",30004);
+		server->mGame = game;
 		game->mServer = server;
 
 		//world

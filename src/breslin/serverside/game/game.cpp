@@ -55,11 +55,6 @@ Game::~Game()
 	delete mServer;
 }
 
-void Game::createServer()
-{
-	mServer = new Server(this,"", 30004);
-}
-
 void Game::createWorld()
 {
   	for(int i = 0; i < 0; i++)

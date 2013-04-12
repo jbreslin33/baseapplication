@@ -59,8 +59,6 @@ public:
 	Game();
 	~Game();
 
-	//server
-	virtual void createServer();
 
 	//world
 	virtual void createWorld();

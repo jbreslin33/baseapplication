@@ -23,9 +23,8 @@
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
 
-Server::Server(Game* serverSideGame,const char *localIP, int serverPort)
+Server::Server(const char *localIP, int serverPort)
 {
-	mGame = serverSideGame;
 	mLocalIP = localIP;
 	
 	// Store the server IP and port for later use

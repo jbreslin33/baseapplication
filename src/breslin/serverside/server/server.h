@@ -100,7 +100,7 @@ public:
 
 
 public:
-	Server(Game* serverSideGame,const char *localIP, int serverPort);
+	Server(const char *localIP, int serverPort);
 	~Server();
 
 	//port
