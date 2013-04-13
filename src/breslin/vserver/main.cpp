@@ -22,14 +22,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-Game* game;
+//Game* game;
 //Server* server;
 
 int main(int argc, char **argv)
 {
 	StartLog();
 
-	game = new Game();
+	Game* game = new Game();
 
 	Server* server = new Server("",30004);
 	server->mGame = game;
