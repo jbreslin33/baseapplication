@@ -47,20 +47,6 @@ Game::~Game()
 	delete mServer;
 }
 
-void Game::createWorld()
-{
-  	for(int i = 0; i < 0; i++)
-        {
-                Vector3D* position = new Vector3D();
-                position->x = 1.5f * i;
-                position->y = 0.0f;
-                position->z = 1.5f * i;
-
-                Shape* shape = new Shape(getOpenIndex(),this,0,position,new Vector3D(),new Vector3D(),
-                        mRoot,true,true,.66f,1,true);
-	}
-}
-
 //you should call this from server processUpdate
 void Game::processUpdate(int msec)
 {

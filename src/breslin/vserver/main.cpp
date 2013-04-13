@@ -35,9 +35,6 @@ int main(int argc, char **argv)
 	server->mGame = game;
 	game->mServer = server;
 
-	//world
-	game->createWorld();
-
 	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
 

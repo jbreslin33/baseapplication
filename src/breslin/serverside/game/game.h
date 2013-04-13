@@ -59,10 +59,6 @@ public:
 	Game();
 	~Game();
 
-
-	//world
-	virtual void createWorld();
-
 	//index
 	unsigned int getOpenIndex ();
 	Vector3D* getOpenPoint    ();
