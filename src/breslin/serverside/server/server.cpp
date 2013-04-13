@@ -45,7 +45,7 @@ Server::~Server()
 
 void Server::processUpdate(int msec)
 {
-
+	mGame->processUpdate(msec);
 }
 
 void Server::addClient(Client* client)
