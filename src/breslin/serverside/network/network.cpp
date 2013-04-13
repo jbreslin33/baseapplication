@@ -25,13 +25,6 @@
 #include <string>
 using namespace std;
 
-Network::Network()
-{
-	mClient = NULL;
-	mDreamLinuxSock = new DreamLinuxSock();
-	mSocket = 0;
-}
-
 Network::Network(Client* client, const char netInterface[32], int port)
 {
 	mClient = client;
