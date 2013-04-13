@@ -18,19 +18,10 @@ cmake_minimum_required(VERSION 2.6)
  
 project(Server)
  
-if(WIN32)
-	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
-	set(OGRE_SAMPLES_INCLUDEPATH
-		$ENV{OGRE_HOME}/Samples/include
-	)
-endif(WIN32)
- 
-if(UNIX)
 	set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
 	set(OGRE_SAMPLES_INCLUDEPATH
 		/usr/local/share/OGRE/samples/Common/include/
 	)
-endif(UNIX)
 
 #POSTGRES..........................................
 #
@@ -102,11 +93,6 @@ set(PostgreSQL_KNOWN_VERSIONS ${PostgreSQL_ADDITIONAL_VERSIONS}
     "9.1" "9.0" "8.4" "8.3" "8.2" "8.1" "8.0")
 
 # Define additional search paths for root directories.
-if ( WIN32 )
-  foreach (suffix ${PostgreSQL_KNOWN_VERSIONS} )
-    set(PostgreSQL_ADDITIONAL_SEARCH_PATHS ${PostgreSQL_ADDITIONAL_SEARCH_PATHS} "C:/Program Files/PostgreSQL/${suffix}" )
-  endforeach()
-endif()
 set( PostgreSQL_ROOT_DIRECTORIES
    ENV PostgreSQL_ROOT
    ${PostgreSQL_ROOT}
@@ -194,8 +180,6 @@ mark_as_advanced(PostgreSQL_INCLUDE_DIR PostgreSQL_TYPE_INCLUDE_DIR PostgreSQL_L
 #END POSTGRES
 
 # link the libraries to the executable
-
-
  
 if (CMAKE_BUILD_TYPE STREQUAL "")
   # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
@@ -249,128 +233,7 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	add_definitions(-DBOOST_ALL_NO_LIB)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
-if (WIN32)
-set(HDRS
 
-	#main
-	./main.h
-	
-	#ability
-	../serverside/ability/ability.h
-	
-	#game
-	../serverside/game/game.h
-
-	#tdreamsock
-	../serverside/tdreamsock/dreamSockLog.h
-	../serverside/tdreamsock/dreamWinSock.h
-	
-	#network
-	../serverside/network/network.h
-	
-	#shape
-	../serverside/shape/shape.h
-		
-	#move
-	../serverside/ability/move/move.h
-	../serverside/ability/move/move.h
-	
-	#move states
-	../serverside/ability/move/moveStateMachine.h
-	../serverside/ability/move/moveState.h
-	../serverside/ability/move/moveStates.h
-	
-	#ai
-	../serverside/ability/ai/ai.h
-	../serverside/ability/ai/ai.h
-	
-	#ai states
-	../serverside/ability/ai/aiStateMachine.h
-	../serverside/ability/ai/aiState.h
-	../serverside/ability/ai/aiStates.h	
-
-	#rotation
-	../serverside/ability/rotation/rotation.h
-	
-	#rotation states
-	../serverside/ability/rotation/rotationStateMachine.h
-	../serverside/ability/rotation/rotationState.h
-	../serverside/ability/rotation/rotationStates.h	
-	
-	#math
-	../math/vector3D.h
-
-	#bounds
-	../serverside/bounds/bounds.h	
-	
-	#message
-	../serverside/message/message.h
-	
-	#server
-	../serverside/server/server.h
-	
-	#client
-	../serverside/client/client.h
-)
- 
-set(SRCS
-
-	#main
-	./main.cpp
-
-	#ability
-	../serverside/ability/ability.cpp
-
-	#game
-	../serverside/game/game.cpp
-	
-	#dreamsock
-	../serverside/tdreamsock/dreamSockLog.cpp
-	../serverside/tdreamsock/dreamWinSock.cpp
-	
-	#network
-	../serverside/network/network.cpp
-	
-	#shape
-	../serverside/shape/shape.cpp
-	
-	#move
-	../serverside/ability/move/move.cpp
-	
-	#move states
-	../serverside/ability/move/moveStates.cpp
-	
-	#ai
-	../serverside/ability/ai/ai.cpp
-	
-	#ai states
-	../serverside/ability/ai/aiStates.cpp
-	
-	#rotation
-	../serverside/ability/rotation/rotation.cpp
-	
-	#rotation states
-	../serverside/ability/rotation/rotationStates.cpp
-	
-	#math
-	../math/vector3D.cpp
-	
-	#bounds
-	../serverside/bounds/bounds.cpp	
-	
-	#message
-	../serverside/message/message.cpp
-	
-	#server
-	../serverside/server/server.cpp
-	
-	#client
-	../serverside/client/client.cpp
-
-)
-endif (WIN32)
-
-if (UNIX)
 set(HDRS
 	
 	#main
@@ -489,7 +352,6 @@ set(SRCS
 	../serverside/client/client.cpp
 
 )
-endif (UNIX)
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}
 	${OGRE_SAMPLES_INCLUDEPATH}
@@ -505,88 +367,19 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/media)
  
 # post-build copy for win32
-if(WIN32 AND NOT MINGW)
-	add_custom_command( TARGET Server PRE_BUILD
-		COMMAND if not exist .\\dist\\bin mkdir .\\dist\\bin )
-	add_custom_command( TARGET Server POST_BUILD
-		COMMAND copy \"$(TargetPath)\" .\\dist\\bin )
-endif(WIN32 AND NOT MINGW)
  
-if(MINGW OR UNIX)
-	set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/dist/bin)
-endif(MINGW OR UNIX)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/dist/bin)
  
-if(WIN32)
- 
-	install(TARGETS Server
-		RUNTIME DESTINATION bin
-		CONFIGURATIONS All)
- 
-	install(FILES ${CMAKE_SOURCE_DIR}/dist/bin/win32/plugins.cfg
-		${CMAKE_SOURCE_DIR}/dist/bin/win32/resources.cfg
-		DESTINATION bin
-		CONFIGURATIONS Release RelWithDebInfo
-	)
- 
-	install(FILES ${CMAKE_SOURCE_DIR}/dist/bin/win32/plugins_d.cfg
-		${CMAKE_SOURCE_DIR}/dist/bin/win32/resources_d.cfg
-		DESTINATION bin
-		CONFIGURATIONS Debug
-	)
- 
-        # NOTE: for the 1.7.1 sdk the OIS dll is called OIS.dll instead of libOIS.dll
-        # so you'll have to change that to make it work with 1.7.1
-	install(FILES ${OGRE_PLUGIN_DIR_REL}/OgreMain.dll
-		${OGRE_PLUGIN_DIR_REL}/RenderSystem_Direct3D9.dll
-		${OGRE_PLUGIN_DIR_REL}/RenderSystem_GL.dll
-		${OGRE_PLUGIN_DIR_REL}/libOIS.dll
-		DESTINATION bin
-		CONFIGURATIONS Release RelWithDebInfo
-	)
- 
-	install(FILES ${OGRE_PLUGIN_DIR_DBG}/OgreMain_d.dll
-		${OGRE_PLUGIN_DIR_DBG}/RenderSystem_Direct3D9_d.dll
-		${OGRE_PLUGIN_DIR_DBG}/RenderSystem_GL_d.dll
-		${OGRE_PLUGIN_DIR_DBG}/libOIS_d.dll
-		DESTINATION bin
-		CONFIGURATIONS Debug
-	)
- 
-   # as of sdk 1.7.2 we need to copy the boost dll's as well
-   # because they're not linked statically (it worked with 1.7.1 though)
-   install(FILES ${Boost_DATE_TIME_LIBRARY_RELEASE}
-      ${Boost_THREAD_LIBRARY_RELEASE}
-      DESTINATION bin
-      CONFIGURATIONS Release RelWithDebInfo
-   )
- 
-   install(FILES ${Boost_DATE_TIME_LIBRARY_DEBUG}
-      ${Boost_THREAD_LIBRARY_DEBUG}
-      DESTINATION bin
-      CONFIGURATIONS Debug
-   )
-endif(WIN32)
- 
-if(UNIX)
- 
-	install(TARGETS Server
-		RUNTIME DESTINATION bin
-		CONFIGURATIONS All)
+install(TARGETS Server
+	RUNTIME DESTINATION bin
+	CONFIGURATIONS All)
   
-	install(FILES ${CMAKE_SOURCE_DIR}/dist/bin/linux/plugins.cfg
-		${CMAKE_SOURCE_DIR}/dist/bin/linux/resources.cfg
-		DESTINATION bin
-		CONFIGURATIONS Release RelWithDebInfo Debug
-	)
+install(FILES ${CMAKE_SOURCE_DIR}/dist/bin/linux/plugins.cfg
+	${CMAKE_SOURCE_DIR}/dist/bin/linux/resources.cfg
+	DESTINATION bin
+	CONFIGURATIONS Release RelWithDebInfo Debug
+)
  
-endif(UNIX)
 
-if(WIN32)
-# Need to link this for timeGetTime windows function.
-target_link_libraries (Server winmm) 
-endif(WIN32)
-
-if(UNIX)
 #need this to link to postgresql 
 target_link_libraries (Server pq) 
-endif(UNIX)
