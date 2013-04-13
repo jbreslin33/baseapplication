@@ -27,6 +27,8 @@ Game* game;
 
 int main(int argc, char **argv)
 {
+	StartLog();
+
 	game = new Game();
 
 	Server* server = new Server("",30004);

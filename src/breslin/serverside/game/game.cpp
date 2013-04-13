@@ -25,8 +25,6 @@
 
 Game::Game()
 {
-	StartLog();
-
 #ifdef _DEBUG
 	mRoot = new Ogre::Root("plugins_d.cfg");
 #else
