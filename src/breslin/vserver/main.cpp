@@ -1,19 +1,6 @@
-#ifdef WIN32
-#ifndef _WINSOCKAPI_
-#define _WINSOCKAPI_
-#endif
-
 #include <stdio.h>
 #include <string.h>
 
-#include <windows.h>
-
-#endif
-
-#ifdef WIN32
-#include <shellapi.h>
-
-#else
 #include <signal.h>
 #include <syslog.h>
 #include <errno.h>
@@ -23,7 +10,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
-#endif
 
 //possible games
 #include "../serverside/game/game.h"
@@ -39,128 +25,6 @@
 Game* game;
 Server* server;
 
-#ifdef WIN32
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
-LRESULT CALLBACK WindowProc(HWND WindowhWnd, UINT Message, WPARAM wParam, LPARAM lParam)
-{
-	// Process Messages
-	switch(Message)
-	{
-	case WM_CREATE:
-		break;
-
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-
-	default:
-		break;
-	}
-
-	return DefWindowProc(WindowhWnd, Message, wParam, lParam);
-}
-
-//-----------------------------------------------------------------------------
-// Name: WinMain()
-// Desc: Windows app start position
-//-----------------------------------------------------------------------------
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
-{
-	WNDCLASS WinClass;
-
-	WinClass.style			= 0;
-	WinClass.lpfnWndProc	= WindowProc;
-	WinClass.cbClsExtra		= 0;
-	WinClass.cbWndExtra		= 0;
-	WinClass.hInstance		= hInstance;
-	WinClass.hIcon			= LoadIcon(NULL, IDI_APPLICATION);
-	WinClass.hCursor		= LoadCursor(NULL, IDC_ARROW);
-	WinClass.hbrBackground	= (HBRUSH) (COLOR_MENU);
-	WinClass.lpszMenuName	= 0;
-	WinClass.lpszClassName	= "WINCLASS1";
-
-	if(!RegisterClass(&WinClass))
-		return 0;
-
-	HWND hwnd = CreateWindow(WinClass.lpszClassName,
-						"dreamSock server",
-						WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-						320,
-						240,
-						320, 240,
-						NULL,
-						NULL,
-						hInstance,
-						NULL);
-
-	ShowWindow(hwnd, SW_HIDE);
-	StartLogConsole();
-	const char* cmdLine = lpCmdLine;
-	const char* aGame    = "1";
-
-	if (strcmp (cmdLine,aGame) == 0)
-	{
-		game = new Game();
-
-		//server
-		game->createServer();
-
-		//world
-		game->createWorld();
-	}
-
-	MSG WinMsg;
-	bool done = false;
-	int time, oldTime, newTime;
-
-	// first peek the message without removing it
-	PeekMessage(&WinMsg, hwnd, 0, 0, PM_NOREMOVE);
-	oldTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
-
-	try
-	{
-		while(!done)
-		{
-			while (PeekMessage(&WinMsg, NULL, 0, 0, PM_NOREMOVE))
-			{
-				if(!GetMessage(&WinMsg, NULL, 0, 0))
-				{
-					game->mServer->mNetwork->dreamSock_Shutdown();
-
-					done = true;
-				}
-				TranslateMessage(&WinMsg);
-   				DispatchMessage(&WinMsg);
-			}
-			do
-			{
-				newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
-				time = newTime - oldTime;
-			} while (time < 1);
-			game->frame(time);
-			oldTime = newTime;
-		}
-	}
-	catch(...)
-	{
-		LogString("Unknown Exception caught in main loop");
-		game->mServer->mNetwork->dreamSock_Shutdown();
-		MessageBox(NULL, "Unknown Exception caught in main loop", "Error", MB_OK | MB_TASKMODAL);
-		return -1;
-	}
-	return WinMsg.wParam;
-}
-
-#else
-
-//-----------------------------------------------------------------------------
-// Name: main()
-// Desc: UNIX app start position
-//-----------------------------------------------------------------------------
 int main(int argc, char **argv)
 {
 	game = new Game();
@@ -205,5 +69,3 @@ int main(int argc, char **argv)
 	game->mServer->mNetwork->dreamSock_Shutdown();
 	return 0;
 }
-
-#endif
