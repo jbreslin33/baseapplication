@@ -3,9 +3,6 @@
 #include "../message/message.h"
 #include "../tdreamsock/dreamSockLog.h"
 
-#ifdef WIN32
-#include "../tdreamsock/dreamWinSock.h"
-#else
 #include <stdio.h>
 #include <memory.h>
 #include <malloc.h>
@@ -20,9 +17,7 @@
 #include <arpa/inet.h>
 #include <pthread.h>
 #include <signal.h>
-
 #include "../tdreamsock/dreamLinuxSock.h"
-#endif
 
 #include "../client/client.h"
 
@@ -32,28 +27,16 @@ using namespace std;
 
 Network::Network()
 {
-
 	mClient = NULL;
-#ifdef WIN32
-	mDreamWinSock = new DreamWinSock();
-#else
 	mDreamLinuxSock = new DreamLinuxSock();
-#endif
-
 	mSocket = 0;
 }
 
 Network::Network(Client* client, const char netInterface[32], int port)
 {
 	mClient = client;
-#ifdef WIN32
-	mDreamWinSock = new DreamWinSock();
-#else
 	mDreamLinuxSock = new DreamLinuxSock();
-#endif
-
 	mSocket = dreamSock_OpenUDPSocket(netInterface, port);
-
 
 	if(mSocket == DREAMSOCK_INVALID_SOCKET)
 	{
@@ -65,14 +48,9 @@ Network::Network(Client* client, const char netInterface[32], int port)
 Network::Network(const char netInterface[32], int port)
 {
 	mClient = NULL;
-#ifdef WIN32
-	mDreamWinSock = new DreamWinSock();
-#else
 	mDreamLinuxSock = new DreamLinuxSock();
-#endif
 
 	mSocket = dreamSock_OpenUDPSocket(netInterface, port);
-
 
 	if(mSocket == DREAMSOCK_INVALID_SOCKET)
 	{
@@ -88,12 +66,6 @@ Network::~Network()
 void Network::dreamSock_Shutdown(void)
 {
 	LogString("Shutting down dreamSock");
-	
-
-
-#ifdef WIN32
-	WSACleanup();
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -122,15 +94,7 @@ SOCKET Network::dreamSock_Socket(int protocol)
 	if((sock = socket(AF_INET, type, proto)) == -1)
 	{
 		LogString("dreamSock_Socket - socket() failed");
-
-#ifdef WIN32
-		errno = WSAGetLastError();
-		size_t t = 256;
-		LogString("Error: socket() code %d : %s", errno, strerror_s("error",t,errno));
-#else
 		LogString("Error: socket() : %s", strerror(errno));
-#endif
-
 		return DREAMSOCK_INVALID_SOCKET;
 	}
 
@@ -142,11 +106,7 @@ int Network::dreamSock_SetNonBlocking(SOCKET sock, u_long setMode)
 	u_long set = setMode;
 
 	// Set the socket option
-#ifdef WIN32
-	return ioctlsocket(sock, FIONBIO, &set);
-#else
 	return ioctl(sock, FIONBIO, &set);
-#endif
 }
 
 int Network::dreamSock_SetBroadcasting(SOCKET sock, int mode)
@@ -155,15 +115,7 @@ int Network::dreamSock_SetBroadcasting(SOCKET sock, int mode)
 	if(setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (char *) &mode, sizeof(int)) == -1)
 	{
 		LogString("DreamSock_SetBroadcasting failed");
-
-#ifdef WIN32
-		int err = WSAGetLastError();
-		size_t t = 256;
-		LogString("Error code %d: setsockopt() : %s", err, strerror_s("error",t,err));
-#else
 		LogString("Error code %d: setsockopt() : %s", errno, strerror(errno));
-#endif
-
 		return DREAMSOCK_INVALID_SOCKET;
 	}
 
@@ -180,12 +132,8 @@ int Network::dreamSock_StringToSockaddr(const char *addressString, struct sockad
 
 	addressPtr->sin_family = AF_INET;
 	addressPtr->sin_port = htons(0);
-#ifdef WIN32
-	size_t t = 256;
-	strcpy_s(copy,t, addressString);
-#else
 	strcpy(copy,addressString);
-#endif
+	
 	// If the address string begins with a number, assume an IP address
 	if(copy[0] >= '0' && copy[0] <= '9')
 	{
@@ -237,14 +185,7 @@ SOCKET Network::dreamSock_OpenUDPSocket(const char *netInterface, int port)
 	// Bind the address to the socket
 	if(bind(sock, (struct sockaddr *) &address, sizeof(address)) == -1)
 	{
-#ifdef WIN32
-		errno = WSAGetLastError();
-		size_t t = 256;
-		LogString("Error code %d: bind() : %s", errno, strerror_s("error",t,errno));
-#else
 		LogString("Error code %d: bind() : %s", errno, strerror(errno));
-#endif
-
 		return DREAMSOCK_INVALID_SOCKET;
 	}
 
@@ -286,34 +227,13 @@ int Network::dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
 	}
 	if(ret == -1)
 	{
-#ifdef WIN32
-		errno = WSAGetLastError();
-
-		// Silently handle wouldblock
-		if(errno == WSAEWOULDBLOCK)
-			return ret;
-
-		if(errno == WSAEMSGSIZE)
-		{
-			// ERROR: Oversize packet
-
-			return ret;
-		}
-		size_t t = 256;
-if (mClient)
-	if (mClient->mConnectionState == 1)
-		LogString("Error code %d: recvfrom() : %s", errno, strerror_s("error",t,errno));
-#else
 		// Silently handle wouldblock
 		if(errno == EWOULDBLOCK || errno == ECONNREFUSED)
 			return ret;
 
 		LogString("Error code %d: recvfrom() : %s", errno, strerror(errno));
-#endif
-
 		return ret;
 	}
-
 	return ret;
 }
 
@@ -325,21 +245,11 @@ void Network::dreamSock_SendPacket(SOCKET sock, int length, char *data, struct s
 
 	if(ret == -1)
 	{
-#ifdef WIN32
-		errno = WSAGetLastError();
-
-		// Silently handle wouldblock
-		if(errno == WSAEWOULDBLOCK)
-			return;
-		size_t t = 256;
-		LogString("Error code %d: sendto() : %s", errno, strerror_s("error",t,errno));
-#else
 		// Silently handle wouldblock
 		if(errno == EWOULDBLOCK)
 			return;
 
 		LogString("Error code %d: sendto() : %s", errno, strerror(errno));
-#endif
 	}
 }
 
@@ -364,29 +274,15 @@ void Network::dreamSock_Broadcast(SOCKET sock, int length, char *data, int port)
 
 	if(ret == -1)
 	{
-#ifdef WIN32
-		errno = WSAGetLastError();
-
-		// Silently handle wouldblock
-		if(errno == WSAEWOULDBLOCK)
-			return;
-		size_t t = 256;
-		LogString("Error code %d: sendto() : %s", errno, strerror_s("error",t,errno));
-#else
 		// Silently handle wouldblock
 		if(errno == EWOULDBLOCK)
 			return;
 
 		LogString("Error code %d: sendto() : %s", errno, strerror(errno));
-#endif
 	}
 }
 
 int Network::dreamSock_GetCurrentSystemTime(void)
 {
-#ifndef WIN32
 	return mDreamLinuxSock->dreamSock_Linux_GetCurrentSystemTime();
-#else
-	return mDreamWinSock->dreamSock_Win_GetCurrentSystemTime();
-#endif
 }
