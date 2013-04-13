@@ -27,7 +27,6 @@ using namespace std;
 
 Network::Network(Client* client, const char netInterface[32], int port)
 {
-	mClient = client;
 	mDreamLinuxSock = new DreamLinuxSock();
 	mSocket = dreamSock_OpenUDPSocket(netInterface, port);
 
@@ -40,7 +39,6 @@ Network::Network(Client* client, const char netInterface[32], int port)
 
 Network::Network(const char netInterface[32], int port)
 {
-	mClient = NULL;
 	mDreamLinuxSock = new DreamLinuxSock();
 
 	mSocket = dreamSock_OpenUDPSocket(netInterface, port);
