@@ -56,6 +56,5 @@ int dreamSock_GetCurrentSystemTime(void);
 
 SOCKET mSocket;
 
-Client* mClient;
 };
 #endif
