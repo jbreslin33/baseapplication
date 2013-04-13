@@ -40,7 +40,7 @@ Server::Server(const char *localIP, int serverPort)
 Server::~Server()
 {
 	mClientVector.empty();
-	mNetwork->dreamSock_CloseSocket(mNetwork->mSocket);
+	mNetwork->closeSocket(mNetwork->mSocket);
 }
 
 void Server::addClient(Client* client)
@@ -80,7 +80,7 @@ int Server::getPacket(char *data, struct sockaddr *from)
 	Message mes;
 	mes.Init(data, sizeof(data));
 
-	ret = mNetwork->dreamSock_GetPacket(mNetwork->mSocket, mes.data, from);
+	ret = mNetwork->getPacket(mNetwork->mSocket, mes.data, from);
 
 	if(ret <= 0)
 	{	
@@ -241,7 +241,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				client = mClientVector.at(i);
-				client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
+				client->mLastMessageTime = mNetwork->getCurrentSystemTime();
                                 mGame->readDeltaMoveCommand(mes,client);
 				// Wait for one message before setting state to connected
                                 if(client->mConnectionState == DREAMSOCK_CONNECTING)
@@ -261,7 +261,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
 				client = mClientVector.at(i);
-				client->mLastMessageTime = mNetwork->dreamSock_GetCurrentSystemTime();
+				client->mLastMessageTime = mNetwork->getCurrentSystemTime();
                                 mGame->readDeltaMoveCommand(mes,client);
   				// Wait for one message before setting state to connected
         			if(client->mConnectionState == DREAMSOCK_CONNECTING)
@@ -306,7 +306,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 int Server::checkForTimeout()
 {
-	int currentTime = mNetwork->dreamSock_GetCurrentSystemTime();
+	int currentTime = mNetwork->getCurrentSystemTime();
 
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{

@@ -35,21 +35,19 @@ Network(const char netInterface[32], int port);
 DreamLinuxSock* mDreamLinuxSock;
 
 // Function prototypes
-void dreamSock_Shutdown(void);
-SOCKET dreamSock_Socket(int protocol);
-int dreamSock_SetNonBlocking(SOCKET sock, u_long setMode);
-int dreamSock_SetBroadcasting(SOCKET sock, int mode);
-int dreamSock_StringToSockaddr(const char *addressString, struct sockaddr *sadr);
-SOCKET dreamSock_OpenUDPSocket(const char netInterface[32], int port);
-void dreamSock_CloseSocket(SOCKET sock);
+void shutdown();
+SOCKET createSocket(int protocol);
+int setNonBlocking(SOCKET sock, u_long setMode);
+int setBroadcasting(SOCKET sock, int mode);
+int stringToSockaddr(const char *addressString, struct sockaddr *sadr);
+SOCKET openUDPSocket(const char netInterface[32], int port);
+void closeSocket(SOCKET sock);
 
-int dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from);
-void dreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr);
-void dreamSock_Broadcast(SOCKET sock, int length, char *data, int port);
+int getPacket(SOCKET sock, char *data, struct sockaddr *from);
+void sendPacket(SOCKET sock, int length, char *data, struct sockaddr addr);
+void broadcast(SOCKET sock, int length, char *data, int port);
 
-int dreamSock_Linux_GetCurrentSystemTime(void);
-
-int dreamSock_GetCurrentSystemTime(void);
+int getCurrentSystemTime();
 
 SOCKET mSocket;
 

@@ -7,7 +7,7 @@ public:
 	DreamLinuxSock();
 	~DreamLinuxSock();
 
-int dreamSock_Linux_GetCurrentSystemTime(void);
+int getCurrentSystemTime(void);
 
 };
 #endif

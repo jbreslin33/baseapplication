@@ -29,7 +29,7 @@ Network::Network(const char netInterface[32], int port)
 {
 	mDreamLinuxSock = new DreamLinuxSock();
 
-	mSocket = dreamSock_OpenUDPSocket(netInterface, port);
+	mSocket = openUDPSocket(netInterface, port);
 
 	if(mSocket == DREAMSOCK_INVALID_SOCKET)
 	{
@@ -42,7 +42,7 @@ Network::~Network()
 {
 }
 
-void Network::dreamSock_Shutdown(void)
+void Network::shutdown(void)
 {
 	LogString("Shutting down dreamSock");
 }
@@ -51,7 +51,7 @@ void Network::dreamSock_Shutdown(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-SOCKET Network::dreamSock_Socket(int protocol)
+SOCKET Network::createSocket(int protocol)
 {
 	int type;
 	int proto;
@@ -80,7 +80,7 @@ SOCKET Network::dreamSock_Socket(int protocol)
 	return sock;
 }
 
-int Network::dreamSock_SetNonBlocking(SOCKET sock, u_long setMode)
+int Network::setNonBlocking(SOCKET sock, u_long setMode)
 {
 	u_long set = setMode;
 
@@ -88,7 +88,7 @@ int Network::dreamSock_SetNonBlocking(SOCKET sock, u_long setMode)
 	return ioctl(sock, FIONBIO, &set);
 }
 
-int Network::dreamSock_SetBroadcasting(SOCKET sock, int mode)
+int Network::setBroadcasting(SOCKET sock, int mode)
 {
 	// make it broadcast capable
 	if(setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (char *) &mode, sizeof(int)) == -1)
@@ -101,7 +101,7 @@ int Network::dreamSock_SetBroadcasting(SOCKET sock, int mode)
 	return 0;
 }
 
-int Network::dreamSock_StringToSockaddr(const char *addressString, struct sockaddr *sadr)
+int Network::stringToSockaddr(const char *addressString, struct sockaddr *sadr)
 {
 	char copy[128];
 
@@ -122,19 +122,19 @@ int Network::dreamSock_StringToSockaddr(const char *addressString, struct sockad
 	else return 1;
 }
 
-SOCKET Network::dreamSock_OpenUDPSocket(const char *netInterface, int port)
+SOCKET Network::openUDPSocket(const char *netInterface, int port)
 {
 	SOCKET sock;
 
 	struct sockaddr_in address;
 
-	sock = dreamSock_Socket(DREAMSOCK_UDP);
+	sock = createSocket(DREAMSOCK_UDP);
 
 	if(sock == DREAMSOCK_INVALID_SOCKET)
 		return sock;
 
-	dreamSock_SetNonBlocking(sock, 1);
-	dreamSock_SetBroadcasting(sock, 1);
+	setNonBlocking(sock, 1);
+	setBroadcasting(sock, 1);
 
 	// If no address string provided, use any interface available
 	if(!netInterface || !netInterface[0] || !strcmp(netInterface, "localhost"))
@@ -145,7 +145,7 @@ SOCKET Network::dreamSock_OpenUDPSocket(const char *netInterface, int port)
 	else
 	{
 		LogString("Using net interface = '%s'", netInterface);
-		dreamSock_StringToSockaddr(netInterface, (struct sockaddr *) &address);
+		stringToSockaddr(netInterface, (struct sockaddr *) &address);
 	}
 
 	// If no port number provided, use any port number available
@@ -177,7 +177,7 @@ SOCKET Network::dreamSock_OpenUDPSocket(const char *netInterface, int port)
 	return sock;
 }
 
-void Network::dreamSock_CloseSocket(SOCKET sock)
+void Network::closeSocket(SOCKET sock)
 {
 #ifdef WIN32
 		closesocket(sock);
@@ -186,7 +186,7 @@ void Network::dreamSock_CloseSocket(SOCKET sock)
 #endif
 }
 
-int Network::dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
+int Network::getPacket(SOCKET sock, char *data, struct sockaddr *from)
 {
 	int ret;
 	struct sockaddr tempFrom;
@@ -216,7 +216,7 @@ int Network::dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
 	return ret;
 }
 
-void Network::dreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr)
+void Network::sendPacket(SOCKET sock, int length, char *data, struct sockaddr addr)
 {
 	int	ret;
 	
@@ -232,7 +232,7 @@ void Network::dreamSock_SendPacket(SOCKET sock, int length, char *data, struct s
 	}
 }
 
-void Network::dreamSock_Broadcast(SOCKET sock, int length, char *data, int port)
+void Network::broadcast(SOCKET sock, int length, char *data, int port)
 {
 	struct sockaddr_in servaddr;
 	socklen_t len;
@@ -261,7 +261,7 @@ void Network::dreamSock_Broadcast(SOCKET sock, int length, char *data, int port)
 	}
 }
 
-int Network::dreamSock_GetCurrentSystemTime(void)
+int Network::getCurrentSystemTime()
 {
-	return mDreamLinuxSock->dreamSock_Linux_GetCurrentSystemTime();
+	return mDreamLinuxSock->getCurrentSystemTime();
 }

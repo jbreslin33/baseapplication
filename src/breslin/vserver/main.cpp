@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 
 	int time, oldTime, newTime;
 
-	oldTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
+	oldTime = game->mServer->mNetwork->getCurrentSystemTime();
 
 	// App main loop
 	try
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 		{
 			do
 			{
-				newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
+				newTime = game->mServer->mNetwork->getCurrentSystemTime();
 				time = newTime - oldTime;
 			} while (time < 1);
 			game->frame(time);
@@ -61,11 +61,11 @@ int main(int argc, char **argv)
 	}
 	catch(...)
 	{
-		game->mServer->mNetwork->dreamSock_Shutdown();
+		game->mServer->mNetwork->shutdown();
 		LogString("Unknown Exception caught in main loop");
 		return -1;
 	}
 	LogString("Shutting down everything");
-	game->mServer->mNetwork->dreamSock_Shutdown();
+	game->mServer->mNetwork->shutdown();
 	return 0;
 }

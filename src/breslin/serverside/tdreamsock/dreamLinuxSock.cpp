@@ -1,8 +1,4 @@
-
-
 // Unix code only
-#ifndef WIN32
-
 #include "dreamLinuxSock.h"
 
 #include <stdio.h>
@@ -28,7 +24,8 @@ DreamLinuxSock::DreamLinuxSock()
 DreamLinuxSock::~DreamLinuxSock()
 {
 }
-int DreamLinuxSock::dreamSock_Linux_GetCurrentSystemTime(void)
+
+int DreamLinuxSock::getCurrentSystemTime(void)
 {
 	struct timeval tp;
 	struct timezone tzp;
@@ -45,4 +42,3 @@ int DreamLinuxSock::dreamSock_Linux_GetCurrentSystemTime(void)
 	return (tp.tv_sec - basetime) * 1000 + tp.tv_usec / 1000;
 }
 
-#endif
