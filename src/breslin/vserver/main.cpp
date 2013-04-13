@@ -179,65 +179,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 #else
 
 //-----------------------------------------------------------------------------
-// Name: daemonInit()
-// Desc: Initialize UNIX daemon
-//-----------------------------------------------------------------------------
-static int daemonInit(void)
-{
-	printf("Running daemon...\n\n");
-
-	runningDaemon = 1;
-
-	pid_t pid;
-
-	if((pid = fork()) < 0)
-	{
-		return -1;
-	}
-	else if(pid != 0)
-	{
-		exit(0);
-	}
-
-	setsid();
-
-	umask(0);
-
-	close(1);
-	close(2);
-	close(3);
-
-	return 0;
-}
-
-//-----------------------------------------------------------------------------
-// Name: keyPress()
-// Desc: Check for a keypress
-//-----------------------------------------------------------------------------
-int keyPress(void)
-{
-	static char keypressed;
-	struct timeval waittime;
-	int num_chars_read;
-	fd_set mask;
-//	struct fd_set mask;
-	FD_SET(0, &mask);
-
-	waittime.tv_sec = 0;
-	waittime.tv_usec = 0;
-
-	if(select(1, &mask, 0, 0, &waittime))
-	{
-		num_chars_read = read(0, &keypressed, 1);
-
-		if(num_chars_read == 1) 
-			return ((int) keypressed);
-	}
-
-	return (-1);
-}
-
-//-----------------------------------------------------------------------------
 // Name: main()
 // Desc: UNIX app start position
 //-----------------------------------------------------------------------------
@@ -263,7 +204,7 @@ int main(int argc, char **argv)
 	try
 	{
 		// Keep server alive (wait for keypress to kill it)
-		while(keyPress() == -1)
+		while(true)
 		{
 			do
 			{
