@@ -22,16 +22,13 @@ typedef int SOCKET;
 #define DREAMSOCK_TCP					0
 #define DREAMSOCK_UDP					1
 
-	#define DREAMSOCK_INVALID_SOCKET	-1
+#define DREAMSOCK_INVALID_SOCKET	-1
 
 class DreamLinuxSock;
-
-class Client;
 
 class Network 
 {
 public:
-Network(Client* client,const char netInterface[32], int port);
 Network(const char netInterface[32], int port);
 ~Network();
 

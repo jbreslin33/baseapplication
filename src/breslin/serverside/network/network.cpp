@@ -25,18 +25,6 @@
 #include <string>
 using namespace std;
 
-Network::Network(Client* client, const char netInterface[32], int port)
-{
-	mDreamLinuxSock = new DreamLinuxSock();
-	mSocket = dreamSock_OpenUDPSocket(netInterface, port);
-
-	if(mSocket == DREAMSOCK_INVALID_SOCKET)
-	{
-		//return DREAMSOCK_SERVER_ERROR;
-		LogString("ERROR IN CONSTRUCTOR OF SERVER, INVALID SOCKET");
-	}
-}
-
 Network::Network(const char netInterface[32], int port)
 {
 	mDreamLinuxSock = new DreamLinuxSock();
