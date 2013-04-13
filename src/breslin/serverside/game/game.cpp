@@ -21,10 +21,7 @@
 //bounds
 #include "../bounds/bounds.h"
 
-//postgresql
 #include <stdio.h>
-//#include <postgresql/libpq-fe.h>
-
 
 Game::Game()
 {
@@ -44,13 +41,10 @@ Game::Game()
 	mOutgoingSequence = 1;
 
 	mBounds = new Bounds();
-
-	mDBConnection = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");	
 }
 
 Game::~Game()
 {
-        PQfinish(mDBConnection);
 	StopLog();
 	delete mServer;
 }
