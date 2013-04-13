@@ -285,6 +285,7 @@ int main(int argc, char **argv)
 	// App main loop
 	try
 	{
+/*
 		if(runningDaemon)
 		{
 			// Keep server alive
@@ -302,6 +303,7 @@ int main(int argc, char **argv)
 		}
 		else
 		{
+*/
 			// Keep server alive (wait for keypress to kill it)
 			while(keyPress() == -1)
 			{
@@ -314,7 +316,7 @@ int main(int argc, char **argv)
 
 				oldTime = newTime;
 			}
-		}
+//		}
 	}
 	catch(...)
 	{
