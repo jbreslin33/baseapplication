@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 				newTime = game->mServer->mNetwork->getCurrentSystemTime();
 				time = newTime - oldTime;
 			} while (time < 1);
-			game->frame(time);
+			game->processUpdate(time);
 
 			oldTime = newTime;
 		}

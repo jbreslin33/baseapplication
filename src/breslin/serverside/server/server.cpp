@@ -43,10 +43,17 @@ Server::~Server()
 	mNetwork->closeSocket(mNetwork->mSocket);
 }
 
+void Server::processUpdate(int msec)
+{
+
+}
+
 void Server::addClient(Client* client)
 {
 	mClientVector.push_back(client);
 }
+
+
 /*******************************************************
 		PACKETS
 ********************************************************/

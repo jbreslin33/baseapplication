@@ -103,6 +103,9 @@ public:
 	Server(const char *localIP, int serverPort);
 	~Server();
 
+	//update
+	void processUpdate(int msec);
+
 	//port
 	int getPort() { return mPort; }
 

@@ -61,7 +61,8 @@ void Game::createWorld()
 	}
 }
 
-void Game::frame(int msec)
+//you should call this from server processUpdate
+void Game::processUpdate(int msec)
 {
 	mFrameTime += msec;
 	mGameTime += msec;
