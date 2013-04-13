@@ -36,14 +36,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// WIN32 only
-#ifdef WIN32
-
-// UNIX only
-#else
-int runningDaemon;
-#endif
-
 Game* game;
 Server* server;
 
@@ -106,11 +98,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 						NULL);
 
 	ShowWindow(hwnd, SW_HIDE);
-
 	StartLogConsole();
-
 	const char* cmdLine = lpCmdLine;
-
 	const char* aGame    = "1";
 
 	if (strcmp (cmdLine,aGame) == 0)
@@ -130,7 +119,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	// first peek the message without removing it
 	PeekMessage(&WinMsg, hwnd, 0, 0, PM_NOREMOVE);
-
 	oldTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
 
 	try
@@ -145,34 +133,25 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 					done = true;
 				}
-
 				TranslateMessage(&WinMsg);
    				DispatchMessage(&WinMsg);
 			}
-
 			do
 			{
 				newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
 				time = newTime - oldTime;
 			} while (time < 1);
-			
 			game->frame(time);
-			
-
 			oldTime = newTime;
 		}
 	}
 	catch(...)
 	{
 		LogString("Unknown Exception caught in main loop");
-
 		game->mServer->mNetwork->dreamSock_Shutdown();
-
 		MessageBox(NULL, "Unknown Exception caught in main loop", "Error", MB_OK | MB_TASKMODAL);
-
 		return -1;
 	}
-
 	return WinMsg.wParam;
 }
 
