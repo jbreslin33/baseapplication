@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 
 	int time, oldTime, newTime;
 
-	oldTime = game->mServer->mNetwork->getCurrentSystemTime();
+	oldTime = server->mNetwork->getCurrentSystemTime();
 
 	// App main loop
 	try
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 		{
 			do
 			{
-				newTime = game->mServer->mNetwork->getCurrentSystemTime();
+				newTime = server->mNetwork->getCurrentSystemTime();
 				time = newTime - oldTime;
 			} while (time < 1);
 			server->processUpdate(time);
@@ -63,11 +63,11 @@ int main(int argc, char **argv)
 	}
 	catch(...)
 	{
-		game->mServer->mNetwork->shutdown();
+		server->mNetwork->shutdown();
 		LogString("Unknown Exception caught in main loop");
 		return -1;
 	}
 	LogString("Shutting down everything");
-	game->mServer->mNetwork->shutdown();
+	server->mNetwork->shutdown();
 	return 0;
 }
