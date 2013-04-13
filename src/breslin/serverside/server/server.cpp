@@ -45,6 +45,7 @@ Server::~Server()
 
 void Server::processUpdate(int msec)
 {
+	readPackets();
 	mGame->processUpdate(msec);
 }
 

@@ -53,8 +53,6 @@ void Game::processUpdate(int msec)
 	mFrameTime += msec;
 	mGameTime += msec;
 	
-	mServer->readPackets();
-
 	//this is where they want to move
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
