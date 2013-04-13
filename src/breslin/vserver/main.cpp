@@ -243,96 +243,46 @@ int keyPress(void)
 //-----------------------------------------------------------------------------
 int main(int argc, char **argv)
 {
+	game = new Game();
 
-	const char* aGame    = "1";
+	server = new Server("",30004);
+	server->mGame = game;
+	game->mServer = server;
 
-	if (strcmp (argv[1],aGame) == 0)
-	{
-		game = new Game();
+	//world
+	game->createWorld();
 
-		//server
-		//game->createServer();
-		server = new Server("",30004);
-		server->mGame = game;
-		game->mServer = server;
-
-		//world
-		game->createWorld();
-	}
-
-	LogString("Linux Learning Game Server");
-	LogString("-------------------------------\n");
-
-
-/*
-	if(argc > 1)
-	{
-		if(strcmp(argv[1], "-daemon") == 0)
-		{
-			daemonInit();
-		}
-	}
-*/
-	// Ignore the SIGPIPE signal, so the program does not terminate if the
-	// pipe gets broken
+	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
 
 	int time, oldTime, newTime;
 
 	oldTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
-	LogString("Server time began at:%d",oldTime);
 
 	// App main loop
 	try
 	{
-/*
-		if(runningDaemon)
+		// Keep server alive (wait for keypress to kill it)
+		while(keyPress() == -1)
 		{
-			// Keep server alive
-			while(1)
+			do
 			{
-				do
-				{
-					newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
-					time = newTime - oldTime;
-				} while (time < 1);
+				newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
+				time = newTime - oldTime;
+			} while (time < 1);
+			game->frame(time);
 
-
-				oldTime = newTime;
-			}
+			oldTime = newTime;
 		}
-		else
-		{
-*/
-			// Keep server alive (wait for keypress to kill it)
-			while(keyPress() == -1)
-			{
-				do
-				{
-					newTime = game->mServer->mNetwork->dreamSock_GetCurrentSystemTime();
-					time = newTime - oldTime;
-				} while (time < 1);
-				game->frame(time);
-
-				oldTime = newTime;
-			}
-//		}
 	}
 	catch(...)
 	{
-
 		game->mServer->mNetwork->dreamSock_Shutdown();
-
 		LogString("Unknown Exception caught in main loop");
-
 		return -1;
 	}
-
 	LogString("Shutting down everything");
-
-
 	game->mServer->mNetwork->dreamSock_Shutdown();
-
 	return 0;
 }
 
