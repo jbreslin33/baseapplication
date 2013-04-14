@@ -30,11 +30,6 @@ Game::Game()
 #else
 	mRoot = new Ogre::Root("plugins.cfg");
 #endif
-	mTickLength = 32;	
-	mFrameTime  = 0;
-	mGameTime   = 0;
-	mFrameTimeLast  = 0;
-
 	//sequence
 	mOutgoingSequence = 1;
 
@@ -48,11 +43,8 @@ Game::~Game()
 }
 
 //you should call this from server processUpdate
-void Game::processUpdate(int msec)
+void Game::processUpdate()
 {
-	mFrameTime += msec;
-	mGameTime += msec;
-	
 	//this is where they want to move
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
@@ -62,18 +54,6 @@ void Game::processUpdate(int msec)
 	
 	//this is where they can move..	
 	checkCollisions();
-	
-	// Wait full 32 ms before allowing to send
-	if(mFrameTime < mTickLength)
-	{
-		return;
-	}
-	
-	//send positions and exact frame time the calcs where done on which is mFrameTime 
-	mServer->sendCommand(this);
-
-	mFrameTimeLast = mFrameTime;
-	mFrameTime = 0;
 }
 
 void Game::checkCollisions()

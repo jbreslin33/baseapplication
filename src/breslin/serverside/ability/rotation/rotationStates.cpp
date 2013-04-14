@@ -9,6 +9,9 @@
 //ability
 #include "rotation.h"
 
+//server
+#include "../../server/server.h"
+
 //game
 #include "../../game/game.h"
 
@@ -52,7 +55,7 @@ void Normal_Rotation::execute(Rotation* rotation)
 
 	//actual rotate
 //	LogString("N:%f",rotation->mRotationSpeed);
-	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mGame->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mGame->mServer->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
 
 //rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
 }
@@ -105,7 +108,7 @@ void Accelerate_Rotation::execute(Rotation* rotation)
 
 	//actual rotate
 //	LogString("A:%f",rotation->mRotationSpeed);
-	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mGame->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mGame->mServer->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
 }
 void Accelerate_Rotation::exit(Rotation* rotation)
 {
@@ -156,7 +159,7 @@ void Decelerate_Rotation::execute(Rotation* rotation)
 
 //	LogString("D:%f",rotation->mRotationSpeed);
 	//actual rotate
-	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mGame->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mGame->mServer->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
 
 }
 void Decelerate_Rotation::exit(Rotation* rotation)

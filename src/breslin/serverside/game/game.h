@@ -40,12 +40,6 @@ static const char mMessageServerExit = 3;
 	//bounds
 	Bounds* mBounds;	
 
-	//time
-	int mTickLength;
-	int mFrameTime;
-	int mGameTime;
-	int mFrameTimeLast;
-
 	//shapes
 	std::vector<Shape*> mShapeVector;	//every tangible item in game world..
 
@@ -71,7 +65,7 @@ public:
 	void	readDeltaMoveCommand(Message *mes, Client *client);
 	
 	//time
-	void	processUpdate(int msec);
+	void	processUpdate();
 	
 	//collision detection
 	virtual void checkCollisions();

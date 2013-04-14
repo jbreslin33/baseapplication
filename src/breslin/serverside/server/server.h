@@ -42,6 +42,12 @@ public:
 	//game
 	Game* mGame;
 
+	//time
+	int mTickLength;
+ 	int mFrameTime;
+        int mGameTime;
+        int mFrameTimeLast;
+
 	//network
 	Network* mNetwork;
 

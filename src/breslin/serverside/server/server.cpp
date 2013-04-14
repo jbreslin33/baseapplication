@@ -28,6 +28,11 @@
 
 Server::Server(const char *localIP, int serverPort)
 {
+	mTickLength = 32;
+ 	mFrameTime  = 0;
+        mGameTime   = 0;
+        mFrameTimeLast  = 0;
+
 	mLocalIP = localIP;
 	
 	// Store the server IP and port for later use
@@ -46,10 +51,28 @@ Server::~Server()
 	mNetwork->closeSocket(mNetwork->mSocket);
 }
 
+
+
 void Server::processUpdate(int msec)
 {
+ 	mFrameTime += msec;
+        mGameTime += msec;
+
 	readPackets();
-	mGame->processUpdate(msec);
+
+	mGame->processUpdate();
+
+        // Wait full 32 ms before allowing to send
+        if(mFrameTime < mTickLength)
+        {
+                return;
+        }
+
+        //send positions and exact frame time the calcs where done on which is mFrameTime
+        sendCommand(mGame);
+
+        mFrameTimeLast = mFrameTime;
+        mFrameTime = 0;
 }
 
 void Server::addClient(Client* client)
@@ -475,7 +498,7 @@ void Server::sendCommand(Game* game)
         mMessage.WriteShort(game->mOutgoingSequence);
 
         //frame time
-        mMessage.WriteByte(game->mFrameTime);
+        mMessage.WriteByte(mFrameTime);
 
         //this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
         for (unsigned int j = 0; j < game->mShapeVector.size(); j++)
