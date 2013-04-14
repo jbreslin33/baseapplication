@@ -28,6 +28,10 @@
 
 Server::Server(const char *localIP, int serverPort)
 {
+        //sequence
+        mOutgoingSequence = 1;
+
+	//time
 	mTickLength = 32;
  	mFrameTime  = 0;
         mGameTime   = 0;
@@ -507,7 +511,7 @@ void Server::sendCommand(Game* game)
         //start filling said mMessage that belongs to client
         mMessage.WriteByte(mMessageFrame);                    // type
 
-        mMessage.WriteShort(game->mOutgoingSequence);
+        mMessage.WriteShort(mOutgoingSequence);
 
         //frame time
         mMessage.WriteByte(mFrameTime);

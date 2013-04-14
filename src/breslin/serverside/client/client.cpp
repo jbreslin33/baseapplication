@@ -393,7 +393,7 @@ void Client::SendPacket(Message *theMes)
 
 	if(type > 0)
 	{
-		mServer->mGame->mOutgoingSequence++;
+		mServer->mOutgoingSequence++;
 	}
 }
 

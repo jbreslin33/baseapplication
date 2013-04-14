@@ -30,8 +30,6 @@ Game::Game()
 #else
 	mRoot = new Ogre::Root("plugins.cfg");
 #endif
-	//sequence
-	mOutgoingSequence = 1;
 
 	mBounds = new Bounds();
 }
@@ -132,7 +130,7 @@ void Game::sendExitNotification()
 			sizeof(mServer->mMessage.outgoingData));
 
 		mServer->mMessage.WriteByte(mMessageServerExit);	// type
-		mServer->mMessage.WriteShort(mOutgoingSequence);
+		mServer->mMessage.WriteShort(mServer->mOutgoingSequence);
 	}
 
 	mServer->sendPackets();

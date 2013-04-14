@@ -50,6 +50,9 @@ public:
  	int mFrameTime;
         int mGameTime;
         int mFrameTimeLast;
+ 	
+	//sequence
+        signed short    mOutgoingSequence;
 
 	//network
 	Network* mNetwork;

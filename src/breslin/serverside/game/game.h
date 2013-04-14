@@ -43,9 +43,6 @@ static const char mMessageServerExit = 3;
 	//shapes
 	std::vector<Shape*> mShapeVector;	//every tangible item in game world..
 
-	//sequence
-	signed short	mOutgoingSequence;
-	
 	//db
      	PGconn* mDBConnection;
 
