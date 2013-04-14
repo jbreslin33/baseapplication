@@ -110,6 +110,8 @@ Client::~Client()
 
 void Client::joinGame(Game* game)
 {
+	mGame = game;
+
 	//let this client know about all shapes
 	if (mClientID > 0)
 	{
@@ -121,7 +123,7 @@ void Client::joinGame(Game* game)
 	}
 
 	//create the shape for this client -- the avatar
-	mShape = new Shape(mServer->mGame->getOpenIndex(),mServer->mGame,this,mServer->mGame->getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f * 30.5,1,false); 
+	mShape = new Shape(mGame->getOpenIndex(),mServer->mGame,this,mServer->mGame->getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mGame->mRoot,true,true,.66f * 30.5,1,false); 
 }
 
 void Client::leaveGame()
