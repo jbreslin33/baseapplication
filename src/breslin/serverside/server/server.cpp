@@ -80,6 +80,11 @@ void Server::addClient(Client* client)
 	mClientVector.push_back(client);
 }
 
+void Server::addGame(Game* game)
+{
+	mGameVector.push_back(game);
+}
+
 
 /*******************************************************
 		PACKETS

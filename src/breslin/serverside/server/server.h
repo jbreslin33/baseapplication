@@ -33,6 +33,9 @@ class Server
 {
 public:
 
+	//games
+	std::vector<Game*> mGameVector;
+
 	//clients
 	std::vector<Client*> mClientVector;
 
@@ -121,6 +124,9 @@ public:
 
 	//timeout
 	int  checkForTimeout();
+
+	//game
+	void addGame(Game* game);
 
 	//client
 	void addClient(Client* client);
