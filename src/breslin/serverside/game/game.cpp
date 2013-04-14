@@ -74,8 +74,6 @@ void Game::processUpdate(int msec)
 
 	mFrameTimeLast = mFrameTime;
 	mFrameTime = 0;
-
-	checkForEndOfGame();
 }
 
 void Game::checkCollisions()
