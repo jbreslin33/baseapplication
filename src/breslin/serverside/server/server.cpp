@@ -60,7 +60,11 @@ void Server::processUpdate(int msec)
 
 	readPackets();
 
-	mGame->processUpdate();
+  	for (unsigned int i = 0; i < mGameVector.size(); i++)
+	{
+		//mGame->processUpdate();
+		mGameVector.at(i)->processUpdate();
+	}
 
         // Wait full 32 ms before allowing to send
         if(mFrameTime < mTickLength)
