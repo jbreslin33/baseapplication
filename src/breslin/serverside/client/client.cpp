@@ -48,6 +48,9 @@ Client::Client(Server* server, struct sockaddr *address)
 	//server
 	mServer = server;
 
+	//game
+	mGame = NULL;
+
 	mLastMessageTime  = 0;
 	mConnectionState  = DREAMSOCK_CONNECTING;
 
@@ -105,7 +108,7 @@ Client::~Client()
 
 //it's only fair to send a remove shape to everybody as well.....
 
-void Client::joinGame()
+void Client::joinGame(Game* game)
 {
 	//let this client know about all shapes
 	if (mClientID > 0)
@@ -123,6 +126,8 @@ void Client::joinGame()
 
 void Client::leaveGame()
 {
+	mGame = NULL;
+
 	//you gotta delete the shape here...and tell everyone about it. i would tell them in shape class
 	if (mShape)
 	{

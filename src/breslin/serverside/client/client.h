@@ -55,7 +55,7 @@
 class Server;
 class Network;
 class Shape;
-
+class Game;
 class Client
 {
 public:
@@ -93,7 +93,7 @@ public:
 	void sendSchools();
 
 	//game
-	void joinGame();
+	void joinGame(Game* game);
 	void leaveGame();
 
 	//connect
@@ -115,9 +115,10 @@ public:
 	void			SetSocketAddress(struct sockaddr *address) { memcpy(&mMyaddress, address, sizeof(struct sockaddr)); }
 
 
-    Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the clients personal avatar..
+    	Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the clients personal avatar..
 
 	Server* mServer;
 
+	Game* mGame;
 };
 #endif

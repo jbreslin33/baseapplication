@@ -175,7 +175,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				client = mClientVector.at(i);
-				client->joinGame(); //now call everything else inside client...
+				client->joinGame(mGameVector.at(0)); //now call everything else inside client...
 			}
 		}
 	}
@@ -188,7 +188,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
                                 client = mClientVector.at(i);
-				client->joinGame();
+				client->joinGame(mGameVector.at(0));
                         }
                 }
 	}
