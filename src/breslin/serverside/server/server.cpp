@@ -287,7 +287,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
 				client = mClientVector.at(i);
 				client->mLastMessageTime = mNetwork->getCurrentSystemTime();
-                                client->mShape->mGame->readDeltaMoveCommand(mes,client);
+                                client->mGame->readDeltaMoveCommand(mes,client);
 				
 				// Wait for one message before setting state to connected
                                 if(client->mConnectionState == DREAMSOCK_CONNECTING)
@@ -308,7 +308,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
 				client = mClientVector.at(i);
 				client->mLastMessageTime = mNetwork->getCurrentSystemTime();
-                                client->mShape->mGame->readDeltaMoveCommand(mes,client);
+                                client->mGame->readDeltaMoveCommand(mes,client);
   				// Wait for one message before setting state to connected
         			if(client->mConnectionState == DREAMSOCK_CONNECTING)
         			{
