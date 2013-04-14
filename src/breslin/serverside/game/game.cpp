@@ -70,7 +70,7 @@ void Game::processUpdate(int msec)
 	}
 	
 	//send positions and exact frame time the calcs where done on which is mFrameTime 
-	sendCommand();
+	mServer->sendCommand(this);
 
 	mFrameTimeLast = mFrameTime;
 	mFrameTime = 0;
@@ -142,45 +142,6 @@ bool Game::checkScope(Client* client, Shape* shape)
 	{
 		return false;
 	}
-}
-
-void Game::sendCommand(void)
-{
-	// Fill messages..for all clients
-	//standard initialize of mMessage for client in this case
-	mServer->mMessage.Init(mServer->mMessage.outgoingData,
-		sizeof(mServer->mMessage.outgoingData));
-
-	//start filling said mMessage that belongs to client
-	mServer->mMessage.WriteByte(mServer->mMessageFrame);			// type
-	
-	mServer->mMessage.WriteShort(mOutgoingSequence);
-
-	//frame time	
-	mServer->mMessage.WriteByte(mFrameTime);
-
-	//this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
-	for (unsigned int j = 0; j < mShapeVector.size(); j++)
-	{                         //the client to send to's message        //the shape command it's about
-		mShapeVector.at(j)->addToMoveMessage(&mServer->mMessage);
-	}
-
-	mServer->sendPackets();
-	
-	// Store the sent command in 
-	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
-	{
-		storeCommands(mServer->mGame->mShapeVector.at(i));
-	}
-}
-
-void Game::storeCommands(Shape* shape)
-{
-	shape->mKeyLast = shape->mKey;
-
-	shape->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
-
-	shape->mRotationLast->copyValuesFrom(shape->mRotation);
 }
 
 //this is the whole shabang server exit not a player or shape exit

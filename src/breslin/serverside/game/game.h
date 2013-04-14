@@ -67,7 +67,6 @@ public:
 	virtual void checkForEndOfGame() { }
 
 	// Network
-	void	sendCommand();
 	void	sendExitNotification();
 	void	readDeltaMoveCommand(Message *mes, Client *client);
 	
@@ -82,8 +81,6 @@ public:
 	//scope
  	bool    checkScope(Client* client, Shape* shape);
 
-	//commands
-	virtual void storeCommands(Shape* shape);
 };
 
 #endif

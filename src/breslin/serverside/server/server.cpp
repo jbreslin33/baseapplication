@@ -19,6 +19,9 @@
 //game
 #include "../game/game.h"
 
+//math
+#include "../../math/vector3D.h"
+
 //postgresql
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
@@ -458,3 +461,44 @@ void Server::readPackets()
 #endif
 	}
 }
+
+void Server::sendCommand(Game* game)
+{
+        // Fill messages..for all clients
+        //standard initialize of mMessage for client in this case
+        mMessage.Init(mMessage.outgoingData,
+                sizeof(mMessage.outgoingData));
+
+        //start filling said mMessage that belongs to client
+        mMessage.WriteByte(mMessageFrame);                    // type
+
+        mMessage.WriteShort(game->mOutgoingSequence);
+
+        //frame time
+        mMessage.WriteByte(game->mFrameTime);
+
+        //this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
+        for (unsigned int j = 0; j < game->mShapeVector.size(); j++)
+        {                         //the client to send to's message        //the shape command it's about
+                game->mShapeVector.at(j)->addToMoveMessage(&mMessage);
+        }
+
+        sendPackets();
+
+        // Store the sent command in
+        for (unsigned int i = 0; i < game->mShapeVector.size(); i++)
+        {
+                storeCommands(game->mShapeVector.at(i));
+        }
+}
+
+void Server::storeCommands(Shape* shape)
+{
+        shape->mKeyLast = shape->mKey;
+
+        shape->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
+
+        shape->mRotationLast->copyValuesFrom(shape->mRotation);
+}
+
+

@@ -128,6 +128,9 @@ public:
 	//db
 	void readDB();
 	
+        //commands
+        void storeCommands(Shape* shape);
+	void sendCommand(Game* game);
 
 
 };
