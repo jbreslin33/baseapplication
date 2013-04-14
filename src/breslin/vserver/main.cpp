@@ -28,6 +28,8 @@ int main(int argc, char **argv)
 
 	Game* game = new Game();
 	Server* server = new Server("",30004);
+	
+	server->addGame(game);
 
 	server->mGame = game;
 	game->mServer = server;
