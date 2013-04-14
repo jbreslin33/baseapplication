@@ -62,7 +62,6 @@ void Server::processUpdate(int msec)
 
   	for (unsigned int i = 0; i < mGameVector.size(); i++)
 	{
-		//mGame->processUpdate();
 		mGameVector.at(i)->processUpdate();
 	}
 
@@ -73,7 +72,10 @@ void Server::processUpdate(int msec)
         }
 
         //send positions and exact frame time the calcs where done on which is mFrameTime
-        sendCommand(mGame);
+ 	for (unsigned int i = 0; i < mGameVector.size(); i++)
+        {
+		sendCommand(mGameVector.at(i));
+	}
 
         mFrameTimeLast = mFrameTime;
         mFrameTime = 0;
@@ -286,6 +288,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				client = mClientVector.at(i);
 				client->mLastMessageTime = mNetwork->getCurrentSystemTime();
                                 client->mShape->mGame->readDeltaMoveCommand(mes,client);
+				
 				// Wait for one message before setting state to connected
                                 if(client->mConnectionState == DREAMSOCK_CONNECTING)
                                 {
