@@ -31,7 +31,6 @@ int main(int argc, char **argv)
 	
 	server->addGame(game);
 
-	server->mGame = game;
 	game->mServer = server;
 
 	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken

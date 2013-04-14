@@ -42,9 +42,6 @@ public:
 	//port
 	int mPort;					// Port
 
-	//game
-	Game* mGame;
-
 	//time
 	int mTickLength;
  	int mFrameTime;
