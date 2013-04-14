@@ -185,12 +185,12 @@ void Client::sendSchools()
 
 void Client::sendAllShapes()
 {
-	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
+	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
 	{
-		if (mShape != mServer->mGame->mShapeVector.at(i))
+		if (mShape != mGame->mShapeVector.at(i))
 		{
 			//write it
-			mServer->mGame->mShapeVector.at(i)->writeAdd(this);
+			mGame->mShapeVector.at(i)->writeAdd(this);
 		
 			//send it
 			SendPacket(&mServer->mMessage);
@@ -200,12 +200,12 @@ void Client::sendAllShapes()
 
 void Client::sendAllShapesBrowser()
 {
-	for (unsigned int i = 0; i < mServer->mGame->mShapeVector.size(); i++)
+	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
 	{
-		if (mShape != mServer->mGame->mShapeVector.at(i))
+		if (mShape != mGame->mShapeVector.at(i))
 		{
 			//write it
-			mServer->mGame->mShapeVector.at(i)->writeAddBrowser(this);
+			mGame->mShapeVector.at(i)->writeAddBrowser(this);
 		
 			//send it
 			SendPacket(&mServer->mMessage);
