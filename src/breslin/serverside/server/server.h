@@ -120,7 +120,7 @@ public:
 
 	//schools
 	std::vector<std::string> mSchoolVector;  
-	std::string getSchools();
+	void getSchools();
 
 	//timeout
 	int  checkForTimeout();

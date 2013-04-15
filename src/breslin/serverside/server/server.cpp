@@ -440,7 +440,7 @@ void Server::readDB()
         PQfinish(conn);
 }
 
-std::string Server::getSchools()
+void Server::getSchools()
 {
         PGconn          *conn;
         PGresult        *res;
