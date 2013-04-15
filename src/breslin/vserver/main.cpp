@@ -22,12 +22,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+//Ogre headers
+#include "Ogre.h"
+using namespace Ogre;
+
 int main(int argc, char **argv)
 {
 	StartLog();
+	Ogre::Root* root;
+
+#ifdef _DEBUG
+        root = new Ogre::Root("plugins_d.cfg");
+#else
+        root = new Ogre::Root("plugins.cfg");
+#endif
 
 	Server* server = new Server("",30004);
-	Game* game = new Game();
+	Game* game = new Game(root);
 	
 	server->addGame(game);
 

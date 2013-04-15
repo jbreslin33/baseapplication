@@ -23,13 +23,9 @@
 
 #include <stdio.h>
 
-Game::Game()
+Game::Game(Ogre::Root* root)
 {
-#ifdef _DEBUG
-	mRoot = new Ogre::Root("plugins_d.cfg");
-#else
-	mRoot = new Ogre::Root("plugins.cfg");
-#endif
+	mRoot = root;
 
 	mBounds = new Bounds();
 }
