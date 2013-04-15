@@ -38,11 +38,14 @@ int main(int argc, char **argv)
 #endif
 
 	Server* server = new Server("",30004);
-	Game* game = new Game(root);
+	Game* gameA = new Game(root);
+	Game* gameB = new Game(root);
 	
-	server->addGame(game);
+	server->addGame(gameA);
+	server->addGame(gameB);
 
-	game->mServer = server;
+	gameA->mServer = server;
+	gameB->mServer = server;
 
 	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
