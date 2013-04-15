@@ -26,8 +26,8 @@ int main(int argc, char **argv)
 {
 	StartLog();
 
-	Game* game = new Game();
 	Server* server = new Server("",30004);
+	Game* game = new Game();
 	
 	server->addGame(game);
 
