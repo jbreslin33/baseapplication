@@ -230,7 +230,7 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
         {
                 moveXChanged = false;
         }
-/*
+
         if(flags & mCommandOriginY)
         {
                 mServerCommandLast->mPosition->y = mServerCommandCurrent->mPosition->y;
@@ -240,7 +240,6 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
         {
                 moveYChanged = false;
         }
-*/
 
         if(flags & mCommandOriginZ)
         {
@@ -288,7 +287,7 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
                 {
                         mServerCommandCurrent->mVelocity->x = 0.0;
                 }
- /*               
+                
                 if (moveYChanged)
                 {
                         mServerCommandCurrent->mVelocity->y = mServerCommandCurrent->mPosition->y - mServerCommandLast->mPosition->y;
@@ -297,7 +296,7 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
                 {
                         mServerCommandCurrent->mVelocity->y = 0.0;
                 }
-*/
+
                 if (moveZChanged)
                 {
                         mServerCommandCurrent->mVelocity->z = mServerCommandCurrent->mPosition->z - mServerCommandLast->mPosition->z;

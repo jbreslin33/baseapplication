@@ -358,12 +358,10 @@ int Shape::setFlag()
 	{
 		flags |= mCommandOriginX;
 	}
-/*
 	if(mSceneNode->getPosition().y != mPositionLast->y)
 	{
 		flags |= mCommandOriginY;
 	}
-*/
 	if(mSceneNode->getPosition().z != mPositionLast->z)
 	{
 		flags |= mCommandOriginZ;
@@ -400,12 +398,10 @@ void Shape::addToMoveMessage(Message* message)
 	{
 		message->WriteFloat(mSceneNode->getPosition().x);
 	}
-/*
 	if(flags & mCommandOriginY)
 	{
 		message->WriteFloat(mSceneNode->getPosition().y);
 	}
-*/
 	if(flags & mCommandOriginZ)
 	{
 		message->WriteFloat(mSceneNode->getPosition().z);
