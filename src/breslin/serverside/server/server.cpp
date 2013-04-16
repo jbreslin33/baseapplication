@@ -52,8 +52,8 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	getSchools();	
 
 	//create games
-	mGameVector.push_back(new Game(this));
-	mGameVector.push_back(new Game(this));
+	mGameVector.push_back(new Game(this,1));
+	mGameVector.push_back(new Game(this,2));
 }
 
 Server::~Server()
@@ -179,8 +179,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 
 	/***JOIN GAME********/
+	/* can i just send more information here for different games?                      */
 	else if (type == mMessageJoinGame)
 	{
+		int gameID = mes->ReadByte();
+
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)

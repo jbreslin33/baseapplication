@@ -29,6 +29,8 @@ static const char mMessageKey        = 1;
 static const char mMessageFrameTime  = 2;
 static const char mMessageServerExit = 3;
 
+	int mID;
+
 	Server	*mServer;  //go between for game(contains game logic) and Network(handles sending message across internets)
 
 	//bounds
@@ -41,7 +43,7 @@ static const char mMessageServerExit = 3;
      	PGconn* mDBConnection;
 
 public:
-	Game(Server* server);
+	Game(Server* server, int id);
 	~Game();
 
 	//index

@@ -23,8 +23,11 @@
 
 #include <stdio.h>
 
-Game::Game(Server* server)
+Game::Game(Server* server, int id)
 {
+	//id
+	mID = id; 
+
 	//server
 	mServer = server;
 
