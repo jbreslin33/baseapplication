@@ -39,7 +39,7 @@ void ApplicationMain::execute()
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGame)
 	{
 		mApplicationBreslin->mButtonHit = NULL;
-		mApplicationBreslin->sendJoinGame();
+		mApplicationBreslin->sendJoinGame(1);
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}
 

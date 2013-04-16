@@ -180,9 +180,9 @@ sendLogout: function()
 	this.mNetwork.mSocket.emit('send_logout', message);
 },
 
-sendJoinGame: function()
+sendJoinGame: function(gameID)
 {
-	message = '';
+	message = '' + gameID;
 	this.mNetwork.mSocket.emit('send_join_game', message);
 },
 

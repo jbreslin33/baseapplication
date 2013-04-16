@@ -99,8 +99,12 @@ io.sockets.on('connection', function (socket)
 
         socket.on('send_join_game', function(message,remote)
 	{
+                mMessage = message;
+
+		var gameID = mMessage;	               
+
                 //send to c++ server
-                var buf = new Buffer(2);
+                var buf = new Buffer(3);
 
 		//type
                 type = -117;
@@ -108,6 +112,9 @@ io.sockets.on('connection', function (socket)
 
 		//mClientID
                 buf.writeInt8(socket.mClientID,1);
+
+		//gameID
+                buf.writeInt8(gameID,2);
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {

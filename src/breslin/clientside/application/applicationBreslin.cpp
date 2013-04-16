@@ -189,10 +189,11 @@ void ApplicationBreslin::sendLogout()
 	mNetwork->send(byteBuffer);
 }
 
-void ApplicationBreslin::sendJoinGame()
+void ApplicationBreslin::sendJoinGame(int gameID)
 {
 	ByteBuffer* byteBuffer = new ByteBuffer();
 	byteBuffer->WriteByte(mMessageJoinGame);
+	byteBuffer->WriteByte(gameID);
 	mNetwork->send(byteBuffer);
 }
 

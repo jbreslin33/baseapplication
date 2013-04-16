@@ -126,7 +126,7 @@ void checkForByteBuffer();
 void sendConnect   ();
 
 //join game
-void sendJoinGame();
+void sendJoinGame(int gameID);
 
 //login 
 void sendLogin();
