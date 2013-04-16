@@ -188,7 +188,13 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		{
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
+				//get client
 				client = mClientVector.at(i);
+			
+				//add client to mClientVector in game	
+				mGameVector.at(gameID)->mClientVector.push_back(client);
+
+				//call clients join game function
 				client->joinGame(mGameVector.at(gameID)); //now call everything else inside client...
 			}
 		}
@@ -197,13 +203,21 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageJoinGameBrowser)
 	{
                 int clientID = mes->ReadByte();
+		int gameID   = mes->ReadByte();
+
 		for (int i = 0; i < mClientVector.size(); i++)
 		{
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
+ 				//get client
                                 client = mClientVector.at(i);
-				client->joinGame(mGameVector.at(gameID));
-                        }
+                                
+                                //add client to mClientVector in game
+                                mGameVector.at(gameID)->mClientVector.push_back(client);
+
+                                //call clients join game function
+                                client->joinGame(mGameVector.at(gameID)); //now call everything else inside client...
+			}
                 }
 	}
 

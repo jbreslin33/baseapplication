@@ -36,6 +36,9 @@ static const char mMessageServerExit = 3;
 	//bounds
 	Bounds* mBounds;	
 
+	//clients
+        std::vector<Client*> mClientVector;
+
 	//shapes
 	std::vector<Shape*> mShapeVector;	//every tangible item in game world..
 
