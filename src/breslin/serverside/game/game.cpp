@@ -23,11 +23,12 @@
 
 #include <stdio.h>
 
-Game::Game(Ogre::Root* root, Server* server)
+Game::Game(Server* server)
 {
+	//server
 	mServer = server;
-	mRoot = root;
 
+	//bounds
 	mBounds = new Bounds();
 }
 

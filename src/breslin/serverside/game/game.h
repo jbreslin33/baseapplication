@@ -5,10 +5,6 @@
 
 #include <vector>
 
-//Ogre headers
-#include "Ogre.h"
-using namespace Ogre;
-
 //postgres
 #include <postgresql/libpq-fe.h>
 
@@ -33,8 +29,6 @@ static const char mMessageKey        = 1;
 static const char mMessageFrameTime  = 2;
 static const char mMessageServerExit = 3;
 
-	Ogre::Root* mRoot;
-
 	Server	*mServer;  //go between for game(contains game logic) and Network(handles sending message across internets)
 
 	//bounds
@@ -47,7 +41,7 @@ static const char mMessageServerExit = 3;
      	PGconn* mDBConnection;
 
 public:
-	Game(Ogre::Root* root, Server* server);
+	Game(Server* server);
 	~Game();
 
 	//index

@@ -52,8 +52,8 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	getSchools();	
 
 	//create games
-	mGameVector.push_back(new Game(mRoot, this));
-	mGameVector.push_back(new Game(mRoot, this));
+	mGameVector.push_back(new Game(this));
+	mGameVector.push_back(new Game(this));
 }
 
 Server::~Server()
