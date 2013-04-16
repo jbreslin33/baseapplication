@@ -12,11 +12,11 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
         this.mGhost = 0;
 
 	//constants
-	this.mCommandOriginX   = 4;
-	this.mCommandOriginY   = 8;
-	this.mCommandOriginZ   = 16;
-	this.mCommandRotationX = 32;
-	this.mCommandRotationZ = 64;
+	this.mCommandOriginX   = 1;
+	this.mCommandOriginY   = 2;
+	this.mCommandOriginZ   = 4;
+	this.mCommandRotationX = 8;
+	this.mCommandRotationZ = 16;
 
  	this.mIsGhost = isGhost;
 	this.mAnimate = false;

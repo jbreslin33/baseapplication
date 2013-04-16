@@ -324,7 +324,6 @@ void Shape::writeAddBrowser(Client* client)
 	mGame->mServer->mMessage.WriteByte(mIndex);
 			
 	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().x);
-	LogString("x:%f",mSceneNode->getPosition().x);
 	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().y);
 	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().z);
 

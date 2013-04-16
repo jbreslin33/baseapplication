@@ -12,11 +12,11 @@ var skipCounter = 0;
 var fireNumber = 0; //no skipping of frames
 
 //constants
-mCommandOriginX      = 4;
-mCommandOriginY      = 8;
-mCommandOriginZ      = 16;
-mCommandRotationX    = 32;
-mCommandRotationZ    = 64;
+mCommandOriginX      = 1;
+mCommandOriginY      = 2;
+mCommandOriginZ      = 4;
+mCommandRotationX    = 8;
+mCommandRotationZ    = 16;
 
 mServerIP = '127.0.0.1';
 mServerPort = 30004;

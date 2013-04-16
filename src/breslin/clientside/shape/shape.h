@@ -69,11 +69,11 @@ int mLocal;
 private:
 
 //constants
-static const char mCommandOriginX      = 4;
-static const char mCommandOriginY      = 8;
-static const char mCommandOriginZ      = 16;
-static const char mCommandRotationX    = 32;
-static const char mCommandRotationZ    = 64;
+static const char mCommandOriginX      = 1;
+static const char mCommandOriginY      = 2;
+static const char mCommandOriginZ      = 4;
+static const char mCommandRotationX    = 8;
+static const char mCommandRotationZ    = 16;
 
 //spawn orientation
 Vector3D* mSpawnPosition;
@@ -102,8 +102,6 @@ float mScale;
 
 //this is your pointer to move shape, really all you need.
 SceneNode*          mSceneNode;
-
-
 
 
 /**************************************************

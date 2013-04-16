@@ -41,11 +41,11 @@ static const char mMessageServerExit = 3;
 static const char mMessageKeepAlive = 12;
 
 //network flags
-static const char mCommandOriginX      = 4;
-static const char mCommandOriginY      = 8;
-static const char mCommandOriginZ      = 16;
-static const char mCommandRotationX    = 32;
-static const char mCommandRotationZ    = 64;
+static const char mCommandOriginX      = 1;
+static const char mCommandOriginY      = 2;
+static const char mCommandOriginZ      = 4;
+static const char mCommandRotationX    = 8;
+static const char mCommandRotationZ    = 16;
 
 
 //ogre scene stuff
