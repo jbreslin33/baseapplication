@@ -389,7 +389,7 @@ int Server::checkForTimeout()
 
 //this loops thru each client instance and then calls their sendPacket(mess) function
 //we are right here I need to just send to one client for all browsers then he should broadcast
-void Server::sendPackets()
+void Server::sendPackets(Game* game)
 {
 	// Check if the server is set up
 	if(!mNetwork->mSocket)
@@ -404,7 +404,11 @@ void Server::sendPackets()
 		if(mClientVector.at(i)->mClientID > 0)
 			continue; 
 
-		mClientVector.at(i)->SendPacket(&mMessage);
+		//is this client in the game?
+		if (mClientVector.at(i)->mGame == game)
+		{
+			mClientVector.at(i)->SendPacket(&mMessage);
+		}
 	}
 }
 
@@ -522,7 +526,7 @@ void Server::sendCommand(Game* game)
                 game->mShapeVector.at(j)->addToMoveMessage(&mMessage);
         }
 
-        sendPackets();
+        sendPackets(Game* game);
 
         // Store the sent command in
         for (unsigned int i = 0; i < game->mShapeVector.size(); i++)

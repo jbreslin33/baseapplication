@@ -117,6 +117,9 @@ void Shape::sendShapeToClients()
 	for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
 	{
 		Client* clientToSendTo = mGame->mServer->mClientVector.at(i);
+		
+		if (clientToSendTo == 
+
 	
 		if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
 		{
