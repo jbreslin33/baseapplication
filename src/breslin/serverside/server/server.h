@@ -23,6 +23,10 @@
 // positive = sequenced message
 // negative = un-sequenced message
 
+//Ogre headers
+#include "Ogre.h"
+using namespace Ogre;
+
 // Introduce classes
 class Network;
 class Client;
@@ -109,7 +113,7 @@ public:
 
 
 public:
-	Server(const char *localIP, int serverPort);
+	Server(Ogre::Root* root, const char *localIP, int serverPort);
 	~Server();
 
 	//update

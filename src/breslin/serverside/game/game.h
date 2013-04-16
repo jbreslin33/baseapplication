@@ -47,7 +47,7 @@ static const char mMessageServerExit = 3;
      	PGconn* mDBConnection;
 
 public:
-	Game(Ogre::Root* root);
+	Game(Ogre::Root* root, Server* server);
 	~Game();
 
 	//index

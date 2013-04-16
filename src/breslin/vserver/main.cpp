@@ -37,15 +37,7 @@ int main(int argc, char **argv)
         root = new Ogre::Root("plugins.cfg");
 #endif
 
-	Server* server = new Server("",30004);
-	Game* gameA = new Game(root);
-	Game* gameB = new Game(root);
-	
-	server->addGame(gameA);
-	server->addGame(gameB);
-
-	gameA->mServer = server;
-	gameB->mServer = server;
+	Server* server = new Server(root,"",30004);
 
 	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
 	signal(SIGPIPE, SIG_IGN);

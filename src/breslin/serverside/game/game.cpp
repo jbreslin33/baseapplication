@@ -23,8 +23,9 @@
 
 #include <stdio.h>
 
-Game::Game(Ogre::Root* root)
+Game::Game(Ogre::Root* root, Server* server)
 {
+	mServer = server;
 	mRoot = root;
 
 	mBounds = new Bounds();

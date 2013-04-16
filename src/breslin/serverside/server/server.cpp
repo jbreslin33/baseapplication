@@ -26,7 +26,7 @@
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
 
-Server::Server(const char *localIP, int serverPort)
+Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 {
         //sequence
         mOutgoingSequence = 1;
@@ -47,6 +47,10 @@ Server::Server(const char *localIP, int serverPort)
 
 	//this will need updating whenever a new school is added to db...
 	getSchools();	
+
+	//create games
+	mGameVector.push_back(new Game(root, this));
+	mGameVector.push_back(new Game(root, this));
 }
 
 Server::~Server()
