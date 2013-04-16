@@ -28,6 +28,9 @@
 
 Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 {
+	//ogre root
+	mRoot = root;
+
         //sequence
         mOutgoingSequence = 1;
 
@@ -49,8 +52,8 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	getSchools();	
 
 	//create games
-	mGameVector.push_back(new Game(root, this));
-	mGameVector.push_back(new Game(root, this));
+	mGameVector.push_back(new Game(mRoot, this));
+	mGameVector.push_back(new Game(mRoot, this));
 }
 
 Server::~Server()

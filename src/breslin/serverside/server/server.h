@@ -37,6 +37,9 @@ class Server
 {
 public:
 
+	//Ogre Root
+	Ogre::Root* mRoot;
+
 	//games
 	std::vector<Game*> mGameVector;
 
