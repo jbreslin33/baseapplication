@@ -191,9 +191,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				//get client
 				client = mClientVector.at(i);
 			
-				//add client to mClientVector in game	
-				mGameVector.at(gameID)->mClientVector.push_back(client);
-
 				//call clients join game function
 				client->joinGame(mGameVector.at(gameID)); //now call everything else inside client...
 			}
@@ -212,9 +209,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
  				//get client
                                 client = mClientVector.at(i);
                                 
-                                //add client to mClientVector in game
-                                mGameVector.at(gameID)->mClientVector.push_back(client);
-
                                 //call clients join game function
                                 client->joinGame(mGameVector.at(gameID)); //now call everything else inside client...
 			}
