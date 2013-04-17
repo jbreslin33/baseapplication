@@ -354,9 +354,13 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 {
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
-				LogString("c++ client deleted");
+				//delete client
                                 client = mClientVector.at(i);
 				delete client;
+
+ 				//erase client from vector
+                        	mClientVector.erase(mClientVector.begin()+i);
+				LogString("c++ client deleted");
 			}
 		}
 
