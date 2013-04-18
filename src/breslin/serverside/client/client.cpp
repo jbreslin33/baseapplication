@@ -36,36 +36,14 @@
 #include <postgresql/libpq-fe.h>
 
 
-//server side client constructor, many instances will be made, one for each client connected.
-Client::Client(Server* server, struct sockaddr *address)
-{
-	//loggedIn
-	mLoggedIn = false;
-
-	//set client id to 0 as this will identify it as a c++ or java client
-	mClientID = 0;	
-
-	//server
-	mServer = server;
-
-	//game
-	mGame = NULL;
-
-	mLastMessageTime  = 0;
-	mConnectionState  = DREAMSOCK_CONNECTING;
-
-	SetSocketAddress(address);
-
-	//register this client with server
-	mServer->addClient(this);
-       	
-	sendConnected();
-        sendSchools();
-}
+#include "../quiz/quiz.h"
 
 //server side client constructor, many instances will be made, one for each client connected.
 Client::Client(Server* server, struct sockaddr *address, int clientID)
 {
+	//quiz
+	mQuiz = NULL;
+
 	mLoggedIn = false;
 
 	//set client id as this is going to be a browser client
@@ -74,6 +52,9 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	//1 or greater than client represents a browser client and should have a shape
 	mClientID = clientID;
 
+	//game
+	mGame = NULL;
+
 	//server
 	mServer = server;
 
@@ -85,10 +66,15 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	//register this client with server
 	mServer->addClient(this);
 
-	if (mClientID > 0)
+
+	if (mClientID >= 0)
 	{
        		sendConnected();
         	sendSchools();
+	}
+	else
+	{
+		//your the node for web sockets
 	}
 }
 
@@ -106,8 +92,15 @@ Client::~Client()
 	}
 }
 
-//it's only fair to send a remove shape to everybody as well.....
+void Client::processUpdate()
+{
+	if (mGame)
+	{
+		LogString("proc");	
+	}
+}
 
+//it's only fair to send a remove shape to everybody as well.....
 void Client::joinGame(Game* game)
 {
 	mGame = game;
@@ -183,6 +176,7 @@ void Client::sendSchools()
 		SendPacket(&mServer->mMessage);
 	}
 }
+
 
 void Client::sendAllShapes()
 {

@@ -18,6 +18,7 @@
 
 //game
 #include "../game/game.h"
+#include "../game/gameMath.h"
 
 //math
 #include "../../math/vector3D.h"
@@ -71,6 +72,13 @@ void Server::processUpdate(int msec)
 
 	readPackets();
 
+	//update clients
+  	for (unsigned int i = 0; i < mClientVector.size(); i++)
+	{
+		mClientVector.at(i)->processUpdate();
+	}
+
+	//update games
   	for (unsigned int i = 0; i < mGameVector.size(); i++)
 	{
 		mGameVector.at(i)->processUpdate();
@@ -162,7 +170,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	//this should just create a client then client should do what need be done.
 	if (type == mMessageConnect)
 	{
-		Client* client = new Client(this, address);
+		Client* client = new Client(this, address, 0);
 	}
 
 	else if (type == mMessageConnectBrowser)

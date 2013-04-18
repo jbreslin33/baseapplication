@@ -295,6 +295,13 @@ set(HDRS
 	
 	#client
 	../serverside/client/client.h
+
+	#quiz
+	../serverside/quiz/quiz.h
+
+	#question
+	../serverside/question/question.h
+	
 )
  
 set(SRCS
@@ -351,6 +358,12 @@ set(SRCS
 	#client
 	../serverside/client/client.cpp
 
+	#quiz
+	../serverside/quiz/quiz.cpp
+
+	#question
+	../serverside/question/question.cpp
+	
 )
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}

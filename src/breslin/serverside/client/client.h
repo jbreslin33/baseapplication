@@ -56,14 +56,16 @@ class Server;
 class Network;
 class Shape;
 class Game;
+class Quiz;
+
 class Client
 {
 public:
-	Client(Server* server, struct sockaddr *address);
 	Client(Server* server, struct sockaddr *address, int clientID);
 
 ~Client();
 
+	Quiz* mQuiz;
 
 	//id used just for browser clients for now, if it's 0 then we know it's a c++ java client.
 	int mClientID;
@@ -81,6 +83,9 @@ public:
 	std::string mStringPassword;
 
 public:
+	//processUpdate
+	void processUpdate();
+
 	//shape
 	void sendAllShapes();
 	void sendAllShapesBrowser();
