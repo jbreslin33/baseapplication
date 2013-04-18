@@ -400,7 +400,7 @@ createMainScreen: function()
 	//join game B
 	if (this.mButtonJoinGameB == 0)
 	{
-		this.mButtonJoinGameB = this.createButton(300,100,100,50,"green","Join Game B");
+		this.mButtonJoinGameB = this.createButton(300,150,100,50,"green","Join Game B");
 		this.mButtonJoinGameB.onclick = function()
 		{
 			mApplication.mButtonHit = mApplication.mButtonJoinGameB;	
