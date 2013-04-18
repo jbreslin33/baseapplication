@@ -77,7 +77,8 @@ OgreBites::Label* mLabelFocus;
 
 OgreBites::Button* mButtonLogin;
 OgreBites::Button* mButtonLogout;
-OgreBites::Button* mButtonJoinGame;
+OgreBites::Button* mButtonJoinGameA;
+OgreBites::Button* mButtonJoinGameB;
 OgreBites::Button* mButtonExit;
 
 std::string mStringSchool;

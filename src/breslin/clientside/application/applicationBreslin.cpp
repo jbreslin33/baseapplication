@@ -392,9 +392,14 @@ void ApplicationBreslin::hideLoginScreen()
 void ApplicationBreslin::createMainScreen()
 {
 	LogString("createMainScreen");
-	if (!mButtonJoinGame)
+	if (!mButtonJoinGameA)
 	{
-		mButtonJoinGame = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGame", "Join Game");
+		mButtonJoinGameA = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGameA", "Join Game A");
+	}
+
+	if (!mButtonJoinGameB)
+	{
+		mButtonJoinGameB = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGameB", "Join Game B");
 	}
 
 	if (!mButtonLogout)
@@ -411,11 +416,13 @@ void ApplicationBreslin::createMainScreen()
 void ApplicationBreslin::showMainScreen()
 {
 	LogString("showMainScreen");
-	mTrayMgr->moveWidgetToTray(mButtonJoinGame,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonJoinGameA,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonJoinGameB,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonLogout,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
-	mButtonJoinGame->show();
+	mButtonJoinGameA->show();
+	mButtonJoinGameB->show();
 	mButtonLogout->show();
 	mButtonExit->show();
 	
@@ -429,11 +436,13 @@ void ApplicationBreslin::showMainScreen()
 void ApplicationBreslin::hideMainScreen()
 {
 	LogString("hideMainScreen");
-	mButtonJoinGame->hide();
+	mButtonJoinGameA->hide();
+	mButtonJoinGameB->hide();
 	mButtonLogout->hide();
 	mButtonExit->hide();
 
-	mTrayMgr->removeWidgetFromTray(mButtonJoinGame);
+	mTrayMgr->removeWidgetFromTray(mButtonJoinGameA);
+	mTrayMgr->removeWidgetFromTray(mButtonJoinGameB);
 	mTrayMgr->removeWidgetFromTray(mButtonLogout);
 	mTrayMgr->removeWidgetFromTray(mButtonExit);
 }

@@ -36,10 +36,17 @@ void ApplicationMain::enter()
 
 void ApplicationMain::execute()
 {
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGame)
+	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGameA)
 	{
 		mApplicationBreslin->mButtonHit = NULL;
 		mApplicationBreslin->sendJoinGame(1);
+		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
+	}
+
+	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGameB)
+	{
+		mApplicationBreslin->mButtonHit = NULL;
+		mApplicationBreslin->sendJoinGame(2);
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}
 

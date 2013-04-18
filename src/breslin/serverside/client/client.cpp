@@ -128,7 +128,6 @@ void Client::joinGame(Game* game)
 
 void Client::leaveGame()
 {
-	mGame = NULL;
 
 	//you gotta delete the shape here...and tell everyone about it. i would tell them in shape class
 	if (mShape)
@@ -144,6 +143,8 @@ void Client::leaveGame()
 
 		mShape->remove();
 	}	
+
+	mGame = NULL;
 }
 
 void Client::remove()

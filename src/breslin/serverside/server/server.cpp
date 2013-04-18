@@ -192,7 +192,14 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				client = mClientVector.at(i);
 			
 				//call clients join game function
-				client->joinGame(mGameVector.at(gameID)); //now call everything else inside client...
+				for (int g = 0; g < mGameVector.size(); g++)
+				{ 
+					if (mGameVector.at(g)->mID == gameID)
+					{
+						client->joinGame(mGameVector.at(g)); //now call everything else inside client...
+						LogString("joinGame:%d",g);
+					}
+				}
 			}
 		}
 	}
@@ -208,9 +215,17 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
  				//get client
                                 client = mClientVector.at(i);
+
+				//call clients join game function
+				for (int g = 0; g < mGameVector.size(); g++)
+				{ 
+					if (mGameVector.at(g)->mID == gameID)
+					{
+						client->joinGame(mGameVector.at(g)); //now call everything else inside client...
+						LogString("joinGame:%d",g);
+					}
+				}
                                 
-                                //call clients join game function
-                                client->joinGame(mGameVector.at(gameID)); //now call everything else inside client...
 			}
                 }
 	}
