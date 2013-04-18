@@ -99,7 +99,8 @@ void ApplicationBreslin::processUpdate()
 		//mGame = new Game(this);
 		createLoginScreen();
 		hideLoginScreen();
-
+ 		
+		mGame = new Game(this);
        		mStateMachine->changeState(mApplicationPlay);
 
 		//sneak an update in

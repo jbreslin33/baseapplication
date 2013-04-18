@@ -34,7 +34,6 @@ ApplicationPlay::~ApplicationPlay()
 
 void ApplicationPlay::enter()
 {
-        mApplicationBreslin->mGame = new Game(mApplicationBreslin);
         mApplicationBreslin->mPlayingGame = true;
         mApplicationBreslin->mSentLeaveGame = false;
 }
