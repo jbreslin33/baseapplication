@@ -1,3 +1,19 @@
 ideas
 ------------------
+you fight when you come into contact with another player.
+
+if it was zombie tag. i
+basic rules..
+pros: no one is ever out, math is only done in battle and not when moving.
+join in middle your it.
+game auto restarts when everyone is caught.
+maybe be able to say no to a battle....
+only ask math when you battle someone...
+this would eliminate having to do math and move at same time.
+you can only fight one person at a time....
+battle results obviously should be saved in db. 
+you will still get belts like other game...
+last person with no defeats is the champion of that game....
+if you join late you are not eligible for champion but you can still battle.
+
 
