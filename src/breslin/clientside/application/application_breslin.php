@@ -61,7 +61,8 @@ initialize: function(serverIP, serverPort)
 	this.mButtonLoading = 0;
 
 	//main screen
-	this.mButtonJoinGame = 0;
+	this.mButtonJoinGameA = 0;
+	this.mButtonJoinGameB = 0;
 	this.mButtonLogout = 0;
 
 	//login	
@@ -175,7 +176,6 @@ sendLogin: function()
 
 sendLogout: function()
 {
-	this.log('sendLogout app');
 	message = '';
 	this.mNetwork.mSocket.emit('send_logout', message);
 },
@@ -387,13 +387,23 @@ hideLoginScreen: function()
 //MAIN SCREEN
 createMainScreen: function()
 {
-	//join game
-	if (this.mButtonJoinGame == 0)
+	//join game A
+	if (this.mButtonJoinGameA == 0)
 	{
-		this.mButtonJoinGame = this.createButton(300,100,100,50,"green","Join Game");
-		this.mButtonJoinGame.onclick = function()
+		this.mButtonJoinGameA = this.createButton(300,100,100,50,"green","Join Game A");
+		this.mButtonJoinGameA.onclick = function()
 		{
-			mApplication.mButtonHit = mApplication.mButtonJoinGame;	
+			mApplication.mButtonHit = mApplication.mButtonJoinGameA;	
+		};
+	}
+	
+	//join game B
+	if (this.mButtonJoinGameB == 0)
+	{
+		this.mButtonJoinGameB = this.createButton(300,100,100,50,"green","Join Game B");
+		this.mButtonJoinGameB.onclick = function()
+		{
+			mApplication.mButtonHit = mApplication.mButtonJoinGameB;	
 		};
 	}
 	
@@ -413,13 +423,15 @@ createMainScreen: function()
 
 showMainScreen: function()
 {
-	this.mButtonJoinGame.style.display="block";
+	this.mButtonJoinGameA.style.display="block";
+	this.mButtonJoinGameB.style.display="block";
 	this.mButtonLogout.style.display="block";
 },
 
 hideMainScreen: function()
 {
-	this.mButtonJoinGame.style.display="none";
+	this.mButtonJoinGameA.style.display="none";
+	this.mButtonJoinGameB.style.display="none";
 	this.mButtonLogout.style.display="none";
 },
 
