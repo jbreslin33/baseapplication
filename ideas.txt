@@ -24,4 +24,24 @@ str = damage
 add in randomness so battles are random. so i need a 2 seconds to hit base chance but then factor in ac dexterity and a random roll.
 
 
+getting questions to clients???
+1: on collision send colliding clients a sendQuestion function or a prepare for battle message?.  
+---should clients get all questions at once? or should they get one at time?
+all at once???
+
+tell them wrong then show correct answer...then ask them same question 3 times. then new one, then same.... 
+
+you should have a learning question, which is the new one. this should be asked 50% of the time. Then 50% of the time you should ask already passed questions.
+
+
+how do you determine that a question has been passed. answered in less then 2 seconds 100 times in a row.
+
+send all at once?? pros: less db reading....client will get questions on login and then only get new ones if he passes a level....
+speed advantage and accurate timing...
+methods: could i just send an id?
+
+
+
+
+cons: update for enemy? 
 
