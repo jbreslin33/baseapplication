@@ -321,8 +321,7 @@ CREATE TABLE questions (
     id integer NOT NULL,
     question text NOT NULL,
     answer text NOT NULL,
-    level_id double precision NOT NULL,
-    question_order double precision NOT NULL 
+    level_id double precision NOT NULL
 );
 
 
@@ -1333,10 +1332,56 @@ insert into standards_clusters_domains_grades (standard_id, cluster_domain_grade
 --		LEVEL_ID: 0 
 insert into levels(id,description) values (0,'Start of Journey');       
 
+--		LEVEL_ID: .100 
+insert into levels(id,description) values (.1,'Identify 0');       
+insert into questions (level_id,question,answer) values (.1,'0','0');
+
+--		LEVEL_ID: .101 
+insert into levels(id,description) values (.101,'Identify 1');       
+insert into questions (level_id,question,answer) values (.101,'1','1');
+
+--		LEVEL_ID: .102 
+insert into levels(id,description) values (.102,'Identify 2');       
+insert into questions (level_id,question,answer) values (.102,'2','2');
+
+--		LEVEL_ID: .103 
+insert into levels(id,description) values (.103,'Identify 3');       
+insert into questions (level_id,question,answer) values (.103,'3','3');
+
+--		LEVEL_ID: .104 
+insert into levels(id,description) values (.104,'Identify 4');       
+insert into questions (level_id,question,answer) values (.104,'4','4');
+
+--		LEVEL_ID: .105 
+insert into levels(id,description) values (.105,'Identify 5');       
+insert into questions (level_id,question,answer) values (.105,'5','5');
+
+--		LEVEL_ID: .106 
+insert into levels(id,description) values (.106,'Identify 6');       
+insert into questions (level_id,question,answer) values (.106,'6','6');
+
+--		LEVEL_ID: .107 
+insert into levels(id,description) values (.107,'Identify 7');       
+insert into questions (level_id,question,answer) values (.107,'7','7');
+
+--		LEVEL_ID: .108 
+insert into levels(id,description) values (.108,'Identify 8');       
+insert into questions (level_id,question,answer) values (.108,'8','8');
+
+--		LEVEL_ID: .109 
+insert into levels(id,description) values (.109,'Identify 9');       
+insert into questions (level_id,question,answer) values (.109,'9','9');
+
+--		LEVEL_ID: .110 
+insert into levels(id,description) values (.110,'Identify 10');       
+insert into questions (level_id,question,answer) values (.110,'10','10');
+
+
 --		LEVEL_ID: 1
 insert into levels(id,description) values (1,'Count from 0 to 1');        
 insert into levels_standards_clusters_domains_grades(level_id, standard_cluster_domain_grade_id) values (1,1);       
 --	QUESTIONS:
+insert into questions (level_id,question,answer) values (1,'Count from 0 to 1:','0 1');
 insert into counting (level_id,score_needed,start_number,end_number,count_by) values (1,1,0,1,1);
 --	GAMES: dungeon
 insert into games_levels (level_id,game_id) values  (1,1);
@@ -1347,6 +1392,7 @@ insert into games_levels (level_id,game_id) values  (1,4);
 insert into levels(id,description) values (1.01,'Count from 0 to 2');       
 insert into levels_standards_clusters_domains_grades(level_id, standard_cluster_domain_grade_id) values (1.01,1);       
 --	QUESTIONS:
+insert into questions (level_id,question,answer) values (1.01,'Count from 0 to 2:','0 1 2');
 insert into counting (level_id,score_needed,start_number,end_number,count_by) values (1.01,2,0,2,1);
 --	GAMES: 
 insert into games_levels (level_id,game_id) values  (1.01,1);
@@ -1541,17 +1587,17 @@ insert into standards_clusters_domains_grades (standard_id, cluster_domain_grade
 insert into levels(id,description) values (3,'Write numbers from 0 to 5'); 
 insert into levels_standards_clusters_domains_grades(level_id, standard_cluster_domain_grade_id) values (3,3);       
 --	QUESTIONS:
-insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 _','1',1);
-insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 _','2',2);
-insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 _','3',3);
-insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 _','4',4);
-insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 _','5',5);
-insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 _','6',6);
-insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 6 _','7',7);
-insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 6 7 _','8',8);
-insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 6 7 8 _','9',9);
-insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 6 7 8 9 _','1',10);
-insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 6 7 8 9 1_','0',11);
+--insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 _','1',1);
+--insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 _','2',2);
+--insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 _','3',3);
+--insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 _','4',4);
+--insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 _','5',5);
+--insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 _','6',6);
+--insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 6 _','7',7);
+--insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 6 7 _','8',8);
+--insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 6 7 8 _','9',9);
+--insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 6 7 8 9 _','1',10);
+--insert into questions (level_id,question,answer,question_order) values (3,'What comes next after 0 1 2 3 4 5 6 7 8 9 1_','0',11);
 --	GAMES: 
 insert into games_levels (level_id,game_id) values  (3,1);
 
@@ -1561,16 +1607,16 @@ insert into games_levels (level_id,game_id) values  (3,1);
 insert into levels(id,description) values (3.1,'Write numbers from 5 to 10'); 
 insert into levels_standards_clusters_domains_grades(level_id, standard_cluster_domain_grade_id) values (3.1,3);       
 --	QUESTIONS:
-insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 _','1',1);
-insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 1_','1',2);
-insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 _','1',3);
-insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 1_','2',4);
-insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 _','1',5);
-insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 1_','3',6);
-insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 13 _','1',7);
-insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 13 1_','4',8);
-insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 13 14 _','1',9);
-insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 13 14 1_','5',10);
+--insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 _','1',1);
+--insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 1_','1',2);
+--insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 _','1',3);
+--insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 1_','2',4);
+--insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 _','1',5);
+--insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 1_','3',6);
+--insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 13 _','1',7);
+--insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 13 1_','4',8);
+--insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 13 14 _','1',9);
+--insert into questions (level_id,question,answer,question_order) values (3.1,'What comes next after 10 11 12 13 14 1_','5',10);
 --	GAMES: 
 insert into games_levels (level_id,game_id) values  (3.1,1);
 
@@ -1580,16 +1626,16 @@ insert into games_levels (level_id,game_id) values  (3.1,1);
 insert into levels(id,description) values (3.2,'Write numbers from 10 to 15'); 
 insert into levels_standards_clusters_domains_grades(level_id, standard_cluster_domain_grade_id) values (3.2,3);       
 --	QUESTIONS:
-insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 _','1',1);
-insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 1_','6',2);
-insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 _','1',3);
-insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 1_','7',4);
-insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 _','1',5);
-insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 1_','8',6);
-insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 18 _','1',7);
-insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 18 1_','9',8);
-insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 18 19 _','2',9);
-insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 18 19 2_','0',10);
+--insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 _','1',1);
+--insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 1_','6',2);
+--insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 _','1',3);
+--insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 1_','7',4);
+--insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 _','1',5);
+--insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 1_','8',6);
+--insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 18 _','1',7);
+--insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 18 1_','9',8);
+--insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 18 19 _','2',9);
+--insert into questions (level_id,question,answer,question_order) values (3.2,'What comes next after 15 16 17 18 19 2_','0',10);
 --	GAMES: 
 insert into games_levels (level_id,game_id) values  (3.2,1);
 
@@ -1599,16 +1645,16 @@ insert into games_levels (level_id,game_id) values  (3.2,1);
 insert into levels(id,description) values (3.3,'Write numbers from 15 to 20'); 
 insert into levels_standards_clusters_domains_grades(level_id, standard_cluster_domain_grade_id) values (3.3,3);       
 --	QUESTIONS:
-insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 _','2',1);
-insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 2_','1',2);
-insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 _','2',3);
-insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 2_','2',4);
-insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 _','2',5);
-insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 2_','3',6);
-insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 23 _','2',7);
-insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 23 2_','4',8);
-insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 23 24 _','2',9);
-insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 23 24 2_','5',10);
+--insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 _','2',1);
+--insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 2_','1',2);
+--insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 _','2',3);
+--insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 2_','2',4);
+--insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 _','2',5);
+--insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 2_','3',6);
+--insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 23 _','2',7);
+--insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 23 2_','4',8);
+--insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 23 24 _','2',9);
+--insert into questions (level_id,question,answer,question_order) values (3.3,'What comes next after 20 21 22 23 24 2_','5',10);
 --	GAMES: 
 insert into games_levels (level_id,game_id) values  (3.3,1);
 
@@ -1639,16 +1685,16 @@ insert into levels(id,description) values (4,'Count objects from 0 to 20');
 insert into levels_standards_clusters_domains_grades(level_id, standard_cluster_domain_grade_id) values (4,4);       
 
 --	QUESTIONS:
-insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','2',1);
-insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','7',2);
-insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','3',3);
-insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','10',4);
-insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','12',5);
-insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','5',6);
-insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','13',7);
-insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','17',8);
-insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','14',9);
-insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','4',10);
+--insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','2',1);
+--insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','7',2);
+--insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','3',3);
+--insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','10',4);
+--insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','12',5);
+--insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','5',6);
+--insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','13',7);
+--insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','17',8);
+--insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','14',9);
+--insert into questions (level_id,question,answer,question_order) values (4,'How many Red Monsters?','4',10);
 
 --	GAMES: 
 insert into games_levels (level_id,game_id) values  (4,2);
@@ -1659,16 +1705,16 @@ insert into levels(id,description) values (4.1,'Count objects from 0 to 20');
 insert into levels_standards_clusters_domains_grades(level_id, standard_cluster_domain_grade_id) values (4.1,4);       
 
 --	QUESTIONS:
-insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','6',1);
-insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','2',2);
-insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','8',3);
-insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','1',4);
-insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','8',5);
-insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','10',6);
-insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','17',7);
-insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','15',8);
-insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','4',9);
-insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','9',10);
+--insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','6',1);
+--insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','2',2);
+--insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','8',3);
+--insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','1',4);
+--insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','8',5);
+--insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','10',6);
+--insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','17',7);
+--insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','15',8);
+--insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','4',9);
+--insert into questions (level_id,question,answer,question_order) values (4.1,'How many Red Monsters?','9',10);
 
 --	GAMES: 
 insert into games_levels (level_id,game_id) values  (4.1,2);
@@ -1679,16 +1725,16 @@ insert into levels(id,description) values (4.2,'Count objects in standard order 
 insert into levels_standards_clusters_domains_grades(level_id, standard_cluster_domain_grade_id) values (4.2,4);       
 
 --	QUESTIONS:
-insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after zero?','one',1);
-insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after one?','two',2);
-insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after two?','three',3);
-insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after three?','four',4);
-insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after four?','five',5);
-insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after five?','six',6);
-insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after six?','seven',7);
-insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after seven?','eight',8);
-insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after eight?','nine',9);
-insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after nine?','ten',10);
+--insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after zero?','one',1);
+--insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after one?','two',2);
+--insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after two?','three',3);
+--insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after three?','four',4);
+--insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after four?','five',5);
+--insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after five?','six',6);
+--insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after six?','seven',7);
+--insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after seven?','eight',8);
+--insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after eight?','nine',9);
+--insert into questions (level_id,question,answer,question_order) values (4.2,'What number comes after nine?','ten',10);
 
 --	GAMES: 
 insert into games_levels (level_id,game_id) values  (4.2,1);
@@ -1699,16 +1745,16 @@ insert into levels(id,description) values (4.3,'Count objects in standard order 
 insert into levels_standards_clusters_domains_grades(level_id, standard_cluster_domain_grade_id) values (4.3,4);       
 
 --	QUESTIONS:
-insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after ten?','eleven',1);
-insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after eleven?','twelve',2);
-insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after twelve?','thirteen',3);
-insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after thirteen?','fourteen',4);
-insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after fourteen?','fifteen',5);
-insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after fifteen?','sixteen',6);
-insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after sixteen?','seventeen',7);
-insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after seventeen?','eighteen',8);
-insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after eighteen?','nineteen',9);
-insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after nineteen?','twenty',10);
+--insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after ten?','eleven',1);
+--insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after eleven?','twelve',2);
+--insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after twelve?','thirteen',3);
+--insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after thirteen?','fourteen',4);
+--insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after fourteen?','fifteen',5);
+--insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after fifteen?','sixteen',6);
+--insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after sixteen?','seventeen',7);
+--insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after seventeen?','eighteen',8);
+--insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after eighteen?','nineteen',9);
+--insert into questions (level_id,question,answer,question_order) values (4.3,'What number comes after nineteen?','twenty',10);
 
 --	GAMES: 
 insert into games_levels (level_id,game_id) values  (4.3,1);
