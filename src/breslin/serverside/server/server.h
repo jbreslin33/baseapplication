@@ -129,6 +129,9 @@ public:
 	std::vector<std::string> mSchoolVector;  
 	void getSchools();
 
+	//questions
+	void getQuestions();
+
 	//timeout
 	int  checkForTimeout();
 
@@ -150,8 +153,6 @@ public:
         //commands
         void storeCommands(Shape* shape);
 	void sendCommand(Game* game);
-
-
 };
 
 #endif

@@ -52,6 +52,9 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	//this will need updating whenever a new school is added to db...
 	getSchools();	
 
+	//get questions
+	getQuestions();
+
 	//create games
 	mGameVector.push_back(new Game(this,1));
 	mGameVector.push_back(new Game(this,2));
@@ -514,6 +517,37 @@ void Server::getSchools()
 
         PQfinish(conn);
 }
+
+void Server::getQuestions()
+{
+        PGconn          *conn;
+        PGresult        *res;
+        int             rec_count;
+        int             row;
+        int             col;
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+        res = PQexec(conn,
+       "select * from questions");
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                puts("We did not get any data!");
+                //exit(0);
+        }
+        rec_count = PQntuples(res);
+        printf("We received %d records.\n", rec_count);
+        for (row=0; row<rec_count; row++)
+        {
+                const char* c = PQgetvalue(res, row, 1);
+                std::string school(c);
+
+                mSchoolVector.push_back(school);
+        }
+
+        PQclear(res);
+
+        PQfinish(conn);
+}
+
 
 void Server::readPackets()
 {
