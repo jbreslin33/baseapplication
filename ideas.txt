@@ -44,4 +44,10 @@ methods: could i just send an id?
 
 
 cons: update for enemy? 
+how will we keep score of battle without sending back and forth with server? reading is easy anyway it's just writing that's expensive so as long as we are not writing alot...
+can i record every answer? 
+you should ony write at the end of the battle.....?or better yet end of game????
+this way game is responsible for keeping all data.....So that being said I should be able to simply load all questions in a vector in game....store level of client in var on server....then pick random questions from lower levels for 50% of questions.... other 50 is again the current level we are tryinhg to master... 
+
+1: get levels for clients...
 
