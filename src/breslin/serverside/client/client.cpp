@@ -96,7 +96,6 @@ void Client::processUpdate()
 {
 	if (mGame)
 	{
-		LogString("proc");	
 	}
 }
 
@@ -152,6 +151,7 @@ void Client::remove()
 	}
 }
 
+//you need to send all schools at once and all questions..
 void Client::sendSchools()
 {
 	//loop thru each char... 
@@ -177,6 +177,30 @@ void Client::sendSchools()
 	}
 }
 
+void Client::sendQuestions()
+{
+        //loop thru each char...
+        for (unsigned int i = 0; i < mServer->mQuestionsVector.size(); i++)
+        {
+                mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+                mServer->mMessage.WriteByte(mServer->mMessageAddQuestions); // add type
+                if (mClientID > 0)
+                {
+                        mServer->mMessage.WriteByte(mClientID); // add mClientID for browsers
+                }
+                int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school
+                mServer->mMessage.WriteByte(length); //send length
+
+                //loop thru length and write it
+                for (int b=0; b < length; b++)
+                {
+                        mServer->mMessage.WriteByte(mServer->mQuestionsVector.at(i).at(b));             
+                }
+
+                //send it
+                SendPacket(&mServer->mMessage);
+        }
+}
 
 void Client::sendAllShapes()
 {

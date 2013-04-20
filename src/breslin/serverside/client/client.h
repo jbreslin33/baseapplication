@@ -97,6 +97,9 @@ public:
 	//schools
 	void sendSchools();
 
+	//questions
+	void sendQuestions();
+
 	//game
 	void joinGame(Game* game);
 	void leaveGame();

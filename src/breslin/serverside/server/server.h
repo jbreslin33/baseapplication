@@ -102,6 +102,9 @@ public:
 	//add school
 	static const int mMessageAddSchool              = -109;
 
+	//add question 
+	static const int mMessageAddQuestion            = -76;
+
 	//login
 	static const int mMessageLogin              	 = -110;
 	static const int mMessageLoginBrowser        	 = -125;
