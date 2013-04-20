@@ -98,7 +98,7 @@ public:
 	void sendSchools();
 
 	//questions
-	void sendQuestions();
+	void sendQuestion(int id);
 
 	//game
 	void joinGame(Game* game);
@@ -112,11 +112,6 @@ public:
 	void logout();
 	void checkLogin(Message* mes);
         bool getPasswordMatch(std::string username,std::string password);
-
-	//questions
-	void sendQuestion();
-	void writeQuestion();
-	void writeQuestionBrowser();
 
 	//clients address to send back messages to
 	struct sockaddr *GetSocketAddress(void) { return &mMyaddress; }

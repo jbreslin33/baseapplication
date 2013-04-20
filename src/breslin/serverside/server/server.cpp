@@ -18,7 +18,7 @@
 
 //game
 #include "../game/game.h"
-#include "../game/gameMath.h"
+#include "../game/gamePartido.h"
 
 //math
 #include "../../math/vector3D.h"
@@ -57,7 +57,7 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 
 	//create games
 	mGameVector.push_back(new Game(this,1));
-	mGameVector.push_back(new Game(this,2));
+	mGameVector.push_back(new GamePartido(this,2));
 }
 
 Server::~Server()

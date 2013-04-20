@@ -177,29 +177,26 @@ void Client::sendSchools()
 	}
 }
 
-void Client::sendQuestions()
+void Client::sendQuestion(int id)
 {
         //loop thru each char...
-        for (unsigned int i = 0; i < mServer->mQuestionsVector.size(); i++)
-        {
-                mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
-                mServer->mMessage.WriteByte(mServer->mMessageAddQuestions); // add type
-                if (mClientID > 0)
-                {
-                        mServer->mMessage.WriteByte(mClientID); // add mClientID for browsers
-                }
-                int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school
-                mServer->mMessage.WriteByte(length); //send length
+	mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+       	mServer->mMessage.WriteByte(mServer->mMessageAddQuestion); // add type
+       	if (mClientID > 0)
+       	{
+       	         mServer->mMessage.WriteByte(mClientID); // add mClientID for browsers
+       	}
+       	int length = mServer->mSchoolVector.at(id).length();  // get length of string containing school
+       	mServer->mMessage.WriteByte(length); //send length
 
-                //loop thru length and write it
-                for (int b=0; b < length; b++)
-                {
-                        mServer->mMessage.WriteByte(mServer->mQuestionsVector.at(i).at(b));             
-                }
+       	//loop thru length and write it
+       	for (int i=0; i < length; i++)
+       	{
+       		mServer->mMessage.WriteByte(mServer->mQuestionsVector.at(id).at(i));             
+       	}
 
-                //send it
-                SendPacket(&mServer->mMessage);
-        }
+       	//send it
+	SendPacket(&mServer->mMessage);
 }
 
 void Client::sendAllShapes()
@@ -230,17 +227,6 @@ void Client::sendAllShapesBrowser()
 			SendPacket(&mServer->mMessage);
 		}
 	}
-}
-
-void Client::sendQuestion()
-{
-	//generate question based on level etc
-	
-	
-	//send it
-	//SendPacket(...
-//	you could actually just SendPacket in writeQuestion and writeQuestionBrowser because we are not looping
-//but we will not because it confuses this.
 }
 
 //connected
@@ -375,17 +361,6 @@ bool Client::getPasswordMatch(std::string username,std::string password)
 
         return match;
 }
-
-void Client::writeQuestion()
-{
-
-}
-
-void Client::writeQuestionBrowser()
-{
-}
-
-
 
 
 void Client::SendPacket(Message *theMes)
