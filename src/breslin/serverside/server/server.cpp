@@ -537,9 +537,21 @@ void Server::getQuestions()
         printf("We received %d records.\n", rec_count);
         for (row=0; row<rec_count; row++)
         {
-                const char* c = PQgetvalue(res, row, 0);
-                std::string question_id(c);
-                mQuestionIDVector.push_back(question_id);
+                const char* a = PQgetvalue(res, row, 0);
+                std::string aString(a);
+                mQuestionIDVector.push_back(aString);
+
+                const char* b = PQgetvalue(res, row, 1);
+                std::string bString(b);
+                mQuestionsVector.push_back(bString);
+
+                const char* c = PQgetvalue(res, row, 2);
+                std::string cString(c);
+                mAnswersVector.push_back(cString);
+
+                const char* d = PQgetvalue(res, row, 3);
+                std::string dString(d);
+                mLevelsVector.push_back(dString);
         }
 
         PQclear(res);

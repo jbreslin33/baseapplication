@@ -129,8 +129,6 @@ public:
 	std::vector<std::string> mSchoolVector;  
 	void getSchools();
 
-
-
 	//questions
 	std::vector<std::string> mQuestionIDVector;  
 	std::vector<std::string> mQuestionsVector;  
