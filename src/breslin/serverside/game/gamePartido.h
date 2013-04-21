@@ -7,6 +7,7 @@ using namespace std;
 
 //class Network;
 class Server;
+class Shape;
 
 class GamePartido : public Game
 {
@@ -16,7 +17,8 @@ public:
 	~GamePartido();
 
 	//time
-	void	processUpdate();
+	void processUpdate();
+	void collision(Shape* shape1, Shape* shape2);
 };
 
 #endif
