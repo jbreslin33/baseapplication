@@ -1,6 +1,7 @@
 #ifndef BATTLE_H
 #define BATTLE_H
 
+class Shape;
 
 class Battle 
 {
@@ -10,6 +11,9 @@ public:
 	~Battle();
 
 void processUpdate();
+
+bool mOver;
+
 };
 
 #endif

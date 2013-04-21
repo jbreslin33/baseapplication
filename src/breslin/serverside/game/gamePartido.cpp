@@ -27,7 +27,7 @@ GamePartido::~GamePartido()
 void GamePartido::processUpdate()
 {
 	Game::processUpdate();
- 
+	
 	//process Battles	
 	for (unsigned int i = 0; i < mBattleVector.size(); i++)
         {
@@ -40,14 +40,8 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 {
 	//do regular collision of backing off shapes
 	Game::collision(shape1,shape2);	
-	LogString("setting mInBattle");
-/*	
 
-	//ShapePartido* shapePartido1 = );
-	//ShapePartido* shapePartido2 = shape2;
-
-	//now go into battle mode...
-	shapePartido1->mInBattle = true;	
-	ShapePartido2->shape2->mInBattle = true;	
-*/
+	//create a battle
+	Battle* battle = new Battle(shape1,shape2);
+	mBattleVector.push_back(battle);
 }
