@@ -9,6 +9,9 @@
 //shape
 #include "../shape/shapePartido.h"
 
+//battles
+#include "../battle/battle.h"
+
 #include <stdio.h>
 
 GamePartido::GamePartido(Server* server, int id) : Game(server,id)
@@ -24,6 +27,13 @@ GamePartido::~GamePartido()
 void GamePartido::processUpdate()
 {
 	Game::processUpdate();
+ 
+	//process Battles	
+	for (unsigned int i = 0; i < mBattleVector.size(); i++)
+        {
+                mBattleVector.at(i)->processUpdate();
+        }
+
 }
 
 void GamePartido::collision(Shape* shape1, Shape* shape2)
