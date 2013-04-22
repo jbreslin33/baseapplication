@@ -66,6 +66,9 @@ public:
 ~Client();
 
 	Quiz* mQuiz;
+	
+	//Message
+        Message mMessage;
 
 	//id used just for browser clients for now, if it's 0 then we know it's a c++ java client.
 	int mClientID;

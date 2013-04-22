@@ -4,6 +4,9 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
+//message
+#include "../message/message.h"
+
 //network
 #include "../network/network.h"
 
@@ -117,23 +120,23 @@ void Client::sendSchools()
 	//loop thru each char... 
 	for (unsigned int i = 0; i < mServer->mSchoolVector.size(); i++)
 	{
-        	mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
-        	mServer->mMessage.WriteByte(mServer->mMessageAddSchool); // add type
+        	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        	mMessage.WriteByte(mServer->mMessageAddSchool); // add type
 		if (mClientID > 0)
 		{
-        		mServer->mMessage.WriteByte(mClientID); // add mClientID for browsers 
+        		mMessage.WriteByte(mClientID); // add mClientID for browsers 
 		}
 		int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school 
-		mServer->mMessage.WriteByte(length); //send length 
+		mMessage.WriteByte(length); //send length 
 
 		//loop thru length and write it 
 		for (int b=0; b < length; b++)
 		{
-			mServer->mMessage.WriteByte(mServer->mSchoolVector.at(i).at(b));		
+			mMessage.WriteByte(mServer->mSchoolVector.at(i).at(b));		
 		}
 		
 		//send it
-		SendPacket(&mServer->mMessage);
+		SendPacket(&mMessage);
 	}
 }
 
