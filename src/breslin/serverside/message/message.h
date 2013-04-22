@@ -33,7 +33,7 @@ public:
 	char			*ReadString(void);
 
 	bool			GetOverFlow(void)	{ return overFlow; }
-	int				GetSize(void)		{ return size; }
+	int			getSize(void)		{ return size; }
 	void			SetSize(int s)		{ size = s; }
 
 	char			*data;

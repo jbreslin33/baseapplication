@@ -215,12 +215,15 @@ int Network::getPacket(SOCKET sock, char *data, struct sockaddr *from)
 	}
 	return ret;
 }
+ //mServer->mNetwork->sendPacket(mServer->mNetwork->mSocket, theMes->GetSize(), theMes->data, mMyaddress);
 
-void Network::sendPacket(SOCKET sock, int length, char *data, struct sockaddr addr)
+//void Network::sendPacket(SOCKET sock, int length, char *data, struct sockaddr addr)
+void Network::sendPacketTo(Client* client)
 {
 	int	ret;
-	
-	ret = sendto(sock, data, length, 0, &addr, sizeof(addr));
+
+	//ret = sendto(sock, data, length, 0, &addr, sizeof(addr));	
+	ret = sendto(mSocket, client->mMessage.data, client->mMessage.getSize(), 0, &client->mMyaddress, sizeof(client->mMyaddress));
 
 	if(ret == -1)
 	{

@@ -312,7 +312,8 @@ void Client::SendPacket(Message *theMes)
 		return;
 	}
 
-	mServer->mNetwork->sendPacket(mServer->mNetwork->mSocket, theMes->GetSize(), theMes->data, mMyaddress);
+	//mServer->mNetwork->sendPacket(mServer->mNetwork->mSocket, theMes->GetSize(), theMes->data, mMyaddress);
+	mServer->mNetwork->sendPacketTo(this);
 
 	// Check if the packet is sequenced
 	theMes->BeginReading();

@@ -443,7 +443,7 @@ void Server::sendPackets()
 
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
-		if(mMessage.GetSize() == 0)
+		if(mMessage.getSize() == 0)
 			continue;
 
 		//is the a browser client but not THE browser client which is -1 normal c++ clients are 0 if so skip
