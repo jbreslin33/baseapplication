@@ -101,7 +101,6 @@ public:
 	void sendQuestion(int id);
 
 	//game
-	void joinGame(Game* game);
 	void leaveGame();
 
 	//connect

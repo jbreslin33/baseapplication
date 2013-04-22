@@ -68,6 +68,9 @@ public:
 	//scope
  	bool    checkScope(Client* client, Shape* shape);
 
+
+	//join
+	void join(Client* client);
 };
 
 #endif

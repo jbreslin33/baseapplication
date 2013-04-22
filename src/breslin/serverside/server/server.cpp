@@ -207,8 +207,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				{ 
 					if (mGameVector.at(g)->mID == gameID)
 					{
-						client->joinGame(mGameVector.at(g)); //now call everything else inside client...
-						LogString("joinGame:%d",g);
+						mGameVector.at(g)->join(client); 
 					}
 				}
 			}
@@ -232,8 +231,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				{ 
 					if (mGameVector.at(g)->mID == gameID)
 					{
-						client->joinGame(mGameVector.at(g)); //now call everything else inside client...
-						LogString("joinGame:%d",g);
+						mGameVector.at(g)->join(client); 
 					}
 				}
                                 

@@ -208,3 +208,23 @@ Vector3D* Game::getOpenPoint()
 		}
         }
 }
+
+
+void Game::join(Client* client)
+{
+        client->mGame = this;
+
+        //let this client know about all shapes
+        if (client->mClientID > 0)
+        {
+                client->sendAllShapesBrowser();
+        }
+        else
+        {
+                client->sendAllShapes();
+        }
+
+        //create the shape for this client -- the avatar
+        client->mShape = new Shape(getOpenIndex(),this,client,getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mRoot,true,true,.66f * 30.5,1,false);
+}
+
