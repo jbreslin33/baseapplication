@@ -228,3 +228,24 @@ void Game::join(Client* client)
         client->mShape = new Shape(getOpenIndex(),this,client,getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mRoot,true,true,.66f * 30.5,1,false);
 }
 
+void Game::leave(Client* client)
+{
+        //you gotta delete the shape here...and tell everyone about it. i would tell them in shape class
+        if (client->mShape)
+        {
+                mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
+                mServer->mMessage.WriteByte(mServer->mMessageLeaveGame); // add type
+                //tell human client that it has left game
+                if (client->mClientID > 0)
+                {
+                        mServer->mMessage.WriteByte(client->mClientID); //client id for browsers
+                }
+                client->SendPacket(&mServer->mMessage);
+
+                client->mShape->remove();
+        }
+
+        client->mGame = NULL;
+}
+
+

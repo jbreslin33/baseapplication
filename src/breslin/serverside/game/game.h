@@ -71,6 +71,7 @@ public:
 
 	//join
 	void join(Client* client);
+	void leave(Client* client);
 };
 
 #endif

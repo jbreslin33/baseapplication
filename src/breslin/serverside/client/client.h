@@ -100,9 +100,6 @@ public:
 	//questions
 	void sendQuestion(int id);
 
-	//game
-	void leaveGame();
-
 	//connect
 	void sendConnected();
 

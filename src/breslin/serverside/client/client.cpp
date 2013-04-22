@@ -81,7 +81,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 Client::~Client()
 {
 	//this will check if there is an mShape
-	leaveGame();
+	mGame->leave(this);
 
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
         {
@@ -97,27 +97,6 @@ void Client::processUpdate()
 	if (mGame)
 	{
 	}
-}
-
-void Client::leaveGame()
-{
-
-	//you gotta delete the shape here...and tell everyone about it. i would tell them in shape class
-	if (mShape)
-	{
-        	mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
-        	mServer->mMessage.WriteByte(mServer->mMessageLeaveGame); // add type
-		//tell human client that it has left game 
-		if (mClientID > 0)
-		{	
-        		mServer->mMessage.WriteByte(mClientID); //client id for browsers
-		}
-		SendPacket(&mServer->mMessage);
-
-		mShape->remove();
-	}	
-
-	mGame = NULL;
 }
 
 void Client::remove()
