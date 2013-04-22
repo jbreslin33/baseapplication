@@ -86,10 +86,6 @@ public:
 	//processUpdate
 	void processUpdate();
 
-	//shape
-	void sendAllShapes();
-	void sendAllShapesBrowser();
-
 	//client
 	void remove();
 	void			SendPacket(Message *message);

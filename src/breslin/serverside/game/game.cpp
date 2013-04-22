@@ -217,11 +217,11 @@ void Game::join(Client* client)
         //let this client know about all shapes
         if (client->mClientID > 0)
         {
-                client->sendAllShapesBrowser();
+                sendAllShapesBrowser(client);
         }
         else
         {
-                client->sendAllShapes();
+                sendAllShapes(client);
         }
 
         //create the shape for this client -- the avatar
@@ -248,4 +248,33 @@ void Game::leave(Client* client)
         client->mGame = NULL;
 }
 
+void Game::sendAllShapes(Client* client)
+{
+        for (unsigned int i = 0; i < mShapeVector.size(); i++)
+        {
+                if (client->mShape != mShapeVector.at(i))
+                {
+                        //write it
+                        mShapeVector.at(i)->writeAdd(client);
+
+                        //send it
+                        client->SendPacket(&mServer->mMessage);
+                }
+        }
+}
+
+void Game::sendAllShapesBrowser(Client* client)
+{
+        for (unsigned int i = 0; i < mShapeVector.size(); i++)
+        {
+                if (client->mShape != mShapeVector.at(i))
+                {
+                        //write it
+                        mShapeVector.at(i)->writeAddBrowser(client);
+
+                        //send it
+                        client->SendPacket(&mServer->mMessage);
+                }
+        }
+}
 

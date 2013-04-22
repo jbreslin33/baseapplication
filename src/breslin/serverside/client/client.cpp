@@ -159,36 +159,6 @@ void Client::sendQuestion(int id)
 	SendPacket(&mServer->mMessage);
 }
 
-void Client::sendAllShapes()
-{
-	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
-	{
-		if (mShape != mGame->mShapeVector.at(i))
-		{
-			//write it
-			mGame->mShapeVector.at(i)->writeAdd(this);
-		
-			//send it
-			SendPacket(&mServer->mMessage);
-		}
-	}
-}
-
-void Client::sendAllShapesBrowser()
-{
-	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
-	{
-		if (mShape != mGame->mShapeVector.at(i))
-		{
-			//write it
-			mGame->mShapeVector.at(i)->writeAddBrowser(this);
-		
-			//send it
-			SendPacket(&mServer->mMessage);
-		}
-	}
-}
-
 //connected
 void Client::sendConnected()
 {
