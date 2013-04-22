@@ -42,6 +42,6 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 	Game::collision(shape1,shape2);	
 
 	//create a battle
-	Battle* battle = new Battle(shape1,shape2);
+	Battle* battle = new Battle(this,shape1,shape2);
 	mBattleVector.push_back(battle);
 }
