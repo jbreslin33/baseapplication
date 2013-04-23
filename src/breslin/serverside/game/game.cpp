@@ -240,7 +240,7 @@ void Game::leave(Client* client)
                 {
                         mServer->mMessage.WriteByte(client->mClientID); //client id for browsers
                 }
-                client->SendPacket(&mServer->mMessage);
+                mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
 
                 client->mShape->remove();
         }
@@ -258,7 +258,7 @@ void Game::sendAllShapes(Client* client)
                         mShapeVector.at(i)->writeAdd(client);
 
                         //send it
-                        client->SendPacket(&mServer->mMessage);
+                	mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
                 }
         }
 }
@@ -273,7 +273,7 @@ void Game::sendAllShapesBrowser(Client* client)
                         mShapeVector.at(i)->writeAddBrowser(client);
 
                         //send it
-                        client->SendPacket(&mServer->mMessage);
+                	mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
                 }
         }
 }
