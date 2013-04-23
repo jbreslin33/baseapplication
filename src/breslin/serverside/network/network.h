@@ -25,11 +25,13 @@ typedef int SOCKET;
 #define DREAMSOCK_INVALID_SOCKET	-1
 
 class DreamLinuxSock;
-
+class Client;
+class Message;
+class Server;
 class Network 
 {
 public:
-Network(const char netInterface[32], int port);
+Network(Server* server, const char netInterface[32], int port);
 ~Network();
 
 DreamLinuxSock* mDreamLinuxSock;
@@ -45,11 +47,12 @@ void closeSocket(SOCKET sock);
 
 int getPacket(SOCKET sock, char *data, struct sockaddr *from);
 void sendPacket(SOCKET sock, int length, char *data, struct sockaddr addr);
+void sendPacketTo(Client* client, Message* message);
 void broadcast(SOCKET sock, int length, char *data, int port);
 
 int getCurrentSystemTime();
 
 SOCKET mSocket;
-
+Server* mServer;
 };
 #endif

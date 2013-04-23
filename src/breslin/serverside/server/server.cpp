@@ -47,7 +47,7 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	mPort = serverPort;
 
 	// Create network
-	mNetwork = new Network(localIP, mPort);
+	mNetwork = new Network(this,localIP, mPort);
 
 	//this will need updating whenever a new school is added to db...
 	getSchools();	
@@ -450,7 +450,9 @@ void Server::sendPackets()
 		if(mClientVector.at(i)->mClientID > 0)
 			continue; 
 
-		mClientVector.at(i)->SendPacket(&mMessage);
+		//mClientVector.at(i)->SendPacket(&mMessage);
+		mNetwork->sendPacketTo(mClientVector.at(i),&mMessage);
+			
 	}
 }
 

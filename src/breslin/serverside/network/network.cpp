@@ -1,6 +1,7 @@
 #include "network.h"
 
 #include "../message/message.h"
+#include "../server/server.h"
 #include "../tdreamsock/dreamSockLog.h"
 
 #include <stdio.h>
@@ -25,8 +26,9 @@
 #include <string>
 using namespace std;
 
-Network::Network(const char netInterface[32], int port)
+Network::Network(Server* server, const char netInterface[32], int port)
 {
+	mServer = server;	
 	mDreamLinuxSock = new DreamLinuxSock();
 
 	mSocket = openUDPSocket(netInterface, port);
@@ -232,6 +234,47 @@ void Network::sendPacket(SOCKET sock, int length, char *data, struct sockaddr ad
 	}
 }
 
+void Network::sendPacketTo(Client* client, Message* message)
+{
+	// Check that everything is set up
+        if(!mSocket || client->mConnectionState == DREAMSOCK_DISCONNECTED)
+        {
+                LogString("SendPacket error: Could not send because the client is disconnected");
+                return;
+        }
+
+        // If the message overflowed do not send it
+        if(message->GetOverFlow())
+        {
+                LogString("SendPacket error: Could not send because the buffer overflowed");
+                return;
+        }
+
+
+
+	int	ret;
+	
+	ret = sendto(mSocket, message->data, message->GetSize(), 0, &client->mMyaddress, sizeof(client->mMyaddress));
+
+	if(ret == -1)
+	{
+		// Silently handle wouldblock
+		if(errno == EWOULDBLOCK)
+			return;
+
+		LogString("Error code %d: sendto() : %s", errno, strerror(errno));
+	}
+ 	
+	// Check if the packet is sequenced
+        message->BeginReading();
+        int type = message->ReadByte();
+
+        if(type > 0)
+        {
+                mServer->mOutgoingSequence++;
+        }
+
+}
 void Network::broadcast(SOCKET sock, int length, char *data, int port)
 {
 	struct sockaddr_in servaddr;
