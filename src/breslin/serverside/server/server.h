@@ -132,13 +132,6 @@ public:
 	std::vector<std::string> mSchoolVector;  
 	void getSchools();
 
-	//questions
-	std::vector<std::string> mQuestionIDVector;  
-	std::vector<std::string> mQuestionsVector;  
-	std::vector<std::string> mAnswersVector;  
-	std::vector<std::string> mLevelsVector;  
-	void getQuestions();
-
 	//timeout
 	int  checkForTimeout();
 

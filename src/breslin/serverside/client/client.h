@@ -93,7 +93,7 @@ public:
 	void sendSchools();
 
 	//questions
-	void sendQuestion(int id);
+	//void sendQuestion(int id);
 
 	//connect
 	void sendConnected();

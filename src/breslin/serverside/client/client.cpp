@@ -136,7 +136,7 @@ void Client::sendSchools()
 		mServer->mNetwork->sendPacketTo(this,&mMessage);
 	}
 }
-
+/*
 void Client::sendQuestion(int id)
 {
         //loop thru each char...
@@ -158,7 +158,7 @@ void Client::sendQuestion(int id)
        	//send it
 	mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
-
+*/
 //connected
 void Client::sendConnected()
 {
