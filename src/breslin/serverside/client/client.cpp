@@ -44,9 +44,6 @@
 //server side client constructor, many instances will be made, one for each client connected.
 Client::Client(Server* server, struct sockaddr *address, int clientID)
 {
-	//quiz
-	mQuiz = NULL;
-
 	mLoggedIn = false;
 
 	//set client id as this is going to be a browser client

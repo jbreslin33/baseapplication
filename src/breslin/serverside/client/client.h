@@ -56,7 +56,6 @@ class Server;
 class Network;
 class Shape;
 class Game;
-class Quiz;
 
 class Client
 {
@@ -65,8 +64,6 @@ public:
 
 ~Client();
 
-	Quiz* mQuiz;
-	
 	//Message
         Message mMessage;
 
