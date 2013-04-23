@@ -91,7 +91,6 @@ public:
 
 	//client
 	void remove();
-	void			SendPacket(Message *message);
 
 	//schools
 	void sendSchools();

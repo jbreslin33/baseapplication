@@ -26,11 +26,13 @@ typedef int SOCKET;
 
 class DreamLinuxSock;
 class Client;
+class Message;
+class Server;
 
 class Network 
 {
 public:
-Network(const char netInterface[32], int port);
+Network(Server* server, const char netInterface[32], int port);
 ~Network();
 
 DreamLinuxSock* mDreamLinuxSock;
@@ -45,12 +47,13 @@ SOCKET openUDPSocket(const char netInterface[32], int port);
 void closeSocket(SOCKET sock);
 
 int getPacket(SOCKET sock, char *data, struct sockaddr *from);
-void sendPacketTo(Client* client);
+void sendPacketTo(Client* client, Message* message, struct sockaddr* sockaddress);
 void broadcast(SOCKET sock, int length, char *data, int port);
 
 int getCurrentSystemTime();
 
 SOCKET mSocket;
+Server* mServer;
 
 };
 #endif

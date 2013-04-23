@@ -136,7 +136,8 @@ void Client::sendSchools()
 		}
 		
 		//send it
-		SendPacket(&mMessage);
+	//	SendPacket(&mMessage);
+		mServer->mNetwork->sendPacketTo(this,&mMessage,&mMyaddress);
 	}
 }
 
@@ -159,7 +160,7 @@ void Client::sendQuestion(int id)
        	}
 
        	//send it
-	SendPacket(&mMessage);
+	mServer->mNetwork->sendPacketTo(this,&mMessage,&mMyaddress);
 }
 
 //connected
@@ -171,7 +172,7 @@ void Client::sendConnected()
 	{
         	mMessage.WriteByte(mClientID); // add mClientID for browsers 
 	}
-	SendPacket(&mMessage);
+	mServer->mNetwork->sendPacketTo(this,&mMessage,&mMyaddress);
 }
 
 //login
@@ -185,7 +186,7 @@ void Client::login()
 	{
         	mMessage.WriteByte(mClientID); //client id for browsers
 	}	
-	SendPacket(&mMessage);
+	mServer->mNetwork->sendPacketTo(this,&mMessage,&mMyaddress);
 }
 
 void Client::logout()
@@ -198,7 +199,7 @@ void Client::logout()
 	{
         	mMessage.WriteByte(mClientID); //client id for browsers
 	}	
-	SendPacket(&mMessage);
+	mServer->mNetwork->sendPacketTo(this,&mMessage,&mMyaddress);
 }
 
 void Client::checkLogin(Message* mes)
@@ -294,35 +295,4 @@ bool Client::getPasswordMatch(std::string username,std::string password)
 
         return match;
 }
-
-
-void Client::SendPacket(Message *theMes)
-{
-	// Check that everything is set up
-	if(!mServer->mNetwork->mSocket || mConnectionState == DREAMSOCK_DISCONNECTED)
-	{
-		LogString("SendPacket error: Could not send because the client is disconnected");
-		return;
-	}
-
-	// If the message overflowed do not send it
-	if(theMes->GetOverFlow())
-	{
-		LogString("SendPacket error: Could not send because the buffer overflowed");
-		return;
-	}
-
-	//mServer->mNetwork->sendPacket(mServer->mNetwork->mSocket, theMes->GetSize(), theMes->data, mMyaddress);
-	mServer->mNetwork->sendPacketTo(this);
-
-	// Check if the packet is sequenced
-	theMes->BeginReading();
-	int type = theMes->ReadByte();
-
-	if(type > 0)
-	{
-		mServer->mOutgoingSequence++;
-	}
-}
-
 
