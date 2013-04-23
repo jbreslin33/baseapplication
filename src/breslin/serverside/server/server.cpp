@@ -47,7 +47,7 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	mPort = serverPort;
 
 	// Create network
-	mNetwork = new Network(this,localIP, mPort);
+	mNetwork = new Network(localIP, mPort);
 
 	//this will need updating whenever a new school is added to db...
 	getSchools();	
@@ -443,15 +443,14 @@ void Server::sendPackets()
 
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
-		if(mMessage.getSize() == 0)
+		if(mMessage.GetSize() == 0)
 			continue;
 
 		//is the a browser client but not THE browser client which is -1 normal c++ clients are 0 if so skip
 		if(mClientVector.at(i)->mClientID > 0)
 			continue; 
-		LogString("server sendPacketTo before...");
-		mNetwork->sendPacketTo(mClientVector.at(i), &mMessage, &mClientVector.at(i)->mMyaddress);
-		LogString("server sendPacketTo after...");
+
+		mClientVector.at(i)->SendPacket(&mMessage);
 	}
 }
 

@@ -4,12 +4,6 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
-//server
-#include "../server/server.h"
-
-//server
-#include "../network/network.h"
-
 //game
 #include "../game/game.h"
 
@@ -131,13 +125,13 @@ void Shape::sendShapeToClients()
 			{
 				writeAddBrowser(clientToSendTo);
 				//send it
-				mGame->mServer->mNetwork->sendPacketTo(mGame->mServer->mClientVector.at(i),&mGame->mServer->mMessage,&mGame->mServer->mClientVector.at(i)->mMyaddress);
+				clientToSendTo->SendPacket(&mGame->mServer->mMessage);
 			}
 			if (mGame->mServer->mClientVector.at(i)->mClientID == 0)
 			{	
 				writeAdd(clientToSendTo);
 				//send it
-				mGame->mServer->mNetwork->sendPacketTo(mGame->mServer->mClientVector.at(i),&mGame->mServer->mMessage,&mGame->mServer->mClientVector.at(i)->mMyaddress);
+				clientToSendTo->SendPacket(&mGame->mServer->mMessage);
 			}		
 		}
 		
@@ -191,7 +185,7 @@ void Shape::remove()
        						mGame->mServer->mMessage.WriteByte(mGame->mServer->mClientVector.at(i)->mClientID); //client id for browsers
 					}
        					mGame->mServer->mMessage.WriteByte(mIndex);
-					mGame->mServer->mNetwork->sendPacketTo(mGame->mServer->mClientVector.at(i),&mGame->mServer->mMessage,&mGame->mServer->mClientVector.at(i)->mMyaddress);
+ 					mGame->mServer->mClientVector.at(i)->SendPacket(&mGame->mServer->mMessage);
 					LogString("send to this guy:%d",mGame->mServer->mClientVector.at(i)->mClientID);
 				}
 				else
