@@ -1,13 +1,13 @@
-#ifndef QUIZ_H
-#define QUIZ_H
+#ifndef SERVERPARTIDO_H
+#define SERVERPARTIDO_H
 
+#include "server.h"
 
-class Quiz 
+class ServerPartido : public Server
 {
 public:
-	
-	Quiz();
-	~Quiz();
+	ServerPartido(Ogre::Root* root, const char *localIP, int serverPort);	
+	~ServerPartido();
 
 void processUpdate();
 };

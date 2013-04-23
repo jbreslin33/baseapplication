@@ -1,24 +1,23 @@
-//parent
+//parent 
 #include "server.h"
 
-//log
+//log 
 #include "../tdreamsock/dreamSockLog.h"
 
-//network
+//network 
 #include "../network/network.h"
 
 //client
 #include "../client/client.h"
 
 //message
-#include "../message/message.h"
+#include "../message/message.h" 
 
 //shape
 #include "../shape/shape.h"
 
 //game
 #include "../game/game.h"
-#include "../game/gamePartido.h"
 
 //math
 #include "../../math/vector3D.h"
@@ -52,12 +51,8 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	//this will need updating whenever a new school is added to db...
 	getSchools();	
 
-	//get questions
-	getQuestions();
-
-	//create games
+	//create games for now just create standard no frills game of you get to collide with stuff in multiplayer....
 	mGameVector.push_back(new Game(this,1));
-	mGameVector.push_back(new GamePartido(this,2));
 }
 
 Server::~Server()
@@ -65,8 +60,6 @@ Server::~Server()
 	mClientVector.empty();
 	mNetwork->closeSocket(mNetwork->mSocket);
 }
-
-
 
 void Server::processUpdate(int msec)
 {

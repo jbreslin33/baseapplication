@@ -15,6 +15,7 @@
 #include "../serverside/game/game.h"
 
 #include "../serverside/server/server.h"
+#include "../serverside/server/serverPartido.h"
 #include "../serverside/network/network.h"
 #include "../serverside/tdreamsock/dreamSockLog.h"
 
@@ -37,7 +38,22 @@ int main(int argc, char **argv)
         root = new Ogre::Root("plugins.cfg");
 #endif
 
-	Server* server = new Server(root,"",30004);
+	Server* server;
+
+	const char* aServer = "1";	
+	const char* aServerPartido = "2";	
+
+	if (strcmp (argv[1],aServer) == 0)
+	{
+		server = new Server(root,"",30004);	
+	}
+
+	if (strcmp (argv[1],aServerPartido) == 0)
+	{
+		server = new ServerPartido(root,"",30004);	
+	}
+
+	//Server* server = new Server(root,"",30004);	
 
 	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
 	signal(SIGPIPE, SIG_IGN);

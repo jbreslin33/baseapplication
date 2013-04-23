@@ -293,6 +293,7 @@ set(HDRS
 	
 	#server
 	../serverside/server/server.h
+	../serverside/server/serverPartido.h
 	
 	#client
 	../serverside/client/client.h
@@ -359,6 +360,7 @@ set(SRCS
 	
 	#server
 	../serverside/server/server.cpp
+	../serverside/server/serverPartido.cpp
 	
 	#client
 	../serverside/client/client.cpp
