@@ -136,7 +136,7 @@ void Client::sendSchools()
 		}
 		
 		//send it
-		SendPacket(&mMessage);
+		mServer->mNetwork->sendPacketTo(this,&mMessage);
 	}
 }
 
