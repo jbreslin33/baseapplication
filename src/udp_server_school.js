@@ -12,11 +12,11 @@ var skipCounter = 0;
 var fireNumber = 0; //no skipping of frames
 
 //constants
-mCommandOriginX      = 4;
-mCommandOriginY      = 8;
-mCommandOriginZ      = 16;
-mCommandRotationX    = 32;
-mCommandRotationZ    = 64;
+mCommandOriginX      = 1;
+mCommandOriginY      = 2;
+mCommandOriginZ      = 4;
+mCommandRotationX    = 8;
+mCommandRotationZ    = 16;
 
 mServerIP = '192.168.2.88';
 mServerPort = 30004;
@@ -99,8 +99,12 @@ io.sockets.on('connection', function (socket)
 
         socket.on('send_join_game', function(message,remote)
 	{
+                mMessage = message;
+
+		var gameID = mMessage;	               
+
                 //send to c++ server
-                var buf = new Buffer(2);
+                var buf = new Buffer(3);
 
 		//type
                 type = -117;
@@ -108,6 +112,9 @@ io.sockets.on('connection', function (socket)
 
 		//mClientID
                 buf.writeInt8(socket.mClientID,1);
+
+		//gameID
+                buf.writeInt8(gameID,2);
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
