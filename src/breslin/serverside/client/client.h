@@ -89,12 +89,6 @@ public:
 	//client
 	void remove();
 
-	//schools
-	void sendSchools();
-
-	//questions
-	//void sendQuestion(int id);
-
 	//connect
 	void sendConnected();
 

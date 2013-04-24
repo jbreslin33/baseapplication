@@ -48,9 +48,6 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	// Create network
 	mNetwork = new Network(this,localIP, mPort);
 
-	//this will need updating whenever a new school is added to db...
-	getSchools();	
-
 	//create games for now just create standard no frills game of you get to collide with stuff in multiplayer....
 	mGameVector.push_back(new Game(this,1));
 }
@@ -166,6 +163,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	//this should just create a client then client should do what need be done.
 	if (type == mMessageConnect)
 	{
+		LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		Client* client = new Client(this, address, 0);
 	}
 
@@ -476,36 +474,6 @@ void Server::readDB()
         }
 
         puts("==========================");
-        PQclear(res);
-
-        PQfinish(conn);
-}
-
-void Server::getSchools()
-{
-        PGconn          *conn;
-        PGresult        *res;
-        int             rec_count;
-        int             row;
-        int             col;
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,
-       "select * from schools");
-        if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-                puts("We did not get any data!");
-                //exit(0);
-        }
-        rec_count = PQntuples(res);
-        printf("We received %d records.\n", rec_count);
-        for (row=0; row<rec_count; row++)
-        {
-		const char* c = PQgetvalue(res, row, 1);  
-		std::string school(c);
-		
-		mSchoolVector.push_back(school);
-        }
-
         PQclear(res);
 
         PQfinish(conn);

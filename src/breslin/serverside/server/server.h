@@ -128,10 +128,6 @@ public:
 	//port
 	int getPort() { return mPort; }
 
-	//schools
-	std::vector<std::string> mSchoolVector;  
-	void getSchools();
-
 	//timeout
 	int  checkForTimeout();
 
@@ -145,7 +141,7 @@ public:
 	int  getPacket  (char *data, struct sockaddr *from);
 	void sendPackets();
 	void readPackets();
-	void parsePacket(Message *mes, struct sockaddr *address);
+	virtual void parsePacket(Message *mes, struct sockaddr *address);
 
 	//db
 	void readDB();

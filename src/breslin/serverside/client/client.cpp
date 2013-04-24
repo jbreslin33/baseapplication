@@ -70,7 +70,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	if (mClientID >= 0)
 	{
        		sendConnected();
-        	sendSchools();
 	}
 	else
 	{
@@ -111,54 +110,6 @@ void Client::remove()
 	}
 }
 
-//you need to send all schools at once and all questions..
-void Client::sendSchools()
-{
-	//loop thru each char... 
-	for (unsigned int i = 0; i < mServer->mSchoolVector.size(); i++)
-	{
-        	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        	mMessage.WriteByte(mServer->mMessageAddSchool); // add type
-		if (mClientID > 0)
-		{
-        		mMessage.WriteByte(mClientID); // add mClientID for browsers 
-		}
-		int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school 
-		mMessage.WriteByte(length); //send length 
-
-		//loop thru length and write it 
-		for (int b=0; b < length; b++)
-		{
-			mMessage.WriteByte(mServer->mSchoolVector.at(i).at(b));		
-		}
-		
-		//send it
-		mServer->mNetwork->sendPacketTo(this,&mMessage);
-	}
-}
-/*
-void Client::sendQuestion(int id)
-{
-        //loop thru each char...
-	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-       	mMessage.WriteByte(mServer->mMessageAddQuestion); // add type
-       	if (mClientID > 0)
-       	{
-       	         mMessage.WriteByte(mClientID); // add mClientID for browsers
-       	}
-       	int length = mServer->mSchoolVector.at(id).length();  // get length of string containing school
-       	mMessage.WriteByte(length); //send length
-
-       	//loop thru length and write it
-       	for (int i=0; i < length; i++)
-       	{
-       		mMessage.WriteByte(mServer->mQuestionsVector.at(id).at(i));             
-       	}
-
-       	//send it
-	mServer->mNetwork->sendPacketTo(this,&mMessage);
-}
-*/
 //connected
 void Client::sendConnected()
 {
