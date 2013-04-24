@@ -143,9 +143,6 @@ public:
 	void readPackets();
 	virtual void parsePacket(Message *mes, struct sockaddr *address);
 
-	//db
-	void readDB();
-	
         //commands
         void storeCommands(Shape* shape);
 	void sendCommand(Game* game);

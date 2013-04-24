@@ -447,38 +447,6 @@ void Server::sendPackets()
 	}
 }
 
-void Server::readDB()
-{
-
-        PGconn          *conn;
-        PGresult        *res;
-        int             rec_count;
-        int             row;
-        int             col;
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,
-       "select * from schools");
-        if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-                puts("We did not get any data!");
-                //exit(0);
-        }
-        rec_count = PQntuples(res);
-        for (row=0; row<rec_count; row++)
-        {
-                for (col=0; col<3; col++)
-                {
-                        printf("%s\t", PQgetvalue(res, row, col));
-                }
-                puts("");
-        }
-
-        puts("==========================");
-        PQclear(res);
-
-        PQfinish(conn);
-}
-
 void Server::readPackets()
 {
 	char data[1400];
