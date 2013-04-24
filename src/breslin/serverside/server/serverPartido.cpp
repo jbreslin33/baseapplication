@@ -26,7 +26,6 @@ ServerPartido::~ServerPartido()
 
 void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 {
-	LogString("is this$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         ClientPartido* client;
         mes->BeginReading();
 
@@ -39,7 +38,6 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		if (type == mMessageConnect)
         	{
-			LogString("client partido%%%%%%%%%%%%%%%");
                 	ClientPartido* client = new ClientPartido(this, address, 0);
         	}
 

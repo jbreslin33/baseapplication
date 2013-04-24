@@ -99,9 +99,6 @@ public:
 	static const int mMessageDisconnect             = -102;
 	static const int mMessageDisconnectBrowser      = -112;
 
-	//add school
-	static const int mMessageAddSchool              = -109;
-
 	//add question 
 	static const int mMessageAddQuestion            = -76;
 

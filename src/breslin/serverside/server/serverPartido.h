@@ -9,6 +9,9 @@ public:
 	ServerPartido(Ogre::Root* root, const char *localIP, int serverPort);	
 	~ServerPartido();
 
+        //add school
+        static const int mMessageAddSchool = -109;
+
 	//schools
         std::vector<std::string> mSchoolVector;
         void getSchools();
