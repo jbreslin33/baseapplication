@@ -338,6 +338,19 @@ CREATE TABLE questions_attempts (
     answer text
 );
 
+
+--battles last 30 seconds... we ask only 15 questions on average..
+--so 30 seconds
+--have x amount of questions ready
+-- winner is determined by time/questions * correct 
+--even better...
+--send a question to both combatants..whoever gets the right answer first wins. if they are both
+--wrong nobody gets a hit. 
+--advantages of this system are that you get more of a heads up draw.
+--this also allows for 10 questions no matter what...
+-- then if opponent answers before you you just go onto next? no you get a chance up to 5 seconds...then we move on..or we could just have you for now get wiped out....if you get wiped out we could after battle so you need time to recover? 
+--i think you must wait for an answer then show each user the correct answer, then have another round of battle. so after 10 seconds we could time out round. and just show answer for 5 seconds then move on.
+--shoiuld for now just do everything in db...
 --==================================================================
 --================= BATTLES  ====================================
 --==================================================================
@@ -367,9 +380,6 @@ CREATE TABLE battles (
 --DROP TABLE browser cascade; --ie6,ie7,ie8,ie9,ie10,opera9,opera10,firefox8,firefox9
 --DROP TABLE engine cascade; --ogre,torque,javascript,2d_brengine,jmonkey
 --i am thinking to show all?
-
-
-
 
 
 
