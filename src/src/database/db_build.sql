@@ -19,6 +19,7 @@ DROP TABLE questions cascade;
 --==================================================================
 
 DROP TABLE games_attempts cascade;
+DROP TABLE games_instance cascade;
 DROP TABLE games cascade;
 
 --==================================================================
@@ -265,7 +266,7 @@ CREATE TABLE levels_standards_clusters_domains_grades (
 --===================== GAMES =====================================
 --==================================================================
 
---GAMES
+--GAMES such as partido...
 CREATE TABLE games (
     id integer NOT NULL,
     game text NOT NULL UNIQUE,
@@ -274,16 +275,24 @@ CREATE TABLE games (
     picture_closed text NOT NULL
 );
 
---GAMES_ATTEMPTS
+--GAMES_INSTANCE an instance of partido or another game
+CREATE TABLE games_instance (
+    id integer NOT NULL,
+    game_instance_time_start timestamp,
+    game_instance_time_end timestamp,
+    game_id integer NOT NULL
+);
+
+--GAMES_ATTEMPTS a user attempt at a game...
 CREATE TABLE games_attempts (
     id integer NOT NULL,
     game_attempt_time_start timestamp,
     game_attempt_time_end timestamp,
-    game_id integer NOT NULL,
-    user_id integer NOT NULL,
-    level_id double precision NOT NULL, --should this be standard_id?
-	score integer DEFAULT 0 NOT NULL,
-	time_warning boolean DEFAULT false NOT NULL
+    game_instance_id integer NOT NULL,
+    user_id integer NOT NULL
+    --level_id double precision NOT NULL --should this be standard_id?
+	--score integer DEFAULT 0 NOT NULL,
+	--time_warning boolean DEFAULT false NOT NULL
 );
 
 --==================================================================
@@ -509,6 +518,14 @@ CREATE SEQUENCE games_id_seq
     NO MAXVALUE
     CACHE 1;
 
+--GAMES_INSTANCE
+CREATE SEQUENCE games_instance_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
 --GAMES_ATTEMPTS
 CREATE SEQUENCE games_attempts_id_seq
     START WITH 1
@@ -633,6 +650,9 @@ ALTER TABLE public.levels_standards_clusters_domains_grades OWNER TO postgres;
 
 --GAMES
 ALTER TABLE public.games OWNER TO postgres;
+
+--GAMES_INSTANCE
+ALTER TABLE public.games_instance OWNER TO postgres;
 
 --GAMES_ATTEMPTS
 ALTER TABLE public.games_attempts OWNER TO postgres;
@@ -762,6 +782,11 @@ ALTER TABLE public.games_id_seq OWNER TO postgres;
 ALTER SEQUENCE games_id_seq OWNED BY games.id;
 ALTER TABLE ONLY games ALTER COLUMN id SET DEFAULT nextval('games_id_seq'::regclass);
 
+--GAMES_INSTANCE
+ALTER TABLE public.games_instance_id_seq OWNER TO postgres;
+ALTER SEQUENCE games_instance_id_seq OWNED BY games_instance.id;
+ALTER TABLE ONLY games_instance ALTER COLUMN id SET DEFAULT nextval('games_instance_id_seq'::regclass);
+
 --GAMES_ATTEMPTS
 ALTER TABLE public.games_attempts_id_seq OWNER TO postgres;
 ALTER SEQUENCE games_attempts_id_seq OWNED BY games_attempts.id;
@@ -874,6 +899,9 @@ ALTER TABLE levels_standards_clusters_domains_grades ADD PRIMARY KEY (level_id, 
 --GAMES
 ALTER TABLE games ADD PRIMARY KEY (id);
 
+--GAMES_INSTANCE
+ALTER TABLE games_instance ADD PRIMARY KEY (id);
+
 --GAMES_ATTEMPTS
 ALTER TABLE games_attempts ADD PRIMARY KEY (id);
 
@@ -978,10 +1006,12 @@ ALTER TABLE levels_standards_clusters_domains_grades ADD FOREIGN KEY (standard_c
 
 --GAMES
 
+--GAMES_INSTANCE
+ALTER TABLE games_instance ADD FOREIGN KEY (game_id) REFERENCES games(id);
+
 --GAMES_ATTEMPTS
-ALTER TABLE games_attempts ADD FOREIGN KEY (game_id) REFERENCES games(id);
+ALTER TABLE games_attempts ADD FOREIGN KEY (game_instance_id) REFERENCES games(id);
 ALTER TABLE games_attempts ADD FOREIGN KEY (user_id) REFERENCES users(id);
-ALTER TABLE games_attempts ADD FOREIGN KEY (level_id) REFERENCES levels(id);
 
 --==================================================================
 --================= PARTIDO  ====================================
@@ -989,7 +1019,6 @@ ALTER TABLE games_attempts ADD FOREIGN KEY (level_id) REFERENCES levels(id);
 
 --QUESTIONS_ATTEMPTS
 ALTER TABLE questions_attempts ADD FOREIGN KEY (question_id) REFERENCES questions(id);
-ALTER TABLE games_attempts ADD FOREIGN KEY (user_id) REFERENCES users(id);
 
 --QUESTIONS
 ALTER TABLE questions ADD FOREIGN KEY (level_id) REFERENCES levels(id);
