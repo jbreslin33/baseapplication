@@ -333,9 +333,8 @@ CREATE TABLE questions_attempts (
     question_attempt_time_start timestamp,
     question_attempt_time_end timestamp,
     question_id integer NOT NULL,
-    user_id integer NOT NULL,
-    --level_id double precision NOT NULL, --users level_id at time of question...so we can run a report
-    answer text
+    answer text,
+    user_id integer NOT NULL
 );
 
 
