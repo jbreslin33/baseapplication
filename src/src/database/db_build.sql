@@ -6,6 +6,13 @@
 --**************************************************************
 --**************************************************************
 
+--==================================================================
+--====================== PARTIDO  =============================
+--==================================================================
+
+DROP TABLE questions_attempts cascade;
+DROP TABLE questions cascade;
+
 
 --==================================================================
 --====================== GAMES  =============================
@@ -21,9 +28,8 @@ DROP TABLE games cascade;
 DROP TABLE levels_standards_clusters_domains_grades cascade;
 DROP TABLE levels_transactions cascade;
 
-DROP TABLE questions_attempts cascade;
-DROP TABLE questions cascade;
 DROP TABLE levels cascade;
+
 
 --==================================================================
 --====================== PEOPLE  =============================
@@ -234,37 +240,6 @@ CREATE TABLE standards_clusters_domains_grades (
 --====================== LEVELS  =============================
 --==================================================================
 
---QUESTIONS
-CREATE TABLE questions (
-    id integer NOT NULL,
-    question text NOT NULL,
-    answer text NOT NULL,
-    level_id double precision NOT NULL
-);
-
---need to change the way you gain levels.....
---threshold for pass. 100 correct attempts with timestamp 
---your level is basically whatever question you have passed
---you are judged on your last 100 attempts at a level....
---so...if you do not get 100 attempts that where successful and average under 300 seconds than you are not passed that level....
---so you are eligible to be asked the lowest level question you have not mastered plus an algorithm of mastered questions. with a greater percent coming from high levels then obviously lowest percent from low levels...
---take number_of_mastered_levels = 10;
--- so if you have none mastered you get ma1  
---mastered = 0
---live_unmastered =1;
---un_mastered === rest;
-
-
---QUESTIONS_ATTEMPTS
-CREATE TABLE questions_attempts (
-    id integer NOT NULL,
-    question_attempt_time_start timestamp,
-    question_attempt_time_end timestamp,
-    question_id integer NOT NULL,
-    user_id integer NOT NULL,
-    --level_id double precision NOT NULL, --users level_id at time of question...so we can run a report
-    answer text
-);
 
 --LEVELS
 CREATE TABLE levels (
@@ -311,6 +286,41 @@ CREATE TABLE games_attempts (
 	time_warning boolean DEFAULT false NOT NULL
 );
 
+--==================================================================
+--===================== PARTIDO =====================================
+--==================================================================
+
+--QUESTIONS
+CREATE TABLE questions (
+    id integer NOT NULL,
+    question text NOT NULL,
+    answer text NOT NULL,
+    level_id double precision NOT NULL
+);
+
+--need to change the way you gain levels.....
+--threshold for pass. 100 correct attempts with timestamp 
+--your level is basically whatever question you have passed
+--you are judged on your last 100 attempts at a level....
+--so...if you do not get 100 attempts that where successful and average under 300 seconds than you are not passed that level....
+--so you are eligible to be asked the lowest level question you have not mastered plus an algorithm of mastered questions. with a greater percent coming from high levels then obviously lowest percent from low levels...
+--take number_of_mastered_levels = 10;
+-- so if you have none mastered you get ma1  
+--mastered = 0
+--live_unmastered =1;
+--un_mastered === rest;
+
+
+--QUESTIONS_ATTEMPTS
+CREATE TABLE questions_attempts (
+    id integer NOT NULL,
+    question_attempt_time_start timestamp,
+    question_attempt_time_end timestamp,
+    question_id integer NOT NULL,
+    user_id integer NOT NULL,
+    --level_id double precision NOT NULL, --users level_id at time of question...so we can run a report
+    answer text
+);
 
 --==================================================================
 --================= ENVIRONMENT  ====================================
@@ -478,25 +488,8 @@ CREATE SEQUENCE grades_id_seq
 --================= LEVELS  ====================================
 --==================================================================
 
---LEVELS
---QUESTIONS_ATTEMPTS
-CREATE SEQUENCE questions_attempts_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
 --LEVELS_TRANSACTIONS
 CREATE SEQUENCE levels_transactions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
---QUESTIONS
-CREATE SEQUENCE questions_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -523,6 +516,27 @@ CREATE SEQUENCE games_attempts_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
+
+--==================================================================
+--==================================================================
+--================= PARTIDO  ====================================
+--==================================================================
+--QUESTIONS_ATTEMPTS
+CREATE SEQUENCE questions_attempts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+--QUESTIONS
+CREATE SEQUENCE questions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
 
 
 --****************************************************************
@@ -602,8 +616,6 @@ ALTER TABLE public.standards_clusters_domains_grades OWNER TO postgres;
 --==================================================================
 --================= LEVELS  ====================================
 --==================================================================
---QUESTIONS_ATTEMPTS
-ALTER TABLE public.questions_attempts OWNER TO postgres;
 
 --LEVELS
 ALTER TABLE public.levels OWNER TO postgres;
@@ -614,8 +626,6 @@ ALTER TABLE public.levels_transactions OWNER TO postgres;
 --LEVELS_STANDARDS_CLUSTERS_DOMAINS_GRADES
 ALTER TABLE public.levels_standards_clusters_domains_grades OWNER TO postgres;
 
---QUESTIONS
-ALTER TABLE public.questions OWNER TO postgres;
 
 --==================================================================
 --================= GAMES  ====================================
@@ -627,6 +637,15 @@ ALTER TABLE public.games OWNER TO postgres;
 --GAMES_ATTEMPTS
 ALTER TABLE public.games_attempts OWNER TO postgres;
 
+--==================================================================
+--================= PARTIDO  ====================================
+--==================================================================
+
+--QUESTIONS_ATTEMPTS
+ALTER TABLE public.questions_attempts OWNER TO postgres;
+
+--QUESTIONS
+ALTER TABLE public.questions OWNER TO postgres;
 
 --****************************************************************
 --***************************************************************
@@ -728,22 +747,11 @@ ALTER TABLE ONLY standards_clusters_domains_grades ALTER COLUMN id SET DEFAULT n
 --================= LEVELS  ====================================
 --==================================================================
 
---LEVELS
-
---QUESTIONS_ATTEMPTS
-ALTER TABLE public.questions_attempts_id_seq OWNER TO postgres;
-ALTER SEQUENCE questions_attempts_id_seq OWNED BY questions_attempts.id;
-ALTER TABLE ONLY questions_attempts ALTER COLUMN id SET DEFAULT nextval('questions_attempts_id_seq'::regclass);
-
 --LEVELS_TRANSACTIONS
 ALTER TABLE public.levels_transactions_id_seq OWNER TO postgres;
 ALTER SEQUENCE levels_transactions_id_seq OWNED BY levels_transactions.id;
 ALTER TABLE ONLY levels_transactions ALTER COLUMN id SET DEFAULT nextval('levels_transactions_id_seq'::regclass);
 
---QUESTIONS
-ALTER TABLE public.questions_id_seq OWNER TO postgres;
-ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
-ALTER TABLE ONLY questions ALTER COLUMN id SET DEFAULT nextval('questions_id_seq'::regclass);
 
 --==================================================================
 --================= GAMES  ====================================
@@ -759,6 +767,19 @@ ALTER TABLE public.games_attempts_id_seq OWNER TO postgres;
 ALTER SEQUENCE games_attempts_id_seq OWNED BY games_attempts.id;
 ALTER TABLE ONLY games_attempts ALTER COLUMN id SET DEFAULT nextval('games_attempts_id_seq'::regclass);
 
+--==================================================================
+--================= PARTIDO  ====================================
+--==================================================================
+
+--QUESTIONS_ATTEMPTS
+ALTER TABLE public.questions_attempts_id_seq OWNER TO postgres;
+ALTER SEQUENCE questions_attempts_id_seq OWNED BY questions_attempts.id;
+ALTER TABLE ONLY questions_attempts ALTER COLUMN id SET DEFAULT nextval('questions_attempts_id_seq'::regclass);
+
+--QUESTIONS
+ALTER TABLE public.questions_id_seq OWNER TO postgres;
+ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
+ALTER TABLE ONLY questions ALTER COLUMN id SET DEFAULT nextval('questions_id_seq'::regclass);
 
 --****************************************************************
 --***************************************************************
@@ -836,8 +857,6 @@ ALTER TABLE standards_clusters_domains_grades ADD PRIMARY KEY (id);
 --==================================================================
 --================= LEVELS  ====================================
 --==================================================================
---QUESTIONS_ATTEMPTS
-ALTER TABLE questions_attempts ADD PRIMARY KEY (id);
 
 --LEVELS
 ALTER TABLE levels ADD PRIMARY KEY (id);
@@ -847,9 +866,6 @@ ALTER TABLE levels_transactions ADD PRIMARY KEY (id);
 
 --LEVELS_STANDARDS_CLUSTERS_DOMAINS_GRADES
 ALTER TABLE levels_standards_clusters_domains_grades ADD PRIMARY KEY (level_id, standard_cluster_domain_grade_id);
-
---QUESTIONS
-ALTER TABLE questions ADD PRIMARY KEY (id);
 
 --==================================================================
 --================= GAMES  ====================================
@@ -861,6 +877,15 @@ ALTER TABLE games ADD PRIMARY KEY (id);
 --GAMES_ATTEMPTS
 ALTER TABLE games_attempts ADD PRIMARY KEY (id);
 
+--==================================================================
+--================= PARTIDO  ====================================
+--==================================================================
+
+--QUESTIONS_ATTEMPTS
+ALTER TABLE questions_attempts ADD PRIMARY KEY (id);
+
+--QUESTIONS
+ALTER TABLE questions ADD PRIMARY KEY (id);
 
 --****************************************************************
 --***************************************************************
@@ -937,10 +962,6 @@ ALTER TABLE standards_clusters_domains_grades ADD FOREIGN KEY (cluster_domain_gr
 
 --LEVELS
 
---QUESTIONS_ATTEMPTS
-ALTER TABLE questions_attempts ADD FOREIGN KEY (question_id) REFERENCES questions(id);
-ALTER TABLE games_attempts ADD FOREIGN KEY (user_id) REFERENCES users(id);
---ALTER TABLE games_attempts ADD FOREIGN KEY (level_id) REFERENCES levels(id);
 
 --LEVELS_TRANSACTIONS
 ALTER TABLE levels_transactions ADD FOREIGN KEY (user_id) REFERENCES users(id);
@@ -950,8 +971,6 @@ ALTER TABLE levels_transactions ADD FOREIGN KEY (level_id) REFERENCES levels(id)
 ALTER TABLE levels_standards_clusters_domains_grades ADD FOREIGN KEY (level_id) REFERENCES levels(id);
 ALTER TABLE levels_standards_clusters_domains_grades ADD FOREIGN KEY (standard_cluster_domain_grade_id) REFERENCES standards_clusters_domains_grades(id);
 
---QUESTIONS
-ALTER TABLE questions ADD FOREIGN KEY (level_id) REFERENCES levels(id);
 
 --==================================================================
 --================= GAMES  ====================================
@@ -963,6 +982,17 @@ ALTER TABLE questions ADD FOREIGN KEY (level_id) REFERENCES levels(id);
 ALTER TABLE games_attempts ADD FOREIGN KEY (game_id) REFERENCES games(id);
 ALTER TABLE games_attempts ADD FOREIGN KEY (user_id) REFERENCES users(id);
 ALTER TABLE games_attempts ADD FOREIGN KEY (level_id) REFERENCES levels(id);
+
+--==================================================================
+--================= PARTIDO  ====================================
+--==================================================================
+
+--QUESTIONS_ATTEMPTS
+ALTER TABLE questions_attempts ADD FOREIGN KEY (question_id) REFERENCES questions(id);
+ALTER TABLE games_attempts ADD FOREIGN KEY (user_id) REFERENCES users(id);
+
+--QUESTIONS
+ALTER TABLE questions ADD FOREIGN KEY (level_id) REFERENCES levels(id);
 
 
 --****************************************************************
