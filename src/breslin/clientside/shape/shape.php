@@ -246,7 +246,7 @@ spawnShape: function(position)
 
 
 	v = new Vector3D();	
-	this.scale();
+	//this.scale();
 
 },
 setSrc: function(src)
