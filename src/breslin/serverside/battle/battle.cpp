@@ -9,10 +9,10 @@
 //shape
 #include "../shape/shape.h"
 
-Battle::Battle(Game* game, Shape* shape1, Shape* shape2)
+Battle::Battle(Game* game, std::vector<Shape*> shapeVector)
 {
 	mOver = false;
-
+/*
 	mShapeVector.push_back(shape1);
 	mShapeVector.push_back(shape2);
 
@@ -21,6 +21,7 @@ Battle::Battle(Game* game, Shape* shape1, Shape* shape2)
 		LogString("client in battle:%d",shape1->mClient->mClientID);
 		LogString("client in battle:%d",shape2->mClient->mClientID);
 	}
+*/
 }
 
 Battle::~Battle()

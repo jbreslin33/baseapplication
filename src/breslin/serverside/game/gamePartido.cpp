@@ -46,6 +46,11 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 
 	//create a battle
 	LogString("create battle");
-	Battle* battle = new Battle(this,shape1,shape2);
+
+	std::vector<Shape*> shapeVector;
+	shapeVector.push_back(shape1);
+	shapeVector.push_back(shape2);
+
+	Battle* battle = new Battle(this,shapeVector);
 	mBattleVector.push_back(battle);
 }

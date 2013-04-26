@@ -12,7 +12,7 @@ class Battle
 {
 public:
 	
-	Battle(Game* game, Shape* shape1, Shape* shape2);
+	Battle(Game* game, std::vector<Shape*> shapeVector);
 	~Battle();
 
 //shapes
