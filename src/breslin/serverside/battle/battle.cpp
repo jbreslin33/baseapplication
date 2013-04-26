@@ -13,6 +13,9 @@ Battle::Battle(Game* game, Shape* shape1, Shape* shape2)
 {
 	mOver = false;
 
+	mShapeVector.push_back(shape1);
+	mShapeVector.push_back(shape2);
+
 	if (shape1->mClient)
 	{
 		LogString("client in battle:%d",shape1->mClient->mClientID);
