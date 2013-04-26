@@ -12,16 +12,20 @@
 Battle::Battle(Game* game, std::vector<Shape*> shapeVector)
 {
 	mOver = false;
-/*
-	mShapeVector.push_back(shape1);
-	mShapeVector.push_back(shape2);
+  
+	//add shapes to battle shapeVector
+        for (unsigned int i = 0; i < shapeVector.size(); i++)
+        {
+                mShapeVector.push_back(shapeVector.at(i));
+        }
 
-	if (shape1->mClient)
+        for (unsigned int i = 0; i < shapeVector.size(); i++)
 	{
-		LogString("client in battle:%d",shape1->mClient->mClientID);
-		LogString("client in battle:%d",shape2->mClient->mClientID);
+		if (mShapeVector.at(i)->mClient)
+		{
+			LogString("id:%d",mShapeVector.at(i)->mClient->mClientID);
+		}
 	}
-*/
 }
 
 Battle::~Battle()

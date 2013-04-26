@@ -42,15 +42,14 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 	Game::collision(shape1,shape2);	
 
 	//now let's check if these guys are already in a battle
-		
 
-	//create a battle
-	LogString("create battle");
+
 
 	std::vector<Shape*> shapeVector;
 	shapeVector.push_back(shape1);
 	shapeVector.push_back(shape2);
 
+	//create a battle
 	Battle* battle = new Battle(this,shapeVector);
 	mBattleVector.push_back(battle);
 }
