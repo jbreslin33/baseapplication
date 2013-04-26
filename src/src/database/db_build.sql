@@ -2711,13 +2711,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --select standards_clusters.standard_id, standards_clusters.cluster_id  from standards_clusters, clusters_grades, clusters_domains where standards_clusters.cluster_id = clusters_grades.cluster_id and clusters_grades.cluster_id = clusters_domains.cluster_id  and clusters_grades.grade_id = 1 and clusters_domains.domain_id = 1; 
 
 
-
-
-
-
-
-
-
-
-
-

@@ -35,5 +35,5 @@ Battle::~Battle()
 void Battle::processUpdate()
 {
 	//this is where you should send questions....
-
+	//select * from questions_attempts limit 10;
 }
