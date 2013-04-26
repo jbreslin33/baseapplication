@@ -42,5 +42,5 @@ void Battle::processUpdate()
 
 
 //for when they answer
-update questions_attempts set question_attempt_time_end = CURRENT_TIMESTAMP, answer='13' where id = 1;
+//update questions_attempts set question_attempt_time_end = CURRENT_TIMESTAMP, answer='13' where id = 1;
 
