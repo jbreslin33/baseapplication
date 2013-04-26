@@ -37,3 +37,10 @@ void Battle::processUpdate()
 	//this is where you should send questions....
 	//select * from questions_attempts limit 10;
 }
+//for inserting when you send question to human client 
+//insert into questions_attempts (question_attempt_time_start, question_attempt_time_end, question_id, answer, user_id) values (CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,1,'1',1);
+
+
+//for when they answer
+update questions_attempts set question_attempt_time_end = CURRENT_TIMESTAMP, answer='13' where id = 1;
+
