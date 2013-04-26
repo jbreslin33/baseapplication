@@ -16,7 +16,7 @@
 
 GamePartido::GamePartido(Server* server, int id) : Game(server,id)
 {
-
+	LogString("constructor for GamePartido");
 }
 
 GamePartido::~GamePartido()
@@ -41,7 +41,9 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 	//do regular collision of backing off shapes
 	Game::collision(shape1,shape2);	
 
+
 	//create a battle
+	LogString("create battle");
 	Battle* battle = new Battle(this,shape1,shape2);
 	mBattleVector.push_back(battle);
 }

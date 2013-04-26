@@ -1,5 +1,8 @@
 #include "battle.h"
 
+//client
+#include "../client/clientPartido.h"
+
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
@@ -9,6 +12,12 @@
 Battle::Battle(Game* game, Shape* shape1, Shape* shape2)
 {
 	mOver = false;
+
+	if (shape1->mClient)
+	{
+		LogString("client in battle:%d",shape1->mClient->mClientID);
+		LogString("client in battle:%d",shape2->mClient->mClientID);
+	}
 }
 
 Battle::~Battle()

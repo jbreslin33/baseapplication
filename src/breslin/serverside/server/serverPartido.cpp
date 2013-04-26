@@ -17,7 +17,7 @@ ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPo
         getQuestions();
 
 	//create game partido!
- 	mGameVector.push_back(new Game(this,2));
+ 	mGameVector.push_back(new GamePartido(this,2));
 }
 
 ServerPartido::~ServerPartido()
