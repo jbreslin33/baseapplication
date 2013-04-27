@@ -61,3 +61,9 @@ select question_attempt_time_end - question_attempt_time_start as mspp from ques
 
 //this is for question 1 id and does a diff on the times
 select questions.id, questions.question, questions_attempts.answer, questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start as ms_per_problem, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id = 1;
+
+//a sum of total time on problems
+ select sum(question_attempt_time_end - question_attempt_time_start) from questions_attempts;
+
+//here is seconds per problem
+select (sum(question_attempt_time_end - question_attempt_time_start))/2 as seconds_per_problem from questions_attempts;
