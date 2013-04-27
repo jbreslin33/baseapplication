@@ -44,3 +44,20 @@ void Battle::processUpdate()
 //for when they answer
 //update questions_attempts set question_attempt_time_end = CURRENT_TIMESTAMP, answer='13' where id = 1;
 
+//for grabbing questions_attempts joined with questions. for comparing answers....and times...
+//select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id;
+
+//how bout for just question.id = 1..this is for evaluating each question in order....
+ select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id = 1;
+
+//here you can do a subtraction of endtime and start time and name the field
+select question_attempt_time_end - question_attempt_time_start as mspp from questions_attempts;
+
+//to find level: did you get any wrong in the last 100 of level 1, if so you are level 1.
+//if none wrong in last 100 of level 1 where any of your times or the avg above 2secs? if so you are level 1.
+
+//if not you may be level 2. proceed to level 2 check which is same as level 1 check.
+
+
+//this is for question 1 id and does a diff on the times
+select questions.id, questions.question, questions_attempts.answer, questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start as ms_per_problem, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id = 1;
