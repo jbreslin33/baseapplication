@@ -16,6 +16,7 @@
 
 Battle::Battle(Game* game, std::vector<Shape*> shapeVector)
 {
+	mGame = game;
 	mOver = false;
   
 	//add shapes to battle shapeVector
@@ -72,49 +73,53 @@ int Battle::getQuestionLevelID()
         int             rec_count;
         int             row;
         int             col;
-	
-	std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
-
-	int question_id = 1;       // number to be converted to a string
-	ostringstream convertA;   // stream used for the conversion
-	convertA << question_id;      // insert the textual representation of 'Number' in the characters in the stream
-	std::string a = convertA.str(); // set 'Result' to the contents of the stream	
-	std::string b = " and questions_attempts.user_id =";
-	int user_id = 2;       // number to be converted to a string
-	ostringstream convertB;   // stream used for the conversion
-	convertB << user_id;      // insert the textual representation of 'Number' in the characters in the stream
-	std::string c = convertB.str(); // set 'Result' to the contents of the stream	
-	std::string d = " order by questions_attempts.question_attempt_time_start";	
-
-	query.append(a);
-        query.append(b);
-        query.append(c);
-        query.append(d);
-
-        const char * q = query.c_str();
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-        res = PQexec(conn,q);
+	for (int i = 0; i < 10; i++)
+	{  	
+	
+		std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
+
+		int question_id = i;       
+		ostringstream convertA;   
+		convertA << question_id; 
+		std::string a = convertA.str(); // set 'Result' to the contents of the stream	
+		std::string b = " and questions_attempts.user_id =";
+		int user_id = 2;       // number to be converted to a string
+		ostringstream convertB;   // stream used for the conversion
+		convertB << user_id;      // insert the textual representation of 'Number' in the characters in the stream
+		std::string c = convertB.str(); // set 'Result' to the contents of the stream	
+		std::string d = " order by questions_attempts.question_attempt_time_start";	
+
+		query.append(a);
+        	query.append(b);
+        	query.append(c);
+        	query.append(d);
+
+        	const char * q = query.c_str();
+
+
+        	res = PQexec(conn,q);
        
-        if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-                puts("We did not get any data!");
-                //exit(0);
-        }
+        	if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        	{
+                	puts("We did not get any data!");
+        	}
 
-        rec_count = PQntuples(res);
-        printf("We received %d records.\n", rec_count);
-	printf("query:%s",q);
+        	rec_count = PQntuples(res);
+        	printf("We received %d records.\n", rec_count);
+		printf("query:%s",q);
 
-        for (row=0; row<rec_count; row++)
-        {
+        	for (row=0; row<rec_count; row++)
+        	{
         
+		}
+
+        	PQclear(res);
+
 	}
-
-        PQclear(res);
-
-        PQfinish(conn);
+     	PQfinish(conn);
 }
 
 /*

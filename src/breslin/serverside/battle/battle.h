@@ -22,8 +22,9 @@ void processUpdate();
 int getQuestionLevelID();
 
 bool mOver;
-
-
+	
+Game* mGame; 
+	
 };
 
 #endif
