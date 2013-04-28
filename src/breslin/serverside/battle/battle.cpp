@@ -66,10 +66,13 @@ int Battle::getQuestionLevelID(int userID)
 		ostringstream convertA;   
 		convertA << question_id; 
 		std::string a = convertA.str(); 	
+
 		std::string b = " and questions_attempts.user_id =";
-		ostringstream convertB;   
-		convertB << userID;   
-		std::string c = convertB.str(); 
+
+		ostringstream convertC;   
+		convertC << userID;   
+		std::string c = convertC.str(); 
+
 		std::string d = " order by questions_attempts.question_attempt_time_start DESC limit ";	
  		ostringstream convertE;
                 convertE << mLimit;  
@@ -82,16 +85,11 @@ int Battle::getQuestionLevelID(int userID)
         	query.append(e);
 
         	const char * q = query.c_str();
-
         	res = PQexec(conn,q);
-
-       
         	if (PQresultStatus(res) != PGRES_TUPLES_OK)
         	{
                 	puts("We did not get any data!");
         	}
-
-
         	rec_count = PQntuples(res);
 
 		//right off the bat we can check if user has even attepted 10 questions...
@@ -134,6 +132,42 @@ int Battle::getQuestionLevelID(int userID)
 		/*
 		select (sum(question_attempt_time_end - question_attempt_time_start))/2 as seconds_per_problem from questions_attempts where question_id = 1 limit 5;
 		*/
+		query = "select (sum(question_attempt_time_end - question_attempt_time_start))/";
+		std::string z = " as seconds_per_problem from questions_attempts where question_id = "; 
+		std::string x = " limit ";
+
+		query.append(e);
+		query.append(z);
+		query.append(e);
+        
+		query = "select * from questions_attempts";
+		query = "select (sum(question_attempt_time_end - question_attempt_time_start))/2 as seconds_per_problem from questions_attempts where question_id = 1 limit 5";
+	
+		q = query.c_str();
+        	res = PQexec(conn,q);
+        	if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        	{
+                	puts("We did not get any data!");
+        	}
+        	rec_count = PQntuples(res);
+
+		for (row=0; row<rec_count; row++)
+		{
+                	for (col=0; col<1; col++)
+			{
+                		printf("%s\t", PQgetvalue(res, row, col));
+                	}
+                	puts("");
+         	}
+/*
+        	for (row=0; row<rec_count; row++)
+		{
+       			const char* seconds_per_problem_char = PQgetvalue(res, row, 0); 
+			to_char(seconds_per_problem_char, 'HH12:MI:SS');
+			LogString("got some");
+			LogString("seconds_per_problem:%s",seconds_per_problem_char);
+		}
+*/
 	}
      	PQfinish(conn);
 }
