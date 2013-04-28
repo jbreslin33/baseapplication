@@ -19,7 +19,7 @@ public:
 std::vector<Shape*> mShapeVector;       //every shape in the battle..
 
 void processUpdate();
-int getQuestionLevelID();
+int getQuestionLevelID(int userID);
 
 bool mOver;
 	

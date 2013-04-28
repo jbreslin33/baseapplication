@@ -24,7 +24,7 @@ Battle::Battle(Game* game, std::vector<Shape*> shapeVector)
         {
                 mShapeVector.push_back(shapeVector.at(i));
 		//let's call query of db for question levels
-		getQuestionLevelID();	
+		getQuestionLevelID(shapeVector.at(i)->mClient->mUserID);	
         }
 
         for (unsigned int i = 0; i < shapeVector.size(); i++)
@@ -66,7 +66,7 @@ void Battle::processUpdate()
         res = PQexec(conn,q);
 
 */
-int Battle::getQuestionLevelID()
+int Battle::getQuestionLevelID(int userID)
 {
         PGconn          *conn;
         PGresult        *res;

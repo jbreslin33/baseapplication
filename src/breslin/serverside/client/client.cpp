@@ -52,6 +52,8 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	//1 or greater than client represents a browser client and should have a shape
 	mClientID = clientID;
 
+	mUserID = 0;
+
 	//game
 	mGame = NULL;
 
@@ -209,7 +211,7 @@ bool Client::getPasswordMatch(std::string username,std::string password)
         int             row;
         int             col;
         bool match = false;
-        std::string query = "select username,password from users where username = '";
+        std::string query = "select id, username, password from users where username = '";
         std::string a = "' ";
         std::string b = "and password = '";
         std::string c = "'";
@@ -233,6 +235,14 @@ bool Client::getPasswordMatch(std::string username,std::string password)
         rec_count = PQntuples(res);
         if (rec_count > 0)
         {
+		const char* value = PQgetvalue(res, row, 0);
+		stringstream strValue;
+		strValue << value;
+		unsigned int intValue;
+		strValue >> intValue;
+		mUserID = intValue;
+		LogString("mUserID:%d",mUserID);
+	
                 match = true;
         }
 
