@@ -31,7 +31,8 @@ Battle::Battle(GamePartido* game, std::vector<Shape*> shapeVector)
                 mShapeVector.push_back(shapeVector.at(i));
 
 		//let's call query of db for question levels
-		getQuestionLevelID(shapeVector.at(i)->mClient->mUserID);	
+		int questionID = getQuestionLevelID(shapeVector.at(i)->mClient->mUserID);	
+		LogString("user is questionID:%d",questionID);
         }
 }
 
@@ -55,7 +56,7 @@ int Battle::getQuestionLevelID(int userID)
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-	for (int i = 0; i < mGame->mServer->mQuestionCount; i++)
+	for (int i = 1; i < mGame->mServer->mQuestionCount; i++)
 	{  	
 		std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
@@ -77,11 +78,18 @@ int Battle::getQuestionLevelID(int userID)
         	const char * q = query.c_str();
 
         	res = PQexec(conn,q);
+
        
         	if (PQresultStatus(res) != PGRES_TUPLES_OK)
         	{
                 	puts("We did not get any data!");
         	}
+
+		//right off the bat we can check if user has even attepted 10 questions...
+		if (rec_count < 10)
+		{
+			return i;	
+		}
 
         	rec_count = PQntuples(res);
         	printf("We received %d records.\n", rec_count);
