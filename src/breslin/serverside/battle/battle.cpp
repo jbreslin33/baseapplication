@@ -24,6 +24,9 @@ Battle::Battle(GamePartido* game, std::vector<Shape*> shapeVector)
 {
 	mGame = game;
 	mOver = false;
+
+	mLimit = 5; 
+
   
 	//add shapes to battle shapeVector
         for (unsigned int i = 0; i < shapeVector.size(); i++)
@@ -32,7 +35,6 @@ Battle::Battle(GamePartido* game, std::vector<Shape*> shapeVector)
 
 		//let's call query of db for question levels
 		int questionID = getQuestionLevelID(shapeVector.at(i)->mClient->mUserID);	
-		LogString("user is questionID:%d",questionID);
         }
 }
 
@@ -68,12 +70,16 @@ int Battle::getQuestionLevelID(int userID)
 		ostringstream convertB;   
 		convertB << userID;   
 		std::string c = convertB.str(); 
-		std::string d = " order by questions_attempts.question_attempt_time_start DESC limit 5";	
+		std::string d = " order by questions_attempts.question_attempt_time_start DESC limit ";	
+ 		ostringstream convertE;
+                convertE << mLimit;  
+                std::string e = convertE.str();
 
 		query.append(a);
         	query.append(b);
         	query.append(c);
         	query.append(d);
+        	query.append(e);
 
         	const char * q = query.c_str();
 
@@ -87,12 +93,16 @@ int Battle::getQuestionLevelID(int userID)
 
 
         	rec_count = PQntuples(res);
-        	printf("We received %d records.\n", rec_count);
 
 		//right off the bat we can check if user has even attepted 10 questions...
-		if (rec_count < 5)
+		if (rec_count < mLimit)
 		{
+			LogString("TEST NUMBER OF QUESTIONS ASKED TOTAL: FAILED FOR USER:%d",userID);
 			return i;	
+		}
+		else
+		{
+			LogString("TEST NUMBER OF QUESTIONS ASKED TOTAL: PASSED FOR USER:%d",userID);
 		}
 
         	for (row=0; row<rec_count; row++)
@@ -106,17 +116,24 @@ int Battle::getQuestionLevelID(int userID)
 
 			if (question == answer)
 			{
-				LogString("Correct answer"); 
 			}
 			else
 			{
-				LogString("INcorrect answer"); 
+				LogString("TEST IF ALL CORRECT: FAILED FOR USER:%d", userID);
 				return i;
 			}
 		}
+		LogString("TEST IF ALL CORRECT: PASSED FOR USER:%d", userID);
 
         	PQclear(res);
 
+		//ok you were asked x amount of suffiecient questions for a level
+		//and you got them all right.
+		//now let's check your time
+		//this next query should get us what we need 
+		/*
+		select (sum(question_attempt_time_end - question_attempt_time_start))/2 as seconds_per_problem from questions_attempts where question_id = 1 limit 5;
+		*/
 	}
      	PQfinish(conn);
 }

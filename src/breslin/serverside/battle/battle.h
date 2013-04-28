@@ -24,6 +24,7 @@ int getQuestionLevelID(int userID);
 bool mOver;
 	
 GamePartido* mGame; 
+int mLimit;
 	
 };
 

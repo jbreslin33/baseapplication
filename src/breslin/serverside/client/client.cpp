@@ -241,7 +241,6 @@ bool Client::getPasswordMatch(std::string username,std::string password)
 		unsigned int intValue;
 		strValue >> intValue;
 		mUserID = intValue;
-		LogString("mUserID:%d",mUserID);
 	
                 match = true;
         }
