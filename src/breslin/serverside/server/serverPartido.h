@@ -17,6 +17,7 @@ public:
         void getSchools();
 
         //questions
+	int mQuestionCount;
         void getQuestions();
         std::vector<std::string> mQuestionIDVector;
         std::vector<std::string> mQuestionsVector;

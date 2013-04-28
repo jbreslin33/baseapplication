@@ -4,7 +4,7 @@
 #include "../tdreamsock/dreamSockLog.h"
 
 //server
-#include "../server/server.h"
+#include "../server/serverPartido.h"
 
 //shape
 #include "../shape/shapePartido.h"
@@ -14,8 +14,9 @@
 
 #include <stdio.h>
 
-GamePartido::GamePartido(Server* server, int id) : Game(server,id)
+GamePartido::GamePartido(ServerPartido* server, int id) : Game(server,id)
 {
+	mServer = server;
 	LogString("constructor for GamePartido");
 }
 

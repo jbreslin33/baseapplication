@@ -6,7 +6,7 @@
 using namespace std;
 
 //class Network;
-class Server;
+class ServerPartido;
 class Shape;
 class Battle;
 
@@ -14,7 +14,7 @@ class GamePartido : public Game
 {
 public:
 
-	GamePartido(Server* server, int id);
+	GamePartido(ServerPartido* server, int id);
 	~GamePartido();
 
 	//time
@@ -22,6 +22,9 @@ public:
 	void collision(Shape* shape1, Shape* shape2);
 
 	std::vector<Battle*> mBattleVector;  
+
+	ServerPartido* mServer;
+
 };
 
 #endif

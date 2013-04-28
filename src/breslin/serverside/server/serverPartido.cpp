@@ -10,6 +10,9 @@ ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPo
 :
  Server(root, localIP, serverPort)
 {
+	//questionCount
+	mQuestionCount = 0;
+
 	//get schools
 	getSchools();
 
@@ -75,6 +78,7 @@ void ServerPartido::getQuestions()
                 //exit(0);
         }
         rec_count = PQntuples(res);
+	mQuestionCount = rec_count;
         printf("We received %d records.\n", rec_count);
         for (row=0; row<rec_count; row++)
         {

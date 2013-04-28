@@ -6,13 +6,13 @@
 using namespace std;
 
 class Shape;
-class Game;
+class GamePartido;
 
 class Battle 
 {
 public:
 	
-	Battle(Game* game, std::vector<Shape*> shapeVector);
+	Battle(GamePartido* game, std::vector<Shape*> shapeVector);
 	~Battle();
 
 //shapes
@@ -23,7 +23,7 @@ int getQuestionLevelID(int userID);
 
 bool mOver;
 	
-Game* mGame; 
+GamePartido* mGame; 
 	
 };
 

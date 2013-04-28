@@ -1,7 +1,13 @@
 #include "battle.h"
 
+//game
+#include "../game/gamePartido.h"
+
 //client
 #include "../client/clientPartido.h"
+
+//server
+#include "../server/serverPartido.h"
 
 //log
 #include "../tdreamsock/dreamSockLog.h"
@@ -14,7 +20,7 @@
 #include <postgresql/libpq-fe.h>
 
 
-Battle::Battle(Game* game, std::vector<Shape*> shapeVector)
+Battle::Battle(GamePartido* game, std::vector<Shape*> shapeVector)
 {
 	mGame = game;
 	mOver = false;
@@ -76,7 +82,7 @@ int Battle::getQuestionLevelID(int userID)
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < mGame->mServer->mQuestionCount; i++)
 	{  	
 	
 		std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
