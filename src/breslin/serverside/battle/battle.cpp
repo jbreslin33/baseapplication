@@ -25,7 +25,7 @@ Battle::Battle(GamePartido* game, std::vector<Shape*> shapeVector)
 	mGame = game;
 	mOver = false;
 
-	mLimit = 5; 
+	mLimit = 1; 
 
   
 	//add shapes to battle shapeVector
@@ -129,10 +129,7 @@ int Battle::getQuestionLevelID(int userID)
 		//and you got them all right.
 		//now let's check your time
 		//this next query should get us what we need 
-		/*
-		select (sum(question_attempt_time_end - question_attempt_time_start))/2 as seconds_per_problem from questions_attempts where question_id = 1 limit 5;
-		*/
-		query = "select (sum(question_attempt_time_end - question_attempt_time_start))/";
+		query = "select (avg(question_attempt_time_end - question_attempt_time_start))/";
 		std::string z = " as seconds_per_problem from questions_attempts where question_id = "; 
 		std::string x = " limit ";
 
@@ -141,13 +138,9 @@ int Battle::getQuestionLevelID(int userID)
 		query.append(a);
 		query.append(x);
 		query.append(e);
-		printf("%s\n",query.c_str());
-        
-		query = "select * from questions_attempts";
-		query = "select (sum(question_attempt_time_end - question_attempt_time_start))/2 as seconds_per_problem from questions_attempts where question_id = 1 limit 5";
-	
-		printf("%s\n",query.c_str());
+		
 		q = query.c_str();
+		printf("%s\n",q);
         	res = PQexec(conn,q);
         	if (PQresultStatus(res) != PGRES_TUPLES_OK)
         	{
