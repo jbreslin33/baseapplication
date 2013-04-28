@@ -29,17 +29,10 @@ Battle::Battle(GamePartido* game, std::vector<Shape*> shapeVector)
         for (unsigned int i = 0; i < shapeVector.size(); i++)
         {
                 mShapeVector.push_back(shapeVector.at(i));
+
 		//let's call query of db for question levels
 		getQuestionLevelID(shapeVector.at(i)->mClient->mUserID);	
         }
-
-        for (unsigned int i = 0; i < shapeVector.size(); i++)
-	{
-		if (mShapeVector.at(i)->mClient)
-		{
-			LogString("id:%d",mShapeVector.at(i)->mClient->mClientID);
-		}
-	}
 }
 
 Battle::~Battle()
@@ -51,27 +44,7 @@ void Battle::processUpdate()
 	//this is where you should send questions....
 	//select * from questions_attempts limit 10;
 }
-//select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=1 and questions_attempts.user_id = 2 order by questions_attempts.question_attempt_time_start;
-/*
- bool match = false;
-        std::string query = "select username,password from users where username = '";
-        std::string a = "' ";
-        std::string b = "and password = '";
-        std::string c = "'";
 
-        query.append(username);
-        query.append(a);
-        query.append(b);
-        query.append(password);
-        query.append(c);
-
-        const char * q = query.c_str();
-
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-
-        res = PQexec(conn,q);
-
-*/
 int Battle::getQuestionLevelID(int userID)
 {
         PGconn          *conn;
@@ -84,7 +57,6 @@ int Battle::getQuestionLevelID(int userID)
 
 	for (int i = 0; i < mGame->mServer->mQuestionCount; i++)
 	{  	
-	
 		std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
 		int question_id = i;       
@@ -103,7 +75,6 @@ int Battle::getQuestionLevelID(int userID)
         	query.append(d);
 
         	const char * q = query.c_str();
-
 
         	res = PQexec(conn,q);
        
