@@ -25,6 +25,10 @@ ClientPartido::~ClientPartido()
 {
 }
 
+//this gets you question_attempts from a particular questions and particular user_id
+//select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=1 and questions_attempts.user_id = 2 order by questions_attempts.question_attempt_time_start;
+
+
 //you need to send all schools at once and all questions..
 void ClientPartido::sendSchools()
 {
