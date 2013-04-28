@@ -76,13 +76,14 @@ int Battle::getQuestionLevelID()
 	std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
 	int question_id = 1;       // number to be converted to a string
-	ostringstream convert;   // stream used for the conversion
-	convert << question_id;      // insert the textual representation of 'Number' in the characters in the stream
-	std::string a = convert.str(); // set 'Result' to the contents of the stream	
+	ostringstream convertA;   // stream used for the conversion
+	convertA << question_id;      // insert the textual representation of 'Number' in the characters in the stream
+	std::string a = convertA.str(); // set 'Result' to the contents of the stream	
 	std::string b = " and questions_attempts.user_id =";
-	int user_id = 1;       // number to be converted to a string
-	convert << user_id;      // insert the textual representation of 'Number' in the characters in the stream
-	std::string c = convert.str(); // set 'Result' to the contents of the stream	
+	int user_id = 2;       // number to be converted to a string
+	ostringstream convertB;   // stream used for the conversion
+	convertB << user_id;      // insert the textual representation of 'Number' in the characters in the stream
+	std::string c = convertB.str(); // set 'Result' to the contents of the stream	
 	std::string d = " order by questions_attempts.question_attempt_time_start";	
 
 	query.append(a);
@@ -104,6 +105,7 @@ int Battle::getQuestionLevelID()
 
         rec_count = PQntuples(res);
         printf("We received %d records.\n", rec_count);
+	printf("query:%s",q);
 
         for (row=0; row<rec_count; row++)
         {
