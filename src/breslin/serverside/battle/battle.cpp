@@ -68,7 +68,7 @@ int Battle::getQuestionLevelID(int userID)
 		ostringstream convertB;   
 		convertB << userID;   
 		std::string c = convertB.str(); 
-		std::string d = " order by questions_attempts.question_attempt_time_start DESC";	
+		std::string d = " order by questions_attempts.question_attempt_time_start DESC limit 5";	
 
 		query.append(a);
         	query.append(b);
@@ -90,7 +90,7 @@ int Battle::getQuestionLevelID(int userID)
         	printf("We received %d records.\n", rec_count);
 
 		//right off the bat we can check if user has even attepted 10 questions...
-		if (rec_count < 10)
+		if (rec_count < 5)
 		{
 			return i;	
 		}
