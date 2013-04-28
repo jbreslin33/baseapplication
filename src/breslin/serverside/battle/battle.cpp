@@ -85,18 +85,30 @@ int Battle::getQuestionLevelID(int userID)
                 	puts("We did not get any data!");
         	}
 
+
+        	rec_count = PQntuples(res);
+        	printf("We received %d records.\n", rec_count);
+
 		//right off the bat we can check if user has even attepted 10 questions...
 		if (rec_count < 10)
 		{
 			return i;	
 		}
 
-        	rec_count = PQntuples(res);
-        	printf("We received %d records.\n", rec_count);
-
         	for (row=0; row<rec_count; row++)
         	{
-        
+			//checking that question is correct..
+       			const char* question = PQgetvalue(res, row, 1); 
+       			const char* answer   = PQgetvalue(res, row, 2); 
+			if (question != answer)
+			{
+				LogString("INcorrect answer"); 
+				return i;
+			}
+			else
+			{
+				LogString("correct answer"); 
+			}
 		}
 
         	PQclear(res);
