@@ -98,22 +98,20 @@ int Battle::getQuestionLevelID(int userID)
         	for (row=0; row<rec_count; row++)
         	{
 			//checking that question is correct..
-       			const char* question = PQgetvalue(res, row, 1); 
-       			const char* answer   = PQgetvalue(res, row, 2); 
+       			const char* question_char = PQgetvalue(res, row, 1); 
+       			const char* answer_char = PQgetvalue(res, row, 2); 
 
-			std::string question_string(question, 15);	
-			std::string answer_string(answer, 15);	
-			printf("question_string:%s",question_string);
-			printf("answer_string:%s",answer_string);
- 			if (question_string.compare(answer_string) == 0)
-			//if (&question == &answer)
+			int question = atoi (question_char);
+			int answer   = atoi (answer_char);
+
+			if (question == answer)
 			{
-				LogString("INcorrect answer"); 
-				return i;
+				LogString("Correct answer"); 
 			}
 			else
 			{
-				LogString("Correct answer"); 
+				LogString("INcorrect answer"); 
+				return i;
 			}
 		}
 
