@@ -68,7 +68,7 @@ int Battle::getQuestionLevelID(int userID)
 		ostringstream convertB;   
 		convertB << userID;   
 		std::string c = convertB.str(); 
-		std::string d = " order by questions_attempts.question_attempt_time_start";	
+		std::string d = " order by questions_attempts.question_attempt_time_start DESC";	
 
 		query.append(a);
         	query.append(b);
@@ -100,14 +100,20 @@ int Battle::getQuestionLevelID(int userID)
 			//checking that question is correct..
        			const char* question = PQgetvalue(res, row, 1); 
        			const char* answer   = PQgetvalue(res, row, 2); 
-			if (question != answer)
+
+			std::string question_string(question, 15);	
+			std::string answer_string(answer, 15);	
+			printf("question_string:%s",question_string);
+			printf("answer_string:%s",answer_string);
+ 			if (question_string.compare(answer_string) == 0)
+			//if (&question == &answer)
 			{
 				LogString("INcorrect answer"); 
 				return i;
 			}
 			else
 			{
-				LogString("correct answer"); 
+				LogString("Correct answer"); 
 			}
 		}
 
