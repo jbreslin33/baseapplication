@@ -76,7 +76,7 @@ int Battle::getQuestionLevelID(int userID)
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 3; i++)
 	{  	
 	
 		std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
@@ -84,12 +84,11 @@ int Battle::getQuestionLevelID(int userID)
 		int question_id = i;       
 		ostringstream convertA;   
 		convertA << question_id; 
-		std::string a = convertA.str(); // set 'Result' to the contents of the stream	
+		std::string a = convertA.str(); 	
 		std::string b = " and questions_attempts.user_id =";
-		int user_id = 2;       // number to be converted to a string
-		ostringstream convertB;   // stream used for the conversion
-		convertB << user_id;      // insert the textual representation of 'Number' in the characters in the stream
-		std::string c = convertB.str(); // set 'Result' to the contents of the stream	
+		ostringstream convertB;   
+		convertB << userID;   
+		std::string c = convertB.str(); 
 		std::string d = " order by questions_attempts.question_attempt_time_start";	
 
 		query.append(a);
@@ -109,7 +108,6 @@ int Battle::getQuestionLevelID(int userID)
 
         	rec_count = PQntuples(res);
         	printf("We received %d records.\n", rec_count);
-		printf("query:%s",q);
 
         	for (row=0; row<rec_count; row++)
         	{
