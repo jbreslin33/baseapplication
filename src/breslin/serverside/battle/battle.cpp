@@ -85,7 +85,6 @@ int Battle::getQuestionLevelID(int userID)
         	query.append(e);
 
         	const char * q = query.c_str();
-		LogString("query:%s",q);
         	res = PQexec(conn,q);
         	if (PQresultStatus(res) != PGRES_TUPLES_OK)
         	{
@@ -114,7 +113,6 @@ int Battle::getQuestionLevelID(int userID)
 			int question = atoi (question_char);
 			int answer   = atoi (answer_char);
 			int seconds_per_problem = atoi (seconds_per_problem_char);
-			LogString("spp:%d",seconds_per_problem);
 
 			if (question == answer)
 			{
@@ -125,6 +123,16 @@ int Battle::getQuestionLevelID(int userID)
 				return i;
 			}
 
+			if (seconds_per_problem < 2000)
+			{
+
+			}
+			else
+			{
+				LogString("TEST IF FAST ENOUGH: FAILED FOR USER:%d", userID);
+				return i;
+			}
+
 
 
 		}
@@ -132,50 +140,11 @@ int Battle::getQuestionLevelID(int userID)
 		LogString("TEST IF ALL CORRECT: PASSED FOR USER:%d", userID);
 
         	PQclear(res);
-
-		//ok you were asked x amount of suffiecient questions for a level
-		//and you got them all right.
-		//now let's check your time
-		//this next query should get us what we need 
-		query = "select (avg(question_attempt_time_end - question_attempt_time_start))/";
-		std::string z = " as seconds_per_problem from questions_attempts where question_id = "; 
-		std::string x = " limit ";
-
-		query.append(e);
-		query.append(z);
-		query.append(a);
-		query.append(x);
-		query.append(e);
-		
-		q = query.c_str();
-		printf("%s\n",q);
-        	res = PQexec(conn,q);
-        	if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        	{
-                	puts("We did not get any data!");
-        	}
-        	rec_count = PQntuples(res);
-
-		for (row=0; row<rec_count; row++)
-		{
-                	for (col=0; col<1; col++)
-			{
-                		printf("%s\t", PQgetvalue(res, row, col));
-                	}
-                	puts("");
-         	}
-/*
-        	for (row=0; row<rec_count; row++)
-		{
-       			const char* seconds_per_problem_char = PQgetvalue(res, row, 0); 
-			to_char(seconds_per_problem_char, 'HH12:MI:SS');
-			LogString("got some");
-			LogString("seconds_per_problem:%s",seconds_per_problem_char);
-		}
-*/
 	}
      	PQfinish(conn);
 }
+
+
 
 /*
                 for (row=0; row<rec_count; row++)
