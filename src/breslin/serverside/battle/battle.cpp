@@ -60,7 +60,7 @@ int Battle::getQuestionLevelID(int userID)
 
 	for (int i = 1; i < mGame->mServer->mQuestionCount; i++)
 	{  	
-		std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
+		std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
 		int question_id = i;       
 		ostringstream convertA;   
@@ -92,7 +92,7 @@ int Battle::getQuestionLevelID(int userID)
         	}
         	rec_count = PQntuples(res);
 
-		//right off the bat we can check if user has even attepted 10 questions...
+		//right off the bat we can check if user has even attepted mLimit questions...
 		if (rec_count < mLimit)
 		{
 			LogString("TEST NUMBER OF QUESTIONS ASKED TOTAL: FAILED FOR USER:%d",userID);
@@ -120,7 +120,10 @@ int Battle::getQuestionLevelID(int userID)
 				LogString("TEST IF ALL CORRECT: FAILED FOR USER:%d", userID);
 				return i;
 			}
+
+
 		}
+
 		LogString("TEST IF ALL CORRECT: PASSED FOR USER:%d", userID);
 
         	PQclear(res);
@@ -170,6 +173,16 @@ int Battle::getQuestionLevelID(int userID)
 }
 
 /*
+                for (row=0; row<rec_count; row++)
+                {
+                        for (col=0; col<5; col++)
+                        {
+                                printf("%s\t", PQgetvalue(res, row, col));
+                        }
+                        puts("");
+                }
+
+
 for inserting when you send question to human client 
 insert into questions_attempts (question_attempt_time_start, question_attempt_time_end, question_id, answer, user_id) values (CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,1,'1',1);
 
