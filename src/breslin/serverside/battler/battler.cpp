@@ -28,8 +28,10 @@ Battler::Battler(Battle* battle, Shape* shape)
 	mBattle = battle;
 	mShape = shape;
 
-	mQuestionLevelID = getQuestionLevelID();
-	LogString("ask question:%d",mQuestionLevelID);
+	mFirstUnmasteredQuestionID = getQuestionLevelID();
+	LogString("first unmastered question id:%d",mFirstUnmasteredQuestionID);
+
+	
 
 }  
 
@@ -43,6 +45,7 @@ void Battler::processUpdate()
 	//select * from questions_attempts limit 10;
 }
 
+//find lowest level but also fill up an array of possible questions...
 int Battler::getQuestionLevelID()
 {
         PGconn          *conn;
@@ -53,6 +56,7 @@ int Battler::getQuestionLevelID()
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
+//check all questions... to find the earliest non-mastered and all mastered ones...
         for (int i = 1; i < mBattle->mGame->mServer->mQuestionCount; i++)
         {
                 std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, extract(epoch from questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start) * 1000 as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";

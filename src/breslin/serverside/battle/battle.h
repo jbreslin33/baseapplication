@@ -2,7 +2,6 @@
 #define BATTLE_H
 
 #include <vector>
-
 using namespace std;
 
 class Shape;

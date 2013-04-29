@@ -1,6 +1,9 @@
 #ifndef BATTLER_H
 #define BATTLER_H
 
+#include <vector>
+using namespace std;
+
 class Shape;
 class Battle;
 
@@ -16,7 +19,8 @@ int getQuestionLevelID();
 	
 Battle* mBattle; 
 Shape* mShape;
-int mQuestionLevelID;	
+int mFirstUnmasteredQuestionID;	
+std::vector<int*> mMasteredQuestionIDVector;    
 };
 
 #endif
