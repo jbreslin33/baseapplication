@@ -15,12 +15,12 @@ public:
 	~Battler();
 
 void processUpdate();
-int getQuestionLevelID();
+void getQuestionLevelID();
 	
 Battle* mBattle; 
 Shape* mShape;
 int mFirstUnmasteredQuestionID;	
-std::vector<int*> mMasteredQuestionIDVector;    
+std::vector<int> mMasteredQuestionIDVector;    
 };
 
 #endif

@@ -28,7 +28,7 @@ Battler::Battler(Battle* battle, Shape* shape)
 	mBattle = battle;
 	mShape = shape;
 
-	mFirstUnmasteredQuestionID = getQuestionLevelID();
+	getQuestionLevelID();
 	LogString("first unmastered question id:%d",mFirstUnmasteredQuestionID);
 
 	
@@ -44,10 +44,12 @@ void Battler::processUpdate()
 	//this is where you should send questions....
 	//select * from questions_attempts limit 10;
 }
-
-//find lowest level but also fill up an array of possible questions...
-int Battler::getQuestionLevelID()
+///mMasteredQuestionIDVector
+//find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
+void Battler::getQuestionLevelID()
 {
+	bool foundFirstUnmasteredID = false;
+
         PGconn          *conn;
         PGresult        *res;
         int             rec_count;
@@ -94,7 +96,12 @@ int Battler::getQuestionLevelID()
                 //right off the bat we can check if user has even attepted mLimit questions...
                 if (rec_count < mBattle->mLimit)
                 {
-                        return i;
+			if (!foundFirstUnmasteredID)
+			{	
+				mFirstUnmasteredQuestionID = i;
+				foundFirstUnmasteredID = true;	
+			}
+			continue;
                 }
                 else
                 {
@@ -116,7 +123,12 @@ int Battler::getQuestionLevelID()
                         }
                         else
                         {
-                                return i;
+				if (!foundFirstUnmasteredID)
+				{	
+					mFirstUnmasteredQuestionID = i;
+					foundFirstUnmasteredID = true;	
+				}
+				continue;
                         }
 
                         if (seconds_per_problem < 2000)
@@ -125,8 +137,18 @@ int Battler::getQuestionLevelID()
                         }
                         else
                         {
-                                return i;
+				if (!foundFirstUnmasteredID)
+				{	
+					mFirstUnmasteredQuestionID = i;
+					foundFirstUnmasteredID = true;	
+				}
+				continue;
                         }
+
+			//made it???? mastered??
+			//add to mastered
+			mMasteredQuestionIDVector.push_back(i);
+
                 }
                 PQclear(res);
         }
