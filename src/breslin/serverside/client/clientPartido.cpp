@@ -11,9 +11,6 @@ ClientPartido::ClientPartido(ServerPartido* server, struct sockaddr *address, in
 	//server
 	mServer = server;
 
-	//questionLevel
-	mQuestionID = 0;
-
         if (mClientID >= 0)
         {
                 sendSchools();

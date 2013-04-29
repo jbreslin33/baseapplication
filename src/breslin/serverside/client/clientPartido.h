@@ -15,7 +15,6 @@ public:
 
 	ServerPartido* mServer;	
 
-	int mQuestionID;	
 };
 
 #endif
