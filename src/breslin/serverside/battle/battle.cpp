@@ -60,7 +60,7 @@ int Battle::getQuestionLevelID(int userID)
 
 	for (int i = 1; i < mGame->mServer->mQuestionCount; i++)
 	{  	
-		std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
+		std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, extract(epoch from questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start) * 1000 as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
 		int question_id = i;       
 		ostringstream convertA;   
@@ -85,6 +85,7 @@ int Battle::getQuestionLevelID(int userID)
         	query.append(e);
 
         	const char * q = query.c_str();
+		LogString("query:%s",q);
         	res = PQexec(conn,q);
         	if (PQresultStatus(res) != PGRES_TUPLES_OK)
         	{
@@ -108,9 +109,12 @@ int Battle::getQuestionLevelID(int userID)
 			//checking that question is correct..
        			const char* question_char = PQgetvalue(res, row, 1); 
        			const char* answer_char = PQgetvalue(res, row, 2); 
+       			const char* seconds_per_problem_char = PQgetvalue(res, row, 4); 
 
 			int question = atoi (question_char);
 			int answer   = atoi (answer_char);
+			int seconds_per_problem = atoi (seconds_per_problem_char);
+			LogString("spp:%d",seconds_per_problem);
 
 			if (question == answer)
 			{
@@ -120,6 +124,7 @@ int Battle::getQuestionLevelID(int userID)
 				LogString("TEST IF ALL CORRECT: FAILED FOR USER:%d", userID);
 				return i;
 			}
+
 
 
 		}
