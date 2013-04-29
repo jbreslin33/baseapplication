@@ -88,15 +88,15 @@ void ServerPartido::getQuestions()
 
                 const char* b = PQgetvalue(res, row, 1);
                 std::string bString(b);
-                mQuestionsVector.push_back(bString);
+                mQuestionVector.push_back(bString);
 
                 const char* c = PQgetvalue(res, row, 2);
                 std::string cString(c);
-                mAnswersVector.push_back(cString);
+                mAnswerVector.push_back(cString);
 
                 const char* d = PQgetvalue(res, row, 3);
                 std::string dString(d);
-                mLevelsVector.push_back(dString);
+                mLevelVector.push_back(dString);
         }
 
         PQclear(res);

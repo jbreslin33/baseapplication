@@ -7,6 +7,7 @@ using namespace std;
 
 class Shape;
 class GamePartido;
+class Battler;
 
 class Battle 
 {
@@ -17,6 +18,8 @@ public:
 
 //shapes
 std::vector<Shape*> mShapeVector;       //every shape in the battle..
+
+std::vector<Battler*> mBattlerVector;       //every battler in the battle..
 
 void processUpdate();
 int getQuestionLevelID(int userID);

@@ -15,6 +15,9 @@
 //shape
 #include "../shape/shape.h"
 
+//battler
+#include "../battler/battler.h"
+
 //postgresql
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
@@ -26,15 +29,15 @@ Battle::Battle(GamePartido* game, std::vector<Shape*> shapeVector)
 	mOver = false;
 
 	mLimit = 1; 
-
   
 	//add shapes to battle shapeVector
         for (unsigned int i = 0; i < shapeVector.size(); i++)
         {
+		//add to shape vector
                 mShapeVector.push_back(shapeVector.at(i));
 
-		//let's call query of db for question levels
-		int questionID = getQuestionLevelID(shapeVector.at(i)->mClient->mUserID);	
+		//create and add a new Battler...
+		mBattlerVector.push_back(new Battler(this,shapeVector.at(i)));
         }
 }
 
@@ -47,104 +50,28 @@ void Battle::processUpdate()
 	//this is where you should send questions....
 	//select * from questions_attempts limit 10;
 }
-
-int Battle::getQuestionLevelID(int userID)
+/*
+void Battle::sendQuestionToClient(Client* client)
 {
-        PGconn          *conn;
-        PGresult        *res;
-        int             rec_count;
-        int             row;
-        int             col;
+                mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+                mMessage.WriteByte(mServer->mMessageAddSchool); // add type
+                if (mClientID > 0)
+                {
+                        mMessage.WriteByte(mClientID); // add mClientID for browsers
+                }
+                int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school
+                mMessage.WriteByte(length); //send length
 
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+                //loop thru length and write it
+                for (int b=0; b < length; b++)
+                {
+                        mMessage.WriteByte(mServer->mQuestionVector.at(i).at(b));
+                }
 
-	for (int i = 1; i < mGame->mServer->mQuestionCount; i++)
-	{  	
-		std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, extract(epoch from questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start) * 1000 as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
-
-		int question_id = i;       
-		ostringstream convertA;   
-		convertA << question_id; 
-		std::string a = convertA.str(); 	
-
-		std::string b = " and questions_attempts.user_id =";
-
-		ostringstream convertC;   
-		convertC << userID;   
-		std::string c = convertC.str(); 
-
-		std::string d = " order by questions_attempts.question_attempt_time_start DESC limit ";	
- 		ostringstream convertE;
-                convertE << mLimit;  
-                std::string e = convertE.str();
-
-		query.append(a);
-        	query.append(b);
-        	query.append(c);
-        	query.append(d);
-        	query.append(e);
-
-        	const char * q = query.c_str();
-        	res = PQexec(conn,q);
-        	if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        	{
-                	puts("We did not get any data!");
-        	}
-        	rec_count = PQntuples(res);
-
-		//right off the bat we can check if user has even attepted mLimit questions...
-		if (rec_count < mLimit)
-		{
-			LogString("TEST NUMBER OF QUESTIONS ASKED TOTAL: FAILED FOR USER:%d",userID);
-			return i;	
-		}
-		else
-		{
-			LogString("TEST NUMBER OF QUESTIONS ASKED TOTAL: PASSED FOR USER:%d",userID);
-		}
-
-        	for (row=0; row<rec_count; row++)
-        	{
-			//checking that question is correct..
-       			const char* question_char = PQgetvalue(res, row, 1); 
-       			const char* answer_char = PQgetvalue(res, row, 2); 
-       			const char* seconds_per_problem_char = PQgetvalue(res, row, 4); 
-
-			int question = atoi (question_char);
-			int answer   = atoi (answer_char);
-			int seconds_per_problem = atoi (seconds_per_problem_char);
-
-			if (question == answer)
-			{
-			}
-			else
-			{
-				LogString("TEST IF ALL CORRECT: FAILED FOR USER:%d", userID);
-				return i;
-			}
-
-			if (seconds_per_problem < 2000)
-			{
-
-			}
-			else
-			{
-				LogString("TEST IF FAST ENOUGH: FAILED FOR USER:%d", userID);
-				return i;
-			}
-
-
-
-		}
-
-		LogString("TEST IF ALL CORRECT: PASSED FOR USER:%d", userID);
-
-        	PQclear(res);
-	}
-     	PQfinish(conn);
+                //send it
+                mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
-
-
+*/
 
 /*
                 for (row=0; row<rec_count; row++)

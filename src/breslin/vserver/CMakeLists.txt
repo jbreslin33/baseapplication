@@ -308,6 +308,9 @@ set(HDRS
 	#battle
 	../serverside/battle/battle.h
 	
+	#battler
+	../serverside/battler/battler.h
+	
 )
  
 set(SRCS
@@ -375,6 +378,9 @@ set(SRCS
 	
 	#battle
 	../serverside/battle/battle.cpp
+
+	#battler
+	../serverside/battler/battler.cpp
 )
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}

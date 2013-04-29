@@ -20,9 +20,9 @@ public:
 	int mQuestionCount;
         void getQuestions();
         std::vector<std::string> mQuestionIDVector;
-        std::vector<std::string> mQuestionsVector;
-        std::vector<std::string> mAnswersVector;
-        std::vector<std::string> mLevelsVector;
+        std::vector<std::string> mQuestionVector;
+        std::vector<std::string> mAnswerVector;
+        std::vector<std::string> mLevelVector;
 
 	void parsePacket(Message *mes, struct sockaddr *address);
 };

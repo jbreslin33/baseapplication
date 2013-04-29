@@ -14,6 +14,8 @@ public:
 	void sendSchools();
 
 	ServerPartido* mServer;	
+
+	int mQuestionID;	
 };
 
 #endif
