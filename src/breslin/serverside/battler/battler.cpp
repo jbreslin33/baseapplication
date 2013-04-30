@@ -31,7 +31,7 @@ Battler::Battler(Battle* battle, Shape* shape)
 	getQuestionLevelID();
 	LogString("first unmastered question id:%d",mFirstUnmasteredQuestionID);
 
-//	mWaitingForAnswer = false;
+	mWaitingForAnswer = false;
 	//should we make a state machine?
 	mAnswer = 0; 
 	mQuestion = "";
@@ -47,6 +47,11 @@ void Battler::processUpdate()
 {
 	//this is where you should send questions....
 	//select * from questions_attempts limit 10;
+	if (mWaitingForAnswer == false)
+	{
+		LogString("send question!!!");
+		mWaitingForAnswer = true;
+	}
 	
 }
 ///mMasteredQuestionIDVector

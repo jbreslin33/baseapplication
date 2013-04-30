@@ -47,8 +47,11 @@ Battle::~Battle()
 
 void Battle::processUpdate()
 {
-	//this is where you should send questions....
-	//select * from questions_attempts limit 10;
+        for (unsigned int i = 0; i < mBattlerVector.size(); i++)
+	{
+		mBattlerVector.at(i)->processUpdate();	
+	}
+	
 }
 /*
 void Battle::sendQuestionToClient(Client* client)

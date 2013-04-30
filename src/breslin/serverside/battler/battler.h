@@ -23,6 +23,7 @@ Battle* mBattle;
 Shape* mShape;
 int mFirstUnmasteredQuestionID;	
 std::vector<int> mMasteredQuestionIDVector;    
+bool mWaitingForAnswer;
 std::string mQuestion;
 int mAnswer;
 };
