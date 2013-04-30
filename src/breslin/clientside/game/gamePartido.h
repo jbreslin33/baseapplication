@@ -21,7 +21,8 @@ public:
 
 // constants
 static const char mMessageAskQuestion = -76;
-
+virtual void checkByteBuffer(ByteBuffer* byteBuffer);
+void askQuestion(ByteBuffer* byteBuffer);
 };
 
 #endif
