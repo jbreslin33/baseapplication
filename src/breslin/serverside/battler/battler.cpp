@@ -31,7 +31,11 @@ Battler::Battler(Battle* battle, Shape* shape)
 	getQuestionLevelID();
 	LogString("first unmastered question id:%d",mFirstUnmasteredQuestionID);
 
-	
+//	mWaitingForAnswer = false;
+	//should we make a state machine?
+	mAnswer = 0; 
+	mQuestion = "";
+		
 
 }  
 
@@ -43,6 +47,7 @@ void Battler::processUpdate()
 {
 	//this is where you should send questions....
 	//select * from questions_attempts limit 10;
+	
 }
 ///mMasteredQuestionIDVector
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
