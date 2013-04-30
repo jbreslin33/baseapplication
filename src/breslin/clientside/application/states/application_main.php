@@ -27,7 +27,7 @@ execute: function()
 	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonJoinGameB)
 	{
 	        this.mApplicationBreslin.mButtonHit = 0;
-		this.mApplicationBreslin.mGame = new Game(this.mApplicationBreslin);
+		this.mApplicationBreslin.mGame = new GamePartido(this.mApplicationBreslin);
  		this.mApplicationBreslin.sendJoinGame('2');
                 this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationPlay);
 	}
