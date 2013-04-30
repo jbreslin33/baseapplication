@@ -9,7 +9,7 @@
 #include "../applicationBreslin.h"
 
 //game
-#include "../../game/game.h"
+#include "../../game/gamePartido.h"
 
 //state machine
 #include "../../../statemachine/stateMachine.h"
@@ -47,7 +47,7 @@ void ApplicationMain::execute()
 	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGameB)
 	{
 		mApplicationBreslin->mButtonHit = NULL;
- 		mApplicationBreslin->mGame = new Game(mApplicationBreslin);
+ 		mApplicationBreslin->mGame = new GamePartido(mApplicationBreslin);
 		mApplicationBreslin->sendJoinGame(2);
 		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
 	}

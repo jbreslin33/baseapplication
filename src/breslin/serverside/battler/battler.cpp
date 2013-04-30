@@ -52,6 +52,7 @@ void Battler::processUpdate()
 	//select * from questions_attempts limit 10;
 	if (mWaitingForAnswer == false)
 	{
+		sendQuestion();
 		LogString("send question!!!");
 		mWaitingForAnswer = true;
 	}
@@ -59,7 +60,7 @@ void Battler::processUpdate()
 
 void Battler::sendQuestion()
 {
-	if (mShape->mClient)
+	if (!mShape->mClient)
 	{
 		return;
 	}	

@@ -29,8 +29,8 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
         byteBuffer->BeginReading();
 
         int type = byteBuffer->ReadByte();
-
-        switch(type)
+        
+	switch(type)
         {
                 case mMessageAskQuestion:
                         askQuestion(byteBuffer);
@@ -40,6 +40,6 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 
 void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 {
-
+	LogString("inside askQuestion!!!!!!!!!!!");
 }
 
