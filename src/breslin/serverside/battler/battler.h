@@ -5,6 +5,7 @@
 using namespace std;
 
 #include <string>
+#include "../message/message.h"
 
 class Shape;
 class Battle;
@@ -18,7 +19,7 @@ public:
 
 void processUpdate();
 void getQuestionLevelID();
-	
+void sendQuestion();	
 Battle* mBattle; 
 Shape* mShape;
 int mFirstUnmasteredQuestionID;	
@@ -26,6 +27,7 @@ std::vector<int> mMasteredQuestionIDVector;
 bool mWaitingForAnswer;
 std::string mQuestion;
 int mAnswer;
+Message mMessage;
 };
 
 #endif

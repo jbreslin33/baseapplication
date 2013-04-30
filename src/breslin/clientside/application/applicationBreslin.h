@@ -50,6 +50,7 @@ static const char mMessageLoggedOut   = -114;
 static const char mMessageJoinGame    = -107;
 static const char mMessageDisconnect  = -102;
 static const char mMessageLeaveGame   =  -99;
+static const char mMessageAskQuestion =  -76;
 
 //Network
 Network*     mNetwork;

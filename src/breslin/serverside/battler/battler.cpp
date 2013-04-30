@@ -16,6 +16,9 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
+//network
+#include "../network/network.h"
+
 //shape
 #include "../shape/shape.h"
 
@@ -52,8 +55,57 @@ void Battler::processUpdate()
 		LogString("send question!!!");
 		mWaitingForAnswer = true;
 	}
-	
 }
+
+void Battler::sendQuestion()
+{
+	if (mShape->mClient)
+	{
+		return;
+	}	
+	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        mMessage.WriteByte(mBattle->mGame->mServer->mMessageAskQuestion); // add type
+
+        if (mShape->mClient->mClientID > 0)
+        {
+                mMessage.WriteByte(mShape->mClient->mClientID); // add mClientID for browsers
+        }
+        int length = mBattle->mGame->mServer->mQuestionVector.at(mFirstUnmasteredQuestionID).length();  // get length of string containing school
+        mMessage.WriteByte(length); //send length
+                
+	//loop thru length and write it
+       	for (int b=0; b < length; b++)
+        {
+                mMessage.WriteByte(mBattle->mGame->mServer->mQuestionVector.at(mFirstUnmasteredQuestionID).at(b));
+        }
+
+        //send it
+        mBattle->mGame->mServer->mNetwork->sendPacketTo(mShape->mClient,&mMessage);
+}
+
+/*
+void ClientPartido::sendSchools()
+{
+                mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+                mMessage.WriteByte(mServer->mMessageAddSchool); // add type
+                if (mClientID > 0)
+                {
+                        mMessage.WriteByte(mClientID); // add mClientID for browsers
+                }
+                int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school
+                mMessage.WriteByte(length); //send length
+
+                //loop thru length and write it
+                for (int b=0; b < length; b++)
+                {
+                        mMessage.WriteByte(mServer->mSchoolVector.at(i).at(b));
+                }
+
+                //send it
+                mServer->mNetwork->sendPacketTo(this,&mMessage);
+}
+*/
+
 ///mMasteredQuestionIDVector
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
 void Battler::getQuestionLevelID()
