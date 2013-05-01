@@ -1,4 +1,4 @@
-var GamePlay = new Class(
+var GameBattle = new Class(
 {
 
 initialize: function(game)
