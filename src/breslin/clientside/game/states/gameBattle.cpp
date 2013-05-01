@@ -1,5 +1,5 @@
 //header
-#include "gamePlay.h"
+#include "gameBattle.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
@@ -16,21 +16,21 @@
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-GamePlay::GamePlay(Game* game)
+GameBattle::GameBattle(Game* game)
 {
 	mGame = game;
 }
 
-GamePlay::~GamePlay()
+GameBattle::~GameBattle()
 {
 
 }
 
-void GamePlay::enter()
+void GameBattle::enter()
 {
 	
 }
-void GamePlay::execute()
+void GameBattle::execute()
 {
 	//user input
 	mGame->processInput();	
@@ -39,7 +39,7 @@ void GamePlay::execute()
 	mGame->sendByteBuffer();
 }
 
-void GamePlay::exit()
+void GameBattle::exit()
 {
 	
 }
