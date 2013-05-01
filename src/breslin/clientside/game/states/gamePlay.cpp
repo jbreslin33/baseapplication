@@ -37,9 +37,6 @@ void GamePlay::execute()
 	
 	//network outgoing
 	mGame->sendByteBuffer();
-
-	//network ingoing
-	//mGame->checkForByteBuffer();
 }
 
 void GamePlay::exit()
