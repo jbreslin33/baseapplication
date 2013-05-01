@@ -287,6 +287,56 @@ server.on("message", function (msg, rinfo)
         }
 
 
+	//mMessageAskQuestion
+ 	if (type == -76)
+        {
+                var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+
+	}
+
+	//mMessageBattleStart
+ 	if (type == -75)
+        {
+                var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+	}
+
+	//mMessageBattleEnd
+ 	if (type == -74)
+        {
+                var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+
+	}
+
 	//mMessageConnected
  	if (type == -90)
         {

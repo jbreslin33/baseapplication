@@ -85,6 +85,12 @@ window.addEvent('domready', function()
                         mApplication.mConnected = true;
                 }
 
+		//mMessageBattleStart
+		if (type == -75)
+		{
+			
+		}
+
 		if (type == -109)
 		{
 /*
@@ -113,7 +119,6 @@ window.addEvent('domready', function()
 	
                 if (type == -103)
                 {
-			mApplication.log('got a -103');
 			if (mApplication.mGame)
 			{
 				
