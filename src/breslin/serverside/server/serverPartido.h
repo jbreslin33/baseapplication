@@ -12,6 +12,13 @@ public:
         //add school
         static const int mMessageAddSchool = -109;
 
+        //add question
+        static const int mMessageAskQuestion            = -76;
+	
+	//battle
+	static const int mMessageBattleStart = -75; 
+	static const int mMessageBattleEnd   = -74; 
+
 	//schools
         std::vector<std::string> mSchoolVector;
         void getSchools();

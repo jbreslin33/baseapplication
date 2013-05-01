@@ -38,7 +38,25 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
                 case mMessageAskQuestion:
                         askQuestion(byteBuffer);
                         break;
+
+                case mMessageBattleStart:
+                        battleStart(byteBuffer);
+                        break;
+
+                case mMessageBattleEnd:
+                        battleEnd(byteBuffer);
+                        break;
         }
+}
+
+void GamePartido::battleStart(ByteBuffer* byteBuffer)
+{
+	LogString("battleStart");
+}
+
+void GamePartido::battleEnd(ByteBuffer* byteBuffer)
+{
+	LogString("battleEnd");
 }
 
 void GamePartido::askQuestion(ByteBuffer* byteBuffer)

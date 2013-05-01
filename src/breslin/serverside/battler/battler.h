@@ -20,6 +20,8 @@ public:
 void processUpdate();
 void getQuestionLevelID();
 void sendQuestion();	
+void sendBattleStart();	
+void sendBattleEnd();	
 Battle* mBattle; 
 Shape* mShape;
 int mFirstUnmasteredQuestionID;	

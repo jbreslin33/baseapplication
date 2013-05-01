@@ -20,9 +20,19 @@ public:
 public:
 
 // constants
+//question
 static const char mMessageAskQuestion = -76;
+
+//battle
+static const char mMessageBattleStart = -75;
+static const char mMessageBattleEnd   = -74;
+
 virtual void checkByteBuffer(ByteBuffer* byteBuffer);
 void askQuestion(ByteBuffer* byteBuffer);
+
+void battleStart(ByteBuffer* byteBuffer);
+void battleEnd(ByteBuffer* byteBuffer);
+
 };
 
 #endif

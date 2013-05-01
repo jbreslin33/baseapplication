@@ -53,28 +53,6 @@ void Battle::processUpdate()
 	}
 	
 }
-/*
-void Battle::sendQuestionToClient(Client* client)
-{
-                mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-                mMessage.WriteByte(mServer->mMessageAddSchool); // add type
-                if (mClientID > 0)
-                {
-                        mMessage.WriteByte(mClientID); // add mClientID for browsers
-                }
-                int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school
-                mMessage.WriteByte(length); //send length
-
-                //loop thru length and write it
-                for (int b=0; b < length; b++)
-                {
-                        mMessage.WriteByte(mServer->mQuestionVector.at(i).at(b));
-                }
-
-                //send it
-                mServer->mNetwork->sendPacketTo(this,&mMessage);
-}
-*/
 
 /*
                 for (row=0; row<rec_count; row++)

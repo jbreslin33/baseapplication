@@ -39,7 +39,7 @@ Battler::Battler(Battle* battle, Shape* shape)
 	mAnswer = 0; 
 	mQuestion = "";
 		
-
+	sendBattleStart(); 
 }  
 
 Battler::~Battler()
@@ -50,12 +50,39 @@ void Battler::processUpdate()
 {
 	//this is where you should send questions....
 	//select * from questions_attempts limit 10;
+/*
 	if (mWaitingForAnswer == false)
 	{
-		sendQuestion();
+		//sendQuestion();
 		LogString("send question!!!");
 		mWaitingForAnswer = true;
 	}
+*/
+}
+
+//this should also send first question to get you started
+void Battler::sendBattleStart()
+{
+        if (!mShape->mClient)
+        {
+                return;
+        }
+	LogString("sendBattleStart");
+        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        mMessage.WriteByte(mBattle->mGame->mServer->mMessageBattleStart); // add type
+
+        if (mShape->mClient->mClientID > 0)
+        {
+                mMessage.WriteByte(mShape->mClient->mClientID); // add mClientID for browsers
+        }
+
+        //send it
+        mBattle->mGame->mServer->mNetwork->sendPacketTo(mShape->mClient,&mMessage);
+}
+
+void Battler::sendBattleEnd()
+{
+
 }
 
 void Battler::sendQuestion()
@@ -83,29 +110,6 @@ void Battler::sendQuestion()
         //send it
         mBattle->mGame->mServer->mNetwork->sendPacketTo(mShape->mClient,&mMessage);
 }
-
-/*
-void ClientPartido::sendSchools()
-{
-                mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-                mMessage.WriteByte(mServer->mMessageAddSchool); // add type
-                if (mClientID > 0)
-                {
-                        mMessage.WriteByte(mClientID); // add mClientID for browsers
-                }
-                int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school
-                mMessage.WriteByte(length); //send length
-
-                //loop thru length and write it
-                for (int b=0; b < length; b++)
-                {
-                        mMessage.WriteByte(mServer->mSchoolVector.at(i).at(b));
-                }
-
-                //send it
-                mServer->mNetwork->sendPacketTo(this,&mMessage);
-}
-*/
 
 ///mMasteredQuestionIDVector
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
