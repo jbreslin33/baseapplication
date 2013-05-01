@@ -10,6 +10,9 @@
 //byteBuffer
 #include "../bytebuffer/byteBuffer.h"
 
+//shape
+#include "../shape/shape.h"
+
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
@@ -40,6 +43,21 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 
 void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 {
-	LogString("inside askQuestion!!!!!!!!!!!");
+	std::string question;
+        int length = byteBuffer->ReadByte();
+        for (int i = 0; i < length; i++)
+        {
+        	char c =  byteBuffer->ReadByte();
+                question.append(1,c);
+        }
+
+	for(int i = 0; i < mShapeVector->size(); i++)
+	{	
+		if (mShapeVector->at(i)->mLocal == 1)
+		{
+			mShapeVector->at(i)->clearTitle();
+			mShapeVector->at(i)->appendToTitle(question);
+		}
+	}
 }
 
