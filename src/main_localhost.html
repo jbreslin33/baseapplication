@@ -85,9 +85,44 @@ window.addEvent('domready', function()
                         mApplication.mConnected = true;
                 }
 
+		//mMessageAskQuestion
+		if (type == -76)
+		{
+			if (mApplication.mGame)
+                        {
+                                mApplication.mGame.askQuestion(byteBuffer);
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+		}
+
 		//mMessageBattleStart
 		if (type == -75)
 		{
+			if (mApplication.mGame)
+                        {
+                                mApplication.mGame.battleStart(byteBuffer);
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+			
+		}
+
+		//mMessageBattleEnd
+		if (type == -74)
+		{
+			if (mApplication.mGame)
+                        {
+                                mApplication.mGame.battleEnd(byteBuffer);
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
 			
 		}
 

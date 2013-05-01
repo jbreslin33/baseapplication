@@ -10,6 +10,7 @@ initialize: function(applicationBreslin)
 	this.log('GAME PARTIDO HAS BEEN CHOSEN!');
 },
 
+
 log: function(msg)
 {
 	setTimeout(function()
@@ -17,5 +18,20 @@ log: function(msg)
         	throw new Error(msg);
         }, 0);
 },
+
+askQuestion: function(byteBuffer)
+{
+	this.log('game askQuestion');
+},
+
+battleStart: function(byteBuffer)
+{
+	this.log('game battleStart');
+},
+
+battleEnd: function(byteBuffer)
+{
+	this.log('game battleEnd');
+}
 
 });
