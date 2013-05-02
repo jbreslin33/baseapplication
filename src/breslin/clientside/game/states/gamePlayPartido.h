@@ -1,5 +1,5 @@
-#ifndef GAMEPARTIDOPLAY_H
-#define GAMEPARTIDOPLAY_H
+#ifndef GAMEPLAYPARTIDO_H
+#define GAMEPLAYPARTIDO_H
 
 #include "gamePlay.h"
 
@@ -11,7 +11,7 @@
 
 class GamePartido;
 
-class GamePartidoPlay : public GamePlay 
+class GamePlayPartido : public GamePlay 
 {
 public:
 
@@ -21,8 +21,8 @@ public:
 
 GamePartido* mGame;
 
-GamePartidoPlay(GamePartido* game);
-~GamePartidoPlay();
+GamePlayPartido(GamePartido* game);
+~GamePlayPartido();
 
 void enter  ();
 void execute();

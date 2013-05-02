@@ -1,5 +1,5 @@
-#ifndef GAMEBATTLE_H
-#define GAMEBATTLE_H
+#ifndef GAMEPLAYPARTIDOBATTLE_H
+#define GAMEPLAYPARTIDOBATTLE_H
 
 /***************************************
 *   		INCLUDES
@@ -13,7 +13,7 @@
 
 class GamePartido;
 
-class GameBattle : public State
+class GamePlayPartidoBattle : public State
 {
 public:
 
@@ -23,8 +23,8 @@ public:
 
 GamePartido* mGame;
 
-GameBattle(GamePartido* game);
-~GameBattle();
+GamePlayPartidoBattle(GamePartido* game);
+~GamePlayPartidoBattle();
 
 void enter  ();
 void execute();

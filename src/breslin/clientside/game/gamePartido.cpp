@@ -17,8 +17,8 @@
 #include "../../statemachine/stateMachine.h"
 
 //states
-#include "states/gamePartidoPlay.h"
-#include "states/gameBattle.h"
+#include "states/gamePlayPartido.h"
+#include "states/gamePlayPartidoBattle.h"
 
 
 /***************************************
