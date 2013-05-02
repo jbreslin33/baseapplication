@@ -8,8 +8,8 @@ initialize: function(applicationBreslin)
 	this.parent(applicationBreslin);
 
 	//states
-        this.mGamePlay = new GamePartidoPlay(this);
-        this.mGameBattle = new GameBattle(this);
+        this.mGamePlay = new GamePlayPartido(this);
+        this.mGameBattle = new GamePlayPartidoBattle(this);
 
 	//constants	
 	//questions

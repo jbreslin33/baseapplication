@@ -10,6 +10,8 @@
 //standard library
 #include <vector>
 
+class GamePlayPartidoBattle;
+
 class GamePartido : public Game 
 {
 public:
@@ -20,7 +22,7 @@ public:
 public:
 
 //states
-State* mGameBattle;
+State* mGamePlayPartidoBattle;
 
 // constants
 //question

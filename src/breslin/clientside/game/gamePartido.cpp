@@ -26,8 +26,8 @@
 ***************************************/
 GamePartido::GamePartido(ApplicationBreslin* applicationBreslin) : Game(applicationBreslin)
 {
-   	mGamePlay = new GamePartidoPlay(this);
-   	mGameBattle = new GameBattle(this);
+   	mGamePlay = new GamePlayPartido(this);
+   	mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
 
 	//change state
         mStateMachine->changeState(mGamePlay);

@@ -16,7 +16,7 @@ log: function(msg)
 
 enter: function()
 {
-
+	this.log('GamePlayPartidoBattle enter');
 },
 
 execute: function()
