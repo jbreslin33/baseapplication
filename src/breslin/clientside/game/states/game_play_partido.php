@@ -1,4 +1,4 @@
-var GamePlay = new Class(
+var GamePartidoPlay = new Class(
 {
 
 initialize: function(game)
@@ -21,6 +21,11 @@ enter: function()
 
 execute: function()
 {
+        if (mGame.mBattleStart)
+        {
+                mGame.mStateMachine.changeState(mGame.mGameBattle);
+        }
+
 	//user input
         this.mGame.processInput();
 

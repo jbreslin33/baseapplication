@@ -19,6 +19,7 @@
 GamePartidoPlay::GamePartidoPlay(GamePartido* game) : GamePlay(game)
 {
 	mGame = game;
+	LogString("GamePartidoPlay Constructor");
 }
 
 GamePartidoPlay::~GamePartidoPlay()
@@ -28,7 +29,7 @@ GamePartidoPlay::~GamePartidoPlay()
 
 void GamePartidoPlay::enter()
 {
-	
+	LogString("GamePartidoPlay enter");
 }
 void GamePartidoPlay::execute()
 {

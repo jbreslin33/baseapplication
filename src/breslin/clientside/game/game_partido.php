@@ -6,8 +6,21 @@ Extends: Game,
 initialize: function(applicationBreslin)
 {
 	this.parent(applicationBreslin);
+
+	//states
+        this.mGamePlay = new GamePartidoPlay(this);
+        this.mGameBattle = new GameBattle(this);
+
+	//constants	
+	//questions
 	this.mMessageAskQuestion    = -76;
-	this.log('GAME PARTIDO HAS BEEN CHOSEN!');
+		
+	//battle
+	this.mMessageBattleStart = -75;
+	this.mMessageBattleEnd   = -74;
+
+	this.mBattleStart = false;
+	this.mBattleEnd = false;
 },
 
 

@@ -13,6 +13,9 @@
 //shape
 #include "../shape/shape.h"
 
+//state machine
+#include "../../statemachine/stateMachine.h"
+
 //states
 #include "states/gamePartidoPlay.h"
 #include "states/gameBattle.h"
@@ -25,6 +28,10 @@ GamePartido::GamePartido(ApplicationBreslin* applicationBreslin) : Game(applicat
 {
    	mGamePlay = new GamePartidoPlay(this);
    	mGameBattle = new GameBattle(this);
+
+	//change state
+        mStateMachine->changeState(mGamePlay);
+
 }
 
 GamePartido::~GamePartido()
