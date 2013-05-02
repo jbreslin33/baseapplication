@@ -19,6 +19,9 @@ public:
 
 public:
 
+//states
+State* mGameBattle;
+
 // constants
 //question
 static const char mMessageAskQuestion = -76;
@@ -32,6 +35,9 @@ void askQuestion(ByteBuffer* byteBuffer);
 
 void battleStart(ByteBuffer* byteBuffer);
 void battleEnd(ByteBuffer* byteBuffer);
+
+bool mBattleStart;
+bool mBattleEnd;
 
 };
 

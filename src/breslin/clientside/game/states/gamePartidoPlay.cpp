@@ -1,5 +1,5 @@
 //header
-#include "gameBattle.h"
+#include "gamePartidoPlay.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
@@ -16,23 +16,27 @@
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-GameBattle::GameBattle(GamePartido* game)
+GamePartidoPlay::GamePartidoPlay(GamePartido* game) : GamePlay(game)
 {
 	mGame = game;
 }
 
-GameBattle::~GameBattle()
+GamePartidoPlay::~GamePartidoPlay()
 {
 
 }
 
-void GameBattle::enter()
+void GamePartidoPlay::enter()
 {
-	LogString("GameBattle state enter");	
-	mGame->mBattleStart = false;
+	
 }
-void GameBattle::execute()
+void GamePartidoPlay::execute()
 {
+	if (mGame->mBattleStart)
+	{
+		mGame->mStateMachine->changeState(mGame->mGameBattle);		
+	}
+
 	//user input
 	mGame->processInput();	
 	
@@ -40,7 +44,7 @@ void GameBattle::execute()
 	mGame->sendByteBuffer();
 }
 
-void GameBattle::exit()
+void GamePartidoPlay::exit()
 {
 	
 }

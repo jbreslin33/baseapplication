@@ -1,9 +1,7 @@
-#ifndef GAMEBATTLE_H
-#define GAMEBATTLE_H
+#ifndef GAMEPARTIDOPLAY_H
+#define GAMEPARTIDOPLAY_H
 
-/***************************************
-*   		INCLUDES
-***************************************/
+#include "gamePlay.h"
 
 #include "../../../statemachine/state.h"
 
@@ -13,7 +11,7 @@
 
 class GamePartido;
 
-class GameBattle : public State
+class GamePartidoPlay : public GamePlay 
 {
 public:
 
@@ -23,8 +21,8 @@ public:
 
 GamePartido* mGame;
 
-GameBattle(GamePartido* game);
-~GameBattle();
+GamePartidoPlay(GamePartido* game);
+~GamePartidoPlay();
 
 void enter  ();
 void execute();

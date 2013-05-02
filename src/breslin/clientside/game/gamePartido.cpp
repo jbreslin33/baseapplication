@@ -13,12 +13,18 @@
 //shape
 #include "../shape/shape.h"
 
+//states
+#include "states/gamePartidoPlay.h"
+#include "states/gameBattle.h"
+
+
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
 GamePartido::GamePartido(ApplicationBreslin* applicationBreslin) : Game(applicationBreslin)
 {
-
+   	mGamePlay = new GamePartidoPlay(this);
+   	mGameBattle = new GameBattle(this);
 }
 
 GamePartido::~GamePartido()
@@ -51,11 +57,13 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 
 void GamePartido::battleStart(ByteBuffer* byteBuffer)
 {
+	mBattleStart = true;
 	LogString("battleStart");
 }
 
 void GamePartido::battleEnd(ByteBuffer* byteBuffer)
 {
+	mBattleEnd = true;
 	LogString("battleEnd");
 }
 
