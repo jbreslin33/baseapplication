@@ -15,28 +15,40 @@
 
 //state machine
 #include "../../statemachine/stateMachine.h"
-
-//states
+#include "states/gameGlobal.h"
+#include "states/gameInitialize.h"
+#include "states/gamePlay.h"
+#include "states/gamePause.h"
 #include "states/gamePlayPartido.h"
 #include "states/gamePlayPartidoBattle.h"
-
 
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
 GamePartido::GamePartido(ApplicationBreslin* applicationBreslin) : Game(applicationBreslin)
 {
-   	mGamePlay = new GamePlayPartido(this);
-   	mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
-
-	//change state
-        mStateMachine->changeState(mGamePlay);
-
+	createStates();
 }
 
 GamePartido::~GamePartido()
 {
 }
+
+void GamePartido::createStates()
+{
+	mBattleStart = false;
+
+  	mStateMachine          = new StateMachine();
+        mGameGlobal            = new GameGlobal(this);
+        mGameInitialize        = new GameInitialize(this);
+   	mGamePlay              = new GamePlayPartido(this);
+        mGamePause             = new GamePause(this);
+   	mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
+
+        mStateMachine->setGlobalState(mGameGlobal);
+        mStateMachine->changeState(mGamePlay);
+}
+
 
 void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 {

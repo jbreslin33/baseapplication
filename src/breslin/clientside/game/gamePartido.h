@@ -32,6 +32,7 @@ static const char mMessageAskQuestion = -76;
 static const char mMessageBattleStart = -75;
 static const char mMessageBattleEnd   = -74;
 
+virtual void createStates();
 virtual void checkByteBuffer(ByteBuffer* byteBuffer);
 void askQuestion(ByteBuffer* byteBuffer);
 

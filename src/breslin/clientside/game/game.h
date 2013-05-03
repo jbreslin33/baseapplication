@@ -103,6 +103,9 @@ Ogre::Entity* mFloor;
 ***************************************/
 public:
 
+//states
+virtual void createStates();
+
 void remove();
 
 //update

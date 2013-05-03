@@ -56,14 +56,7 @@ Game::Game(ApplicationBreslin* applicationBreslin)
     	mRunNetworkTime = 0.0f;
 	mFrameTimeServer = 0.0f;
 
-	mStateMachine = new StateMachine();
-	mGameGlobal = new GameGlobal(this);
-	mGameInitialize = new GameInitialize(this);
-	mGamePlay = new GamePlay(this);
-	mGamePause = new GamePause(this);
-
-	mStateMachine->setGlobalState(mGameGlobal);
-	mStateMachine->changeState(mGamePlay);
+	createStates();
 
 	//set Camera
 	// Position it at 500 in Z direction
@@ -82,6 +75,19 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 Game::~Game()
 {
 }
+
+void Game::createStates()
+{
+	mStateMachine = new StateMachine();
+	mGameGlobal = new GameGlobal(this);
+	mGameInitialize = new GameInitialize(this);
+	mGamePlay = new GamePlay(this);
+	mGamePause = new GamePause(this);
+
+	mStateMachine->setGlobalState(mGameGlobal);
+	mStateMachine->changeState(mGamePlay);
+}
+
 //i am guessing i am not clearing the shape arrray???
 void Game::remove()
 {
