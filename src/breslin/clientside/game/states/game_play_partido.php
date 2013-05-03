@@ -21,9 +21,10 @@ enter: function()
 
 execute: function()
 {
-        if (mGame.mBattleStart)
+	this.log('GamePlayPartido execute');
+        if (this.mGame.mBattleStart)
         {
-                mGame.mStateMachine.changeState(mGame.mGamePartidoPlayBattle);
+                this.mGame.mStateMachine.changeState(this.mGame.mGamePartidoPlayBattle);
         }
 
 	//user input

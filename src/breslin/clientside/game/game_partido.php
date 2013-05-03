@@ -7,7 +7,7 @@ initialize: function(applicationBreslin)
 {
 	this.parent(applicationBreslin);
 
-	createStates();
+	this.createStates();
 
 	//constants	
 	//questions
@@ -18,7 +18,7 @@ initialize: function(applicationBreslin)
 	this.mMessageBattleEnd   = -74;
 
 	this.mBattleStart = false;
-	this.mBattleEnd = false;
+	this.mBattleEnd   = false;
 },
 
 log: function(msg)
@@ -32,7 +32,15 @@ log: function(msg)
 createStates: function()
 {
 	//states
+	this.mStateMachine = new StateMachine();
+
+        this.mGameGlobal = new GameGlobal(this);
+        this.mGameInitialize = new GameInitialize(this);
         this.mGamePlay = new GamePlayPartido(this);
+        this.mGamePause = new GamePause(this);
+
+        this.mStateMachine.setGlobalState(this.mGameGlobal);
+        this.mStateMachine.changeState(this.mGamePlay);
         this.mGameBattle = new GamePlayPartidoBattle(this);
 
 },
@@ -45,11 +53,13 @@ askQuestion: function(byteBuffer)
 battleStart: function(byteBuffer)
 {
 	this.log('game battleStart');
+	this.mBattleStart = true;
 },
 
 battleEnd: function(byteBuffer)
 {
 	this.log('game battleEnd');
+	this.mBattleEnd = true;
 }
 
 });

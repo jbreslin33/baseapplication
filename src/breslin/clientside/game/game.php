@@ -48,7 +48,7 @@ initialize: function(applicationBreslin)
 	this.mPollDelayCounter = 0;
 	this.mFrameTimeServer = 0;
 
-	createStates();
+	this.createStates();
 /*
         //set Camera
         // Position it at 500 in Z direction

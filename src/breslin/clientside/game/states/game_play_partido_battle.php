@@ -21,6 +21,7 @@ enter: function()
 
 execute: function()
 {
+	this.log('GamePlayPartidoBattle execute');
 	//user input
         this.mGame.processInput();
 
