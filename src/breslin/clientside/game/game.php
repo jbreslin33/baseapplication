@@ -48,6 +48,20 @@ initialize: function(applicationBreslin)
 	this.mPollDelayCounter = 0;
 	this.mFrameTimeServer = 0;
 
+	createStates();
+/*
+        //set Camera
+        // Position it at 500 in Z direction
+        mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(0,20,20));
+        // Look back along -Z
+        mApplicationBreslin->getCamera()->lookAt(Ogre::Vector3(0,0,0));
+        mApplicationBreslin->getCamera()->setNearClipDistance(5);
+*/
+
+},
+
+createStates: function()
+{
        	//states 
 	this.mStateMachine = new StateMachine();
         
@@ -58,16 +72,6 @@ initialize: function(applicationBreslin)
 
         this.mStateMachine.setGlobalState(this.mGameGlobal);
         this.mStateMachine.changeState(this.mGamePlay);
-
-/*
-        //set Camera
-        // Position it at 500 in Z direction
-        mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(0,20,20));
-        // Look back along -Z
-        mApplicationBreslin->getCamera()->lookAt(Ogre::Vector3(0,0,0));
-        mApplicationBreslin->getCamera()->setNearClipDistance(5);
-*/
-
 },
 
 log: function(msg)

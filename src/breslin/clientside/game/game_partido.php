@@ -7,9 +7,7 @@ initialize: function(applicationBreslin)
 {
 	this.parent(applicationBreslin);
 
-	//states
-        this.mGamePlay = new GamePlayPartido(this);
-        this.mGameBattle = new GamePlayPartidoBattle(this);
+	createStates();
 
 	//constants	
 	//questions
@@ -23,13 +21,20 @@ initialize: function(applicationBreslin)
 	this.mBattleEnd = false;
 },
 
-
 log: function(msg)
 {
 	setTimeout(function()
         {
         	throw new Error(msg);
         }, 0);
+},
+
+createStates: function()
+{
+	//states
+        this.mGamePlay = new GamePlayPartido(this);
+        this.mGameBattle = new GamePlayPartidoBattle(this);
+
 },
 
 askQuestion: function(byteBuffer)
