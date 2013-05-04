@@ -19,7 +19,6 @@
 GamePlayPartido::GamePlayPartido(GamePartido* game) : GamePlay(game)
 {
 	mGame = game;
-	LogString("GamePlayPartido Constructor");
 }
 
 GamePlayPartido::~GamePlayPartido()

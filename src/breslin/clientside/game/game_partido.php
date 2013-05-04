@@ -46,18 +46,15 @@ createStates: function()
 
 askQuestion: function(byteBuffer)
 {
-	this.log('game askQuestion');
 },
 
 battleStart: function(byteBuffer)
 {
-	this.log('game battleStart');
 	this.mBattleStart = true;
 },
 
 battleEnd: function(byteBuffer)
 {
-	this.log('game battleEnd');
 	this.mBattleEnd = true;
 }
 

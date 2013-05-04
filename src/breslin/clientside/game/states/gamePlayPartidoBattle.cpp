@@ -28,12 +28,10 @@ GamePlayPartidoBattle::~GamePlayPartidoBattle()
 
 void GamePlayPartidoBattle::enter()
 {
-	LogString("GamePlayPartidoBattle state enter");	
 	mGame->mBattleStart = false;
 }
 void GamePlayPartidoBattle::execute()
 {
-	LogString("GamePlayPartidoBattle state execute");	
 
 	//user input
 	mGame->processInput();	

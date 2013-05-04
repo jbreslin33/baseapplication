@@ -16,13 +16,11 @@ log: function(msg)
 
 enter: function()
 {
-	this.log('GamePlayPartidoBattle enter');
 	this.mGame.mBattleStart = false;
 },
 
 execute: function()
 {
-	this.log('GamePlayPartidoBattle execute');
 
 	//user input
         this.mGame.processInput();

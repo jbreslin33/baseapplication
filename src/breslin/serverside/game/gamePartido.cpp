@@ -17,7 +17,6 @@
 GamePartido::GamePartido(ServerPartido* server, int id) : Game(server,id)
 {
 	mServer = server;
-	LogString("constructor for GamePartido");
 }
 
 GamePartido::~GamePartido()
