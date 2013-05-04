@@ -33,11 +33,11 @@ createStates: function()
 	//states
 	this.mStateMachine = new StateMachine();
 
-        this.mGameGlobal     = new GameGlobal(this);
-        this.mGameInitialize = new GameInitialize(this);
-        this.mGamePlay       = new GamePlayPartido(this);
-        this.mGamePause      = new GamePause(this);
-        this.mGameBattle     = new GamePlayPartidoBattle(this);
+        this.mGameGlobal            = new GameGlobal(this);
+        this.mGameInitialize        = new GameInitialize(this);
+        this.mGamePlay              = new GamePlayPartido(this);
+        this.mGamePause             = new GamePause(this);
+        this.mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
 
         this.mStateMachine.setGlobalState(this.mGameGlobal);
         this.mStateMachine.changeState(this.mGamePlay);
