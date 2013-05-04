@@ -62,6 +62,8 @@ initialize: function(applicationBreslin)
 
 createStates: function()
 {
+
+	this.log('createSTATES IN GAME');
        	//states 
 	this.mStateMachine = new StateMachine();
         

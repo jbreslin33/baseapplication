@@ -27,6 +27,9 @@
 ***************************************/
 GamePartido::GamePartido(ApplicationBreslin* applicationBreslin) : Game(applicationBreslin)
 {
+	mBattleStart = false;
+	mBattleEnd   = false;
+
 	createStates();
 }
 
@@ -36,8 +39,6 @@ GamePartido::~GamePartido()
 
 void GamePartido::createStates()
 {
-	mBattleStart = false;
-
   	mStateMachine          = new StateMachine();
         mGameGlobal            = new GameGlobal(this);
         mGameInitialize        = new GameInitialize(this);
