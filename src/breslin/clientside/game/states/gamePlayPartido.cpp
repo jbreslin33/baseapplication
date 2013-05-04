@@ -29,11 +29,9 @@ GamePlayPartido::~GamePlayPartido()
 
 void GamePlayPartido::enter()
 {
-	LogString("GamePlayPartido enter");
 }
 void GamePlayPartido::execute()
 {
-	LogString("GamePlayPartido execute");
 	if (mGame->mBattleStart)
 	{
 		mGame->mStateMachine->changeState(mGame->mGamePlayPartidoBattle);		

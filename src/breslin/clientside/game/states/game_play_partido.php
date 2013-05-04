@@ -21,10 +21,9 @@ enter: function()
 
 execute: function()
 {
-	this.log('GamePlayPartido execute');
         if (this.mGame.mBattleStart)
         {
-                this.mGame.mStateMachine.changeState(this.mGame.mGamePartidoPlayBattle);
+                this.mGame.mStateMachine.changeState(this.mGame.mGamePlayPartidoBattle);
         }
 
 	//user input
