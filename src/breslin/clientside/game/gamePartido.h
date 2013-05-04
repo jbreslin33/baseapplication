@@ -6,7 +6,6 @@
 //Ogre
 #include <OgreEntity.h>
 
-
 //standard library
 #include <vector>
 

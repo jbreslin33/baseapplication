@@ -3,7 +3,7 @@
 #include "../clientside/tdreamsock/dreamSockLog.h"
 
 //app
-#include "../clientside/application/applicationBreslin.h"
+#include "../clientside/application/applicationPartido.h"
 
 
 /******************** MAIN ***********************/
@@ -26,9 +26,9 @@ extern "C" {
        
 	StartLogConsole();
         
-	ApplicationBreslin* applicationBreslin = new ApplicationBreslin(strCmdLine,30004);
+	ApplicationBreslin* applicationBreslin = new ApplicationPartido(strCmdLine,30004);
 #else
-        ApplicationBreslin* applicationBreslin = new ApplicationBreslin(argv[1],30004);
+        ApplicationBreslin* applicationBreslin = new ApplicationPartido(argv[1],30004);
 #endif
         try
 	{
