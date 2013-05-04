@@ -34,6 +34,7 @@ void GamePlayPartidoBattle::enter()
 void GamePlayPartidoBattle::execute()
 {
 	LogString("GamePlayPartidoBattle state execute");	
+
 	//user input
 	mGame->processInput();	
 	
