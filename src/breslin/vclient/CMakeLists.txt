@@ -122,6 +122,7 @@ set(HDRS
 	#application
 	../clientside/application/BaseApplication.h
 	../clientside/application/applicationBreslin.h
+	../clientside/application/applicationPartido.h
 	../clientside/application/states/applicationLogin.h
 	../clientside/application/states/applicationLogin.h
 	../clientside/application/states/applicationMain.h
@@ -189,6 +190,7 @@ set(SRCS
 	#application
 	../clientside/application/BaseApplication.cpp
 	../clientside/application/applicationBreslin.cpp
+	../clientside/application/applicationPartido.cpp
 	../clientside/application/states/applicationLogin.cpp
 	../clientside/application/states/applicationMain.cpp
 	../clientside/application/states/applicationPlay.cpp
@@ -269,6 +271,7 @@ set(HDRS
 	#application
 	../clientside/application/BaseApplication.h
 	../clientside/application/applicationBreslin.h
+	../clientside/application/applicationPartido.h
 	../clientside/application/states/applicationLogin.h
 	../clientside/application/states/applicationMain.h
 	../clientside/application/states/applicationPlay.h
@@ -334,6 +337,7 @@ set(SRCS
 	#application
 	../clientside/application/BaseApplication.cpp
 	../clientside/application/applicationBreslin.cpp
+	../clientside/application/applicationPartido.cpp
 	../clientside/application/states/applicationLogin.cpp
 	../clientside/application/states/applicationMain.cpp
 	../clientside/application/states/applicationPlay.cpp
