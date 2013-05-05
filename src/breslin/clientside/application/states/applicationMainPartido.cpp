@@ -1,6 +1,5 @@
 //header
-#include "applicationMain.h"
-
+#include "applicationMainPartido.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
@@ -17,7 +16,7 @@
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
-ApplicationMainPartido::ApplicationMainPartido(ApplicationBreslin* application) : ApplicationMain(application)
+ApplicationMainPartido::ApplicationMainPartido(ApplicationPartido* application) : ApplicationMain(application)
 {
 	mApplication = application;
 }

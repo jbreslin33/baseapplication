@@ -1,14 +1,66 @@
 //header
 #include "applicationPartido.h"
 
+//log
+#include "../tdreamsock/dreamSockLog.h"
+
+//state machine
+#include "../../statemachine/stateMachine.h"
+#include "states/applicationGlobal.h"
+#include "states/applicationLogin.h"
+#include "states/applicationMainPartido.h"
+#include "states/applicationInitialize.h"
+#include "states/applicationPlay.h"
+
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
-
 }
 
 ApplicationPartido::~ApplicationPartido()
 {
+}
 
+void ApplicationPartido::createStates()
+{
+        //state machine (Menus)
+        mStateMachine = new StateMachine();
+
+        mApplicationGlobal = new ApplicationGlobal(this);
+        mApplicationInitialize = new ApplicationInitialize(this);
+        mApplicationLogin   = new ApplicationLogin  (this);
+        mApplicationMain   = new ApplicationMainPartido  (this);
+        mApplicationPlay   = new ApplicationPlay(this);
+
+        mStateMachine->setGlobalState (mApplicationGlobal);
+        mStateMachine->changeState(mApplicationInitialize);
+        mStateMachine->setPreviousState(mApplicationInitialize);
+}
+
+void  ApplicationPartido::createMainScreen()
+{
+	ApplicationBreslin::createMainScreen();
+
+	LogString("CALLLED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        if (!mButtonJoinGameB)
+        {
+                mButtonJoinGameB = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGameB", "Join Game B");
+        }
+}
+
+void  ApplicationPartido::showMainScreen()
+{
+	ApplicationBreslin::showMainScreen();
+        mTrayMgr->moveWidgetToTray(mButtonJoinGameB,OgreBites::TL_CENTER);
+
+        mButtonJoinGameB->show();
+}
+
+void  ApplicationPartido::hideMainScreen()
+{
+	ApplicationBreslin::hideMainScreen();
+        mButtonJoinGameB->hide();
+
+        mTrayMgr->removeWidgetFromTray(mButtonJoinGameB);
 }
 
 void  ApplicationPartido::createBattleScreen()
@@ -21,8 +73,8 @@ void  ApplicationPartido::createBattleScreen()
         {
                 mLabelAnswer  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelAnswer", "Answer:");
         }
-
 }
+
 void  ApplicationPartido::showBattleScreen()
 {
 	mTrayMgr->moveWidgetToTray(mLabelQuestion,OgreBites::TL_CENTER);
@@ -35,6 +87,7 @@ void  ApplicationPartido::showBattleScreen()
 
 	mLabelFocus = mLabelAnswer;
 }
+
 void  ApplicationPartido::hideBattleScreen()
 {
 	mLabelQuestion->hide();
@@ -43,3 +96,5 @@ void  ApplicationPartido::hideBattleScreen()
 	mTrayMgr->removeWidgetFromTray(mLabelQuestion);
 	mTrayMgr->removeWidgetFromTray(mLabelAnswer);
 }
+
+

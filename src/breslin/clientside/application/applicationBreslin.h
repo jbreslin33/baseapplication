@@ -78,7 +78,6 @@ OgreBites::Label* mLabelFocus;
 OgreBites::Button* mButtonLogin;
 OgreBites::Button* mButtonLogout;
 OgreBites::Button* mButtonJoinGameA;
-OgreBites::Button* mButtonJoinGameB;
 OgreBites::Button* mButtonExit;
 
 std::string mStringSchool;
@@ -96,6 +95,9 @@ float mRenderTime;
 ***************************************/
 
 public:
+
+//states
+virtual void createStates();
 
 //process update
 void processUpdate();

@@ -59,19 +59,9 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//game
 	mGame = NULL;
 
-	//state machine (Menus)
-	mStateMachine = new StateMachine();
-
-	mApplicationGlobal = new ApplicationGlobal(this);
-	mApplicationInitialize = new ApplicationInitialize(this);
-	mApplicationLogin   = new ApplicationLogin  (this);
-	mApplicationMain   = new ApplicationMain  (this);
-	mApplicationPlay   = new ApplicationPlay(this);
-
-	mStateMachine->setGlobalState (mApplicationGlobal);
-	mStateMachine->changeState(mApplicationInitialize);
-        mStateMachine->setPreviousState(mApplicationInitialize);
+	createStates();
 }
+
 
 ApplicationBreslin::~ApplicationBreslin()
 {
@@ -85,6 +75,25 @@ ApplicationBreslin::~ApplicationBreslin()
 	delete mApplicationPlay;	
 	
 	delete mGame;
+}
+
+/*********************************
+			states	
+**********************************/
+void ApplicationBreslin::createStates()
+{
+	//state machine (Menus)
+	mStateMachine = new StateMachine();
+
+	mApplicationGlobal = new ApplicationGlobal(this);
+	mApplicationInitialize = new ApplicationInitialize(this);
+	mApplicationLogin   = new ApplicationLogin  (this);
+	mApplicationMain   = new ApplicationMain  (this);
+	mApplicationPlay   = new ApplicationPlay(this);
+
+	mStateMachine->setGlobalState (mApplicationGlobal);
+	mStateMachine->changeState(mApplicationInitialize);
+        mStateMachine->setPreviousState(mApplicationInitialize);
 }
 
 /*********************************
@@ -119,7 +128,6 @@ void ApplicationBreslin::processUpdate()
 		mConnectSent = true; 
 		sendConnect();
 	}
-
 }
 
 /*********************************
@@ -398,11 +406,6 @@ void ApplicationBreslin::createMainScreen()
 		mButtonJoinGameA = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGameA", "Join Game A");
 	}
 
-	if (!mButtonJoinGameB)
-	{
-		mButtonJoinGameB = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGameB", "Join Game B");
-	}
-
 	if (!mButtonLogout)
 	{
         	mButtonLogout    = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonLogout", "Logout");
@@ -418,12 +421,10 @@ void ApplicationBreslin::showMainScreen()
 {
 	LogString("showMainScreen");
 	mTrayMgr->moveWidgetToTray(mButtonJoinGameA,OgreBites::TL_CENTER);
-	mTrayMgr->moveWidgetToTray(mButtonJoinGameB,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonLogout,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
 	
 	mButtonJoinGameA->show();
-	mButtonJoinGameB->show();
 	mButtonLogout->show();
 	mButtonExit->show();
 	
@@ -438,12 +439,10 @@ void ApplicationBreslin::hideMainScreen()
 {
 	LogString("hideMainScreen");
 	mButtonJoinGameA->hide();
-	mButtonJoinGameB->hide();
 	mButtonLogout->hide();
 	mButtonExit->hide();
 
 	mTrayMgr->removeWidgetFromTray(mButtonJoinGameA);
-	mTrayMgr->removeWidgetFromTray(mButtonJoinGameB);
 	mTrayMgr->removeWidgetFromTray(mButtonLogout);
 	mTrayMgr->removeWidgetFromTray(mButtonExit);
 }

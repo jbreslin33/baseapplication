@@ -4,8 +4,8 @@
 /***************************************
 *   		INCLUDES
 ***************************************/
+#include "applicationMain.h"
 
-#include "../../../statemachine/state.h"
 
 /***************************************
 *   		FORWARD DECLARATIONS
@@ -13,7 +13,7 @@
 
 class ApplicationPartido;
 
-class ApplicationMainPartido : public State
+class ApplicationMainPartido : public ApplicationMain 
 {
 public:
 

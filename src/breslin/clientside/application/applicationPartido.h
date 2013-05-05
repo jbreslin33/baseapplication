@@ -12,10 +12,22 @@ public:
 	ApplicationPartido(const char* serverIP, int serverPort);
 	~ApplicationPartido();
 
+//main
+OgreBites::Button* mButtonJoinGameB;
+
 //battle
 OgreBites::Label* mLabelQuestion; 
 OgreBites::Label* mLabelAnswer; 
 
+//states
+virtual void createStates();
+
+//main
+virtual void createMainScreen();
+virtual void showMainScreen();
+virtual void hideMainScreen();
+
+//battle
 void createBattleScreen();
 void showBattleScreen();
 void hideBattleScreen();
