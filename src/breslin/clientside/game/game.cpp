@@ -33,9 +33,9 @@
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
-Game::Game(ApplicationBreslin* applicationBreslin)
+Game::Game(ApplicationBreslin* application)
 {
-	mApplicationBreslin = applicationBreslin;
+	mApplication = application;
 
 	mShapeVector = new std::vector<Shape*>();
 	mShapeGhostVector = new std::vector<Shape*>();
@@ -60,10 +60,10 @@ Game::Game(ApplicationBreslin* applicationBreslin)
 
 	//set Camera
 	// Position it at 500 in Z direction
-    	mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(0,20,20));
+    	mApplication->getCamera()->setPosition(Ogre::Vector3(0,20,20));
     	// Look back along -Z
-    	mApplicationBreslin->getCamera()->lookAt(Ogre::Vector3(0,0,0));
-    	mApplicationBreslin->getCamera()->setNearClipDistance(5);
+    	mApplication->getCamera()->lookAt(Ogre::Vector3(0,0,0));
+    	mApplication->getCamera()->setNearClipDistance(5);
 
 	createScene();
 
@@ -106,8 +106,8 @@ void Game::remove()
                 }
         }
 	
-	mApplicationBreslin->getSceneManager()->destroyAllEntities();
-        mApplicationBreslin->mSceneMgr->destroyLight(mPointLight);
+	mApplication->getSceneManager()->destroyAllEntities();
+        mApplication->mSceneMgr->destroyLight(mPointLight);
 
 	//clear the vectors....	
 	mShapeVector->clear();
@@ -123,7 +123,7 @@ void Game::processUpdate()
 
 	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
-		mShapeVector->at(i)->interpolateTick(mApplicationBreslin->getRenderTime());
+		mShapeVector->at(i)->interpolateTick(mApplication->getRenderTime());
 	}
 }
 
@@ -132,7 +132,7 @@ void Game::processUpdate()
 **********************************/
 void Game::addShape(ByteBuffer* byteBuffer)
 {
-	Shape* shape = new Shape(mApplicationBreslin,byteBuffer,false);  //you should just need to call this...
+	Shape* shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
 
 	//ability
 	shape->addAbility(new AbilityRotation(shape));
@@ -160,8 +160,8 @@ void Game::removeShape(ByteBuffer* byteBuffer)
  			delete shape->mObjectTitle;
 
 			//delete entities by name
- 			mApplicationBreslin->getSceneManager()->destroyEntity(shape->mGhost->mName);
- 			mApplicationBreslin->getSceneManager()->destroyEntity(shape->mName);
+ 			mApplication->getSceneManager()->destroyEntity(shape->mGhost->mName);
+ 			mApplication->getSceneManager()->destroyEntity(shape->mName);
 
 			//erase shapes from vectors
 			mShapeVector->erase(mShapeVector->begin()+i);
@@ -206,9 +206,9 @@ Shape* Game::getShape(int id)
 
 void Game::createScene()
 {
-        mApplicationBreslin->mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
+        mApplication->mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
 
-        mPointLight = mApplicationBreslin->mSceneMgr->createLight("pointLight");
+        mPointLight = mApplication->mSceneMgr->createLight("pointLight");
         mPointLight->setType(Ogre::Light::LT_POINT);
         mPointLight->setPosition(Ogre::Vector3(250, 150, 250));
         mPointLight->setDiffuseColour(Ogre::ColourValue::White);
@@ -220,10 +220,10 @@ void Game::createScene()
                Plane(Vector3::UNIT_Y, -10), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
                 // create a floor entity, give it a material, and place it at the origin
-        mFloor = mApplicationBreslin->mSceneMgr->createEntity("Floor", "floor");
+        mFloor = mApplication->mSceneMgr->createEntity("Floor", "floor");
         mFloor->setMaterialName("Examples/Rockwall");
         mFloor->setCastShadows(false);
-        mApplicationBreslin->mSceneMgr->getRootSceneNode()->attachObject(mFloor);
+        mApplication->mSceneMgr->getRootSceneNode()->attachObject(mFloor);
 }
 
 /*********************************
@@ -247,7 +247,7 @@ void Game::checkByteBuffer(ByteBuffer* byteBuffer)
                         break;
 
                 case mMessageFrame:
-                       	if (!mApplicationBreslin->mNetwork->mIgnorePacket)
+                       	if (!mApplication->mNetwork->mIgnorePacket)
 			{
                         	readServerTick(byteBuffer);
                         }
@@ -264,7 +264,7 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
 
         while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
         {
-                mApplicationBreslin->mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
+                mApplication->mDetailsPanel->setParamValue(11, Ogre::StringConverter::toString(byteBuffer->GetSize()));
 
                 int id = byteBuffer->ReadByte();
 
@@ -284,7 +284,7 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
 
 void Game::sendByteBuffer()
 {
-	mRunNetworkTime += mApplicationBreslin->getRenderTime() * 1000.0f;
+	mRunNetworkTime += mApplication->getRenderTime() * 1000.0f;
 
     	// Framerate is too high
     	if(mRunNetworkTime > (1000 / 60))
@@ -315,7 +315,7 @@ void Game::sendByteBuffer()
         	mKeyLast = mKeyCurrent;
 
         	// Send the packet
-        	mApplicationBreslin->mNetwork->send(byteBuffer);
+        	mApplication->mNetwork->send(byteBuffer);
 
 		mRunNetworkTime = 0.0f;
     	}
@@ -341,32 +341,32 @@ void Game::processInput()
 {
 	mKeyCurrent = 0;
 
-	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
+	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
    {
 		mKeyCurrent |= mKeyUp;
    }
 
-   if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_K)) // Backward
+   if (mApplication->getKeyboard()->isKeyDown(OIS::KC_K)) // Backward
    {
 		mKeyCurrent |= mKeyDown;
    }
 
-	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_J)) // Left
+	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_J)) // Left
    {
 		mKeyCurrent |= mKeyLeft;
    }
 
-   if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_L)) // Right
+   if (mApplication->getKeyboard()->isKeyDown(OIS::KC_L)) // Right
    {
 		mKeyCurrent |= mKeyRight;
    }
 
-	if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_Z)) // Rotate -Yaw(counter-clockwise)
+	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_Z)) // Rotate -Yaw(counter-clockwise)
    {
 		mKeyCurrent |= mKeyCounterClockwise;
    }
 
-   if (mApplicationBreslin->getKeyboard()->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
+   if (mApplication->getKeyboard()->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
    {
 		mKeyCurrent |= mKeyClockwise;
    }

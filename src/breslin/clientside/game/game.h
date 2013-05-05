@@ -35,7 +35,7 @@ class Game
 {
 public:
 	
-	Game(ApplicationBreslin* applicationBreslin);
+	Game(ApplicationBreslin* application);
 	~Game();
 
 /***************************************
@@ -66,7 +66,7 @@ static const char mMessageQuitGame = -108;
 protected:
 
 //applicationBreslin
-ApplicationBreslin* mApplicationBreslin;
+ApplicationBreslin* mApplication;
 
 //Shapes
 std::vector<Shape*>* mShapeVector;	 //all shapes in the client world
