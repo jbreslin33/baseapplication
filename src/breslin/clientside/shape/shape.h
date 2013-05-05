@@ -27,7 +27,7 @@ class Shape
 {
 public:
 
-Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGhost);
+Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGhost);
 ~Shape();
 
 /**************************************************
@@ -36,7 +36,7 @@ Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGho
 public:
 
 //applicationBreslin
-ApplicationBreslin* mApplicationBreslin;
+ApplicationBreslin* mApplication;
 
 //id
 int   mIndex;

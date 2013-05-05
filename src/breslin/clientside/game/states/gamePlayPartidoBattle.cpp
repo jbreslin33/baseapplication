@@ -5,7 +5,7 @@
 #include "../../tdreamsock/dreamSockLog.h"
 
 //application
-#include "../../application/applicationBreslin.h"
+#include "../../application/applicationPartido.h"
 
 //game
 #include "../gamePartido.h"
@@ -28,6 +28,8 @@ GamePlayPartidoBattle::~GamePlayPartidoBattle()
 
 void GamePlayPartidoBattle::enter()
 {
+	mGame->mApplication->createBattleScreen();
+	mGame->mApplication->showBattleScreen();
 	mGame->mBattleStart = false;
 }
 void GamePlayPartidoBattle::execute()
@@ -42,5 +44,6 @@ void GamePlayPartidoBattle::execute()
 
 void GamePlayPartidoBattle::exit()
 {
-	
+	mGame->mApplication->hideBattleScreen();
+	mGame->mBattleEnd = true;
 }

@@ -45,10 +45,10 @@
 
 #endif
 
-Network::Network(ApplicationBreslin* applicationBreslin, const char serverIP[32], int serverPort )
+Network::Network(ApplicationBreslin* application, const char serverIP[32], int serverPort )
 {
 	//game
-	mApplicationBreslin = applicationBreslin;
+	mApplication = application;
 
 	//server address
 	mServerIP = serverIP;

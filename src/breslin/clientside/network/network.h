@@ -64,7 +64,7 @@ class ByteBuffer;
 class Network
 {
 public:
-Network(ApplicationBreslin* applicationBreslin, const char serverIP[32], int serverPort);
+Network(ApplicationBreslin* application, const char serverIP[32], int serverPort);
 ~Network();
 
 /**********************************
@@ -73,7 +73,7 @@ Network(ApplicationBreslin* applicationBreslin, const char serverIP[32], int ser
 private:
 
 //game
-ApplicationBreslin* mApplicationBreslin;
+ApplicationBreslin* mApplication;
 
 
 //server address

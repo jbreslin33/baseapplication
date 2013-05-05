@@ -25,13 +25,13 @@
 //ObjectTitle
 #include "../billboard/objectTitle.h"
 
-Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGhost)
+Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGhost)
 {
 
 	mIsGhost = isGhost;
 
 	//applicationBreslin
-	mApplicationBreslin = applicationBreslin;
+	mApplication = application;
 
 	//commands
 	mServerCommandLast    = new Command();
@@ -64,7 +64,7 @@ Shape::Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, boo
 	if (!mIsGhost) 
 	{
 		//create a ghost for this shape
-		mGhost = new Shape(mApplicationBreslin,byteBuffer,true);
+		mGhost = new Shape(mApplication,byteBuffer,true);
 		mGhost->setVisible(false);
 	}
 
@@ -161,14 +161,14 @@ void Shape::spawnShape(Vector3D* position)
 	}	
 
 	mName         = StringConverter::toString(mIndex);
-	mSceneNode    = mApplicationBreslin->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+	mSceneNode    = mApplication->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 
 	//set Starting position of sceneNode, we will attach our mesh to this. this is all that's needed for static shapes. actually we need to add
 	//rotation for them
 	mSceneNode->setPosition(position->x,position->y,position->z);	
 	
 	//create mesh
-	mEntity = mApplicationBreslin->getSceneManager()->createEntity(mName, mMeshName);
+	mEntity = mApplication->getSceneManager()->createEntity(mName, mMeshName);
 
 	//attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
     	mSceneNode->attachObject(mEntity);
@@ -266,9 +266,9 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
         }
 
         //frame time
-       // if (flags & mApplicationBreslin->mGame->mCommandFrameTime)
+       // if (flags & mApplication->mGame->mCommandFrameTime)
         //{
-                mServerCommandCurrent->mFrameTime = mApplicationBreslin->mGame->mFrameTimeServer;
+                mServerCommandCurrent->mFrameTime = mApplication->mGame->mFrameTimeServer;
                 mCommandToRunOnShape->mFrameTime = mServerCommandCurrent->mFrameTime;
        // }
 
@@ -352,7 +352,7 @@ void Shape::setupTitle()
 	const Ogre::String& fontName = "SdkTrays/Caption";
 	const Ogre::ColourValue& color = Ogre::ColourValue::White;
 	mObjectTitle = new ObjectTitle
-	(titlename, mEntity, mApplicationBreslin->getSceneManager()->getCamera("PlayerCam"), title,
+	(titlename, mEntity, mApplication->getSceneManager()->getCamera("PlayerCam"), title,
     fontName, color);
 }
 

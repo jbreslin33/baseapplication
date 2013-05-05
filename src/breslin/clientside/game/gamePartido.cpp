@@ -13,6 +13,9 @@
 //shape
 #include "../shape/shape.h"
 
+//application
+#include "../application/applicationPartido.h"
+
 //state machine
 #include "../../statemachine/stateMachine.h"
 #include "states/gameGlobal.h"
@@ -25,7 +28,7 @@
 /***************************************
 *			          CONSTRUCTORS
 ***************************************/
-GamePartido::GamePartido(ApplicationBreslin* applicationBreslin) : Game(applicationBreslin)
+GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicationPartido)
 {
 	mBattleStart = false;
 	mBattleEnd   = false;

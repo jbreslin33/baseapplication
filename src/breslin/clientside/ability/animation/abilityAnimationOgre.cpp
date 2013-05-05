@@ -18,8 +18,6 @@
 
 AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : AbilityAnimation(shape)
 {
-
-
 	mShape = shape;
 
 	mAnimationFadeSpeed = 7.5;
@@ -58,9 +56,9 @@ void AbilityAnimationOgre::setupAnimations()
 
 void AbilityAnimationOgre::runAnimations()
 {
-	mAnims[mBaseAnimID]->addTime(mShape->mApplicationBreslin->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax );
-	mAnims[mTopAnimID]->addTime(mShape->mApplicationBreslin->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax );
-	fadeAnimations(mShape->mApplicationBreslin->getRenderTime());
+	mAnims[mBaseAnimID]->addTime(mShape->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax );
+	mAnims[mTopAnimID]->addTime(mShape->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax );
+	fadeAnimations(mShape->mApplication->getRenderTime());
 }
 
 void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAnimationState)

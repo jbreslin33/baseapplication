@@ -21,9 +21,9 @@ public:
 *   		MEMBER VARIABLES
 ***************************************/
 
-ApplicationBreslin* mApplicationBreslin;
+ApplicationBreslin* mApplication;
 
-ApplicationGlobal(ApplicationBreslin* applicationBreslin);
+ApplicationGlobal(ApplicationBreslin* application);
 ~ApplicationGlobal();
 
 void enter  ();

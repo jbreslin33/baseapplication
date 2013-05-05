@@ -13,9 +13,9 @@
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
-ApplicationLogin::ApplicationLogin(ApplicationBreslin* applicationBreslin)
+ApplicationLogin::ApplicationLogin(ApplicationBreslin* application)
 {
-	mApplicationBreslin = applicationBreslin;
+	mApplication = application;
 }
 
 ApplicationLogin::~ApplicationLogin()
@@ -25,45 +25,45 @@ ApplicationLogin::~ApplicationLogin()
 
 void ApplicationLogin::enter()
 {
-	mApplicationBreslin->createLoginScreen();
-	mApplicationBreslin->showLoginScreen();
+	mApplication->createLoginScreen();
+	mApplication->showLoginScreen();
 }
 
 void ApplicationLogin::execute()
 {
-	if (mApplicationBreslin->mLoggedIn == true)
+	if (mApplication->mLoggedIn == true)
 	{
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
+		mApplication->mStateMachine->changeState(mApplication->mApplicationMain);
 	}
 
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogin)
+	if (mApplication->mButtonHit == mApplication->mButtonLogin)
 	{
-		mApplicationBreslin->mButtonHit = NULL;
-		if (mApplicationBreslin->mStringUsername.size() > 0) 
+		mApplication->mButtonHit = NULL;
+		if (mApplication->mStringUsername.size() > 0) 
 		{
-			mApplicationBreslin->sendLogin();
+			mApplication->sendLogin();
 		}
 	}
 
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
+	if (mApplication->mButtonHit == mApplication->mButtonExit)
 	{
-		mApplicationBreslin->mStateMachine->changeState(NULL);
-		mApplicationBreslin->mStateMachine->setGlobalState(NULL);
-		mApplicationBreslin->mButtonHit = NULL;
-		mApplicationBreslin->shutdown();
-		mApplicationBreslin->mShutDown = true;
-		delete mApplicationBreslin;
+		mApplication->mStateMachine->changeState(NULL);
+		mApplication->mStateMachine->setGlobalState(NULL);
+		mApplication->mButtonHit = NULL;
+		mApplication->shutdown();
+		mApplication->mShutDown = true;
+		delete mApplication;
 	}
 }
 
 void ApplicationLogin::exit()
 {
-	mApplicationBreslin->mStringUsername.clear();
-	mApplicationBreslin->mStringPassword.clear();
+	mApplication->mStringUsername.clear();
+	mApplication->mStringPassword.clear();
 
-	mApplicationBreslin->mLabelUsername->setCaption("Username");
-	mApplicationBreslin->mLabelPassword->setCaption("Password");
+	mApplication->mLabelUsername->setCaption("Username");
+	mApplication->mLabelPassword->setCaption("Password");
 
-	mApplicationBreslin->hideLoginScreen();
+	mApplication->hideLoginScreen();
 }
 

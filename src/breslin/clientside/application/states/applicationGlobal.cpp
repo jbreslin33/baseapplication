@@ -13,9 +13,9 @@
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
-ApplicationGlobal::ApplicationGlobal(ApplicationBreslin* applicationBreslin)
+ApplicationGlobal::ApplicationGlobal(ApplicationBreslin* application)
 {
-	mApplicationBreslin = applicationBreslin;
+	mApplication = application;
 }
 
 ApplicationGlobal::~ApplicationGlobal()
@@ -29,13 +29,13 @@ void ApplicationGlobal::enter()
 }
 void ApplicationGlobal::execute()
 {
-	if (mApplicationBreslin->mSetup)
+	if (mApplication->mSetup)
 	{
 		//check network
-		mApplicationBreslin->checkForByteBuffer();
+		mApplication->checkForByteBuffer();
 
 		//graphics
-		mApplicationBreslin->runGraphics();
+		mApplication->runGraphics();
 	}
 }
 void ApplicationGlobal::exit()

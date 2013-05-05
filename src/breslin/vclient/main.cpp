@@ -26,15 +26,15 @@ extern "C" {
        
 	StartLogConsole();
         
-	ApplicationBreslin* applicationBreslin = new ApplicationPartido(strCmdLine,30004);
+	ApplicationPartido* application = new ApplicationPartido(strCmdLine,30004);
 #else
-        ApplicationBreslin* applicationBreslin = new ApplicationPartido(argv[1],30004);
+        ApplicationPartido* application = new ApplicationPartido(argv[1],30004);
 #endif
         try
 	{
 		while (true)
 		{
-       	    		applicationBreslin->processUpdate();
+       	    		application->processUpdate();
 		}
         }
 		catch( Ogre::Exception& e )

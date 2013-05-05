@@ -17,9 +17,9 @@
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
-ApplicationMain::ApplicationMain(ApplicationBreslin* applicationBreslin)
+ApplicationMain::ApplicationMain(ApplicationBreslin* application)
 {
-	mApplicationBreslin = applicationBreslin;
+	mApplication = application;
 }
 
 ApplicationMain::~ApplicationMain()
@@ -30,52 +30,44 @@ ApplicationMain::~ApplicationMain()
 void ApplicationMain::enter()
 {
 	LogString("STATE: ApplicationGlobal");
-	mApplicationBreslin->createMainScreen();
-	mApplicationBreslin->showMainScreen();
+	mApplication->createMainScreen();
+	mApplication->showMainScreen();
 }
 
 void ApplicationMain::execute()
 {
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGameA)
+	if (mApplication->mButtonHit == mApplication->mButtonJoinGameA)
 	{
-		mApplicationBreslin->mButtonHit = NULL;
- 		mApplicationBreslin->mGame = new Game(mApplicationBreslin);
-		mApplicationBreslin->sendJoinGame(1);
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
+		mApplication->mButtonHit = NULL;
+ 		mApplication->mGame = new Game(mApplication);
+		mApplication->sendJoinGame(1);
+		mApplication->mStateMachine->changeState(mApplication->mApplicationPlay);
 	}
 
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonJoinGameB)
+	if (mApplication->mButtonHit == mApplication->mButtonLogout)
 	{
-		mApplicationBreslin->mButtonHit = NULL;
- 		mApplicationBreslin->mGame = new GamePartido(mApplicationBreslin);
-		mApplicationBreslin->sendJoinGame(2);
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationPlay);
-	}
-
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonLogout)
-	{
-		mApplicationBreslin->mButtonHit = NULL;
-		mApplicationBreslin->sendLogout();
+		mApplication->mButtonHit = NULL;
+		mApplication->sendLogout();
 	}
 	
-	if (mApplicationBreslin->mLoggedIn == false)
+	if (mApplication->mLoggedIn == false)
 	{
-		mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationLogin);
+		mApplication->mStateMachine->changeState(mApplication->mApplicationLogin);
 	}
 
-	if (mApplicationBreslin->mButtonHit == mApplicationBreslin->mButtonExit)
+	if (mApplication->mButtonHit == mApplication->mButtonExit)
 	{
-		mApplicationBreslin->mStateMachine->changeState(NULL);
-		mApplicationBreslin->mStateMachine->setGlobalState(NULL);
-		mApplicationBreslin->mButtonHit = NULL;
-		mApplicationBreslin->shutdown();
-		mApplicationBreslin->mShutDown = true;
-		delete mApplicationBreslin;
+		mApplication->mStateMachine->changeState(NULL);
+		mApplication->mStateMachine->setGlobalState(NULL);
+		mApplication->mButtonHit = NULL;
+		mApplication->shutdown();
+		mApplication->mShutDown = true;
+		delete mApplication;
 	}
 }
 
 void ApplicationMain::exit()
 {
-	mApplicationBreslin->hideMainScreen();
+	mApplication->hideMainScreen();
 }
 

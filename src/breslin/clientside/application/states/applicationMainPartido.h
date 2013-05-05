@@ -1,5 +1,5 @@
-#ifndef MAINSCREEN_H
-#define MAINSCREEN_H
+#ifndef MAINSCREENPARTIDO_H
+#define MAINSCREENPARTIDO_H
 
 /***************************************
 *   		INCLUDES
@@ -11,9 +11,9 @@
 *   		FORWARD DECLARATIONS
 ***************************************/
 
-class ApplicationBreslin;
+class ApplicationPartido;
 
-class ApplicationMain : public State
+class ApplicationMainPartido : public State
 {
 public:
 
@@ -21,14 +21,14 @@ public:
 *   		MEMBER VARIABLES
 ***************************************/
 
-ApplicationBreslin* mApplication;
+ApplicationPartido* mApplication;
 
-ApplicationMain(ApplicationBreslin* application);
-~ApplicationMain();
+ApplicationMainPartido(ApplicationPartido* application);
+~ApplicationMainPartido();
 
-virtual void enter  ();
-virtual void execute();
-virtual void exit   ();
+void enter  ();
+void execute();
+void exit   ();
 
 };
 

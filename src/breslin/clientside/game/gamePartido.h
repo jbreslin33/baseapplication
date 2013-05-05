@@ -9,16 +9,19 @@
 //standard library
 #include <vector>
 
+class ApplicationPartido;
 class GamePlayPartidoBattle;
 
 class GamePartido : public Game 
 {
 public:
 	
-	GamePartido(ApplicationBreslin* applicationBreslin);
+	GamePartido(ApplicationPartido* applicationPartido);
 	~GamePartido();
 
 public:
+
+ApplicationPartido* mApplication;
 
 //states
 State* mGamePlayPartidoBattle;
