@@ -22,9 +22,9 @@
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
-ApplicationPlay::ApplicationPlay(ApplicationBreslin* applicationBreslin)
+ApplicationPlay::ApplicationPlay(ApplicationBreslin* application)
 {
-	mApplication = applicationBreslin;
+	mApplication = application;
 }
 
 ApplicationPlay::~ApplicationPlay()
@@ -39,6 +39,7 @@ void ApplicationPlay::enter()
 }
 void ApplicationPlay::execute()
 {
+	LogString("execute in ApplicationPlay begin");
 	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_ESCAPE) && mApplication->mSentLeaveGame == false)
 	{
 		//send quit game
@@ -49,6 +50,7 @@ void ApplicationPlay::execute()
 
                 mApplication->mSentLeaveGame = true;
 	}
+	LogString("execute in ApplicationPlay mid");
 
 	if (mApplication->mLeaveGame)
        	{
@@ -66,8 +68,14 @@ void ApplicationPlay::execute()
        	else
        	{
               	//game
-               	mApplication->mGame->processUpdate();
+		LogString("execute in ApplicationPlay before processUpdate");
+		if (mApplication->mGame)
+		{	
+               		mApplication->mGame->processUpdate();
+		}
+		LogString("execute in ApplicationPlay after processUpdate");
 	}
+	LogString("execute in ApplicationPlay");
 }
 
 void ApplicationPlay::exit()

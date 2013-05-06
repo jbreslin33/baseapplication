@@ -100,6 +100,7 @@ void ApplicationBreslin::createStates()
 **********************************/
 void ApplicationBreslin::processUpdate()
 {
+	LogString("should not be called processUpdate FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
 	mStateMachine->update();
 
 	if (mFake == true)
@@ -109,6 +110,7 @@ void ApplicationBreslin::processUpdate()
 		hideLoginScreen();
  		
 		mGame = new Game(this);
+		mGame->createStates();
        		mStateMachine->changeState(mApplicationPlay);
 
 		//sneak an update in

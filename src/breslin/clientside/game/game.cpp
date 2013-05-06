@@ -56,8 +56,6 @@ Game::Game(ApplicationBreslin* application)
     	mRunNetworkTime = 0.0f;
 	mFrameTimeServer = 0.0f;
 
-	createStates();
-
 	//set Camera
 	// Position it at 500 in Z direction
     	mApplication->getCamera()->setPosition(Ogre::Vector3(0,20,20));

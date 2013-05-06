@@ -1,8 +1,11 @@
 //header
-#include "applicationPartido.h"
+ #include "applicationPartido.h"
 
 //log
 #include "../tdreamsock/dreamSockLog.h"
+
+//game
+#include "../game/gamePartido.h"
 
 //state machine
 #include "../../statemachine/stateMachine.h"
@@ -14,12 +17,49 @@
 
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
-	LogString("CALLLED CONSTRUCTORGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG ApplicationPartido!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
 }
 
 ApplicationPartido::~ApplicationPartido()
 {
 }
+
+/*********************************
+                        update
+**********************************/
+void ApplicationPartido::processUpdate()
+{
+	LogString("before mStateMachine->update");
+        mStateMachine->update();
+	LogString("after mStateMachine->update");
+
+        if (mFake == true)
+        {
+                createLoginScreen();
+                hideLoginScreen();
+
+                mGame = new GamePartido(this);
+                mGame->createStates();
+                mStateMachine->changeState(mApplicationPlay);
+
+                //sneak an update in
+                mStateMachine->update();
+
+                //fake esc from game
+                mPlayingGame = false;
+                mStateMachine->changeState(mApplicationLogin);
+
+                mFake = false;
+        }
+
+        //did you sendConnect if not do so
+        if (!mConnectSent)
+        {
+                mConnectSent = true;
+                sendConnect();
+        }
+}
+
 
 void ApplicationPartido::createStates()
 {
@@ -40,13 +80,11 @@ void ApplicationPartido::createStates()
 
 void  ApplicationPartido::createMainScreen()
 {
-
-	LogString("CALLLED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	ApplicationBreslin::createMainScreen();
         if (!mButtonJoinGameB)
         {
                 mButtonJoinGameB = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGameB", "Join Game B");
         }
-	ApplicationBreslin::createMainScreen();
 }
 
 void  ApplicationPartido::showMainScreen()

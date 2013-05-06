@@ -26,9 +26,9 @@ ApplicationPartido* mApplication;
 ApplicationMainPartido(ApplicationPartido* application);
 ~ApplicationMainPartido();
 
-void enter  ();
-void execute();
-void exit   ();
+virtual void enter  ();
+virtual void execute();
+virtual void exit   ();
 
 };
 

@@ -100,7 +100,7 @@ public:
 virtual void createStates();
 
 //process update
-void processUpdate();
+virtual void processUpdate();
 
 //time
 float getRenderTime();

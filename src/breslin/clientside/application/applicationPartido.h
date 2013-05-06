@@ -19,6 +19,9 @@ OgreBites::Button* mButtonJoinGameB;
 OgreBites::Label* mLabelQuestion; 
 OgreBites::Label* mLabelAnswer; 
 
+//processUpdate
+virtual void processUpdate();
+
 //states
 virtual void createStates();
 

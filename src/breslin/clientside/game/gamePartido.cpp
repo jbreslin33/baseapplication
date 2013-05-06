@@ -32,8 +32,6 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
 {
 	mBattleStart = false;
 	mBattleEnd   = false;
-
-	createStates();
 }
 
 GamePartido::~GamePartido()
