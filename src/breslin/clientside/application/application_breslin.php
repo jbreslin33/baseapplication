@@ -62,7 +62,6 @@ initialize: function(serverIP, serverPort)
 
 	//main screen
 	this.mButtonJoinGameA = 0;
-	this.mButtonJoinGameB = 0;
 	this.mButtonLogout = 0;
 
 	//login	
@@ -82,16 +81,6 @@ initialize: function(serverIP, serverPort)
 
         //state machine (Menus)
         this.mStateMachine = new StateMachine();
-
-        this.mApplicationGlobal     = new ApplicationGlobal    (this);
-	this.mApplicationInitialize = new ApplicationInitialize(this);
-	this.mApplicationLogin      = new ApplicationLogin     (this);
-        this.mApplicationMain       = new ApplicationMain      (this);
-        this.mApplicationPlay       = new ApplicationPlay      (this);
-
-        this.mStateMachine.setGlobalState (this.mApplicationGlobal);
-        this.mStateMachine.setCurrentState(this.mApplicationInitialize);
-        this.mStateMachine.changeState(this.mApplicationInitialize);	
 
 	//input
 	this.mKey_up = false;
@@ -121,6 +110,23 @@ log: function(msg)
         {
         	throw new Error(msg);
         }, 0);
+},
+
+//states
+createStates: function()
+{
+ 	this.mApplicationGlobal     = new ApplicationGlobal    (this);
+        this.mApplicationInitialize = new ApplicationInitialize(this);
+        this.mApplicationLogin      = new ApplicationLogin     (this);
+        this.mApplicationMain       = new ApplicationMain      (this);
+        this.mApplicationPlay       = new ApplicationPlay      (this);
+},
+
+setStates: function()
+{
+        this.mStateMachine.setGlobalState (this.mApplicationGlobal);
+        this.mStateMachine.setCurrentState(this.mApplicationInitialize);
+        this.mStateMachine.changeState(this.mApplicationInitialize);
 },
 
 /*********************************
@@ -394,16 +400,6 @@ createMainScreen: function()
 		this.mButtonJoinGameA.onclick = function()
 		{
 			mApplication.mButtonHit = mApplication.mButtonJoinGameA;	
-		};
-	}
-	
-	//join game B
-	if (this.mButtonJoinGameB == 0)
-	{
-		this.mButtonJoinGameB = this.createButton(300,150,100,50,"green","Join Game B");
-		this.mButtonJoinGameB.onclick = function()
-		{
-			mApplication.mButtonHit = mApplication.mButtonJoinGameB;	
 		};
 	}
 	
