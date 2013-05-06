@@ -109,11 +109,12 @@ void ApplicationBreslin::processUpdate()
 
 	if (mFake == true)
 	{
-		//mGame = new Game(this);
 		createLoginScreen();
 		hideLoginScreen();
  		
 		mGame = new Game(this);
+		mGame->createStates();
+		mGame->setStates();
        		mStateMachine->changeState(mApplicationPlay);
 
 		//sneak an update in

@@ -46,7 +46,10 @@ void GamePartido::createStates()
    	mGamePlay              = new GamePlayPartido(this);
         mGamePause             = new GamePause(this);
    	mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
+}
 
+void GamePartido::setStates()
+{
         mStateMachine->setGlobalState(mGameGlobal);
         mStateMachine->changeState(mGamePlay);
 }

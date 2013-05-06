@@ -68,7 +68,6 @@ Game::Game(ApplicationBreslin* application)
 	LogString("Game::Game");
 
 	mStateMachine = new StateMachine();
-	createStates();
 }
 /*
 
@@ -80,13 +79,16 @@ Game::~Game()
 
 void Game::createStates()
 {
-	mGameGlobal     = new GameGlobal(this);
+	mGameGlobal     = new GameGlobal    (this);
 	mGameInitialize = new GameInitialize(this);
-	mGamePlay       = new GamePlay(this);
-	mGamePause      = new GamePause(this);
+	mGamePlay       = new GamePlay      (this);
+	mGamePause      = new GamePause     (this);
+}
 
+void Game::setStates()
+{
 	mStateMachine->setGlobalState(mGameGlobal);
-	mStateMachine->changeState(mGamePlay);
+	mStateMachine->changeState   (mGamePlay);
 }
 
 //i am guessing i am not clearing the shape arrray???

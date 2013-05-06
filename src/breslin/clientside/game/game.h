@@ -105,6 +105,7 @@ public:
 
 //states
 virtual void createStates();
+virtual void setStates();
 
 void remove();
 

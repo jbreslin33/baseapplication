@@ -40,6 +40,8 @@ void ApplicationMainPartido::execute()
 		LogString("ApplicationMainPartido::execute....button hit for b"); 
 		mApplication->mButtonHit = NULL;
  		mApplication->mGame = new GamePartido(mApplication);
+ 		mApplication->mGame->createStates();
+ 		mApplication->mGame->setStates();
 		mApplication->sendJoinGame(2);
 		mApplication->mStateMachine->changeState(mApplication->mApplicationPlay);
 	}
