@@ -37,7 +37,9 @@
 ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 {
 	StartLog();
-	
+
+	LogString("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");	
+
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
@@ -60,6 +62,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mGame = NULL;
 
 	createStates();
+	LogString("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");	
 }
 
 
@@ -82,6 +85,7 @@ ApplicationBreslin::~ApplicationBreslin()
 **********************************/
 void ApplicationBreslin::createStates()
 {
+	LogString("this should not be called##############################################################HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
 	//state machine (Menus)
 	mStateMachine = new StateMachine();
 
@@ -332,7 +336,7 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 //LOGIN
 void ApplicationBreslin::createLoginScreen()
 {
-	LogString("createLoginScreen");
+	LogString("createLoginScreen what");
 	if (!mSelectMenuSchool)
 	{
         	mSelectMenuSchool = mTrayMgr->createThickSelectMenu(OgreBites::TL_CENTER, "mSelectMenuSchool", "Select School", 120, 10);

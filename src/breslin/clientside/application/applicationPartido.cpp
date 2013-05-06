@@ -14,6 +14,7 @@
 
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
+	LogString("CALLLED CONSTRUCTORGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG ApplicationPartido!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
 ApplicationPartido::~ApplicationPartido()
@@ -22,6 +23,7 @@ ApplicationPartido::~ApplicationPartido()
 
 void ApplicationPartido::createStates()
 {
+	LogString("CALLLED createStates in ApplicationPartido!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         //state machine (Menus)
         mStateMachine = new StateMachine();
 
@@ -38,13 +40,13 @@ void ApplicationPartido::createStates()
 
 void  ApplicationPartido::createMainScreen()
 {
-	ApplicationBreslin::createMainScreen();
 
 	LogString("CALLLED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         if (!mButtonJoinGameB)
         {
                 mButtonJoinGameB = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGameB", "Join Game B");
         }
+	ApplicationBreslin::createMainScreen();
 }
 
 void  ApplicationPartido::showMainScreen()

@@ -25,7 +25,8 @@ extern "C" {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
        
 	StartLogConsole();
-        
+       
+
 	ApplicationPartido* application = new ApplicationPartido(strCmdLine,30004);
 #else
         ApplicationPartido* application = new ApplicationPartido(argv[1],30004);
