@@ -58,8 +58,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//game
 	mGame = NULL;
-
-	createStates();
 }
 
 
