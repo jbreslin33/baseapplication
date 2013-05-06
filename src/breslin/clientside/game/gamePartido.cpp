@@ -40,7 +40,6 @@ GamePartido::~GamePartido()
 
 void GamePartido::createStates()
 {
-  	mStateMachine          = new StateMachine();
         mGameGlobal            = new GameGlobal(this);
         mGameInitialize        = new GameInitialize(this);
    	mGamePlay              = new GamePlayPartido(this);

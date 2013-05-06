@@ -65,6 +65,7 @@ Game::Game(ApplicationBreslin* application)
 
 	createScene();
 
+	mStateMachine = new StateMachine();
 }
 /*
 
@@ -76,11 +77,10 @@ Game::~Game()
 
 void Game::createStates()
 {
-	mStateMachine = new StateMachine();
-	mGameGlobal = new GameGlobal(this);
+	mGameGlobal     = new GameGlobal(this);
 	mGameInitialize = new GameInitialize(this);
-	mGamePlay = new GamePlay(this);
-	mGamePause = new GamePause(this);
+	mGamePlay       = new GamePlay(this);
+	mGamePause      = new GamePause(this);
 
 	mStateMachine->setGlobalState(mGameGlobal);
 	mStateMachine->changeState(mGamePlay);
@@ -337,6 +337,7 @@ void Game::sendByteBuffer()
 
 void Game::processInput()
 {
+	LogString("Game::processInput");
 	mKeyCurrent = 0;
 
 	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward

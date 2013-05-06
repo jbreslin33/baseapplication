@@ -28,9 +28,11 @@ GamePlayPartido::~GamePlayPartido()
 
 void GamePlayPartido::enter()
 {
+	GamePlay::enter();
 }
 void GamePlayPartido::execute()
 {
+	GamePlay::execute();
 	if (mGame->mBattleStart)
 	{
 		mGame->mStateMachine->changeState(mGame->mGamePlayPartidoBattle);		
@@ -45,5 +47,5 @@ void GamePlayPartido::execute()
 
 void GamePlayPartido::exit()
 {
-	
+	GamePlay::exit();
 }

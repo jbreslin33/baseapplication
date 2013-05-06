@@ -29,9 +29,7 @@ ApplicationPartido::~ApplicationPartido()
 **********************************/
 void ApplicationPartido::processUpdate()
 {
-	LogString("before mStateMachine->update");
         mStateMachine->update();
-	LogString("after mStateMachine->update");
 
         if (mFake == true)
         {
@@ -63,7 +61,6 @@ void ApplicationPartido::processUpdate()
 
 void ApplicationPartido::createStates()
 {
-	LogString("CALLLED createStates in ApplicationPartido!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         //state machine (Menus)
         mStateMachine = new StateMachine();
 
