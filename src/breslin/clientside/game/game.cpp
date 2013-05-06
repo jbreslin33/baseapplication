@@ -340,37 +340,35 @@ void Game::sendByteBuffer()
 
 void Game::processInput()
 {
-	LogString("Game::processInput");
 	mKeyCurrent = 0;
 
 	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
-   {
+   	{
 		mKeyCurrent |= mKeyUp;
-   }
+   	}
 
-   if (mApplication->getKeyboard()->isKeyDown(OIS::KC_K)) // Backward
-   {
+   	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_K)) // Backward
+   	{
 		mKeyCurrent |= mKeyDown;
-   }
+   	}
 
 	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_J)) // Left
-   {
+   	{
 		mKeyCurrent |= mKeyLeft;
-   }
+   	}
 
-   if (mApplication->getKeyboard()->isKeyDown(OIS::KC_L)) // Right
-   {
+   	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_L)) // Right
+   	{
 		mKeyCurrent |= mKeyRight;
-   }
+   	}
 
 	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_Z)) // Rotate -Yaw(counter-clockwise)
-   {
+   	{
 		mKeyCurrent |= mKeyCounterClockwise;
-   }
+   	}
 
-   if (mApplication->getKeyboard()->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
-   {
+   	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_X)) // Right + Yaw(clockwise)
+   	{
 		mKeyCurrent |= mKeyClockwise;
-   }
-
+   	}
 }
