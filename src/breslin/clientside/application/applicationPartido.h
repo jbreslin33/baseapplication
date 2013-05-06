@@ -24,6 +24,7 @@ virtual void processUpdate();
 
 //states
 virtual void createStates();
+virtual void setStates();
 
 //main
 virtual void createMainScreen();

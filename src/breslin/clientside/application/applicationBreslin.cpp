@@ -59,7 +59,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//game
 	mGame = NULL;
 
-	createStates();
+	mStateMachine = new StateMachine();
 }
 
 
@@ -82,15 +82,18 @@ ApplicationBreslin::~ApplicationBreslin()
 **********************************/
 void ApplicationBreslin::createStates()
 {
-	//state machine (Menus)
-	mStateMachine = new StateMachine();
-
-	mApplicationGlobal = new ApplicationGlobal(this);
+	LogString("ApplicationBreslin::createStates");
+	mApplicationGlobal     = new ApplicationGlobal(this);
 	mApplicationInitialize = new ApplicationInitialize(this);
-	mApplicationLogin   = new ApplicationLogin  (this);
-	mApplicationMain   = new ApplicationMain  (this);
-	mApplicationPlay   = new ApplicationPlay(this);
+	mApplicationLogin      = new ApplicationLogin  (this);
+	mApplicationMain       = new ApplicationMain  (this);
+	mApplicationPlay       = new ApplicationPlay(this);
 
+}
+
+void ApplicationBreslin::setStates()
+{
+	LogString("ApplicationBreslin::setStates");
 	mStateMachine->setGlobalState (mApplicationGlobal);
 	mStateMachine->changeState(mApplicationInitialize);
         mStateMachine->setPreviousState(mApplicationInitialize);

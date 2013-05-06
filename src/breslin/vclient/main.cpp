@@ -30,6 +30,10 @@ extern "C" {
 #else
         ApplicationPartido* application = new ApplicationPartido(argv[1],30004);
 #endif
+	//call virtual createStates and setStates
+	application->createStates();
+	application->setStates();
+
         try
 	{
 		while (true)

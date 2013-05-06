@@ -17,11 +17,29 @@
 
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
-
+	LogString("ApplicationPartido::ApplicationPartido");
 }
 
 ApplicationPartido::~ApplicationPartido()
 {
+}
+
+void ApplicationPartido::createStates()
+{
+	LogString("ApplicationPartido::createStates");
+        mApplicationGlobal     = new ApplicationGlobal(this);
+        mApplicationInitialize = new ApplicationInitialize(this);
+        mApplicationLogin      = new ApplicationLogin  (this);
+        mApplicationMain       = new ApplicationMainPartido  (this);
+        mApplicationPlay       = new ApplicationPlay(this);
+}
+
+void ApplicationPartido::setStates()
+{
+	LogString("ApplicationPartido::setStates");
+        mStateMachine->setGlobalState (mApplicationGlobal);
+        mStateMachine->changeState(mApplicationInitialize);
+        mStateMachine->setPreviousState(mApplicationInitialize);
 }
 
 /*********************************
@@ -58,22 +76,6 @@ void ApplicationPartido::processUpdate()
 }
 
 
-void ApplicationPartido::createStates()
-{
-	LogString("ApplicationPartido::createStates");
-        //state machine (Menus)
-        mStateMachine = new StateMachine();
-
-        mApplicationGlobal = new ApplicationGlobal(this);
-        mApplicationInitialize = new ApplicationInitialize(this);
-        mApplicationLogin   = new ApplicationLogin  (this);
-        mApplicationMain   = new ApplicationMainPartido  (this);
-        mApplicationPlay   = new ApplicationPlay(this);
-
-        mStateMachine->setGlobalState (mApplicationGlobal);
-        mStateMachine->changeState(mApplicationInitialize);
-        mStateMachine->setPreviousState(mApplicationInitialize);
-}
 
 void  ApplicationPartido::createMainScreen()
 {

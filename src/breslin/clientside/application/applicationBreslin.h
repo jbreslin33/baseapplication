@@ -98,6 +98,7 @@ public:
 
 //states
 virtual void createStates();
+virtual void setStates();
 
 //process update
 virtual void processUpdate();
