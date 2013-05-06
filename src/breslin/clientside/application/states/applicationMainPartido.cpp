@@ -37,6 +37,7 @@ void ApplicationMainPartido::execute()
 
 	if (mApplication->mButtonHit == mApplication->mButtonJoinGameB)
 	{
+		LogString("ApplicationMainPartido::execute....button hit for b"); 
 		mApplication->mButtonHit = NULL;
  		mApplication->mGame = new GamePartido(mApplication);
 		mApplication->sendJoinGame(2);

@@ -65,7 +65,10 @@ Game::Game(ApplicationBreslin* application)
 
 	createScene();
 
+	LogString("Game::Game");
+
 	mStateMachine = new StateMachine();
+	createStates();
 }
 /*
 

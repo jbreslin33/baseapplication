@@ -40,7 +40,6 @@ void ApplicationMain::execute()
 	{
 		mApplication->mButtonHit = NULL;
  		mApplication->mGame = new Game(mApplication);
-		mApplication->mGame->createStates();
 		mApplication->sendJoinGame(1);
 		mApplication->mStateMachine->changeState(mApplication->mApplicationPlay);
 	}

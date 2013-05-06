@@ -37,7 +37,6 @@ void ApplicationPartido::processUpdate()
                 hideLoginScreen();
 
                 mGame = new GamePartido(this);
-                mGame->createStates();
                 mStateMachine->changeState(mApplicationPlay);
 
                 //sneak an update in

@@ -19,6 +19,7 @@
 GamePlayPartido::GamePlayPartido(GamePartido* game) : GamePlay(game)
 {
 	mGame = game;
+	LogString("GamePlayPartido::GamePlayPartido");
 }
 
 GamePlayPartido::~GamePlayPartido()
@@ -29,6 +30,7 @@ GamePlayPartido::~GamePlayPartido()
 void GamePlayPartido::enter()
 {
 	GamePlay::enter();
+	LogString("GamePlayPartido::enter");
 }
 void GamePlayPartido::execute()
 {
@@ -37,6 +39,8 @@ void GamePlayPartido::execute()
 	{
 		mGame->mStateMachine->changeState(mGame->mGamePlayPartidoBattle);		
 	}
+
+	LogString("GamePlayPartido::execute");
 
 	//user input
 	mGame->processInput();	

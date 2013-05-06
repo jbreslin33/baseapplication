@@ -24,9 +24,9 @@ GamePartido* mGame;
 GamePlayPartido(GamePartido* game);
 ~GamePlayPartido();
 
-void enter  ();
-void execute();
-void exit   ();
+virtual void enter  ();
+virtual void execute();
+virtual void exit   ();
 
 };
 

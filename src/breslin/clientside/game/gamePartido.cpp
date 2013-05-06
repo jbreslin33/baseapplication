@@ -30,6 +30,7 @@
 ***************************************/
 GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicationPartido)
 {
+	LogString("GamePartio::GamePartido");
 	mBattleStart = false;
 	mBattleEnd   = false;
 }

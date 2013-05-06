@@ -58,6 +58,8 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	//game
 	mGame = NULL;
+
+	createStates();
 }
 
 
@@ -80,7 +82,6 @@ ApplicationBreslin::~ApplicationBreslin()
 **********************************/
 void ApplicationBreslin::createStates()
 {
-	LogString("this should not be called##############################################################HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
 	//state machine (Menus)
 	mStateMachine = new StateMachine();
 
@@ -110,7 +111,6 @@ void ApplicationBreslin::processUpdate()
 		hideLoginScreen();
  		
 		mGame = new Game(this);
-		mGame->createStates();
        		mStateMachine->changeState(mApplicationPlay);
 
 		//sneak an update in
