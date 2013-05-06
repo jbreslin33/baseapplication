@@ -50,6 +50,7 @@ askQuestion: function(byteBuffer)
 
 battleStart: function(byteBuffer)
 {
+	this.log('battleStart');
 	this.mBattleStart = true;
 },
 
