@@ -26,7 +26,6 @@ extern "C" {
        
 	StartLogConsole();
        
-
 	ApplicationPartido* application = new ApplicationPartido(strCmdLine,30004);
 #else
         ApplicationPartido* application = new ApplicationPartido(argv[1],30004);

@@ -38,8 +38,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 {
 	StartLog();
 
-	LogString("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");	
-
 	//network
 	mNetwork = new Network(this,serverIP,serverPort);
 
@@ -62,7 +60,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mGame = NULL;
 
 	createStates();
-	LogString("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");	
 }
 
 
