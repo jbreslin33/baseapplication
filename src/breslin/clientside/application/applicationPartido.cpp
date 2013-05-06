@@ -60,6 +60,7 @@ void ApplicationPartido::processUpdate()
 
 void ApplicationPartido::createStates()
 {
+	LogString("ApplicationPartido::createStates");
         //state machine (Menus)
         mStateMachine = new StateMachine();
 
