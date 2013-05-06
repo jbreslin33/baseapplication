@@ -28,6 +28,7 @@ GamePlayPartidoBattle::~GamePlayPartidoBattle()
 
 void GamePlayPartidoBattle::enter()
 {
+	LogString("GamePlayPartidoBattle::enter");
 	mGame->mApplication->createBattleScreen();
 	mGame->mApplication->showBattleScreen();
 	mGame->mBattleStart = false;
