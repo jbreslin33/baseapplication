@@ -115,9 +115,9 @@ void showLoginScreen();
 void hideLoginScreen();
 
 //main
-void createMainScreen();
-void showMainScreen();
-void hideMainScreen();
+virtual void createMainScreen();
+virtual void showMainScreen();
+virtual void hideMainScreen();
 
 //input
 OIS::Keyboard* getKeyboard() { return mKeyboard; }
