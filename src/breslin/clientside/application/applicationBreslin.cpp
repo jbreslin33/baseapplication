@@ -104,7 +104,6 @@ void ApplicationBreslin::setStates()
 **********************************/
 void ApplicationBreslin::processUpdate()
 {
-	LogString("should not be called processUpdate FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
 	mStateMachine->update();
 
 	if (mFake == true)
