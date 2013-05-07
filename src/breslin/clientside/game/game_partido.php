@@ -16,8 +16,6 @@ initialize: function(applicationBreslin)
 
 	this.mBattleStart = false;
 	this.mBattleEnd   = false;
-
-	this.createStates();
 },
 
 log: function(msg)
@@ -38,10 +36,12 @@ createStates: function()
         this.mGamePlay              = new GamePlayPartido(this);
         this.mGamePause             = new GamePause(this);
         this.mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
+},
 
+createStates: function()
+{
         this.mStateMachine.setGlobalState(this.mGameGlobal);
         this.mStateMachine.changeState(this.mGamePlay);
-
 },
 
 askQuestion: function(byteBuffer)

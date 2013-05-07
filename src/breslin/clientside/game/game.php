@@ -48,7 +48,7 @@ initialize: function(applicationBreslin)
 	this.mPollDelayCounter = 0;
 	this.mFrameTimeServer = 0;
 
-	this.createStates();
+	this.mStateMachine = new StateMachine();
 /*
         //set Camera
         // Position it at 500 in Z direction
@@ -62,16 +62,14 @@ initialize: function(applicationBreslin)
 
 createStates: function()
 {
-
-	this.log('createSTATES IN GAME');
-       	//states 
-	this.mStateMachine = new StateMachine();
-        
         this.mGameGlobal = new GameGlobal(this);
         this.mGameInitialize = new GameInitialize(this);
         this.mGamePlay = new GamePlay(this);
         this.mGamePause = new GamePause(this);
+},
 
+setStates: function()
+{
         this.mStateMachine.setGlobalState(this.mGameGlobal);
         this.mStateMachine.changeState(this.mGamePlay);
 },

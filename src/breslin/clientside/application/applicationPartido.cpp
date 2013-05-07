@@ -104,11 +104,14 @@ void  ApplicationPartido::hideMainScreen()
         mTrayMgr->removeWidgetFromTray(mButtonJoinGameB);
 }
 
+//battle
 void  ApplicationPartido::createBattleScreen()
 {
+	LogString("ApplicationPartido::createBattleScreen");
 	if (!mLabelQuestion)
         {
                 mLabelQuestion  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelQuestion", "Question:");
+		LogString("ApplicationPartido::createBattleScreen 1");
         }
 	if (!mLabelAnswer)
         {

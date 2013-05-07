@@ -17,11 +17,15 @@ log: function(msg)
 enter: function()
 {
 	this.mGame.mBattleStart = false;
+	this.mGame.mApplication.createBattleScreen();
+        this.mGame.mApplication.showBattleScreen();
+        this.mGame.mBattleStart = false;
+
 },
 
 execute: function()
 {
-
+	this.log('GamePlayPartidoBattle::execute');
 	//user input
         this.mGame.processInput();
 
@@ -32,6 +36,8 @@ execute: function()
 exit: function()
 {
 
+        this.mGame.mApplication.hideBattleScreen();
+        this.mGame.mBattleEnd = true;
 }
 
 });

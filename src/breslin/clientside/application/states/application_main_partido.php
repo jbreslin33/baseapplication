@@ -24,6 +24,8 @@ execute: function()
 	{
 	        this.mApplication.mButtonHit = 0;
 		this.mApplication.mGame = new GamePartido(this.mApplication);
+		this.mApplication.mGame.createStates();
+		this.mApplication.mGame.setStates();
  		this.mApplication.sendJoinGame('2');
                 this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationPlay);
 	}
