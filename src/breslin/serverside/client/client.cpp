@@ -83,7 +83,11 @@ Client::~Client()
 {
 	LogString("Client::~Client");
 	//this will check if there is an mShape
-	mGame->leave(this);
+
+	if (mGame)
+	{
+		mGame->leave(this);
+	}
 
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
         {
