@@ -1,9 +1,7 @@
 Shape = new Class(
 {
 
-//Shape(ApplicationBreslin* applicationBreslin, ByteBuffer* byteBuffer, bool isGhost);
-//this.mApplicationBreslin,false,index,client,x,z,rx,rz,m,a)
-initialize: function(applicationBreslin, byteBuffer, isGhost)
+initialize: function(application, byteBuffer, isGhost)
 {
 
 	this.mIndex = 0;
@@ -32,8 +30,8 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
 	//abilitys
 	this.mAbilityVector = new Array();
 
-        //applicationBreslin
-        this.mApplicationBreslin = applicationBreslin;
+        //application
+        this.mApplication = application;
 
         //commands
         this.mServerCommandLast    = new Command();
@@ -71,11 +69,11 @@ initialize: function(applicationBreslin, byteBuffer, isGhost)
         if (!this.mIsGhost)
         {
                 //create a ghost for this shape
-                this.mGhost = new Shape(this.mApplicationBreslin,byteBuffer,true);
+                this.mGhost = new Shape(this.mApplication,byteBuffer,true);
 	
 		if (this.mLocal == 1)
 		{
-			this.mApplicationBreslin.mGame.mControlObjectGhost = this.mGhost;
+			this.mApplication.mGame.mControlObjectGhost = this.mGhost;
 		}
         }
 },
@@ -133,18 +131,18 @@ setPosition: function(position)
 
 
 	//you are control object or control ghost
-	if (this.mApplicationBreslin.mGame.mControlObject == this ||
-		this.mApplicationBreslin.mGame.mControlObjectGhost == this)
+	if (this.mApplication.mGame.mControlObject == this ||
+		this.mApplication.mGame.mControlObjectGhost == this)
 	{
-		this.mPositionRender.x = parseFloat(this.mApplicationBreslin.mScreenCenter.x);	
+		this.mPositionRender.x = parseFloat(this.mApplication.mScreenCenter.x);	
 		this.mPositionRender.y = 0;	
-		this.mPositionRender.z = parseFloat(this.mApplicationBreslin.mScreenCenter.z);	
+		this.mPositionRender.z = parseFloat(this.mApplication.mScreenCenter.z);	
 	}
 	else //you are not control object
 	{
-		this.mPositionRender.x = parseFloat(x) + parseFloat(this.mApplicationBreslin.mGame.mOffSet.x);
+		this.mPositionRender.x = parseFloat(x) + parseFloat(this.mApplication.mGame.mOffSet.x);
 		this.mPositionRender.y = parseFloat(0);
-		this.mPositionRender.z = parseFloat(z) + parseFloat(this.mApplicationBreslin.mGame.mOffSet.z);
+		this.mPositionRender.z = parseFloat(z) + parseFloat(this.mApplication.mGame.mOffSet.z);
 	}
 
 	//you are out of visible area 
@@ -209,7 +207,7 @@ parseSpawnByteBuffer: function(byteBuffer)
 	//set control object
 	if (this.mLocal == 1 && this.mIsGhost == false)
 	{
-		this.mApplicationBreslin.mGame.mControlObject = this;
+		this.mApplication.mGame.mControlObject = this;
 	} 
 },
 
@@ -321,7 +319,7 @@ parseDeltaByteBuffer: function(byteBuffer)
                 this.mServerCommandCurrent.mRotation.z = byteBuffer.readByte();
         }
 
-        this.mServerCommandCurrent.mFrameTime = this.mApplicationBreslin.mGame.mFrameTimeServer;
+        this.mServerCommandCurrent.mFrameTime = this.mApplication.mGame.mFrameTimeServer;
         this.mCommandToRunOnShape.mFrameTime = this.mServerCommandCurrent.mFrameTime;
 
         if (this.mServerCommandCurrent.mFrameTime != 0)
@@ -376,12 +374,12 @@ getMeshString: function(meshCode)
 		{
  			//set animation instance
                 	this.mAnimation = new AnimationAdvanced(this);
-                	this.mAnimation.addAnimations('http://' + this.mApplicationBreslin.mNetwork.mServerIP + '/breslin/vclient/dist/media/materials/textures/wizard_','.png');
-			return "http://" + this.mApplicationBreslin.mNetwork.mServerIP + "/breslin/vclient/dist/media/materials/textures/wizard_1.png";
+                	this.mAnimation.addAnimations('http://' + this.mApplication.mNetwork.mServerIP + '/breslin/vclient/dist/media/materials/textures/wizard_','.png');
+			return "http://" + this.mApplication.mNetwork.mServerIP + "/breslin/vclient/dist/media/materials/textures/wizard_1.png";
 		}
 		else
 		{
-			return "http://" + this.mApplicationBreslin.mNetwork.mServerIP + "/breslin/vclient/dist/media/materials/textures/red_monster.png";
+			return "http://" + this.mApplication.mNetwork.mServerIP + "/breslin/vclient/dist/media/materials/textures/red_monster.png";
 		}
         }
 },

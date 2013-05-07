@@ -1,9 +1,9 @@
 var ApplicationInitialize = new Class(
 {
 	
-initialize: function(applicationBreslin)
+initialize: function(application)
 {
-	this.mApplicationBreslin = applicationBreslin;
+	this.mApplication = application;
 },
 
 enter: function()
@@ -12,14 +12,14 @@ enter: function()
 
 execute: function()
 {
-        if (this.mApplicationBreslin.setup())
+        if (this.mApplication.setup())
         {
-        	this.mApplicationBreslin.mSetup = true;
+        	this.mApplication.mSetup = true;
         }
-        if (this.mApplicationBreslin.mSetup && this.mApplicationBreslin.mConnected)
+        if (this.mApplication.mSetup && this.mApplication.mConnected)
 	{
-		this.mApplicationBreslin.hideLoadingScreen();
-        	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationLogin);
+		this.mApplication.hideLoadingScreen();
+        	this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationLogin);
 
 	}
 },

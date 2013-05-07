@@ -1,45 +1,45 @@
 var ApplicationLogin = new Class(
 {
 	
-initialize: function(applicationBreslin)
+initialize: function(application)
 {
-	this.mApplicationBreslin = applicationBreslin;
+	this.mApplication = application;
 },
 
 enter: function()
 {
-        this.mApplicationBreslin.createLoginScreen();
-        this.mApplicationBreslin.showLoginScreen();
+        this.mApplication.createLoginScreen();
+        this.mApplication.showLoginScreen();
 },
 
 execute: function()
 {
-	if (this.mApplicationBreslin.mLoggedIn == true)
+	if (this.mApplication.mLoggedIn == true)
 	{	
-                this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationMain);
+                this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationMain);
 	}
 
-	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonLogin)
+	if (this.mApplication.mButtonHit == this.mApplication.mButtonLogin)
 	{
-		if (this.mApplicationBreslin.mLabelUsername.value == '')
+		if (this.mApplication.mLabelUsername.value == '')
 		{
-	        	this.mApplicationBreslin.mButtonHit = 0;
+	        	this.mApplication.mButtonHit = 0;
 			alert('username cannot be blank');
 		}
 		else
 		{
-	        	this.mApplicationBreslin.mButtonHit = 0;
-			this.mApplicationBreslin.sendLogin();	
+	        	this.mApplication.mButtonHit = 0;
+			this.mApplication.sendLogin();	
 		}
 	}
 },
 
 exit: function()
 {
-	this.mApplicationBreslin.mStringUsername = '';
-	this.mApplicationBreslin.mStringPassword = '';
+	this.mApplication.mStringUsername = '';
+	this.mApplication.mStringPassword = '';
 	
-	this.mApplicationBreslin.hideLoginScreen();
+	this.mApplication.hideLoginScreen();
 }
 
 });

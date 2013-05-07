@@ -1,53 +1,53 @@
 var ApplicationMain = new Class(
 {
 	
-initialize: function(applicationBreslin)
+initialize: function(application)
 {
-	this.mApplicationBreslin = applicationBreslin;
+	this.mApplication = application;
 },
 
 enter: function()
 {
-        this.mApplicationBreslin.createMainScreen();
-        this.mApplicationBreslin.showMainScreen();
+        this.mApplication.createMainScreen();
+        this.mApplication.showMainScreen();
 },
 
 execute: function()
 {
 	//join game A
-	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonJoinGameA)
+	if (this.mApplication.mButtonHit == this.mApplication.mButtonJoinGameA)
 	{
-	        this.mApplicationBreslin.mButtonHit = 0;
-		this.mApplicationBreslin.mGame = new Game(this.mApplicationBreslin);
-		this.mApplicationBreslin.mGame.createStates();
-		this.mApplicationBreslin.mGame.setStates();
- 		this.mApplicationBreslin.sendJoinGame('1');
-                this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationPlay);
+	        this.mApplication.mButtonHit = 0;
+		this.mApplication.mGame = new Game(this.mApplication);
+		this.mApplication.mGame.createStates();
+		this.mApplication.mGame.setStates();
+ 		this.mApplication.sendJoinGame('1');
+                this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationPlay);
 	}
 
 	//logout
-	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonLogout)
+	if (this.mApplication.mButtonHit == this.mApplication.mButtonLogout)
 	{
-	        this.mApplicationBreslin.mButtonHit = 0;
-                this.mApplicationBreslin.sendLogout();
+	        this.mApplication.mButtonHit = 0;
+                this.mApplication.sendLogout();
 	}
 
-	if (this.mApplicationBreslin.mLoggedIn == false)
+	if (this.mApplication.mLoggedIn == false)
 	{
-                this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationLogin);
+                this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationLogin);
 	}
 
 	//exit
-	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonExit)
+	if (this.mApplication.mButtonHit == this.mApplication.mButtonExit)
 	{
-	        this.mApplicationBreslin.mButtonHit = 0;
+	        this.mApplication.mButtonHit = 0;
 	
 	}
 },
 
 exit: function()
 {
-        this.mApplicationBreslin.hideMainScreen();
+        this.mApplication.hideMainScreen();
 }
 
 });

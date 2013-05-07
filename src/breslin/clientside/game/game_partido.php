@@ -6,7 +6,8 @@ Extends: Game,
 initialize: function(applicationBreslin)
 {
 	this.parent(applicationBreslin);
-
+	
+	this.log('GamePartido::GamePartido');
 	//questions
 	this.mMessageAskQuestion    = -76;
 		
@@ -28,9 +29,7 @@ log: function(msg)
 
 createStates: function()
 {
-	//states
-	this.mStateMachine = new StateMachine();
-
+	this.log('GamePartido::createStates');
         this.mGameGlobal            = new GameGlobal(this);
         this.mGameInitialize        = new GameInitialize(this);
         this.mGamePlay              = new GamePlayPartido(this);
@@ -40,6 +39,7 @@ createStates: function()
 
 createStates: function()
 {
+	this.log('GamePartido::setStates');
         this.mStateMachine.setGlobalState(this.mGameGlobal);
         this.mStateMachine.changeState(this.mGamePlay);
 },

@@ -29,7 +29,7 @@ execute: function()
         //copy values from mVelocity so we don't make changes to original
         transVector.copyValuesFrom(this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity);
         //get the mulitplier
-        parsedRenderTime = parseFloat(this.mAbilityMove.mShape.mApplicationBreslin.getRenderTime());
+        parsedRenderTime = parseFloat(this.mAbilityMove.mShape.mApplication.getRenderTime());
 	
 	multipliedRenderTime = parsedRenderTime * 1000;
 
@@ -42,12 +42,12 @@ execute: function()
 
 	//set new position
 	this.mAbilityMove.mShape.setPosition(transVector);
-	//document.getElementById('mMessageFrameG').innerHTML=':mSequence ' + this.mAbilityMove.mShape.mApplicationBreslin.mGame.mSequence;	
+	//document.getElementById('mMessageFrameG').innerHTML=':mSequence ' + this.mAbilityMove.mShape.mApplication.mGame.mSequence;	
 /*
         if (abilityMove->mShape->mLocal == 1)
         {
-                abilityMove->mShape->mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(transVector->x,transVector->y + 20,transVector->z + 20));
-                abilityMove->mShape->mApplicationBreslin->getCamera()->lookAt(Ogre::Vector3(transVector->x,transVector->y,transVector->z));
+                abilityMove->mShape->mApplication->getCamera()->setPosition(Ogre::Vector3(transVector->x,transVector->y + 20,transVector->z + 20));
+                abilityMove->mShape->mApplication->getCamera()->lookAt(Ogre::Vector3(transVector->x,transVector->y,transVector->z));
 
         }
 

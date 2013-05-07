@@ -7,7 +7,7 @@ initialize: function(application,serverIP, serverPort)
 	this.mClientID = 0;
 
         //application
-        this.mApplicationBreslin = application;
+        this.mApplication = application;
 
         //server address
         this.mServerIP = serverIP;

@@ -1,9 +1,9 @@
 var GamePause = new Class(
 {
 
-initialize: function(applicationBreslin)
+initialize: function(application)
 {
-	this.mApplicationBreslin = applicationBreslin;
+	this.mApplication = application;
 },
 
 enter: function()

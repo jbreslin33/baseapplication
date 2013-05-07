@@ -1,7 +1,7 @@
 var Game = new Class(
 {
 
-initialize: function(applicationBreslin)
+initialize: function(application)
 {
 	this.mDelayClick = 100;
 	this.mDelayClickCounter = 0;
@@ -18,7 +18,7 @@ initialize: function(applicationBreslin)
 	this.mMessageRemoveShape = -104;
 
 	//application	
-	this.mApplicationBreslin = applicationBreslin;	
+	this.mApplication = application;	
 
 	//shapes
 	this.mShapeVector      = new Array();
@@ -52,16 +52,17 @@ initialize: function(applicationBreslin)
 /*
         //set Camera
         // Position it at 500 in Z direction
-        mApplicationBreslin->getCamera()->setPosition(Ogre::Vector3(0,20,20));
+        mApplication->getCamera()->setPosition(Ogre::Vector3(0,20,20));
         // Look back along -Z
-        mApplicationBreslin->getCamera()->lookAt(Ogre::Vector3(0,0,0));
-        mApplicationBreslin->getCamera()->setNearClipDistance(5);
+        mApplication->getCamera()->lookAt(Ogre::Vector3(0,0,0));
+        mApplication->getCamera()->setNearClipDistance(5);
 */
-
+	this.log('Game::Game');
 },
 
 createStates: function()
 {
+	this.log('Game::createStates');
         this.mGameGlobal = new GameGlobal(this);
         this.mGameInitialize = new GameInitialize(this);
         this.mGamePlay = new GamePlay(this);
@@ -70,6 +71,7 @@ createStates: function()
 
 setStates: function()
 {
+	this.log('Game::setStates');
         this.mStateMachine.setGlobalState(this.mGameGlobal);
         this.mStateMachine.changeState(this.mGamePlay);
 },
@@ -127,16 +129,16 @@ processUpdate: function()
 		x = x * 2;
 		z = z * 2;
 
-		this.mOffSet.x = parseInt(this.mApplicationBreslin.mScreenCenter.x) - parseFloat(x);
+		this.mOffSet.x = parseInt(this.mApplication.mScreenCenter.x) - parseFloat(x);
         	this.mOffSet.y = 0;
-        	this.mOffSet.z = parseInt(this.mApplicationBreslin.mScreenCenter.z) - parseFloat(z);
+        	this.mOffSet.z = parseInt(this.mApplication.mScreenCenter.z) - parseFloat(z);
 	}
 
 	this.mStateMachine.update();
 
 	for (i = 0; i < this.mShapeVector.length; i++)
 	{
-		this.mShapeVector[i].interpolateTick(this.mApplicationBreslin.getRenderTime());
+		this.mShapeVector[i].interpolateTick(this.mApplication.getRenderTime());
 	}
 },
 
@@ -153,7 +155,7 @@ checkForByteBuffer: function()
 **********************************/
 addShape: function(byteBuffer)
 {
-	shape = new Shape(this.mApplicationBreslin,byteBuffer,false);
+	shape = new Shape(this.mApplication,byteBuffer,false);
 
 	//ability
         abilityMove = new AbilityMove(shape);
@@ -178,7 +180,7 @@ addShape: function(byteBuffer)
 
 removeShape: function(byteBuffer)
 {
-	if (this.mApplicationBreslin.mLeaveGame || this.mApplicationBreslin.mSentLeaveGame)
+	if (this.mApplication.mLeaveGame || this.mApplication.mSentLeaveGame)
 	{
 		this.log('dont call');
 	}
@@ -217,8 +219,8 @@ removeShape: function(byteBuffer)
 
 readServerTick: function(byteBuffer)
 {
-	this.mApplicationBreslin.mIntervalCountLast = this.mApplicationBreslin.mIntervalCount;
-	this.mApplicationBreslin.mIntervalCount++;
+	this.mApplication.mIntervalCountLast = this.mApplication.mIntervalCount;
+	this.mApplication.mIntervalCount++;
 
 	seq = byteBuffer.readByte(); //seq
 	this.mSequence = seq;
@@ -265,7 +267,7 @@ getShape: function(id)
 
 sendByteBuffer: function()
 {
-        this.mRunNetworkTime += this.mApplicationBreslin.getRenderTime() * 1000.0;
+        this.mRunNetworkTime += this.mApplication.getRenderTime() * 1000.0;
   	
 	// Framerate is too high
         if(this.mRunNetworkTime > (1000 / 60))
@@ -285,7 +287,7 @@ sendByteBuffer: function()
 
                 // Send the packet
         	message = '1 ' + this.mKeyCurrent;
-        	this.mApplicationBreslin.mNetwork.mSocket.emit('send_move', message);
+        	this.mApplication.mNetwork.mSocket.emit('send_move', message);
 
                 //set 'last' commands for diff
                 this.mKeyLast = this.mKeyCurrent;
@@ -303,28 +305,28 @@ processInput: function()
 {
 	this.mKeyCurrent = 0;
 
-	if (this.mApplicationBreslin.mKey_up)
+	if (this.mApplication.mKey_up)
 	{
 		this.mKeyCurrent |= this.mKeyUp;
 	}
-	if (this.mApplicationBreslin.mKey_down)
+	if (this.mApplication.mKey_down)
 	{
 		this.mKeyCurrent |= this.mKeyDown;
 	}
-	if (this.mApplicationBreslin.mKey_left)
+	if (this.mApplication.mKey_left)
 	{
 		this.mKeyCurrent |= this.mKeyLeft;
 	}
-	if (this.mApplicationBreslin.mKey_right)
+	if (this.mApplication.mKey_right)
 	{
 		this.mKeyCurrent |= this.mKeyRight;
 	}
 
-	if (this.mApplicationBreslin.mKey_counterclockwise)
+	if (this.mApplication.mKey_counterclockwise)
 	{
 		this.mKeyCurrent |= this.mKeyCounterClockwise;
 	}
-	if (this.mApplicationBreslin.mKey_clockwise)
+	if (this.mApplication.mKey_clockwise)
 	{
 		this.mKeyCurrent |= this.mKeyClockwise;
 	}

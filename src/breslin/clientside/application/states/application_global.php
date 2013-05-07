@@ -1,9 +1,9 @@
 var ApplicationGlobal = new Class(
 {
 	
-initialize: function(applicationBreslin)
+initialize: function(application)
 {
-	this.mApplicationBreslin = applicationBreslin;
+	this.mApplication = application;
 },
 
 enter: function()
@@ -13,10 +13,10 @@ enter: function()
 
 execute: function()
 {
-	if (this.mApplicationBreslin.mSetup)
+	if (this.mApplication.mSetup)
 	{
 		//graphics
-		this.mApplicationBreslin.runGraphics();
+		this.mApplication.runGraphics();
 	}
 },
 

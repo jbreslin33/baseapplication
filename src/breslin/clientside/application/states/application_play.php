@@ -1,52 +1,52 @@
 var ApplicationPlay = new Class(
 {
 	
-initialize: function(applicationBreslin)
+initialize: function(application)
 {
-	this.mApplicationBreslin = applicationBreslin;
+	this.mApplication = application;
 },
 
 enter: function()
 {
-	this.mApplicationBreslin.mPlayingGame = true;
-	this.mApplicationBreslin.mSentLeaveGame = false;
+	this.mApplication.mPlayingGame = true;
+	this.mApplication.mSentLeaveGame = false;
 },
 
 execute: function()
 {
 
-	if (this.mApplicationBreslin.mKey_q && this.mApplicationBreslin.mSentLeaveGame == false)
+	if (this.mApplication.mKey_q && this.mApplication.mSentLeaveGame == false)
         {
        		message = '';
-        	this.mApplicationBreslin.mNetwork.mSocket.emit('send_quit_game', message);
-		this.mApplicationBreslin.mSentLeaveGame = true;
+        	this.mApplication.mNetwork.mSocket.emit('send_quit_game', message);
+		this.mApplication.mSentLeaveGame = true;
         }
 
-	if (this.mApplicationBreslin.mLeaveGame)
+	if (this.mApplication.mLeaveGame)
 	{
-		this.mApplicationBreslin.mSentLeaveGame = false;
-		if (this.mApplicationBreslin.mLoggedIn)
+		this.mApplication.mSentLeaveGame = false;
+		if (this.mApplication.mLoggedIn)
 		{
-                	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationMain);
+                	this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationMain);
 		}
 		else
 		{
-                	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationLogin);
+                	this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationLogin);
 		}
 	}
         else
         {
                 //game
-                this.mApplicationBreslin.mGame.processUpdate();
+                this.mApplication.mGame.processUpdate();
         }
 },
 
 exit: function()
 {
-        this.mApplicationBreslin.mPlayingGame = false;
-	this.mApplicationBreslin.mLeaveGame = false;
-	this.mApplicationBreslin.mGame.remove();
-	this.mApplicationBreslin.mGame = 0;
+        this.mApplication.mPlayingGame = false;
+	this.mApplication.mLeaveGame = false;
+	this.mApplication.mGame.remove();
+	this.mApplication.mGame = 0;
 }
 
 });
