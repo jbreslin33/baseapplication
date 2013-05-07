@@ -81,13 +81,16 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 
 Client::~Client()
 {
+	LogString("Client::~Client");
 	//this will check if there is an mShape
 	mGame->leave(this);
 
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
         {
+		LogString("Client::~Client for loop");
                 if (mServer->mClientVector.at(i) == this)
 		{
+			LogString("delete client index:%d", mServer->mClientVector.at(i)->mUserID);
  			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
 		}
 	}
