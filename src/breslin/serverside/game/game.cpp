@@ -228,6 +228,7 @@ void Game::join(Client* client)
         client->mShape = new Shape(getOpenIndex(),this,client,getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mRoot,true,true,.66f * 30.5,1,false);
 }
 
+//the client that is leaving????
 void Game::leave(Client* client)
 {
         //you gotta delete the shape here...and tell everyone about it. i would tell them in shape class
