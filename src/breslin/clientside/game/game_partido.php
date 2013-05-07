@@ -37,7 +37,7 @@ createStates: function()
         this.mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
 },
 
-createStates: function()
+setStates: function()
 {
 	this.log('GamePartido::setStates');
         this.mStateMachine.setGlobalState(this.mGameGlobal);
