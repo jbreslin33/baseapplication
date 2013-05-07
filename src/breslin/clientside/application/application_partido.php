@@ -6,7 +6,7 @@ Extends: ApplicationBreslin,
 initialize: function(serverIP, serverPort)
 {
 	this.parent(serverIP,serverPort);
-  	
+	this.log('ApplicationPartido::ApplicationPartido');  	
 	/*****GUI******/
 
         //main screen
@@ -25,6 +25,7 @@ log: function(msg)
 
 createStates: function()
 {
+	this.log('ApplicationPartido::createStates');  	
 	this.mApplicationGlobal     = new ApplicationGlobal     (this);
         this.mApplicationInitialize = new ApplicationInitialize (this);
         this.mApplicationLogin      = new ApplicationLogin      (this);
@@ -34,6 +35,7 @@ createStates: function()
 
 setStates: function()
 {
+	this.log('ApplicationPartido::setStates');  	
 	this.mStateMachine.setGlobalState  (this.mApplicationGlobal    );
         this.mStateMachine.changeState     (this.mApplicationInitialize);
         this.mStateMachine.setPreviousState(this.mApplicationInitialize);

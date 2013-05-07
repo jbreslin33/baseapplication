@@ -102,6 +102,7 @@ initialize: function(serverIP, serverPort)
  	this.createLoadingScreen();
         this.showLoadingScreen();
 
+	this.log('ApplicationBreslin::ApplicationBreslin');
 },
 
 log: function(msg)
@@ -115,6 +116,7 @@ log: function(msg)
 //states
 createStates: function()
 {
+	this.log('ApplicationBreslin::createStates');
  	this.mApplicationGlobal     = new ApplicationGlobal    (this);
         this.mApplicationInitialize = new ApplicationInitialize(this);
         this.mApplicationLogin      = new ApplicationLogin     (this);
@@ -124,6 +126,7 @@ createStates: function()
 
 setStates: function()
 {
+	this.log('ApplicationBreslin::setStates');
         this.mStateMachine.setGlobalState (this.mApplicationGlobal);
         this.mStateMachine.setCurrentState(this.mApplicationInitialize);
         this.mStateMachine.changeState(this.mApplicationInitialize);
