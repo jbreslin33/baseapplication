@@ -107,20 +107,24 @@ void  ApplicationPartido::hideMainScreen()
 //battle
 void  ApplicationPartido::createBattleScreen()
 {
+/*
 	LogString("ApplicationPartido::createBattleScreen");
 	if (!mLabelQuestion)
         {
                 mLabelQuestion  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelQuestion", "Question:");
 		LogString("ApplicationPartido::createBattleScreen 1");
         }
+	LogString("ApplicationPartido::createBattleScreen 2");
 	if (!mLabelAnswer)
         {
                 mLabelAnswer  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelAnswer", "Answer:");
         }
+*/
 }
 
 void  ApplicationPartido::showBattleScreen()
 {
+/*
 	mTrayMgr->moveWidgetToTray(mLabelQuestion,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mLabelAnswer,OgreBites::TL_CENTER);
 	
@@ -130,15 +134,18 @@ void  ApplicationPartido::showBattleScreen()
 	mTrayMgr->showCursor();
 
 	mLabelFocus = mLabelAnswer;
+*/
 }
 
 void  ApplicationPartido::hideBattleScreen()
 {
+/*
 	mLabelQuestion->hide();
 	mLabelAnswer->hide();
 
 	mTrayMgr->removeWidgetFromTray(mLabelQuestion);
 	mTrayMgr->removeWidgetFromTray(mLabelAnswer);
+*/
 }
 
 
