@@ -243,7 +243,7 @@ server.on("message", function (msg, rinfo)
 	var count = 0;
 
         var type   = msg.readInt8(0);
-	console.log('type:' + type);
+	//console.log('type:' + type);
 	count++
        
         //add shape
