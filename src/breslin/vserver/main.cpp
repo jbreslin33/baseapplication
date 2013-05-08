@@ -45,15 +45,13 @@ int main(int argc, char **argv)
 
 	if (strcmp (argv[1],aServer) == 0)
 	{
-		server = new Server(root,"",30004);	
+		server = new Server(root,"",30001);	
 	}
 
 	if (strcmp (argv[1],aServerPartido) == 0)
 	{
-		server = new ServerPartido(root,"",30004);	
+		server = new ServerPartido(root,"",30001);	
 	}
-
-	//Server* server = new Server(root,"",30004);	
 
 	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
 	signal(SIGPIPE, SIG_IGN);

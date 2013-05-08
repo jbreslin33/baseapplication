@@ -19,10 +19,10 @@ mCommandRotationX    = 8;
 mCommandRotationZ    = 16;
 
 mServerIP = '127.0.0.1';
-mServerPort = 30004;
+mServerPort = 30001;
 
 
-app.listen(10000);
+app.listen(10001);
 
 // routing
 app.get('/', function (req, res) {

@@ -26,9 +26,9 @@ extern "C" {
        
 	StartLogConsole();
        
-	ApplicationPartido* application = new ApplicationPartido(strCmdLine,30004);
+	ApplicationPartido* application = new ApplicationPartido(strCmdLine,30001);
 #else
-        ApplicationPartido* application = new ApplicationPartido(argv[1],30004);
+        ApplicationPartido* application = new ApplicationPartido(argv[1],30001);
 #endif
 	//call virtual createStates and setStates
 	application->createStates();
