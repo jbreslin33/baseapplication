@@ -129,6 +129,7 @@ public:
 	void addGame(Game* game);
 
 	//client
+	virtual void createClientsFromDB(struct sockaddr *udp_server);
 	void addClient(Client* client);
 	
 	//packets

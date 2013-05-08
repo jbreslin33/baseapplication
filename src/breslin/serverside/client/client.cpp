@@ -78,7 +78,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	}
 	else
 	{
-		//your the node for web sockets
+		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
 }
 

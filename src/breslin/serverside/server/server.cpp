@@ -93,6 +93,65 @@ void Server::processUpdate(int msec)
         mFrameTime = 0;
 }
 
+void Server::createClientsFromDB(struct sockaddr* address)
+{
+        PGconn          *conn;
+        PGresult        *res;
+        int             rec_count;
+        int             row;
+        int             col;
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+        res = PQexec(conn,
+        "select * from users ORDER BY id");
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                puts("We did not get any data!");
+        }
+        rec_count = PQntuples(res);
+        printf("We received %d records from user table.\n", rec_count);
+        for (row=0; row<rec_count; row++)
+        {
+                //client
+                Client* client = new Client(this, address, -2);
+
+                //id
+                const char* a = PQgetvalue(res, row, 0);
+                stringstream a_str;
+                a_str << a;
+                unsigned int a_int;
+                a_str >> a_int;
+                client->db_id = a_int;
+
+                //username
+                const char* b = PQgetvalue(res, row, 1);
+                client->db_username.assign(b);
+
+                //password
+                const char* c = PQgetvalue(res, row, 2);
+                client->db_password.assign(c);
+
+                //first_name
+                const char* d = PQgetvalue(res, row, 3);
+                client->db_first_name.assign(d);
+
+                //last_name
+                const char* e = PQgetvalue(res, row, 7);
+                client->db_last_name.assign(e);
+
+   		//school_id
+                const char* f = PQgetvalue(res, row, 8);
+                stringstream f_str;
+                f_str << f;
+                unsigned int f_int;
+                f_str >> f_int;
+                client->db_school_id = f_int;
+
+                LogString("created a client with db id of:%d",client->db_id);
+        }
+        PQclear(res);
+        PQfinish(conn);
+}
+
 void Server::addClient(Client* client)
 {
 	mClientVector.push_back(client);
@@ -175,6 +234,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	else if (type == mMessageConnectNode)
 	{
+		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, -1);
 	}	

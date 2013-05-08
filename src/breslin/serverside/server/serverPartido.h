@@ -32,6 +32,10 @@ public:
         std::vector<std::string> mLevelVector;
 
 	void parsePacket(Message *mes, struct sockaddr *address);
+
+	//clients
+	virtual void createClientsFromDB(struct sockaddr* address);
+
 };
 
 #endif
