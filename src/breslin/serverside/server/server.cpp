@@ -357,7 +357,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	else if (type == mMessageDisconnect)
 	{
-	
+/*	
  		// Find the correct client by comparing addresses
                 for (unsigned int i = 0; i < mClientVector.size(); i++)
                 {
@@ -372,11 +372,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				LogString("c++ client deleted");
 			}
 		}
-
+*/
 	}
 
 	else if (type == mMessageDisconnectBrowser)
 	{
+/*
  		int clientID = mes->ReadByte();
 
                 for (unsigned int i = 0; i < mClientVector.size(); i++)
@@ -388,6 +389,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				delete client;
 			}
 		}
+*/
 	}
 }
 

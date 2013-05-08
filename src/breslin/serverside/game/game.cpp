@@ -232,6 +232,7 @@ void Game::join(Client* client)
 void Game::leave(Client* client)
 {
         //you gotta delete the shape here...and tell everyone about it. i would tell them in shape class
+	
         if (client->mShape)
         {
                 mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));
@@ -243,7 +244,7 @@ void Game::leave(Client* client)
                 }
                 mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
 
-                client->mShape->remove();
+                //client->mShape->remove();
         }
 
         client->mGame = NULL;
