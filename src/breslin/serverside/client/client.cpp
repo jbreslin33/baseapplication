@@ -232,14 +232,20 @@ void Client::checkLogin(Message* mes)
 					continue;
 				}
 				LogString("duplicate mUserID");
-				//Client::Client(Server* server, struct sockaddr *address, int clientID)
+
 				//let's swap some info to new client....
+
 				//swap game
 				mGame = mServer->mClientVector.at(i)->mGame;
+
 				//swap shape
 				mShape = mServer->mClientVector.at(i)->mShape;
 	
+				//ai
+				mAI = false;
+				
 				//logout old client
+				mServer->mClientVector.at(i)->mAI = true;	
 				mServer->mClientVector.at(i)->logout();	
 			}	
 		}
