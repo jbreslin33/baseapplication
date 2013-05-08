@@ -19,14 +19,14 @@ mCommandRotationX    = 8;
 mCommandRotationZ    = 16;
 
 mServerIP = '127.0.0.1';
-mServerPort = 30001;
+mServerPort = 30002;
 
 
-app.listen(10001);
+app.listen(10002);
 
 // routing
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/main_localhost_30001.html');
+  res.sendfile(__dirname + '/main_localhost_30002.html');
 });
 
 
@@ -576,7 +576,7 @@ server.on("listening", function ()
         address.address + ":" + address.port);
 });
 
-server.bind(40001);
+server.bind(40002);
 
 //send initial connection to c++ server
 //send to c++ server
