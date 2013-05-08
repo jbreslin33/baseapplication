@@ -225,7 +225,10 @@ void Game::join(Client* client)
         }
 
         //create the shape for this client -- the avatar
-        client->mShape = new Shape(getOpenIndex(),this,client,getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mRoot,true,true,.66f * 30.5,1,false);
+	if (!client->mShape)
+	{
+        	client->mShape = new Shape(getOpenIndex(),this,client,getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mRoot,true,true,.66f * 30.5,1,false);
+	}
 }
 
 //the client that is leaving????
