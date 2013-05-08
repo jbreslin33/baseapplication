@@ -14,7 +14,12 @@ enter: function()
 
 execute: function()
 {
-
+	//check for logout as well....
+   	if (this.mApplication.mLoggedIn == false)
+        {
+		this.mApplication.log('mLoggedIN = false');
+                this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationLogin);
+	}
 	if (this.mApplication.mKey_q && this.mApplication.mSentLeaveGame == false)
         {
        		message = '';
@@ -45,8 +50,11 @@ exit: function()
 {
         this.mApplication.mPlayingGame = false;
 	this.mApplication.mLeaveGame = false;
-	this.mApplication.mGame.remove();
-	this.mApplication.mGame = 0;
+	if (this.mApplication.mGame)
+	{
+		this.mApplication.mGame.remove();
+		this.mApplication.mGame = 0;
+	}
 }
 
 });

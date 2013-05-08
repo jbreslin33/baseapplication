@@ -35,8 +35,29 @@ app.get('/', function (req, res) {
 //could i not just assign an id here and then pass that to c++ as it's just going to be a browser id and no one else will use it.
 
 
+//you could send username and password with sendConnect......
+//if you are trying to login and you already have a client associated with username than
+//you can just authenticate on server. other wise give them a new client.
+//if ( 
+///
+/*
+loop clients
+if
+	username
+		then if password
+			then reconnect...
+else
+	createClient
+		check username and password combo
+			if good
+				then login 
+			else bad
+				then delete client and user can try again to send a connect.   
+*/
+
 io.sockets.on('connection', function (socket) 
 {
+	console.log('io.sockets.on,socket.id:' + socket.id);
         socket.on('send_connect', function(message,remote)
         {
 		socket.join('game1');
@@ -47,10 +68,13 @@ io.sockets.on('connection', function (socket)
                 //send to c++ server
                 var buf = new Buffer(2);
                 buf.writeInt8(mess,0);
+		console.log('mess:' + mess);
 
 		mClientIDCounter++;
-		console.log('clientID socket connect:' + socket.mClientID);
 		socket.mClientID = mClientIDCounter;
+		console.log('clientID socket connect:' + socket.mClientID);
+		console.log('socket.id:' + socket.id);
+		
                 
 		buf.writeInt8(socket.mClientID,1);
 

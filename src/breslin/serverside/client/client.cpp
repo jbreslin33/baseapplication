@@ -56,6 +56,9 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 
 	//game
 	mGame = NULL;
+	
+	//shape
+	mShape = NULL;
 
 	//server
 	mServer = server;
@@ -132,6 +135,8 @@ void Client::sendConnected()
 }
 
 //login
+//i should send mUserID back as well.....because once a client connects we are not going to delete it..... we will just manage it best we can from here on server....
+//which means when you login from a new address we will send a notification to old address as a courtesy....
 void Client::login()
 {
 	mLoggedIn = true;
@@ -142,6 +147,7 @@ void Client::login()
 	{
         	mMessage.WriteByte(mClientID); //client id for browsers
 	}	
+        //mMessage.WriteByte(mUserID); //user id from database
 	mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
 
@@ -202,6 +208,34 @@ void Client::checkLogin(Message* mes)
 	//check against db
         if (getPasswordMatch(mStringUsername,mStringPassword))
      	{ 
+		/* first let's logout old guy...
+		for
+		check if this id already exists.....
+		if it does logout other client...
+		then you can clean garbage over time...
+		
+		*/
+		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+		{
+			if (mServer->mClientVector.at(i)->mUserID == mUserID)
+			{
+				if (mServer->mClientVector.at(i) == this)
+				{
+					continue;
+				}
+				LogString("duplicate mUserID");
+				//Client::Client(Server* server, struct sockaddr *address, int clientID)
+				//let's swap some info to new client....
+				//swap game
+				mGame = mServer->mClientVector.at(i)->mGame;
+				//swap shape
+				mShape = mServer->mClientVector.at(i)->mShape;
+	
+				//logout old client
+				mServer->mClientVector.at(i)->logout();	
+			}	
+		}
+
         	login();
         }
         else
