@@ -34,7 +34,7 @@ public:
 	void parsePacket(Message *mes, struct sockaddr *address);
 
 	//clients
-	virtual void createClientsFromDB(struct sockaddr* address);
+	virtual void createClientsFromDB();
 
 };
 

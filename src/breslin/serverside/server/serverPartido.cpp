@@ -27,7 +27,7 @@ ServerPartido::~ServerPartido()
 {
 }
 
-void ServerPartido::createClientsFromDB(struct sockaddr* address)
+void ServerPartido::createClientsFromDB()
 {
         PGconn          *conn;
         PGresult        *res;
@@ -46,7 +46,7 @@ void ServerPartido::createClientsFromDB(struct sockaddr* address)
         for (row=0; row<rec_count; row++)
         {
                 //client
-                Client* client = new ClientPartido(this, address, -2);
+                Client* client = new ClientPartido(this, NULL, -2, true);
 
                 //id
                 const char* a = PQgetvalue(res, row, 0);
@@ -101,21 +101,22 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		if (type == mMessageConnect)
         	{
-                	ClientPartido* client = new ClientPartido(this, address, 0);
+                	ClientPartido* client = new ClientPartido(this, address, 0, false);
         	}
 
         	else if (type == mMessageConnectBrowser)
         	{
                 	int clientID = mes->ReadByte();
-                	ClientPartido* client = new ClientPartido(this, address, clientID);
+                	ClientPartido* client = new ClientPartido(this, address, clientID, false);
         	}
 
         	else if (type == mMessageConnectNode)
         	{
-			createClientsFromDB(address);	
 
                 	int clientID = mes->ReadByte();
-                	ClientPartido* client = new ClientPartido(this, address, -1);
+                	ClientPartido* client = new ClientPartido(this, address, -1, false);
+
+			createClientsFromDB();	
 
         	}     	 
 	}

@@ -42,8 +42,12 @@
 #include "../quiz/quiz.h"
 
 //server side client constructor, many instances will be made, one for each client connected.
-Client::Client(Server* server, struct sockaddr *address, int clientID)
+Client::Client(Server* server, struct sockaddr *address, int clientID, bool ai)
 {
+	//ai
+	mAI = ai;
+	
+	//logged in
 	mLoggedIn = false;
 
 	//set client id as this is going to be a browser client
@@ -52,6 +56,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	//1 or greater than client represents a browser client and should have a shape
 	mClientID = clientID;
 
+	//user id from db
 	mUserID = 0;
 
 	//game
@@ -66,7 +71,10 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	mLastMessageTime  = 0;
 	mConnectionState  = DREAMSOCK_CONNECTING;
 
-	SetSocketAddress(address);
+	if (!mAI)
+	{
+		SetSocketAddress(address);
+	}
 
 	//register this client with server
 	mServer->addClient(this);

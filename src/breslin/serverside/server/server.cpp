@@ -93,7 +93,7 @@ void Server::processUpdate(int msec)
         mFrameTime = 0;
 }
 
-void Server::createClientsFromDB(struct sockaddr* address)
+void Server::createClientsFromDB()
 {
         PGconn          *conn;
         PGresult        *res;
@@ -112,7 +112,7 @@ void Server::createClientsFromDB(struct sockaddr* address)
         for (row=0; row<rec_count; row++)
         {
                 //client
-                Client* client = new Client(this, address, -2);
+                Client* client = new Client(this, NULL, -2, true);
 
                 //id
                 const char* a = PQgetvalue(res, row, 0);
@@ -223,20 +223,23 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	if (type == mMessageConnect)
 	{
 		LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		Client* client = new Client(this, address, 0);
+		Client* client = new Client(this, address, 0, false);
 	}
 
 	else if (type == mMessageConnectBrowser)
 	{
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, clientID);
+ 		Client* client = new Client(this, address, clientID, false);
 	}
 
 	else if (type == mMessageConnectNode)
 	{
 		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, -1);
+ 		Client* client = new Client(this, address, -1, false);
+	
+		createClientsFromDB();
+
 	}	
 
 

@@ -90,19 +90,6 @@ int Network::setNonBlocking(SOCKET sock, u_long setMode)
 	return ioctl(sock, FIONBIO, &set);
 }
 
-int Network::setBroadcasting(SOCKET sock, int mode)
-{
-	// make it broadcast capable
-	if(setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (char *) &mode, sizeof(int)) == -1)
-	{
-		LogString("DreamSock_SetBroadcasting failed");
-		LogString("Error code %d: setsockopt() : %s", errno, strerror(errno));
-		return DREAMSOCK_INVALID_SOCKET;
-	}
-
-	return 0;
-}
-
 int Network::stringToSockaddr(const char *addressString, struct sockaddr *sadr)
 {
 	char copy[128];
@@ -178,6 +165,17 @@ SOCKET Network::openUDPSocket(const char *netInterface, int port)
 
 	return sock;
 }
+int Network::setBroadcasting(SOCKET sock, int mode)
+{
+	// make it broadcast capable
+	if(setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (char *) &mode, sizeof(int)) == -1)
+	{
+		LogString("DreamSock_SetBroadcasting failed");
+		LogString("Error code %d: setsockopt() : %s", errno, strerror(errno));
+		return DREAMSOCK_INVALID_SOCKET;
+	}
+	return 0;
+}
 
 void Network::closeSocket(SOCKET sock)
 {
@@ -218,24 +216,13 @@ int Network::getPacket(SOCKET sock, char *data, struct sockaddr *from)
 	return ret;
 }
 
-void Network::sendPacket(SOCKET sock, int length, char *data, struct sockaddr addr)
-{
-	int	ret;
-	
-	ret = sendto(sock, data, length, 0, &addr, sizeof(addr));
-
-	if(ret == -1)
-	{
-		// Silently handle wouldblock
-		if(errno == EWOULDBLOCK)
-			return;
-
-		LogString("Error code %d: sendto() : %s", errno, strerror(errno));
-	}
-}
-
 void Network::sendPacketTo(Client* client, Message* message)
 {
+	if (client->mAI)
+	{
+		return;
+	}
+	
 	// Check that everything is set up
         if(!mSocket || client->mConnectionState == DREAMSOCK_DISCONNECTED)
         {
@@ -249,8 +236,6 @@ void Network::sendPacketTo(Client* client, Message* message)
                 LogString("SendPacket error: Could not send because the buffer overflowed");
                 return;
         }
-
-
 
 	int	ret;
 	
@@ -273,35 +258,6 @@ void Network::sendPacketTo(Client* client, Message* message)
         {
                 mServer->mOutgoingSequence++;
         }
-
-}
-void Network::broadcast(SOCKET sock, int length, char *data, int port)
-{
-	struct sockaddr_in servaddr;
-	socklen_t len;
-
-	// Use broadcast address
-	u_long inetAddr = inet_addr("255.255.255.255");
-
-	// Fill address information structure
-	memset(&servaddr, 0, sizeof(struct sockaddr_in));
-	servaddr.sin_family		= AF_INET;
-	servaddr.sin_port		= htons(port);	
-	servaddr.sin_addr.s_addr = inetAddr;
-
-	len = sizeof(servaddr);
-
-	// Broadcast!
-	int ret = sendto(sock, data, length, 0, (struct sockaddr *) &servaddr, len);
-
-	if(ret == -1)
-	{
-		// Silently handle wouldblock
-		if(errno == EWOULDBLOCK)
-			return;
-
-		LogString("Error code %d: sendto() : %s", errno, strerror(errno));
-	}
 }
 
 int Network::getCurrentSystemTime()

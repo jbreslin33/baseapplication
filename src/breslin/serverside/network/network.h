@@ -46,9 +46,7 @@ SOCKET openUDPSocket(const char netInterface[32], int port);
 void closeSocket(SOCKET sock);
 
 int getPacket(SOCKET sock, char *data, struct sockaddr *from);
-void sendPacket(SOCKET sock, int length, char *data, struct sockaddr addr);
 void sendPacketTo(Client* client, Message* message);
-void broadcast(SOCKET sock, int length, char *data, int port);
 
 int getCurrentSystemTime();
 

@@ -60,9 +60,12 @@ class Game;
 class Client
 {
 public:
-	Client(Server* server, struct sockaddr *address, int clientID);
+	Client(Server* server, struct sockaddr *address, int clientID, bool ai);
 
 ~Client();
+
+	//ai
+	bool mAI;
 
 	//Message
         Message mMessage;
