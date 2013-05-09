@@ -53,8 +53,9 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool disc
 	//1 or greater than client represents a browser client and should have a shape
 	mClientID = clientID;
 
-	//user id from db
-	mUserID = 0;
+	//db
+	db_id = 0;
+	db_school_id = 0;
 
 	//game
 	mGame = NULL;
@@ -105,7 +106,7 @@ Client::~Client()
 		LogString("Client::~Client for loop");
                 if (mServer->mClientVector.at(i) == this)
 		{
-			LogString("delete client index:%d", mServer->mClientVector.at(i)->mUserID);
+			LogString("delete client index:%d", mServer->mClientVector.at(i)->db_id);
  			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
 		}
 	}
@@ -148,7 +149,7 @@ void Client::sendConnected()
 }
 
 //login
-//i should send mUserID back as well.....because once a client connects we are not going to delete it..... we will just manage it best we can from here on server....
+//i should send db_id back as well.....because once a client connects we are not going to delete it..... we will just manage it best we can from here on server....
 //which means when you login from a new address we will send a notification to old address as a courtesy....
 void Client::login()
 {
@@ -160,7 +161,6 @@ void Client::login()
 	{
         	mMessage.WriteByte(mClientID); //client id for browsers
 	}	
-        //mMessage.WriteByte(mUserID); //user id from database
 	mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
 
@@ -221,22 +221,16 @@ void Client::checkLogin(Message* mes)
 	//check against db
         if (getPasswordMatch(mStringUsername,mStringPassword))
      	{ 
-		/* first let's logout old guy...
-		for
-		check if this id already exists.....
-		if it does logout other client...
-		then you can clean garbage over time...
-		
-		*/
 		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 		{
-			if (mServer->mClientVector.at(i)->mUserID == mUserID)
+			LogString("checking db_id:%d",mServer->mClientVector.at(i)->db_id);	
+			if (mServer->mClientVector.at(i)->db_id == db_id)
 			{
 				if (mServer->mClientVector.at(i) == this)
 				{
 					continue;
 				}
-				LogString("duplicate mUserID");
+				LogString("duplicate db_id");
 
 				//let's swap address from new Client to permanent client and tell perm client it's logged in and not ai anymore maybe not that yet as it did not join game.
 
@@ -297,7 +291,7 @@ bool Client::getPasswordMatch(std::string username,std::string password)
 		strValue << value;
 		unsigned int intValue;
 		strValue >> intValue;
-		mUserID = intValue;
+		db_id = intValue;
 	
                 match = true;
         }
