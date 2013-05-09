@@ -8,7 +8,7 @@ class ServerPartido;
 class ClientPartido : public Client
 {
 public:
- 	ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID, bool disconnected);	
+ 	ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID, bool disconnected, bool permanent);	
 	~ClientPartido();
 
 	void sendSchools();

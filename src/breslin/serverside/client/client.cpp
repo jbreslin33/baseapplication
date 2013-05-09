@@ -42,8 +42,11 @@
 #include "../quiz/quiz.h"
 
 //server side client constructor, many instances will be made, one for each client connected.
-Client::Client(Server* server, struct sockaddr *address, int clientID, bool disconnected)
+Client::Client(Server* server, struct sockaddr *address, int clientID, bool disconnected, bool permanent)
 {
+	//is it permanent???
+	mPermanent = false;
+
 	//logged in
 	mLoggedIn = false;
 

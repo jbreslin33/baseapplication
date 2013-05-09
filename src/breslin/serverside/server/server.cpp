@@ -112,7 +112,7 @@ void Server::createClientsFromDB()
         for (row=0; row<rec_count; row++)
         {
                 //client
-                Client* client = new Client(this, NULL, -2, true);
+                Client* client = new Client(this, NULL, -2, true, true);
 
                 //id
                 const char* a = PQgetvalue(res, row, 0);
@@ -223,20 +223,20 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	if (type == mMessageConnect)
 	{
 		LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		Client* client = new Client(this, address, 0, false);
+		Client* client = new Client(this, address, 0, false, false);
 	}
 
 	else if (type == mMessageConnectBrowser)
 	{
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, clientID, false);
+ 		Client* client = new Client(this, address, clientID, false, false);
 	}
 
 	else if (type == mMessageConnectNode)
 	{
 		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, -1, false);
+ 		Client* client = new Client(this, address, -1, false, false);
 	
 		createClientsFromDB();
 

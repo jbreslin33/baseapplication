@@ -60,9 +60,12 @@ class Game;
 class Client
 {
 public:
-	Client(Server* server, struct sockaddr *address, int clientID, bool disconnected);
+	Client(Server* server, struct sockaddr *address, int clientID, bool disconnected, bool permanent);
 
 ~Client();
+
+	//permanent
+	bool mPermanent;
 
 	//Message
         Message mMessage;
