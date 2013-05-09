@@ -6,7 +6,7 @@
 #include "../server/serverPartido.h"
 #include "../network/network.h"
 
-ClientPartido::ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID, bool ai) : Client(server, address, clientID, ai) 
+ClientPartido::ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID, bool disconnected) : Client(server, address, clientID, disconnected) 
 {
 	//server
 	mServer = server;

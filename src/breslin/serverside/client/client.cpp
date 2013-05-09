@@ -42,11 +42,8 @@
 #include "../quiz/quiz.h"
 
 //server side client constructor, many instances will be made, one for each client connected.
-Client::Client(Server* server, struct sockaddr *address, int clientID, bool ai)
+Client::Client(Server* server, struct sockaddr *address, int clientID, bool disconnected)
 {
-	//ai
-	mAI = ai;
-	
 	//logged in
 	mLoggedIn = false;
 
@@ -69,16 +66,19 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool ai)
 	mServer = server;
 
 	mLastMessageTime  = 0;
-	mConnectionState  = DREAMSOCK_CONNECTING;
 
-	if (!mAI)
+	if (disconnected)
 	{
-		SetSocketAddress(address);
+		mConnectionState  = DREAMSOCK_DISCONNECTED;
+	}
+	else
+	{
+		setSocketAddress(address);
+		mConnectionState  = DREAMSOCK_CONNECTING;
 	}
 
 	//register this client with server
 	mServer->addClient(this);
-
 
 	if (mClientID >= 0)
 	{
@@ -109,6 +109,11 @@ Client::~Client()
  			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
 		}
 	}
+}
+
+void Client::setSocketAddress(struct sockaddr *address)
+{
+	memcpy(&mSocketAddress, address, sizeof(struct sockaddr)); 
 }
 
 void Client::processUpdate()
@@ -233,7 +238,7 @@ void Client::checkLogin(Message* mes)
 				}
 				LogString("duplicate mUserID");
 
-				//let's swap some info to new client....
+				//let's swap address from new Client to permanent client and tell perm client it's logged in and not ai anymore maybe not that yet as it did not join game.
 
 				//swap game
 				mGame = mServer->mClientVector.at(i)->mGame;
@@ -241,11 +246,8 @@ void Client::checkLogin(Message* mes)
 				//swap shape
 				mShape = mServer->mClientVector.at(i)->mShape;
 	
-				//ai
-				mAI = false;
-				
 				//logout old client
-				mServer->mClientVector.at(i)->mAI = true;	
+				//mServer->mClientVector.at(i)->mConnectionState = ;	
 				mServer->mClientVector.at(i)->logout();	
 			}	
 		}

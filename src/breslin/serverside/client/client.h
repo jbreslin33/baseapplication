@@ -32,7 +32,7 @@
 
 // Connection states
 #define DREAMSOCK_CONNECTING			0
-#define DREAMSOCK_CONNECTED				1
+#define DREAMSOCK_CONNECTED			1
 #define DREAMSOCK_DISCONNECTING			2
 #define DREAMSOCK_DISCONNECTED			4
 
@@ -60,12 +60,9 @@ class Game;
 class Client
 {
 public:
-	Client(Server* server, struct sockaddr *address, int clientID, bool ai);
+	Client(Server* server, struct sockaddr *address, int clientID, bool disconnected);
 
 ~Client();
-
-	//ai
-	bool mAI;
 
 	//Message
         Message mMessage;
@@ -80,7 +77,7 @@ public:
 
 	signed short	mDroppedPackets;			// Dropped packets
 
-	struct sockaddr	mMyaddress;				// Socket address
+	struct sockaddr	mSocketAddress;				// Socket address
 
 	int				mLastMessageTime;
 
@@ -105,9 +102,8 @@ public:
         bool getPasswordMatch(std::string username,std::string password);
 
 	//clients address to send back messages to
-	struct sockaddr *GetSocketAddress(void) { return &mMyaddress; }
-	void			SetSocketAddress(struct sockaddr *address) { memcpy(&mMyaddress, address, sizeof(struct sockaddr)); }
-
+	struct sockaddr *GetSocketAddress(void) { return &mSocketAddress; }
+	void setSocketAddress(struct sockaddr *address); 
 
     	Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the clients personal avatar..
 

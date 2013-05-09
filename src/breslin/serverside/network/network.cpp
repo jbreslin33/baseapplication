@@ -218,15 +218,10 @@ int Network::getPacket(SOCKET sock, char *data, struct sockaddr *from)
 
 void Network::sendPacketTo(Client* client, Message* message)
 {
-	if (client->mAI)
-	{
-		return;
-	}
-	
 	// Check that everything is set up
         if(!mSocket || client->mConnectionState == DREAMSOCK_DISCONNECTED)
         {
-                LogString("SendPacket error: Could not send because the client is disconnected");
+                //LogString("SendPacket error: Could not send because the client is disconnected");
                 return;
         }
 
@@ -239,7 +234,7 @@ void Network::sendPacketTo(Client* client, Message* message)
 
 	int	ret;
 	
-	ret = sendto(mSocket, message->data, message->GetSize(), 0, &client->mMyaddress, sizeof(client->mMyaddress));
+	ret = sendto(mSocket, message->data, message->GetSize(), 0, &client->mSocketAddress, sizeof(client->mSocketAddress));
 
 	if(ret == -1)
 	{
