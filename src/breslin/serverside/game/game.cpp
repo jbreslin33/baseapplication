@@ -168,7 +168,7 @@ Vector3D* Game::getOpenPoint()
 {
 	Vector3D* vector3D = new Vector3D();
 
-	for (int x = 25; x < 400; x++)
+	for (int x = 25; x < 800; x++)
 	{	
 		bool occupied = false; 
 		vector3D->x = x;
