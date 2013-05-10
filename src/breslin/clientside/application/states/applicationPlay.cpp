@@ -39,6 +39,13 @@ void ApplicationPlay::enter()
 }
 void ApplicationPlay::execute()
 {
+  	//check for logout as well....
+        if (this->mApplication->mLoggedIn == false)
+        {
+                this->mApplication->mStateMachine->changeState(this->mApplication->mApplicationLogin);
+        }
+
+
 	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_ESCAPE) && mApplication->mSentLeaveGame == false)
 	{
 		//send quit game
