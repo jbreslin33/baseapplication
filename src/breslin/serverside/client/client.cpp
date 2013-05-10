@@ -53,7 +53,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool disc
 	//0 = c++ client, obviously a shape 
 	//1 or greater than client represents a browser client and should have a shape
 	mClientID = clientID;
-	LogString("Client::Client mClientID =%d",mClientID);
+	
 	//db
 	db_id = 0;
 	db_school_id = 0;
@@ -101,7 +101,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool disc
 
 Client::~Client()
 {
-	LogString("Client::~Client");
 	//this will check if there is an mShape
 
 	if (mGame)
@@ -111,10 +110,8 @@ Client::~Client()
 
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
         {
-		LogString("Client::~Client for loop");
                 if (mServer->mClientVector.at(i) == this)
 		{
-			LogString("delete client index:%d", mServer->mClientVector.at(i)->db_id);
  			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
 		}
 	}
@@ -244,7 +241,6 @@ void Client::checkLogin(Message* mes)
 		{
 			if (mServer->mClientVector.at(i)->db_id == db_id)
 			{
-				LogString("dup");	
 				mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
 				mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
 				mServer->mClientVector.at(i)->mClientID = mClientID;

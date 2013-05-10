@@ -68,13 +68,9 @@ io.sockets.on('connection', function (socket)
                 //send to c++ server
                 var buf = new Buffer(2);
                 buf.writeInt8(mess,0);
-		console.log('mess:' + mess);
 
 		mClientIDCounter++;
 		socket.mClientID = mClientIDCounter;
-		console.log('clientID socket connect:' + socket.mClientID);
-		console.log('socket.id:' + socket.id);
-		
                 
 		buf.writeInt8(socket.mClientID,1);
 
@@ -85,8 +81,6 @@ io.sockets.on('connection', function (socket)
 
 	socket.on('disconnect', function ()
 	{
-        	console.log('DISCONNESSO also sending to c++!!! ');
-
                 //send to c++ server
                 var buf = new Buffer(2);
 
@@ -105,7 +99,6 @@ io.sockets.on('connection', function (socket)
 
         socket.on('send_disconnect', function(message,remote)
         {
-		console.log('got disconnect from browser');
 		//send to c++ server
                 var buf = new Buffer(2);
 
@@ -153,15 +146,9 @@ io.sockets.on('connection', function (socket)
 		//type
                 type = -118;
                 buf.writeInt8(type,0);
-                console.log(type);
-                console.log(buf.readInt8(0));
 
 		//mClientID
                 buf.writeInt8(socket.mClientID,1);
-                console.log(socket.mClientID);
-                console.log(buf.readInt8(1));
-
-		console.log('mClientID:' + socket.mClientID + ' disconnecting');
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
                 {
@@ -190,7 +177,6 @@ io.sockets.on('connection', function (socket)
 
         socket.on('send_logout', function(message,remote)
 	{
-		console.log('send_logout in udp');
          	//send to c++ server
                 var buf = new Buffer(2);
 
@@ -267,7 +253,6 @@ server.on("message", function (msg, rinfo)
 	var count = 0;
 
         var type   = msg.readInt8(0);
-	//console.log('type:' + type);
 	count++
        
         //add shape
@@ -550,10 +535,8 @@ server.on("message", function (msg, rinfo)
 		
 		       	io.sockets.clients().forEach(function (socket)
                         {
-				console.log('mClientID:' + socket.mClientID);
 				if (socket.mClientID > 0)
 				{
-					console.log('mClientID:' + socket.mClientID);
                        			socket.emit('news', dataString)
 				}
                         });
@@ -566,8 +549,7 @@ server.on("message", function (msg, rinfo)
 server.on("listening", function ()
 {
         var address = server.address();
-        console.log("server listening " +
-        address.address + ":" + address.port);
+ 	console.log("server listening " +  address.address + ":" + address.port); 
 });
 
 server.bind(40001);
