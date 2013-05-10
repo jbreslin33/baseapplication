@@ -118,7 +118,7 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
         	{
 
                 	int clientID = mes->ReadByte();
-                	ClientPartido* client = new ClientPartido(this, address, -1, false, false);
+                	ClientPartido* client = new ClientPartido(this, address, -1, false, true);
 
 			createClientsFromDB();	
 

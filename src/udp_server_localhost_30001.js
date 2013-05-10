@@ -548,23 +548,17 @@ server.on("message", function (msg, rinfo)
 		
 			} //  end while count < length
 		
-	
-			//console.log('clients in room: ' + io.sockets.clients('game1'));
-			//console.log('rooms: ' + io.sockets.manager.rooms);
-	
-//			io.sockets.in('game1').emit('news',dataString)	
-			
 		       	io.sockets.clients().forEach(function (socket)
                         {
+				console.log('mClientID:' + socket.mClientID);
 				if (socket.mClientID > 0)
 				{
+					console.log('mClientID:' + socket.mClientID);
                        			socket.emit('news', dataString)
 				}
                         });
 
-			//io.sockets.emit('news', dataString)
 			skipCounter = 0;
-
 		} //end skip check	
 	} //if type
 });

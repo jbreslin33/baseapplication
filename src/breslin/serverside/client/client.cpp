@@ -53,7 +53,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool disc
 	//0 = c++ client, obviously a shape 
 	//1 or greater than client represents a browser client and should have a shape
 	mClientID = clientID;
-
+	LogString("Client::Client mClientID =%d",mClientID);
 	//db
 	db_id = 0;
 	db_school_id = 0;
@@ -247,10 +247,10 @@ void Client::checkLogin(Message* mes)
 				LogString("dup");	
 				mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
 				mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
+				mServer->mClientVector.at(i)->mClientID = mClientID;
 				mServer->mClientVector.at(i)->login();
 			}	
 		}
-
         }
         else
         {

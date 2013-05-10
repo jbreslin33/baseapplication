@@ -243,7 +243,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, -1, false, false);
+ 		Client* client = new Client(this, address, -1, false, true);
 	
 		createClientsFromDB();
 
@@ -533,7 +533,6 @@ void Server::sendPackets()
 		if(mClientVector.at(i)->mClientID > 0)
 			continue; 
 
-		//mClientVector.at(i)->SendPacket(&mMessage);
 		mNetwork->sendPacketTo(mClientVector.at(i),&mMessage);
 			
 	}
