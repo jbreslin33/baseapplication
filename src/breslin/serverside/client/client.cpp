@@ -241,6 +241,10 @@ void Client::checkLogin(Message* mes)
 		{
 			if (mServer->mClientVector.at(i)->db_id == db_id)
 			{
+				//logout old 
+				mServer->mClientVector.at(i)->logout();
+
+				//swap
 				mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
 				mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
 				mServer->mClientVector.at(i)->mClientID = mClientID;
