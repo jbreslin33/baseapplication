@@ -45,6 +45,7 @@ public:
 
 	//clients
 	std::vector<Client*> mClientVector;
+	std::vector<Client*> mClientVectorTemp;
 
 	//port
 	int mPort;					// Port
@@ -130,7 +131,8 @@ public:
 
 	//client
 	virtual void createClientsFromDB();
-	void addClient(Client* client);
+	void addClientPermanent(Client* client);
+	void addClientTemp(Client* client);
 	
 	//packets
 	int  getPacket  (char *data, struct sockaddr *from);

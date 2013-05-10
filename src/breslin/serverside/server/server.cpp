@@ -147,14 +147,21 @@ void Server::createClientsFromDB()
                 client->db_school_id = f_int;
 
                 LogString("created a client with db id of:%d",client->db_id);
+  		client->mShape = new Shape(mGameVector.at(0)->getOpenIndex(),mGameVector.at(0),client,mGameVector.at(0)->getOpenPoint(),new Vector3D(),new Vector3D(),mRoot,true,true,.66f * 30.5,1,false);
+
         }
         PQclear(res);
         PQfinish(conn);
 }
 
-void Server::addClient(Client* client)
+void Server::addClientPermanent(Client* client)
 {
 	mClientVector.push_back(client);
+}
+
+void Server::addClientTemp(Client* client)
+{
+	mClientVectorTemp.push_back(client);
 }
 
 void Server::addGame(Game* game)
@@ -262,6 +269,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 					if (mGameVector.at(g)->mID == gameID)
 					{
 						mGameVector.at(g)->join(client); 
+						LogString("join");
 					}
 				}
 			}
@@ -306,6 +314,16 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				client->checkLogin(mes);
 			}
                 }
+
+		for (unsigned int i = 0; i < mClientVectorTemp.size(); i++)
+                {
+                        if( memcmp(mClientVectorTemp.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+                        {
+				//set client to pointer
+                                client = mClientVectorTemp.at(i);
+				client->checkLogin(mes);
+			}
+		}
 	}
 
 	else if (type == mMessageLoginBrowser)
@@ -320,6 +338,15 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				client->checkLogin(mes);
 			}
 		}	
+		for (int i = 0; i < mClientVectorTemp.size(); i++)
+		{
+			if (mClientVectorTemp.at(i)->mClientID == clientID)
+			{
+                                //set client to pointer
+                                client = mClientVectorTemp.at(i);
+				client->checkLogin(mes);
+			}
+		}
 	}
 
 	/***LOG OUT********/

@@ -40,12 +40,10 @@
 
 
 #include "../quiz/quiz.h"
-
 //server side client constructor, many instances will be made, one for each client connected.
 Client::Client(Server* server, struct sockaddr *address, int clientID, bool disconnected, bool permanent)
 {
-	//is it permanent???
-	mPermanent = false;
+	mPermanent = permanent;
 
 	//logged in
 	mLoggedIn = false;
@@ -82,7 +80,14 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool disc
 	}
 
 	//register this client with server
-	mServer->addClient(this);
+	if (mPermanent)
+	{
+		mServer->addClientPermanent(this);
+	}
+	else
+	{
+		mServer->addClientTemp(this);
+	}
 
 	if (mClientID >= 0)
 	{
@@ -221,35 +226,31 @@ void Client::checkLogin(Message* mes)
                 }
         }
         
+	Client* client;
 	//check against db
         if (getPasswordMatch(mStringUsername,mStringPassword))
      	{ 
 		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 		{
-			LogString("checking db_id:%d",mServer->mClientVector.at(i)->db_id);	
 			if (mServer->mClientVector.at(i)->db_id == db_id)
 			{
 				if (mServer->mClientVector.at(i) == this)
 				{
-					continue;
+					login();
 				}
-				LogString("duplicate db_id");
-
-				//let's swap address from new Client to permanent client and tell perm client it's logged in and not ai anymore maybe not that yet as it did not join game.
-
-				//swap game
-				mGame = mServer->mClientVector.at(i)->mGame;
-
-				//swap shape
-				mShape = mServer->mClientVector.at(i)->mShape;
-	
-				//logout old client
-				//mServer->mClientVector.at(i)->mConnectionState = ;	
-				mServer->mClientVector.at(i)->logout();	
+			}	
+		}
+		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+		{
+			if (mServer->mClientVector.at(i)->db_id == db_id)
+			{
+				LogString("dup");	
+				mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
+				mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
+				mServer->mClientVector.at(i)->login();
 			}	
 		}
 
-        	login();
         }
         else
         {

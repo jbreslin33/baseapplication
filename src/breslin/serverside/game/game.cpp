@@ -223,12 +223,6 @@ void Game::join(Client* client)
         {
                 sendAllShapes(client);
         }
-
-        //create the shape for this client -- the avatar
-	if (!client->mShape)
-	{
-        	client->mShape = new Shape(getOpenIndex(),this,client,getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mRoot,true,true,.66f * 30.5,1,false);
-	}
 }
 
 //the client that is leaving????
@@ -255,16 +249,18 @@ void Game::leave(Client* client)
 
 void Game::sendAllShapes(Client* client)
 {
+	LogString("Game::sendAllShapes()");
         for (unsigned int i = 0; i < mShapeVector.size(); i++)
         {
-                if (client->mShape != mShapeVector.at(i))
-                {
+		LogString("Game::sendAllShapes() in shapeVector loop");
+           //     if (client->mShape != mShapeVector.at(i))
+             //   {
                         //write it
                         mShapeVector.at(i)->writeAdd(client);
 
                         //send it
                 	mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
-                }
+              //  }
         }
 }
 

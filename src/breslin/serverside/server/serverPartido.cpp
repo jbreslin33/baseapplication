@@ -5,6 +5,8 @@
 
 #include "../game/gamePartido.h"
 #include "../client/clientPartido.h"
+#include "../../math/vector3D.h"
+#include "../shape/shape.h"
 
 ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPort) 
 :
@@ -36,7 +38,7 @@ void ServerPartido::createClientsFromDB()
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
         res = PQexec(conn,
-        "select * from users ORDER BY id");
+        "select * from users ORDER BY id LIMIT 3");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
@@ -81,6 +83,8 @@ void ServerPartido::createClientsFromDB()
                 client->db_school_id = f_int;
 
                 LogString("created a client with db id of:%d",client->db_id);
+ 		client->mShape = new Shape(mGameVector.at(1)->getOpenIndex(),mGameVector.at(1),client,mGameVector.at(1)->getOpenPoint(),new Vector3D(),new Vector3D(),mRoot,true,true,.66f * 30.5,1,false);
+
         }
         PQclear(res);
         PQfinish(conn);

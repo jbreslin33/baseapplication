@@ -135,6 +135,7 @@ void Game::processUpdate()
 **********************************/
 void Game::addShape(ByteBuffer* byteBuffer)
 {
+	LogString("Game::addShape");
 	Shape* shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
 
 	//ability
