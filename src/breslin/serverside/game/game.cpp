@@ -209,19 +209,32 @@ Vector3D* Game::getOpenPoint()
         }
 }
 
-
 void Game::join(Client* client)
 {
         client->mGame = this;
+	sendShapes(client);
+}
 
-        //let this client know about all shapes
-        if (client->mClientID > 0)
+void Game::sendShapes(Client* client)
+{
+ 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
         {
-                sendAllShapesBrowser(client);
-        }
-        else
-        {
-                sendAllShapes(client);
+                if (client->mClientID > 0)
+                {
+                        //write it
+                        mShapeVector.at(i)->writeAddBrowser(client);
+
+                        //send it
+                        mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
+                }
+                else
+                {
+                        //write it
+                        mShapeVector.at(i)->writeAdd(client);
+
+                        //send it
+                        mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
+                }
         }
 }
 
@@ -240,42 +253,7 @@ void Game::leave(Client* client)
                         mServer->mMessage.WriteByte(client->mClientID); //client id for browsers
                 }
                 mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
-
-                //client->mShape->remove();
         }
-
         client->mGame = NULL;
-}
-
-void Game::sendAllShapes(Client* client)
-{
-	LogString("Game::sendAllShapes()");
-        for (unsigned int i = 0; i < mShapeVector.size(); i++)
-        {
-		LogString("Game::sendAllShapes() in shapeVector loop");
-           //     if (client->mShape != mShapeVector.at(i))
-             //   {
-                        //write it
-                        mShapeVector.at(i)->writeAdd(client);
-
-                        //send it
-                	mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
-              //  }
-        }
-}
-
-void Game::sendAllShapesBrowser(Client* client)
-{
-        for (unsigned int i = 0; i < mShapeVector.size(); i++)
-        {
-                if (client->mShape != mShapeVector.at(i))
-                {
-                        //write it
-                        mShapeVector.at(i)->writeAddBrowser(client);
-
-                        //send it
-                	mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
-                }
-        }
 }
 

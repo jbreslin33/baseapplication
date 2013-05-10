@@ -72,10 +72,9 @@ public:
 	//join
 	void join(Client* client);
 	void leave(Client* client);
-
-	//send shapes
-	void sendAllShapes(Client* client);
-	void sendAllShapesBrowser(Client* client);
+	
+	//shapes
+	void sendShapes(Client* client);
 };
 
 #endif
