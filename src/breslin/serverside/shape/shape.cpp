@@ -90,9 +90,6 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 
 	//register with shape vector
 	mGame->mShapeVector.push_back(this);
-
-	sendShapeToClients();
-
 }
 
 Shape::~Shape()
@@ -113,34 +110,6 @@ void Shape::setValues()
 {
 	
 }
-
-void Shape::sendShapeToClients()
-{
-	//send this shape to all clients
-	for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
-	{
-		Client* clientToSendTo = mGame->mServer->mClientVector.at(i);
-
-		//is this client in the same game?
-		if (clientToSendTo->mGame == mGame)
-		{	
-			if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
-			{
-				writeAddBrowser(clientToSendTo);
-				//send it
-				mGame->mServer->mNetwork->sendPacketTo(clientToSendTo,&mGame->mServer->mMessage);
-			}
-			if (mGame->mServer->mClientVector.at(i)->mClientID == 0)
-			{	
-				writeAdd(clientToSendTo);
-				//send it
-				mGame->mServer->mNetwork->sendPacketTo(clientToSendTo,&mGame->mServer->mMessage);
-			}		
-		}
-		
-	}
-}
-
 
 void Shape::addAbility(Ability* ability)
 {

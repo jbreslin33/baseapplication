@@ -130,8 +130,6 @@ void writeAdd(Client* client);
 void writeAddBrowser(Client* client);
 void insertIntoDB();
 
-void sendShapeToClients();
-
 	//delta move command
 virtual int  setFlag();
 virtual void addToMoveMessage(Message* message);
