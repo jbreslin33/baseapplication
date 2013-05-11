@@ -36,10 +36,6 @@ public:
 
 	void parsePacket(Message *mes, struct sockaddr *address);
 
-	//clients
-	virtual void createClients();
-
-
 };
 
 #endif
