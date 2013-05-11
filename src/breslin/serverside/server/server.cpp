@@ -116,7 +116,8 @@ void Server::createClients()
         for (row=0; row<rec_count; row++)
         {
                 //client
-                Client* client = new Client(this, NULL, -2, true, true);
+                Client* client = new Client(this, NULL, -2);
+		addClientPermanent(client);	
 
                 //id
                 const char* a = PQgetvalue(res, row, 0);
@@ -230,20 +231,23 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	if (type == mMessageConnect)
 	{
 		LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		Client* client = new Client(this, address, 0, false, false);
+		Client* client = new Client(this, address, 0);
+		addClientTemp(client);
 	}
 
 	else if (type == mMessageConnectBrowser)
 	{
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, clientID, false, false);
+ 		Client* client = new Client(this, address, clientID);
+		addClientTemp(client);
 	}
 
 	else if (type == mMessageConnectNode)
 	{
 		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, -1, false, true);
+ 		Client* client = new Client(this, address, -1);
+		addClientPermanent(client);
 	}	
 
 	/***JOIN GAME********/

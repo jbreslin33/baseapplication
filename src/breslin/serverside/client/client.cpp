@@ -41,10 +41,8 @@
 
 #include "../quiz/quiz.h"
 //server side client constructor, many instances will be made, one for each client connected.
-Client::Client(Server* server, struct sockaddr *address, int clientID, bool disconnected, bool permanent)
+Client::Client(Server* server, struct sockaddr *address, int clientID)
 {
-	mPermanent = permanent;
-
 	//logged in
 	mLoggedIn = false;
 
@@ -69,7 +67,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool disc
 
 	mLastMessageTime  = 0;
 
-	if (disconnected)
+	if (!address)
 	{
 		mConnectionState  = DREAMSOCK_DISCONNECTED;
 	}
@@ -77,16 +75,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool disc
 	{
 		setSocketAddress(address);
 		mConnectionState  = DREAMSOCK_CONNECTING;
-	}
-
-	//register this client with server
-	if (mPermanent)
-	{
-		mServer->addClientPermanent(this);
-	}
-	else
-	{
-		mServer->addClientTemp(this);
 	}
 
 	if (mClientID >= 0)

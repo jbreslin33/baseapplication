@@ -49,20 +49,22 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		if (type == mMessageConnect)
         	{
-                	ClientPartido* client = new ClientPartido(this, address, 0, false, false);
+                	ClientPartido* client = new ClientPartido(this, address, 0);
+			addClientTemp(client);
         	}
 
         	else if (type == mMessageConnectBrowser)
         	{
                 	int clientID = mes->ReadByte();
-                	ClientPartido* client = new ClientPartido(this, address, clientID, false, false);
+                	ClientPartido* client = new ClientPartido(this, address, clientID);
+			addClientTemp(client);
         	}
 
         	else if (type == mMessageConnectNode)
         	{
-
                 	int clientID = mes->ReadByte();
-                	ClientPartido* client = new ClientPartido(this, address, -1, false, true);
+                	ClientPartido* client = new ClientPartido(this, address, -1);
+			addClientPermanent(client);
         	}     	 
 	}
 	else
