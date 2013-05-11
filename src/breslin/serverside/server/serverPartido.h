@@ -9,6 +9,9 @@ public:
 	ServerPartido(Ogre::Root* root, const char *localIP, int serverPort);	
 	~ServerPartido();
 
+	//games
+	virtual void createGames();
+
         //add school
         static const int mMessageAddSchool = -109;
 
@@ -34,7 +37,8 @@ public:
 	void parsePacket(Message *mes, struct sockaddr *address);
 
 	//clients
-	virtual void createClientsFromDB();
+	virtual void createClients();
+
 
 };
 

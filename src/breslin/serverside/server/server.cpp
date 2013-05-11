@@ -48,14 +48,18 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	// Create network
 	mNetwork = new Network(this,localIP, mPort);
 
-	//create games for now just create standard no frills game of you get to collide with stuff in multiplayer....
-	mGameVector.push_back(new Game(this,1));
 }
 
 Server::~Server()
 {
 	mClientVector.empty();
 	mNetwork->closeSocket(mNetwork->mSocket);
+}
+
+void Server::createGames()
+{
+	//create games for now just create standard no frills game of you get to collide with stuff in multiplayer....
+	mGameVector.push_back(new Game(this,1));
 }
 
 void Server::processUpdate(int msec)
@@ -93,7 +97,7 @@ void Server::processUpdate(int msec)
         mFrameTime = 0;
 }
 
-void Server::createClientsFromDB()
+void Server::createClients()
 {
         PGconn          *conn;
         PGresult        *res;
@@ -244,11 +248,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, -1, false, true);
-	
-		createClientsFromDB();
-
 	}	
-
 
 	/***JOIN GAME********/
 	/* can i just send more information here for different games?                      */

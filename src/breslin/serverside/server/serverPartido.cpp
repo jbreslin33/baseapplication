@@ -21,15 +21,21 @@ ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPo
 	//get questions
         getQuestions();
 
-	//create game partido!
- 	mGameVector.push_back(new GamePartido(this,2));
 }
 
 ServerPartido::~ServerPartido()
 {
 }
 
-void ServerPartido::createClientsFromDB()
+void ServerPartido::createGames()
+{
+	Server::createGames();
+
+	//create game partido!
+ 	mGameVector.push_back(new GamePartido(this,2));
+}
+
+void ServerPartido::createClients()
 {
         PGconn          *conn;
         PGresult        *res;
@@ -82,7 +88,6 @@ void ServerPartido::createClientsFromDB()
                 f_str >> f_int;
                 client->db_school_id = f_int;
 
-                LogString("created a client with db id of:%d",client->db_id);
  		client->mShape = new Shape(mGameVector.at(1)->getOpenIndex(),mGameVector.at(1),client,mGameVector.at(1)->getOpenPoint(),new Vector3D(),new Vector3D(),mRoot,true,true,.66f * 30.5,1,false);
 
         }
@@ -119,9 +124,6 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 
                 	int clientID = mes->ReadByte();
                 	ClientPartido* client = new ClientPartido(this, address, -1, false, true);
-
-			createClientsFromDB();	
-
         	}     	 
 	}
 	else

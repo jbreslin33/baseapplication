@@ -203,7 +203,6 @@ Vector3D* Game::getOpenPoint()
 
 		if (!occupied)
 		{
-			LogString("return modified"); 
 			return vector3D;
 		}
         }

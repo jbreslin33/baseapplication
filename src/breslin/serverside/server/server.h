@@ -117,6 +117,7 @@ public:
 	Server(Ogre::Root* root, const char *localIP, int serverPort);
 	~Server();
 
+
 	//update
 	void processUpdate(int msec);
 
@@ -127,10 +128,11 @@ public:
 	int  checkForTimeout();
 
 	//game
+	virtual void createGames();	
 	void addGame(Game* game);
 
 	//client
-	virtual void createClientsFromDB();
+	virtual void createClients();
 	void addClientPermanent(Client* client);
 	void addClientTemp(Client* client);
 	

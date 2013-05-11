@@ -59,6 +59,9 @@ int main(int argc, char **argv)
 		server = new ServerPartido(root,"",intValue);	
 	}
 
+	server->createGames();
+	server->createClients();
+
 	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
 
