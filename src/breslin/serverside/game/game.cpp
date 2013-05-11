@@ -41,6 +41,14 @@ Game::~Game()
 	delete mServer;
 }
 
+void Game::createShapes()
+{
+        for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+        {
+                mServer->mClientVector.at(i)->mShape = new Shape(getOpenIndex(),this,mServer->mClientVector.at(i),getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mRoot,true,true,.66f * 30.5,1,false);
+        }
+}
+
 //you should call this from server processUpdate
 void Game::processUpdate()
 {

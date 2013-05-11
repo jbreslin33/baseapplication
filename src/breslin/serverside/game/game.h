@@ -74,6 +74,7 @@ public:
 	void leave(Client* client);
 	
 	//shapes
+	virtual void createShapes();
 	void sendShapes(Client* client);
 };
 

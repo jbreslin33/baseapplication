@@ -67,3 +67,4 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 		mBattleVector.push_back(battle);
 	}
 }
+

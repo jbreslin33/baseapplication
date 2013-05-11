@@ -87,9 +87,6 @@ void ServerPartido::createClients()
                 unsigned int f_int;
                 f_str >> f_int;
                 client->db_school_id = f_int;
-
- 		client->mShape = new Shape(mGameVector.at(1)->getOpenIndex(),mGameVector.at(1),client,mGameVector.at(1)->getOpenPoint(),new Vector3D(),new Vector3D(),mRoot,true,true,.66f * 30.5,1,false);
-
         }
         PQclear(res);
         PQfinish(conn);

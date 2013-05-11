@@ -149,10 +149,6 @@ void Server::createClients()
                 unsigned int f_int;
                 f_str >> f_int;
                 client->db_school_id = f_int;
-
-                LogString("created a client with db id of:%d",client->db_id);
-  		client->mShape = new Shape(mGameVector.at(0)->getOpenIndex(),mGameVector.at(0),client,mGameVector.at(0)->getOpenPoint(),new Vector3D(),new Vector3D(),mRoot,true,true,.66f * 30.5,1,false);
-
         }
         PQclear(res);
         PQfinish(conn);

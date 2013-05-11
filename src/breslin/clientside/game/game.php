@@ -174,7 +174,7 @@ addShape: function(byteBuffer)
 		shape.mGhost.setVisible(false);
 	}
 */
-	shape.mGhost.setVisible(true);
+	shape.mGhost.setVisible(false);
 
 },
 

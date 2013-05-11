@@ -24,7 +24,6 @@ public:
 	std::vector<Battle*> mBattleVector;  
 
 	ServerPartido* mServer;
-
 };
 
 #endif

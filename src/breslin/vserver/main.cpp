@@ -61,6 +61,10 @@ int main(int argc, char **argv)
 
 	server->createGames();
 	server->createClients();
+  	for (unsigned int i = 0; i < server->mGameVector.size(); i++)
+	{
+		server->mGameVector.at(i)->createShapes();
+	}
 
 	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
