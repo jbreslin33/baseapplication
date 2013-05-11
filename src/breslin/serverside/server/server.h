@@ -133,8 +133,7 @@ public:
 
 	//client
 	virtual void createClients();
-	void addClientPermanent(Client* client);
-	void addClientTemp(Client* client);
+	void addClient(Client* client, bool permanent);
 	
 	//packets
 	int  getPacket  (char *data, struct sockaddr *from);

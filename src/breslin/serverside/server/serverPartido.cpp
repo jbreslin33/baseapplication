@@ -50,21 +50,21 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 		if (type == mMessageConnect)
         	{
                 	ClientPartido* client = new ClientPartido(this, address, 0);
-			addClientTemp(client);
+			addClient(client,false);
         	}
 
         	else if (type == mMessageConnectBrowser)
         	{
                 	int clientID = mes->ReadByte();
                 	ClientPartido* client = new ClientPartido(this, address, clientID);
-			addClientTemp(client);
+			addClient(client,false);
         	}
 
         	else if (type == mMessageConnectNode)
         	{
                 	int clientID = mes->ReadByte();
                 	ClientPartido* client = new ClientPartido(this, address, -1);
-			addClientPermanent(client);
+			addClient(client,true);
         	}     	 
 	}
 	else

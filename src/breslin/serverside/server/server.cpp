@@ -117,7 +117,7 @@ void Server::createClients()
         {
                 //client
                 Client* client = new Client(this, NULL, -2);
-		addClientPermanent(client);	
+		addClient(client,true);	
 
                 //id
                 const char* a = PQgetvalue(res, row, 0);
@@ -155,14 +155,16 @@ void Server::createClients()
         PQfinish(conn);
 }
 
-void Server::addClientPermanent(Client* client)
+void Server::addClient(Client* client, bool permanent)
 {
-	mClientVector.push_back(client);
-}
-
-void Server::addClientTemp(Client* client)
-{
-	mClientVectorTemp.push_back(client);
+	if (permanent)
+	{
+		mClientVector.push_back(client);
+	}
+	else
+	{
+		mClientVectorTemp.push_back(client);
+	}
 }
 
 void Server::addGame(Game* game)
@@ -232,14 +234,14 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		Client* client = new Client(this, address, 0);
-		addClientTemp(client);
+		addClient(client,false);
 	}
 
 	else if (type == mMessageConnectBrowser)
 	{
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, clientID);
-		addClientTemp(client);
+		addClient(client,false);
 	}
 
 	else if (type == mMessageConnectNode)
@@ -247,7 +249,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, -1);
-		addClientPermanent(client);
+		addClient(client,true);
 	}	
 
 	/***JOIN GAME********/
