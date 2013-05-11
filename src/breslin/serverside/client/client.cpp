@@ -46,10 +46,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	//logged in
 	mLoggedIn = false;
 
-	//set client id as this is going to be a browser client
-	//-1 = browser client to udp_server.js, no shape 
-	//0 = c++ client, obviously a shape 
-	//1 or greater than client represents a browser client and should have a shape
+	//client id for php but everyone uses one...
 	mClientID = clientID;
 	
 	//db
