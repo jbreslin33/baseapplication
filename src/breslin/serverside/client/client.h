@@ -89,6 +89,9 @@ public:
 	//processUpdate
 	void processUpdate();
 
+	//timeout
+	void checkForTimeout();
+
 	//client
 	void remove();
 

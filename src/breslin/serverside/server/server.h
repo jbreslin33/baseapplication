@@ -112,38 +112,32 @@ public:
 	static const int mMessageAddShape    	         = -103;
 	static const int mMessageRemoveShape             = -104;
 
-
 public:
 	Server(Ogre::Root* root, const char *localIP, int serverPort);
 	~Server();
 
-
 	//update
-	void processUpdate(int msec);
-
-	//port
-	int getPort() { return mPort; }
-
-	//timeout
-	int  checkForTimeout();
+	        void processUpdate(int msec);
 
 	//game
 	virtual void createGames();	
-	void addGame(Game* game);
 
 	//client
-	virtual void createClients();
-	void addClient(Client* client, bool permanent);
+   	virtual void createClients();
+	        void addClient(Client* client, bool permanent);
+
+	//timeout
+	        int  checkForTimeout();
 	
 	//packets
-	int  getPacket  (char *data, struct sockaddr *from);
-	void sendPackets();
-	void readPackets();
+		int  getPacket  (char *data, struct sockaddr *from);
+		void sendPackets();
+	        void readPackets();
 	virtual void parsePacket(Message *mes, struct sockaddr *address);
 
         //commands
-        void storeCommands(Shape* shape);
-	void sendCommand(Game* game);
+                void storeCommands(Shape* shape);
+		void sendCommand(Game* game);
 };
 
 #endif

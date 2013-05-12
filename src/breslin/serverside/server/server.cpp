@@ -47,7 +47,6 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 
 	// Create network
 	mNetwork = new Network(this,localIP, mPort);
-
 }
 
 Server::~Server()
@@ -56,12 +55,20 @@ Server::~Server()
 	mNetwork->closeSocket(mNetwork->mSocket);
 }
 
+
+/*******************************************************
+		GAMES	
+********************************************************/
+
 void Server::createGames()
 {
 	//create games for now just create standard no frills game of you get to collide with stuff in multiplayer....
 	mGameVector.push_back(new Game(this,1));
 }
 
+/*******************************************************
+		UPDATES	
+********************************************************/
 void Server::processUpdate(int msec)
 {
  	mFrameTime += msec;
@@ -97,6 +104,9 @@ void Server::processUpdate(int msec)
         mFrameTime = 0;
 }
 
+/*******************************************************
+		CLIENTS	
+********************************************************/
 void Server::createClients()
 {
         PGconn          *conn;
@@ -105,8 +115,7 @@ void Server::createClients()
         int             row;
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,
-        "select * from users ORDER BY id");
+        res = PQexec(conn,"select * from users ORDER BY id");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
@@ -167,10 +176,8 @@ void Server::addClient(Client* client, bool permanent)
 	}
 }
 
-void Server::addGame(Game* game)
-{
-	mGameVector.push_back(game);
-}
+
+
 
 
 /*******************************************************

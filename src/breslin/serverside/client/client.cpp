@@ -62,7 +62,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	//server
 	mServer = server;
 
-	mLastMessageTime  = 0;
+	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 
 	if (!address)
 	{
@@ -109,6 +109,7 @@ void Client::setSocketAddress(struct sockaddr *address)
 
 void Client::processUpdate()
 {
+	checkForTimeout();	
 	if (mGame)
 	{
 	}
@@ -143,6 +144,9 @@ void Client::sendConnected()
 //which means when you login from a new address we will send a notification to old address as a courtesy....
 void Client::login()
 {
+	//set last messageTime
+	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
+
 	mLoggedIn = true;
 
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
@@ -290,5 +294,23 @@ bool Client::getPasswordMatch(std::string username,std::string password)
         PQfinish(conn);
 
         return match;
+}
+
+void Client::checkForTimeout()
+{
+        // Don't timeout when connecting or if logged out...
+        if(mLoggedIn == false || mConnectionState == DREAMSOCK_CONNECTING)
+        {
+        	return;
+        }
+
+        int currentTime = mServer->mNetwork->getCurrentSystemTime();
+
+        // Check if the client has been silent for 30 seconds if so log him out and start ai up...
+        if(currentTime - mLastMessageTime > 30000)
+        {
+		logout();
+		LogString("logging out.. you should fire up ai for:%d",mClientID);
+        }
 }
 
