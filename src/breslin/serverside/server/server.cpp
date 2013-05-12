@@ -52,6 +52,7 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 Server::~Server()
 {
 	mClientVector.empty();
+	mClientVectorTemp.empty();
 	mNetwork->closeSocket(mNetwork->mSocket);
 }
 
