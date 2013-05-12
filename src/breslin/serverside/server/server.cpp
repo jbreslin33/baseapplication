@@ -453,77 +453,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			}
 		}
 	} 
-
-	else if (type == mMessageDisconnect)
-	{
-/*	
- 		// Find the correct client by comparing addresses
-                for (unsigned int i = 0; i < mClientVector.size(); i++)
-                {
-                        if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
-                        {
-				//delete client
-                                client = mClientVector.at(i);
-				delete client;
-
- 				//erase client from vector
-                        	mClientVector.erase(mClientVector.begin()+i);
-				LogString("c++ client deleted");
-			}
-		}
-*/
-	}
-
-	else if (type == mMessageDisconnectBrowser)
-	{
-/*
- 		int clientID = mes->ReadByte();
-
-                for (unsigned int i = 0; i < mClientVector.size(); i++)
-                {
-                        if (mClientVector.at(i)->mClientID == clientID)
-                        {
-				LogString("Browser client deleted, you should delete shape too...");
-                                client = mClientVector.at(i);
-				delete client;
-			}
-		}
-*/
-	}
 }
 
-int Server::checkForTimeout()
-{
-	int currentTime = mNetwork->getCurrentSystemTime();
-
-	for (unsigned int i = 0; i < mClientVector.size(); i++)
-	{
-		// Don't timeout when connecting
-		if(mClientVector.at(i)->mConnectionState == DREAMSOCK_CONNECTING)
-		{
-			continue;
-		}
-
-		// Check if the client has been silent for 30 seconds
-		// If yes, assume crashed and remove the client
-		if(currentTime - mClientVector.at(i)->mLastMessageTime > 30000)
-		{
-			LogString("Client timeout, disconnecting (%d - %d = %d)",
-				currentTime, mClientVector.at(i)->mLastMessageTime, currentTime - mClientVector.at(i)->mLastMessageTime);
-
-			// Build a 'fake' message so the applicationBreslin will also
-			// receive notification of a client disconnecting
-			//Message mes;
-			//mes.Init(data, sizeof(data));
-			//mes.WriteByte(mDisconnect);
-
-			mClientVector.at(i)->remove();
-
-			//return mes.GetSize();
-		}
-	}
-	return 0;
-}
 
 //this loops thru each client instance and then calls their sendPacket(mess) function
 //we are right here I need to just send to one client for all browsers then he should broadcast

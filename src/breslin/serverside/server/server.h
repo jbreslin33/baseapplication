@@ -126,9 +126,6 @@ public:
    	virtual void createClients();
 	        void addClient(Client* client, bool permanent);
 
-	//timeout
-	        int  checkForTimeout();
-	
 	//packets
 		int  getPacket  (char *data, struct sockaddr *from);
 		void sendPackets();
