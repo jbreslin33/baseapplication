@@ -226,11 +226,50 @@ void Game::sendShapes(Client* client)
 {
  	for (unsigned int i = 0; i < mShapeVector.size(); i++)
         {
-        	//write it
-                mShapeVector.at(i)->writeAdd(client);
+  		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+
+        	mMessage.WriteByte(mServer->mMessageAddShape); // type
+
+        	if (client->mClientID > 0)
+        	{
+                	mMessage.WriteByte(client->mClientID); //client id for browsers
+        	}
+                
+        	if (client == mShapeVector.at(i)->mClient)
+        	{       
+                	mMessage.WriteByte(1);
+        	}               
+        	else    
+        	{       
+                	mMessage.WriteByte(0);
+        	}
+        	mMessage.WriteByte(mShapeVector.at(i)->mIndex);
+
+        	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().x);
+        	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().y);
+        	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().z);
+
+        	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->x);
+        	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->z);
+
+        	//mesh
+        	mMessage.WriteByte(mShapeVector.at(i)->mMeshCode);
+
+        	//animation
+        	mMessage.WriteByte(mShapeVector.at(i)->mAnimated);
+
+        	//username
+        	int length = mShapeVector.at(i)->mClient->mStringUsername.length();  // get length of string containing school
+        	mMessage.WriteByte(length); //send length
+
+        	//loop thru length and write it
+        	for (int b=0; b < length; b++)
+        	{
+                	mMessage.WriteByte(mShapeVector.at(i)->mClient->mStringUsername.at(b));
+        	}
 
                 //send it
-                mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
+                mServer->mNetwork->sendPacketTo(client,&mMessage);
         }
 }
 

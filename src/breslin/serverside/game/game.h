@@ -1,8 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <string.h>
+#include "../message/message.h"
 
+#include <string.h>
 #include <vector>
 
 //postgres
@@ -12,8 +13,6 @@ using namespace std;
 
 #define COMMAND_HISTORY_SIZE		64
 
-//class Network;
-class Message;
 class Server;
 class Client;
 class Shape;
@@ -35,6 +34,9 @@ static const char mMessageServerExit = 3;
 
 	//bounds
 	Bounds* mBounds;	
+
+        //Message
+        Message mMessage;
 
 	//shapes
 	std::vector<Shape*> mShapeVector;	//every tangible item in game world..
