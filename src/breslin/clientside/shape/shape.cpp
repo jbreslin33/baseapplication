@@ -39,7 +39,7 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	mCommandToRunOnShape  = new Command();
 	//speed
 	mSpeed = 0.0f;
-	mSpeedMax  = 1.66f * 30.5;
+	mSpeedMax  = 1.66f * 5.5;
 
 	mVelocity = new Vector3D();
 
