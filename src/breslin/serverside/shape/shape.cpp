@@ -275,15 +275,15 @@ void Shape::writeAdd(Client* client)
 	mGame->mServer->mMessage.WriteByte(mAnimated);
 
 	//username
- 	int length = mClient->mStringUsername.length();  // get length of string containing school
+ 	int length = mClient->db_first_name.length();  // get length of string containing school
         mGame->mServer->mMessage.WriteByte(length); //send length
-	LogString("length of mStringUsername:%d",length);
+	LogString("length of db_first_name:%d",length);
 
         //loop thru length and write it
         for (int b=0; b < length; b++)
         {
-                mGame->mServer->mMessage.WriteByte(mClient->mStringUsername.at(b));
-		LogString("mStringUsername:%s",mClient->mStringUsername.at(b));
+                mGame->mServer->mMessage.WriteByte(mClient->db_first_name.at(b));
+		LogString("mStringUsername:%s",mClient->db_first_name.at(b));
         }
 }
 
@@ -319,13 +319,13 @@ void Shape::writeAddBrowser(Client* client)
 	mGame->mServer->mMessage.WriteByte(mAnimated);
 
 	//username
- 	int length = mClient->mStringUsername.length();  // get length of string containing school
+ 	int length = mClient->db_first_name.length();  // get length of string containing school
         mGame->mServer->mMessage.WriteByte(length); //send length
 
         //loop thru length and write it
         for (int b=0; b < length; b++)
         {
-                mGame->mServer->mMessage.WriteByte(mClient->mStringUsername.at(b));
+                mGame->mServer->mMessage.WriteByte(mClient->db_first_name.at(b));
         }
 }
 
