@@ -64,6 +64,10 @@ public:
 
 ~Client();
 
+	//ai
+	int mAITimeOutCounter;
+	int aAITimeOutThreshold;
+
 	//Message
         Message mMessage;
 
@@ -73,11 +77,11 @@ public:
 	//user id from database
 	int mUserID;
 
-	int				mConnectionState;		// Connecting, connected, disconnecting, disconnected
+	int				mConnectionState;		
 
-	signed short	mDroppedPackets;			// Dropped packets
+	signed short	mDroppedPackets;
 
-	struct sockaddr	mSocketAddress;				// Socket address
+	struct sockaddr	mSocketAddress;
 
 	int				mLastMessageTime;
 
@@ -108,7 +112,7 @@ public:
 	struct sockaddr *GetSocketAddress(void) { return &mSocketAddress; }
 	void setSocketAddress(struct sockaddr *address); 
 
-    	Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the clients personal avatar..
+    	Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the avatar.
 
 	Server* mServer;
 
