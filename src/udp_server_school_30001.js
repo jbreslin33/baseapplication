@@ -18,7 +18,7 @@ mCommandOriginZ      = 4;
 mCommandRotationX    = 8;
 mCommandRotationZ    = 16;
 
-mServerIP = '127.0.0.1';
+mServerIP = '1921.68.2.88';
 mServerPort = 30001;
 
 
@@ -26,7 +26,7 @@ app.listen(10001);
 
 // routing
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/main_localhost_30001.html');
+  res.sendfile(__dirname + '/main_school_30001.html');
 });
 
 
