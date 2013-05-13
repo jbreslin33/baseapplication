@@ -277,11 +277,13 @@ void Shape::writeAdd(Client* client)
 	//username
  	int length = mClient->mStringUsername.length();  // get length of string containing school
         mGame->mServer->mMessage.WriteByte(length); //send length
+	LogString("length of mStringUsername:%d",length);
 
         //loop thru length and write it
         for (int b=0; b < length; b++)
         {
                 mGame->mServer->mMessage.WriteByte(mClient->mStringUsername.at(b));
+		LogString("mStringUsername:%s",mClient->mStringUsername.at(b));
         }
 }
 
