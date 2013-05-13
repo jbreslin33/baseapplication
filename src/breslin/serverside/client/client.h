@@ -5,17 +5,29 @@
 
 #include "../message/message.h"
 
-#include <string.h>
-#include <netinet/in.h>
+#ifdef WIN32
+	#pragma comment (lib,"ws2_32.lib")
+#pragma message ("Auto linking WinSock2 library")
 
-// Define SOCKET data type for UNIX 
-typedef int SOCKET;
-
-#ifndef TRUE
-#define TRUE 1
+	#include <winsock2.h>
+#else
+	#include <string.h>
+	#include <netinet/in.h>
 #endif
-#ifndef FALSE
-#define FALSE 0
+
+// Define SOCKET data type for UNIX (defined in WinSock for Win32)
+// And socklen_t for Win32
+#ifdef WIN32
+	typedef int socklen_t;
+#else
+	typedef int SOCKET;
+
+	#ifndef TRUE
+	#define TRUE 1
+	#endif
+	#ifndef FALSE
+	#define FALSE 0
+	#endif
 #endif
 
 // Connection states
@@ -24,7 +36,11 @@ typedef int SOCKET;
 #define DREAMSOCK_DISCONNECTING			2
 #define DREAMSOCK_DISCONNECTED			4
 
-#define DREAMSOCK_INVALID_SOCKET	-1
+#ifdef WIN32
+	#define DREAMSOCK_INVALID_SOCKET	INVALID_SOCKET
+#else
+	#define DREAMSOCK_INVALID_SOCKET	-1
+#endif
 
 // System messages
 // Note (for all messages - system and user):

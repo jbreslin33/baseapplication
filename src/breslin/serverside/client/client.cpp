@@ -26,9 +26,13 @@
 //math
 #include "../../math/vector3D.h"
 
+#ifdef WIN32
+//
+#else
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#endif
 
 //postgresql
 #include <stdio.h>
