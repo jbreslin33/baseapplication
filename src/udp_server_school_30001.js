@@ -18,7 +18,7 @@ mCommandOriginZ      = 4;
 mCommandRotationX    = 8;
 mCommandRotationZ    = 16;
 
-mServerIP = '1921.68.2.88';
+mServerIP = '192.168.2.88';
 mServerPort = 30001;
 
 
