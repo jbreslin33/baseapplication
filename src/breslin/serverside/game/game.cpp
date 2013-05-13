@@ -226,22 +226,11 @@ void Game::sendShapes(Client* client)
 {
  	for (unsigned int i = 0; i < mShapeVector.size(); i++)
         {
-                if (client->mClientID > 0)
-                {
-                        //write it
-                        mShapeVector.at(i)->writeAddBrowser(client);
+        	//write it
+                mShapeVector.at(i)->writeAdd(client);
 
-                        //send it
-                        mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
-                }
-                else
-                {
-                        //write it
-                        mShapeVector.at(i)->writeAdd(client);
-
-                        //send it
-                        mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
-                }
+                //send it
+                mServer->mNetwork->sendPacketTo(client,&mServer->mMessage);
         }
 }
 

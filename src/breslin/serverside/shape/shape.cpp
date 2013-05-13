@@ -251,47 +251,10 @@ void Shape::writeAdd(Client* client)
 
 	mGame->mServer->mMessage.WriteByte(mGame->mServer->mMessageAddShape); // type
 
-	if (client == mClient)
-	{
-		mGame->mServer->mMessage.WriteByte(1);
+	if (client->mClientID > 0)
+	{	
+		mGame->mServer->mMessage.WriteByte(client->mClientID); //client id for browsers 
 	}
-	else
-	{
-		mGame->mServer->mMessage.WriteByte(0);
-	}
-	mGame->mServer->mMessage.WriteByte(mIndex);
-			
-	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().x);
-	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().y);
-	mGame->mServer->mMessage.WriteFloat(mSceneNode->getPosition().z);
-
-	mGame->mServer->mMessage.WriteFloat(mRotation->x);
-	mGame->mServer->mMessage.WriteFloat(mRotation->z);
-			
-	//mesh
-	mGame->mServer->mMessage.WriteByte(mMeshCode);
-
-	//animation
-	mGame->mServer->mMessage.WriteByte(mAnimated);
-
-	//username
- 	int length = mClient->mStringUsername.length();  // get length of string containing school
-        mGame->mServer->mMessage.WriteByte(length); //send length
-
-        //loop thru length and write it
-        for (int b=0; b < length; b++)
-        {
-                mGame->mServer->mMessage.WriteByte(mClient->mStringUsername.at(b));
-        }
-}
-
-void Shape::writeAddBrowser(Client* client)
-{
-	mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
-
-	mGame->mServer->mMessage.WriteByte(mGame->mServer->mMessageAddShape); // type
-	
-	mGame->mServer->mMessage.WriteByte(client->mClientID); //client id for browsers 
 
 	if (client == mClient)
 	{
