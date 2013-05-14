@@ -328,11 +328,5 @@ void Client::checkForTimeout()
 		logout();
 		LogString("logging out.. you should fire up ai for:%d",mClientID);
         }
-	else
-	{
-		LogString("still good");
-	}
-	
-
 }
 
