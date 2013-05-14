@@ -116,19 +116,16 @@ void Client::processUpdate()
 	if (mGame)
 	{
 	}
-	//LogString("fire ai for client shape:%d",mShape->mIndex);
-/*	
-	if (!mLoggedIn && !mGame)
+	
+	if (!mLoggedIn && mShape)
 	{
 
         	if (mAITimeOutCounter > mAITimeOutThreshold)
 		{
-			LogString("fire ai for client shape:%d",mShape->mIndex);
 			mAITimeOutCounter = 0;
 		}	
         	mAITimeOutCounter++;
 	}
-*/
 }
 
 void Client::remove()
