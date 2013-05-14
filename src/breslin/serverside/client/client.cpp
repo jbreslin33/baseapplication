@@ -113,10 +113,9 @@ void Client::setSocketAddress(struct sockaddr *address)
 void Client::processUpdate()
 {
 	//checkForTimeout();	
-	
+/*	
 	if (!mLoggedIn && mShape)
 	{
-
         	if (mAITimeOutCounter > mAITimeOutThreshold)
 		{
 			srand ( (short)time(NULL) + mShape->mIndex);    
@@ -125,6 +124,7 @@ void Client::processUpdate()
 		}	
         	mAITimeOutCounter++;
 	}
+*/
 }
 
 void Client::remove()

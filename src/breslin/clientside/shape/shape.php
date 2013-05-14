@@ -121,15 +121,17 @@ setPosition: function(position)
 	this.mPosition.y = parseFloat(position.y);
 	this.mPosition.z = parseFloat(position.z);
 
-
 	x = parseFloat(position.x);
 	y = parseFloat(position.y);
 	z = parseFloat(position.z);
 
-	x = x * 2; 
-	z = z * 2; 
 
-
+	this.mPositionRender.x = x; 
+	this.mPositionRender.y = 0; 
+	this.mPositionRender.z = z; 
+	//x = x * 2; 
+	//z = z * 2; 
+/*
 	//you are control object or control ghost
 	if (this.mApplication.mGame.mControlObject == this ||
 		this.mApplication.mGame.mControlObjectGhost == this)
@@ -144,7 +146,7 @@ setPosition: function(position)
 		this.mPositionRender.y = parseFloat(0);
 		this.mPositionRender.z = parseFloat(z) + parseFloat(this.mApplication.mGame.mOffSet.z);
 	}
-
+*/
 	//you are out of visible area 
 	if (parseFloat(this.mPositionRender.x) > parseFloat(760) || parseFloat(this.mPositionRender.z) > parseFloat(360))
 	{
@@ -387,7 +389,7 @@ getMeshString: function(meshCode)
 scale: function()
 {
        	this.mMesh.style.width = '50%';
-       	this.mMesh.style.height = 'auto';
+       	this.mMesh.style.height = '50%';
 },
 
 setupTitle: function()

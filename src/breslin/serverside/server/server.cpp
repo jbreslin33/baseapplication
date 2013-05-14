@@ -116,7 +116,7 @@ void Server::createClients()
         int             row;
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,"select * from users ORDER BY id");
+        res = PQexec(conn,"select * from users ORDER BY id LIMIT 3");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");

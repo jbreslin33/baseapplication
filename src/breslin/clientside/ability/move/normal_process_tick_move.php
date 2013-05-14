@@ -17,12 +17,12 @@ log: function(msg)
 
 enter: function()
 {
-
+	this.log('enter n');
 },
 
 execute: function()
 {
-	//this.mAbilityMove.mShape.mMesh.innerHTML='n:' + this.mAbilityMove.mShape.mIndex;
+	this.mAbilityMove.mShape.mMesh.innerHTML='n:' + this.mAbilityMove.mShape.mIndex;
 
         // if distance exceeds threshold && server velocity is zero
         if(this.mAbilityMove.mDeltaPosition > this.mAbilityMove.mPosInterpLimitHigh && !this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())

@@ -17,12 +17,14 @@ log: function(msg)
 
 enter: function()
 {
-
+	this.log('enter c');
 },
 
 execute: function()
 {
-        //this.mAbilityMove.mShape.mMesh.innerHTML='C:' + this.mAbilityMove.mShape.mIndex;
+        this.mAbilityMove.mShape.mMesh.innerHTML='C:' + this.mAbilityMove.mShape.mIndex;
+
+	
 
 	//if we are back in sync
         if(this.mAbilityMove.mDeltaPosition <= this.mAbilityMove.mPosInterpLimitHigh || this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())

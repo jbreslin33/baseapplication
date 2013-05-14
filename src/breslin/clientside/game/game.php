@@ -126,12 +126,12 @@ processUpdate: function()
 	{
 		x = parseFloat(this.mControlObject.mPosition.x);
 		z = parseFloat(this.mControlObject.mPosition.z);
-		x = x * 2;
-		z = z * 2;
+		//x = parseFloat(x * 2);
+		//z = parseFloat(z * 2);
 
-		this.mOffSet.x = parseInt(this.mApplication.mScreenCenter.x) - parseFloat(x);
+		this.mOffSet.x = parseFloat(this.mApplication.mScreenCenter.x) - parseFloat(x);
         	this.mOffSet.y = 0;
-        	this.mOffSet.z = parseInt(this.mApplication.mScreenCenter.z) - parseFloat(z);
+        	this.mOffSet.z = parseFloat(this.mApplication.mScreenCenter.z) - parseFloat(z);
 	}
 
 	this.mStateMachine.update();
@@ -174,7 +174,7 @@ addShape: function(byteBuffer)
 		shape.mGhost.setVisible(false);
 	}
 */
-	shape.mGhost.setVisible(false);
+	shape.mGhost.setVisible(true);
 
 },
 
