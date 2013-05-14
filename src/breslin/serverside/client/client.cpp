@@ -116,7 +116,7 @@ void Client::processUpdate()
 	if (mGame)
 	{
 	}
-	LogString("fire ai for client shape:%d",mShape->mIndex);
+	//LogString("fire ai for client shape:%d",mShape->mIndex);
 /*	
 	if (!mLoggedIn && !mGame)
 	{
@@ -328,5 +328,11 @@ void Client::checkForTimeout()
 		logout();
 		LogString("logging out.. you should fire up ai for:%d",mClientID);
         }
+	else
+	{
+		LogString("still good");
+	}
+	
+
 }
 

@@ -80,6 +80,7 @@ void Server::processUpdate(int msec)
 	//update clients
   	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
+		LogString("mIndex:%d",mClientVector.at(i)->mShape->mIndex);
 		mClientVector.at(i)->processUpdate();
 	}
 
