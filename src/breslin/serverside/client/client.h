@@ -66,7 +66,7 @@ public:
 
 	//ai
 	int mAITimeOutCounter;
-	int aAITimeOutThreshold;
+	int mAITimeOutThreshold;
 
 	//Message
         Message mMessage;

@@ -83,8 +83,8 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
 
-	aiTimeOutCounter = 0;
-	aiTimeOutThreshold = 150;
+	mAITimeOutCounter = 0;
+	mAITimeOutThreshold = 150;
 }
 
 Client::~Client()
@@ -116,17 +116,18 @@ void Client::processUpdate()
 	if (mGame)
 	{
 	}
-	
+/*	
 	if (!mLoggedIn)
 	{
 
-        	if (mAITimeOutCounter > aiTimeOutThreshold)
+        	if (mAITimeOutCounter > mAITimeOutThreshold)
 		{
+			LogString("fire ai for client shape:%s",mShape->mIndex);
 			mAITimeOutCounter = 0;
 		}	
         	mAITimeOutCounter++;
 	}
-
+*/
 }
 
 void Client::remove()
