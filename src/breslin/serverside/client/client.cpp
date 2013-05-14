@@ -112,10 +112,7 @@ void Client::setSocketAddress(struct sockaddr *address)
 
 void Client::processUpdate()
 {
-	checkForTimeout();	
-	if (mGame)
-	{
-	}
+	//checkForTimeout();	
 	
 	if (!mLoggedIn && mShape)
 	{
