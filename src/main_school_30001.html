@@ -1,0 +1,244 @@
+<?php
+
+?>
+
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<html>
+<head>
+<title>ABC AND YOU</title>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://127.0.0.1/mootools/mootools-core-1.4.5-full-compat.js"></script>
+<script src="http://127.0.0.1/breslin/clientside/application/application_breslin.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/application/application_partido.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/network/network.php"></script>
+<script src="http://127.0.0.1/breslin/breslin/statemachine/state.php"></script>
+<script src="http://127.0.0.1/breslin/statemachine/state_machine.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/application/states/application_global.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/application/states/application_initialize.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/application/states/application_login.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/application/states/application_main.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/application/states/application_main_partido.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/application/states/application_play.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/bytebuffer/byte_buffer.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/game/game.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/game/game_partido.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/game/states/game_global.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/game/states/game_initialize.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/game/states/game_pause.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/game/states/game_play.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/game/states/game_play_partido.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/game/states/game_play_partido_battle.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/shape/shape.php"></script>
+<script src="http://127.0.0.1/breslin/math/vector_3d.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/command/command.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/div/div.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/ability/ability.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/ability/move/ability_move.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/ability/move/ability_move_state.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/ability/move/global_process_tick_move.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/ability/move/catchup_process_tick_move.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/ability/move/normal_process_tick_move.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/ability/move/normal_interpolate_tick_move.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/ability/move/ability_move_state_machine.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/animation/animation.php"></script>
+<script src="http://127.0.0.1/breslin/clientside/animation/animation_advanced.php"></script>
+
+</head>
+
+<body bgcolor="grey">
+
+<script>
+
+var mApplication;
+var mSize = 0;
+var mMiddleOfViewPort = new Vector3D();;
+
+window.addEvent('domready', function()
+{
+       	mSize = window.getSize();
+
+        //let's move control object to middle of screen
+        mMiddleOfViewPort.x =  mSize.x / 2;
+        mMiddleOfViewPort.y =  0;
+        mMiddleOfViewPort.z =  mSize.y / 2;
+
+        mApplication = new ApplicationPartido('127.0.0.1','10001');
+	mApplication.createStates();
+	mApplication.setStates();
+       	
+        //input
+        document.addEvent("keydown", mApplication.keyDown);
+        document.addEvent("keyup", mApplication.keyUp);
+
+        //main loop
+	mIntervalCount = 0;
+        mInterval=setInterval("mApplication.processUpdate()",32)
+        
+	mApplication.mNetwork.mSocket.on('news', function (data)
+        {
+		mApplication.mTimeSinceLastServerTick = 0;
+
+                s = data.split(',');
+
+                byteBuffer = new ByteBuffer(s);
+
+                type = byteBuffer.readByte();
+		//mApplication.log('type:' + type);
+
+		//mMessageConnected
+  		if (type == -90)
+                {
+                        mApplication.mConnected = true;
+                }
+
+		//mMessageAskQuestion
+		if (type == -76)
+		{
+			if (mApplication.mGame)
+                        {
+                                mApplication.mGame.askQuestion(byteBuffer);
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+		}
+
+		//mMessageBattleStart
+		if (type == -75)
+		{
+			if (mApplication.mGame)
+                        {
+                                mApplication.mGame.battleStart(byteBuffer);
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+			
+		}
+
+		//mMessageBattleEnd
+		if (type == -74)
+		{
+			if (mApplication.mGame)
+                        {
+                                mApplication.mGame.battleEnd(byteBuffer);
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+			
+		}
+
+		if (type == -109)
+		{
+/*
+                	length = byteBuffer.readByte();
+			mApplication.log('length:' + length);			
+			var string = "";
+			for (i = 0; i < length; i++)
+			{
+				string = string + byteBuffer.readByte();
+			}
+			
+
+			var option=document.createElement("option");
+			option.text=string;
+			try
+  			{
+  				// for IE earlier than version 8
+  				mApplication.mSelectMenuSchool.add(option,x.options[null]);
+  			}
+			catch (e)
+  			{
+  				mApplication.mSelectMenuSchool.add(option,null);
+  			}
+*/
+		}
+	
+                if (type == -103)
+                {
+			if (mApplication.mGame)
+			{
+				
+				mApplication.mGame.addShape(byteBuffer);
+			}
+			else
+			{
+				mApplication.log('no game yet on client!');
+			}
+                }
+	
+                if (type == -104)
+		{
+			if (mApplication.mGame)
+			{
+				mApplication.mGame.removeShape(byteBuffer);
+			}
+			else
+			{
+				mApplication.log('no game so cant process -104');
+			}
+		}
+
+		if (type == mApplication.mMessageLoggedIn)
+                {
+                        mApplication.mLoggedIn = true;
+                }
+
+                if (type == mApplication.mMessageLoggedOut)
+                {
+                        mApplication.mLoggedIn = false;
+                }
+
+                if (type == mApplication.mMessageLeaveGame)
+                {
+                        mApplication.mLeaveGame = true;
+                }
+
+                if (type == 1)
+                {
+			if (mApplication.mGame)
+			{
+				mIntervalCount++;
+		
+				//check if we stopped game loop	
+				if (mIntervalCount > 25)
+				{
+					//game loop stopped so let's clear interval and start a new one.	
+					mApplication.log('gameloop stopped');
+					//clear it
+					clearInterval(mInterval);
+
+					//set it again
+        				mInterval=setInterval("mApplication.processUpdate()",32)
+
+					mIntervalCount = 0;
+
+				}
+                        	mApplication.mGame.readServerTick(byteBuffer);
+			}
+                }
+        });
+}
+);
+
+window.onresize = function(event)
+{
+	mSize = window.getSize();	
+
+        //let's move control object to middle of screen
+        mMiddleOfViewPort.x =  mSize.x / 2;
+        mMiddleOfViewPort.y =  0;
+        mMiddleOfViewPort.z =  mSize.y / 2;
+    	//mApplication.mNetwork.mSocket.emit('send_disconnect', '');
+}
+
+</script>
+
+
+</body>
+</html>
