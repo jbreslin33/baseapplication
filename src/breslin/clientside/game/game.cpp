@@ -226,7 +226,12 @@ void Game::createScene()
         mFloor = mApplication->mSceneMgr->createEntity("Floor", "floor");
         mFloor->setMaterialName("Examples/Rockwall");
         mFloor->setCastShadows(false);
-        mApplication->mSceneMgr->getRootSceneNode()->attachObject(mFloor);
+        //mApplication->mSceneMgr->getRootSceneNode()->attachObject(mFloor);
+
+	mFloorNode = mApplication->mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	mFloorNode->attachObject(mFloor);
+
+	mFloorNode->setPosition(50,0,25);
 }
 
 /*********************************

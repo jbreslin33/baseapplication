@@ -181,7 +181,7 @@ Vector3D* Game::getOpenPoint()
 		bool occupied = false; 
 		vector3D->x = x;
 		vector3D->y = 0;
-		vector3D->z = 0;
+		vector3D->z = 50;
 
                 if (mShapeVector.size() < 1)
 		{
