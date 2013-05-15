@@ -220,7 +220,7 @@ void Game::createScene()
 // create a floor mesh resource
 
         MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-               Plane(Vector3::UNIT_Y, -10), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
+               Plane(Vector3::UNIT_Y, -10), 100, 50, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
                 // create a floor entity, give it a material, and place it at the origin
         mFloor = mApplication->mSceneMgr->createEntity("Floor", "floor");

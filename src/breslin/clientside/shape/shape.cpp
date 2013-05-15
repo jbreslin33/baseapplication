@@ -39,7 +39,7 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	mCommandToRunOnShape  = new Command();
 	//speed
 	mSpeed = 0.0f;
-	mSpeedMax  = 1.66f * 5.5;
+	mSpeedMax  = 1.66f;
 
 	mVelocity = new Vector3D();
 
@@ -122,6 +122,9 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 	mSpawnPosition->x =   byteBuffer->ReadFloat();
 	mSpawnPosition->y =   byteBuffer->ReadFloat();
 	mSpawnPosition->z =   byteBuffer->ReadFloat();
+	
+	LogString("spawnx:%d",mSpawnPosition->x);
+	LogString("spawnz:%d",mSpawnPosition->z);
 
 	mSpawnRotation->x = byteBuffer->ReadFloat();
 	mSpawnRotation->z = byteBuffer->ReadFloat();
@@ -477,7 +480,7 @@ std::string Shape::getMeshString(int meshCode)
 	}
 	if (meshCode == 1)
 	{
-		mScale = .25f * 9.5;
+		mScale = .25f;
 		return "sinbad.mesh";
 	}
 }

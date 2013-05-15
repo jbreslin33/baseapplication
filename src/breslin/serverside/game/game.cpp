@@ -45,7 +45,7 @@ void Game::createShapes()
 {
         for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
         {
-                mServer->mClientVector.at(i)->mShape = new Shape(getOpenIndex(),this,mServer->mClientVector.at(i),getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mRoot,true,true,.66f * 30.5,1,false);
+                mServer->mClientVector.at(i)->mShape = new Shape(getOpenIndex(),this,mServer->mClientVector.at(i),getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mRoot,true,true,.66f,1,false);
         }
 }
 
@@ -181,7 +181,7 @@ Vector3D* Game::getOpenPoint()
 		bool occupied = false; 
 		vector3D->x = x;
 		vector3D->y = 0;
-		vector3D->z = 100;
+		vector3D->z = 0;
 
                 if (mShapeVector.size() < 1)
 		{
