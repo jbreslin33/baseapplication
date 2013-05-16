@@ -33,9 +33,11 @@ initialize: function (shapeDynamic)
    
 	/***************************************** variables **/
 	//thresholds
-    	this.mPosInterpLimitHigh = parseFloat(.066 * 30.5); //how far away from server till we try to catch up
+    	this.mPosInterpLimitHigh = parseFloat(.066); //how far away from server till we try to catch up
     	this.mPosInterpFactor    = parseFloat(4.0);
         this.mMaximunVelocity    = parseFloat(.003083); //do not let velocity go above this in any direction.
+
+
 
         //deltas
         this.mDeltaX        = 0.0;

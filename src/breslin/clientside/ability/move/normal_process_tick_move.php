@@ -17,7 +17,7 @@ log: function(msg)
 
 enter: function()
 {
-	this.log('enter n');
+//	this.log('enter n');
 },
 
 execute: function()
