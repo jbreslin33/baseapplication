@@ -156,6 +156,8 @@ void Client::sendConnected()
 //which means when you login from a new address we will send a notification to old address as a courtesy....
 void Client::login()
 {
+	LogString("sending login to clientID:%d",mClientID);
+
 	//set last messageTime
 	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 
@@ -172,6 +174,7 @@ void Client::login()
 
 void Client::logout()
 {
+	LogString("sending logout to clientID:%d",mClientID);
 	mLoggedIn = false;
 
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));

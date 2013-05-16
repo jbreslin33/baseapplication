@@ -116,7 +116,7 @@ void Server::createClients()
         int             row;
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,"select * from users ORDER BY id LIMIT 3");
+        res = PQexec(conn,"select * from users ORDER BY id");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
@@ -339,6 +339,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageLoginBrowser)
 	{
                 int clientID = mes->ReadByte();
+		LogString("login attempt for clientID:%d",clientID);
 		for (int i = 0; i < mClientVector.size(); i++)
 		{
 			if (mClientVector.at(i)->mClientID == clientID)

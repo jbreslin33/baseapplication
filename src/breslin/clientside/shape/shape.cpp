@@ -123,9 +123,6 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 	mSpawnPosition->y =   byteBuffer->ReadFloat();
 	mSpawnPosition->z =   byteBuffer->ReadFloat();
 	
-	LogString("spawnx:%d",mSpawnPosition->x);
-	LogString("spawnz:%d",mSpawnPosition->z);
-
 	mSpawnRotation->x = byteBuffer->ReadFloat();
 	mSpawnRotation->z = byteBuffer->ReadFloat();
 	
