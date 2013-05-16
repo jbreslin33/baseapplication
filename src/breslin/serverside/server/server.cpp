@@ -370,6 +370,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         {
                                 //set client to pointer
                                 client = mClientVector.at(i);
+				LogString("mMessageLogout:logout");
 				client->logout();
 			}
 		}
@@ -384,6 +385,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         {
                                 //set client to pointer
                                 client = mClientVector.at(i);
+				LogString("mMessageLogoutBrowser:logout");
 				client->logout();
 			}
 		}

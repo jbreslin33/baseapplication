@@ -186,7 +186,7 @@ void Client::logout()
 	mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
 
-void Client::checkLogin(Message* mes)
+bool Client::checkLogin(Message* mes)
 {
 	//clear username and password strings
         mStringUsername.clear();
@@ -230,13 +230,15 @@ void Client::checkLogin(Message* mes)
 	Client* client;
 	//check against db
         if (getPasswordMatch(mStringUsername,mStringPassword))
-     	{ 
+     	{
+		Client* loginClient = NULL; 
 		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 		{
 			if (mServer->mClientVector.at(i)->db_id == db_id)
 			{
 				if (mServer->mClientVector.at(i) == this)
 				{
+					loginClient = mServer->mClientVector.at(i);
 					login();
 				}
 			}	
@@ -246,6 +248,12 @@ void Client::checkLogin(Message* mes)
 			if (mServer->mClientVector.at(i)->db_id == db_id)
 			{
 				//logout old 
+				if (loginClient == mServer->mClientVector.at(i))
+				{
+					LogString("returning");
+					return true;
+				}
+				LogString("should not get to this logout!!!");
 				mServer->mClientVector.at(i)->logout();
 
 				//swap
@@ -258,6 +266,7 @@ void Client::checkLogin(Message* mes)
         }
         else
         {
+		LogString("else logout");	
         	logout();
         }
 }
@@ -324,6 +333,7 @@ void Client::checkForTimeout()
         // Check if the client has been silent for 30 seconds if so log him out and start ai up...
         if(currentTime - mLastMessageTime > 30000)
         {
+		LogString("timeout logout");
 		logout();
 		LogString("logging out.. you should fire up ai for:%d",mClientID);
         }
