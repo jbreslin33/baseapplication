@@ -17,7 +17,8 @@ log: function(msg)
 
 enter: function()
 {
-
+ 	//this.mAbilityMove.mShape.mObjectTitle.innerHTML='' + ername + ':' + this.mIndex;
+ 	this.mAbilityMove.mShape.mObjectTitle.innerHTML='N';  
 },
 
 execute: function()

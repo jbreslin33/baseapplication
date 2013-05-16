@@ -18,19 +18,25 @@ log: function(msg)
 enter: function()
 {
 //	this.log('enter c');
+//	this.mAbilityMove.mShape.mObjectTitle.innerHTML='C';  
 },
 
 execute: function()
 {
-        this.mAbilityMove.mShape.mMesh.innerHTML='C:' + this.mAbilityMove.mShape.mIndex;
+//let's check if it's mInterpLimitHigh is greater than  1 than snap to it.
+	if (this.mAbilityMove.mDeltaPosition > 1)
+	{
+		this.mAbilityMove.mShape.setPosition(this.mAbilityMove.mShape.mServerCommandCurrent.mPosition);
+		return;
+	}		
 
-	
-
+        //this.mAbilityMove.mShape.mMesh.innerHTML='C:' + this.mAbilityMove.mShape.mIndex;
 	//if we are back in sync
         if(this.mAbilityMove.mDeltaPosition <= this.mAbilityMove.mPosInterpLimitHigh || this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())
         {
                 this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mNormalProcessTickMove);
         }
+	this.mAbilityMove.mShape.mObjectTitle.innerHTML='C_D:' + this.mAbilityMove.mDeltaPosition;  
         //this is what we will set mCommandToRunOnShape->mVelocity to
         newVelocity = new Vector3D(); //vector to future server pos
 

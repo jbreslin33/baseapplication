@@ -241,7 +241,7 @@ spawnShape: function(position)
 
 	//objectTitle
         this.mObjectTitle = document.createElement("p");
-	this.mObjectTitle.innerHTML='' + this.mStringUsername + ':' + this.mIndex;
+	//this.mObjectTitle.innerHTML='' + this.mStringUsername + ':' + this.mIndex;
         this.mDiv.mDiv.appendChild(this.mObjectTitle);
 
 
