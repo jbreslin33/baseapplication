@@ -40,7 +40,7 @@ initialize: function(application, byteBuffer, isGhost)
 
         //speed
         this.mSpeed = 0.0;
-        this.mSpeedMax  = 1.66 * 5.5;
+        this.mSpeedMax  = 1.66;
 
         this.mVelocity = new Vector3D();
 
