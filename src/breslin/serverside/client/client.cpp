@@ -188,6 +188,7 @@ void Client::logout()
 
 bool Client::checkLogin(Message* mes)
 {
+	LogString("Client::checkLogin");
 	//clear username and password strings
         mStringUsername.clear();
         mStringPassword.clear();

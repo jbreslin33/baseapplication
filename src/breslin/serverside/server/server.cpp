@@ -322,6 +322,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				//set client to pointer
                                 client = mClientVector.at(i);
 				client->checkLogin(mes);
+				return;
 			}
                 }
 
@@ -332,6 +333,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				//set client to pointer
                                 client = mClientVectorTemp.at(i);
 				client->checkLogin(mes);
+				return;
 			}
 		}
 	}
@@ -347,6 +349,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 //set client to pointer
                                 client = mClientVector.at(i);
 				client->checkLogin(mes);
+				return;
 			}
 		}	
 		for (int i = 0; i < mClientVectorTemp.size(); i++)
@@ -356,6 +359,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 //set client to pointer
                                 client = mClientVectorTemp.at(i);
 				client->checkLogin(mes);
+				return;
 			}
 		}
 	}
