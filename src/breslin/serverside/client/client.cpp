@@ -235,7 +235,7 @@ bool Client::checkLogin(Message* mes)
 	//let's find what permanent client you are trying to login to	
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
-
+		//do you match the username/password?
 		if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
 		{
 			LogString("match!!!:%d",mClientID);			
@@ -244,8 +244,9 @@ bool Client::checkLogin(Message* mes)
 			{
 				login();	
 			}
-			else
+			else if(
 			{
+				//logout client who is logged in under this uname
 				mServer->mClientVector.at(i)->logout();
 
                                 //swap
