@@ -238,7 +238,23 @@ bool Client::checkLogin(Message* mes)
 
 		if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
 		{
-			LogString("match!!!:%d",mClientID);							
+			LogString("match!!!:%d",mClientID);			
+			//we could have the same client log back in with same up	
+			if (this == mServer->mClientVector.at(i))
+			{
+				login();	
+			}
+			else
+			{
+				//mServer->mClientVector.at(i)->logout();
+
+                                //swap
+                                mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
+                                mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
+                                mServer->mClientVector.at(i)->mClientID = mClientID;
+                                mServer->mClientVector.at(i)->login();
+			}
+			
 		}
 		else
 		{

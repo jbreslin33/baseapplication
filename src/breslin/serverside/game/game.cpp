@@ -185,7 +185,6 @@ Vector3D* Game::getOpenPoint()
 
                 if (mShapeVector.size() < 1)
 		{
-			LogString("return default"); 
 			return vector3D;
 		}
 
