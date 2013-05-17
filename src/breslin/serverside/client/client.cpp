@@ -186,9 +186,8 @@ void Client::logout()
 	mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
 
-bool Client::checkLogin(Message* mes)
+void Client::readLoginMessage(Message* mes)
 {
-	LogString("Client::checkLogin");
 	//clear username and password strings
         mStringUsername.clear();
         mStringPassword.clear();
@@ -199,18 +198,18 @@ bool Client::checkLogin(Message* mes)
         //loop thru and set mStringUsername from client
         for (int i = 0; i < sizeOfUsername; i++)
         {
-		if (mClientID > 0)
-		{
-                	char c = mes->ReadByte();
+                if (mClientID > 0)
+                {
+                        char c = mes->ReadByte();
                         mStringUsername.append(1,c);
-		}
-		else
-		{
-               		int numeric = mes->ReadByte();
+                }
+                else
+                {
+                        int numeric = mes->ReadByte();
                         char ascii = (char)numeric;
-                       	mStringUsername.append(1,ascii);
-		}
-	}
+                        mStringUsername.append(1,ascii);
+                }
+        }
 
         //loop thru and set mStringPassword from client
         for (int i = 0; i < sizeOfPassword; i++)
@@ -227,7 +226,12 @@ bool Client::checkLogin(Message* mes)
                         mStringPassword.append(1,ascii);
                 }
         }
-        
+}
+
+bool Client::checkLogin(Message* mes)
+{
+	readLoginMessage(mes);
+
 	Client* client;
 	//check against db
         if (getPasswordMatch(mStringUsername,mStringPassword))

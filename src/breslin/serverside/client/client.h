@@ -107,6 +107,8 @@ public:
 	void logout();
 	bool checkLogin(Message* mes);
         bool getPasswordMatch(std::string username,std::string password);
+	void readLoginMessage(Message* mes);
+
 
 	//clients address to send back messages to
 	struct sockaddr *GetSocketAddress(void) { return &mSocketAddress; }
@@ -125,6 +127,8 @@ public:
         std::string db_first_name;
         std::string db_last_name;
         int         db_school_id;
+
+
 
 };
 #endif

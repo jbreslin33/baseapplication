@@ -352,6 +352,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				return;
 			}
 		}	
+
 		for (int i = 0; i < mClientVectorTemp.size(); i++)
 		{
 			if (mClientVectorTemp.at(i)->mClientID == clientID)
