@@ -246,7 +246,7 @@ bool Client::checkLogin(Message* mes)
 			}
 			else
 			{
-				//mServer->mClientVector.at(i)->logout();
+				mServer->mClientVector.at(i)->logout();
 
                                 //swap
                                 mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
