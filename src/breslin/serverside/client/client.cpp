@@ -235,17 +235,13 @@ bool Client::checkLogin(Message* mes)
 	//let's find what permanent client you are trying to login to	
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
-		LogString("sizes:");
-		LogString("a:%d",mStringUsername.size());
-		LogString("b:%d",mServer->mClientVector.at(i)->db_username.size());
 
-		if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0)
+		if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
 		{
 			LogString("match!!!:%d",mClientID);							
 		}
 		else
 		{
-			LogString("no match!!!:%d",mClientID);							
 		}
 	}
 }
