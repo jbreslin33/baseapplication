@@ -232,8 +232,29 @@ bool Client::checkLogin(Message* mes)
 {
 	readLoginMessage(mes);
 
-	Client* client;
-	//check against db
+	//let's find what permanent client you are trying to login to	
+	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+	{
+		LogString("sizes:");
+		LogString("a:%d",mStringUsername.size());
+		LogString("b:%d",mServer->mClientVector.at(i)->db_username.size());
+
+		if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0)
+		{
+			LogString("match!!!:%d",mClientID);							
+		}
+		else
+		{
+			LogString("no match!!!:%d",mClientID);							
+		}
+	}
+}
+
+/*
+bool Client::checkLogin(Message* mes)
+{
+	readLoginMessage(mes);
+
         if (getPasswordMatch(mStringUsername,mStringPassword))
      	{
 		Client* loginClient = NULL; 
@@ -275,7 +296,7 @@ bool Client::checkLogin(Message* mes)
         	logout();
         }
 }
-
+*/
 bool Client::getPasswordMatch(std::string username,std::string password)
 {
         PGconn          *conn;
