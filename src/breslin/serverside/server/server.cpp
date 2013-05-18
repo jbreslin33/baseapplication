@@ -406,6 +406,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
 				client = mClientVector.at(i);
 				client->mGame->leave(client);
+				//are we properly deletting on c++ and php client
 			}
 		}
 	}
