@@ -276,8 +276,6 @@ void Game::sendShapes(Client* client)
 //the client that is leaving????
 void Game::leave(Client* client)
 {
-        //you gotta delete the shape here...and tell everyone about it. i would tell them in shape class
-	
         if (client->mShape)
         {
                 mServer->mMessage.Init(mServer->mMessage.outgoingData, sizeof(mServer->mMessage.outgoingData));

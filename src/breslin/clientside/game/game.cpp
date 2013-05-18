@@ -105,6 +105,9 @@ void Game::remove()
 			{
         			delete shape->mGhost->mObjectTitle;
         			delete shape->mObjectTitle;
+        			delete shape->mGhost;
+        			delete shape;
+				LogString("delete shape:%d",i);
 			}
                 }
         }
