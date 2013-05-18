@@ -327,6 +327,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         {
 				//set client to pointer
                                 client = mClientVector.at(i);
+ 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+                                {
+                                        LogString("disconnected client trying to login!!!!!!!!!!!!!!!!!");
+                                        continue;
+                                }
+
 				client->checkLogin(mes);
 				return;
 			}
@@ -338,6 +344,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         {
 				//set client to pointer
                                 client = mClientVectorTemp.at(i);
+ 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+                                {
+                                        LogString("disconnected client trying to login!!!!!!!!!!!!!!!!!");
+                                        continue;
+                                }
+
 				client->checkLogin(mes);
 				return;
 			}
@@ -354,6 +366,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
                                 //set client to pointer
                                 client = mClientVector.at(i);
+ 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+                                {
+                                        LogString("disconnected client trying to login!!!!!!!!!!!!!!!!!");
+                                        continue;
+                                }
+
 				client->checkLogin(mes);
 				return;
 			}
@@ -365,6 +383,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
                                 //set client to pointer
                                 client = mClientVectorTemp.at(i);
+ 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+                                {
+                                        LogString("disconnected client trying to login!!!!!!!!!!!!!!!!!");
+                                        continue;
+                                }
 				client->checkLogin(mes);
 				return;
 			}
@@ -381,6 +404,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         {
                                 //set client to pointer
                                 client = mClientVector.at(i);
+ 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+                                {
+                                        LogString("disconnected client trying to logout!!!!!!!!!!!!!!!!!");
+                                        continue;
+                                }
 				LogString("mMessageLogout:logout");
 				client->logout();
 			}
@@ -396,6 +424,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         {
                                 //set client to pointer
                                 client = mClientVector.at(i);
+ 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+                                {
+                                        LogString("disconnected client trying to logout!!!!!!!!!!!!!!!!!");
+                                        continue;
+                                }
 				LogString("mMessageLogoutBrowser:logout");
 				client->logout();
 			}
@@ -411,6 +444,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				client = mClientVector.at(i);
+ 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+                                {
+                                        LogString("disconnected client trying to quit game!!!!!!!!!!!!!!!!!");
+                                        continue;
+                                }
 				client->mGame->leave(client);
 				//are we properly deletting on c++ and php client
 			}
@@ -425,6 +463,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
 				client = mClientVector.at(i);
+ 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+                                {
+                                        LogString("disconnected client trying to quit game!!!!!!!!!!!!!!!!!");
+                                        continue;
+                                }
 				client->mGame->leave(client);
 			}
 		}
@@ -438,6 +481,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				client = mClientVector.at(i);
+ 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+                                {
+                                        LogString("disconnected client trying to move !!!!!!!!!!!!!!!!!");
+                                        continue;
+                                }
 				client->mLastMessageTime = mNetwork->getCurrentSystemTime();
                                 client->mGame->readDeltaMoveCommand(mes,client);
 				
@@ -459,6 +507,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
 				client = mClientVector.at(i);
+ 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+                                {
+                                        LogString("disconnected client trying to move !!!!!!!!!!!!!!!!!");
+                                        continue;
+                                }
 				client->mLastMessageTime = mNetwork->getCurrentSystemTime();
                                 client->mGame->readDeltaMoveCommand(mes,client);
   				// Wait for one message before setting state to connected
