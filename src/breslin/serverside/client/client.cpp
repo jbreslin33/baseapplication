@@ -252,6 +252,9 @@ bool Client::checkLogin(Message* mes)
 
 				//logout client who is logged in under this uname
 				//mServer->mClientVector.at(i)->logout();
+				//let's disconnect this client because it used to control someone
+				//logout();
+				mConnectionState = DREAMSOCK_DISCONNECTED; 
 
                                 //swap
                                 mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
