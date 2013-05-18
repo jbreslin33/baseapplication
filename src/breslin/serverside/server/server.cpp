@@ -116,7 +116,7 @@ void Server::createClients()
         int             row;
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,"select * from users ORDER BY id");
+        res = PQexec(conn,"select * from users ORDER BY id LIMIT 4");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
@@ -273,6 +273,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
 				//get client
 				client = mClientVector.at(i);
+				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+				{
+					LogString("disconnected client trying to join game!!!!!!!!!!!!!!!!!");
+					continue;
+				}
 			
 				//call clients join game function
 				for (int g = 0; g < mGameVector.size(); g++)
