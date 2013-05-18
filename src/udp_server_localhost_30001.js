@@ -1,3 +1,7 @@
+process.argv.forEach(function (val, index, array) {
+  console.log(index + ': ' + val);
+});
+
 var app = require('express').createServer()
 var io = require('socket.io').listen(app);
 io.set('log level', 1); //reduce logging
