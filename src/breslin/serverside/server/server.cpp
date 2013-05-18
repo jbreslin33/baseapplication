@@ -264,6 +264,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/* can i just send more information here for different games?                      */
 	else if (type == mMessageJoinGame)
 	{
+		//client is joining game as "original" client! according to memory and then as far as php it is joining as the client id! i think!
 		int gameID = mes->ReadByte();
 
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
