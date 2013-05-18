@@ -258,13 +258,14 @@ void Game::sendShapes(Client* client)
         	mMessage.WriteByte(mShapeVector.at(i)->mAnimated);
 
         	//username
-        	int length = mShapeVector.at(i)->mClient->mStringUsername.length();  // get length of string containing school
+        	int length = mShapeVector.at(i)->mClient->db_username.length();  // get length of string containing school
         	mMessage.WriteByte(length); //send length
+		
 
         	//loop thru length and write it
         	for (int b=0; b < length; b++)
         	{
-                	mMessage.WriteByte(mShapeVector.at(i)->mClient->mStringUsername.at(b));
+                	mMessage.WriteByte(mShapeVector.at(i)->mClient->db_username.at(b));
         	}
 
                 //send it

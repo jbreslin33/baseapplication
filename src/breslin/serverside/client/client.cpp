@@ -244,16 +244,21 @@ bool Client::checkLogin(Message* mes)
 			{
 				login();	
 			}
-			else if(
+			else //we have a diff client but a pass match...
 			{
+				//for (unsigned int b = 0; b < mServer->mClientVector.size(); b++)
+				//{
+				//	if (this == mClientVector	
+
 				//logout client who is logged in under this uname
-				mServer->mClientVector.at(i)->logout();
+				//mServer->mClientVector.at(i)->logout();
 
                                 //swap
                                 mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
                                 mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
                                 mServer->mClientVector.at(i)->mClientID = mClientID;
                                 mServer->mClientVector.at(i)->login();
+	//			}
 			}
 			
 		}

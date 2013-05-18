@@ -36,7 +36,7 @@ execute: function()
         {
                 this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mNormalProcessTickMove);
         }
-	this.mAbilityMove.mShape.mObjectTitle.innerHTML='C_D:' + this.mAbilityMove.mDeltaPosition;  
+	//this.mAbilityMove.mShape.mObjectTitle.innerHTML='C_D:' + this.mAbilityMove.mDeltaPosition;  
         //this is what we will set mCommandToRunOnShape->mVelocity to
         newVelocity = new Vector3D(); //vector to future server pos
 

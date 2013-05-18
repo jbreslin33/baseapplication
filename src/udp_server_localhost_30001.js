@@ -271,14 +271,15 @@ server.on("message", function (msg, rinfo)
                 var anim     = msg.readInt8(25);
 
   		var length = msg.readInt8(26);
+		console.log('lengh:' + length);
 
-                string = "" + length;
+                string = "" + length + ",";
 
                 for (i = 0; i < length; i++)
                 {
                         var n = msg.readInt8(parseInt(27 + i));
                         var c = String.fromCharCode(n);
-                        string = string + "," + c;
+                        string = string + c;
                 }
 
         
@@ -286,7 +287,8 @@ server.on("message", function (msg, rinfo)
 		var addShapeString = type;
 
                 addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim + "," + string; 
-
+//-103,0,50,1936,0,35,0,1,1,1,0
+		console.log('addShapeString:' + addShapeString);
 		io.sockets.clients().forEach(function (socket)
 		{
 			if (socket.mClientID == clientID)

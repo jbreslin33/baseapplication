@@ -200,10 +200,14 @@ parseSpawnByteBuffer: function(byteBuffer)
   	
 	//username
         var length = byteBuffer.readByte();
+/*
         for (i = 0; i < length; i++)
         {
+		this.log('B:' + this.mStringUsername);
 		this.mStringUsername = this.mStringUsername + byteBuffer.readByte();	
         }
+*/
+	this.mStringUsername = byteBuffer.readByte();	
 
 
 	//set control object
@@ -241,7 +245,7 @@ spawnShape: function(position)
 
 	//objectTitle
         this.mObjectTitle = document.createElement("p");
-	//this.mObjectTitle.innerHTML='' + this.mStringUsername + ':' + this.mIndex;
+	this.mObjectTitle.innerHTML='' + this.mStringUsername + ':' + this.mIndex;
         this.mDiv.mDiv.appendChild(this.mObjectTitle);
 
 
