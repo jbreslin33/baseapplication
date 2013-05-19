@@ -1,5 +1,8 @@
-mServerIP = '127.0.0.1';
-mServerPort = 30001;
+mServerIP = process.argv[2];
+mServerPort = process.argv[3];
+mListenPort = process.argv[4];
+mMainFile = process.argv[5];
+mServerBind = process.argv[6];
 
 process.argv.forEach(function (val, index, array) {
   console.log(index + ': ' + val);
@@ -27,11 +30,11 @@ mCommandRotationZ    = 16;
 
 
 
-app.listen(10001);
+app.listen(mListenPort);
 
 // routing
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/main_localhost_30001.html');
+  res.sendfile(__dirname + '/' + mMainFile);
 });
 
 
@@ -559,7 +562,7 @@ server.on("listening", function ()
  	console.log("server listening " +  address.address + ":" + address.port); 
 });
 
-server.bind(40001);
+server.bind(mServerBind);
 
 //send initial connection to c++ server
 //send to c++ server
