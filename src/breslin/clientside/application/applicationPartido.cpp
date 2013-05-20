@@ -128,7 +128,7 @@ void  ApplicationPartido::createBattleScreen()
 
 void  ApplicationPartido::showBattleScreen()
 {
-/*
+
         mTrayMgr->moveWidgetToTray(mLabelQuestion,OgreBites::TL_CENTER);
         mTrayMgr->moveWidgetToTray(mLabelAnswer,OgreBites::TL_CENTER);
 
@@ -138,7 +138,7 @@ void  ApplicationPartido::showBattleScreen()
         mTrayMgr->showCursor();
 
         mLabelFocus = mLabelAnswer;
-*/
+
 }
 
 void  ApplicationPartido::hideBattleScreen()

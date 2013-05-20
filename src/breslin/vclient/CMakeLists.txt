@@ -128,6 +128,7 @@ set(HDRS
 	../clientside/application/states/applicationMain.h
 	../clientside/application/states/applicationMainPartido.h
 	../clientside/application/states/applicationPlay.h
+	../clientside/application/states/applicationPlayPartido.h
 	../clientside/application/states/applicationGlobal.h
 	../clientside/application/states/applicationInitialize.h
 	
@@ -196,6 +197,7 @@ set(SRCS
 	../clientside/application/states/applicationMain.cpp
 	../clientside/application/states/applicationMainPartido.cpp
 	../clientside/application/states/applicationPlay.cpp
+	../clientside/application/states/applicationPlayPartido.cpp
 	../clientside/application/states/applicationGlobal.cpp
 	../clientside/application/states/applicationInitialize.cpp
 	
@@ -278,6 +280,7 @@ set(HDRS
 	../clientside/application/states/applicationMain.h
 	../clientside/application/states/applicationMainPartido.h
 	../clientside/application/states/applicationPlay.h
+	../clientside/application/states/applicationPlayPartido.h
 	../clientside/application/states/applicationGlobal.h
 	../clientside/application/states/applicationInitialize.h
 	
@@ -345,6 +348,7 @@ set(SRCS
 	../clientside/application/states/applicationMain.cpp
 	../clientside/application/states/applicationMainPartido.cpp
 	../clientside/application/states/applicationPlay.cpp
+	../clientside/application/states/applicationPlayPartido.cpp
 	../clientside/application/states/applicationGlobal.cpp
 	../clientside/application/states/applicationInitialize.cpp
 

@@ -1,5 +1,5 @@
-#ifndef PLAYSCREEN_H
-#define PLAYSCREEN_H
+#ifndef APPLICATIONPLAYPARTIDO_H
+#define APPLICATIONPLAYPARTIDO_H
 
 /***************************************
 *   		INCLUDES
@@ -26,9 +26,9 @@ ApplicationBreslin* mApplication;
 ApplicationPlay(ApplicationBreslin* application);
 ~ApplicationPlay();
 
-void enter  ();
-void execute();
-void exit   ();
+virtual void enter  ();
+virtual void execute();
+virtual void exit   ();
 
 };
 
