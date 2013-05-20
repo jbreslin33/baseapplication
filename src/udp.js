@@ -1,7 +1,7 @@
-mServerIP = process.argv[2];
+mServerIP   = process.argv[2];
 mServerPort = process.argv[3];
 mListenPort = process.argv[4];
-mMainFile = process.argv[5];
+mMainFile   = process.argv[5];
 mServerBind = process.argv[6];
 
 process.argv.forEach(function (val, index, array) {
@@ -27,8 +27,6 @@ mCommandOriginY      = 2;
 mCommandOriginZ      = 4;
 mCommandRotationX    = 8;
 mCommandRotationZ    = 16;
-
-
 
 app.listen(mListenPort);
 
