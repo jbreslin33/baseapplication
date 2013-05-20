@@ -33,17 +33,11 @@ void GamePlayPartido::enter()
 }
 void GamePlayPartido::execute()
 {
-	GamePlay::execute();
 	if (mGame->mBattleStart)
 	{
 		mGame->mStateMachine->changeState(mGame->mGamePlayPartidoBattle);		
 	}
-
-	//user input
-	mGame->processInput();	
-	
-	//network outgoing
-	mGame->sendByteBuffer();
+	GamePlay::execute();
 }
 
 void GamePlayPartido::exit()

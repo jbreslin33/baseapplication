@@ -75,6 +75,10 @@ OgreBites::Label* mLabelUsername;
 OgreBites::Label* mLabelPassword;
 OgreBites::Label* mLabelFocus;
 
+//battle
+OgreBites::Label* mLabelQuestion;
+OgreBites::Label* mLabelAnswer;
+
 OgreBites::Button* mButtonLogin;
 OgreBites::Button* mButtonLogout;
 OgreBites::Button* mButtonJoinGameA;
@@ -119,6 +123,11 @@ void hideLoginScreen();
 virtual void createMainScreen();
 virtual void showMainScreen();
 virtual void hideMainScreen();
+
+//battle
+void createBattleScreen();
+void showBattleScreen();
+void hideBattleScreen();
 
 //input
 OIS::Keyboard* getKeyboard() { return mKeyboard; }

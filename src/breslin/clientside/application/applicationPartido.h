@@ -15,10 +15,6 @@ public:
 //main
 OgreBites::Button* mButtonJoinGameB;
 
-//battle
-OgreBites::Label* mLabelQuestion; 
-OgreBites::Label* mLabelAnswer; 
-
 //processUpdate
 virtual void processUpdate();
 
@@ -31,10 +27,6 @@ virtual void createMainScreen();
 virtual void showMainScreen();
 virtual void hideMainScreen();
 
-//battle
-void createBattleScreen();
-void showBattleScreen();
-void hideBattleScreen();
 
 };
 

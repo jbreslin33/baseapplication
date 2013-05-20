@@ -110,14 +110,14 @@ virtual void setStates();
 void remove();
 
 //update
-void processUpdate();
+virtual void processUpdate();
 
 //network
-void sendByteBuffer();
+virtual void sendByteBuffer();
 virtual void checkByteBuffer(ByteBuffer* byteBuffer);
 
 //input
-void processInput();
+virtual void processInput();
 
 
 
