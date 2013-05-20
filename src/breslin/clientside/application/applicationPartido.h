@@ -27,6 +27,15 @@ virtual void createMainScreen();
 virtual void showMainScreen();
 virtual void hideMainScreen();
 
+//battle
+void createBattleScreen();
+void showBattleScreen();
+void hideBattleScreen();
+
+//battle
+OgreBites::Label* mLabelQuestion;
+OgreBites::Label* mLabelAnswer;
+
 
 };
 
