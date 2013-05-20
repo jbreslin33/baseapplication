@@ -13,7 +13,7 @@
 #include "states/applicationLogin.h"
 #include "states/applicationMainPartido.h"
 #include "states/applicationInitialize.h"
-#include "states/applicationPlay.h"
+#include "states/applicationPlayPartido.h"
 
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
@@ -31,7 +31,7 @@ void ApplicationPartido::createStates()
         mApplicationInitialize = new ApplicationInitialize(this);
         mApplicationLogin      = new ApplicationLogin  (this);
         mApplicationMain       = new ApplicationMainPartido  (this);
-        mApplicationPlay       = new ApplicationPlay(this);
+        mApplicationPlay       = new ApplicationPlayPartido(this);
 }
 
 void ApplicationPartido::setStates()
