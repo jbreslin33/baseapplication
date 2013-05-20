@@ -143,7 +143,11 @@ void  ApplicationPartido::showBattleScreen()
 
 void  ApplicationPartido::hideBattleScreen()
 {
-        mLabelQuestion->hide();
+	if (mFake)
+	{
+		return;	
+	}
+       	mLabelQuestion->hide();
         mLabelAnswer->hide();
 
         mTrayMgr->removeWidgetFromTray(mLabelQuestion);

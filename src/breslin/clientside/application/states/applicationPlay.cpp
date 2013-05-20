@@ -45,7 +45,6 @@ void ApplicationPlay::execute()
                 this->mApplication->mStateMachine->changeState(this->mApplication->mApplicationLogin);
         }
 
-
 	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_ESCAPE) && mApplication->mSentLeaveGame == false)
 	{
 		//send quit game
