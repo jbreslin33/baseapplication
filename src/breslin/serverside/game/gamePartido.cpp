@@ -33,14 +33,13 @@ void GamePartido::processUpdate()
         {
                 mBattleVector.at(i)->processUpdate();
         }
-
 }
 
 void GamePartido::collision(Shape* shape1, Shape* shape2)
 {
 	//do regular collision of backing off shapes
 	Game::collision(shape1,shape2);	
-/*
+
 	bool battleCollision = true;
 
 	//now let's check if these guys are already in a battle
@@ -66,6 +65,5 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 		Battle* battle = new Battle(this,shapeVector);
 		mBattleVector.push_back(battle);
 	}
-*/
 }
 

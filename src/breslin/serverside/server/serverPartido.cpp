@@ -41,7 +41,6 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
         mes->BeginReading();
 
         int type = mes->ReadByte();
-	LogString("type:%d",type);
 
         /***CONNECT********/
         //this should just create a client then client should do what need be done.

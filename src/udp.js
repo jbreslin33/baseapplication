@@ -294,7 +294,6 @@ server.on("message", function (msg, rinfo)
 
                 addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim + "," + string; 
 //-103,0,50,1936,0,35,0,1,1,1,0
-		console.log('addShapeString:' + addShapeString);
 		io.sockets.clients().forEach(function (socket)
 		{
 			if (socket.mClientID == clientID)
