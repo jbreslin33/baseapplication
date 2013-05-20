@@ -1,5 +1,5 @@
-#ifndef APPLICATIONPLAYPARTIDO_H
-#define APPLICATIONPLAYPARTIDO_H
+#ifndef APPLICATIONPLAY_H
+#define APPLICATIONPLAY_H
 
 /***************************************
 *   		INCLUDES
