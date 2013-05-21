@@ -155,7 +155,8 @@ virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);
 void buttonHit  (OgreBites::Button *button);
 void labelHit   (OgreBites::Label* label );
 bool mouseMoved (const OIS::MouseEvent &arg );
-bool keyPressed ( const OIS::KeyEvent &arg );
+protected:
+virtual bool keyPressed ( const OIS::KeyEvent &arg );
 
 };
 

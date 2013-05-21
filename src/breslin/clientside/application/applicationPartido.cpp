@@ -154,4 +154,7 @@ void  ApplicationPartido::hideBattleScreen()
         mTrayMgr->removeWidgetFromTray(mLabelAnswer);
 }
 
+bool ApplicationPartido::keyPressed( const OIS::KeyEvent &arg )
+{
+}
 
