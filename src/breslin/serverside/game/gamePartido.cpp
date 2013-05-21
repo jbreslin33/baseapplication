@@ -47,7 +47,7 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 	{
 		for (unsigned int s = 0; s < mBattleVector.at(i)->mShapeVector.size(); s++)
 		{
-			if (shape1 == mBattleVector.at(i)->mShapeVector.at(s))
+			if (shape1 == mBattleVector.at(i)->mShapeVector.at(s) || shape2 == mBattleVector.at(i)->mShapeVector.at(s))
 			{
 				battleCollision = false;	
 			} 
