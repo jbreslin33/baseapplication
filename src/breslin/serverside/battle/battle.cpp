@@ -51,7 +51,6 @@ void Battle::processUpdate()
 	{
 		mBattlerVector.at(i)->processUpdate();	
 	}
-	
 }
 
 /*

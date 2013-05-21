@@ -50,14 +50,14 @@ void Battler::processUpdate()
 {
 	//this is where you should send questions....
 	//select * from questions_attempts limit 10;
-/*
+
 	if (mWaitingForAnswer == false)
 	{
-		//sendQuestion();
-		LogString("send question!!!");
+		sendQuestion();
+		LogString("sendQuestion!!!");
 		mWaitingForAnswer = true;
 	}
-*/
+
 }
 
 //this should also send first question to get you started
@@ -84,7 +84,9 @@ void Battler::sendBattleEnd()
 {
 
 }
-
+/*
+ just send question...
+*/
 void Battler::sendQuestion()
 {
 	if (!mShape->mClient)

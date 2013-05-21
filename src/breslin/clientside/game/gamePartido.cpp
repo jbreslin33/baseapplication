@@ -94,6 +94,7 @@ void GamePartido::battleEnd(ByteBuffer* byteBuffer)
 
 void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 {
+	LogString("askQuestion...");
 	std::string question;
         int length = byteBuffer->ReadByte();
         for (int i = 0; i < length; i++)
