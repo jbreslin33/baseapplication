@@ -107,8 +107,7 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 	{	
 		if (mShapeVector->at(i)->mLocal == 1)
 		{
-			mShapeVector->at(i)->clearTitle();
-			mShapeVector->at(i)->appendToTitle(question);
+			mApplication->mLabelQuestion->setCaption(question);
 		}
 	}
 }
