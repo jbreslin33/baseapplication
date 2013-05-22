@@ -70,6 +70,7 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
        		else if (type == mMessageAnswerQuestion)
                 {
 			LogString("mMessageAnswerQuestion received");
+			//we have to locate the client and then game then battle etc that this is a refering to.
                         //ClientPartido* client = new ClientPartido(this, address, -1);
                         //addClient(client,true);
                 }

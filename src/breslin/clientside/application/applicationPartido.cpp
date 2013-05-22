@@ -180,6 +180,7 @@ bool ApplicationPartido::keyPressed( const OIS::KeyEvent &arg )
 				LogString("enter!!!");
 				sendAnswer();
                                 mStringAnswer.clear();
+                                mLabelAnswer->setCaption(mStringAnswer);
                         }
 
                         if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
