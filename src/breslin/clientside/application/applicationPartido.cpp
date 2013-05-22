@@ -156,5 +156,6 @@ void  ApplicationPartido::hideBattleScreen()
 
 bool ApplicationPartido::keyPressed( const OIS::KeyEvent &arg )
 {
+	ApplicationBreslin::keyPressed(arg);
 }
 
