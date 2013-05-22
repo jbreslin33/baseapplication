@@ -177,6 +177,10 @@ void Server::addClient(Client* client, bool permanent)
 	}
 }
 
+
+
+
+
 /*******************************************************
 		PACKETS
 ********************************************************/
@@ -227,6 +231,7 @@ int Server::getPacket(char *data, struct sockaddr *from)
 
 void Server::parsePacket(Message *mes, struct sockaddr *address)
 {
+	Client* client;
 	mes->BeginReading();
 
 	int type = mes->ReadByte();
@@ -267,7 +272,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				//get client
-				Client* client = mClientVector.at(i);
+				client = mClientVector.at(i);
 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
 				{
 					continue;
@@ -296,7 +301,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
  				//get client
-                                Client* client = mClientVector.at(i);
+                                client = mClientVector.at(i);
 
 				//call clients join game function
 				for (int g = 0; g < mGameVector.size(); g++)
@@ -320,7 +325,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
 				//set client to pointer
-                                Client* client = mClientVector.at(i);
+                                client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -336,7 +341,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         if( memcmp(mClientVectorTemp.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
 				//set client to pointer
-                                Client* client = mClientVectorTemp.at(i);
+                                client = mClientVectorTemp.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -357,7 +362,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
                                 //set client to pointer
-                                Client* client = mClientVector.at(i);
+                                client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -373,7 +378,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVectorTemp.at(i)->mClientID == clientID)
 			{
                                 //set client to pointer
-                                Client* client = mClientVectorTemp.at(i);
+                                client = mClientVectorTemp.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -393,7 +398,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
                                 //set client to pointer
-                                Client* client = mClientVector.at(i);
+                                client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -412,7 +417,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         if (mClientVector.at(i)->mClientID == clientID)
                         {
                                 //set client to pointer
-                                Client* client = mClientVector.at(i);
+                                client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -431,7 +436,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		{
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
-				Client* client = mClientVector.at(i);
+				client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -449,7 +454,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		{
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
-				Client* client = mClientVector.at(i);
+				client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -466,7 +471,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		{
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
-				Client* client = mClientVector.at(i);
+				client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -491,7 +496,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		{
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
-				Client* client = mClientVector.at(i);
+				client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;

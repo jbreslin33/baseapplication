@@ -3,8 +3,6 @@
 
 #include "server.h"
 
-class ClientPartido;
-
 class ServerPartido : public Server
 {
 public:
@@ -13,11 +11,8 @@ public:
 
 	//games
 	virtual void createGames();
-	
-	//clients
-	virtual void createClients();
-        std::vector<ClientPartido*> mClientVector;
-        std::vector<ClientPartido*> mClientVectorTemp;
+
+
 
         //add school
         static const int mMessageAddSchool = -109;

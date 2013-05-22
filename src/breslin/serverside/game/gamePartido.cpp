@@ -9,9 +9,6 @@
 //shape
 #include "../shape/shapePartido.h"
 
-//client
-#include "../client/client.h"
-
 //battles
 #include "../battle/battle.h"
 
@@ -70,7 +67,3 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 	}
 }
 
-void GamePartido::sendAnswer(Client* client, std::string answer)
-{
-	LogString("GamePartido::sendAnswer from db_id:%d", client->db_id);
-} 
