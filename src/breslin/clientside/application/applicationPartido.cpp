@@ -4,6 +4,12 @@
 //log
 #include "../tdreamsock/dreamSockLog.h"
 
+//byteBuffer
+#include "../bytebuffer/byteBuffer.h"
+
+//network
+#include "../network/network.h"
+
 //game
 #include "../game/gamePartido.h"
 
@@ -169,8 +175,11 @@ bool ApplicationPartido::keyPressed( const OIS::KeyEvent &arg )
                                 mLabelAnswer->setCaption(mStringAnswer);
                         }
 
-                        if (numeric == 9) //tab
+                        if (numeric == 13) //carriage return  or enter 
                         {
+				LogString("enter!!!");
+				sendAnswer();
+                                mStringAnswer.clear();
                         }
 
                         if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
@@ -181,5 +190,30 @@ bool ApplicationPartido::keyPressed( const OIS::KeyEvent &arg )
 			
 		}	
 	}
+}
+
+void ApplicationPartido::sendAnswer()
+{
+        ByteBuffer* byteBuffer = new ByteBuffer();
+        byteBuffer->WriteByte(mMessageAnswerQuestion);
+	int mAnswerTime = 120;
+        byteBuffer->WriteByte(mAnswerTime);
+
+        //get length of username
+        int sizeOfAnswer = mStringAnswer.size();
+
+        //write length of username
+        byteBuffer->WriteByte(sizeOfAnswer);
+
+        //loop thru answer string
+        for (int i = 0; i < sizeOfAnswer; i++)
+        {
+                //write individual char of mStringAnswer
+                byteBuffer->WriteByte(mStringAnswer.at(i));
+        }
+
+        //send it off to server
+	LogString("sendAnswer");
+        mNetwork->send(byteBuffer);
 }
 

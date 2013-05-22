@@ -12,6 +12,8 @@ public:
 	ApplicationPartido(const char* serverIP, int serverPort);
 	~ApplicationPartido();
 
+static const char mMessageAnswerQuestion  = -84;
+
 //main
 OgreBites::Button* mButtonJoinGameB;
 
@@ -37,6 +39,8 @@ OgreBites::Label* mLabelQuestion;
 OgreBites::Label* mLabelAnswer;
 
 std::string mStringAnswer;
+
+void sendAnswer();
 
 protected:
 virtual bool keyPressed ( const OIS::KeyEvent &arg );

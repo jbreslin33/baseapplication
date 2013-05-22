@@ -12,11 +12,15 @@ public:
 	//games
 	virtual void createGames();
 
+
+
         //add school
         static const int mMessageAddSchool = -109;
 
-        //add question
-        static const int mMessageAskQuestion            = -76;
+        //question
+        static const int mMessageAskQuestion           = -76;
+        static const int mMessageAnswerQuestion        = -84;
+        static const int mMessageAnswerQuestionBrowser = -85;
 	
 	//battle
 	static const int mMessageBattleStart = -75; 

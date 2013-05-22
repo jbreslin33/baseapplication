@@ -45,7 +45,8 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
         /***CONNECT********/
         //this should just create a client then client should do what need be done.
         
-	if (type == mMessageConnect || type == mMessageConnectBrowser || type == mMessageConnectNode)
+	if (type == mMessageConnect || type == mMessageConnectBrowser || type == mMessageConnectNode
+		|| type == mMessageAnswerQuestion || type == mMessageAnswerQuestionBrowser)
 	{
 		if (type == mMessageConnect)
         	{
@@ -66,6 +67,21 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
                 	ClientPartido* client = new ClientPartido(this, address, -1);
 			addClient(client,true);
         	}     	 
+       		else if (type == mMessageAnswerQuestion)
+                {
+			LogString("mMessageAnswerQuestion received");
+                        //ClientPartido* client = new ClientPartido(this, address, -1);
+                        //addClient(client,true);
+                }
+    		else if (type == mMessageAnswerQuestionBrowser)
+                {
+			LogString("mMessageAnswerQuestionBrowser received");
+                        //int clientID = mes->ReadByte();
+                        //ClientPartido* client = new ClientPartido(this, address, -1);
+                        //addClient(client,true);
+                }
+
+
 	}
 	else
 	{
