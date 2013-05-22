@@ -108,18 +108,13 @@ void  ApplicationPartido::hideMainScreen()
 void  ApplicationPartido::createBattleScreen()
 {
         LogString("ApplicationPartido::createBattleScreen");
+
         if (!mLabelQuestion)
         {
-                LogString("ApplicationPartido::createBattleScreen 0");
-
                 mLabelQuestion  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelQuestion", "Question:");
 
         }
-        if (!mLabelQuestion)
-        {
-                LogString("ApplicationPartido::createBattleScreen 0");
-                mLabelQuestion  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelQuestion", "Question:");
-        }
+
         if (!mLabelAnswer)
         {
                 mLabelAnswer  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelAnswer", "Answer:");
@@ -138,7 +133,6 @@ void  ApplicationPartido::showBattleScreen()
         mTrayMgr->showCursor();
 
         mLabelFocus = mLabelAnswer;
-
 }
 
 void  ApplicationPartido::hideBattleScreen()
@@ -157,5 +151,35 @@ void  ApplicationPartido::hideBattleScreen()
 bool ApplicationPartido::keyPressed( const OIS::KeyEvent &arg )
 {
 	ApplicationBreslin::keyPressed(arg);
+
+	if (!mFake)
+	{
+		if (mLabelFocus == mLabelAnswer)
+		{
+	     		int numeric = arg.text;
+                        char ascii = (char)numeric;
+
+                        if (numeric == 8) //backspace
+                        {
+                                int size = mStringAnswer.size();
+                                if (size > 0)
+                                {
+                                        mStringAnswer.resize(size - 1);
+                                }
+                                mLabelAnswer->setCaption(mStringAnswer);
+                        }
+
+                        if (numeric == 9) //tab
+                        {
+                        }
+
+                        if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
+                        {
+                                mStringAnswer.append(1,ascii);
+                                mLabelAnswer->setCaption(mStringAnswer);
+                        }
+			
+		}	
+	}
 }
 

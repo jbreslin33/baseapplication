@@ -473,7 +473,6 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	if (mStateMachine->getCurrentState() == mApplicationLogin)
 	{
-
 		if (mLabelFocus == mLabelUsername)
 		{
 			int numeric = arg.text;
@@ -518,7 +517,6 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 
                 	if (numeric == 9) //tab
                 	{
-                        	//mLabelFocus = mButtonLogin;
                 	}
 
                 	if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password

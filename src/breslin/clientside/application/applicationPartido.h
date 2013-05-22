@@ -36,6 +36,8 @@ void hideBattleScreen();
 OgreBites::Label* mLabelQuestion;
 OgreBites::Label* mLabelAnswer;
 
+std::string mStringAnswer;
+
 protected:
 virtual bool keyPressed ( const OIS::KeyEvent &arg );
 
