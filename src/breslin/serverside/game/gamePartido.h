@@ -25,7 +25,6 @@ public:
 
 	ServerPartido* mServer;
 
-	void sendAnswer();
 };
 
 #endif

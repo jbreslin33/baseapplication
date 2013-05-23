@@ -51,6 +51,7 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 		if (type == mMessageConnect)
         	{
                 	ClientPartido* client = new ClientPartido(this, address, 0);
+
 			addClient(client,false);
         	}
 
@@ -76,9 +77,11 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
                         	if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         	{
                                 	ClientPartido* client = (ClientPartido*)mClientVector.at(i);
-					GamePartido* gamePartido = (GamePartido*)client->mGame;
-					gamePartido->sendAnswer();
-					LogString("client db_id:%d",client->db_id);
+  					if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+                        		{
+                        			continue;
+                        		}
+					client->parseAnswer(mes);
 				}
 			}
                 }

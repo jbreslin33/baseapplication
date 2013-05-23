@@ -12,9 +12,11 @@ public:
 	~ClientPartido();
 
 	void sendSchools();
+	void parseAnswer();
 
 	ServerPartido* mServer;	
 
+	void parseAnswer(Message* message);
 };
 
 #endif

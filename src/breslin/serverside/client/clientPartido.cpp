@@ -54,3 +54,7 @@ void ClientPartido::sendSchools()
                 mServer->mNetwork->sendPacketTo(this,&mMessage);
         }
 }
+void ClientPartido::parseAnswer(Message* mes)
+{
+	LogString("ClientPartido::parseAnswer");
+}
