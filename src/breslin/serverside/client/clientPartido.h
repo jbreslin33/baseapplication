@@ -18,9 +18,6 @@ public:
 	ServerPartido* mServer;	
 	GamePartido* mGame;
 
-	void parseAnswer(Message* message);
-	std::string mStringAnswer;
-	int mAnswerTime;
 };
 
 #endif

@@ -76,12 +76,12 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
                 	{
                         	if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         	{
-                                	ClientPartido* client = (ClientPartido*)mClientVector.at(i);
+                                	Client* client = mClientVector.at(i);
   					if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                         		{
                         			continue;
                         		}
-					client->parseAnswer(mes);
+					client->readAnswer(mes);
 				}
 			}
                 }

@@ -55,35 +55,3 @@ void ClientPartido::sendSchools()
                 mServer->mNetwork->sendPacketTo(this,&mMessage);
         }
 }
-void ClientPartido::parseAnswer(Message* mes)
-{
-	LogString("ClientPartido::parseAnswer");
-
-        mAnswerTime = mes->ReadByte();
-	LogString("mAnswerTime:%d",mAnswerTime);
-
-        int sizeOfAnswer = mes->ReadByte();
-	LogString("sizeOfAnswer:%d",sizeOfAnswer);
-
- 	//clear username and password strings
-        mStringAnswer.clear();
-
-
-        //loop thru and set mStringAnswer from client
-        for (int i = 0; i < sizeOfAnswer; i++)
-        {
-                if (mClientID > 0)
-                {
-                        char c = mes->ReadByte();
-                        mStringAnswer.append(1,c);
-                }
-                else
-                {
-                        int numeric = mes->ReadByte();
-                        char ascii = (char)numeric;
-                        mStringAnswer.append(1,ascii);
-                }
-        }
-	LogString("ClientPartido::about to sendAnswer");
-	mGame->sendAnswer(this,mAnswerTime,mStringAnswer);
-}
