@@ -67,3 +67,7 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 	}
 }
 
+void GamePartido::sendAnswer()
+{
+	LogString("GamePartido::sendAnswer");
+}
