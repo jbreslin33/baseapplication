@@ -33,16 +33,16 @@ void ServerPartido::addGame(GamePartido* game)
         mGamePartidoVector.push_back(game);
 }
 
-void ServerPartido::addClient(ClientPartido* client, bool permanent)
+void ServerPartido::addClient(Client* client, bool permanent)
 {
 	Server::addClient(client, permanent);
         if (permanent)
         {
-                mClientPartidoVector.push_back(client);
+                mClientPartidoVector.push_back((ClientPartido*)client);
         }
         else
         {
-                mClientPartidoVectorTemp.push_back(client);
+                mClientPartidoVectorTemp.push_back((ClientPartido*)client);
         }
 }
 
@@ -105,8 +105,6 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
                         //ClientPartido* client = new ClientPartido(this, address, -1);
                         //addClient(client,true);
                 }
-
-
 	}
 	else
 	{

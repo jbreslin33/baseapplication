@@ -17,7 +17,7 @@ public:
    	std::vector<GamePartido*> mGamePartidoVector;
 
    	//clients
-	virtual void addClient(ClientPartido* client, bool permanent);
+	virtual void addClient(Client* client, bool permanent);
         std::vector<ClientPartido*> mClientPartidoVector;
         std::vector<ClientPartido*> mClientPartidoVectorTemp;
 
