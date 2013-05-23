@@ -7,14 +7,14 @@ using namespace std;
 #include <string>
 #include "../message/message.h"
 
-class Shape;
+class ShapePartido;
 class Battle;
 
 class Battler 
 {
 public:
 	
-	Battler(Battle* battle, Shape* shape);
+	Battler(Battle* battle, ShapePartido* shapePartido);
 	~Battler();
 
 void processUpdate();
@@ -23,7 +23,7 @@ void sendQuestion();
 void sendBattleStart();	
 void sendBattleEnd();	
 Battle* mBattle; 
-Shape* mShape;
+ShapePartido* mShapePartido;
 int mFirstUnmasteredQuestionID;	
 std::vector<int> mMasteredQuestionIDVector;    
 bool mWaitingForAnswer;

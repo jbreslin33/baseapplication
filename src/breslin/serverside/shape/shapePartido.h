@@ -10,14 +10,15 @@
 *            FORWARD DECLARATIONS
 ****************************************/
 class GamePartido;
+class ClientPartido;
 /******************************************
 *            CLASS
 ****************************************/
-class ShapePartido : public	Shape
+class ShapePartido : public Shape
 {
 
 public:
-ShapePartido(unsigned int index, GamePartido* gamePartido, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+ShapePartido(unsigned int index, GamePartido* gamePartido, ClientPartido* clientPartido, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~ShapePartido();
 
@@ -26,6 +27,7 @@ ShapePartido(unsigned int index, GamePartido* gamePartido, Client* client, Vecto
 ****************************************/
 
 GamePartido* mGamePartido;
+ShapePartido* mShapePartido;
 bool mInBattle;
 
 /******************************************

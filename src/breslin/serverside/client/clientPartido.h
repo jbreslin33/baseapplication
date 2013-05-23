@@ -2,9 +2,11 @@
 #define CLIENTPARTIDO_H
 
 #include "client.h"
+#include "../battler/battler.h"
 
 class ServerPartido;
 class GamePartido;
+class ShapePartido;
 
 class ClientPartido : public Client
 {
@@ -15,6 +17,8 @@ public:
 	void sendSchools();
 	void parseAnswer();
 
+
+
 	ServerPartido* mServer;	
 	GamePartido* mGame;
 
@@ -23,6 +27,13 @@ public:
         std::string mStringAnswer;
         int mAnswerTime;
 
+	//shape
+	ShapePartido* mShapePartido;
+	void setShape(ShapePartido* shapePartido);
+
+	//battler
+	Battler* mBattler;
+	void setBattler(Battler* battler) { mBattler = battler; }
 };
 
 #endif

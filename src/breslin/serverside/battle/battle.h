@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-class Shape;
+class ShapePartido;
 class GamePartido;
 class Battler;
 
@@ -12,11 +12,11 @@ class Battle
 {
 public:
 	
-	Battle(GamePartido* game, std::vector<Shape*> shapeVector);
+	Battle(GamePartido* gamePartido, std::vector<ShapePartido*> shapePartidoVector);
 	~Battle();
 
 //shapes
-std::vector<Shape*> mShapeVector;       //every shape in the battle..
+std::vector<ShapePartido*> mShapePartidoVector;       //every shape in the battle..
 
 std::vector<Battler*> mBattlerVector;       //every battler in the battle..
 
@@ -25,7 +25,7 @@ int getQuestionLevelID(int userID);
 
 bool mOver;
 	
-GamePartido* mGame; 
+GamePartido* mGamePartido; 
 int mLimit;
 	
 };

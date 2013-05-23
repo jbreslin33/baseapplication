@@ -12,11 +12,17 @@
 //battles
 #include "../battle/battle.h"
 
+//client
+#include "../client/clientPartido.h"
+
+//vector3d
+#include "../../math/vector3D.h"
+
 #include <stdio.h>
 
-GamePartido::GamePartido(ServerPartido* server, int id) : Game(server,id)
+GamePartido::GamePartido(ServerPartido* serverPartido, int id) : Game(serverPartido,id)
 {
-	mServer = server;
+	mServerPartido = serverPartido;
 }
 
 GamePartido::~GamePartido()
@@ -35,7 +41,16 @@ void GamePartido::processUpdate()
         }
 }
 
-void GamePartido::collision(Shape* shape1, Shape* shape2)
+void GamePartido::createShapes()
+{
+        for (unsigned int i = 0; i < mServerPartido->mClientVector.size(); i++)
+        {
+                mServerPartido->mClientPartidoVector.at(i)->setShape( new ShapePartido(getOpenIndex(),this,mServerPartido->mClientPartidoVector.at(i),getOpenPoint(),new Vector3D(),new Vector3D(),mServerPartido->mRoot,true,true,30.0f,1,false) );
+        }
+}
+
+
+void GamePartido::collision(ShapePartido* shape1, ShapePartido* shape2)
 {
 	//do regular collision of backing off shapes
 	Game::collision(shape1,shape2);	
@@ -45,9 +60,9 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 	//now let's check if these guys are already in a battle
 	for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
-		for (unsigned int s = 0; s < mBattleVector.at(i)->mShapeVector.size(); s++)
+		for (unsigned int s = 0; s < mBattleVector.at(i)->mShapePartidoVector.size(); s++)
 		{
-			if (shape1 == mBattleVector.at(i)->mShapeVector.at(s) || shape2 == mBattleVector.at(i)->mShapeVector.at(s))
+			if (shape1 == mBattleVector.at(i)->mShapePartidoVector.at(s) || shape2 == mBattleVector.at(i)->mShapePartidoVector.at(s))
 			{
 				battleCollision = false;	
 			} 
@@ -57,12 +72,12 @@ void GamePartido::collision(Shape* shape1, Shape* shape2)
 	if (battleCollision)
 	{
 
-		std::vector<Shape*> shapeVector;
-		shapeVector.push_back(shape1);
-		shapeVector.push_back(shape2);
+		std::vector<ShapePartido*> shapePartidoVector;
+		shapePartidoVector.push_back(shape1);
+		shapePartidoVector.push_back(shape2);
 
 		//create a battle
-		Battle* battle = new Battle(this,shapeVector);
+		Battle* battle = new Battle(this,shapePartidoVector);
 		mBattleVector.push_back(battle);
 	}
 }

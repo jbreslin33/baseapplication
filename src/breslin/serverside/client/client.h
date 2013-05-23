@@ -115,6 +115,7 @@ public:
 	void setSocketAddress(struct sockaddr *address); 
 
     	Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the avatar.
+	void setShape(Shape* shape) { mShape = shape; } 
 
 	Server* mServer;
 

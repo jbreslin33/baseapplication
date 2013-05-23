@@ -13,7 +13,7 @@
 #include "../tdreamsock/dreamSockLog.h"
 
 //shape
-#include "../shape/shape.h"
+#include "../shape/shapePartido.h"
 
 //battler
 #include "../battler/battler.h"
@@ -23,21 +23,21 @@
 #include <postgresql/libpq-fe.h>
 
 
-Battle::Battle(GamePartido* game, std::vector<Shape*> shapeVector)
+Battle::Battle(GamePartido* gamePartido, std::vector<ShapePartido*> shapePartidoVector)
 {
-	mGame = game;
+	mGamePartido = gamePartido;
 	mOver = false;
 
 	mLimit = 1; 
   
 	//add shapes to battle shapeVector
-        for (unsigned int i = 0; i < shapeVector.size(); i++)
+        for (unsigned int i = 0; i < shapePartidoVector.size(); i++)
         {
 		//add to shape vector
-                mShapeVector.push_back(shapeVector.at(i));
+                mShapePartidoVector.push_back(shapePartidoVector.at(i));
 
 		//create and add a new Battler...
-		mBattlerVector.push_back(new Battler(this,shapeVector.at(i)));
+		mBattlerVector.push_back(new Battler(this,shapePartidoVector.at(i)));
         }
 }
 

@@ -20,16 +20,25 @@
 #include "../network/network.h"
 
 //shape
-#include "../shape/shape.h"
+#include "../shape/shapePartido.h"
+
+//client
+#include "../client/client.h"
 
 //postgresql
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
 
-Battler::Battler(Battle* battle, Shape* shape)
+Battler::Battler(Battle* battle, ShapePartido* shapePartido)
 {
 	mBattle = battle;
-	mShape = shape;
+	mShapePartido = shapePartido;
+
+	//let's tell client about this if we have one...
+	if (shapePartido->mClientPartido)
+	{
+		shapePartido->mClientPartido->setBattler(this);
+	}
 
 	getQuestionLevelID();
 	LogString("first unmastered question id:%d",mFirstUnmasteredQuestionID);
@@ -63,21 +72,21 @@ void Battler::processUpdate()
 //this should also send first question to get you started
 void Battler::sendBattleStart()
 {
-        if (!mShape->mClient)
+        if (!mShapePartido->mClientPartido)
         {
                 return;
         }
 	LogString("sendBattleStart");
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mBattle->mGame->mServer->mMessageBattleStart); // add type
+        mMessage.WriteByte(mBattle->mGamePartido->mServerPartido->mMessageBattleStart); // add type
 
         if (mShape->mClient->mClientID > 0)
         {
-                mMessage.WriteByte(mShape->mClient->mClientID); // add mClientID for browsers
+                mMessage.WriteByte(mShapePartido->mClientPartido->mClientID); // add mClientID for browsers
         }
 
         //send it
-        mBattle->mGame->mServer->mNetwork->sendPacketTo(mShape->mClient,&mMessage);
+        mBattle->mGamePartido->mServerPartido->mNetwork->sendPacketTo(mShapePartido->mClientPartido,&mMessage);
 }
 
 void Battler::sendBattleEnd()

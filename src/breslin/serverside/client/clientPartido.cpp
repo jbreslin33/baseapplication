@@ -6,6 +6,7 @@
 #include "../server/serverPartido.h"
 #include "../network/network.h"
 #include "../game/gamePartido.h"
+#include "../shape/shapePartido.h"
 
 ClientPartido::ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID) : Client(server, address, clientID) 
 {
@@ -24,6 +25,12 @@ ClientPartido::ClientPartido(ServerPartido* server, struct sockaddr *address, in
 
 ClientPartido::~ClientPartido()
 {
+}
+
+void ClientPartido::setShape(ShapePartido* shapePartido)
+{
+	Client::setShape(shapePartido);
+	mShapePartido = (ShapePartido*)shapePartido;
 }
 
 //this gets you question_attempts from a particular questions and particular user_id
