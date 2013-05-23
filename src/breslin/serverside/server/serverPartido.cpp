@@ -33,6 +33,19 @@ void ServerPartido::addGame(GamePartido* game)
         mGamePartidoVector.push_back(game);
 }
 
+void ServerPartido::addClient(ClientPartido* client, bool permanent)
+{
+	Server::addClient(client, permanent);
+        if (permanent)
+        {
+                mClientPartidoVector.push_back(client);
+        }
+        else
+        {
+                mClientPartidoVectorTemp.push_back(client);
+        }
+}
+
 void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 {
         ClientPartido* client;
@@ -70,16 +83,18 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
                 {
 			LogString("mMessageAnswerQuestion received");
       			// Find the correct client by comparing addresses
-                	for (unsigned int i = 0; i < mClientVector.size(); i++)
+                	for (unsigned int i = 0; i < mClientPartidoVector.size(); i++)
                 	{
-                        	if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+				LogString("looping...");
+                        	if( memcmp(mClientPartidoVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         	{
-                                	Client* client = mClientVector.at(i);
+					LogString("looping. 2..");
+                                	ClientPartido* clientPartido = mClientPartidoVector.at(i);
   					if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                         		{
                         			continue;
                         		}
-					client->readAnswer(mes);
+					clientPartido->readAnswer(mes);
 				}
 			}
                 }

@@ -18,6 +18,11 @@ public:
 	ServerPartido* mServer;	
 	GamePartido* mGame;
 
+	//answer
+        virtual void readAnswer(Message* message);
+        std::string mStringAnswer;
+        int mAnswerTime;
+
 };
 
 #endif

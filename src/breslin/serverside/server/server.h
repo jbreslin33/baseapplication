@@ -125,7 +125,7 @@ public:
 
 	//client
    	virtual void createClients();
-	        void addClient(Client* client, bool permanent);
+	virtual void addClient(Client* client, bool permanent);
 
 	//packets
 		int  getPacket  (char *data, struct sockaddr *from);

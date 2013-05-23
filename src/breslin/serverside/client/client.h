@@ -89,11 +89,6 @@ public:
 	std::string mStringUsername;
 	std::string mStringPassword;
 
-	//answer
-     	virtual void readAnswer(Message* message);
-        std::string mStringAnswer;
-        int mAnswerTime;
-
 public:
 	//processUpdate
 	void processUpdate();

@@ -4,6 +4,7 @@
 #include "server.h"
 
 class GamePartido;
+class ClientPartido;
 
 class ServerPartido : public Server
 {
@@ -14,6 +15,11 @@ public:
 	//games
 	virtual void addGame(GamePartido* gamePartido);
    	std::vector<GamePartido*> mGamePartidoVector;
+
+   	//clients
+	virtual void addClient(ClientPartido* client, bool permanent);
+        std::vector<ClientPartido*> mClientPartidoVector;
+        std::vector<ClientPartido*> mClientPartidoVectorTemp;
 
         //add school
         static const int mMessageAddSchool = -109;
