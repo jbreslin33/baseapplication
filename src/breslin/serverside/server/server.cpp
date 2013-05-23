@@ -61,10 +61,9 @@ Server::~Server()
 		GAMES	
 ********************************************************/
 
-void Server::createGames()
+void Server::addGame(Game* game)
 {
-	//create games for now just create standard no frills game of you get to collide with stuff in multiplayer....
-	mGameVector.push_back(new Game(this,1));
+	mGameVector.push_back(game);
 }
 
 /*******************************************************

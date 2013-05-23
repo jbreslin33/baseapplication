@@ -3,6 +3,8 @@
 
 #include "server.h"
 
+class GamePartido;
+
 class ServerPartido : public Server
 {
 public:
@@ -10,9 +12,8 @@ public:
 	~ServerPartido();
 
 	//games
-	virtual void createGames();
-
-
+	virtual void addGame(GamePartido* gamePartido);
+   	std::vector<GamePartido*> mGamePartidoVector;
 
         //add school
         static const int mMessageAddSchool = -109;

@@ -13,6 +13,7 @@
 
 //possible games
 #include "../serverside/game/game.h"
+#include "../serverside/game/gamePartido.h"
 
 #include "../serverside/server/server.h"
 #include "../serverside/server/serverPartido.h"
@@ -37,9 +38,6 @@ int main(int argc, char **argv)
 #else
         root = new Ogre::Root("plugins.cfg");
 #endif
-
-	Server* server;
-
 	const char* aServer = "1";	
 	const char* aServerPartido = "2";	
 
@@ -49,53 +47,85 @@ int main(int argc, char **argv)
 	unsigned int intValue;
 	strValue >> intValue;
 
+	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
+	signal(SIGPIPE, SIG_IGN);
+	int time, oldTime, newTime;
+
 	if (strcmp (argv[1],aServer) == 0)
 	{
-		server = new Server(root,"",intValue);	
+		Server* server = new Server(root,"",intValue);	
+		server->addGame(new Game(server,1));
+		server->createClients();
+
+  		for (unsigned int i = 0; i < server->mGameVector.size(); i++)
+		{
+			server->mGameVector.at(i)->createShapes();
+		}
+
+		oldTime = server->mNetwork->getCurrentSystemTime();
+
+		// App main loop
+		try
+		{
+			// Keep server alive (wait for keypress to kill it)
+			while(true)
+			{
+				do
+				{
+					newTime = server->mNetwork->getCurrentSystemTime();
+					time = newTime - oldTime;
+				} while (time < 1);
+				server->processUpdate(time);
+				oldTime = newTime;
+			}
+		}
+		catch(...)
+		{
+			server->mNetwork->shutdown();
+			LogString("Unknown Exception caught in main loop");
+			return -1;
+		}
+		LogString("Shutting down everything");
+		server->mNetwork->shutdown();
+		return 0;
 	}
 
 	if (strcmp (argv[1],aServerPartido) == 0)
 	{
-		server = new ServerPartido(root,"",intValue);	
+		ServerPartido* server = new ServerPartido(root,"",intValue);	
+		server->addGame(new GamePartido(server,2));
+		server->createClients();
+
+                for (unsigned int i = 0; i < server->mGameVector.size(); i++)
+                {
+                        server->mGameVector.at(i)->createShapes();
+                }
+
+                oldTime = server->mNetwork->getCurrentSystemTime();
+
+                // App main loop
+                try
+                {       
+                        // Keep server alive (wait for keypress to kill it)
+                        while(true)
+                        {
+                                do
+                                {
+                                        newTime = server->mNetwork->getCurrentSystemTime();
+                                        time = newTime - oldTime;
+                                } while (time < 1);
+                                server->processUpdate(time);
+                                oldTime = newTime;
+                        }
+                }
+                catch(...)
+                {
+                        server->mNetwork->shutdown();
+                        LogString("Unknown Exception caught in main loop");
+                        return -1;
+                }
+                LogString("Shutting down everything");
+                server->mNetwork->shutdown();
+                return 0;
 	}
-
-	server->createGames();
-	server->createClients();
-  	for (unsigned int i = 0; i < server->mGameVector.size(); i++)
-	{
-		server->mGameVector.at(i)->createShapes();
-	}
-
-	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
-	signal(SIGPIPE, SIG_IGN);
-
-	int time, oldTime, newTime;
-
-	oldTime = server->mNetwork->getCurrentSystemTime();
-
-	// App main loop
-	try
-	{
-		// Keep server alive (wait for keypress to kill it)
-		while(true)
-		{
-			do
-			{
-				newTime = server->mNetwork->getCurrentSystemTime();
-				time = newTime - oldTime;
-			} while (time < 1);
-			server->processUpdate(time);
-
-			oldTime = newTime;
-		}
-	}
-	catch(...)
-	{
-		server->mNetwork->shutdown();
-		LogString("Unknown Exception caught in main loop");
-		return -1;
-	}
-	LogString("Shutting down everything");
-	server->mNetwork->shutdown();
-	return 0;
 }

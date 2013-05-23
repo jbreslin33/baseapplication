@@ -41,6 +41,7 @@ public:
 	Ogre::Root* mRoot;
 
 	//games
+	//this should only handle base game level stuff....and we should have a seperate gameVectorPartido for partido??
 	std::vector<Game*> mGameVector;
 
 	//clients
@@ -120,7 +121,7 @@ public:
 	        void processUpdate(int msec);
 
 	//game
-	virtual void createGames();	
+	virtual void addGame(Game* game);	
 
 	//client
    	virtual void createClients();

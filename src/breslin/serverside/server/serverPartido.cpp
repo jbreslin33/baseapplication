@@ -27,12 +27,10 @@ ServerPartido::~ServerPartido()
 {
 }
 
-void ServerPartido::createGames()
+void ServerPartido::addGame(GamePartido* game)
 {
-	Server::createGames();
-
-	//create game partido!
- 	mGameVector.push_back(new GamePartido(this,2));
+	Server::addGame(game);
+        mGamePartidoVector.push_back(game);
 }
 
 void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
