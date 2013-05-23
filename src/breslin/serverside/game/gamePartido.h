@@ -4,11 +4,13 @@
 #include "game.h"
 
 using namespace std;
+#include <string>
 
 //class Network;
 class ServerPartido;
 class Shape;
 class Battle;
+class ClientPartido;
 
 class GamePartido : public Game
 {
@@ -24,6 +26,7 @@ public:
 	std::vector<Battle*> mBattleVector;  
 
 	ServerPartido* mServer;
+	void sendAnswer(ClientPartido* client, int answerTime, std::string answer);
 
 };
 

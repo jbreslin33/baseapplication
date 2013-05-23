@@ -202,6 +202,7 @@ void ApplicationPartido::sendAnswer()
 
         //get length of username
         int sizeOfAnswer = mStringAnswer.size();
+	LogString("sizeOfAnswer:%d",sizeOfAnswer);
 
         //write length of username
         byteBuffer->WriteByte(sizeOfAnswer);

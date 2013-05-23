@@ -4,6 +4,7 @@
 #include "client.h"
 
 class ServerPartido;
+class GamePartido;
 
 class ClientPartido : public Client
 {
@@ -15,8 +16,11 @@ public:
 	void parseAnswer();
 
 	ServerPartido* mServer;	
+	GamePartido* mGame;
 
 	void parseAnswer(Message* message);
+	std::string mStringAnswer;
+	int mAnswerTime;
 };
 
 #endif
