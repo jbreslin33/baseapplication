@@ -27,6 +27,33 @@ ServerPartido::~ServerPartido()
 {
 }
 
+void ServerPartido::processClients()
+{
+        //update clients
+        for (unsigned int i = 0; i < mClientPartidoVector.size(); i++)
+        {
+                mClientPartidoVector.at(i)->processUpdate();
+        }
+}
+
+void ServerPartido::processGames()
+{
+        //update games
+        for (unsigned int i = 0; i < mGamePartidoVector.size(); i++)
+        {
+                mGamePartidoVector.at(i)->processUpdate();
+        }
+}
+
+void ServerPartido::sendCommands()
+{
+        //send positions and exact frame time the calcs where done on which is mFrameTime
+        for (unsigned int i = 0; i < mGamePartidoVector.size(); i++)
+        {
+                sendCommand(mGamePartidoVector.at(i));
+        }
+}
+
 void ServerPartido::addGame(GamePartido* gamePartido)
 {
 	Server::addGame(gamePartido);

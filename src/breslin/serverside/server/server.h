@@ -118,6 +118,9 @@ public:
 
 	//update
 	void processUpdate(int msec);
+	virtual void processGames();
+	virtual void processClients();
+	virtual void sendCommands();
 
 	//game
 	void addGame(Game* game);	

@@ -48,6 +48,11 @@ public:
 
 	void parsePacket(Message *mes, struct sockaddr *address);
 
+	//updates
+        virtual void processGames();
+        virtual void processClients();
+        virtual void sendCommands();
+
 };
 
 #endif

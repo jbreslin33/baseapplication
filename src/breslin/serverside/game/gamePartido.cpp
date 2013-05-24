@@ -52,6 +52,7 @@ void GamePartido::createShapes()
 
 void GamePartido::collision(ShapePartido* shape1, ShapePartido* shape2)
 {
+	LogString("GamePartido::collision");
 	//do regular collision of backing off shapes
 	Game::collision(shape1,shape2);	
 

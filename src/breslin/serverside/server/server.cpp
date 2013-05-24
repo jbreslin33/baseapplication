@@ -76,17 +76,9 @@ void Server::processUpdate(int msec)
 
 	readPackets();
 
-	//update clients
-  	for (unsigned int i = 0; i < mClientVector.size(); i++)
-	{
-		mClientVector.at(i)->processUpdate();
-	}
+	processClients();
 
-	//update games
-  	for (unsigned int i = 0; i < mGameVector.size(); i++)
-	{
-		mGameVector.at(i)->processUpdate();
-	}
+	processGames();
 
         // Wait full 32 ms before allowing to send
         if(mFrameTime < mTickLength)
@@ -94,14 +86,37 @@ void Server::processUpdate(int msec)
                 return;
         }
 
+	sendCommands();
+
+        mFrameTimeLast = mFrameTime;
+        mFrameTime = 0;
+}
+
+void Server::processClients()
+{
+	//update clients
+  	for (unsigned int i = 0; i < mClientVector.size(); i++)
+	{
+		mClientVector.at(i)->processUpdate();
+	}
+}
+
+void Server::processGames()
+{
+	//update games
+  	for (unsigned int i = 0; i < mGameVector.size(); i++)
+	{
+		mGameVector.at(i)->processUpdate();
+	}
+}
+
+void Server::sendCommands()
+{
         //send positions and exact frame time the calcs where done on which is mFrameTime
  	for (unsigned int i = 0; i < mGameVector.size(); i++)
         {
 		sendCommand(mGameVector.at(i));
 	}
-
-        mFrameTimeLast = mFrameTime;
-        mFrameTime = 0;
 }
 
 /*******************************************************
