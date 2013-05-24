@@ -40,8 +40,13 @@ public:
 	//Ogre Root
 	Ogre::Root* mRoot;
 
+	//network
+	Network* mNetwork;
+
+	//Message
+	Message mMessage;
+
 	//games
-	//this should only handle base game level stuff....and we should have a seperate gameVectorPartido for partido??
 	std::vector<Game*> mGameVector;
 
 	//clients
@@ -59,12 +64,6 @@ public:
  	
 	//sequence
         signed short    mOutgoingSequence;
-
-	//network
-	Network* mNetwork;
-
-	//Message
-	Message mMessage;
 
 	//address
 	const char *mLocalIP;
@@ -118,24 +117,24 @@ public:
 	~Server();
 
 	//update
-	        void processUpdate(int msec);
+	void processUpdate(int msec);
 
 	//game
-	virtual void addGame(Game* game);	
+	void addGame(Game* game);	
 
 	//client
-   	virtual void createClients();
-	virtual void addClient(Client* client, bool permanent);
+   	void createClients();
+	void addClient(Client* client, bool permanent);
 
 	//packets
-		int  getPacket  (char *data, struct sockaddr *from);
-		void sendPackets();
-	        void readPackets();
+	int  getPacket  (char *data, struct sockaddr *from);
+	void sendPackets();
+        void readPackets();
 	virtual void parsePacket(Message *mes, struct sockaddr *address);
 
         //commands
-                void storeCommands(Shape* shape);
-		void sendCommand(Game* game);
+        void storeCommands(Shape* shape);
+	void sendCommand(Game* game);
 };
 
 #endif

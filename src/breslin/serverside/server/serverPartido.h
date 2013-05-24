@@ -13,11 +13,12 @@ public:
 	~ServerPartido();
 
 	//games
-	virtual void addGame(GamePartido* gamePartido);
+	void addGame(GamePartido* gamePartido);
    	std::vector<GamePartido*> mGamePartidoVector;
 
    	//clients
-	virtual void addClient(Client* client, bool permanent);
+	void createClients();
+	void addClient(ClientPartido* clientPartido, bool permanent);
         std::vector<ClientPartido*> mClientPartidoVector;
         std::vector<ClientPartido*> mClientPartidoVectorTemp;
 
