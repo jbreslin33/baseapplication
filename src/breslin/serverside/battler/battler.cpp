@@ -80,7 +80,7 @@ void Battler::sendBattleStart()
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mBattle->mGamePartido->mServerPartido->mMessageBattleStart); // add type
 
-        if (mShape->mClient->mClientID > 0)
+        if (mShapePartido->mClientPartido->mClientID > 0)
         {
                 mMessage.WriteByte(mShapePartido->mClientPartido->mClientID); // add mClientID for browsers
         }
@@ -98,28 +98,28 @@ void Battler::sendBattleEnd()
 */
 void Battler::sendQuestion()
 {
-	if (!mShape->mClient)
+	if (!mShapePartido->mClientPartido)
 	{
 		return;
 	}	
 	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mBattle->mGame->mServer->mMessageAskQuestion); // add type
+        mMessage.WriteByte(mBattle->mGamePartido->mServerPartido->mMessageAskQuestion); // add type
 
-        if (mShape->mClient->mClientID > 0)
+        if (mShapePartido->mClientPartido->mClientID > 0)
         {
-                mMessage.WriteByte(mShape->mClient->mClientID); // add mClientID for browsers
+                mMessage.WriteByte(mShapePartido->mClientPartido->mClientID); // add mClientID for browsers
         }
-        int length = mBattle->mGame->mServer->mQuestionVector.at(mFirstUnmasteredQuestionID).length();  // get length of string containing school
+        int length = mBattle->mGamePartido->mServerPartido->mQuestionVector.at(mFirstUnmasteredQuestionID).length();  // get length of string containing school
         mMessage.WriteByte(length); //send length
                 
 	//loop thru length and write it
        	for (int b=0; b < length; b++)
         {
-                mMessage.WriteByte(mBattle->mGame->mServer->mQuestionVector.at(mFirstUnmasteredQuestionID).at(b));
+                mMessage.WriteByte(mBattle->mGamePartido->mServerPartido->mQuestionVector.at(mFirstUnmasteredQuestionID).at(b));
         }
 
         //send it
-        mBattle->mGame->mServer->mNetwork->sendPacketTo(mShape->mClient,&mMessage);
+        mBattle->mGamePartido->mServerPartido->mNetwork->sendPacketTo(mShapePartido->mClientPartido,&mMessage);
 }
 
 ///mMasteredQuestionIDVector
@@ -137,7 +137,7 @@ void Battler::getQuestionLevelID()
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
 //check all questions... to find the earliest non-mastered and all mastered ones...
-        for (int i = 1; i < mBattle->mGame->mServer->mQuestionCount; i++)
+        for (int i = 1; i < mBattle->mGamePartido->mServerPartido->mQuestionCount; i++)
         {
                 std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, extract(epoch from questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start) * 1000 as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
@@ -149,7 +149,7 @@ void Battler::getQuestionLevelID()
                 std::string b = " and questions_attempts.user_id =";
 
                 ostringstream convertC;
-                convertC << mShape->mClient->mUserID;
+                convertC << mShapePartido->mClientPartido->mUserID;
                 std::string c = convertC.str();
 
                 std::string d = " order by questions_attempts.question_attempt_time_start DESC limit ";

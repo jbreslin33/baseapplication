@@ -27,7 +27,7 @@ ShapePartido(unsigned int index, GamePartido* gamePartido, ClientPartido* client
 ****************************************/
 
 GamePartido* mGamePartido;
-ShapePartido* mShapePartido;
+ClientPartido* mClientPartido;
 bool mInBattle;
 
 /******************************************
