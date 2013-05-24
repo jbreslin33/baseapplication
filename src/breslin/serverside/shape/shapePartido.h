@@ -34,6 +34,8 @@ bool mInBattle;
 *            METHODS
 ****************************************/
 void processTick();
+virtual void collision(Shape* shape);
+
 };
 
 #endif

@@ -132,7 +132,7 @@ void setValues();
 void insertIntoDB();
 
 //collision
-virtual void collision();
+virtual void collision(Shape* shape);
 
 	//delta move command
 virtual int  setFlag();

@@ -84,8 +84,8 @@ void Game::checkCollisions()
 					//to distSQ between them. IS this right or is it working by chance?
 					if(distSq < mShapeVector.at(i)->mCollisionRadius + mShapeVector.at(j)->mCollisionRadius)
 					{
-						mShapeVector.at(i)->collision();
-						mShapeVector.at(j)->collision();
+						mShapeVector.at(i)->collision(mShapeVector.at(j));
+						mShapeVector.at(j)->collision(mShapeVector.at(i));
 					}
 				}
 			}

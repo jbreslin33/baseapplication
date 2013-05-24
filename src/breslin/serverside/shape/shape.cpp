@@ -106,7 +106,7 @@ void Shape::createShape(Ogre::Root* root, Vector3D* position)
 	mSceneNode = mSceneManager->getRootSceneNode()->createChildSceneNode(position->convertToVector3());
 }
 
-void Shape::collision()
+void Shape::collision(Shape* shape)
 {
   	float x = mPositionBeforeCollision->x;
         float z = mPositionBeforeCollision->z;
