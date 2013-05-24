@@ -105,6 +105,12 @@ Client::~Client()
 	}
 }
 
+void Client::setShape(Shape* shape)
+{
+        mShape = shape;
+}
+
+
 void Client::setSocketAddress(struct sockaddr *address)
 {
 	memcpy(&mSocketAddress, address, sizeof(struct sockaddr)); 

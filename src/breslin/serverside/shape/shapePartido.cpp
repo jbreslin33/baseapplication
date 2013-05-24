@@ -21,6 +21,9 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
 	mGamePartido = gamePartido;
 	mClientPartido = clientPartido;
 	mInBattle = false;
+
+        //register with shapePartido vector
+        mGamePartido->mShapePartidoVector.push_back(this);
 }
 	
 ShapePartido::~ShapePartido()

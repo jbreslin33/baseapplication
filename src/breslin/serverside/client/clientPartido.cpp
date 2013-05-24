@@ -30,7 +30,7 @@ ClientPartido::~ClientPartido()
 void ClientPartido::setShape(ShapePartido* shapePartido)
 {
 	Client::setShape(shapePartido);
-	mShapePartido = (ShapePartido*)shapePartido;
+	mShapePartido = shapePartido;
 }
 
 //this gets you question_attempts from a particular questions and particular user_id

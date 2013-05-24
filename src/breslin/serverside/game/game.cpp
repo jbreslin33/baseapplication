@@ -67,7 +67,6 @@ void Game::checkCollisions()
 {
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
-	  
 		if (mShapeVector.at(i)->mCollidable == true)
 		{
 			for (unsigned int j = i+1; j < mShapeVector.size(); j++) 
