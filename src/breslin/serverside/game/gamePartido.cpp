@@ -50,13 +50,11 @@ void GamePartido::createShapes()
 }
 
 
-void GamePartido::collision(ShapePartido* shape1, ShapePartido* shape2)
+void GamePartido::collision(Shape* shape1, Shape* shape2)
 {
 	LogString("GamePartido::collision");
 	//do regular collision of backing off shapes
 	Game::collision(shape1,shape2);	
-
-	bool battleCollision = true;
 
 	//now let's check if these guys are already in a battle
 	for (unsigned int i = 0; i < mBattleVector.size(); i++)
@@ -65,22 +63,23 @@ void GamePartido::collision(ShapePartido* shape1, ShapePartido* shape2)
 		{
 			if (shape1 == mBattleVector.at(i)->mShapePartidoVector.at(s) || shape2 == mBattleVector.at(i)->mShapePartidoVector.at(s))
 			{
-				battleCollision = false;	
+				return;
 			} 
 		}
 	}
+	
+	battleCollision((ShapePartido*)shape1,(ShapePartido*)shape2);
+}
 
-	if (battleCollision)
-	{
+void GamePartido::battleCollision(ShapePartido* shapePartido1, ShapePartido* shapePartido2)
+{
+	std::vector<ShapePartido*> shapePartidoVector;
+	shapePartidoVector.push_back(shapePartido1);
+	shapePartidoVector.push_back(shapePartido2);
 
-		std::vector<ShapePartido*> shapePartidoVector;
-		shapePartidoVector.push_back(shape1);
-		shapePartidoVector.push_back(shape2);
-
-		//create a battle
-		Battle* battle = new Battle(this,shapePartidoVector);
-		mBattleVector.push_back(battle);
-	}
+	//create a battle
+	Battle* battle = new Battle(this,shapePartidoVector);
+	mBattleVector.push_back(battle);
 }
 
 void GamePartido::sendAnswer(ClientPartido* client, int answerTime, std::string answer)

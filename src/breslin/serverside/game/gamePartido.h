@@ -21,7 +21,8 @@ public:
 
 	//time
 	void processUpdate();
-	void collision(ShapePartido* shape1, ShapePartido* shape2);
+	void collision(Shape* shape1, Shape* shape2);
+	void battleCollision(ShapePartido* shapePartido1, ShapePartido* shapePartido2);
 
 	std::vector<Battle*> mBattleVector;  
 
