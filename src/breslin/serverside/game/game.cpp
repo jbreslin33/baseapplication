@@ -99,7 +99,6 @@ void Game::checkBounds(Shape* shape)
 
 void Game::collision(Shape* shape1, Shape* shape2)
 {
-	LogString("Game::collision");
 	float x3 = shape1->mPositionBeforeCollision->x;
 	float z3 = shape1->mPositionBeforeCollision->z;
 	float x4 = shape2->mPositionBeforeCollision->x;

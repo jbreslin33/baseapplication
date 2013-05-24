@@ -52,8 +52,6 @@ void GamePartido::createShapes()
 
 void GamePartido::collision(Shape* shape1, Shape* shape2)
 {
-	LogString("GamePartido::collision");
-	//do regular collision of backing off shapes
 	Game::collision(shape1,shape2);	
 
 	//now let's check if these guys are already in a battle
