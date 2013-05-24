@@ -25,16 +25,31 @@ ShapePartido(unsigned int index, GamePartido* gamePartido, ClientPartido* client
 /******************************************
 *            VARIABLES
 ****************************************/
-
 GamePartido*   mGamePartido;
 ClientPartido* mClientPartido;
 Shape*  mOpponent;
+
+//battle
+int mFirstUnmasteredQuestionID;
+std::vector<int> mMasteredQuestionIDVector;
+bool mWaitingForAnswer;
+std::string mQuestion;
+int mAnswer;
+int mLimit;
 
 /******************************************
 *            METHODS
 ****************************************/
 void processTick();
 virtual void collision(Shape* shape);
+
+//battle
+void processUpdate();
+void getQuestionLevelID();
+void sendQuestion();
+void sendBattleStart();
+void sendBattleEnd();
+
 
 };
 
