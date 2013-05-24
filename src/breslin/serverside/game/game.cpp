@@ -84,7 +84,8 @@ void Game::checkCollisions()
 					//to distSQ between them. IS this right or is it working by chance?
 					if(distSq < mShapeVector.at(i)->mCollisionRadius + mShapeVector.at(j)->mCollisionRadius)
 					{
-						collision(mShapeVector.at(i),mShapeVector.at(j));
+						mShapeVector.at(i)->collision();
+						mShapeVector.at(j)->collision();
 					}
 				}
 			}
@@ -96,18 +97,16 @@ void Game::checkBounds(Shape* shape)
 {
 
 }
-
-void Game::collision(Shape* shape1, Shape* shape2)
-{
+/*
 	float x3 = shape1->mPositionBeforeCollision->x;
 	float z3 = shape1->mPositionBeforeCollision->z;
+
 	float x4 = shape2->mPositionBeforeCollision->x;
 	float z4 = shape2->mPositionBeforeCollision->z;
 
 	shape1->mSceneNode->setPosition(x3,0.0,z3);
 	shape2->mSceneNode->setPosition(x4,0.0,z4);
-}
-
+*/
 bool Game::checkScope(Client* client, Shape* shape)
 {
 	//let's check scop here...

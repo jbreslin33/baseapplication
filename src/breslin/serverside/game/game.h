@@ -64,7 +64,6 @@ public:
 	
 	//collision detection
 	virtual void checkCollisions();
-	virtual void collision(Shape* shape1, Shape* shape2);
 	virtual void checkBounds(Shape* shape);
 		
 	//scope

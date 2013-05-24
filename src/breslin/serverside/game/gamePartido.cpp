@@ -49,7 +49,7 @@ void GamePartido::createShapes()
         }
 }
 
-
+/*
 void GamePartido::collision(Shape* shape1, Shape* shape2)
 {
 	Game::collision(shape1,shape2);	
@@ -79,7 +79,7 @@ void GamePartido::battleCollision(ShapePartido* shapePartido1, ShapePartido* sha
 	Battle* battle = new Battle(this,shapePartidoVector);
 	mBattleVector.push_back(battle);
 }
-
+*/
 void GamePartido::sendAnswer(ClientPartido* client, int answerTime, std::string answer)
 {
 	LogString("GamePartido::sendAnswer");

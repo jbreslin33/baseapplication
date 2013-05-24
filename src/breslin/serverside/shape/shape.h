@@ -131,6 +131,9 @@ void setValues();
 
 void insertIntoDB();
 
+//collision
+virtual void collision();
+
 	//delta move command
 virtual int  setFlag();
 virtual void addToMoveMessage(Message* message);
