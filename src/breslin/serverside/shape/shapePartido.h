@@ -40,7 +40,7 @@ int mLimit;
 /******************************************
 *            METHODS
 ****************************************/
-void processTick();
+virtual void processTick();
 virtual void collision(Shape* shape);
 
 //battle

@@ -120,6 +120,7 @@ public:
 	Server* mServer;
 
 	Game* mGame;
+	virtual Game* getGame();
 	
 	//db
 	int         db_id;

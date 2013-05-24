@@ -123,7 +123,7 @@ void addAbilitys();
 void createShape(Ogre::Root* root, Vector3D* position);
 
 //ticks
-void processTick();
+virtual void processTick();
 
 void setKeyDirection();
 

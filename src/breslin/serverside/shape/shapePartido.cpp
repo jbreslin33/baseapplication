@@ -47,8 +47,8 @@ ShapePartido::~ShapePartido()
 void ShapePartido::processTick()
 {
 	Shape::processTick();
- 
-	if (mWaitingForAnswer == false)
+
+	if (mOpponent && mWaitingForAnswer == false)
         {
                 sendQuestion();
                 LogString("sendQuestion!!!");
@@ -58,7 +58,7 @@ void ShapePartido::processTick()
 }
 void ShapePartido::sendQuestion()
 {
-        if (mClientPartido)
+        if (!mClientPartido)
         {
                 return;
         }
