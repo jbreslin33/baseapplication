@@ -142,6 +142,12 @@ void Server::createClients()
                 //client
                 Client* client = new Client(this, NULL, -2);
 		addClient(client,true);	
+	
+		//add Games
+	 	for (unsigned int i = 0; i < mGameVector.size(); i++)
+		{
+			client->addGame(mGameVector.at(i));
+		}
 
                 //id
                 const char* a = PQgetvalue(res, row, 0);
@@ -291,7 +297,10 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				{
 					continue;
 				}
-			
+		
+				client->controlGame(gameID);
+	
+/*
 				//call clients join game function
 				for (int g = 0; g < mGameVector.size(); g++)
 				{ 
@@ -300,6 +309,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 						mGameVector.at(g)->join(client); 
 					}
 				}
+*/
 			}
 		}
 	}
@@ -316,6 +326,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
  				//get client
                                 client = mClientVector.at(i);
 
+				client->controlGame(gameID);
+/*	
 				//call clients join game function
 				for (int g = 0; g < mGameVector.size(); g++)
 				{ 
@@ -324,7 +336,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 						mGameVector.at(g)->join(client); 
 					}
 				}
-                                
+       */                         
 			}
                 }
 	}

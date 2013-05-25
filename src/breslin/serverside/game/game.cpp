@@ -212,13 +212,13 @@ Vector3D* Game::getOpenPoint()
 		}
         }
 }
-
+/*
 void Game::join(Client* client)
 {
 	client->setGame(this);
 	sendShapes(client);
 }
-
+*/
 void Game::sendShapes(Client* client)
 {
  	for (unsigned int i = 0; i < mShapeVector.size(); i++)

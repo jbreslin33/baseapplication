@@ -80,6 +80,12 @@ void ServerPartido::createClients()
                 ClientPartido* clientPartido = new ClientPartido(this, NULL, -2);
                 addClient(clientPartido,true);
 
+                //add Games
+                for (unsigned int i = 0; i < mGameVector.size(); i++)
+                {
+                        clientPartido->addGame(mGamePartidoVector.at(i));
+                }
+
                 //id
                 const char* a = PQgetvalue(res, row, 0);
                 stringstream a_str;

@@ -48,7 +48,7 @@ void ShapePartido::processTick()
 void ShapePartido::collision(Shape* shape)
 {
 	Shape::collision(shape);	
-/*
+
 	if (mOpponent == NULL)
 	{
 		mOpponent = shape;
@@ -57,6 +57,5 @@ void ShapePartido::collision(Shape* shape)
 			mClientPartido->initializeBattle();
 		}
 	}
-*/
 }
 

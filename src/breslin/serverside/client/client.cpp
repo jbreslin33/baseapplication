@@ -53,7 +53,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	db_id = 0;
 	db_school_id = 0;
 
-	//game
+	//game--there should be a vector as well. and a mGame to show what the user is playing right now if any 
 	mGame = NULL;
 	
 	//shape
@@ -105,16 +105,37 @@ Client::~Client()
 	}
 }
 
+//game
 Game* Client::getGame()
 {
 	return mGame;
 }
+
+void Client::addGame(Game* game)
+{
+	mGameVector.push_back(game);
+} 
 
 void Client::setGame(Game* game)
 {
 	mGame = game;
 }
 
+void Client::controlGame(int gameID)
+{
+	
+ 	for (int i = 0; i < mGameVector.size(); i++)
+        {
+        	if (mGameVector.at(i)->mID == gameID)
+               	{
+               		mGame = mGameVector.at(i);
+			mGame->sendShapes(this);
+			LogString("Client::ControlGame:%d",gameID);
+                }
+	}	
+}
+
+//shape
 void Client::setShape(Shape* shape)
 {
         mShape = shape;

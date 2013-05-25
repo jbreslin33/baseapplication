@@ -23,9 +23,12 @@ void parseAnswer();
 ServerPartido* mServerPartido;	
 
 //game
+void addGame(GamePartido* gamePartido);
+std::vector<GamePartido*> mGamePartidoVector;
 GamePartido* mGamePartido;
 void setGame(GamePartido* gamePartido);
 GamePartido* getGame();
+virtual void controlGame(int gameID);
 
 //battle
 int mFirstUnmasteredQuestionID;

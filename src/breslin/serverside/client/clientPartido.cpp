@@ -35,6 +35,13 @@ ClientPartido::~ClientPartido()
 {
 }
 
+//game
+void ClientPartido::addGame(GamePartido* gamePartido)
+{
+	Client::addGame(gamePartido);
+        mGamePartidoVector.push_back(gamePartido);
+}
+
 GamePartido* ClientPartido::getGame()
 {
 	return mGamePartido;
@@ -46,7 +53,20 @@ void ClientPartido::setGame(GamePartido* gamePartido)
         mGamePartido = gamePartido;
 }
 
+void ClientPartido::controlGame(int gameID)
+{
+        for (int i = 0; i < mGamePartidoVector.size(); i++)
+        {
+                if (mGamePartidoVector.at(i)->mID == gameID)
+                {
+                        mGamePartido = mGamePartidoVector.at(i);
+                        mGamePartido->sendShapes(this);
+			LogString("ClientPartido::ControlGame:%d",gameID);
+                }
+        }
+}
 
+//updates
 void ClientPartido::processUpdate()
 {
 	if (mShapePartido)
@@ -61,12 +81,12 @@ void ClientPartido::processUpdate()
 
 void ClientPartido::initializeBattle()
 {
-	  getQuestionLevelID();
-
-          mWaitingForAnswer = false;
-          mAnswer = 0;
-          mQuestion = "";
-          sendBattleStart();
+	getQuestionLevelID();
+	LogString("after");
+        mWaitingForAnswer = false;
+        mAnswer = 0;
+        mQuestion = "";
+        sendBattleStart();
 }
 
 void ClientPartido::setShape(ShapePartido* shapePartido)
@@ -139,6 +159,7 @@ void ClientPartido::sendBattleStart()
 
         //send it
         mGamePartido->mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+	LogString("ClientPartido::sendBattleStart");
 }
 
 void ClientPartido::readAnswer(Message* mes)
@@ -191,10 +212,12 @@ void ClientPartido::getQuestionLevelID()
         int             col;
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+	LogString("getQuestinLevelID");
 
 //check all questions... to find the earliest non-mastered and all mastered ones...
         for (int i = 1; i < mGamePartido->mServerPartido->mQuestionCount; i++)
         {
+		LogString("i:%d",i);
                 std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, extract(epoch from questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start) * 1000 as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
                 int question_id = i;

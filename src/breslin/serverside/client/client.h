@@ -5,15 +5,9 @@
 
 #include "../message/message.h"
 
-#ifdef WIN32
-	#pragma comment (lib,"ws2_32.lib")
-#pragma message ("Auto linking WinSock2 library")
-
-	#include <winsock2.h>
-#else
-	#include <string.h>
-	#include <netinet/in.h>
-#endif
+#include <vector>
+#include <string.h>
+#include <netinet/in.h>
 
 // Define SOCKET data type for UNIX (defined in WinSock for Win32)
 // And socklen_t for Win32
@@ -119,9 +113,13 @@ public:
 
 	Server* mServer;
 
+	//game
+        std::vector<Game*> mGameVector;
+	void addGame(Game* game);
 	Game* mGame;
 	Game* getGame();
 	void setGame(Game* game);
+	virtual void controlGame(int gameID);
 	
 	//db
 	int         db_id;
