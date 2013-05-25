@@ -2,7 +2,8 @@
 #define CLIENTPARTIDO_H
 
 #include "client.h"
-#include "../battler/battler.h"
+
+#include <vector>
 
 class ServerPartido;
 class GamePartido;
@@ -10,30 +11,48 @@ class ShapePartido;
 
 class ClientPartido : public Client
 {
+
 public:
- 	ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID);	
-	~ClientPartido();
 
-	void sendSchools();
-	void parseAnswer();
+ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID);	
+~ClientPartido();
+
+void sendSchools();
+void parseAnswer();
+
+ServerPartido* mServerPartido;	
+
+//game
+GamePartido* mGamePartido;
+void setGame(GamePartido* gamePartido);
+GamePartido* getGame();
+
+//battle
+int mFirstUnmasteredQuestionID;
+std::vector<int> mMasteredQuestionIDVector;
+bool mWaitingForAnswer;
+std::string mQuestion;
+int mAnswer;
+int mLimit;
 
 
+//answer
+virtual void readAnswer(Message* message);
+std::string mStringAnswer;
+int mAnswerTime;
 
-	ServerPartido* mServer;	
-	GamePartido* mGame;
+//shape
+ShapePartido* mShapePartido;
+void setShape(ShapePartido* shapePartido);
 
-	//answer
-        virtual void readAnswer(Message* message);
-        std::string mStringAnswer;
-        int mAnswerTime;
+//battle
+void initializeBattle();
+virtual void processUpdate();
+void getQuestionLevelID();
+void sendQuestion();
+void sendBattleStart();
+void sendBattleEnd();
 
-	//shape
-	ShapePartido* mShapePartido;
-	void setShape(ShapePartido* shapePartido);
-
-	//battler
-	Battler* mBattler;
-	void setBattler(Battler* battler) { mBattler = battler; }
 };
 
 #endif

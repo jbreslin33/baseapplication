@@ -8,10 +8,13 @@
 #include "../game/gamePartido.h"
 #include "../shape/shapePartido.h"
 
-ClientPartido::ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID) : Client(server, address, clientID) 
+ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID) : Client(serverPartido, address, clientID) 
 {
 	//server
-	mServer = server;
+	mServerPartido = serverPartido;
+
+	//game
+	mGamePartido = NULL;
 
         if (mClientID >= 0)
         {
@@ -21,10 +24,49 @@ ClientPartido::ClientPartido(ServerPartido* server, struct sockaddr *address, in
         {
                 //your the node for web sockets
         }
+ 	
+	//battle
+        mWaitingForAnswer = false;
+        mLimit = 1;
+
 }
 
 ClientPartido::~ClientPartido()
 {
+}
+
+GamePartido* ClientPartido::getGame()
+{
+	return mGamePartido;
+}
+
+void ClientPartido::setGame(GamePartido* gamePartido)
+{
+        Client::setGame(gamePartido);
+        mGamePartido = gamePartido;
+}
+
+
+void ClientPartido::processUpdate()
+{
+	if (mShapePartido)
+	{
+ 		if (mShapePartido->mOpponent && mWaitingForAnswer == false)
+        	{
+                	sendQuestion();
+                	mWaitingForAnswer = true;
+        	}
+	}
+}
+
+void ClientPartido::initializeBattle()
+{
+	  getQuestionLevelID();
+
+          mWaitingForAnswer = false;
+          mAnswer = 0;
+          mQuestion = "";
+          sendBattleStart();
 }
 
 void ClientPartido::setShape(ShapePartido* shapePartido)
@@ -41,26 +83,62 @@ void ClientPartido::setShape(ShapePartido* shapePartido)
 void ClientPartido::sendSchools()
 {
         //loop thru each char... 
-        for (unsigned int i = 0; i < mServer->mSchoolVector.size(); i++)
+        for (unsigned int i = 0; i < mServerPartido->mSchoolVector.size(); i++)
         {
                 mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-                mMessage.WriteByte(mServer->mMessageAddSchool); // add type
+                mMessage.WriteByte(mServerPartido->mMessageAddSchool); // add type
                 if (mClientID > 0)
                 {
                         mMessage.WriteByte(mClientID); // add mClientID for browsers 
                 }
-                int length = mServer->mSchoolVector.at(i).length();  // get length of string containing school 
+                int length = mServerPartido->mSchoolVector.at(i).length();  // get length of string containing school 
                 mMessage.WriteByte(length); //send length 
 
                 //loop thru length and write it 
                 for (int b=0; b < length; b++)
                 {
-                        mMessage.WriteByte(mServer->mSchoolVector.at(i).at(b));         
+                        mMessage.WriteByte(mServerPartido->mSchoolVector.at(i).at(b));         
                 }
                 
                 //send it
-                mServer->mNetwork->sendPacketTo(this,&mMessage);
+                mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
         }
+}
+
+void ClientPartido::sendQuestion()
+{
+        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        mMessage.WriteByte(mGamePartido->mServerPartido->mMessageAskQuestion); // add type
+
+        if (mClientID > 0)
+        {
+                mMessage.WriteByte(mClientID); // add mClientID for browsers
+        }
+        int length = mGamePartido->mServerPartido->mQuestionVector.at(mFirstUnmasteredQuestionID).length();  // get length of string containing school
+        mMessage.WriteByte(length); //send length
+
+        //loop thru length and write it
+        for (int b=0; b < length; b++)
+        {
+                mMessage.WriteByte(mGamePartido->mServerPartido->mQuestionVector.at(mFirstUnmasteredQuestionID).at(b));
+        }
+
+        //send it
+        mGamePartido->mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+}
+
+void ClientPartido::sendBattleStart()
+{
+        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        mMessage.WriteByte(mGamePartido->mServerPartido->mMessageBattleStart); // add type
+
+        if (mClientID > 0)
+        {
+                mMessage.WriteByte(mClientID); // add mClientID for browsers
+        }
+
+        //send it
+        mGamePartido->mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 }
 
 void ClientPartido::readAnswer(Message* mes)
@@ -99,5 +177,115 @@ void ClientPartido::readAnswer(Message* mes)
         }
         LogString("ClientPartido::about to sendAnswer");
         //mGame->sendAnswer(this,mAnswerTime,mStringAnswer);
+}
+
+//find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
+void ClientPartido::getQuestionLevelID()
+{
+        bool foundFirstUnmasteredID = false;
+
+        PGconn          *conn;
+        PGresult        *res;
+        int             rec_count;
+        int             row;
+        int             col;
+
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+//check all questions... to find the earliest non-mastered and all mastered ones...
+        for (int i = 1; i < mGamePartido->mServerPartido->mQuestionCount; i++)
+        {
+                std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, extract(epoch from questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start) * 1000 as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
+
+                int question_id = i;
+                ostringstream convertA;
+                convertA << question_id;
+                std::string a = convertA.str();
+
+                std::string b = " and questions_attempts.user_id =";
+
+                ostringstream convertC;
+                convertC << mUserID;
+                std::string c = convertC.str();
+
+                std::string d = " order by questions_attempts.question_attempt_time_start DESC limit ";
+                ostringstream convertE;
+                convertE << mLimit;
+                std::string e = convertE.str();
+
+                query.append(a);
+                query.append(b);
+                query.append(c);
+                query.append(d);
+                query.append(e);
+
+                const char * q = query.c_str();
+                res = PQexec(conn,q);
+                if (PQresultStatus(res) != PGRES_TUPLES_OK)
+                {
+                        puts("We did not get any data!");
+                }
+                rec_count = PQntuples(res);
+
+                //right off the bat we can check if user has even attepted mLimit questions...
+                if (rec_count < mLimit)
+                {
+                        if (!foundFirstUnmasteredID)
+                        {
+                                mFirstUnmasteredQuestionID = i;
+                                foundFirstUnmasteredID = true;
+                        }
+                        continue;
+                }
+                else
+                {
+                }
+
+                for (row=0; row<rec_count; row++)
+                {
+                        //checking that question is correct..
+                        const char* question_char = PQgetvalue(res, row, 1);
+                        const char* answer_char = PQgetvalue(res, row, 2);
+                        const char* seconds_per_problem_char = PQgetvalue(res, row, 4);
+
+                        int question = atoi (question_char);
+                        int answer   = atoi (answer_char);
+                        int seconds_per_problem = atoi (seconds_per_problem_char);
+
+                        if (question == answer)
+                        {
+                        }
+                        else
+                        {
+                                if (!foundFirstUnmasteredID)
+                                {
+                                        mFirstUnmasteredQuestionID = i;
+                                        foundFirstUnmasteredID = true;
+                                }
+                                continue;
+                        }
+
+                        if (seconds_per_problem < 2000)
+                        {
+
+                        }
+                        else
+                        {
+                                if (!foundFirstUnmasteredID)
+                                {
+                                        mFirstUnmasteredQuestionID = i;
+                                        foundFirstUnmasteredID = true;
+                                }
+                                continue;
+                        }
+
+                        //made it???? mastered??
+                        //add to mastered
+                        mMasteredQuestionIDVector.push_back(i);
+
+                }
+                PQclear(res);
+        }
+        PQfinish(conn);
 }
 

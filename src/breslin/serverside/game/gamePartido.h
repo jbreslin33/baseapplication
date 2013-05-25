@@ -9,7 +9,6 @@ using namespace std;
 //class Network;
 class ServerPartido;
 class ShapePartido;
-class Battle;
 class ClientPartido;
 
 class GamePartido : public Game
@@ -21,8 +20,6 @@ public:
 
 	//time
 	void processUpdate();
-
-	std::vector<Battle*> mBattleVector;  
 
 	ServerPartido* mServerPartido;
 	void sendAnswer(ClientPartido* client, int answerTime, std::string answer);

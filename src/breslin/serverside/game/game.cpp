@@ -215,7 +215,7 @@ Vector3D* Game::getOpenPoint()
 
 void Game::join(Client* client)
 {
-        client->mGame = this;
+	client->setGame(this);
 	sendShapes(client);
 }
 

@@ -298,7 +298,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 					if (mGameVector.at(g)->mID == gameID)
 					{
 						mGameVector.at(g)->join(client); 
-						LogString("join");
 					}
 				}
 			}

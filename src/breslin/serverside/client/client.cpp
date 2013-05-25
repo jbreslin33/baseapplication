@@ -110,6 +110,11 @@ Game* Client::getGame()
 	return mGame;
 }
 
+void Client::setGame(Game* game)
+{
+	mGame = game;
+}
+
 void Client::setShape(Shape* shape)
 {
         mShape = shape;

@@ -91,7 +91,7 @@ public:
 
 public:
 	//processUpdate
-	void processUpdate();
+	virtual void processUpdate();
 
 	//timeout
 	void checkForTimeout();
@@ -120,7 +120,8 @@ public:
 	Server* mServer;
 
 	Game* mGame;
-	virtual Game* getGame();
+	Game* getGame();
+	void setGame(Game* game);
 	
 	//db
 	int         db_id;

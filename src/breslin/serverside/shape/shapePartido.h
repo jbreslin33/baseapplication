@@ -29,27 +29,11 @@ GamePartido*   mGamePartido;
 ClientPartido* mClientPartido;
 Shape*  mOpponent;
 
-//battle
-int mFirstUnmasteredQuestionID;
-std::vector<int> mMasteredQuestionIDVector;
-bool mWaitingForAnswer;
-std::string mQuestion;
-int mAnswer;
-int mLimit;
-
 /******************************************
 *            METHODS
 ****************************************/
 virtual void processTick();
 virtual void collision(Shape* shape);
-
-//battle
-void processUpdate();
-void getQuestionLevelID();
-void sendQuestion();
-void sendBattleStart();
-void sendBattleEnd();
-
 
 };
 
