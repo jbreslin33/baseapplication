@@ -47,13 +47,7 @@ GamePartido* ClientPartido::getGame()
 	return mGamePartido;
 }
 
-void ClientPartido::setGame(GamePartido* gamePartido)
-{
-        Client::setGame(gamePartido);
-        mGamePartido = gamePartido;
-}
-
-void ClientPartido::controlGame(int gameID)
+void ClientPartido::setGame(int gameID)
 {
         for (int i = 0; i < mGamePartidoVector.size(); i++)
         {
@@ -217,7 +211,6 @@ void ClientPartido::getQuestionLevelID()
 //check all questions... to find the earliest non-mastered and all mastered ones...
         for (int i = 1; i < mGamePartido->mServerPartido->mQuestionCount; i++)
         {
-		LogString("i:%d",i);
                 std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, extract(epoch from questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start) * 1000 as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
                 int question_id = i;

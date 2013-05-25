@@ -63,7 +63,9 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
         byteBuffer->BeginReading();
 
         int type = byteBuffer->ReadByte();
-        
+       
+	LogString("type:%d",type);
+ 
 	switch(type)
         {
                 case mMessageAskQuestion:

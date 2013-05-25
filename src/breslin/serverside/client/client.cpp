@@ -116,12 +116,7 @@ void Client::addGame(Game* game)
 	mGameVector.push_back(game);
 } 
 
-void Client::setGame(Game* game)
-{
-	mGame = game;
-}
-
-void Client::controlGame(int gameID)
+void Client::setGame(int gameID)
 {
 	
  	for (int i = 0; i < mGameVector.size(); i++)

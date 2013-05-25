@@ -118,8 +118,7 @@ public:
 	void addGame(Game* game);
 	Game* mGame;
 	Game* getGame();
-	void setGame(Game* game);
-	virtual void controlGame(int gameID);
+	virtual void setGame(int gameID);
 	
 	//db
 	int         db_id;

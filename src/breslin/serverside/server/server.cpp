@@ -298,18 +298,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 					continue;
 				}
 		
-				client->controlGame(gameID);
-	
-/*
-				//call clients join game function
-				for (int g = 0; g < mGameVector.size(); g++)
-				{ 
-					if (mGameVector.at(g)->mID == gameID)
-					{
-						mGameVector.at(g)->join(client); 
-					}
-				}
-*/
+				client->setGame(gameID);
 			}
 		}
 	}
@@ -326,17 +315,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
  				//get client
                                 client = mClientVector.at(i);
 
-				client->controlGame(gameID);
-/*	
-				//call clients join game function
-				for (int g = 0; g < mGameVector.size(); g++)
-				{ 
-					if (mGameVector.at(g)->mID == gameID)
-					{
-						mGameVector.at(g)->join(client); 
-					}
-				}
-       */                         
+				client->setGame(gameID);
 			}
                 }
 	}

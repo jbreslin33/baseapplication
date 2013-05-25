@@ -26,9 +26,8 @@ ServerPartido* mServerPartido;
 void addGame(GamePartido* gamePartido);
 std::vector<GamePartido*> mGamePartidoVector;
 GamePartido* mGamePartido;
-void setGame(GamePartido* gamePartido);
 GamePartido* getGame();
-virtual void controlGame(int gameID);
+virtual void setGame(int gameID);
 
 //battle
 int mFirstUnmasteredQuestionID;
