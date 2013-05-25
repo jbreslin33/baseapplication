@@ -206,11 +206,12 @@ void ClientPartido::getQuestionLevelID()
         int             col;
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-	LogString("getQuestinLevelID");
+	LogString("getQuestionLevelID");
 
 //check all questions... to find the earliest non-mastered and all mastered ones...
         for (int i = 1; i < mGamePartido->mServerPartido->mQuestionCount; i++)
         {
+		LogString("getQuestionLevelID in loop");
                 std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, extract(epoch from questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start) * 1000 as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
                 int question_id = i;

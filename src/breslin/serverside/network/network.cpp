@@ -248,7 +248,6 @@ void Network::sendPacketTo(Client* client, Message* message)
 	// Check if the packet is sequenced
         message->BeginReading();
         int type = message->ReadByte();
-	LogString("clientID:%d",client->db_id);
 
         if(type > 0)
         {
