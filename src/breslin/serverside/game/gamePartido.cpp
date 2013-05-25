@@ -40,37 +40,6 @@ void GamePartido::createShapes()
         }
 }
 
-/*
-void GamePartido::collision(Shape* shape1, Shape* shape2)
-{
-	Game::collision(shape1,shape2);	
-
-	//now let's check if these guys are already in a battle
-	for (unsigned int i = 0; i < mBattleVector.size(); i++)
-	{
-		for (unsigned int s = 0; s < mBattleVector.at(i)->mShapePartidoVector.size(); s++)
-		{
-			if (shape1 == mBattleVector.at(i)->mShapePartidoVector.at(s) || shape2 == mBattleVector.at(i)->mShapePartidoVector.at(s))
-			{
-				return;
-			} 
-		}
-	}
-	
-	battleCollision((ShapePartido*)shape1,(ShapePartido*)shape2);
-}
-
-void GamePartido::battleCollision(ShapePartido* shapePartido1, ShapePartido* shapePartido2)
-{
-	std::vector<ShapePartido*> shapePartidoVector;
-	shapePartidoVector.push_back(shapePartido1);
-	shapePartidoVector.push_back(shapePartido2);
-
-	//create a battle
-	Battle* battle = new Battle(this,shapePartidoVector);
-	mBattleVector.push_back(battle);
-}
-*/
 void GamePartido::sendAnswer(ClientPartido* client, int answerTime, std::string answer)
 {
 	LogString("GamePartido::sendAnswer");
