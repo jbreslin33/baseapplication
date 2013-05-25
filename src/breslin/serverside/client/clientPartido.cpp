@@ -69,7 +69,6 @@ void ClientPartido::controlGame(int gameID)
 //updates
 void ClientPartido::processUpdate()
 {
-	Client::processUpdate();
 	if (mShapePartido)
 	{
  		if (mShapePartido->mOpponent && mWaitingForAnswer == false)
@@ -82,15 +81,12 @@ void ClientPartido::processUpdate()
 
 void ClientPartido::initializeBattle()
 {
-	if (mGamePartido)
-	{
-		getQuestionLevelID();
-		LogString("after");
-        	mWaitingForAnswer = false;
-        	mAnswer = 0;
-        	mQuestion = "";
-        	sendBattleStart();
-	}
+	getQuestionLevelID();
+	LogString("after");
+        mWaitingForAnswer = false;
+        mAnswer = 0;
+        mQuestion = "";
+        sendBattleStart();
 }
 
 void ClientPartido::setShape(ShapePartido* shapePartido)
@@ -221,6 +217,7 @@ void ClientPartido::getQuestionLevelID()
 //check all questions... to find the earliest non-mastered and all mastered ones...
         for (int i = 1; i < mGamePartido->mServerPartido->mQuestionCount; i++)
         {
+		LogString("i:%d",i);
                 std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, extract(epoch from questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start) * 1000 as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
                 int question_id = i;
