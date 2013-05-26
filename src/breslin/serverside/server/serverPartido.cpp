@@ -169,17 +169,15 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
         	}     	 
        		else if (type == mMessageAnswerQuestion)
                 {
-			LogString("mMessageAnswerQuestion received");
       			// Find the correct client by comparing addresses
                 	for (unsigned int i = 0; i < mClientPartidoVector.size(); i++)
                 	{
-				LogString("looping...");
                         	if( memcmp(mClientPartidoVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         	{
-					LogString("looping. 2..");
                                 	ClientPartido* clientPartido = mClientPartidoVector.at(i);
-  					if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
+  					if (DREAMSOCK_DISCONNECTED == clientPartido->mConnectionState)
                         		{
+						LogString("continue");
                         			continue;
                         		}
 					clientPartido->readAnswer(mes);

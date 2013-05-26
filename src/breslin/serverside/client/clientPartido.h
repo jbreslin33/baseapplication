@@ -42,6 +42,7 @@ int mLimit;
 virtual void readAnswer(Message* message);
 std::string mStringAnswer;
 int mAnswerTime;
+void insertAnswerAttempt(int mAnswerTime, std::string mStringAnswer);
 
 //shape
 ShapePartido* mShapePartido;
