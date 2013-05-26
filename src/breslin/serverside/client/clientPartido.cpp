@@ -224,7 +224,7 @@ void ClientPartido::getQuestionLevelID()
 	//check all questions... to find the earliest non-mastered and all mastered ones...
         for (int i = 0; i < mServerPartido->mQuestionCount; i++)
         {
-                std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, extract(epoch from questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start) * 1000 as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
+                std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
                 int question_id = i;
                 ostringstream convertA;
@@ -275,11 +275,11 @@ void ClientPartido::getQuestionLevelID()
                         //checking that question is correct..
                         const char* question_char = PQgetvalue(res, row, 1);
                         const char* answer_char = PQgetvalue(res, row, 2);
-                        const char* seconds_per_problem_char = PQgetvalue(res, row, 4);
+                        const char* answer_time_char = PQgetvalue(res, row, 4);
 
-                        int question = atoi (question_char);
-                        int answer   = atoi (answer_char);
-                        int seconds_per_problem = atoi (seconds_per_problem_char);
+                        int question    = atoi (question_char);
+                        int answer      = atoi (answer_char);
+                        int answer_time = atoi (answer_time_char);
 
                         if (question == answer)
                         {
@@ -294,7 +294,7 @@ void ClientPartido::getQuestionLevelID()
                                 continue;
                         }
 
-                        if (seconds_per_problem < 2000)
+                        if (answer_time < 2000)
                         {
 
                         }

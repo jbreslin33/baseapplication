@@ -330,10 +330,9 @@ CREATE TABLE questions (
 --QUESTIONS_ATTEMPTS
 CREATE TABLE questions_attempts (
     id integer NOT NULL,
-    question_attempt_time_start timestamp,
-    question_attempt_time_end timestamp,
     question_id integer NOT NULL,
     answer text,
+    answer_time integer NOT NULL,
     user_id integer NOT NULL
 );
 
