@@ -44,5 +44,4 @@ void ApplicationPlayPartido::execute()
 void ApplicationPlayPartido::exit()
 {
 	ApplicationPlay::exit();
-	mApplicationPartido->hideBattleScreen();
 }

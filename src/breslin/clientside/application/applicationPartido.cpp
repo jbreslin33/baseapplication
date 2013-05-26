@@ -72,6 +72,10 @@ void ApplicationPartido::processUpdate()
                 mPlayingGame = false;
                 mStateMachine->changeState(mApplicationLogin);
 
+		//battle screen init...
+		createBattleScreen();
+		hideBattleScreen();
+
                 mFake = false;
         }
 
@@ -143,10 +147,6 @@ void  ApplicationPartido::showBattleScreen()
 
 void  ApplicationPartido::hideBattleScreen()
 {
-	if (mFake)
-	{
-		return;	
-	}
        	mLabelQuestion->hide();
         mLabelAnswer->hide();
 
