@@ -29,6 +29,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
         mWaitingForAnswer = false;
         mLimit = 1;
 	mFirstUnmasteredQuestionID = 0;
+//i dont' think this is getting set....later mFirstUnmasteredQuestionID
 
 }
 
