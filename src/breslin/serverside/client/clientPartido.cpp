@@ -213,7 +213,7 @@ void ClientPartido::getQuestionLevelID()
         int             col;
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-	LogString("getQuestionLevelID");
+	LogString("mQuestionCount:%d",mServerPartido->mQuestionCount);
 
 //check all questions... to find the earliest non-mastered and all mastered ones...
         for (int i = 1; i < mServerPartido->mQuestionCount; i++)

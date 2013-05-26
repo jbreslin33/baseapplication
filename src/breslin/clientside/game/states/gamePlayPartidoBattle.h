@@ -21,9 +21,9 @@ public:
 *   		MEMBER VARIABLES
 ***************************************/
 
-GamePartido* mGame;
+GamePartido* mGamePartido;
 
-GamePlayPartidoBattle(GamePartido* game);
+GamePlayPartidoBattle(GamePartido* gamePartido);
 ~GamePlayPartidoBattle();
 
 void enter  ();

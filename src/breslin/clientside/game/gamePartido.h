@@ -21,7 +21,7 @@ public:
 
 public:
 
-ApplicationPartido* mApplication;
+ApplicationPartido* mApplicationPartido;
 
 //states
 State* mGamePlayPartidoBattle;

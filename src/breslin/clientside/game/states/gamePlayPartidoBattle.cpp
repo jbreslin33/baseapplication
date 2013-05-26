@@ -16,9 +16,9 @@
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-GamePlayPartidoBattle::GamePlayPartidoBattle(GamePartido* game)
+GamePlayPartidoBattle::GamePlayPartidoBattle(GamePartido* gamePartido)
 {
-	mGame = game;
+	mGamePartido = gamePartido;
 }
 
 GamePlayPartidoBattle::~GamePlayPartidoBattle()
@@ -29,24 +29,18 @@ GamePlayPartidoBattle::~GamePlayPartidoBattle()
 void GamePlayPartidoBattle::enter()
 {
 	LogString("GamePlayPartidoBattle::enter");
-	mGame->mApplication->createBattleScreen();
-	mGame->mApplication->showBattleScreen();
-	mGame->mBattleStart = false;
+	mGamePartido->mApplicationPartido->createBattleScreen();
+	mGamePartido->mApplicationPartido->showBattleScreen();
+	mGamePartido->mBattleStart = false;
 }
 
 void GamePlayPartidoBattle::execute()
 {
-/*
-	//user input
-	mGame->processInput();	
-	
-	//network outgoing
-	mGame->sendByteBuffer();
-*/
+
 }
 
 void GamePlayPartidoBattle::exit()
 {
-	mGame->mApplication->hideBattleScreen();
-	mGame->mBattleEnd = true;
+	mGamePartido->mApplicationPartido->hideBattleScreen();
+	mGamePartido->mBattleEnd = true;
 }

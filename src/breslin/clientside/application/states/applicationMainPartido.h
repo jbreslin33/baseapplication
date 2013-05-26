@@ -21,9 +21,9 @@ public:
 *   		MEMBER VARIABLES
 ***************************************/
 
-ApplicationPartido* mApplication;
+ApplicationPartido* mApplicationPartido;
 
-ApplicationMainPartido(ApplicationPartido* application);
+ApplicationMainPartido(ApplicationPartido* applicationPartido);
 ~ApplicationMainPartido();
 
 virtual void enter  ();

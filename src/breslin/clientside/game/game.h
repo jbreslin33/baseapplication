@@ -63,7 +63,6 @@ static const char mMessageRemoveShape = -104;
 
 static const char mMessageQuitGame = -108;
 
-protected:
 
 //applicationBreslin
 ApplicationBreslin* mApplication;

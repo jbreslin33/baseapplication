@@ -16,9 +16,9 @@
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
-ApplicationMainPartido::ApplicationMainPartido(ApplicationPartido* application) : ApplicationMain(application)
+ApplicationMainPartido::ApplicationMainPartido(ApplicationPartido* applicationPartido) : ApplicationMain(applicationPartido)
 {
-	mApplication = application;
+	mApplicationPartido = applicationPartido;
 }
 
 ApplicationMainPartido::~ApplicationMainPartido()
@@ -35,15 +35,15 @@ void ApplicationMainPartido::execute()
 {
 	ApplicationMain::execute();	
 
-	if (mApplication->mButtonHit == mApplication->mButtonJoinGameB)
+	if (mApplicationPartido->mButtonHit == mApplicationPartido->mButtonJoinGameB)
 	{
 		LogString("ApplicationMainPartido::execute....button hit for b"); 
-		mApplication->mButtonHit = NULL;
- 		mApplication->mGame = new GamePartido(mApplication);
- 		mApplication->mGame->createStates();
- 		mApplication->mGame->setStates();
-		mApplication->sendJoinGame(2);
-		mApplication->mStateMachine->changeState(mApplication->mApplicationPlay);
+		mApplicationPartido->mButtonHit = NULL;
+ 		mApplicationPartido->mGame = new GamePartido(mApplicationPartido);
+ 		mApplicationPartido->mGame->createStates();
+ 		mApplicationPartido->mGame->setStates();
+		mApplicationPartido->sendJoinGame(2);
+		mApplicationPartido->mStateMachine->changeState(mApplicationPartido->mApplicationPlay);
 	}
 }
 

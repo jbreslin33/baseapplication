@@ -8,10 +8,10 @@ class ApplicationPartido;
 class ApplicationPlayPartido : public ApplicationPlay
 {
 public:
-ApplicationPlayPartido(ApplicationPartido* application);
+ApplicationPlayPartido(ApplicationPartido* applicationPartido);
 ~ApplicationPlayPartido();
 
-ApplicationPartido* mApplication;
+ApplicationPartido* mApplicationPartido;
 
 
 virtual void enter  ();

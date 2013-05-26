@@ -31,7 +31,7 @@
 GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicationPartido)
 {
 	LogString("GamePartio::GamePartido");
-	mApplication = applicationPartido;
+	mApplicationPartido = applicationPartido;
 	mBattleStart = false;
 	mBattleEnd   = false;
 }
@@ -64,8 +64,6 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 
         int type = byteBuffer->ReadByte();
        
-	LogString("type:%d",type);
- 
 	switch(type)
         {
                 case mMessageAskQuestion:
@@ -103,14 +101,25 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
         for (int i = 0; i < length; i++)
         {
         	char c =  byteBuffer->ReadByte();
+		LogString("c:%c",c);
                 question.append(1,c);
         }
 	LogString("askQuestion... before 2");
 	for(int i = 0; i < mShapeVector->size(); i++)
 	{	
+		LogString("mShapeVector:%d",i);
 		if (mShapeVector->at(i)->mLocal == 1)
 		{
-			mApplication->mLabelQuestion->setCaption(question);
+			LogString("mShapeVector is local:%d",i);
+			if (mApplicationPartido->mLabelQuestion)
+			{
+				mApplicationPartido->mLabelQuestion->setCaption(question);
+			}
+			else
+			{
+				LogString("no label");
+			}
+			LogString("after caption mShapeVector is :%d",i);
 		}
 	}
 	LogString("askQuestion... after");

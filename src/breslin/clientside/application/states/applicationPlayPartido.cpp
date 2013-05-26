@@ -22,9 +22,9 @@
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
-ApplicationPlayPartido::ApplicationPlayPartido(ApplicationPartido* application) : ApplicationPlay(application)
+ApplicationPlayPartido::ApplicationPlayPartido(ApplicationPartido* applicationPartido) : ApplicationPlay(applicationPartido)
 {
-	mApplication = application;
+	mApplicationPartido = applicationPartido;
 }
 
 ApplicationPlayPartido::~ApplicationPlayPartido()
@@ -44,5 +44,5 @@ void ApplicationPlayPartido::execute()
 void ApplicationPlayPartido::exit()
 {
 	ApplicationPlay::exit();
-	mApplication->hideBattleScreen();
+	mApplicationPartido->hideBattleScreen();
 }
