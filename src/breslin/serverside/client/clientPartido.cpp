@@ -29,8 +29,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
         mWaitingForAnswer = false;
         mLimit = 1;
 	mFirstUnmasteredQuestionID = 0;
-//i dont' think this is getting set....later mFirstUnmasteredQuestionID
-
+	mQuestionID = 0;
 }
 
 ClientPartido::~ClientPartido()
@@ -165,7 +164,6 @@ void ClientPartido::sendBattleStart()
 
 void ClientPartido::readAnswer(Message* mes)
 {
-
         //clear answer string
         mStringAnswer.clear();
 
@@ -191,9 +189,10 @@ void ClientPartido::readAnswer(Message* mes)
         }
         //mGame->sendAnswer(this,mAnswerTime,mStringAnswer);
 	//insert into answer attempts....
+	insertAnswerAttempt();
 }
 
-void ClientPartido::insertAnswerAttempt(int mAnswerTime, std::string mStringAnswer)
+void ClientPartido::insertAnswerAttempt()
 {
        bool foundFirstUnmasteredID = false;
 
@@ -204,8 +203,49 @@ void ClientPartido::insertAnswerAttempt(int mAnswerTime, std::string mStringAnsw
         int             col;
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+	
+	std::string query = "insert into questions_attempts (question_id,answer,answer_time,user_id) VALUES (";
+	//question_id	
+	std::string question_id_string;	
+	ostringstream convert_question_id_string;
+	convert_question_id_string << mQuestionID;
+	question_id_string = convert_question_id_string.str();
+	query.append(question_id_string);
 
-//	std::string query = "insert into questions_attempts:wq
+	//answer
+	std::string a = ",'";
+	query.append(a);
+	query.append(mStringAnswer);	
+	std::string b = "',";	
+	query.append(b);
+
+	//answer_time
+ 	std::string answer_time_string;
+        ostringstream convert_answer_time_string;
+        convert_answer_time_string << mAnswerTime;
+        answer_time_string = convert_answer_time_string.str();
+        query.append(answer_time_string);
+	std::string c = ",";
+
+	//user_id
+ 	std::string user_id_string;
+        ostringstream convert_user_id_string;
+        convert_user_id_string << db_id;
+        user_id_string = convert_user_id_string.str();
+        query.append(user_id_string);
+
+
+	std::string d = ")";	
+	query.append(d);
+
+    	const char * q = query.c_str();
+	LogString("q:%s",q);
+        res = PQexec(conn,q);
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                puts("We did not get any data!");
+        }
+       rec_count = PQntuples(res);
 }
 
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
@@ -226,15 +266,15 @@ void ClientPartido::getQuestionLevelID()
         {
                 std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
-                int question_id = i;
+                mQuestionID = i;
                 ostringstream convertA;
-                convertA << question_id;
+                convertA << mQuestionID;
                 std::string a = convertA.str();
 
                 std::string b = " and questions_attempts.user_id =";
 
                 ostringstream convertC;
-                convertC << mUserID;
+                convertC << db_id;
                 std::string c = convertC.str();
 
                 std::string d = " order by questions_attempts.question_attempt_time_start DESC limit ";

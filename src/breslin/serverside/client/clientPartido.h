@@ -37,12 +37,14 @@ std::string mQuestion;
 int mAnswer;
 int mLimit;
 
+//questions
+int mQuestionID;
 
 //answer
 virtual void readAnswer(Message* message);
 std::string mStringAnswer;
 int mAnswerTime;
-void insertAnswerAttempt(int mAnswerTime, std::string mStringAnswer);
+void insertAnswerAttempt();
 
 //shape
 ShapePartido* mShapePartido;

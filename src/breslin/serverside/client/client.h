@@ -68,9 +68,6 @@ public:
 	//id used just for browser clients for now, if it's 0 then we know it's a c++ java client.
 	int mClientID;
 
-	//user id from database
-	int mUserID;
-
 	int				mConnectionState;		
 
 	signed short	mDroppedPackets;
