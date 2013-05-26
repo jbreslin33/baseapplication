@@ -28,6 +28,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	//battle
         mWaitingForAnswer = false;
         mLimit = 1;
+	mFirstUnmasteredQuestionID = 0;
 
 }
 
@@ -55,7 +56,7 @@ void ClientPartido::setGame(int gameID)
                 {
                         mGamePartido = mGamePartidoVector.at(i);
                         mGamePartido->sendShapes(this);
-			LogString("ClientPartido::ControlGame:%d",gameID);
+			LogString("ClientPartido::setGame:%d",gameID);
                 }
         }
 }
@@ -71,7 +72,7 @@ void ClientPartido::processUpdate()
  			if (mShapePartido->mOpponent && mWaitingForAnswer == false)
         		{
                 		LogString("ClientPartido::sendQuestion:%d",db_id);	
-			//	sendQuestion();
+				sendQuestion();
                 		mWaitingForAnswer = true;
         		}
 		}
@@ -127,29 +128,29 @@ void ClientPartido::sendSchools()
 void ClientPartido::sendQuestion()
 {
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mGamePartido->mServerPartido->mMessageAskQuestion); // add type
+        mMessage.WriteByte(mServerPartido->mMessageAskQuestion); // add type
 
         if (mClientID > 0)
         {
                 mMessage.WriteByte(mClientID); // add mClientID for browsers
         }
-        int length = mGamePartido->mServerPartido->mQuestionVector.at(mFirstUnmasteredQuestionID).length();  // get length of string containing school
+        int length = mServerPartido->mQuestionVector.at(mFirstUnmasteredQuestionID).length();  // get length of string containing school
         mMessage.WriteByte(length); //send length
 
         //loop thru length and write it
         for (int b=0; b < length; b++)
         {
-                mMessage.WriteByte(mGamePartido->mServerPartido->mQuestionVector.at(mFirstUnmasteredQuestionID).at(b));
+                mMessage.WriteByte(mServerPartido->mQuestionVector.at(mFirstUnmasteredQuestionID).at(b));
         }
 
         //send it
-        mGamePartido->mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+        mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 }
 
 void ClientPartido::sendBattleStart()
 {
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mGamePartido->mServerPartido->mMessageBattleStart); // add type
+        mMessage.WriteByte(mServerPartido->mMessageBattleStart); // add type
 
         if (mClientID > 0)
         {
@@ -157,7 +158,7 @@ void ClientPartido::sendBattleStart()
         }
 
         //send it
-        mGamePartido->mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+        mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 	LogString("ClientPartido::sendBattleStart");
 }
 
@@ -214,9 +215,8 @@ void ClientPartido::getQuestionLevelID()
 	LogString("getQuestionLevelID");
 
 //check all questions... to find the earliest non-mastered and all mastered ones...
-        for (int i = 1; i < mGamePartido->mServerPartido->mQuestionCount; i++)
+        for (int i = 1; i < mServerPartido->mQuestionCount; i++)
         {
-		LogString("getQuestionLevelID in loop");
                 std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, extract(epoch from questions_attempts.question_attempt_time_end - questions_attempts.question_attempt_time_start) * 1000 as seconds_per_problem  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
                 int question_id = i;
