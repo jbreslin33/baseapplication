@@ -114,8 +114,14 @@ int main(int argc, char **argv)
                                         newTime = server->mNetwork->getCurrentSystemTime();
                                         time = newTime - oldTime;
                                 } while (time < 1);
-				LogString("main::processUpdate");	
-                                server->processUpdate(time);
+				if (server)
+				{
+                                	server->processUpdate(time);
+				}
+				else
+				{
+					LogString("server is null");
+				}
                                 oldTime = newTime;
                         }
                 }

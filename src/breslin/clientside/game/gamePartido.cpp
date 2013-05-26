@@ -96,7 +96,7 @@ void GamePartido::battleEnd(ByteBuffer* byteBuffer)
 
 void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 {
-	LogString("askQuestion...");
+	LogString("askQuestion... before");
 	std::string question;
         int length = byteBuffer->ReadByte();
         for (int i = 0; i < length; i++)
@@ -112,5 +112,6 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 			mApplication->mLabelQuestion->setCaption(question);
 		}
 	}
+	LogString("askQuestion... after");
 }
 

@@ -63,13 +63,18 @@ void ClientPartido::setGame(int gameID)
 //updates
 void ClientPartido::processUpdate()
 {
-	if (mShapePartido)
+	Client::processUpdate();
+	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
- 		if (mShapePartido->mOpponent && mWaitingForAnswer == false)
-        	{
-                	sendQuestion();
-                	mWaitingForAnswer = true;
-        	}
+		if (mShapePartido)
+		{
+ 			if (mShapePartido->mOpponent && mWaitingForAnswer == false)
+        		{
+                		LogString("ClientPartido::sendQuestion:%d",db_id);	
+			//	sendQuestion();
+                		mWaitingForAnswer = true;
+        		}
+		}
 	}
 }
 

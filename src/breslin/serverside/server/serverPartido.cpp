@@ -20,7 +20,6 @@ ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPo
 
 	//get questions
         getQuestions();
-
 }
 
 ServerPartido::~ServerPartido()
@@ -47,7 +46,6 @@ void ServerPartido::processGames()
 
 void ServerPartido::sendCommands()
 {
-	LogString("ServerPartido::sendCommands");
         //send positions and exact frame time the calcs where done on which is mFrameTime
         for (unsigned int i = 0; i < mGamePartidoVector.size(); i++)
         {
