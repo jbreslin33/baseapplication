@@ -28,7 +28,6 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	//battle
         mWaitingForAnswer = false;
         mLimit = 1;
-	mFirstUnmasteredQuestionID = 0;
 	mQuestionID = 0;
 }
 
@@ -134,13 +133,13 @@ void ClientPartido::sendQuestion()
         {
                 mMessage.WriteByte(mClientID); // add mClientID for browsers
         }
-        int length = mServerPartido->mQuestionVector.at(mFirstUnmasteredQuestionID).length();  // get length of string containing school
+        int length = mServerPartido->mQuestionVector.at(mQuestionID).length();  // get length of string containing school
         mMessage.WriteByte(length); //send length
 
         //loop thru length and write it
         for (int b=0; b < length; b++)
         {
-                mMessage.WriteByte(mServerPartido->mQuestionVector.at(mFirstUnmasteredQuestionID).at(b));
+                mMessage.WriteByte(mServerPartido->mQuestionVector.at(mQuestionID).at(b));
         }
 
         //send it
@@ -263,13 +262,13 @@ void ClientPartido::getQuestionLevelID()
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
 	//check all questions... to find the earliest non-mastered and all mastered ones...
-        for (int i = 0; i < mServerPartido->mQuestionCount; i++)
+        for (int i = 1; i < mServerPartido->mQuestionCount; i++)
         {
                 std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
-                mQuestionID = i;
+                int questionID = i;
                 ostringstream convertA;
-                convertA << mQuestionID;
+                convertA << questionID;
                 std::string a = convertA.str();
 
                 std::string b = " and questions_attempts.user_id =";
@@ -302,7 +301,7 @@ void ClientPartido::getQuestionLevelID()
                 {
                         if (!foundFirstUnmasteredID)
                         {
-                                mFirstUnmasteredQuestionID = i;
+                                mQuestionID = i;
                                 foundFirstUnmasteredID = true;
                         }
                         continue;
@@ -329,7 +328,7 @@ void ClientPartido::getQuestionLevelID()
                         {
                                 if (!foundFirstUnmasteredID)
                                 {
-                                        mFirstUnmasteredQuestionID = i;
+                                        mQuestionID = i;
                                         foundFirstUnmasteredID = true;
                                 }
                                 continue;
@@ -343,7 +342,7 @@ void ClientPartido::getQuestionLevelID()
                         {
                                 if (!foundFirstUnmasteredID)
                                 {
-                                        mFirstUnmasteredQuestionID = i;
+                                        mQuestionID = i;
                                         foundFirstUnmasteredID = true;
                                 }
                                 continue;

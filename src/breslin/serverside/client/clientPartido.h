@@ -30,15 +30,12 @@ GamePartido* getGame();
 virtual void setGame(int gameID);
 
 //battle
-int mFirstUnmasteredQuestionID;
+int mQuestionID;
 std::vector<int> mMasteredQuestionIDVector;
 bool mWaitingForAnswer;
 std::string mQuestion;
 int mAnswer;
 int mLimit;
-
-//questions
-int mQuestionID;
 
 //answer
 virtual void readAnswer(Message* message);
