@@ -203,7 +203,7 @@ void ClientPartido::insertAnswerAttempt()
         int             col;
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-	
+//insert into questions_attempts (question_id,answer,answer_time,user_id) VALUES (12,'8',1202)	
 	std::string query = "insert into questions_attempts (question_id,answer,answer_time,user_id) VALUES (";
 	//question_id	
 	std::string question_id_string;	
@@ -226,6 +226,7 @@ void ClientPartido::insertAnswerAttempt()
         answer_time_string = convert_answer_time_string.str();
         query.append(answer_time_string);
 	std::string c = ",";
+	query.append(c);
 
 	//user_id
  	std::string user_id_string;
