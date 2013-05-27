@@ -332,6 +332,7 @@ CREATE TABLE questions_attempts (
     id integer NOT NULL,
     question_id integer NOT NULL,
     answer text,
+    answer_attempt_time timestamp default current_timestamp,
     answer_time integer NOT NULL,
     user_id integer NOT NULL
 );

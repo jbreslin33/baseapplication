@@ -1,3 +1,26 @@
+/*
+select min(questions.level_id), questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions_attempts.answer_time > 2000 AND questions.answer != questions_attempts.answer GROUP BY questions.id,questions_attempts.answer,questions_attempts.user_id,questions_attempts.answer_time;
+
+
+select min(questions.level_id), questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions_attempts.answer_time > 2000 or questions.answer != questions_attempts.answer GROUP BY questions.id,questions_attempts.answer,questions_attempts.user_id,questions_attempts.answer_time;
+
+select min(questions.level_id), max(questions.id), questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions_attempts.answer_time > 2000 AND questions.answer != questions_attempts.answer GROUP BY questions.id,questions_attempts.answer,questions_attempts.user_id,questions_attempts.answer_time LIMIT 1 OFFSET 2;
+
+
+//getting everyting...
+ select min(questions.level_id), questions_attempts.answer_attempt_time, questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time from questions_attempts inner join questions on questions_attempts.question_id=questions.id GROUP BY questions.id,questions_attempts.answer,questions_attempts.user_id,questions_attempts.answer_time, questions_attempts.answer_attempt_time order by questions.level_id, questions_attempts.answer_attempt_time DESC;
+
+//without min
+select questions.level_id, questions_attempts.answer_attempt_time, questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time from questions_attempts inner join questions on questions_attempts.question_id=questions.id GROUP BY questions.id,questions_attempts.answer,questions_attempts.user_id,questions_attempts.answer_time, questions_attempts.answer_attempt_time order by questions.level_id, questions_attempts.answer_attempt_time DESC;
+
+
+SELECT questions.level_id FROM questions_attempts INNER JOIN questions ON questions_attempts.question_id=questions.id WHERE questions_attempts.answer_time > 2000 AND questions.answer != questions_attempts.answer AND 1 = (SELECT COUNT(*) FROM questions);
+
+
+ ; WITH cte AS ( SELECT *, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts) SELECT * FROM cte WHERE rn = 1;
+
+; WITH cte AS ( SELECT *, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts) SELECT * FROM cte WHERE rn = 1;
+*/
 #include "clientPartido.h"
 
 //log
@@ -262,9 +285,9 @@ void ClientPartido::getQuestionLevelID()
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
 	//check all questions... to find the earliest non-mastered and all mastered ones...
-        for (int i = 1; i < mServerPartido->mQuestionCount; i++)
-        {
-                std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
+       	// for (int i = 1; i < mServerPartido->mQuestionCount; i++)
+        //{
+                std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time, min(questions_attempts.level_id)  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
                 int questionID = i;
                 ostringstream convertA;
@@ -353,8 +376,8 @@ void ClientPartido::getQuestionLevelID()
                         mMasteredQuestionIDVector.push_back(i);
 
                 }
-                PQclear(res);
-        }
+        //}
+       	PQclear(res);
         PQfinish(conn);
 }
 
