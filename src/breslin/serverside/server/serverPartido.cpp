@@ -207,12 +207,16 @@ void ServerPartido::getQuestions()
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
         res = PQexec(conn,
-       "select * from questions ORDER BY id");
+       "select * from questions ORDER BY level_id");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
                 //exit(0);
         }
+	else
+	{
+		LogString("Total questions:%d",rec_count);
+	}
         rec_count = PQntuples(res);
 	mQuestionCount = rec_count;
         printf("We received %d records.\n", rec_count);
@@ -234,9 +238,7 @@ void ServerPartido::getQuestions()
                 std::string dString(d);
                 mLevelVector.push_back(dString);
         }
-
         PQclear(res);
-
         PQfinish(conn);
 }
 
