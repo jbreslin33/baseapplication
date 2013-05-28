@@ -20,6 +20,43 @@ SELECT questions.level_id FROM questions_attempts INNER JOIN questions ON questi
  ; WITH cte AS ( SELECT *, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts) SELECT * FROM cte WHERE rn = 1;
 
 ; WITH cte AS ( SELECT *, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts) SELECT * FROM cte WHERE rn = 1;
+
+
+
+; WITH cte AS ( SELECT *, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000;
+
+
+//using join and partion by
+; WITH cte AS ( SELECT *, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000;
+
+
+
+
+//closer...
+ ; WITH cte AS ( SELECT questions.id, questions_attempts.answer_time, questions.answer as "real_answer", questions_attempts.answer as "client_answer", ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000;
+
+
+//is this it?
+ ; WITH cte AS ( SELECT questions.id, questions_attempts.answer_time, questions.answer as "real_answer", questions_attempts.answer as "client_answer", ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000 AND real_answer != client_answer;
+
+
+//this is with a limit
+; WITH cte AS ( SELECT questions.id, questions_attempts.answer_time, questions.answer as "real_answer", questions_attempts.answer as "client_answer", ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000 AND real_answer != client_answer LIMIT 1;
+
+
+
+
+//with limit and user id also it will return nothing if user has answered all correct thus far so then you would simply querey again
+getting distinct level_id...
+ ; WITH cte AS ( SELECT questions.id, questions_attempts.user_id as "userid", questions_attempts.answer_time, questions.answer as "real_answer", questions_attempts.answer as "client_answer", ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000 AND real_answer != client_answer AND userid = 2 LIMIT 1;
+
+
+
+
+
+
+
+
 */
 #include "clientPartido.h"
 
