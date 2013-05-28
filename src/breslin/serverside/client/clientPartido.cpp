@@ -50,13 +50,6 @@ SELECT questions.level_id FROM questions_attempts INNER JOIN questions ON questi
 getting distinct level_id...
  ; WITH cte AS ( SELECT questions.id, questions_attempts.user_id as "userid", questions_attempts.answer_time, questions.answer as "real_answer", questions_attempts.answer as "client_answer", ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000 AND real_answer != client_answer AND userid = 2 LIMIT 1;
 
-
-
-
-
-
-
-
 */
 #include "clientPartido.h"
 
@@ -67,6 +60,9 @@ getting distinct level_id...
 #include "../network/network.h"
 #include "../game/gamePartido.h"
 #include "../shape/shapePartido.h"
+
+//utility
+#include "../../utility/utility.h"
 
 ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID) : Client(serverPartido, address, clientID) 
 {
@@ -324,6 +320,9 @@ void ClientPartido::getQuestionLevelID()
 	//check all questions... to find the earliest non-mastered and all mastered ones...
        	// for (int i = 1; i < mServerPartido->mQuestionCount; i++)
         //{
+/*
+; WITH cte AS ( SELECT questions.id, questions_attempts.user_id as "userid", questions_attempts.answer_time, questions.answer as "real_answer", questions_attempts.answer as "client_answer", ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000 AND real_answer != client_answer AND userid = 2 LIMIT 1;
+*/
                 std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time, min(questions_attempts.level_id)  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
 
                 int questionID = i;

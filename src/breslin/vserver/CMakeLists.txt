@@ -285,6 +285,9 @@ set(HDRS
 		
 	#math
 	../math/vector3D.h
+	
+	#utility
+	../utility/utility.h
 
 	#bounds
 	../serverside/bounds/bounds.h
@@ -350,6 +353,9 @@ set(SRCS
 	
 	#math
 	../math/vector3D.cpp
+
+	#utility
+	../utility/utility.cpp
 	
 	#bounds
 	../serverside/bounds/bounds.cpp
