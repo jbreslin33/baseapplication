@@ -126,7 +126,7 @@ void ClientPartido::processUpdate()
 		{
  			if (mShapePartido->mOpponent && mWaitingForAnswer == false)
         		{
-                		LogString("ClientPartido::sendQuestion:%d",db_id);	
+				getQuestionLevelID();
 				sendQuestion();
                 		mWaitingForAnswer = true;
         		}
@@ -136,9 +136,8 @@ void ClientPartido::processUpdate()
 
 void ClientPartido::initializeBattle()
 {
-	getQuestionLevelID();
-	LogString("after");
-        mWaitingForAnswer = false;
+	LogString("ClientPartido::initializeBattle");        
+	mWaitingForAnswer = false;
         mAnswer = 0;
         mQuestion = "";
         sendBattleStart();
@@ -182,6 +181,7 @@ void ClientPartido::sendSchools()
 
 void ClientPartido::sendQuestion()
 {
+	LogString("ClientPartido::sendQuestion id:%d",mQuestionID);
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServerPartido->mMessageAskQuestion); // add type
 
@@ -204,6 +204,7 @@ void ClientPartido::sendQuestion()
 
 void ClientPartido::sendBattleStart()
 {
+	LogString("ClientPartido::sendBattleStart");
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServerPartido->mMessageBattleStart); // add type
 
@@ -214,7 +215,6 @@ void ClientPartido::sendBattleStart()
 
         //send it
         mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
-	LogString("ClientPartido::sendBattleStart");
 }
 
 void ClientPartido::readAnswer(Message* mes)
@@ -223,7 +223,6 @@ void ClientPartido::readAnswer(Message* mes)
         mStringAnswer.clear();
 
         mAnswerTime = mes->ReadByte();
-        LogString("mAnswerTime:%d",mAnswerTime);
 
         int sizeOfAnswer = mes->ReadByte();
 
@@ -307,6 +306,7 @@ void ClientPartido::insertAnswerAttempt()
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
 void ClientPartido::getQuestionLevelID()
 {
+   	LogString("ClientPartido::getQuestionLevelID");	
         bool foundFirstUnmasteredID = false;
 
         PGconn          *conn;

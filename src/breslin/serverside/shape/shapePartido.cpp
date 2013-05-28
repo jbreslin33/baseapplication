@@ -51,15 +51,11 @@ void ShapePartido::collision(Shape* shape)
 
 	if (mOpponent == NULL)
 	{
-		LogString("init client after null check:%d", mClientPartido->db_id);
 		mOpponent = shape;
-		LogString("init client after shape:%d", mClientPartido->db_id);
 		if (mClientPartido)
 		{
-			LogString("init client after clientPartido:%d", mClientPartido->db_id);
 			if (mClientPartido->mConnectionState == DREAMSOCK_CONNECTED)
 			{
-				LogString("init client after dreamsocke:%d", mClientPartido->db_id);
 				mClientPartido->initializeBattle();
 			}
 		}
