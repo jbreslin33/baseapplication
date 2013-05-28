@@ -317,102 +317,46 @@ void ClientPartido::getQuestionLevelID()
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-	//check all questions... to find the earliest non-mastered and all mastered ones...
-       	// for (int i = 1; i < mServerPartido->mQuestionCount; i++)
-        //{
-/*
-; WITH cte AS ( SELECT questions.id, questions_attempts.user_id as "userid", questions_attempts.answer_time, questions.answer as "real_answer", questions_attempts.answer as "client_answer", ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000 AND real_answer != client_answer AND userid = 2 LIMIT 1;
-*/
-                std::string query = "select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id, questions_attempts.answer_time, min(questions_attempts.level_id)  from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=";
+	std::string query = "; WITH cte AS ( SELECT questions.id, questions_attempts.user_id as userid, questions_attempts.answer_time, questions.answer as real_answer, questions_attempts.answer as client_answer, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000 AND real_answer != client_answer AND userid = ";
 
-                int questionID = i;
-                ostringstream convertA;
-                convertA << questionID;
-                std::string a = convertA.str();
+	std::string a = utility->intToString(db_id);       
+	query.append(a);
+	std::string b = " LIMIT 1"; 
+	query.append(b);
+         
 
-                std::string b = " and questions_attempts.user_id =";
+        const char * q = query.c_str();
+	LogString("q:%s",q);
+        res = PQexec(conn,q);
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                puts("We did not get any data!");
+        }
+        rec_count = PQntuples(res);
 
-                ostringstream convertC;
-                convertC << db_id;
-                std::string c = convertC.str();
-
-                std::string d = " order by questions_attempts.question_attempt_time_start DESC limit ";
-                ostringstream convertE;
-                convertE << mLimit;
-                std::string e = convertE.str();
-
-                query.append(a);
-                query.append(b);
-                query.append(c);
-                query.append(d);
-                query.append(e);
-
-                const char * q = query.c_str();
-                res = PQexec(conn,q);
-                if (PQresultStatus(res) != PGRES_TUPLES_OK)
+	LogString("rec_count:%d",rec_count);
+        //right off the bat we can check if user has even attepted mLimit questions...
+        if (rec_count < mLimit)
+        {
+        	if (!foundFirstUnmasteredID)
                 {
-                        puts("We did not get any data!");
+                        //mQuestionID = i;
+                        foundFirstUnmasteredID = true;
                 }
-                rec_count = PQntuples(res);
+                //continue;
+        }
+        else
+        {
+        }
 
-                //right off the bat we can check if user has even attepted mLimit questions...
-                if (rec_count < mLimit)
-                {
-                        if (!foundFirstUnmasteredID)
-                        {
-                                mQuestionID = i;
-                                foundFirstUnmasteredID = true;
-                        }
-                        continue;
-                }
-                else
-                {
-                }
+        for (row=0; row<rec_count; row++)
+        {
+        	//checking that question is correct..
+                const char* question_id_char = PQgetvalue(res, row, 0);
 
-                for (row=0; row<rec_count; row++)
-                {
-                        //checking that question is correct..
-                        const char* question_char = PQgetvalue(res, row, 1);
-                        const char* answer_char = PQgetvalue(res, row, 2);
-                        const char* answer_time_char = PQgetvalue(res, row, 4);
-
-                        int question    = atoi (question_char);
-                        int answer      = atoi (answer_char);
-                        int answer_time = atoi (answer_time_char);
-
-                        if (question == answer)
-                        {
-                        }
-                        else
-                        {
-                                if (!foundFirstUnmasteredID)
-                                {
-                                        mQuestionID = i;
-                                        foundFirstUnmasteredID = true;
-                                }
-                                continue;
-                        }
-
-                        if (answer_time < 2000)
-                        {
-
-                        }
-                        else
-                        {
-                                if (!foundFirstUnmasteredID)
-                                {
-                                        mQuestionID = i;
-                                        foundFirstUnmasteredID = true;
-                                }
-                                continue;
-                        }
-
-                        //made it???? mastered??
-                        //add to mastered
-                        mMasteredQuestionIDVector.push_back(i);
-
-                }
-        //}
+                mQuestionID = atoi (question_id_char);
+                //mMasteredQuestionIDVector.push_back(i);
+        }
        	PQclear(res);
         PQfinish(conn);
 }

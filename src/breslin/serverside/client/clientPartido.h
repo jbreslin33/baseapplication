@@ -8,6 +8,7 @@
 class ServerPartido;
 class GamePartido;
 class ShapePartido;
+class Utility;
 
 class ClientPartido : public Client
 {
@@ -21,6 +22,9 @@ void sendSchools();
 void parseAnswer();
 
 ServerPartido* mServerPartido;	
+
+//utility
+Utility* utility;
 
 //game
 void addGame(GamePartido* gamePartido);
