@@ -94,23 +94,17 @@ void GamePartido::battleEnd(ByteBuffer* byteBuffer)
 
 void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 {
-	LogString("askQuestion... before");
 	std::string question;
         int length = byteBuffer->ReadByte();
-	LogString("length:%d",length);
         for (int i = 0; i < length; i++)
         {
         	char c =  byteBuffer->ReadByte();
-		LogString("c:%c",c);
                 question.append(1,c);
         }
-	LogString("askQuestion... before 2");
 	for(int i = 0; i < mShapeVector->size(); i++)
 	{	
-		LogString("mShapeVector:%d",i);
 		if (mShapeVector->at(i)->mLocal == 1)
 		{
-			LogString("mShapeVector is local:%d",i);
 			if (mApplicationPartido->mLabelQuestion)
 			{
 				mApplicationPartido->mLabelQuestion->setCaption(question);
@@ -119,9 +113,7 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 			{
 				LogString("no label");
 			}
-			LogString("after caption mShapeVector is :%d",i);
 		}
 	}
-	LogString("askQuestion... after");
 }
 

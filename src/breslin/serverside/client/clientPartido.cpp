@@ -84,7 +84,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	//battle
         mWaitingForAnswer = false;
         mLimit = 1;
-	mQuestionID = 0;
+	mQuestionID = 1;
 }
 
 ClientPartido::~ClientPartido()
@@ -248,7 +248,7 @@ void ClientPartido::readAnswer(Message* mes)
 
 void ClientPartido::insertAnswerAttempt()
 {
-       bool foundFirstUnmasteredID = false;
+	bool foundFirstUnmasteredID = false;
 
         PGconn          *conn;
         PGresult        *res;
@@ -257,14 +257,8 @@ void ClientPartido::insertAnswerAttempt()
         int             col;
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-//insert into questions_attempts (question_id,answer,answer_time,user_id) VALUES (12,'8',1202)	
 	std::string query = "insert into questions_attempts (question_id,answer,answer_time,user_id) VALUES (";
-	//question_id	
-	std::string question_id_string;	
-	ostringstream convert_question_id_string;
-	convert_question_id_string << mQuestionID;
-	question_id_string = convert_question_id_string.str();
-	query.append(question_id_string);
+	query.append(utility->intToString(mQuestionID));
 
 	//answer
 	std::string a = ",'";
@@ -274,21 +268,12 @@ void ClientPartido::insertAnswerAttempt()
 	query.append(b);
 
 	//answer_time
- 	std::string answer_time_string;
-        ostringstream convert_answer_time_string;
-        convert_answer_time_string << mAnswerTime;
-        answer_time_string = convert_answer_time_string.str();
-        query.append(answer_time_string);
+        query.append(utility->intToString(mAnswerTime));
 	std::string c = ",";
 	query.append(c);
 
 	//user_id
- 	std::string user_id_string;
-        ostringstream convert_user_id_string;
-        convert_user_id_string << db_id;
-        user_id_string = convert_user_id_string.str();
-        query.append(user_id_string);
-
+        query.append(utility->intToString(db_id));
 
 	std::string d = ")";	
 	query.append(d);
@@ -299,8 +284,8 @@ void ClientPartido::insertAnswerAttempt()
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
-        }
-       rec_count = PQntuples(res);
+	}
+       	rec_count = PQntuples(res);
 }
 
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
@@ -323,39 +308,28 @@ void ClientPartido::getQuestionLevelID()
 	query.append(a);
 	std::string b = " LIMIT 1"; 
 	query.append(b);
-         
 
         const char * q = query.c_str();
 	LogString("q:%s",q);
         res = PQexec(conn,q);
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
-                puts("We did not get any data!");
+		LogString("No result set, put user at questions.id = 1");
+        	mQuestionID = 1;
         }
         rec_count = PQntuples(res);
 
-	LogString("rec_count:%d",rec_count);
         //right off the bat we can check if user has even attepted mLimit questions...
         if (rec_count < mLimit)
         {
-        	if (!foundFirstUnmasteredID)
-                {
-                        //mQuestionID = i;
-                        foundFirstUnmasteredID = true;
-                }
-                //continue;
+		LogString("result set is empty, put user at questions.id = 1");
+        	mQuestionID = 1;
         }
         else
         {
-        }
-
-        for (row=0; row<rec_count; row++)
-        {
-        	//checking that question is correct..
-                const char* question_id_char = PQgetvalue(res, row, 0);
-
+                const char* question_id_char = PQgetvalue(res, 0, 0);
                 mQuestionID = atoi (question_id_char);
-                //mMasteredQuestionIDVector.push_back(i);
+		LogString("mQuestionID=%d",mQuestionID);
         }
        	PQclear(res);
         PQfinish(conn);
