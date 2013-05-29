@@ -139,7 +139,7 @@ void ClientPartido::initializeBattle()
 	LogString("ClientPartido::initializeBattle");        
 	mWaitingForAnswer = false;
         mAnswer = 0;
-        mQuestion = "";
+        mQuestionString = "";
         sendBattleStart();
 }
 
@@ -189,13 +189,13 @@ void ClientPartido::sendQuestion()
         {
                 mMessage.WriteByte(mClientID); // add mClientID for browsers
         }
-        int length = mServerPartido->mQuestionVector.at(mQuestionID).length();  // get length of string containing school
+        int length = mQuestionString.length();  // get length of string containing school
         mMessage.WriteByte(length); //send length
 
         //loop thru length and write it
-        for (int b=0; b < length; b++)
+        for (int i=0; i < length; i++)
         {
-                mMessage.WriteByte(mServerPartido->mQuestionVector.at(mQuestionID).at(b));
+                mMessage.WriteByte(mQuestionString.at(i));
         }
 
         //send it
@@ -302,7 +302,7 @@ void ClientPartido::getQuestionLevelID()
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-	std::string query = "; WITH cte AS ( SELECT questions.id, questions_attempts.user_id as userid, questions_attempts.answer_time, questions.answer as real_answer, questions_attempts.answer as client_answer, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000 AND real_answer != client_answer AND userid = ";
+	std::string query = "; WITH cte AS ( SELECT questions.id, questions.question, questions_attempts.user_id as userid, questions_attempts.answer_time, questions.answer as real_answer, questions_attempts.answer as client_answer, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000 AND real_answer != client_answer AND userid = ";
 
 	std::string a = utility->intToString(db_id);       
 	query.append(a);
@@ -314,7 +314,7 @@ void ClientPartido::getQuestionLevelID()
         res = PQexec(conn,q);
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
-		LogString("No result set, put user at questions.id = 1");
+		LogString("SQL ERROR OUTER:%s",q);
         	mQuestionID = 1;
         }
         rec_count = PQntuples(res);
@@ -322,14 +322,61 @@ void ClientPartido::getQuestionLevelID()
         //right off the bat we can check if user has even attepted mLimit questions...
         if (rec_count < mLimit)
         {
-		LogString("result set is empty, put user at questions.id = 1");
-        	mQuestionID = 1;
+		LogString("record count is less than 1 so we need to do another query...");
+		//then client has completed all attempted levels....so give him max level attempted then add one.....
+		PGconn          *conn2;
+        	PGresult        *res2;
+        	int             rec_count2;
+        	int             row2;
+        	int             col2;
+
+        	conn2 = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+        	std::string query2 = "; WITH cte AS ( SELECT questions.id, questions.question, questions_attempts.user_id as userid, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY question_id DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND userid = ";
+
+		std::string a2 = utility->intToString(db_id);       
+		query2.append(a2);
+		std::string b2 = " LIMIT 1"; 
+		query2.append(b2);
+
+        	const char * q2 = query2.c_str();
+		LogString("q2:%s",q2);
+        	res2 = PQexec(conn2,q2);
+        	if (PQresultStatus(res2) != PGRES_TUPLES_OK)
+        	{
+			LogString("Sql Error INNER:%s",q2);
+        		mQuestionID = 1;
+        	}
+
+        	if (rec_count < mLimit)
+        	{
+			mQuestionID = 1;
+			mQuestionString.append("0");	
+		}
+		else
+		{
+  			const char* question_id_char = PQgetvalue(res2, 0, 0);
+                	mQuestionID = atoi (question_id_char);
+                	LogString("mQuestionID=%d",mQuestionID);
+
+                	const char* b2 = PQgetvalue(res, 0, 1);
+                	std::string bString(b2);
+                	mQuestionString = bString;
+
+        		rec_count2 = PQntuples(res2);
+		}	
+       		PQclear(res2);
+        	PQfinish(conn2);
         }
         else
         {
                 const char* question_id_char = PQgetvalue(res, 0, 0);
                 mQuestionID = atoi (question_id_char);
 		LogString("mQuestionID=%d",mQuestionID);
+
+		const char* b = PQgetvalue(res, 0, 1);
+                std::string bString(b);
+                mQuestionString = bString;
         }
        	PQclear(res);
         PQfinish(conn);

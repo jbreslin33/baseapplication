@@ -37,7 +37,7 @@ virtual void setGame(int gameID);
 int mQuestionID;
 std::vector<int> mMasteredQuestionIDVector;
 bool mWaitingForAnswer;
-std::string mQuestion;
+std::string mQuestionString;
 int mAnswer;
 int mLimit;
 
