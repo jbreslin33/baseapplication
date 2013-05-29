@@ -323,8 +323,8 @@ void ClientPartido::getQuestionLevelID()
         }
         rec_count = PQntuples(res);
 
-        //right off the bat we can check if user has even attepted mLimit questions...
-        if (rec_count < mLimit)
+       	//empty result could mean new user at level 1 or user who has completed all attempted levels.... 
+	if (rec_count < mLimit)
         {
 		getQuestionLevelIDNextLevel();
         }
