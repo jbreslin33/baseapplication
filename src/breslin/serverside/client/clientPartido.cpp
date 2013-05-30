@@ -314,12 +314,15 @@ void ClientPartido::getQuestionLevelID()
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-	std::string query = "; WITH cte AS ( SELECT questions.id, questions.question, questions_attempts.user_id as userid, questions_attempts.answer_time, questions.answer as real_answer, questions_attempts.answer as client_answer, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000 AND real_answer != client_answer AND userid = ";
+	std::string query = "SELECT questions.id, questions.question FROM questions INNER JOIN questions_attempts ON questions.id=questions_attempts.question_id WHERE questions_attempts.answer_time < 2000 AND questions.answer = questions_attempts.answer AND questions_attempts.user_id = ";
 
+	//user_id
 	std::string a = utility->intToString(db_id);       
 	query.append(a);
-	std::string b = " LIMIT 1"; 
-	query.append(b);
+
+	//the rest
+	std::string b = "GROUP BY questions.id, questions_attempts.answer_attempt_time ORDER BY questions.id DESC, questions_attempts.answer_attempt_time DESC LIMIT 1 OFFSET 2";	
+	query.append(b);	
 
         const char * q = query.c_str();
 	LogString("q:%s",q);
@@ -334,7 +337,8 @@ void ClientPartido::getQuestionLevelID()
        	//empty result could mean new user at level 1 or user who has completed all attempted levels.... 
 	if (rec_count < mLimit)
         {
-		getQuestionLevelIDNextLevel();
+		mQuestionID = 1;
+		mQuestionString = "0";	
         }
         else
         {
