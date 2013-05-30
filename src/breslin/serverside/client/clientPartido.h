@@ -54,9 +54,7 @@ void setShape(ShapePartido* shapePartido);
 //battle
 void initializeBattle();
 virtual void processUpdate();
-void getQuestionLevelID();
-void getQuestionLevelIDNextLevel();
-void getQuestion(int id);
+void getQuestion();
 void sendQuestion();
 void sendBattleStart();
 void sendBattleEnd();

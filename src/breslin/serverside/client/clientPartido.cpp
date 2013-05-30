@@ -134,7 +134,7 @@ void ClientPartido::processUpdate()
 		{
  			if (mShapePartido->mOpponent && mWaitingForAnswer == false)
         		{
-				getQuestionLevelID();
+				getQuestion();
 				sendQuestion();
                 		mWaitingForAnswer = true;
         		}
@@ -301,9 +301,9 @@ void ClientPartido::insertAnswerAttempt()
 }
 
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
-void ClientPartido::getQuestionLevelID()
+void ClientPartido::getQuestion()
 {
-   	LogString("ClientPartido::getQuestionLevelID");	
+   	LogString("ClientPartido::getQuestion");	
         bool foundFirstUnmasteredID = false;
 
         PGconn          *conn;
@@ -354,90 +354,3 @@ void ClientPartido::getQuestionLevelID()
         PQfinish(conn);
 }
 
-//find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
-void ClientPartido::getQuestionLevelIDNextLevel()
-{
-        LogString("ClientPartido::getQuestionLevelIDNextLevel");
-        PGconn          *conn;
-        PGresult        *res;
-        int             rec_count;
-        int             row;
-        int             col;
-
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-
-        std::string query = "; WITH cte AS ( SELECT questions.id, questions.question, questions_attempts.user_id as userid, ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY question_id DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND userid = ";
-
-        std::string a = utility->intToString(db_id);
-        query.append(a);
-        std::string b = " LIMIT 1";
-        query.append(b);
-
-        const char * q = query.c_str();
-        LogString("q:%s",q);
-        res = PQexec(conn,q);
-        if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-                LogString("Sql Error INNER:%s",q);
-                mQuestionID = 1;
-        }
-        rec_count = PQntuples(res);
-
-        if (rec_count < mLimit)
-        {
-		LogString("Sending to first level");
-        	mQuestionID = 1;
-                mQuestionString.append("0");
-        }
-        else
-        {
-		LogString("Sending to next level");
-        	const char* question_id_char = PQgetvalue(res, 0, 0);
-                mQuestionID = atoi (question_id_char);
-		mQuestionID++;
-                LogString("mQuestionID=%d",mQuestionID);
-		getQuestion(mQuestionID);
-        }      
-        PQclear(res);
-        PQfinish(conn);
-}
-
-void ClientPartido::getQuestion(int id)
-{
-	LogString("ClientPartido::getQuestion");
-        PGconn          *conn;
-        PGresult        *res;
-        int             rec_count;
-        int             row;
-        int             col;
-
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-
-        std::string query = "SELECT question FROM questions WHERE id = ";
-
-        std::string a = utility->intToString(id);
-        query.append(a);
-
-        const char * q = query.c_str();
-        LogString("q:%s",q);
-        res = PQexec(conn,q);
-        if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-                LogString("Sql Error INNER:%s",q);
-                mQuestionID = 1;
-        }
-        rec_count = PQntuples(res);
-
-        if (rec_count < mLimit)
-        {
-                LogString("NO QUESTION MATCH");
-        }
-        else
-        {
-                const char* b = PQgetvalue(res, 0, 0);
-                std::string bString(b);
-                mQuestionString = bString;
-        }
-        PQclear(res);
-        PQfinish(conn);
-}
