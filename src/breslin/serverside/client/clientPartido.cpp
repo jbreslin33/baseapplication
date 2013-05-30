@@ -257,24 +257,14 @@ void ClientPartido::getQuestion()
 
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-/*
-	std::string query = "SELECT * FROM (SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions.id = (SELECT max(question_id) FROM questions_attempts) ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10) AS A WHERE time_in_msec < 2000 AND real_answer = client_answer";
-
+	std::string query = "SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions.id = (SELECT max(question_id) FROM questions_attempts) AND questions_attempts.user_id = ";
 
 	//user_id
 	std::string a = utility->intToString(db_id);       
 	query.append(a);
-
-	//the rest
-	std::string b = "GROUP BY questions.id, questions_attempts.answer_attempt_time ORDER BY questions.id DESC, questions_attempts.answer_attempt_time DESC LIMIT 1 OFFSET 2";	
-	query.append(b);	
-*/
-	std::string = "{
-{
-{
-SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions.id = (SELECT max(question_id) FROM questions_attempts) AND questions_attempts.user_id = 2 ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10;
-
-
+	
+	std::string b = " ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10";
+	query.append(b);
 
         const char * q = query.c_str();
 	LogString("q:%s",q);
@@ -286,25 +276,42 @@ SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer 
         }
         rec_count = PQntuples(res);
 
-       	//empty result could mean new user at level 1 or user who has completed all attempted levels.... 
-	if (rec_count == 10)
-        {
-                const char* question_id_char = PQgetvalue(res, 0, 0);
-                mQuestionID = atoi (question_id_char);
+       	//empty result means new user... 
+	if (rec_count == 0)
+	{
+		mQuestionID = 1;	
+		mQuestionString = "0";
+	
+	}
 
-		//complete level add one to levelID
-		mQuestionID++;
-                mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-        }
-        else
-        {
-		//not enough questions answered goto to level in resultset....
+	//same level as result set id just go there
+	if (rec_count > 0 && rec_count < 10)
+	{
                 const char* question_id_char = PQgetvalue(res, 0, 0);
                 mQuestionID = atoi (question_id_char);
 
                 mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
 	}
-       	PQclear(res);
+// id | real_answer | client_answer | answer_attempt_time | time_in_msec | user_id 
+	//we have a contender to check further.....
+	if (rec_count == 10)
+        {
+		//id
+                const char* question_id_char = PQgetvalue(res, 0, 0);
+                mQuestionID = atoi (question_id_char);
+
+		//real_answer
+		const char* d = PQgetvalue(res, row, 3);
+                std::string dString(d);
+                mLevelVector.push_back(dString);
+	
+
+		//complete level add one to levelID
+		mQuestionID++;
+                mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+        }
+       	
+	PQclear(res);
         PQfinish(conn);
 }
 
