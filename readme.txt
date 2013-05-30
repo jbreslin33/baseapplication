@@ -1,3 +1,4 @@
+turn off synchronous_commit in /etc/postgresql/9.1/main/postgresql.conf
 set permissions of /upload file or it won't work:
 you will get a key error for some reason...
 sudo chmod -R 777 web/insert/upload

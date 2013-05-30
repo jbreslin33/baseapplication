@@ -50,6 +50,14 @@ SELECT questions.level_id FROM questions_attempts INNER JOIN questions ON questi
 getting distinct level_id...
  ; WITH cte AS ( SELECT questions.id, questions_attempts.user_id as "userid", questions_attempts.answer_time, questions.answer as "real_answer", questions_attempts.answer as "client_answer", ROW_NUMBER() OVER (PARTITION BY question_id ORDER BY answer_attempt_time DESC) AS rn FROM questions_attempts inner join questions on questions_attempts.question_id=questions.id) SELECT * FROM cte WHERE rn = 1 AND answer_time > 2000 AND real_answer != client_answer AND userid = 2 LIMIT 1;
 
+//even simpler still. this will give you the higest id you have passed the last x amount of times in a row...
+SELECT questions.id, questions_attempts.answer_attempt_time FROM questions INNER JOIN questions_attempts ON questions.id=questions_attempts.question_id WHERE questions_attempts.answer_time < 2000 AND questions.answer = questions_attempts.answer GROUP BY questions.id, questions_attempts.answer_attempt_time ORDER BY questions.id DESC, questions_attempts.answer_attempt_time DESC LIMIT 1 OFFSET 2;
+
+
+//mac daddy
+SELECT questions.id, questions.question FROM questions INNER JOIN questions_attempts ON questions.id=questions_attempts.question_id WHERE questions_attempts.answer_time < 2000 AND questions.answer = questions_attempts.answer GROUP BY questions.id, questions_attempts.answer_attempt_time ORDER BY questions.id DESC, questions_attempts.answer_attempt_time DESC LIMIT 1 OFFSET 2;
+and turn off synchronous_commit in /etc/postgresql/9.1/main/postgresql.conf
+ 
 */
 #include "clientPartido.h"
 
