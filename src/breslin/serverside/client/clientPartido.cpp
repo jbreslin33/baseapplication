@@ -344,11 +344,12 @@ void ClientPartido::getQuestion()
         {
                 const char* question_id_char = PQgetvalue(res, 0, 0);
                 mQuestionID = atoi (question_id_char);
+		mQuestionID++;
 		LogString("mQuestionID=%d",mQuestionID);
 
-		const char* b = PQgetvalue(res, 0, 1);
-                std::string bString(b);
-                mQuestionString = bString;
+		//const char* b = PQgetvalue(res, 0, 1);
+                //std::string bString(b);
+                mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
         }
        	PQclear(res);
         PQfinish(conn);
