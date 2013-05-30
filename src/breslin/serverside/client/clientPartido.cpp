@@ -292,8 +292,8 @@ void ClientPartido::getQuestion()
 
                 mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
 	}
-
 	//we have a contender to check further.....
+	bool wrong = false;
 	if (rec_count == 10)
         {
 		//let's get id right off bat....
@@ -301,19 +301,29 @@ void ClientPartido::getQuestion()
                	const char* question_id_char = PQgetvalue(res, 0, 0);
                	mQuestionID = atoi (question_id_char);
 
-		for (row=0; row<rec_count; row++)
+		for (row=0; row<rec_count && wrong == false; row++)
         	{
 			//real_answer
-			const char* d = PQgetvalue(res, row, 1);
-                	std::string real_answer(d);
+			const char* real_answer_char = PQgetvalue(res, row, 1);
+                	std::string real_answer(real_answer_char);
 	
 			//client_answer
-			const char* d = PQgetvalue(res, row, 2);
-                	std::string client_answer(d);
+			const char* client_answer_char = PQgetvalue(res, row, 2);
+                	std::string client_answer(client_answer_char);
 	
 			//time_in_msec
                 	const char* time_in_msec_char = PQgetvalue(res, 0, 4);
                 	int time_in_msec = atoi (time_in_msec_char);
+
+			if (time_in_msec > 2000)
+			{
+				wrong = true;
+			}
+	
+			if (real_answer.compare(client_answer) != 0)	
+			{
+				wrong = true;
+			}
 		}
         }
        	
