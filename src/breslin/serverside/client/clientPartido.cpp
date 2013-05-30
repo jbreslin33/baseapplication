@@ -267,7 +267,7 @@ void ClientPartido::getQuestion()
 	query.append(b);
 
         const char * q = query.c_str();
-	LogString("q:%s",q);
+	//LogString("q:%s",q);
         res = PQexec(conn,q);
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
@@ -281,7 +281,7 @@ void ClientPartido::getQuestion()
 	{
 		mQuestionID = 1;	
 		mQuestionString = "0";
-	
+		LogString("no rec_count at all = 0");	
 	}
 
 	//same level as result set id just go there
@@ -291,11 +291,13 @@ void ClientPartido::getQuestion()
                 mQuestionID = atoi (question_id_char);
 
                 mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+		LogString("not enough records for level clear..");
 	}
 	//we have a contender to check further.....
 	bool wrong = false;
 	if (rec_count == 10)
         {
+		LogString("contender = 10");
 		//let's get id right off bat....
 		//id
                	const char* question_id_char = PQgetvalue(res, 0, 0);
@@ -333,7 +335,8 @@ void ClientPartido::getQuestion()
 		}
 		else
 		{
-			mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID);
+			mQuestionID++;
+			mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
 		}
         }
        	
