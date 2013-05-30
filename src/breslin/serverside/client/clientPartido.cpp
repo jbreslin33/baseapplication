@@ -292,26 +292,35 @@ void ClientPartido::getQuestion()
 
                 mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
 	}
-// id | real_answer | client_answer | answer_attempt_time | time_in_msec | user_id 
+
 	//we have a contender to check further.....
 	if (rec_count == 10)
         {
+		//let's get id right off bat....
 		//id
-                const char* question_id_char = PQgetvalue(res, 0, 0);
-                mQuestionID = atoi (question_id_char);
+               	const char* question_id_char = PQgetvalue(res, 0, 0);
+               	mQuestionID = atoi (question_id_char);
 
-		//real_answer
-		const char* d = PQgetvalue(res, row, 3);
-                std::string dString(d);
-                mLevelVector.push_back(dString);
+		for (row=0; row<rec_count; row++)
+        	{
+			//real_answer
+			const char* d = PQgetvalue(res, row, 1);
+                	std::string real_answer(d);
 	
-
-		//complete level add one to levelID
-		mQuestionID++;
-                mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+			//client_answer
+			const char* d = PQgetvalue(res, row, 2);
+                	std::string client_answer(d);
+	
+			//time_in_msec
+                	const char* time_in_msec_char = PQgetvalue(res, 0, 4);
+                	int time_in_msec = atoi (time_in_msec_char);
+		}
         }
        	
 	PQclear(res);
         PQfinish(conn);
 }
-
+/*
+id | real_answer | client_answer | answer_attempt_time | time_in_msec | user_id 
+mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+*/
