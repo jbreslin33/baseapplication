@@ -269,7 +269,10 @@ void ClientPartido::getQuestion()
 	std::string b = "GROUP BY questions.id, questions_attempts.answer_attempt_time ORDER BY questions.id DESC, questions_attempts.answer_attempt_time DESC LIMIT 1 OFFSET 2";	
 	query.append(b);	
 */
-	std::string = "
+	std::string = "{
+{
+{
+SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions.id = (SELECT max(question_id) FROM questions_attempts) AND questions_attempts.user_id = 2 ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10;
 
 
 
