@@ -325,6 +325,16 @@ void ClientPartido::getQuestion()
 				wrong = true;
 			}
 		}
+			
+		//ok we are done loop one way or another let's use id to set stuff
+		if (wrong)
+		{
+			mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+		}
+		else
+		{
+			mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID);
+		}
         }
        	
 	PQclear(res);
