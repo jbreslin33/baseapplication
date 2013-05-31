@@ -37,14 +37,10 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
         mWaitingForAnswer = false;
         mLimit = 1;
 	mQuestionID = 1;
-
-	//db
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 }
 
 ClientPartido::~ClientPartido()
 {
-        PQfinish(conn);
 }
 
 //game
@@ -210,13 +206,13 @@ void ClientPartido::readAnswer(Message* mes)
 
 void ClientPartido::insertAnswerAttempt()
 {
-        //PGconn          *conn;
+        PGconn          *conn;
         PGresult        *res;
         int             rec_count;
         int             row;
         int             col;
 
-        //conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 	std::string query = "insert into questions_attempts (question_id,answer,answer_time,user_id) VALUES (";
 	query.append(utility->intToString(mQuestionID));
 
@@ -246,6 +242,8 @@ void ClientPartido::insertAnswerAttempt()
                 puts("We did not get any data!");
 	}
        	rec_count = PQntuples(res);
+	PQclear(res);
+        PQfinish(conn);
 }
 
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
@@ -254,11 +252,13 @@ void ClientPartido::getQuestion()
    	LogString("ClientPartido::getQuestion");	
         bool foundFirstUnmasteredID = false;
 
+        PGconn          *conn;
         PGresult        *res;
         int             rec_count;
         int             row;
         int             col;
 
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
 	std::string query = "SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions.id = (SELECT max(question_id) FROM questions_attempts) AND questions_attempts.user_id = ";
 
@@ -342,8 +342,8 @@ void ClientPartido::getQuestion()
 			mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
 		}
         }
-       	
 	PQclear(res);
+        PQfinish(conn);
 }
 /*
 id | real_answer | client_answer | answer_attempt_time | time_in_msec | user_id 

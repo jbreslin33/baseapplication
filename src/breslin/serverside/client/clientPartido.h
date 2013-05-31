@@ -26,10 +26,6 @@ void parseAnswer();
 
 ServerPartido* mServerPartido;	
 
-//db
-PGconn          *conn;
-
-
 //utility
 Utility* utility;
 
