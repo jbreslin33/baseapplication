@@ -322,7 +322,10 @@ void ClientPartido::getQuestion()
 				wrong = true;
 			}
 		}
-			
+
+		int randomNumber = utility->getRandomNumber(2,mServerPartido->mOutgoingSequence);
+		LogString("randomNumber:%d",randomNumber);
+		
 		//ok we are done loop one way or another let's use id to set stuff
 		if (wrong)
 		{
