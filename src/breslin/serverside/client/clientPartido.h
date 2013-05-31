@@ -45,6 +45,7 @@ int mAnswer;
 int mLimit;
 
 //questions
+int getLowestUnpassedLevel();
 int getMaxLevelAskedID();
 bool checkLevel(int level);
 

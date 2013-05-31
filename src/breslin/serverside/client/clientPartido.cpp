@@ -299,11 +299,10 @@ bool ClientPartido::checkLevel(int level)
 	
 	query.append(utility->intToString(level));       
 
-
 	query.append(" ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10");
 
 	const char * q = query.c_str();
-	LogString("q:%s",q);
+	//LogString("q:%s",q);
         res = PQexec(conn,q);
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
@@ -350,7 +349,7 @@ bool ClientPartido::checkLevel(int level)
 	}
 }
 
-void ClientPartido::getQuestion()
+int ClientPartido::getLowestUnpassedLevel()
 {
 	int maxLevel = getMaxLevelAskedID();
 
@@ -363,8 +362,16 @@ void ClientPartido::getQuestion()
 		else
 		{
 			LogString("LEVEL FAILED:%d", levelToCheck);
+			return levelToCheck;
 		}
 	}
+	return maxLevel;
+}
+
+void ClientPartido::getQuestion()
+{
+	int lowestUnpassedLevel = getLowestUnpassedLevel();
+	LogString("lowesUnpassedLevel:%d",lowestUnpassedLevel);
 }
 
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
