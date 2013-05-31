@@ -1,5 +1,7 @@
 /*
 //this should return 10 records if so you are on next level, if not then you are on that level....
+		PQclear(res);
+        	PQfinish(conn);
 SELECT * FROM (SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions.id = (SELECT max(question_id) FROM questions_attempts) ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10) AS A WHERE time_in_msec < 2000 AND real_answer = client_answer;
 */
 
@@ -272,13 +274,19 @@ int ClientPartido::getMaxLevelAskedID()
         //empty result means new user...
         if (rec_count == 0)
         {
+		PQclear(res);
+        	PQfinish(conn);
                 return 1;
         }
         else
         {
                 const char* question_id_char = PQgetvalue(res, 0, 0);
+		PQclear(res);
+        	PQfinish(conn);
         	return atoi (question_id_char);
 	}
+	PQclear(res);
+        PQfinish(conn);
 }
 
 bool ClientPartido::checkLevel(int level)
@@ -316,6 +324,8 @@ bool ClientPartido::checkLevel(int level)
 	//quick check...	
 	if (rec_count != 10)
 	{
+		PQclear(res);
+        	PQfinish(conn);
 		return false;
 	}
 	else
@@ -336,22 +346,27 @@ bool ClientPartido::checkLevel(int level)
 
                         if (time_in_msec > 2000)
                         {
+				PQclear(res);
+        			PQfinish(conn);
                         	return false;
                        	} 
 
                         if (real_answer.compare(client_answer) != 0)
                         {
-                               return false;
+				PQclear(res);
+        			PQfinish(conn);
+                               	return false;
                         }
 		}
 		//if you got here it means you have 10 records and they survived the pass checks so return true
+		PQclear(res);
+        	PQfinish(conn);
 		return true;
 	}
 }
 
-int ClientPartido::getLowestUnpassedLevel()
+int ClientPartido::getLowestUnpassedLevel(int maxLevel)
 {
-	int maxLevel = getMaxLevelAskedID();
 
 	for (int levelToCheck = 1; levelToCheck <= maxLevel; levelToCheck++)
 	{
@@ -370,8 +385,33 @@ int ClientPartido::getLowestUnpassedLevel()
 
 void ClientPartido::getQuestion()
 {
-	int lowestUnpassedLevel = getLowestUnpassedLevel();
+	int maxLevel = getMaxLevelAskedID();
+
+	int lowestUnpassedLevel = getLowestUnpassedLevel(maxLevel);
+
 	LogString("lowesUnpassedLevel:%d",lowestUnpassedLevel);
+
+	int randomNumber = utility->getRandomNumber(2,0);
+	
+        if (randomNumber == 1) //ask lowest unpassed level
+        {
+		LogString("randomNumber:%d",randomNumber);
+                //mQuestionID = lowestUnpassedLevel;
+                //mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+                mQuestionID = 1;
+                mQuestionString = "0";
+		LogString("is 1");
+        }
+        else //ask a question from 1 to maxLevel....
+        {
+		LogString("randomNumber:%d",randomNumber);
+                //int randomNumber = utility->getRandomNumber(maxLevel,0);
+                //mQuestionID = randomNumber + 1;
+		mQuestionID = 2;
+               // mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+		mQuestionString = "1";
+		LogString("is 0");
+	}
 }
 
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
