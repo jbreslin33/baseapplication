@@ -63,7 +63,6 @@ void ClientPartido::setGame(int gameID)
                 {
                         mGamePartido = mGamePartidoVector.at(i);
                         mGamePartido->sendShapes(this);
-			LogString("ClientPartido::setGame:%d",gameID);
                 }
         }
 }
@@ -88,7 +87,6 @@ void ClientPartido::processUpdate()
 
 void ClientPartido::initializeBattle()
 {
-	LogString("ClientPartido::initializeBattle");        
 	mWaitingForAnswer = false;
         mAnswer = 0;
         mQuestionString = "";
@@ -133,7 +131,6 @@ void ClientPartido::sendSchools()
 
 void ClientPartido::sendQuestion()
 {
-	LogString("ClientPartido::sendQuestion id:%d",mQuestionID);
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServerPartido->mMessageAskQuestion); // add type
 
@@ -156,7 +153,6 @@ void ClientPartido::sendQuestion()
 
 void ClientPartido::sendBattleStart()
 {
-	LogString("ClientPartido::sendBattleStart");
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServerPartido->mMessageBattleStart); // add type
 
@@ -235,13 +231,14 @@ void ClientPartido::insertAnswerAttempt()
 	query.append(d);
 
     	const char * q = query.c_str();
-	LogString("q:%s",q);
         res = PQexec(conn,q);
+/*
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
-                puts("We did not get any data!");
+                //puts("We did not get any data!");
 	}
-       	rec_count = PQntuples(res);
+*/
+ //      	rec_count = PQntuples(res);
 	PQclear(res);
         PQfinish(conn);
 }
@@ -249,7 +246,6 @@ void ClientPartido::insertAnswerAttempt()
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
 void ClientPartido::getQuestion()
 {
-   	LogString("ClientPartido::getQuestion");	
         bool foundFirstUnmasteredID = false;
 
         PGconn          *conn;
@@ -270,7 +266,6 @@ void ClientPartido::getQuestion()
 	query.append(b);
 
         const char * q = query.c_str();
-	//LogString("q:%s",q);
         res = PQexec(conn,q);
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
@@ -284,7 +279,6 @@ void ClientPartido::getQuestion()
 	{
 		mQuestionID = 1;	
 		mQuestionString = "0";
-		LogString("no rec_count at all = 0");	
 	}
 
 	//same level as result set id just go there
@@ -294,13 +288,11 @@ void ClientPartido::getQuestion()
                 mQuestionID = atoi (question_id_char);
 
                 mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-		LogString("not enough records for level clear..");
 	}
 	//we have a contender to check further.....
 	bool wrong = false;
 	if (rec_count == 10)
         {
-		LogString("contender = 10");
 		//let's get id right off bat....
 		//id
                	const char* question_id_char = PQgetvalue(res, 0, 0);

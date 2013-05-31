@@ -117,8 +117,6 @@ void  ApplicationPartido::hideMainScreen()
 //battle
 void  ApplicationPartido::createBattleScreen()
 {
-        LogString("ApplicationPartido::createBattleScreen");
-
         if (!mLabelQuestion)
         {
                 mLabelQuestion  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelQuestion", "Question:");
@@ -177,7 +175,6 @@ bool ApplicationPartido::keyPressed( const OIS::KeyEvent &arg )
 
                         if (numeric == 13) //carriage return  or enter 
                         {
-				LogString("enter!!!");
 				sendAnswer();
                                 mStringAnswer.clear();
                                 mLabelAnswer->setCaption(mStringAnswer);
@@ -202,7 +199,6 @@ void ApplicationPartido::sendAnswer()
 
         //get length of username
         int sizeOfAnswer = mStringAnswer.size();
-	LogString("sizeOfAnswer:%d",sizeOfAnswer);
 
         //write length of username
         byteBuffer->WriteByte(sizeOfAnswer);
@@ -215,7 +211,6 @@ void ApplicationPartido::sendAnswer()
         }
 
         //send it off to server
-	LogString("sendAnswer");
         mNetwork->send(byteBuffer);
 }
 
