@@ -284,15 +284,18 @@ void ClientPartido::getQuestion()
 	{
         	const char* question_id_char = PQgetvalue(res, 0, 0);
         	mQuestionID = atoi (question_id_char);
-
-		if (utility->getRandomNumber(2,mServerPartido->mOutgoingSequence) == 1)
+		LogString("out:%d",mServerPartido->mOutgoingSequence);
+		int randomNumber = utility->getRandomNumber(2,mServerPartido->mOutgoingSequence);
+		if (randomNumber == 1)
 		{
+			LogString("random:%d",randomNumber);
 			int randomNumber = utility->getRandomNumber(mQuestionID,mServerPartido->mOutgoingSequence);
 			mQuestionID = randomNumber + 1;	
                 	mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
 		}
 		else
 		{
+			LogString("not random:%d",randomNumber);
 			//same level as result set id just go there
 			if (rec_count > 0 && rec_count < 10)
 			{
