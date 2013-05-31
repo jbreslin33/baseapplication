@@ -313,13 +313,39 @@ bool ClientPartido::checkLevel(int level)
         rec_count = PQntuples(res);
 
 	LogString("rec_count:%d",rec_count);
-	
+
+	//quick check...	
 	if (rec_count != 10)
 	{
 		return false;
 	}
 	else
 	{
+                for (row=0; row<rec_count; row++)
+                {
+                	//real_answer
+                        const char* real_answer_char = PQgetvalue(res, row, 1);
+                        std::string real_answer(real_answer_char);
+
+                        //client_answer
+                        const char* client_answer_char = PQgetvalue(res, row, 2);
+                        std::string client_answer(client_answer_char);
+
+                        //time_in_msec
+                        const char* time_in_msec_char = PQgetvalue(res, 0, 4);
+                        int time_in_msec = atoi (time_in_msec_char);
+
+                        if (time_in_msec > 2000)
+                        {
+                        	return false;
+                       	} 
+
+                        if (real_answer.compare(client_answer) != 0)
+                        {
+                               return false;
+                        }
+		}
+		//if you got here it means you have 10 records and they survived the pass checks so return true
 		return true;
 	}
 }
@@ -332,11 +358,11 @@ void ClientPartido::getQuestion()
 	{
 		if (checkLevel(levelToCheck))	
 		{
-			LogString("true");
+			LogString("LEVEL PASSED:%d", levelToCheck);
 		}
 		else
 		{
-			LogString("false");
+			LogString("LEVEL FAILED:%d", levelToCheck);
 		}
 	}
 }
