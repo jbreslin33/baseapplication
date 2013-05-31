@@ -5,6 +5,9 @@
 
 #include <vector>
 
+//postgresql
+#include <postgresql/libpq-fe.h>
+
 class ServerPartido;
 class GamePartido;
 class ShapePartido;
@@ -22,6 +25,10 @@ void sendSchools();
 void parseAnswer();
 
 ServerPartido* mServerPartido;	
+
+//db
+PGconn          *conn;
+
 
 //utility
 Utility* utility;
