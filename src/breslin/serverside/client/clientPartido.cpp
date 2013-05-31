@@ -324,19 +324,20 @@ bool ClientPartido::checkLevel(int level)
 	}
 }
 
-
-
 void ClientPartido::getQuestion()
 {
 	int maxLevel = getMaxLevelAskedID();
-	if (checkLevel(maxLevel))	
-	{
-		LogString("true");
 
-	}
-	else
+	for (int levelToCheck = 1; levelToCheck <= maxLevel; levelToCheck++)
 	{
-		LogString("false");
+		if (checkLevel(levelToCheck))	
+		{
+			LogString("true");
+		}
+		else
+		{
+			LogString("false");
+		}
 	}
 }
 
