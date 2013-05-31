@@ -284,12 +284,13 @@ void ClientPartido::getQuestion()
 	{
         	const char* question_id_char = PQgetvalue(res, 0, 0);
         	mQuestionID = atoi (question_id_char);
-		LogString("out:%d",mServerPartido->mOutgoingSequence);
-		int randomNumber = utility->getRandomNumber(2,mServerPartido->mOutgoingSequence);
+
+		int randomNumber = utility->getRandomNumber(2,0);
+
 		if (randomNumber == 1)
 		{
 			LogString("random:%d",randomNumber);
-			int randomNumber = utility->getRandomNumber(mQuestionID,mServerPartido->mOutgoingSequence);
+			int randomNumber = utility->getRandomNumber(mQuestionID,mServerPartido->mFrameTime);
 			mQuestionID = randomNumber + 1;	
                 	mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
 		}
