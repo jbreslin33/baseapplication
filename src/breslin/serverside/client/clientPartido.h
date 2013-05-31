@@ -44,6 +44,10 @@ std::string mQuestionString;
 int mAnswer;
 int mLimit;
 
+//questions
+int getMaxLevelAskedID();
+
+
 //answer
 virtual void readAnswer(Message* message);
 std::string mStringAnswer;
@@ -62,6 +66,7 @@ void sendQuestion();
 void sendBattleStart();
 void sendBattleEnd();
 
+//db
 };
 
 #endif

@@ -243,7 +243,51 @@ void ClientPartido::insertAnswerAttempt()
         PQfinish(conn);
 }
 
+int ClientPartido::getMaxLevelAskedID()
+{
+ 	PGconn          *conn;
+        PGresult        *res;
+        int             rec_count = 0;;
+        int             row = 0;
+        int             col = 0;
+	
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+	std::string query = "SELECT max(question_id) FROM questions_attempts WHERE user_id = ";
+ 
+	//user_id
+	std::string a = utility->intToString(db_id);       
+	query.append(a);
+	
+	const char * q = query.c_str();
+        res = PQexec(conn,q);
+
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                LogString("SQL ERROR OUTER:%s",q);
+        }
+
+        rec_count = PQntuples(res);
+
+        //empty result means new user...
+        if (rec_count == 0)
+        {
+                return 1;
+        }
+        else
+        {
+                const char* question_id_char = PQgetvalue(res, 0, 0);
+        	return atoi (question_id_char);
+	}
+}
+
+void ClientPartido::getQuestion()
+{
+	LogString("getMaxLevelAskedID:%d",getMaxLevelAskedID());
+}
+
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
+/*
 void ClientPartido::getQuestion()
 {
         bool foundFirstUnmasteredID = false;
@@ -356,6 +400,7 @@ void ClientPartido::getQuestion()
 	PQclear(res);
         PQfinish(conn);
 }
+*/
 /*
 id | real_answer | client_answer | answer_attempt_time | time_in_msec | user_id 
 mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
