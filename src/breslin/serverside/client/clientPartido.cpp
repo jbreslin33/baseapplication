@@ -283,7 +283,10 @@ int ClientPartido::getMaxLevelAskedID()
                 const char* question_id_char = PQgetvalue(res, 0, 0);
 		PQclear(res);
         	PQfinish(conn);
-        	return atoi (question_id_char);
+		
+        	int ret =  atoi (question_id_char);
+		LogString("ret:%d",ret);
+		return ret;
 	}
 	PQclear(res);
         PQfinish(conn);
@@ -367,7 +370,6 @@ bool ClientPartido::checkLevel(int level)
 
 int ClientPartido::getLowestUnpassedLevel(int maxLevel)
 {
-
 	for (int levelToCheck = 1; levelToCheck <= maxLevel; levelToCheck++)
 	{
 		if (checkLevel(levelToCheck))	
@@ -396,8 +398,8 @@ void ClientPartido::getQuestion()
         if (randomNumber == 1) //ask lowest unpassed level
         {
 		LogString("randomNumber:%d",randomNumber);
-                //mQuestionID = lowestUnpassedLevel;
-                //mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+                mQuestionID = lowestUnpassedLevel;
+                mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
                 mQuestionID = 1;
                 mQuestionString = "0";
 		LogString("is 1");
