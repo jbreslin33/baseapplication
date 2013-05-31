@@ -281,9 +281,63 @@ int ClientPartido::getMaxLevelAskedID()
 	}
 }
 
+bool ClientPartido::checkLevel(int level)
+{
+ 	PGconn          *conn;
+        PGresult        *res;
+        int             rec_count = 0;;
+        int             row = 0;
+        int             col = 0;
+	
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+	std::string query = "SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions_attempts.user_id = ";
+
+	query.append(utility->intToString(db_id));       
+
+	query.append(" AND questions.id = "); 
+	
+	query.append(utility->intToString(level));       
+
+
+	query.append(" ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10");
+
+	const char * q = query.c_str();
+	LogString("q:%s",q);
+        res = PQexec(conn,q);
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                LogString("SQL ERROR OUTER:%s",q);
+                mQuestionID = 1;
+        }
+        rec_count = PQntuples(res);
+
+	LogString("rec_count:%d",rec_count);
+	
+	if (rec_count != 10)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+
+
 void ClientPartido::getQuestion()
 {
-	LogString("getMaxLevelAskedID:%d",getMaxLevelAskedID());
+	int maxLevel = getMaxLevelAskedID();
+	if (checkLevel(maxLevel))	
+	{
+		LogString("true");
+
+	}
+	else
+	{
+		LogString("false");
+	}
 }
 
 //find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......

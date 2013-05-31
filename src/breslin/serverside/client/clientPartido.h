@@ -46,6 +46,7 @@ int mLimit;
 
 //questions
 int getMaxLevelAskedID();
+bool checkLevel(int level);
 
 
 //answer
