@@ -280,61 +280,73 @@ void ClientPartido::getQuestion()
 		mQuestionID = 1;	
 		mQuestionString = "0";
 	}
-
-	//same level as result set id just go there
-	if (rec_count > 0 && rec_count < 10)
+	else
 	{
-                const char* question_id_char = PQgetvalue(res, 0, 0);
-                mQuestionID = atoi (question_id_char);
+        	const char* question_id_char = PQgetvalue(res, 0, 0);
+        	mQuestionID = atoi (question_id_char);
 
-                mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-	}
-	//we have a contender to check further.....
-	bool wrong = false;
-	if (rec_count == 10)
-        {
-		//let's get id right off bat....
-		//id
-               	const char* question_id_char = PQgetvalue(res, 0, 0);
-               	mQuestionID = atoi (question_id_char);
-
-		for (row=0; row<rec_count && wrong == false; row++)
-        	{
-			//real_answer
-			const char* real_answer_char = PQgetvalue(res, row, 1);
-                	std::string real_answer(real_answer_char);
-	
-			//client_answer
-			const char* client_answer_char = PQgetvalue(res, row, 2);
-                	std::string client_answer(client_answer_char);
-	
-			//time_in_msec
-                	const char* time_in_msec_char = PQgetvalue(res, 0, 4);
-                	int time_in_msec = atoi (time_in_msec_char);
-
-			if (time_in_msec > 2000)
-			{
-				wrong = true;
-			}
-	
-			if (real_answer.compare(client_answer) != 0)	
-			{
-				wrong = true;
-			}
-		}
-
-		int randomNumber = utility->getRandomNumber(2,mServerPartido->mOutgoingSequence);
-		LogString("randomNumber:%d",randomNumber);
-		
-		//ok we are done loop one way or another let's use id to set stuff
-		if (wrong)
+		if (utility->getRandomNumber(2,mServerPartido->mOutgoingSequence) == 1)
 		{
-			mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+			int randomNumber = utility->getRandomNumber(mQuestionID,mServerPartido->mOutgoingSequence);
+			mQuestionID = randomNumber + 1;	
+                	mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
 		}
 		else
 		{
-			mQuestionID++;
-			mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+			//same level as result set id just go there
+			if (rec_count > 0 && rec_count < 10)
+			{
+                		const char* question_id_char = PQgetvalue(res, 0, 0);
+                		mQuestionID = atoi (question_id_char);
+
+                		mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+			}
+
+			//we have a contender to check further.....
+			bool wrong = false;
+			if (rec_count == 10)
+        		{
+				//let's get id right off bat....
+               			const char* question_id_char = PQgetvalue(res, 0, 0);
+               			mQuestionID = atoi (question_id_char);
+
+				for (row=0; row<rec_count && wrong == false; row++)
+        			{
+					//real_answer
+					const char* real_answer_char = PQgetvalue(res, row, 1);
+                			std::string real_answer(real_answer_char);
+	
+					//client_answer
+					const char* client_answer_char = PQgetvalue(res, row, 2);
+                			std::string client_answer(client_answer_char);
+	
+					//time_in_msec
+                			const char* time_in_msec_char = PQgetvalue(res, 0, 4);
+                			int time_in_msec = atoi (time_in_msec_char);
+
+					if (time_in_msec > 2000)
+					{
+						wrong = true;
+					}
+	
+					if (real_answer.compare(client_answer) != 0)	
+					{
+						wrong = true;
+					}
+				}
+
+		
+				//ok we are done loop one way or another let's use id to set stuff
+				if (wrong)
+				{
+					mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+				}
+				else
+				{
+					mQuestionID++;
+					mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
+				}
+			}
 		}
         }
 	PQclear(res);
