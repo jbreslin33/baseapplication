@@ -333,7 +333,7 @@ bool ClientPartido::checkLevel(int level)
 	query.append(" ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10");
 
 	const char * q = query.c_str();
-	//LogString("q:%s",q);
+	LogString("q:%s",q);
         res = PQexec(conn,q);
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
@@ -408,33 +408,21 @@ int ClientPartido::getLowestUnpassedLevel(int maxLevel)
 
 void ClientPartido::getQuestion()
 {
-	int maxLevel = getMaxLevelAskedID();
-	LogString("maxLevel....:%d",maxLevel);
-
+	int maxLevel            = getMaxLevelAskedID();
 	int lowestUnpassedLevel = getLowestUnpassedLevel(maxLevel);
-
-	LogString("lowesUnpassedLevel:%d",lowestUnpassedLevel);
-
-	int randomNumber = utility->getRandomNumber(2,0);
+	int randomNumber        = utility->getRandomNumber(2,0);
 	
         if (randomNumber == 1) //ask lowest unpassed level
         {
-		LogString("randomNumber:%d",randomNumber);
-                mQuestionID = lowestUnpassedLevel;
+                mQuestionID     = lowestUnpassedLevel;
                 mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-                mQuestionID = 1;
-                mQuestionString = "0";
-		LogString("is 1");
+                mQuestionID     = 1;
         }
         else //ask a question from 1 to maxLevel....
         {
-		LogString("randomNumber:%d",randomNumber);
-                //int randomNumber = utility->getRandomNumber(maxLevel,0);
-                //mQuestionID = randomNumber + 1;
-		mQuestionID = 2;
-               // mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-		mQuestionString = "1";
-		LogString("is 0");
+                int randomNumber = utility->getRandomNumber(maxLevel,0);
+                mQuestionID      = randomNumber + 1;
+                mQuestionString  = mServerPartido->mQuestionVector.at(mQuestionID - 1);
 	}
 }
 
