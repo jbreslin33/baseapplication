@@ -255,13 +255,13 @@ int ClientPartido::getMaxLevelAskedID()
 	
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-	std::string query = "SELECT max(question_id) FROM questions_attempts WHERE user_id = ";
- 
-	//user_id
-	std::string a = utility->intToString(db_id);       
-	query.append(a);
-	
+	std::string query = "SELECT question_id FROM questions_attempts WHERE user_id = ";
+	query.append(utility->intToString(db_id));       
+	query.append(" ORDER BY question_id DESC LIMIT 1");
+
 	const char * q = query.c_str();
+
+	LogString("q:%s",q);
         res = PQexec(conn,q);
 
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
@@ -269,7 +269,27 @@ int ClientPartido::getMaxLevelAskedID()
                 LogString("SQL ERROR OUTER:%s",q);
         }
 
-        rec_count = PQntuples(res);
+        rec_count  = PQntuples(res);
+	LogString("rec_count:%d",rec_count);
+	int num_fields = PQnfields(res);
+	LogString("num_fields:%d",num_fields);
+	
+	int i = 0;
+	int j = 0;
+
+    	for (i = 0; i < rec_count; i++)
+    	{
+        	for (j = 0; j < num_fields; j++)
+		{
+                	const char* question_id_char = PQgetvalue(res, i, j);
+        		int ret =  atoi (question_id_char);
+
+			LogString("atio:%d",ret);
+			PQclear(res);
+        		PQfinish(conn);
+			return ret;
+		}
+	}
 
         //empty result means new user...
         if (rec_count == 0)
@@ -370,6 +390,7 @@ bool ClientPartido::checkLevel(int level)
 
 int ClientPartido::getLowestUnpassedLevel(int maxLevel)
 {
+	LogString("maxLevel:%d",maxLevel);
 	for (int levelToCheck = 1; levelToCheck <= maxLevel; levelToCheck++)
 	{
 		if (checkLevel(levelToCheck))	
@@ -388,6 +409,7 @@ int ClientPartido::getLowestUnpassedLevel(int maxLevel)
 void ClientPartido::getQuestion()
 {
 	int maxLevel = getMaxLevelAskedID();
+	LogString("maxLevel....:%d",maxLevel);
 
 	int lowestUnpassedLevel = getLowestUnpassedLevel(maxLevel);
 
