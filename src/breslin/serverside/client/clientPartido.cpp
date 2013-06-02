@@ -404,8 +404,13 @@ int ClientPartido::getLowestUnpassedLevel(int maxLevel)
 
 int ClientPartido::getNewQuestionID()
 {
+	int maxLevel            = getMaxLevelAskedID();
+	LogString("maxLevel:%d",maxLevel);
 	return mQuestionID  = utility->getRandomNumber(9,0) + 1;
 }
+
+
+
 
 void ClientPartido::getQuestion()
 {
