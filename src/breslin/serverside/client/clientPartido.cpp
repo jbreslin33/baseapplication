@@ -233,6 +233,7 @@ void ClientPartido::insertAnswerAttempt()
 	query.append(d);
 
     	const char * q = query.c_str();
+	//LogString("insert:%s",q);
         res = PQexec(conn,q);
 /*
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
@@ -261,7 +262,6 @@ int ClientPartido::getMaxLevelAskedID()
 
 	const char * q = query.c_str();
 
-	LogString("q:%s",q);
         res = PQexec(conn,q);
 
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
@@ -270,9 +270,7 @@ int ClientPartido::getMaxLevelAskedID()
         }
 
         rec_count  = PQntuples(res);
-	LogString("rec_count:%d",rec_count);
 	int num_fields = PQnfields(res);
-	LogString("num_fields:%d",num_fields);
 	
 	int i = 0;
 	int j = 0;
@@ -284,7 +282,6 @@ int ClientPartido::getMaxLevelAskedID()
                 	const char* question_id_char = PQgetvalue(res, i, j);
         		int ret =  atoi (question_id_char);
 
-			LogString("atio:%d",ret);
 			PQclear(res);
         		PQfinish(conn);
 			return ret;
@@ -294,6 +291,7 @@ int ClientPartido::getMaxLevelAskedID()
         //empty result means new user...
         if (rec_count == 0)
         {
+		LogString("this should not be called");
 		PQclear(res);
         	PQfinish(conn);
                 return 1;
@@ -305,7 +303,6 @@ int ClientPartido::getMaxLevelAskedID()
         	PQfinish(conn);
 		
         	int ret =  atoi (question_id_char);
-		LogString("ret:%d",ret);
 		return ret;
 	}
 	PQclear(res);
@@ -333,7 +330,6 @@ bool ClientPartido::checkLevel(int level)
 	query.append(" ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10");
 
 	const char * q = query.c_str();
-	LogString("q:%s",q);
         res = PQexec(conn,q);
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
@@ -342,7 +338,6 @@ bool ClientPartido::checkLevel(int level)
         }
         rec_count = PQntuples(res);
 
-	LogString("rec_count:%d",rec_count);
 
 	//quick check...	
 	if (rec_count != 10)
@@ -390,16 +385,13 @@ bool ClientPartido::checkLevel(int level)
 
 int ClientPartido::getLowestUnpassedLevel(int maxLevel)
 {
-	LogString("maxLevel:%d",maxLevel);
 	for (int levelToCheck = 1; levelToCheck <= maxLevel; levelToCheck++)
 	{
 		if (checkLevel(levelToCheck))	
 		{
-			LogString("LEVEL PASSED:%d", levelToCheck);
 		}
 		else
 		{
-			LogString("LEVEL FAILED:%d", levelToCheck);
 			return levelToCheck;
 		}
 	}
@@ -410,6 +402,7 @@ void ClientPartido::getQuestion()
 {
 	int maxLevel            = getMaxLevelAskedID();
 	int lowestUnpassedLevel = getLowestUnpassedLevel(maxLevel);
+	LogString("low:%d",lowestUnpassedLevel);
 	int randomNumber        = utility->getRandomNumber(2,0);
 	
         if (randomNumber == 1) //ask lowest unpassed level
@@ -473,14 +466,12 @@ void ClientPartido::getQuestion()
 
 		if (randomNumber == 1)
 		{
-			LogString("random:%d",randomNumber);
 			int randomNumber = utility->getRandomNumber(mQuestionID,mServerPartido->mFrameTime);
 			mQuestionID = randomNumber + 1;	
                 	mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
 		}
 		else
 		{
-			LogString("not random:%d",randomNumber);
 			//same level as result set id just go there
 			if (rec_count > 0 && rec_count < 10)
 			{
