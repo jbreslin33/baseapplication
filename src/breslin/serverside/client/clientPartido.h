@@ -64,7 +64,8 @@ void setShape(ShapePartido* shapePartido);
 void initializeBattle();
 virtual void processUpdate();
 void getQuestion();
-void sendQuestion();
+int getNewQuestionID();
+void sendQuestion(int questionID);
 void sendBattleStart();
 void sendBattleEnd();
 

@@ -79,8 +79,7 @@ void ClientPartido::processUpdate()
 		{
  			if (mShapePartido->mOpponent && mWaitingForAnswer == false)
         		{
-				getQuestion();
-				sendQuestion();
+				sendQuestion(getNewQuestionID());
                 		mWaitingForAnswer = true;
         		}
 		}
@@ -131,7 +130,7 @@ void ClientPartido::sendSchools()
         }
 }
 
-void ClientPartido::sendQuestion()
+void ClientPartido::sendQuestion(int questionID)
 {
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServerPartido->mMessageAskQuestion); // add type
@@ -140,13 +139,15 @@ void ClientPartido::sendQuestion()
         {
                 mMessage.WriteByte(mClientID); // add mClientID for browsers
         }
-        int length = mQuestionString.length();  // get length of string containing school
-        mMessage.WriteByte(length); //send length
+       	//int length = mQuestionString.length(); 
+       	int length = mServerPartido->mQuestionVector.at(questionID).length();  
+        mMessage.WriteByte(length); 
 
         //loop thru length and write it
         for (int i=0; i < length; i++)
         {
-                mMessage.WriteByte(mQuestionString.at(i));
+                mMessage.WriteByte(mServerPartido->mQuestionVector.at(questionID).at(i));
+                //mMessage.WriteByte(mQuestionString.at(i));
         }
 
         //send it
@@ -175,7 +176,6 @@ void ClientPartido::readAnswer(Message* mes)
         mAnswerTime = mes->ReadByte();
 
         int sizeOfAnswer = mes->ReadByte();
-
         //loop thru and set mStringAnswer from client
         for (int i = 0; i < sizeOfAnswer; i++)
         {
@@ -342,6 +342,7 @@ bool ClientPartido::checkLevel(int level)
 	//quick check...	
 	if (rec_count != 10)
 	{
+		LogString("should not be here if you then goto 0");
 		PQclear(res);
         	PQfinish(conn);
 		return false;
@@ -364,6 +365,7 @@ bool ClientPartido::checkLevel(int level)
 
                         if (time_in_msec > 2000)
                         {
+				LogString("should not be here msc");
 				PQclear(res);
         			PQfinish(conn);
                         	return false;
@@ -371,11 +373,13 @@ bool ClientPartido::checkLevel(int level)
 
                         if (real_answer.compare(client_answer) != 0)
                         {
+				LogString("wrong answer level :%d",level);
 				PQclear(res);
         			PQfinish(conn);
                                	return false;
                         }
 		}
+		LogString("passed level:%d",level);
 		//if you got here it means you have 10 records and they survived the pass checks so return true
 		PQclear(res);
         	PQfinish(conn);
@@ -398,10 +402,16 @@ int ClientPartido::getLowestUnpassedLevel(int maxLevel)
 	return maxLevel;
 }
 
+int ClientPartido::getNewQuestionID()
+{
+	return mQuestionID  = utility->getRandomNumber(9,0) + 1;
+}
+
 void ClientPartido::getQuestion()
 {
 	int maxLevel            = getMaxLevelAskedID();
 	int lowestUnpassedLevel = getLowestUnpassedLevel(maxLevel);
+
 	LogString("low:%d",lowestUnpassedLevel);
 	int randomNumber        = utility->getRandomNumber(2,0);
 	

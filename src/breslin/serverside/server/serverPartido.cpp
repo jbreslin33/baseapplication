@@ -220,6 +220,13 @@ void ServerPartido::getQuestions()
         rec_count = PQntuples(res);
 	mQuestionCount = rec_count;
         printf("We received %d records.\n", rec_count);
+       
+	//make first elements x so they coincide with db id's 
+        mQuestionIDVector.push_back("x");
+        mQuestionVector.push_back("x");
+	mAnswerVector.push_back("x");
+        mLevelVector.push_back("x");
+
         for (row=0; row<rec_count; row++)
         {
                 const char* a = PQgetvalue(res, row, 0);
