@@ -310,11 +310,21 @@ int ClientPartido::getMaxLevelAskedID()
 int ClientPartido::getNewQuestionID()
 {
 	int maxLevel            = getMaxLevelAskedID();
-	mQuestionID = getUnpassedID(maxLevel);
-	return mQuestionID;
+	int unpassedID = getUnpassedID(maxLevel);
 
-	//return mQuestionID  = utility->getRandomNumber(9,0) + 1;
+	//unpassedID or random
+	if(utility->getRandomNumber(2,0))
+	{
+		mQuestionID = unpassedID;
+	}
+	else
+	{
+		mQuestionID  = utility->getRandomNumber(maxLevel - 1,0) + 1;
+	}
+
+	return mQuestionID;
 }
+
 int ClientPartido::getUnpassedID(int maxLevel)
 {
 	for (int i = 1; i <= maxLevel; i++)
