@@ -51,7 +51,7 @@ void Random_AI::enter(AI* ai)
 
 void Random_AI::execute(AI* ai)
 {
-	srand ( (short)time(NULL) + ai->mShape->mIndex);	/* initialize random seed: */
+//	srand ( (short)time(NULL) + ai->mShape->mIndex);	/* initialize random seed: */
 	ai->mShape->mKey = rand() % 32 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
 }
 

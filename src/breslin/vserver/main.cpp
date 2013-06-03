@@ -47,14 +47,13 @@ int main(int argc, char **argv)
 	unsigned int intValue;
 	strValue >> intValue;
 
+	//seed rand
+        srand(time(NULL));
+
 	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
 	int time, oldTime, newTime;
 
-	//seed rand
- 	timeval tv;
-        gettimeofday(&tv, NULL);
-        srand(tv.tv_sec * tv.tv_usec);
 
 	if (strcmp (argv[1],aServer) == 0)
 	{
