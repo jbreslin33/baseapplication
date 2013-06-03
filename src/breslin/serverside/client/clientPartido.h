@@ -48,6 +48,7 @@ int mLimit;
 int getLowestUnpassedLevel(int maxLevel);
 int getMaxLevelAskedID();
 bool checkLevel(int level);
+int getUnpassedID(int maxLevel);
 
 
 //answer

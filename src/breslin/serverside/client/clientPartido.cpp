@@ -139,7 +139,6 @@ void ClientPartido::sendQuestion(int questionID)
         {
                 mMessage.WriteByte(mClientID); // add mClientID for browsers
         }
-       	//int length = mQuestionString.length(); 
        	int length = mServerPartido->mQuestionVector.at(questionID).length();  
         mMessage.WriteByte(length); 
 
@@ -147,7 +146,6 @@ void ClientPartido::sendQuestion(int questionID)
         for (int i=0; i < length; i++)
         {
                 mMessage.WriteByte(mServerPartido->mQuestionVector.at(questionID).at(i));
-                //mMessage.WriteByte(mQuestionString.at(i));
         }
 
         //send it
@@ -309,6 +307,28 @@ int ClientPartido::getMaxLevelAskedID()
         PQfinish(conn);
 }
 
+int ClientPartido::getNewQuestionID()
+{
+	int maxLevel            = getMaxLevelAskedID();
+	mQuestionID = getUnpassedID(maxLevel);
+	return mQuestionID;
+
+	//return mQuestionID  = utility->getRandomNumber(9,0) + 1;
+}
+int ClientPartido::getUnpassedID(int maxLevel)
+{
+	for (int i = 1; i <= maxLevel; i++)
+	{
+		if (checkLevel(i))
+		{
+		}
+		else
+		{
+			return i;
+		}
+	}
+}
+
 bool ClientPartido::checkLevel(int level)
 {
  	PGconn          *conn;
@@ -401,16 +421,6 @@ int ClientPartido::getLowestUnpassedLevel(int maxLevel)
 	}
 	return maxLevel;
 }
-
-int ClientPartido::getNewQuestionID()
-{
-	int maxLevel            = getMaxLevelAskedID();
-	LogString("maxLevel:%d",maxLevel);
-	return mQuestionID  = utility->getRandomNumber(9,0) + 1;
-}
-
-
-
 
 void ClientPartido::getQuestion()
 {
