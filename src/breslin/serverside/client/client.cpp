@@ -150,7 +150,7 @@ void Client::processUpdate()
 	{
         	if (mAITimeOutCounter > mAITimeOutThreshold)
 		{
-			//srand ( (short)time(NULL) + mShape->mIndex);    
+			srand ( (short)time(NULL) + mShape->mIndex);    
         		mShape->mKey = rand() % 32 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
 			mAITimeOutCounter = 0;
 		}	
