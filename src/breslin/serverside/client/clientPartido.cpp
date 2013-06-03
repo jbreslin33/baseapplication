@@ -375,7 +375,7 @@ int ClientPartido::getNewQuestionID()
 {
 	int maxLevel            = getMaxLevelAskedID();
 	LogString("maxLevel:%d",maxLevel);
-/*
+
 	for (int i = 1; i <= maxLevel; i++)
 	{
 		if (checkLevel(i))
@@ -387,7 +387,7 @@ int ClientPartido::getNewQuestionID()
 			LogString("FAILED:%d",i);
 		}
 	}
-*/	
+	
 	mQuestionID  = rand() % maxLevel + 1;
 	LogString("mQuestionID:%d",mQuestionID);
 	return mQuestionID;
