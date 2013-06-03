@@ -51,6 +51,11 @@ int main(int argc, char **argv)
 	signal(SIGPIPE, SIG_IGN);
 	int time, oldTime, newTime;
 
+	//seed rand
+ 	timeval tv;
+        gettimeofday(&tv, NULL);
+        srand(tv.tv_sec * tv.tv_usec);
+
 	if (strcmp (argv[1],aServer) == 0)
 	{
 		Server* server = new Server(root,"",intValue);	
