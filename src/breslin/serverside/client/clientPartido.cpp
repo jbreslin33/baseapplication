@@ -31,7 +31,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	//battle
         mWaitingForAnswer = false;
         mLimit = 1;
-	mQuestionID = 1;
+	mQuestionID = 0;
 }
 
 ClientPartido::~ClientPartido()
@@ -317,7 +317,7 @@ bool ClientPartido::checkLevel(int level)
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 LogString("SQL ERROR OUTER:%s",q);
-                mQuestionID = 1;
+		return false;
         }
         rec_count = PQntuples(res);
 
@@ -374,5 +374,5 @@ int ClientPartido::getNewQuestionID()
 {
 	int maxLevel            = getMaxLevelAskedID();
 	LogString("maxLevel:%d",maxLevel);
-	return mQuestionID  = utility->getRandomNumber(9,0) + 1;
+	return mQuestionID  = utility->getRandomNumber(maxLevel,0) + 1;
 }
