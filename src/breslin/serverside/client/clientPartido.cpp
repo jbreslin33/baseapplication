@@ -374,5 +374,5 @@ int ClientPartido::getNewQuestionID()
 {
 	int maxLevel            = getMaxLevelAskedID();
 	LogString("maxLevel:%d",maxLevel);
-	return mQuestionID  = utility->getRandomNumber(maxLevel,0) + 1;
+	return mQuestionID  = rand() % maxLevel + 1;
 }

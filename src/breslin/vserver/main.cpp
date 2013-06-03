@@ -47,6 +47,8 @@ int main(int argc, char **argv)
 	unsigned int intValue;
 	strValue >> intValue;
 
+	srand(time(NULL)); 
+	
 	// Ignore the SIGPIPE signal, so the program does not terminate if the pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
 	int time, oldTime, newTime;
