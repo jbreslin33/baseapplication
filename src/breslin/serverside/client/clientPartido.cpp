@@ -1,10 +1,3 @@
-/*
-//this should return 10 records if so you are on next level, if not then you are on that level....
-		PQclear(res);
-        	PQfinish(conn);
-SELECT * FROM (SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions.id = (SELECT max(question_id) FROM questions_attempts) ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10) AS A WHERE time_in_msec < 2000 AND real_answer = client_answer;
-*/
-
 #include "clientPartido.h"
 //log
 #include "../tdreamsock/dreamSockLog.h"
@@ -233,16 +226,6 @@ void ClientPartido::insertAnswerAttempt()
 	query.append(d);
 
     	const char * q = query.c_str();
-	//LogString("insert:%s",q);
-        res = PQexec(conn,q);
-/*
-        if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-                //puts("We did not get any data!");
-	}
-*/
- //      	rec_count = PQntuples(res);
-	PQclear(res);
         PQfinish(conn);
 }
 
@@ -387,167 +370,9 @@ bool ClientPartido::checkLevel(int level)
 	}
 }
 
-int ClientPartido::getLowestUnpassedLevel(int maxLevel)
-{
-	for (int levelToCheck = 1; levelToCheck <= maxLevel; levelToCheck++)
-	{
-		if (checkLevel(levelToCheck))	
-		{
-		}
-		else
-		{
-			return levelToCheck;
-		}
-	}
-	return maxLevel;
-}
-
 int ClientPartido::getNewQuestionID()
 {
 	int maxLevel            = getMaxLevelAskedID();
 	LogString("maxLevel:%d",maxLevel);
 	return mQuestionID  = utility->getRandomNumber(9,0) + 1;
 }
-
-
-
-
-void ClientPartido::getQuestion()
-{
-	int maxLevel            = getMaxLevelAskedID();
-	int lowestUnpassedLevel = getLowestUnpassedLevel(maxLevel);
-
-	LogString("low:%d",lowestUnpassedLevel);
-	int randomNumber        = utility->getRandomNumber(2,0);
-	
-        if (randomNumber == 1) //ask lowest unpassed level
-        {
-                mQuestionID     = lowestUnpassedLevel;
-                mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-                mQuestionID     = 1;
-        }
-        else //ask a question from 1 to maxLevel....
-        {
-                int randomNumber = utility->getRandomNumber(maxLevel,0);
-                mQuestionID      = randomNumber + 1;
-                mQuestionString  = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-	}
-}
-
-//find lowest level unmastered but also fill up an array of possible questions made up of all mastered ones......
-/*
-void ClientPartido::getQuestion()
-{
-        bool foundFirstUnmasteredID = false;
-
-        PGconn          *conn;
-        PGresult        *res;
-        int             rec_count;
-        int             row;
-        int             col;
-
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-
-	std::string query = "SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions.id = (SELECT max(question_id) FROM questions_attempts) AND questions_attempts.user_id = ";
-
-	//user_id
-	std::string a = utility->intToString(db_id);       
-	query.append(a);
-	
-	std::string b = " ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10";
-	query.append(b);
-
-        const char * q = query.c_str();
-        res = PQexec(conn,q);
-        if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-		LogString("SQL ERROR OUTER:%s",q);
-        	mQuestionID = 1;
-        }
-        rec_count = PQntuples(res);
-
-       	//empty result means new user... 
-	if (rec_count == 0)
-	{
-		mQuestionID = 1;	
-		mQuestionString = "0";
-	}
-	else
-	{
-        	const char* question_id_char = PQgetvalue(res, 0, 0);
-        	mQuestionID = atoi (question_id_char);
-
-		int randomNumber = utility->getRandomNumber(2,0);
-
-		if (randomNumber == 1)
-		{
-			int randomNumber = utility->getRandomNumber(mQuestionID,mServerPartido->mFrameTime);
-			mQuestionID = randomNumber + 1;	
-                	mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-		}
-		else
-		{
-			//same level as result set id just go there
-			if (rec_count > 0 && rec_count < 10)
-			{
-                		const char* question_id_char = PQgetvalue(res, 0, 0);
-                		mQuestionID = atoi (question_id_char);
-
-                		mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-			}
-
-			//we have a contender to check further.....
-			bool wrong = false;
-			if (rec_count == 10)
-        		{
-				//let's get id right off bat....
-               			const char* question_id_char = PQgetvalue(res, 0, 0);
-               			mQuestionID = atoi (question_id_char);
-
-				for (row=0; row<rec_count && wrong == false; row++)
-        			{
-					//real_answer
-					const char* real_answer_char = PQgetvalue(res, row, 1);
-                			std::string real_answer(real_answer_char);
-	
-					//client_answer
-					const char* client_answer_char = PQgetvalue(res, row, 2);
-                			std::string client_answer(client_answer_char);
-	
-					//time_in_msec
-                			const char* time_in_msec_char = PQgetvalue(res, 0, 4);
-                			int time_in_msec = atoi (time_in_msec_char);
-
-					if (time_in_msec > 2000)
-					{
-						wrong = true;
-					}
-	
-					if (real_answer.compare(client_answer) != 0)	
-					{
-						wrong = true;
-					}
-				}
-
-		
-				//ok we are done loop one way or another let's use id to set stuff
-				if (wrong)
-				{
-					mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-				}
-				else
-				{
-					mQuestionID++;
-					mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-				}
-			}
-		}
-        }
-	PQclear(res);
-        PQfinish(conn);
-}
-*/
-/*
-id | real_answer | client_answer | answer_attempt_time | time_in_msec | user_id 
-mQuestionString = mServerPartido->mQuestionVector.at(mQuestionID - 1);
-*/
