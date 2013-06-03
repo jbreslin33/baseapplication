@@ -163,6 +163,7 @@ void ClientPartido::sendBattleStart()
 
 void ClientPartido::readAnswer(Message* mes)
 {
+	LogString("readAnswer");
         //clear answer string
         mStringAnswer.clear();
 
@@ -184,8 +185,6 @@ void ClientPartido::readAnswer(Message* mes)
                         mStringAnswer.append(1,ascii);
                 }
         }
-        //mGame->sendAnswer(this,mAnswerTime,mStringAnswer);
-	//insert into answer attempts....
 	insertAnswerAttempt();
 
 	//set vars for new question and answer combo....
@@ -226,6 +225,8 @@ void ClientPartido::insertAnswerAttempt()
 	query.append(d);
 
     	const char * q = query.c_str();
+	LogString("insert:%s",q);
+        PQexec(conn,q);
         PQfinish(conn);
 }
 
@@ -374,5 +375,20 @@ int ClientPartido::getNewQuestionID()
 {
 	int maxLevel            = getMaxLevelAskedID();
 	LogString("maxLevel:%d",maxLevel);
-	return mQuestionID  = rand() % maxLevel + 1;
+/*
+	for (int i = 1; i <= maxLevel; i++)
+	{
+		if (checkLevel(i))
+		{
+			LogString("PASSED:%d",i);
+		}
+		else
+		{
+			LogString("FAILED:%d",i);
+		}
+	}
+*/	
+	mQuestionID  = rand() % maxLevel + 1;
+	LogString("mQuestionID:%d",mQuestionID);
+	return mQuestionID;
 }
