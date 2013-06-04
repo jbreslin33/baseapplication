@@ -80,6 +80,9 @@ void ClientPartido::processUpdate()
 
 void ClientPartido::initializeBattle()
 {
+	LogString("ClientPartido::initializeBattle");
+
+	mBattleScore = 0;	
 	mWaitingForAnswer = false;
         mQuestionString = "";
         sendBattleStart();
@@ -164,7 +167,11 @@ void ClientPartido::sendBattleStart()
 void ClientPartido::sendBattleEnd()
 {
 	LogString("ClientPartido::sendBattleEnd");
-	
+
+	//reset opponent pointers and vars for answers...	
+	mWaitingForAnswer = false;
+        mQuestionString = "";
+	mShapePartido->mOpponentLast = mShapePartido->mOpponent;
 	mShapePartido->mOpponent = NULL;
 
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
