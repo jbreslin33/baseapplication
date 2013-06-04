@@ -41,8 +41,7 @@ int mQuestionID;
 std::vector<int> mMasteredQuestionIDVector;
 bool mWaitingForAnswer;
 std::string mQuestionString;
-int mAnswer;
-int mLimit;
+int mBattleScore;
 
 //questions
 int getLowestUnpassedLevel(int maxLevel);
@@ -63,7 +62,6 @@ void setShape(ShapePartido* shapePartido);
 //battle
 void initializeBattle();
 virtual void processUpdate();
-void getQuestion();
 int getNewQuestionID();
 void sendQuestion(int questionID);
 void sendBattleStart();

@@ -27,7 +27,7 @@ ShapePartido(unsigned int index, GamePartido* gamePartido, ClientPartido* client
 ****************************************/
 GamePartido*   mGamePartido;
 ClientPartido* mClientPartido;
-Shape*  mOpponent;
+ShapePartido*  mOpponent;
 
 /******************************************
 *            METHODS

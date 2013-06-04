@@ -30,7 +30,6 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
  	
 	//battle
         mWaitingForAnswer = false;
-        mLimit = 1;
 	mQuestionID = 0;
 }
 
@@ -82,7 +81,6 @@ void ClientPartido::processUpdate()
 void ClientPartido::initializeBattle()
 {
 	mWaitingForAnswer = false;
-        mAnswer = 0;
         mQuestionString = "";
         sendBattleStart();
 }
@@ -186,9 +184,32 @@ void ClientPartido::readAnswer(Message* mes)
         }
 	insertAnswerAttempt();
 
+	//after you insert can i do some live battle stuff here????
+	//if you get one wrong or not in time then battle over????
+	//or first one to 10....for now...
+
+        //if (real_answer.compare(client_answer) != 0)
+//mServerPartido->mQuestionVector.at(questionID)
+        if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0)  
+	{
+		LogString("you lost battle");	
+	}
+	else
+	{
+		mBattleScore++;
+	}	
+
+	if (mBattleScore > 9)
+	{
+		LogString("You win! db_id:%d",db_id);
+	} 	
+	if (mShapePartido->mOpponent->mClientPartido->mBattleScore > 9)
+	{
+		LogString("Opponent Wins!:%d",db_id);
+	}
+
 	//set vars for new question and answer combo....
         mWaitingForAnswer = false;
-        mAnswer = 0;
         mQuestionString = "";
 
 }

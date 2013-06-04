@@ -51,7 +51,7 @@ void ShapePartido::collision(Shape* shape)
 
 	if (mOpponent == NULL)
 	{
-		mOpponent = shape;
+		mOpponent = (ShapePartido*)shape;
 		if (mClientPartido)
 		{
 			if (mClientPartido->mConnectionState == DREAMSOCK_CONNECTED)
