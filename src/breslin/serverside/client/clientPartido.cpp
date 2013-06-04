@@ -368,18 +368,27 @@ int ClientPartido::getNewQuestionID()
 {
 	int maxLevel            = getMaxLevelAskedID();
 
-	for (int i = 1; i <= maxLevel; i++)
+	if (rand() % 2 == 1)
 	{
-		if (checkLevel(i))
+		LogString("DETERMINED");
+		for (int i = 1; i <= maxLevel; i++)
 		{
-			LogString("PASSED:%d",i);
-		}
-		else
-		{
-			LogString("FAILED:%d",i);
+			if (checkLevel(i))
+			{
+				//LogString("PASSED:%d",i);
+			}
+			else
+			{
+				//LogString("FAILED:%d",i);
+			}
 		}
 	}
+	else
+	{
+		LogString("RANDOM");
+		//do it random based on maxLevel......
+		mQuestionID  = rand() % maxLevel + 1;
+	}
 	
-	mQuestionID  = rand() % maxLevel + 1;
 	return mQuestionID;
 }
