@@ -148,6 +148,7 @@ void ClientPartido::sendQuestion(int questionID)
 
 void ClientPartido::sendBattleStart()
 {
+	LogString("ClientPartido::sendBattleStart");
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServerPartido->mMessageBattleStart); // add type
 
@@ -162,6 +163,7 @@ void ClientPartido::sendBattleStart()
 
 void ClientPartido::sendBattleEnd()
 {
+	LogString("ClientPartido::sendBattleEnd");
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServerPartido->mMessageBattleEnd); // add type
 
@@ -176,6 +178,7 @@ void ClientPartido::sendBattleEnd()
 
 void ClientPartido::readAnswer(Message* mes)
 {
+	LogString("ClientPartido::readAnswer");
         //clear answer string
         mStringAnswer.clear();
 
