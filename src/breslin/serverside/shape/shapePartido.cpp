@@ -30,7 +30,8 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
 {
 	mGamePartido   = gamePartido;
 	mClientPartido = clientPartido;
-	mOpponent      = NULL;
+	mOpponent     = NULL;
+	mOpponentLast = NULL;
 
         //register with shapePartido vector
         mGamePartido->mShapePartidoVector.push_back(this);
@@ -49,7 +50,7 @@ void ShapePartido::collision(Shape* shape)
 {
 	Shape::collision(shape);	
 
-	if (mOpponent == NULL)
+	if (mOpponent == NULL && mOpponentLast != shape)
 	{
 		mOpponent = (ShapePartido*)shape;
 		if (mClientPartido)
