@@ -36,6 +36,11 @@ void GamePlayPartidoBattle::enter()
 
 void GamePlayPartidoBattle::execute()
 {
+ 	if (mGame->mBattleEnd)
+        {
+                mGame->mStateMachine->changeState(mGame->mGamePlayPartido); 
+        }
+        GamePlay::execute();
 
 }
 
