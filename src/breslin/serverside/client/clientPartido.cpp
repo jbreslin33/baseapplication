@@ -145,10 +145,25 @@ void ClientPartido::sendQuestion(int questionID)
         mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 }
 
+
 void ClientPartido::sendBattleStart()
 {
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServerPartido->mMessageBattleStart); // add type
+
+        if (mClientID > 0)
+        {
+                mMessage.WriteByte(mClientID); // add mClientID for browsers
+        }
+
+        //send it
+        mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+}
+
+void ClientPartido::sendBattleEnd()
+{
+        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        mMessage.WriteByte(mServerPartido->mMessageBattleEnd); // add type
 
         if (mClientID > 0)
         {
@@ -202,10 +217,12 @@ void ClientPartido::readAnswer(Message* mes)
 	if (mBattleScore > 9)
 	{
 		LogString("You win! db_id:%d",db_id);
+		sendBattleEnd();
 	} 	
 	if (mShapePartido->mOpponent->mClientPartido->mBattleScore > 9)
 	{
 		LogString("Opponent Wins!:%d",db_id);
+		sendBattleEnd();
 	}
 
 	//set vars for new question and answer combo....

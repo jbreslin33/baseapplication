@@ -36,12 +36,11 @@ void GamePlayPartidoBattle::enter()
 
 void GamePlayPartidoBattle::execute()
 {
- 	if (mGame->mBattleEnd)
+ 	if (mGamePartido->mBattleEnd)
         {
-                mGame->mStateMachine->changeState(mGame->mGamePlayPartido); 
+		LogString("battle end!!!");
+                mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlay); 
         }
-        GamePlay::execute();
-
 }
 
 void GamePlayPartidoBattle::exit()
