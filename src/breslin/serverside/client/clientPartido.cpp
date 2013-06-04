@@ -222,6 +222,7 @@ void ClientPartido::readAnswer(Message* mes)
         if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0)  
 	{
 		LogString("you lost battle");	
+		this is the prob you should not readAnswer ..why is it reading answer
 	}
 	else
 	{
