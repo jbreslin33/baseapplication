@@ -52,6 +52,7 @@ void ShapePartido::collision(Shape* shape)
 
 	if (mOpponent == NULL && mOpponentLast != shape)
 	{
+		LogString("here");	
 		mOpponent = (ShapePartido*)shape;
 		if (mClientPartido)
 		{

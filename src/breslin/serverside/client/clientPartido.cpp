@@ -164,6 +164,9 @@ void ClientPartido::sendBattleStart()
 void ClientPartido::sendBattleEnd()
 {
 	LogString("ClientPartido::sendBattleEnd");
+	
+	mShapePartido->mOpponent = NULL;
+
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServerPartido->mMessageBattleEnd); // add type
 
@@ -222,12 +225,7 @@ void ClientPartido::readAnswer(Message* mes)
 		LogString("You win! db_id:%d",db_id);
 		sendBattleEnd();
 	} 	
-	if (mShapePartido->mOpponent->mClientPartido->mBattleScore > 9)
-	{
-		LogString("Opponent Wins!:%d",db_id);
-		sendBattleEnd();
-	}
-
+	
 	//set vars for new question and answer combo....
         mWaitingForAnswer = false;
         mQuestionString = "";
