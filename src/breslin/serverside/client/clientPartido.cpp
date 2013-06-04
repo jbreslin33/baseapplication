@@ -169,6 +169,7 @@ void ClientPartido::sendBattleEnd()
 	LogString("ClientPartido::sendBattleEnd");
 
 	//reset opponent pointers and vars for answers...	
+	mBattleScore = 0;	
 	mWaitingForAnswer = false;
         mQuestionString = "";
 	mShapePartido->mOpponentLast = mShapePartido->mOpponent;
