@@ -370,25 +370,31 @@ int ClientPartido::getNewQuestionID()
 
 	if (rand() % 2 == 1)
 	{
+		//you could advance here if you passed maxLevel and all before it...
 		LogString("DETERMINED");
 		for (int i = 1; i <= maxLevel; i++)
 		{
 			if (checkLevel(i))
 			{
-				//LogString("PASSED:%d",i);
+				if (i == maxLevel)
+				{
+					//advance level
+					mQuestionID = maxLevel + 1;
+					return mQuestionID;
+				}
 			}
 			else
 			{
-				//LogString("FAILED:%d",i);
+				mQuestionID = i;
+				return mQuestionID;	
 			}
 		}
 	}
 	else
 	{
 		LogString("RANDOM");
-		//do it random based on maxLevel......
+		//do it random based on maxLevel, you cannot advance a level here.
 		mQuestionID  = rand() % maxLevel + 1;
+		return mQuestionID;
 	}
-	
-	return mQuestionID;
 }
