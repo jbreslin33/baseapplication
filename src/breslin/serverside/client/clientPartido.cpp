@@ -168,26 +168,23 @@ void ClientPartido::sendBattleStart()
         mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 }
 
-void ClientPartido::sendBattleEnd(int result)
+void ClientPartido::sendBattleEnd(int result, bool sendToOpponent)
 {
 	LogString("ClientPartido::sendBattleEnd");
 
+	if (mShapePartido->mOpponent && sendToOpponent)
+	{
+		mShapePartido->mOpponent->mClientPartido->sendBattleEnd(result * -1, false); //opposite
+	}
+	
 	if (result == -1)
 	{	
 		mLosses++;
-		if (mShapePartido->mOpponent)
-		{
-			mShapePartido->mOpponent->mClientPartido->mWins++;
-		}
 	}
 
 	else if (result == 1)
 	{
 		mWins++;
-		if (mShapePartido->mOpponent)
-		{
-			mShapePartido->mOpponent->mClientPartido->mLosses++;
-		}
 	}
 	
 	//setText	
@@ -253,7 +250,7 @@ void ClientPartido::readAnswer(Message* mes)
         if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0)  
 	{
 
-		sendBattleEnd(-1);
+		sendBattleEnd(-1,true);
 	}
 	else
 	{
@@ -262,7 +259,7 @@ void ClientPartido::readAnswer(Message* mes)
 
 	if (mBattleScore > 9)
 	{
-		sendBattleEnd(1);
+		sendBattleEnd(1,true);
 	} 	
 	
 	//set vars for new question and answer combo....

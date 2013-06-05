@@ -69,7 +69,7 @@ virtual void processUpdate();
 int getNewQuestionID();
 void sendQuestion(int questionID);
 void sendBattleStart();
-void sendBattleEnd(int result);
+void sendBattleEnd(int result, bool sendToOpponent);
 
 //db
 };
