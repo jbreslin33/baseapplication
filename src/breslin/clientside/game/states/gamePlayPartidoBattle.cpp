@@ -32,6 +32,10 @@ void GamePlayPartidoBattle::enter()
 	mGamePartido->mApplicationPartido->createBattleScreen();
 	mGamePartido->mApplicationPartido->showBattleScreen();
 	mGamePartido->mBattleStart = false;
+
+	//reset text box 
+	mGamePartido->mApplicationPartido->mStringAnswer.clear();
+        mGamePartido->mApplicationPartido->mLabelAnswer->setCaption("");
 }
 
 void GamePlayPartidoBattle::execute()
