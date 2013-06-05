@@ -52,14 +52,12 @@ void ShapePartido::collision(Shape* shape)
 
 	if (mOpponent == NULL && mOpponentLast != shape)
 	{
-		LogString("here");	
+		LogString("stop moving shape");	
+		mKey = 0;
 		mOpponent = (ShapePartido*)shape;
 		if (mClientPartido)
 		{
-			if (mClientPartido->mConnectionState == DREAMSOCK_CONNECTED)
-			{
-				mClientPartido->initializeBattle();
-			}
+			mClientPartido->initializeBattle();
 		}
 	}
 }

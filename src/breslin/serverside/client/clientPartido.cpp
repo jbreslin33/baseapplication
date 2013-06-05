@@ -89,7 +89,11 @@ void ClientPartido::initializeBattle()
 	mBattleScore = 0;	
 	mWaitingForAnswer = false;
         mQuestionString = "";
-        sendBattleStart();
+	mShapePartido->mCollidable = false;
+	if (mConnectionState == DREAMSOCK_CONNECTED)
+        {
+       		sendBattleStart();
+	}
 }
 
 void ClientPartido::setShape(ShapePartido* shapePartido)
@@ -130,42 +134,47 @@ void ClientPartido::sendSchools()
 
 void ClientPartido::sendQuestion(int questionID)
 {
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServerPartido->mMessageAskQuestion); // add type
+	if (mConnectionState == DREAMSOCK_CONNECTED)
+	{
+        	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        	mMessage.WriteByte(mServerPartido->mMessageAskQuestion); // add type
 
-        if (mClientID > 0)
-        {
-                mMessage.WriteByte(mClientID); // add mClientID for browsers
-        }
-       	//int length = mQuestionString.length(); 
-       	int length = mServerPartido->mQuestionVector.at(questionID).length();  
-        mMessage.WriteByte(length); 
+        	if (mClientID > 0)
+        	{
+                	mMessage.WriteByte(mClientID); // add mClientID for browsers
+        	}
+       		int length = mServerPartido->mQuestionVector.at(questionID).length();  
+        	mMessage.WriteByte(length); 
 
-        //loop thru length and write it
-        for (int i=0; i < length; i++)
-        {
-                mMessage.WriteByte(mServerPartido->mQuestionVector.at(questionID).at(i));
-                //mMessage.WriteByte(mQuestionString.at(i));
-        }
+        	//loop thru length and write it
+        	for (int i=0; i < length; i++)
+        	{
+                	mMessage.WriteByte(mServerPartido->mQuestionVector.at(questionID).at(i));
+        	}
 
-        //send it
-        mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+        	//send it
+        	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+	}
 }
 
 
 void ClientPartido::sendBattleStart()
 {
 	LogString("ClientPartido::sendBattleStart");
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServerPartido->mMessageBattleStart); // add type
+	if (mConnectionState == DREAMSOCK_CONNECTED)
+	{
+        
+		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        	mMessage.WriteByte(mServerPartido->mMessageBattleStart); // add type
 
-        if (mClientID > 0)
-        {
-                mMessage.WriteByte(mClientID); // add mClientID for browsers
-        }
+        	if (mClientID > 0)
+        	{
+                	mMessage.WriteByte(mClientID); // add mClientID for browsers
+        	}
 
-        //send it
-        mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+        	//send it
+        	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+	}
 }
 
 void ClientPartido::sendBattleEnd(int result, bool sendToOpponent)
@@ -203,16 +212,22 @@ void ClientPartido::sendBattleEnd(int result, bool sendToOpponent)
 	mShapePartido->mOpponentLast = mShapePartido->mOpponent;
 	mShapePartido->mOpponent = NULL;
 
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServerPartido->mMessageBattleEnd); // add type
 
-        if (mClientID > 0)
-        {
-                mMessage.WriteByte(mClientID); // add mClientID for browsers
-        }
+	if (mConnectionState == DREAMSOCK_CONNECTED)
+	{
+        	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        	mMessage.WriteByte(mServerPartido->mMessageBattleEnd); // add type
 
-        //send it
-        mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+        	if (mClientID > 0)
+        	{
+                	mMessage.WriteByte(mClientID); // add mClientID for browsers
+        	}
+
+        	//send it
+        	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+	}
+
+	mShapePartido->mCollidable = true;
 }
 
 void ClientPartido::readAnswer(Message* mes)
