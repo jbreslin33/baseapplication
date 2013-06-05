@@ -168,9 +168,36 @@ void ClientPartido::sendBattleStart()
         mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 }
 
-void ClientPartido::sendBattleEnd()
+void ClientPartido::sendBattleEnd(int result)
 {
 	LogString("ClientPartido::sendBattleEnd");
+
+	if (result == -1)
+	{	
+		mLosses++;
+		if (mShapePartido->mOpponent)
+		{
+			mShapePartido->mOpponent->mClientPartido->mWins++;
+		}
+	}
+
+	else if (result == 1)
+	{
+		mWins++;
+		if (mShapePartido->mOpponent)
+		{
+			mShapePartido->mOpponent->mClientPartido->mLosses++;
+		}
+	}
+	
+	//setText	
+	std::string record;	
+	record.append(db_first_name);
+	record.append(":");
+	record.append(utility->intToString(mWins));
+	record.append("-");
+	record.append(utility->intToString(mLosses));
+	mShapePartido->setText(record);
 
 	//reset opponent pointers and vars for answers...	
 	mBattleScore = 0;	
@@ -225,10 +252,8 @@ void ClientPartido::readAnswer(Message* mes)
 //mServerPartido->mQuestionVector.at(questionID)
         if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0)  
 	{
-		LogString("you lost battle");	
-		sendBattleEnd();
-		mShapePartido->setText("lost");
-		//this is the prob you should not readAnswer ..why is it reading answer
+
+		sendBattleEnd(-1);
 	}
 	else
 	{
@@ -237,8 +262,7 @@ void ClientPartido::readAnswer(Message* mes)
 
 	if (mBattleScore > 9)
 	{
-		LogString("You win! db_id:%d",db_id);
-		sendBattleEnd();
+		sendBattleEnd(1);
 	} 	
 	
 	//set vars for new question and answer combo....
