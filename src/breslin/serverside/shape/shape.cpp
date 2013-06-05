@@ -327,3 +327,32 @@ void Shape::addToMoveMessage(Message* message)
 	//}
 }
 
+void Shape::setText(std::string text)
+{
+        //send it to everyone
+	for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
+	{
+ 		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        	mMessage.WriteByte(mMessageSetText); // add type
+
+        	if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
+        	{
+                	mMessage.WriteByte(mGame->mServer->mClientVector.at(i)->mClientID); // add mClientID for browsers
+        	}
+
+		//index id
+		mMessage.WriteByte(mIndex);
+
+		//username
+        	int length = text.length();  
+        	mMessage.WriteByte(length); //send length
+
+        	//loop thru length and write it
+        	for (int b=0; b < length; b++)
+        	{
+                	mMessage.WriteByte(text.at(b));
+        	}
+
+        	mGame->mServer->mNetwork->sendPacketTo(mGame->mServer->mClientVector.at(i),&mMessage);
+	}
+}

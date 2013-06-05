@@ -77,6 +77,20 @@ Shape::~Shape()
 //	delete mSceneNode;
 }
 
+void Shape::setText(ByteBuffer* byteBuffer)
+{
+	mText.clear();
+
+        //text
+        int length = byteBuffer->ReadByte();
+        for (int i = 0; i < length; i++)
+        {
+                char c =  byteBuffer->ReadByte();
+                mText.append(1,c);
+        }
+}
+
+
 /*********************************
 		ABILITY
 ******************************/
@@ -143,6 +157,10 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
                 mStringUsername.append(1,c);
         }
 
+	//setText
+	mText.clear();
+	mText.append(mStringUsername);
+
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
 	mServerCommandLast->mPosition->copyValuesFrom(mSpawnPosition);
 	mServerCommandCurrent->mPosition->copyValuesFrom(mSpawnPosition);
@@ -188,7 +206,7 @@ void Shape::spawnShape(Vector3D* position)
 void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 {
 	clearTitle(); //empty title string so it can be filled anew
-	
+/*	
 	std::string s;
 
 	s.append(mStringUsername);
@@ -196,6 +214,10 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 	s.append(StringConverter::toString(mIndex));
  
 	appendToTitle(s);
+*/
+	clearTitle();
+	appendToTitle(mText);
+	
 
 	parseDeltaByteBuffer(byteBuffer);
 
@@ -342,7 +364,6 @@ void Shape::moveGhostShape()
 *		OGRE_SPECIFIC PRIVATE
 *
 *********************************************************/
-
 
 void Shape::setupTitle()
 {

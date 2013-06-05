@@ -263,6 +263,18 @@ void Game::checkByteBuffer(ByteBuffer* byteBuffer)
                         	readServerTick(byteBuffer);
                         }
                         break;
+		case mMessageSetText:
+        		int index = byteBuffer->ReadByte();
+   			for (unsigned int i = 0; i < mShapeVector->size(); i++)
+                	{
+                        	Shape* shape = mShapeVector->at(i);
+				if (shape->mIndex == index)
+				{
+					shape->setText(byteBuffer);	
+				}
+
+			}
+			break;
 	}
 }
 

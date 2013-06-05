@@ -38,6 +38,7 @@ Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector
 static const char mCommandFrameTime = 2;
 
 static const char mMessageRemoveShape = -104;
+static const char mMessageSetText     = -66;
 
 static const char mMessageNonDeltaFrame = 2;
 static const char mMessageServerExit = 3;
@@ -128,6 +129,8 @@ virtual void processTick();
 void setKeyDirection();
 
 void setValues();
+
+void setText(std::string text);
 
 void insertIntoDB();
 

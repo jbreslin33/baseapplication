@@ -60,6 +60,7 @@ static const char mMessageFrame = 1;
 
 static const char mMessageAddShape    = -103;
 static const char mMessageRemoveShape = -104;
+static const char mMessageSetText     = -66;
 
 static const char mMessageQuitGame = -108;
 
@@ -117,8 +118,6 @@ virtual void checkByteBuffer(ByteBuffer* byteBuffer);
 
 //input
 virtual void processInput();
-
-
 
 private:
 

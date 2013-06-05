@@ -224,6 +224,7 @@ void ClientPartido::readAnswer(Message* mes)
 	{
 		LogString("you lost battle");	
 		sendBattleEnd();
+		mShapePartido->setText("lost");
 		//this is the prob you should not readAnswer ..why is it reading answer
 	}
 	else

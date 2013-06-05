@@ -250,10 +250,9 @@ void Game::sendShapes(Client* client)
         	mMessage.WriteByte(mShapeVector.at(i)->mAnimated);
 
         	//username
-        	int length = mShapeVector.at(i)->mClient->db_username.length();  // get length of string containing school
+        	int length = mShapeVector.at(i)->mClient->db_username.length(); 
         	mMessage.WriteByte(length); //send length
 		
-
         	//loop thru length and write it
         	for (int b=0; b < length; b++)
         	{
@@ -264,6 +263,8 @@ void Game::sendShapes(Client* client)
                 mServer->mNetwork->sendPacketTo(client,&mMessage);
         }
 }
+
+
 
 //the client that is leaving????
 void Game::leave(Client* client)

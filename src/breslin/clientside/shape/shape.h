@@ -41,6 +41,7 @@ ApplicationBreslin* mApplication;
 //id
 int   mIndex;
 std::string mStringUsername;
+std::string mText;
 
 //speed
 float mSpeed;
@@ -109,6 +110,8 @@ SceneNode*          mSceneNode;
 **************************************************/
 
 public:
+
+void setText(ByteBuffer* byteBuffer);
 
 //ogre scene node
 SceneNode*  getSceneNode() { return mSceneNode; }
