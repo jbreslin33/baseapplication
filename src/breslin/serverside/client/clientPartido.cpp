@@ -31,6 +31,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	//battle
         mWaitingForAnswer = false;
 	mQuestionID = 0;
+	mBattleScore = 0;
 }
 
 ClientPartido::~ClientPartido()
