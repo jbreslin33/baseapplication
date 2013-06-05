@@ -16,9 +16,9 @@
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-GamePlayPartido::GamePlayPartido(GamePartido* game) : GamePlay(game)
+GamePlayPartido::GamePlayPartido(GamePartido* gamePartido) : GamePlay(gamePartido)
 {
-	mGame = game;
+	mGamePartido = gamePartido;
 	LogString("GamePlayPartido::GamePlayPartido");
 }
 
@@ -33,9 +33,9 @@ void GamePlayPartido::enter()
 }
 void GamePlayPartido::execute()
 {
-	if (mGame->mBattleStart)
+	if (mGamePartido->mBattleStart)
 	{
-		mGame->mStateMachine->changeState(mGame->mGamePlayPartidoBattle);		
+		mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoBattle);		
 	}
 	GamePlay::execute();
 }
