@@ -46,5 +46,6 @@ void GamePlayPartidoBattle::execute()
 void GamePlayPartidoBattle::exit()
 {
 	mGamePartido->mApplicationPartido->hideBattleScreen();
-	mGamePartido->mBattleEnd = true;
+	mGamePartido->mBattleEnd   = false;
+	mGamePartido->mBattleStart = false;
 }
