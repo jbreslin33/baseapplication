@@ -43,6 +43,10 @@ bool mWaitingForAnswer;
 std::string mQuestionString;
 int mBattleScore;
 
+int mWins;
+int mLosses;
+int mTies;
+
 //questions
 int getLowestUnpassedLevel(int maxLevel);
 int getMaxLevelAskedID();
