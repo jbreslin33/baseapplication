@@ -208,7 +208,20 @@ void ClientPartido::battleEnd(int result, bool sendToOpponent)
 	mBattleScore = 0;	
 	mWaitingForAnswer = false;
         mQuestionString = "";
+
+	//relieve your last opponents last opponent if it was you
+	if (mShapePartido->mOpponentLast)
+	{
+		if (mShapePartido->mOpponentLast->mOpponentLast == mShapePartido)
+		{
+			mShapePartido->mOpponentLast->mOpponentLast = NULL;
+		}
+	}
+	
+	//set your last opponent
 	mShapePartido->mOpponentLast = mShapePartido->mOpponent;
+
+	//clear you opponent
 	mShapePartido->mOpponent = NULL;
 
 	mShapePartido->mCollidable = true;
