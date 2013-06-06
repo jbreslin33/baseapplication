@@ -30,11 +30,35 @@ GamePartido::~GamePartido()
 void GamePartido::processUpdate()
 {
 	Game::processUpdate();
+	
+	if (checkForEndOfGame())
+	{
+		LogString("endOFGAME!!!!!!!!!!!!!!!!!!!!!!");
+	}
+}
+
+bool GamePartido::checkForEndOfGame()
+{
+	//check for end of game
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
+	{
+		if (mServerPartido->mClientPartidoVector.at(i)->mClientID == -1) //browser bridge
+		{
+			continue;
+		}
+
+		if (mServerPartido->mClientPartidoVector.at(i)->mLosses == 0)	
+		{
+			return false;
+		}
+	}
+	
+	return true;
 }
 
 void GamePartido::createShapes()
 {
-        for (unsigned int i = 0; i < mServerPartido->mClientVector.size(); i++)
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
         {
                 mServerPartido->mClientPartidoVector.at(i)->setShape( new ShapePartido(getOpenIndex(),this,mServerPartido->mClientPartidoVector.at(i),getOpenPoint(),new Vector3D(),new Vector3D(),mServerPartido->mRoot,true,true,30.0f,1,false) );
         }

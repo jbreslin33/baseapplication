@@ -53,7 +53,7 @@ public:
 	Vector3D* getOpenPoint    ();
 
 	//end game
-	virtual void checkForEndOfGame() { }
+	virtual bool checkForEndOfGame() { }
 
 	// Network
 	void	sendExitNotification();
