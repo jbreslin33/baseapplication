@@ -21,6 +21,10 @@ public:
 ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID);	
 ~ClientPartido();
 
+static const int WIN  = 1;
+static const int TIE  = 0;
+static const int LOSS = -1;
+
 void sendSchools();
 void parseAnswer();
 
@@ -69,10 +73,10 @@ int getNewQuestionID();
 void sendQuestion(int questionID);
 void sendBattleStart();
 void battleStart(ShapePartido* whoToBattle);
-void battleEnd(int result, bool sendToOpponent);
 void sendBattleEnd();
+void scoreBattle(int result);
+void sendBattleRecord(); 
+void resetBattle();
 
-//db
 };
-
 #endif

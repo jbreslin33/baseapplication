@@ -30,6 +30,7 @@ public:
 
 	//end of game
 	bool checkForEndOfGame();
+	void reset();
 };
 
 #endif

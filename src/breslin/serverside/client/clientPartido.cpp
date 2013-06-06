@@ -176,75 +176,73 @@ void ClientPartido::sendBattleStart()
         	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 	}
 }
-void ClientPartido::battleEnd(int result, bool sendToOpponent)
+
+void ClientPartido::scoreBattle(int result)
 {
-	LogString("ClientPartido::battleEnd:%s",db_first_name.c_str());
-
-	if (mShapePartido->mOpponent && sendToOpponent)
-	{
-		mShapePartido->mOpponent->mClientPartido->battleEnd(result * -1, false); //opposite
-	}
-	
-	if (result == -1)
-	{	
-		mLosses++;
-	}
-
-	else if (result == 1)
+	if (result == WIN)
 	{
 		mWins++;
 	}
-	
-	//setText	
-	std::string record;	
-	record.append(db_first_name);
-	record.append(":");
-	record.append(utility->intToString(mWins));
-	record.append("-");
-	record.append(utility->intToString(mLosses));
-	mShapePartido->setText(record);
 
-	//reset opponent pointers and vars for answers...	
-	mBattleScore = 0;	
-	mWaitingForAnswer = false;
-        mQuestionString = "";
-
-	//relieve your last opponents last opponent if it was you
-	if (mShapePartido->mOpponentLast)
+	if (result == LOSS)
 	{
-		if (mShapePartido->mOpponentLast->mOpponentLast == mShapePartido)
-		{
-			mShapePartido->mOpponentLast->mOpponentLast = NULL;
-		}
+		mLosses++;
 	}
-	
-	//set your last opponent
-	mShapePartido->mOpponentLast = mShapePartido->mOpponent;
+}
 
-	//clear you opponent
-	mShapePartido->mOpponent = NULL;
+void ClientPartido::sendBattleRecord()
+{
+  	//setText
+        std::string record;
+        record.append(db_first_name);
+        record.append(":");
+        record.append(utility->intToString(mWins));
+        record.append("-");
+        record.append(utility->intToString(mLosses));
+        mShapePartido->setText(record);
+}
 
-	mShapePartido->mCollidable = true;
+void ClientPartido::resetBattle()
+{
+ 	//reset opponent pointers and vars for answers...
+        mBattleScore      = 0;
+        mWaitingForAnswer = false;
+        mQuestionString   = "";
 
-	if (mConnectionState == DREAMSOCK_CONNECTED)
-	{
-		sendBattleEnd();
-	}
+        //relieve your last opponents last opponent if it was you
+        if (mShapePartido->mOpponentLast)
+        {
+                if (mShapePartido->mOpponentLast->mOpponentLast == mShapePartido)
+                {
+                        mShapePartido->mOpponentLast->mOpponentLast = NULL;
+                }
+        }
+
+        //set your last opponent
+        mShapePartido->mOpponentLast = mShapePartido->mOpponent;
+
+        //clear you opponent
+        mShapePartido->mOpponent = NULL;
+
+        mShapePartido->mCollidable = true;
 }
 
 void ClientPartido::sendBattleEnd()
 {
 	LogString("ClientPartido::sendBattleEnd:%s",db_first_name.c_str());
-       	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-       	mMessage.WriteByte(mServerPartido->mMessageBattleEnd); // add type
+	if (mConnectionState == DREAMSOCK_CONNECTED)
+	{
+       		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+       		mMessage.WriteByte(mServerPartido->mMessageBattleEnd); // add type
 
-       	if (mClientID > 0)
-       	{
-               	mMessage.WriteByte(mClientID); // add mClientID for browsers
-       	}
+       		if (mClientID > 0)
+       		{
+               		mMessage.WriteByte(mClientID); // add mClientID for browsers
+       		}
 
-       	//send it
-       	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+       		//send it
+       		mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+	}
 }
 
 void ClientPartido::readAnswer(Message* mes)
@@ -281,8 +279,23 @@ void ClientPartido::readAnswer(Message* mes)
 //mServerPartido->mQuestionVector.at(questionID)
         if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0)  
 	{
+		ShapePartido* opponent  = mShapePartido->mOpponent;
 
-		battleEnd(-1,true);
+		//score battle
+		scoreBattle(LOSS);
+		opponent->mClientPartido->scoreBattle(WIN);
+
+		//send battle record to clients
+		sendBattleRecord();	
+		opponent->mClientPartido->sendBattleRecord();	
+
+		//reset battle
+		resetBattle();	
+		opponent->mClientPartido->resetBattle();	
+
+		//send battle end to client	
+		sendBattleEnd();
+		opponent->mClientPartido->sendBattleEnd();
 	}
 	else
 	{
@@ -291,7 +304,23 @@ void ClientPartido::readAnswer(Message* mes)
 
 	if (mBattleScore > 9)
 	{
-		battleEnd(1,true);
+		ShapePartido* opponent  = mShapePartido->mOpponent;
+		
+		//score battle
+		scoreBattle(WIN);
+		opponent->mClientPartido->scoreBattle(LOSS);
+
+   		//send battle record to clients
+                sendBattleRecord();
+                opponent->mClientPartido->sendBattleRecord();
+
+                //reset battle
+                resetBattle();
+                opponent->mClientPartido->resetBattle();
+
+                //send battle end to client
+                sendBattleEnd();
+                opponent->mClientPartido->sendBattleEnd();
 	} 	
 	
 	//set vars for new question and answer combo....
