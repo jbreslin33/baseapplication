@@ -64,12 +64,13 @@ ShapePartido* mShapePartido;
 void setShape(ShapePartido* shapePartido);
 
 //battle
-void initializeBattle();
 virtual void processUpdate();
 int getNewQuestionID();
 void sendQuestion(int questionID);
 void sendBattleStart();
-void sendBattleEnd(int result, bool sendToOpponent);
+void battleStart(ShapePartido* whoToBattle);
+void battleEnd(int result, bool sendToOpponent);
+void sendBattleEnd();
 
 //db
 };

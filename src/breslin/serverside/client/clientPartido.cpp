@@ -82,20 +82,6 @@ void ClientPartido::processUpdate()
 	}
 }
 
-void ClientPartido::initializeBattle()
-{
-	LogString("ClientPartido::initializeBattle");
-
-	mBattleScore = 0;	
-	mWaitingForAnswer = false;
-        mQuestionString = "";
-	mShapePartido->mCollidable = false;
-	if (mConnectionState == DREAMSOCK_CONNECTED)
-        {
-       		sendBattleStart();
-	}
-}
-
 void ClientPartido::setShape(ShapePartido* shapePartido)
 {
 	Client::setShape(shapePartido);
@@ -156,11 +142,25 @@ void ClientPartido::sendQuestion(int questionID)
         	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 	}
 }
+void ClientPartido::battleStart(ShapePartido* whoToBattle)
+{
+	LogString("ClientPartido::battleStart:%s",db_first_name.c_str());
+        mShapePartido->mKey = 0;
+        mShapePartido->mOpponent = whoToBattle;
 
+	mBattleScore = 0;	
+	mWaitingForAnswer = false;
+        mQuestionString = "";
+	mShapePartido->mCollidable = false;
+	if (mConnectionState == DREAMSOCK_CONNECTED)
+        {
+       		sendBattleStart();
+	}
+}
 
 void ClientPartido::sendBattleStart()
 {
-	LogString("ClientPartido::sendBattleStart");
+	LogString("ClientPartido::sendBattleStart:%s",db_first_name.c_str());
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
         
@@ -176,14 +176,13 @@ void ClientPartido::sendBattleStart()
         	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 	}
 }
-
-void ClientPartido::sendBattleEnd(int result, bool sendToOpponent)
+void ClientPartido::battleEnd(int result, bool sendToOpponent)
 {
-	LogString("ClientPartido::sendBattleEnd");
+	LogString("ClientPartido::battleEnd:%s",db_first_name.c_str());
 
 	if (mShapePartido->mOpponent && sendToOpponent)
 	{
-		mShapePartido->mOpponent->mClientPartido->sendBattleEnd(result * -1, false); //opposite
+		mShapePartido->mOpponent->mClientPartido->battleEnd(result * -1, false); //opposite
 	}
 	
 	if (result == -1)
@@ -212,27 +211,32 @@ void ClientPartido::sendBattleEnd(int result, bool sendToOpponent)
 	mShapePartido->mOpponentLast = mShapePartido->mOpponent;
 	mShapePartido->mOpponent = NULL;
 
+	mShapePartido->mCollidable = true;
 
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
-        	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        	mMessage.WriteByte(mServerPartido->mMessageBattleEnd); // add type
-
-        	if (mClientID > 0)
-        	{
-                	mMessage.WriteByte(mClientID); // add mClientID for browsers
-        	}
-
-        	//send it
-        	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+		sendBattleEnd();
 	}
+}
 
-	mShapePartido->mCollidable = true;
+void ClientPartido::sendBattleEnd()
+{
+	LogString("ClientPartido::sendBattleEnd:%s",db_first_name.c_str());
+       	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+       	mMessage.WriteByte(mServerPartido->mMessageBattleEnd); // add type
+
+       	if (mClientID > 0)
+       	{
+               	mMessage.WriteByte(mClientID); // add mClientID for browsers
+       	}
+
+       	//send it
+       	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 }
 
 void ClientPartido::readAnswer(Message* mes)
 {
-	LogString("ClientPartido::readAnswer");
+	LogString("ClientPartido::readAnswer:%s",db_first_name.c_str());
         //clear answer string
         mStringAnswer.clear();
 
@@ -265,7 +269,7 @@ void ClientPartido::readAnswer(Message* mes)
         if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0)  
 	{
 
-		sendBattleEnd(-1,true);
+		battleEnd(-1,true);
 	}
 	else
 	{
@@ -274,7 +278,7 @@ void ClientPartido::readAnswer(Message* mes)
 
 	if (mBattleScore > 9)
 	{
-		sendBattleEnd(1,true);
+		battleEnd(1,true);
 	} 	
 	
 	//set vars for new question and answer combo....
@@ -461,7 +465,6 @@ int ClientPartido::getNewQuestionID()
 	if (rand() % 2 == 1)
 	{
 		//you could advance here if you passed maxLevel and all before it...
-		LogString("DETERMINED");
 		for (int i = 1; i <= maxLevel; i++)
 		{
 			if (checkLevel(i))
@@ -482,7 +485,6 @@ int ClientPartido::getNewQuestionID()
 	}
 	else
 	{
-		LogString("RANDOM");
 		//do it random based on maxLevel, you cannot advance a level here.
 		mQuestionID  = rand() % maxLevel + 1;
 		return mQuestionID;

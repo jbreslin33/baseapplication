@@ -48,16 +48,14 @@ void ShapePartido::processTick()
 
 void ShapePartido::collision(Shape* shape)
 {
+	LogString("ShapePartido::collision:%s",shape->mClient->db_first_name.c_str());
 	Shape::collision(shape);	
 
 	if (mOpponent == NULL && mOpponentLast != shape)
 	{
-		LogString("stop moving shape");	
-		mKey = 0;
-		mOpponent = (ShapePartido*)shape;
 		if (mClientPartido)
 		{
-			mClientPartido->initializeBattle();
+			mClientPartido->battleStart((ShapePartido*)shape);
 		}
 	}
 }
