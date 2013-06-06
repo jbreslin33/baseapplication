@@ -33,11 +33,9 @@ ApplicationPartido::~ApplicationPartido()
 
 bool ApplicationPartido::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-/*
-        mRenderTime = evt.timeSinceLastFrame;
-*/
-	mAnswerTime = mAnswerTime + mRenderTime;
         bool ret = ApplicationBreslin::frameRenderingQueued(evt);
+	unsigned int ms = mRenderTime * 1000;
+	mAnswerTime = mAnswerTime + ms;
         return ret;
 }
 
@@ -205,7 +203,8 @@ void ApplicationPartido::sendAnswer()
 {
         ByteBuffer* byteBuffer = new ByteBuffer();
         byteBuffer->WriteByte(mMessageAnswerQuestion);
-	int mAnswerTime = 120;
+	//int mAnswerTime = 120;
+	LogString("mAnswerTime:%d",mAnswerTime);
         byteBuffer->WriteByte(mAnswerTime);
 
         //get length of username

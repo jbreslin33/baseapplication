@@ -85,11 +85,11 @@ std::string mStringSchool;
 std::string mStringUsername;
 std::string mStringPassword;
 
-private:
-
+public:
 //time
 float mRenderTime;
 
+private:
 /***************************************
 *			          METHODS
 ***************************************/

@@ -116,7 +116,7 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 		}
 	}
 	
-	//reset mAnswerTim	
+	//reset mAnswerTime	
 	mApplicationPartido->mAnswerTime = 0; 
 
 }
