@@ -48,12 +48,9 @@ void GamePartido::reset()
 			continue;
 		}
 
-   		//set your last opponent
-        	clientPartido->mShapePartido->mOpponentLast = NULL; 
-
-        	//clear you opponent
-        	clientPartido->mShapePartido->mOpponent = NULL; 
-
+		//reset opponent pointers	
+		clientPartido->resetOpponents();
+		
 		//collision
         	clientPartido->mShapePartido->mCollidable = NULL; 
 		
@@ -63,10 +60,10 @@ void GamePartido::reset()
 		}	
 			
 		clientPartido->mBattleScore = 0;	
-		clientPartido->mWins   = 0;	
-		clientPartido->mLosses = 0;	
-		clientPartido->mTies   = 0;	
 
+		clientPartido->resetRecords();	
+
+		clientPartido->sendBattleRecord();	
 	}
 
 }

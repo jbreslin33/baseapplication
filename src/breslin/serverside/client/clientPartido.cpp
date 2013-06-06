@@ -202,6 +202,22 @@ void ClientPartido::sendBattleRecord()
         mShapePartido->setText(record);
 }
 
+void ClientPartido::resetOpponents()
+{
+	//set your last opponent
+        mShapePartido->mOpponentLast = NULL;
+
+        //clear you opponent
+        mShapePartido->mOpponent = NULL;
+}
+
+void ClientPartido::resetRecords()
+{
+ 	mWins   = 0;
+       	mLosses = 0;
+        mTies   = 0;
+}
+
 void ClientPartido::resetBattle()
 {
  	//reset opponent pointers and vars for answers...

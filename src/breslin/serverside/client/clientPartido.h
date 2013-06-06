@@ -77,6 +77,7 @@ void sendBattleEnd();
 void scoreBattle(int result);
 void sendBattleRecord(); 
 void resetBattle();
-
+void resetRecords();
+void resetOpponents();
 };
 #endif
