@@ -12,6 +12,9 @@ public:
 	ApplicationPartido(const char* serverIP, int serverPort);
 	~ApplicationPartido();
 
+//rendering
+virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);
+
 static const char mMessageAnswerQuestion  = -84;
 
 //main
@@ -39,6 +42,8 @@ OgreBites::Label* mLabelQuestion;
 OgreBites::Label* mLabelAnswer;
 
 std::string mStringAnswer;
+
+int mAnswerTime;
 
 void sendAnswer();
 

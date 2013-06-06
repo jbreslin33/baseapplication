@@ -148,9 +148,11 @@ Ogre::Camera* getCamera() { return mCamera; }
 private:
 void createScene          ();
 
+public:
 //rendering
 virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);
 
+private:
 //input
 void buttonHit  (OgreBites::Button *button);
 void labelHit   (OgreBites::Label* label );

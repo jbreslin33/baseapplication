@@ -24,10 +24,21 @@
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
 	LogString("ApplicationPartido::ApplicationPartido");
+	mAnswerTime = 0;
 }
 
 ApplicationPartido::~ApplicationPartido()
 {
+}
+
+bool ApplicationPartido::frameRenderingQueued(const Ogre::FrameEvent& evt)
+{
+/*
+        mRenderTime = evt.timeSinceLastFrame;
+*/
+	mAnswerTime = mAnswerTime + mRenderTime;
+        bool ret = ApplicationBreslin::frameRenderingQueued(evt);
+        return ret;
 }
 
 void ApplicationPartido::createStates()
