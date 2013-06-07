@@ -12,6 +12,10 @@ initialize: function(serverIP, serverPort)
         //main screen
         this.mButtonJoinGameB = 0;
 
+	//battle
+        this.mLabelQuestion = 0;
+        this.mLabelAnswer = 0;
+
 },
 
 
@@ -74,18 +78,28 @@ hideMainScreen: function()
 //battle
 createBattleScreen: function()
 {
+ 	if (this.mLabelQuestion == 0)
+        {
+                this.mLabelQuestion = this.createLabel(300,75,100,25,"blue","Question:");
+        }
 
+        if (this.mLabelAnswer == 0)
+        {
+                this.mLabelAnswer= this.createLabel(300,100,100,25,"yellow","Answer:");
+        }
 },
+
+showBattleScreen: function()
+{
+        this.mLabelUsername.style.display="block";
+        this.mLabelPassword.style.display="block";
+},
+
 
 hideBattleScreen: function()
 {
-
-},
-
-
-hideBattleScreen: function()
-{
-
+        this.mLabelUsername.style.display="none";
+        this.mLabelPassword.style.display="none";
 }
 
 

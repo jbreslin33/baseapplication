@@ -5,7 +5,7 @@ Extends: Game,
 
 initialize: function(applicationPartido)
 {
-	this.parent(applicationPartido;
+	this.parent(applicationPartido);
 
 	this.mApplicationPartido = applicationPartido;
 	

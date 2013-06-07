@@ -6,6 +6,7 @@ Extends: GamePlay,
 
 initialize: function(gamePartido)
 {
+	this.parent(gamePartido);
 	this.mGamePartido = gamePartido; 
 },
 
