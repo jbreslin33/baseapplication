@@ -71,25 +71,13 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
                         break;
 
                 case mMessageBattleStart:
-                        battleStart(byteBuffer);
+			mBattleStart = true;
                         break;
 
                 case mMessageBattleEnd:
-                        battleEnd(byteBuffer);
+			mBattleEnd = true;
                         break;
         }
-}
-
-void GamePartido::battleStart(ByteBuffer* byteBuffer)
-{
-	mBattleStart = true;
-	LogString("battleStart");
-}
-
-void GamePartido::battleEnd(ByteBuffer* byteBuffer)
-{
-	mBattleEnd = true;
-	LogString("battleEnd");
 }
 
 void GamePartido::askQuestion(ByteBuffer* byteBuffer)

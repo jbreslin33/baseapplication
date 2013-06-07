@@ -41,9 +41,6 @@ virtual void setStates();
 virtual void checkByteBuffer(ByteBuffer* byteBuffer);
 void askQuestion(ByteBuffer* byteBuffer);
 
-void battleStart(ByteBuffer* byteBuffer);
-void battleEnd(ByteBuffer* byteBuffer);
-
 bool mBattleStart;
 bool mBattleEnd;
 
