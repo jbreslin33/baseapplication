@@ -267,7 +267,7 @@ void ClientPartido::readAnswer(Message* mes)
         //clear answer string
         mStringAnswer.clear();
 
-        mAnswerTime = mes->ReadByte();
+        mAnswerTime = mes->ReadShort();
 
         int sizeOfAnswer = mes->ReadByte();
         //loop thru and set mStringAnswer from client

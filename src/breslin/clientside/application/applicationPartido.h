@@ -43,7 +43,7 @@ OgreBites::Label* mLabelAnswer;
 
 std::string mStringAnswer;
 
-unsigned int mAnswerTime;
+unsigned short mAnswerTime;
 
 void sendAnswer();
 
