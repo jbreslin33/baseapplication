@@ -293,7 +293,7 @@ void ClientPartido::readAnswer(Message* mes)
 
         //if (real_answer.compare(client_answer) != 0)
 //mServerPartido->mQuestionVector.at(questionID)
-        if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0)  
+        if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
 	{
 		ShapePartido* opponent  = mShapePartido->mOpponent;
 
