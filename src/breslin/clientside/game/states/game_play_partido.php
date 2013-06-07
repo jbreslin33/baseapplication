@@ -1,9 +1,12 @@
 var GamePlayPartido = new Class(
 {
 
-initialize: function(game)
+Extends: GamePlay,
+
+
+initialize: function(gamePartido)
 {
-	this.mGame = game; 
+	this.mGamePartido = gamePartido; 
 },
 
 log: function(msg)
@@ -21,16 +24,12 @@ enter: function()
 
 execute: function()
 {
-        if (this.mGame.mBattleStart)
+        if (this.mGamePartido.mBattleStart)
         {
-                this.mGame.mStateMachine.changeState(this.mGame.mGamePlayPartidoBattle);
+                this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlayPartidoBattle);
         }
 
-	//user input
-        this.mGame.processInput();
-
-        //network outgoing
-        this.mGame.sendByteBuffer();
+	this.parent()
 },	
 
 exit: function()

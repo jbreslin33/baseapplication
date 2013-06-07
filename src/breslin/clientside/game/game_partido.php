@@ -3,11 +3,12 @@ var GamePartido = new Class(
 
 Extends: Game,
 
-initialize: function(applicationBreslin)
+initialize: function(applicationPartido)
 {
-	this.parent(applicationBreslin);
+	this.parent(applicationPartido;
+
+	this.mApplicationPartido = applicationPartido;
 	
-	this.log('GamePartido::GamePartido');
 	//questions
 	this.mMessageAskQuestion    = -76;
 		

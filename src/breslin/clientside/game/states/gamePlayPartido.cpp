@@ -19,7 +19,6 @@
 GamePlayPartido::GamePlayPartido(GamePartido* gamePartido) : GamePlay(gamePartido)
 {
 	mGamePartido = gamePartido;
-	LogString("GamePlayPartido::GamePlayPartido");
 }
 
 GamePlayPartido::~GamePlayPartido()

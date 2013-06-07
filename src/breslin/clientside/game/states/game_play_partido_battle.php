@@ -1,9 +1,9 @@
 var GamePlayPartidoBattle = new Class(
 {
 
-initialize: function(game)
+initialize: function(gamePartido)
 {
-	this.mGame = game; 
+	this.mGamePartido = gamePartido; 
 },
 
 log: function(msg)
@@ -16,28 +16,29 @@ log: function(msg)
 
 enter: function()
 {
-	this.log('GamePlayPartidoBattle::enter');
-	this.mGame.mBattleStart = false;
-	this.mGame.mApplication.createBattleScreen();
-        this.mGame.mApplication.showBattleScreen();
-        this.mGame.mBattleStart = false;
+	this.mGamePartido.mApplicationPartido.createBattleScreen();
+	this.mGamePartido.mApplicationPartido.showBattleScreen();
+	this.mGamePartido.mBattleStart = false;
+
+	
+	//reset text box	
+	//still need to do this.....
 
 },
 
 execute: function()
 {
-	//user input
-        this.mGame.processInput();
-
-        //network outgoing
-        this.mGame.sendByteBuffer();
+	if (this.mGamePartido.mBattleEnd)
+        {
+               this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlay);
+        }
 },	
 
 exit: function()
 {
-
-        this.mGame.mApplication.hideBattleScreen();
-        this.mGame.mBattleEnd = true;
+        this.mGamePartido.mApplicationPartido.hideBattleScreen();
+        this.mGamePartido.mBattleEnd = false;
+        this.mGamePartido.mBattleEnd = false;
 }
 
 });
