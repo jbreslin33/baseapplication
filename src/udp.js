@@ -288,7 +288,6 @@ server.on("message", function (msg, rinfo)
                         string = string + c;
                 }
 
-        
                 //let's just pass off data msg to browsers
 		var addShapeString = type;
 
@@ -308,8 +307,18 @@ server.on("message", function (msg, rinfo)
  	if (type == -76)
         {
                 var clientID = msg.readInt8(1);
-                var string = type;
-                string = string + "," + clientID;
+  		var length   = msg.readInt8(2);
+                
+                var questionString = '';
+		for (i = 0; i < length; i++)
+                {
+                        var n = msg.readInt8(parseInt(3 + i));
+                        var c = String.fromCharCode(n);
+                        questionString = questionString + c;
+                }
+		console.log('questionString:' + questionString);
+
+		var string = type + "," + length + "," + questionString;
 
                 io.sockets.clients().forEach(function (socket)
                 {
@@ -318,7 +327,6 @@ server.on("message", function (msg, rinfo)
                                 socket.emit('news', string)
                         }
                 });
-
 	}
 
 	//mMessageBattleStart

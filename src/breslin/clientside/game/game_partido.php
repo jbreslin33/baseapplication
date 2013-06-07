@@ -47,6 +47,15 @@ setStates: function()
 
 askQuestion: function(byteBuffer)
 {
+	this.log('GamePartido::askQuestion');
+        var length = byteBuffer.readByte();
+
+        this.mStringQuestion = '';
+        for (i = 0; i < length; i++)
+        {
+                this.mStringQuestion = this.mStringQuestion + byteBuffer.readByte();
+                this.log('question:' + this.mStringQuestion);
+        }
 }
 
 });
