@@ -58,7 +58,7 @@ window.addEvent('domready', function()
 		{
 			if (mApplication.mGame)
                         {
-                                mApplication.mGame.battleStart(byteBuffer);
+                                mApplication.mGame.mBattleStart = true;
                         }
                         else
                         {
@@ -72,7 +72,7 @@ window.addEvent('domready', function()
 		{
 			if (mApplication.mGame)
                         {
-                                mApplication.mGame.battleEnd(byteBuffer);
+                                mApplication.mGame.mBattleEnd = true;
                         }
                         else
                         {

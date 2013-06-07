@@ -46,17 +46,6 @@ setStates: function()
 
 askQuestion: function(byteBuffer)
 {
-},
-
-battleStart: function(byteBuffer)
-{
-	this.log('battleStart');
-	this.mBattleStart = true;
-},
-
-battleEnd: function(byteBuffer)
-{
-	this.mBattleEnd = true;
 }
 
 });
