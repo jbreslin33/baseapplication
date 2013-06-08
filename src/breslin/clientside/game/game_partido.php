@@ -44,7 +44,37 @@ setStates: function()
         this.mStateMachine.setGlobalState(this.mGameGlobal);
         this.mStateMachine.changeState(this.mGamePlay);
 },
+/*
+void GamePartido::askQuestion(ByteBuffer* byteBuffer)
+{
+        std::string question;
+        int length = byteBuffer->ReadByte();
+        for (int i = 0; i < length; i++)
+        {
+                char c =  byteBuffer->ReadByte();
+                question.append(1,c);
+        }
+        for(int i = 0; i < mShapeVector->size(); i++)
+        {      
+                if (mShapeVector->at(i)->mLocal == 1)
+                {
+                        if (mApplicationPartido->mLabelQuestion)
+                        {
+                                mApplicationPartido->mLabelQuestion->setCaption(question);
+                        }
+                        else
+                        {
+                                LogString("no label");
+                        }
+                }
+        }
 
+        //reset mAnswerTime
+        mApplicationPartido->mAnswerTime = 0;
+
+}
+
+*/
 askQuestion: function(byteBuffer)
 {
 	this.log('GamePartido::askQuestion');

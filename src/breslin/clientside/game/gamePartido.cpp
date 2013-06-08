@@ -82,30 +82,23 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 
 void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 {
-	std::string question;
+	mApplicationPartido->mStringQuestion.clear();
         int length = byteBuffer->ReadByte();
         for (int i = 0; i < length; i++)
         {
         	char c =  byteBuffer->ReadByte();
-                question.append(1,c);
+                mApplicationPartido->mStringQuestion.append(1,c);
         }
-	for(int i = 0; i < mShapeVector->size(); i++)
-	{	
-		if (mShapeVector->at(i)->mLocal == 1)
-		{
-			if (mApplicationPartido->mLabelQuestion)
-			{
-				mApplicationPartido->mLabelQuestion->setCaption(question);
-			}
-			else
-			{
-				LogString("no label");
-			}
-		}
+	if (mApplicationPartido->mLabelQuestion)
+	{
+		mApplicationPartido->mLabelQuestion->setCaption(mApplicationPartido->mStringQuestion);
+	}
+	else
+	{
+		LogString("no label");
 	}
 	
 	//reset mAnswerTime	
 	mApplicationPartido->mAnswerTime = 0; 
-
 }
 

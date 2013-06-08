@@ -42,6 +42,7 @@ OgreBites::Label* mLabelQuestion;
 OgreBites::Label* mLabelAnswer;
 
 std::string mStringAnswer;
+std::string mStringQuestion;
 
 unsigned short mAnswerTime;
 

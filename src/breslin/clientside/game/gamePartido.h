@@ -43,7 +43,6 @@ void askQuestion(ByteBuffer* byteBuffer);
 
 bool mBattleStart;
 bool mBattleEnd;
-
 };
 
 #endif
