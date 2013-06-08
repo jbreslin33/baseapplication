@@ -348,6 +348,7 @@ createLoginScreen: function()
   	if (this.mLabelUsername == 0)
 	{
                 this.mLabelUsername = this.createLabel(300,75,100,25,"green","Username");
+		this.mLabelUsername.focus();
 	}
 
   	if (this.mLabelPassword == 0)
@@ -500,14 +501,12 @@ keyDown: function(event)
 	{
 		if (mApplication.mLabelUsername == document.activeElement)
 		{
-			mApplication.log('hit enter from username, gointo password!!!');
 			mApplication.mLabelPassword.focus();
 		}
-		else
+		if (mApplication.mLabelPassword == document.activeElement)
 		{
-			//mApplication.log('hit enter from somewhere else !!!');
+			mApplication.sendLogin();
 		}
-		
 	}
 
 },
