@@ -102,10 +102,18 @@ hideBattleScreen: function()
 {
         this.mLabelUsername.style.display="none";
         this.mLabelPassword.style.display="none";
+},
+
+sendAnswer: function()
+{
+    	var answer = this.mLabelAnswer.value;
+        message = answer + ' ' + this.mAnswerTime;
+        this.mNetwork.mSocket.emit('send_answer', message);
 }
 
-
 });
+
+
 
 /*
 */

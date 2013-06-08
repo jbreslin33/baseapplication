@@ -203,8 +203,7 @@ void ApplicationPartido::sendAnswer()
 {
         ByteBuffer* byteBuffer = new ByteBuffer();
         byteBuffer->WriteByte(mMessageAnswerQuestion);
-	//int mAnswerTime = 120;
-	LogString("mAnswerTime:%d",mAnswerTime);
+	
         byteBuffer->WriteShort(mAnswerTime);
 
         //get length of username
