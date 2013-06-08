@@ -18,6 +18,8 @@ initialize: function(serverIP, serverPort)
 	
 	this.mStringQuestion = '';
 	this.mStringAnswer = '';
+	
+	this.mAnswerTime = 0;
 },
 
 
@@ -27,6 +29,12 @@ log: function(msg)
         {
         	throw new Error(msg);
         }, 0);
+},
+
+processUpdate: function()
+{
+	this.parent();
+	this.mAnswerTime = this.mAnswerTime + this.mRenderTime;   
 },
 
 createStates: function()
@@ -111,6 +119,22 @@ sendAnswer: function()
         message = answer + ' ' + this.mAnswerTime;
         this.mNetwork.mSocket.emit('send_answer', message);
 }
+
+/*
+keyDown: function(event)
+{
+	//mApplication.parent.keyDown(event);
+	parent(event);
+
+        if (event.key == 'enter')
+        {
+                if (mApplication.mLabelAnswer == document.activeElement)
+                {
+                        mApplication.sendAnswer();
+                }
+        }
+}
+*/
 
 });
 

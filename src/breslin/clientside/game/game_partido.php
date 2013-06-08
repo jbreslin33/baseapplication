@@ -85,6 +85,9 @@ askQuestion: function(byteBuffer)
 	{
 		this.log('no label');
 	}
+       	
+	//reset mAnswerTime 
+	this.mApplicationPartido.mAnswerTime = 0;
 }
 
 });

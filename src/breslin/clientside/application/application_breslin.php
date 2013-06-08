@@ -507,6 +507,12 @@ keyDown: function(event)
 		{
 			mApplication.sendLogin();
 		}
+		//this is a hack. need to use inheritance...
+ 		if (mApplication.mLabelAnswer == document.activeElement)
+                {
+                        mApplication.sendAnswer();
+                }
+
 	}
 
 },

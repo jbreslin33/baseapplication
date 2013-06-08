@@ -181,6 +181,17 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
+
+        socket.on('send_answer', function(message,remote)
+	{
+		console.log('send answer.....');
+
+                server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
+		{
+
+                });
+        });
+
         socket.on('send_logout', function(message,remote)
 	{
          	//send to c++ server
