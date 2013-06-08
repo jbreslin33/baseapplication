@@ -495,6 +495,12 @@ keyDown: function(event)
         {
                 mApplication.mKey_q = true;
 	}
+
+	if (event.key == 'enter')
+	{
+		mApplication.log('hit enter!!!');
+	}
+
 },
 
 keyUp: function(event)
