@@ -15,7 +15,9 @@ initialize: function(serverIP, serverPort)
 	//battle
         this.mLabelQuestion = 0;
         this.mLabelAnswer = 0;
-
+	
+	this.mStringQuestion = '';
+	this.mStringAnswer = '';
 },
 
 
