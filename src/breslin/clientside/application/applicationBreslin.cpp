@@ -492,6 +492,10 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 			{
 				mLabelFocus = mLabelPassword;
 			}
+			if (numeric == 13) //enter
+			{
+				mLabelFocus = mLabelPassword;
+			}
 			
 			if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
 			{
@@ -518,6 +522,15 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
                 	if (numeric == 9) //tab
                 	{
                 	}
+			if (numeric == 13) //enter
+			{
+ 				//let's simulate hitting login button	
+				if (mStringUsername.size() > 0)
+                		{
+                        		sendLogin();
+                		}
+
+			}
 
                 	if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
                 	{
