@@ -498,7 +498,16 @@ keyDown: function(event)
 
 	if (event.key == 'enter')
 	{
-		mApplication.log('hit enter!!!');
+		if (mApplication.mLabelUsername == document.activeElement)
+		{
+			mApplication.log('hit enter from username, gointo password!!!');
+			mApplication.mLabelPassword.focus();
+		}
+		else
+		{
+			//mApplication.log('hit enter from somewhere else !!!');
+		}
+		
 	}
 
 },
