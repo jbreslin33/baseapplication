@@ -70,15 +70,21 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 */
 askQuestion: function(byteBuffer)
 {
-	this.log('GamePartido::askQuestion');
+        this.mApplicationPartido.mStringQuestion = '';
         var length = byteBuffer.readByte();
 
-        this.mStringQuestion = '';
         for (i = 0; i < length; i++)
         {
-                this.mStringQuestion = this.mStringQuestion + byteBuffer.readByte();
-                this.log('question:' + this.mStringQuestion);
+                this.mApplicationPartido.mStringQuestion = this.mApplicationPartido.mStringQuestion + byteBuffer.readByte();
         }
+	if (this.mApplicationPartido.mLabelQuestion)
+	{
+		this.mApplicationPartido.mLabelQuestion.value = this.mApplicationPartido.mStringQuestion; 
+	}
+	else
+	{
+		this.log('no label');
+	}
 }
 
 });
