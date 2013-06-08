@@ -87,7 +87,8 @@ createBattleScreen: function()
 
         if (this.mLabelAnswer == 0)
         {
-                this.mLabelAnswer= this.createLabel(300,100,100,25,"yellow","Answer:");
+                this.mLabelAnswer = this.createLabel(300,100,100,25,"yellow","Answer:");
+		this.mLabelAnswer.focus();
         }
 },
 
