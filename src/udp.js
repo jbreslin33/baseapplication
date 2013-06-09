@@ -190,7 +190,7 @@ io.sockets.on('connection', function (socket)
 		var messageArray = message.split(" ");
 	
 		//send to c++
-                var bufLength = parseInt(messageLength + 2); // -1 for blank +1 for short and +1 for mClientID 
+                var bufLength = parseInt(messageLength + 3); // -1 for blank +1 for short and +1 for mClientID +1 for size 
                 var buf = new Buffer(bufLength);
 
                 //type
@@ -202,13 +202,14 @@ io.sockets.on('connection', function (socket)
 
 		//answerTime
 		buf.writeInt16LE(messageArray[0],2);	
-
-		//answer
+		
+		//answerLenght and answer 
 		var answer = messageArray[1];
 		var answerLength = answer.length;
+                buf.writeInt8(answerLength,4);
 		for (i = 0; i < answerLength; i++)
 		{
-  			buf.writeInt8(answer[i].charCodeAt(0),parseInt(i + 4));
+  			buf.writeInt8(answer[i].charCodeAt(0),parseInt(i + 5));
 		}
 
 
