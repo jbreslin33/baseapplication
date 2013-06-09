@@ -184,27 +184,31 @@ io.sockets.on('connection', function (socket)
 
         socket.on('send_answer', function(message,remote)
 	{
+		console.log('send_answer...');
 		var messageLength = message.length;
 		var blankSpot = 0;	
 		var messageArray = message.split(" ");
 	
 		//send to c++
-                var bufLength = parseInt(messageLength + 1); // -1 for blank +1 for short 
+                var bufLength = parseInt(messageLength + 2); // -1 for blank +1 for short and +1 for mClientID 
                 var buf = new Buffer(bufLength);
 
                 //type
-                type = -84;
+                type = -85;
                 buf.writeInt8(type,0);
 
+		//mClientID
+                buf.writeInt8(socket.mClientID,1);
+
 		//answerTime
-		buf.writeInt16LE(messageArray[0],1);	
+		buf.writeInt16LE(messageArray[0],2);	
 
 		//answer
 		var answer = messageArray[1];
 		var answerLength = answer.length;
 		for (i = 0; i < answerLength; i++)
 		{
-  			buf.writeInt8(answer[i].charCodeAt(0),parseInt(i + 3));
+  			buf.writeInt8(answer[i].charCodeAt(0),parseInt(i + 4));
 		}
 
 

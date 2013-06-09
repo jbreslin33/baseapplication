@@ -178,7 +178,6 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
                                 	ClientPartido* clientPartido = mClientPartidoVector.at(i);
   					if (DREAMSOCK_DISCONNECTED == clientPartido->mConnectionState)
                         		{
-						LogString("continue");
                         			continue;
                         		}
 					clientPartido->readAnswer(mes);
@@ -187,10 +186,23 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
                 }
     		else if (type == mMessageAnswerQuestionBrowser)
                 {
-			LogString("mMessageAnswerQuestionBrowser received");
-                        //int clientID = mes->ReadByte();
-                        //ClientPartido* client = new ClientPartido(this, address, -1);
-                        //addClient(client,true);
+ 			int clientID = mes->ReadByte();
+			LogString("mMessageAnswerQuestionBrowser from client:%d",clientID);
+                	for (unsigned int i = 0; i < mClientPartidoVector.size(); i++)
+                	{
+                                ClientPartido* clientPartido = mClientPartidoVector.at(i);
+                        	if (mClientPartidoVector.at(i)->mClientID == clientID)
+                        	{
+  					if (DREAMSOCK_DISCONNECTED == clientPartido->mConnectionState)
+					{
+						continue;
+					}
+					else
+					{
+                       	         		clientPartido->readAnswer(mes);
+					}
+				}	
+			}
                 }
 	}
 	else

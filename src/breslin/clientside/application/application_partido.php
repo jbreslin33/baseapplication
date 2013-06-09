@@ -116,7 +116,11 @@ hideBattleScreen: function()
 sendAnswer: function()
 {
     	var answer = this.mLabelAnswer.value;
-        message = answer + ' ' + this.mAnswerTime;
+
+	var answerInMS = this.mAnswerTime * 1000;
+	var answerInMSRound = Math.round(answerInMS);
+	this.log('answerInMSRound:' + answerInMSRound);
+        message = answerInMSRound + ' ' + answer;
         this.mNetwork.mSocket.emit('send_answer', message);
 }
 
