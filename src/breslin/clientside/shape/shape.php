@@ -253,6 +253,12 @@ spawnShape: function(position)
 	//this.scale();
 
 },
+
+setText: function(text)
+{
+	this.mObjectTitle.innerHTML= '' + text;
+},
+
 setSrc: function(src)
 {
 	this.mSrc = src;

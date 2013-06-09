@@ -27,6 +27,7 @@ public:
 	//shapes
         std::vector<ShapePartido*> mShapePartidoVector;       //every tangible item in game world..
 	void createShapes();
+	void sendShapes(ClientPartido* clientPartido);
 
 	//end of game
 	bool checkForEndOfGame();

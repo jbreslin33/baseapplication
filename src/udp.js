@@ -413,6 +413,34 @@ server.on("message", function (msg, rinfo)
                 });
 	}
 
+	//mMessageSetText
+	if (type == -66)
+	{
+		console.log('setText');	
+ 		var clientID = msg.readInt8(1);
+ 		var index    = msg.readInt8(2);
+                var length   = msg.readInt8(3);
+
+                var setTextString = '';
+                for (i = 0; i < length; i++)
+                {
+                        var n = msg.readInt8(parseInt(4 + i));
+                        var c = String.fromCharCode(n);
+                        setTextString = setTextString + c;
+                }
+                console.log('setTextString:' + setTextString);
+
+                var string = type + "," + index + "," + length + "," + setTextString;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+	} 
+
 	//logout	
         if (type == -114)
 	{

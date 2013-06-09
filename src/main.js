@@ -53,6 +53,19 @@ window.addEvent('domready', function()
                         }
 		}
 
+  		//mMessageSetText
+                if (type == -66)
+                {
+                        if (mApplication.mGame)
+                        {
+                                mApplication.mGame.setText(byteBuffer);
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+                }
+
 		//mMessageBattleStart
 		if (type == -75)
 		{

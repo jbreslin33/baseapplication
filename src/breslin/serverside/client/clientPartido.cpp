@@ -202,6 +202,18 @@ void ClientPartido::sendBattleRecord()
         mShapePartido->setText(record);
 }
 
+void ClientPartido::sendBattleRecord(ClientPartido* clientPartido)
+{
+        //setText
+        std::string record;
+        record.append(db_first_name);
+        record.append(":");
+        record.append(utility->intToString(mWins));
+        record.append("-");
+        record.append(utility->intToString(mLosses));
+        mShapePartido->setText(record,clientPartido);
+}
+
 void ClientPartido::resetOpponents()
 {
 	//set your last opponent
