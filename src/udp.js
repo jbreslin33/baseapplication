@@ -184,7 +184,29 @@ io.sockets.on('connection', function (socket)
 
         socket.on('send_answer', function(message,remote)
 	{
-		console.log('send answer.....');
+		var messageLength = message.length;
+		var blankSpot = 0;	
+		var messageArray = message.split(" ");
+	
+		//send to c++
+                var bufLength = parseInt(messageLength + 1); // -1 for blank +1 for short 
+                var buf = new Buffer(bufLength);
+
+                //type
+                type = -84;
+                buf.writeInt8(type,0);
+
+		//answerTime
+		buf.writeInt16LE(messageArray[0],1);	
+
+		//answer
+		var answer = messageArray[1];
+		var answerLength = answer.length;
+		for (i = 0; i < answerLength; i++)
+		{
+  			buf.writeInt8(answer[i].charCodeAt(0),parseInt(i + 3));
+		}
+
 
                 server.send(buf, 0, buf.length, mServerPort, mServerIP, function(err, bytes)
 		{
@@ -221,10 +243,7 @@ io.sockets.on('connection', function (socket)
 				blankSpot = i;
 			}
 		}
-
-
-                //send to c++ server
-	
+		//send to c++
 		//buf
                 var bufLength = parseInt(3 + messageLength); // 4 items minus blankspot + messageLength
                 var buf = new Buffer(bufLength);
