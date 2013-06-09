@@ -256,7 +256,9 @@ spawnShape: function(position)
 
 setText: function(text)
 {
+	this.mObjectTitle.innerHTML= '';
 	this.mObjectTitle.innerHTML= '' + text;
+	this.log('text:' + text);
 },
 
 setSrc: function(src)

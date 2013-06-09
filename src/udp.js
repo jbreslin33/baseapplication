@@ -431,6 +431,7 @@ server.on("message", function (msg, rinfo)
                 console.log('setTextString:' + setTextString);
 
                 var string = type + "," + index + "," + length + "," + setTextString;
+		console.log('string:' + string + ':end string');
 
                 io.sockets.clients().forEach(function (socket)
                 {

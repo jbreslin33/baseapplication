@@ -247,13 +247,18 @@ setText: function(byteBuffer)
 {
 	var text = '';
         var index = byteBuffer.readByte();
+	this.log('index:' + index);
         var length = byteBuffer.readByte();
-
+	this.log('length:' + length);
+        
+	text = text + byteBuffer.readByte();
+/*
 	for (i = 0; i < length; i++)
         {
+		this.log('text:' + text);
                 text = text + byteBuffer.readByte();
         }
-
+*/
 	var shape = this.getShape(index);
 	shape.setText(text);
 },
