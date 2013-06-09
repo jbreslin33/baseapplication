@@ -290,12 +290,6 @@ void ClientPartido::readAnswer(Message* mes)
         }
 	insertAnswerAttempt();
 
-	//after you insert can i do some live battle stuff here????
-	//if you get one wrong or not in time then battle over????
-	//or first one to 10....for now...
-
-        //if (real_answer.compare(client_answer) != 0)
-//mServerPartido->mQuestionVector.at(questionID)
         if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
 	{
 		ShapePartido* opponent  = mShapePartido->mOpponent;
