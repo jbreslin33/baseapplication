@@ -120,6 +120,7 @@ sendAnswer: function()
 	var answerInMS = this.mAnswerTime * 1000;
 	var answerInMSRound = Math.round(answerInMS);
 	this.log('answerInMSRound:' + answerInMSRound);
+	this.log('answer:' + answer);
         message = answerInMSRound + ' ' + answer;
         this.mNetwork.mSocket.emit('send_answer', message);
 }

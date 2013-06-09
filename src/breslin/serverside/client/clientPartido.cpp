@@ -271,6 +271,7 @@ void ClientPartido::readAnswer(Message* mes)
 	LogString("mAnswerTime:%d",mAnswerTime);
 
         int sizeOfAnswer = mes->ReadByte();
+	LogString("sizeOfAnswer:%d",sizeOfAnswer);
         //loop thru and set mStringAnswer from client
         for (int i = 0; i < sizeOfAnswer; i++)
         {
@@ -282,6 +283,7 @@ void ClientPartido::readAnswer(Message* mes)
                 else
                 {
                         int numeric = mes->ReadByte();
+			LogString("numeric:%d",numeric);
                         char ascii = (char)numeric;
                         mStringAnswer.append(1,ascii);
                 }
@@ -377,6 +379,7 @@ void ClientPartido::insertAnswerAttempt()
 	query.append(d);
 
     	const char * q = query.c_str();
+    	LogString("q:%s",q);
         PQexec(conn,q);
         PQfinish(conn);
 }
