@@ -295,15 +295,16 @@ void ClientPartido::readAnswer(Message* mes)
         if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
 	{
 		ShapePartido* opponent  = mShapePartido->mOpponent;
-/*
+
 		//score battle
 		scoreBattle(LOSS);
 		opponent->mClientPartido->scoreBattle(WIN);
-
+		
 		//send battle record to clients
-		endBattleRecord();	
+/*
+		sendBattleRecord();	
 		opponent->mClientPartido->sendBattleRecord();	
-
+*/
 		//reset battle
 		resetBattle();	
 		opponent->mClientPartido->resetBattle();	
@@ -311,7 +312,6 @@ void ClientPartido::readAnswer(Message* mes)
 		//send battle end to client	
 		sendBattleEnd();
 		opponent->mClientPartido->sendBattleEnd();
-*/
 	}
 	else
 	{
