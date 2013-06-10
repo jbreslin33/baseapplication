@@ -22,10 +22,7 @@
 
 //state machine
 #include "../../statemachine/stateMachine.h"
-#include "states/gameGlobal.h"
-#include "states/gameInitialize.h"
 #include "states/gamePlay.h"
-#include "states/gamePause.h"
 
 //ObjectTitle
 #include "../billboard/objectTitle.h"
@@ -79,15 +76,12 @@ Game::~Game()
 
 void Game::createStates()
 {
-	mGameGlobal     = new GameGlobal    (this);
-	mGameInitialize = new GameInitialize(this);
 	mGamePlay       = new GamePlay      (this);
-	mGamePause      = new GamePause     (this);
 }
 
 void Game::setStates()
 {
-	mStateMachine->setGlobalState(mGameGlobal);
+	mStateMachine->setGlobalState(NULL);
 	mStateMachine->changeState   (mGamePlay);
 }
 

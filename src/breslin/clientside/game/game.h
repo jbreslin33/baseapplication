@@ -46,11 +46,7 @@ public:
 //states
 StateMachine* mStateMachine;
 
-State* mGameGlobal;
-State* mGameInitialize;
 State* mGamePlay;
-State* mGamePause;
-
 
 // constants
 static const char mMessageKey       = 1;

@@ -23,8 +23,8 @@ enter: function()
 	
 	//reset text box	
 	//still need to do this.....
-	this.mGamePartido.mApplicationPartido->mStringAnswer = '';
-	this.mGamePartido.mApplicationPartido->mLabelAnswer = '';
+	this.mGamePartido.mApplicationPartido.mStringAnswer = '';
+	this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
 },
 
 execute: function()

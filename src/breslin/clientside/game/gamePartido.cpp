@@ -18,10 +18,7 @@
 
 //state machine
 #include "../../statemachine/stateMachine.h"
-#include "states/gameGlobal.h"
-#include "states/gameInitialize.h"
 #include "states/gamePlay.h"
-#include "states/gamePause.h"
 #include "states/gamePlayPartido.h"
 #include "states/gamePlayPartidoBattle.h"
 
@@ -42,16 +39,13 @@ GamePartido::~GamePartido()
 
 void GamePartido::createStates()
 {
-        mGameGlobal            = new GameGlobal(this);
-        mGameInitialize        = new GameInitialize(this);
    	mGamePlay              = new GamePlayPartido(this);
-        mGamePause             = new GamePause(this);
    	mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
 }
 
 void GamePartido::setStates()
 {
-        mStateMachine->setGlobalState(mGameGlobal);
+        mStateMachine->setGlobalState(NULL);
         mStateMachine->changeState(mGamePlay);
 }
 

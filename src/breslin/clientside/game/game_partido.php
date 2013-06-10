@@ -31,10 +31,7 @@ log: function(msg)
 createStates: function()
 {
 	this.log('GamePartido::createStates');
-        this.mGameGlobal            = new GameGlobal(this);
-        this.mGameInitialize        = new GameInitialize(this);
         this.mGamePlay              = new GamePlayPartido(this);
-        this.mGamePause             = new GamePause(this);
         this.mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
 },
 

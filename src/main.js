@@ -29,7 +29,7 @@ window.addEvent('domready', function()
 		var dataSplit = ''; 
 		mApplication.mTimeSinceLastServerTick = 0;
 
-		mApplication.log('data:' + data);
+//		mApplication.log('data:' + data);
 		
 //		if (data)
 //		{
