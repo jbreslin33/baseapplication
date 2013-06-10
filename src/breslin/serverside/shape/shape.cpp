@@ -339,7 +339,7 @@ void Shape::setText(std::string text)
 		}
  		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         	mMessage.WriteByte(mMessageSetText); // add type
-
+		LogString("Shape::setText mClientID:%d",mGame->mServer->mClientVector.at(i)->mClientID);
         	if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
         	{
                 	mMessage.WriteByte(mGame->mServer->mClientVector.at(i)->mClientID); // add mClientID for browsers
