@@ -192,7 +192,6 @@ void ClientPartido::scoreBattle(int result)
 
 void ClientPartido::sendBattleRecord()
 {
-  	//setText
         std::string record;
         record.append(db_first_name);
         record.append(":");
@@ -204,7 +203,6 @@ void ClientPartido::sendBattleRecord()
 
 void ClientPartido::sendBattleRecord(ClientPartido* clientPartido)
 {
-        //setText
         std::string record;
         record.append(db_first_name);
         record.append(":");
