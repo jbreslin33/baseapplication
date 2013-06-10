@@ -25,14 +25,23 @@ window.addEvent('domready', function()
         
 	mApplication.mNetwork.mSocket.on('news', function (data)
         {
+		var type = 0;
+		var dataSplit = ''; 
 		mApplication.mTimeSinceLastServerTick = 0;
+
 		mApplication.log('data:' + data);
-                s = data.split(',');
+		
+		if (data)
+		{
+                	dataSplit = data.split(',');
 
-                byteBuffer = new ByteBuffer(s);
-
-                type = byteBuffer.readByte();
-		//mApplication.log('type:' + type);
+                	byteBuffer = new ByteBuffer(dataSplit);
+                	type = byteBuffer.readByte();
+		}
+		else
+		{
+		
+		}
 
 		//mMessageConnected
   		if (type == -90)
