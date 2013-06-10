@@ -76,7 +76,6 @@ void battleStart(ShapePartido* whoToBattle);
 void sendBattleEnd();
 void scoreBattle(int result);
 void sendBattleRecord(); 
-void sendBattleRecord(ClientPartido* clientPartido); 
 void resetBattle();
 void resetRecords();
 void resetOpponents();

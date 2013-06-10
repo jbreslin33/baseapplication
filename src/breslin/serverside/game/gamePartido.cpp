@@ -41,14 +41,6 @@ void GamePartido::processUpdate()
 void GamePartido::sendShapes(ClientPartido* clientPartido)
 {
 	Game::sendShapes(clientPartido);
-
-        for (unsigned int i = 0; i < mShapePartidoVector.size(); i++)
-        {
-		if (mShapePartidoVector.at(i)->mClientPartido)
-		{
-			mShapePartidoVector.at(i)->mClientPartido->sendBattleRecord(clientPartido);
-		}
-	}
 }
 
 void GamePartido::reset()
