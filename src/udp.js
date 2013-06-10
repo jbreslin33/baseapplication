@@ -417,17 +417,17 @@ server.on("message", function (msg, rinfo)
 	if (type == -66)
 	{
 		console.log('setText');	
- 		var clientID = msg.readInt8(1);
-		console.log('clientID:' + clientID);
- 		var index    = msg.readInt8(2);
+ 		
+		var index    = msg.readInt8(1);
 		console.log('index:' + index);
-                var length   = msg.readInt8(3);
+
+                var length   = msg.readInt8(2);
 		console.log('length:' + length);
 
                 var setTextString = '';
                 for (i = 0; i < length; i++)
                 {
-                        var n = msg.readInt8(parseInt(4 + i));
+                        var n = msg.readInt8(parseInt(3 + i));
                         var c = String.fromCharCode(n);
                         setTextString = setTextString + c;
                 }
@@ -436,13 +436,14 @@ server.on("message", function (msg, rinfo)
                 var string = type + "," + index + "," + length + "," + setTextString;
 		console.log('string:' + string + ':end string');
 
-                io.sockets.clients().forEach(function (socket)
+		io.sockets.clients().forEach(function (socket)
                 {
-                        if (socket.mClientID == clientID)
+                	if (socket.mClientID > 0)
                         {
-                                socket.emit('news', string)
+                                socket.emit('news', dataString)
                         }
                 });
+
 	} 
 
 	//logout	

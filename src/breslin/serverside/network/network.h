@@ -47,6 +47,7 @@ void closeSocket(SOCKET sock);
 
 int getPacket(SOCKET sock, char *data, struct sockaddr *from);
 void sendPacketTo(Client* client, Message* message);
+void broadcast(Message* message);
 
 int getCurrentSystemTime();
 
