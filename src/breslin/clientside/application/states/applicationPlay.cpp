@@ -81,6 +81,9 @@ void ApplicationPlay::exit()
 {
 	mApplication->mPlayingGame = false;
         mApplication->mLeaveGame = false;
-        mApplication->mGame->remove();
-	mApplication->mGame = NULL;
+	if (mApplication->mGame)
+	{
+        	mApplication->mGame->remove();
+		mApplication->mGame = NULL;
+	}
 }

@@ -31,17 +31,13 @@ window.addEvent('domready', function()
 
 		mApplication.log('data:' + data);
 		
-		if (data)
-		{
+//		if (data)
+//		{
                 	dataSplit = data.split(',');
 
                 	byteBuffer = new ByteBuffer(dataSplit);
                 	type = byteBuffer.readByte();
-		}
-		else
-		{
-		
-		}
+//		}
 
 		//mMessageConnected
   		if (type == -90)

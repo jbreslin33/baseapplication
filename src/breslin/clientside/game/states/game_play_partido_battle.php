@@ -23,7 +23,8 @@ enter: function()
 	
 	//reset text box	
 	//still need to do this.....
-
+	this.mGamePartido.mApplicationPartido->mStringAnswer = '';
+	this.mGamePartido.mApplicationPartido->mLabelAnswer = '';
 },
 
 execute: function()
@@ -31,7 +32,7 @@ execute: function()
 	if (this.mGamePartido.mBattleEnd)
         {
 		this.log('battle end!!!!!!!!!!!###$$$');
-               this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlay);
+               	this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlay);
         }
 },	
 

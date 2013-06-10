@@ -42,7 +42,10 @@ execute: function()
         else
         {
                 //game
-                this.mApplication.mGame.processUpdate();
+		if (this.mApplication.mGame)
+		{
+                	this.mApplication.mGame.processUpdate();
+		}
         }
 },
 

@@ -3,11 +3,11 @@ var ApplicationMainPartido = new Class(
 
 Extends: ApplicationMain,
 	
-initialize: function(application)
+initialize: function(applicationPartido)
 {
-	this.parent(application);
+	this.parent(applicationPartido);
 
-	this.mApplication = application;
+	this.mApplicationPartido = applicationPartido;
 },
 
 enter: function()
@@ -20,14 +20,14 @@ execute: function()
 	this.parent();
 
 	//join game B
-	if (this.mApplication.mButtonHit == this.mApplication.mButtonJoinGameB)
+	if (this.mApplicationPartido.mButtonHit == this.mApplicationPartido.mButtonJoinGameB)
 	{
-	        this.mApplication.mButtonHit = 0;
-		this.mApplication.mGame = new GamePartido(this.mApplication);
-		this.mApplication.mGame.createStates();
-		this.mApplication.mGame.setStates();
- 		this.mApplication.sendJoinGame('2');
-                this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationPlay);
+	        this.mApplicationPartido.mButtonHit = 0;
+		this.mApplicationPartido.mGame = new GamePartido(this.mApplicationPartido);
+		this.mApplicationPartido.mGame.createStates();
+		this.mApplicationPartido.mGame.setStates();
+ 		this.mApplicationPartido.sendJoinGame('2');
+                this.mApplicationPartido.mStateMachine.changeState(this.mApplicationPartido.mApplicationPlay);
 	}
 },
 

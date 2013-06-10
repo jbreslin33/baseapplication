@@ -20,7 +20,7 @@ log: function(msg)
 
 enter: function()
 {
-
+	this.parent();
 },
 
 execute: function()
@@ -35,7 +35,7 @@ execute: function()
 
 exit: function()
 {
-
+	this.parent();
 }
 
 });
