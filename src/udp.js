@@ -421,7 +421,7 @@ server.on("message", function (msg, rinfo)
 	if (type == -66)
 	{
 		console.log('udp mMessageSetTexudp mMessageSetTextt');	
- 	/*	
+ 		
 		var index    = msg.readInt8(1);
 		console.log('index:' + index);
 
@@ -444,11 +444,9 @@ server.on("message", function (msg, rinfo)
                 {
                 	if (socket.mClientID > 0)
                         {
-                                socket.emit('news', dataString)
+                                socket.emit('news', string)
                         }
                 });
-*/
-
 	} 
 
 	//logout	
