@@ -333,7 +333,7 @@ void Shape::setText(std::string text)
         //send it to everyone
 	for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
 	{
-		if (mGame->mServer->mClientVector->mConnectionState == DREAMSOCK_DISCONNECTED)
+		if (mGame->mServer->mClientVector.at(i)->mConnectionState == DREAMSOCK_DISCONNECTED)
 		{
 			continue;
 		}
