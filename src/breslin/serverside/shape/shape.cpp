@@ -333,6 +333,10 @@ void Shape::setText(std::string text)
         //send it to everyone
 	for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
 	{
+		if (mGame->mServer->mClientVector->mConnectionState == DREAMSOCK_DISCONNECTED)
+		{
+			continue;
+		}
  		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         	mMessage.WriteByte(mMessageSetText); // add type
 
@@ -343,9 +347,11 @@ void Shape::setText(std::string text)
 
 		//index id
 		mMessage.WriteByte(mIndex);
+		LogString("Shape::setText mIndex:%d",mIndex);
 
 		//username
         	int length = text.length();  
+		LogString("Shape::setText length:%d",length);
         	mMessage.WriteByte(length); //send length
 
         	//loop thru length and write it
