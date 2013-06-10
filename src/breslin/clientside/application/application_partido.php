@@ -109,8 +109,9 @@ showBattleScreen: function()
 
 hideBattleScreen: function()
 {
-        this.mLabelUsername.style.display="none";
-        this.mLabelPassword.style.display="none";
+	this.log('ApplicationPartido::hideBattleScreen');
+        this.mLabelQuestion.style.display="none";
+        this.mLabelAnswer.style.display="none";
 },
 
 sendAnswer: function()
