@@ -301,10 +301,10 @@ void ClientPartido::readAnswer(Message* mes)
 		opponent->mClientPartido->scoreBattle(WIN);
 		
 		//send battle record to clients
-/*
+
 		sendBattleRecord();	
 		opponent->mClientPartido->sendBattleRecord();	
-*/
+
 		//reset battle
 		resetBattle();	
 		opponent->mClientPartido->resetBattle();	

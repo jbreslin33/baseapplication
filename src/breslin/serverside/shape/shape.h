@@ -131,6 +131,9 @@ void setKeyDirection();
 void setValues();
 
 void setText(std::string text);
+void sendText();
+std::string mText;
+std::string mTextLast;
 
 void insertIntoDB();
 

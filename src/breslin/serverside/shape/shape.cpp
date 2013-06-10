@@ -207,6 +207,17 @@ void Shape::processTick()
   	mRotation->x = mSceneNode->_getDerivedOrientation().zAxis().x;
 
     	mRotation->z = mSceneNode->_getDerivedOrientation().zAxis().z;
+
+	if (mText.compare(mTextLast) != 0)
+	{
+		sendText();				
+		mTextLast = mText;
+	}
+}
+
+void Shape::sendText()
+{
+	LogString("Shape::sendText");
 }
 
 void Shape::setKeyDirection()  //this is called first in process tick so let's start conversion to separate
@@ -330,6 +341,9 @@ void Shape::addToMoveMessage(Message* message)
 //to everyone
 void Shape::setText(std::string text)
 {
+	mText.clear();
+	mText.append(text);
+/*
 	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
        	mMessage.WriteByte(mMessageSetText); // add type
 
@@ -349,5 +363,6 @@ void Shape::setText(std::string text)
        	}
        	
 	mGame->mServer->mNetwork->broadcast(&mMessage);
+*/
 }
 
