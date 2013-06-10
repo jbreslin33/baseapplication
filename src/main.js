@@ -26,7 +26,7 @@ window.addEvent('domready', function()
 	mApplication.mNetwork.mSocket.on('news', function (data)
         {
 		mApplication.mTimeSinceLastServerTick = 0;
-
+		mApplication.log('data:' + data);
                 s = data.split(',');
 
                 byteBuffer = new ByteBuffer(s);
