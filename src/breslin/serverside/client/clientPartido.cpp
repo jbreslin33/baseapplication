@@ -278,6 +278,7 @@ void ClientPartido::readAnswer(Message* mes)
         {
                 if (mClientID > 0)
                 {
+
                         char c = mes->ReadByte();
                         mStringAnswer.append(1,c);
                 }
@@ -294,13 +295,13 @@ void ClientPartido::readAnswer(Message* mes)
         if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
 	{
 		ShapePartido* opponent  = mShapePartido->mOpponent;
-
+/*
 		//score battle
 		scoreBattle(LOSS);
 		opponent->mClientPartido->scoreBattle(WIN);
 
 		//send battle record to clients
-		sendBattleRecord();	
+		endBattleRecord();	
 		opponent->mClientPartido->sendBattleRecord();	
 
 		//reset battle
@@ -310,6 +311,7 @@ void ClientPartido::readAnswer(Message* mes)
 		//send battle end to client	
 		sendBattleEnd();
 		opponent->mClientPartido->sendBattleEnd();
+*/
 	}
 	else
 	{
@@ -318,6 +320,7 @@ void ClientPartido::readAnswer(Message* mes)
 
 	if (mBattleScore > 9)
 	{
+/*
 		ShapePartido* opponent  = mShapePartido->mOpponent;
 		
 		//score battle
@@ -335,6 +338,7 @@ void ClientPartido::readAnswer(Message* mes)
                 //send battle end to client
                 sendBattleEnd();
                 opponent->mClientPartido->sendBattleEnd();
+*/
 	} 	
 	
 	//set vars for new question and answer combo....
