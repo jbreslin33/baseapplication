@@ -83,8 +83,10 @@ window.addEvent('domready', function()
 		//mMessageBattleEnd
 		if (type == -74)
 		{
+                        mApplication.log('*****mMessageBattleEnd%$#');
 			if (mApplication.mGame)
                         {
+				
                                 mApplication.mGame.mBattleEnd = true;
                         }
                         else

@@ -30,6 +30,7 @@ execute: function()
 {
 	if (this.mGamePartido.mBattleEnd)
         {
+		this.log('battle end!!!!!!!!!!!###$$$');
                this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlay);
         }
 },	
@@ -37,8 +38,8 @@ execute: function()
 exit: function()
 {
         this.mGamePartido.mApplicationPartido.hideBattleScreen();
-        this.mGamePartido.mBattleEnd = false;
-        this.mGamePartido.mBattleEnd = false;
+        this.mGamePartido.mBattleEnd   = false;
+        this.mGamePartido.mBattleStart = false;
 }
 
 });

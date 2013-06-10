@@ -383,14 +383,18 @@ server.on("message", function (msg, rinfo)
 	//mMessageBattleEnd
  	if (type == -74)
         {
+		console.log('battle ender....inudp');
                 var clientID = msg.readInt8(1);
+		console.log('**clientID:' + clientID); 
                 var string = type;
                 string = string + "," + clientID;
 
+		console.log('**string:' + string); 
                 io.sockets.clients().forEach(function (socket)
                 {
                         if (socket.mClientID == clientID)
                         {
+				console.log('found match sengding strring:' + string);
                                 socket.emit('news', string)
                         }
                 });
