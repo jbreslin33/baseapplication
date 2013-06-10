@@ -418,8 +418,11 @@ server.on("message", function (msg, rinfo)
 	{
 		console.log('setText');	
  		var clientID = msg.readInt8(1);
+		console.log('clientID:' + clientID);
  		var index    = msg.readInt8(2);
+		console.log('index:' + index);
                 var length   = msg.readInt8(3);
+		console.log('length:' + length);
 
                 var setTextString = '';
                 for (i = 0; i < length; i++)
