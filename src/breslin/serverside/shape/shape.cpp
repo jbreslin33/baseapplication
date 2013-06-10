@@ -215,10 +215,6 @@ void Shape::processTick()
 	}
 }
 
-void Shape::sendText()
-{
-	LogString("Shape::sendText");
-}
 
 void Shape::setKeyDirection()  //this is called first in process tick so let's start conversion to separate
 //move/rotation.
@@ -366,3 +362,31 @@ void Shape::setText(std::string text)
 */
 }
 
+void Shape::sendText()
+{
+	LogString("Shape::sendText");
+	if (!mGame)
+	{
+		return;
+	}
+
+ 	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+       	mMessage.WriteByte(mMessageSetText); // add type
+	
+	//index id
+	mMessage.WriteByte(mIndex);
+	LogString("Shape::setText mIndex:%d",mIndex);
+
+	//text
+       	int length = mText.length();  
+	LogString("Shape::setText length:%d",length);
+       	mMessage.WriteByte(length); //send length
+
+       	//loop thru length and write it
+       	for (int b=0; b < length; b++)
+       	{
+               	mMessage.WriteByte(mText.at(b));
+       	}
+	
+       	mGame->mServer->mNetwork->broadcast(&mMessage);
+}

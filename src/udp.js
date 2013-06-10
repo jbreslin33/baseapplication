@@ -420,8 +420,8 @@ server.on("message", function (msg, rinfo)
 	//mMessageSetText
 	if (type == -66)
 	{
-		console.log('setText');	
- 		
+		console.log('udp mMessageSetTexudp mMessageSetTextt');	
+ 	/*	
 		var index    = msg.readInt8(1);
 		console.log('index:' + index);
 
@@ -447,6 +447,7 @@ server.on("message", function (msg, rinfo)
                                 socket.emit('news', dataString)
                         }
                 });
+*/
 
 	} 
 

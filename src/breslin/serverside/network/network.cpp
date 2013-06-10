@@ -215,8 +215,6 @@ int Network::getPacket(SOCKET sock, char *data, struct sockaddr *from)
 	}
 	return ret;
 }
-
-
 void Network::broadcast(Message* message)
 {
  	if(!mSocket)
@@ -240,6 +238,26 @@ void Network::broadcast(Message* message)
                 sendPacketTo(mServer->mClientVector.at(i),message);
         }
 }
+/*
+        // Check if the server is set up
+        if(!mNetwork->mSocket)
+                return;
+
+        for (unsigned int i = 0; i < mClientVector.size(); i++)
+        {
+                if(mMessage.GetSize() == 0)
+                        continue;
+
+                //is the a browser client but not THE browser client which is -1 normal c++ clients are 0 if so skip
+                if(mClientVector.at(i)->mClientID > 0)
+                        continue;
+
+                mNetwork->sendPacketTo(mClientVector.at(i),&mMessage);
+
+        }
+*/
+
+
 
 /*
  // Check if the server is set up
