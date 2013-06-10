@@ -340,6 +340,7 @@ hideLoadingScreen: function()
 //LOGIN SCREEN
 createLoginScreen: function()
 {
+	this.log('ApplicationBreslin::createLoginScreen');
   	if (this.mSelectMenuSchool == 0)
         {
                 this.mSelectMenuSchool = this.createSelectMenu(300,50,100,25,"green","Schools");
@@ -377,6 +378,7 @@ createLoginScreen: function()
 
 showLoginScreen: function()
 {       
+	this.log('ApplicationBreslin::showLoginScreen');
         this.mSelectMenuSchool.style.display="block";
         this.mLabelUsername.style.display="block";
         this.mLabelPassword.style.display="block";
@@ -386,6 +388,7 @@ showLoginScreen: function()
 
 hideLoginScreen: function()
 {       
+	this.log('ApplicationBreslin::hideLoginScreen');
         this.mSelectMenuSchool.style.display="none";
         this.mLabelUsername.style.display="none";
         this.mLabelPassword.style.display="none";

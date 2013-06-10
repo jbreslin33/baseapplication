@@ -102,8 +102,8 @@ createBattleScreen: function()
 
 showBattleScreen: function()
 {
-        this.mLabelUsername.style.display="block";
-        this.mLabelPassword.style.display="block";
+        this.mLabelQuestion.style.display="block";
+        this.mLabelAnswer.style.display="block";
 },
 
 
@@ -124,23 +124,9 @@ sendAnswer: function()
 	this.log('answer:' + answer);
         message = answerInMSRound + ' ' + answer;
         this.mNetwork.mSocket.emit('send_answer', message);
-}
 
-/*
-keyDown: function(event)
-{
-	//mApplication.parent.keyDown(event);
-	parent(event);
-
-        if (event.key == 'enter')
-        {
-                if (mApplication.mLabelAnswer == document.activeElement)
-                {
-                        mApplication.sendAnswer();
-                }
-        }
+	this.mLabelAnswer.value = '';
 }
-*/
 
 });
 
