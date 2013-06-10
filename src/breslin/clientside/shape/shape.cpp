@@ -482,6 +482,12 @@ void Shape::appendToTitle(int appendage)
 	mObjectTitleString.append(StringConverter::toString(appendage));
 }
 
+void Shape::setTitle(std::string title)
+{
+	mObjectTitleString.clear();
+	mObjectTitleString.append(title);
+}
+
 void Shape::clearTitle()
 {
 	mObjectTitleString.clear();

@@ -133,7 +133,7 @@ Vector3D* getRotation          (                          ) ;
 //title
 void     appendToTitle        (std::string appendage     ) ;
 void     appendToTitle        (int appendage             ) ;
-
+void     setTitle (std::string title);
 //abilitys
 void     addAbility(Ability* ability);
 Ability* getAbility(Ability* ability);
