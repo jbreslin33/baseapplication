@@ -494,22 +494,10 @@ keyDown: function(event)
                 mApplication.mKey_q = true;
 	}
 
+	//enter
 	if (event.key == 'enter')
 	{
-		if (mApplication.mLabelUsername == document.activeElement)
-		{
-			mApplication.mLabelPassword.focus();
-		}
-		if (mApplication.mLabelPassword == document.activeElement)
-		{
-			mApplication.sendLogin();
-		}
-		//this is a hack. need to use inheritance...
- 		if (mApplication.mLabelAnswer == document.activeElement)
-                {
-                        mApplication.sendAnswer();
-                }
-
+                mApplication.mKey_enter = true;
 	}
 
 },
@@ -562,6 +550,12 @@ keyUp: function(event)
         if (event.key == 'q')
         {
                 mApplication.mKey_q = false;
+	}
+
+	//enter	
+	if (event.key == 'enter')
+	{
+                mApplication.mKey_enter = false;
 	}
 }
 

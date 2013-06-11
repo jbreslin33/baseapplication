@@ -19,6 +19,7 @@ execute: function()
                 this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationMain);
 	}
 
+	//for button
 	if (this.mApplication.mButtonHit == this.mApplication.mButtonLogin)
 	{
 		if (this.mApplication.mLabelUsername.value == '')
@@ -32,6 +33,25 @@ execute: function()
 			this.mApplication.sendLogin();	
 		}
 	}
+
+	//for enter key
+    	if (this.mApplication.mLabelUsername == document.activeElement)
+        {
+		if (this.mApplication.mKey_enter ==  true)
+		{
+                	this.mApplication.mLabelPassword.focus();
+		}
+        }
+        if (this.mApplication.mLabelPassword == document.activeElement)
+        {
+		if (this.mApplication.mKey_enter == true)
+		{
+                	this.mApplication.sendLogin();
+		}
+        }
+
+	
+
 },
 
 exit: function()

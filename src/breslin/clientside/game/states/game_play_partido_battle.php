@@ -29,10 +29,21 @@ enter: function()
 
 execute: function()
 {
+	//check for end of batlle
 	if (this.mGamePartido.mBattleEnd)
         {
 		this.log('battle end!!!!!!!!!!!###$$$');
                	this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlay);
+        }
+	
+	//for enter
+   	if (this.mGamePartido.mApplicationPartido.mLabelAnswer == document.activeElement)
+       	{ 
+		if (this.mGamePartido.mApplicationPartido.mKey_enter == true)
+		{
+        		this.mGamePartido.mApplicationPartido.sendAnswer();
+			this.mGamePartido.mApplicationPartido.mKey_enter = false;
+		}
         }
 },	
 
