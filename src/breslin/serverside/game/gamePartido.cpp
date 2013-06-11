@@ -68,7 +68,7 @@ void GamePartido::reset()
 
 		clientPartido->resetRecords();	
 
-		clientPartido->sendBattleRecord();	
+		clientPartido->setBattleRecordText();	
 	}
 
 }

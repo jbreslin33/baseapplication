@@ -172,15 +172,14 @@ void ClientPartido::scoreBattle(int result)
 	}
 }
 
-void ClientPartido::sendBattleRecord()
+void ClientPartido::setBattleRecordText()
 {
-        std::string record;
-        record.append(db_first_name);
-        record.append(":");
-        record.append(utility->intToString(mWins));
-        record.append("-");
-        record.append(utility->intToString(mLosses));
-        mShapePartido->setText(record);
+        mBattleRecordText.clear();
+        mBattleRecordText.append(db_first_name);
+        mBattleRecordText.append(":");
+        mBattleRecordText.append(utility->intToString(mWins));
+        mBattleRecordText.append("-");
+        mBattleRecordText.append(utility->intToString(mLosses));
 }
 
 void ClientPartido::resetOpponents()
@@ -300,11 +299,14 @@ void ClientPartido::readAnswer(Message* mes)
 		scoreBattle(LOSS);
 		opponent->mClientPartido->scoreBattle(WIN);
 		
-		//send battle record to clients
+		//set battle record text .. mBattleRecordText 
+		setBattleRecordText();	
+		opponent->mClientPartido->setBattleRecordText();	
 
-		sendBattleRecord();	
-		opponent->mClientPartido->sendBattleRecord();	
-
+		//set Text of shape .. mText
+	       	mShapePartido->setText(mBattleRecordText); 	
+		opponent->mClientPartido->mShapePartido->setText(opponent->mClientPartido->mBattleRecordText);	
+		
 		//reset battle
 		resetBattle();	
 		opponent->mClientPartido->resetBattle();	

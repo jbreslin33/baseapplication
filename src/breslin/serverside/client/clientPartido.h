@@ -46,6 +46,7 @@ std::vector<int> mMasteredQuestionIDVector;
 bool mWaitingForAnswer;
 std::string mQuestionString;
 int mBattleScore;
+std::string mBattleRecordText;
 
 int mWins;
 int mLosses;
@@ -75,9 +76,10 @@ void sendBattleStart();
 void battleStart(ShapePartido* whoToBattle);
 void sendBattleEnd();
 void scoreBattle(int result);
-void sendBattleRecord(); 
 void resetBattle();
 void resetRecords();
 void resetOpponents();
+void setBattleRecordText();
+
 };
 #endif

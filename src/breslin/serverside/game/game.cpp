@@ -249,14 +249,14 @@ void Game::sendShapes(Client* client)
         	//animation
         	mMessage.WriteByte(mShapeVector.at(i)->mAnimated);
 
-        	//username
-        	int length = mShapeVector.at(i)->mClient->db_first_name.length(); 
+        	//essentially should be setText...previously username...
+        	int length = mShapeVector.at(i)->mText.length(); 
         	mMessage.WriteByte(length); //send length
 		
         	//loop thru length and write it
         	for (int b=0; b < length; b++)
         	{
-                	mMessage.WriteByte(mShapeVector.at(i)->mClient->db_first_name.at(b));
+                	mMessage.WriteByte(mShapeVector.at(i)->mText.at(b));
         	}
 
                 //send it
