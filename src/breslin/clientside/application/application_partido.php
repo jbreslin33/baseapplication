@@ -6,7 +6,6 @@ Extends: ApplicationBreslin,
 initialize: function(serverIP, serverPort)
 {
 	this.parent(serverIP,serverPort);
-	this.log('ApplicationPartido::ApplicationPartido');  	
 	/*****GUI******/
 
         //main screen
@@ -39,7 +38,6 @@ processUpdate: function()
 
 createStates: function()
 {
-	this.log('ApplicationPartido::createStates');  	
 	this.mApplicationGlobal     = new ApplicationGlobal     (this);
         this.mApplicationInitialize = new ApplicationInitialize (this);
         this.mApplicationLogin      = new ApplicationLogin      (this);
@@ -49,7 +47,6 @@ createStates: function()
 
 setStates: function()
 {
-	this.log('ApplicationPartido::setStates');  	
 	this.mStateMachine.setGlobalState  (this.mApplicationGlobal    );
         this.mStateMachine.changeState     (this.mApplicationInitialize);
         this.mStateMachine.setPreviousState(this.mApplicationInitialize);
@@ -109,7 +106,6 @@ showBattleScreen: function()
 
 hideBattleScreen: function()
 {
-	this.log('ApplicationPartido::hideBattleScreen');
         this.mLabelQuestion.style.display="none";
         this.mLabelAnswer.style.display="none";
 },
@@ -120,8 +116,6 @@ sendAnswer: function()
 
 	var answerInMS = this.mAnswerTime * 1000;
 	var answerInMSRound = Math.round(answerInMS);
-	this.log('answerInMSRound:' + answerInMSRound);
-	this.log('answer:' + answer);
         message = answerInMSRound + ' ' + answer;
         this.mNetwork.mSocket.emit('send_answer', message);
 

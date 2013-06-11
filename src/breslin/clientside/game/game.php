@@ -57,12 +57,10 @@ initialize: function(application)
         mApplication->getCamera()->lookAt(Ogre::Vector3(0,0,0));
         mApplication->getCamera()->setNearClipDistance(5);
 */
-	this.log('Game::Game');
 },
 
 createStates: function()
 {
-	this.log('Game::createStates');
         this.mGameGlobal = new GameGlobal(this);
         this.mGameInitialize = new GameInitialize(this);
         this.mGamePlay = new GamePlay(this);
@@ -71,7 +69,6 @@ createStates: function()
 
 setStates: function()
 {
-	this.log('Game::setStates');
         this.mStateMachine.setGlobalState(this.mGameGlobal);
         this.mStateMachine.changeState(this.mGamePlay);
 },
@@ -182,11 +179,9 @@ removeShape: function(byteBuffer)
 {
 	if (this.mApplication.mLeaveGame || this.mApplication.mSentLeaveGame)
 	{
-		this.log('dont call');
 	}
 	else
 	{
-		this.log('call');	
  		byteBuffer.beginReading();
         	type     = byteBuffer.readByte();
         	clientID = byteBuffer.readByte();
@@ -196,7 +191,6 @@ removeShape: function(byteBuffer)
         	{
                 	if (index == this.mShapeVector[i].mIndex)
 			{
-				this.log('removeChild:' + index);
  				this.mShapeVector[i].mDiv.mDiv.removeChild(this.mShapeVector[i].mObjectTitle);
                         	this.mShapeVector[i].mDiv.mDiv.removeChild(this.mShapeVector[i].mMesh);
                         	document.body.removeChild(this.mShapeVector[i].mDiv.mDiv);
@@ -206,7 +200,6 @@ removeShape: function(byteBuffer)
 			inverseIndex = index * -1;
                 	if (inverseIndex == this.mShapeGhostVector[i].mIndex)
 			{
-				this.log('removeChild:' + inverseIndex);
  				this.mShapeGhostVector[i].mDiv.mDiv.removeChild(this.mShapeGhostVector[i].mObjectTitle);
                         	this.mShapeGhostVector[i].mDiv.mDiv.removeChild(this.mShapeGhostVector[i].mMesh);
                         	document.body.removeChild(this.mShapeGhostVector[i].mDiv.mDiv);
@@ -247,15 +240,12 @@ setText: function(byteBuffer)
 {
 	var text = '';
         var index = byteBuffer.readByte();
-	this.log('index:' + index);
         var length = byteBuffer.readByte();
-	this.log('length:' + length);
         
 	text = text + byteBuffer.readByte();
 /*
 	for (i = 0; i < length; i++)
         {
-		this.log('text:' + text);
                 text = text + byteBuffer.readByte();
         }
 */
@@ -280,7 +270,6 @@ askQuestion: function(byteBuffer)
         }
         else
         {
-                this.log('no label');
         }
 
         //reset mAnswerTime

@@ -30,14 +30,12 @@ log: function(msg)
 
 createStates: function()
 {
-	this.log('GamePartido::createStates');
         this.mGamePlay              = new GamePlayPartido(this);
         this.mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
 },
 
 setStates: function()
 {
-	this.log('GamePartido::setStates');
         this.mStateMachine.setGlobalState(this.mGameGlobal);
         this.mStateMachine.changeState(this.mGamePlay);
 },
@@ -80,7 +78,6 @@ askQuestion: function(byteBuffer)
 	}
 	else
 	{
-		this.log('no label');
 	}
        	
 	//reset mAnswerTime 

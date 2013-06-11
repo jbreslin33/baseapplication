@@ -29,15 +29,18 @@ window.addEvent('domready', function()
 		var dataSplit = ''; 
 		mApplication.mTimeSinceLastServerTick = 0;
 
-//		mApplication.log('data:' + data);
 		
-//		if (data)
-//		{
+		if (data)
+		{
                 	dataSplit = data.split(',');
 
                 	byteBuffer = new ByteBuffer(dataSplit);
                 	type = byteBuffer.readByte();
-//		}
+		}
+		else
+		{
+			mApplication.log('NO DATA!!!!!!!!!!!!!!!!!!!!!!!!');
+		}
 
 		//mMessageConnected
   		if (type == -90)
@@ -88,7 +91,6 @@ window.addEvent('domready', function()
 		//mMessageBattleEnd
 		if (type == -74)
 		{
-                        mApplication.log('*****mMessageBattleEnd%$#');
 			if (mApplication.mGame)
                         {
 				
@@ -105,7 +107,6 @@ window.addEvent('domready', function()
 		{
 /*
                 	length = byteBuffer.readByte();
-			mApplication.log('length:' + length);			
 			var string = "";
 			for (i = 0; i < length; i++)
 			{

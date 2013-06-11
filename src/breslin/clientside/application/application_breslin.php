@@ -102,7 +102,6 @@ initialize: function(serverIP, serverPort)
  	this.createLoadingScreen();
         this.showLoadingScreen();
 
-	this.log('ApplicationBreslin::ApplicationBreslin');
 },
 
 log: function(msg)
@@ -116,7 +115,6 @@ log: function(msg)
 //states
 createStates: function()
 {
-	this.log('ApplicationBreslin::createStates');
  	this.mApplicationGlobal     = new ApplicationGlobal    (this);
         this.mApplicationInitialize = new ApplicationInitialize(this);
         this.mApplicationLogin      = new ApplicationLogin     (this);
@@ -126,7 +124,6 @@ createStates: function()
 
 setStates: function()
 {
-	this.log('ApplicationBreslin::setStates');
         this.mStateMachine.setGlobalState (this.mApplicationGlobal);
         this.mStateMachine.setCurrentState(this.mApplicationInitialize);
         this.mStateMachine.changeState(this.mApplicationInitialize);
@@ -340,7 +337,6 @@ hideLoadingScreen: function()
 //LOGIN SCREEN
 createLoginScreen: function()
 {
-	this.log('ApplicationBreslin::createLoginScreen');
   	if (this.mSelectMenuSchool == 0)
         {
                 this.mSelectMenuSchool = this.createSelectMenu(300,50,100,25,"green","Schools");
@@ -378,7 +374,6 @@ createLoginScreen: function()
 
 showLoginScreen: function()
 {       
-	this.log('ApplicationBreslin::showLoginScreen');
         this.mSelectMenuSchool.style.display="block";
         this.mLabelUsername.style.display="block";
         this.mLabelPassword.style.display="block";
@@ -388,7 +383,6 @@ showLoginScreen: function()
 
 hideLoginScreen: function()
 {       
-	this.log('ApplicationBreslin::hideLoginScreen');
         this.mSelectMenuSchool.style.display="none";
         this.mLabelUsername.style.display="none";
         this.mLabelPassword.style.display="none";
