@@ -144,7 +144,6 @@ void ClientPartido::sendQuestion(int questionID)
 }
 void ClientPartido::battleStart(ShapePartido* whoToBattle)
 {
-	LogString("ClientPartido::battleStart:%s",db_first_name.c_str());
         mShapePartido->mKey = 0;
         mShapePartido->mOpponent = whoToBattle;
 
@@ -225,7 +224,6 @@ void ClientPartido::resetBattle()
 
 void ClientPartido::sendBattleStart()
 {
-	LogString("ClientPartido::sendBattleStart:%s",db_first_name.c_str());
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
         
@@ -244,7 +242,6 @@ void ClientPartido::sendBattleStart()
 
 void ClientPartido::sendBattleEnd()
 {
-	LogString("ClientPartido::sendBattleEnd:%s",db_first_name.c_str());
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
        		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
@@ -253,7 +250,6 @@ void ClientPartido::sendBattleEnd()
        		if (mClientID > 0)
        		{
                		mMessage.WriteByte(mClientID); // add mClientID for browsers
-			LogString("ClientPartido::sendBattleEnd mClientID:%d",mClientID);
        		}
 
        		//send it
@@ -263,15 +259,12 @@ void ClientPartido::sendBattleEnd()
 
 void ClientPartido::readAnswer(Message* mes)
 {
-	LogString("ClientPartido::readAnswer:%s",db_first_name.c_str());
         //clear answer string
         mStringAnswer.clear();
 
         mAnswerTime = mes->ReadShort();
-	LogString("mAnswerTime:%d",mAnswerTime);
 
         int sizeOfAnswer = mes->ReadByte();
-	LogString("sizeOfAnswer:%d",sizeOfAnswer);
         //loop thru and set mStringAnswer from client
         for (int i = 0; i < sizeOfAnswer; i++)
         {
@@ -284,7 +277,6 @@ void ClientPartido::readAnswer(Message* mes)
                 else
                 {
                         int numeric = mes->ReadByte();
-			LogString("numeric:%d",numeric);
                         char ascii = (char)numeric;
                         mStringAnswer.append(1,ascii);
                 }
@@ -322,16 +314,19 @@ void ClientPartido::readAnswer(Message* mes)
 
 	if (mBattleScore > 9)
 	{
-/*
 		ShapePartido* opponent  = mShapePartido->mOpponent;
 		
-		//score battle
-		scoreBattle(WIN);
-		opponent->mClientPartido->scoreBattle(LOSS);
+                //score battle
+                scoreBattle(WIN);
+                opponent->mClientPartido->scoreBattle(LOSS);
 
-   		//send battle record to clients
-                sendBattleRecord();
-                opponent->mClientPartido->sendBattleRecord();
+                //set battle record text .. mBattleRecordText
+                setBattleRecordText();
+                opponent->mClientPartido->setBattleRecordText();
+
+                //set Text of shape .. mText
+                mShapePartido->setText(mBattleRecordText);
+                opponent->mClientPartido->mShapePartido->setText(opponent->mClientPartido->mBattleRecordText);
 
                 //reset battle
                 resetBattle();
@@ -340,7 +335,7 @@ void ClientPartido::readAnswer(Message* mes)
                 //send battle end to client
                 sendBattleEnd();
                 opponent->mClientPartido->sendBattleEnd();
-*/
+
 	} 	
 	
 	//set vars for new question and answer combo....
@@ -380,7 +375,6 @@ void ClientPartido::insertAnswerAttempt()
 	query.append(d);
 
     	const char * q = query.c_str();
-    	LogString("q:%s",q);
         PQexec(conn,q);
         PQfinish(conn);
 }

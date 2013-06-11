@@ -184,7 +184,6 @@ io.sockets.on('connection', function (socket)
 
         socket.on('send_answer', function(message,remote)
 	{
-		console.log('send_answer...');
 		var messageLength = message.length;
 		var blankSpot = 0;	
 		var messageArray = message.split(" ");
@@ -312,7 +311,6 @@ server.on("message", function (msg, rinfo)
                 var anim     = msg.readInt8(25);
 
   		var length = msg.readInt8(26);
-		console.log('lengh:' + length);
 
                 string = "" + length + ",";
 
@@ -351,7 +349,6 @@ server.on("message", function (msg, rinfo)
                         var c = String.fromCharCode(n);
                         questionString = questionString + c;
                 }
-		console.log('questionString:' + questionString);
 
 		var string = type + "," + length + "," + questionString;
 
@@ -383,18 +380,14 @@ server.on("message", function (msg, rinfo)
 	//mMessageBattleEnd
  	if (type == -74)
         {
-		console.log('battle ender....inudp');
                 var clientID = msg.readInt8(1);
-		console.log('**clientID:' + clientID); 
                 var string = type;
                 string = string + "," + clientID;
 
-		console.log('**string:' + string); 
                 io.sockets.clients().forEach(function (socket)
                 {
                         if (socket.mClientID == clientID)
                         {
-				console.log('found match sengding strring:' + string);
                                 socket.emit('news', string)
                         }
                 });
@@ -420,13 +413,9 @@ server.on("message", function (msg, rinfo)
 	//mMessageSetText
 	if (type == -66)
 	{
-		console.log('udp mMessageSetTexudp mMessageSetTextt');	
- 		
 		var index    = msg.readInt8(1);
-		console.log('index:' + index);
 
                 var length   = msg.readInt8(2);
-		console.log('length:' + length);
 
                 var setTextString = '';
                 for (i = 0; i < length; i++)
@@ -435,10 +424,8 @@ server.on("message", function (msg, rinfo)
                         var c = String.fromCharCode(n);
                         setTextString = setTextString + c;
                 }
-                console.log('setTextString:' + setTextString);
 
                 var string = type + "," + index + "," + length + "," + setTextString;
-		console.log('string:' + string + ':end string');
 
 		io.sockets.clients().forEach(function (socket)
                 {

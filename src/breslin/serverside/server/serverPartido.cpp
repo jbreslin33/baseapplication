@@ -72,7 +72,7 @@ void ServerPartido::createClients()
                 puts("We did not get any data!");
         }
         rec_count = PQntuples(res);
-        printf("We received %d records from user table.\n", rec_count);
+        //printf("We received %d records from user table.\n", rec_count);
         for (row=0; row<rec_count; row++)
         {
                 //client
@@ -104,7 +104,6 @@ void ServerPartido::createClients()
                 //first_name
                 const char* d = PQgetvalue(res, row, 3);
                 clientPartido->db_first_name.assign(d);
-		LogString("firstName:%s",d);
 
                 //last_name
                 const char* e = PQgetvalue(res, row, 7);
@@ -187,7 +186,6 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
     		else if (type == mMessageAnswerQuestionBrowser)
                 {
  			int clientID = mes->ReadByte();
-			LogString("mMessageAnswerQuestionBrowser from client:%d",clientID);
                 	for (unsigned int i = 0; i < mClientPartidoVector.size(); i++)
                 	{
                                 ClientPartido* clientPartido = mClientPartidoVector.at(i);
@@ -228,11 +226,10 @@ void ServerPartido::getQuestions()
         }
 	else
 	{
-		LogString("Total questions:%d",rec_count);
 	}
         rec_count = PQntuples(res);
 	mQuestionCount = rec_count;
-        printf("We received %d records.\n", rec_count);
+        //printf("We received %d records.\n", rec_count);
        
 	//make first elements x so they coincide with db id's 
         mQuestionIDVector.push_back("x");
@@ -278,14 +275,13 @@ void ServerPartido::getSchools()
                 //exit(0);
         }
         rec_count = PQntuples(res);
-        printf("We received %d records.\n", rec_count);
+        //printf("We received %d records.\n", rec_count);
         for (row=0; row<rec_count; row++)
         {
                 const char* c = PQgetvalue(res, row, 1);
                 std::string school(c);
 
                 mSchoolVector.push_back(school);
-		LogString("adding school..");
         }
 
         PQclear(res);

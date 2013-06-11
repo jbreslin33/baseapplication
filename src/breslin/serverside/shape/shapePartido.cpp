@@ -52,7 +52,6 @@ void ShapePartido::processTick()
 
 void ShapePartido::collision(Shape* shape)
 {
-	LogString("ShapePartido::collision:%s",mClient->db_first_name.c_str());
 	Shape::collision(shape);	
 
 	if (mOpponent == NULL && mOpponentLast != shape)

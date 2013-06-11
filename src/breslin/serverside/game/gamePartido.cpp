@@ -103,5 +103,4 @@ void GamePartido::createShapes()
 
 void GamePartido::sendAnswer(ClientPartido* client, int answerTime, std::string answer)
 {
-	LogString("GamePartido::sendAnswer");
 }

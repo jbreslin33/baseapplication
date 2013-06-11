@@ -167,11 +167,9 @@ void Shape::remove()
 
 					mGame->mServer->mNetwork->sendPacketTo(mGame->mServer->mClientVector.at(i),&mGame->mServer->mMessage);
 					
-					LogString("send to this guy:%d",mGame->mServer->mClientVector.at(i)->mClientID);
 				}
 				else
 				{
-					LogString("don't send to this guy:%d",mGame->mServer->mClientVector.at(i)->mClientID);
 				}
 			}
 		}
@@ -345,11 +343,9 @@ void Shape::setText(std::string text)
 
 	//index id
 	mMessage.WriteByte(mIndex);
-	LogString("Shape::setText mIndex:%d",mIndex);
 
 	//username
        	int length = text.length();  
-	LogString("Shape::setText length:%d",length);
        	mMessage.WriteByte(length); //send length
 
        	//loop thru length and write it
@@ -364,7 +360,6 @@ void Shape::setText(std::string text)
 
 void Shape::sendText()
 {
-	LogString("Shape::sendText");
 	if (!mGame)
 	{
 		return;
@@ -375,11 +370,9 @@ void Shape::sendText()
 	
 	//index id
 	mMessage.WriteByte(mIndex);
-	LogString("Shape::setText mIndex:%d",mIndex);
 
 	//text
        	int length = mText.length();  
-	LogString("Shape::setText length:%d",length);
        	mMessage.WriteByte(length); //send length
 
        	//loop thru length and write it

@@ -136,7 +136,7 @@ void Server::createClients()
                 puts("We did not get any data!");
         }
         rec_count = PQntuples(res);
-        printf("We received %d records from user table.\n", rec_count);
+        //printf("We received %d records from user table.\n", rec_count);
         for (row=0; row<rec_count; row++)
         {
                 //client
