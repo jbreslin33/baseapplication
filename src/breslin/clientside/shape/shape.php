@@ -275,6 +275,7 @@ processDeltaByteBuffer: function(byteBuffer)
         this.mAbilityVector[0].processTick();
 },
 
+//i think we may be able to offset position here.
 parseDeltaByteBuffer: function(byteBuffer)
 {
 	var flags = 0;
@@ -284,16 +285,26 @@ parseDeltaByteBuffer: function(byteBuffer)
        	var moveZChanged = true;
 
 	flags = byteBuffer.readByte();
-	if (this.mIndex == 1)
-	{
 	
-	}
+	var centerx = 200;
+	var centerz = 200;
 
 	// Origin
         if(flags & this.mCommandOriginX)
         {
                 this.mServerCommandLast.mPosition.x = this.mServerCommandCurrent.mPosition.x;
                 this.mServerCommandCurrent.mPosition.x = byteBuffer.readByte();
+
+                if (this.mApplication.mGame.mControlObject == this) 
+		{
+			this.mApplication.mGame.mControlObjectServerPosition.x = this.mServerCommandCurrent.mPosition.x;
+                	this.mServerCommandCurrent.mPosition.x = centerx;
+		}
+		else
+		{
+                	var diffx = this.mServerCommandCurrent.mPosition.x - this.mApplication.mGame.mControlObjectServerPosition.x;
+                	this.mServerCommandCurrent.mPosition.x = diffx + centerx;
+		}
         }
         else
         {
@@ -304,6 +315,17 @@ parseDeltaByteBuffer: function(byteBuffer)
         {
                 this.mServerCommandLast.mPosition.y = this.mServerCommandCurrent.mPosition.y;
                 this.mServerCommandCurrent.mPosition.y = byteBuffer.readByte();
+
+                if (this.mApplication.mGame.mControlObject == this) 
+		{
+			this.mApplication.mGame.mControlObjectServerPosition.y = this.mServerCommandCurrent.mPosition.y;
+                	this.mServerCommandCurrent.mPosition.y = 0;
+		}
+		else
+		{
+                	var diffy = this.mServerCommandCurrent.mPosition.y - this.mApplication.mGame.mControlObjectServerPosition.y;
+                	this.mServerCommandCurrent.mPosition.y = diffy + centerY;
+		}
         }
         else
         {
@@ -314,11 +336,23 @@ parseDeltaByteBuffer: function(byteBuffer)
         {
                 this.mServerCommandLast.mPosition.z = this.mServerCommandCurrent.mPosition.z;
                 this.mServerCommandCurrent.mPosition.z = byteBuffer.readByte();
+
+                if (this.mApplication.mGame.mControlObject == this) 
+		{
+			this.mApplication.mGame.mControlObjectServerPosition.z = this.mServerCommandCurrent.mPosition.z;
+                	this.mServerCommandCurrent.mPosition.z = centerz;
+		}
+		else
+		{
+                	var diffz = this.mServerCommandCurrent.mPosition.z - this.mApplication.mGame.mControlObjectServerPosition.z;
+                	this.mServerCommandCurrent.mPosition.z = diffz + centerz;
+		}
         }
         else
         {
                 moveZChanged = false;
         }
+
 
  	//rotation
         if(flags & this.mCommandRotationX)

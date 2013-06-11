@@ -26,6 +26,7 @@ initialize: function(application)
 	this.mControlObject      = 0; 
 	this.mControlObjectGhost = 0; 
 	this.mOffSet = new Vector3D();
+	this.mControlObjectServerPosition = new Vector3D();
 
 	//byteBuffer
 	this.mByteBuffer = new ByteBuffer();
