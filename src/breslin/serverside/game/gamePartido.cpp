@@ -57,8 +57,9 @@ void GamePartido::reset()
 		clientPartido->resetOpponents();
 		
 		//collision
-        	clientPartido->mShapePartido->mCollidable = NULL; 
-		
+        	clientPartido->mShapePartido->mCollidable = true; 
+	
+		//is anyone in a battle as game ends?	
    		if (clientPartido->mConnectionState == DREAMSOCK_CONNECTED)
 		{
 			clientPartido->sendBattleEnd();	
