@@ -534,42 +534,6 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 	mKeyArray[numeric] = true;
 	LogString("numeric:%d",numeric);
 
-	if (mKeyArray[13] == true)
-	{
-		LogString("enter hit");
-	}
-
-/*
-	if (numeric == 65) 
-    	{
-		LogString("A");
-		mKey_A = true;	
-	}
-
-	if (numeric == 97) 
-    	{
-		LogString("a");
-		mKey_a = true;	
-	}
-
-	if (numeric == 15) 
-    	{
-		LogString("enter");
-		mKey_enter = true;	
-	}
-
-	if (arg.key == OIS::KC_TAB) 
-    	{
-		LogString("tab");
-		mKey_tab = true;	
-	}
-	
-	if (numeric == 8) 
-    	{
-		LogString("backspace");
-		mKey_backspace = true;	
-	}
-*/
 /*
 	if (mStateMachine->getCurrentState() == mApplicationLogin)
 	{
