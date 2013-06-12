@@ -72,6 +72,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mKey_q = false;
 	mKey_tab = false;
 	mKey_enter = false;
+	mKey_backspace = false;
 }
 
 
@@ -484,6 +485,14 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	LogString("ApplicationBreslin::keyPressed");
+
+	if (arg.key == OIS::KC_A)   // toggle visibility of advanced frame stats
+    	{
+		LogString("A hit");	
+	}
+
+
+/*
 	if (mStateMachine->getCurrentState() == mApplicationLogin)
 	{
 		if (mLabelFocus == mLabelUsername)
@@ -552,6 +561,7 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
                 	}
 		}
 	}
+*/
 }
 
 bool ApplicationBreslin::keyReleased( const OIS::KeyEvent &arg )

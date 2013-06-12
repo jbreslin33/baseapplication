@@ -134,6 +134,7 @@ bool mKey_esc;
 bool mKey_q;
 bool mKey_tab;
 bool mKey_enter;
+bool mKey_backspace;
 
 /********* NETWORK *******/
 void checkForByteBuffer();
