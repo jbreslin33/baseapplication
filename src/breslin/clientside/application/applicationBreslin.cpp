@@ -528,84 +528,12 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
-	LogString("ApplicationBreslin::keyPressed");
 	int numeric = arg.text;
 	mKeyArray[numeric] = true;
-/*
-	if (mStateMachine->getCurrentState() == mApplicationLogin)
-	{
-		if (mLabelFocus == mLabelUsername)
-		{
-			int numeric = arg.text;
-			char ascii = (char)numeric;	
-
-			if (numeric == 8) //backspace
-			{
-				int size = mStringUsername.size();
-				if (size > 0)
-				{
-					mStringUsername.resize(size - 1);
-				}
-				mLabelUsername->setCaption(mStringUsername);
-			}
-
-			if (numeric == 9) //tab
-			{
-				mLabelFocus = mLabelPassword;
-			}
-			if (numeric == 13) //enter
-			{
-				mLabelFocus = mLabelPassword;
-			}
-			
-			if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
-			{
-				mStringUsername.append(1,ascii);
-				mLabelUsername->setCaption(mStringUsername);
-			}
-		}
-
-		if (mLabelFocus == mLabelPassword)
-		{
- 			int numeric = arg.text;
-                	char ascii = (char)numeric;
-
-                	if (numeric == 8) //backspace
-                	{
-                        	int size = mStringPassword.size();
-				if (size > 0)
-				{
-                        		mStringPassword.resize(size - 1);
-				}
-                        	mLabelPassword->setCaption(mStringPassword);
-                	}
-
-                	if (numeric == 9) //tab
-                	{
-                	}
-			if (numeric == 13) //enter
-			{
- 				//let's simulate hitting login button	
-				if (mStringUsername.size() > 0)
-                		{
-                        		sendLogin();
-                		}
-
-			}
-
-                	if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
-                	{
-                        	mStringPassword.append(1,ascii);
-                        	mLabelPassword->setCaption(mStringPassword);
-                	}
-		}
-	}
-*/
 }
 
 bool ApplicationBreslin::keyReleased( const OIS::KeyEvent &arg )
 {
-	LogString("ApplicationBreslin::keyReleased");
 	int numeric = arg.text;
 	mKeyArray[numeric] = false;
 }
