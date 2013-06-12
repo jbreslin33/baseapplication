@@ -123,6 +123,18 @@ virtual void hideMainScreen();
 //input
 OIS::Keyboard* getKeyboard() { return mKeyboard; }
 
+//keys
+bool mKey_up;
+bool mKey_down;
+bool mKey_right;
+bool mKey_left;
+bool mKey_counterclockwise;
+bool mKey_clockwise;
+bool mKey_esc;
+bool mKey_q;
+bool mKey_tab;
+bool mKey_enter;
+
 /********* NETWORK *******/
 void checkForByteBuffer();
 
@@ -158,7 +170,8 @@ void buttonHit  (OgreBites::Button *button);
 void labelHit   (OgreBites::Label* label );
 bool mouseMoved (const OIS::MouseEvent &arg );
 protected:
-virtual bool keyPressed ( const OIS::KeyEvent &arg );
+virtual bool keyPressed  ( const OIS::KeyEvent &arg );
+virtual bool keyReleased ( const OIS::KeyEvent &arg );
 
 };
 

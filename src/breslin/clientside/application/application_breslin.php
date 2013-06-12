@@ -91,6 +91,7 @@ initialize: function(serverIP, serverPort)
 	this.mKey_clockwise = false;
 	this.mKey_esc = false;
 	this.mKey_q = false;
+	this.mKey_enter = false;
 
 	this.sendConnect();	
 

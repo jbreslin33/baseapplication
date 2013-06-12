@@ -60,6 +60,18 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mGame = NULL;
 
 	mStateMachine = new StateMachine();
+
+	//keys
+	mKey_up = false;
+	bool mKey_down = false;
+	mKey_right = false;
+	mKey_left = false;
+	mKey_counterclockwise = false;
+	mKey_clockwise = false;
+	mKey_esc = false;
+	mKey_q = false;
+	mKey_tab = false;
+	mKey_enter = false;
 }
 
 
@@ -471,6 +483,7 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
+	LogString("ApplicationBreslin::keyPressed");
 	if (mStateMachine->getCurrentState() == mApplicationLogin)
 	{
 		if (mLabelFocus == mLabelUsername)
@@ -539,6 +552,11 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
                 	}
 		}
 	}
+}
+
+bool ApplicationBreslin::keyReleased( const OIS::KeyEvent &arg )
+{
+
 }
 
 void ApplicationBreslin::labelHit( OgreBites::Label* label )
