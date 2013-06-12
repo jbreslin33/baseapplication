@@ -128,15 +128,24 @@ setPosition: function(position)
 	
 	if (this.mApplication.mGame.mControlObject == this || this.mApplication.mGame.mControlObject.mGhost == this)
 	{
-		this.mPositionRender.x = 300; 
-		this.mPositionRender.y = 0; 
-		this.mPositionRender.z = 200; 
+		this.mPositionRender.x = parseFloat(300); 
+		this.mPositionRender.y = parseFloat(0); 
+		this.mPositionRender.z = parseFloat(200); 
 	} 	
 	else
 	{	
+		diffx = parseFloat(this.mPosition.x) - parseFloat(this.mApplication.mGame.mControlObject.mPosition.x);
+		diffz = parseFloat(this.mPosition.z) - parseFloat(this.mApplication.mGame.mControlObject.mPosition.z);
+
+		this.mPositionRender.x = parseFloat(diffx) + parseFloat(300);
+		this.mPositionRender.y = 0; 
+		this.mPositionRender.z = parseFloat(diffz) + parseFloat(200);
+
+		/*
 		this.mPositionRender.x = x; 
 		this.mPositionRender.y = 0; 
 		this.mPositionRender.z = z; 
+		*/
 	}
 	
 	//you are out of visible area 
