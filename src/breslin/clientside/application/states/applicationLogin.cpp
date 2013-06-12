@@ -58,6 +58,7 @@ void ApplicationLogin::execute()
 	//for keys
 	if (mApplication->mLabelFocus == mApplication->mLabelUsername)
         {
+
         	if (mApplication->mKeyArray[8]) //backspace
 		{
         		mApplication->mKeyArray[8] = false;
@@ -68,6 +69,7 @@ void ApplicationLogin::execute()
                         }
                         mApplication->mLabelUsername->setCaption(mApplication->mStringUsername);
                 }
+
       	 	if (mApplication->mKeyArray[9]) //tab
 		{
         		mApplication->mKeyArray[9] = false;
@@ -90,61 +92,44 @@ void ApplicationLogin::execute()
                                 mApplication->mLabelUsername->setCaption(mApplication->mStringUsername);
 			}
 		} 
-
 	}
 
+	if (mApplication->mLabelFocus == mApplication->mLabelPassword)
+	{
 
-/*
-                        if (numeric == 9) //tab
+        	if (mApplication->mKeyArray[8]) //backspace
+		{
+        		mApplication->mKeyArray[8] = false;
+                	int size = mApplication->mStringPassword.size();
+                        if (size > 0)
                         {
-                                mLabelFocus = mLabelPassword;
+                                mApplication->mStringPassword.resize(size - 1);
                         }
-                        if (numeric == 13) //enter
-                        {
-                                mLabelFocus = mLabelPassword;
-                        }
-
-                        if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
-                        {
-                                mStringUsername.append(1,ascii);
-                                mLabelUsername->setCaption(mStringUsername);
-                        }
+                        mApplication->mLabelPassword->setCaption(mApplication->mStringPassword);
                 }
 
-                if (mLabelFocus == mLabelPassword)
-                {
-                        int numeric = arg.text;
-                        char ascii = (char)numeric;
-
-                        if (numeric == 8) //backspace
+		if (mApplication->mKeyArray[13]) //enter
+		{
+        		mApplication->mKeyArray[13] = false;
+                        
+			//let's simulate hitting login button
+                        if (mApplication->mStringUsername.size() > 0)
                         {
-                                int size = mStringPassword.size();
-                                if (size > 0)
-                                {
-                                        mStringPassword.resize(size - 1);
-                                }
-                                mLabelPassword->setCaption(mStringPassword);
+                        	mApplication->sendLogin();
                         }
+		}
 
-                        if (numeric == 9) //tab
-                        {
-                        }
-                        if (numeric == 13) //enter
-                        {
-                                //let's simulate hitting login button
-                                if (mStringUsername.size() > 0)
-                                {
-                                        sendLogin();
-                                }
-
-                        }
-
-                        if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
-                        {
-                                mStringPassword.append(1,ascii);
-                                mLabelPassword->setCaption(mStringPassword);
-                        }
-*/
+		for (int i = 47; i < 123; i++)
+		{
+			if (mApplication->mKeyArray[i])
+			{
+        			mApplication->mKeyArray[i] = false;
+				char ascii = (char)i;
+                                mApplication->mStringPassword.append(1,ascii);
+                                mApplication->mLabelPassword->setCaption(mApplication->mStringPassword);
+			}
+		} 
+	}	
 }
 
 void ApplicationLogin::exit()
