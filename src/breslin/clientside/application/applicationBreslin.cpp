@@ -529,11 +529,8 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	LogString("ApplicationBreslin::keyPressed");
-
 	int numeric = arg.text;
 	mKeyArray[numeric] = true;
-	LogString("numeric:%d",numeric);
-
 /*
 	if (mStateMachine->getCurrentState() == mApplicationLogin)
 	{
@@ -608,6 +605,7 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 
 bool ApplicationBreslin::keyReleased( const OIS::KeyEvent &arg )
 {
+	LogString("ApplicationBreslin::keyReleased");
 	int numeric = arg.text;
 	mKeyArray[numeric] = false;
 }
