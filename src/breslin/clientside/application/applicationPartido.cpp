@@ -201,7 +201,7 @@ bool ApplicationPartido::keyPressed( const OIS::KeyEvent &arg )
 
 bool ApplicationPartido::keyReleased( const OIS::KeyEvent &arg )
 {
-
+	ApplicationBreslin::keyReleased(arg);
 }
 void ApplicationPartido::sendAnswer()
 {
