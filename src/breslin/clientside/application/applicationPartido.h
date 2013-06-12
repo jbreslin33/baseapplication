@@ -50,6 +50,7 @@ void sendAnswer();
 
 protected:
 virtual bool keyPressed ( const OIS::KeyEvent &arg );
+virtual bool keyReleased ( const OIS::KeyEvent &arg );
 
 };
 

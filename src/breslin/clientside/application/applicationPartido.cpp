@@ -199,6 +199,10 @@ bool ApplicationPartido::keyPressed( const OIS::KeyEvent &arg )
 	}
 }
 
+bool ApplicationPartido::keyReleased( const OIS::KeyEvent &arg )
+{
+
+}
 void ApplicationPartido::sendAnswer()
 {
         ByteBuffer* byteBuffer = new ByteBuffer();
