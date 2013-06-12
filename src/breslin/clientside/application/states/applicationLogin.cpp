@@ -58,10 +58,9 @@ void ApplicationLogin::execute()
 	//for keys
 	if (mApplication->mLabelFocus == mApplication->mLabelUsername)
         {
-        	if (mApplication->mKeyArray[8] == true) //backspace
+        	if (mApplication->mKeyArray[8]) //backspace
 		{
         		mApplication->mKeyArray[8] = false;
-			LogString("backspace");
                 	int size = mApplication->mStringUsername.size();
                         if (size > 0)
                         {
@@ -69,7 +68,32 @@ void ApplicationLogin::execute()
                         }
                         mApplication->mLabelUsername->setCaption(mApplication->mStringUsername);
                 }
+      	 	if (mApplication->mKeyArray[9]) //tab
+		{
+        		mApplication->mKeyArray[9] = false;
+                        mApplication->mLabelFocus = mApplication->mLabelPassword;
+		}
+
+		if (mApplication->mKeyArray[13]) //enter
+		{
+        		mApplication->mKeyArray[13] = false;
+                        mApplication->mLabelFocus = mApplication->mLabelPassword;
+		}
+
+		for (int i = 47; i < 123; i++)
+		{
+			if (mApplication->mKeyArray[i])
+			{
+        			mApplication->mKeyArray[i] = false;
+				char ascii = (char)i;
+                                mApplication->mStringUsername.append(1,ascii);
+                                mApplication->mLabelUsername->setCaption(mApplication->mStringUsername);
+			}
+		} 
+
 	}
+
+
 /*
                         if (numeric == 9) //tab
                         {
