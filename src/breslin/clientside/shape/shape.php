@@ -125,28 +125,20 @@ setPosition: function(position)
 	y = parseFloat(position.y);
 	z = parseFloat(position.z);
 
-
-	this.mPositionRender.x = x; 
-	this.mPositionRender.y = 0; 
-	this.mPositionRender.z = z; 
-	//x = x * 2; 
-	//z = z * 2; 
-/*
-	//you are control object or control ghost
-	if (this.mApplication.mGame.mControlObject == this ||
-		this.mApplication.mGame.mControlObjectGhost == this)
+	
+	if (this.mApplication.mGame.mControlObject == this || this.mApplication.mGame.mControlObject.mGhost == this)
 	{
-		this.mPositionRender.x = parseFloat(this.mApplication.mScreenCenter.x);	
-		this.mPositionRender.y = 0;	
-		this.mPositionRender.z = parseFloat(this.mApplication.mScreenCenter.z);	
+		this.mPositionRender.x = 300; 
+		this.mPositionRender.y = 0; 
+		this.mPositionRender.z = 200; 
+	} 	
+	else
+	{	
+		this.mPositionRender.x = x; 
+		this.mPositionRender.y = 0; 
+		this.mPositionRender.z = z; 
 	}
-	else //you are not control object
-	{
-		this.mPositionRender.x = parseFloat(x) + parseFloat(this.mApplication.mGame.mOffSet.x);
-		this.mPositionRender.y = parseFloat(0);
-		this.mPositionRender.z = parseFloat(z) + parseFloat(this.mApplication.mGame.mOffSet.z);
-	}
-*/
+	
 	//you are out of visible area 
 	if (parseFloat(this.mPositionRender.x) > parseFloat(760) || parseFloat(this.mPositionRender.z) > parseFloat(360))
 	{
