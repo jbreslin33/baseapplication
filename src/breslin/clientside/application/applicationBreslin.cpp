@@ -61,7 +61,12 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	mStateMachine = new StateMachine();
 
-	//keys
+	//init all keys to false as in up/released
+	for (int i = 0; i <= 127; i++)
+	{
+		mKeyArray[i] = false;
+	}
+
 	mKey_up = false;
 	bool mKey_down = false;
 	mKey_right = false;
@@ -73,6 +78,45 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mKey_tab = false;
 	mKey_enter = false;
 	mKey_backspace = false;
+
+	//letters
+	mKey_A = false;
+	mKey_B = false;
+	mKey_C = false;
+	mKey_D = false;
+	mKey_E = false;
+	mKey_F = false;
+	mKey_G = false;
+	mKey_H = false;
+	mKey_I = false;
+	mKey_J = false;
+	mKey_K = false;
+	mKey_L = false;
+	mKey_M = false;
+	mKey_N = false;
+	mKey_O = false;
+	mKey_P = false;
+	mKey_Q = false;
+	mKey_R = false;
+	mKey_S = false;
+	mKey_T = false;
+	mKey_U = false;
+	mKey_V = false;
+	mKey_W = false;
+	mKey_X = false;
+	mKey_Y = false;
+	mKey_Z = false;
+	mKey_0 = false;
+	mKey_1 = false;
+	mKey_2 = false;
+	mKey_3 = false;
+	mKey_4 = false;
+	mKey_5 = false;
+	mKey_6 = false;
+	mKey_7 = false;
+	mKey_8 = false;
+	mKey_9 = false;
+
 }
 
 
@@ -486,12 +530,46 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	LogString("ApplicationBreslin::keyPressed");
 
-	if (arg.key == OIS::KC_A)   // toggle visibility of advanced frame stats
-    	{
-		LogString("A hit");	
+	int numeric = arg.text;
+	mKeyArray[numeric] = true;
+	LogString("numeric:%d",numeric);
+
+	if (mKeyArray[13] == true)
+	{
+		LogString("enter hit");
 	}
 
+/*
+	if (numeric == 65) 
+    	{
+		LogString("A");
+		mKey_A = true;	
+	}
 
+	if (numeric == 97) 
+    	{
+		LogString("a");
+		mKey_a = true;	
+	}
+
+	if (numeric == 15) 
+    	{
+		LogString("enter");
+		mKey_enter = true;	
+	}
+
+	if (arg.key == OIS::KC_TAB) 
+    	{
+		LogString("tab");
+		mKey_tab = true;	
+	}
+	
+	if (numeric == 8) 
+    	{
+		LogString("backspace");
+		mKey_backspace = true;	
+	}
+*/
 /*
 	if (mStateMachine->getCurrentState() == mApplicationLogin)
 	{
@@ -566,7 +644,8 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 
 bool ApplicationBreslin::keyReleased( const OIS::KeyEvent &arg )
 {
-
+	int numeric = arg.text;
+	mKeyArray[numeric] = false;
 }
 
 void ApplicationBreslin::labelHit( OgreBites::Label* label )

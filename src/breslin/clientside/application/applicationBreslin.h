@@ -124,6 +124,7 @@ virtual void hideMainScreen();
 OIS::Keyboard* getKeyboard() { return mKeyboard; }
 
 //keys
+bool mKeyArray[128];  
 bool mKey_up;
 bool mKey_down;
 bool mKey_right;
@@ -135,6 +136,43 @@ bool mKey_q;
 bool mKey_tab;
 bool mKey_enter;
 bool mKey_backspace;
+//letters
+bool mKey_A;
+bool mKey_B;
+bool mKey_C;
+bool mKey_D;
+bool mKey_E;
+bool mKey_F;
+bool mKey_G;
+bool mKey_H;
+bool mKey_I;
+bool mKey_J;
+bool mKey_K;
+bool mKey_L;
+bool mKey_M;
+bool mKey_N;
+bool mKey_O;
+bool mKey_P;
+bool mKey_Q;
+bool mKey_R;
+bool mKey_S;
+bool mKey_T;
+bool mKey_U;
+bool mKey_V;
+bool mKey_W;
+bool mKey_X;
+bool mKey_Y;
+bool mKey_Z;
+bool mKey_0;
+bool mKey_1;
+bool mKey_2;
+bool mKey_3;
+bool mKey_4;
+bool mKey_5;
+bool mKey_6;
+bool mKey_7;
+bool mKey_8;
+bool mKey_9;
 
 /********* NETWORK *******/
 void checkForByteBuffer();
