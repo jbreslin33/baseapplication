@@ -44,7 +44,13 @@ void ApplicationPlay::execute()
         {
                 this->mApplication->mStateMachine->changeState(this->mApplication->mApplicationLogin);
         }
-
+	
+	if (mApplication->mKeyArray[9]) //tab
+        {
+        	mApplication->mKeyArray[9] = false;
+                mApplication->mLabelFocus = mApplication->mLabelPassword;
+        }
+/*
 	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_ESCAPE) && mApplication->mSentLeaveGame == false)
 	{
 		//send quit game
@@ -54,7 +60,7 @@ void ApplicationPlay::execute()
 
                 mApplication->mSentLeaveGame = true;
 	}
-
+*/
 	if (mApplication->mLeaveGame)
        	{
                	mApplication->mSentLeaveGame = false;
