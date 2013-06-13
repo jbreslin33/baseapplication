@@ -36,6 +36,12 @@ void GamePlayPartidoBattle::enter()
 	//reset text box 
 	mGamePartido->mApplicationPartido->mStringAnswer.clear();
         mGamePartido->mApplicationPartido->mLabelAnswer->setCaption("");
+       
+	//set mKeyArray to false 
+	for (int i = 0; i < 128; i++)
+	{
+        	mGamePartido->mApplicationPartido->mKeyArray[i] = false;
+	}
 }
 
 void GamePlayPartidoBattle::execute()
@@ -47,6 +53,8 @@ void GamePlayPartidoBattle::execute()
         }
 
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
+
+
 
 	if (app->mLabelFocus == app->mLabelAnswer)
 	{
@@ -80,6 +88,13 @@ void GamePlayPartidoBattle::execute()
                                 app->mLabelAnswer->setCaption(app->mStringAnswer);
                         }
                 }
+	
+		//set mKeyArray to false 
+		for (int i = 0; i < 128; i++)
+		{
+        		mGamePartido->mApplicationPartido->mKeyArray[i] = false;
+		}
+
 	}
 /*	
 if (mApplication->mLabelFocus == mApplication->mLabelUsername)
