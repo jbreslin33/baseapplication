@@ -27,6 +27,12 @@ void ApplicationGlobal::enter()
 {
 	//LogString("STATE: ApplicationGlobal");
 }
+/*
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
+        {
+                mKeyCurrent |= mKeyUp;
+        }
+*/
 void ApplicationGlobal::execute()
 {
 	if (mApplication->mSetup)

@@ -32,9 +32,22 @@ void GamePlay::enter()
 }
 void GamePlay::execute()
 {
-	//user input
-//	mGame->processInput();	
+ 	//process input
+ 	mGame->mKeyCurrent = 0;
+        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_W)) // Forward
+        {
+        	mGame->mApplication->mKeyArray[119] = true;
+                mGame->mKeyCurrent |= mGame->mKeyUp;
+        }
+       	else
+        {
+        	mGame->mApplication->mKeyArray[119] = false;
+        }
 
+	//network outgoing
+	mGame->sendByteBuffer();
+
+/*
  	mGame->mKeyCurrent = 0;
   	if (mGame->mApplication->mKeyArray[119]) //forward
         {
@@ -43,11 +56,11 @@ void GamePlay::execute()
         }
   	if (mGame->mApplication->mKeyArray[119] == false) //forward
         {
-		LogString("falselllll");
+		LogString("false");
         	//mGame->mApplication->mKeyArray[119] = false;
                // mGame->mKeyCurrent |= mGame->mKeyUp;
         }
-
+*/
 
 /*
  mKeyCurrent = 0;
@@ -84,8 +97,6 @@ void GamePlay::execute()
 
 */	
 	
-	//network outgoing
-	mGame->sendByteBuffer();
 }
 
 void GamePlay::exit()

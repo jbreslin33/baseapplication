@@ -66,57 +66,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	{
 		mKeyArray[i] = false;
 	}
-
-	mKey_up = false;
-	bool mKey_down = false;
-	mKey_right = false;
-	mKey_left = false;
-	mKey_counterclockwise = false;
-	mKey_clockwise = false;
-	mKey_esc = false;
-	mKey_q = false;
-	mKey_tab = false;
-	mKey_enter = false;
-	mKey_backspace = false;
-
-	//letters
-	mKey_A = false;
-	mKey_B = false;
-	mKey_C = false;
-	mKey_D = false;
-	mKey_E = false;
-	mKey_F = false;
-	mKey_G = false;
-	mKey_H = false;
-	mKey_I = false;
-	mKey_J = false;
-	mKey_K = false;
-	mKey_L = false;
-	mKey_M = false;
-	mKey_N = false;
-	mKey_O = false;
-	mKey_P = false;
-	mKey_Q = false;
-	mKey_R = false;
-	mKey_S = false;
-	mKey_T = false;
-	mKey_U = false;
-	mKey_V = false;
-	mKey_W = false;
-	mKey_X = false;
-	mKey_Y = false;
-	mKey_Z = false;
-	mKey_0 = false;
-	mKey_1 = false;
-	mKey_2 = false;
-	mKey_3 = false;
-	mKey_4 = false;
-	mKey_5 = false;
-	mKey_6 = false;
-	mKey_7 = false;
-	mKey_8 = false;
-	mKey_9 = false;
-
 }
 
 
@@ -526,16 +475,27 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
     return true;
 }
 
+/*
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
+        {
+                mKeyCurrent |= mKeyUp;
+        }
+*/
+
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	int numeric = arg.text;
 	mKeyArray[numeric] = true;
+	LogString("ApplicationBreslin::keyPressed:%d",numeric);
+	return true;
 }
 
 bool ApplicationBreslin::keyReleased( const OIS::KeyEvent &arg )
 {
 	int numeric = arg.text;
 	mKeyArray[numeric] = false;
+	LogString("ApplicationBreslin::keyReleased:%d",numeric);
+	return true;
 }
 
 void ApplicationBreslin::labelHit( OgreBites::Label* label )

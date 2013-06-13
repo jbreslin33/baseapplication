@@ -161,15 +161,6 @@ void  ApplicationPartido::hideBattleScreen()
         mTrayMgr->removeWidgetFromTray(mLabelAnswer);
 }
 
-bool ApplicationPartido::keyPressed( const OIS::KeyEvent &arg )
-{
-	ApplicationBreslin::keyPressed(arg);
-}
-
-bool ApplicationPartido::keyReleased( const OIS::KeyEvent &arg )
-{
-	ApplicationBreslin::keyReleased(arg);
-}
 void ApplicationPartido::sendAnswer()
 {
         ByteBuffer* byteBuffer = new ByteBuffer();
