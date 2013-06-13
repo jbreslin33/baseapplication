@@ -112,9 +112,6 @@ virtual void processUpdate();
 virtual void sendByteBuffer();
 virtual void checkByteBuffer(ByteBuffer* byteBuffer);
 
-//input
-virtual void processInput();
-
 private:
 
 //shape
