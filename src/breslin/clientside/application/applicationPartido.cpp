@@ -164,39 +164,6 @@ void  ApplicationPartido::hideBattleScreen()
 bool ApplicationPartido::keyPressed( const OIS::KeyEvent &arg )
 {
 	ApplicationBreslin::keyPressed(arg);
-
-	if (!mFake)
-	{
-		if (mLabelFocus == mLabelAnswer)
-		{
-	     		int numeric = arg.text;
-                        char ascii = (char)numeric;
-
-                        if (numeric == 8) //backspace
-                        {
-                                int size = mStringAnswer.size();
-                                if (size > 0)
-                                {
-                                        mStringAnswer.resize(size - 1);
-                                }
-                                mLabelAnswer->setCaption(mStringAnswer);
-                        }
-
-                        if (numeric == 13) //carriage return  or enter 
-                        {
-				sendAnswer();
-                                mStringAnswer.clear();
-                                mLabelAnswer->setCaption(mStringAnswer);
-                        }
-
-                        if (numeric > 47 && numeric < 123) //letters and valid symbols for username and password
-                        {
-                                mStringAnswer.append(1,ascii);
-                                mLabelAnswer->setCaption(mStringAnswer);
-                        }
-			
-		}	
-	}
 }
 
 bool ApplicationPartido::keyReleased( const OIS::KeyEvent &arg )
