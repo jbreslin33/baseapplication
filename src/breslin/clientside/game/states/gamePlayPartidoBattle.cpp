@@ -19,6 +19,7 @@
 GamePlayPartidoBattle::GamePlayPartidoBattle(GamePartido* gamePartido)
 {
 	mGamePartido = gamePartido;
+	mFirstTimeExecute = true;
 }
 
 GamePlayPartidoBattle::~GamePlayPartidoBattle()
@@ -42,6 +43,7 @@ void GamePlayPartidoBattle::enter()
 	{
         	mGamePartido->mApplicationPartido->mKeyArray[i] = false;
 	}
+	mFirstTimeExecute = true;
 }
 
 void GamePlayPartidoBattle::execute()
@@ -55,6 +57,15 @@ void GamePlayPartidoBattle::execute()
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
 
+	if (mFirstTimeExecute)
+	{
+		for (int i = 0; i < 128; i++)
+		{
+        		mGamePartido->mApplicationPartido->mKeyArray[i] = false;
+		}
+		mFirstTimeExecute = false;
+	}
+	
 
 	if (app->mLabelFocus == app->mLabelAnswer)
 	{

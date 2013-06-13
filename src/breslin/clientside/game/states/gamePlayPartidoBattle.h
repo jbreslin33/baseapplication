@@ -22,6 +22,7 @@ public:
 ***************************************/
 
 GamePartido* mGamePartido;
+bool mFirstTimeExecute;
 
 GamePlayPartidoBattle(GamePartido* gamePartido);
 ~GamePlayPartidoBattle();
