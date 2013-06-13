@@ -29,7 +29,6 @@ ApplicationMain::~ApplicationMain()
 
 void ApplicationMain::enter()
 {
-	LogString("STATE: ApplicationGlobal");
 	mApplication->createMainScreen();
 	mApplication->showMainScreen();
 }

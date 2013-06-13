@@ -27,7 +27,6 @@
 ***************************************/
 GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicationPartido)
 {
-	LogString("GamePartio::GamePartido");
 	mApplicationPartido = applicationPartido;
 	mBattleStart = false;
 	mBattleEnd   = false;

@@ -62,8 +62,6 @@ Game::Game(ApplicationBreslin* application)
 
 	createScene();
 
-	LogString("Game::Game");
-
 	mStateMachine = new StateMachine();
 }
 /*
@@ -101,7 +99,6 @@ void Game::remove()
         			delete shape->mObjectTitle;
         			delete shape->mGhost;
         			delete shape;
-				LogString("delete shape:%d",i);
 			}
                 }
         }
@@ -277,7 +274,6 @@ void Game::readServerTick(ByteBuffer* byteBuffer)
         // Skip sequences
         short sequence = byteBuffer->ReadShort();
         mFrameTimeServer = byteBuffer->ReadByte();
-        //LogString("mFrameTimeServer:%f",mFrameTimeServer);
 
         while (byteBuffer->getReadCount() <= byteBuffer->GetSize())
         {

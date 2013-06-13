@@ -88,7 +88,6 @@ ApplicationBreslin::~ApplicationBreslin()
 **********************************/
 void ApplicationBreslin::createStates()
 {
-	LogString("ApplicationBreslin::createStates");
 	mApplicationGlobal     = new ApplicationGlobal(this);
 	mApplicationInitialize = new ApplicationInitialize(this);
 	mApplicationLogin      = new ApplicationLogin  (this);
@@ -99,7 +98,6 @@ void ApplicationBreslin::createStates()
 
 void ApplicationBreslin::setStates()
 {
-	LogString("ApplicationBreslin::setStates");
 	mStateMachine->setGlobalState (mApplicationGlobal);
 	mStateMachine->changeState(mApplicationInitialize);
         mStateMachine->setPreviousState(mApplicationInitialize);
@@ -230,13 +228,11 @@ void ApplicationBreslin::checkForByteBuffer()
 
 		if (type == mMessageConnected)
 		{
-			LogString("mConnected = true");
 			mConnected = true;
 		}
 
 		if (type == mMessageAddSchool)
 		{
-			LogString("adding school..");
 			std::string school;
 			int length = byteBuffer->ReadByte();
 			for (int i = 0; i < length; i++)
@@ -249,13 +245,11 @@ void ApplicationBreslin::checkForByteBuffer()
 
 		if (type == mMessageLoggedIn)
 		{
-			LogString("LoggedIn");
 			mLoggedIn = true;
 		}
 
 		if (type == mMessageLoggedOut)
 		{
-			LogString("LoggedOut");
 			mLoggedIn = false;
 		}
 
@@ -342,7 +336,6 @@ bool ApplicationBreslin::frameRenderingQueued(const Ogre::FrameEvent& evt)
 //LOGIN
 void ApplicationBreslin::createLoginScreen()
 {
-	LogString("createLoginScreen what");
 	if (!mSelectMenuSchool)
 	{
         	mSelectMenuSchool = mTrayMgr->createThickSelectMenu(OgreBites::TL_CENTER, "mSelectMenuSchool", "Select School", 120, 10);
@@ -371,7 +364,6 @@ void ApplicationBreslin::createLoginScreen()
 
 void ApplicationBreslin::showLoginScreen()
 {
-	LogString("showLoginScreen");
         mTrayMgr->moveWidgetToTray(mSelectMenuSchool,OgreBites::TL_CENTER);
         mTrayMgr->moveWidgetToTray(mLabelUsername,OgreBites::TL_CENTER);
         mTrayMgr->moveWidgetToTray(mLabelPassword,OgreBites::TL_CENTER);
@@ -392,7 +384,6 @@ void ApplicationBreslin::showLoginScreen()
 
 void ApplicationBreslin::hideLoginScreen()
 {
-	LogString("hideLoginScreen");
         mSelectMenuSchool->hide();
         mLabelUsername->hide();
         mLabelPassword->hide();
@@ -410,7 +401,6 @@ void ApplicationBreslin::hideLoginScreen()
 //MAIN
 void ApplicationBreslin::createMainScreen()
 {
-	LogString("createMainScreen");
 	if (!mButtonJoinGameA)
 	{
 		mButtonJoinGameA = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGameA", "Join Game A");
@@ -429,7 +419,6 @@ void ApplicationBreslin::createMainScreen()
 
 void ApplicationBreslin::showMainScreen()
 {
-	LogString("showMainScreen");
 	mTrayMgr->moveWidgetToTray(mButtonJoinGameA,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonLogout,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
@@ -447,7 +436,6 @@ void ApplicationBreslin::showMainScreen()
 
 void ApplicationBreslin::hideMainScreen()
 {
-	LogString("hideMainScreen");
 	mButtonJoinGameA->hide();
 	mButtonLogout->hide();
 	mButtonExit->hide();
@@ -486,7 +474,6 @@ bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	int numeric = arg.text;
 	mKeyArray[numeric] = true;
-	LogString("ApplicationBreslin::keyPressed:%d",numeric);
 	return true;
 }
 
@@ -494,7 +481,6 @@ bool ApplicationBreslin::keyReleased( const OIS::KeyEvent &arg )
 {
 	int numeric = arg.text;
 	mKeyArray[numeric] = false;
-	LogString("ApplicationBreslin::keyReleased:%d",numeric);
 	return true;
 }
 
