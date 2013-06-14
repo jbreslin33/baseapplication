@@ -45,11 +45,17 @@ void ApplicationPlay::execute()
                 this->mApplication->mStateMachine->changeState(this->mApplication->mApplicationLogin);
         }
 	
-	if (mApplication->mKeyArray[9]) //tab
+	if (mApplication->mKeyArray[27]) //esc
         {
-        	mApplication->mKeyArray[9] = false;
-                mApplication->mLabelFocus = mApplication->mLabelPassword;
-        }
+		LogString("esc");
+        	mApplication->mKeyArray[27] = false;
+
+		//send quit game
+        	ByteBuffer* byteBuffer = new ByteBuffer();
+        	byteBuffer->WriteByte(mApplication->mGame->mMessageQuitGame);
+        	mApplication->mNetwork->send(byteBuffer);
+                mApplication->mSentLeaveGame = true;
+	}
 /*
 	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_ESCAPE) && mApplication->mSentLeaveGame == false)
 	{

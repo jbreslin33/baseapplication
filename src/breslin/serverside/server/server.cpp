@@ -435,18 +435,19 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/***QUIT GAME********/
 	else if (type == mMessageQuitGame)
 	{
+		LogString("mMessageQuitGame");
 		// Find the correct client by comparing addresses
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
+				LogString("memcp");
 				client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
                                 }
 				client->mGame->leave(client);
-				//are we properly deletting on c++ and php client
 			}
 		}
 	}
