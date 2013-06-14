@@ -433,9 +433,9 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	}
                            	
 	/***QUIT GAME********/
-	else if (type == mMessageQuitGame)
+	else if (type == mMessageLeaveGame)
 	{
-		LogString("mMessageQuitGame");
+		LogString("mMessageLeaveGame");
 		// Find the correct client by comparing addresses
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
@@ -447,7 +447,15 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
-				client->mGame->leave(client);
+				LogString("init");
+        			mMessage.Init(mMessage.outgoingData,sizeof(mMessage.outgoingData));
+				LogString("wrtie byte");
+        			mMessage.WriteByte(mMessageLeaveGame); 
+				LogString("sendPatckt");
+	   			mNetwork->sendPacketTo(client,&mMessage);
+				LogString("done");
+
+			//	client->mGame->leave(client);
 			}
 		}
 	}

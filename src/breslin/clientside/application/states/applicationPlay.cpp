@@ -52,7 +52,7 @@ void ApplicationPlay::execute()
 
 		//send quit game
         	ByteBuffer* byteBuffer = new ByteBuffer();
-        	byteBuffer->WriteByte(mApplication->mGame->mMessageQuitGame);
+        	byteBuffer->WriteByte(mApplication->mMessageLeaveGame);
         	mApplication->mNetwork->send(byteBuffer);
                 mApplication->mSentLeaveGame = true;
 	}
@@ -69,6 +69,7 @@ void ApplicationPlay::execute()
 */
 	if (mApplication->mLeaveGame)
        	{
+		LogString("mLeaveGame true");
                	mApplication->mSentLeaveGame = false;
                	if (mApplication->mLoggedIn)
                	{

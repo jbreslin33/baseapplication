@@ -255,6 +255,7 @@ void ApplicationBreslin::checkForByteBuffer()
 
 		if (type == mMessageLeaveGame)
 		{
+			LogString("mMessageLeaveGame......");
 			mLeaveGame = true;
 		}
 
