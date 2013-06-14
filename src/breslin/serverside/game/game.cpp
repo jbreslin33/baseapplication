@@ -269,31 +269,17 @@ void Game::sendShapes(Client* client)
 //the client that is leaving????
 void Game::leave(Client* client)
 {
-	LogString("Game::leave");
         if (client->mShape)
         {
-		LogString("Game::leave have shape ");
   		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
                 mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-		//dont' make it here!!! first try using a message from game..and again why do i need to check for shape?
-		LogString("Game::leave have shape 2");
                 mMessage.WriteByte(mServer->mMessageLeaveGame); // add type
-		LogString("Game::leave have shape 3");
-                //tell human client that it has left game
                 if (client->mClientID > 0)
                 {
                         mMessage.WriteByte(client->mClientID); //client id for browsers
-			LogString("Game::leave have shape in if");
                 }
-		LogString("Game::leave have shape 4");
                 mServer->mNetwork->sendPacketTo(client,&mMessage);
-		LogString("sent leave packet");
         }
-	else
-	{
-		LogString("Game::leave no shape and why do i care");
-		
-	}
         client->mGame = NULL;
 }
 

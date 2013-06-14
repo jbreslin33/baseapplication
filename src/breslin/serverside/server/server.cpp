@@ -435,32 +435,24 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/***QUIT GAME********/
 	else if (type == mMessageLeaveGame)
 	{
-		LogString("mMessageLeaveGame");
 		// Find the correct client by comparing addresses
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
-				LogString("memcp");
 				client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
                                 }
-				LogString("init");
         			mMessage.Init(mMessage.outgoingData,sizeof(mMessage.outgoingData));
-				LogString("wrtie byte");
         			mMessage.WriteByte(mMessageLeaveGame); 
-				LogString("sendPatckt");
 	   			mNetwork->sendPacketTo(client,&mMessage);
-				LogString("done");
-
-			//	client->mGame->leave(client);
 			}
 		}
 	}
 
-	else if (type == mMessageQuitGameBrowser)
+	else if (type == mMessageLeaveGameBrowser)
 	{
                 int clientID = mes->ReadByte();
 		for (int i = 0; i < mClientVector.size(); i++)
@@ -472,6 +464,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
+ 				if (client->mClientID > 0)
+                		{
+                        		mMessage.WriteByte(client->mClientID); //client id for browsers
+                		}
+                		mServer->mNetwork->sendPacketTo(client,&mMessage);
+
 				client->mGame->leave(client);
 			}
 		}
