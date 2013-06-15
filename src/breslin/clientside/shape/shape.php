@@ -24,9 +24,8 @@ initialize: function(application, byteBuffer, isGhost)
 	this.mDiv = 0;
 
 	//position
-	this.mPosition           = new Vector3D();
-	this.mPositionRender     = new Vector3D();
-	this.mPositionRenderLast = new Vector3D();
+	this.mPosition       = new Vector3D();
+	this.mPositionRender = new Vector3D();
 	
 	//abilitys
 	this.mAbilityVector = new Array();
@@ -118,11 +117,6 @@ addAbility: function(ability)
 
 setPosition: function(position)
 {
-	//set last....
-	this.mPositionRenderLast.x = this.mPositionRender.x;
-	this.mPositionRenderLast.y = this.mPositionRender.y;
-	this.mPositionRenderLast.z = this.mPositionRender.z;
-
 	this.mPosition.x = parseFloat(position.x);
 	this.mPosition.y = parseFloat(position.y);
 	this.mPosition.z = parseFloat(position.z);
@@ -131,10 +125,12 @@ setPosition: function(position)
 	y = parseFloat(position.y);
 	z = parseFloat(position.z);
 
+
 	this.mPositionRender.x = x; 
 	this.mPositionRender.y = 0; 
 	this.mPositionRender.z = z; 
-	
+	//x = x * 2; 
+	//z = z * 2; 
 	//you are control object or control ghost
 	if (this.mApplication.mGame.mControlObject == this ||
 		this.mApplication.mGame.mControlObjectGhost == this)
@@ -149,7 +145,6 @@ setPosition: function(position)
 		this.mPositionRender.y = parseFloat(0);
 		this.mPositionRender.z = parseFloat(z) + parseFloat(this.mApplication.mGame.mOffSet.z);
 	}
-
 	//you are out of visible area 
 	if (parseFloat(this.mPositionRender.x) > parseFloat(760) || parseFloat(this.mPositionRender.z) > parseFloat(360))
 	{
@@ -157,32 +152,7 @@ setPosition: function(position)
 		this.mPositionRender.y = parseFloat(0);
 		this.mPositionRender.z = parseFloat(-150);
 	} 
-/*
-	else //let's regulate
-	{
-		var diffx = this.mPositionRender.x - this.mPositionRenderLast.x; 	
-		var diffy = this.mPositionRender.y - this.mPositionRenderLast.y; 	
-		var diffz = this.mPositionRender.z - this.mPositionRenderLast.z 	
 	
-		if (diffx > 5)
-		{
-			this.mPositionRender.x = parseFloat(this.mPositionRenderLast.x + 2);
-		}
-		if (diffx < 5 )
-		{
-			this.mPositionRender.x = parseFloat(this.mPositionRenderLast.x - 2);
-		}
-		if (diffy > 5)
-		{
-			this.mPositionRender.y = parseFloat(this.mPositionRenderLast.y + 2);
-		}
-		if (diffy < 5 )
-		{
-			this.mPositionRender.y = parseFloat(this.mPositionRenderLast.y - 2);
-		}
-
-	}
-*/	
 	//set a member position because we are going to have to modify the div's position
 	modx = this.mPositionRender.x+"px";
 	mody = this.mPositionRender.z+"px";

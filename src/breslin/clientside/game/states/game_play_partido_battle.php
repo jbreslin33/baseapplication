@@ -16,9 +16,15 @@ log: function(msg)
 
 enter: function()
 {
+	this.mGamePartido.mApplicationPartido.createBattleScreen();
 	this.mGamePartido.mApplicationPartido.showBattleScreen();
 	this.mGamePartido.mBattleStart = false;
-   	this.mGamePartido.mApplicationPartido.mLabelAnswer.focus();
+
+	
+	//reset text box	
+	//still need to do this.....
+	this.mGamePartido.mApplicationPartido.mStringAnswer = '';
+	this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
 },
 
 execute: function()
@@ -26,6 +32,7 @@ execute: function()
 	//check for end of batlle
 	if (this.mGamePartido.mBattleEnd)
         {
+		this.log('battle end!!!!!!!!!!!###$$$');
                	this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlay);
         }
 	
@@ -36,23 +43,13 @@ execute: function()
 		{
         		this.mGamePartido.mApplicationPartido.sendAnswer();
 			this.mGamePartido.mApplicationPartido.mKey_enter = false;
-   			this.mGamePartido.mApplicationPartido.mLabelQuestion.value = '';
-   			this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
-   			this.mGamePartido.mApplicationPartido.mLabelAnswer.focus();
 		}
         }
 },	
 
 exit: function()
 {
-	//clear labels
-	this.mGamePartido.mApplicationPartido.mStringAnswer = '';
-	this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
-	
-	//hide screen
         this.mGamePartido.mApplicationPartido.hideBattleScreen();
-
-	//battle end var
         this.mGamePartido.mBattleEnd   = false;
         this.mGamePartido.mBattleStart = false;
 }
