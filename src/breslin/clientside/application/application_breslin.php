@@ -99,6 +99,7 @@ initialize: function(serverIP, serverPort)
 
 	//prep loginScreen for selectMenu
 	this.createLoginScreen();
+	this.showLoginScreen();
 	this.hideLoginScreen();
 
 	//show something while waiting for server

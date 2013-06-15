@@ -20,10 +20,14 @@ initialize: function(serverIP, serverPort)
 	
 	this.mAnswerTime = 0;
 
+	
 
+
+	//init battle screens
 	this.createBattleScreen();
 	this.showBattleScreen();
 	this.hideBattleScreen();
+
 },
 
 

@@ -16,9 +16,9 @@ log: function(msg)
 
 enter: function()
 {
-	this.mGamePartido.mApplicationPartido.createBattleScreen();
 	this.mGamePartido.mApplicationPartido.showBattleScreen();
 	this.mGamePartido.mBattleStart = false;
+   	this.mGamePartido.mApplicationPartido.mLabelAnswer.focus();
 },
 
 execute: function()
@@ -38,6 +38,7 @@ execute: function()
 			this.mGamePartido.mApplicationPartido.mKey_enter = false;
    			this.mGamePartido.mApplicationPartido.mLabelQuestion.value = '';
    			this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
+   			this.mGamePartido.mApplicationPartido.mLabelAnswer.focus();
 		}
         }
 },	
