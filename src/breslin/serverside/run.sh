@@ -21,3 +21,8 @@ if test $3 -eq 4
 then
 node ../../udp.js 71.23.229.73 $2 10001 main_71.html 40001 
 fi
+
+if test $3 -eq 5 
+then
+node ../../udp.js 192.168.1.105 $2 10001 main_71.html 40001 
+fi
