@@ -144,8 +144,9 @@ io.sockets.on('connection', function (socket)
                 });
         });
 
-        socket.on('send_quit_game', function(message,remote)
+        socket.on('send_leave_game', function(message,remote)
 	{
+		console.log('received send_leave_game..');		
                 //send to c++ server
                 var buf = new Buffer(2);
 
@@ -511,15 +512,16 @@ server.on("message", function (msg, rinfo)
 
         if (type == -99)
 	{
+		console.log('9999');
                 var clientID = msg.readInt8(1);
-		var loginString = type;
-		loginString = loginString + "," + clientID; 
+		var string = type;
+		string = string + "," + clientID; 
 
 		io.sockets.clients().forEach(function (socket)
 		{
 			if (socket.mClientID == clientID)
 			{
-       				socket.emit('news', loginString)
+       				socket.emit('news', string)
 			} 
 		});
 	}
