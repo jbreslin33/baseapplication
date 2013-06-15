@@ -468,9 +468,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 		{
                         		mMessage.WriteByte(client->mClientID); //client id for browsers
                 		}
-                		mServer->mNetwork->sendPacketTo(client,&mMessage);
-
-				client->mGame->leave(client);
+                		mNetwork->sendPacketTo(client,&mMessage);
+				//client->mGame->leave(client);
 			}
 		}
 	}
