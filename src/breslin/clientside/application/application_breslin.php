@@ -28,6 +28,7 @@ initialize: function(serverIP, serverPort)
 	this.mMessageLoggedOut   = -114; 
 
 	this.mMessageJoinGame    = -117; //browser
+	this.mMessageLeaveGame   = -99; //from server
 	this.mMessageLeaveGame   = -45; //browser
 	this.mSentLeaveGame      = false; 
 

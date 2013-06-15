@@ -91,7 +91,7 @@ public:
 	static const int mMessageJoinGame               = -107;
 	static const int mMessageJoinGameBrowser        = -117;
 	static const int mMessageLeaveGame              = -99;
-	static const int mMessageLeaveGameBrowser       = -99;
+	static const int mMessageLeaveGameBrowser       = -45;
 
 	//disconnect	
 	static const int mMessageDisconnect             = -102;

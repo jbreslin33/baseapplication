@@ -162,7 +162,7 @@ window.addEvent('domready', function()
                 {
                         mApplication.mLoggedIn = false;
                 }
-
+		//-99
                 if (type == mApplication.mMessageLeaveGame)
                 {
                         mApplication.mLeaveGame = true;

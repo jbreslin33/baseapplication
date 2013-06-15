@@ -22,6 +22,7 @@ execute: function()
 	}
 	if (this.mApplication.mKey_q && this.mApplication.mSentLeaveGame == false)
         {
+		this.mApplication.log('emitttttting');
        		message = '';
         	this.mApplication.mNetwork.mSocket.emit('send_quit_game', message);
 		this.mApplication.mSentLeaveGame = true;
