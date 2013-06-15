@@ -32,7 +32,6 @@ execute: function()
 	//check for end of batlle
 	if (this.mGamePartido.mBattleEnd)
         {
-		this.log('battle end!!!!!!!!!!!###$$$');
                	this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlay);
         }
 	
@@ -43,6 +42,8 @@ execute: function()
 		{
         		this.mGamePartido.mApplicationPartido.sendAnswer();
 			this.mGamePartido.mApplicationPartido.mKey_enter = false;
+   			this.mGamePartido.mApplicationPartido.mLabelQuestion.value = '';
+   			this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
 		}
         }
 },	
