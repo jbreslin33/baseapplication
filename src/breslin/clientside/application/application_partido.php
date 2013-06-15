@@ -19,6 +19,11 @@ initialize: function(serverIP, serverPort)
 	this.mStringAnswer = '';
 	
 	this.mAnswerTime = 0;
+
+
+	this.createBattleScreen();
+	this.showBattleScreen();
+	this.hideBattleScreen();
 },
 
 

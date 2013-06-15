@@ -19,12 +19,6 @@ enter: function()
 	this.mGamePartido.mApplicationPartido.createBattleScreen();
 	this.mGamePartido.mApplicationPartido.showBattleScreen();
 	this.mGamePartido.mBattleStart = false;
-
-	
-	//reset text box	
-	//still need to do this.....
-	this.mGamePartido.mApplicationPartido.mStringAnswer = '';
-	this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
 },
 
 execute: function()
@@ -50,7 +44,14 @@ execute: function()
 
 exit: function()
 {
+	//clear labels
+	this.mGamePartido.mApplicationPartido.mStringAnswer = '';
+	this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
+	
+	//hide screen
         this.mGamePartido.mApplicationPartido.hideBattleScreen();
+
+	//battle end var
         this.mGamePartido.mBattleEnd   = false;
         this.mGamePartido.mBattleStart = false;
 }

@@ -243,41 +243,11 @@ setText: function(byteBuffer)
         var length = byteBuffer.readByte();
         
 	text = text + byteBuffer.readByte();
-/*
-	for (i = 0; i < length; i++)
-        {
-                text = text + byteBuffer.readByte();
-        }
-*/
+	
 	var shape = this.getShape(index);
 	shape.setText(text);
 },
 
-/*
-askQuestion: function(byteBuffer)
-{
-        this.mApplicationPartido.mStringQuestion = '';
-        var length = byteBuffer.readByte();
-
-        for (i = 0; i < length; i++)
-        {
-                this.mApplicationPartido.mStringQuestion = this.mApplicationPartido.mStringQuestion + byteBuffer.readByte();
-        }
-
-        if (this.mApplicationPartido.mLabelQuestion)
-        {
-                this.mApplicationPartido.mLabelQuestion.value = this.mApplicationPartido.mStringQuestion;
-        }
-        else
-        {
-        }
-
-        //reset mAnswerTime
-        this.mApplicationPartido.mAnswerTime = 0;
-}
-
-
-*/
 getShape: function(id)
 {
 	var shape = 0;
