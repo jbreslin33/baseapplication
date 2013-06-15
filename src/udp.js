@@ -151,7 +151,7 @@ io.sockets.on('connection', function (socket)
                 var buf = new Buffer(2);
 
 		//type
-                type = -118;
+                type = -45;
                 buf.writeInt8(type,0);
 
 		//mClientID
@@ -392,7 +392,6 @@ server.on("message", function (msg, rinfo)
                                 socket.emit('news', string)
                         }
                 });
-
 	}
 
 	//mMessageConnected
@@ -525,8 +524,7 @@ server.on("message", function (msg, rinfo)
 			} 
 		});
 	}
-
-
+	
 	if (type == 1)
 	{
 		skipCounter++;

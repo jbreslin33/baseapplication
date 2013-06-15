@@ -464,12 +464,13 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
+        			mMessage.Init(mMessage.outgoingData,sizeof(mMessage.outgoingData));
+        			mMessage.WriteByte(mMessageLeaveGame); 
  				if (client->mClientID > 0)
                 		{
                         		mMessage.WriteByte(client->mClientID); //client id for browsers
                 		}
-                		mNetwork->sendPacketTo(client,&mMessage);
-				//client->mGame->leave(client);
+	   			mNetwork->sendPacketTo(client,&mMessage);
 			}
 		}
 	}
