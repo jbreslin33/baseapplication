@@ -55,8 +55,10 @@ exit: function()
         this.mGamePartido.mApplicationPartido.hideBattleScreen();
         this.mGamePartido.mBattleEnd   = false;
         this.mGamePartido.mBattleStart = false;
+	
 	//reset text labels	
 	this.mGamePartido.mApplicationPartido.mStringAnswer = '';
+	this.mGamePartido.mApplicationPartido.mLabelQuestion.value = '';
 	this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
 }
 
