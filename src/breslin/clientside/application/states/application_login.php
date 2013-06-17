@@ -10,6 +10,7 @@ enter: function()
 {
         this.mApplication.createLoginScreen();
         this.mApplication.showLoginScreen();
+	this.mApplication.mLabelUsername.focus();
 },
 
 execute: function()

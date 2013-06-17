@@ -16,14 +16,13 @@ log: function(msg)
 
 enter: function()
 {
-	this.mGamePartido.mApplicationPartido.showBattleScreen();
-	this.mGamePartido.mBattleStart = false;
-
-	
 	//reset text labels	
 	this.mGamePartido.mApplicationPartido.mStringAnswer = '';
 	this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
 	this.mGamePartido.mApplicationPartido.mLabelAnswer.focus();
+	
+	this.mGamePartido.mApplicationPartido.showBattleScreen();
+	this.mGamePartido.mBattleStart = false;
 },
 
 execute: function()
