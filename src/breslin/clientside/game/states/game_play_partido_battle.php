@@ -27,6 +27,7 @@ enter: function()
 
 execute: function()
 {
+	this.mGamePartido.mApplicationPartido.mLabelAnswer.focus();
 	//check for end of batlle
 	if (this.mGamePartido.mBattleEnd)
         {
