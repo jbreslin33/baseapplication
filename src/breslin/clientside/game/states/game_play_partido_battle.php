@@ -16,7 +16,7 @@ log: function(msg)
 
 enter: function()
 {
-	this.mGamePartido.mApplicationPartido.createBattleScreen();
+//	this.mGamePartido.mApplicationPartido.createBattleScreen();
 	this.mGamePartido.mApplicationPartido.showBattleScreen();
 	this.mGamePartido.mBattleStart = false;
 
