@@ -125,12 +125,10 @@ setPosition: function(position)
 	y = parseFloat(position.y);
 	z = parseFloat(position.z);
 
-
 	this.mPositionRender.x = x; 
 	this.mPositionRender.y = 0; 
 	this.mPositionRender.z = z; 
-	//x = x * 2; 
-	//z = z * 2; 
+	
 	//you are control object or control ghost
 	if (this.mApplication.mGame.mControlObject == this ||
 		this.mApplication.mGame.mControlObjectGhost == this)

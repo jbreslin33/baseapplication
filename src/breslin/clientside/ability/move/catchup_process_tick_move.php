@@ -24,12 +24,13 @@ enter: function()
 execute: function()
 {
 //let's check if it's mInterpLimitHigh is greater than  1 than snap to it.
+/*
 	if (this.mAbilityMove.mDeltaPosition > 1)
 	{
 		this.mAbilityMove.mShape.setPosition(this.mAbilityMove.mShape.mServerCommandCurrent.mPosition);
 		return;
 	}		
-
+*/
         //this.mAbilityMove.mShape.mMesh.innerHTML='C:' + this.mAbilityMove.mShape.mIndex;
 	//if we are back in sync
         if(this.mAbilityMove.mDeltaPosition <= this.mAbilityMove.mPosInterpLimitHigh || this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())
