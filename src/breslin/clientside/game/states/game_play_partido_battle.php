@@ -16,15 +16,14 @@ log: function(msg)
 
 enter: function()
 {
-//	this.mGamePartido.mApplicationPartido.createBattleScreen();
 	this.mGamePartido.mApplicationPartido.showBattleScreen();
 	this.mGamePartido.mBattleStart = false;
 
 	
-	//reset text box	
-	//still need to do this.....
+	//reset text labels	
 	this.mGamePartido.mApplicationPartido.mStringAnswer = '';
 	this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
+	this.mGamePartido.mApplicationPartido.mLabelAnswer.focus();
 },
 
 execute: function()
@@ -32,7 +31,6 @@ execute: function()
 	//check for end of batlle
 	if (this.mGamePartido.mBattleEnd)
         {
-		this.log('battle end!!!!!!!!!!!###$$$');
                	this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlay);
         }
 	
@@ -43,6 +41,10 @@ execute: function()
 		{
         		this.mGamePartido.mApplicationPartido.sendAnswer();
 			this.mGamePartido.mApplicationPartido.mKey_enter = false;
+		
+			//reset text labels	
+			this.mGamePartido.mApplicationPartido.mStringAnswer = '';
+			this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
 		}
         }
 },	
@@ -52,6 +54,9 @@ exit: function()
         this.mGamePartido.mApplicationPartido.hideBattleScreen();
         this.mGamePartido.mBattleEnd   = false;
         this.mGamePartido.mBattleStart = false;
+	//reset text labels	
+	this.mGamePartido.mApplicationPartido.mStringAnswer = '';
+	this.mGamePartido.mApplicationPartido.mLabelAnswer.value = '';
 }
 
 });
