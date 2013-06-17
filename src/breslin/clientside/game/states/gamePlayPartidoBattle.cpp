@@ -79,17 +79,6 @@ void GamePlayPartidoBattle::execute()
                         }
                         app->mLabelAnswer->setCaption(app->mStringAnswer);
                 }
-		
-		if (app->mKeyArray[13]) //enter
-                {
-                        app->mKeyArray[13] = false;
-                        app->sendAnswer();
-                        app->mStringAnswer.clear();
-                        app->mLabelAnswer->setCaption("");
-                        app->mLabelAnswer->setCaption("");
-
-
-                }
 
                 for (int i = 47; i < 123; i++)
                 {
@@ -101,6 +90,16 @@ void GamePlayPartidoBattle::execute()
                                 app->mStringAnswer.append(1,ascii);
                                 app->mLabelAnswer->setCaption(app->mStringAnswer);
                         }
+                }
+		
+		if (app->mKeyArray[13]) //enter
+                {
+                        app->mKeyArray[13] = false;
+                        app->sendAnswer();
+                        app->mStringQuestion.clear();
+                        app->mStringAnswer.clear();
+                        app->mLabelQuestion->setCaption("");
+                        app->mLabelAnswer->setCaption("");
                 }
 	
 		//set mKeyArray to false 
@@ -119,6 +118,7 @@ void GamePlayPartidoBattle::exit()
 	mGamePartido->mBattleStart = false;
 	
 	//reset text box 
+	mGamePartido->mApplicationPartido->mStringQuestion.clear();
 	mGamePartido->mApplicationPartido->mStringAnswer.clear();
         mGamePartido->mApplicationPartido->mLabelQuestion->setCaption("");
         mGamePartido->mApplicationPartido->mLabelAnswer->setCaption("");
