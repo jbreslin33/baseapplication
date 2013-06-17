@@ -23,8 +23,8 @@
 
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
-	LogString("ApplicationPartido::ApplicationPartido");
 	mAnswerTime = 0;
+
 }
 
 ApplicationPartido::~ApplicationPartido()
@@ -83,6 +83,7 @@ void ApplicationPartido::processUpdate()
 
 		//battle screen init...
 		createBattleScreen();
+		showBattleScreen();
 		hideBattleScreen();
 
                 mFake = false;

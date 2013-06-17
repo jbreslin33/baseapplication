@@ -112,6 +112,7 @@ void ApplicationBreslin::processUpdate()
 
 	if (mFake == true)
 	{
+		//create login
 		createLoginScreen();
 		hideLoginScreen();
  		
