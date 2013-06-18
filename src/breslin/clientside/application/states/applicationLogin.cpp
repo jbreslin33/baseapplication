@@ -27,6 +27,9 @@ void ApplicationLogin::enter()
 {
 	mApplication->createLoginScreen();
 	mApplication->showLoginScreen();
+	mApplication->mLabelFocus = mApplication->mLabelUsername;
+ 	LogString("ApplicationLogin::enter mLabelFocus = mLabelUsername");
+
 }
 
 void ApplicationLogin::execute()
@@ -58,7 +61,7 @@ void ApplicationLogin::execute()
 	//for keys
 	if (mApplication->mLabelFocus == mApplication->mLabelUsername)
         {
-
+//		LogString("mLabelUsernmae hit");
         	if (mApplication->mKeyArray[8]) //backspace
 		{
         		mApplication->mKeyArray[8] = false;
@@ -74,12 +77,16 @@ void ApplicationLogin::execute()
 		{
         		mApplication->mKeyArray[9] = false;
                         mApplication->mLabelFocus = mApplication->mLabelPassword;
+ 			LogString("ApplicationLogin::execute mLabelFocus = mLabelPassword");
+
 		}
 
 		if (mApplication->mKeyArray[13]) //enter
 		{
         		mApplication->mKeyArray[13] = false;
                         mApplication->mLabelFocus = mApplication->mLabelPassword;
+ 			LogString("ApplicationLogin::ShowLoginScreen mLabelFocus = mLabelPassword");
+
 		}
 
 		for (int i = 47; i < 123; i++)

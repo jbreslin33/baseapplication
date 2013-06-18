@@ -66,6 +66,12 @@ void ApplicationPartido::processUpdate()
 
         if (mFake == true)
         {
+		//battle screen init...
+		createBattleScreen();
+		showBattleScreen();
+		hideBattleScreen();
+
+		//login init
                 createLoginScreen();
                 hideLoginScreen();
 
@@ -81,12 +87,7 @@ void ApplicationPartido::processUpdate()
                 mPlayingGame = false;
                 mStateMachine->changeState(mApplicationLogin);
 
-		//battle screen init...
-		createBattleScreen();
-		showBattleScreen();
-		hideBattleScreen();
-
-                mFake = false;
+		mFake = false;
         }
 
         //did you sendConnect if not do so
@@ -151,6 +152,7 @@ void  ApplicationPartido::showBattleScreen()
         mTrayMgr->showCursor();
 
         mLabelFocus = mLabelAnswer;
+ 	LogString("ApplicationPartido::ShowBattleScreen mLabelFocus = mLabelAnswer");
 }
 
 void  ApplicationPartido::hideBattleScreen()

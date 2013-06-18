@@ -382,6 +382,7 @@ void ApplicationBreslin::showLoginScreen()
 
         //set intial focus on username
         mLabelFocus = mLabelUsername;
+	LogString("ApplicationBreslin::ShowLoginScreen mLabelFocus = mLabelUsername");
 }
 
 void ApplicationBreslin::hideLoginScreen()
@@ -433,6 +434,7 @@ void ApplicationBreslin::showMainScreen()
 
 	//set intial focus on username
 	mLabelFocus = mLabelUsername;
+ 	LogString("ApplicationBreslin::ShowMainScreen mLabelFocus = mLabelUsername");
 
 }
 
@@ -490,5 +492,7 @@ void ApplicationBreslin::labelHit( OgreBites::Label* label )
 {
 	//set pointer to label that is focused so you can write keypressed to it 
 	mLabelFocus = label;
+	LogString("ApplicationBreslin::labelHit mLabelFocus = label");
+
 }
 
