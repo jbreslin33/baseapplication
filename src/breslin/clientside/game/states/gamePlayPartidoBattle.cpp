@@ -58,6 +58,8 @@ void GamePlayPartidoBattle::execute()
                 mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlay); 
         }
 
+	//should end game properly...it should NOT allow you to end battle this should log you out
+//if you hit escape from here...... no you should just lose battle...
         if (mGamePartido->mApplicationPartido->mKeyArray[27]) //esc
         {
                 mGamePartido->mApplicationPartido->mKeyArray[27] = false;
