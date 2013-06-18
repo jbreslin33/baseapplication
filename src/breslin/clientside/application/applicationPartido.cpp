@@ -41,7 +41,6 @@ bool ApplicationPartido::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 void ApplicationPartido::createStates()
 {
-	LogString("ApplicationPartido::createStates");
         mApplicationGlobal     = new ApplicationGlobal(this);
         mApplicationInitialize = new ApplicationInitialize(this);
         mApplicationLogin      = new ApplicationLogin  (this);
@@ -51,7 +50,6 @@ void ApplicationPartido::createStates()
 
 void ApplicationPartido::setStates()
 {
-	LogString("ApplicationPartido::setStates");
         mStateMachine->setGlobalState (mApplicationGlobal);
         mStateMachine->changeState(mApplicationInitialize);
         mStateMachine->setPreviousState(mApplicationInitialize);
@@ -152,7 +150,6 @@ void  ApplicationPartido::showBattleScreen()
         mTrayMgr->showCursor();
 
         mLabelFocus = mLabelAnswer;
- 	LogString("ApplicationPartido::ShowBattleScreen mLabelFocus = mLabelAnswer");
 }
 
 void  ApplicationPartido::hideBattleScreen()

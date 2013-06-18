@@ -10,6 +10,12 @@
 //game
 #include "../gamePartido.h"
 
+//byte buffer
+#include "../../bytebuffer/byteBuffer.h"
+
+//network
+#include "../../network/network.h"
+
 //state machine
 #include "../../../statemachine/stateMachine.h"
 
@@ -36,7 +42,6 @@ void GamePlayPartidoBattle::enter()
 	
 	mGamePartido->mApplicationPartido->showBattleScreen();
 	mGamePartido->mBattleStart = false;
-
        
 	//set mKeyArray to false 
 	for (int i = 0; i < 128; i++)
@@ -50,12 +55,21 @@ void GamePlayPartidoBattle::execute()
 {
  	if (mGamePartido->mBattleEnd)
         {
-		LogString("battle end!!!");
                 mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlay); 
         }
 
-	ApplicationPartido* app = mGamePartido->mApplicationPartido;
+        if (mGamePartido->mApplicationPartido->mKeyArray[27]) //esc
+        {
+                mGamePartido->mApplicationPartido->mKeyArray[27] = false;
 
+                //send quit game
+                ByteBuffer* byteBuffer = new ByteBuffer();
+                byteBuffer->WriteByte(mGamePartido->mApplicationPartido->mMessageLeaveGame);
+                mGamePartido->mApplicationPartido->mNetwork->send(byteBuffer);
+                mGamePartido->mApplicationPartido->mSentLeaveGame = true;
+        }
+
+	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
 	if (mFirstTimeExecute)
 	{
@@ -113,6 +127,7 @@ void GamePlayPartidoBattle::execute()
 
 void GamePlayPartidoBattle::exit()
 {
+	LogString("is this called");
 	mGamePartido->mApplicationPartido->hideBattleScreen();
 	mGamePartido->mBattleEnd   = false;
 	mGamePartido->mBattleStart = false;

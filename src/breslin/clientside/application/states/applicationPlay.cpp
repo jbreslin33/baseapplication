@@ -22,9 +22,9 @@
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
-ApplicationPlay::ApplicationPlay(ApplicationBreslin* application)
+ApplicationPlay::ApplicationPlay(ApplicationBreslin* applicationBreslin)
 {
-	mApplication = application;
+	mApplicationBreslin = applicationBreslin;
 }
 
 ApplicationPlay::~ApplicationPlay()
@@ -34,69 +34,72 @@ ApplicationPlay::~ApplicationPlay()
 
 void ApplicationPlay::enter()
 {
-        mApplication->mPlayingGame = true;
-        mApplication->mSentLeaveGame = false;
+        mApplicationBreslin->mPlayingGame = true;
+        mApplicationBreslin->mSentLeaveGame = false;
 }
 void ApplicationPlay::execute()
 {
   	//check for logout as well....
-        if (this->mApplication->mLoggedIn == false)
+
+        if (this->mApplicationBreslin->mLoggedIn == false )
         {
-                this->mApplication->mStateMachine->changeState(this->mApplication->mApplicationLogin);
+                this->mApplicationBreslin->mStateMachine->changeState(this->mApplicationBreslin->mApplicationLogin);
         }
-	
-	if (mApplication->mKeyArray[27]) //esc
+
+/*	
+	if (mApplicationBreslin->mKeyArray[27]) //esc
         {
 		LogString("esc");
-        	mApplication->mKeyArray[27] = false;
+        	mApplicationBreslin->mKeyArray[27] = false;
 
 		//send quit game
         	ByteBuffer* byteBuffer = new ByteBuffer();
-        	byteBuffer->WriteByte(mApplication->mMessageLeaveGame);
-        	mApplication->mNetwork->send(byteBuffer);
-                mApplication->mSentLeaveGame = true;
+        	byteBuffer->WriteByte(mApplicationBreslin->mMessageLeaveGame);
+        	mApplicationBreslin->mNetwork->send(byteBuffer);
+                mApplicationBreslin->mSentLeaveGame = true;
 	}
+*/
 /*
-	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_ESCAPE) && mApplication->mSentLeaveGame == false)
+	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_ESCAPE) && mApplicationBreslin->mSentLeaveGame == false)
 	{
 		//send quit game
         	ByteBuffer* byteBuffer = new ByteBuffer();
-        	byteBuffer->WriteByte(mApplication->mGame->mMessageQuitGame);
-        	mApplication->mNetwork->send(byteBuffer);
+        	byteBuffer->WriteByte(mApplicationBreslin->mGame->mMessageQuitGame);
+        	mApplicationBreslin->mNetwork->send(byteBuffer);
 
-                mApplication->mSentLeaveGame = true;
+                mApplicationBreslin->mSentLeaveGame = true;
 	}
 */
-	if (mApplication->mLeaveGame)
+	if (mApplicationBreslin->mLeaveGame)
        	{
 		LogString("mLeaveGame true");
-               	mApplication->mSentLeaveGame = false;
-               	if (mApplication->mLoggedIn)
+               	mApplicationBreslin->mSentLeaveGame = false;
+               	if (mApplicationBreslin->mLoggedIn)
                	{
-                       	mApplication->mStateMachine->changeState(mApplication->mApplicationMain);
+                       	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
                	}
                	else
                	{
-                       	mApplication->mStateMachine->changeState(mApplication->mApplicationLogin);
+                       	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationLogin);
                	}
        	}
        	else
        	{
               	//game
-		if (mApplication->mGame)
+		if (mApplicationBreslin->mGame)
 		{	
-               		mApplication->mGame->processUpdate();
+               		mApplicationBreslin->mGame->processUpdate();
 		}
 	}
 }
 
 void ApplicationPlay::exit()
 {
-	mApplication->mPlayingGame = false;
-        mApplication->mLeaveGame = false;
-	if (mApplication->mGame)
+	mApplicationBreslin->mPlayingGame = false;
+        mApplicationBreslin->mLeaveGame = false;
+	if (mApplicationBreslin->mGame)
 	{
-        	mApplication->mGame->remove();
-		mApplication->mGame = NULL;
+        	mApplicationBreslin->mGame->remove();
+		mApplicationBreslin->mGame = NULL;
 	}
 }
