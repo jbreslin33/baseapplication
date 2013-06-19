@@ -60,6 +60,7 @@ void GamePlayPartidoBattle::execute()
 
 	//should end game properly...it should NOT allow you to end battle this should log you out
 //if you hit escape from here...... no you should just lose battle...
+/*
         if (mGamePartido->mApplicationPartido->mKeyArray[27]) //esc
         {
                 mGamePartido->mApplicationPartido->mKeyArray[27] = false;
@@ -70,7 +71,7 @@ void GamePlayPartidoBattle::execute()
                 mGamePartido->mApplicationPartido->mNetwork->send(byteBuffer);
                 mGamePartido->mApplicationPartido->mSentLeaveGame = true;
         }
-
+*/
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
 	if (mFirstTimeExecute)

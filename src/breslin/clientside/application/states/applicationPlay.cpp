@@ -40,16 +40,13 @@ void ApplicationPlay::enter()
 void ApplicationPlay::execute()
 {
   	//check for logout as well....
-
         if (this->mApplicationBreslin->mLoggedIn == false )
         {
                 this->mApplicationBreslin->mStateMachine->changeState(this->mApplicationBreslin->mApplicationLogin);
         }
 
-/*	
 	if (mApplicationBreslin->mKeyArray[27]) //esc
         {
-		LogString("esc");
         	mApplicationBreslin->mKeyArray[27] = false;
 
 		//send quit game
@@ -58,18 +55,7 @@ void ApplicationPlay::execute()
         	mApplicationBreslin->mNetwork->send(byteBuffer);
                 mApplicationBreslin->mSentLeaveGame = true;
 	}
-*/
-/*
-	if (mApplication->getKeyboard()->isKeyDown(OIS::KC_ESCAPE) && mApplicationBreslin->mSentLeaveGame == false)
-	{
-		//send quit game
-        	ByteBuffer* byteBuffer = new ByteBuffer();
-        	byteBuffer->WriteByte(mApplicationBreslin->mGame->mMessageQuitGame);
-        	mApplicationBreslin->mNetwork->send(byteBuffer);
 
-                mApplicationBreslin->mSentLeaveGame = true;
-	}
-*/
 	if (mApplicationBreslin->mLeaveGame)
        	{
 		LogString("mLeaveGame true");
