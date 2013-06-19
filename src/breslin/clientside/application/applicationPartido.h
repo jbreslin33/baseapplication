@@ -4,6 +4,7 @@
 //parents
 #include "applicationBreslin.h"
 
+class GamePartido;
 
 class ApplicationPartido : public ApplicationBreslin
 {
@@ -11,6 +12,9 @@ public:
 	
 	ApplicationPartido(const char* serverIP, int serverPort);
 	~ApplicationPartido();
+
+//game partido
+GamePartido* mGamePartido;
 
 //rendering
 virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);

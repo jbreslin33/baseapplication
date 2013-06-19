@@ -60,15 +60,15 @@ void ApplicationPlayPartido::execute()
 
 		//check to see if in battle....	
 /*
-		if (mApplicationPartido->mGame->mStateMachine->getCurrentState() == mApplicationPartido->mGame->mGamePlayPartidoBattle)
+		if (mApplicationPartido->mGamePartido->mStateMachine->getCurrentState() == mApplicationPartido->mGamePartido->mGamePartidoPlayPartidoBattle)
 		{
- 			mApplicationPartido->mGame->mKeyArray[27] = false;
+ 			mApplicationPartido->mGamePartido->mKeyArray[27] = false;
 
                 	//send quit game
                 	ByteBuffer* byteBuffer = new ByteBuffer();
-                	byteBuffer->WriteByte(mApplicationPartido->mGame->mMessageLeaveGame);
-                	mApplicationPartido->mGame->mNetwork->send(byteBuffer);
-                	mApplicationPartido->mGame->mSentLeaveGame = true;
+                	byteBuffer->WriteByte(mApplicationPartido->mGamePartido->mMessageLeaveGame);
+                	mApplicationPartido->mGamePartido->mNetwork->send(byteBuffer);
+                	mApplicationPartido->mGamePartido->mSentLeaveGame = true;
 		}
 */
         }
@@ -89,9 +89,9 @@ void ApplicationPlayPartido::execute()
         else
         {
                 //game
-                if (mApplicationPartido->mGame)
+                if (mApplicationPartido->mGamePartido)
                 {
-                        mApplicationPartido->mGame->processUpdate();
+                        mApplicationPartido->mGamePartido->processUpdate();
                 }
         }
 
@@ -102,10 +102,10 @@ void ApplicationPlayPartido::exit()
 {
  	mApplicationPartido->mPlayingGame = false;
         mApplicationPartido->mLeaveGame = false;
-        if (mApplicationPartido->mGame)
+        if (mApplicationPartido->mGamePartido)
         {
-                mApplicationPartido->mGame->remove();
-                mApplicationPartido->mGame = NULL;
+                mApplicationPartido->mGamePartido->remove();
+                mApplicationPartido->mGamePartido = NULL;
         }
 //	ApplicationPlay::exit();
 }
