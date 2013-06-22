@@ -488,6 +488,8 @@ keyDown: function(event)
 	//escape
         if (event.key == 'esc')
         {
+		mApplication.log('hit escape!!!!!!!!');
+		event.preventDefault();
                 mApplication.mKey_esc = true;
 	}
 
