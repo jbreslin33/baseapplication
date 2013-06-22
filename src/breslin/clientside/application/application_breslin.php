@@ -454,9 +454,17 @@ keyDown: function(event)
         {
         	mApplication.mKey_left = true;
         }
+        if (event.key == 'a')
+        {
+        	mApplication.mKey_left = true;
+        }
 
         //right
         if (event.key == 'right')
+        {
+                mApplication.mKey_right = true;
+        }
+        if (event.key == 'd')
         {
                 mApplication.mKey_right = true;
         }
@@ -466,9 +474,17 @@ keyDown: function(event)
         {
                 mApplication.mKey_up = true;
         }
+        if (event.key == 'w')
+        {
+                mApplication.mKey_up = true;
+        }
 
         //down
         if (event.key == 'down')
+        {
+                mApplication.mKey_down = true;
+        }
+        if (event.key == 's')
         {
                 mApplication.mKey_down = true;
         }
@@ -493,12 +509,6 @@ keyDown: function(event)
                 mApplication.mKey_esc = true;
 	}
 
-	//quit game
-        if (event.key == 'q')
-        {
-                mApplication.mKey_q = true;
-	}
-
 	//enter
 	if (event.key == 'enter')
 	{
@@ -514,9 +524,17 @@ keyUp: function(event)
         {
                 mApplication.mKey_left = false;
         }
+        if (event.key == 'a')
+        {
+                mApplication.mKey_left = false;
+        }
 
         //right
         if (event.key == 'right')
+        {
+                mApplication.mKey_right = false;
+        }
+        if (event.key == 'd')
         {
                 mApplication.mKey_right = false;
         }
@@ -526,9 +544,17 @@ keyUp: function(event)
         {
                 mApplication.mKey_up = false;
         }
+        if (event.key == 'w')
+        {
+                mApplication.mKey_up = false;
+        }
 
         //down
         if (event.key == 'down')
+        {
+                mApplication.mKey_down = false;
+        }
+        if (event.key == 's')
         {
                 mApplication.mKey_down = false;
         }
@@ -549,12 +575,6 @@ keyUp: function(event)
         if (event.key == 'esc')
         {
                 mApplication.mKey_esc = false;
-	}
-
-	//quit game
-        if (event.key == 'q')
-        {
-                mApplication.mKey_q = false;
 	}
 
 	//enter	

@@ -20,9 +20,8 @@ execute: function()
 		this.mApplication.log('mLoggedIN = false');
                 this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationLogin);
 	}
-	if (this.mApplication.mKey_q && this.mApplication.mSentLeaveGame == false)
+	if (this.mApplication.mKey_esc && this.mApplication.mSentLeaveGame == false)
         {
-		this.mApplication.log('emitttttting');
        		message = '';
         	this.mApplication.mNetwork.mSocket.emit('send_leave_game', message);
 		this.mApplication.mSentLeaveGame = true;
