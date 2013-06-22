@@ -60,15 +60,15 @@ void ApplicationPlayPartido::execute()
 
 		//check to see if in battle....	
 /*
-		if (mApplicationPartido->mGamePartido->mStateMachine->getCurrentState() == mApplicationPartido->mGamePartido->mGamePartidoPlayPartidoBattle)
+		if (mApplicationPartido->getGame()->mStateMachine->getCurrentState() == mApplicationPartido->getGame()->mGamePartidoPlayPartidoBattle)
 		{
- 			mApplicationPartido->mGamePartido->mKeyArray[27] = false;
+ 			mApplicationPartido->getGame()->mKeyArray[27] = false;
 
                 	//send quit game
                 	ByteBuffer* byteBuffer = new ByteBuffer();
-                	byteBuffer->WriteByte(mApplicationPartido->mGamePartido->mMessageLeaveGame);
-                	mApplicationPartido->mGamePartido->mNetwork->send(byteBuffer);
-                	mApplicationPartido->mGamePartido->mSentLeaveGame = true;
+                	byteBuffer->WriteByte(mApplicationPartido->getGame()->mMessageLeaveGame);
+                	mApplicationPartido->getGame()->mNetwork->send(byteBuffer);
+                	mApplicationPartido->getGame()->mSentLeaveGame = true;
 		}
 */
         }
@@ -89,9 +89,9 @@ void ApplicationPlayPartido::execute()
         else
         {
                 //game
-                if (mApplicationPartido->mGamePartido)
+                if (mApplicationPartido->getGame())
                 {
-                        mApplicationPartido->mGamePartido->processUpdate();
+                        mApplicationPartido->getGame()->processUpdate();
                 }
         }
 
@@ -102,10 +102,10 @@ void ApplicationPlayPartido::exit()
 {
  	mApplicationPartido->mPlayingGame = false;
         mApplicationPartido->mLeaveGame = false;
-        if (mApplicationPartido->mGamePartido)
+        if (mApplicationPartido->getGame())
         {
-                mApplicationPartido->mGamePartido->remove();
-                mApplicationPartido->mGamePartido = NULL;
+                mApplicationPartido->getGame()->remove();
+                mApplicationPartido->setGame(NULL);
         }
 //	ApplicationPlay::exit();
 }

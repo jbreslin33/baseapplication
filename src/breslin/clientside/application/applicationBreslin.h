@@ -56,6 +56,8 @@ Network*     mNetwork;
 
 //game
 Game* mGame;
+void setGame(Game* game);
+Game* getGame();
 
 //state transition variables
 bool mSetup;

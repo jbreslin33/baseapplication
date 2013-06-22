@@ -72,9 +72,9 @@ void ApplicationPlay::execute()
        	else
        	{
               	//game
-		if (mApplicationBreslin->mGame)
+		if (mApplicationBreslin->getGame())
 		{	
-               		mApplicationBreslin->mGame->processUpdate();
+               		mApplicationBreslin->getGame()->processUpdate();
 		}
 	}
 }
@@ -83,9 +83,9 @@ void ApplicationPlay::exit()
 {
 	mApplicationBreslin->mPlayingGame = false;
         mApplicationBreslin->mLeaveGame = false;
-	if (mApplicationBreslin->mGame)
+	if (mApplicationBreslin->getGame())
 	{
-        	mApplicationBreslin->mGame->remove();
-		mApplicationBreslin->mGame = NULL;
+        	mApplicationBreslin->getGame()->remove();
+		mApplicationBreslin->setGame(NULL);
 	}
 }

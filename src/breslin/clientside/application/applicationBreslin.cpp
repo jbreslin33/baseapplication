@@ -57,7 +57,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mRenderTime = 0.0f;
 
 	//game
-	mGame = NULL;
+	setGame(NULL);
 
 	mStateMachine = new StateMachine();
 
@@ -116,9 +116,9 @@ void ApplicationBreslin::processUpdate()
 		createLoginScreen();
 		hideLoginScreen();
  		
-		mGame = new Game(this);
-		mGame->createStates();
-		mGame->setStates();
+		setGame(new Game(this));
+		getGame()->createStates();
+		getGame()->setStates();
        		mStateMachine->changeState(mApplicationPlay);
 
 		//sneak an update in
@@ -137,6 +137,19 @@ void ApplicationBreslin::processUpdate()
 		mConnectSent = true; 
 		sendConnect();
 	}
+}
+
+/*********************************
+	GAME	
+**********************************/
+void ApplicationBreslin::setGame(Game* game)
+{
+	mGame = game;
+}
+
+Game* ApplicationBreslin::getGame()
+{
+	return mGame;
 }
 
 /*********************************
@@ -260,9 +273,9 @@ void ApplicationBreslin::checkForByteBuffer()
 		}
 
 		//pass on to game if there is one....
-		if (mGame)
+		if (getGame())
 		{
-			mGame->checkByteBuffer(byteBuffer);
+			getGame()->checkByteBuffer(byteBuffer);
 		}
         }
 }

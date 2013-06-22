@@ -38,9 +38,9 @@ void ApplicationMain::execute()
 	if (mApplication->mButtonHit == mApplication->mButtonJoinGameA)
 	{
 		mApplication->mButtonHit = NULL;
- 		mApplication->mGame = new Game(mApplication);
-		mApplication->mGame->createStates();
-		mApplication->mGame->setStates();
+ 		mApplication->setGame(new Game(mApplication));
+		mApplication->getGame()->createStates();
+		mApplication->getGame()->setStates();
 		mApplication->sendJoinGame(1);
 		mApplication->mStateMachine->changeState(mApplication->mApplicationPlay);
 	}

@@ -15,6 +15,8 @@ public:
 
 //game partido
 GamePartido* mGamePartido;
+void setGame(GamePartido* gamePartido);
+GamePartido* getGame();
 
 //rendering
 virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);

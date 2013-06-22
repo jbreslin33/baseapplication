@@ -31,6 +31,20 @@ ApplicationPartido::~ApplicationPartido()
 {
 }
 
+/*********************************
+        GAME
+**********************************/
+void ApplicationPartido::setGame(GamePartido* gamePartido)
+{
+        mGamePartido = gamePartido;
+	ApplicationBreslin::setGame(gamePartido);
+}
+
+GamePartido* ApplicationPartido::getGame()
+{
+        return mGamePartido;
+}
+
 bool ApplicationPartido::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
         bool ret = ApplicationBreslin::frameRenderingQueued(evt);
@@ -73,10 +87,9 @@ void ApplicationPartido::processUpdate()
                 createLoginScreen();
                 hideLoginScreen();
 
-                mGamePartido = new GamePartido(this);
-		mGame = mGamePartido;
-		mGamePartido->createStates();
-		mGamePartido->setStates();
+                setGame(new GamePartido(this));
+		getGame()->createStates();
+		getGame()->setStates();
                 mStateMachine->changeState(mApplicationPlay);
 
                 //sneak an update in
