@@ -50,24 +50,14 @@ void ApplicationPlayPartido::execute()
 
         if (mApplicationPartido->mKeyArray[27]) //esc
         {
-                mApplicationPartido->mKeyArray[27] = false;
-
-                //send quit game
-                ByteBuffer* byteBuffer = new ByteBuffer();
-                byteBuffer->WriteByte(mApplicationPartido->mMessageLeaveGame);
-                mApplicationPartido->mNetwork->send(byteBuffer);
-                mApplicationPartido->mSentLeaveGame = true;
-
 		//check to see if in battle....	
 		if (mApplicationPartido->getGame()->mStateMachine->getCurrentState() == mApplicationPartido->getGame()->mGamePlayPartidoBattle)
 		{
- 			mApplicationPartido->mKeyArray[27] = false;
-
 			//answer
 			mApplicationPartido->mAnswerTime = 2001;
-			mApplicationPartido->mStringAnswer = "quit";
-				 
+			mApplicationPartido->mStringAnswer = "esc";
 			mApplicationPartido->sendAnswer();
+				/* 
                         mApplicationPartido->mStringQuestion.clear();
                         mApplicationPartido->mStringAnswer.clear();
                         mApplicationPartido->mLabelQuestion->setCaption("");
@@ -75,14 +65,22 @@ void ApplicationPlayPartido::execute()
 
 			mApplicationPartido->hideBattleScreen();
 
-
                 	//send quit game
                 	ByteBuffer* byteBuffer = new ByteBuffer();
                 	byteBuffer->WriteByte(mApplicationPartido->mMessageLeaveGame);
                 	mApplicationPartido->mNetwork->send(byteBuffer);
                 	mApplicationPartido->mSentLeaveGame = true;
+		*/
 		}
-        }
+		else
+		{
+			mApplicationPartido->mKeyArray[27] = false;
+                	ByteBuffer* byteBuffer = new ByteBuffer();
+                	byteBuffer->WriteByte(mApplicationPartido->mMessageLeaveGame);
+                	mApplicationPartido->mNetwork->send(byteBuffer);
+                	mApplicationPartido->mSentLeaveGame = true;
+       		} 
+	}
 
         if (mApplicationPartido->mLeaveGame)
         {
