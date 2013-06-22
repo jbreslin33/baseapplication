@@ -59,18 +59,29 @@ void ApplicationPlayPartido::execute()
                 mApplicationPartido->mSentLeaveGame = true;
 
 		//check to see if in battle....	
-/*
-		if (mApplicationPartido->getGame()->mStateMachine->getCurrentState() == mApplicationPartido->getGame()->mGamePartidoPlayPartidoBattle)
+		if (mApplicationPartido->getGame()->mStateMachine->getCurrentState() == mApplicationPartido->getGame()->mGamePlayPartidoBattle)
 		{
- 			mApplicationPartido->getGame()->mKeyArray[27] = false;
+ 			mApplicationPartido->mKeyArray[27] = false;
+
+			//answer
+			mApplicationPartido->mAnswerTime = 2001;
+			mApplicationPartido->mStringAnswer = "quit";
+				 
+			mApplicationPartido->sendAnswer();
+                        mApplicationPartido->mStringQuestion.clear();
+                        mApplicationPartido->mStringAnswer.clear();
+                        mApplicationPartido->mLabelQuestion->setCaption("");
+                        mApplicationPartido->mLabelAnswer->setCaption("");
+
+			mApplicationPartido->hideBattleScreen();
+
 
                 	//send quit game
                 	ByteBuffer* byteBuffer = new ByteBuffer();
-                	byteBuffer->WriteByte(mApplicationPartido->getGame()->mMessageLeaveGame);
-                	mApplicationPartido->getGame()->mNetwork->send(byteBuffer);
-                	mApplicationPartido->getGame()->mSentLeaveGame = true;
+                	byteBuffer->WriteByte(mApplicationPartido->mMessageLeaveGame);
+                	mApplicationPartido->mNetwork->send(byteBuffer);
+                	mApplicationPartido->mSentLeaveGame = true;
 		}
-*/
         }
 
         if (mApplicationPartido->mLeaveGame)
