@@ -35,7 +35,18 @@ void GamePlay::execute()
  	//process input
  	mGame->mKeyCurrent = 0;
 
-        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_W)) // Forward
+	//UP	
+        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_W))
+        {
+        	mGame->mApplication->mKeyArray[119] = true;
+                mGame->mKeyCurrent |= mGame->mKeyUp;
+        }
+       	else
+        {
+        	mGame->mApplication->mKeyArray[119] = false;
+        }
+
+        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_UP)) 
         {
         	mGame->mApplication->mKeyArray[119] = true;
                 mGame->mKeyCurrent |= mGame->mKeyUp;
@@ -46,7 +57,17 @@ void GamePlay::execute()
         }
 
 
-        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_S)) // down 
+	//DOWN
+        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_S))  
+        {
+        	mGame->mApplication->mKeyArray[115] = true;
+                mGame->mKeyCurrent |= mGame->mKeyDown;
+        }
+       	else
+        {
+        	mGame->mApplication->mKeyArray[115] = false;
+        }
+        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_DOWN))  
         {
         	mGame->mApplication->mKeyArray[115] = true;
                 mGame->mKeyCurrent |= mGame->mKeyDown;
@@ -56,7 +77,17 @@ void GamePlay::execute()
         	mGame->mApplication->mKeyArray[115] = false;
         }
 
-        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_A)) // left 
+	//LEFT
+        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_A))  
+        {
+        	mGame->mApplication->mKeyArray[97] = true;
+                mGame->mKeyCurrent |= mGame->mKeyLeft;
+        }
+       	else
+        {
+        	mGame->mApplication->mKeyArray[97] = false;
+        }
+        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_LEFT))  
         {
         	mGame->mApplication->mKeyArray[97] = true;
                 mGame->mKeyCurrent |= mGame->mKeyLeft;
@@ -66,8 +97,17 @@ void GamePlay::execute()
         	mGame->mApplication->mKeyArray[97] = false;
         }
 
-
-        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_D)) // right 
+	//RIGHT
+        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_D)) 
+        {
+        	mGame->mApplication->mKeyArray[100] = true;
+                mGame->mKeyCurrent |= mGame->mKeyRight;
+        }
+       	else
+        {
+        	mGame->mApplication->mKeyArray[100] = false;
+        }
+        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_RIGHT)) 
         {
         	mGame->mApplication->mKeyArray[100] = true;
                 mGame->mKeyCurrent |= mGame->mKeyRight;
