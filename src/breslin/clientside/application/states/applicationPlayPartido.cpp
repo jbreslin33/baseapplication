@@ -34,10 +34,7 @@ ApplicationPlayPartido::~ApplicationPlayPartido()
 
 void ApplicationPlayPartido::enter()
 {
-	mApplicationPartido->mPlayingGame = true;
-        mApplicationPartido->mSentLeaveGame = false;
-	//ApplicationPlay::enter();
-
+	ApplicationPlay::enter();
 }
 
 void ApplicationPlayPartido::execute()
@@ -53,24 +50,9 @@ void ApplicationPlayPartido::execute()
 		//check to see if in battle....	
 		if (mApplicationPartido->getGame()->mStateMachine->getCurrentState() == mApplicationPartido->getGame()->mGamePlayPartidoBattle)
 		{
-			//answer
 			mApplicationPartido->mAnswerTime = 2001;
 			mApplicationPartido->mStringAnswer = "esc";
 			mApplicationPartido->sendAnswer();
-				/* 
-                        mApplicationPartido->mStringQuestion.clear();
-                        mApplicationPartido->mStringAnswer.clear();
-                        mApplicationPartido->mLabelQuestion->setCaption("");
-                        mApplicationPartido->mLabelAnswer->setCaption("");
-
-			mApplicationPartido->hideBattleScreen();
-
-                	//send quit game
-                	ByteBuffer* byteBuffer = new ByteBuffer();
-                	byteBuffer->WriteByte(mApplicationPartido->mMessageLeaveGame);
-                	mApplicationPartido->mNetwork->send(byteBuffer);
-                	mApplicationPartido->mSentLeaveGame = true;
-		*/
 		}
 		else
 		{
@@ -103,8 +85,6 @@ void ApplicationPlayPartido::execute()
                         mApplicationPartido->getGame()->processUpdate();
                 }
         }
-
-//	ApplicationPlay::execute();
 }
 
 void ApplicationPlayPartido::exit()
@@ -116,5 +96,4 @@ void ApplicationPlayPartido::exit()
                 mApplicationPartido->getGame()->remove();
                 mApplicationPartido->setGame(NULL);
         }
-//	ApplicationPlay::exit();
 }
