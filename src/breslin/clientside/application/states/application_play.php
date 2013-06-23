@@ -19,21 +19,12 @@ execute: function()
         {
                 this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationLogin);
 	}
-/*
-	if (this.mApplicationBreslin.mKey_esc && this.mApplicationBreslin.mSentLeaveGame == false)
-        {
-       		message = '';
-        	this.mApplicationBreslin.mNetwork.mSocket.emit('send_leave_game', message);
-		this.mApplicationBreslin.mSentLeaveGame = true;
-        }
-*/
+	
 	if (mApplicationBreslin.mKeyArray[27] && mApplicationBreslin.mSentLeaveGame == false)
 	{
 		message = '';
                 this.mApplicationBreslin.mNetwork.mSocket.emit('send_leave_game', message);
                 this.mApplicationBreslin.mSentLeaveGame = true;
-
-
 	}
 
 	if (this.mApplicationBreslin.mLeaveGame)

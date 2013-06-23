@@ -52,6 +52,11 @@ changeState: function(pNewState)
 	{
         	this.mCurrentState.enter();
 	}
+},
+
+getCurrentState: function()
+{
+	return this.mCurrentState;
 }
 
 });

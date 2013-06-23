@@ -3,80 +3,74 @@ var ApplicationPlayPartido = new Class(
 
 Extends: ApplicationPlay,
 	
-initialize: function(application)
+initialize: function(applicationPartido)
 {
-	this.mApplication = application;
+	this.mApplicationPartido = applicationPartido;
 },
 
 enter: function()
 {
-	this.mApplication.mPlayingGame = true;
-	this.mApplication.mSentLeaveGame = false;
+	this.mApplicationPartido.mPlayingGame = true;
+	this.mApplicationPartido.mSentLeaveGame = false;
 },
 
 execute: function()
 {
 	//check for logout as well....
-   	if (this.mApplication.mLoggedIn == false)
+   	if (this.mApplicationPartido.mLoggedIn == false)
         {
-                this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationLogin);
+                this.mApplicationPartido.mStateMachine.changeState(this.mApplicationPartido.mApplicationLogin);
 	}
-/*
-	if (this.mApplication.mKey_esc && this.mApplication.mSentLeaveGame == false)
-        {
-       		message = '';
-        	this.mApplication.mNetwork.mSocket.emit('send_leave_game', message);
-		this.mApplication.mSentLeaveGame = true;
-        }
-*/
-	if (this.mApplication.mKeyArray[27] && this.mApplication.mSentLeaveGame == false)
+	
+	if (this.mApplicationPartido.mKeyArray[27] && this.mApplicationPartido.mSentLeaveGame == false)
         {
 		//check to see if in battle....
-		if (mApplicationPartido.getGame().mStateMachine.getCurrentState() == mApplicationPartido.getGame().mGamePlayPartidoBattle)
+		if (this.mApplicationPartido.getGame().mStateMachine.getCurrentState() == this.mApplicationPartido.getGame().mGamePlayPartidoBattle)
 		{	
-			mApplicationPartido.mAnswerTime = 2001;
-			mApplicationPartido.mStringAnswer = 'esc';
-			mApplicationPartido.sendAnswer();	
+			this.mApplicationPartido.mAnswerTime = 3;
+			this.mApplicationPartido.mStringAnswer = 'esc';
+			this.mApplicationPartido.sendAnswer();	
 		}
 		else
 		{
-			mApplicationPartido.mKeyArray[27] = false;
        			message = '';
         		this.mApplication.mNetwork.mSocket.emit('send_leave_game', message);
 			this.mApplication.mSentLeaveGame = true;
 		}
+		this.mApplicationPartido.mKeyArray[27] = false;
         }
 
-	if (this.mApplication.mLeaveGame)
+	if (this.mApplicationPartido.mLeaveGame)
 	{
-		this.mApplication.mSentLeaveGame = false;
-		if (this.mApplication.mLoggedIn)
+		this.log('leave game');	
+		this.mApplicationPartido.mSentLeaveGame = false;
+		if (this.mApplicationPartido.mLoggedIn)
 		{
-                	this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationMain);
+                	this.mApplicationPartido.mStateMachine.changeState(this.mApplicationPartido.mApplicationMain);
 		}
 		else
 		{
-                	this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationLogin);
+                	this.mApplicationPartido.mStateMachine.changeState(this.mApplicationPartido.mApplicationLogin);
 		}
 	}
         else
         {
                 //game
-		if (this.mApplication.getGame())
+		if (this.mApplicationPartido.getGame())
 		{
-                	this.mApplication.getGame().processUpdate();
+                	this.mApplicationPartido.getGame().processUpdate();
 		}
         }
 },
 
 exit: function()
 {
-        this.mApplication.mPlayingGame = false;
-	this.mApplication.mLeaveGame = false;
-	if (this.mApplication.getGame())
+        this.mApplicationPartido.mPlayingGame = false;
+	this.mApplicationPartido.mLeaveGame = false;
+	if (this.mApplicationPartido.getGame())
 	{
-		this.mApplication.getGame().remove();
-		this.mApplication.setGame(0);
+		this.mApplicationPartido.getGame().remove();
+		this.mApplicationPartido.setGame(0);
 	}
 }
 

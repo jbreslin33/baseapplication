@@ -468,9 +468,16 @@ runGraphics: function()
 **********************************/
 keyDown: function(event)
 {
+	//escape
+        if (event.key == 'esc')
+        {
+		mApplication.log('hit escape!!!!!!!!');
+		event.preventDefault();
+                mApplication.mKey_esc = true;
+	}
+
 	//this.mKeyArray[event.keyCode] = true;	
 	mApplication.mKeyArray[event.code] = true;	
-	mApplication.log('letter:' + event.code);	
 
 	//left
         if (event.key == 'left')
@@ -524,14 +531,6 @@ keyDown: function(event)
                 mApplication.mKey_clockwise = true;
 	}
 	
-	//escape
-        if (event.key == 'esc')
-        {
-		mApplication.log('hit escape!!!!!!!!');
-		event.preventDefault();
-                mApplication.mKey_esc = true;
-	}
-
 	//enter
 	if (event.key == 'enter')
 	{
@@ -600,6 +599,7 @@ keyUp: function(event)
         if (event.key == 'esc')
         {
                 mApplication.mKey_esc = false;
+		event.preventDefault();
 	}
 
 	//enter	

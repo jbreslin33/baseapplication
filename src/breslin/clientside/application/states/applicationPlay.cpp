@@ -45,7 +45,7 @@ void ApplicationPlay::execute()
                 this->mApplicationBreslin->mStateMachine->changeState(this->mApplicationBreslin->mApplicationLogin);
         }
 
-	if (mApplicationBreslin->mKeyArray[27]) //esc
+	if (mApplicationBreslin->mKeyArray[27] && mApplicationBreslin->mSentLeaveGame == false) //esc
         {
         	mApplicationBreslin->mKeyArray[27] = false;
 
@@ -58,8 +58,7 @@ void ApplicationPlay::execute()
 
 	if (mApplicationBreslin->mLeaveGame)
        	{
-		LogString("mLeaveGame true");
-               	mApplicationBreslin->mSentLeaveGame = false;
+		mApplicationBreslin->mSentLeaveGame = false;
                	if (mApplicationBreslin->mLoggedIn)
                	{
                        	mApplicationBreslin->mStateMachine->changeState(mApplicationBreslin->mApplicationMain);
