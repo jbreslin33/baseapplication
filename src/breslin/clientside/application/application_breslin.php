@@ -3,6 +3,14 @@ var ApplicationBreslin = new Class(
 
 initialize: function(serverIP, serverPort)
 {
+
+	//keys 
+	this.mKeyArray = new Array();
+	for (i = 0; i < 256; i++)
+	{
+		this.mKeyArray[i] = false;
+	}
+
 	//position offsets
 	this.mScreenCenter = new Vector3D();
 	this.mScreenCenter.x = 380;
@@ -460,6 +468,10 @@ runGraphics: function()
 **********************************/
 keyDown: function(event)
 {
+	//this.mKeyArray[event.keyCode] = true;	
+	mApplication.mKeyArray[event.code] = true;	
+	mApplication.log('letter:' + event.code);	
+
 	//left
         if (event.key == 'left')
         {
@@ -530,6 +542,8 @@ keyDown: function(event)
 
 keyUp: function(event)
 {
+	mApplication.mKeyArray[event.code] = false;	
+	
 	//left
         if (event.key == 'left')
         {

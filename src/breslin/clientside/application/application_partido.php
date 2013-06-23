@@ -44,11 +44,12 @@ processUpdate: function()
 setGame: function(gamePartido)
 {
 	this.mGamePartido = gamePartido;
+	this.mGame = gamePartido;
 },
 
 getGame: function()
 {
-	return mGamePartido;
+	return this.mGamePartido;
 },
 
 

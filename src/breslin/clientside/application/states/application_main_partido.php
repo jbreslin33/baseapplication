@@ -23,9 +23,9 @@ execute: function()
 	if (this.mApplicationPartido.mButtonHit == this.mApplicationPartido.mButtonJoinGameB)
 	{
 	        this.mApplicationPartido.mButtonHit = 0;
-		this.mApplicationPartido.mGame = new GamePartido(this.mApplicationPartido);
-		this.mApplicationPartido.mGame.createStates();
-		this.mApplicationPartido.mGame.setStates();
+		this.mApplicationPartido.setGame(new GamePartido(this.mApplicationPartido));
+		this.mApplicationPartido.getGame().createStates();
+		this.mApplicationPartido.getGame().setStates();
  		this.mApplicationPartido.sendJoinGame('2');
                 this.mApplicationPartido.mStateMachine.changeState(this.mApplicationPartido.mApplicationPlay);
 	}

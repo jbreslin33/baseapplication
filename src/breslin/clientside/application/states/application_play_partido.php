@@ -19,14 +19,32 @@ execute: function()
 	//check for logout as well....
    	if (this.mApplication.mLoggedIn == false)
         {
-		this.mApplication.log('mLoggedIN = false');
                 this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationLogin);
 	}
+/*
 	if (this.mApplication.mKey_esc && this.mApplication.mSentLeaveGame == false)
         {
        		message = '';
         	this.mApplication.mNetwork.mSocket.emit('send_leave_game', message);
 		this.mApplication.mSentLeaveGame = true;
+        }
+*/
+	if (this.mApplication.mKeyArray[27] && this.mApplication.mSentLeaveGame == false)
+        {
+		//check to see if in battle....
+		if (mApplicationPartido.getGame().mStateMachine.getCurrentState() == mApplicationPartido.getGame().mGamePlayPartidoBattle)
+		{	
+			mApplicationPartido.mAnswerTime = 2001;
+			mApplicationPartido.mStringAnswer = 'esc';
+			mApplicationPartido.sendAnswer();	
+		}
+		else
+		{
+			mApplicationPartido.mKeyArray[27] = false;
+       			message = '';
+        		this.mApplication.mNetwork.mSocket.emit('send_leave_game', message);
+			this.mApplication.mSentLeaveGame = true;
+		}
         }
 
 	if (this.mApplication.mLeaveGame)
@@ -44,9 +62,9 @@ execute: function()
         else
         {
                 //game
-		if (this.mApplication.mGame)
+		if (this.mApplication.getGame())
 		{
-                	this.mApplication.mGame.processUpdate();
+                	this.mApplication.getGame().processUpdate();
 		}
         }
 },
@@ -55,10 +73,10 @@ exit: function()
 {
         this.mApplication.mPlayingGame = false;
 	this.mApplication.mLeaveGame = false;
-	if (this.mApplication.mGame)
+	if (this.mApplication.getGame())
 	{
-		this.mApplication.mGame.remove();
-		this.mApplication.mGame = 0;
+		this.mApplication.getGame().remove();
+		this.mApplication.setGame(0);
 	}
 }
 

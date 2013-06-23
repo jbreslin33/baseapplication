@@ -6,6 +6,9 @@ initialize: function(application)
 	this.mDelayClick = 100;
 	this.mDelayClickCounter = 0;
 
+	//keys
+ 	this.mKeyArray     = new Array();
+
 	// constants
 	this.mCommandKey          = 1;
 	this.mCommandFrameTime = 2;
