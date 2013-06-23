@@ -47,7 +47,7 @@ createStates: function()
         this.mApplicationInitialize = new ApplicationInitialize (this);
         this.mApplicationLogin      = new ApplicationLogin      (this);
         this.mApplicationMain       = new ApplicationMainPartido(this);
-        this.mApplicationPlay       = new ApplicationPlay       (this);
+        this.mApplicationPlay       = new ApplicationPlayPartido(this);
 },
 
 setStates: function()
