@@ -115,6 +115,17 @@ log: function(msg)
         }, 0);
 },
 
+//game
+setGame: function(game)
+{
+	this.mGame = game;
+},
+
+getGame: function()
+{
+	return this.mGame;
+},
+
 //states
 createStates: function()
 {
@@ -145,7 +156,7 @@ processUpdate: function()
         //set RenderTime as function of timeSinceEpoch and LastTimeSinceEpoch diff
         this.mRenderTime = this.mTimeSinceEpoch - this.mLastTimeSinceEpoch;
 	this.mTimeSinceLastServerTick += this.mRenderTime;
-	if (this.mGame)
+	if (this.getGame())
 	{
 		if (this.mTimeSinceLastServerTick > 1000)
 		{

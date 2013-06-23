@@ -1,62 +1,62 @@
 var ApplicationPlay = new Class(
 {
 	
-initialize: function(application)
+initialize: function(applicationBreslin)
 {
-	this.mApplication = application;
+	this.mApplicationBreslin = application;
 },
 
 enter: function()
 {
-	this.mApplication.mPlayingGame = true;
-	this.mApplication.mSentLeaveGame = false;
+	this.mApplicationBreslin.mPlayingGame = true;
+	this.mApplicationBreslin.mSentLeaveGame = false;
 },
 
 execute: function()
 {
 	//check for logout as well....
-   	if (this.mApplication.mLoggedIn == false)
+   	if (this.mApplicationBreslin.mLoggedIn == false)
         {
-		this.mApplication.log('mLoggedIN = false');
-                this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationLogin);
+                this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationLogin);
 	}
-	if (this.mApplication.mKey_esc && this.mApplication.mSentLeaveGame == false)
+
+	if (this.mApplicationBreslin.mKey_esc && this.mApplicationBreslin.mSentLeaveGame == false)
         {
        		message = '';
-        	this.mApplication.mNetwork.mSocket.emit('send_leave_game', message);
-		this.mApplication.mSentLeaveGame = true;
+        	this.mApplicationBreslin.mNetwork.mSocket.emit('send_leave_game', message);
+		this.mApplicationBreslin.mSentLeaveGame = true;
         }
 
-	if (this.mApplication.mLeaveGame)
+	if (this.mApplicationBreslin.mLeaveGame)
 	{
-		this.mApplication.mSentLeaveGame = false;
-		if (this.mApplication.mLoggedIn)
+		this.mApplicationBreslin.mSentLeaveGame = false;
+		if (this.mApplicationBreslin.mLoggedIn)
 		{
-                	this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationMain);
+                	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationMain);
 		}
 		else
 		{
-                	this.mApplication.mStateMachine.changeState(this.mApplication.mApplicationLogin);
+                	this.mApplicationBreslin.mStateMachine.changeState(this.mApplicationBreslin.mApplicationLogin);
 		}
 	}
         else
         {
                 //game
-		if (this.mApplication.mGame)
+		if (this.mApplicationBreslin.getGame())
 		{
-                	this.mApplication.mGame.processUpdate();
+                	this.mApplicationBreslin.getGame().processUpdate();
 		}
         }
 },
 
 exit: function()
 {
-        this.mApplication.mPlayingGame = false;
-	this.mApplication.mLeaveGame = false;
-	if (this.mApplication.mGame)
+        this.mApplicationBreslin.mPlayingGame = false;
+	this.mApplicationBreslin.mLeaveGame = false;
+	if (this.mApplicationBreslin.getGame())
 	{
-		this.mApplication.mGame.remove();
-		this.mApplication.mGame = 0;
+		this.mApplicationBreslin.getGame().remove();
+		this.mApplicationBreslin.setGame(0);
 	}
 }
 

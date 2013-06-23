@@ -41,6 +41,17 @@ processUpdate: function()
 	this.mAnswerTime = this.mAnswerTime + this.mRenderTime;   
 },
 
+setGame: function(gamePartido)
+{
+	this.mGamePartido = gamePartido;
+},
+
+getGame: function()
+{
+	return mGamePartido;
+},
+
+
 createStates: function()
 {
 	this.mApplicationGlobal     = new ApplicationGlobal     (this);
