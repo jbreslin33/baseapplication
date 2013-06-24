@@ -104,12 +104,12 @@ createBattleScreen: function()
 {
  	if (this.mLabelQuestion == 0)
         {
-                this.mLabelQuestion = this.createLabel(300,75,100,25,"blue","Question:");
+                this.mLabelQuestion = this.createLabel(300,75,100,25,"yellow","Question:");
         }
 
         if (this.mLabelAnswer == 0)
         {
-                this.mLabelAnswer = this.createLabel(300,100,100,25,"yellow","Answer:");
+                this.mLabelAnswer = this.createLabel(300,100,100,25,"orange","Answer:");
 		this.mLabelAnswer.focus();
         }
 },

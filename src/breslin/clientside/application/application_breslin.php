@@ -361,18 +361,18 @@ createLoginScreen: function()
 {
   	if (this.mSelectMenuSchool == 0)
         {
-                this.mSelectMenuSchool = this.createSelectMenu(300,50,100,25,"green","Schools");
+                this.mSelectMenuSchool = this.createSelectMenu(300,50,100,25,"yellow","Schools");
 	}
 
   	if (this.mLabelUsername == 0)
 	{
-                this.mLabelUsername = this.createLabel(300,75,100,25,"green","Username");
+                this.mLabelUsername = this.createLabel(300,75,100,25,"yellow","Username");
 		this.mLabelUsername.focus();
 	}
 
   	if (this.mLabelPassword == 0)
 	{
-                this.mLabelPassword = this.createLabel(300,100,100,25,"green","Password");
+                this.mLabelPassword = this.createLabel(300,100,100,25,"yellow","Password");
 	}
 
 	if (this.mButtonLogin == 0)
@@ -385,7 +385,7 @@ createLoginScreen: function()
 	}
  	if (this.mButtonExit == 0)
         {
-                this.mButtonExit = this.createButton(300,175,100,50,"green","Exit");
+                this.mButtonExit = this.createButton(300,175,100,50,"red","Exit");
                 this.mButtonExit.onclick = function()
                 {
                         mApplication.mButtonHit = mApplication.mButtonExit;
