@@ -1838,52 +1838,28 @@ insert into levels(id,description) values (500.09,'Subtraction min 0 max 10');
 ----XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-MULTIPLICATION XXXXXXXXXXXXXXXXX
 
 --		LEVEL_ID: 600  
-insert into levels(id,description) values (600,'Multiplication min 0 max 1');
+insert into levels(id,description) values (600,'Multiplication 0 X 0');
 --	QUESTIONS: 
+insert into questions (level_id,question,answer) values (600,'0 X 0','0');
 
 --		LEVEL_ID: 600.01  
-insert into levels(id,description) values (600.01,'Multiplication min 0 max 2');
+insert into levels(id,description) values (600.01,'0 X 1');
 --	QUESTIONS: 
+insert into questions (level_id,question,answer) values (600.01,'0 X 1','0');
 
 --		LEVEL_ID: 600.02  
-insert into levels(id,description) values (600.02,'Multiplication min 0 max 3');
+insert into levels(id,description) values (600.02,'0 X 2');
 --	QUESTIONS: 
+insert into questions (level_id,question,answer) values (600.02,'0 X 2','0');
 
 --		LEVEL_ID: 600.03  
-insert into levels(id,description) values (600.03,'Multiplication min 0 max 4');
+insert into levels(id,description) values (600.03,'0 X 3');
 --	QUESTIONS: 
+insert into questions (level_id,question,answer) values (600.03,'0 X 3','0');
 
---		LEVEL_ID: 600.04  
-insert into levels(id,description) values (600.04,'Multiplication min 0 max 5');
---	QUESTIONS: 
 
---		LEVEL_ID: 600.05  
-insert into levels(id,description) values (600.05,'Multiplication min 0 max 6');
---	QUESTIONS: 
 
---		LEVEL_ID: 600.06  
-insert into levels(id,description) values (600.06,'Multiplication min 0 max 7');
---	QUESTIONS: 
 
---		LEVEL_ID: 600.07  
-insert into levels(id,description) values (600.07,'Multiplication min 0 max 8');
---	QUESTIONS: 
-
---		LEVEL_ID: 600.08  
-insert into levels(id,description) values (600.08,'Multiplication min 0 max 9');
---	QUESTIONS: 
-
---		LEVEL_ID: 600.09  
-insert into levels(id,description) values (600.09,'Multiplication min 0 max 10');
---	QUESTIONS: 
-
---		LEVEL_ID: 600.10  
-insert into levels(id,description) values (600.10,'Multiplication min 0 max 11');
---	QUESTIONS: 
-
---		LEVEL_ID: 600.11  
-insert into levels(id,description) values (600.11,'Multiplication min 0 max 12');
---	QUESTIONS: 
 
 -----////////////////////-DIVISION-///////////////////////////////////////
 
