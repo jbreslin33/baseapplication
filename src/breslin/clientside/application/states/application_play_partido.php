@@ -33,16 +33,17 @@ execute: function()
 		}
 		else
 		{
+			this.mApplicationPartido.log('send_leave_game....');
        			message = '';
-        		this.mApplication.mNetwork.mSocket.emit('send_leave_game', message);
-			this.mApplication.mSentLeaveGame = true;
+        		this.mApplicationPartido.mNetwork.mSocket.emit('send_leave_game', message);
+			this.mApplicationPartido.mSentLeaveGame = true;
 		}
 		this.mApplicationPartido.mKeyArray[27] = false;
         }
 
 	if (this.mApplicationPartido.mLeaveGame)
 	{
-		this.log('leave game');	
+		this.mApplicationPartido.log('leave game');	
 		this.mApplicationPartido.mSentLeaveGame = false;
 		if (this.mApplicationPartido.mLoggedIn)
 		{
