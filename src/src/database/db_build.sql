@@ -2631,6 +2631,23 @@ insert into questions (level_id,question,answer) values (606.12,'12 X 6','72');
 -- 7 times table
 
 
+--		LEVEL_ID: 607  
+insert into levels(id,description) values (607,'7 X 7');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (607,'7 X 7','49');
+
+
+
+--		LEVEL_ID: 607.01  
+insert into levels(id,description) values (607.01,'7 X 8');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (607.01,'7 X 8','56');
+
+--		LEVEL_ID: 607.02  
+insert into levels(id,description) values (607.02,'8 X 7');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (607.02,'8 X 7','56');
+
 
 
 
