@@ -351,7 +351,7 @@ server.on("message", function (msg, rinfo)
                         questionString = questionString + c;
                 }
 
-		var string = type + "," + length + "," + questionString;
+		var string = type + "," + questionString;
 
                 io.sockets.clients().forEach(function (socket)
                 {

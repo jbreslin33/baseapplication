@@ -39,39 +39,13 @@ setStates: function()
         this.mStateMachine.setGlobalState(this.mGameGlobal);
         this.mStateMachine.changeState(this.mGamePlay);
 },
-/*
-void GamePartido::askQuestion(ByteBuffer* byteBuffer)
-{
-        mApplicationPartido->mStringQuestion.clear();
-        int length = byteBuffer->ReadByte();
-        for (int i = 0; i < length; i++)
-        {
-                char c =  byteBuffer->ReadByte();
-                mApplicationPartido->mStringQuestion.append(1,c);
-        }
-        if (mApplicationPartido->mLabelQuestion)
-        {
-                mApplicationPartido->mLabelQuestion->setCaption(mApplicationPartido->mStringQuestion);
-        }
-        else
-        {
-                LogString("no label");
-        }
 
-        //reset mAnswerTime
-        mApplicationPartido->mAnswerTime = 0;
-}
-
-*/
 askQuestion: function(byteBuffer)
 {
         this.mApplicationPartido.mStringQuestion = '';
-        var length = byteBuffer.readByte();
 
-        for (i = 0; i < length; i++)
-        {
-                this.mApplicationPartido.mStringQuestion = this.mApplicationPartido.mStringQuestion + byteBuffer.readByte();
-        }
+        this.mApplicationPartido.mStringQuestion = byteBuffer.readByte();
+
 	if (this.mApplicationPartido.mLabelQuestion)
 	{
 		this.mApplicationPartido.mLabelQuestion.value = this.mApplicationPartido.mStringQuestion; 
