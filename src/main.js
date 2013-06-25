@@ -165,7 +165,6 @@ window.addEvent('domready', function()
 		//-99
                 if (type == mApplication.mMessageLeaveGame)
                 {
-			mApplication.log('got 99 in coming into html in main.js');
                         mApplication.mLeaveGame = true;
                 }
 
