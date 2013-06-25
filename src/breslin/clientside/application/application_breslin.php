@@ -401,6 +401,13 @@ showLoginScreen: function()
         this.mLabelPassword.style.display="block";
         this.mButtonLogin.style.display="block";
         this.mButtonExit.style.display="block";
+
+	//clear it
+	this.mStringUsername = '';
+	this.mStringPassword = '';
+
+	this.mLabelUsername.value = '';
+	this.mLabelPassword.value = '';
 },
 
 hideLoginScreen: function()
@@ -410,6 +417,15 @@ hideLoginScreen: function()
         this.mLabelPassword.style.display="none";
         this.mButtonLogin.style.display="none";
         this.mButtonExit.style.display="none";
+	
+	//clear it
+/*
+	this.mStringUsername = '';
+	this.mStringPassword = '';
+
+	this.mLabelUsername.value = '';
+	this.mLabelPassword.value = '';
+*/
 },
 
 
