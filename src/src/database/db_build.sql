@@ -2464,6 +2464,96 @@ insert into questions (level_id,question,answer) values (604.16,'12 X 4','48');
 
 -- 5 times table
 
+--		LEVEL_ID: 605  
+insert into levels(id,description) values (605,'5 X 5');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605,'5 X 5','25');
+
+
+--		LEVEL_ID: 605.01  
+insert into levels(id,description) values (605.01,'5 X 6');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.01,'5 X 6','30');
+
+--		LEVEL_ID: 605.02  
+insert into levels(id,description) values (605.02,'6 X 5');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.02,'6 X 5','30');
+
+
+
+--		LEVEL_ID: 605.03  
+insert into levels(id,description) values (605.03,'5 X 7');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.03,'5 X 7','35');
+
+--		LEVEL_ID: 605.04  
+insert into levels(id,description) values (605.04,'7 X 5');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.04,'7 X 5','35');
+
+
+
+--		LEVEL_ID: 605.05  
+insert into levels(id,description) values (605.05,'5 X 8');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.05,'5 X 8','40');
+
+--		LEVEL_ID: 605.06  
+insert into levels(id,description) values (605.06,'8 X 5');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.06,'8 X 5','40');
+
+
+
+--		LEVEL_ID: 605.07  
+insert into levels(id,description) values (605.07,'5 X 9');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.07,'5 X 9','45');
+
+--		LEVEL_ID: 605.08  
+insert into levels(id,description) values (605.08,'9 X 5');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.08,'9 X 5','45');
+
+
+
+--		LEVEL_ID: 605.09  
+insert into levels(id,description) values (605.09,'5 X 10');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.09,'5 X 10','50');
+
+--		LEVEL_ID: 605.10  
+insert into levels(id,description) values (605.10,'10 X 5');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.10,'10 X 5','50');
+
+
+
+--		LEVEL_ID: 605.11  
+insert into levels(id,description) values (605.11,'5 X 11');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.11,'5 X 11','55');
+
+--		LEVEL_ID: 605.12  
+insert into levels(id,description) values (605.12,'11 X 5');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.12,'11 X 5','55');
+
+
+--		LEVEL_ID: 605.13  
+insert into levels(id,description) values (605.13,'5 X 12');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.13,'5 X 12','60');
+
+--		LEVEL_ID: 605.14  
+insert into levels(id,description) values (605.14,'12 X 5');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (605.14,'12 X 5','60');
+
+
+-- 6 times table
+
 
 
 -----////////////////////-DIVISION-///////////////////////////////////////
