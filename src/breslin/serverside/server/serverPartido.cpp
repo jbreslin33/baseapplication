@@ -245,10 +245,13 @@ void ServerPartido::getQuestions()
 
                 const char* b = PQgetvalue(res, row, 1);
                 std::string bString(b);
+		LogString("q:%s:q",b);
                 mQuestionVector.push_back(bString);
+		
 
                 const char* c = PQgetvalue(res, row, 2);
                 std::string cString(c);
+		LogString("a:%s:a",c);
                 mAnswerVector.push_back(cString);
 
                 const char* d = PQgetvalue(res, row, 3);

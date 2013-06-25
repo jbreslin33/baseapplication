@@ -136,7 +136,13 @@ void ClientPartido::sendQuestion(int questionID)
         	for (int i=0; i < length; i++)
         	{
                 	mMessage.WriteByte(mServerPartido->mQuestionVector.at(questionID).at(i));
+			LogString("about to print");
+                	LogString("sq:%c:sq",mServerPartido->mQuestionVector.at(questionID).at(i));
         	}
+        	for (int x=0; x < mServerPartido->mAnswerVector.at(questionID).length(); x++)
+		{
+           		LogString("sa:%c:sa",mServerPartido->mAnswerVector.at(questionID).at(x));
+		}
 
         	//send it
         	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
@@ -283,7 +289,7 @@ void ClientPartido::readAnswer(Message* mes)
         }
 	insertAnswerAttempt();
 
-        if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
+        if (mStringAnswer.compare(mServerPartido->mAnswerVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
 	{
 		ShapePartido* opponent  = mShapePartido->mOpponent;
 
