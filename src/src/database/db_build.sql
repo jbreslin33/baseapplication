@@ -2115,6 +2115,135 @@ insert into questions (level_id,question,answer) values (601.22,'12 X 1','12');
 
 -- 2 times table
 
+--		LEVEL_ID: 602  
+insert into levels(id,description) values (602,'2 X 2');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602,'2 X 2','4');
+
+
+
+--		LEVEL_ID: 602.01  
+insert into levels(id,description) values (602.01,'2 X 3');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.01,'2 X 3','6');
+
+--		LEVEL_ID: 602.02  
+insert into levels(id,description) values (602.02,'3 X 2');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.02,'3 X 2','6');
+
+
+
+--		LEVEL_ID: 602.03  
+insert into levels(id,description) values (602.03,'2 X 4');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.03,'2 X 4','8');
+
+--		LEVEL_ID: 602.04  
+insert into levels(id,description) values (602.04,'4 X 2');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.04,'4 X 2','8');
+
+
+--		LEVEL_ID: 602.05  
+insert into levels(id,description) values (602.05,'2 X 5');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.05,'2 X 5','10');
+
+--		LEVEL_ID: 602.06  
+insert into levels(id,description) values (602.06,'5 X 2');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.06,'5 X 2','10');
+
+
+--		LEVEL_ID: 602.07  
+insert into levels(id,description) values (602.07,'2 X 6');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.07,'2 X 6','12');
+
+--		LEVEL_ID: 602.08  
+insert into levels(id,description) values (602.08,'6 X 2');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.08,'6 X 2','12');
+
+
+
+--		LEVEL_ID: 602.09  
+insert into levels(id,description) values (602.09,'2 X 7');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.09,'2 X 7','14');
+
+--		LEVEL_ID: 602.10  
+insert into levels(id,description) values (602.10,'7 X 2');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.10,'7 X 2','14');
+
+
+
+--		LEVEL_ID: 602.11  
+insert into levels(id,description) values (602.11,'2 X 8');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.11,'2 X 8','16');
+
+--		LEVEL_ID: 602.12  
+insert into levels(id,description) values (602.12,'8 X 2');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.12,'8 X 2','16');
+
+
+
+
+--		LEVEL_ID: 602.13  
+insert into levels(id,description) values (602.13,'2 X 9');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.13,'2 X 9','18');
+
+--		LEVEL_ID: 602.14  
+insert into levels(id,description) values (602.14,'9 X 2');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.14,'9 X 2','18');
+
+
+
+
+--		LEVEL_ID: 602.15  
+insert into levels(id,description) values (602.15,'2 X 10');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.15,'2 X 10','20');
+
+--		LEVEL_ID: 602.16  
+insert into levels(id,description) values (602.16,'10 X 2');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.16,'10 X 2','20');
+
+
+
+--		LEVEL_ID: 602.17  
+insert into levels(id,description) values (602.17,'2 X 11');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.17,'2 X 11','22');
+
+--		LEVEL_ID: 602.18  
+insert into levels(id,description) values (602.18,'11 X 2');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.18,'11 X 2','22');
+
+
+--		LEVEL_ID: 602.19  
+insert into levels(id,description) values (602.19,'2 X 12');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.19,'2 X 12','24');
+
+--		LEVEL_ID: 602.20  
+insert into levels(id,description) values (602.20,'12 X 2');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (602.20,'12 X 2','24');
+
+
+-- 3 times table
+
+
+
 -----////////////////////-DIVISION-///////////////////////////////////////
 
 --		LEVEL_ID: 700 
