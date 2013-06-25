@@ -1270,36 +1270,33 @@ insert into levels(id,description) values (0,'Start of Journey');
 --insert into levels(id,description) values (.1,'Identify 0');       
 --insert into questions (level_id,question,answer) values (.1,'0','0');
 
-insert into levels(id,description) values (.1,'0 X 0');       
-insert into questions (level_id,question,answer) values (.1,'0 X 0','0');
-
 --		LEVEL_ID: .101 
 insert into levels(id,description) values (.101,'Identify 1');       
-insert into questions (level_id,question,answer) values (.101,'1','1');
+--insert into questions (level_id,question,answer) values (.101,'1','1');
 
 --		LEVEL_ID: .102 
 insert into levels(id,description) values (.102,'Identify 2');       
-insert into questions (level_id,question,answer) values (.102,'2','2');
+--insert into questions (level_id,question,answer) values (.102,'2','2');
 
 --		LEVEL_ID: .103 
 insert into levels(id,description) values (.103,'Identify 3');       
-insert into questions (level_id,question,answer) values (.103,'3','3');
+--insert into questions (level_id,question,answer) values (.103,'3','3');
 
 --		LEVEL_ID: .104 
 insert into levels(id,description) values (.104,'Identify 4');       
-insert into questions (level_id,question,answer) values (.104,'4','4');
+--insert into questions (level_id,question,answer) values (.104,'4','4');
 
 --		LEVEL_ID: .105 
 insert into levels(id,description) values (.105,'Identify 5');       
-insert into questions (level_id,question,answer) values (.105,'5','5');
+--insert into questions (level_id,question,answer) values (.105,'5','5');
 
 --		LEVEL_ID: .106 
 insert into levels(id,description) values (.106,'Identify 6');       
-insert into questions (level_id,question,answer) values (.106,'6','6');
+--insert into questions (level_id,question,answer) values (.106,'6','6');
 
 --		LEVEL_ID: .107 
 insert into levels(id,description) values (.107,'Identify 7');       
-insert into questions (level_id,question,answer) values (.107,'7','7');
+--insert into questions (level_id,question,answer) values (.107,'7','7');
 
 --		LEVEL_ID: .108 
 insert into levels(id,description) values (.108,'Identify 8');       
@@ -1844,63 +1841,63 @@ insert into levels(id,description) values (500.09,'Subtraction min 0 max 10');
 --		LEVEL_ID: 600  
 insert into levels(id,description) values (600,'0 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600,'0 X 0','0');
+insert into questions (level_id,question,answer) values (600,'0 X 0','0');
 
 --		LEVEL_ID: 600.01  
 insert into levels(id,description) values (600.01,'0 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.01,'0 X 1','0');
+insert into questions (level_id,question,answer) values (600.01,'0 X 1','0');
 
 --		LEVEL_ID: 600.02  
 insert into levels(id,description) values (600.02,'1 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.02,'1 X 0','0');
+insert into questions (level_id,question,answer) values (600.02,'1 X 0','0');
 
 
 --		LEVEL_ID: 600.03  
 insert into levels(id,description) values (600.03,'0 X 2');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.03,'0 X 2','0');
+insert into questions (level_id,question,answer) values (600.03,'0 X 2','0');
 
 --		LEVEL_ID: 600.04  
 insert into levels(id,description) values (600.04,'2 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.04,'2 X 0','0');
+insert into questions (level_id,question,answer) values (600.04,'2 X 0','0');
 
 
 --		LEVEL_ID: 600.05  
 insert into levels(id,description) values (600.05,'0 X 3');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.05,'0 X 3','0');
+insert into questions (level_id,question,answer) values (600.05,'0 X 3','0');
 
 --		LEVEL_ID: 600.06  
 insert into levels(id,description) values (600.06,'3 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.06,'3 X 0','0');
+insert into questions (level_id,question,answer) values (600.06,'3 X 0','0');
 
 
 
 --		LEVEL_ID: 600.07  
 insert into levels(id,description) values (600.07,'0 X 4');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.07,'4 X 0','0');
+insert into questions (level_id,question,answer) values (600.07,'4 X 0','0');
 
 --		LEVEL_ID: 600.08  
 insert into levels(id,description) values (600.08,'4 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.08,'0 X 4','0');
+insert into questions (level_id,question,answer) values (600.08,'0 X 4','0');
 
 
 
 --		LEVEL_ID: 600.09  
 insert into levels(id,description) values (600.09,'0 X 5');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.09,'0 X 5','0');
+insert into questions (level_id,question,answer) values (600.09,'0 X 5','0');
 
 --		LEVEL_ID: 600.10  
 insert into levels(id,description) values (600.10,'5 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.10,'5 X 0','0');
+insert into questions (level_id,question,answer) values (600.10,'5 X 0','0');
 
 
 
@@ -1908,12 +1905,12 @@ insert into levels(id,description) values (600.10,'5 X 0');
 --		LEVEL_ID: 600.11  
 insert into levels(id,description) values (600.11,'0 X 6');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.11,'0 X 6','0');
+insert into questions (level_id,question,answer) values (600.11,'0 X 6','0');
 
 --		LEVEL_ID: 600.12  
 insert into levels(id,description) values (600.12,'6 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.12,'6 X 0','0');
+insert into questions (level_id,question,answer) values (600.12,'6 X 0','0');
 
 
 
@@ -1921,199 +1918,199 @@ insert into levels(id,description) values (600.12,'6 X 0');
 --		LEVEL_ID: 600.13  
 insert into levels(id,description) values (600.13,'0 X 7');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.13,'0 X 7','0');
+insert into questions (level_id,question,answer) values (600.13,'0 X 7','0');
 
 --		LEVEL_ID: 600.14  
 insert into levels(id,description) values (600.14,'7 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.14,'7 X 0','0');
+insert into questions (level_id,question,answer) values (600.14,'7 X 0','0');
 
 
 --		LEVEL_ID: 600.15  
 insert into levels(id,description) values (600.15,'0 X 8');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.15,'0 X 8','0');
+insert into questions (level_id,question,answer) values (600.15,'0 X 8','0');
 
 --		LEVEL_ID: 600.16  
 insert into levels(id,description) values (600.16,'8 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.16,'8 X 0','0');
+insert into questions (level_id,question,answer) values (600.16,'8 X 0','0');
 
 
 --		LEVEL_ID: 600.17  
 insert into levels(id,description) values (600.17,'0 X 9');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.17,'0 X 9','0');
+insert into questions (level_id,question,answer) values (600.17,'0 X 9','0');
 
 --		LEVEL_ID: 600.18  
 insert into levels(id,description) values (600.18,'9 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.18,'9 X 0','0');
+insert into questions (level_id,question,answer) values (600.18,'9 X 0','0');
 
 
 --		LEVEL_ID: 600.19  
 insert into levels(id,description) values (600.19,'0 X 10');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.19,'0 X 10','0');
+insert into questions (level_id,question,answer) values (600.19,'0 X 10','0');
 
 --		LEVEL_ID: 600.20  
 insert into levels(id,description) values (600.20,'10 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.20,'10 X 0','0');
+insert into questions (level_id,question,answer) values (600.20,'10 X 0','0');
 
 
 --		LEVEL_ID: 600.21  
 insert into levels(id,description) values (600.21,'0 X 11');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.21,'0 X 11','0');
+insert into questions (level_id,question,answer) values (600.21,'0 X 11','0');
 
 --		LEVEL_ID: 600.22  
 insert into levels(id,description) values (600.22,'11 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.22,'11 X 0','0');
+insert into questions (level_id,question,answer) values (600.22,'11 X 0','0');
 
 --		LEVEL_ID: 600.23  
 insert into levels(id,description) values (600.23,'0 X 12');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.23,'0 X 12','0');
+insert into questions (level_id,question,answer) values (600.23,'0 X 12','0');
 
 --		LEVEL_ID: 600.24  
 insert into levels(id,description) values (600.24,'12 X 0');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (600.24,'12 X 0','0');
+insert into questions (level_id,question,answer) values (600.24,'12 X 0','0');
 
 -- 1 times table
 
 --		LEVEL_ID: 601  
 insert into levels(id,description) values (601,'1 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601,'1 X 1','1');
+insert into questions (level_id,question,answer) values (601,'1 X 1','1');
 
 
 
 --		LEVEL_ID: 601.01  
 insert into levels(id,description) values (601.01,'1 X 2');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.01,'1 X 2','2');
+insert into questions (level_id,question,answer) values (601.01,'1 X 2','2');
 
 --		LEVEL_ID: 601.02  
 insert into levels(id,description) values (601.02,'2 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.02,'2 X 1','2');
+insert into questions (level_id,question,answer) values (601.02,'2 X 1','2');
 
 
 
 --		LEVEL_ID: 601.03  
 insert into levels(id,description) values (601.03,'1 X 3');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.03,'1 X 3','3');
+insert into questions (level_id,question,answer) values (601.03,'1 X 3','3');
 
 --		LEVEL_ID: 601.04  
 insert into levels(id,description) values (601.04,'3 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.04,'3 X 1','3');
+insert into questions (level_id,question,answer) values (601.04,'3 X 1','3');
 
 
 
 --		LEVEL_ID: 601.05  
 insert into levels(id,description) values (601.05,'1 X 4');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.05,'1 X 4','4');
+insert into questions (level_id,question,answer) values (601.05,'1 X 4','4');
 
 --		LEVEL_ID: 601.06  
 insert into levels(id,description) values (601.06,'4 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.06,'4 X 1','4');
+insert into questions (level_id,question,answer) values (601.06,'4 X 1','4');
 
 
 --		LEVEL_ID: 601.07  
 insert into levels(id,description) values (601.07,'1 X 5');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.07,'1 X 5','5');
+insert into questions (level_id,question,answer) values (601.07,'1 X 5','5');
 
 --		LEVEL_ID: 601.08  
 insert into levels(id,description) values (601.08,'5 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.08,'5 X 1','5');
+insert into questions (level_id,question,answer) values (601.08,'5 X 1','5');
 
 
 --		LEVEL_ID: 601.09  
 insert into levels(id,description) values (601.09,'1 X 6');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.09,'1 X 6','6');
+insert into questions (level_id,question,answer) values (601.09,'1 X 6','6');
 
 --		LEVEL_ID: 601.10  
 insert into levels(id,description) values (601.10,'6 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.10,'6 X 1','6');
+insert into questions (level_id,question,answer) values (601.10,'6 X 1','6');
 
 
 --		LEVEL_ID: 601.11  
 insert into levels(id,description) values (601.11,'1 X 7');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.11,'1 X 7','7');
+insert into questions (level_id,question,answer) values (601.11,'1 X 7','7');
 
 --		LEVEL_ID: 601.12  
 insert into levels(id,description) values (601.12,'7 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.12,'7 X 1','7');
+insert into questions (level_id,question,answer) values (601.12,'7 X 1','7');
 
 
 --		LEVEL_ID: 601.13  
 insert into levels(id,description) values (601.13,'1 X 8');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.13,'1 X 8','8');
+insert into questions (level_id,question,answer) values (601.13,'1 X 8','8');
 
 --		LEVEL_ID: 601.14  
 insert into levels(id,description) values (601.14,'8 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.14,'8 X 1','8');
+insert into questions (level_id,question,answer) values (601.14,'8 X 1','8');
 
 
 --		LEVEL_ID: 601.15  
 insert into levels(id,description) values (601.15,'1 X 9');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.15,'1 X 9','9');
+insert into questions (level_id,question,answer) values (601.15,'1 X 9','9');
 
 --		LEVEL_ID: 601.16  
 insert into levels(id,description) values (601.16,'9 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.16,'9 X 1','9');
+insert into questions (level_id,question,answer) values (601.16,'9 X 1','9');
 
 
 
 --		LEVEL_ID: 601.17  
 insert into levels(id,description) values (601.17,'1 X 10');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.17,'1 X 10','10');
+insert into questions (level_id,question,answer) values (601.17,'1 X 10','10');
 
 --		LEVEL_ID: 601.18  
 insert into levels(id,description) values (601.18,'10 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.18,'10 X 1','10');
+insert into questions (level_id,question,answer) values (601.18,'10 X 1','10');
 
 
 
 --		LEVEL_ID: 601.19  
 insert into levels(id,description) values (601.19,'1 X 11');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.19,'1 X 11','11');
+insert into questions (level_id,question,answer) values (601.19,'1 X 11','11');
 
 --		LEVEL_ID: 601.20  
 insert into levels(id,description) values (601.20,'11 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.20,'11 X 1','11');
+insert into questions (level_id,question,answer) values (601.20,'11 X 1','11');
 
 
 --		LEVEL_ID: 601.21  
 insert into levels(id,description) values (601.21,'1 X 12');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.21,'1 X 12','12');
+insert into questions (level_id,question,answer) values (601.21,'1 X 12','12');
 
 --		LEVEL_ID: 601.22  
 insert into levels(id,description) values (601.22,'12 X 1');
 --	QUESTIONS: 
---insert into questions (level_id,question,answer) values (601.22,'12 X 1','12');
+insert into questions (level_id,question,answer) values (601.22,'12 X 1','12');
 
 
 -- 2 times table
