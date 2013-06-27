@@ -243,7 +243,7 @@ void Game::createScene()
         mEastWall->setCastShadows(false);
 	mEastWallNode = mApplication->mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	mEastWallNode->attachObject(mEastWall);
-	mEastWallNode->setPosition(250,0,0);
+	mEastWallNode->setPosition(500,0,250);
 
 
 
