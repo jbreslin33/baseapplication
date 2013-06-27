@@ -236,7 +236,7 @@ void Game::createScene()
 
 	// create a eastwall mesh resource
         MeshManager::getSingleton().createPlane("eastwall", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-               Plane(Vector3::UNIT_Z, -10), 500, 50, 10, 10, true, 1, 10, 10, Vector3::UNIT_X);
+               Plane(Vector3::UNIT_X, -10), 500, 50, 10, 10, true, 1, 10, 10, Vector3::UNIT_Y);
 
         mEastWall = mApplication->mSceneMgr->createEntity("Eastwall", "eastwall");
         mEastWall->setMaterialName("Examples/Rockwall");
