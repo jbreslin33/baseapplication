@@ -220,7 +220,7 @@ void Game::createScene()
         mFloor->setCastShadows(false);
 	mFloorNode = mApplication->mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	mFloorNode->attachObject(mFloor);
-	mFloorNode->setPosition(250,0,250);
+	mFloorNode->setPosition(0,0,0);
 
 
 	// create a northwall mesh resource

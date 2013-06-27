@@ -33,6 +33,9 @@ Game::Game(Server* server, int id)
 
 	//bounds
 	mBounds = new Bounds();
+   	mBounds->a = new Vector3D(-250.0f,0.0f,-250.0f);
+        mBounds->c = new Vector3D(250.0f,0.0f,250.0f);
+
 }
 
 Game::~Game()
@@ -95,18 +98,28 @@ void Game::checkCollisions()
 
 void Game::checkBounds(Shape* shape)
 {
+        if (shape->mSceneNode->getPosition().x < mBounds->a->x)
+        {
+                shape->mSceneNode->setPosition(mBounds->a->x, shape->mSceneNode->getPosition().y, shape->mSceneNode->getPosition().z);
+        }
 
+        if (shape->mSceneNode->getPosition().x > mBounds->c->x)
+        {
+                shape->mSceneNode->setPosition(mBounds->c->x, shape->mSceneNode->getPosition().y, shape->mSceneNode->getPosition().z);
+        }
+
+
+        if (shape->mSceneNode->getPosition().z < mBounds->a->z)
+        {
+                shape->mSceneNode->setPosition(shape->mSceneNode->getPosition().x, shape->mSceneNode->getPosition().y, mBounds->a->z);
+        }
+
+        if (shape->mSceneNode->getPosition().z > mBounds->c->z)
+        {
+                shape->mSceneNode->setPosition(shape->mSceneNode->getPosition().x, shape->mSceneNode->getPosition().y, mBounds->c->z);
+        }
 }
-/*
-	float x3 = shape1->mPositionBeforeCollision->x;
-	float z3 = shape1->mPositionBeforeCollision->z;
 
-	float x4 = shape2->mPositionBeforeCollision->x;
-	float z4 = shape2->mPositionBeforeCollision->z;
-
-	shape1->mSceneNode->setPosition(x3,0.0,z3);
-	shape2->mSceneNode->setPosition(x4,0.0,z4);
-*/
 bool Game::checkScope(Client* client, Shape* shape)
 {
 	//let's check scop here...
