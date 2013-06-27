@@ -213,7 +213,7 @@ void Game::createScene()
 
 	// create a floor mesh resource
         MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-               Plane(Vector3::UNIT_Y, -10), 500, 500, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
+               Plane(Vector3::UNIT_Y, 0), 500, 500, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
         mFloor = mApplication->mSceneMgr->createEntity("Floor", "floor");
         mFloor->setMaterialName("Examples/Rockwall");
@@ -225,7 +225,7 @@ void Game::createScene()
 
 	// create a northwall mesh resource
         MeshManager::getSingleton().createPlane("northwall", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-               Plane(Vector3::UNIT_Z, -10), 500, 50, 10, 10, true, 1, 10, 10, Vector3::UNIT_Y);
+               Plane(Vector3::UNIT_Z, 0), 500, 50, 10, 10, true, 1, 10, 10, Vector3::UNIT_Y);
 
         mNorthWall = mApplication->mSceneMgr->createEntity("Northwall", "northwall");
         mNorthWall->setMaterialName("Examples/Rockwall");
@@ -236,7 +236,7 @@ void Game::createScene()
 
 	// create a eastwall mesh resource
         MeshManager::getSingleton().createPlane("eastwall", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-               Plane(Vector3::UNIT_X, -10), 500, 50, 10, 10, true, 1, 10, 10, Vector3::UNIT_Y);
+               Plane(Vector3::UNIT_X, 0), 500, 50, 10, 10, true, 1, 10, 10, Vector3::UNIT_Y);
 
         mEastWall = mApplication->mSceneMgr->createEntity("Eastwall", "eastwall");
         mEastWall->setMaterialName("Examples/Rockwall");
