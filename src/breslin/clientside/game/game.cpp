@@ -220,19 +220,31 @@ void Game::createScene()
         mFloor->setCastShadows(false);
 	mFloorNode = mApplication->mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	mFloorNode->attachObject(mFloor);
-	mFloorNode->setPosition(380,0,200);
+	mFloorNode->setPosition(250,0,250);
 
 
 	// create a northwall mesh resource
         MeshManager::getSingleton().createPlane("northwall", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-               Plane(Vector3::UNIT_Z, -10), 500, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Y);
+               Plane(Vector3::UNIT_Z, -10), 500, 50, 10, 10, true, 1, 10, 10, Vector3::UNIT_Y);
 
         mNorthWall = mApplication->mSceneMgr->createEntity("Northwall", "northwall");
         mNorthWall->setMaterialName("Examples/Rockwall");
         mNorthWall->setCastShadows(false);
 	mNorthWallNode = mApplication->mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	mNorthWallNode->attachObject(mNorthWall);
-	mNorthWallNode->setPosition(0,0,0);
+	mNorthWallNode->setPosition(250,0,0);
+
+	// create a eastwall mesh resource
+        MeshManager::getSingleton().createPlane("eastwall", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+               Plane(Vector3::UNIT_Z, -10), 500, 50, 10, 10, true, 1, 10, 10, Vector3::UNIT_X);
+
+        mEastWall = mApplication->mSceneMgr->createEntity("Eastwall", "eastwall");
+        mEastWall->setMaterialName("Examples/Rockwall");
+        mEastWall->setCastShadows(false);
+	mEastWallNode = mApplication->mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	mEastWallNode->attachObject(mEastWall);
+	mEastWallNode->setPosition(250,0,0);
+
 
 
 }

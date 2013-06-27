@@ -98,6 +98,14 @@ Ogre::SceneNode* mFloorNode;
 Ogre::Entity* mNorthWall;
 Ogre::SceneNode* mNorthWallNode;
 
+Ogre::Entity* mEastWall;
+Ogre::SceneNode* mEastWallNode;
+
+Ogre::Entity* mSouthWall;
+Ogre::SceneNode* mSouthWallNode;
+
+Ogre::Entity* mWestWall;
+Ogre::SceneNode* mWestWallNode;
 /***************************************
 *			          METHODS
 ***************************************/
