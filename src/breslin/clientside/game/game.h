@@ -91,8 +91,12 @@ float mFrameTimeServer;
 
 //scene
 Ogre::Light* mPointLight;
+
 Ogre::Entity* mFloor;
 Ogre::SceneNode* mFloorNode;
+
+Ogre::Entity* mNorthWall;
+Ogre::SceneNode* mNorthWallNode;
 
 /***************************************
 *			          METHODS

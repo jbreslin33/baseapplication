@@ -211,21 +211,30 @@ void Game::createScene()
         mPointLight->setDiffuseColour(Ogre::ColourValue::White);
         mPointLight->setSpecularColour(Ogre::ColourValue::White);
 
-// create a floor mesh resource
-
+	// create a floor mesh resource
         MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
                Plane(Vector3::UNIT_Y, -10), 760, 400, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
-                // create a floor entity, give it a material, and place it at the origin
         mFloor = mApplication->mSceneMgr->createEntity("Floor", "floor");
         mFloor->setMaterialName("Examples/Rockwall");
         mFloor->setCastShadows(false);
-        //mApplication->mSceneMgr->getRootSceneNode()->attachObject(mFloor);
-
 	mFloorNode = mApplication->mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	mFloorNode->attachObject(mFloor);
-
 	mFloorNode->setPosition(380,0,200);
+
+
+	// create a northwall mesh resource
+        MeshManager::getSingleton().createPlane("northwall", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+               Plane(Vector3::UNIT_Y, -10), 760, 400, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
+
+        mNorthWall = mApplication->mSceneMgr->createEntity("Northwall", "northwall");
+        mNorthWall->setMaterialName("Examples/Rockwall");
+        mNorthWall->setCastShadows(false);
+	mNorthWallNode = mApplication->mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	mNorthWallNode->attachObject(mNorthWall);
+	mNorthWallNode->setPosition(380,0,200);
+
+
 }
 
 /*********************************
