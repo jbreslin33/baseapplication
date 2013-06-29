@@ -25,6 +25,7 @@
 
 #define MAX_RUN_SPEED 1.66           // character running speed in units per second
 
+/*   Normal_AI   */
 Normal_AI* Normal_AI::Instance()
 {
   static Normal_AI instance;
@@ -41,6 +42,7 @@ void Normal_AI::exit(AI* ai)
 }
 
 
+/*   Random_AI   */
 Random_AI* Random_AI::Instance()
 {
   static Random_AI instance;
@@ -54,16 +56,19 @@ void Random_AI::enter(AI* ai)
 
 void Random_AI::execute(AI* ai)
 {
-	if (ai->mShape->mClient->mConnectionState == 4)
+	if (ai->mShape->mClient->mConnectionState == 1)
 	{
-		ai->mShape->mKey = rand() % 32 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
+		ai->mAIStateMachine->changeState(No_AI::Instance());
 	}
+
+	ai->mShape->mKey = rand() % 32 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
 }
 
 void Random_AI::exit(AI* ai)
 {
 }
 
+/*   No_AI   */
 No_AI* No_AI::Instance()
 {
 	static No_AI instance;
@@ -76,12 +81,17 @@ void No_AI::enter(AI* ai)
 
 void No_AI::execute(AI* ai)
 {
+	if (ai->mShape->mClient->mConnectionState == 4)
+	{
+		ai->mAIStateMachine->changeState(Random_AI::Instance());
+	}
 }
 
 void No_AI::exit(AI* ai)
 {
 }
 
+/*   Accelerate   */
 Accelerate_AI* Accelerate_AI::Instance()
 {
 	static Accelerate_AI instance;
@@ -97,6 +107,7 @@ void Accelerate_AI::exit(AI* ai)
 {
 }
 
+/*   Decelarate   */
 Decelerate_AI* Decelerate_AI::Instance()
 {
 	static Decelerate_AI instance;
