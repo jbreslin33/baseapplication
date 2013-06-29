@@ -16,6 +16,9 @@
 //shapes
 #include "../../shape/shape.h"
 
+//client
+#include "../../client/client.h"
+
 //rand
 #include <stdlib.h>
 #include <time.h>
@@ -51,7 +54,10 @@ void Random_AI::enter(AI* ai)
 
 void Random_AI::execute(AI* ai)
 {
-	ai->mShape->mKey = rand() % 32 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
+	if (ai->mShape->mClient->mConnectionState == 4)
+	{
+		ai->mShape->mKey = rand() % 32 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
+	}
 }
 
 void Random_AI::exit(AI* ai)

@@ -187,6 +187,12 @@ void Shape::remove()
 
 void Shape::processTick()
 {
+/*
+  	if (mClient->mConnectionState == mClient->DREAMSOCK_DISCONNECTED)
+        {
+		mAiOn = true;
+        }
+*/
 	setKeyDirection();
 
 	mPositionBeforeCollision->x = mSceneNode->getPosition().x;
