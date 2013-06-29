@@ -53,15 +53,30 @@ void Random_AI::enter(AI* ai)
 {
 
 }
+/*
+ 		if (mAITimeOutCounter > mAITimeOutThreshold)
+                {
+                        mShape->mKey = rand() % 32 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
+                        mAITimeOutCounter = 0;
+                }
+                mAITimeOutCounter++;
 
+*/
 void Random_AI::execute(AI* ai)
 {
+	//is this human controlled?
 	if (ai->mShape->mClient->mConnectionState == 1)
 	{
 		ai->mAIStateMachine->changeState(No_AI::Instance());
 	}
 
-	ai->mShape->mKey = rand() % 32 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
+	//have we reached threshold if so give a new mKey for random movement 
+	if (ai->mCounter > ai->mThreshold)
+	{
+		ai->mShape->mKey = rand() % 32 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
+		ai->mCounter = 0;
+	}
+	ai->mCounter++;
 }
 
 void Random_AI::exit(AI* ai)

@@ -58,10 +58,6 @@ public:
 
 ~Client();
 
-	//ai
-	int mAITimeOutCounter;
-	int mAITimeOutThreshold;
-
 	//Message
         Message mMessage;
 

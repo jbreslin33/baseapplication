@@ -22,6 +22,9 @@ AI::AI(Shape* shape) : Ability(shape)
 	mAIStateMachine->setCurrentState      (Random_AI::Instance());
 	mAIStateMachine->setPreviousState     (Random_AI::Instance());
 	mAIStateMachine->setGlobalState       (NULL);
+
+	mCounter   = 0;
+        mThreshold = 1000;
 }
 
 AI::~AI()

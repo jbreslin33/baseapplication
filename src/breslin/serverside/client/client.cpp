@@ -82,9 +82,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	{
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
-
-	mAITimeOutCounter = 0;
-	mAITimeOutThreshold = 150;
 }
 
 Client::~Client()
@@ -144,18 +141,6 @@ void Client::setSocketAddress(struct sockaddr *address)
 
 void Client::processUpdate()
 {
-	//checkForTimeout();	
-/*	
-	if (!mLoggedIn && mShape)
-	{
-        	if (mAITimeOutCounter > mAITimeOutThreshold)
-		{
-        		mShape->mKey = rand() % 32 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
-			mAITimeOutCounter = 0;
-		}	
-        	mAITimeOutCounter++;
-	}
-*/
 }
 
 void Client::remove()

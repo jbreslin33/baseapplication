@@ -26,6 +26,9 @@ Shape* mShape;
 
 AIStateMachine* mAIStateMachine;
 
+int mCounter;
+int mThreshold;
+
 };
 
 #endif
