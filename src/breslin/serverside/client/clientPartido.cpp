@@ -257,30 +257,41 @@ void ClientPartido::sendBattleEnd()
 	}
 }
 
-void ClientPartido::readAnswer(Message* mes)
+void ClientPartido::parseAnswer(Message* mes)
 {
-        //clear answer string
-        mStringAnswer.clear();
-
-        mAnswerTime = mes->ReadShort();
-
+	int answerTime = mes->ReadShort();
         int sizeOfAnswer = mes->ReadByte();
-        //loop thru and set mStringAnswer from client
+
+	std::string answer;
+
+        //loop thru and set stringAnswer   
         for (int i = 0; i < sizeOfAnswer; i++)
         {
                 if (mClientID > 0)
                 {
-
                         char c = mes->ReadByte();
-                        mStringAnswer.append(1,c);
+                        answer.append(1,c);
                 }
                 else
                 {
                         int numeric = mes->ReadByte();
                         char ascii = (char)numeric;
-                        mStringAnswer.append(1,ascii);
+                        answer.append(1,ascii);
                 }
-        }
+	}
+	
+	readAnswer(answerTime,answer);
+
+}
+
+void ClientPartido::readAnswer(int answerTime, std::string answer)
+{
+        //clear answer string
+        mStringAnswer.clear();
+
+        mAnswerTime = answerTime;
+	mStringAnswer = answer;	
+
 	insertAnswerAttempt();
 
         if (mStringAnswer.compare(mServerPartido->mAnswerVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
@@ -335,7 +346,6 @@ void ClientPartido::readAnswer(Message* mes)
                 //send battle end to client
                 sendBattleEnd();
                 opponent->mClientPartido->sendBattleEnd();
-
 	} 	
 	
 	//set vars for new question and answer combo....

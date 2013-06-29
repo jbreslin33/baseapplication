@@ -179,7 +179,7 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
                         		{
                         			continue;
                         		}
-					clientPartido->readAnswer(mes);
+					clientPartido->parseAnswer(mes);
 				}
 			}
                 }
@@ -197,7 +197,7 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 					}
 					else
 					{
-                       	         		clientPartido->readAnswer(mes);
+                       	         		clientPartido->parseAnswer(mes);
 					}
 				}	
 			}

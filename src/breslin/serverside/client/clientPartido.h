@@ -59,7 +59,8 @@ bool checkLevel(int level);
 
 
 //answer
-virtual void readAnswer(Message* message);
+virtual void parseAnswer(Message* message);
+virtual void readAnswer(int answerTime, std::string answer);
 std::string mStringAnswer;
 int mAnswerTime;
 void insertAnswerAttempt();
