@@ -1,5 +1,5 @@
-#ifndef SERVERSIDEAI_H
-#define SERVERSIDEAI_H
+#ifndef AI_H
+#define AI_H
 
 //parent
 #include "../ability.h"

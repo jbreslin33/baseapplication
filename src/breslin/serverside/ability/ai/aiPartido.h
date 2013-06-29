@@ -1,33 +1,30 @@
-#ifndef SERVERSIDEAI_H
-#define SERVERSIDEAI_H
+#ifndef AIPARTIDO_H
+#define AIPARTIDO_H
 
 //parent
-#include "../ability.h"
+#include "../ai.h"
 
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
 
-class AIStateMachine;
-class Shape;
+class AIPartidoStateMachine;
+class ShapePartido;
 
-class AI : public Ability
+class AIPartido : public AI
 {
 
 public:
 
-AI(Shape* shape);
-~AI();
+AIPartido(Shape* shape);
+~AIPartido();
 
 //ticks
 void processTick    ();
 
-Shape* mShape;
+ShapePartido* mShapePartido;
 
-AIStateMachine* mAIStateMachine;
-
-int mCounter;
-int mThreshold;
+AIPartidoStateMachine* mAIPartidoStateMachine;
 
 };
 

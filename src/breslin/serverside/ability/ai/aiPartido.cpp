@@ -13,26 +13,24 @@ using namespace Ogre;
 #include "states/aiStateMachine.h"
 #include "states/aiStates.h"
 
-AI::AI(Shape* shape) : Ability(shape)
+AIPartido::AIPartido(ShapePartido* shapePartido) : AI(shapePartido)
 {
-	mShape = shape;
+	mShapePartido = shapePartido;
 
  	//ai states
-	mAIStateMachine = new AIStateMachine(this);    //setup the state machine
-	mAIStateMachine->setCurrentState      (Random_AI::Instance());
-	mAIStateMachine->setPreviousState     (Random_AI::Instance());
-	mAIStateMachine->setGlobalState       (NULL);
-
-	mCounter   = 0;
-        mThreshold = 1000;
+	mAIPartidoStateMachine = new AIPartidoStateMachine(this);    //setup the state machine
+	mAIPartidoStateMachine->setCurrentState      (Random_AI::Instance());
+	mAIPartidoStateMachine->setPreviousState     (Random_AI::Instance());
+	mAIPartidoStateMachine->setGlobalState       (NULL);
 }
 
-AI::~AI()
+AIPartido::~AIPartido()
 {
 }
 void AI::processTick()
 {
-	mAIStateMachine->update();
+	AI::processTick();
+	mAIPartidoStateMachine->update();
 }
 
 
