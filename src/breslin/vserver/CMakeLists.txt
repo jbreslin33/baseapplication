@@ -271,9 +271,9 @@ set(HDRS
 	../serverside/ability/ai/ai.h
 	
 	#ai states
-	../serverside/ability/ai/aiStateMachine.h
-	../serverside/ability/ai/aiState.h
-	../serverside/ability/ai/aiStates.h	
+	../serverside/ability/ai/states/aiStateMachine.h
+	../serverside/ability/ai/states/aiState.h
+	../serverside/ability/ai/states/aiStates.h	
 	
 	#rotation
 	../serverside/ability/rotation/rotation.h
@@ -343,7 +343,7 @@ set(SRCS
 	../serverside/ability/ai/ai.cpp
 	
 	#ai states
-	../serverside/ability/ai/aiStates.cpp
+	../serverside/ability/ai/states/aiStates.cpp
 	
 	#rotation
 	../serverside/ability/rotation/rotation.cpp

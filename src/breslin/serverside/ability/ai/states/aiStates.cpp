@@ -2,22 +2,22 @@
 #include "aiStates.h"
 
 //log
-#include "../../tdreamsock/dreamSockLog.h"
+#include "../../../tdreamsock/dreamSockLog.h"
 
 //states
 #include "aiStateMachine.h"
 
 //ability
-#include "ai.h"
+#include "../ai.h"
 
 //game
-#include "../../game/game.h"
+#include "../../../game/game.h"
 
 //shapes
-#include "../../shape/shape.h"
+#include "../../../shape/shape.h"
 
 //client
-#include "../../client/client.h"
+#include "../../../client/client.h"
 
 //rand
 #include <stdlib.h>

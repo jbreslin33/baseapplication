@@ -10,8 +10,8 @@
 using namespace Ogre;
 
 //ai states
-#include "aiStateMachine.h"
-#include "aiStates.h"
+#include "states/aiStateMachine.h"
+#include "states/aiStates.h"
 
 AI::AI(Shape* shape) : Ability(shape)
 {
