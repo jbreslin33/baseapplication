@@ -2649,8 +2649,202 @@ insert into levels(id,description) values (607.02,'8 X 7');
 insert into questions (level_id,question,answer) values (607.02,'8 X 7','56');
 
 
+--		LEVEL_ID: 607.03  
+insert into levels(id,description) values (607.03,'7 X 9');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (607.03,'7 X 9','63');
+
+--		LEVEL_ID: 607.04  
+insert into levels(id,description) values (607.04,'9 X 7');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (607.04,'9 X 7','63');
 
 
+--		LEVEL_ID: 607.05  
+insert into levels(id,description) values (607.05,'7 X 10');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (607.05,'7 X 10','70');
+
+--		LEVEL_ID: 607.06  
+insert into levels(id,description) values (607.06,'10 X 7');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (607.06,'10 X 7','70');
+
+
+--		LEVEL_ID: 607.07  
+insert into levels(id,description) values (607.07,'7 X 11');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (607.07,'7 X 11','77');
+
+--		LEVEL_ID: 607.08  
+insert into levels(id,description) values (607.08,'11 X 7');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (607.08,'11 X 7','77');
+
+
+
+--		LEVEL_ID: 607.09  
+insert into levels(id,description) values (607.09,'7 X 12');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (607.09,'7 X 12','84');
+
+--		LEVEL_ID: 607.10  
+insert into levels(id,description) values (607.10,'12 X 7');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (607.10,'12 X 7','84');
+
+
+-- 8 times table
+--		LEVEL_ID: 608  
+insert into levels(id,description) values (608,'8 X 8');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (608,'8 X 8','64');
+
+
+--		LEVEL_ID: 608.01  
+insert into levels(id,description) values (608.01,'8 X 9');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (608.01,'8 X 9','72');
+
+--		LEVEL_ID: 608.02  
+insert into levels(id,description) values (608.02,'9 X 8');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (608.02,'9 X 8','72');
+
+
+--		LEVEL_ID: 608.03  
+insert into levels(id,description) values (608.03,'8 X 10');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (608.03,'8 X 10','80');
+
+--		LEVEL_ID: 608.04  
+insert into levels(id,description) values (608.04,'10 X 8');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (608.04,'10 X 8','80');
+
+
+--		LEVEL_ID: 608.05  
+insert into levels(id,description) values (608.05,'8 X 11');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (608.05,'8 X 11','88');
+
+--		LEVEL_ID: 608.06  
+insert into levels(id,description) values (608.06,'11 X 8');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (608.06,'11 X 8','88');
+
+
+--		LEVEL_ID: 608.07  
+insert into levels(id,description) values (608.07,'8 X 12');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (608.07,'8 X 12','96');
+
+--		LEVEL_ID: 608.08  
+insert into levels(id,description) values (608.08,'12 X 8');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (608.08,'12 X 8','96');
+
+
+
+
+
+-- 9 times table
+--		LEVEL_ID: 609  
+insert into levels(id,description) values (609,'9 X 9');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (609,'9 X 9','81');
+
+
+--		LEVEL_ID: 609.01  
+insert into levels(id,description) values (609.01,'9 X 10');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (609.01,'9 X 10','90');
+
+--		LEVEL_ID: 609.02  
+insert into levels(id,description) values (609.02,'10 X 9');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (609.02,'10 X 9','90');
+
+
+--		LEVEL_ID: 609.03  
+insert into levels(id,description) values (609.03,'9 X 11');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (609.03,'9 X 11','99');
+
+--		LEVEL_ID: 609.04  
+insert into levels(id,description) values (609.04,'11 X 9');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (609.04,'11 X 9','99');
+
+
+--		LEVEL_ID: 609.05  
+insert into levels(id,description) values (609.05,'9 X 12');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (609.05,'9 X 12','108');
+
+--		LEVEL_ID: 609.06  
+insert into levels(id,description) values (609.06,'12 X 9');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (609.06,'12 X 9','108');
+
+
+
+
+-- 10 times table
+--		LEVEL_ID: 610  
+insert into levels(id,description) values (610,'10 X 10');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (610,'10 X 10','100');
+
+--		LEVEL_ID: 610.01  
+insert into levels(id,description) values (610.01,'10 X 11');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (610.01,'10 X 11','110');
+
+--		LEVEL_ID: 610.02  
+insert into levels(id,description) values (610.02,'11 X 10');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (610.02,'11 X 10','110');
+
+
+--		LEVEL_ID: 610.03  
+insert into levels(id,description) values (610.03,'10 X 12');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (610.03,'10 X 12','120');
+
+--		LEVEL_ID: 610.04  
+insert into levels(id,description) values (610.04,'12 X 10');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (610.04,'12 X 10','120');
+
+
+
+-- 11 times table
+--		LEVEL_ID: 611  
+insert into levels(id,description) values (611,'11 X 11');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (611,'11 X 11','122');
+
+
+--		LEVEL_ID: 611.01  
+insert into levels(id,description) values (611.01,'11 X 12');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (611.01,'11 X 12','132');
+
+--		LEVEL_ID: 611.02  
+insert into levels(id,description) values (611.02,'12 X 11');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (611.02,'12 X 11','132');
+
+
+
+
+
+-- 12 times table
+--		LEVEL_ID: 612  
+insert into levels(id,description) values (612,'12 X 12');
+--	QUESTIONS: 
+insert into questions (level_id,question,answer) values (612,'12 X 12','144');
 -----////////////////////-DIVISION-///////////////////////////////////////
 
 --		LEVEL_ID: 700 
