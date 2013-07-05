@@ -4,10 +4,6 @@
 
 class AI;
 
-class Normal_AI : public AIState
-{
-private:
-
 class Random_AI : public AIState
 {
 private:
