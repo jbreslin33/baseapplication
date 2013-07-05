@@ -187,12 +187,6 @@ void Shape::remove()
 
 void Shape::processTick()
 {
-/*
-  	if (mClient->mConnectionState == mClient->DREAMSOCK_DISCONNECTED)
-        {
-		mAiOn = true;
-        }
-*/
 	setKeyDirection();
 
 	mPositionBeforeCollision->x = mSceneNode->getPosition().x;
@@ -261,6 +255,14 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 	{
 		mKeyRotation += 1;
 	}
+/*
+	if (mClient->mLoggedIn)
+	{
+		LogString("x:%f",mKeyDirection.x);
+		LogString("z:%f",mKeyDirection.z);
+	}
+*/
+
 }
 
 int Shape::setFlag()
