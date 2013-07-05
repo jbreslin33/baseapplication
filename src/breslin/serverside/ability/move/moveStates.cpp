@@ -29,6 +29,7 @@ Normal_Move* Normal_Move::Instance()
 }
 void Normal_Move::enter(Move* move)
 {
+	//LogString("Normal");
 }
 void Normal_Move::execute(Move* move)
 {
@@ -75,6 +76,7 @@ No_Move* No_Move::Instance()
 }
 void No_Move::enter(Move* move)
 {
+	//LogString("No");
 }
 void No_Move::execute(Move* move)
 {
@@ -118,6 +120,7 @@ Accelerate_Move* Accelerate_Move::Instance()
 }
 void Accelerate_Move::enter(Move* move)
 {
+	//LogString("Accelerate");
 }
 void Accelerate_Move::execute(Move* move)
 {
@@ -167,6 +170,7 @@ Decelerate_Move* Decelerate_Move::Instance()
 }
 void Decelerate_Move::enter(Move* move)
 {
+	//LogString("Decelerate");
 }
 void Decelerate_Move::execute(Move* move)
 {
