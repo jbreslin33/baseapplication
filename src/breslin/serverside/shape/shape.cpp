@@ -42,7 +42,7 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	
 	mPositionBeforeCollision      = new Vector3D();
 
-	mRotation         = new Vector3D();
+	mRotationBres         = new Vector3D();
 	mRotationLast         = new Vector3D();
 
 	mKey = 0;
@@ -89,7 +89,19 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 
 	createShape(root,position);
 
-	addAbilitys();
+	//add abilitys
+	mRotation = new Rotation(this);
+	mAbilityVector.push_back(mRotation);	
+	
+	mMove = new Move(this);
+	mAbilityVector.push_back(mMove);	
+	
+	mSeek = new Seek(this);
+	mAbilityVector.push_back(mSeek);	
+	
+	mAI = new AI(this);
+	mAbilityVector.push_back(mAI);	
+	
 
 	//register with shape vector
 	mGame->mShapeVector.push_back(this);
@@ -144,9 +156,11 @@ Ability* Shape::getAbility(Ability* ability)
 	{
 		if (typeid(ability) == typeid(mAbilityVector.at(i)))
 		{
+			LogString("return ability");
 			return mAbilityVector.at(i);
 		}
 	}
+	LogString("return 0");
 	return 0;
 }
 
@@ -206,9 +220,9 @@ void Shape::processTick()
 	Ogre::Quaternion orientation = mSceneNode->getOrientation();
     	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
 
-  	mRotation->x = mSceneNode->_getDerivedOrientation().zAxis().x;
+  	mRotationBres->x = mSceneNode->_getDerivedOrientation().zAxis().x;
 
-    	mRotation->z = mSceneNode->_getDerivedOrientation().zAxis().z;
+    	mRotationBres->z = mSceneNode->_getDerivedOrientation().zAxis().z;
 
 	if (mText.compare(mTextLast) != 0)
 	{
@@ -288,11 +302,11 @@ int Shape::setFlag()
 	}
 
 	//Rotation
-	if(mRotation->x != mRotationLast->x)
+	if(mRotationBres->x != mRotationLast->x)
 	{
 		flags |= mCommandRotationX;
 	}
-	if(mRotation->z != mRotationLast->z)
+	if(mRotationBres->z != mRotationLast->z)
 	{
 		flags |= mCommandRotationZ;
 	}
@@ -330,11 +344,11 @@ void Shape::addToMoveMessage(Message* message)
 	//Rotation
 	if(flags & mCommandRotationX)
 	{
-		message->WriteFloat(mRotation->x);
+		message->WriteFloat(mRotationBres->x);
 	}
 	if(flags & mCommandRotationZ)
 	{
-		message->WriteFloat(mRotation->z);
+		message->WriteFloat(mRotationBres->z);
 	}
 
 	//frameTime

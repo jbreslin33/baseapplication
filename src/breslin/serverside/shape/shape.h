@@ -16,6 +16,7 @@ class Client;
 class Rotation;
 class Move;
 class AI;
+class Seek;
 class Vector3D;
 class Ability;
 
@@ -73,6 +74,10 @@ Game* mGame;
 
 //abilitys
 std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
+Rotation* mRotation;
+Move* 	  mMove;
+Seek*     mSeek;
+AI*       mAI;
 
 //associated client if any
 Client* mClient;
@@ -103,7 +108,7 @@ Vector3D* mPositionLast;
 
 Vector3D* mPositionBeforeCollision;            //origin of last frame/tick
 
-Vector3D* mRotation; //rotation during frame/tick
+Vector3D* mRotationBres; //rotation during frame/tick
 Vector3D* mRotationLast;
 
 int mKey;               //key pressed

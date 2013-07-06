@@ -3,6 +3,8 @@
 
 #include "../../client/client.h"
 
+#include "../../../math/vector3D.h"
+
 #include <string>
 
 //Ogre headers
@@ -18,7 +20,7 @@ Seek::Seek(Shape* shape) : Ability(shape)
 	mShape = shape;
 
 	mSeekShape = NULL;
-	mSeekPoint = NULL;
+	mSeekPoint = new Vector3D(100.0f,0.0f,100.0f);
 
  	//seek states
 	mSeekStateMachine = new SeekStateMachine(this);    //setup the state machine
@@ -32,6 +34,7 @@ Seek::~Seek()
 }
 void Seek::processTick()
 {
+	LogString("pr");
 	mSeekStateMachine->update();
 }
 

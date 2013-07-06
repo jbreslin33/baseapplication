@@ -38,14 +38,24 @@ void Normal_Seek::execute(Seek* seek)
 {
 	if (seek->mSeekShape || seek->mSeekPoint)
 	{
-		//LogString("seeking");
-		Vector3D* currentPosition;
-		currentPosition->convertFromVector3(seek->mShape->mSceneNode->getPosition());
-		
+ 		Vector3D* newKeyDirection = new Vector3D();
+                Vector3D* currentPosition  = new Vector3D();
+                currentPosition->x = seek->mShape->mSceneNode->getPosition().x;
+                currentPosition->y = seek->mShape->mSceneNode->getPosition().y;
+                currentPosition->z = seek->mShape->mSceneNode->getPosition().z;
+
+                newKeyDirection->subtract(seek->mSeekPoint,currentPosition);
+                seek->mShape->mKeyDirection.x = newKeyDirection->x;
+               	seek->mShape->mKeyDirection.y = newKeyDirection->y;
+                seek->mShape->mKeyDirection.z = newKeyDirection->z;
+
+                seek->mShape->mKeyDirection.normalise();
+		LogString("x:%f",seek->mShape->mKeyDirection.x);
+		LogString("z:%f",seek->mShape->mKeyDirection.z);
 	}
 	else
 	{
-		seek->mSeekStateMachine->changeState(No_Seek::Instance());
+//		seek->mSeekStateMachine->changeState(No_Seek::Instance());
 	}
 /*
 	//check for No_seek and Decelerate and Accelerate states..

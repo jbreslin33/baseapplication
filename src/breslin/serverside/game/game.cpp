@@ -253,8 +253,8 @@ void Game::sendShapes(Client* client)
         	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().y);
         	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().z);
 
-        	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->x);
-        	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->z);
+        	mMessage.WriteFloat(mShapeVector.at(i)->mRotationBres->x);
+        	mMessage.WriteFloat(mShapeVector.at(i)->mRotationBres->z);
 
         	//mesh
         	mMessage.WriteByte(mShapeVector.at(i)->mMeshCode);

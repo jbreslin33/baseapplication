@@ -614,7 +614,7 @@ void Server::storeCommands(Shape* shape)
 
         shape->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
 
-        shape->mRotationLast->copyValuesFrom(shape->mRotation);
+        shape->mRotationLast->copyValuesFrom(shape->mRotationBres);
 }
 
 
