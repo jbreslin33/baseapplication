@@ -144,7 +144,7 @@ void ClientPartido::sendQuestion(int questionID)
 }
 void ClientPartido::battleStart(ShapePartido* whoToBattle)
 {
-        mShapePartido->mKey = 0;
+        mKey = 0;
         mShapePartido->mOpponent = whoToBattle;
 
 	mBattleScore = 0;	

@@ -62,7 +62,7 @@ int			mIndex;
 Message	mMessage; //is this all i need to get information over the internets?
 
 //keys
-Vector3 mKeyDirection;
+Vector3 mVelocity;
 float   mKeyRotation;
 Vector3 mGoalDirection;
 
@@ -96,20 +96,9 @@ bool mAnimated;
 //ai
 bool mIsAI;
 
-//keys
-int mKeyUp;
-int mKeyDown;
-int mKeyLeft;
-int mKeyRight;
-int mKeyCounterClockwise;
-int mKeyClockwise;
-
 Vector3D* mPositionLast;
 
 Vector3D* mPositionBeforeCollision;            //origin of last frame/tick
-
-int mKey;               //key pressed
-int mKeyLast; 
 
 /******************************************************
 *				METHODS

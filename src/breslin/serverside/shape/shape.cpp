@@ -42,9 +42,6 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	
 	mPositionBeforeCollision      = new Vector3D();
 
-	mKey = 0;
-	mKeyLast = 0;
-
  	//mPosition = position;
 	mIndex  = index;
 
@@ -52,7 +49,7 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	mSpeedMax = 1.66f;
 
 	//keys
-    	mKeyDirection = Vector3::ZERO;
+    	mVelocity = Vector3::ZERO;
 	mKeyRotation  = 0.0f;
 	mGoalDirection = Vector3::ZERO;
 
@@ -75,14 +72,6 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 
 	//ai -- bool
 	mIsAI = ai;
-
-	//keys
-	mKeyUp = 1;
-	mKeyDown = 2;
-	mKeyLeft = 4;
-	mKeyRight = 8;
-	mKeyCounterClockwise = 16;
-	mKeyClockwise = 32;
 
 	createShape(root,position);
 
@@ -177,6 +166,11 @@ void Shape::remove()
 
 void Shape::processTick()
 {
+	if (mClient->mLoggedIn)
+	{
+		mClient->setVelocity();
+	}
+
 	setKeyDirection();
 
 	mPositionBeforeCollision->x = mSceneNode->getPosition().x;
@@ -204,14 +198,13 @@ void Shape::processTick()
 }
 
 
-void Shape::setKeyDirection()  //this is called first in process tick so let's start conversion to separate
-//move/rotation.
+void Shape::setKeyDirection()  
 {
+/*
 	mKeyDirection.x = 0;
     	mKeyDirection.y = 0;
     	mKeyDirection.z = 0;
 
-	mKeyRotation = 0.0f;
  
 	// keep track of the player's intended direction
     	if(mKey & mKeyUp) 
@@ -235,24 +228,17 @@ void Shape::setKeyDirection()  //this is called first in process tick so let's s
 	}
 
 	mKeyDirection.normalise();
-
+*/
+	mKeyRotation = 0.0f;
    	// keep track of the player's intended rotation
-    	if(mKey & mKeyCounterClockwise) 
+    	if(mClient->mKey & mClient->mKeyCounterClockwise) 
 	{
 		mKeyRotation += -1;
 	}
-	if(mKey & mKeyClockwise) 
+	if(mClient->mKey & mClient->mKeyClockwise) 
 	{
 		mKeyRotation += 1;
 	}
-/*
-	if (mClient->mLoggedIn)
-	{
-		LogString("x:%f",mKeyDirection.x);
-		LogString("z:%f",mKeyDirection.z);
-	}
-*/
-
 }
 
 int Shape::setFlag()

@@ -58,6 +58,14 @@ public:
 
 ~Client();
 
+//keys
+int mKeyUp;
+int mKeyDown;
+int mKeyLeft;
+int mKeyRight;
+int mKeyCounterClockwise;
+int mKeyClockwise;
+
 	//Message
         Message mMessage;
 
@@ -76,7 +84,13 @@ public:
 	std::string mStringUsername;
 	std::string mStringPassword;
 
+	int mKey;
+	int mKeyLast;
+
 public:
+	//setVelocity
+	void setVelocity();
+
 	//processUpdate
 	virtual void processUpdate();
 

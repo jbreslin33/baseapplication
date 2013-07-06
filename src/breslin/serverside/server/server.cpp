@@ -613,7 +613,7 @@ void Server::sendCommand(Game* game)
 
 void Server::storeCommands(Shape* shape)
 {
-        shape->mKeyLast = shape->mKey;
+        shape->mClient->mKeyLast = shape->mClient->mKey;
 
         shape->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
 

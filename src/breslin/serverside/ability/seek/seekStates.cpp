@@ -45,11 +45,11 @@ void Normal_Seek::execute(Seek* seek)
                 currentPosition->z = seek->mShape->mSceneNode->getPosition().z;
 
                 newKeyDirection->subtract(seek->mSeekPoint,currentPosition);
-                seek->mShape->mKeyDirection.x = newKeyDirection->x;
-               	seek->mShape->mKeyDirection.y = newKeyDirection->y;
-                seek->mShape->mKeyDirection.z = newKeyDirection->z;
+                seek->mShape->mVelocity.x = newKeyDirection->x;
+               	seek->mShape->mVelocity.y = newKeyDirection->y;
+                seek->mShape->mVelocity.z = newKeyDirection->z;
 
-                seek->mShape->mKeyDirection.normalise();
+                seek->mShape->mVelocity.normalise();
 	}
 	else
 	{
@@ -57,7 +57,7 @@ void Normal_Seek::execute(Seek* seek)
 	}
 /*
 	//check for No_seek and Decelerate and Accelerate states..
-    	if (seek->mShape->mKeyDirection.isZeroLength()) 
+    	if (seek->mShape->mVelocity.isZeroLength()) 
 	{
 		if(seek->mRunSpeed > 0.0) //Decelerate_Seek
 		{
@@ -80,9 +80,9 @@ void Normal_Seek::execute(Seek* seek)
 	}
 
 	//actual seek
-	seek->mShape->mSceneNode->translate(seek->mShape->mKeyDirection.x * seek->mShape->mGame->mServer->mFrameTime / 1000.0f * seek->mRunSpeed,
+	seek->mShape->mSceneNode->translate(seek->mShape->mVelocity.x * seek->mShape->mGame->mServer->mFrameTime / 1000.0f * seek->mRunSpeed,
 		0,
-		seek->mShape->mKeyDirection.z  * seek->mShape->mGame->mServer->mFrameTime / 1000.0f * seek->mRunSpeed,
+		seek->mShape->mVelocity.z  * seek->mShape->mGame->mServer->mFrameTime / 1000.0f * seek->mRunSpeed,
 		Node::TS_WORLD);
 */
 }
@@ -113,7 +113,7 @@ void No_Seek::execute(Seek* seek)
 		seek->mSeekStateMachine->changeState(Normal_Seek::Instance());
 	}
 /*
-	if (seek->mShape->mKeyDirection.isZeroLength()) 
+	if (seek->mShape->mVelocity.isZeroLength()) 
 	{
 		if(seek->mRunSpeed > 0.0) //Decelerate_Seek
 		{

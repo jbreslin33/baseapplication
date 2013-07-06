@@ -162,7 +162,7 @@ void Game::sendExitNotification()
 //this is just for clients right now, should i make another or hijack this function??
 void Game::readDeltaMoveCommand(Message *mes, Client *client)
 {
-	client->mShape->mKey = mes->ReadByte();
+	client->mKey = mes->ReadByte();
 }
 
 unsigned int Game::getOpenIndex()

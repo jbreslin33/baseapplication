@@ -43,6 +43,14 @@
 //server side client constructor, many instances will be made, one for each client connected.
 Client::Client(Server* server, struct sockaddr *address, int clientID)
 {
+        //keys
+        mKeyUp = 1;
+        mKeyDown = 2;
+        mKeyLeft = 4;
+        mKeyRight = 8;
+        mKeyCounterClockwise = 16;
+        mKeyClockwise = 32;
+
 	//logged in
 	mLoggedIn = false;
 
@@ -62,6 +70,10 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	//server
 	mServer = server;
 
+	//key
+	mKey = 0;
+	mKeyLast = 0;
+	
 	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 
 	if (!address)
@@ -125,6 +137,36 @@ void Client::setGame(int gameID)
 			LogString("Client::ControlGame:%d",gameID);
                 }
 	}	
+}
+
+void Client::setVelocity()
+{
+	mShape->mVelocity.x = 0;
+        mShape->mVelocity.y = 0;
+        mShape->mVelocity.z = 0;
+
+        // keep track of the player's intended direction
+        if(mKey & mKeyUp)
+        {
+                mShape->mVelocity.z += -1;
+        }
+
+        if(mKey & mKeyLeft)
+        {
+                mShape->mVelocity.x += -1;
+        }
+ 
+        if(mKey & mKeyDown)
+        {
+                mShape->mVelocity.z += 1;
+        }
+   
+        if(mKey & mKeyRight)
+        {
+                mShape->mVelocity.x += 1;
+        }
+
+        mShape->mVelocity.normalise();
 }
 
 //shape
