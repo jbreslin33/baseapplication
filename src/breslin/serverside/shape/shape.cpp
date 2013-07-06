@@ -90,19 +90,19 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	createShape(root,position);
 
 	//add abilitys
-	mRotation = new Rotation(this);
-	mAbilityVector.push_back(mRotation);	
-	
-	mMove = new Move(this);
-	mAbilityVector.push_back(mMove);	
-	
-	mSeek = new Seek(this);
-	mAbilityVector.push_back(mSeek);	
 	
 	mAI = new AI(this);
 	mAbilityVector.push_back(mAI);	
 	
+	mSeek = new Seek(this);
+	mAbilityVector.push_back(mSeek);	
+	
+	mMove = new Move(this);
+	mAbilityVector.push_back(mMove);	
 
+	mRotation = new Rotation(this);
+	mAbilityVector.push_back(mRotation);	
+	
 	//register with shape vector
 	mGame->mShapeVector.push_back(this);
 }
@@ -136,32 +136,6 @@ void Shape::setValues()
 void Shape::addAbility(Ability* ability)
 {
 	mAbilityVector.push_back(ability);	
-}
-
-void Shape::addAbilitys()
-{
-	//add abilitys
-	addAbility(new Rotation(this));
-	addAbility(new Move(this));
-	addAbility(new Seek(this));
-	if (mIsAI)
-	{
-		addAbility(new AI(this));
-	}
-}
-
-Ability* Shape::getAbility(Ability* ability)
-{
-	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
-	{
-		if (typeid(ability) == typeid(mAbilityVector.at(i)))
-		{
-			LogString("return ability");
-			return mAbilityVector.at(i);
-		}
-	}
-	LogString("return 0");
-	return 0;
 }
 
 void Shape::remove()

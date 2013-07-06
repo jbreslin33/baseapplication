@@ -52,20 +52,6 @@ void Random_AI::execute(AI* ai)
 			ai->mShape->mSeek->mSeekPoint->x = 100.0f;
 			ai->mShape->mSeek->mSeekPoint->y = 0.0f;
 			ai->mShape->mSeek->mSeekPoint->z = 100.0f;
-		/*	
-			Vector3D* newKeyDirection = new Vector3D();
-			Vector3D* currentPosition  = new Vector3D();
-			currentPosition->x = ai->mShape->mSceneNode->getPosition().x;
-			currentPosition->y = ai->mShape->mSceneNode->getPosition().y;
-			currentPosition->z = ai->mShape->mSceneNode->getPosition().z;
-
-			newKeyDirection->subtract(ai->mShape->mSeek->mSeekPoint,currentPosition);
-			ai->mShape->mKeyDirection.x = newKeyDirection->x;
-			ai->mShape->mKeyDirection.y = newKeyDirection->y;
-			ai->mShape->mKeyDirection.z = newKeyDirection->z;
-
-			ai->mShape->mKeyDirection.normalise();
-*/
 		}
 		else
 		{

@@ -122,8 +122,6 @@ void remove();
 
 //abilitys
 void     addAbility(Ability* ability);
-Ability* getAbility(Ability* ability);
-void addAbilitys();
 
 //create
 void createShape(Ogre::Root* root, Vector3D* position);
