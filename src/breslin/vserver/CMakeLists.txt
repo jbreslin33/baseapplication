@@ -266,6 +266,15 @@ set(HDRS
 	../serverside/ability/move/moveState.h
 	../serverside/ability/move/moveStates.h
 	
+	#seek
+	../serverside/ability/seek/seek.h
+	../serverside/ability/seek/seek.h
+	
+	#seek states
+	../serverside/ability/seek/seekStateMachine.h
+	../serverside/ability/seek/seekState.h
+	../serverside/ability/seek/seekStates.h
+	
 	#ai
 	../serverside/ability/ai/ai.h
 	../serverside/ability/ai/ai.h
@@ -338,6 +347,12 @@ set(SRCS
 	
 	#move states
 	../serverside/ability/move/moveStates.cpp
+	
+	#seek
+	../serverside/ability/seek/seek.cpp
+	
+	#seek states
+	../serverside/ability/seek/seekStates.cpp
 	
 	#ai
 	../serverside/ability/ai/ai.cpp
