@@ -22,6 +22,9 @@
 //seek
 #include "../../seek/seek.h"
 
+//vector3D
+#include "../../../../math/vector3D.h"
+
 //rand
 #include <stdlib.h>
 #include <time.h>
@@ -42,10 +45,11 @@ void Random_AI::enter(AI* ai)
 
 void Random_AI::execute(AI* ai)
 {
-	Seek* seek;
-	if (ai->mShape->getAbility(seek))
+	Seek* seek = (Seek*)ai->mShape->getAbility(seek);
+	
+	if (seek)
 	{
-		LogString("seek exists");
+		seek->mSeekPoint = new Vector3D(100.0f,0.0f,100.0f);	
 	}
 
 /*

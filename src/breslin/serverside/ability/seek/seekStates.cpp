@@ -19,6 +19,9 @@
 //shape
 #include "../../shape/shape.h"
 
+//vector3D
+#include "../../../math/vector3D.h"
+
 /*****************************************
 	Normal_Seek
 ****************************************/
@@ -36,6 +39,9 @@ void Normal_Seek::execute(Seek* seek)
 	if (seek->mSeekShape || seek->mSeekPoint)
 	{
 		//LogString("seeking");
+		Vector3D* currentPosition;
+		currentPosition->convertFromVector3(seek->mShape->mSceneNode->getPosition());
+		
 	}
 	else
 	{
