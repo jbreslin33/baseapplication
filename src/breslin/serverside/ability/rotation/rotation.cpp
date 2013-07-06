@@ -36,9 +36,8 @@ Rotation::~Rotation()
 
 void Rotation::processTick()
 {
-	//LogString("rb:%f",mRotationSpeed);
+	LogString("pt");
 	mRotationStateMachine->update();
-	//LogString("ra:%f",mRotationSpeed);
 }
 
 

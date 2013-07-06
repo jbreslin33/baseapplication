@@ -97,11 +97,12 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	mSeek = new Seek(this);
 	mAbilityVector.push_back(mSeek);	
 	
+	mRotation = new Rotation(this);
+	mAbilityVector.push_back(mRotation);	
+	
 	mMove = new Move(this);
 	mAbilityVector.push_back(mMove);	
 
-	mRotation = new Rotation(this);
-	mAbilityVector.push_back(mRotation);	
 	
 	//register with shape vector
 	mGame->mShapeVector.push_back(this);

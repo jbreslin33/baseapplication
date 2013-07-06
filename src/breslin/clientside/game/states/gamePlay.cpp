@@ -117,6 +117,33 @@ void GamePlay::execute()
         	mGame->mApplication->mKeyArray[100] = false;
         }
 
+	//COUNTERCLOCKWISE
+        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_Z)) 
+        {
+        	mGame->mApplication->mKeyArray[122] = true;
+                mGame->mKeyCurrent |= mGame->mKeyCounterClockwise;
+        }
+       	else
+        {
+        	mGame->mApplication->mKeyArray[122] = false;
+        }
+
+	//CLOCKWISE
+        if (mGame->mApplication->getKeyboard()->isKeyDown(OIS::KC_X)) 
+        {
+        	mGame->mApplication->mKeyArray[120] = true;
+                mGame->mKeyCurrent |= mGame->mKeyClockwise;
+        }
+       	else
+        {
+        	mGame->mApplication->mKeyArray[120] = false;
+        }
+
+
+// mKeyCounterClockwise = 16;
+ //       mKeyClockwise = 32;
+
+
 	//network outgoing
 	mGame->sendByteBuffer();
 }

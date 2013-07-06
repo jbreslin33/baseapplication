@@ -477,13 +477,6 @@ bool ApplicationBreslin::mouseMoved( const OIS::MouseEvent &arg )
     return true;
 }
 
-/*
-        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
-        {
-                mKeyCurrent |= mKeyUp;
-        }
-*/
-
 bool ApplicationBreslin::keyPressed( const OIS::KeyEvent &arg )
 {
 	int numeric = arg.text;
