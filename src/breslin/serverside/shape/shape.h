@@ -108,9 +108,6 @@ Vector3D* mPositionLast;
 
 Vector3D* mPositionBeforeCollision;            //origin of last frame/tick
 
-Vector3D* mRotationBres; //rotation during frame/tick
-Vector3D* mRotationLast;
-
 int mKey;               //key pressed
 int mKeyLast; 
 

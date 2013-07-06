@@ -22,6 +22,9 @@
 //math
 #include "../../math/vector3D.h"
 
+//rotation
+#include "../ability/rotation/rotation.h"
+
 //postgresql
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
@@ -614,7 +617,7 @@ void Server::storeCommands(Shape* shape)
 
         shape->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
 
-        shape->mRotationLast->copyValuesFrom(shape->mRotationBres);
+        shape->mRotation->mRotationLast->copyValuesFrom(shape->mRotation->mRotation);
 }
 
 

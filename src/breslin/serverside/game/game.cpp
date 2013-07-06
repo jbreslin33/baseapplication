@@ -21,6 +21,9 @@
 //bounds
 #include "../bounds/bounds.h"
 
+//rotation
+#include "../ability/rotation/rotation.h"
+
 #include <stdio.h>
 
 Game::Game(Server* server, int id)
@@ -253,8 +256,8 @@ void Game::sendShapes(Client* client)
         	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().y);
         	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().z);
 
-        	mMessage.WriteFloat(mShapeVector.at(i)->mRotationBres->x);
-        	mMessage.WriteFloat(mShapeVector.at(i)->mRotationBres->z);
+        	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->mRotation->x);
+        	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->mRotation->z);
 
         	//mesh
         	mMessage.WriteByte(mShapeVector.at(i)->mMeshCode);

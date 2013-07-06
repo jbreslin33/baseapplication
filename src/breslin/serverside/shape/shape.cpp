@@ -42,9 +42,6 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	
 	mPositionBeforeCollision      = new Vector3D();
 
-	mRotationBres         = new Vector3D();
-	mRotationLast         = new Vector3D();
-
 	mKey = 0;
 	mKeyLast = 0;
 
@@ -195,9 +192,9 @@ void Shape::processTick()
 	Ogre::Quaternion orientation = mSceneNode->getOrientation();
     	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
 
-  	mRotationBres->x = mSceneNode->_getDerivedOrientation().zAxis().x;
+  	mRotation->mRotation->x = mSceneNode->_getDerivedOrientation().zAxis().x;
 
-    	mRotationBres->z = mSceneNode->_getDerivedOrientation().zAxis().z;
+    	mRotation->mRotation->z = mSceneNode->_getDerivedOrientation().zAxis().z;
 
 	if (mText.compare(mTextLast) != 0)
 	{
@@ -277,11 +274,11 @@ int Shape::setFlag()
 	}
 
 	//Rotation
-	if(mRotationBres->x != mRotationLast->x)
+	if(mRotation->mRotation->x != mRotation->mRotationLast->x)
 	{
 		flags |= mCommandRotationX;
 	}
-	if(mRotationBres->z != mRotationLast->z)
+	if(mRotation->mRotation->z != mRotation->mRotationLast->z)
 	{
 		flags |= mCommandRotationZ;
 	}
@@ -319,11 +316,11 @@ void Shape::addToMoveMessage(Message* message)
 	//Rotation
 	if(flags & mCommandRotationX)
 	{
-		message->WriteFloat(mRotationBres->x);
+		message->WriteFloat(mRotation->mRotation->x);
 	}
 	if(flags & mCommandRotationZ)
 	{
-		message->WriteFloat(mRotationBres->z);
+		message->WriteFloat(mRotation->mRotation->z);
 	}
 
 	//frameTime

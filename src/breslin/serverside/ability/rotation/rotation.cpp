@@ -15,13 +15,16 @@ using namespace Ogre;
 
 Rotation::Rotation(Shape* shape) : Ability(shape)
 {
+	mRotation = new Vector3D();
+	mRotationLast = new Vector3D();
+
 	mShape = shape;
 
 	mRotationSpeed  = 0.0;
 
-    //run acceleration
-    mRotationAccel    = .04166f * 100.0f;
-    mRotationDecel    = .04166f * 100.0f;
+    	//run acceleration
+    	mRotationAccel    = .04166f * 100.0f;
+    	mRotationDecel    = .04166f * 100.0f;
 
 	//rotation states
 	mRotationStateMachine = new RotationStateMachine(this);    //setup the state machine
@@ -36,7 +39,6 @@ Rotation::~Rotation()
 
 void Rotation::processTick()
 {
-	LogString("pt");
 	mRotationStateMachine->update();
 }
 
