@@ -39,6 +39,12 @@ void Random_AI::enter(AI* ai)
 
 void Random_AI::execute(AI* ai)
 {
+	if (ai->mShape->mSeek)
+	{
+		LogString("seek exists");
+	}
+
+/*
 	//is this human controlled?
 	if (ai->mShape->mClient->mConnectionState == 1)
 	{
@@ -52,6 +58,7 @@ void Random_AI::execute(AI* ai)
 		ai->mCounter = 0;
 	}
 	ai->mCounter++;
+*/
 }
 
 void Random_AI::exit(AI* ai)

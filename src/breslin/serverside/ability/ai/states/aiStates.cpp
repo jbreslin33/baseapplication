@@ -19,6 +19,9 @@
 //client
 #include "../../../client/client.h"
 
+//seek
+#include "../../seek/seek.h"
+
 //rand
 #include <stdlib.h>
 #include <time.h>
@@ -39,6 +42,13 @@ void Random_AI::enter(AI* ai)
 
 void Random_AI::execute(AI* ai)
 {
+	Seek* seek;
+	if (ai->mShape->getAbility(seek))
+	{
+		LogString("seek exists");
+	}
+
+/*
 	//is this human controlled?
 	if (ai->mShape->mClient->mConnectionState == 1)
 	{
@@ -52,6 +62,7 @@ void Random_AI::execute(AI* ai)
 		ai->mCounter = 0;
 	}
 	ai->mCounter++;
+*/
 }
 
 void Random_AI::exit(AI* ai)
