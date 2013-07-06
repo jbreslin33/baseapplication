@@ -22,6 +22,9 @@
 //move
 #include "../ability/move/move.h"
 
+//seek
+#include "../ability/seek/seek.h"
+
 //ai
 #include "../ability/ai/ai.h"
 
@@ -128,6 +131,7 @@ void Shape::addAbilitys()
 	//add abilitys
 	addAbility(new Rotation(this));
 	addAbility(new Move(this));
+	addAbility(new Seek(this));
 	if (mIsAI)
 	{
 		addAbility(new AI(this));

@@ -33,6 +33,14 @@ void Normal_Seek::enter(Seek* seek)
 }
 void Normal_Seek::execute(Seek* seek)
 {
+	if (seek->mSeekShape || seek->mSeekPoint)
+	{
+		//LogString("seeking");
+	}
+	else
+	{
+		seek->mSeekStateMachine->changeState(No_Seek::Instance());
+	}
 /*
 	//check for No_seek and Decelerate and Accelerate states..
     	if (seek->mShape->mKeyDirection.isZeroLength()) 
@@ -82,6 +90,14 @@ void No_Seek::enter(Seek* seek)
 }
 void No_Seek::execute(Seek* seek)
 {
+	if (seek->mSeekShape == NULL && seek->mSeekPoint == NULL)
+	{
+		//LogString("Not seeking");
+	}
+	else
+	{
+		seek->mSeekStateMachine->changeState(Normal_Seek::Instance());
+	}
 /*
 	if (seek->mShape->mKeyDirection.isZeroLength()) 
 	{
