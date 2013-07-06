@@ -47,20 +47,13 @@ void Random_AI::execute(AI* ai)
 {
 	if (ai->mShape->mSeek)
 	{
-		if (ai->mShape->mSeek->mSeekPoint)
+		if (ai->mShape->mClient->db_id == 5)
 		{
-			ai->mShape->mSeek->mSeekPoint->x = 100.0f;
-			ai->mShape->mSeek->mSeekPoint->y = 0.0f;
-			ai->mShape->mSeek->mSeekPoint->z = 100.0f;
-		}
-		else
-		{
+			Vector3D* seekPoint = new Vector3D(200.0f,0.0f,100.0f);
+
+			ai->mShape->mSeek->setSeekPoint(seekPoint);
 		}
 	}
-
-
-	
-
 /*
 	//is this human controlled?
 	if (ai->mShape->mClient->mConnectionState == 1)

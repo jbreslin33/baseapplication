@@ -42,6 +42,8 @@ void processTick    ();
 Shape* mShape;
 Shape* mSeekShape;
 Vector3D* mSeekPoint;
+void setSeekPoint(Vector3D* seekPoint);
+void setSeekShape(Shape* seekShape);
 
 SeekStateMachine* mSeekStateMachine;
 

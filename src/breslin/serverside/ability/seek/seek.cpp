@@ -20,7 +20,7 @@ Seek::Seek(Shape* shape) : Ability(shape)
 	mShape = shape;
 
 	mSeekShape = NULL;
-	mSeekPoint = new Vector3D(100.0f,0.0f,100.0f);
+	mSeekPoint = NULL;
 
  	//seek states
 	mSeekStateMachine = new SeekStateMachine(this);    //setup the state machine
@@ -34,8 +34,31 @@ Seek::~Seek()
 }
 void Seek::processTick()
 {
-	LogString("pr");
 	mSeekStateMachine->update();
 }
 
+void Seek::setSeekPoint(Vector3D* seekPoint)
+{
+	if (seekPoint)
+	{
+		mSeekPoint = new Vector3D();
+		mSeekPoint->copyValuesFrom(seekPoint); 
+	}
+	else
+	{
+		mSeekPoint = NULL;
+	}
+}
 
+void Seek::setSeekShape(Shape* seekShape)
+{
+	if (seekShape)
+	{
+		mSeekShape = seekShape;
+	}
+	else
+	{
+		mSeekShape = NULL;
+	}
+
+}

@@ -50,8 +50,6 @@ void Normal_Seek::execute(Seek* seek)
                 seek->mShape->mKeyDirection.z = newKeyDirection->z;
 
                 seek->mShape->mKeyDirection.normalise();
-		LogString("x:%f",seek->mShape->mKeyDirection.x);
-		LogString("z:%f",seek->mShape->mKeyDirection.z);
 	}
 	else
 	{
