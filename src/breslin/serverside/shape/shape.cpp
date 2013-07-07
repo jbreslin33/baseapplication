@@ -173,14 +173,7 @@ void Shape::processTick()
 	{
 		mAbilityVector.at(i)->processTick();
 	}
-
-	Ogre::Quaternion orientation = mSceneNode->getOrientation();
-    	Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
-
-  	mRotation->mRotation->x = mSceneNode->_getDerivedOrientation().zAxis().x;
-
-    	mRotation->mRotation->z = mSceneNode->_getDerivedOrientation().zAxis().z;
-
+	
 	if (mText.compare(mTextLast) != 0)
 	{
 		sendText();				

@@ -41,6 +41,13 @@ Rotation::~Rotation()
 
 void Rotation::processTick()
 {
+ 	Ogre::Quaternion orientation = mShape->mSceneNode->getOrientation();
+        Ogre::Vector3 vector = orientation * -Vector3::UNIT_Z;
+
+        mRotation->x = mShape->mSceneNode->_getDerivedOrientation().zAxis().x;
+
+        mRotation->z = mShape->mSceneNode->_getDerivedOrientation().zAxis().z;
+
 	mRotationStateMachine->update();
 }
 
