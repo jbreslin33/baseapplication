@@ -1,10 +1,10 @@
-#ifndef SERVERSIDEMOVESTATEMACHINE_H
-#define SERVERSIDEMOVESTATEMACHINE_H
-#include "moveState.h"
+#ifndef CLIENTSTATEMACHINE_H
+#define CLIENTSTATEMACHINE_H
+#include "clientState.h"
 
-class Move;
+class Client;
 
-class MoveStateMachine
+class ClientStateMachine
 {
 private:
   //a pointer to the agent that owns this instance
