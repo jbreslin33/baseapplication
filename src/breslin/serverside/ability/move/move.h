@@ -18,6 +18,7 @@ using namespace Ogre;
 
 class MoveStateMachine;
 class Shape;
+class Vector3D;
 
 class Move : public Ability
 {
@@ -41,6 +42,9 @@ void processTick    ();
 Shape* mShape;
 
 MoveStateMachine* mMoveStateMachine;
+
+//keys
+Vector3D* mHeading;
 
 //run speed
 float mRunSpeed;

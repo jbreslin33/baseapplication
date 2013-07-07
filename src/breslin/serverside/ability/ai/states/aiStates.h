@@ -15,12 +15,12 @@ public:
   void exit   (AI* ai);
 };
 
-class No_AI : public AIState
+class Human_AI : public AIState
 {
 private:
-  No_AI(){}
+  Human_AI(){}
 public:
-  static No_AI* Instance();
+  static Human_AI* Instance();
   void enter  (AI* ai);
   void execute(AI* ai);
   void exit   (AI* ai);

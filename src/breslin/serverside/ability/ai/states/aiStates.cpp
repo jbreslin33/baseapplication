@@ -22,6 +22,9 @@
 //seek
 #include "../../seek/seek.h"
 
+//seek
+#include "../../move/move.h"
+
 //vector3D
 #include "../../../../math/vector3D.h"
 
@@ -54,47 +57,65 @@ void Random_AI::execute(AI* ai)
 			ai->mShape->mSeek->setSeekPoint(seekPoint);
 		}
 	}
-/*
+
 	//is this human controlled?
 	if (ai->mShape->mClient->mConnectionState == 1)
 	{
-		ai->mAIStateMachine->changeState(No_AI::Instance());
+		ai->mAIStateMachine->changeState(Human_AI::Instance());
 	}
-
-	//have we reached threshold if so give a new mKey for random movement 
-	if (ai->mCounter > ai->mThreshold)
-	{
-		ai->mShape->mKey = rand() % 32 + 1;  //assign random key 0-16 or is it 1-16 or 0-15?
-		ai->mCounter = 0;
-	}
-	ai->mCounter++;
-*/
 }
 
 void Random_AI::exit(AI* ai)
 {
 }
 
-/*   No_AI   */
-No_AI* No_AI::Instance()
+/*   Human_AI   */
+Human_AI* Human_AI::Instance()
 {
-	static No_AI instance;
+	static Human_AI instance;
 	return &instance;
 }
 
-void No_AI::enter(AI* ai)
+void Human_AI::enter(AI* ai)
 {
 }
 
-void No_AI::execute(AI* ai)
+void Human_AI::execute(AI* ai)
 {
 	if (ai->mShape->mClient->mConnectionState == 4)
 	{
 		ai->mAIStateMachine->changeState(Random_AI::Instance());
 	}
+
+ 	ai->mShape->mMove->mHeading->x = 0;
+        ai->mShape->mMove->mHeading->y = 0;
+        ai->mShape->mMove->mHeading->z = 0;
+
+        // keep track of the player's intended direction
+        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyUp)
+        {
+                ai->mShape->mMove->mHeading->z += -1;
+        }
+
+        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyLeft)
+        {
+                ai->mShape->mMove->mHeading->x += -1;
+        }
+
+        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyDown)
+        {
+                ai->mShape->mMove->mHeading->z += 1;
+        }
+  
+        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyRight)
+        {
+                ai->mShape->mMove->mHeading->x += 1;
+        }
+
+        ai->mShape->mMove->mHeading->normalise();
 }
 
-void No_AI::exit(AI* ai)
+void Human_AI::exit(AI* ai)
 {
 }
 

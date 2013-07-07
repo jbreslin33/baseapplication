@@ -49,7 +49,6 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	mSpeedMax = 1.66f;
 
 	//keys
-    	mHeading = Vector3::ZERO;
 	mKeyRotation  = 0.0f;
 	mGoalDirection = Vector3::ZERO;
 
@@ -197,38 +196,8 @@ void Shape::processTick()
 	}
 }
 
-
 void Shape::setKeyDirection()  
 {
-/*
-	mKeyDirection.x = 0;
-    	mKeyDirection.y = 0;
-    	mKeyDirection.z = 0;
-
- 
-	// keep track of the player's intended direction
-    	if(mKey & mKeyUp) 
-	{
-		mKeyDirection.z += -1;
-	}
-
-    	if(mKey & mKeyLeft) 
-	{
-		mKeyDirection.x += -1;
-	}
-                
-    	if(mKey & mKeyDown) 
-	{
-        	mKeyDirection.z += 1;
-	}
-    
-	if(mKey & mKeyRight) 
-	{
-		mKeyDirection.x += 1;
-	}
-
-	mKeyDirection.normalise();
-*/
 	mKeyRotation = 0.0f;
    	// keep track of the player's intended rotation
     	if(mClient->mKey & mClient->mKeyCounterClockwise) 

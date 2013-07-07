@@ -22,6 +22,10 @@
 //vector3D
 #include "../../../math/vector3D.h"
 
+//move
+#include "../move/move.h"
+
+
 /*****************************************
 	Normal_Seek
 ****************************************/
@@ -45,11 +49,11 @@ void Normal_Seek::execute(Seek* seek)
                 currentPosition->z = seek->mShape->mSceneNode->getPosition().z;
 
                 newKeyDirection->subtract(seek->mSeekPoint,currentPosition);
-                seek->mShape->mHeading.x = newKeyDirection->x;
-               	seek->mShape->mHeading.y = newKeyDirection->y;
-                seek->mShape->mHeading.z = newKeyDirection->z;
+                seek->mShape->mMove->mHeading->x = newKeyDirection->x;
+               	seek->mShape->mMove->mHeading->y = newKeyDirection->y;
+                seek->mShape->mMove->mHeading->z  = newKeyDirection->z;
 
-                seek->mShape->mHeading.normalise();
+                seek->mShape->mMove->mHeading->normalise();
 	}
 	else
 	{
