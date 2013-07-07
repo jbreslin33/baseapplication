@@ -1,7 +1,7 @@
 #ifndef CLIENTPARTIDO_H
 #define CLIENTPARTIDO_H
 
-#include "client.h"
+#include "../client.h"
 
 #include <vector>
 

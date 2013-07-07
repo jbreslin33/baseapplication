@@ -1,7 +1,7 @@
 #ifndef GAMEPARTIDO_H
 #define GAMEPARTIDO_H
 
-#include "game.h"
+#include "../game.h"
 
 using namespace std;
 #include <string>

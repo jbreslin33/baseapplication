@@ -244,7 +244,7 @@ set(HDRS
 	
 	#game
 	../serverside/game/game.h
-	../serverside/game/gamePartido.h
+	../serverside/game/partido/gamePartido.h
 	
 	#network
 	../serverside/network/network.h
@@ -255,7 +255,7 @@ set(HDRS
 	
 		#shape
 	../serverside/shape/shape.h
-	../serverside/shape/shapePartido.h
+	../serverside/shape/partido/shapePartido.h
 	
 	#move
 	../serverside/ability/move/move.h
@@ -306,11 +306,11 @@ set(HDRS
 	
 	#server
 	../serverside/server/server.h
-	../serverside/server/serverPartido.h
+	../serverside/server/partido/serverPartido.h
 	
 	#client
 	../serverside/client/client.h
-	../serverside/client/clientPartido.h
+	../serverside/client/partido/clientPartido.h
 
 	#quiz
 	../serverside/quiz/quiz.h
@@ -329,7 +329,7 @@ set(SRCS
 	
 	#game
 	../serverside/game/game.cpp
-	../serverside/game/gamePartido.cpp
+	../serverside/game/partido/gamePartido.cpp
 
 	#dreamsock
 	../serverside/tdreamsock/dreamSockLog.cpp
@@ -340,7 +340,7 @@ set(SRCS
 	
 	#shape
 	../serverside/shape/shape.cpp
-	../serverside/shape/shapePartido.cpp
+	../serverside/shape/partido/shapePartido.cpp
 	
 	#move
 	../serverside/ability/move/move.cpp
@@ -380,11 +380,11 @@ set(SRCS
 	
 	#server
 	../serverside/server/server.cpp
-	../serverside/server/serverPartido.cpp
+	../serverside/server/partido/serverPartido.cpp
 	
 	#client
 	../serverside/client/client.cpp
-	../serverside/client/clientPartido.cpp
+	../serverside/client/partido/clientPartido.cpp
 
 	#quiz
 	../serverside/quiz/quiz.cpp

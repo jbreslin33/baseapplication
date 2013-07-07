@@ -4,7 +4,7 @@
 *            INCLUDES
 ****************************************/
 
-#include "shape.h"
+#include "../shape.h"
 
 /******************************************
 *            FORWARD DECLARATIONS

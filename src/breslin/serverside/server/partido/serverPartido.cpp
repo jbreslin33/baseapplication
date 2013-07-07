@@ -1,12 +1,12 @@
 #include "serverPartido.h"
 
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
-#include "../game/gamePartido.h"
-#include "../client/clientPartido.h"
-#include "../../math/vector3D.h"
-#include "../shape/shape.h"
+#include "../../game/partido/gamePartido.h"
+#include "../../client/partido/clientPartido.h"
+#include "../../../math/vector3D.h"
+#include "../../shape/shape.h"
 
 ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPort) 
 :

@@ -1,14 +1,14 @@
 #include "clientPartido.h"
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
-#include "../server/serverPartido.h"
-#include "../network/network.h"
-#include "../game/gamePartido.h"
-#include "../shape/shapePartido.h"
+#include "../../server/partido/serverPartido.h"
+#include "../../network/network.h"
+#include "../../game/partido/gamePartido.h"
+#include "../../shape/partido/shapePartido.h"
 
 //utility
-#include "../../utility/utility.h"
+#include "../../../utility/utility.h"
 
 
 ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID) : Client(serverPartido, address, clientID) 

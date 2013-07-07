@@ -1,7 +1,7 @@
 #ifndef SERVERPARTIDO_H
 #define SERVERPARTIDO_H
 
-#include "server.h"
+#include "../server.h"
 
 class GamePartido;
 class ClientPartido;

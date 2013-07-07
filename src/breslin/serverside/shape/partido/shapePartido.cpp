@@ -1,22 +1,22 @@
 #include "shapePartido.h"
 
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
 //game
-#include "../network/network.h"
+#include "../../network/network.h"
 
 //game
-#include "../server/serverPartido.h"
+#include "../../server/partido/serverPartido.h"
 
 //game
-#include "../game/gamePartido.h"
+#include "../../game/partido/gamePartido.h"
 
 //client
-#include "../client/clientPartido.h"
+#include "../../client/partido/clientPartido.h"
 
 //math
-#include "../../math/vector3D.h"
+#include "../../../math/vector3D.h"
 
 //postgresql
 #include <stdio.h>

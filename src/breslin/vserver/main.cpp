@@ -13,10 +13,10 @@
 
 //possible games
 #include "../serverside/game/game.h"
-#include "../serverside/game/gamePartido.h"
+#include "../serverside/game/partido/gamePartido.h"
 
 #include "../serverside/server/server.h"
-#include "../serverside/server/serverPartido.h"
+#include "../serverside/server/partido/serverPartido.h"
 #include "../serverside/network/network.h"
 #include "../serverside/tdreamsock/dreamSockLog.h"
 

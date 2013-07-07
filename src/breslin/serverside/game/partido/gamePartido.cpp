@@ -1,19 +1,19 @@
 #include "gamePartido.h"
 
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
 //server
-#include "../server/serverPartido.h"
+#include "../../server/partido/serverPartido.h"
 
 //shape
-#include "../shape/shapePartido.h"
+#include "../../shape/partido/shapePartido.h"
 
 //client
-#include "../client/clientPartido.h"
+#include "../../client/partido/clientPartido.h"
 
 //vector3d
-#include "../../math/vector3D.h"
+#include "../../../math/vector3D.h"
 
 #include <stdio.h>
 
