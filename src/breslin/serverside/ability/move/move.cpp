@@ -21,8 +21,14 @@ Move::Move(Shape* shape) : Ability(shape)
 
 	mShape = shape;
 
+	mPositionLast = new Vector3D();
+	mPositionBeforeCollision = new Vector3D();
+
     	//runSpeed
     	mRunSpeed     = 0.0;
+
+	//max speed
+	mSpeedMax = 1.66f;
 
     	//run acceleration
     	mRunAccel    = .04166f * 30.5;

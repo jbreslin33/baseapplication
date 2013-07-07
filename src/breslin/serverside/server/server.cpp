@@ -25,6 +25,9 @@
 //rotation
 #include "../ability/rotation/rotation.h"
 
+//move
+#include "../ability/move/move.h"
+
 //postgresql
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
@@ -615,7 +618,7 @@ void Server::storeCommands(Shape* shape)
 {
         shape->mClient->mKeyLast = shape->mClient->mKey;
 
-        shape->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
+        shape->mMove->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
 
         shape->mRotation->mRotationLast->copyValuesFrom(shape->mRotation->mRotation);
 }

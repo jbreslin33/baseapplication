@@ -38,15 +38,8 @@
 Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
 {
-	mPositionLast         = new Vector3D();
-	
-	mPositionBeforeCollision      = new Vector3D();
-
  	//mPosition = position;
 	mIndex  = index;
-
-	//speed
-	mSpeedMax = 1.66f;
 
 	//keys
 	mGoalDirection = Vector3::ZERO;
@@ -108,8 +101,8 @@ void Shape::createShape(Ogre::Root* root, Vector3D* position)
 
 void Shape::collision(Shape* shape)
 {
-  	float x = mPositionBeforeCollision->x;
-        float z = mPositionBeforeCollision->z;
+  	float x = mMove->mPositionBeforeCollision->x;
+        float z = mMove->mPositionBeforeCollision->z;
         mSceneNode->setPosition(x,0.0,z);
 }
 
@@ -164,9 +157,9 @@ void Shape::remove()
 
 void Shape::processTick()
 {
-	mPositionBeforeCollision->x = mSceneNode->getPosition().x;
-    	mPositionBeforeCollision->y = mSceneNode->getPosition().y;
-    	mPositionBeforeCollision->z = mSceneNode->getPosition().z;
+	mMove->mPositionBeforeCollision->x = mSceneNode->getPosition().x;
+    	mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;
+    	mMove->mPositionBeforeCollision->z = mSceneNode->getPosition().z;
 	
 	//process ticks on abilitys
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
@@ -186,15 +179,15 @@ int Shape::setFlag()
 	int flags = 0;
 
 	//Origin
-	if(mSceneNode->getPosition().x != mPositionLast->x)
+	if(mSceneNode->getPosition().x != mMove->mPositionLast->x)
 	{
 		flags |= mCommandOriginX;
 	}
-	if(mSceneNode->getPosition().y != mPositionLast->y)
+	if(mSceneNode->getPosition().y != mMove->mPositionLast->y)
 	{
 		flags |= mCommandOriginY;
 	}
-	if(mSceneNode->getPosition().z != mPositionLast->z)
+	if(mSceneNode->getPosition().z != mMove->mPositionLast->z)
 	{
 		flags |= mCommandOriginZ;
 	}

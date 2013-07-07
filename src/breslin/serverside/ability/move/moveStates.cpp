@@ -52,7 +52,7 @@ void Normal_Move::execute(Move* move)
     	}
 	else 
 	{
-        	if(move->mRunSpeed < move->mShape->mSpeedMax) //Accelerate_Move
+        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
 		{
 			move->mMoveStateMachine->changeState(Accelerate_Move::Instance());
 			return;
@@ -97,7 +97,7 @@ void No_Move::execute(Move* move)
     	}
 	else 
 	{
-        	if(move->mRunSpeed < move->mShape->mSpeedMax) //Accelerate_Move
+        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
 		{
 			move->mMoveStateMachine->changeState(Accelerate_Move::Instance());
 			return;
@@ -142,7 +142,7 @@ void Accelerate_Move::execute(Move* move)
     	}
 	else 
 	{
-        	if(move->mRunSpeed < move->mShape->mSpeedMax) //Accelerate_Move
+        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
 		{
 			move->mRunSpeed += move->mRunAccel;
 		}
@@ -191,7 +191,7 @@ void Decelerate_Move::execute(Move* move)
     	}
 	else 
 	{
-        	if(move->mRunSpeed < move->mShape->mSpeedMax) //Accelerate_Move
+        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
 		{
 			move->mMoveStateMachine->changeState(Accelerate_Move::Instance());
 			return;

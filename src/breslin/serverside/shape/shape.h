@@ -64,9 +64,6 @@ Message	mMessage; //is this all i need to get information over the internets?
 //keys
 Vector3 mGoalDirection;
 
-//speed
-float mSpeedMax;
-
 //game
 Game* mGame;
 
@@ -93,10 +90,6 @@ bool mAnimated;
 
 //ai
 bool mIsAI;
-
-Vector3D* mPositionLast;
-
-Vector3D* mPositionBeforeCollision;            //origin of last frame/tick
 
 /******************************************************
 *				METHODS

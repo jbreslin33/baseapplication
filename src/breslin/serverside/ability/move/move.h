@@ -41,6 +41,10 @@ void processTick    ();
 
 Shape* mShape;
 
+//position
+Vector3D* mPositionLast;
+Vector3D* mPositionBeforeCollision;
+
 MoveStateMachine* mMoveStateMachine;
 
 //keys
@@ -48,6 +52,9 @@ Vector3D* mHeading;
 
 //run speed
 float mRunSpeed;
+
+float mSpeedMax;
+
 
 
 //run acceleration
