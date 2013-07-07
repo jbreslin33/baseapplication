@@ -165,11 +165,6 @@ void Shape::remove()
 
 void Shape::processTick()
 {
-	if (mClient->mLoggedIn)
-	{
-		mClient->setVelocity();
-	}
-
 	setKeyDirection();
 
 	mPositionBeforeCollision->x = mSceneNode->getPosition().x;

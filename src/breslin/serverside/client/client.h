@@ -88,8 +88,6 @@ int mKeyClockwise;
 	int mKeyLast;
 
 public:
-	//setVelocity
-	void setVelocity();
 
 	//processUpdate
 	virtual void processUpdate();
