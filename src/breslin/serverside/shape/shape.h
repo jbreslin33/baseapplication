@@ -62,7 +62,6 @@ int			mIndex;
 Message	mMessage; //is this all i need to get information over the internets?
 
 //keys
-float   mKeyRotation;
 Vector3 mGoalDirection;
 
 //speed
@@ -113,8 +112,6 @@ void createShape(Ogre::Root* root, Vector3D* position);
 
 //ticks
 virtual void processTick();
-
-void setKeyDirection();
 
 void setValues();
 

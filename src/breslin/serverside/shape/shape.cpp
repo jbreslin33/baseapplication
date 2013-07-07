@@ -49,7 +49,6 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	mSpeedMax = 1.66f;
 
 	//keys
-	mKeyRotation  = 0.0f;
 	mGoalDirection = Vector3::ZERO;
 
 	//game
@@ -165,8 +164,6 @@ void Shape::remove()
 
 void Shape::processTick()
 {
-	setKeyDirection();
-
 	mPositionBeforeCollision->x = mSceneNode->getPosition().x;
     	mPositionBeforeCollision->y = mSceneNode->getPosition().y;
     	mPositionBeforeCollision->z = mSceneNode->getPosition().z;
@@ -188,20 +185,6 @@ void Shape::processTick()
 	{
 		sendText();				
 		mTextLast = mText;
-	}
-}
-
-void Shape::setKeyDirection()  
-{
-	mKeyRotation = 0.0f;
-   	// keep track of the player's intended rotation
-    	if(mClient->mKey & mClient->mKeyCounterClockwise) 
-	{
-		mKeyRotation += -1;
-	}
-	if(mClient->mKey & mClient->mKeyClockwise) 
-	{
-		mKeyRotation += 1;
 	}
 }
 

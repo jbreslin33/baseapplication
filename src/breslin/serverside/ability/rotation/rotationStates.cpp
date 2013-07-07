@@ -31,7 +31,7 @@ void Normal_Rotation::enter(Rotation* rotation)
 void Normal_Rotation::execute(Rotation* rotation)
 {
 	
-	if (rotation->mShape->mKeyRotation == 0)
+	if (rotation->mDegrees == 0)
 	{
 		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
 		{
@@ -55,9 +55,9 @@ void Normal_Rotation::execute(Rotation* rotation)
 
 	//actual rotate
 //	LogString("N:%f",rotation->mRotationSpeed);
-	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mGame->mServer->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mDegrees * rotation->mShape->mGame->mServer->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
 
-//rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
+//rotation->mShape->mSceneNode->yaw(Degree(rotation->mDegrees * rotation->mShape->mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
 }
 void Normal_Rotation::exit(Rotation* rotation)
 {
@@ -80,7 +80,7 @@ void Accelerate_Rotation::execute(Rotation* rotation)
 		return;
 	}
 	*/
-	if (rotation->mShape->mKeyRotation == 0)
+	if (rotation->mDegrees == 0)
 	{
 		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
 		{
@@ -108,7 +108,7 @@ void Accelerate_Rotation::execute(Rotation* rotation)
 
 	//actual rotate
 //	LogString("A:%f",rotation->mRotationSpeed);
-	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mGame->mServer->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mDegrees * rotation->mShape->mGame->mServer->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
 }
 void Accelerate_Rotation::exit(Rotation* rotation)
 {
@@ -131,7 +131,7 @@ void Decelerate_Rotation::execute(Rotation* rotation)
 		return;
 	}
 	*/
-	if (rotation->mShape->mKeyRotation == 0)
+	if (rotation->mDegrees == 0)
 	{
 		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
 		{
@@ -159,7 +159,7 @@ void Decelerate_Rotation::execute(Rotation* rotation)
 
 //	LogString("D:%f",rotation->mRotationSpeed);
 	//actual rotate
-	rotation->mShape->mSceneNode->yaw(Degree(rotation->mShape->mKeyRotation * rotation->mShape->mGame->mServer->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
+	rotation->mShape->mSceneNode->yaw(Degree(rotation->mDegrees * rotation->mShape->mGame->mServer->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
 
 }
 void Decelerate_Rotation::exit(Rotation* rotation)
@@ -177,7 +177,7 @@ void No_Rotation::enter(Rotation* rotation)
 }
 void No_Rotation::execute(Rotation* rotation)
 {
-	if (rotation->mShape->mKeyRotation == 0)
+	if (rotation->mDegrees == 0)
 	{
 		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
 		{

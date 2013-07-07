@@ -27,6 +27,7 @@ Vector3D* mRotationLast;
 
 Shape* mShape;
 
+float mDegrees;
 float mRotationSpeed;
 
 //acceleration

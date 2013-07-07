@@ -25,6 +25,9 @@
 //seek
 #include "../../move/move.h"
 
+//seek
+#include "../../rotation/rotation.h"
+
 //vector3D
 #include "../../../../math/vector3D.h"
 
@@ -113,6 +116,19 @@ void Human_AI::execute(AI* ai)
         }
 
         ai->mShape->mMove->mHeading->normalise();
+
+	//Rotation
+        ai->mShape->mRotation->mDegrees = 0.0f;
+        // keep track of the player's intended rotation
+        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyCounterClockwise)
+        {
+                ai->mShape->mRotation->mDegrees += -1;
+        }
+        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyClockwise)
+        {
+                ai->mShape->mRotation->mDegrees += 1;
+        }
+
 }
 
 void Human_AI::exit(AI* ai)

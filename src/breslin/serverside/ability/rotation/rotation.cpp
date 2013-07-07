@@ -22,6 +22,8 @@ Rotation::Rotation(Shape* shape) : Ability(shape)
 
 	mRotationSpeed  = 0.0;
 
+	mDegrees = 0.0f;
+
     	//run acceleration
     	mRotationAccel    = .04166f * 100.0f;
     	mRotationDecel    = .04166f * 100.0f;
