@@ -44,6 +44,7 @@ void Normal_Seek::execute(Seek* seek)
 	{
  		Vector3D* newKeyDirection = new Vector3D();
                 Vector3D* currentPosition  = new Vector3D();
+
                 currentPosition->x = seek->mShape->mSceneNode->getPosition().x;
                 currentPosition->y = seek->mShape->mSceneNode->getPosition().y;
                 currentPosition->z = seek->mShape->mSceneNode->getPosition().z;

@@ -55,9 +55,17 @@ void Random_AI::execute(AI* ai)
 	{
 		if (ai->mShape->mClient->db_id == 5)
 		{
+			/*
 			Vector3D* seekPoint = new Vector3D(200.0f,0.0f,100.0f);
-
 			ai->mShape->mSeek->setSeekPoint(seekPoint);
+			*/
+			for (int i = 0; i < ai->mShape->mGame->mShapeVector.size(); i++)
+			{
+				if (ai->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
+				{
+					ai->mShape->mSeek->setSeekShape(ai->mShape->mGame->mShapeVector.at(i));	
+				}
+			}
 		}
 	}
 

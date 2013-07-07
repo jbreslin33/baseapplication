@@ -2,8 +2,10 @@
 #include "../../tdreamsock/dreamSockLog.h"
 
 #include "../../client/client.h"
+#include "../../shape/shape.h"
 
 #include "../../../math/vector3D.h"
+
 
 #include <string>
 
@@ -35,6 +37,24 @@ Seek::~Seek()
 void Seek::processTick()
 {
 	mSeekStateMachine->update();
+	
+	if (mSeekShape)
+	{
+		updateSeekPoint();
+	}
+}
+
+void Seek::updateSeekPoint()
+{
+	//update seek point if seek shape
+ 	if (mSeekShape)
+        {
+                //set seek point as that is what we will really use...
+                mSeekPoint = new Vector3D();
+                mSeekPoint->x = mSeekShape->mSceneNode->getPosition().x;             
+                mSeekPoint->y = mSeekShape->mSceneNode->getPosition().y;             
+                mSeekPoint->z = mSeekShape->mSceneNode->getPosition().z;             
+        }
 }
 
 void Seek::setSeekPoint(Vector3D* seekPoint)
@@ -47,6 +67,7 @@ void Seek::setSeekPoint(Vector3D* seekPoint)
 	else
 	{
 		mSeekPoint = NULL;
+		mSeekShape = NULL;
 	}
 }
 
@@ -54,11 +75,14 @@ void Seek::setSeekShape(Shape* seekShape)
 {
 	if (seekShape)
 	{
+		//set shape
 		mSeekShape = seekShape;
+
+		updateSeekPoint();
 	}
 	else
 	{
 		mSeekShape = NULL;
+		mSeekPoint = NULL;
 	}
-
 }
