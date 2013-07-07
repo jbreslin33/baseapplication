@@ -141,32 +141,32 @@ void Client::setGame(int gameID)
 
 void Client::setVelocity()
 {
-	mShape->mVelocity.x = 0;
-        mShape->mVelocity.y = 0;
-        mShape->mVelocity.z = 0;
+	mShape->mHeading.x = 0;
+        mShape->mHeading.y = 0;
+        mShape->mHeading.z = 0;
 
         // keep track of the player's intended direction
         if(mKey & mKeyUp)
         {
-                mShape->mVelocity.z += -1;
+                mShape->mHeading.z += -1;
         }
 
         if(mKey & mKeyLeft)
         {
-                mShape->mVelocity.x += -1;
+                mShape->mHeading.x += -1;
         }
  
         if(mKey & mKeyDown)
         {
-                mShape->mVelocity.z += 1;
+                mShape->mHeading.z += 1;
         }
    
         if(mKey & mKeyRight)
         {
-                mShape->mVelocity.x += 1;
+                mShape->mHeading.x += 1;
         }
 
-        mShape->mVelocity.normalise();
+        mShape->mHeading.normalise();
 }
 
 //shape

@@ -34,7 +34,7 @@ void Normal_Move::enter(Move* move)
 void Normal_Move::execute(Move* move)
 {
 	//check for No_move and Decelerate and Accelerate states..
-    	if (move->mShape->mVelocity.isZeroLength()) 
+    	if (move->mShape->mHeading.isZeroLength()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
 		{
@@ -57,9 +57,9 @@ void Normal_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mShape->mSceneNode->translate(move->mShape->mVelocity.x * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mHeading.x * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
 		0,
-		move->mShape->mVelocity.z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
+		move->mShape->mHeading.z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Normal_Move::exit(Move* move)
@@ -80,7 +80,7 @@ void No_Move::enter(Move* move)
 }
 void No_Move::execute(Move* move)
 {
-	if (move->mShape->mVelocity.isZeroLength()) 
+	if (move->mShape->mHeading.isZeroLength()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
 		{
@@ -124,7 +124,7 @@ void Accelerate_Move::enter(Move* move)
 }
 void Accelerate_Move::execute(Move* move)
 {
-	if (move->mShape->mVelocity.isZeroLength()) 
+	if (move->mShape->mHeading.isZeroLength()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
 		{
@@ -151,9 +151,9 @@ void Accelerate_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mShape->mSceneNode->translate(move->mShape->mVelocity.x * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mHeading.x * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
 		0,
-		move->mShape->mVelocity.z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
+		move->mShape->mHeading.z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Accelerate_Move::exit(Move* move)
@@ -174,7 +174,7 @@ void Decelerate_Move::enter(Move* move)
 }
 void Decelerate_Move::execute(Move* move)
 {
-    	if (move->mShape->mVelocity.isZeroLength()) 
+    	if (move->mShape->mHeading.isZeroLength()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
 		{
@@ -201,9 +201,9 @@ void Decelerate_Move::execute(Move* move)
 	}
 
 	//actual move
-	move->mShape->mSceneNode->translate(move->mShape->mVelocity.x * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
+	move->mShape->mSceneNode->translate(move->mShape->mHeading.x * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
 		0,
-		move->mShape->mVelocity.z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
+		move->mShape->mHeading.z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
 		Node::TS_WORLD);
 }
 void Decelerate_Move::exit(Move* move)

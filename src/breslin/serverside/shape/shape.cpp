@@ -49,7 +49,7 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	mSpeedMax = 1.66f;
 
 	//keys
-    	mVelocity = Vector3::ZERO;
+    	mHeading = Vector3::ZERO;
 	mKeyRotation  = 0.0f;
 	mGoalDirection = Vector3::ZERO;
 

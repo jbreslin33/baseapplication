@@ -62,7 +62,7 @@ int			mIndex;
 Message	mMessage; //is this all i need to get information over the internets?
 
 //keys
-Vector3 mVelocity;
+Vector3 mHeading;
 float   mKeyRotation;
 Vector3 mGoalDirection;
 
