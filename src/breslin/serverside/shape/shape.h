@@ -66,6 +66,8 @@ Game* mGame;
 
 //abilitys
 std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
+std::vector<Ability*> mSteeringAbilityVector;	 //all steering abilitys for this shape
+
 Rotation* mRotation;
 Move* 	  mMove;
 Seek*     mSeek;
@@ -96,6 +98,7 @@ void remove();
 
 //abilitys
 void     addAbility(Ability* ability);
+void     addSteeringAbility(Ability* ability);
 
 //create
 void createShape(Ogre::Root* root, Vector3D* position);

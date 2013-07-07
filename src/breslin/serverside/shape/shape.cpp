@@ -66,18 +66,17 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	//add abilitys
 	
 	mAI = new AI(this);
-	mAbilityVector.push_back(mAI);	
+	addAbility(mAI);	
 	
 	mSeek = new Seek(this);
-	mAbilityVector.push_back(mSeek);	
+	addSteeringAbility(mSeek);	
 	
 	mRotation = new Rotation(this);
-	mAbilityVector.push_back(mRotation);	
+	addAbility(mRotation);	
 	
 	mMove = new Move(this);
-	mAbilityVector.push_back(mMove);	
+	addAbility(mMove);	
 
-	
 	//register with shape vector
 	mGame->mShapeVector.push_back(this);
 }
@@ -111,6 +110,11 @@ void Shape::setValues()
 void Shape::addAbility(Ability* ability)
 {
 	mAbilityVector.push_back(ability);	
+}
+
+void Shape::addSteeringAbility(Ability* ability)
+{
+	mSteeringAbilityVector.push_back(ability);	
 }
 
 void Shape::remove()
@@ -162,6 +166,12 @@ void Shape::processTick()
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
 		mAbilityVector.at(i)->processTick();
+	}
+	
+	//process ticks on steering abilitys..here you can use one of the precedence or bailout methods in bucklands book
+	for (unsigned int i = 0; i < mSteeringAbilityVector.size(); i++)
+	{
+		mSteeringAbilityVector.at(i)->processTick();
 	}
 	
 	if (mText.compare(mTextLast) != 0)
