@@ -61,9 +61,6 @@ int			mIndex;
 //message
 Message	mMessage; //is this all i need to get information over the internets?
 
-//keys
-Vector3 mGoalDirection;
-
 //game
 Game* mGame;
 

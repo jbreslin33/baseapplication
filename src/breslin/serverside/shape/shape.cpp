@@ -41,9 +41,6 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
  	//mPosition = position;
 	mIndex  = index;
 
-	//keys
-	mGoalDirection = Vector3::ZERO;
-
 	//game
 	mGame = game;
 
