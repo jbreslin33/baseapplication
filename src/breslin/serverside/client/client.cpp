@@ -318,53 +318,6 @@ bool Client::checkLogin(Message* mes)
 	}
 }
 
-/*
-bool Client::checkLogin(Message* mes)
-{
-	readLoginMessage(mes);
-
-        if (getPasswordMatch(mStringUsername,mStringPassword))
-     	{
-		Client* loginClient = NULL; 
-		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
-		{
-			if (mServer->mClientVector.at(i)->db_id == db_id)
-			{
-				if (mServer->mClientVector.at(i) == this)
-				{
-					loginClient = mServer->mClientVector.at(i);
-					login();
-				}
-			}	
-		}
-		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
-		{
-			if (mServer->mClientVector.at(i)->db_id == db_id)
-			{
-				//logout old 
-				if (loginClient == mServer->mClientVector.at(i))
-				{
-					LogString("returning");
-					return true;
-				}
-				LogString("should not get to this logout!!!");
-				mServer->mClientVector.at(i)->logout();
-
-				//swap
-				mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
-				mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
-				mServer->mClientVector.at(i)->mClientID = mClientID;
-				mServer->mClientVector.at(i)->login();
-			}	
-		}
-        }
-        else
-        {
-		LogString("else logout");	
-        	logout();
-        }
-}
-*/
 bool Client::getPasswordMatch(std::string username,std::string password)
 {
         PGconn          *conn;
