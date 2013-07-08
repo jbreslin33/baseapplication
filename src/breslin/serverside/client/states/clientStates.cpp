@@ -5,7 +5,7 @@
 #include "../../tdreamsock/dreamSockLog.h"
 
 //states
-#include "clientStateMachine.h"
+#include "../../../fsm/stateMachine.h"
 
 //ability
 #include "../client.h"
@@ -31,7 +31,10 @@ void Logged_In::execute(Client* client)
 void Logged_In::exit(Client* client)
 {
 }
-
+bool Logged_In::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
+}
 /*****************************************
 	Logged_Out
 ****************************************/
@@ -49,6 +52,10 @@ void Logged_Out::execute(Client* client)
 }
 void Logged_Out::exit(Client* client)
 {
+}
+bool Logged_Out::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
 }
 
 
@@ -74,6 +81,10 @@ void Human::execute(Client* client)
 void Human::exit(Client* client)
 {
 }
+bool Human::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
+}
 
 /*****************************************
 	Computer
@@ -85,6 +96,7 @@ Computer* Computer::Instance()
 }
 void Computer::enter(Client* client)
 {
+LogString("enter computer");
 }
 void Computer::execute(Client* client)
 {
@@ -93,5 +105,9 @@ void Computer::execute(Client* client)
 }
 void Computer::exit(Client* client)
 {
+}
+bool Computer::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
 }
 

@@ -34,6 +34,9 @@ private:
 	
 public:
 
+Game* mGame;
+
+
   //send a message to another agent. Receiving agent is referenced by ID.
   void DispatchMsg(double      delay,
                    int         sender,

@@ -1,14 +1,15 @@
 #ifndef CLIENTSTATES_H
 #define CLIENTSTATES_H
-#include "clientState.h"
+#include "../../../fsm/state.h"
 
 class Client;
+struct Telegram;
 
 /*******************************
 *       LOGIN 
 ******************************/
 
-class Logged_In : public ClientState
+class Logged_In : public State<Client>
 {
 private:
   Logged_In(){}
@@ -17,9 +18,10 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
+  bool onMessage(Client* client, const Telegram& msg);
 };
 
-class Logged_Out : public ClientState
+class Logged_Out : public State<Client>
 {
 private:
   Logged_Out(){}
@@ -28,6 +30,7 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
+  bool onMessage(Client* client, const Telegram& msg);
 };
 
 
@@ -35,7 +38,7 @@ public:
 /*******************************
 *        GAME CONTROL
 ******************************/
-class Human : public ClientState
+class Human : public State<Client>
 {
 private:
   Human(){}
@@ -44,9 +47,10 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
+  bool onMessage(Client* client, const Telegram& msg);
 };
 
-class Computer : public ClientState
+class Computer : public State<Client>
 {
 private:
   Computer(){}
@@ -55,6 +59,7 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
+  bool onMessage(Client* client, const Telegram& msg);
 };
 
 #endif

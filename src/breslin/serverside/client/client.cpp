@@ -27,7 +27,7 @@
 #include "../../math/vector3D.h"
 
 //state machine
-#include "../../fsm/stateMachine.h"
+//#include "../../fsm/stateMachine.h"
 
 //states
 #include "states/clientStates.h"
@@ -108,10 +108,11 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
         mGameControlStateMachine->setGlobalState       (NULL);
 
 	//login_out states
-        mLoginStateMachine = new ClientStateMachine(this);    //setup the state machine
+        mLoginStateMachine = new StateMachine<Client>(this);    //setup the state machine
         mLoginStateMachine->setCurrentState      (Logged_Out::Instance());
         mLoginStateMachine->setPreviousState     (Logged_Out::Instance());
         mLoginStateMachine->setGlobalState       (NULL);
+
 }
 
 Client::~Client()

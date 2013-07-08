@@ -1,6 +1,5 @@
 #include "message.h"
-#include "../client/client.h"
-
+#include <string.h>
 //log
 #include "../tdreamsock/dreamSockLog.h"
 

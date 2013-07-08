@@ -2,6 +2,7 @@
 #include "../serverside/shape/shape.h"
 //#include "misc/FrameCounter.h"
 #include "../serverside/game/game.h"
+#include "../serverside/server/server.h"
 //#include "Debug/DebugConsole.h"
 
 using std::set;
@@ -37,7 +38,7 @@ void MessageDispatcher::DispatchMsg(double       delay,
 {
 
   //get a pointer to the receiver
-  Shape* pReceiver = game->getShapeFromID(receiver);
+  Shape* pReceiver = mGame->getShapeFromID(receiver);
 
   //make sure the receiver is valid
   if (pReceiver == NULL)
@@ -68,7 +69,7 @@ void MessageDispatcher::DispatchMsg(double       delay,
   //else calculate the time when the telegram should be dispatched
   else
   {
-    double CurrentTime = TickCounter->GetCurrentFrame(); 
+    double CurrentTime = mGame->mServer->mGameTime; 
 
     telegram.DispatchTime = CurrentTime + delay;
 
@@ -91,7 +92,7 @@ void MessageDispatcher::DispatchMsg(double       delay,
 void MessageDispatcher::DispatchDelayedMessages()
 { 
   //first get current time
-  double CurrentTime = TickCounter->GetCurrentFrame(); 
+  double CurrentTime = mGame->mServer->mGameTime; 
 
   //now peek at the queue to see if any telegrams need dispatching.
   //remove all telegrams from the front of the queue that have gone
@@ -104,7 +105,7 @@ void MessageDispatcher::DispatchDelayedMessages()
     const Telegram& telegram = *PriorityQ.begin();
 
     //find the recipient
-    Shape* pReceiver = game->getShapeFromID(telegram.Receiver);
+    Shape* pReceiver = mGame->getShapeFromID(telegram.Receiver);
 
     #ifdef SHOW_MESSAGING_INFO
     debug_con << "\nQueued telegram ready for dispatch: Sent to " 

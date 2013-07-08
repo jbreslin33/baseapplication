@@ -1,6 +1,10 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+#include "../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
+
 #include <string>
 
 #include "../message/message.h"
@@ -50,14 +54,15 @@ class Server;
 class Network;
 class Shape;
 class Game;
-class StateMachine;
-
 class Client
 {
 public:
 	Client(Server* server, struct sockaddr *address, int clientID);
 
 ~Client();
+
+StateMachine<Client>* mGameControlStateMachine;
+StateMachine<Client>* mLoginStateMachine;
 
 //keys
 int mKeyUp;
@@ -134,8 +139,6 @@ public:
         std::string db_last_name;
         int         db_school_id;
 
-	StateMachine* mGameControlStateMachine;
-	StateMachine* mLoginStateMachine;
 
 };
 #endif

@@ -1,5 +1,5 @@
-#ifndef STATEMACHINE_H
-#define STATEMACHINE_H
+#ifndef FSTATEMACHINE_H
+#define FSTATEMACHINE_H
 
 #include <cassert>
 #include <string>
@@ -7,7 +7,7 @@
 #include "state.h"
 #include "../messaging/telegram.h"
 
-
+#include <typeinfo>
 template <class entity_type>
 class StateMachine
 {
@@ -36,32 +36,32 @@ public:
   virtual ~StateMachine(){}
 
   //use these methods to initialize the FSM
-  void SetCurrentState(State<entity_type>* s){m_pCurrentState = s;}
-  void SetGlobalState(State<entity_type>* s) {m_pGlobalState = s;}
-  void SetPreviousState(State<entity_type>* s){m_pPreviousState = s;}
+  void setCurrentState(State<entity_type>* s){m_pCurrentState = s;}
+  void setGlobalState(State<entity_type>* s) {m_pGlobalState = s;}
+  void setPreviousState(State<entity_type>* s){m_pPreviousState = s;}
   
   //call this to update the FSM
-  void  Update()const
+  void  update()const
   {
     //if a global state exists, call its execute method, else do nothing
-    if(m_pGlobalState)   m_pGlobalState->Execute(m_pOwner);
+    if(m_pGlobalState)   m_pGlobalState->execute(m_pOwner);
 
     //same for the current state
-    if (m_pCurrentState) m_pCurrentState->Execute(m_pOwner);
+    if (m_pCurrentState) m_pCurrentState->execute(m_pOwner);
   }
 
-  bool  HandleMessage(const Telegram& msg)const
+  bool  handleMessage(const Telegram& msg)const
   {
     //first see if the current state is valid and that it can handle
     //the message
-    if (m_pCurrentState && m_pCurrentState->OnMessage(m_pOwner, msg))
+    if (m_pCurrentState && m_pCurrentState->onMessage(m_pOwner, msg))
     {
       return true;
     }
   
     //if not, and if a global state has been implemented, send 
     //the message to the global state
-    if (m_pGlobalState && m_pGlobalState->OnMessage(m_pOwner, msg))
+    if (m_pGlobalState && m_pGlobalState->onMessage(m_pOwner, msg))
     {
       return true;
     }
@@ -70,7 +70,7 @@ public:
   }
 
   //change to a new state
-  void  ChangeState(State<entity_type>* pNewState)
+  void  changeState(State<entity_type>* pNewState)
   {
     assert(pNewState && "<StateMachine::ChangeState>:trying to assign null state to current");
 
@@ -78,19 +78,19 @@ public:
     m_pPreviousState = m_pCurrentState;
 
     //call the exit method of the existing state
-    m_pCurrentState->Exit(m_pOwner);
+    m_pCurrentState->exit(m_pOwner);
 
     //change state to the new state
     m_pCurrentState = pNewState;
 
     //call the entry method of the new state
-    m_pCurrentState->Enter(m_pOwner);
+    m_pCurrentState->enter(m_pOwner);
   }
 
   //change state back to the previous state
-  void  RevertToPreviousState()
+  void  revertToPreviousState()
   {
-    ChangeState(m_pPreviousState);
+    changeState(m_pPreviousState);
   }
 
   //returns true if the current state's type is equal to the type of the
@@ -101,12 +101,12 @@ public:
     return false;
   }
 
-  State<entity_type>*  CurrentState()  const{return m_pCurrentState;}
-  State<entity_type>*  GlobalState()   const{return m_pGlobalState;}
-  State<entity_type>*  PreviousState() const{return m_pPreviousState;}
+  State<entity_type>*  currentState()  const{return m_pCurrentState;}
+  State<entity_type>*  globalState()   const{return m_pGlobalState;}
+  State<entity_type>*  previousState() const{return m_pPreviousState;}
 
   //only ever used during debugging to grab the name of the current state
-  std::string         GetNameOfCurrentState()const
+  std::string         getNameOfCurrentState()const
   {
     std::string s(typeid(*m_pCurrentState).name());
 
