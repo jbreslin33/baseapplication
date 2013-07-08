@@ -238,6 +238,14 @@ set(HDRS
 	
 	#main
 	./main.h
+
+	#fsm
+	../fsm/state.h	
+	../fsm/stateMachine.h	
+
+	#messaging
+	../messaging/messageDispatcher.h
+	../messaging/telegram.h
 	
 	#ability
 	../serverside/ability/ability.h
@@ -328,6 +336,9 @@ set(SRCS
 
 	#main
 	./main.cpp
+
+	#messaging
+	../messaging/messageDispatcher.cpp
 	
 	#ability
 	../serverside/ability/ability.cpp

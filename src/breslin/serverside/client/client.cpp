@@ -26,8 +26,10 @@
 //math
 #include "../../math/vector3D.h"
 
-//client states
-#include "states/clientStateMachine.h"
+//state machine
+#include "../../fsm/stateMachine.h"
+
+//states
 #include "states/clientStates.h"
 
 
@@ -99,9 +101,8 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	{
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
-
-        //human_computer states
-        mGameControlStateMachine = new ClientStateMachine(this);    //setup the state machine
+ 	
+	mGameControlStateMachine =  new StateMachine<Client>(this);
         mGameControlStateMachine->setCurrentState      (Computer::Instance());
         mGameControlStateMachine->setPreviousState     (Computer::Instance());
         mGameControlStateMachine->setGlobalState       (NULL);

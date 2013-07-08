@@ -50,7 +50,7 @@ class Server;
 class Network;
 class Shape;
 class Game;
-class ClientStateMachine;
+class StateMachine;
 
 class Client
 {
@@ -134,7 +134,8 @@ public:
         std::string db_last_name;
         int         db_school_id;
 
-	ClientStateMachine* mGameControlStateMachine;
-	ClientStateMachine* mLoginStateMachine;
+	StateMachine* mGameControlStateMachine;
+	StateMachine* mLoginStateMachine;
+
 };
 #endif

@@ -19,6 +19,7 @@ class AI;
 class Seek;
 class Vector3D;
 class Ability;
+class Telegram;
 
 class Shape
 {
@@ -121,6 +122,7 @@ virtual void collision(Shape* shape);
 	//delta move command
 virtual int  setFlag();
 virtual void addToMoveMessage(Message* message);
+virtual bool handleMessage(const Telegram& msg){return false;}
 };
 
 #endif

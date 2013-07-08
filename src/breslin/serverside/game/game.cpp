@@ -55,6 +55,19 @@ void Game::createShapes()
         }
 }
 
+Shape* Game::getShapeFromID(int id)
+{
+	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	{
+		if (id = mShapeVector.at(i)->mIndex)
+		{
+			return mShapeVector.at(i);
+		}	
+	}
+	
+	return NULL;
+}
+
 //you should call this from server processUpdate
 void Game::processUpdate()
 {

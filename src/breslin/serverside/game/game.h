@@ -77,6 +77,7 @@ public:
 	//shapes
 	virtual void createShapes();
 	void sendShapes(Client* client);
+	Shape* getShapeFromID(int id);
 };
 
 #endif
