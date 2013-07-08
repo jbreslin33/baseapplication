@@ -43,6 +43,7 @@ void Computer_Client::enter(Client* client)
 void Computer_Client::execute(Client* client)
 {
 	//client->mClientStateMachine->changeState(Human_Client::Instance());
+	client->checkForTimeout();
 }
 void Computer_Client::exit(Client* client)
 {
