@@ -100,11 +100,17 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
 
-        //states
-        mClientStateMachine = new ClientStateMachine(this);    //setup the state machine
-        mClientStateMachine->setCurrentState      (Computer_Client::Instance());
-        mClientStateMachine->setPreviousState     (Computer_Client::Instance());
-        mClientStateMachine->setGlobalState       (NULL);
+        //human_computer states
+        mGameControlStateMachine = new ClientStateMachine(this);    //setup the state machine
+        mGameControlStateMachine->setCurrentState      (Computer::Instance());
+        mGameControlStateMachine->setPreviousState     (Computer::Instance());
+        mGameControlStateMachine->setGlobalState       (NULL);
+
+	//login_out states
+        mLoginStateMachine = new ClientStateMachine(this);    //setup the state machine
+        mLoginStateMachine->setCurrentState      (Logged_Out::Instance());
+        mLoginStateMachine->setPreviousState     (Logged_Out::Instance());
+        mLoginStateMachine->setGlobalState       (NULL);
 }
 
 Client::~Client()
@@ -164,7 +170,8 @@ void Client::setSocketAddress(struct sockaddr *address)
 
 void Client::processUpdate()
 {
-        mClientStateMachine->update();
+        mLoginStateMachine->update();
+        mGameControlStateMachine->update();
 }
 
 void Client::remove()

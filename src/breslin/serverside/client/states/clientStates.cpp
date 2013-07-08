@@ -11,41 +11,87 @@
 #include "../client.h"
 
 /*****************************************
-	Human_Client
+*******       GAME CONTROL    ******************	
 ****************************************/
-Human_Client* Human_Client::Instance()
+/*****************************************
+	Logged_In
+****************************************/
+Logged_In* Logged_In::Instance()
 {
-  static Human_Client instance;
+  static Logged_In instance;
   return &instance;
 }
-void Human_Client::enter(Client* client)
+void Logged_In::enter(Client* client)
 {
 }
-void Human_Client::execute(Client* client)
+void Logged_In::execute(Client* client)
 {
 
 }
-void Human_Client::exit(Client* client)
+void Logged_In::exit(Client* client)
 {
 }
 
 /*****************************************
-	Computer_Client
+	Logged_Out
 ****************************************/
-Computer_Client* Computer_Client::Instance()
+Logged_Out* Logged_Out::Instance()
 {
-	static Computer_Client instance;
+  static Logged_Out instance;
+  return &instance;
+}
+void Logged_Out::enter(Client* client)
+{
+}
+void Logged_Out::execute(Client* client)
+{
+
+}
+void Logged_Out::exit(Client* client)
+{
+}
+
+
+/*****************************************
+*******       GAME CONTROL    ******************	
+****************************************/
+
+/*****************************************
+	Human
+****************************************/
+Human* Human::Instance()
+{
+  static Human instance;
+  return &instance;
+}
+void Human::enter(Client* client)
+{
+}
+void Human::execute(Client* client)
+{
+
+}
+void Human::exit(Client* client)
+{
+}
+
+/*****************************************
+	Computer
+****************************************/
+Computer* Computer::Instance()
+{
+	static Computer instance;
 	return &instance;
 }
-void Computer_Client::enter(Client* client)
+void Computer::enter(Client* client)
 {
 }
-void Computer_Client::execute(Client* client)
+void Computer::execute(Client* client)
 {
-	//client->mClientStateMachine->changeState(Human_Client::Instance());
+	//client->mClientStateMachine->changeState(Human::Instance());
 	client->checkForTimeout();
 }
-void Computer_Client::exit(Client* client)
+void Computer::exit(Client* client)
 {
 }
 

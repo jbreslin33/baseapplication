@@ -4,23 +4,54 @@
 
 class Client;
 
-class Human_Client : public ClientState
+/*******************************
+*       LOGIN 
+******************************/
+
+class Logged_In : public ClientState
 {
 private:
-  Human_Client(){}
+  Logged_In(){}
 public:
-  static Human_Client* Instance();
+  static Logged_In* Instance();
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
 };
 
-class Computer_Client : public ClientState
+class Logged_Out : public ClientState
 {
 private:
-  Computer_Client(){}
+  Logged_Out(){}
 public:
-  static Computer_Client* Instance();
+  static Logged_Out* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+};
+
+
+
+/*******************************
+*        GAME CONTROL
+******************************/
+class Human : public ClientState
+{
+private:
+  Human(){}
+public:
+  static Human* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+};
+
+class Computer : public ClientState
+{
+private:
+  Computer(){}
+public:
+  static Computer* Instance();
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);

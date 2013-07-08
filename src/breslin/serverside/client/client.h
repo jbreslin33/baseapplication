@@ -134,9 +134,7 @@ public:
         std::string db_last_name;
         int         db_school_id;
 
-	ClientStateMachine* mClientStateMachine;
-
-
-
+	ClientStateMachine* mGameControlStateMachine;
+	ClientStateMachine* mLoginStateMachine;
 };
 #endif
