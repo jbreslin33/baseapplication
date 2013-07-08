@@ -1,214 +1,50 @@
 //parent
-#include "moveStates.h"
+#include "clientStates.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
 
 //states
-#include "moveStateMachine.h"
+#include "clientStateMachine.h"
 
 //ability
-#include "move.h"
-
-//server
-#include "../../server/server.h"
-
-//game
-#include "../../game/game.h"
-
-//shape
-#include "../../shape/shape.h"
-
-//vector3d
-#include "../../../math/vector3D.h"
+#include "../client.h"
 
 /*****************************************
-	Normal_Move
+	Human_Client
 ****************************************/
-Normal_Move* Normal_Move::Instance()
+Human_Client* Human_Client::Instance()
 {
-  static Normal_Move instance;
+  static Human_Client instance;
   return &instance;
 }
-void Normal_Move::enter(Move* move)
+void Human_Client::enter(Client* client)
 {
-	//LogString("Normal");
 }
-void Normal_Move::execute(Move* move)
+void Human_Client::execute(Client* client)
 {
-	//check for No_move and Decelerate and Accelerate states..
-    	if (move->mHeading->isZero()) 
-	{
-		if(move->mRunSpeed > 0.0) //Decelerate_Move
-		{
-			move->mMoveStateMachine->changeState(Decelerate_Move::Instance());
-			return;
-		}
-        	else //No_Move
-		{
-			move->mMoveStateMachine->changeState(No_Move::Instance());
-			return;
-		}
-    	}
-	else 
-	{
-        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
-		{
-			move->mMoveStateMachine->changeState(Accelerate_Move::Instance());
-			return;
-		}
-	}
 
-	//actual move
-	move->mShape->mSceneNode->translate(move->mHeading->x * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
-		0,
-		move->mHeading->z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
-		Node::TS_WORLD);
 }
-void Normal_Move::exit(Move* move)
+void Human_Client::exit(Client* client)
 {
 }
 
 /*****************************************
-	No_Move
+	Computer_Client
 ****************************************/
-No_Move* No_Move::Instance()
+Computer_Client* Computer_Client::Instance()
 {
-	static No_Move instance;
+	static Computer_Client instance;
 	return &instance;
 }
-void No_Move::enter(Move* move)
+void Computer_Client::enter(Client* client)
 {
-	//LogString("No");
 }
-void No_Move::execute(Move* move)
+void Computer_Client::execute(Client* client)
 {
-	if (move->mHeading->isZero()) 
-	{
-		if(move->mRunSpeed > 0.0) //Decelerate_Move
-		{
-			move->mMoveStateMachine->changeState(Decelerate_Move::Instance());
-			return;
-		}
-        	else //No_Move
-		{
-           		move->mRunSpeed = 0.0;
-		}
-    	}
-	else 
-	{
-        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
-		{
-			move->mMoveStateMachine->changeState(Accelerate_Move::Instance());
-			return;
-		}
-		else //Normal_Move 
-		{
-			move->mMoveStateMachine->changeState(Normal_Move::Instance());
-			return;
-		}
-	}
+	//client->mClientStateMachine->changeState(Human_Client::Instance());
 }
-void No_Move::exit(Move* move)
+void Computer_Client::exit(Client* client)
 {
 }
 
-/*****************************************
-	Accelerate_Move
-****************************************/
-Accelerate_Move* Accelerate_Move::Instance()
-{
-	static Accelerate_Move instance;
-	return &instance;
-}
-void Accelerate_Move::enter(Move* move)
-{
-	//LogString("Accelerate");
-}
-void Accelerate_Move::execute(Move* move)
-{
-	if (move->mHeading->isZero()) 
-	{
-		if(move->mRunSpeed > 0.0) //Decelerate_Move
-		{
-			move->mMoveStateMachine->changeState(Decelerate_Move::Instance());
-			return;
-		}
-        	else //No_Move
-		{
-			move->mMoveStateMachine->changeState(No_Move::Instance());
-			return;
-		}
-    	}
-	else 
-	{
-        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
-		{
-			move->mRunSpeed += move->mRunAccel;
-		}
-		else //Normal_Move 
-		{
-			move->mMoveStateMachine->changeState(Normal_Move::Instance());
-			return;
-		}
-	}
-
-	//actual move
-	move->mShape->mSceneNode->translate(move->mHeading->x * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
-		0,
-		move->mHeading->z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
-		Node::TS_WORLD);
-}
-void Accelerate_Move::exit(Move* move)
-{
-}
-
-/*****************************************
-	Decelerate_Move
-****************************************/
-Decelerate_Move* Decelerate_Move::Instance()
-{
-	static Decelerate_Move instance;
-	return &instance;
-}
-void Decelerate_Move::enter(Move* move)
-{
-	//LogString("Decelerate");
-}
-void Decelerate_Move::execute(Move* move)
-{
-    	if (move->mHeading->isZero()) 
-	{
-		if(move->mRunSpeed > 0.0) //Decelerate_Move
-		{
-			move->mRunSpeed -= move->mRunDecel;
-		}
-        	else //No_Move
-		{
-			move->mMoveStateMachine->changeState(No_Move::Instance());
-			return;
-		}
-    	}
-	else 
-	{
-        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
-		{
-			move->mMoveStateMachine->changeState(Accelerate_Move::Instance());
-			return;
-		}
-		else //Normal_Move 
-		{
-			move->mMoveStateMachine->changeState(Normal_Move::Instance());
-			return;
-		}
-	}
-
-	//actual move
-	move->mShape->mSceneNode->translate(move->mHeading->x * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
-		0,
-		move->mHeading->z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
-		Node::TS_WORLD);
-}
-void Decelerate_Move::exit(Move* move)
-{
-}

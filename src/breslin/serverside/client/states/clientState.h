@@ -1,23 +1,19 @@
-#ifndef ClIENTSIDEMOVESTATE_H
-#define ClIENTSIDEMOVESTATE_H
+#ifndef CLIENTSTATE_H
+#define CLIENTSTATE_H
 
-class Move;
+class Client;
 
-class MoveState
+class ClientState
 {
 public:
 
-  virtual ~MoveState(){}
+  virtual ~ClientState(){}
 
-  //this will execute when the state is entered
-  virtual void enter(Move*)=0;
+  virtual void enter(Client*)=0;
 
-  //this is the states normal update function
-  virtual void execute(Move*)=0;
+  virtual void execute(Client*)=0;
 
-  //this will execute when the state is exited. (My word, isn't
-  //life full of surprises... ;o))
-  virtual void exit(Move*)=0;
+  virtual void exit(Client*)=0;
 };
 
 #endif

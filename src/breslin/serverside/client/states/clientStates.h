@@ -1,50 +1,29 @@
-#ifndef MOVESTATES_H
-#define MOVESTATES_H
-#include "moveState.h"
+#ifndef CLIENTSTATES_H
+#define CLIENTSTATES_H
+#include "clientState.h"
 
-class Move;
+class Client;
 
-class Normal_Move : public MoveState
+class Human_Client : public ClientState
 {
 private:
-  Normal_Move(){}
+  Human_Client(){}
 public:
-  static Normal_Move* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
+  static Human_Client* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
 };
 
-class No_Move : public MoveState
+class Computer_Client : public ClientState
 {
 private:
-  No_Move(){}
+  Computer_Client(){}
 public:
-  static No_Move* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
+  static Computer_Client* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
 };
 
-class Accelerate_Move : public MoveState
-{
-private:
-  Accelerate_Move(){}
-public:
-  static Accelerate_Move* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
-};
-
-class Decelerate_Move : public MoveState
-{
-private:
-  Decelerate_Move(){}
-public:
-  static Decelerate_Move* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
-};
 #endif

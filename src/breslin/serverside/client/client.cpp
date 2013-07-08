@@ -26,6 +26,11 @@
 //math
 #include "../../math/vector3D.h"
 
+//client states
+#include "states/clientStateMachine.h"
+#include "states/clientStates.h"
+
+
 #ifdef WIN32
 //
 #else
@@ -94,6 +99,12 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	{
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
+
+        //states
+        mClientStateMachine = new ClientStateMachine(this);    //setup the state machine
+        mClientStateMachine->setCurrentState      (Computer_Client::Instance());
+        mClientStateMachine->setPreviousState     (Computer_Client::Instance());
+        mClientStateMachine->setGlobalState       (NULL);
 }
 
 Client::~Client()
@@ -153,6 +164,7 @@ void Client::setSocketAddress(struct sockaddr *address)
 
 void Client::processUpdate()
 {
+        mClientStateMachine->update();
 }
 
 void Client::remove()

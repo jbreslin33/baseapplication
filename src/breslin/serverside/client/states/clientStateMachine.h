@@ -8,77 +8,61 @@ class ClientStateMachine
 {
 private:
   //a pointer to the agent that owns this instance
-  Move*   m_pOwner;
-  MoveState*    m_pCurrentState;
+  Client*   mClient;
+  ClientState*    mCurrentState;
 
   //a record of the last state the agent was in
-  MoveState*   m_pPreviousState;
+  ClientState*   mPreviousState;
 
   //this is called every time the FSM is updated
-  MoveState*   m_pGlobalState;
+  ClientState*   mGlobalState;
 
 public:
 
-  MoveStateMachine(Move* owner):m_pOwner(owner),
-	                               m_pCurrentState(0),
-                                   m_pPreviousState(0),
-                                   m_pGlobalState(0)
+  ClientStateMachine(Client* owner):mClient(owner),
+	                               mCurrentState(0),
+                                   mPreviousState(0),
+                                   mGlobalState(0)
   {}
 
-  virtual ~MoveStateMachine(){}
+  virtual ~ClientStateMachine(){}
 
   //use these methods to initialize the FSM
-  void setCurrentState(MoveState* s){m_pCurrentState = s;}
-  void setGlobalState(MoveState* s) {m_pGlobalState = s;}
-  void setPreviousState(MoveState* s){m_pPreviousState = s;}
+  void setCurrentState(ClientState* s){mCurrentState = s;}
+  void setGlobalState(ClientState* s) {mGlobalState = s;}
+  void setPreviousState(ClientState* s){mPreviousState = s;}
 
   //call this to update the FSM
   void  update()const
   {
-//    if a global state exists, call its execute method, else do nothing
-    if(m_pGlobalState)   m_pGlobalState->execute(m_pOwner);
-    //same for the current state
-	    //Con::errorf("fieldPlayerStateMachine update");
-    if (m_pCurrentState) m_pCurrentState->execute(m_pOwner);
+    if(mGlobalState)
+   	mGlobalState->execute(mClient);
+    if (mCurrentState) mCurrentState->execute(mClient);
   }
 
   //change to a new state
-  void  changeState(MoveState* pNewState)
+  void  changeState(ClientState* mNewState)
   {
-   // assert(pNewState &&
-           //"<StateMachine::ChangeState>: trying to change to NULL state");
 
-    //keep a record of the previous state
-    m_pPreviousState = m_pCurrentState;
+    mPreviousState = mCurrentState;
 
-    //call the exit method of the existing state
-	if(m_pCurrentState)
-       m_pCurrentState->exit(m_pOwner);
+	if(mCurrentState)
+       mCurrentState->exit(mClient);
 
-    //change state to the new state
-    m_pCurrentState = pNewState;
+    mCurrentState = mNewState;
 
-    //call the entry method of the new state
-	if(m_pCurrentState)
-       m_pCurrentState->enter(m_pOwner);
+	if(mCurrentState)
+       mCurrentState->enter(mClient);
   }
 
-  //change state back to the previous state
   void  revertToPreviousState()
   {
-    changeState(m_pPreviousState);
+    changeState(mPreviousState);
   }
 
-  //returns true if the current state's type is equal to the type of the
-  //class passed as a parameter.
- // bool  isInState(const State& st)const
- // {
- //   return typeid(*m_pCurrentState) == typeid(st);
- // }
-
-  MoveState*  currentState()  const{return m_pCurrentState;}
-  MoveState*  globalState()   const{return m_pGlobalState;}
-  MoveState*  previousState() const{return m_pPreviousState;}
+  ClientState*  currentState()  const{return mCurrentState;}
+  ClientState*  globalState()   const{return mGlobalState;}
+  ClientState*  previousState() const{return mPreviousState;}
 };
 #endif
 

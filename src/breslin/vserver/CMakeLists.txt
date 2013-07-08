@@ -311,6 +311,11 @@ set(HDRS
 	#client
 	../serverside/client/client.h
 	../serverside/client/partido/clientPartido.h
+	
+	#client states
+	../serverside/client/states/clientStateMachine.h
+	../serverside/client/states/clientState.h
+	../serverside/client/states/clientStates.h
 
 	#quiz
 	../serverside/quiz/quiz.h
@@ -385,6 +390,9 @@ set(SRCS
 	#client
 	../serverside/client/client.cpp
 	../serverside/client/partido/clientPartido.cpp
+
+	#client states
+	../serverside/client/states/clientStates.cpp
 
 	#quiz
 	../serverside/quiz/quiz.cpp
