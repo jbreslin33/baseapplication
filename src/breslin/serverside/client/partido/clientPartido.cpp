@@ -65,10 +65,15 @@ void ClientPartido::setGame(int gameID)
         }
 }
 
-//updates
-void ClientPartido::processUpdate()
+bool ClientPartido::handleMessage(const Telegram& msg)
 {
-	Client::processUpdate();
+        return mStateMachine->handleMessage(msg);
+}
+
+//updates
+void ClientPartido::update()
+{
+	Client::update();
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
 		if (mShapePartido)
@@ -81,6 +86,7 @@ void ClientPartido::processUpdate()
 		}
 	}
 }
+
 
 void ClientPartido::setShape(ShapePartido* shapePartido)
 {

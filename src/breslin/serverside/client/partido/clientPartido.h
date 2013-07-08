@@ -69,8 +69,13 @@ void insertAnswerAttempt();
 ShapePartido* mShapePartido;
 void setShape(ShapePartido* shapePartido);
 
+//update
+virtual void update();
+
+//handle message
+virtual bool  handleMessage(const Telegram& msg);
+
 //battle
-virtual void processUpdate();
 int getNewQuestionID();
 void sendQuestion(int questionID);
 void sendBattleStart();

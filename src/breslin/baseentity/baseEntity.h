@@ -1,20 +1,28 @@
-#ifndef BOUNDS_H
-#define BOUNDS_H
+#ifndef BASEENTITY_H
+#define BASEENTITY_H
 
-#include "../../math/vector3D.h"
+#include "../messaging/telegram.h"
 
-class Bounds
+class BaseEntity
 {
 public:
 
-Bounds();
-Bounds(Vector3D* a,Vector3D* b,Vector3D* c,Vector3D* d);
-~Bounds();
+BaseEntity(int id);
+~BaseEntity();
 
-Vector3D* a; 
-Vector3D* b; 
-Vector3D* c;
-Vector3D* d;
+int mID;
+
+static int mNextValidID;
+
+virtual void update()=0;
+
+virtual bool handleMessage(const Telegram& msg)=0;
+
+void setID(int id);
+int  getID()const { return mID; }
+  //use this to grab the next valid ID
+
+static int   getNextValidID(){ return mNextValidID; }
 
 };
 #endif

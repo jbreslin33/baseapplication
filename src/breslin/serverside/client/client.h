@@ -1,6 +1,8 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+#include "../../baseentity/baseEntity.h"
+
 #include "../../fsm/stateMachine.h"
 
 template <class entity_type> class State;
@@ -54,13 +56,15 @@ class Server;
 class Network;
 class Shape;
 class Game;
-class Client
+
+class Client : public BaseEntity
 {
 public:
 	Client(Server* server, struct sockaddr *address, int clientID);
 
 ~Client();
 
+StateMachine<Client>* mStateMachine;
 StateMachine<Client>* mGameControlStateMachine;
 StateMachine<Client>* mLoginStateMachine;
 
@@ -95,8 +99,11 @@ int mKeyClockwise;
 
 public:
 
-	//processUpdate
-	virtual void processUpdate();
+	//update
+	virtual void update();
+	
+	//handle message
+  	virtual bool  handleMessage(const Telegram& msg);
 
 	//timeout
 	void checkForTimeout();

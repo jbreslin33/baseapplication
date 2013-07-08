@@ -239,6 +239,9 @@ set(HDRS
 	#main
 	./main.h
 
+	#baseEntity
+	../baseentity/baseEntity.h
+
 	#fsm
 	../fsm/state.h	
 	../fsm/stateMachine.h	
@@ -337,6 +340,9 @@ set(SRCS
 	#main
 	./main.cpp
 
+	#baseEntity
+	../baseentity/baseEntity.cpp
+	
 	#messaging
 	../messaging/messageDispatcher.cpp
 	

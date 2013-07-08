@@ -31,7 +31,7 @@ void ServerPartido::processClients()
         //update clients
         for (unsigned int i = 0; i < mClientPartidoVector.size(); i++)
         {
-                mClientPartidoVector.at(i)->processUpdate();
+                mClientPartidoVector.at(i)->update();
         }
 }
 

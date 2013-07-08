@@ -48,7 +48,7 @@
 
 #include "../quiz/quiz.h"
 //server side client constructor, many instances will be made, one for each client connected.
-Client::Client(Server* server, struct sockaddr *address, int clientID)
+Client::Client(Server* server, struct sockaddr *address, int clientID) : BaseEntity(BaseEntity::getNextValidID())
 {
         //keys
         mKeyUp = 1;
@@ -101,6 +101,11 @@ Client::Client(Server* server, struct sockaddr *address, int clientID)
 	{
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
+
+	mStateMachine =  new StateMachine<Client>(this);
+        mStateMachine->setCurrentState      (NULL);
+        mStateMachine->setPreviousState     (NULL);
+        mStateMachine->setGlobalState       (NULL);
  	
 	mGameControlStateMachine =  new StateMachine<Client>(this);
         mGameControlStateMachine->setCurrentState      (Computer::Instance());
@@ -170,10 +175,15 @@ void Client::setSocketAddress(struct sockaddr *address)
 	memcpy(&mSocketAddress, address, sizeof(struct sockaddr)); 
 }
 
-void Client::processUpdate()
+void Client::update()
 {
         mLoginStateMachine->update();
         mGameControlStateMachine->update();
+}
+
+bool Client::handleMessage(const Telegram& msg)
+{
+	return mStateMachine->handleMessage(msg);
 }
 
 void Client::remove()

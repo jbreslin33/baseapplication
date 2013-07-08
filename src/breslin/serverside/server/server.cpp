@@ -103,7 +103,7 @@ void Server::processClients()
 	//update clients
   	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
-		mClientVector.at(i)->processUpdate();
+		mClientVector.at(i)->update();
 	}
 }
 

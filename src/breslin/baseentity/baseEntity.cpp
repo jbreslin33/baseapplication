@@ -1,14 +1,21 @@
-#include "bounds.h"
+#include "baseEntity.h"
+#include <assert.h> 
 
-Bounds::Bounds()
+int BaseEntity::mNextValidID = 0;
+
+BaseEntity::BaseEntity(int id)
 {
-        a = new Vector3D();
-        b = new Vector3D();
-        c = new Vector3D();
-        d = new Vector3D();
+	setID(id);
 }
 
-Bounds::~Bounds()
+BaseEntity::~BaseEntity()
 {
 }
 
+void BaseEntity::setID(int id)
+{
+	//make sure the val is equal to or greater than the next available ID
+  	assert ( (id >= mNextValidID) && "<BaseGameEntity::setID>: invalid ID");
+  	mID = id;
+  	mNextValidID = mID + 1;
+}
