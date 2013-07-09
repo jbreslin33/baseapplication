@@ -64,6 +64,23 @@ Server::~Server()
 
 
 /*******************************************************
+		BASE ENTITYS	
+********************************************************/
+BaseEntity* Server::getBaseEntityFromID(int id)
+{
+        for (unsigned int i = 0; i < mBaseEntityVector.size(); i++)
+        {
+                if (id = mBaseEntityVector.at(i)->mID)
+                {
+                        return mBaseEntityVector.at(i);
+                }
+        }
+
+        return NULL;
+}
+
+
+/*******************************************************
 		GAMES	
 ********************************************************/
 

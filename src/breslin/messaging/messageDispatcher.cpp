@@ -1,7 +1,5 @@
 #include "messageDispatcher.h"
-#include "../serverside/shape/shape.h"
-//#include "misc/FrameCounter.h"
-#include "../serverside/game/game.h"
+#include "../baseentity/baseEntity.h"
 #include "../serverside/server/server.h"
 
 //log
@@ -9,18 +7,18 @@
 
 using std::set;
 
-MessageDispatcher::MessageDispatcher(Game* game)
+MessageDispatcher::MessageDispatcher(Server* server)
 {
-        mGame = game;
+        mServer = server;
 }
 
 MessageDispatcher::~MessageDispatcher()
 {
 }
 
-void MessageDispatcher::discharge(Shape* pReceiver, const Telegram& telegram)
+void MessageDispatcher::discharge(BaseEntity* receiver, const Telegram& telegram)
 {
-	if (!pReceiver->handleMessage(telegram))
+	if (!receiver->handleMessage(telegram))
   	{
 		LogString("telegram could not be handled");
   	}
@@ -28,35 +26,35 @@ void MessageDispatcher::discharge(Shape* pReceiver, const Telegram& telegram)
 
 void MessageDispatcher::dispatchMsg(double       delay,
                                     int          sender,
-                                    int          receiver,
+                                    int          receiverID,
                                     int          msg,
                                     void*        AdditionalInfo = NULL)
 {
 
 	//get a pointer to the receiver
-  	Shape* pReceiver = mGame->getShapeFromID(receiver);
+  	BaseEntity* receiver = mServer->getBaseEntityFromID(receiverID);
 
   	//make sure the receiver is valid
-  	if (pReceiver == NULL)
+  	if (receiver == NULL)
   	{
 		LogString("WARNING: Receiver not found with id:%d",receiver);
     		return;
   	}
   
   	//create the telegram
-  	Telegram telegram(0, sender, receiver, msg, AdditionalInfo);
+  	Telegram telegram(0, sender, receiverID, msg, AdditionalInfo);
   
   	//if there is no delay, route telegram immediately                       
   	if (delay <= 0.0)                                                        
   	{
     		//send the telegram to the recipient
-    		discharge(pReceiver, telegram);
+    		discharge(receiver, telegram);
   	}
 
   	//else calculate the time when the telegram should be dispatched
   	else
   	{
-    		double currentTime = mGame->mServer->mGameTime; 
+    		double currentTime = mServer->mGameTime; 
 
     		telegram.mDispatchTime = currentTime + delay;
 
@@ -73,7 +71,7 @@ void MessageDispatcher::dispatchMsg(double       delay,
 void MessageDispatcher::dispatchDelayedMessages()
 { 
 	//first get current time
-  	double currentTime = mGame->mServer->mGameTime; 
+  	double currentTime = mServer->mGameTime; 
 
   	//now peek at the queue to see if any telegrams need dispatching.
   	//remove all telegrams from the front of the queue that have gone
@@ -86,7 +84,7 @@ void MessageDispatcher::dispatchDelayedMessages()
     		const Telegram& telegram = *mPriorityQ.begin();
 
     		//find the recipient
-    		Shape* receiver = mGame->getShapeFromID(telegram.mReceiver);
+    		BaseEntity* receiver = mServer->getBaseEntityFromID(telegram.mReceiver);
 
     		//send the telegram to the recipient
     		discharge(receiver, telegram);

@@ -28,6 +28,7 @@
 using namespace Ogre;
 
 // Introduce classes
+class BaseEntity;
 class Network;
 class Client;
 class Game;
@@ -45,6 +46,9 @@ public:
 
 	//Message
 	Message mMessage;
+	
+	//games
+	std::vector<BaseEntity*> mBaseEntityVector;
 
 	//games
 	std::vector<Game*> mGameVector;
@@ -112,6 +116,9 @@ public:
 public:
 	Server(Ogre::Root* root, const char *localIP, int serverPort);
 	~Server();
+
+	//BaseEntitys
+	BaseEntity* getBaseEntityFromID(int id);
 
 	//update
 	void processUpdate(int msec);

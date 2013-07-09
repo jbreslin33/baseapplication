@@ -6,8 +6,8 @@
 #include <string>
 #include "telegram.h"
 
-class Game;
-class Shape;
+class Server;
+class BaseEntity;
 
 //to make code easier to read
 const double SEND_MSG_IMMEDIATELY = 0.0;
@@ -20,15 +20,15 @@ class MessageDispatcher
 
 private:  
   
-	MessageDispatcher(Game* game);
+	MessageDispatcher(Server* server);
 	~MessageDispatcher();
   
 	std::set<Telegram> mPriorityQ;
- 	void discharge(Shape* pReceiver, const Telegram& msg);
+ 	void discharge(BaseEntity* receiver, const Telegram& message);
 
 	public:
 
-	Game* mGame;
+	Server* mServer;
 	
 	void dispatchMsg(double      delay,
                    int         sender,
