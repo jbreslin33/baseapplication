@@ -1,23 +1,20 @@
 //parent
-#include "aiStates.h"
+#include "computerStates.h"
 
 //log
-#include "../../../tdreamsock/dreamSockLog.h"
-
-//states
-#include "aiStateMachine.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
 //ability
-#include "../ai.h"
+#include "../computer.h"
 
 //game
-#include "../../../game/game.h"
+#include "../../game/game.h"
 
 //shapes
-#include "../../../shape/shape.h"
+#include "../../shape/shape.h"
 
 //client
-#include "../../../client/client.h"
+#include "../../client/client.h"
 
 //seek
 #include "../../seek/seek.h"
@@ -29,7 +26,7 @@
 #include "../../rotation/rotation.h"
 
 //vector3D
-#include "../../../../math/vector3D.h"
+#include "../../../math/vector3D.h"
 
 //rand
 #include <stdlib.h>
@@ -37,109 +34,153 @@
 
 #define MAX_RUN_SPEED 1.66           // character running speed in units per second
 
-/*   Random_AI   */
-Random_AI* Random_AI::Instance()
+
+/*****************************************
+*******       GLOBAL    ******************
+****************************************/
+GlobalComputer* GlobalComputer::Instance()
 {
-  static Random_AI instance;
+  static GlobalComputer instance;
+  return &instance;
+}
+void GlobalComputer::enter(Computer* computer)
+{
+}
+void GlobalComputer::execute(Computer* computer)
+{
+
+}
+void GlobalComputer::exit(Computer* computer)
+{
+}
+bool GlobalComputer::onMessage(Computer* computer, const Telegram& msg)
+{
+        return true;
+}
+
+
+/*****************************************
+*******       COMPUTER    ******************
+****************************************/
+
+/*****************************************
+*******      RANDOM COMPUTER    ******************
+****************************************/
+/*   Random_Computer   */
+Random_Computer* Random_Computer::Instance()
+{
+  static Random_Computer instance;
   return &instance;
 }
 
-void Random_AI::enter(AI* ai)
+void Random_Computer::enter(Computer* computer)
 {
 
 }
 
-void Random_AI::execute(AI* ai)
+void Random_Computer::execute(Computer* computer)
 {
-	if (ai->mShape->mSeek)
+	if (computer->mShape->mSeek)
 	{
-		if (ai->mShape->mClient->db_id == 5)
+		if (computer->mShape->mClient->db_id == 5)
 		{
 			/*
 			Vector3D* seekPoint = new Vector3D(200.0f,0.0f,100.0f);
-			ai->mShape->mSeek->setSeekPoint(seekPoint);
+			computer->mShape->mSeek->setSeekPoint(seekPoint);
 			*/
-			for (int i = 0; i < ai->mShape->mGame->mShapeVector.size(); i++)
+			for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
 			{
-				if (ai->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
+				if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
 				{
-					ai->mShape->mSeek->setSeekShape(ai->mShape->mGame->mShapeVector.at(i));	
+					computer->mShape->mSeek->setSeekShape(computer->mShape->mGame->mShapeVector.at(i));	
 				}
 			}
 		}
 	}
 
 	//is this human controlled?
-	if (ai->mShape->mClient->mConnectionState == 1)
+	if (computer->mShape->mClient->mConnectionState == 1)
 	{
-		ai->mAIStateMachine->changeState(Human_AI::Instance());
+		computer->mStateMachine->changeState(No_Computer::Instance());
 	}
 }
 
-void Random_AI::exit(AI* ai)
+void Random_Computer::exit(Computer* computer)
 {
 }
-
-/*   Human_AI   */
-Human_AI* Human_AI::Instance()
+bool Random_Computer::onMessage(Computer* computer, const Telegram& msg)
 {
-	static Human_AI instance;
+        return true;
+}
+
+
+
+/*****************************************
+*******      RANDOM COMPUTER    ******************
+****************************************/
+No_Computer* No_Computer::Instance()
+{
+	static No_Computer instance;
 	return &instance;
 }
 
-void Human_AI::enter(AI* ai)
+void No_Computer::enter(Computer* computer)
 {
 }
 
-void Human_AI::execute(AI* ai)
+void No_Computer::execute(Computer* computer)
 {
-	if (ai->mShape->mClient->mConnectionState == 4)
+	if (computer->mShape->mClient->mConnectionState == 4)
 	{
-		ai->mAIStateMachine->changeState(Random_AI::Instance());
+		computer->mStateMachine->changeState(Random_Computer::Instance());
 	}
 
- 	ai->mShape->mMove->mHeading->x = 0;
-        ai->mShape->mMove->mHeading->y = 0;
-        ai->mShape->mMove->mHeading->z = 0;
+ 	computer->mShape->mMove->mHeading->x = 0;
+        computer->mShape->mMove->mHeading->y = 0;
+        computer->mShape->mMove->mHeading->z = 0;
 
         // keep track of the player's intended direction
-        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyUp)
+        if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyUp)
         {
-                ai->mShape->mMove->mHeading->z += -1;
+                computer->mShape->mMove->mHeading->z += -1;
         }
 
-        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyLeft)
+        if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyLeft)
         {
-                ai->mShape->mMove->mHeading->x += -1;
+                computer->mShape->mMove->mHeading->x += -1;
         }
 
-        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyDown)
+        if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyDown)
         {
-                ai->mShape->mMove->mHeading->z += 1;
+                computer->mShape->mMove->mHeading->z += 1;
         }
   
-        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyRight)
+        if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyRight)
         {
-                ai->mShape->mMove->mHeading->x += 1;
+                computer->mShape->mMove->mHeading->x += 1;
         }
 
-        ai->mShape->mMove->mHeading->normalise();
+        computer->mShape->mMove->mHeading->normalise();
 
 	//Rotation
-        ai->mShape->mRotation->mDegrees = 0.0f;
+        computer->mShape->mRotation->mDegrees = 0.0f;
         // keep track of the player's intended rotation
-        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyCounterClockwise)
+        if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyCounterClockwise)
         {
-                ai->mShape->mRotation->mDegrees += -1;
+                computer->mShape->mRotation->mDegrees += -1;
         }
-        if(ai->mShape->mClient->mKey & ai->mShape->mClient->mKeyClockwise)
+        if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyClockwise)
         {
-                ai->mShape->mRotation->mDegrees += 1;
+                computer->mShape->mRotation->mDegrees += 1;
         }
 
 }
 
-void Human_AI::exit(AI* ai)
+void No_Computer::exit(Computer* computer)
 {
+}
+bool No_Computer::onMessage(Computer* computer, const Telegram& msg)
+{
+        return true;
 }
 

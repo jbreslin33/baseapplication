@@ -1,10 +1,10 @@
 #include "seek.h"
-#include "../../tdreamsock/dreamSockLog.h"
+#include "../tdreamsock/dreamSockLog.h"
 
-#include "../../client/client.h"
-#include "../../shape/shape.h"
+#include "../client/client.h"
+#include "../shape/shape.h"
 
-#include "../../../math/vector3D.h"
+#include "../../math/vector3D.h"
 
 
 #include <string>
@@ -14,10 +14,9 @@
 using namespace Ogre;
 
 //seek states
-#include "seekStateMachine.h"
-#include "seekStates.h"
+#include "states/seekStates.h"
 
-Seek::Seek(Shape* shape) : Ability(shape)
+Seek::Seek(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
 	mShape = shape;
 
@@ -25,23 +24,28 @@ Seek::Seek(Shape* shape) : Ability(shape)
 	mSeekPoint = NULL;
 
  	//seek states
-	mSeekStateMachine = new SeekStateMachine(this);    //setup the state machine
-	mSeekStateMachine->setCurrentState      (Normal_Seek::Instance());
-	mSeekStateMachine->setPreviousState     (Normal_Seek::Instance());
-	mSeekStateMachine->setGlobalState       (NULL);
+	mStateMachine =  new StateMachine<Seek>(this);
+	mStateMachine->setCurrentState      (Normal_Seek::Instance());
+	mStateMachine->setPreviousState     (Normal_Seek::Instance());
+	mStateMachine->setGlobalState       (GlobalSeek::Instance());
 }
 
 Seek::~Seek()
 {
 }
-void Seek::processTick()
+void Seek::update()
 {
-	mSeekStateMachine->update();
+	mStateMachine->update();
 	
 	if (mSeekShape)
 	{
 		updateSeekPoint();
 	}
+}
+
+bool Seek::handleMessage(const Telegram& msg)
+{
+        return mStateMachine->handleMessage(msg);
 }
 
 void Seek::updateSeekPoint()

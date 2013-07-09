@@ -1,12 +1,9 @@
 #ifndef SEEK_H
 #define SEEK_H
 
-/***********************************************
-		METHODS
-***********************************************/
+#include "../../baseentity/baseEntity.h"
 
-//parent
-#include "../ability.h"
+#include "../../fsm/stateMachine.h"
 
 //Ogre headers
 #include "Ogre.h"
@@ -16,11 +13,10 @@ using namespace Ogre;
 		FORWARD DECLARATIONS
 ***********************************************/
 
-class SeekStateMachine;
 class Shape;
 class Vector3D;
 
-class Seek : public Ability
+class Seek : public BaseEntity 
 {
 
 public:
@@ -36,8 +32,12 @@ Seek(Shape* shape);
 		METHODS
 ***********************************************/
 
-//ticks
-void processTick    ();
+//update
+virtual void update();
+
+//handle message
+virtual bool  handleMessage(const Telegram& msg);
+
 
 Shape* mShape;
 Shape* mSeekShape;
@@ -46,7 +46,7 @@ void setSeekPoint(Vector3D* seekPoint);
 void setSeekShape(Shape* seekShape);
 void updateSeekPoint();
 
-SeekStateMachine* mSeekStateMachine;
+StateMachine<Seek>* mStateMachine;
 
 
 

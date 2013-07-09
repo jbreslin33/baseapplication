@@ -250,9 +250,6 @@ set(HDRS
 	../messaging/messageDispatcher.h
 	../messaging/telegram.h
 	
-	#ability
-	../serverside/ability/ability.h
-	
 	#game
 	../serverside/game/game.h
 	../serverside/game/partido/gamePartido.h
@@ -275,30 +272,22 @@ set(HDRS
 	../serverside/move/states/moveStates.h
 	
 	#seek
-	../serverside/ability/seek/seek.h
-	../serverside/ability/seek/seek.h
+	../serverside/seek/seek.h
 	
 	#seek states
-	../serverside/ability/seek/seekStateMachine.h
-	../serverside/ability/seek/seekState.h
-	../serverside/ability/seek/seekStates.h
+	../serverside/seek/states/seekStates.h
 	
-	#ai
-	../serverside/ability/ai/ai.h
-	../serverside/ability/ai/ai.h
+	#computer
+	../serverside/computer/computer.h
 	
 	#ai states
-	../serverside/ability/ai/states/aiStateMachine.h
-	../serverside/ability/ai/states/aiState.h
-	../serverside/ability/ai/states/aiStates.h	
+	../serverside/computer/states/computerStates.h	
 	
 	#rotation
-	../serverside/ability/rotation/rotation.h
+	../serverside/rotation/rotation.h
 	
 	#rotation states
-	../serverside/ability/rotation/rotationStateMachine.h
-	../serverside/ability/rotation/rotationState.h
-	../serverside/ability/rotation/rotationStates.h	
+	../serverside/rotation/states/rotationStates.h	
 		
 	#math
 	../math/vector3D.h
@@ -343,9 +332,6 @@ set(SRCS
 	#messaging
 	../messaging/messageDispatcher.cpp
 	
-	#ability
-	../serverside/ability/ability.cpp
-	
 	#game
 	../serverside/game/game.cpp
 	../serverside/game/partido/gamePartido.cpp
@@ -368,22 +354,22 @@ set(SRCS
 	../serverside/move/states/moveStates.cpp
 	
 	#seek
-	../serverside/ability/seek/seek.cpp
+	../serverside/seek/seek.cpp
 	
 	#seek states
-	../serverside/ability/seek/seekStates.cpp
+	../serverside/seek/states/seekStates.cpp
 	
-	#ai
-	../serverside/ability/ai/ai.cpp
+	#computer
+	../serverside/computer/computer.cpp
 	
-	#ai states
-	../serverside/ability/ai/states/aiStates.cpp
+	#computer states
+	../serverside/computer/states/computerStates.cpp
 	
 	#rotation
-	../serverside/ability/rotation/rotation.cpp
+	../serverside/rotation/rotation.cpp
 	
 	#rotation states
-	../serverside/ability/rotation/rotationStates.cpp
+	../serverside/rotation/states/rotationStates.cpp
 	
 	#math
 	../math/vector3D.cpp

@@ -4,11 +4,8 @@
 //log
 #include "../../tdreamsock/dreamSockLog.h"
 
-//states
-#include "moveStateMachine.h"
-
 //ability
-#include "move.h"
+#include "../move.h"
 
 //server
 #include "../../server/server.h"
@@ -21,6 +18,30 @@
 
 //vector3d
 #include "../../../math/vector3D.h"
+
+/*****************************************
+*******       GLOBAL    ******************
+****************************************/
+GlobalMove* GlobalMove::Instance()
+{
+  static GlobalMove instance;
+  return &instance;
+}
+void GlobalMove::enter(Move* move)
+{
+}
+void GlobalMove::execute(Move* move)
+{
+
+}
+void GlobalMove::exit(Move* move)
+{
+}
+bool GlobalMove::onMessage(Move* move, const Telegram& msg)
+{
+        return true;
+}
+
 
 /*****************************************
 	Normal_Move
@@ -41,12 +62,12 @@ void Normal_Move::execute(Move* move)
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
 		{
-			move->mMoveStateMachine->changeState(Decelerate_Move::Instance());
+			move->mStateMachine->changeState(Decelerate_Move::Instance());
 			return;
 		}
         	else //No_Move
 		{
-			move->mMoveStateMachine->changeState(No_Move::Instance());
+			move->mStateMachine->changeState(No_Move::Instance());
 			return;
 		}
     	}
@@ -54,7 +75,7 @@ void Normal_Move::execute(Move* move)
 	{
         	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
 		{
-			move->mMoveStateMachine->changeState(Accelerate_Move::Instance());
+			move->mStateMachine->changeState(Accelerate_Move::Instance());
 			return;
 		}
 	}
@@ -67,6 +88,10 @@ void Normal_Move::execute(Move* move)
 }
 void Normal_Move::exit(Move* move)
 {
+}
+bool Normal_Move::onMessage(Move* move, const Telegram& msg)
+{
+        return true;
 }
 
 /*****************************************
@@ -87,7 +112,7 @@ void No_Move::execute(Move* move)
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
 		{
-			move->mMoveStateMachine->changeState(Decelerate_Move::Instance());
+			move->mStateMachine->changeState(Decelerate_Move::Instance());
 			return;
 		}
         	else //No_Move
@@ -99,18 +124,22 @@ void No_Move::execute(Move* move)
 	{
         	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
 		{
-			move->mMoveStateMachine->changeState(Accelerate_Move::Instance());
+			move->mStateMachine->changeState(Accelerate_Move::Instance());
 			return;
 		}
 		else //Normal_Move 
 		{
-			move->mMoveStateMachine->changeState(Normal_Move::Instance());
+			move->mStateMachine->changeState(Normal_Move::Instance());
 			return;
 		}
 	}
 }
 void No_Move::exit(Move* move)
 {
+}
+bool No_Move::onMessage(Move* move, const Telegram& msg)
+{
+        return true;
 }
 
 /*****************************************
@@ -131,12 +160,12 @@ void Accelerate_Move::execute(Move* move)
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
 		{
-			move->mMoveStateMachine->changeState(Decelerate_Move::Instance());
+			move->mStateMachine->changeState(Decelerate_Move::Instance());
 			return;
 		}
         	else //No_Move
 		{
-			move->mMoveStateMachine->changeState(No_Move::Instance());
+			move->mStateMachine->changeState(No_Move::Instance());
 			return;
 		}
     	}
@@ -148,7 +177,7 @@ void Accelerate_Move::execute(Move* move)
 		}
 		else //Normal_Move 
 		{
-			move->mMoveStateMachine->changeState(Normal_Move::Instance());
+			move->mStateMachine->changeState(Normal_Move::Instance());
 			return;
 		}
 	}
@@ -161,6 +190,10 @@ void Accelerate_Move::execute(Move* move)
 }
 void Accelerate_Move::exit(Move* move)
 {
+}
+bool Accelerate_Move::onMessage(Move* move, const Telegram& msg)
+{
+        return true;
 }
 
 /*****************************************
@@ -185,7 +218,7 @@ void Decelerate_Move::execute(Move* move)
 		}
         	else //No_Move
 		{
-			move->mMoveStateMachine->changeState(No_Move::Instance());
+			move->mStateMachine->changeState(No_Move::Instance());
 			return;
 		}
     	}
@@ -193,12 +226,12 @@ void Decelerate_Move::execute(Move* move)
 	{
         	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
 		{
-			move->mMoveStateMachine->changeState(Accelerate_Move::Instance());
+			move->mStateMachine->changeState(Accelerate_Move::Instance());
 			return;
 		}
 		else //Normal_Move 
 		{
-			move->mMoveStateMachine->changeState(Normal_Move::Instance());
+			move->mStateMachine->changeState(Normal_Move::Instance());
 			return;
 		}
 	}
@@ -211,4 +244,8 @@ void Decelerate_Move::execute(Move* move)
 }
 void Decelerate_Move::exit(Move* move)
 {
+}
+bool Decelerate_Move::onMessage(Move* move, const Telegram& msg)
+{
+        return true;
 }

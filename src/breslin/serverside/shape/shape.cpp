@@ -17,16 +17,16 @@
 #include "../../serverside/server/server.h"
 
 //rotation
-#include "../ability/rotation/rotation.h"
+#include "../rotation/rotation.h"
 
 //move
 #include "../move/move.h"
 
 //seek
-#include "../ability/seek/seek.h"
+#include "../seek/seek.h"
 
 //ai
-#include "../ability/ai/ai.h"
+#include "../computer/computer.h"
 
 //math
 #include "../../math/vector3D.h"
@@ -36,7 +36,7 @@
 #include <string>
 
 Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
-			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool ai)
+			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool computer)
 {
  	//mPosition = position;
 	mIndex  = index;
@@ -59,14 +59,14 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	mAnimated = animated;
 
 	//ai -- bool
-	mIsAI = ai;
+	mIsComputer = computer;
 
 	createShape(root,position);
 
 	//add abilitys
 	
-	mAI = new AI(this);
-	addAbility(mAI);	
+	mComputer = new Computer(this);
+	addAbility(mComputer);	
 	
 	mSeek = new Seek(this);
 	addSteeringAbility(mSeek);	
@@ -158,6 +158,7 @@ void Shape::remove()
 
 void Shape::processTick()
 {
+	LogString("proc");
 	mMove->mPositionBeforeCollision->x = mSceneNode->getPosition().x;
     	mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;
     	mMove->mPositionBeforeCollision->z = mSceneNode->getPosition().z;
@@ -165,13 +166,13 @@ void Shape::processTick()
 	//process ticks on abilitys
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
-		mAbilityVector.at(i)->processTick();
+		mAbilityVector.at(i)->update();
 	}
 	
 	//process ticks on steering abilitys..here you can use one of the precedence or bailout methods in bucklands book
 	for (unsigned int i = 0; i < mSteeringAbilityVector.size(); i++)
 	{
-		mSteeringAbilityVector.at(i)->processTick();
+		mSteeringAbilityVector.at(i)->update();
 	}
 	
 	if (mText.compare(mTextLast) != 0)

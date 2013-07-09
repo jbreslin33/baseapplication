@@ -1,5 +1,6 @@
 #ifndef CLIENTSTATES_H
 #define CLIENTSTATES_H
+
 #include "../../../fsm/state.h"
 
 class Client;

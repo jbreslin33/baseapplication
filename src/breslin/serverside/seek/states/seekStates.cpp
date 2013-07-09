@@ -4,11 +4,8 @@
 //log
 #include "../../tdreamsock/dreamSockLog.h"
 
-//states
-#include "seekStateMachine.h"
-
-//ability
-#include "seek.h"
+//seek
+#include "../seek.h"
 
 //server
 #include "../../server/server.h"
@@ -23,7 +20,30 @@
 #include "../../../math/vector3D.h"
 
 //move
-#include "../move/move.h"
+#include "../../move/move.h"
+
+/*****************************************
+*******       GLOBAL    ******************
+****************************************/
+GlobalSeek* GlobalSeek::Instance()
+{
+  static GlobalSeek instance;
+  return &instance;
+}
+void GlobalSeek::enter(Seek* seek)
+{
+}
+void GlobalSeek::execute(Seek* seek)
+{
+
+}
+void GlobalSeek::exit(Seek* seek)
+{
+}
+bool GlobalSeek::onMessage(Seek* seek, const Telegram& msg)
+{
+        return true;
+}
 
 
 /*****************************************
@@ -58,7 +78,7 @@ void Normal_Seek::execute(Seek* seek)
 	}
 	else
 	{
-//		seek->mSeekStateMachine->changeState(No_Seek::Instance());
+//		seek->mStateMachine->changeState(No_Seek::Instance());
 	}
 /*
 	//check for No_seek and Decelerate and Accelerate states..
@@ -66,12 +86,12 @@ void Normal_Seek::execute(Seek* seek)
 	{
 		if(seek->mRunSpeed > 0.0) //Decelerate_Seek
 		{
-			seek->mSeekStateMachine->changeState(Decelerate_Seek::Instance());
+			seek->mStateMachine->changeState(Decelerate_Seek::Instance());
 			return;
 		}
         	else //No_Seek
 		{
-			seek->mSeekStateMachine->changeState(No_Seek::Instance());
+			seek->mStateMachine->changeState(No_Seek::Instance());
 			return;
 		}
     	}
@@ -79,7 +99,7 @@ void Normal_Seek::execute(Seek* seek)
 	{
         	if(seek->mRunSpeed < seek->mShape->mSpeedMax) //Accelerate_Seek
 		{
-			seek->mSeekStateMachine->changeState(Accelerate_Seek::Instance());
+			seek->mStateMachine->changeState(Accelerate_Seek::Instance());
 			return;
 		}
 	}
@@ -93,6 +113,10 @@ void Normal_Seek::execute(Seek* seek)
 }
 void Normal_Seek::exit(Seek* seek)
 {
+}
+bool Normal_Seek::onMessage(Seek* seek, const Telegram& msg)
+{
+        return true;
 }
 
 /*****************************************
@@ -115,37 +139,14 @@ void No_Seek::execute(Seek* seek)
 	}
 	else
 	{
-		seek->mSeekStateMachine->changeState(Normal_Seek::Instance());
+		seek->mStateMachine->changeState(Normal_Seek::Instance());
 	}
-/*
-	if (seek->mShape->mHeading.isZeroLength()) 
-	{
-		if(seek->mRunSpeed > 0.0) //Decelerate_Seek
-		{
-			seek->mSeekStateMachine->changeState(Decelerate_Seek::Instance());
-			return;
-		}
-        	else //No_Seek
-		{
-           		seek->mRunSpeed = 0.0;
-		}
-    	}
-	else 
-	{
-        	if(seek->mRunSpeed < seek->mShape->mSpeedMax) //Accelerate_Seek
-		{
-			seek->mSeekStateMachine->changeState(Accelerate_Seek::Instance());
-			return;
-		}
-		else //Normal_Seek 
-		{
-			seek->mSeekStateMachine->changeState(Normal_Seek::Instance());
-			return;
-		}
-	}
-*/
 }
 void No_Seek::exit(Seek* seek)
 {
+}
+bool No_Seek::onMessage(Seek* seek, const Telegram& msg)
+{
+        return true;
 }
 

@@ -23,10 +23,10 @@
 #include "../../math/vector3D.h"
 
 //rotation
-#include "../ability/rotation/rotation.h"
+#include "../rotation/rotation.h"
 
 //move
-#include "../ability/move/move.h"
+#include "../move/move.h"
 
 //postgresql
 #include <stdio.h>
@@ -98,10 +98,14 @@ void Server::processUpdate(int msec)
         mGameTime += msec;
 
 	readPackets();
+	
+	LogString("Server::processUpdate");
 
 	processClients();
+	LogString("Server::processUpdate 1");
 
 	processGames();
+	LogString("Server::processUpdate 2");
 
         // Wait full 32 ms before allowing to send
         if(mFrameTime < mTickLength)
@@ -118,14 +122,18 @@ void Server::processUpdate(int msec)
 void Server::processClients()
 {
 	//update clients
+	LogString("Server::processClients !!!!!!!!!!");
   	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
+		LogString("Server::processClients 2");
 		mClientVector.at(i)->update();
+		LogString("Server::processClients 3");
 	}
 }
 
 void Server::processGames()
 {
+	LogString("Server::processGames");
 	//update games
   	for (unsigned int i = 0; i < mGameVector.size(); i++)
 	{

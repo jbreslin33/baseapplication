@@ -22,7 +22,7 @@
 #include "../bounds/bounds.h"
 
 //rotation
-#include "../ability/rotation/rotation.h"
+#include "../rotation/rotation.h"
 
 #include <stdio.h>
 
@@ -71,6 +71,7 @@ Shape* Game::getShapeFromID(int id)
 //you should call this from server processUpdate
 void Game::processUpdate()
 {
+	LogString("Game::processUpdate");
 	//this is where they want to move
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{

@@ -1,10 +1,33 @@
 #ifndef SEEKTATES_H
 #define SEEKSTATES_H
-#include "seekState.h"
+
+#include "../../../fsm/state.h"
 
 class Seek;
+struct Telegram;
 
-class Normal_Seek : public SeekState
+
+/*******************************
+*      GlobalSeek
+******************************/
+
+class GlobalSeek : public State<Seek>
+{
+private:
+  GlobalSeek(){}
+public:
+  static GlobalSeek* Instance();
+  void enter  (Seek* seek);
+  void execute(Seek* seek);
+  void exit   (Seek* seek);
+  bool onMessage(Seek* seek, const Telegram& msg);
+};
+
+/*******************************
+*      Seek
+******************************/
+
+class Normal_Seek : public State<Seek>
 {
 private:
   Normal_Seek(){}
@@ -13,9 +36,10 @@ public:
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
+  bool onMessage(Seek* seek, const Telegram& msg);
 };
 
-class No_Seek : public SeekState
+class No_Seek : public State<Seek>
 {
 private:
   No_Seek(){}
@@ -24,6 +48,7 @@ public:
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
+  bool onMessage(Seek* seek, const Telegram& msg);
 };
 
 #endif

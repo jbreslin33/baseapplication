@@ -1,10 +1,32 @@
 #ifndef MOVESTATES_H
 #define MOVESTATES_H
-#include "moveState.h"
+
+#include "../../../fsm/state.h"
 
 class Move;
+struct Telegram;
 
-class Normal_Move : public MoveState
+/*******************************
+*      GlobalMove
+******************************/
+
+class GlobalMove : public State<Move>
+{
+private:
+  GlobalMove(){}
+public:
+  static GlobalMove* Instance();
+  void enter  (Move* move);
+  void execute(Move* move);
+  void exit   (Move* move);
+  bool onMessage(Move* move, const Telegram& msg);
+};
+
+
+/*******************************
+*      Move
+******************************/
+class Normal_Move : public State<Move>
 {
 private:
   Normal_Move(){}
@@ -13,9 +35,10 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
+  bool onMessage(Move* move, const Telegram& msg);
 };
 
-class No_Move : public MoveState
+class No_Move : public State<Move>
 {
 private:
   No_Move(){}
@@ -24,9 +47,10 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
+  bool onMessage(Move* move, const Telegram& msg);
 };
 
-class Accelerate_Move : public MoveState
+class Accelerate_Move : public State<Move>
 {
 private:
   Accelerate_Move(){}
@@ -35,9 +59,10 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
+  bool onMessage(Move* move, const Telegram& msg);
 };
 
-class Decelerate_Move : public MoveState
+class Decelerate_Move : public State<Move>
 {
 private:
   Decelerate_Move(){}
@@ -46,5 +71,6 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
+  bool onMessage(Move* move, const Telegram& msg);
 };
 #endif

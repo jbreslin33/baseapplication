@@ -15,10 +15,9 @@ class Game;
 class Client;
 class Rotation;
 class Move;
-class AI;
+class Computer;
 class Seek;
 class Vector3D;
-class Ability;
 class Telegram;
 class BaseEntity;
 
@@ -73,7 +72,7 @@ std::vector<BaseEntity*> mSteeringAbilityVector;	 //all steering abilitys for th
 Rotation* mRotation;
 Move* 	  mMove;
 Seek*     mSeek;
-AI*       mAI;
+Computer* mComputer;
 
 //associated client if any
 Client* mClient;
@@ -90,7 +89,7 @@ bool  mCollidable;
 bool mAnimated;
 
 //ai
-bool mIsAI;
+bool mIsComputer;
 
 /******************************************************
 *				METHODS
@@ -99,8 +98,8 @@ bool mIsAI;
 void remove();
 
 //abilitys
-void     addAbility(Ability* ability);
-void     addSteeringAbility(Ability* ability);
+void     addAbility(BaseEntity* ability);
+void     addSteeringAbility(BaseEntity* ability);
 
 //create
 void createShape(Ogre::Root* root, Vector3D* position);

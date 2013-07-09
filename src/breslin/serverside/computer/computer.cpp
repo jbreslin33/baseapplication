@@ -1,7 +1,7 @@
-#include "ai.h"
-#include "../../tdreamsock/dreamSockLog.h"
+#include "computer.h"
+#include "../tdreamsock/dreamSockLog.h"
 
-#include "../../client/client.h"
+#include "../client/client.h"
 
 #include <string>
 
@@ -9,30 +9,35 @@
 #include "Ogre.h"
 using namespace Ogre;
 
-//ai states
-#include "states/aiStateMachine.h"
-#include "states/aiStates.h"
+//computer states
+#include "states/computerStates.h"
 
-AI::AI(Shape* shape) : Ability(shape)
+Computer::Computer(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
 	mShape = shape;
 
- 	//ai states
-	mAIStateMachine = new AIStateMachine(this);    //setup the state machine
-	mAIStateMachine->setCurrentState      (Random_AI::Instance());
-	mAIStateMachine->setPreviousState     (Random_AI::Instance());
-	mAIStateMachine->setGlobalState       (NULL);
+ 	//computer states
+   	mStateMachine = new StateMachine<Computer>(this);
+	mStateMachine->setCurrentState      (Random_Computer::Instance());
+	mStateMachine->setPreviousState     (Random_Computer::Instance());
+	mStateMachine->setGlobalState       (GlobalComputer::Instance());
 
 	mCounter   = 0;
         mThreshold = 1000;
 }
 
-AI::~AI()
+Computer::~Computer()
 {
 }
-void AI::processTick()
+
+void Computer::update()
 {
-	mAIStateMachine->update();
+	mStateMachine->update();
+}
+
+bool Computer::handleMessage(const Telegram& msg)
+{
+        return mStateMachine->handleMessage(msg);
 }
 
 

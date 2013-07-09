@@ -19,9 +19,11 @@
 //shape
 #include "../shape/shape.h"
 
-//abilitys
-#include "../ability/rotation/rotation.h"
-#include "../ability/move/move.h"
+//rotation
+#include "../rotation/rotation.h"
+
+//move
+#include "../move/move.h"
 
 //math
 #include "../../math/vector3D.h"
@@ -103,7 +105,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID) : BaseEnt
         mStateMachine->setCurrentState      (NULL);
         mStateMachine->setPreviousState     (NULL);
         mStateMachine->setGlobalState       (NULL);
- 	
+ /*	
 	mGameControlStateMachine =  new StateMachine<Client>(this);
         mGameControlStateMachine->setCurrentState      (Computer::Instance());
         mGameControlStateMachine->setPreviousState     (Computer::Instance());
@@ -114,7 +116,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID) : BaseEnt
         mLoginStateMachine->setCurrentState      (Logged_Out::Instance());
         mLoginStateMachine->setPreviousState     (Logged_Out::Instance());
         mLoginStateMachine->setGlobalState       (NULL);
-
+*/
 }
 
 Client::~Client()
@@ -174,8 +176,7 @@ void Client::setSocketAddress(struct sockaddr *address)
 
 void Client::update()
 {
-        mLoginStateMachine->update();
-        mGameControlStateMachine->update();
+        mStateMachine->update();
 }
 
 bool Client::handleMessage(const Telegram& msg)

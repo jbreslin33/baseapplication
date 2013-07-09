@@ -73,13 +73,18 @@ bool ClientPartido::handleMessage(const Telegram& msg)
 //updates
 void ClientPartido::update()
 {
+	LogString("breslin 1");
 	Client::update();
+	LogString("breslin 2");
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
+		LogString("breslin 3");
 		if (mShapePartido)
 		{
+			LogString("breslin 4");
  			if (mShapePartido->mOpponent && mWaitingForAnswer == false)
         		{
+				LogString("breslin 5");
 				sendQuestion(getNewQuestionID());
                 		mWaitingForAnswer = true;
         		}

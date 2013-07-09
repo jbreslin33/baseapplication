@@ -14,7 +14,7 @@ using namespace Ogre;
 //move states
 #include "states/moveStates.h"
 
-Move::Move(Shape* shape) : Ability(shape)
+Move::Move(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
         mHeading = new Vector3D();
 

@@ -1,29 +1,55 @@
-#ifndef AISTATES_H
-#define AISTATES_H
-#include "aiState.h"
+#ifndef COMPUTERSTATES_H
+#define COMPUTERSTATES_H
 
-class AI;
+#include "../../../fsm/state.h"
 
-class Random_AI : public AIState
+class Computer;
+struct Telegram;
+
+
+/*******************************
+*     GLOBAL COMPTER 
+******************************/
+
+class GlobalComputer : public State<Computer>
 {
 private:
-  Random_AI(){}
+  GlobalComputer(){}
 public:
-  static Random_AI* Instance();
-  void enter  (AI* ai);
-  void execute(AI* ai);
-  void exit   (AI* ai);
+  static GlobalComputer* Instance();
+  void enter  (Computer* computer);
+  void execute(Computer* computer);
+  void exit   (Computer* computer);
+  bool onMessage(Computer* computer, const Telegram& msg);
 };
 
-class Human_AI : public AIState
+
+/*******************************
+*     COMPTER 
+******************************/
+
+class Random_Computer : public State<Computer>
 {
 private:
-  Human_AI(){}
+  Random_Computer(){}
 public:
-  static Human_AI* Instance();
-  void enter  (AI* ai);
-  void execute(AI* ai);
-  void exit   (AI* ai);
+  static Random_Computer* Instance();
+  void enter  (Computer* computer);
+  void execute(Computer* computer);
+  void exit   (Computer* computer);
+  bool onMessage(Computer* computer, const Telegram& msg);
+};
+
+class No_Computer : public State<Computer>
+{
+private:
+  No_Computer(){}
+public:
+  static No_Computer* Instance();
+  void enter  (Computer* computer);
+  void execute(Computer* computer);
+  void exit   (Computer* computer);
+  bool onMessage(Computer* computer, const Telegram& msg);
 };
 
 #endif

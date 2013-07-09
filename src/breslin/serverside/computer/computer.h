@@ -1,30 +1,33 @@
-#ifndef AI_H
-#define AI_H
+#ifndef COMPUTER_H
+#define COMPUTER_H
 
-//parent
-#include "../ability.h"
+#include "../../baseentity/baseEntity.h"
+
+#include "../../fsm/stateMachine.h"
 
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
 
-class AIStateMachine;
 class Shape;
 
-class AI : public Ability
+class Computer : public BaseEntity 
 {
 
 public:
 
-AI(Shape* shape);
-~AI();
+Computer(Shape* shape);
+~Computer();
 
-//ticks
-void processTick    ();
+//update
+virtual void update();
+
+//handle message
+virtual bool  handleMessage(const Telegram& msg);
 
 Shape* mShape;
 
-AIStateMachine* mAIStateMachine;
+StateMachine<Computer>* mStateMachine;
 
 int mCounter;
 int mThreshold;
