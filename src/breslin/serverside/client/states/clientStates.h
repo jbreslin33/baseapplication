@@ -5,6 +5,24 @@
 class Client;
 struct Telegram;
 
+
+/*******************************
+*      GlobalClient 
+******************************/
+
+class GlobalClient : public State<Client>
+{
+private:
+  GlobalClient(){}
+public:
+  static GlobalClient* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+  bool onMessage(Client* client, const Telegram& msg);
+};
+
+
 /*******************************
 *       LOGIN 
 ******************************/

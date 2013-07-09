@@ -10,6 +10,31 @@
 //ability
 #include "../client.h"
 
+
+/*****************************************
+*******       GLOBAL    ******************
+****************************************/
+GlobalClient* GlobalClient::Instance()
+{
+  static GlobalClient instance;
+  return &instance;
+}
+void GlobalClient::enter(Client* client)
+{
+}
+void GlobalClient::execute(Client* client)
+{
+
+}
+void GlobalClient::exit(Client* client)
+{
+}
+bool GlobalClient::onMessage(Client* client, const Telegram& msg)
+{
+        return true;
+}
+
+
 /*****************************************
 *******       GAME CONTROL    ******************	
 ****************************************/
