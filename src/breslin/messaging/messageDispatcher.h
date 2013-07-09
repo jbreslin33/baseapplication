@@ -17,38 +17,26 @@ const int    SENDER_ID_IRRELEVANT = -1;
 
 class MessageDispatcher
 {
+
 private:  
   
-  //a std::set is used as the container for the delayed messages
-  //because of the benefit of automatic sorting and avoidance
-  //of duplicates. Messages are sorted by their dispatch time.
-  std::set<Telegram> PriorityQ;
+	MessageDispatcher(Game* game);
+	~MessageDispatcher();
+  
+	std::set<Telegram> mPriorityQ;
+ 	void discharge(Shape* pReceiver, const Telegram& msg);
 
-  //this method is utilized by DispatchMsg or DispatchDelayedMessages.
-  //This method calls the message handling member function of the receiving
-  //entity, pReceiver, with the newly created telegram
-  void Discharge(Shape* pReceiver, const Telegram& msg);
+	public:
 
-  MessageDispatcher(Game* game);
-  ~MessageDispatcher();
+	Game* mGame;
 	
-public:
-
-Game* mGame;
-
-
-  //send a message to another agent. Receiving agent is referenced by ID.
-  void DispatchMsg(double      delay,
+	void dispatchMsg(double      delay,
                    int         sender,
                    int         receiver,
                    int         msg,
                    void*       ExtraInfo);
 
-  //send out any delayed messages. This method is called each time through   
-  //the main game loop.
-  void DispatchDelayedMessages();
+	void dispatchDelayedMessages();
 };
-
-
 
 #endif

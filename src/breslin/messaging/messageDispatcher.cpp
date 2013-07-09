@@ -18,7 +18,7 @@ MessageDispatcher::~MessageDispatcher()
 {
 }
 
-void MessageDispatcher::Discharge(Shape* pReceiver, const Telegram& telegram)
+void MessageDispatcher::discharge(Shape* pReceiver, const Telegram& telegram)
 {
 	if (!pReceiver->handleMessage(telegram))
   	{
@@ -26,7 +26,7 @@ void MessageDispatcher::Discharge(Shape* pReceiver, const Telegram& telegram)
   	}
 }
 
-void MessageDispatcher::DispatchMsg(double       delay,
+void MessageDispatcher::dispatchMsg(double       delay,
                                     int          sender,
                                     int          receiver,
                                     int          msg,
@@ -50,18 +50,18 @@ void MessageDispatcher::DispatchMsg(double       delay,
   	if (delay <= 0.0)                                                        
   	{
     		//send the telegram to the recipient
-    		Discharge(pReceiver, telegram);
+    		discharge(pReceiver, telegram);
   	}
 
   	//else calculate the time when the telegram should be dispatched
   	else
   	{
-    		double CurrentTime = mGame->mServer->mGameTime; 
+    		double currentTime = mGame->mServer->mGameTime; 
 
-    		telegram.DispatchTime = CurrentTime + delay;
+    		telegram.mDispatchTime = currentTime + delay;
 
     		//and put it in the queue
-    		PriorityQ.insert(telegram);   
+    		mPriorityQ.insert(telegram);   
   	}
 }
 
@@ -70,29 +70,29 @@ void MessageDispatcher::DispatchMsg(double       delay,
 //  This function dispatches any telegrams with a timestamp that has
 //  expired. Any dispatched telegrams are removed from the queue
 //------------------------------------------------------------------------
-void MessageDispatcher::DispatchDelayedMessages()
+void MessageDispatcher::dispatchDelayedMessages()
 { 
 	//first get current time
-  	double CurrentTime = mGame->mServer->mGameTime; 
+  	double currentTime = mGame->mServer->mGameTime; 
 
   	//now peek at the queue to see if any telegrams need dispatching.
   	//remove all telegrams from the front of the queue that have gone
   	//past their sell by date
-  	while( !PriorityQ.empty() &&
-	     (PriorityQ.begin()->DispatchTime < CurrentTime) && 
-         (PriorityQ.begin()->DispatchTime > 0) )
+  	while( !mPriorityQ.empty() &&
+	     (mPriorityQ.begin()->mDispatchTime < currentTime) && 
+         (mPriorityQ.begin()->mDispatchTime > 0) )
   	{
     		//read the telegram from the front of the queue
-    		const Telegram& telegram = *PriorityQ.begin();
+    		const Telegram& telegram = *mPriorityQ.begin();
 
     		//find the recipient
-    		Shape* pReceiver = mGame->getShapeFromID(telegram.Receiver);
+    		Shape* receiver = mGame->getShapeFromID(telegram.mReceiver);
 
     		//send the telegram to the recipient
-    		Discharge(pReceiver, telegram);
+    		discharge(receiver, telegram);
 
 		//remove it from the queue
-    		PriorityQ.erase(PriorityQ.begin());
+    		mPriorityQ.erase(mPriorityQ.begin());
   	}
 }
 
