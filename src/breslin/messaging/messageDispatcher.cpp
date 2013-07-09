@@ -24,7 +24,7 @@ void MessageDispatcher::discharge(BaseEntity* receiver, const Telegram& telegram
   	}
 }
 
-void MessageDispatcher::dispatchMsg(double       delay,
+void MessageDispatcher::dispatchMessage(double       delay,
                                     int          sender,
                                     int          receiverID,
                                     int          msg,

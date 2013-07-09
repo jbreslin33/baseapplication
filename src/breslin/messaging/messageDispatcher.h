@@ -30,7 +30,7 @@ private:
 
 	Server* mServer;
 	
-	void dispatchMsg(double      delay,
+	void dispatchMessage(double      delay,
                    int         sender,
                    int         receiver,
                    int         msg,
