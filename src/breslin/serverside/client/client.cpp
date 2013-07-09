@@ -26,9 +26,6 @@
 //math
 #include "../../math/vector3D.h"
 
-//state machine
-//#include "../../fsm/stateMachine.h"
-
 //states
 #include "states/clientStates.h"
 
@@ -45,9 +42,9 @@
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
 
-
+//quiz
 #include "../quiz/quiz.h"
-//server side client constructor, many instances will be made, one for each client connected.
+
 Client::Client(Server* server, struct sockaddr *address, int clientID) : BaseEntity(BaseEntity::getNextValidID())
 {
         //keys

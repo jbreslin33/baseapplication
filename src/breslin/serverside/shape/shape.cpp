@@ -20,7 +20,7 @@
 #include "../ability/rotation/rotation.h"
 
 //move
-#include "../ability/move/move.h"
+#include "../move/move.h"
 
 //seek
 #include "../ability/seek/seek.h"
@@ -107,12 +107,12 @@ void Shape::setValues()
 	
 }
 
-void Shape::addAbility(Ability* ability)
+void Shape::addAbility(BaseEntity* ability)
 {
 	mAbilityVector.push_back(ability);	
 }
 
-void Shape::addSteeringAbility(Ability* ability)
+void Shape::addSteeringAbility(BaseEntity* ability)
 {
 	mSteeringAbilityVector.push_back(ability);	
 }

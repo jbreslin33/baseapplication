@@ -20,6 +20,7 @@ class Seek;
 class Vector3D;
 class Ability;
 class Telegram;
+class BaseEntity;
 
 class Shape
 {
@@ -66,8 +67,8 @@ Message	mMessage; //is this all i need to get information over the internets?
 Game* mGame;
 
 //abilitys
-std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
-std::vector<Ability*> mSteeringAbilityVector;	 //all steering abilitys for this shape
+std::vector<BaseEntity*> mAbilityVector;	 //all abilitys for this shape
+std::vector<BaseEntity*> mSteeringAbilityVector;	 //all steering abilitys for this shape
 
 Rotation* mRotation;
 Move* 	  mMove;

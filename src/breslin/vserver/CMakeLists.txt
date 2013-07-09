@@ -269,13 +269,10 @@ set(HDRS
 	../serverside/shape/partido/shapePartido.h
 	
 	#move
-	../serverside/ability/move/move.h
-	../serverside/ability/move/move.h
+	../serverside/move/move.h
 	
 	#move states
-	../serverside/ability/move/moveStateMachine.h
-	../serverside/ability/move/moveState.h
-	../serverside/ability/move/moveStates.h
+	../serverside/move/states/moveStates.h
 	
 	#seek
 	../serverside/ability/seek/seek.h
@@ -365,10 +362,10 @@ set(SRCS
 	../serverside/shape/partido/shapePartido.cpp
 	
 	#move
-	../serverside/ability/move/move.cpp
+	../serverside/move/move.cpp
 	
 	#move states
-	../serverside/ability/move/moveStates.cpp
+	../serverside/move/states/moveStates.cpp
 	
 	#seek
 	../serverside/ability/seek/seek.cpp
