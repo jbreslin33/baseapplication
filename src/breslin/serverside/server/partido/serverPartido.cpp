@@ -29,12 +29,9 @@ ServerPartido::~ServerPartido()
 void ServerPartido::processClients()
 {
         //update clients
-	LogString("ServerPartido::processClients");
         for (unsigned int i = 0; i < mClientPartidoVector.size(); i++)
         {
-		LogString("ServerPartido::processClients before for");
                 mClientPartidoVector.at(i)->update();
-		LogString("ServerPartido::processClients after for");
         }
 }
 

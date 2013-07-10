@@ -158,7 +158,6 @@ void Shape::remove()
 
 void Shape::processTick()
 {
-	LogString("proc");
 	mMove->mPositionBeforeCollision->x = mSceneNode->getPosition().x;
     	mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;
     	mMove->mPositionBeforeCollision->z = mSceneNode->getPosition().z;

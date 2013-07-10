@@ -99,13 +99,9 @@ void Server::processUpdate(int msec)
 
 	readPackets();
 	
-	LogString("Server::processUpdate");
-
 	processClients();
-	LogString("Server::processUpdate 1");
 
 	processGames();
-	LogString("Server::processUpdate 2");
 
         // Wait full 32 ms before allowing to send
         if(mFrameTime < mTickLength)
@@ -122,18 +118,14 @@ void Server::processUpdate(int msec)
 void Server::processClients()
 {
 	//update clients
-	LogString("Server::processClients !!!!!!!!!!");
   	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
-		LogString("Server::processClients 2");
 		mClientVector.at(i)->update();
-		LogString("Server::processClients 3");
 	}
 }
 
 void Server::processGames()
 {
-	LogString("Server::processGames");
 	//update games
   	for (unsigned int i = 0; i < mGameVector.size(); i++)
 	{
