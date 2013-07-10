@@ -31,6 +31,9 @@
 //states
 #include "states/clientStates.h"
 
+//messageDispatcher
+#include "../../messaging/messageDispatcher.h"
+
 
 #ifdef WIN32
 //
@@ -101,6 +104,9 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
 
+
+	mServer->mBaseEntityVector.push_back(this);
+
 	mPermanence = permanence;
 
 	//client states
@@ -133,6 +139,8 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 
         mPermanenceStateMachine->setPreviousState     (NULL);
         mPermanenceStateMachine->setGlobalState       (NULL);
+
+	
 
 }
 
@@ -233,7 +241,14 @@ void Client::login()
 {
 	LogString("sending login to clientID:%d",mClientID);
 
-
+	mServer->mMessageDispatcher->dispatchMessage(0,mID,mID,1,NULL,NULL);
+/*
+void MessageDispatcher::dispatchMessage(double       delay,
+                                    int          sender,
+                                    int          receiverID,
+                                    int          msg,
+                                    void*        AdditionalInfo = NULL, Message* message = NULL)
+*/
 	//set last messageTime
 	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 

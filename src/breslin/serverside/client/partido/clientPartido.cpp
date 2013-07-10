@@ -67,6 +67,7 @@ void ClientPartido::setGame(int gameID)
 
 bool ClientPartido::handleMessage(const Telegram& msg)
 {
+	LogString("got message");
         return mStateMachine->handleMessage(msg);
 }
 
