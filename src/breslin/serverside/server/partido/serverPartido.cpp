@@ -121,9 +121,10 @@ void ServerPartido::createClients()
         PQfinish(conn);
 }
 
-void ServerPartido::addClient(ClientPartido* clientPartido, bool permanent)
+void ServerPartido::addClient(Client* client, bool permanent)
 {
-	Server::addClient(clientPartido, permanent);
+	Server::addClient(client, permanent);
+	ClientPartido* clientPartido = (ClientPartido*)client;
         if (permanent)
         {
                 mClientPartidoVector.push_back(clientPartido);
