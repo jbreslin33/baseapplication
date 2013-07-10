@@ -23,6 +23,9 @@ public:
   
 	MessageDispatcher(Server* server);
 	~MessageDispatcher();
+
+static const int mMessageDispatcherLogin = 1;
+
   
 	std::set<Telegram> mPriorityQ;
  	void discharge(BaseEntity* receiver, const Telegram& telegram);

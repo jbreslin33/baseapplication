@@ -241,7 +241,7 @@ void Client::login()
 {
 	LogString("sending login to clientID:%d",mClientID);
 
-	mServer->mMessageDispatcher->dispatchMessage(0,mID,mID,1,NULL,NULL);
+	mServer->mMessageDispatcher->dispatchMessage(0,mID,mID,mServer->mMessageDispatcher->mMessageDispatcherLogin,NULL,NULL);
 /*
 void MessageDispatcher::dispatchMessage(double       delay,
                                     int          sender,

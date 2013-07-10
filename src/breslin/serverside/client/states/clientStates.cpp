@@ -33,6 +33,11 @@ void GlobalClient::exit(Client* client)
 }
 bool GlobalClient::onMessage(Client* client, const Telegram& msg)
 {
+	if (msg.mMessageNumber == 1)	
+	{
+		LogString("got msg 1");
+		client->mStateMachine->changeState(Lobby::Instance());
+	}
         return true;
 }
 
@@ -51,6 +56,7 @@ Logged_Out* Logged_Out::Instance()
 }
 void Logged_Out::enter(Client* client)
 {
+	LogString("Logged_Out::enter");
 }
 void Logged_Out::execute(Client* client)
 {
@@ -61,7 +67,8 @@ void Logged_Out::exit(Client* client)
 }
 bool Logged_Out::onMessage(Client* client, const Telegram& msg)
 {
-	return true;
+	LogString("Logged_Out::onMessage");
+	return false;
 }
 
 /*****************************************
@@ -74,6 +81,7 @@ Lobby* Lobby::Instance()
 }
 void Lobby::enter(Client* client)
 {
+	LogString("Lobby::enter");
 }
 void Lobby::execute(Client* client)
 {
