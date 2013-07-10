@@ -119,16 +119,18 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
         mPermanenceStateMachine = new StateMachine<Client>(this);    //setup the state machine
 	
         mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
-/*
+
 	if (permanence)
 	{
-        	mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
+		mServer->addClient(this,true);
+        //	mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
 	}	
 	else
 	{
-        	mPermanenceStateMachine->setCurrentState      (Temporary::Instance());
+		mServer->addClient(this,false);
+        //	mPermanenceStateMachine->setCurrentState      (Temporary::Instance());
 	}
-*/
+
         mPermanenceStateMachine->setPreviousState     (NULL);
         mPermanenceStateMachine->setGlobalState       (NULL);
 
