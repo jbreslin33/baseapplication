@@ -233,6 +233,7 @@ void Client::login()
 {
 	LogString("sending login to clientID:%d",mClientID);
 
+
 	//set last messageTime
 	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 

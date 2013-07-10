@@ -28,6 +28,9 @@
 //move
 #include "../move/move.h"
 
+//messageDispatcher
+#include "../../messaging/messageDispatcher.h"
+
 //postgresql
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
@@ -36,6 +39,9 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 {
 	//ogre root
 	mRoot = root;
+
+	//Message Dispathcer
+	mMessageDispatcher = new MessageDispatcher(this);
 
         //sequence
         mOutgoingSequence = 1;

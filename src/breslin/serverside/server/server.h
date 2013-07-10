@@ -33,6 +33,7 @@ class Network;
 class Client;
 class Game;
 class Shape;
+class MessageDispatcher;
 
 class Server
 {
@@ -46,6 +47,8 @@ public:
 
 	//Message
 	Message mMessage;
+	MessageDispatcher* mMessageDispatcher;
+
 	
 	//games
 	std::vector<BaseEntity*> mBaseEntityVector;

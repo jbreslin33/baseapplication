@@ -19,7 +19,7 @@ const int    SENDER_ID_IRRELEVANT = -1;
 class MessageDispatcher
 {
 
-private:  
+public:  
   
 	MessageDispatcher(Server* server);
 	~MessageDispatcher();
