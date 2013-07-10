@@ -7,6 +7,9 @@
 #include "state.h"
 #include "../messaging/telegram.h"
 
+//log
+#include "../serverside/tdreamsock/dreamSockLog.h"
+
 #include <typeinfo>
 template <class entity_type>
 class StateMachine
@@ -41,13 +44,22 @@ public:
   void setPreviousState(State<entity_type>* s){m_pPreviousState = s;}
   
   //call this to update the FSM
-  void  update()const
-  {
-    //if a global state exists, call its execute method, else do nothing
-    if(m_pGlobalState)   m_pGlobalState->execute(m_pOwner);
+void  update()const
+{
+	LogString("fsm update 1");
+    	if(m_pGlobalState)
+	{
+		LogString("fsm update 2");
+		m_pGlobalState->execute(m_pOwner);
+		LogString("fsm update 3");
+	}	
 
-    //same for the current state
-    if (m_pCurrentState) m_pCurrentState->execute(m_pOwner);
+    	if (m_pCurrentState)
+	{
+		LogString("fsm update 4");
+		m_pCurrentState->execute(m_pOwner);
+		LogString("fsm update 5");
+	}
   }
 
   bool  handleMessage(const Telegram& msg)const

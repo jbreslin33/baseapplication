@@ -65,8 +65,8 @@ public:
 ~Client();
 
 StateMachine<Client>* mStateMachine;
-StateMachine<Client>* mGameControlStateMachine;
-StateMachine<Client>* mLoginStateMachine;
+StateMachine<Client>* mControlStateMachine;
+StateMachine<Client>* mPermanenceStateMachine;
 
 //keys
 int mKeyUp;

@@ -146,12 +146,13 @@ Computer* Computer::Instance()
 }
 void Computer::enter(Client* client)
 {
-LogString("enter computer");
+	LogString("enter computer");
 }
 void Computer::execute(Client* client)
 {
+	LogString("breslin execute");
 	//client->mClientStateMachine->changeState(Human::Instance());
-	client->checkForTimeout();
+	//client->checkForTimeout();
 }
 void Computer::exit(Client* client)
 {

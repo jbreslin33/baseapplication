@@ -101,22 +101,24 @@ Client::Client(Server* server, struct sockaddr *address, int clientID) : BaseEnt
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
 
+	//client states
 	mStateMachine =  new StateMachine<Client>(this);
-        mStateMachine->setCurrentState      (NULL);
+        mStateMachine->setCurrentState      (Logged_Out::Instance());
         mStateMachine->setPreviousState     (NULL);
-        mStateMachine->setGlobalState       (NULL);
- /*	
-	mGameControlStateMachine =  new StateMachine<Client>(this);
-        mGameControlStateMachine->setCurrentState      (Computer::Instance());
-        mGameControlStateMachine->setPreviousState     (Computer::Instance());
-        mGameControlStateMachine->setGlobalState       (NULL);
+        mStateMachine->setGlobalState       (GlobalClient::Instance());
+ 
+	//control states	
+	mControlStateMachine =  new StateMachine<Client>(this);
+        mControlStateMachine->setCurrentState      (Logged_Out::Instance());
+        mControlStateMachine->setPreviousState     (NULL);
+        mControlStateMachine->setGlobalState       (NULL);
 
-	//login_out states
-        mLoginStateMachine = new StateMachine<Client>(this);    //setup the state machine
-        mLoginStateMachine->setCurrentState      (Logged_Out::Instance());
-        mLoginStateMachine->setPreviousState     (Logged_Out::Instance());
-        mLoginStateMachine->setGlobalState       (NULL);
-*/
+	//permanence states
+        mPermanenceStateMachine = new StateMachine<Client>(this);    //setup the state machine
+        mPermanenceStateMachine->setCurrentState      (NULL);
+        mPermanenceStateMachine->setPreviousState     (NULL);
+        mPermanenceStateMachine->setGlobalState       (NULL);
+
 }
 
 Client::~Client()
@@ -177,6 +179,10 @@ void Client::setSocketAddress(struct sockaddr *address)
 void Client::update()
 {
         mStateMachine->update();
+	LogString("breslin 1");
+        mControlStateMachine->update();
+	LogString("breslin 2");
+        //mPermanenceStateMachine->update();
 }
 
 bool Client::handleMessage(const Telegram& msg)
