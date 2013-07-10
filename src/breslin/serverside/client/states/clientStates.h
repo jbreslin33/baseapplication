@@ -97,6 +97,20 @@ public:
 /*******************************
 *          PERMANENCE 
 ******************************/
+
+class Initialize_Permanence : public State<Client>
+{
+private:
+  Initialize_Permanence(){}
+public:
+  static Initialize_Permanence* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+  bool onMessage(Client* client, const Telegram& msg);
+};
+
+
 class Permanent : public State<Client>
 {
 private:

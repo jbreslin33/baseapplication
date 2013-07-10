@@ -165,6 +165,36 @@ bool Computer_Mode::onMessage(Client* client, const Telegram& msg)
 /*****************************************
 *******       PERMANENCE    ******************	
 ****************************************/
+/*****************************************
+        INITIALIZE_PERMANENCE
+****************************************/
+Initialize_Permanence* Initialize_Permanence::Instance()
+{
+  static Initialize_Permanence instance;
+  return &instance;
+}
+void Initialize_Permanence::enter(Client* client)
+{
+}
+void Initialize_Permanence::execute(Client* client)
+{
+	if (client->mPermanence)
+	{
+		client->mPermanenceStateMachine->changeState(Permanent::Instance());
+	}
+	else
+	{
+		client->mPermanenceStateMachine->changeState(Temporary::Instance());
+	}
+
+}
+void Initialize_Permanence::exit(Client* client)
+{
+}
+bool Initialize_Permanence::onMessage(Client* client, const Telegram& msg)
+{
+        return true;
+}
 
 /*****************************************
 	PERMANENT	
@@ -176,10 +206,10 @@ Permanent* Permanent::Instance()
 }
 void Permanent::enter(Client* client)
 {
+	LogString("enter");
 }
 void Permanent::execute(Client* client)
 {
-
 }
 void Permanent::exit(Client* client)
 {
@@ -199,10 +229,10 @@ Temporary* Temporary::Instance()
 }
 void Temporary::enter(Client* client)
 {
+	LogString("enter");
 }
 void Temporary::execute(Client* client)
 {
-
 }
 void Temporary::exit(Client* client)
 {

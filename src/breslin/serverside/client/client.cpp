@@ -101,6 +101,8 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
 
+	mPermanence = permanence;
+
 	//client states
 	mStateMachine =  new StateMachine<Client>(this);
         mStateMachine->setCurrentState      (Logged_Out::Instance());
@@ -116,15 +118,17 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 	//permanence states
         mPermanenceStateMachine = new StateMachine<Client>(this);    //setup the state machine
 	
+        mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
+/*
 	if (permanence)
 	{
-        	mPermanenceStateMachine->setCurrentState      (Permanent::Instance());
+        	mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
 	}	
 	else
 	{
         	mPermanenceStateMachine->setCurrentState      (Temporary::Instance());
 	}
-
+*/
         mPermanenceStateMachine->setPreviousState     (NULL);
         mPermanenceStateMachine->setGlobalState       (NULL);
 

@@ -68,6 +68,8 @@ StateMachine<Client>* mStateMachine;
 StateMachine<Client>* mControlStateMachine;
 StateMachine<Client>* mPermanenceStateMachine;
 
+bool mPermanence;
+
 //keys
 int mKeyUp;
 int mKeyDown;
