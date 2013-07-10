@@ -82,12 +82,9 @@ void Random_Computer::execute(Computer* computer)
 {
 	if (computer->mShape->mSeek)
 	{
+/*
 		if (computer->mShape->mClient->db_id == 5)
 		{
-			/*
-			Vector3D* seekPoint = new Vector3D(200.0f,0.0f,100.0f);
-			computer->mShape->mSeek->setSeekPoint(seekPoint);
-			*/
 			for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
 			{
 				if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
@@ -96,6 +93,7 @@ void Random_Computer::execute(Computer* computer)
 				}
 			}
 		}
+*/
 	}
 
 	//is this human controlled?

@@ -163,7 +163,7 @@ void Server::createClients()
         for (row=0; row<rec_count; row++)
         {
                 //client
-                Client* client = new Client(this, NULL, -2);
+                Client* client = new Client(this, NULL, -2, true);
 		addClient(client,true);	
 	
 		//add Games
@@ -284,14 +284,14 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	if (type == mMessageConnect)
 	{
 		LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		Client* client = new Client(this, address, 0);
+		Client* client = new Client(this, address, 0, false);
 		addClient(client,false);
 	}
 
 	else if (type == mMessageConnectBrowser)
 	{
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, clientID);
+ 		Client* client = new Client(this, address, clientID, false);
 		addClient(client,false);
 	}
 
@@ -299,7 +299,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, -1);
+ 		Client* client = new Client(this, address, -1, false);
 		addClient(client,true);
 	}	
 

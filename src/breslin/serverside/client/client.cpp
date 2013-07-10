@@ -47,7 +47,7 @@
 //quiz
 #include "../quiz/quiz.h"
 
-Client::Client(Server* server, struct sockaddr *address, int clientID) : BaseEntity(BaseEntity::getNextValidID())
+Client::Client(Server* server, struct sockaddr *address, int clientID, bool permanence) : BaseEntity(BaseEntity::getNextValidID())
 {
         //keys
         mKeyUp = 1;
@@ -115,7 +115,16 @@ Client::Client(Server* server, struct sockaddr *address, int clientID) : BaseEnt
 
 	//permanence states
         mPermanenceStateMachine = new StateMachine<Client>(this);    //setup the state machine
-        mPermanenceStateMachine->setCurrentState      (NULL);
+	
+	if (permanence)
+	{
+        	mPermanenceStateMachine->setCurrentState      (Permanent::Instance());
+	}	
+	else
+	{
+        	mPermanenceStateMachine->setCurrentState      (Temporary::Instance());
+	}
+
         mPermanenceStateMachine->setPreviousState     (NULL);
         mPermanenceStateMachine->setGlobalState       (NULL);
 

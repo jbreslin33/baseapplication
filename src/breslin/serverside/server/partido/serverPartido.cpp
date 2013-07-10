@@ -76,7 +76,7 @@ void ServerPartido::createClients()
         for (row=0; row<rec_count; row++)
         {
                 //client
-                ClientPartido* clientPartido = new ClientPartido(this, NULL, -2);
+                ClientPartido* clientPartido = new ClientPartido(this, NULL, -2, true);
                 addClient(clientPartido,true);
 
                 //add Games
@@ -149,7 +149,7 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		if (type == mMessageConnect)
         	{
-                	ClientPartido* client = new ClientPartido(this, address, 0);
+                	ClientPartido* client = new ClientPartido(this, address, 0, false);
 
 			addClient(client,false);
         	}
@@ -157,14 +157,14 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
         	else if (type == mMessageConnectBrowser)
         	{
                 	int clientID = mes->ReadByte();
-                	ClientPartido* client = new ClientPartido(this, address, clientID);
+                	ClientPartido* client = new ClientPartido(this, address, clientID, false);
 			addClient(client,false);
         	}
 
         	else if (type == mMessageConnectNode)
         	{
                 	int clientID = mes->ReadByte();
-                	ClientPartido* client = new ClientPartido(this, address, -1);
+                	ClientPartido* client = new ClientPartido(this, address, -1, false);
 			addClient(client,true);
         	}     	 
        		else if (type == mMessageAnswerQuestion)

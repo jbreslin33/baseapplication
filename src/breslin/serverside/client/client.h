@@ -60,7 +60,7 @@ class Game;
 class Client : public BaseEntity
 {
 public:
-	Client(Server* server, struct sockaddr *address, int clientID);
+	Client(Server* server, struct sockaddr *address, int clientID, bool permanent);
 
 ~Client();
 
