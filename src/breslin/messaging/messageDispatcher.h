@@ -8,6 +8,7 @@
 
 class Server;
 class BaseEntity;
+class Message;
 
 //to make code easier to read
 const double SEND_MSG_IMMEDIATELY = 0.0;
@@ -24,7 +25,7 @@ private:
 	~MessageDispatcher();
   
 	std::set<Telegram> mPriorityQ;
- 	void discharge(BaseEntity* receiver, const Telegram& message);
+ 	void discharge(BaseEntity* receiver, const Telegram& telegram);
 
 	public:
 
@@ -34,7 +35,7 @@ private:
                    int         sender,
                    int         receiver,
                    int         msg,
-                   void*       ExtraInfo);
+                   void*       ExtraInfo, Message* message);
 
 	void dispatchDelayedMessages();
 };
