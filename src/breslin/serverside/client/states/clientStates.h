@@ -82,19 +82,17 @@ public:
   bool onMessage(Client* client, const Telegram& msg);
 };
 
-class Computer : public State<Client>
+class Computer_Mode : public State<Client>
 {
 private:
-  Computer(){}
+  Computer_Mode(){}
 public:
-  static Computer* Instance();
+  static Computer_Mode* Instance();
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
   bool onMessage(Client* client, const Telegram& msg);
 };
-
-
 
 /*******************************
 *          PERMANENCE 

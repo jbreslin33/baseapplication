@@ -109,7 +109,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID) : BaseEnt
  
 	//control states	
 	mControlStateMachine =  new StateMachine<Client>(this);
-        mControlStateMachine->setCurrentState      (Logged_Out::Instance());
+        mControlStateMachine->setCurrentState      (Computer_Mode::Instance());
         mControlStateMachine->setPreviousState     (NULL);
         mControlStateMachine->setGlobalState       (NULL);
 
@@ -159,7 +159,6 @@ void Client::setGame(int gameID)
                	{
                		mGame = mGameVector.at(i);
 			mGame->sendShapes(this);
-			LogString("Client::ControlGame:%d",gameID);
                 }
 	}	
 }
@@ -179,10 +178,8 @@ void Client::setSocketAddress(struct sockaddr *address)
 void Client::update()
 {
         mStateMachine->update();
-	LogString("breslin 1");
         mControlStateMachine->update();
-	LogString("breslin 2");
-        //mPermanenceStateMachine->update();
+        mPermanenceStateMachine->update();
 }
 
 bool Client::handleMessage(const Telegram& msg)

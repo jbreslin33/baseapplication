@@ -46,19 +46,14 @@ public:
   //call this to update the FSM
 void  update()const
 {
-	LogString("fsm update 1");
     	if(m_pGlobalState)
 	{
-		LogString("fsm update 2");
 		m_pGlobalState->execute(m_pOwner);
-		LogString("fsm update 3");
 	}	
 
     	if (m_pCurrentState)
 	{
-		LogString("fsm update 4");
 		m_pCurrentState->execute(m_pOwner);
-		LogString("fsm update 5");
 	}
   }
 

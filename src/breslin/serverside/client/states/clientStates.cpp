@@ -139,25 +139,24 @@ bool Human::onMessage(Client* client, const Telegram& msg)
 /*****************************************
 	Computer
 ****************************************/
-Computer* Computer::Instance()
+Computer_Mode* Computer_Mode::Instance()
 {
-	static Computer instance;
+	static Computer_Mode instance;
 	return &instance;
 }
-void Computer::enter(Client* client)
+void Computer_Mode::enter(Client* client)
 {
 	LogString("enter computer");
 }
-void Computer::execute(Client* client)
+void Computer_Mode::execute(Client* client)
 {
-	LogString("breslin execute");
 	//client->mClientStateMachine->changeState(Human::Instance());
 	//client->checkForTimeout();
 }
-void Computer::exit(Client* client)
+void Computer_Mode::exit(Client* client)
 {
 }
-bool Computer::onMessage(Client* client, const Telegram& msg)
+bool Computer_Mode::onMessage(Client* client, const Telegram& msg)
 {
 	return true;
 }
