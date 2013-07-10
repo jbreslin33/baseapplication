@@ -164,7 +164,6 @@ void Server::createClients()
         {
                 //client
                 Client* client = new Client(this, NULL, -2, true);
-		//addClient(client,true);	
 	
 		//add Games
 	 	for (unsigned int i = 0; i < mGameVector.size(); i++)
@@ -285,14 +284,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		Client* client = new Client(this, address, 0, false);
-		//addClient(client,false);
 	}
 
 	else if (type == mMessageConnectBrowser)
 	{
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, clientID, false);
-		//addClient(client,false);
 	}
 
 	else if (type == mMessageConnectNode)
@@ -300,7 +297,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, -1, true);
-		//addClient(client,true);
 	}	
 
 	/***JOIN GAME********/
