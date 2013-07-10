@@ -36,30 +36,9 @@ bool GlobalClient::onMessage(Client* client, const Telegram& msg)
 
 
 /*****************************************
-*******       GAME CONTROL    ******************	
+*******       CLIENT STATES    ******************	
 ****************************************/
-/*****************************************
-	Logged_In
-****************************************/
-Logged_In* Logged_In::Instance()
-{
-  static Logged_In instance;
-  return &instance;
-}
-void Logged_In::enter(Client* client)
-{
-}
-void Logged_In::execute(Client* client)
-{
 
-}
-void Logged_In::exit(Client* client)
-{
-}
-bool Logged_In::onMessage(Client* client, const Telegram& msg)
-{
-	return true;
-}
 /*****************************************
 	Logged_Out
 ****************************************/
@@ -83,9 +62,54 @@ bool Logged_Out::onMessage(Client* client, const Telegram& msg)
 	return true;
 }
 
+/*****************************************
+	Lobby
+****************************************/
+Lobby* Lobby::Instance()
+{
+  static Lobby instance;
+  return &instance;
+}
+void Lobby::enter(Client* client)
+{
+}
+void Lobby::execute(Client* client)
+{
+
+}
+void Lobby::exit(Client* client)
+{
+}
+bool Lobby::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
+}
 
 /*****************************************
-*******       GAME CONTROL    ******************	
+		GAME_MODE		
+****************************************/
+Game_Mode* Game_Mode::Instance()
+{
+  static Game_Mode instance;
+  return &instance;
+}
+void Game_Mode::enter(Client* client)
+{
+}
+void Game_Mode::execute(Client* client)
+{
+
+}
+void Game_Mode::exit(Client* client)
+{
+}
+bool Game_Mode::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
+}
+
+/*****************************************
+*******       CONTROL    ******************	
 ****************************************/
 
 /*****************************************
@@ -110,6 +134,7 @@ bool Human::onMessage(Client* client, const Telegram& msg)
 {
 	return true;
 }
+
 
 /*****************************************
 	Computer
@@ -136,3 +161,53 @@ bool Computer::onMessage(Client* client, const Telegram& msg)
 	return true;
 }
 
+
+/*****************************************
+*******       PERMANENCE    ******************	
+****************************************/
+
+/*****************************************
+	PERMANENT	
+****************************************/
+Permanent* Permanent::Instance()
+{
+  static Permanent instance;
+  return &instance;
+}
+void Permanent::enter(Client* client)
+{
+}
+void Permanent::execute(Client* client)
+{
+
+}
+void Permanent::exit(Client* client)
+{
+}
+bool Permanent::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
+}
+
+/*****************************************
+	TEMPORARY	
+****************************************/
+Temporary* Temporary::Instance()
+{
+  static Temporary instance;
+  return &instance;
+}
+void Temporary::enter(Client* client)
+{
+}
+void Temporary::execute(Client* client)
+{
+
+}
+void Temporary::exit(Client* client)
+{
+}
+bool Temporary::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
+}

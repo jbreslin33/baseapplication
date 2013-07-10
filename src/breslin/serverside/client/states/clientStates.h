@@ -25,20 +25,8 @@ public:
 
 
 /*******************************
-*       LOGIN 
+*       CLIENT STATES 
 ******************************/
-
-class Logged_In : public State<Client>
-{
-private:
-  Logged_In(){}
-public:
-  static Logged_In* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onMessage(Client* client, const Telegram& msg);
-};
 
 class Logged_Out : public State<Client>
 {
@@ -46,6 +34,31 @@ private:
   Logged_Out(){}
 public:
   static Logged_Out* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+  bool onMessage(Client* client, const Telegram& msg);
+};
+
+class Lobby : public State<Client>
+{
+private:
+  Lobby(){}
+public:
+  static Lobby* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+  bool onMessage(Client* client, const Telegram& msg);
+};
+
+
+class Game_Mode : public State<Client>
+{
+private:
+  Game_Mode(){}
+public:
+  static Game_Mode* Instance();
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
@@ -80,5 +93,35 @@ public:
   void exit   (Client* client);
   bool onMessage(Client* client, const Telegram& msg);
 };
+
+
+
+/*******************************
+*          PERMANENCE 
+******************************/
+class Permanent : public State<Client>
+{
+private:
+  Permanent(){}
+public:
+  static Permanent* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+  bool onMessage(Client* client, const Telegram& msg);
+};
+
+class Temporary : public State<Client>
+{
+private:
+  Temporary(){}
+public:
+  static Temporary* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+  bool onMessage(Client* client, const Telegram& msg);
+};
+
 
 #endif

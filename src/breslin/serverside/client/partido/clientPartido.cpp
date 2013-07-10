@@ -159,7 +159,9 @@ Computer
 
 Logged out
 in lobby
-normal game mode
+game mode
+
+playgame
 waiting for answer
 sendQuestion
 
