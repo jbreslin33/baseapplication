@@ -28,8 +28,8 @@
 //move
 #include "../move/move.h"
 
-//messageDispatcher
-#include "../../messaging/messageDispatcher.h"
+//mailman
+#include "../mailman/mailMan.h"
 
 //postgresql
 #include <stdio.h>
@@ -40,8 +40,8 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	//ogre root
 	mRoot = root;
 
-	//Message Dispathcer
-	mMessageDispatcher = new MessageDispatcher(this);
+	//MailMan
+	mMailMan = new MailMan(this);
 
         //sequence
         mOutgoingSequence = 1;

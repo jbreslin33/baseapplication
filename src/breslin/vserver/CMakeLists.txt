@@ -246,9 +246,11 @@ set(HDRS
 	../fsm/state.h	
 	../fsm/stateMachine.h	
 
-	#messaging
-	../messaging/messageDispatcher.h
-	../messaging/telegram.h
+	#mailman
+	../serverside/mailman/mailMan.h
+
+	#letter
+	../serverside/letter/letter.h
 	
 	#game
 	../serverside/game/game.h
@@ -328,9 +330,12 @@ set(SRCS
 
 	#baseEntity
 	../baseentity/baseEntity.cpp
-	
-	#messaging
-	../messaging/messageDispatcher.cpp
+
+	#mailman
+	../serverside/mailman/mailMan.cpp
+
+	#letter
+	../serverside/letter/letter.cpp
 	
 	#game
 	../serverside/game/game.cpp

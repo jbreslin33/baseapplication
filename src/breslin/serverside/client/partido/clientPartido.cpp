@@ -65,9 +65,9 @@ void ClientPartido::setGame(int gameID)
         }
 }
 
-bool ClientPartido::handleMessage(const Telegram& msg)
+bool ClientPartido::handleLetter(Letter* letter)
 {
-        return mStateMachine->handleMessage(msg);
+        return mStateMachine->handleLetter(letter);
 }
 
 //updates

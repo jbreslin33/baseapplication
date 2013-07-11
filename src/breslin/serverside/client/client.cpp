@@ -31,10 +31,6 @@
 //states
 #include "states/clientStates.h"
 
-//messageDispatcher
-#include "../../messaging/messageDispatcher.h"
-
-
 #ifdef WIN32
 //
 #else
@@ -205,9 +201,9 @@ void Client::update()
         mPermanenceStateMachine->update();
 }
 
-bool Client::handleMessage(const Telegram& msg)
+bool Client::handleLetter(Letter* letter)
 {
-	return mStateMachine->handleMessage(msg);
+	return mStateMachine->handleLetter(letter);
 }
 
 void Client::remove()
@@ -241,14 +237,6 @@ void Client::login()
 {
 	LogString("sending login to clientID:%d",mClientID);
 
-	mServer->mMessageDispatcher->dispatchMessage(0,mID,mID,mServer->mMessageDispatcher->mMessageDispatcherLogin,NULL,NULL);
-/*
-void MessageDispatcher::dispatchMessage(double       delay,
-                                    int          sender,
-                                    int          receiverID,
-                                    int          msg,
-                                    void*        AdditionalInfo = NULL, Message* message = NULL)
-*/
 	//set last messageTime
 	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 

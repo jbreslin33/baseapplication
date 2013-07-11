@@ -31,13 +31,15 @@ void GlobalClient::execute(Client* client)
 void GlobalClient::exit(Client* client)
 {
 }
-bool GlobalClient::onMessage(Client* client, const Telegram& msg)
+bool GlobalClient::onLetter(Client* client, Letter* letter)
 {
-	if (msg.mMessageNumber == 1)	
+/*
+	if (letter->mMessageNumber == 1)	
 	{
 		LogString("got msg 1");
 		client->mStateMachine->changeState(Lobby::Instance());
 	}
+*/
         return true;
 }
 
@@ -65,9 +67,9 @@ void Logged_Out::execute(Client* client)
 void Logged_Out::exit(Client* client)
 {
 }
-bool Logged_Out::onMessage(Client* client, const Telegram& msg)
+bool Logged_Out::onLetter(Client* client, Letter* letter)
 {
-	LogString("Logged_Out::onMessage");
+	LogString("Logged_Out::onLetter");
 	return false;
 }
 
@@ -90,7 +92,7 @@ void Lobby::execute(Client* client)
 void Lobby::exit(Client* client)
 {
 }
-bool Lobby::onMessage(Client* client, const Telegram& msg)
+bool Lobby::onLetter(Client* client, Letter* letter)
 {
 	return true;
 }
@@ -113,7 +115,7 @@ void Game_Mode::execute(Client* client)
 void Game_Mode::exit(Client* client)
 {
 }
-bool Game_Mode::onMessage(Client* client, const Telegram& msg)
+bool Game_Mode::onLetter(Client* client, Letter* letter)
 {
 	return true;
 }
@@ -140,7 +142,7 @@ void Human::execute(Client* client)
 void Human::exit(Client* client)
 {
 }
-bool Human::onMessage(Client* client, const Telegram& msg)
+bool Human::onLetter(Client* client, Letter* letter)
 {
 	return true;
 }
@@ -166,7 +168,7 @@ void Computer_Mode::execute(Client* client)
 void Computer_Mode::exit(Client* client)
 {
 }
-bool Computer_Mode::onMessage(Client* client, const Telegram& msg)
+bool Computer_Mode::onLetter(Client* client, Letter* letter)
 {
 	return true;
 }
@@ -201,7 +203,7 @@ void Initialize_Permanence::execute(Client* client)
 void Initialize_Permanence::exit(Client* client)
 {
 }
-bool Initialize_Permanence::onMessage(Client* client, const Telegram& msg)
+bool Initialize_Permanence::onLetter(Client* client, Letter* letter)
 {
         return true;
 }
@@ -248,7 +250,7 @@ void Permanent::execute(Client* client)
 void Permanent::exit(Client* client)
 {
 }
-bool Permanent::onMessage(Client* client, const Telegram& msg)
+bool Permanent::onLetter(Client* client, Letter* letter)
 {
 	return true;
 }
@@ -293,7 +295,7 @@ void Temporary::execute(Client* client)
 void Temporary::exit(Client* client)
 {
 }
-bool Temporary::onMessage(Client* client, const Telegram& msg)
+bool Temporary::onLetter(Client* client, Letter* letter)
 {
 	return true;
 }

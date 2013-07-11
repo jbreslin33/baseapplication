@@ -20,7 +20,7 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
-  bool onMessage(Client* client, const Telegram& msg);
+  bool onLetter(Client* client, Letter* letter);
 };
 
 
@@ -37,7 +37,7 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
-  bool onMessage(Client* client, const Telegram& msg);
+  bool onLetter(Client* client, Letter* letter);
 };
 
 class Lobby : public State<Client>
@@ -49,7 +49,7 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
-  bool onMessage(Client* client, const Telegram& msg);
+  bool onLetter(Client* client, Letter* letter);
 };
 
 
@@ -62,7 +62,7 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
-  bool onMessage(Client* client, const Telegram& msg);
+  bool onLetter(Client* client, Letter* letter);
 };
 
 
@@ -79,7 +79,7 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
-  bool onMessage(Client* client, const Telegram& msg);
+  bool onLetter(Client* client, Letter* letter);
 };
 
 class Computer_Mode : public State<Client>
@@ -91,7 +91,7 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
-  bool onMessage(Client* client, const Telegram& msg);
+  bool onLetter(Client* client, Letter* letter);
 };
 
 /*******************************
@@ -107,7 +107,7 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
-  bool onMessage(Client* client, const Telegram& msg);
+  bool onLetter(Client* client, Letter* letter);
 };
 
 
@@ -120,7 +120,7 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
-  bool onMessage(Client* client, const Telegram& msg);
+  bool onLetter(Client* client, Letter* letter);
 };
 
 class Temporary : public State<Client>
@@ -132,7 +132,7 @@ public:
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
-  bool onMessage(Client* client, const Telegram& msg);
+  bool onLetter(Client* client, Letter* letter);
 };
 
 

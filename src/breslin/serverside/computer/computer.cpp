@@ -35,9 +35,9 @@ void Computer::update()
 	mStateMachine->update();
 }
 
-bool Computer::handleMessage(const Telegram& msg)
+bool Computer::handleLetter(Letter* letter)
 {
-        return mStateMachine->handleMessage(msg);
+        return mStateMachine->handleLetter(letter);
 }
 
 

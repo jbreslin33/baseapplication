@@ -22,8 +22,8 @@ Computer(Shape* shape);
 //update
 virtual void update();
 
-//handle message
-virtual bool  handleMessage(const Telegram& msg);
+//handle letter 
+virtual bool  handleLetter(Letter* letter);
 
 Shape* mShape;
 
