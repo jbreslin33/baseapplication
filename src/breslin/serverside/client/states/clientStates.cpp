@@ -69,8 +69,21 @@ void Logged_Out::exit(Client* client)
 }
 bool Logged_Out::onLetter(Client* client, Letter* letter)
 {
-	LogString("Logged_Out::onLetter");
-	return false;
+	Message* message = letter->mMessage;
+	message->BeginReading();	
+	int type = message->ReadByte();
+
+	if (type == client->mServer->mMessageLogin)
+	{
+		LogString("Logged_Out::onLetter...checkLogin");
+		client->checkLogin(message);
+		return true;	
+	}
+	else
+	{
+		return false;
+	}
+
 }
 
 /*****************************************
