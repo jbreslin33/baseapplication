@@ -28,17 +28,6 @@ public:
 *       CLIENT STATES 
 ******************************/
 
-class Logged_Out : public State<Client>
-{
-private:
-  Logged_Out(){}
-public:
-  static Logged_Out* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
 
 class Lobby : public State<Client>
 {
@@ -65,7 +54,32 @@ public:
   bool onLetter(Client* client, Letter* letter);
 };
 
+/*******************************
+*       LOGIN STATES 
+******************************/
+class Logged_Out : public State<Client>
+{
+private:
+  Logged_Out(){}
+public:
+  static Logged_Out* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+  bool onLetter(Client* client, Letter* letter);
+};
 
+class Logged_In : public State<Client>
+{
+private:
+  Logged_In(){}
+public:
+  static Logged_In* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+  bool onLetter(Client* client, Letter* letter);
+};
 
 /*******************************
 *        GAME CONTROL

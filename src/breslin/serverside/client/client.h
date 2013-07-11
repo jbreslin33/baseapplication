@@ -65,6 +65,7 @@ public:
 ~Client();
 
 StateMachine<Client>* mStateMachine;
+StateMachine<Client>* mLoginStateMachine;
 StateMachine<Client>* mControlStateMachine;
 StateMachine<Client>* mPermanenceStateMachine;
 

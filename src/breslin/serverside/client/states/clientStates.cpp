@@ -44,8 +44,59 @@ bool GlobalClient::onLetter(Client* client, Letter* letter)
 }
 
 
+
 /*****************************************
 *******       CLIENT STATES    ******************	
+****************************************/
+/*****************************************
+	Lobby
+****************************************/
+Lobby* Lobby::Instance()
+{
+  static Lobby instance;
+  return &instance;
+}
+void Lobby::enter(Client* client)
+{
+	LogString("Lobby::enter");
+}
+void Lobby::execute(Client* client)
+{
+
+}
+void Lobby::exit(Client* client)
+{
+}
+bool Lobby::onLetter(Client* client, Letter* letter)
+{
+	return true;
+}
+
+/*****************************************
+		GAME_MODE		
+****************************************/
+Game_Mode* Game_Mode::Instance()
+{
+  static Game_Mode instance;
+  return &instance;
+}
+void Game_Mode::enter(Client* client)
+{
+}
+void Game_Mode::execute(Client* client)
+{
+
+}
+void Game_Mode::exit(Client* client)
+{
+}
+bool Game_Mode::onLetter(Client* client, Letter* letter)
+{
+	return true;
+}
+
+/*****************************************
+*******       LOGIN STATES    ******************	
 ****************************************/
 
 /*****************************************
@@ -106,56 +157,31 @@ bool Logged_Out::onLetter(Client* client, Letter* letter)
 		return false;
 	}
 }
-
 /*****************************************
-	Lobby
+        Logged_In
 ****************************************/
-Lobby* Lobby::Instance()
+Logged_In* Logged_In::Instance()
 {
-  static Lobby instance;
+  static Logged_In instance;
   return &instance;
 }
-void Lobby::enter(Client* client)
+void Logged_In::enter(Client* client)
 {
-	LogString("Lobby::enter");
+        LogString("Logged_In::enter");
 }
-void Lobby::execute(Client* client)
+void Logged_In::execute(Client* client)
 {
 
 }
-void Lobby::exit(Client* client)
+void Logged_In::exit(Client* client)
 {
 }
-bool Lobby::onLetter(Client* client, Letter* letter)
+bool Logged_In::onLetter(Client* client, Letter* letter)
 {
-	return true;
-}
 
+}
 /*****************************************
-		GAME_MODE		
-****************************************/
-Game_Mode* Game_Mode::Instance()
-{
-  static Game_Mode instance;
-  return &instance;
-}
-void Game_Mode::enter(Client* client)
-{
-}
-void Game_Mode::execute(Client* client)
-{
-
-}
-void Game_Mode::exit(Client* client)
-{
-}
-bool Game_Mode::onLetter(Client* client, Letter* letter)
-{
-	return true;
-}
-
-/*****************************************
-*******       CONTROL    ******************	
+*******       CONTROL STATES    ******************	
 ****************************************/
 
 /*****************************************
