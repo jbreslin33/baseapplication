@@ -31,6 +31,7 @@ using namespace Ogre;
 class BaseEntity;
 class Network;
 class Client;
+class ClientStable;
 class Game;
 class Shape;
 class MailMan;
@@ -58,7 +59,7 @@ public:
 	std::vector<Game*> mGameVector;
 
 	//clients
-	std::vector<Client*> mClientVector;
+	std::vector<ClientStable*> mClientVector;
 	std::vector<Client*> mClientVectorTemp;
 
 	//port

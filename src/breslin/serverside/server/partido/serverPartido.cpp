@@ -4,7 +4,7 @@
 #include "../../tdreamsock/dreamSockLog.h"
 
 #include "../../game/partido/gamePartido.h"
-#include "../../client/partido/clientPartido.h"
+#include "../../client/stable/partido/clientPartido.h"
 #include "../../../math/vector3D.h"
 #include "../../shape/shape.h"
 
@@ -122,15 +122,15 @@ void ServerPartido::createClients()
 
 void ServerPartido::addClient(Client* client, bool permanent)
 {
+	LogString("ServerPartido::addClient");
 	Server::addClient(client, permanent);
-	ClientPartido* clientPartido = (ClientPartido*)client;
         if (permanent)
         {
-                mClientPartidoVector.push_back(clientPartido);
+                mClientPartidoVector.push_back((ClientPartido*)client);
         }
         else
         {
-                mClientPartidoVectorTemp.push_back(clientPartido);
+                mClientPartidoVectorTemp.push_back((ClientPartido*)client);
         }
 }
 
@@ -149,14 +149,14 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		if (type == mMessageConnect)
         	{
-                	ClientPartido* client = new ClientPartido(this, address, 0, false);
+                	Client* client = new Client(this, address, 0, false);
 
         	}
 
         	else if (type == mMessageConnectBrowser)
         	{
                 	int clientID = mes->ReadByte();
-                	ClientPartido* client = new ClientPartido(this, address, clientID, false);
+                	Client* client = new Client(this, address, clientID, false);
         	}
 
         	else if (type == mMessageConnectNode)

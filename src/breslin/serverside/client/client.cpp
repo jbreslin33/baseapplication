@@ -48,37 +48,15 @@
 
 Client::Client(Server* server, struct sockaddr *address, int clientID, bool permanence) : BaseEntity(BaseEntity::getNextValidID())
 {
-        //keys
-        mKeyUp = 1;
-        mKeyDown = 2;
-        mKeyLeft = 4;
-        mKeyRight = 8;
-        mKeyCounterClockwise = 16;
-        mKeyClockwise = 32;
-
 	//logged in
 	mLoggedIn = false;
 
 	//client id for php but everyone uses one...
 	mClientID = clientID;
 	
-	//db
-	db_id = 0;
-	db_school_id = 0;
-
-	//game--there should be a vector as well. and a mGame to show what the user is playing right now if any 
-	mGame = NULL;
-	
-	//shape
-	mShape = NULL;
-
 	//server
 	mServer = server;
 
-	//key
-	mKey = 0;
-	mKeyLast = 0;
-	
 	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 
 	if (!address)
@@ -100,55 +78,18 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
 
-
 	mServer->mBaseEntityVector.push_back(this);
 
-	mPermanence = permanence;
-
 	//client states
-	mStateMachine =  new StateMachine<Client>(this);
-        mStateMachine->setCurrentState      (Logged_Out::Instance());
-        mStateMachine->setPreviousState     (NULL);
-        mStateMachine->setGlobalState       (GlobalClient::Instance());
- 
-	//control states	
-	mControlStateMachine =  new StateMachine<Client>(this);
-        mControlStateMachine->setCurrentState      (Computer_Mode::Instance());
-        mControlStateMachine->setPreviousState     (NULL);
-        mControlStateMachine->setGlobalState       (NULL);
-
-	//permanence states
-        mPermanenceStateMachine = new StateMachine<Client>(this);    //setup the state machine
-	
-        mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
-
-	if (permanence)
-	{
-		mServer->addClient(this,true);
-        //	mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
-	}	
-	else
-	{
-		mServer->addClient(this,false);
-        //	mPermanenceStateMachine->setCurrentState      (Temporary::Instance());
-	}
-
-        mPermanenceStateMachine->setPreviousState     (NULL);
-        mPermanenceStateMachine->setGlobalState       (NULL);
-
-	
-
+	mClientStateMachine =  new StateMachine<Client>(this);
+        mClientStateMachine->setCurrentState      (NULL);
+        mClientStateMachine->setPreviousState     (NULL);
+        mClientStateMachine->setGlobalState       (NULL);
 }
 
 Client::~Client()
 {
-	//this will check if there is an mShape
-
-	if (mGame)
-	{
-		mGame->leave(this);
-	}
-
+/*
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
         {
                 if (mServer->mClientVector.at(i) == this)
@@ -156,38 +97,8 @@ Client::~Client()
  			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
 		}
 	}
+*/
 }
-
-//game
-Game* Client::getGame()
-{
-	return mGame;
-}
-
-void Client::addGame(Game* game)
-{
-	mGameVector.push_back(game);
-} 
-
-void Client::setGame(int gameID)
-{
-	
- 	for (int i = 0; i < mGameVector.size(); i++)
-        {
-        	if (mGameVector.at(i)->mID == gameID)
-               	{
-               		mGame = mGameVector.at(i);
-			mGame->sendShapes(this);
-                }
-	}	
-}
-
-//shape
-void Client::setShape(Shape* shape)
-{
-        mShape = shape;
-}
-
 
 void Client::setSocketAddress(struct sockaddr *address)
 {
@@ -196,18 +107,17 @@ void Client::setSocketAddress(struct sockaddr *address)
 
 void Client::update()
 {
-        mStateMachine->update();
-        mControlStateMachine->update();
-        mPermanenceStateMachine->update();
+        mClientStateMachine->update();
 }
 
 bool Client::handleLetter(Letter* letter)
 {
-	return mStateMachine->handleLetter(letter);
+	return mClientStateMachine->handleLetter(letter);
 }
 
 void Client::remove()
 {
+/*
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
 		if (mServer->mClientVector.at(i) == this)
@@ -216,6 +126,7 @@ void Client::remove()
 			///delete this;
 		}
 	}
+*/
 }
 
 //connected
@@ -333,55 +244,6 @@ bool Client::checkLogin(Message* mes)
 		}
 	}
 */
-}
-
-bool Client::getPasswordMatch(std::string username,std::string password)
-{
-        PGconn          *conn;
-        PGresult        *res;
-        int             rec_count;
-        int             row;
-        int             col;
-        bool match = false;
-        std::string query = "select id, username, password from users where username = '";
-        std::string a = "' ";
-        std::string b = "and password = '";
-        std::string c = "'";
-
-        query.append(username);
-        query.append(a);
-        query.append(b);
-        query.append(password);
-        query.append(c);
-
-        const char * q = query.c_str();
-
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-
-        res = PQexec(conn,q);
-        if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-                puts("We did not get any data!");
-                //exit(0);
-        }
-        rec_count = PQntuples(res);
-        if (rec_count > 0)
-        {
-		const char* value = PQgetvalue(res, row, 0);
-		stringstream strValue;
-		strValue << value;
-		unsigned int intValue;
-		strValue >> intValue;
-		db_id = intValue;
-	
-                match = true;
-        }
-
-        PQclear(res);
-
-        PQfinish(conn);
-
-        return match;
 }
 
 void Client::checkForTimeout()

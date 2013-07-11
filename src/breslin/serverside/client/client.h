@@ -64,91 +64,52 @@ public:
 
 ~Client();
 
-StateMachine<Client>* mStateMachine;
-StateMachine<Client>* mLoginStateMachine;
-StateMachine<Client>* mControlStateMachine;
-StateMachine<Client>* mPermanenceStateMachine;
+StateMachine<Client>* mClientStateMachine;
 
-bool mPermanence;
+//Message
+Message mMessage;
 
-//keys
-int mKeyUp;
-int mKeyDown;
-int mKeyLeft;
-int mKeyRight;
-int mKeyCounterClockwise;
-int mKeyClockwise;
+//id used just for browser clients for now, if it's 0 then we know it's a c++ java client.
+int mClientID;
 
-	//Message
-        Message mMessage;
+int mConnectionState;		
 
-	//id used just for browser clients for now, if it's 0 then we know it's a c++ java client.
-	int mClientID;
+signed short	mDroppedPackets;
 
-	int				mConnectionState;		
+struct sockaddr	mSocketAddress;
 
-	signed short	mDroppedPackets;
+int mLastMessageTime;
 
-	struct sockaddr	mSocketAddress;
+bool mLoggedIn;
+std::string mStringUsername;
+std::string mStringPassword;
 
-	int				mLastMessageTime;
-
-	bool mLoggedIn;
-	std::string mStringUsername;
-	std::string mStringPassword;
-
-	int mKey;
-	int mKeyLast;
-
-public:
-
-	//update
-	virtual void update();
+//update
+virtual void update();
 	
-	//handle letter 
-  	virtual bool  handleLetter(Letter* letter);
+//handle letter 
+virtual bool  handleLetter(Letter* letter);
 
-	//timeout
-	void checkForTimeout();
+//timeout
+void checkForTimeout();
 
-	//client
-	void remove();
+//client
+void remove();
 
-	//connect
-	void sendConnected();
+//connect
+void sendConnected();
 
-	//login
-	void login();
-	void logout();
-	bool checkLogin(Message* mes);
-        bool getPasswordMatch(std::string username,std::string password);
-	void readLoginMessage(Message* mes);
+//login
+void login();
+void logout();
+bool checkLogin(Message* mes);
+void readLoginMessage(Message* mes);
 
+//clients address to send back messages to
+struct sockaddr *GetSocketAddress(void) { return &mSocketAddress; }
+void setSocketAddress(struct sockaddr *address); 
 
-	//clients address to send back messages to
-	struct sockaddr *GetSocketAddress(void) { return &mSocketAddress; }
-	void setSocketAddress(struct sockaddr *address); 
-
-    	Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the avatar.
-	void setShape(Shape* shape);  
-
-	Server* mServer;
-
-	//game
-        std::vector<Game*> mGameVector;
-	void addGame(Game* game);
-	Game* mGame;
-	Game* getGame();
-	virtual void setGame(int gameID);
-	
-	//db
-	int         db_id;
-        std::string db_username;
-        std::string db_password;
-        std::string db_first_name;
-        std::string db_last_name;
-        int         db_school_id;
-
+Server* mServer;
 
 };
 #endif
