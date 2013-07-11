@@ -75,15 +75,15 @@ bool Logged_Out::onLetter(Client* client, Letter* letter)
 
 	if (type == client->mServer->mMessageLogin)
 	{
-		LogString("Logged_Out::onLetter...checkLogin");
-		//client->checkLogin(message);
      		client->readLoginMessage(message);
 
+		Client* proposedClient;
         	for (unsigned int i = 0; i < client->mServer->mClientVector.size(); i++)
         	{
-                	if (client->mStringUsername.compare(client->mServer->mClientVector.at(i)->db_username) == 0 && client->mStringPassword.compare(client->mServer->mClientVector.at(i)->db_password) == 0)
+			proposedClient = client->mServer->mClientVector.at(i);
+                	if (client->mStringUsername.compare(proposedClient->db_username) == 0 && client->mStringPassword.compare(proposedClient->db_password) == 0)
                 	{
-                        	if (client == client->mServer->mClientVector.at(i))
+                        	if (client == proposedClient)
                         	{
                                 	client->login();
                         	}
@@ -92,10 +92,10 @@ bool Logged_Out::onLetter(Client* client, Letter* letter)
                                 	client->mConnectionState = 4;
 
                                 	//swap
-                                	client->mServer->mClientVector.at(i)->setSocketAddress(&client->mSocketAddress);
-                                	client->mServer->mClientVector.at(i)->mConnectionState = 1;
-                                	client->mServer->mClientVector.at(i)->mClientID = client->mClientID;
-                                	client->mServer->mClientVector.at(i)->login();
+                                	proposedClient->setSocketAddress(&client->mSocketAddress);
+                                	proposedClient->mConnectionState = 1;
+                                	proposedClient->mClientID = client->mClientID;
+                                	proposedClient->login();
                         	}
                 	}
         	}
@@ -105,7 +105,6 @@ bool Logged_Out::onLetter(Client* client, Letter* letter)
 	{
 		return false;
 	}
-
 }
 
 /*****************************************
