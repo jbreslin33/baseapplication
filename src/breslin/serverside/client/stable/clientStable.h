@@ -15,10 +15,10 @@ ClientStable(Server* server, struct sockaddr *address, int clientID, bool perman
 
 
 //update
-virtual void update() { }
+virtual void update(); 
 	
 //handle letter 
-virtual bool  handleLetter(Letter* letter) { } 
+virtual bool  handleLetter(Letter* letter); 
 
 
 };

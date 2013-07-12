@@ -120,26 +120,34 @@ void Logged_Out::exit(Client* client)
 }
 bool Logged_Out::onLetter(Client* client, Letter* letter)
 {
+	LogString("Logged_Out::onLetter");
 	Message* message = letter->mMessage;
 	message->BeginReading();	
 	int type = message->ReadByte();
 
-	if (type == client->mServer->mMessageLogin)
+	if (type == client->mServer->mMessageLogin || type == client->mServer->mMessageLoginBrowser)
 	{
+		LogString("Logged_Out::onLetter got type");
      		client->readLoginMessage(message);
 
 		Client* proposedClient;
         	for (unsigned int i = 0; i < client->mServer->mClientVector.size(); i++)
         	{
+			LogString("Logged_Out::onLetter looping clientVector");
 			proposedClient = client->mServer->mClientVector.at(i);
+        		//const char * q = client->mStringUsername.c_str();
+
+			//LogString("username:%s",q);
                 	if (client->mStringUsername.compare(proposedClient->db_username) == 0 && client->mStringPassword.compare(proposedClient->db_password) == 0)
                 	{
+				LogString("Logged_Out::onLetter pass match");
                         	if (client == proposedClient)
                         	{
                                 	client->login();
                         	}
                         	else //we have a diff client but a pass match...
                       		{
+					LogString("Logged_Out::onLetter calling login");
                                 	client->mConnectionState = 4;
 
                                 	//swap

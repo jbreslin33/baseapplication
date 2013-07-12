@@ -203,6 +203,7 @@ void Client::update()
 
 bool Client::handleLetter(Letter* letter)
 {
+	LogString("Client::handleLetter");
 	return mStateMachine->handleLetter(letter);
 }
 

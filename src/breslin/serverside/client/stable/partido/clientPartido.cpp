@@ -73,7 +73,7 @@ bool ClientPartido::handleLetter(Letter* letter)
 //updates
 void ClientPartido::update()
 {
-	Client::update();
+	ClientStable::update();
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
 		if (mShapePartido)

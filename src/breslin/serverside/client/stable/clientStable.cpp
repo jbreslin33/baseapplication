@@ -14,3 +14,14 @@ ClientStable::~ClientStable()
 {
 }
 
+bool ClientStable::handleLetter(Letter* letter)
+{
+        return mStateMachine->handleLetter(letter);
+}
+
+void ClientStable::update()
+{
+	Client::update();
+}
+
+
