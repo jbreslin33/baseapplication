@@ -49,6 +49,55 @@ bool GlobalClient::onLetter(Client* client, Letter* letter)
 ****************************************/
 
 /*****************************************
+	TEMPORARY	
+****************************************/
+Temporary* Temporary::Instance()
+{
+  static Temporary instance;
+  return &instance;
+}
+void Temporary::enter(Client* client)
+{
+
+}
+void Temporary::execute(Client* client)
+{
+}
+void Temporary::exit(Client* client)
+{
+	
+}
+bool Temporary::onLetter(Client* client, Letter* letter)
+{
+	return true;
+}
+
+/*****************************************
+        AJAX_NODE       
+****************************************/
+Ajax_Node* Ajax_Node::Instance()
+{
+  static Ajax_Node instance;
+  return &instance; 
+} 
+void Ajax_Node::enter(Client* client)
+{
+
+}       
+void Ajax_Node::execute(Client* client)
+{
+}
+void Ajax_Node::exit(Client* client)
+{
+
+}
+bool Ajax_Node::onLetter(Client* client, Letter* letter)
+{
+        return true;
+}
+
+
+/*****************************************
 	Logged_Out
 ****************************************/
 Logged_Out* Logged_Out::Instance()
@@ -73,7 +122,7 @@ bool Logged_Out::onLetter(Client* client, Letter* letter)
 	message->BeginReading();	
 	int type = message->ReadByte();
 
-	if (type == client->mServer->mMessageLogin)
+	if (type == client->mServer->mMessageLogin || client->mServer->mMessageLoginBrowser)
 	{
 		LogString("Logged_Out::onLetter...checkLogin");
 		client->checkLogin(message);
@@ -236,6 +285,7 @@ void Permanent::enter(Client* client)
 void Permanent::execute(Client* client)
 {
 	//LogString("Permanent::execute");
+	client->mStateMachine->changeState(Logged_Out::Instance());
 }
 void Permanent::exit(Client* client)
 {
@@ -245,26 +295,3 @@ bool Permanent::onLetter(Client* client, Letter* letter)
 	return true;
 }
 
-/*****************************************
-	TEMPORARY	
-****************************************/
-Temporary* Temporary::Instance()
-{
-  static Temporary instance;
-  return &instance;
-}
-void Temporary::enter(Client* client)
-{
-
-}
-void Temporary::execute(Client* client)
-{
-}
-void Temporary::exit(Client* client)
-{
-	
-}
-bool Temporary::onLetter(Client* client, Letter* letter)
-{
-	return true;
-}

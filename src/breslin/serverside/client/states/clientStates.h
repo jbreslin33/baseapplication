@@ -23,10 +23,34 @@ public:
   bool onLetter(Client* client, Letter* letter);
 };
 
-
 /*******************************
 *       CLIENT STATES 
 ******************************/
+class Temporary : public State<Client>
+{
+private:
+  Temporary(){}
+public:
+  static Temporary* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+  bool onLetter(Client* client, Letter* letter);
+};
+
+
+
+class Ajax_Node : public State<Client>
+{
+private:
+  Ajax_Node(){}
+public:
+  static Ajax_Node* Instance();
+  void enter  (Client* client);
+  void execute(Client* client);
+  void exit   (Client* client);
+  bool onLetter(Client* client, Letter* letter);
+};
 
 class Logged_Out : public State<Client>
 {
@@ -123,17 +147,6 @@ public:
   bool onLetter(Client* client, Letter* letter);
 };
 
-class Temporary : public State<Client>
-{
-private:
-  Temporary(){}
-public:
-  static Temporary* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
 
 
 #endif

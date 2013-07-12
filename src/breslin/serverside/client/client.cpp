@@ -108,16 +108,22 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 	mStateMachine =  new StateMachine<Client>(this);
 	if (permanence)
 	{
-		LogString("perm");
 		mServer->addClient(this,true);
-        	mStateMachine->setCurrentState      (Permanent::Instance());
+		if (mClientID == -1)
+		{
+        		mStateMachine->setCurrentState      (Ajax_Node::Instance());
+		}
+		else
+		{
+        		mStateMachine->setCurrentState      (Permanent::Instance());
+		}
 	}	
 	else
 	{
-		LogString("not perm");
 		mServer->addClient(this,false);
         	mStateMachine->setCurrentState      (Temporary::Instance());
 	}
+
         mStateMachine->setPreviousState     (NULL);
         mStateMachine->setGlobalState       (GlobalClient::Instance());
 }
