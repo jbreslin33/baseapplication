@@ -231,31 +231,7 @@ Permanent* Permanent::Instance()
 }
 void Permanent::enter(Client* client)
 {
-//myvector.erase (myvector.begin()+5);
 
-        LogString("enter NEED TO REMOVE AS WELL");
-	bool existsInClientVector = false;
-	for (int i = 0; i < client->mServer->mClientVector.size(); i++)
-	{
-		if (client->mServer->mClientVector.at(i) == client)
-		{
-			existsInClientVector = true;	
-		}
-	}
-	
-	if (!existsInClientVector)
-	{
-		client->mServer->addClient(client,true);
-	}	
-
-        bool existsInClientTempVector = false;
-        for (int i = 0; i < client->mServer->mClientVectorTemp.size(); i++)
-        {
-                if (client->mServer->mClientVectorTemp.at(i) == client)
-                {
-			client->mServer->mClientVectorTemp.erase(client->mServer->mClientVectorTemp.begin()+i);
-                }
-        }
 }
 void Permanent::execute(Client* client)
 {
@@ -278,29 +254,7 @@ Temporary* Temporary::Instance()
 }
 void Temporary::enter(Client* client)
 {
-        LogString("enter NEED TO REMOVE AS WELL");
-        bool existsInTempVector = false;
-        for (int i = 0; i < client->mServer->mClientVectorTemp.size(); i++)
-        {
-                if (client->mServer->mClientVectorTemp.at(i) == client)
-                {
-                        existsInTempVector = true;
-                }
-        }
 
-        if (!existsInTempVector)
-        {
-                client->mServer->addClient(client,false);
-        }
-
-        bool existsInClientVector = false;
-        for (int i = 0; i < client->mServer->mClientVector.size(); i++)
-        {
-                if (client->mServer->mClientVector.at(i) == client)
-                {
-                        client->mServer->mClientVector.erase(client->mServer->mClientVector.begin()+i);
-                }
-        }
 }
 void Temporary::execute(Client* client)
 {
