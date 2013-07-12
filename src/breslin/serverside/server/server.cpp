@@ -367,7 +367,9 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 }
 
 				LogString("breslin 1");
-				client->checkLogin(mes);
+				Letter* letter = new Letter(client,mes);	
+				mMailMan->deliver(client,letter);
+				//client->checkLogin(mes);
 				return;
 			}
                 }
@@ -409,7 +411,10 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                         continue;
                                 }
 
-				client->checkLogin(mes);
+				LogString("breslin 1");
+				Letter* letter = new Letter(client,mes);	
+				mMailMan->deliver(client,letter);
+				//client->checkLogin(mes);
 				return;
 			}
 		}	
@@ -425,7 +430,10 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
-				client->checkLogin(mes);
+				LogString("breslin 1");
+				Letter* letter = new Letter(client,mes);	
+				mMailMan->deliver(client,letter);
+				//client->checkLogin(mes);
 				return;
 			}
 		}
@@ -434,7 +442,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/***LOG OUT********/
 	else if (type == mMessageLogout)
 	{
-		Client* client;
+		ClientStable* client;
  		//get client 
                 for (unsigned int i = 0; i < mClientVector.size(); i++)
                 {
@@ -454,7 +462,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
         else if (type == mMessageLogoutBrowser)
         {
-		Client* client;
+		ClientStable* client;
                 int clientID = mes->ReadByte();
                 for (int i = 0; i < mClientVector.size(); i++)
                 {

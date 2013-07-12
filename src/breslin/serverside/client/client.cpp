@@ -48,8 +48,6 @@
 
 Client::Client(Server* server, struct sockaddr *address, int clientID, bool permanence) : BaseEntity(BaseEntity::getNextValidID())
 {
-	//logged in
-	mLoggedIn = false;
 
 	//client id for php but everyone uses one...
 	mClientID = clientID;
@@ -72,11 +70,17 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 	if (mClientID >= 0)
 	{
        		sendConnected();
+		sendSchools();
 	}
 	else
 	{
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
+
+      	if (!permanence)
+        {
+                mServer->addClient(this,false);
+        }      
 
 	mServer->mBaseEntityVector.push_back(this);
 
@@ -84,7 +88,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 	mClientStateMachine =  new StateMachine<Client>(this);
         mClientStateMachine->setCurrentState      (NULL);
         mClientStateMachine->setPreviousState     (NULL);
-        mClientStateMachine->setGlobalState       (NULL);
+        mClientStateMachine->setGlobalState       (GlobalClient::Instance());
 }
 
 Client::~Client()
@@ -99,6 +103,7 @@ Client::~Client()
 	}
 */
 }
+
 
 void Client::setSocketAddress(struct sockaddr *address)
 {
@@ -138,41 +143,6 @@ void Client::sendConnected()
 	{
         	mMessage.WriteByte(mClientID); // add mClientID for browsers 
 	}
-	mServer->mNetwork->sendPacketTo(this,&mMessage);
-}
-
-//login
-//i should send db_id back as well.....because once a client connects we are not going to delete it..... we will just manage it best we can from here on server....
-//which means when you login from a new address we will send a notification to old address as a courtesy....
-void Client::login()
-{
-	LogString("sending login to clientID:%d",mClientID);
-
-	//set last messageTime
-	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
-
-	mLoggedIn = true;
-
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServer->mMessageLoggedIn); // add type
-	if (mClientID > 0)
-	{
-        	mMessage.WriteByte(mClientID); //client id for browsers
-	}	
-	mServer->mNetwork->sendPacketTo(this,&mMessage);
-}
-
-void Client::logout()
-{
-	LogString("sending logout to clientID:%d",mClientID);
-	mLoggedIn = false;
-
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServer->mMessageLoggedOut); // add type
-	if (mClientID > 0)
-	{
-        	mMessage.WriteByte(mClientID); //client id for browsers
-	}	
 	mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
 
@@ -218,36 +188,9 @@ void Client::readLoginMessage(Message* mes)
         }
 }
 
-bool Client::checkLogin(Message* mes)
-{
-/*
-	readLoginMessage(mes);
-
-	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
-	{
-		if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
-		{
-			if (this == mServer->mClientVector.at(i))
-			{
-				login();	
-			}
-			else //we have a diff client but a pass match...
-			{
-				mConnectionState = DREAMSOCK_DISCONNECTED; 
-
-                                //swap
-                                mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
-                                mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
-                                mServer->mClientVector.at(i)->mClientID = mClientID;
-                                mServer->mClientVector.at(i)->login();
-			}
-		}
-	}
-*/
-}
-
 void Client::checkForTimeout()
 {
+/*
         // Don't timeout when connecting or if logged out...
         if(mLoggedIn == false || mConnectionState == DREAMSOCK_CONNECTING)
         {
@@ -263,5 +206,6 @@ void Client::checkForTimeout()
 		logout();
 		LogString("logging out.. you should fire up ai for:%d",mClientID);
         }
+*/
 }
 

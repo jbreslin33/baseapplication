@@ -80,15 +80,17 @@ struct sockaddr	mSocketAddress;
 
 int mLastMessageTime;
 
-bool mLoggedIn;
 std::string mStringUsername;
 std::string mStringPassword;
+
 
 //update
 virtual void update();
 	
 //handle letter 
 virtual bool  handleLetter(Letter* letter);
+
+virtual void sendSchools() { }
 
 //timeout
 void checkForTimeout();
@@ -100,9 +102,7 @@ void remove();
 void sendConnected();
 
 //login
-void login();
-void logout();
-bool checkLogin(Message* mes);
+bool getPasswordMatch(std::string username,std::string password);
 void readLoginMessage(Message* mes);
 
 //clients address to send back messages to
