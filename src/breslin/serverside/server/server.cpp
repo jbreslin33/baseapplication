@@ -364,8 +364,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
-
-				LogString("breslin 1");
 				client->checkLogin(mes);
 				return;
 			}
@@ -381,10 +379,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
-				LogString("breslin 2");
-				Letter* letter = new Letter(client,mes);	
-				mMailMan->deliver(client,letter);
-				//client->checkLogin(mes);
+				client->checkLogin(mes);
 				return;
 			}
 		}
@@ -404,7 +399,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
-
 				client->checkLogin(mes);
 				return;
 			}

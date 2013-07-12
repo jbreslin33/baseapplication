@@ -69,6 +69,7 @@ void Temporary::exit(Client* client)
 }
 bool Temporary::onLetter(Client* client, Letter* letter)
 {
+/*
         LogString("Temporary::onLetter");
         Message* message = letter->mMessage;
         message->BeginReading();
@@ -84,6 +85,7 @@ bool Temporary::onLetter(Client* client, Letter* letter)
         {
                 return false;
         }
+*/
 }
 
 /*****************************************
@@ -132,6 +134,7 @@ void Logged_Out::exit(Client* client)
 }
 bool Logged_Out::onLetter(Client* client, Letter* letter)
 {
+/*
 	LogString("Logged_Out::onLetter");
 	Message* message = letter->mMessage;
 	message->BeginReading();	
@@ -147,7 +150,7 @@ bool Logged_Out::onLetter(Client* client, Letter* letter)
 	{
 		return false;
 	}
-
+*/
 }
 
 /*****************************************
