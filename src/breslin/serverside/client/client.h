@@ -15,13 +15,19 @@ template <class entity_type> class State;
 #include <string.h>
 #include <netinet/in.h>
 
-typedef int SOCKET;
+// Define SOCKET data type for UNIX (defined in WinSock for Win32)
+// And socklen_t for Win32
+#ifdef WIN32
+	typedef int socklen_t;
+#else
+	typedef int SOCKET;
 
-#ifndef TRUE
-#define TRUE 1
-#endif
-#ifndef FALSE
-#define FALSE 0
+	#ifndef TRUE
+	#define TRUE 1
+	#endif
+	#ifndef FALSE
+	#define FALSE 0
+	#endif
 #endif
 
 // Connection states
@@ -30,7 +36,16 @@ typedef int SOCKET;
 #define DREAMSOCK_DISCONNECTING			2
 #define DREAMSOCK_DISCONNECTED			4
 
-#define DREAMSOCK_INVALID_SOCKET	-1
+#ifdef WIN32
+	#define DREAMSOCK_INVALID_SOCKET	INVALID_SOCKET
+#else
+	#define DREAMSOCK_INVALID_SOCKET	-1
+#endif
+
+// System messages
+// Note (for all messages - system and user):
+// positive = sequenced message
+// negative = un-sequenced message
 
 // Error codes
 #define DREAMSOCK_SERVER_ERROR			1
@@ -50,7 +65,6 @@ public:
 ~Client();
 
 StateMachine<Client>* mStateMachine;
-StateMachine<Client>* mLoginStateMachine;
 StateMachine<Client>* mControlStateMachine;
 StateMachine<Client>* mPermanenceStateMachine;
 

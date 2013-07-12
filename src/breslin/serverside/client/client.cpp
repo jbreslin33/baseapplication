@@ -203,7 +203,6 @@ void Client::update()
 
 bool Client::handleLetter(Letter* letter)
 {
-	LogString("Client::handleLetter");
 	return mStateMachine->handleLetter(letter);
 }
 
@@ -310,19 +309,30 @@ void Client::readLoginMessage(Message* mes)
 
 bool Client::checkLogin(Message* mes)
 {
-
 	readLoginMessage(mes);
 
+	//let's find what permanent client you are trying to login to	
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
+		//do you match the username/password?
 		if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
 		{
+			LogString("match!!!:%d",mClientID);			
+			//we could have the same client log back in with same up	
 			if (this == mServer->mClientVector.at(i))
 			{
 				login();	
 			}
 			else //we have a diff client but a pass match...
 			{
+				//for (unsigned int b = 0; b < mServer->mClientVector.size(); b++)
+				//{
+				//	if (this == mClientVector	
+
+				//logout client who is logged in under this uname
+				//mServer->mClientVector.at(i)->logout();
+				//let's disconnect this client because it used to control someone
+				//logout();
 				mConnectionState = DREAMSOCK_DISCONNECTED; 
 
                                 //swap
@@ -330,10 +340,14 @@ bool Client::checkLogin(Message* mes)
                                 mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
                                 mServer->mClientVector.at(i)->mClientID = mClientID;
                                 mServer->mClientVector.at(i)->login();
+	//			}
 			}
+			
+		}
+		else
+		{
 		}
 	}
-
 }
 
 bool Client::getPasswordMatch(std::string username,std::string password)

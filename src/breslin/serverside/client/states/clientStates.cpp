@@ -44,10 +44,48 @@ bool GlobalClient::onLetter(Client* client, Letter* letter)
 }
 
 
-
 /*****************************************
 *******       CLIENT STATES    ******************	
 ****************************************/
+
+/*****************************************
+	Logged_Out
+****************************************/
+Logged_Out* Logged_Out::Instance()
+{
+  static Logged_Out instance;
+  return &instance;
+}
+void Logged_Out::enter(Client* client)
+{
+	LogString("Logged_Out::enter");
+}
+void Logged_Out::execute(Client* client)
+{
+
+}
+void Logged_Out::exit(Client* client)
+{
+}
+bool Logged_Out::onLetter(Client* client, Letter* letter)
+{
+	Message* message = letter->mMessage;
+	message->BeginReading();	
+	int type = message->ReadByte();
+
+	if (type == client->mServer->mMessageLogin)
+	{
+		LogString("Logged_Out::onLetter...checkLogin");
+		client->checkLogin(message);
+		return true;	
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
 /*****************************************
 	Lobby
 ****************************************/
@@ -96,100 +134,7 @@ bool Game_Mode::onLetter(Client* client, Letter* letter)
 }
 
 /*****************************************
-*******       LOGIN STATES    ******************	
-****************************************/
-
-/*****************************************
-	Logged_Out
-****************************************/
-Logged_Out* Logged_Out::Instance()
-{
-  static Logged_Out instance;
-  return &instance;
-}
-void Logged_Out::enter(Client* client)
-{
-	LogString("Logged_Out::enter");
-}
-void Logged_Out::execute(Client* client)
-{
-
-}
-void Logged_Out::exit(Client* client)
-{
-}
-bool Logged_Out::onLetter(Client* client, Letter* letter)
-{
-	LogString("Logged_Out::onLetter");
-	Message* message = letter->mMessage;
-	message->BeginReading();	
-	int type = message->ReadByte();
-
-	if (type == client->mServer->mMessageLogin || type == client->mServer->mMessageLoginBrowser)
-	{
-		LogString("Logged_Out::onLetter got type");
-     		client->readLoginMessage(message);
-
-		Client* proposedClient;
-        	for (unsigned int i = 0; i < client->mServer->mClientVector.size(); i++)
-        	{
-			LogString("Logged_Out::onLetter looping clientVector");
-			proposedClient = client->mServer->mClientVector.at(i);
-        		//const char * q = client->mStringUsername.c_str();
-
-			//LogString("username:%s",q);
-                	if (client->mStringUsername.compare(proposedClient->db_username) == 0 && client->mStringPassword.compare(proposedClient->db_password) == 0)
-                	{
-				LogString("Logged_Out::onLetter pass match");
-                        	if (client == proposedClient)
-                        	{
-                                	client->login();
-                        	}
-                        	else //we have a diff client but a pass match...
-                      		{
-					LogString("Logged_Out::onLetter calling login");
-                                	client->mConnectionState = 4;
-
-                                	//swap
-                                	proposedClient->setSocketAddress(&client->mSocketAddress);
-                                	proposedClient->mConnectionState = 1;
-                                	proposedClient->mClientID = client->mClientID;
-                                	proposedClient->login();
-                        	}
-                	}
-        	}
-		return true;	
-	}
-	else
-	{
-		return false;
-	}
-}
-/*****************************************
-        Logged_In
-****************************************/
-Logged_In* Logged_In::Instance()
-{
-  static Logged_In instance;
-  return &instance;
-}
-void Logged_In::enter(Client* client)
-{
-        LogString("Logged_In::enter");
-}
-void Logged_In::execute(Client* client)
-{
-
-}
-void Logged_In::exit(Client* client)
-{
-}
-bool Logged_In::onLetter(Client* client, Letter* letter)
-{
-
-}
-/*****************************************
-*******       CONTROL STATES    ******************	
+*******       CONTROL    ******************	
 ****************************************/
 
 /*****************************************

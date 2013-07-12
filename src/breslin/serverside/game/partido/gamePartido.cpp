@@ -10,7 +10,7 @@
 #include "../../shape/partido/shapePartido.h"
 
 //client
-#include "../../client/stable/partido/clientPartido.h"
+#include "../../client/partido/clientPartido.h"
 
 //vector3d
 #include "../../../math/vector3D.h"
