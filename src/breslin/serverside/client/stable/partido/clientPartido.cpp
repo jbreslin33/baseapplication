@@ -11,7 +11,7 @@
 #include "../../../../utility/utility.h"
 
 
-ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence) : Client(serverPartido, address, clientID, permanence) 
+ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence) : ClientStable(serverPartido, address, clientID, permanence) 
 {
 	//server
 	mServerPartido = serverPartido;

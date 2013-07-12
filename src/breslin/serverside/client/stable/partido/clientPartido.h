@@ -1,7 +1,7 @@
 #ifndef CLIENTPARTIDO_H
 #define CLIENTPARTIDO_H
 
-#include "../../client.h"
+#include "../clientStable.h"
 
 #include <vector>
 
@@ -13,7 +13,7 @@ class GamePartido;
 class ShapePartido;
 class Utility;
 
-class ClientPartido : public Client
+class ClientPartido : public ClientStable
 {
 
 public:
