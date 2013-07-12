@@ -377,9 +377,9 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                         continue;
                                 }
 				LogString("breslin 2");
-				Letter* letter = new Letter(client,mes);	
-				mMailMan->deliver(client,letter);
-				//client->checkLogin(mes);
+				//Letter* letter = new Letter(client,mes);	
+				//mMailMan->deliver(client,letter);
+				client->checkLogin(mes);
 				return;
 			}
 		}
