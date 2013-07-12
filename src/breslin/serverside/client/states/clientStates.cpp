@@ -33,13 +33,14 @@ void GlobalClient::exit(Client* client)
 }
 bool GlobalClient::onLetter(Client* client, Letter* letter)
 {
-/*
-	if (letter->mMessageNumber == 1)	
+	LogString("GlobalClient::onLetter");
+	Message* message = letter->mMessage;
+	message->BeginReading();	
+	int type = message->ReadByte();
+	if (type == client->mServer->mMessageLogin)
 	{
-		LogString("got msg 1");
 		client->mStateMachine->changeState(Lobby::Instance());
 	}
-*/
         return true;
 }
 
@@ -58,7 +59,6 @@ Temporary* Temporary::Instance()
 }
 void Temporary::enter(Client* client)
 {
-
 }
 void Temporary::execute(Client* client)
 {
@@ -69,23 +69,7 @@ void Temporary::exit(Client* client)
 }
 bool Temporary::onLetter(Client* client, Letter* letter)
 {
-/*
-        LogString("Temporary::onLetter");
-        Message* message = letter->mMessage;
-        message->BeginReading();
-        int type = message->ReadByte();
-
-        if (type == client->mServer->mMessageLogin || client->mServer->mMessageLoginBrowser)
-        {
-                LogString("Temporary::onLetter...checkLogin");
-                client->checkLogin(message);
-                return true;
-        }
-        else
-        {
-                return false;
-        }
-*/
+	return false;	
 }
 
 /*****************************************
@@ -109,7 +93,7 @@ void Ajax_Node::exit(Client* client)
 }
 bool Ajax_Node::onLetter(Client* client, Letter* letter)
 {
-        return true;
+	return false;	
 }
 
 
@@ -134,23 +118,7 @@ void Logged_Out::exit(Client* client)
 }
 bool Logged_Out::onLetter(Client* client, Letter* letter)
 {
-/*
-	LogString("Logged_Out::onLetter");
-	Message* message = letter->mMessage;
-	message->BeginReading();	
-	int type = message->ReadByte();
-
-	if (type == client->mServer->mMessageLogin || client->mServer->mMessageLoginBrowser)
-	{
-		LogString("Logged_Out::onLetter...checkLogin");
-		client->checkLogin(message);
-		return true;	
-	}
-	else
-	{
-		return false;
-	}
-*/
+        return false; 
 }
 
 /*****************************************
@@ -174,7 +142,7 @@ void Lobby::exit(Client* client)
 }
 bool Lobby::onLetter(Client* client, Letter* letter)
 {
-	return true;
+        return false; 
 }
 
 /*****************************************
@@ -197,7 +165,7 @@ void Game_Mode::exit(Client* client)
 }
 bool Game_Mode::onLetter(Client* client, Letter* letter)
 {
-	return true;
+        return false; 
 }
 
 /*****************************************
@@ -224,7 +192,7 @@ void Human::exit(Client* client)
 }
 bool Human::onLetter(Client* client, Letter* letter)
 {
-	return true;
+        return false; 
 }
 
 
@@ -238,19 +206,16 @@ Computer_Mode* Computer_Mode::Instance()
 }
 void Computer_Mode::enter(Client* client)
 {
-	LogString("enter computer");
 }
 void Computer_Mode::execute(Client* client)
 {
-	//client->mClientStateMachine->changeState(Human::Instance());
-	//client->checkForTimeout();
 }
 void Computer_Mode::exit(Client* client)
 {
 }
 bool Computer_Mode::onLetter(Client* client, Letter* letter)
 {
-	return true;
+        return false; 
 }
 
 
@@ -270,22 +235,13 @@ void Initialize_Permanence::enter(Client* client)
 }
 void Initialize_Permanence::execute(Client* client)
 {
-	if (client->mPermanence)
-	{
-		client->mPermanenceStateMachine->changeState(Permanent::Instance());
-	}
-	else
-	{
-		client->mPermanenceStateMachine->changeState(Temporary::Instance());
-	}
-
 }
 void Initialize_Permanence::exit(Client* client)
 {
 }
 bool Initialize_Permanence::onLetter(Client* client, Letter* letter)
 {
-        return true;
+        return false; 
 }
 
 /*****************************************
@@ -298,11 +254,9 @@ Permanent* Permanent::Instance()
 }
 void Permanent::enter(Client* client)
 {
-
 }
 void Permanent::execute(Client* client)
 {
-	//LogString("Permanent::execute");
 	client->mStateMachine->changeState(Logged_Out::Instance());
 }
 void Permanent::exit(Client* client)
@@ -310,6 +264,6 @@ void Permanent::exit(Client* client)
 }
 bool Permanent::onLetter(Client* client, Letter* letter)
 {
-	return true;
+        return false; 
 }
 

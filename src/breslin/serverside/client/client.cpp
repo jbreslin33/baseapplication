@@ -31,6 +31,9 @@
 //states
 #include "states/clientStates.h"
 
+//mailman
+#include "../mailman/mailMan.h"
+
 #ifdef WIN32
 //
 #else
@@ -218,12 +221,13 @@ void Client::sendConnected()
 	mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
 
-//login
-//i should send db_id back as well.....because once a client connects we are not going to delete it..... we will just manage it best we can from here on server....
-//which means when you login from a new address we will send a notification to old address as a courtesy....
 void Client::login()
 {
-	LogString("sending login to clientID:%d",mClientID);
+	Message message;
+        message.Init(message.outgoingData, sizeof(message.outgoingData));
+        message.WriteByte(mServer->mMessageLogin); // add type
+	Letter* letter = new Letter(this,&message);
+	mServer->mMailMan->deliver(this,letter);
 
 	//set last messageTime
 	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
@@ -309,6 +313,8 @@ bool Client::checkLogin(Message* mes)
 			}
 			else //we have a diff client but a pass match...
 			{
+				
+                                mServer->mClientVector.at(i)->logout();
 				mConnectionState = DREAMSOCK_DISCONNECTED; 
 
                                 mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
