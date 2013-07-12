@@ -309,7 +309,7 @@ void Client::readLoginMessage(Message* mes)
 
 bool Client::checkLogin(Message* mes)
 {
-/*
+
 	readLoginMessage(mes);
 
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
@@ -332,7 +332,7 @@ bool Client::checkLogin(Message* mes)
 			}
 		}
 	}
-*/
+
 }
 
 bool Client::getPasswordMatch(std::string username,std::string password)
