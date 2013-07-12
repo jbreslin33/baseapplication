@@ -20,7 +20,7 @@ public:
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
-  bool onLetter(Seek* seek, Letter* letter);
+  bool onMessage(Seek* seek, const Telegram& msg);
 };
 
 /*******************************
@@ -36,7 +36,7 @@ public:
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
-  bool onLetter(Seek* seek, Letter* letter);
+  bool onMessage(Seek* seek, const Telegram& msg);
 };
 
 class No_Seek : public State<Seek>
@@ -48,7 +48,7 @@ public:
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
-  bool onLetter(Seek* seek, Letter* letter);
+  bool onMessage(Seek* seek, const Telegram& msg);
 };
 
 #endif

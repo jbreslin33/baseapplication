@@ -10,8 +10,6 @@
 //ability
 #include "../client.h"
 
-//server
-#include "../../server/server.h"
 
 /*****************************************
 *******       GLOBAL    ******************
@@ -31,15 +29,8 @@ void GlobalClient::execute(Client* client)
 void GlobalClient::exit(Client* client)
 {
 }
-bool GlobalClient::onLetter(Client* client, Letter* letter)
+bool GlobalClient::onMessage(Client* client, const Telegram& msg)
 {
-/*
-	if (letter->mMessageNumber == 1)	
-	{
-		LogString("got msg 1");
-		client->mStateMachine->changeState(Lobby::Instance());
-	}
-*/
         return true;
 }
 
@@ -58,7 +49,6 @@ Logged_Out* Logged_Out::Instance()
 }
 void Logged_Out::enter(Client* client)
 {
-	LogString("Logged_Out::enter");
 }
 void Logged_Out::execute(Client* client)
 {
@@ -67,23 +57,9 @@ void Logged_Out::execute(Client* client)
 void Logged_Out::exit(Client* client)
 {
 }
-bool Logged_Out::onLetter(Client* client, Letter* letter)
+bool Logged_Out::onMessage(Client* client, const Telegram& msg)
 {
-	Message* message = letter->mMessage;
-	message->BeginReading();	
-	int type = message->ReadByte();
-
-	if (type == client->mServer->mMessageLogin)
-	{
-		LogString("Logged_Out::onLetter...checkLogin");
-		client->checkLogin(message);
-		return true;	
-	}
-	else
-	{
-		return false;
-	}
-
+	return true;
 }
 
 /*****************************************
@@ -96,7 +72,6 @@ Lobby* Lobby::Instance()
 }
 void Lobby::enter(Client* client)
 {
-	LogString("Lobby::enter");
 }
 void Lobby::execute(Client* client)
 {
@@ -105,7 +80,7 @@ void Lobby::execute(Client* client)
 void Lobby::exit(Client* client)
 {
 }
-bool Lobby::onLetter(Client* client, Letter* letter)
+bool Lobby::onMessage(Client* client, const Telegram& msg)
 {
 	return true;
 }
@@ -128,7 +103,7 @@ void Game_Mode::execute(Client* client)
 void Game_Mode::exit(Client* client)
 {
 }
-bool Game_Mode::onLetter(Client* client, Letter* letter)
+bool Game_Mode::onMessage(Client* client, const Telegram& msg)
 {
 	return true;
 }
@@ -155,7 +130,7 @@ void Human::execute(Client* client)
 void Human::exit(Client* client)
 {
 }
-bool Human::onLetter(Client* client, Letter* letter)
+bool Human::onMessage(Client* client, const Telegram& msg)
 {
 	return true;
 }
@@ -181,7 +156,7 @@ void Computer_Mode::execute(Client* client)
 void Computer_Mode::exit(Client* client)
 {
 }
-bool Computer_Mode::onLetter(Client* client, Letter* letter)
+bool Computer_Mode::onMessage(Client* client, const Telegram& msg)
 {
 	return true;
 }
@@ -216,7 +191,7 @@ void Initialize_Permanence::execute(Client* client)
 void Initialize_Permanence::exit(Client* client)
 {
 }
-bool Initialize_Permanence::onLetter(Client* client, Letter* letter)
+bool Initialize_Permanence::onMessage(Client* client, const Telegram& msg)
 {
         return true;
 }
@@ -231,31 +206,7 @@ Permanent* Permanent::Instance()
 }
 void Permanent::enter(Client* client)
 {
-//myvector.erase (myvector.begin()+5);
-
-        LogString("enter NEED TO REMOVE AS WELL");
-	bool existsInClientVector = false;
-	for (int i = 0; i < client->mServer->mClientVector.size(); i++)
-	{
-		if (client->mServer->mClientVector.at(i) == client)
-		{
-			existsInClientVector = true;	
-		}
-	}
-	
-	if (!existsInClientVector)
-	{
-		client->mServer->addClient(client,true);
-	}	
-
-        bool existsInClientTempVector = false;
-        for (int i = 0; i < client->mServer->mClientVectorTemp.size(); i++)
-        {
-                if (client->mServer->mClientVectorTemp.at(i) == client)
-                {
-			client->mServer->mClientVectorTemp.erase(client->mServer->mClientVectorTemp.begin()+i);
-                }
-        }
+	LogString("enter");
 }
 void Permanent::execute(Client* client)
 {
@@ -263,7 +214,7 @@ void Permanent::execute(Client* client)
 void Permanent::exit(Client* client)
 {
 }
-bool Permanent::onLetter(Client* client, Letter* letter)
+bool Permanent::onMessage(Client* client, const Telegram& msg)
 {
 	return true;
 }
@@ -278,29 +229,7 @@ Temporary* Temporary::Instance()
 }
 void Temporary::enter(Client* client)
 {
-        LogString("enter NEED TO REMOVE AS WELL");
-        bool existsInTempVector = false;
-        for (int i = 0; i < client->mServer->mClientVectorTemp.size(); i++)
-        {
-                if (client->mServer->mClientVectorTemp.at(i) == client)
-                {
-                        existsInTempVector = true;
-                }
-        }
-
-        if (!existsInTempVector)
-        {
-                client->mServer->addClient(client,false);
-        }
-
-        bool existsInClientVector = false;
-        for (int i = 0; i < client->mServer->mClientVector.size(); i++)
-        {
-                if (client->mServer->mClientVector.at(i) == client)
-                {
-                        client->mServer->mClientVector.erase(client->mServer->mClientVector.begin()+i);
-                }
-        }
+	LogString("enter");
 }
 void Temporary::execute(Client* client)
 {
@@ -308,7 +237,7 @@ void Temporary::execute(Client* client)
 void Temporary::exit(Client* client)
 {
 }
-bool Temporary::onLetter(Client* client, Letter* letter)
+bool Temporary::onMessage(Client* client, const Telegram& msg)
 {
 	return true;
 }

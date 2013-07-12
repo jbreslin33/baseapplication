@@ -39,7 +39,7 @@ void GlobalRotation::execute(Rotation* rotation)
 void GlobalRotation::exit(Rotation* rotation)
 {
 }
-bool GlobalRotation::onLetter(Rotation* rotation, Letter* letter)
+bool GlobalRotation::onMessage(Rotation* rotation, const Telegram& msg)
 {
         return true;
 }
@@ -87,7 +87,7 @@ void Normal_Rotation::execute(Rotation* rotation)
 void Normal_Rotation::exit(Rotation* rotation)
 {
 }
-bool Normal_Rotation::onLetter(Rotation* rotation, Letter* letter)
+bool Normal_Rotation::onMessage(Rotation* rotation, const Telegram& msg)
 {
         return true;
 }
@@ -142,7 +142,7 @@ void Accelerate_Rotation::execute(Rotation* rotation)
 void Accelerate_Rotation::exit(Rotation* rotation)
 {
 }
-bool Accelerate_Rotation::onLetter(Rotation* rotation, Letter* letter)
+bool Accelerate_Rotation::onMessage(Rotation* rotation, const Telegram& msg)
 {
         return true;
 }
@@ -198,7 +198,7 @@ void Decelerate_Rotation::execute(Rotation* rotation)
 void Decelerate_Rotation::exit(Rotation* rotation)
 {
 }
-bool Decelerate_Rotation::onLetter(Rotation* rotation, Letter* letter)
+bool Decelerate_Rotation::onMessage(Rotation* rotation, const Telegram& msg)
 {
         return true;
 }
@@ -243,7 +243,7 @@ void No_Rotation::execute(Rotation* rotation)
 void No_Rotation::exit(Rotation* rotation)
 {
 }
-bool No_Rotation::onLetter(Rotation* rotation, Letter* letter)
+bool No_Rotation::onMessage(Rotation* rotation, const Telegram& msg)
 {
         return true;
 }

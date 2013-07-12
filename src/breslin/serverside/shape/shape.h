@@ -18,8 +18,8 @@ class Move;
 class Computer;
 class Seek;
 class Vector3D;
+class Telegram;
 class BaseEntity;
-class Letter;
 
 class Shape
 {
@@ -122,7 +122,7 @@ virtual void collision(Shape* shape);
 	//delta move command
 virtual int  setFlag();
 virtual void addToMoveMessage(Message* message);
-virtual bool handleLetter(Letter* letter) { return false; }
+virtual bool handleMessage(const Telegram& msg){return false;}
 };
 
 #endif

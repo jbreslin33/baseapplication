@@ -53,7 +53,7 @@ void GlobalComputer::execute(Computer* computer)
 void GlobalComputer::exit(Computer* computer)
 {
 }
-bool GlobalComputer::onLetter(Computer* computer, Letter* letter)
+bool GlobalComputer::onMessage(Computer* computer, const Telegram& msg)
 {
         return true;
 }
@@ -106,7 +106,7 @@ void Random_Computer::execute(Computer* computer)
 void Random_Computer::exit(Computer* computer)
 {
 }
-bool Random_Computer::onLetter(Computer* computer, Letter* letter)
+bool Random_Computer::onMessage(Computer* computer, const Telegram& msg)
 {
         return true;
 }
@@ -177,7 +177,7 @@ void No_Computer::execute(Computer* computer)
 void No_Computer::exit(Computer* computer)
 {
 }
-bool No_Computer::onLetter(Computer* computer, Letter* letter)
+bool No_Computer::onMessage(Computer* computer, const Telegram& msg)
 {
         return true;
 }

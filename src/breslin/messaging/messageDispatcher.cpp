@@ -5,9 +5,6 @@
 //log
 #include "../serverside/tdreamsock/dreamSockLog.h"
 
-//message
-#include "../serverside/message/message.h"
-
 using std::set;
 
 MessageDispatcher::MessageDispatcher(Server* server)
@@ -31,8 +28,7 @@ void MessageDispatcher::dispatchMessage(double       delay,
                                     int          sender,
                                     int          receiverID,
                                     int          msg,
-                                    void*        AdditionalInfo = NULL, Message* message = NULL)
-
+                                    void*        AdditionalInfo = NULL)
 {
 
 	//get a pointer to the receiver
@@ -46,7 +42,7 @@ void MessageDispatcher::dispatchMessage(double       delay,
   	}
   
   	//create the telegram
-  	Telegram telegram(0, sender, receiverID, msg, AdditionalInfo, message);
+  	Telegram telegram(0, sender, receiverID, msg, AdditionalInfo);
   
   	//if there is no delay, route telegram immediately                       
   	if (delay <= 0.0)                                                        

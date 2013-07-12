@@ -50,9 +50,9 @@ void Rotation::update()
 	mStateMachine->update();
 }
 
-bool Rotation::handleLetter(Letter* letter)
+bool Rotation::handleMessage(const Telegram& msg)
 {
-        return mStateMachine->handleLetter(letter);
+        return mStateMachine->handleMessage(msg);
 }
 
 

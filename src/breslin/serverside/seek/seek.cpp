@@ -43,9 +43,9 @@ void Seek::update()
 	}
 }
 
-bool Seek::handleLetter(Letter* letter)
+bool Seek::handleMessage(const Telegram& msg)
 {
-        return mStateMachine->handleLetter(letter);
+        return mStateMachine->handleMessage(msg);
 }
 
 void Seek::updateSeekPoint()

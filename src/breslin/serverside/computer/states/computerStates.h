@@ -20,7 +20,7 @@ public:
   void enter  (Computer* computer);
   void execute(Computer* computer);
   void exit   (Computer* computer);
-  bool onLetter(Computer* computer, Letter* letter);
+  bool onMessage(Computer* computer, const Telegram& msg);
 };
 
 
@@ -37,7 +37,7 @@ public:
   void enter  (Computer* computer);
   void execute(Computer* computer);
   void exit   (Computer* computer);
-  bool onLetter(Computer* computer, Letter* letter);
+  bool onMessage(Computer* computer, const Telegram& msg);
 };
 
 class No_Computer : public State<Computer>
@@ -49,7 +49,7 @@ public:
   void enter  (Computer* computer);
   void execute(Computer* computer);
   void exit   (Computer* computer);
-  bool onLetter(Computer* computer, Letter* letter);
+  bool onMessage(Computer* computer, const Telegram& msg);
 };
 
 #endif

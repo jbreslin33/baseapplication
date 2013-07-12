@@ -28,9 +28,6 @@
 //move
 #include "../move/move.h"
 
-//mailman
-#include "../mailman/mailMan.h"
-
 //postgresql
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
@@ -39,9 +36,6 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 {
 	//ogre root
 	mRoot = root;
-
-	//MailMan
-	mMailMan = new MailMan(this);
 
         //sequence
         mOutgoingSequence = 1;
@@ -170,6 +164,7 @@ void Server::createClients()
         {
                 //client
                 Client* client = new Client(this, NULL, -2, true);
+		addClient(client,true);	
 	
 		//add Games
 	 	for (unsigned int i = 0; i < mGameVector.size(); i++)
@@ -290,19 +285,22 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		Client* client = new Client(this, address, 0, false);
+		addClient(client,false);
 	}
 
 	else if (type == mMessageConnectBrowser)
 	{
 		int clientID = mes->ReadByte();
  		Client* client = new Client(this, address, clientID, false);
+		addClient(client,false);
 	}
 
 	else if (type == mMessageConnectNode)
 	{
 		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, -1, true);
+ 		Client* client = new Client(this, address, -1, false);
+		addClient(client,true);
 	}	
 
 	/***JOIN GAME********/
@@ -360,7 +358,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                         continue;
                                 }
 
-				LogString("breslin 1");
 				client->checkLogin(mes);
 				return;
 			}
@@ -376,10 +373,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
-				LogString("breslin 2");
-				Letter* letter = new Letter(client,mes);	
-				mMailMan->deliver(client,letter);
-				//client->checkLogin(mes);
+
+				client->checkLogin(mes);
 				return;
 			}
 		}

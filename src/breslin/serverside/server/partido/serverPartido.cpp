@@ -77,6 +77,7 @@ void ServerPartido::createClients()
         {
                 //client
                 ClientPartido* clientPartido = new ClientPartido(this, NULL, -2, true);
+                addClient(clientPartido,true);
 
                 //add Games
                 for (unsigned int i = 0; i < mGameVector.size(); i++)
@@ -120,10 +121,9 @@ void ServerPartido::createClients()
         PQfinish(conn);
 }
 
-void ServerPartido::addClient(Client* client, bool permanent)
+void ServerPartido::addClient(ClientPartido* clientPartido, bool permanent)
 {
-	Server::addClient(client, permanent);
-	ClientPartido* clientPartido = (ClientPartido*)client;
+	Server::addClient(clientPartido, permanent);
         if (permanent)
         {
                 mClientPartidoVector.push_back(clientPartido);
@@ -151,18 +151,21 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
         	{
                 	ClientPartido* client = new ClientPartido(this, address, 0, false);
 
+			addClient(client,false);
         	}
 
         	else if (type == mMessageConnectBrowser)
         	{
                 	int clientID = mes->ReadByte();
                 	ClientPartido* client = new ClientPartido(this, address, clientID, false);
+			addClient(client,false);
         	}
 
         	else if (type == mMessageConnectNode)
         	{
                 	int clientID = mes->ReadByte();
-                	ClientPartido* client = new ClientPartido(this, address, -1, true);
+                	ClientPartido* client = new ClientPartido(this, address, -1, false);
+			addClient(client,true);
         	}     	 
        		else if (type == mMessageAnswerQuestion)
                 {

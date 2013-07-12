@@ -104,8 +104,8 @@ public:
 	//update
 	virtual void update();
 	
-	//handle letter 
-  	virtual bool  handleLetter(Letter* letter);
+	//handle message
+  	virtual bool  handleMessage(const Telegram& msg);
 
 	//timeout
 	void checkForTimeout();

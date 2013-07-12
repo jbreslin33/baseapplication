@@ -19,7 +19,7 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
-  bool onLetter(Move* move, Letter* letter);
+  bool onMessage(Move* move, const Telegram& msg);
 };
 
 
@@ -35,7 +35,7 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
-  bool onLetter(Move* move, Letter* letter);
+  bool onMessage(Move* move, const Telegram& msg);
 };
 
 class No_Move : public State<Move>
@@ -47,7 +47,7 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
-  bool onLetter(Move* move, Letter* letter);
+  bool onMessage(Move* move, const Telegram& msg);
 };
 
 class Accelerate_Move : public State<Move>
@@ -59,7 +59,7 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
-  bool onLetter(Move* move, Letter* letter);
+  bool onMessage(Move* move, const Telegram& msg);
 };
 
 class Decelerate_Move : public State<Move>
@@ -71,6 +71,6 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
-  bool onLetter(Move* move, Letter* letter);
+  bool onMessage(Move* move, const Telegram& msg);
 };
 #endif
