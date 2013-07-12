@@ -12,7 +12,7 @@ using namespace Ogre;
 
 //forward declarations
 class Game;
-class ClientStable;
+class Client;
 class Rotation;
 class Move;
 class Computer;
@@ -25,10 +25,16 @@ class Shape
 {
 
 public:
-Shape(unsigned int index, Game* game, ClientStable* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~Shape();
 
+/*****************************************************
+(unsigned int index, GamePartido* gamePartido, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+          bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
+
+*				VARIABLES
+********************************************************/
 
 // ByteBufferes
 static const char mCommandFrameTime = 2;
@@ -69,7 +75,7 @@ Seek*     mSeek;
 Computer* mComputer;
 
 //associated client if any
-ClientStable* mClient;
+Client* mClient;
 
 //mesh
 int mMeshCode;

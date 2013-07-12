@@ -11,7 +11,7 @@
 #include "../game/game.h"
 
 //client
-#include "../../serverside/client/stable/clientStable.h"
+#include "../../serverside/client/client.h"
 
 //server
 #include "../../serverside/server/server.h"
@@ -35,7 +35,7 @@
 
 #include <string>
 
-Shape::Shape(unsigned int index, Game* game, ClientStable* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool computer)
 {
  	//mPosition = position;

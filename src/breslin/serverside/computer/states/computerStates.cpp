@@ -14,7 +14,7 @@
 #include "../../shape/shape.h"
 
 //client
-#include "../../client/stable/clientStable.h"
+#include "../../client/client.h"
 
 //seek
 #include "../../seek/seek.h"

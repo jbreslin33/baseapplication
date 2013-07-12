@@ -11,7 +11,6 @@
 
 //client
 #include "../client/client.h"
-#include "../client/stable/clientStable.h"
 
 //shape
 #include "../shape/shape.h"
@@ -137,7 +136,7 @@ void Game::checkBounds(Shape* shape)
         }
 }
 
-bool Game::checkScope(ClientStable* client, Shape* shape)
+bool Game::checkScope(Client* client, Shape* shape)
 {
 	//let's check scop here...
 	float x1 = client->mShape->mSceneNode->getPosition().x;  //clientshape
@@ -174,7 +173,7 @@ void Game::sendExitNotification()
 }
 
 //this is just for clients right now, should i make another or hijack this function??
-void Game::readDeltaMoveCommand(Message *mes, ClientStable *client)
+void Game::readDeltaMoveCommand(Message *mes, Client *client)
 {
 	client->mKey = mes->ReadByte();
 }
@@ -297,7 +296,7 @@ void Game::sendShapes(Client* client)
 
 
 //the client that is leaving????
-void Game::leave(ClientStable* client)
+void Game::leave(Client* client)
 {
         if (client->mShape)
         {

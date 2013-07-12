@@ -7,9 +7,8 @@
 //states
 #include "../../../fsm/stateMachine.h"
 
-//client
+//ability
 #include "../client.h"
-#include "../stable/clientStable.h"
 
 //server
 #include "../../server/server.h"
@@ -34,44 +33,329 @@ void GlobalClient::exit(Client* client)
 }
 bool GlobalClient::onLetter(Client* client, Letter* letter)
 {
-	LogString("GlobalClient::onLetter");
-     	Message* message = letter->mMessage;
-        message->BeginReading();
-        int type = message->ReadByte();
-
-        if (type == client->mServer->mMessageLogin)
-        {
-                client->readLoginMessage(message);
-
-                ClientStable* proposedClientStable;
-                for (unsigned int i = 0; i < client->mServer->mClientVector.size(); i++)
-                {
-                        proposedClientStable = client->mServer->mClientVector.at(i);
-                        if (client->mStringUsername.compare(proposedClientStable->db_username) == 0 && client->mStringPassword.compare(proposedClientStable->db_password) == 0)
-                        {
-                                if (client == proposedClientStable)
-                                {
-                                        proposedClientStable->login();
-                                }
-                                else //we have a diff clientStable but a pass match...
-                                {
-                                        client->mConnectionState = 4;
-
-                                        //swap
-                                        proposedClientStable->setSocketAddress(&client->mSocketAddress);
-                                        proposedClientStable->mConnectionState = 1;
-                                        proposedClientStable->mClientID = client->mClientID;
-                                        proposedClientStable->login();
-                                }
-                        }
-                }
-                return true;
-        }
-        else
-        {
-                return false;
-        }
-
+/*
+	if (letter->mMessageNumber == 1)	
+	{
+		LogString("got msg 1");
+		client->mStateMachine->changeState(Lobby::Instance());
+	}
+*/
+        return true;
 }
 
 
+
+/*****************************************
+*******       CLIENT STATES    ******************	
+****************************************/
+/*****************************************
+	Lobby
+****************************************/
+Lobby* Lobby::Instance()
+{
+  static Lobby instance;
+  return &instance;
+}
+void Lobby::enter(Client* client)
+{
+	LogString("Lobby::enter");
+}
+void Lobby::execute(Client* client)
+{
+
+}
+void Lobby::exit(Client* client)
+{
+}
+bool Lobby::onLetter(Client* client, Letter* letter)
+{
+	return true;
+}
+
+/*****************************************
+		GAME_MODE		
+****************************************/
+Game_Mode* Game_Mode::Instance()
+{
+  static Game_Mode instance;
+  return &instance;
+}
+void Game_Mode::enter(Client* client)
+{
+}
+void Game_Mode::execute(Client* client)
+{
+
+}
+void Game_Mode::exit(Client* client)
+{
+}
+bool Game_Mode::onLetter(Client* client, Letter* letter)
+{
+	return true;
+}
+
+/*****************************************
+*******       LOGIN STATES    ******************	
+****************************************/
+
+/*****************************************
+	Logged_Out
+****************************************/
+Logged_Out* Logged_Out::Instance()
+{
+  static Logged_Out instance;
+  return &instance;
+}
+void Logged_Out::enter(Client* client)
+{
+	LogString("Logged_Out::enter");
+}
+void Logged_Out::execute(Client* client)
+{
+
+}
+void Logged_Out::exit(Client* client)
+{
+}
+bool Logged_Out::onLetter(Client* client, Letter* letter)
+{
+	Message* message = letter->mMessage;
+	message->BeginReading();	
+	int type = message->ReadByte();
+
+	if (type == client->mServer->mMessageLogin)
+	{
+     		client->readLoginMessage(message);
+
+		Client* proposedClient;
+        	for (unsigned int i = 0; i < client->mServer->mClientVector.size(); i++)
+        	{
+			proposedClient = client->mServer->mClientVector.at(i);
+                	if (client->mStringUsername.compare(proposedClient->db_username) == 0 && client->mStringPassword.compare(proposedClient->db_password) == 0)
+                	{
+                        	if (client == proposedClient)
+                        	{
+                                	client->login();
+                        	}
+                        	else //we have a diff client but a pass match...
+                      		{
+                                	client->mConnectionState = 4;
+
+                                	//swap
+                                	proposedClient->setSocketAddress(&client->mSocketAddress);
+                                	proposedClient->mConnectionState = 1;
+                                	proposedClient->mClientID = client->mClientID;
+                                	proposedClient->login();
+                        	}
+                	}
+        	}
+		return true;	
+	}
+	else
+	{
+		return false;
+	}
+}
+/*****************************************
+        Logged_In
+****************************************/
+Logged_In* Logged_In::Instance()
+{
+  static Logged_In instance;
+  return &instance;
+}
+void Logged_In::enter(Client* client)
+{
+        LogString("Logged_In::enter");
+}
+void Logged_In::execute(Client* client)
+{
+
+}
+void Logged_In::exit(Client* client)
+{
+}
+bool Logged_In::onLetter(Client* client, Letter* letter)
+{
+
+}
+/*****************************************
+*******       CONTROL STATES    ******************	
+****************************************/
+
+/*****************************************
+	Human
+****************************************/
+Human* Human::Instance()
+{
+  static Human instance;
+  return &instance;
+}
+void Human::enter(Client* client)
+{
+}
+void Human::execute(Client* client)
+{
+
+}
+void Human::exit(Client* client)
+{
+}
+bool Human::onLetter(Client* client, Letter* letter)
+{
+	return true;
+}
+
+
+/*****************************************
+	Computer
+****************************************/
+Computer_Mode* Computer_Mode::Instance()
+{
+	static Computer_Mode instance;
+	return &instance;
+}
+void Computer_Mode::enter(Client* client)
+{
+	LogString("enter computer");
+}
+void Computer_Mode::execute(Client* client)
+{
+	//client->mClientStateMachine->changeState(Human::Instance());
+	//client->checkForTimeout();
+}
+void Computer_Mode::exit(Client* client)
+{
+}
+bool Computer_Mode::onLetter(Client* client, Letter* letter)
+{
+	return true;
+}
+
+
+/*****************************************
+*******       PERMANENCE    ******************	
+****************************************/
+/*****************************************
+        INITIALIZE_PERMANENCE
+****************************************/
+Initialize_Permanence* Initialize_Permanence::Instance()
+{
+  static Initialize_Permanence instance;
+  return &instance;
+}
+void Initialize_Permanence::enter(Client* client)
+{
+}
+void Initialize_Permanence::execute(Client* client)
+{
+	if (client->mPermanence)
+	{
+		client->mPermanenceStateMachine->changeState(Permanent::Instance());
+	}
+	else
+	{
+		client->mPermanenceStateMachine->changeState(Temporary::Instance());
+	}
+
+}
+void Initialize_Permanence::exit(Client* client)
+{
+}
+bool Initialize_Permanence::onLetter(Client* client, Letter* letter)
+{
+        return true;
+}
+
+/*****************************************
+	PERMANENT	
+****************************************/
+Permanent* Permanent::Instance()
+{
+  static Permanent instance;
+  return &instance;
+}
+void Permanent::enter(Client* client)
+{
+//myvector.erase (myvector.begin()+5);
+
+        LogString("enter NEED TO REMOVE AS WELL");
+	bool existsInClientVector = false;
+	for (int i = 0; i < client->mServer->mClientVector.size(); i++)
+	{
+		if (client->mServer->mClientVector.at(i) == client)
+		{
+			existsInClientVector = true;	
+		}
+	}
+	
+	if (!existsInClientVector)
+	{
+		client->mServer->addClient(client,true);
+	}	
+
+        bool existsInClientTempVector = false;
+        for (int i = 0; i < client->mServer->mClientVectorTemp.size(); i++)
+        {
+                if (client->mServer->mClientVectorTemp.at(i) == client)
+                {
+			client->mServer->mClientVectorTemp.erase(client->mServer->mClientVectorTemp.begin()+i);
+                }
+        }
+}
+void Permanent::execute(Client* client)
+{
+}
+void Permanent::exit(Client* client)
+{
+}
+bool Permanent::onLetter(Client* client, Letter* letter)
+{
+	return true;
+}
+
+/*****************************************
+	TEMPORARY	
+****************************************/
+Temporary* Temporary::Instance()
+{
+  static Temporary instance;
+  return &instance;
+}
+void Temporary::enter(Client* client)
+{
+        LogString("enter NEED TO REMOVE AS WELL");
+        bool existsInTempVector = false;
+        for (int i = 0; i < client->mServer->mClientVectorTemp.size(); i++)
+        {
+                if (client->mServer->mClientVectorTemp.at(i) == client)
+                {
+                        existsInTempVector = true;
+                }
+        }
+
+        if (!existsInTempVector)
+        {
+                client->mServer->addClient(client,false);
+        }
+
+        bool existsInClientVector = false;
+        for (int i = 0; i < client->mServer->mClientVector.size(); i++)
+        {
+                if (client->mServer->mClientVector.at(i) == client)
+                {
+                        client->mServer->mClientVector.erase(client->mServer->mClientVector.begin()+i);
+                }
+        }
+}
+void Temporary::execute(Client* client)
+{
+}
+void Temporary::exit(Client* client)
+{
+}
+bool Temporary::onLetter(Client* client, Letter* letter)
+{
+	return true;
+}

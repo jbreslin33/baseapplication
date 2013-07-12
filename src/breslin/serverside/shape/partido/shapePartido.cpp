@@ -13,7 +13,7 @@
 #include "../../game/partido/gamePartido.h"
 
 //client
-#include "../../client/stable/partido/clientPartido.h"
+#include "../../client/partido/clientPartido.h"
 
 //math
 #include "../../../math/vector3D.h"

@@ -20,7 +20,7 @@
 #include <signal.h>
 #include "../tdreamsock/dreamLinuxSock.h"
 
-#include "../client/stable/clientStable.h"
+#include "../client/client.h"
 
 //for string
 #include <string>

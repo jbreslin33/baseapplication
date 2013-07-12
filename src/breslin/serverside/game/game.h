@@ -15,7 +15,6 @@ using namespace std;
 
 class Server;
 class Client;
-class ClientStable;
 class Shape;
 class Vector3D;
 class Bounds;
@@ -58,7 +57,7 @@ public:
 
 	// Network
 	void	sendExitNotification();
-	void	readDeltaMoveCommand(Message *mes, ClientStable *client);
+	void	readDeltaMoveCommand(Message *mes, Client *client);
 	
 	//time
 	virtual void	processUpdate();
@@ -68,12 +67,12 @@ public:
 	virtual void checkBounds(Shape* shape);
 		
 	//scope
- 	bool    checkScope(ClientStable* client, Shape* shape);
+ 	bool    checkScope(Client* client, Shape* shape);
 
 
 	//join
 	void join(Client* client);
-	void leave(ClientStable* client);
+	void leave(Client* client);
 	
 	//shapes
 	virtual void createShapes();

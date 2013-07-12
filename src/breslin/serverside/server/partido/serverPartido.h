@@ -18,7 +18,7 @@ public:
 
    	//clients
 	void createClients();
-	virtual void addClient(Client* client, bool permanent);
+	virtual void addClient(Client* clientPartido, bool permanent);
         std::vector<ClientPartido*> mClientPartidoVector;
         std::vector<ClientPartido*> mClientPartidoVectorTemp;
 
