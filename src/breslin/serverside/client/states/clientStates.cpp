@@ -75,15 +75,36 @@ bool Logged_Out::onLetter(Client* client, Letter* letter)
 
 	if (type == client->mServer->mMessageLogin)
 	{
-		LogString("Logged_Out::onLetter...checkLogin");
-		client->checkLogin(message);
+     		client->readLoginMessage(message);
+
+		Client* proposedClient;
+        	for (unsigned int i = 0; i < client->mServer->mClientVector.size(); i++)
+        	{
+			proposedClient = client->mServer->mClientVector.at(i);
+                	if (client->mStringUsername.compare(proposedClient->db_username) == 0 && client->mStringPassword.compare(proposedClient->db_password) == 0)
+                	{
+                        	if (client == proposedClient)
+                        	{
+                                	client->login();
+                        	}
+                        	else //we have a diff client but a pass match...
+                      		{
+                                	client->mConnectionState = 4;
+
+                                	//swap
+                                	proposedClient->setSocketAddress(&client->mSocketAddress);
+                                	proposedClient->mConnectionState = 1;
+                                	proposedClient->mClientID = client->mClientID;
+                                	proposedClient->login();
+                        	}
+                	}
+        	}
 		return true;	
 	}
 	else
 	{
 		return false;
 	}
-
 }
 
 /*****************************************
