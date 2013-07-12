@@ -128,6 +128,11 @@ void Server::processClients()
 	{
 		mClientVector.at(i)->update();
 	}
+  	for (unsigned int i = 0; i < mClientVectorTemp.size(); i++)
+	{
+		mClientVectorTemp.at(i)->update();
+	}
+
 }
 
 void Server::processGames()

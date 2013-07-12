@@ -235,6 +235,7 @@ void Permanent::enter(Client* client)
 }
 void Permanent::execute(Client* client)
 {
+	//LogString("Permanent::execute");
 }
 void Permanent::exit(Client* client)
 {
@@ -261,6 +262,7 @@ void Temporary::execute(Client* client)
 }
 void Temporary::exit(Client* client)
 {
+	
 }
 bool Temporary::onLetter(Client* client, Letter* letter)
 {

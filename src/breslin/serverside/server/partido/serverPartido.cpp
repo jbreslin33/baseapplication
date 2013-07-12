@@ -33,6 +33,10 @@ void ServerPartido::processClients()
         {
                 mClientPartidoVector.at(i)->update();
         }
+        for (unsigned int i = 0; i < mClientPartidoVectorTemp.size(); i++)
+        {
+                mClientPartidoVectorTemp.at(i)->update();
+        }
 }
 
 void ServerPartido::processGames()

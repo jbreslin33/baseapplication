@@ -100,44 +100,26 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
 
-
 	mServer->mBaseEntityVector.push_back(this);
 
 	mPermanence = permanence;
 
 	//client states
 	mStateMachine =  new StateMachine<Client>(this);
-        mStateMachine->setCurrentState      (Logged_Out::Instance());
-        mStateMachine->setPreviousState     (NULL);
-        mStateMachine->setGlobalState       (GlobalClient::Instance());
- 
-	//control states	
-	mControlStateMachine =  new StateMachine<Client>(this);
-        mControlStateMachine->setCurrentState      (Computer_Mode::Instance());
-        mControlStateMachine->setPreviousState     (NULL);
-        mControlStateMachine->setGlobalState       (NULL);
-
-	//permanence states
-        mPermanenceStateMachine = new StateMachine<Client>(this);    //setup the state machine
-	
-        mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
-
 	if (permanence)
 	{
+		LogString("perm");
 		mServer->addClient(this,true);
-        //	mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
+        	mStateMachine->setCurrentState      (Permanent::Instance());
 	}	
 	else
 	{
+		LogString("not perm");
 		mServer->addClient(this,false);
-        //	mPermanenceStateMachine->setCurrentState      (Temporary::Instance());
+        	mStateMachine->setCurrentState      (Temporary::Instance());
 	}
-
-        mPermanenceStateMachine->setPreviousState     (NULL);
-        mPermanenceStateMachine->setGlobalState       (NULL);
-
-	
-
+        mStateMachine->setPreviousState     (NULL);
+        mStateMachine->setGlobalState       (GlobalClient::Instance());
 }
 
 Client::~Client()
@@ -197,8 +179,8 @@ void Client::setSocketAddress(struct sockaddr *address)
 void Client::update()
 {
         mStateMachine->update();
-        mControlStateMachine->update();
-        mPermanenceStateMachine->update();
+        //mControlStateMachine->update();
+        //mPermanenceStateMachine->update();
 }
 
 bool Client::handleLetter(Letter* letter)
