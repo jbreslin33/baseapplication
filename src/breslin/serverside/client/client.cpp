@@ -31,7 +31,6 @@
 //states
 #include "states/clientStates.h"
 
-
 #ifdef WIN32
 //
 #else
@@ -101,6 +100,9 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
 
+
+	mServer->mBaseEntityVector.push_back(this);
+
 	mPermanence = permanence;
 
 	//client states
@@ -119,18 +121,22 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
         mPermanenceStateMachine = new StateMachine<Client>(this);    //setup the state machine
 	
         mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
-/*
+
 	if (permanence)
 	{
-        	mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
+		mServer->addClient(this,true);
+        //	mPermanenceStateMachine->setCurrentState      (Initialize_Permanence::Instance());
 	}	
 	else
 	{
-        	mPermanenceStateMachine->setCurrentState      (Temporary::Instance());
+		mServer->addClient(this,false);
+        //	mPermanenceStateMachine->setCurrentState      (Temporary::Instance());
 	}
-*/
+
         mPermanenceStateMachine->setPreviousState     (NULL);
         mPermanenceStateMachine->setGlobalState       (NULL);
+
+	
 
 }
 
@@ -195,9 +201,9 @@ void Client::update()
         mPermanenceStateMachine->update();
 }
 
-bool Client::handleMessage(const Telegram& msg)
+bool Client::handleLetter(Letter* letter)
 {
-	return mStateMachine->handleMessage(msg);
+	return mStateMachine->handleLetter(letter);
 }
 
 void Client::remove()

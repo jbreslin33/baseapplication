@@ -40,7 +40,7 @@ void GlobalSeek::execute(Seek* seek)
 void GlobalSeek::exit(Seek* seek)
 {
 }
-bool GlobalSeek::onMessage(Seek* seek, const Telegram& msg)
+bool GlobalSeek::onLetter(Seek* seek, Letter* letter)
 {
         return true;
 }
@@ -114,7 +114,7 @@ void Normal_Seek::execute(Seek* seek)
 void Normal_Seek::exit(Seek* seek)
 {
 }
-bool Normal_Seek::onMessage(Seek* seek, const Telegram& msg)
+bool Normal_Seek::onLetter(Seek* seek, Letter* letter)
 {
         return true;
 }
@@ -145,7 +145,7 @@ void No_Seek::execute(Seek* seek)
 void No_Seek::exit(Seek* seek)
 {
 }
-bool No_Seek::onMessage(Seek* seek, const Telegram& msg)
+bool No_Seek::onLetter(Seek* seek, Letter* letter)
 {
         return true;
 }

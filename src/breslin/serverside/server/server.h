@@ -33,6 +33,7 @@ class Network;
 class Client;
 class Game;
 class Shape;
+class MailMan;
 
 class Server
 {
@@ -46,6 +47,9 @@ public:
 
 	//Message
 	Message mMessage;
+
+	//MailMan
+	MailMan* mMailMan;
 	
 	//games
 	std::vector<BaseEntity*> mBaseEntityVector;
@@ -131,7 +135,7 @@ public:
 
 	//client
    	void createClients();
-	void addClient(Client* client, bool permanent);
+	virtual void addClient(Client* client, bool permanent);
 
 	//packets
 	int  getPacket  (char *data, struct sockaddr *from);

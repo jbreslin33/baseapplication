@@ -37,7 +37,7 @@ void GlobalMove::execute(Move* move)
 void GlobalMove::exit(Move* move)
 {
 }
-bool GlobalMove::onMessage(Move* move, const Telegram& msg)
+bool GlobalMove::onLetter(Move* move, Letter* letter)
 {
         return true;
 }
@@ -89,7 +89,7 @@ void Normal_Move::execute(Move* move)
 void Normal_Move::exit(Move* move)
 {
 }
-bool Normal_Move::onMessage(Move* move, const Telegram& msg)
+bool Normal_Move::onLetter(Move* move, Letter* letter)
 {
         return true;
 }
@@ -137,7 +137,7 @@ void No_Move::execute(Move* move)
 void No_Move::exit(Move* move)
 {
 }
-bool No_Move::onMessage(Move* move, const Telegram& msg)
+bool No_Move::onLetter(Move* move, Letter* letter)
 {
         return true;
 }
@@ -191,7 +191,7 @@ void Accelerate_Move::execute(Move* move)
 void Accelerate_Move::exit(Move* move)
 {
 }
-bool Accelerate_Move::onMessage(Move* move, const Telegram& msg)
+bool Accelerate_Move::onLetter(Move* move, Letter* letter)
 {
         return true;
 }
@@ -245,7 +245,7 @@ void Decelerate_Move::execute(Move* move)
 void Decelerate_Move::exit(Move* move)
 {
 }
-bool Decelerate_Move::onMessage(Move* move, const Telegram& msg)
+bool Decelerate_Move::onLetter(Move* move, Letter* letter)
 {
         return true;
 }

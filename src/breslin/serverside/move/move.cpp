@@ -48,9 +48,9 @@ void Move::update()
 	mStateMachine->update();
 }
 
-bool Move::handleMessage(const Telegram& msg)
+bool Move::handleLetter(Letter* letter)
 {
-        return mStateMachine->handleMessage(msg);
+        return mStateMachine->handleLetter(letter);
 }
 
 

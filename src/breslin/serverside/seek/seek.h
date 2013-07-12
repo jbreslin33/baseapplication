@@ -15,6 +15,7 @@ using namespace Ogre;
 
 class Shape;
 class Vector3D;
+class Letter;
 
 class Seek : public BaseEntity 
 {
@@ -35,8 +36,8 @@ Seek(Shape* shape);
 //update
 virtual void update();
 
-//handle message
-virtual bool  handleMessage(const Telegram& msg);
+//handle letter 
+virtual bool  handleLetter(Letter* letter);
 
 
 Shape* mShape;

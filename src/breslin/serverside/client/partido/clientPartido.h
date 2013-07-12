@@ -72,8 +72,8 @@ void setShape(ShapePartido* shapePartido);
 //update
 virtual void update();
 
-//handle message
-virtual bool  handleMessage(const Telegram& msg);
+//handle letter 
+virtual bool  handleLetter(Letter* letter);
 
 //battle
 int getNewQuestionID();
