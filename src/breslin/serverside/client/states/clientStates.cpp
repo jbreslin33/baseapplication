@@ -69,7 +69,21 @@ void Temporary::exit(Client* client)
 }
 bool Temporary::onLetter(Client* client, Letter* letter)
 {
-	return true;
+        LogString("Temporary::onLetter");
+        Message* message = letter->mMessage;
+        message->BeginReading();
+        int type = message->ReadByte();
+
+        if (type == client->mServer->mMessageLogin || client->mServer->mMessageLoginBrowser)
+        {
+                LogString("Temporary::onLetter...checkLogin");
+                client->checkLogin(message);
+                return true;
+        }
+        else
+        {
+                return false;
+        }
 }
 
 /*****************************************
@@ -118,6 +132,7 @@ void Logged_Out::exit(Client* client)
 }
 bool Logged_Out::onLetter(Client* client, Letter* letter)
 {
+	LogString("Logged_Out::onLetter");
 	Message* message = letter->mMessage;
 	message->BeginReading();	
 	int type = message->ReadByte();
