@@ -68,7 +68,6 @@ Temporary* Temporary::Instance()
 }
 void Temporary::enter(Client* client)
 {
-	LogString("Temporary::enter:%d",client->db_id);
 }
 void Temporary::execute(Client* client)
 {
@@ -92,7 +91,6 @@ Ajax_Node* Ajax_Node::Instance()
 } 
 void Ajax_Node::enter(Client* client)
 {
-	LogString("Ajax_Node::enter:%d",client->db_id);
 }       
 void Ajax_Node::execute(Client* client)
 {
@@ -117,7 +115,6 @@ Logged_Out* Logged_Out::Instance()
 }
 void Logged_Out::enter(Client* client)
 {
-	LogString("Logged_Out::enter:%d",client->db_id);
 }
 void Logged_Out::execute(Client* client)
 {
@@ -141,7 +138,6 @@ Lobby* Lobby::Instance()
 }
 void Lobby::enter(Client* client)
 {
-	LogString("Lobby::enter:%d",client->db_id);
 }
 void Lobby::execute(Client* client)
 {
@@ -176,7 +172,6 @@ Game_Mode* Game_Mode::Instance()
 }
 void Game_Mode::enter(Client* client)
 {
-	LogString("Game_Mode::enter:%d",client->db_id);
 }
 void Game_Mode::execute(Client* client)
 {

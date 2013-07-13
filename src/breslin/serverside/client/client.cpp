@@ -58,11 +58,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 	//client id for php but everyone uses one...
 	mClientID = clientID;
 	
-	//db
-	db_id = 0;
-	db_school_id = 0;
-
-	//game--there should be a vector as well. and a mGame to show what the user is playing right now if any 
 	mGame = NULL;
 	
 	//shape
@@ -368,7 +363,7 @@ bool Client::getPasswordMatch(std::string username,std::string password)
 		strValue << value;
 		unsigned int intValue;
 		strValue >> intValue;
-		db_id = intValue;
+		//db_id = intValue;
 	
                 match = true;
         }

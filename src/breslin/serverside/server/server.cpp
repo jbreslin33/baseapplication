@@ -174,7 +174,7 @@ void Server::createClients()
         for (row=0; row<rec_count; row++)
         {
                 //client
-                Client* client = new Client(this, NULL, -2, true);
+                ClientRobust* client = new ClientRobust(this, NULL, -2, true);
 	
 		//add Games
 	 	for (unsigned int i = 0; i < mGameVector.size(); i++)
@@ -307,7 +307,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, -1, true);
+ 		ClientRobust* client = new ClientRobust(this, address, -1, true);
 	}	
 
 	/***JOIN GAME********/
