@@ -26,12 +26,12 @@ public:
 /*******************************
 *       CLIENT STATES 
 ******************************/
-class Temporary : public State<Client>
+class Connected : public State<Client>
 {
 private:
-  Temporary(){}
+  Connected(){}
 public:
-  static Temporary* Instance();
+  static Connected* Instance();
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
@@ -40,113 +40,16 @@ public:
 
 
 
-class Ajax_Node : public State<Client>
+class Disconnected : public State<Client>
 {
 private:
-  Ajax_Node(){}
+  Disconnected(){}
 public:
-  static Ajax_Node* Instance();
+  static Disconnected* Instance();
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
   bool onLetter(Client* client, Letter* letter);
 };
-
-class Logged_Out : public State<Client>
-{
-private:
-  Logged_Out(){}
-public:
-  static Logged_Out* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
-
-class Lobby : public State<Client>
-{
-private:
-  Lobby(){}
-public:
-  static Lobby* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
-
-
-class Game_Mode : public State<Client>
-{
-private:
-  Game_Mode(){}
-public:
-  static Game_Mode* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
-
-
-
-/*******************************
-*        GAME CONTROL
-******************************/
-class Human : public State<Client>
-{
-private:
-  Human(){}
-public:
-  static Human* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
-
-class Computer_Mode : public State<Client>
-{
-private:
-  Computer_Mode(){}
-public:
-  static Computer_Mode* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
-
-/*******************************
-*          PERMANENCE 
-******************************/
-
-class Initialize_Permanence : public State<Client>
-{
-private:
-  Initialize_Permanence(){}
-public:
-  static Initialize_Permanence* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
-
-
-class Permanent : public State<Client>
-{
-private:
-  Permanent(){}
-public:
-  static Permanent* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
-
-
 
 #endif

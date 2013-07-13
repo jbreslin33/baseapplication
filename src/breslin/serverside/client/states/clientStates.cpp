@@ -26,13 +26,13 @@ void GlobalClient::enter(Client* client)
 }
 void GlobalClient::execute(Client* client)
 {
-
 }
 void GlobalClient::exit(Client* client)
 {
 }
 bool GlobalClient::onLetter(Client* client, Letter* letter)
 {
+/*
 	Message* message = letter->mMessage;
 	message->BeginReading();	
 	int type = message->ReadByte();
@@ -48,11 +48,9 @@ bool GlobalClient::onLetter(Client* client, Letter* letter)
 		client->mStateMachine->changeState(Logged_Out::Instance());
 		return true;
 	}
-
-
         return false;
+*/
 }
-
 
 /*****************************************
 *******       CLIENT STATES    ******************	
@@ -61,22 +59,22 @@ bool GlobalClient::onLetter(Client* client, Letter* letter)
 /*****************************************
 	TEMPORARY	
 ****************************************/
-Temporary* Temporary::Instance()
+Connected* Connected::Instance()
 {
-  static Temporary instance;
+  static Connected instance;
   return &instance;
 }
-void Temporary::enter(Client* client)
+void Connected::enter(Client* client)
 {
 }
-void Temporary::execute(Client* client)
+void Connected::execute(Client* client)
 {
 }
-void Temporary::exit(Client* client)
+void Connected::exit(Client* client)
 {
 	
 }
-bool Temporary::onLetter(Client* client, Letter* letter)
+bool Connected::onLetter(Client* client, Letter* letter)
 {
 	return false;	
 }
@@ -84,203 +82,23 @@ bool Temporary::onLetter(Client* client, Letter* letter)
 /*****************************************
         AJAX_NODE       
 ****************************************/
-Ajax_Node* Ajax_Node::Instance()
+Disconnected* Disconnected::Instance()
 {
-  static Ajax_Node instance;
+  static Disconnected instance;
   return &instance; 
 } 
-void Ajax_Node::enter(Client* client)
+void Disconnected::enter(Client* client)
 {
 }       
-void Ajax_Node::execute(Client* client)
+void Disconnected::execute(Client* client)
 {
 }
-void Ajax_Node::exit(Client* client)
+void Disconnected::exit(Client* client)
 {
 
 }
-bool Ajax_Node::onLetter(Client* client, Letter* letter)
+bool Disconnected::onLetter(Client* client, Letter* letter)
 {
 	return false;	
-}
-
-
-/*****************************************
-	Logged_Out
-****************************************/
-Logged_Out* Logged_Out::Instance()
-{
-  static Logged_Out instance;
-  return &instance;
-}
-void Logged_Out::enter(Client* client)
-{
-}
-void Logged_Out::execute(Client* client)
-{
-
-}
-void Logged_Out::exit(Client* client)
-{
-}
-bool Logged_Out::onLetter(Client* client, Letter* letter)
-{
-        return false; 
-}
-
-/*****************************************
-	Lobby
-****************************************/
-Lobby* Lobby::Instance()
-{
-  static Lobby instance;
-  return &instance;
-}
-void Lobby::enter(Client* client)
-{
-}
-void Lobby::execute(Client* client)
-{
-
-}
-void Lobby::exit(Client* client)
-{
-}
-bool Lobby::onLetter(Client* client, Letter* letter)
-{
-	Message* message = letter->mMessage;
-	message->BeginReading();	
-	int type = message->ReadByte();
-
-	if (type == client->mServer->mMessageJoinGame)
-	{
-		int gameID = message->ReadByte();
-		//client->setGame(gameID);
-		client->mStateMachine->changeState(Game_Mode::Instance());
-		return true;
-	}
-        return false; 
-}
-
-/*****************************************
-		GAME_MODE		
-****************************************/
-Game_Mode* Game_Mode::Instance()
-{
-  static Game_Mode instance;
-  return &instance;
-}
-void Game_Mode::enter(Client* client)
-{
-}
-void Game_Mode::execute(Client* client)
-{
-
-}
-void Game_Mode::exit(Client* client)
-{
-}
-bool Game_Mode::onLetter(Client* client, Letter* letter)
-{
-        return false; 
-}
-
-/*****************************************
-*******       CONTROL    ******************	
-****************************************/
-
-/*****************************************
-	Human
-****************************************/
-Human* Human::Instance()
-{
-  static Human instance;
-  return &instance;
-}
-void Human::enter(Client* client)
-{
-}
-void Human::execute(Client* client)
-{
-
-}
-void Human::exit(Client* client)
-{
-}
-bool Human::onLetter(Client* client, Letter* letter)
-{
-        return false; 
-}
-
-
-/*****************************************
-	Computer
-****************************************/
-Computer_Mode* Computer_Mode::Instance()
-{
-	static Computer_Mode instance;
-	return &instance;
-}
-void Computer_Mode::enter(Client* client)
-{
-}
-void Computer_Mode::execute(Client* client)
-{
-}
-void Computer_Mode::exit(Client* client)
-{
-}
-bool Computer_Mode::onLetter(Client* client, Letter* letter)
-{
-        return false; 
-}
-
-
-/*****************************************
-*******       PERMANENCE    ******************	
-****************************************/
-/*****************************************
-        INITIALIZE_PERMANENCE
-****************************************/
-Initialize_Permanence* Initialize_Permanence::Instance()
-{
-  static Initialize_Permanence instance;
-  return &instance;
-}
-void Initialize_Permanence::enter(Client* client)
-{
-}
-void Initialize_Permanence::execute(Client* client)
-{
-}
-void Initialize_Permanence::exit(Client* client)
-{
-}
-bool Initialize_Permanence::onLetter(Client* client, Letter* letter)
-{
-        return false; 
-}
-
-/*****************************************
-	PERMANENT	
-****************************************/
-Permanent* Permanent::Instance()
-{
-  static Permanent instance;
-  return &instance;
-}
-void Permanent::enter(Client* client)
-{
-}
-void Permanent::execute(Client* client)
-{
-	client->mStateMachine->changeState(Logged_Out::Instance());
-}
-void Permanent::exit(Client* client)
-{
-}
-bool Permanent::onLetter(Client* client, Letter* letter)
-{
-        return false; 
 }
 

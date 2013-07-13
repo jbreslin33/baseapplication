@@ -52,6 +52,8 @@
 
 Client::Client(Server* server, struct sockaddr *address, int clientID, bool permanence) : BaseEntity(BaseEntity::getNextValidID())
 {
+	mPermanence = permanence;
+	
 	//logged in
 	mLoggedIn = false;
 
@@ -63,14 +65,22 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 
 	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 
+
+
+
+	mStateMachine =  new StateMachine<Client>(this);
+
 	if (!address)
 	{
 		mConnectionState  = DREAMSOCK_DISCONNECTED;
+        	mStateMachine->setCurrentState      (Disconnected::Instance());
 	}
 	else
 	{
 		setSocketAddress(address);
 		mConnectionState  = DREAMSOCK_CONNECTING;
+        	mStateMachine->setCurrentState      (Connected::Instance());
+
 	}
 
 	if (mClientID >= 0)
@@ -82,32 +92,19 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
 
-	mServer->mBaseEntityVector.push_back(this);
-
-	mPermanence = permanence;
-
-	//client states
-	mStateMachine =  new StateMachine<Client>(this);
-	if (permanence)
+	if (mPermanence)
 	{
 		mServer->addClient(this,true);
-		if (mClientID == -1)
-		{
-        		mStateMachine->setCurrentState      (Ajax_Node::Instance());
-		}
-		else
-		{
-        		mStateMachine->setCurrentState      (Permanent::Instance());
-		}
 	}	
 	else
 	{
 		mServer->addClient(this,false);
-        	mStateMachine->setCurrentState      (Temporary::Instance());
 	}
 
         mStateMachine->setPreviousState     (NULL);
         mStateMachine->setGlobalState       (GlobalClient::Instance());
+	
+	mServer->mBaseEntityVector.push_back(this);
 }
 
 Client::~Client()
