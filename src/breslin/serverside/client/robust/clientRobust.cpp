@@ -4,8 +4,20 @@
 //log
 #include "../../tdreamsock/dreamSockLog.h"
 
+//server
+#include "../../server/server.h"
+
 //game
 #include "../../game/game.h"
+
+//mailman
+#include "../../mailman/mailMan.h"
+
+//letter
+#include "../../letter/letter.h"
+
+//network
+#include "../../network/network.h"
 
 ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientID, bool permanence) : Client(server,address,clientID,permanence)
 {
@@ -74,5 +86,63 @@ void ClientRobust::setGame(int gameID)
 void ClientRobust::setShape(Shape* shape)
 {
         mShape = shape;
+}
+
+void ClientRobust::login()
+{
+
+        //send letter
+        Message message;
+        message.Init(message.outgoingData, sizeof(message.outgoingData));
+        message.WriteByte(mServer->mMessageLogin); // add type
+        Letter* letter = new Letter(this,&message);
+        mServer->mMailMan->deliver(this,letter);
+
+        //set last messageTime
+        mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
+
+        mLoggedIn = true;
+
+        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        mMessage.WriteByte(mServer->mMessageLoggedIn); // add type
+        if (mClientID > 0)
+        {
+                mMessage.WriteByte(mClientID); //client id for browsers
+        }
+        mServer->mNetwork->sendPacketTo(this,&mMessage);
+}
+
+void ClientRobust::logout()
+{
+        //send letter
+        Message message;
+        message.Init(message.outgoingData, sizeof(message.outgoingData));
+        message.WriteByte(mServer->mMessageLogout); // add type
+        Letter* letter = new Letter(this,&message);
+        mServer->mMailMan->deliver(this,letter);
+
+        mLoggedIn = false;
+
+        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        mMessage.WriteByte(mServer->mMessageLoggedOut); // add type
+        if (mClientID > 0)
+        {
+                mMessage.WriteByte(mClientID); //client id for browsers
+        }
+        mServer->mNetwork->sendPacketTo(this,&mMessage);
+}
+
+bool ClientRobust::checkLogin(Message* mes)
+{
+        LogString("ClientRobust::checkLogin");
+        readLoginMessage(mes);
+
+        for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+        {
+                if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
+                {
+                	login();
+                }
+        }
 }
 

@@ -337,7 +337,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         			mMailMan->deliver(client,letter);
 			
 				client->setGame(gameID);
-
 			}
 		}
 	}
@@ -448,7 +447,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
                                 //set client to pointer
-                                client = mClientVector.at(i);
+                                ClientRobust* client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -467,7 +466,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         if (mClientVector.at(i)->mClientID == clientID)
                         {
                                 //set client to pointer
-                                client = mClientVector.at(i);
+                                ClientRobust* client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;

@@ -53,6 +53,10 @@ virtual bool  handleLetter(Letter* letter);
 Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the avatar.
 void setShape(Shape* shape);
 
+//login
+void login();
+void logout();
+virtual bool checkLogin(Message* message);
 
 };
 #endif

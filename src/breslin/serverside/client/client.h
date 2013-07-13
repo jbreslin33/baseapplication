@@ -100,9 +100,7 @@ public:
 	void sendConnected();
 
 	//login
-	void login();
-	void logout();
-	bool checkLogin(Message* mes);
+	virtual bool checkLogin(Message* mes);
         bool getPasswordMatch(std::string username,std::string password);
 	void readLoginMessage(Message* mes);
 

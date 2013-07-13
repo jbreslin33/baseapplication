@@ -165,50 +165,6 @@ void Client::sendConnected()
 	mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
 
-void Client::login()
-{
-
-	//send letter
-	Message message;
-        message.Init(message.outgoingData, sizeof(message.outgoingData));
-        message.WriteByte(mServer->mMessageLogin); // add type
-	Letter* letter = new Letter(this,&message);
-	mServer->mMailMan->deliver(this,letter);
-
-	//set last messageTime
-	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
-
-	mLoggedIn = true;
-
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServer->mMessageLoggedIn); // add type
-	if (mClientID > 0)
-	{
-        	mMessage.WriteByte(mClientID); //client id for browsers
-	}	
-	mServer->mNetwork->sendPacketTo(this,&mMessage);
-}
-
-void Client::logout()
-{
-	//send letter
-	Message message;
-        message.Init(message.outgoingData, sizeof(message.outgoingData));
-        message.WriteByte(mServer->mMessageLogout); // add type
-	Letter* letter = new Letter(this,&message);
-	mServer->mMailMan->deliver(this,letter);
-	
-	mLoggedIn = false;
-
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServer->mMessageLoggedOut); // add type
-	if (mClientID > 0)
-	{
-        	mMessage.WriteByte(mClientID); //client id for browsers
-	}	
-	mServer->mNetwork->sendPacketTo(this,&mMessage);
-}
-
 void Client::readLoginMessage(Message* mes)
 {
 	//clear username and password strings
@@ -260,21 +216,13 @@ bool Client::checkLogin(Message* mes)
 	{
 		if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
 		{
-			if (this == mServer->mClientVector.at(i))
-			{
-				login();	
-			}
-			else //we have a diff client but a pass match...
-			{
-				
-                                mServer->mClientVector.at(i)->logout();
-				mConnectionState = DREAMSOCK_DISCONNECTED; 
+                        mServer->mClientVector.at(i)->logout();
+			mConnectionState = DREAMSOCK_DISCONNECTED; 
 
-                                mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
-                                mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
-                                mServer->mClientVector.at(i)->mClientID = mClientID;
-                                mServer->mClientVector.at(i)->login();
-			}
+                        mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
+                        mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
+                        mServer->mClientVector.at(i)->mClientID = mClientID;
+                        mServer->mClientVector.at(i)->login();
 		}
 	}
 }
@@ -320,16 +268,14 @@ bool Client::getPasswordMatch(std::string username,std::string password)
 	
                 match = true;
         }
-
         PQclear(res);
-
         PQfinish(conn);
-
         return match;
 }
 
 void Client::checkForTimeout()
 {
+/*
         // Don't timeout when connecting or if logged out...
         if(mLoggedIn == false || mConnectionState == DREAMSOCK_CONNECTING)
         {
@@ -341,9 +287,7 @@ void Client::checkForTimeout()
         // Check if the client has been silent for 30 seconds if so log him out and start ai up...
         if(currentTime - mLastMessageTime > 30000)
         {
-		LogString("timeout logout");
 		logout();
-		LogString("logging out.. you should fire up ai for:%d",mClientID);
         }
+*/
 }
-
