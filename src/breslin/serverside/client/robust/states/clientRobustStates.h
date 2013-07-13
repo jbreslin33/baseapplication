@@ -26,19 +26,6 @@ public:
 /*******************************
 *       CLIENT STATES 
 ******************************/
-class Temporary : public State<ClientRobust>
-{
-private:
-  Temporary(){}
-public:
-  static Temporary* Instance();
-  void enter  (ClientRobust* clientRobust);
-  void execute(ClientRobust* clientRobust);
-  void exit   (ClientRobust* clientRobust);
-  bool onLetter(ClientRobust* clientRobust, Letter* letter);
-};
-
-
 
 class Ajax_Node : public State<ClientRobust>
 {
@@ -76,7 +63,6 @@ public:
   bool onLetter(ClientRobust* clientRobust, Letter* letter);
 };
 
-
 class Game_Mode : public State<ClientRobust>
 {
 private:
@@ -88,65 +74,5 @@ public:
   void exit   (ClientRobust* clientRobust);
   bool onLetter(ClientRobust* clientRobust, Letter* letter);
 };
-
-
-
-/*******************************
-*        GAME CONTROL
-******************************/
-class Human : public State<ClientRobust>
-{
-private:
-  Human(){}
-public:
-  static Human* Instance();
-  void enter  (ClientRobust* clientRobust);
-  void execute(ClientRobust* clientRobust);
-  void exit   (ClientRobust* clientRobust);
-  bool onLetter(ClientRobust* clientRobust, Letter* letter);
-};
-
-class Computer_Mode : public State<ClientRobust>
-{
-private:
-  Computer_Mode(){}
-public:
-  static Computer_Mode* Instance();
-  void enter  (ClientRobust* clientRobust);
-  void execute(ClientRobust* clientRobust);
-  void exit   (ClientRobust* clientRobust);
-  bool onLetter(ClientRobust* clientRobust, Letter* letter);
-};
-
-/*******************************
-*          PERMANENCE 
-******************************/
-
-class Initialize_Permanence : public State<ClientRobust>
-{
-private:
-  Initialize_Permanence(){}
-public:
-  static Initialize_Permanence* Instance();
-  void enter  (ClientRobust* clientRobust);
-  void execute(ClientRobust* clientRobust);
-  void exit   (ClientRobust* clientRobust);
-  bool onLetter(ClientRobust* clientRobust, Letter* letter);
-};
-
-
-class Permanent : public State<ClientRobust>
-{
-private:
-  Permanent(){}
-public:
-  static Permanent* Instance();
-  void enter  (ClientRobust* clientRobust);
-  void execute(ClientRobust* clientRobust);
-  void exit   (ClientRobust* clientRobust);
-  bool onLetter(ClientRobust* clientRobust, Letter* letter);
-};
-
-
 
 #endif
