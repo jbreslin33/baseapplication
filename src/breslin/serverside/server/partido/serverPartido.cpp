@@ -153,14 +153,14 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		if (type == mMessageConnect)
         	{
-                	ClientPartido* client = new ClientPartido(this, address, 0, false);
+                	Client* client = new Client(this, address, 0, false);
 
         	}
 
         	else if (type == mMessageConnectBrowser)
         	{
                 	int clientID = mes->ReadByte();
-                	ClientPartido* client = new ClientPartido(this, address, clientID, false);
+                	Client* client = new Client(this, address, clientID, false);
         	}
 
         	else if (type == mMessageConnectNode)
