@@ -26,6 +26,8 @@ ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientI
 
 	mGame = NULL;
 
+        //shape
+        mShape = NULL;
 }
 
 ClientRobust::~ClientRobust()
@@ -58,5 +60,11 @@ void ClientRobust::setGame(int gameID)
                         mGame->sendShapes(this);
                 }
         }
+}
+
+//shape
+void ClientRobust::setShape(Shape* shape)
+{
+        mShape = shape;
 }
 

@@ -48,6 +48,9 @@ virtual void update();
 //handle letter 
 virtual bool  handleLetter(Letter* letter);
 
+Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the avatar.
+void setShape(Shape* shape);
+
 
 };
 #endif

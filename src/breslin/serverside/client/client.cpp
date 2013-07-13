@@ -58,10 +58,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 	//client id for php but everyone uses one...
 	mClientID = clientID;
 	
-	
-	//shape
-	mShape = NULL;
-
 	//server
 	mServer = server;
 
@@ -133,13 +129,6 @@ Client::~Client()
 	}
 */
 }
-
-//shape
-void Client::setShape(Shape* shape)
-{
-        mShape = shape;
-}
-
 
 void Client::setSocketAddress(struct sockaddr *address)
 {

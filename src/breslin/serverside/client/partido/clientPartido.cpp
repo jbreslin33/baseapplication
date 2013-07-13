@@ -90,7 +90,7 @@ void ClientPartido::update()
 
 void ClientPartido::setShape(ShapePartido* shapePartido)
 {
-	Client::setShape(shapePartido);
+	ClientRobust::setShape(shapePartido);
 	mShapePartido = shapePartido;
 }
 

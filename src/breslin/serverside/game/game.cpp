@@ -136,7 +136,7 @@ void Game::checkBounds(Shape* shape)
         }
 }
 
-bool Game::checkScope(Client* client, Shape* shape)
+bool Game::checkScope(ClientRobust* client, Shape* shape)
 {
 	//let's check scop here...
 	float x1 = client->mShape->mSceneNode->getPosition().x;  //clientshape

@@ -67,7 +67,7 @@ public:
 	virtual void checkBounds(Shape* shape);
 		
 	//scope
- 	bool    checkScope(Client* client, Shape* shape);
+ 	bool    checkScope(ClientRobust* client, Shape* shape);
 
 
 	//join
