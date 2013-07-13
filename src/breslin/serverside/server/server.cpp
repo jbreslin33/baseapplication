@@ -327,8 +327,14 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				{
 					continue;
 				}
-		
-				client->setGame(gameID);
+        			
+				//send letter
+        			Message message;
+        			message.Init(message.outgoingData, sizeof(message.outgoingData));
+        			message.WriteByte(mMessageJoinGame); 
+        			message.WriteByte(gameID);
+        			Letter* letter = new Letter(client,&message);
+        			mMailMan->deliver(client,letter);
 			}
 		}
 	}
@@ -345,7 +351,13 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
  				//get client
                                 client = mClientVector.at(i);
 
-				client->setGame(gameID);
+				//send letter
+        			Message message;
+        			message.Init(message.outgoingData, sizeof(message.outgoingData));
+        			message.WriteByte(mMessageJoinGame); 
+        			message.WriteByte(gameID);
+        			Letter* letter = new Letter(client,&message);
+        			mMailMan->deliver(client,letter);
 			}
                 }
 	}

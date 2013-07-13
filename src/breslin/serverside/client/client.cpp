@@ -162,7 +162,6 @@ void Client::addGame(Game* game)
 
 void Client::setGame(int gameID)
 {
-	
  	for (int i = 0; i < mGameVector.size(); i++)
         {
         	if (mGameVector.at(i)->mID == gameID)
