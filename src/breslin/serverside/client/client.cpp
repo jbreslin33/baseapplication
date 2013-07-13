@@ -223,6 +223,8 @@ void Client::sendConnected()
 
 void Client::login()
 {
+
+	//send letter
 	Message message;
         message.Init(message.outgoingData, sizeof(message.outgoingData));
         message.WriteByte(mServer->mMessageLogin); // add type
@@ -245,7 +247,13 @@ void Client::login()
 
 void Client::logout()
 {
-	LogString("sending logout to clientID:%d",mClientID);
+	//send letter
+	Message message;
+        message.Init(message.outgoingData, sizeof(message.outgoingData));
+        message.WriteByte(mServer->mMessageLogout); // add type
+	Letter* letter = new Letter(this,&message);
+	mServer->mMailMan->deliver(this,letter);
+	
 	mLoggedIn = false;
 
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));

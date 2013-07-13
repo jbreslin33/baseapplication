@@ -37,11 +37,22 @@ bool GlobalClient::onLetter(Client* client, Letter* letter)
 	Message* message = letter->mMessage;
 	message->BeginReading();	
 	int type = message->ReadByte();
+
+
 	if (type == client->mServer->mMessageLogin)
 	{
 		client->mStateMachine->changeState(Lobby::Instance());
+		return true;
 	}
-        return true;
+	
+	if (type == client->mServer->mMessageLogout)
+	{
+		client->mStateMachine->changeState(Logged_Out::Instance());
+		return true;
+	}
+
+
+        return false;
 }
 
 
