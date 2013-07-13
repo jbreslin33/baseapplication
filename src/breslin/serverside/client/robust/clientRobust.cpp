@@ -28,6 +28,13 @@ ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientI
 
         //shape
         mShape = NULL;
+
+	//states
+        mClientRobustStateMachine =  new StateMachine<ClientRobust>(this);
+        mClientRobustStateMachine->setCurrentState      (NULL);
+        mClientRobustStateMachine->setPreviousState     (NULL);
+        mClientRobustStateMachine->setGlobalState       (NULL);
+
 }
 
 ClientRobust::~ClientRobust()
@@ -36,7 +43,8 @@ ClientRobust::~ClientRobust()
 
 void ClientRobust::update()
 {
-        mStateMachine->update();
+	Client::update();
+        mClientRobustStateMachine->update();
 }
 
 bool ClientRobust::handleLetter(Letter* letter)

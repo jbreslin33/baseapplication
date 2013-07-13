@@ -61,8 +61,6 @@ public:
 ~Client();
 
 StateMachine<Client>* mStateMachine;
-StateMachine<Client>* mControlStateMachine;
-StateMachine<Client>* mPermanenceStateMachine;
 
 bool mPermanence;
 

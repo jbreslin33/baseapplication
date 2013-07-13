@@ -15,6 +15,8 @@ public:
 ClientRobust(Server* server, struct sockaddr *address, int clientID, bool permanent);
 ~ClientRobust();
 
+StateMachine<ClientRobust>* mClientRobustStateMachine;
+
 //keys
 int mKeyUp;
 int mKeyDown;

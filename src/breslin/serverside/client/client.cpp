@@ -138,8 +138,6 @@ void Client::setSocketAddress(struct sockaddr *address)
 void Client::update()
 {
         mStateMachine->update();
-        //mControlStateMachine->update();
-        //mPermanenceStateMachine->update();
 }
 
 bool Client::handleLetter(Letter* letter)
