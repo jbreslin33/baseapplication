@@ -155,7 +155,7 @@ bool Lobby::onLetter(Client* client, Letter* letter)
 	if (type == client->mServer->mMessageJoinGame)
 	{
 		int gameID = message->ReadByte();
-		client->setGame(gameID);
+		//client->setGame(gameID);
 		client->mStateMachine->changeState(Game_Mode::Instance());
 		return true;
 	}

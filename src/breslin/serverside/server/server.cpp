@@ -322,7 +322,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				//get client
-				client = mClientVector.at(i);
+				ClientRobust* client = mClientVector.at(i);
 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
 				{
 					continue;
@@ -335,6 +335,9 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         			message.WriteByte(gameID);
         			Letter* letter = new Letter(client,&message);
         			mMailMan->deliver(client,letter);
+			
+				client->setGame(gameID);
+
 			}
 		}
 	}
@@ -349,7 +352,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
  				//get client
-                                client = mClientVector.at(i);
+                                ClientRobust* client = mClientVector.at(i);
 
 				//send letter
         			Message message;
@@ -358,6 +361,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         			message.WriteByte(gameID);
         			Letter* letter = new Letter(client,&message);
         			mMailMan->deliver(client,letter);
+				
+				client->setGame(gameID);
 			}
                 }
 	}

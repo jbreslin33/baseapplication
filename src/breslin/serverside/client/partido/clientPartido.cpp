@@ -44,7 +44,7 @@ ClientPartido::~ClientPartido()
 //game
 void ClientPartido::addGame(GamePartido* gamePartido)
 {
-	Client::addGame(gamePartido);
+	ClientRobust::addGame(gamePartido);
         mGamePartidoVector.push_back(gamePartido);
 }
 

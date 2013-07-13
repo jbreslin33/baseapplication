@@ -71,8 +71,8 @@ public:
 
 
 	//join
-	void join(Client* client);
-	void leave(Client* client);
+	void join(ClientRobust* client);
+	void leave(ClientRobust* client);
 	
 	//shapes
 	virtual void createShapes();

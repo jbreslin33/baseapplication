@@ -293,14 +293,12 @@ void Game::sendShapes(Client* client)
         }
 }
 
-
-
 //the client that is leaving????
-void Game::leave(Client* client)
+void Game::leave(ClientRobust* client)
 {
         if (client->mShape)
         {
-  		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+                mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
                 mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
                 mMessage.WriteByte(mServer->mMessageLeaveGame); // add type
                 if (client->mClientID > 0)
@@ -311,4 +309,5 @@ void Game::leave(Client* client)
         }
         client->mGame = NULL;
 }
+
 

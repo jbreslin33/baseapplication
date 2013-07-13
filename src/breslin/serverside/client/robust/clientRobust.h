@@ -34,6 +34,13 @@ std::string db_first_name;
 std::string db_last_name;
 int         db_school_id;
 
+//game
+std::vector<Game*> mGameVector;
+void addGame(Game* game);
+Game* mGame;
+Game* getGame();
+virtual void setGame(int gameID);
+
 
 //update
 virtual void update();

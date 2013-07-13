@@ -4,6 +4,8 @@
 //log
 #include "../../tdreamsock/dreamSockLog.h"
 
+//game
+#include "../../game/game.h"
 
 ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientID, bool permanence) : Client(server,address,clientID,permanence)
 {
@@ -21,6 +23,9 @@ ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientI
         //db
         db_id = 0;
         db_school_id = 0;
+
+	mGame = NULL;
+
 }
 
 ClientRobust::~ClientRobust()
@@ -37,4 +42,21 @@ bool ClientRobust::handleLetter(Letter* letter)
 	return mStateMachine->handleLetter(letter);
 }
 
+
+void ClientRobust::addGame(Game* game)
+{
+        mGameVector.push_back(game);
+}
+
+void ClientRobust::setGame(int gameID)
+{
+        for (int i = 0; i < mGameVector.size(); i++)
+        {
+                if (mGameVector.at(i)->mID == gameID)
+                {
+                        mGame = mGameVector.at(i);
+                        mGame->sendShapes(this);
+                }
+        }
+}
 

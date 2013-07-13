@@ -58,7 +58,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 	//client id for php but everyone uses one...
 	mClientID = clientID;
 	
-	mGame = NULL;
 	
 	//shape
 	mShape = NULL;
@@ -133,29 +132,6 @@ Client::~Client()
 		}
 	}
 */
-}
-
-//game
-Game* Client::getGame()
-{
-	return mGame;
-}
-
-void Client::addGame(Game* game)
-{
-	mGameVector.push_back(game);
-} 
-
-void Client::setGame(int gameID)
-{
- 	for (int i = 0; i < mGameVector.size(); i++)
-        {
-        	if (mGameVector.at(i)->mID == gameID)
-               	{
-               		mGame = mGameVector.at(i);
-			mGame->sendShapes(this);
-                }
-	}	
 }
 
 //shape

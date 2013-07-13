@@ -118,12 +118,6 @@ public:
 
 	Server* mServer;
 
-	//game
-        std::vector<Game*> mGameVector;
-	void addGame(Game* game);
-	Game* mGame;
-	Game* getGame();
-	virtual void setGame(int gameID);
 
 };
 #endif
