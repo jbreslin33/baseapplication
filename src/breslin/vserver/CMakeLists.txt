@@ -309,6 +309,7 @@ set(HDRS
 	
 	#client
 	../serverside/client/client.h
+	../serverside/client/robust/clientRobust.h
 	../serverside/client/partido/clientPartido.h
 	
 	#client states
@@ -394,6 +395,7 @@ set(SRCS
 	
 	#client
 	../serverside/client/client.cpp
+	../serverside/client/robust/clientRobust.cpp
 	../serverside/client/partido/clientPartido.cpp
 
 	#client states
