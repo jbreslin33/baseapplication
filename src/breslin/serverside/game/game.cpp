@@ -74,7 +74,7 @@ void Game::processUpdate()
 	//this is where they want to move
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
-		mShapeVector.at(i)->processTick();
+		mShapeVector.at(i)->update();
 		checkBounds(mShapeVector.at(i));
 	}
 	

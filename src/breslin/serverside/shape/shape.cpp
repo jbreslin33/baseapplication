@@ -36,7 +36,7 @@
 #include <string>
 
 Shape::Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
-			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool computer)
+			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool computer)  : BaseEntity(BaseEntity::getNextValidID())
 {
  	//mPosition = position;
 	mIndex  = index;
@@ -156,7 +156,13 @@ void Shape::remove()
 	}
 }
 
-void Shape::processTick()
+bool Shape::handleLetter(Letter* letter)
+{
+        //return mStateMachine->handleLetter(letter);
+	return false;
+}
+
+void Shape::update()
 {
 	mMove->mPositionBeforeCollision->x = mSceneNode->getPosition().x;
     	mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;

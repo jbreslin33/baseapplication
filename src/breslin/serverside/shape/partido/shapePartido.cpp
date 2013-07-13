@@ -45,9 +45,14 @@ ShapePartido::~ShapePartido()
 {
 }
 
-void ShapePartido::processTick()
+void ShapePartido::update()
 {
-	Shape::processTick();
+	Shape::update();
+}
+
+bool ShapePartido::handleLetter(Letter* letter)
+{
+	return Shape::handleLetter(letter);
 }
 
 void ShapePartido::collision(Shape* shape)

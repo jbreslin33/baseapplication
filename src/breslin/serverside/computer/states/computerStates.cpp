@@ -82,7 +82,6 @@ void Random_Computer::execute(Computer* computer)
 {
 	if (computer->mShape->mSeek)
 	{
-
 		if (computer->mShape->mClient->db_id == 5)
 		{
 			for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
@@ -93,7 +92,6 @@ void Random_Computer::execute(Computer* computer)
 				}
 			}
 		}
-
 	}
 
 	//is this human controlled?

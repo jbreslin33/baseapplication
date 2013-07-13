@@ -1,6 +1,12 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+#include "../../baseentity/baseEntity.h"
+
+#include "../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
+
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
@@ -18,10 +24,9 @@ class Move;
 class Computer;
 class Seek;
 class Vector3D;
-class BaseEntity;
 class Letter;
 
-class Shape
+class Shape : BaseEntity
 {
 
 public:
@@ -97,8 +102,11 @@ void     addSteeringAbility(BaseEntity* ability);
 //create
 void createShape(Ogre::Root* root, Vector3D* position);
 
-//ticks
-virtual void processTick();
+//update
+virtual void update();
+
+//handle letter
+virtual bool  handleLetter(Letter* letter);
 
 void setValues();
 
@@ -115,7 +123,6 @@ virtual void collision(Shape* shape);
 	//delta move command
 virtual int  setFlag();
 virtual void addToMoveMessage(Message* message);
-virtual bool handleLetter(Letter* letter) { return false; }
 };
 
 #endif

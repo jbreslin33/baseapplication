@@ -33,7 +33,8 @@ ShapePartido*  mOpponentLast;
 /******************************************
 *            METHODS
 ****************************************/
-virtual void processTick();
+virtual void update();
+virtual bool handleLetter(Letter* letter);
 virtual void collision(Shape* shape);
 
 };
