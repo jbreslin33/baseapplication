@@ -66,10 +66,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 	//server
 	mServer = server;
 
-	//key
-	mKey = 0;
-	mKeyLast = 0;
-	
 	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 
 	if (!address)

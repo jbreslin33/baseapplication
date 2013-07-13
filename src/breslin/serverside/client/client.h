@@ -84,9 +84,6 @@ bool mPermanence;
 	std::string mStringUsername;
 	std::string mStringPassword;
 
-	int mKey;
-	int mKeyLast;
-
 public:
 
 	//update

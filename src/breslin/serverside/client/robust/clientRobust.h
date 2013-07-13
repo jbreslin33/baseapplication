@@ -23,6 +23,9 @@ int mKeyRight;
 int mKeyCounterClockwise;
 int mKeyClockwise;
 
+int mKey;
+int mKeyLast;
+
 //db
 int         db_id;
 std::string db_username;
@@ -30,6 +33,7 @@ std::string db_password;
 std::string db_first_name;
 std::string db_last_name;
 int         db_school_id;
+
 
 //update
 virtual void update();

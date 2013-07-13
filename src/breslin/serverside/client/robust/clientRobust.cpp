@@ -15,6 +15,9 @@ ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientI
         mKeyCounterClockwise = 16;
         mKeyClockwise = 32;
 
+        mKey = 0;
+        mKeyLast = 0;
+
         //db
         db_id = 0;
         db_school_id = 0;
