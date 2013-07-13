@@ -388,7 +388,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageLoginBrowser)
 	{
                 int clientID = mes->ReadByte();
-		LogString("login attempt for clientID:%d",clientID);
 		for (int i = 0; i < mClientVector.size(); i++)
 		{
 			if (mClientVector.at(i)->mClientID == clientID)

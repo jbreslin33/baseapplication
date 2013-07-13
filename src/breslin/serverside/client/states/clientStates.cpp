@@ -33,11 +33,9 @@ void GlobalClient::exit(Client* client)
 }
 bool GlobalClient::onLetter(Client* client, Letter* letter)
 {
-	LogString("GlobalClient::onLetter");
 	Message* message = letter->mMessage;
 	message->BeginReading();	
 	int type = message->ReadByte();
-
 
 	if (type == client->mServer->mMessageLogin)
 	{
@@ -70,6 +68,7 @@ Temporary* Temporary::Instance()
 }
 void Temporary::enter(Client* client)
 {
+	LogString("Temporary::enter:%d",client->db_id);
 }
 void Temporary::execute(Client* client)
 {
@@ -93,7 +92,7 @@ Ajax_Node* Ajax_Node::Instance()
 } 
 void Ajax_Node::enter(Client* client)
 {
-
+	LogString("Ajax_Node::enter:%d",client->db_id);
 }       
 void Ajax_Node::execute(Client* client)
 {
@@ -118,7 +117,7 @@ Logged_Out* Logged_Out::Instance()
 }
 void Logged_Out::enter(Client* client)
 {
-	LogString("Logged_Out::enter");
+	LogString("Logged_Out::enter:%d",client->db_id);
 }
 void Logged_Out::execute(Client* client)
 {
@@ -142,7 +141,7 @@ Lobby* Lobby::Instance()
 }
 void Lobby::enter(Client* client)
 {
-	LogString("Lobby::enter");
+	LogString("Lobby::enter:%d",client->db_id);
 }
 void Lobby::execute(Client* client)
 {
@@ -153,6 +152,15 @@ void Lobby::exit(Client* client)
 }
 bool Lobby::onLetter(Client* client, Letter* letter)
 {
+	Message* message = letter->mMessage;
+	message->BeginReading();	
+	int type = message->ReadByte();
+
+	if (type == client->mServer->mMessageJoinGame)
+	{
+		client->mStateMachine->changeState(Game_Mode::Instance());
+		return true;
+	}
         return false; 
 }
 
@@ -166,6 +174,7 @@ Game_Mode* Game_Mode::Instance()
 }
 void Game_Mode::enter(Client* client)
 {
+	LogString("Game_Mode::enter:%d",client->db_id);
 }
 void Game_Mode::execute(Client* client)
 {
