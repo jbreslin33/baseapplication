@@ -57,30 +57,7 @@ bool GlobalClient::onLetter(Client* client, Letter* letter)
 ****************************************/
 
 /*****************************************
-	TEMPORARY	
-****************************************/
-Connected* Connected::Instance()
-{
-  static Connected instance;
-  return &instance;
-}
-void Connected::enter(Client* client)
-{
-}
-void Connected::execute(Client* client)
-{
-}
-void Connected::exit(Client* client)
-{
-	
-}
-bool Connected::onLetter(Client* client, Letter* letter)
-{
-	return false;	
-}
-
-/*****************************************
-        AJAX_NODE       
+        DISCONNECTED      
 ****************************************/
 Disconnected* Disconnected::Instance()
 {
@@ -102,3 +79,46 @@ bool Disconnected::onLetter(Client* client, Letter* letter)
 	return false;	
 }
 
+/*****************************************
+	CONNECTING
+****************************************/
+Connecting* Connecting::Instance()
+{
+  static Connecting instance;
+  return &instance;
+}
+void Connecting::enter(Client* client)
+{
+}
+void Connecting::execute(Client* client)
+{
+}
+void Connecting::exit(Client* client)
+{
+}
+bool Connecting::onLetter(Client* client, Letter* letter)
+{
+	return false;	
+}
+
+/*****************************************
+	CONNECTED	
+****************************************/
+Connected* Connected::Instance()
+{
+  static Connected instance;
+  return &instance;
+}
+void Connected::enter(Client* client)
+{
+}
+void Connected::execute(Client* client)
+{
+}
+void Connected::exit(Client* client)
+{
+}
+bool Connected::onLetter(Client* client, Letter* letter)
+{
+	return false;	
+}

@@ -253,7 +253,6 @@ void ClientPartido::sendBattleStart()
 {
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
-        
 		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         	mMessage.WriteByte(mServerPartido->mMessageBattleStart); // add type
 
