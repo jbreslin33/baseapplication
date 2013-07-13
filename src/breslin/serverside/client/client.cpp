@@ -308,6 +308,7 @@ void Client::readLoginMessage(Message* mes)
 
 bool Client::checkLogin(Message* mes)
 {
+	LogString("Client::checkLogin");
 	readLoginMessage(mes);
 
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)

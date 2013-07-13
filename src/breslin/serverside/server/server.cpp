@@ -365,6 +365,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/******* LOGIN **********/
 	else if (type == mMessageLogin)
 	{
+		LogString("type == mMessageLogin");
  		//get client	
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
                 {
@@ -374,7 +375,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
-                                        continue;
+					LogString("contin");
+                                        //continue;
                                 }
 				client->checkLogin(mes);
 				return;
@@ -389,7 +391,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 client = mClientVectorTemp.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
-                                        continue;
+					LogString("contin");
+                                        //continue;
                                 }
 				client->checkLogin(mes);
 				return;
@@ -408,7 +411,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 client = mClientVector.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
-                                        continue;
+                                        //continue;
                                 }
 				client->checkLogin(mes);
 				return;
@@ -423,7 +426,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 client = mClientVectorTemp.at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
-                                        continue;
+                                       //continue;
                                 }
 				client->checkLogin(mes);
 				return;
