@@ -10,7 +10,7 @@
 #include "../network/network.h"
 
 //client
-#include "../client/client.h"
+#include "../client/robust/clientRobust.h"
 
 //shape
 #include "../shape/shape.h"

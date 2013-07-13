@@ -1,5 +1,6 @@
 //parent
 #include "client.h"
+#include "robust/clientRobust.h"
 
 //log
 #include "../tdreamsock/dreamSockLog.h"
@@ -51,14 +52,6 @@
 
 Client::Client(Server* server, struct sockaddr *address, int clientID, bool permanence) : BaseEntity(BaseEntity::getNextValidID())
 {
-        //keys
-        mKeyUp = 1;
-        mKeyDown = 2;
-        mKeyLeft = 4;
-        mKeyRight = 8;
-        mKeyCounterClockwise = 16;
-        mKeyClockwise = 32;
-
 	//logged in
 	mLoggedIn = false;
 
@@ -133,6 +126,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 
 Client::~Client()
 {
+/*
 	//this will check if there is an mShape
 
 	if (mGame)
@@ -147,6 +141,7 @@ Client::~Client()
  			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
 		}
 	}
+*/
 }
 
 //game
@@ -198,6 +193,7 @@ bool Client::handleLetter(Letter* letter)
 
 void Client::remove()
 {
+/*
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
 		if (mServer->mClientVector.at(i) == this)
@@ -206,6 +202,7 @@ void Client::remove()
 			///delete this;
 		}
 	}
+*/
 }
 
 //connected

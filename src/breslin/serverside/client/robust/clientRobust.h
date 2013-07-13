@@ -15,6 +15,14 @@ public:
 ClientRobust(Server* server, struct sockaddr *address, int clientID, bool permanent);
 ~ClientRobust();
 
+//keys
+int mKeyUp;
+int mKeyDown;
+int mKeyLeft;
+int mKeyRight;
+int mKeyCounterClockwise;
+int mKeyClockwise;
+
 //update
 virtual void update();
 	

@@ -17,17 +17,13 @@ template <class entity_type> class State;
 
 // Define SOCKET data type for UNIX (defined in WinSock for Win32)
 // And socklen_t for Win32
-#ifdef WIN32
-	typedef int socklen_t;
-#else
 	typedef int SOCKET;
 
-	#ifndef TRUE
-	#define TRUE 1
-	#endif
-	#ifndef FALSE
-	#define FALSE 0
-	#endif
+#ifndef TRUE
+#define TRUE 1
+#endif
+#ifndef FALSE
+#define FALSE 0
 #endif
 
 // Connection states
@@ -69,14 +65,6 @@ StateMachine<Client>* mControlStateMachine;
 StateMachine<Client>* mPermanenceStateMachine;
 
 bool mPermanence;
-
-//keys
-int mKeyUp;
-int mKeyDown;
-int mKeyLeft;
-int mKeyRight;
-int mKeyCounterClockwise;
-int mKeyClockwise;
 
 	//Message
         Message mMessage;

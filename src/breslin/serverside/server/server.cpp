@@ -8,7 +8,7 @@
 #include "../network/network.h"
 
 //client
-#include "../client/client.h"
+#include "../client/robust/clientRobust.h"
 
 //message
 #include "../message/message.h" 
@@ -222,7 +222,7 @@ void Server::addClient(Client* client, bool permanent)
 {
 	if (permanent)
 	{
-		mClientVector.push_back(client);
+		mClientVector.push_back((ClientRobust*)client);
 	}
 	else
 	{
