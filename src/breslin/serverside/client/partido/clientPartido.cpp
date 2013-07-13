@@ -21,7 +21,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 
         if (mClientID >= 0)
         {
-                sendSchools();
+                ////sendSchools();
         }
         else
         {
