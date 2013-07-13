@@ -329,6 +329,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				}
         			
 				//send letter
+				LogString("message...");
         			Message message;
         			message.Init(message.outgoingData, sizeof(message.outgoingData));
         			message.WriteByte(mMessageJoinGame); 
@@ -369,35 +370,23 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/******* LOGIN **********/
 	else if (type == mMessageLogin)
 	{
-		LogString("type == mMessageLogin");
- 		//get client	
+ 		//get client is it a (ClientRobust) one???	
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
                 {
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
-				//set client to pointer
                                 client = mClientVector.at(i);
- 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
-                                {
-					LogString("contin");
-                                        //continue;
-                                }
 				client->checkLogin(mes);
 				return;
 			}
                 }
 
+ 		//get client is it a temp(Client) one???	
 		for (unsigned int i = 0; i < mClientVectorTemp.size(); i++)
                 {
                         if( memcmp(mClientVectorTemp.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
-				//set client to pointer
                                 client = mClientVectorTemp.at(i);
- 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
-                                {
-					LogString("contin");
-                                        //continue;
-                                }
 				client->checkLogin(mes);
 				return;
 			}
@@ -407,31 +396,25 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageLoginBrowser)
 	{
                 int clientID = mes->ReadByte();
+ 		//get client is it a (ClientRobust) one???	
 		for (int i = 0; i < mClientVector.size(); i++)
 		{
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
                                 //set client to pointer
                                 client = mClientVector.at(i);
- 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
-                                {
-                                        //continue;
-                                }
 				client->checkLogin(mes);
 				return;
 			}
 		}	
 
+ 		//get client is it a (Client) one???	
 		for (int i = 0; i < mClientVectorTemp.size(); i++)
 		{
 			if (mClientVectorTemp.at(i)->mClientID == clientID)
 			{
                                 //set client to pointer
                                 client = mClientVectorTemp.at(i);
- 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
-                                {
-                                       //continue;
-                                }
 				client->checkLogin(mes);
 				return;
 			}

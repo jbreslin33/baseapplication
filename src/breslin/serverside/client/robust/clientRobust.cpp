@@ -19,8 +19,16 @@
 //network
 #include "../../network/network.h"
 
+//states
+#include "states/clientRobustStates.h"
+
+
 ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientID, bool permanence) : Client(server,address,clientID,permanence)
 {
+
+	//temp client
+	mClient = NULL;
+
         //keys
         mKeyUp = 1;
         mKeyDown = 2;
@@ -36,6 +44,8 @@ ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientI
         db_id = 0;
         db_school_id = 0;
 
+	//game
+	mInGame = false;
 	mGame = NULL;
 
         //shape
@@ -43,9 +53,9 @@ ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientI
 
 	//states
         mClientRobustStateMachine =  new StateMachine<ClientRobust>(this);
-        mClientRobustStateMachine->setCurrentState      (NULL);
+        mClientRobustStateMachine->setCurrentState      (Logged_Out::Instance());
         mClientRobustStateMachine->setPreviousState     (NULL);
-        mClientRobustStateMachine->setGlobalState       (NULL);
+        mClientRobustStateMachine->setGlobalState       (GlobalClientRobust::Instance());
 
 }
 
@@ -61,7 +71,12 @@ void ClientRobust::update()
 
 bool ClientRobust::handleLetter(Letter* letter)
 {
-	return mStateMachine->handleLetter(letter);
+	bool b = Client::handleLetter(letter);
+	if (b)
+	{
+		return b;	
+	}
+	return mClientRobustStateMachine->handleLetter(letter);
 }
 
 
@@ -92,6 +107,7 @@ void ClientRobust::login()
 {
 
         //send letter
+	LogString("ClientRobust::login");
         Message message;
         message.Init(message.outgoingData, sizeof(message.outgoingData));
         message.WriteByte(mServer->mMessageLogin); // add type

@@ -33,6 +33,7 @@ void GlobalClientRobust::exit(ClientRobust* clientRobust)
 }
 bool GlobalClientRobust::onLetter(ClientRobust* clientRobust, Letter* letter)
 {
+	LogString("GlobalClientRobust::onLetter");
 	Message* message = letter->mMessage;
 	message->BeginReading();	
 	int type = message->ReadByte();
@@ -115,10 +116,10 @@ Logged_Out* Logged_Out::Instance()
 }
 void Logged_Out::enter(ClientRobust* clientRobust)
 {
+	LogString("Logged_Out::enter");
 }
 void Logged_Out::execute(ClientRobust* clientRobust)
 {
-
 }
 void Logged_Out::exit(ClientRobust* clientRobust)
 {
@@ -138,6 +139,7 @@ Lobby* Lobby::Instance()
 }
 void Lobby::enter(ClientRobust* clientRobust)
 {
+	LogString("Lobby::enter");
 }
 void Lobby::execute(ClientRobust* clientRobust)
 {
@@ -172,6 +174,8 @@ Game_Mode* Game_Mode::Instance()
 }
 void Game_Mode::enter(ClientRobust* clientRobust)
 {
+	LogString("Game_Mode");
+	clientRobust->mInGame = true;
 }
 void Game_Mode::execute(ClientRobust* clientRobust)
 {
@@ -179,6 +183,7 @@ void Game_Mode::execute(ClientRobust* clientRobust)
 }
 void Game_Mode::exit(ClientRobust* clientRobust)
 {
+	clientRobust->mInGame = false; 
 }
 bool Game_Mode::onLetter(ClientRobust* clientRobust, Letter* letter)
 {

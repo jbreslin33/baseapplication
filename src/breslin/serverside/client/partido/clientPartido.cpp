@@ -35,6 +35,8 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	mWins = 0;
 	mLosses = 0;
 	mTies = 0;	
+
+	
 }
 
 ClientPartido::~ClientPartido()
@@ -67,13 +69,13 @@ void ClientPartido::setGame(int gameID)
 
 bool ClientPartido::handleLetter(Letter* letter)
 {
-        return mStateMachine->handleLetter(letter);
+	return ClientRobust::handleLetter(letter);
 }
 
 //updates
 void ClientPartido::update()
 {
-	Client::update();
+	ClientRobust::update();
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
 		if (mShapePartido)

@@ -17,6 +17,9 @@ ClientRobust(Server* server, struct sockaddr *address, int clientID, bool perman
 
 StateMachine<ClientRobust>* mClientRobustStateMachine;
 
+//temp client
+Client* mClient;
+
 //keys
 int mKeyUp;
 int mKeyDown;
@@ -37,6 +40,7 @@ std::string db_last_name;
 int         db_school_id;
 
 //game
+bool mInGame;
 std::vector<Game*> mGameVector;
 void addGame(Game* game);
 Game* mGame;
