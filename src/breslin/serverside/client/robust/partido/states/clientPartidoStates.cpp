@@ -162,6 +162,11 @@ void Sending_Question::enter(ClientPartido* clientPartido)
 }
 void Sending_Question::execute(ClientPartido* clientPartido)
 {
+  	if (!clientPartido->mShapePartido->mOpponent)
+        {
+                clientPartido->mBattleStateMachine->changeState(Battle_OFF::Instance());
+        }
+
         if (clientPartido->mLoggedIn)
         {
                 if (clientPartido->mShapePartido)
@@ -202,9 +207,22 @@ void Waiting_For_Answer::enter(ClientPartido* clientPartido)
 }       
 void Waiting_For_Answer::execute(ClientPartido* clientPartido)
 {
+  	if (!clientPartido->mShapePartido->mOpponent)
+        {
+                clientPartido->mBattleStateMachine->changeState(Battle_OFF::Instance());
+        }
+	
 	if (!clientPartido->mWaitingForAnswer && clientPartido->mShapePartido->mOpponent)
 	{
         	clientPartido->mBattleStateMachine->changeState(Sending_Question::Instance());
+	}
+	
+	//mServerPartido->mAnswerVector.at(mQuestionID)
+	if (!clientPartido->mLoggedIn) //send to readAnswer(int,string)
+	{
+		std::string s = "s";
+		//clientPartido->readAnswer(3000,clientPartido->mServerPartido->mAnswerVector.at(clientPartido->mQuestionID));
+		clientPartido->readAnswer(3000,s);
 	}
 	
 }

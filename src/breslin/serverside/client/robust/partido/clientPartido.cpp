@@ -358,26 +358,35 @@ void ClientPartido::readAnswer(int answerTime, std::string answer)
         if (mStringAnswer.compare(mServerPartido->mAnswerVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
 	{
 		ShapePartido* opponent  = mShapePartido->mOpponent;
-
-		//score battle
-		scoreBattle(LOSS);
-		opponent->mClientPartido->scoreBattle(WIN);
 		
-		//set battle record text .. mBattleRecordText 
-		setBattleRecordText();	
-		opponent->mClientPartido->setBattleRecordText();	
+		if (opponent)
+		{
 
-		//set Text of shape .. mText
-	       	mShapePartido->setText(mBattleRecordText); 	
-		opponent->mClientPartido->mShapePartido->setText(opponent->mClientPartido->mBattleRecordText);	
+			//score battle
+			scoreBattle(LOSS);
+			opponent->mClientPartido->scoreBattle(WIN);
 		
-		//reset battle
-		resetBattle();	
-		opponent->mClientPartido->resetBattle();	
+			//set battle record text .. mBattleRecordText 
+			setBattleRecordText();	
+			opponent->mClientPartido->setBattleRecordText();	
 
-		//send battle end to client	
-		sendBattleEnd();
-		opponent->mClientPartido->sendBattleEnd();
+			//set Text of shape .. mText
+	       		mShapePartido->setText(mBattleRecordText); 	
+			opponent->mClientPartido->mShapePartido->setText(opponent->mClientPartido->mBattleRecordText);	
+		
+			//reset battle
+			resetBattle();	
+			opponent->mClientPartido->resetBattle();	
+
+			//send battle end to client	
+			sendBattleEnd();
+			opponent->mClientPartido->sendBattleEnd();
+		}
+		else //opponent took care of loss....
+		{
+			// do nothing...
+
+		}
 	}
 	else
 	{
