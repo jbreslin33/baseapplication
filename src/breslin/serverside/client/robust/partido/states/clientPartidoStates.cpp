@@ -42,11 +42,11 @@ bool GlobalClientPartido::onLetter(ClientPartido* clientPartido, Letter* letter)
 
 
 /*****************************************
-*******       CLIENT STATES    ******************       
+*******       CLIENT PARTIDO STATES    ******************       
 ****************************************/
 
 /*****************************************
-        AJAX_NODE       
+        WAITING FOR ANSWER       
 ****************************************/
 Waiting_For_Answer* Waiting_For_Answer::Instance()
 {
@@ -55,6 +55,7 @@ Waiting_For_Answer* Waiting_For_Answer::Instance()
 } 
 void Waiting_For_Answer::enter(ClientPartido* clientPartido)
 {
+        LogString("WAITING_FOR_ANSWER::enter");
 }       
 void Waiting_For_Answer::execute(ClientPartido* clientPartido)
 {
@@ -91,7 +92,7 @@ bool Sending_Question::onLetter(ClientPartido* clientPartido, Letter* letter)
         return false; 
 }
 /*****************************************
-                GAME_MODE               
+                GAME_PARTIDO_MODE               
 ****************************************/
 Game_Partido_Mode* Game_Partido_Mode::Instance()
 {
@@ -100,16 +101,13 @@ Game_Partido_Mode* Game_Partido_Mode::Instance()
 }
 void Game_Partido_Mode::enter(ClientPartido* clientPartido)
 {
-        LogString("Game_Partido_Mode");
-        clientPartido->mInGame = true;
+        LogString("Game_Partido_Mode::enter");
 }
 void Game_Partido_Mode::execute(ClientPartido* clientPartido)
 {
-
 }
 void Game_Partido_Mode::exit(ClientPartido* clientPartido)
 {
-        clientPartido->mInGame = false; 
 }
 bool Game_Partido_Mode::onLetter(ClientPartido* clientPartido, Letter* letter)
 {

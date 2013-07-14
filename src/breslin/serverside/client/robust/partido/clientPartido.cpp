@@ -10,6 +10,8 @@
 //utility
 #include "../../../../utility/utility.h"
 
+//states
+#include "states/clientPartidoStates.h"
 
 ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence) : ClientRobust(serverPartido, address, clientID, permanence) 
 {
@@ -38,9 +40,9 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 
         //states
         mClientPartidoStateMachine =  new StateMachine<ClientPartido>(this);
-        mClientPartidoStateMachine->setCurrentState      (NULL);
+        mClientPartidoStateMachine->setCurrentState      (Game_Partido_Mode::Instance());
         mClientPartidoStateMachine->setPreviousState     (NULL);
-        mClientPartidoStateMachine->setGlobalState       (NULL);
+        mClientPartidoStateMachine->setGlobalState       (GlobalClientPartido::Instance());
 
 	
 }
@@ -82,6 +84,7 @@ bool ClientPartido::handleLetter(Letter* letter)
 void ClientPartido::update()
 {
 	ClientRobust::update();
+	mClientPartidoStateMachine->update();
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
 		if (mShapePartido)
