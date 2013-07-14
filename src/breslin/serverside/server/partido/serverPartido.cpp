@@ -4,7 +4,7 @@
 #include "../../tdreamsock/dreamSockLog.h"
 
 #include "../../game/partido/gamePartido.h"
-#include "../../client/partido/clientPartido.h"
+#include "../../client/robust/partido/clientPartido.h"
 #include "../../../math/vector3D.h"
 #include "../../shape/shape.h"
 

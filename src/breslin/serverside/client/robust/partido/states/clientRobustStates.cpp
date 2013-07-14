@@ -1,5 +1,5 @@
 //parent
-#include "clientRobustStates.h"
+#include "clientPartidoStates.h"
 
 //log
 #include "../../../tdreamsock/dreamSockLog.h"
@@ -8,7 +8,7 @@
 #include "../../../../fsm/stateMachine.h"
 
 //ability
-#include "../clientRobust.h"
+#include "../clientPartido.h"
 
 //server
 #include "../../../server/server.h"
@@ -16,37 +16,37 @@
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalClientRobust* GlobalClientRobust::Instance()
+GlobalClientPartido* GlobalClientPartido::Instance()
 {
-  static GlobalClientRobust instance;
+  static GlobalClientPartido instance;
   return &instance;
 }
-void GlobalClientRobust::enter(ClientRobust* clientRobust)
+void GlobalClientPartido::enter(ClientPartido* clientPartido)
 {
 }
-void GlobalClientRobust::execute(ClientRobust* clientRobust)
+void GlobalClientPartido::execute(ClientPartido* clientPartido)
 {
 
 }
-void GlobalClientRobust::exit(ClientRobust* clientRobust)
+void GlobalClientPartido::exit(ClientPartido* clientPartido)
 {
 }
-bool GlobalClientRobust::onLetter(ClientRobust* clientRobust, Letter* letter)
+bool GlobalClientPartido::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
-	LogString("GlobalClientRobust::onLetter");
+	LogString("GlobalClientPartido::onLetter");
 	Message* message = letter->mMessage;
 	message->BeginReading();	
 	int type = message->ReadByte();
 
-	if (type == clientRobust->mServer->mMessageLogin)
+	if (type == clientPartido->mServer->mMessageLogin)
 	{
-		clientRobust->mClientRobustStateMachine->changeState(Lobby::Instance());
+		clientPartido->mClientPartidoStateMachine->changeState(Lobby::Instance());
 		return true;
 	}
 	
-	if (type == clientRobust->mServer->mMessageLogout)
+	if (type == clientPartido->mServer->mMessageLogout)
 	{
-		clientRobust->mClientRobustStateMachine->changeState(Logged_Out::Instance());
+		clientPartido->mClientPartidoStateMachine->changeState(Logged_Out::Instance());
 		return true;
 	}
 
@@ -62,107 +62,112 @@ bool GlobalClientRobust::onLetter(ClientRobust* clientRobust, Letter* letter)
 /*****************************************
         AJAX_NODE       
 ****************************************/
+/*
 Ajax_Node* Ajax_Node::Instance()
 {
   static Ajax_Node instance;
   return &instance; 
 } 
-void Ajax_Node::enter(ClientRobust* clientRobust)
+void Ajax_Node::enter(ClientPartido* clientPartido)
 {
 }       
-void Ajax_Node::execute(ClientRobust* clientRobust)
+void Ajax_Node::execute(ClientPartido* clientPartido)
 {
 }
-void Ajax_Node::exit(ClientRobust* clientRobust)
+void Ajax_Node::exit(ClientPartido* clientPartido)
 {
 
 }
-bool Ajax_Node::onLetter(ClientRobust* clientRobust, Letter* letter)
+bool Ajax_Node::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
 	return false;	
 }
 
-
+*/
 /*****************************************
 	Logged_Out
 ****************************************/
+/*
 Logged_Out* Logged_Out::Instance()
 {
   static Logged_Out instance;
   return &instance;
 }
-void Logged_Out::enter(ClientRobust* clientRobust)
+void Logged_Out::enter(ClientPartido* clientPartido)
 {
 	LogString("Logged_Out::enter");
 }
-void Logged_Out::execute(ClientRobust* clientRobust)
+void Logged_Out::execute(ClientPartido* clientPartido)
 {
 }
-void Logged_Out::exit(ClientRobust* clientRobust)
+void Logged_Out::exit(ClientPartido* clientPartido)
 {
 }
-bool Logged_Out::onLetter(ClientRobust* clientRobust, Letter* letter)
+bool Logged_Out::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false; 
 }
-
+*/
 /*****************************************
 	Lobby
 ****************************************/
+/*
 Lobby* Lobby::Instance()
 {
   static Lobby instance;
   return &instance;
 }
-void Lobby::enter(ClientRobust* clientRobust)
+void Lobby::enter(ClientPartido* clientPartido)
 {
 	LogString("Lobby::enter");
 }
-void Lobby::execute(ClientRobust* clientRobust)
+void Lobby::execute(ClientPartido* clientPartido)
 {
 
 }
-void Lobby::exit(ClientRobust* clientRobust)
+void Lobby::exit(ClientPartido* clientPartido)
 {
 }
-bool Lobby::onLetter(ClientRobust* clientRobust, Letter* letter)
+bool Lobby::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
 	Message* message = letter->mMessage;
 	message->BeginReading();	
 	int type = message->ReadByte();
 
-	if (type == clientRobust->mServer->mMessageJoinGame)
+	if (type == clientPartido->mServer->mMessageJoinGame)
 	{
 		int gameID = message->ReadByte();
-		//clientRobust->setGame(gameID);
-		clientRobust->mClientRobustStateMachine->changeState(Game_Mode::Instance());
+		//clientPartido->setGame(gameID);
+		clientPartido->mClientPartidoStateMachine->changeState(Game_Mode::Instance());
 		return true;
 	}
         return false; 
 }
-
+*/
 /*****************************************
 		GAME_MODE		
 ****************************************/
+/*
 Game_Mode* Game_Mode::Instance()
 {
   static Game_Mode instance;
   return &instance;
 }
-void Game_Mode::enter(ClientRobust* clientRobust)
+void Game_Mode::enter(ClientPartido* clientPartido)
 {
 	LogString("Game_Mode");
-	clientRobust->mInGame = true;
+	clientPartido->mInGame = true;
 }
-void Game_Mode::execute(ClientRobust* clientRobust)
+void Game_Mode::execute(ClientPartido* clientPartido)
 {
 
 }
-void Game_Mode::exit(ClientRobust* clientRobust)
+void Game_Mode::exit(ClientPartido* clientPartido)
 {
-	clientRobust->mInGame = false; 
+	clientPartido->mInGame = false; 
 }
-bool Game_Mode::onLetter(ClientRobust* clientRobust, Letter* letter)
+bool Game_Mode::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false; 
 }
+*/

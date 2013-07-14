@@ -1,77 +1,77 @@
-#ifndef CLIENTROBUSTSTATES_H
-#define CLIENTROBUSTSTATES_H
+#ifndef CLIENTPARTIDOSTATES_H
+#define CLIENTPARTIDOSTATES_H
 
 #include "../../../../fsm/state.h"
 
-class ClientRobust;
+class ClientPartido;
 
 
 /*******************************
-*      GlobalClientRobust 
+*      GlobalClientPartido 
 ******************************/
 
-class GlobalClientRobust : public State<ClientRobust>
+class GlobalClientPartido : public State<ClientPartido>
 {
 private:
-  GlobalClientRobust(){}
+  GlobalClientPartido(){}
 public:
-  static GlobalClientRobust* Instance();
-  void enter  (ClientRobust* clientRobust);
-  void execute(ClientRobust* clientRobust);
-  void exit   (ClientRobust* clientRobust);
-  bool onLetter(ClientRobust* clientRobust, Letter* letter);
+  static GlobalClientPartido* Instance();
+  void enter  (ClientPartido* clientPartido);
+  void execute(ClientPartido* clientPartido);
+  void exit   (ClientPartido* clientPartido);
+  bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
 /*******************************
 *       CLIENT STATES 
 ******************************/
-
-class Ajax_Node : public State<ClientRobust>
+/*
+class Ajax_Node : public State<ClientPartido>
 {
 private:
   Ajax_Node(){}
 public:
   static Ajax_Node* Instance();
-  void enter  (ClientRobust* clientRobust);
-  void execute(ClientRobust* clientRobust);
-  void exit   (ClientRobust* clientRobust);
-  bool onLetter(ClientRobust* clientRobust, Letter* letter);
+  void enter  (ClientPartido* clientPartido);
+  void execute(ClientPartido* clientPartido);
+  void exit   (ClientPartido* clientPartido);
+  bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
-class Logged_Out : public State<ClientRobust>
+class Logged_Out : public State<ClientPartido>
 {
 private:
   Logged_Out(){}
 public:
   static Logged_Out* Instance();
-  void enter  (ClientRobust* clientRobust);
-  void execute(ClientRobust* clientRobust);
-  void exit   (ClientRobust* clientRobust);
-  bool onLetter(ClientRobust* clientRobust, Letter* letter);
+  void enter  (ClientPartido* clientPartido);
+  void execute(ClientPartido* clientPartido);
+  void exit   (ClientPartido* clientPartido);
+  bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
-class Lobby : public State<ClientRobust>
+class Lobby : public State<ClientPartido>
 {
 private:
   Lobby(){}
 public:
   static Lobby* Instance();
-  void enter  (ClientRobust* clientRobust);
-  void execute(ClientRobust* clientRobust);
-  void exit   (ClientRobust* clientRobust);
-  bool onLetter(ClientRobust* clientRobust, Letter* letter);
+  void enter  (ClientPartido* clientPartido);
+  void execute(ClientPartido* clientPartido);
+  void exit   (ClientPartido* clientPartido);
+  bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
-class Game_Mode : public State<ClientRobust>
+class Game_Mode : public State<ClientPartido>
 {
 private:
   Game_Mode(){}
 public:
   static Game_Mode* Instance();
-  void enter  (ClientRobust* clientRobust);
-  void execute(ClientRobust* clientRobust);
-  void exit   (ClientRobust* clientRobust);
-  bool onLetter(ClientRobust* clientRobust, Letter* letter);
+  void enter  (ClientPartido* clientPartido);
+  void execute(ClientPartido* clientPartido);
+  void exit   (ClientPartido* clientPartido);
+  bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
-
+*/
 #endif

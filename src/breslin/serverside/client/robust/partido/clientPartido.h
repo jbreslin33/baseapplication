@@ -1,7 +1,7 @@
 #ifndef CLIENTPARTIDO_H
 #define CLIENTPARTIDO_H
 
-#include "../robust/clientRobust.h"
+#include "../clientRobust.h"
 
 #include <vector>
 
