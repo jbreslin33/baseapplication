@@ -2,16 +2,16 @@
 #include "clientPartidoStates.h"
 
 //log
-#include "../../../tdreamsock/dreamSockLog.h"
+#include "../../../../tdreamsock/dreamSockLog.h"
 
 //states
-#include "../../../../fsm/stateMachine.h"
+#include "../../../../../fsm/stateMachine.h"
 
 //ability
 #include "../clientPartido.h"
 
 //server
-#include "../../../server/server.h"
+#include "../../../../server/partido/serverPartido.h"
 
 /*****************************************
 *******       GLOBAL    ******************
@@ -33,6 +33,7 @@ void GlobalClientPartido::exit(ClientPartido* clientPartido)
 }
 bool GlobalClientPartido::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
+/*
 	LogString("GlobalClientPartido::onLetter");
 	Message* message = letter->mMessage;
 	message->BeginReading();	
@@ -52,6 +53,7 @@ bool GlobalClientPartido::onLetter(ClientPartido* clientPartido, Letter* letter)
 
 
         return false;
+*/
 }
 
 

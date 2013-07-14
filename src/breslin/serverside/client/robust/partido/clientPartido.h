@@ -3,6 +3,11 @@
 
 #include "../clientRobust.h"
 
+#include "../../../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
+
+
 #include <vector>
 
 //postgresql
@@ -86,6 +91,9 @@ void resetBattle();
 void resetRecords();
 void resetOpponents();
 void setBattleRecordText();
+
+//states
+StateMachine<ClientPartido>* mClientPartidoStateMachine;
 
 };
 #endif

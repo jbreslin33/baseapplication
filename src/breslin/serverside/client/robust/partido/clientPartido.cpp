@@ -10,6 +10,8 @@
 //utility
 #include "../../../../utility/utility.h"
 
+//states
+#include "states/clientPartidoStates.h"
 
 ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence) : ClientRobust(serverPartido, address, clientID, permanence) 
 {
@@ -35,6 +37,12 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	mWins = 0;
 	mLosses = 0;
 	mTies = 0;	
+
+        //states
+        mClientPartidoStateMachine =  new StateMachine<ClientPartido>(this);
+        mClientPartidoStateMachine->setCurrentState      (NULL);
+        mClientPartidoStateMachine->setPreviousState     (NULL);
+        mClientPartidoStateMachine->setGlobalState       (GlobalClientPartido::Instance());
 
 	
 }
