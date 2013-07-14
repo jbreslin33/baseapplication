@@ -1,3 +1,7 @@
+/***
+these states are always on...as their is always a gamePartido..and these clients are in it. it really should handle the mechanics of quiz... 
+
+*/
 //parent
 #include "clientPartidoStates.h"
 
@@ -33,27 +37,7 @@ void GlobalClientPartido::exit(ClientPartido* clientPartido)
 }
 bool GlobalClientPartido::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
-/*
-	LogString("GlobalClientPartido::onLetter");
-	Message* message = letter->mMessage;
-	message->BeginReading();	
-	int type = message->ReadByte();
-
-	if (type == clientPartido->mServer->mMessageLogin)
-	{
-		clientPartido->mClientPartidoStateMachine->changeState(Lobby::Instance());
-		return true;
-	}
-	
-	if (type == clientPartido->mServer->mMessageLogout)
-	{
-		clientPartido->mClientPartidoStateMachine->changeState(Logged_Out::Instance());
-		return true;
-	}
-
-
-        return false;
-*/
+	return false;
 }
 
 
@@ -64,112 +48,70 @@ bool GlobalClientPartido::onLetter(ClientPartido* clientPartido, Letter* letter)
 /*****************************************
         AJAX_NODE       
 ****************************************/
-/*
-Ajax_Node* Ajax_Node::Instance()
+Waiting_For_Answer* Waiting_For_Answer::Instance()
 {
-  static Ajax_Node instance;
+  static Waiting_For_Answer instance;
   return &instance; 
 } 
-void Ajax_Node::enter(ClientPartido* clientPartido)
+void Waiting_For_Answer::enter(ClientPartido* clientPartido)
 {
 }       
-void Ajax_Node::execute(ClientPartido* clientPartido)
+void Waiting_For_Answer::execute(ClientPartido* clientPartido)
 {
 }
-void Ajax_Node::exit(ClientPartido* clientPartido)
+void Waiting_For_Answer::exit(ClientPartido* clientPartido)
 {
 
 }
-bool Ajax_Node::onLetter(ClientPartido* clientPartido, Letter* letter)
+bool Waiting_For_Answer::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
 	return false;	
 }
 
-*/
 /*****************************************
-	Logged_Out
+	Sending_Question
 ****************************************/
-/*
-Logged_Out* Logged_Out::Instance()
+Sending_Question* Sending_Question::Instance()
 {
-  static Logged_Out instance;
+  static Sending_Question instance;
   return &instance;
 }
-void Logged_Out::enter(ClientPartido* clientPartido)
+void Sending_Question::enter(ClientPartido* clientPartido)
 {
-	LogString("Logged_Out::enter");
+	LogString("Sending_Question::enter");
 }
-void Logged_Out::execute(ClientPartido* clientPartido)
-{
-}
-void Logged_Out::exit(ClientPartido* clientPartido)
+void Sending_Question::execute(ClientPartido* clientPartido)
 {
 }
-bool Logged_Out::onLetter(ClientPartido* clientPartido, Letter* letter)
+void Sending_Question::exit(ClientPartido* clientPartido)
+{
+}
+bool Sending_Question::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false; 
 }
-*/
-/*****************************************
-	Lobby
-****************************************/
-/*
-Lobby* Lobby::Instance()
-{
-  static Lobby instance;
-  return &instance;
-}
-void Lobby::enter(ClientPartido* clientPartido)
-{
-	LogString("Lobby::enter");
-}
-void Lobby::execute(ClientPartido* clientPartido)
-{
-
-}
-void Lobby::exit(ClientPartido* clientPartido)
-{
-}
-bool Lobby::onLetter(ClientPartido* clientPartido, Letter* letter)
-{
-	Message* message = letter->mMessage;
-	message->BeginReading();	
-	int type = message->ReadByte();
-
-	if (type == clientPartido->mServer->mMessageJoinGame)
-	{
-		int gameID = message->ReadByte();
-		//clientPartido->setGame(gameID);
-		clientPartido->mClientPartidoStateMachine->changeState(Game_Mode::Instance());
-		return true;
-	}
-        return false; 
-}
-*/
 /*****************************************
 		GAME_MODE		
 ****************************************/
-/*
-Game_Mode* Game_Mode::Instance()
+Game_Partido_Mode* Game_Partido_Mode::Instance()
 {
-  static Game_Mode instance;
+  static Game_Partido_Mode instance;
   return &instance;
 }
-void Game_Mode::enter(ClientPartido* clientPartido)
+void Game_Partido_Mode::enter(ClientPartido* clientPartido)
 {
-	LogString("Game_Mode");
+	LogString("Game_Partido_Mode");
 	clientPartido->mInGame = true;
 }
-void Game_Mode::execute(ClientPartido* clientPartido)
+void Game_Partido_Mode::execute(ClientPartido* clientPartido)
 {
 
 }
-void Game_Mode::exit(ClientPartido* clientPartido)
+void Game_Partido_Mode::exit(ClientPartido* clientPartido)
 {
 	clientPartido->mInGame = false; 
 }
-bool Game_Mode::onLetter(ClientPartido* clientPartido, Letter* letter)
+bool Game_Partido_Mode::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false; 
 }
-*/

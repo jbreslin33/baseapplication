@@ -23,55 +23,41 @@ public:
 };
 
 /*******************************
-*       CLIENT STATES 
+*       CLIENT PARTIDO STATES 
 ******************************/
-/*
-class Ajax_Node : public State<ClientPartido>
+class Waiting_For_Answer : public State<ClientPartido>
 {
 private:
-  Ajax_Node(){}
+  Waiting_For_Answer(){}
 public:
-  static Ajax_Node* Instance();
+  static Waiting_For_Answer* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
   bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
-class Logged_Out : public State<ClientPartido>
+class Sending_Question : public State<ClientPartido>
 {
 private:
-  Logged_Out(){}
+  Sending_Question(){}
 public:
-  static Logged_Out* Instance();
+  static Sending_Question* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
   bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
-class Lobby : public State<ClientPartido>
+class Game_Partido_Mode : public State<ClientPartido>
 {
 private:
-  Lobby(){}
+  Game_Partido_Mode(){}
 public:
-  static Lobby* Instance();
+  static Game_Partido_Mode* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
   bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
-
-class Game_Mode : public State<ClientPartido>
-{
-private:
-  Game_Mode(){}
-public:
-  static Game_Mode* Instance();
-  void enter  (ClientPartido* clientPartido);
-  void execute(ClientPartido* clientPartido);
-  void exit   (ClientPartido* clientPartido);
-  bool onLetter(ClientPartido* clientPartido, Letter* letter);
-};
-*/
 #endif
