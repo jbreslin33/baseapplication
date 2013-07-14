@@ -4,7 +4,6 @@
 #include "../../../fsm/state.h"
 
 class Computer;
-struct Telegram;
 
 
 /*******************************

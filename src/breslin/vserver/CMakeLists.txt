@@ -281,9 +281,11 @@ set(HDRS
 	
 	#computer
 	../serverside/computer/computer.h
+	../serverside/computer/partido/computerPartido.h
 	
 	#ai states
 	../serverside/computer/states/computerStates.h	
+	../serverside/computer/partido/states/computerPartidoStates.h	
 	
 	#rotation
 	../serverside/rotation/rotation.h
@@ -366,9 +368,11 @@ set(SRCS
 	
 	#computer
 	../serverside/computer/computer.cpp
+	../serverside/computer/partido/computerPartido.cpp
 	
 	#computer states
 	../serverside/computer/states/computerStates.cpp
+	../serverside/computer/partido/states/computerPartidoStates.cpp
 	
 	#rotation
 	../serverside/rotation/rotation.cpp

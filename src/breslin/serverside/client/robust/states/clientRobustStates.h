@@ -4,7 +4,6 @@
 #include "../../../../fsm/state.h"
 
 class ClientRobust;
-struct Telegram;
 
 
 /*******************************
