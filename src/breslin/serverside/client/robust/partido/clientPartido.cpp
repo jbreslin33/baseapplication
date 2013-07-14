@@ -36,6 +36,12 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	mLosses = 0;
 	mTies = 0;	
 
+        //states
+        mClientPartidoStateMachine =  new StateMachine<ClientPartido>(this);
+        mClientPartidoStateMachine->setCurrentState      (NULL);
+        mClientPartidoStateMachine->setPreviousState     (NULL);
+        mClientPartidoStateMachine->setGlobalState       (NULL);
+
 	
 }
 

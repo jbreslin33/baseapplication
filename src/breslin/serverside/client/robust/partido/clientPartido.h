@@ -21,7 +21,7 @@ public:
 ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID, bool permanence);	
 ~ClientPartido();
 
-//StateMachine<ClientPartido>* mClientPartidoStateMachine;
+StateMachine<ClientPartido>* mClientPartidoStateMachine;
 
 static const int WIN  = 1;
 static const int TIE  = 0;
