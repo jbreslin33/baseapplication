@@ -1,7 +1,7 @@
 #ifndef CLIENTPARTIDOSTATES_H
 #define CLIENTPARTIDOSTATES_H
 
-#include "../../../../../fsm/state.h"
+#include "../../../../fsm/state.h"
 
 class ClientPartido;
 
@@ -23,41 +23,55 @@ public:
 };
 
 /*******************************
-*       CLIENT PARTIDO STATES 
+*       CLIENT STATES 
 ******************************/
-class Waiting_For_Answer : public State<ClientPartido>
+/*
+class Ajax_Node : public State<ClientPartido>
 {
 private:
-  Waiting_For_Answer(){}
+  Ajax_Node(){}
 public:
-  static Waiting_For_Answer* Instance();
+  static Ajax_Node* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
   bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
-class Sending_Question : public State<ClientPartido>
+class Logged_Out : public State<ClientPartido>
 {
 private:
-  Sending_Question(){}
+  Logged_Out(){}
 public:
-  static Sending_Question* Instance();
+  static Logged_Out* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
   bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
-class Game_Partido_Mode : public State<ClientPartido>
+class Lobby : public State<ClientPartido>
 {
 private:
-  Game_Partido_Mode(){}
+  Lobby(){}
 public:
-  static Game_Partido_Mode* Instance();
+  static Lobby* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
   bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
+
+class Game_Mode : public State<ClientPartido>
+{
+private:
+  Game_Mode(){}
+public:
+  static Game_Mode* Instance();
+  void enter  (ClientPartido* clientPartido);
+  void execute(ClientPartido* clientPartido);
+  void exit   (ClientPartido* clientPartido);
+  bool onLetter(ClientPartido* clientPartido, Letter* letter);
+};
+*/
 #endif
