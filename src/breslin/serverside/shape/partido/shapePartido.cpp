@@ -63,7 +63,7 @@ void ShapePartido::collision(Shape* shape)
 	{
 		if (mClientPartido)
 		{
-			mClientPartido->battleStart((ShapePartido*)shape);
+        		mOpponent = (ShapePartido*)shape;
 		}
 	}
 }

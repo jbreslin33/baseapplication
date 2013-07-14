@@ -40,9 +40,29 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 
         //states
         mClientPartidoStateMachine =  new StateMachine<ClientPartido>(this);
-        mClientPartidoStateMachine->setCurrentState      (Game_Partido_Mode::Instance());
+	if (clientID == -1)
+	{
+        	mClientPartidoStateMachine->setCurrentState      (NULL);
+	}
+	else
+	{
+        	mClientPartidoStateMachine->setCurrentState      (Game_Partido_Mode::Instance());
+	}
         mClientPartidoStateMachine->setPreviousState     (NULL);
         mClientPartidoStateMachine->setGlobalState       (GlobalClientPartido::Instance());
+
+        //states
+        mBattleStateMachine =  new StateMachine<ClientPartido>(this);
+	if (clientID == -1)
+	{
+        	mBattleStateMachine->setCurrentState      (NULL);
+	}
+	else
+	{
+        	mBattleStateMachine->setCurrentState      (Battle_OFF::Instance());
+	}
+        mBattleStateMachine->setPreviousState     (NULL);
+        mBattleStateMachine->setGlobalState       (NULL);
 
 	
 }
@@ -85,6 +105,9 @@ void ClientPartido::update()
 {
 	ClientRobust::update();
 	mClientPartidoStateMachine->update();
+	mBattleStateMachine->update();
+
+/*
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
 		if (mShapePartido)
@@ -96,6 +119,7 @@ void ClientPartido::update()
         		}
 		}
 	}
+*/
 }
 
 
@@ -182,8 +206,8 @@ sendQuestion
 
 void ClientPartido::battleStart(ShapePartido* whoToBattle)
 {
-        mKey = 0;
         mShapePartido->mOpponent = whoToBattle;
+        mKey = 0;
 
 	mBattleScore = 0;	
 	mWaitingForAnswer = false;

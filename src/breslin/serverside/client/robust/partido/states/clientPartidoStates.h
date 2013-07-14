@@ -25,6 +25,44 @@ public:
 /*******************************
 *       CLIENT PARTIDO STATES 
 ******************************/
+
+class Battle : public State<ClientPartido>
+{
+private:
+  Battle(){}
+public:
+  static Battle* Instance();
+  void enter  (ClientPartido* clientPartido);
+  void execute(ClientPartido* clientPartido);
+  void exit   (ClientPartido* clientPartido);
+  bool onLetter(ClientPartido* clientPartido, Letter* letter);
+};
+
+class Game_Partido_Mode : public State<ClientPartido>
+{
+private:
+  Game_Partido_Mode(){}
+public:
+  static Game_Partido_Mode* Instance();
+  void enter  (ClientPartido* clientPartido);
+  void execute(ClientPartido* clientPartido);
+  void exit   (ClientPartido* clientPartido);
+  bool onLetter(ClientPartido* clientPartido, Letter* letter);
+};
+
+/***BATTLE***/
+class Battle_OFF : public State<ClientPartido>
+{
+private:
+  Battle_OFF(){}
+public:
+  static Battle_OFF* Instance();
+  void enter  (ClientPartido* clientPartido);
+  void execute(ClientPartido* clientPartido);
+  void exit   (ClientPartido* clientPartido);
+  bool onLetter(ClientPartido* clientPartido, Letter* letter);
+};
+
 class Waiting_For_Answer : public State<ClientPartido>
 {
 private:
@@ -43,18 +81,6 @@ private:
   Sending_Question(){}
 public:
   static Sending_Question* Instance();
-  void enter  (ClientPartido* clientPartido);
-  void execute(ClientPartido* clientPartido);
-  void exit   (ClientPartido* clientPartido);
-  bool onLetter(ClientPartido* clientPartido, Letter* letter);
-};
-
-class Game_Partido_Mode : public State<ClientPartido>
-{
-private:
-  Game_Partido_Mode(){}
-public:
-  static Game_Partido_Mode* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
