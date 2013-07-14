@@ -126,7 +126,7 @@ Battle_OFF* Battle_OFF::Instance()
 }
 void Battle_OFF::enter(ClientPartido* clientPartido)
 {
-        LogString("WAITING_FOR_ANSWER::enter");
+        LogString("Battle_OFF::enter");
 }
 void Battle_OFF::execute(ClientPartido* clientPartido)
 {
@@ -203,6 +203,12 @@ Waiting_For_Answer* Waiting_For_Answer::Instance()
 void Waiting_For_Answer::enter(ClientPartido* clientPartido)
 {
         LogString("WAITING_FOR_ANSWER::enter");
+
+	clientPartido->mComputerAskedTime = clientPartido->mServer->mGameTime;	
+
+ 	int randomNumber = rand() % 1000;
+ 	clientPartido->mComputerAnswerTime = 1500 + randomNumber;
+
         clientPartido->mWaitingForAnswer = true;
 }       
 void Waiting_For_Answer::execute(ClientPartido* clientPartido)
@@ -220,9 +226,10 @@ void Waiting_For_Answer::execute(ClientPartido* clientPartido)
 	//mServerPartido->mAnswerVector.at(mQuestionID)
 	if (!clientPartido->mLoggedIn) //send to readAnswer(int,string)
 	{
-		std::string s = "s";
-		//clientPartido->readAnswer(3000,clientPartido->mServerPartido->mAnswerVector.at(clientPartido->mQuestionID));
-		clientPartido->readAnswer(3000,s);
+		if (clientPartido->mComputerAskedTime + clientPartido->mComputerAnswerTime < clientPartido->mServer->mGameTime)
+		{		
+			clientPartido->readAnswer(clientPartido->mComputerAnswerTime,clientPartido->mServerPartido->mAnswerVector.at(clientPartido->mQuestionID));
+		}
 	}
 	
 }

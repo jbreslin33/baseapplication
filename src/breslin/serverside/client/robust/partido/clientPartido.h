@@ -50,6 +50,8 @@ bool mWaitingForAnswer;
 std::string mQuestionString;
 int mBattleScore;
 std::string mBattleRecordText;
+int mComputerAskedTime;
+int mComputerAnswerTime;
 
 int mWins;
 int mLosses;

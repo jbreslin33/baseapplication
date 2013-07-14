@@ -57,7 +57,6 @@ bool ShapePartido::handleLetter(Letter* letter)
 
 void ShapePartido::collision(Shape* shape)
 {
-	Shape::collision(shape);	
 
 	if (mOpponent == NULL && mOpponentLast != shape)
 	{
@@ -66,5 +65,6 @@ void ShapePartido::collision(Shape* shape)
         		mOpponent = (ShapePartido*)shape;
 		}
 	}
+	//Shape::collision(shape);	
 }
 
