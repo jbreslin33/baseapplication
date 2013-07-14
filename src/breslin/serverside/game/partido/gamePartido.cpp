@@ -88,6 +88,9 @@ bool GamePartido::checkForEndOfGame()
 		{
 			return false;
 		}
+		else
+		{
+		}
 	}
 	
 	return true;
