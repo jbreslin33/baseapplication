@@ -1,6 +1,8 @@
 #include "computerPartido.h"
 #include "../../tdreamsock/dreamSockLog.h"
 
+#include "../../shape/partido/shapePartido.h"
+
 #include <string>
 
 //Ogre headers
@@ -10,7 +12,7 @@ using namespace Ogre;
 //computer states
 #include "states/computerPartidoStates.h"
 
-ComputerPartido::ComputerPartido(ShapePartido* shape) : Computer((Shape*)shape)
+ComputerPartido::ComputerPartido(ShapePartido* shape) : Computer(shape)
 {
 	mShapePartido = shape;
 
