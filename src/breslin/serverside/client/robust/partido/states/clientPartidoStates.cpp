@@ -2,16 +2,14 @@
 #include "clientPartidoStates.h"
 
 //log
-#include "../../../tdreamsock/dreamSockLog.h"
+#include "../../../../tdreamsock/dreamSockLog.h"
 
 //states
-#include "../../../../fsm/stateMachine.h"
+#include "../../../../../fsm/stateMachine.h"
 
 //ability
 #include "../clientPartido.h"
 
-//server
-#include "../../../server/server.h"
 
 /*****************************************
 *******       GLOBAL    ******************
@@ -33,24 +31,6 @@ void GlobalClientPartido::exit(ClientPartido* clientPartido)
 }
 bool GlobalClientPartido::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
-	LogString("GlobalClientPartido::onLetter");
-	Message* message = letter->mMessage;
-	message->BeginReading();	
-	int type = message->ReadByte();
-
-	if (type == clientPartido->mServer->mMessageLogin)
-	{
-		clientPartido->mClientPartidoStateMachine->changeState(Lobby::Instance());
-		return true;
-	}
-	
-	if (type == clientPartido->mServer->mMessageLogout)
-	{
-		clientPartido->mClientPartidoStateMachine->changeState(Logged_Out::Instance());
-		return true;
-	}
-
-
         return false;
 }
 
