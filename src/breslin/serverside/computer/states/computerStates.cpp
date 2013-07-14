@@ -66,19 +66,19 @@ bool GlobalComputer::onLetter(Computer* computer, Letter* letter)
 /*****************************************
 *******      RANDOM COMPUTER    ******************
 ****************************************/
-/*   Random_Computer   */
-Random_Computer* Random_Computer::Instance()
+/*   Computer_Controlled   */
+Computer_Controlled* Computer_Controlled::Instance()
 {
-  static Random_Computer instance;
+  static Computer_Controlled instance;
   return &instance;
 }
 
-void Random_Computer::enter(Computer* computer)
+void Computer_Controlled::enter(Computer* computer)
 {
 
 }
 
-void Random_Computer::execute(Computer* computer)
+void Computer_Controlled::execute(Computer* computer)
 {
 	if (computer->mShape->mSeek)
 	{
@@ -97,14 +97,14 @@ void Random_Computer::execute(Computer* computer)
 	//is this human controlled?
 	if (computer->mShape->mClient->mConnectionState == 1)
 	{
-		computer->mStateMachine->changeState(No_Computer::Instance());
+		computer->mStateMachine->changeState(Human_Controlled::Instance());
 	}
 }
 
-void Random_Computer::exit(Computer* computer)
+void Computer_Controlled::exit(Computer* computer)
 {
 }
-bool Random_Computer::onLetter(Computer* computer, Letter* letter)
+bool Computer_Controlled::onLetter(Computer* computer, Letter* letter)
 {
         return true;
 }
@@ -114,21 +114,21 @@ bool Random_Computer::onLetter(Computer* computer, Letter* letter)
 /*****************************************
 *******      RANDOM COMPUTER    ******************
 ****************************************/
-No_Computer* No_Computer::Instance()
+Human_Controlled* Human_Controlled::Instance()
 {
-	static No_Computer instance;
+	static Human_Controlled instance;
 	return &instance;
 }
 
-void No_Computer::enter(Computer* computer)
+void Human_Controlled::enter(Computer* computer)
 {
 }
 
-void No_Computer::execute(Computer* computer)
+void Human_Controlled::execute(Computer* computer)
 {
 	if (computer->mShape->mClient->mGame)
 	{
-		computer->mStateMachine->changeState(Random_Computer::Instance());
+		computer->mStateMachine->changeState(Computer_Controlled::Instance());
 	}
 
  	computer->mShape->mMove->mHeading->x = 0;
@@ -172,10 +172,10 @@ void No_Computer::execute(Computer* computer)
 
 }
 
-void No_Computer::exit(Computer* computer)
+void Human_Controlled::exit(Computer* computer)
 {
 }
-bool No_Computer::onLetter(Computer* computer, Letter* letter)
+bool Human_Controlled::onLetter(Computer* computer, Letter* letter)
 {
         return true;
 }

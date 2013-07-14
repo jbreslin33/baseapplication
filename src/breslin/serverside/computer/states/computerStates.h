@@ -28,24 +28,24 @@ public:
 *     COMPTER 
 ******************************/
 
-class Random_Computer : public State<Computer>
+class Computer_Controlled : public State<Computer>
 {
 private:
-  Random_Computer(){}
+  Computer_Controlled(){}
 public:
-  static Random_Computer* Instance();
+  static Computer_Controlled* Instance();
   void enter  (Computer* computer);
   void execute(Computer* computer);
   void exit   (Computer* computer);
   bool onLetter(Computer* computer, Letter* letter);
 };
 
-class No_Computer : public State<Computer>
+class Human_Controlled : public State<Computer>
 {
 private:
-  No_Computer(){}
+  Human_Controlled(){}
 public:
-  static No_Computer* Instance();
+  static Human_Controlled* Instance();
   void enter  (Computer* computer);
   void execute(Computer* computer);
   void exit   (Computer* computer);

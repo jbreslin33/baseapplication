@@ -18,8 +18,8 @@ Computer::Computer(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
  	//computer states
    	mStateMachine = new StateMachine<Computer>(this);
-	mStateMachine->setCurrentState      (Random_Computer::Instance());
-	mStateMachine->setPreviousState     (Random_Computer::Instance());
+	mStateMachine->setCurrentState      (Computer_Controlled::Instance());
+	mStateMachine->setPreviousState     (Computer_Controlled::Instance());
 	mStateMachine->setGlobalState       (GlobalComputer::Instance());
 
 	mCounter   = 0;
