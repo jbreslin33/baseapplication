@@ -33,6 +33,9 @@ Move::Move(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
     	mRunAccel    = .04166f * 30.5;
     	mRunDecel    = .04166f * 30.5;
 
+	//max force
+	mMaxForce = 1.0f;
+
  	//move states
 	mStateMachine =  new StateMachine<Move>(this);
 	mStateMachine->setCurrentState      (Normal_Move::Instance());

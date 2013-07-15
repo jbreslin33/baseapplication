@@ -273,6 +273,12 @@ set(HDRS
 	#move states
 	../serverside/move/states/moveStates.h
 	
+	#steering
+	../serverside/steering/steering.h
+	
+	#steering states
+	../serverside/steering/states/steeringStates.h
+	
 	#seek
 	../serverside/seek/seek.h
 	
@@ -360,6 +366,12 @@ set(SRCS
 	
 	#move states
 	../serverside/move/states/moveStates.cpp
+	
+	#steering
+	../serverside/steering/steering.cpp
+	
+	#steering states
+	../serverside/steering/states/steeringStates.cpp
 	
 	#seek
 	../serverside/seek/seek.cpp

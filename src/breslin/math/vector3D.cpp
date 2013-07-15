@@ -23,6 +23,15 @@ Vector3D::~Vector3D()
 {
 }
 
+void Vector3D::truncate(float max)
+{
+	if (this->length() > max)
+  	{
+    		this->normalise();
+    		this->multiply(max);
+  	} 	
+}
+
 float Vector3D::length()
 {
 	return sqrt(x*x + y*y + z*z);

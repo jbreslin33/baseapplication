@@ -46,6 +46,8 @@ float mRunSpeed;
 
 float mSpeedMax;
 
+float mMaxForce;
+
 //run acceleration
 float mRunDecel;
 float mRunAccel;

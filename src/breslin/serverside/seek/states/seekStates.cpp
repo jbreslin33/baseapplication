@@ -78,38 +78,8 @@ void Normal_Seek::execute(Seek* seek)
 	}
 	else
 	{
-//		seek->mStateMachine->changeState(No_Seek::Instance());
+		seek->mStateMachine->changeState(No_Seek::Instance());
 	}
-/*
-	//check for No_seek and Decelerate and Accelerate states..
-    	if (seek->mShape->mHeading.isZeroLength()) 
-	{
-		if(seek->mRunSpeed > 0.0) //Decelerate_Seek
-		{
-			seek->mStateMachine->changeState(Decelerate_Seek::Instance());
-			return;
-		}
-        	else //No_Seek
-		{
-			seek->mStateMachine->changeState(No_Seek::Instance());
-			return;
-		}
-    	}
-	else 
-	{
-        	if(seek->mRunSpeed < seek->mShape->mSpeedMax) //Accelerate_Seek
-		{
-			seek->mStateMachine->changeState(Accelerate_Seek::Instance());
-			return;
-		}
-	}
-
-	//actual seek
-	seek->mShape->mSceneNode->translate(seek->mShape->mHeading.x * seek->mShape->mGame->mServer->mFrameTime / 1000.0f * seek->mRunSpeed,
-		0,
-		seek->mShape->mHeading.z  * seek->mShape->mGame->mServer->mFrameTime / 1000.0f * seek->mRunSpeed,
-		Node::TS_WORLD);
-*/
 }
 void Normal_Seek::exit(Seek* seek)
 {

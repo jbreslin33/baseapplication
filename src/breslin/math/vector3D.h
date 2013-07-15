@@ -36,7 +36,7 @@ void zero();
 void printValues();
 
 void normalise();
-
+void truncate(float max);
 void multiply(float num);
 void add     (Vector3D* vectorToAddtoThisOne);
 void subtract(Vector3D* vectorToAddtoThisOne);
