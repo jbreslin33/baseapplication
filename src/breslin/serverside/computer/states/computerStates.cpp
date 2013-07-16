@@ -16,8 +16,8 @@
 //client
 #include "../../client/robust/clientRobust.h"
 
-//seek
-#include "../../seek/seek.h"
+//steering
+#include "../../steering/steering.h"
 
 //seek
 #include "../../move/move.h"
@@ -80,6 +80,14 @@ void Computer_Controlled::enter(Computer* computer)
 
 void Computer_Controlled::execute(Computer* computer)
 {
+	if (computer->mShape->mClient->db_id == 5)
+	{
+		Vector3D* target = new Vector3D(200.0f,0.0f,200.0f);
+		computer->mShape->mSteering->setTarget(target);
+		computer->mShape->mSteering->mSeekOn = true;
+	}
+	
+
 /*
 	if (computer->mShape->mSeek)
 	{
