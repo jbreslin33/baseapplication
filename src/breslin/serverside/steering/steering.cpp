@@ -109,10 +109,10 @@ Vector3D* Steering::calculate()
 
   	//this will hold the value of each individual steering force
   	mSteeringForce = sumForces();
-/*
+
   	//make sure the force doesn't exceed the vehicles maximum allowable
   	mSteeringForce->truncate(mShape->mMove->mMaxForce);
-*/
+
   	return mSteeringForce;
 }
 
@@ -153,16 +153,21 @@ Vector3D* Steering::sumForces()
   
   	//the soccer players must always tag their neighbors
    	findNeighbours();
-
+/*
   	if (mSeperationOn)
   	{
     		Vector3D* v = separation();
 		v->multiply(mMultSeperation);
     		force->add(v);
 
-    		if (!accumulateForce(mSteeringForce, force)) return mSteeringForce;
+    		if (!accumulateForce(mSteeringForce, force)) 
+		{
+			return mSteeringForce;
+		}
+
   	}    
-/*
+*/
+
   	if (mSeekOn)
   	{
     		force->add(seek(mTarget));
@@ -172,7 +177,7 @@ Vector3D* Steering::sumForces()
 			return mSteeringForce;
 		}
   	}
-*/
+
   	return mSteeringForce;
 }
 
@@ -189,15 +194,18 @@ double Steering::sideComponent()
 
 Vector3D* Steering::seek(Vector3D* target)
 {
-	Vector3D* v = new Vector3D;
+	Vector3D* v = new Vector3D();
+	Vector3D* desiredVelocity = new Vector3D();
+/*
 	v->convertFromVector3(mShape->mSceneNode->getPosition());
 
   	v->multiply(mShape->mMove->mSpeedMax);
   	target->subtract(v);
-  	Vector3D* desiredVelocity = target;
+  	desiredVelocity = target;
   	desiredVelocity->normalise();
 
   	desiredVelocity->subtract(mShape->mMove->mHeading);
+*/
   	return desiredVelocity;
 }
 
@@ -225,7 +233,7 @@ void Steering::findNeighbours()
 Vector3D* Steering::separation()
 {  
 	//iterate through all the neighbors and calculate the vector from the
-  	Vector3D* steeringForce;
+  	Vector3D* steeringForce = new Vector3D();
 
 /*
   	std::list<Shape*>& allPlayers = AutoList<Shape>::GetAllMembers();
