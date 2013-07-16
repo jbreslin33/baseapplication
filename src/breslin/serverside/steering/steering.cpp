@@ -33,6 +33,12 @@ Steering::Steering(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mSteeringForce = new Vector3D();
 	mTarget = new Vector3D();
 
+	mMultSeperation  = 0.0;
+	mViewDistance  = 0.0;
+	mTagged = false;
+
+	mSeekOn = false;
+	mSeperationOn  = false;
 }
 
 Steering::~Steering()
