@@ -31,6 +31,7 @@ Steering::Steering(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mStateMachine->setGlobalState       (GlobalSteering::Instance());
 
 	mSteeringForce = new Vector3D();
+	mTarget = new Vector3D();
 
 }
 
@@ -200,9 +201,9 @@ Vector3D* Steering::seek(Vector3D* target)
 	v->convertFromVector3(mShape->mSceneNode->getPosition());
 
   	v->multiply(mShape->mMove->mSpeedMax);
-/*
   	target->subtract(v);
   	desiredVelocity = target;
+/*
   	desiredVelocity->normalise();
 
   	desiredVelocity->subtract(mShape->mMove->mHeading);
