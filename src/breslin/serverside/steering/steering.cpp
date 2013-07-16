@@ -102,6 +102,20 @@ void Steering::setSteeringShape(Shape* steeringShape)
 	Buckland
 */
 
+Vector3D* Steering::calculate()
+{                                                                         
+	//reset the force
+  	mSteeringForce->zero();
+
+  	//this will hold the value of each individual steering force
+  	mSteeringForce = sumForces();
+/*
+  	//make sure the force doesn't exceed the vehicles maximum allowable
+  	mSteeringForce->truncate(mShape->mMove->mMaxForce);
+*/
+  	return mSteeringForce;
+}
+
 bool Steering::accumulateForce(Vector3D* sf, Vector3D* forceToAdd)
 {
 	//first calculate how much steering force we have left to use
@@ -132,23 +146,10 @@ bool Steering::accumulateForce(Vector3D* sf, Vector3D* forceToAdd)
   	return true;
 }
 
-Vector3D* Steering::calculate()
-{                                                                         
-	//reset the force
-  	mSteeringForce->zero();
-/*
-  	//this will hold the value of each individual steering force
-  	mSteeringForce = sumForces();
-
-  	//make sure the force doesn't exceed the vehicles maximum allowable
-  	mSteeringForce->truncate(mShape->mMove->mMaxForce);
-*/
-  	return mSteeringForce;
-}
 
 Vector3D* Steering::sumForces()
 {
-	Vector3D* force;
+	Vector3D* force = new Vector3D();
   
   	//the soccer players must always tag their neighbors
    	findNeighbours();
@@ -161,7 +162,7 @@ Vector3D* Steering::sumForces()
 
     		if (!accumulateForce(mSteeringForce, force)) return mSteeringForce;
   	}    
-
+/*
   	if (mSeekOn)
   	{
     		force->add(seek(mTarget));
@@ -171,7 +172,7 @@ Vector3D* Steering::sumForces()
 			return mSteeringForce;
 		}
   	}
-
+*/
   	return mSteeringForce;
 }
 
