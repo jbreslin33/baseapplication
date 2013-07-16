@@ -60,26 +60,6 @@ void Normal_Steering::enter(Steering* steering)
 }
 void Normal_Steering::execute(Steering* steering)
 {
-	if (steering->mSteeringShape || steering->mSteeringPoint)
-	{
- 		Vector3D* newKeyDirection = new Vector3D();
-                Vector3D* currentPosition  = new Vector3D();
-
-                currentPosition->x = steering->mShape->mSceneNode->getPosition().x;
-                currentPosition->y = steering->mShape->mSceneNode->getPosition().y;
-                currentPosition->z = steering->mShape->mSceneNode->getPosition().z;
-
-                newKeyDirection->subtract(steering->mSteeringPoint,currentPosition);
-                steering->mShape->mMove->mHeading->x = newKeyDirection->x;
-               	steering->mShape->mMove->mHeading->y = newKeyDirection->y;
-                steering->mShape->mMove->mHeading->z  = newKeyDirection->z;
-
-                steering->mShape->mMove->mHeading->normalise();
-	}
-	else
-	{
-		steering->mStateMachine->changeState(No_Steering::Instance());
-	}
 }
 void Normal_Steering::exit(Steering* steering)
 {
@@ -103,14 +83,6 @@ void No_Steering::enter(Steering* steering)
 }
 void No_Steering::execute(Steering* steering)
 {
-	if (steering->mSteeringShape == NULL && steering->mSteeringPoint == NULL)
-	{
-		//LogString("Not steeringing");
-	}
-	else
-	{
-		steering->mStateMachine->changeState(Normal_Steering::Instance());
-	}
 }
 void No_Steering::exit(Steering* steering)
 {

@@ -80,6 +80,7 @@ void Computer_Controlled::enter(Computer* computer)
 
 void Computer_Controlled::execute(Computer* computer)
 {
+/*
 	if (computer->mShape->mSeek)
 	{
 		if (computer->mShape->mClient->db_id == 5)
@@ -93,6 +94,7 @@ void Computer_Controlled::execute(Computer* computer)
 			}
 		}
 	}
+*/
 
 	//is this human controlled?
 	if (computer->mShape->mClient->mConnectionState == 1)

@@ -29,6 +29,9 @@ Steering::Steering(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mStateMachine->setCurrentState      (Normal_Steering::Instance());
 	mStateMachine->setPreviousState     (Normal_Steering::Instance());
 	mStateMachine->setGlobalState       (GlobalSteering::Instance());
+
+	mSteeringForce = new Vector3D();
+
 }
 
 Steering::~Steering()
@@ -36,12 +39,16 @@ Steering::~Steering()
 }
 void Steering::update()
 {
-	mStateMachine->update();
+//	mStateMachine->update();
+
+	calculate();
 	
+/*
 	if (mSteeringShape)
 	{
 		updateSteeringPoint();
 	}
+*/
 }
 
 bool Steering::handleLetter(Letter* letter)
@@ -129,13 +136,13 @@ Vector3D* Steering::calculate()
 {                                                                         
 	//reset the force
   	mSteeringForce->zero();
-
+/*
   	//this will hold the value of each individual steering force
   	mSteeringForce = sumForces();
 
   	//make sure the force doesn't exceed the vehicles maximum allowable
   	mSteeringForce->truncate(mShape->mMove->mMaxForce);
-
+*/
   	return mSteeringForce;
 }
 

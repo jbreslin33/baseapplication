@@ -22,8 +22,8 @@
 //move
 #include "../move/move.h"
 
-//seek
-#include "../seek/seek.h"
+//steering
+#include "../steering/steering.h"
 
 //ai
 #include "../computer/computer.h"
@@ -67,9 +67,8 @@ Shape::Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* pos
 	
 	mComputer = new Computer(this);
 	addAbility(mComputer);	
-	
-	mSeek = new Seek(this);
-	addSteeringAbility(mSeek);	
+
+	mSteering = new Steering(this);
 	
 	mRotation = new Rotation(this);
 	addAbility(mRotation);	
@@ -110,11 +109,6 @@ void Shape::setValues()
 void Shape::addAbility(BaseEntity* ability)
 {
 	mAbilityVector.push_back(ability);	
-}
-
-void Shape::addSteeringAbility(BaseEntity* ability)
-{
-	mSteeringAbilityVector.push_back(ability);	
 }
 
 void Shape::remove()
@@ -173,13 +167,16 @@ void Shape::update()
 	{
 		mAbilityVector.at(i)->update();
 	}
+
+	mSteering->update();
 	
 	//process ticks on steering abilitys..here you can use one of the precedence or bailout methods in bucklands book
+/*
 	for (unsigned int i = 0; i < mSteeringAbilityVector.size(); i++)
 	{
 		mSteeringAbilityVector.at(i)->update();
 	}
-	
+*/	
 	if (mText.compare(mTextLast) != 0)
 	{
 		sendText();				
