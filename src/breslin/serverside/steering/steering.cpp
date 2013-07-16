@@ -203,11 +203,11 @@ Vector3D* Steering::seek(Vector3D* target)
   	v->multiply(mShape->mMove->mSpeedMax);
   	target->subtract(v);
   	desiredVelocity = target;
-/*
+
   	desiredVelocity->normalise();
 
   	desiredVelocity->subtract(mShape->mMove->mHeading);
-*/
+
   	return desiredVelocity;
 }
 
