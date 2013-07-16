@@ -10,10 +10,6 @@
 #include "Ogre.h"
 using namespace Ogre;
 
-/***********************************************
-		FORWARD DECLARATIONS
-***********************************************/
-
 class Shape;
 class Vector3D;
 class Letter;
@@ -26,20 +22,11 @@ public:
 Steering(Shape* shape);
 ~Steering();
 
-/***********************************************
-		VARIABLES
-***********************************************/
-
-/***********************************************
-		METHODS
-***********************************************/
-
 //update
 virtual void update();
 
 //handle letter 
 virtual bool  handleLetter(Letter* letter);
-
 
 Shape* mShape;
 Shape* mSteeringShape;
