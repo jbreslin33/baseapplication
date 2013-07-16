@@ -196,10 +196,11 @@ Vector3D* Steering::seek(Vector3D* target)
 {
 	Vector3D* v = new Vector3D();
 	Vector3D* desiredVelocity = new Vector3D();
-/*
+
 	v->convertFromVector3(mShape->mSceneNode->getPosition());
 
   	v->multiply(mShape->mMove->mSpeedMax);
+/*
   	target->subtract(v);
   	desiredVelocity = target;
   	desiredVelocity->normalise();
