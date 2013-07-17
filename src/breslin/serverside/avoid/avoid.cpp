@@ -63,6 +63,9 @@ bool Avoid::removeAvoidShape(Shape* avoidShape)
 
 Shape*  Avoid::findClosestAvoidee()
 {
+	Shape* closestShapeSoFar = NULL;
+	float closestDistanceSoFar = 3000.0f;
+
 	for (int i = 0; i < mAvoidVector.size(); i++)
 	{
 		Shape* avoidee = mAvoidVector.at(i);
@@ -84,9 +87,13 @@ Shape*  Avoid::findClosestAvoidee()
 		differenceVector->subtract(currentPosition,currentAvoideePosition);
 
 		float length = differenceVector->length();
-		//LogString("i:%d",i);
-		//LogString("length:%f",length); 	
-	
+
+		if (length < closestDistanceSoFar)
+		{
+			closestShapeSoFar = avoidee;
+			closestDistanceSoFar = length;
+		}
 	}
+	return closestShapeSoFar;
 }
 

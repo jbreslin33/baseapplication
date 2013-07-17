@@ -203,7 +203,7 @@ Vector3D* Game::getOpenPoint()
 {
 	Vector3D* vector3D = new Vector3D();
 
-	for (int x = 25; x < 3000; x++)
+	for (int x = -200; x < 3000; x++)
 	{	
 		bool occupied = false; 
 		vector3D->x = x;
@@ -228,7 +228,7 @@ Vector3D* Game::getOpenPoint()
 
                                 //i am simply adding the 2 collisionradius's of the 2 objects in question then comparing
                                 //to distSQ between them. IS this right or is it working by chance?
-                                if(distSq < mShapeVector.at(i)->mCollisionRadiusSpawn * 25)
+                                if(distSq < mShapeVector.at(i)->mCollisionRadiusSpawn * 300)
                                 {
 					occupied = true; 
                                 }
