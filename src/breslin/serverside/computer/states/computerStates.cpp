@@ -87,23 +87,6 @@ void Computer_Controlled::execute(Computer* computer)
 		computer->mShape->mSteering->mSeekOn = true;
 	}
 	
-
-/*
-	if (computer->mShape->mSeek)
-	{
-		if (computer->mShape->mClient->db_id == 5)
-		{
-			for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
-			{
-				if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
-				{
-					computer->mShape->mSeek->setSeekShape(computer->mShape->mGame->mShapeVector.at(i));	
-				}
-			}
-		}
-	}
-*/
-
 	//is this human controlled?
 	if (computer->mShape->mClient->mConnectionState == 1)
 	{
@@ -141,32 +124,32 @@ void Human_Controlled::execute(Computer* computer)
 		computer->mStateMachine->changeState(Computer_Controlled::Instance());
 	}
 
- 	computer->mShape->mMove->mHeading->x = 0;
-        computer->mShape->mMove->mHeading->y = 0;
-        computer->mShape->mMove->mHeading->z = 0;
+ 	computer->mShape->mMove->mVelocity->x = 0;
+        computer->mShape->mMove->mVelocity->y = 0;
+        computer->mShape->mMove->mVelocity->z = 0;
 
         // keep track of the player's intended direction
         if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyUp)
         {
-                computer->mShape->mMove->mHeading->z += -1;
+                computer->mShape->mMove->mVelocity->z += -1;
         }
 
         if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyLeft)
         {
-                computer->mShape->mMove->mHeading->x += -1;
+                computer->mShape->mMove->mVelocity->x += -1;
         }
 
         if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyDown)
         {
-                computer->mShape->mMove->mHeading->z += 1;
+                computer->mShape->mMove->mVelocity->z += 1;
         }
   
         if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyRight)
         {
-                computer->mShape->mMove->mHeading->x += 1;
+                computer->mShape->mMove->mVelocity->x += 1;
         }
 
-        computer->mShape->mMove->mHeading->normalise();
+        computer->mShape->mMove->mVelocity->normalise();
 
 	//Rotation
         computer->mShape->mRotation->mDegrees = 0.0f;

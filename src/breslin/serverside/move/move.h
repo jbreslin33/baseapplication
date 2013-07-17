@@ -39,7 +39,7 @@ Vector3D* mPositionBeforeCollision;
 StateMachine<Move>* mStateMachine;
 
 //keys
-Vector3D* mHeading;
+Vector3D* mVelocity;
 
 //run speed
 float mRunSpeed;

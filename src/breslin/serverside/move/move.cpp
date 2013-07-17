@@ -16,7 +16,7 @@ using namespace Ogre;
 
 Move::Move(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
-        mHeading = new Vector3D();
+        mVelocity = new Vector3D();
 
 	mShape = shape;
 

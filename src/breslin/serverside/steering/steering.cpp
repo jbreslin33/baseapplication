@@ -1,7 +1,7 @@
 #include "steering.h"
 #include "../tdreamsock/dreamSockLog.h"
 
-#include "../client/client.h"
+#include "../client/robust/clientRobust.h"
 #include "../shape/shape.h"
 #include "../move/move.h"
 
@@ -119,8 +119,75 @@ Vector3D* Steering::calculate()
 
   	//make sure the force doesn't exceed the vehicles maximum allowable
   	mSteeringForce->truncate(mShape->mMove->mMaxForce);
+	
+	mShape->mMove->mVelocity->copyValuesFrom(mSteeringForce); 
+	mShape->mMove->mVelocity->normalise(); 
+
+	if (mShape->mClient->db_id == 5)
+	{
+		LogString("calculate");
+		LogString("x:%f", mShape->mMove->mVelocity->x);
+		LogString("z:%f", mShape->mMove->mVelocity->z);
+	}
 
   	return mSteeringForce;
+}
+
+Vector3D* Steering::sumForces()
+{
+	Vector3D* force = new Vector3D();
+  
+  	//the soccer players must always tag their neighbors
+   	findNeighbours();
+/*
+  	if (mSeperationOn)
+  	{
+    		Vector3D* v = separation();
+		v->multiply(mMultSeperation);
+    		force->add(v);
+
+    		if (!accumulateForce(mSteeringForce, force)) 
+		{
+			return mSteeringForce;
+		}
+
+  	}    
+*/
+  	if (mSeekOn)
+  	{
+		Vector3D* seekForce = seek(mTarget);
+		LogString("seekForce");
+		LogString("x:%f",seekForce->x);
+		LogString("z:%f",seekForce->z);
+
+    		force->add(seekForce);
+
+    		if (!accumulateForce(mSteeringForce, force))
+		{
+			return mSteeringForce;
+		}
+  	}
+  	return mSteeringForce;
+}
+
+Vector3D* Steering::seek(Vector3D* target)
+{
+	Vector3D* currentPosition = new Vector3D();
+	Vector3D* desiredVelocity = new Vector3D();
+
+	currentPosition->convertFromVector3(mShape->mSceneNode->getPosition());
+
+  	currentPosition->multiply(mShape->mMove->mSpeedMax);
+
+  	desiredVelocity->copyValuesFrom(target);
+  	desiredVelocity->subtract(currentPosition);
+
+
+  	desiredVelocity->normalise();
+
+  	//desiredVelocity->subtract(mShape->mMove->mVelocity);
+
+  	return desiredVelocity;
 }
 
 bool Steering::accumulateForce(Vector3D* sf, Vector3D* forceToAdd)
@@ -154,43 +221,10 @@ bool Steering::accumulateForce(Vector3D* sf, Vector3D* forceToAdd)
 }
 
 
-Vector3D* Steering::sumForces()
-{
-	Vector3D* force = new Vector3D();
-  
-  	//the soccer players must always tag their neighbors
-   	findNeighbours();
-/*
-  	if (mSeperationOn)
-  	{
-    		Vector3D* v = separation();
-		v->multiply(mMultSeperation);
-    		force->add(v);
-
-    		if (!accumulateForce(mSteeringForce, force)) 
-		{
-			return mSteeringForce;
-		}
-
-  	}    
-*/
-
-  	if (mSeekOn)
-  	{
-    		force->add(seek(mTarget));
-
-    		if (!accumulateForce(mSteeringForce, force))
-		{
-			return mSteeringForce;
-		}
-  	}
-
-  	return mSteeringForce;
-}
 
 double Steering::forwardComponent()
 {
-  	return mShape->mMove->mHeading->dot(mSteeringForce);
+  	return mShape->mMove->mVelocity->dot(mSteeringForce);
 }
 
 double Steering::sideComponent()
@@ -199,23 +233,6 @@ double Steering::sideComponent()
 	return 0.0f;
 }
 
-Vector3D* Steering::seek(Vector3D* target)
-{
-	Vector3D* v = new Vector3D();
-	Vector3D* desiredVelocity = new Vector3D();
-
-	v->convertFromVector3(mShape->mSceneNode->getPosition());
-
-  	v->multiply(mShape->mMove->mSpeedMax);
-  	target->subtract(v);
-  	desiredVelocity = target;
-
-  	desiredVelocity->normalise();
-
-  	desiredVelocity->subtract(mShape->mMove->mHeading);
-
-  	return desiredVelocity;
-}
 
 void Steering::findNeighbours()
 {
