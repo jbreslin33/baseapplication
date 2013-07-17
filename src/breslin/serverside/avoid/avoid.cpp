@@ -20,8 +20,8 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
 	mShape = shape;
 
-	mAvoidShape = NULL;
-	mAvoidPoint = NULL;
+	mOptimalPoint = NULL;
+	mOptimalVelocity = NULL;
 
  	//avoid states
 	mStateMachine =  new StateMachine<Avoid>(this);
@@ -36,11 +36,6 @@ Avoid::~Avoid()
 void Avoid::update()
 {
 	mStateMachine->update();
-	
-	if (mAvoidShape)
-	{
-		updateAvoidPoint();
-	}
 }
 
 bool Avoid::handleLetter(Letter* letter)
@@ -48,45 +43,50 @@ bool Avoid::handleLetter(Letter* letter)
         return mStateMachine->handleLetter(letter);
 }
 
-void Avoid::updateAvoidPoint()
+void Avoid::addAvoidShape(Shape* avoidShape)
 {
-	//update avoid point if avoid shape
- 	if (mAvoidShape)
-        {
-                //set avoid point as that is what we will really use...
-                mAvoidPoint = new Vector3D();
-                mAvoidPoint->x = mAvoidShape->mSceneNode->getPosition().x;             
-                mAvoidPoint->y = mAvoidShape->mSceneNode->getPosition().y;             
-                mAvoidPoint->z = mAvoidShape->mSceneNode->getPosition().z;             
-        }
+	mAvoidVector.push_back(avoidShape);
 }
 
-void Avoid::setAvoidPoint(Vector3D* avoidPoint)
+bool Avoid::removeAvoidShape(Shape* avoidShape)
 {
-	if (avoidPoint)
+	for (int i = 0; i < mAvoidVector.size(); i++)
 	{
-		mAvoidPoint = new Vector3D();
-		mAvoidPoint->copyValuesFrom(avoidPoint); 
+		if (mAvoidVector.at(i) == avoidShape)
+		{
+			mAvoidVector.erase(mAvoidVector.begin()+i);
+			return true;
+		}	
 	}
-	else
+	return false;
+}
+
+Shape*  Avoid::findClosestAvoidee()
+{
+	for (int i = 0; i < mAvoidVector.size(); i++)
 	{
-		mAvoidPoint = NULL;
-		mAvoidShape = NULL;
+		Shape* avoidee = mAvoidVector.at(i);
+
+ 		Vector3D* newKeyDirection         = new Vector3D();
+
+                Vector3D* currentPosition         = new Vector3D();
+                Vector3D* currentAvoideePosition  = new Vector3D();
+                Vector3D* differenceVector        = new Vector3D();
+
+                currentPosition->x = mShape->mSceneNode->getPosition().x;
+                currentPosition->y = mShape->mSceneNode->getPosition().y;
+                currentPosition->z = mShape->mSceneNode->getPosition().z;
+
+                currentAvoideePosition->x = avoidee->mSceneNode->getPosition().x;
+                currentAvoideePosition->y = avoidee->mSceneNode->getPosition().y;
+                currentAvoideePosition->z = avoidee->mSceneNode->getPosition().z;
+
+		differenceVector->subtract(currentPosition,currentAvoideePosition);
+
+		float length = differenceVector->length();
+		LogString("i:%d",i);
+		LogString("length:%f",length); 	
+	
 	}
 }
 
-void Avoid::setAvoidShape(Shape* avoidShape)
-{
-	if (avoidShape)
-	{
-		//set shape
-		mAvoidShape = avoidShape;
-
-		updateAvoidPoint();
-	}
-	else
-	{
-		mAvoidShape = NULL;
-		mAvoidPoint = NULL;
-	}
-}

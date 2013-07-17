@@ -22,6 +22,9 @@
 //seek
 #include "../../seek/seek.h"
 
+//avoid
+#include "../../avoid/avoid.h"
+
 //move
 #include "../../move/move.h"
 
@@ -78,11 +81,26 @@ Computer_Controlled* Computer_Controlled::Instance()
 
 void Computer_Controlled::enter(Computer* computer)
 {
+	LogString("Computer_Controlled::enter");
+    	if (computer->mShape->mAvoid)
+        {
+                if (computer->mShape->mClient->db_id == 5)
+                {
+                        for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
+                        {
+                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
+                                {
+                                        computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
+                                }
+                        }
+                }
+        }
 
 }
 
 void Computer_Controlled::execute(Computer* computer)
 {
+/*
        	if (computer->mShape->mSeek)
         {
                 if (computer->mShape->mClient->db_id == 5)
@@ -96,6 +114,7 @@ void Computer_Controlled::execute(Computer* computer)
                         }
                 }
         }
+*/
 /*
 	if (computer->mShape->mClient->db_id == 5)
 	{
@@ -105,7 +124,7 @@ void Computer_Controlled::execute(Computer* computer)
 	}
 */	
 	//is this human controlled?
-	if (computer->mShape->mClient->mConnectionState == 1)
+	if (computer->mShape->mClient->mLoggedIn)
 	{
 		computer->mStateMachine->changeState(Human_Controlled::Instance());
 	}
@@ -136,7 +155,7 @@ void Human_Controlled::enter(Computer* computer)
 
 void Human_Controlled::execute(Computer* computer)
 {
-	if (computer->mShape->mClient->mGame)
+	if (!computer->mShape->mClient->mLoggedIn)
 	{
 		computer->mStateMachine->changeState(Computer_Controlled::Instance());
 	}

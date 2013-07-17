@@ -9,10 +9,6 @@
 #include "Ogre.h"
 using namespace Ogre;
 
-/***********************************************
-		FORWARD DECLARATIONS
-***********************************************/
-
 class Shape;
 class Vector3D;
 class Letter;
@@ -25,31 +21,25 @@ public:
 Avoid(Shape* shape);
 ~Avoid();
 
-/***********************************************
-		VARIABLES
-***********************************************/
-
-/***********************************************
-		METHODS
-***********************************************/
-
 //update
 virtual void update();
 
 //handle letter 
 virtual bool  handleLetter(Letter* letter);
 
-
 Shape* mShape;
-Shape* mAvoidShape;
-Vector3D* mAvoidPoint;
-void setAvoidPoint(Vector3D* avoidPoint);
-void setAvoidShape(Shape* avoidShape);
-void updateAvoidPoint();
+
+void addAvoidShape   (Shape* avoidShape);
+bool removeAvoidShape(Shape* avoidShape);
+
+Vector3D* mOptimalPoint; 
+Vector3D* mOptimalVelocity; 
 
 StateMachine<Avoid>* mStateMachine;
 
+std::vector<Shape*> mAvoidVector;
 
+Shape* findClosestAvoidee();
 
 };
 
