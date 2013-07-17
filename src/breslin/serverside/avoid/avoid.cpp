@@ -84,8 +84,8 @@ Shape*  Avoid::findClosestAvoidee()
 		differenceVector->subtract(currentPosition,currentAvoideePosition);
 
 		float length = differenceVector->length();
-		LogString("i:%d",i);
-		LogString("length:%f",length); 	
+		//LogString("i:%d",i);
+		//LogString("length:%f",length); 	
 	
 	}
 }

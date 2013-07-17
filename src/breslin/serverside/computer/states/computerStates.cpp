@@ -81,7 +81,6 @@ Computer_Controlled* Computer_Controlled::Instance()
 
 void Computer_Controlled::enter(Computer* computer)
 {
-	LogString("Computer_Controlled::enter");
     	if (computer->mShape->mAvoid)
         {
                 if (computer->mShape->mClient->db_id == 5)
