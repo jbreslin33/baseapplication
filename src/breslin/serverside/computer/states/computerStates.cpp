@@ -20,9 +20,12 @@
 #include "../../steering/steering.h"
 
 //seek
+#include "../../seek/seek.h"
+
+//move
 #include "../../move/move.h"
 
-//seek
+//rotation
 #include "../../rotation/rotation.h"
 
 //vector3D
@@ -80,13 +83,27 @@ void Computer_Controlled::enter(Computer* computer)
 
 void Computer_Controlled::execute(Computer* computer)
 {
+       	if (computer->mShape->mSeek)
+        {
+                if (computer->mShape->mClient->db_id == 5)
+                {
+                        for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
+                        {
+                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
+                                {
+                                        computer->mShape->mSeek->setSeekShape(computer->mShape->mGame->mShapeVector.at(i));     
+                                }
+                        }
+                }
+        }
+/*
 	if (computer->mShape->mClient->db_id == 5)
 	{
 		Vector3D* target = new Vector3D(200.0f,0.0f,200.0f);
 		computer->mShape->mSteering->setTarget(target);
 		computer->mShape->mSteering->mSeekOn = true;
 	}
-	
+*/	
 	//is this human controlled?
 	if (computer->mShape->mClient->mConnectionState == 1)
 	{

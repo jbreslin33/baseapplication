@@ -20,6 +20,7 @@ using namespace Ogre;
 class Game;
 class ClientRobust;
 class Steering;
+class Seek;
 class Rotation;
 class Move;
 class Computer;
@@ -65,10 +66,12 @@ Game* mGame;
 
 //abilitys
 std::vector<BaseEntity*> mAbilityVector;	 //all abilitys for this shape
+std::vector<BaseEntity*> mSteeringAbilityVector;         //all steering abilitys for this shape
 
 Rotation* mRotation;
 Move* 	  mMove;
 Steering* mSteering;
+Seek*     mSeek;
 Computer* mComputer;
 
 //associated client if any
@@ -96,6 +99,7 @@ void remove();
 
 //abilitys
 void     addAbility(BaseEntity* ability);
+void     addSteeringAbility(BaseEntity* ability);
 
 //create
 void createShape(Ogre::Root* root, Vector3D* position);

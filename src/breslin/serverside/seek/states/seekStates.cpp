@@ -60,6 +60,26 @@ void Normal_Seek::enter(Seek* seek)
 }
 void Normal_Seek::execute(Seek* seek)
 {
+	if (seek->mSeekShape || seek->mSeekPoint)
+        {
+                Vector3D* newKeyDirection = new Vector3D();
+                Vector3D* currentPosition  = new Vector3D();
+
+                currentPosition->x = seek->mShape->mSceneNode->getPosition().x;
+                currentPosition->y = seek->mShape->mSceneNode->getPosition().y;
+                currentPosition->z = seek->mShape->mSceneNode->getPosition().z;
+
+                newKeyDirection->subtract(seek->mSeekPoint,currentPosition);
+                seek->mShape->mMove->mVelocity->x = newKeyDirection->x;
+                seek->mShape->mMove->mVelocity->y = newKeyDirection->y;
+                seek->mShape->mMove->mVelocity->z = newKeyDirection->z;
+
+                seek->mShape->mMove->mVelocity->normalise();
+        }
+        else
+        {
+                seek->mStateMachine->changeState(No_Seek::Instance());
+        }
 }
 void Normal_Seek::exit(Seek* seek)
 {
