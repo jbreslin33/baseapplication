@@ -88,6 +88,13 @@ void Vector3D::add(Vector3D* vectorToAddtoThisOne)
 	z = z + vectorToAddtoThisOne->z;
 }
 
+void Vector3D::add(Vector3D* add1, Vector3D* add2)
+{
+	x = add1->x - add2->x;
+	y = add1->y - add2->y;
+	z = add1->z - add2->z;	
+}
+
 //subtract another vector from this one
 void Vector3D::subtract(Vector3D* vectorToSubtract)
 {

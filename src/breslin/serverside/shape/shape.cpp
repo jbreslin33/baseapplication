@@ -179,20 +179,16 @@ void Shape::update()
     	mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;
     	mMove->mPositionBeforeCollision->z = mSceneNode->getPosition().z;
 	
-	//mSteering->update();
-
+        for (unsigned int i = 0; i < mSteeringAbilityVector.size(); i++)
+        {
+                mSteeringAbilityVector.at(i)->update();
+        }
 	//process ticks on abilitys
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
 		mAbilityVector.at(i)->update();
 	}
     
-    	//process ticks on steering abilitys..here you can use one of the precedence or bailout methods in bucklands book
-
-        for (unsigned int i = 0; i < mSteeringAbilityVector.size(); i++)
-        {
-                mSteeringAbilityVector.at(i)->update();
-        }
    
 	if (mText.compare(mTextLast) != 0)
 	{

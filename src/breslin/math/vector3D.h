@@ -39,6 +39,7 @@ void normalise();
 void truncate(float max);
 void multiply(float num);
 void add     (Vector3D* vectorToAddtoThisOne);
+void add     (Vector3D* add1, Vector3D* add2);
 void subtract(Vector3D* vectorToAddtoThisOne);
 void subtract(Vector3D* sub1, Vector3D* sub2);
 void copyValuesFrom(Vector3D* copyFrom);

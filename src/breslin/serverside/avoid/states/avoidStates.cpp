@@ -65,8 +65,39 @@ void Normal_Avoid::execute(Avoid* avoid)
 		avoid->mStateMachine->changeState(No_Avoid::Instance());
 	}
 
-	avoid->findClosestAvoidee();
-	
+	Shape* avoidee = avoid->findClosestAvoidee();
+
+	if (avoidee)
+	{
+		//get current proposed velocity from seek and others basically...
+		Vector3D* currentProposedVelocity = new Vector3D();
+		currentProposedVelocity->copyValuesFrom(avoid->mShape->mMove->mVelocity);		
+		//get current position of avoidee
+		Vector3D* avoideePosition = new Vector3D();	
+		avoideePosition->convertFromVector3(avoidee->mSceneNode->getPosition());
+
+		//let's get a direction vector to the shape to be avoided
+ 		Vector3D* velocityToAvoidAvoidee     = new Vector3D();
+                Vector3D* currentPosition = new Vector3D();
+                currentPosition->convertFromVector3(avoid->mShape->mSceneNode->getPosition());
+                velocityToAvoidAvoidee->subtract(currentPosition,avoideePosition);
+
+		//betweeen	
+
+		velocityToAvoidAvoidee->normalise();
+		velocityToAvoidAvoidee->normalise();
+		avoid->mShape->mMove->mVelocity = velocityToAvoidAvoidee;
+
+/*
+		Vector3D* compromiseVelocity = new Vector3D();
+		compromiseVelocity->add(currentProposedVelocity,velocityToAvoidAvoidee); 
+		compromiseVelocity->multiply(.5);
+		compromiseVelocity->normalise();
+		avoid->mShape->mMove->mVelocity = compromiseVelocity;
+*/	
+		
+
+	}
 
 }
 void Normal_Avoid::exit(Avoid* avoid)
