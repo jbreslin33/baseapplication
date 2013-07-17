@@ -3,52 +3,52 @@
 
 #include "../../../fsm/state.h"
 
-class Seek;
+class Avoid;
 struct Telegram;
 
 
 /*******************************
-*      GlobalSeek
+*      GlobalAvoid
 ******************************/
 
-class GlobalSeek : public State<Seek>
+class GlobalAvoid : public State<Avoid>
 {
 private:
-  GlobalSeek(){}
+  GlobalAvoid(){}
 public:
-  static GlobalSeek* Instance();
-  void enter  (Seek* seek);
-  void execute(Seek* seek);
-  void exit   (Seek* seek);
-  bool onLetter(Seek* seek, Letter* letter);
+  static GlobalAvoid* Instance();
+  void enter  (Avoid* avoid);
+  void execute(Avoid* avoid);
+  void exit   (Avoid* avoid);
+  bool onLetter(Avoid* avoid, Letter* letter);
 };
 
 /*******************************
-*      Seek
+*      Avoid
 ******************************/
 
-class Normal_Seek : public State<Seek>
+class Normal_Avoid : public State<Avoid>
 {
 private:
-  Normal_Seek(){}
+  Normal_Avoid(){}
 public:
-  static Normal_Seek* Instance();
-  void enter  (Seek* seek);
-  void execute(Seek* seek);
-  void exit   (Seek* seek);
-  bool onLetter(Seek* seek, Letter* letter);
+  static Normal_Avoid* Instance();
+  void enter  (Avoid* avoid);
+  void execute(Avoid* avoid);
+  void exit   (Avoid* avoid);
+  bool onLetter(Avoid* avoid, Letter* letter);
 };
 
-class No_Seek : public State<Seek>
+class No_Avoid : public State<Avoid>
 {
 private:
-  No_Seek(){}
+  No_Avoid(){}
 public:
-  static No_Seek* Instance();
-  void enter  (Seek* seek);
-  void execute(Seek* seek);
-  void exit   (Seek* seek);
-  bool onLetter(Seek* seek, Letter* letter);
+  static No_Avoid* Instance();
+  void enter  (Avoid* avoid);
+  void execute(Avoid* avoid);
+  void exit   (Avoid* avoid);
+  bool onLetter(Avoid* avoid, Letter* letter);
 };
 
 #endif

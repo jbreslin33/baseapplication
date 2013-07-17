@@ -21,6 +21,7 @@ class Game;
 class ClientRobust;
 class Steering;
 class Seek;
+class Avoid;
 class Rotation;
 class Move;
 class Computer;
@@ -72,6 +73,7 @@ Rotation* mRotation;
 Move* 	  mMove;
 Steering* mSteering;
 Seek*     mSeek;
+Avoid*    mAvoid;
 Computer* mComputer;
 
 //associated client if any

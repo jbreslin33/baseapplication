@@ -1,5 +1,5 @@
-#ifndef SEEK_H
-#define SEEK_H
+#ifndef AVOID_H
+#define AVOID_H
 
 #include "../../baseentity/baseEntity.h"
 
@@ -17,13 +17,13 @@ class Shape;
 class Vector3D;
 class Letter;
 
-class Seek : public BaseEntity 
+class Avoid : public BaseEntity 
 {
 
 public:
 
-Seek(Shape* shape);
-~Seek();
+Avoid(Shape* shape);
+~Avoid();
 
 /***********************************************
 		VARIABLES
@@ -41,13 +41,13 @@ virtual bool  handleLetter(Letter* letter);
 
 
 Shape* mShape;
-Shape* mSeekShape;
-Vector3D* mSeekPoint;
-void setSeekPoint(Vector3D* seekPoint);
-void setSeekShape(Shape* seekShape);
-void updateSeekPoint();
+Shape* mAvoidShape;
+Vector3D* mAvoidPoint;
+void setAvoidPoint(Vector3D* avoidPoint);
+void setAvoidShape(Shape* avoidShape);
+void updateAvoidPoint();
 
-StateMachine<Seek>* mStateMachine;
+StateMachine<Avoid>* mStateMachine;
 
 
 

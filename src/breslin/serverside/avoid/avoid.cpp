@@ -1,4 +1,4 @@
-#include "seek.h"
+#include "avoid.h"
 #include "../tdreamsock/dreamSockLog.h"
 
 #include "../client/client.h"
@@ -13,80 +13,80 @@
 #include "Ogre.h"
 using namespace Ogre;
 
-//seek states
-#include "states/seekStates.h"
+//avoid states
+#include "states/avoidStates.h"
 
-Seek::Seek(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
+Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
 	mShape = shape;
 
-	mSeekShape = NULL;
-	mSeekPoint = NULL;
+	mAvoidShape = NULL;
+	mAvoidPoint = NULL;
 
- 	//seek states
-	mStateMachine =  new StateMachine<Seek>(this);
-	mStateMachine->setCurrentState      (Normal_Seek::Instance());
-	mStateMachine->setPreviousState     (Normal_Seek::Instance());
-	mStateMachine->setGlobalState       (GlobalSeek::Instance());
+ 	//avoid states
+	mStateMachine =  new StateMachine<Avoid>(this);
+	mStateMachine->setCurrentState      (Normal_Avoid::Instance());
+	mStateMachine->setPreviousState     (Normal_Avoid::Instance());
+	mStateMachine->setGlobalState       (GlobalAvoid::Instance());
 }
 
-Seek::~Seek()
+Avoid::~Avoid()
 {
 }
-void Seek::update()
+void Avoid::update()
 {
 	mStateMachine->update();
 	
-	if (mSeekShape)
+	if (mAvoidShape)
 	{
-		updateSeekPoint();
+		updateAvoidPoint();
 	}
 }
 
-bool Seek::handleLetter(Letter* letter)
+bool Avoid::handleLetter(Letter* letter)
 {
         return mStateMachine->handleLetter(letter);
 }
 
-void Seek::updateSeekPoint()
+void Avoid::updateAvoidPoint()
 {
-	//update seek point if seek shape
- 	if (mSeekShape)
+	//update avoid point if avoid shape
+ 	if (mAvoidShape)
         {
-                //set seek point as that is what we will really use...
-                mSeekPoint = new Vector3D();
-                mSeekPoint->x = mSeekShape->mSceneNode->getPosition().x;             
-                mSeekPoint->y = mSeekShape->mSceneNode->getPosition().y;             
-                mSeekPoint->z = mSeekShape->mSceneNode->getPosition().z;             
+                //set avoid point as that is what we will really use...
+                mAvoidPoint = new Vector3D();
+                mAvoidPoint->x = mAvoidShape->mSceneNode->getPosition().x;             
+                mAvoidPoint->y = mAvoidShape->mSceneNode->getPosition().y;             
+                mAvoidPoint->z = mAvoidShape->mSceneNode->getPosition().z;             
         }
 }
 
-void Seek::setSeekPoint(Vector3D* seekPoint)
+void Avoid::setAvoidPoint(Vector3D* avoidPoint)
 {
-	if (seekPoint)
+	if (avoidPoint)
 	{
-		mSeekPoint = new Vector3D();
-		mSeekPoint->copyValuesFrom(seekPoint); 
+		mAvoidPoint = new Vector3D();
+		mAvoidPoint->copyValuesFrom(avoidPoint); 
 	}
 	else
 	{
-		mSeekPoint = NULL;
-		mSeekShape = NULL;
+		mAvoidPoint = NULL;
+		mAvoidShape = NULL;
 	}
 }
 
-void Seek::setSeekShape(Shape* seekShape)
+void Avoid::setAvoidShape(Shape* avoidShape)
 {
-	if (seekShape)
+	if (avoidShape)
 	{
 		//set shape
-		mSeekShape = seekShape;
+		mAvoidShape = avoidShape;
 
-		updateSeekPoint();
+		updateAvoidPoint();
 	}
 	else
 	{
-		mSeekShape = NULL;
-		mSeekPoint = NULL;
+		mAvoidShape = NULL;
+		mAvoidPoint = NULL;
 	}
 }

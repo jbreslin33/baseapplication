@@ -1,11 +1,11 @@
 //parent
-#include "seekStates.h"
+#include "avoidStates.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
 
-//seek
-#include "../seek.h"
+//avoid
+#include "../avoid.h"
 
 //server
 #include "../../server/server.h"
@@ -25,97 +25,100 @@
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalSeek* GlobalSeek::Instance()
+GlobalAvoid* GlobalAvoid::Instance()
 {
-  static GlobalSeek instance;
+  static GlobalAvoid instance;
   return &instance;
 }
-void GlobalSeek::enter(Seek* seek)
+void GlobalAvoid::enter(Avoid* avoid)
 {
 }
-void GlobalSeek::execute(Seek* seek)
+void GlobalAvoid::execute(Avoid* avoid)
 {
 
 }
-void GlobalSeek::exit(Seek* seek)
+void GlobalAvoid::exit(Avoid* avoid)
 {
 }
-bool GlobalSeek::onLetter(Seek* seek, Letter* letter)
+bool GlobalAvoid::onLetter(Avoid* avoid, Letter* letter)
 {
         return true;
 }
 
 
 /*****************************************
-	Normal_Seek
+	Normal_Avoid
 ****************************************/
-Normal_Seek* Normal_Seek::Instance()
+Normal_Avoid* Normal_Avoid::Instance()
 {
-  static Normal_Seek instance;
+  static Normal_Avoid instance;
   return &instance;
 }
-void Normal_Seek::enter(Seek* seek)
+void Normal_Avoid::enter(Avoid* avoid)
 {
 	//LogString("Normal");
 }
-void Normal_Seek::execute(Seek* seek)
+void Normal_Avoid::execute(Avoid* avoid)
 {
-	if (seek->mSeekShape || seek->mSeekPoint)
+	
+/*
+	if (avoid->mAvoidShape || avoid->mAvoidPoint)
         {
                 Vector3D* newKeyDirection = new Vector3D();
                 Vector3D* currentPosition  = new Vector3D();
 
-                currentPosition->x = seek->mShape->mSceneNode->getPosition().x;
-                currentPosition->y = seek->mShape->mSceneNode->getPosition().y;
-                currentPosition->z = seek->mShape->mSceneNode->getPosition().z;
+                currentPosition->x = avoid->mShape->mSceneNode->getPosition().x;
+                currentPosition->y = avoid->mShape->mSceneNode->getPosition().y;
+                currentPosition->z = avoid->mShape->mSceneNode->getPosition().z;
 
-                newKeyDirection->subtract(seek->mSeekPoint,currentPosition);
-                seek->mShape->mMove->mVelocity->x = newKeyDirection->x;
-                seek->mShape->mMove->mVelocity->y = newKeyDirection->y;
-                seek->mShape->mMove->mVelocity->z = newKeyDirection->z;
+                newKeyDirection->subtract(avoid->mAvoidPoint,currentPosition);
+                avoid->mShape->mMove->mVelocity->x = newKeyDirection->x;
+                avoid->mShape->mMove->mVelocity->y = newKeyDirection->y;
+                avoid->mShape->mMove->mVelocity->z = newKeyDirection->z;
 
-                seek->mShape->mMove->mVelocity->normalise();
+                avoid->mShape->mMove->mVelocity->normalise();
         }
         else
         {
-                seek->mStateMachine->changeState(No_Seek::Instance());
+                avoid->mStateMachine->changeState(No_Avoid::Instance());
         }
+*/
 }
-void Normal_Seek::exit(Seek* seek)
+void Normal_Avoid::exit(Avoid* avoid)
 {
 }
-bool Normal_Seek::onLetter(Seek* seek, Letter* letter)
+bool Normal_Avoid::onLetter(Avoid* avoid, Letter* letter)
 {
         return true;
 }
 
 /*****************************************
-	No_Seek
+	No_Avoid
 ****************************************/
-No_Seek* No_Seek::Instance()
+No_Avoid* No_Avoid::Instance()
 {
-	static No_Seek instance;
+	static No_Avoid instance;
 	return &instance;
 }
-void No_Seek::enter(Seek* seek)
+void No_Avoid::enter(Avoid* avoid)
 {
 	//LogString("No");
 }
-void No_Seek::execute(Seek* seek)
+void No_Avoid::execute(Avoid* avoid)
 {
-	if (seek->mSeekShape == NULL && seek->mSeekPoint == NULL)
+	if (avoid->mAvoidShape == NULL && avoid->mAvoidPoint == NULL)
 	{
-		//LogString("Not seeking");
+		//LogString("Not avoiding");
 	}
 	else
 	{
-		seek->mStateMachine->changeState(Normal_Seek::Instance());
+		avoid->mStateMachine->changeState(Normal_Avoid::Instance());
 	}
 }
-void No_Seek::exit(Seek* seek)
+void No_Avoid::exit(Avoid* avoid)
 {
 }
-bool No_Seek::onLetter(Seek* seek, Letter* letter)
+bool No_Avoid::onLetter(Avoid* avoid, Letter* letter)
 {
         return true;
 }

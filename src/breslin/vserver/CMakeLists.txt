@@ -285,6 +285,12 @@ set(HDRS
 	#seek states
 	../serverside/seek/states/seekStates.h
 	
+	#avoid
+	../serverside/avoid/avoid.h
+	
+	#avoid states
+	../serverside/avoid/states/avoidStates.h
+	
 	#computer
 	../serverside/computer/computer.h
 	../serverside/computer/partido/computerPartido.h
@@ -378,6 +384,12 @@ set(SRCS
 	
 	#seek states
 	../serverside/seek/states/seekStates.cpp
+	
+	#avoid
+	../serverside/avoid/avoid.cpp
+	
+	#avoid states
+	../serverside/avoid/states/avoidStates.cpp
 	
 	#computer
 	../serverside/computer/computer.cpp

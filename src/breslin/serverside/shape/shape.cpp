@@ -28,6 +28,9 @@
 //seek
 #include "../seek/seek.h"
 
+//avoid
+#include "../avoid/avoid.h"
+
 //ai
 #include "../computer/computer.h"
 
@@ -75,6 +78,9 @@ Shape::Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* pos
 
 	mSeek = new Seek(this);
 	addSteeringAbility(mSeek);	
+	
+	mAvoid = new Avoid(this);
+	addSteeringAbility(mAvoid);	
 	
 	mRotation = new Rotation(this);
 	addAbility(mRotation);	
