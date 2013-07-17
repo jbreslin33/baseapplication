@@ -88,6 +88,14 @@ void Computer_Controlled::enter(Computer* computer)
                 {
                         for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
                         {
+                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 2)
+                                {
+                                        computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
+                                }
+                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 3)
+                                {
+                                        computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
+                                }
                                 if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
                                 {
                                         computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
