@@ -59,12 +59,6 @@ void Normal_Move::enter(Move* move)
 }
 void Normal_Move::execute(Move* move)
 {
-	if (move->mShape->mClient->db_id == 5)
-	{
-		LogString("Normal_Move");
-		LogString("xm:%f",move->mVelocity->x);	
-		LogString("zm:%f",move->mVelocity->z);	
-	}
 	//check for No_move and Decelerate and Accelerate states..
     	if (move->mVelocity->isZero()) 
 	{
@@ -117,12 +111,6 @@ void No_Move::enter(Move* move)
 }
 void No_Move::execute(Move* move)
 {
-	if (move->mShape->mClient->db_id == 5)
-	{
-		LogString("No_Move");
-		LogString("xm:%f",move->mVelocity->x);	
-		LogString("zm:%f",move->mVelocity->z);	
-	}
 	if (move->mVelocity->isZero()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
@@ -171,12 +159,6 @@ void Accelerate_Move::enter(Move* move)
 }
 void Accelerate_Move::execute(Move* move)
 {
-	if (move->mShape->mClient->db_id == 5)
-	{
-		LogString("Accelerate");
-		LogString("xm:%f",move->mVelocity->x);	
-		LogString("zm:%f",move->mVelocity->z);	
-	}
 	if (move->mVelocity->isZero()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move
@@ -231,12 +213,6 @@ void Decelerate_Move::enter(Move* move)
 }
 void Decelerate_Move::execute(Move* move)
 {
-	if (move->mShape->mClient->db_id == 5)
-	{
-		LogString("Decelerate");
-		LogString("xm:%f",move->mVelocity->x);	
-		LogString("zm:%f",move->mVelocity->z);	
-	}
     	if (move->mVelocity->isZero()) 
 	{
 		if(move->mRunSpeed > 0.0) //Decelerate_Move

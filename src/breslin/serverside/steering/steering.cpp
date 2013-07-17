@@ -123,13 +123,6 @@ Vector3D* Steering::calculate()
 	mShape->mMove->mVelocity->copyValuesFrom(mSteeringForce); 
 	mShape->mMove->mVelocity->normalise(); 
 
-	if (mShape->mClient->db_id == 5)
-	{
-		LogString("calculate");
-		LogString("x:%f", mShape->mMove->mVelocity->x);
-		LogString("z:%f", mShape->mMove->mVelocity->z);
-	}
-
   	return mSteeringForce;
 }
 
@@ -156,9 +149,6 @@ Vector3D* Steering::sumForces()
   	if (mSeekOn)
   	{
 		Vector3D* seekForce = seek(mTarget);
-		LogString("seekForce");
-		LogString("x:%f",seekForce->x);
-		LogString("z:%f",seekForce->z);
 
     		force->add(seekForce);
 
