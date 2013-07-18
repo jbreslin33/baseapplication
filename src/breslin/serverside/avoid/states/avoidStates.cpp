@@ -22,6 +22,9 @@
 //move
 #include "../../move/move.h"
 
+//seek
+#include "../../seek/seek.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -79,7 +82,41 @@ void Normal_Avoid::execute(Avoid* avoid)
 
                 seek->mShape->mMove->mVelocity->normalise();
 */
+/*
 
+          	//current position
+                Vector3D* currentPosition = new Vector3D();
+                currentPosition->convertFromVector3(seek->mShape->mSceneNode->getPosition());
+
+                //seek velocity and length
+                seek->mSeekVelocity->subtract(seek->mSeekPoint,currentPosition);
+                seek->mSeekLength = seek->mSeekVelocity->length();
+                seek->mSeekVelocity->normalise();
+
+                //set to shape velocity
+                seek->mShape->mMove->mVelocity->copyValuesFrom(seek->mSeekVelocity);
+
+*/
+
+	if (avoidee)
+	{
+          	//current position
+                Vector3D* currentPosition = new Vector3D();
+                currentPosition->convertFromVector3(avoid->mShape->mSceneNode->getPosition());
+
+		//avoidee position
+                Vector3D* avoideePosition = new Vector3D();
+                avoideePosition->convertFromVector3(avoidee->mSceneNode->getPosition());
+
+                //avoid velocity and length
+                avoid->mAvoidVelocity->subtract(avoideePosition,currentPosition);
+                avoid->mAvoidLength = avoid->mAvoidVelocity->length();
+                avoid->mAvoidVelocity->normalise();
+
+		float d = avoid->mAvoidVelocity->dot(avoid->mShape->mSeek->mSeekVelocity);
+		LogString("dot:%f",d);
+
+	}
 /*
 	if (avoidee)
 	{

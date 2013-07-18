@@ -32,8 +32,8 @@ Shape* mShape;
 void addAvoidShape   (Shape* avoidShape);
 bool removeAvoidShape(Shape* avoidShape);
 
-Vector3D* mOptimalPoint; 
-Vector3D* mOptimalVelocity; 
+Vector3D* mAvoidVelocity;
+float mAvoidLength;
 
 StateMachine<Avoid>* mStateMachine;
 

@@ -20,8 +20,8 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
 	mShape = shape;
 
-	mOptimalPoint = NULL;
-	mOptimalVelocity = NULL;
+	mAvoidLength = 0.0f;
+	mAvoidVelocity = new Vector3D();
 
  	//avoid states
 	mStateMachine =  new StateMachine<Avoid>(this);
