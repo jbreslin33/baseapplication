@@ -66,9 +66,25 @@ void Normal_Avoid::execute(Avoid* avoid)
 	}
 
 	Shape* avoidee = avoid->findClosestAvoidee();
+
+/*
+    		Vector3D* currentPosition = new Vector3D();
+
+                currentPosition->convertFromVector3(seek->mShape->mSceneNode->getPosition());
+
+                seek->mSeekVelocity->subtract(seek->mSeekPoint,currentPosition);
+                seek->mSeekLength = seek->mSeekVelocity->length();
+
+                seek->mShape->mMove->mVelocity->copyValuesFrom(seek->mSeekVelocity);
+
+                seek->mShape->mMove->mVelocity->normalise();
+*/
+
 /*
 	if (avoidee)
 	{
+
+			
 
 		//get current proposed velocity from seek and others basically...
 		Vector3D* currentProposedVelocity = new Vector3D();
