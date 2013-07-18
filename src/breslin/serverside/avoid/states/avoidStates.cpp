@@ -81,20 +81,18 @@ void Normal_Avoid::execute(Avoid* avoid)
                 Vector3D* currentPosition = new Vector3D();
                 currentPosition->convertFromVector3(avoid->mShape->mSceneNode->getPosition());
                 velocityToAvoidAvoidee->subtract(currentPosition,avoideePosition);
+		velocityToAvoidAvoidee->normalise();
 
 		//betweeen	
+//		avoid->mShape->mMove->mVelocity = velocityToAvoidAvoidee;
 
-		velocityToAvoidAvoidee->normalise();
-		velocityToAvoidAvoidee->normalise();
-		avoid->mShape->mMove->mVelocity = velocityToAvoidAvoidee;
 
-/*
 		Vector3D* compromiseVelocity = new Vector3D();
 		compromiseVelocity->add(currentProposedVelocity,velocityToAvoidAvoidee); 
 		compromiseVelocity->multiply(.5);
 		compromiseVelocity->normalise();
 		avoid->mShape->mMove->mVelocity = compromiseVelocity;
-*/	
+	
 		
 
 	}
