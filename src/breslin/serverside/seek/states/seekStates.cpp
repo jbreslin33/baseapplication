@@ -60,15 +60,14 @@ void Normal_Seek::execute(Seek* seek)
 {
 	if (seek->mSeekShape || seek->mSeekPoint)
         {
-                Vector3D* newVelocity     = new Vector3D();
                 Vector3D* currentPosition = new Vector3D();
 
 		currentPosition->convertFromVector3(seek->mShape->mSceneNode->getPosition());
 
-                newVelocity->subtract(seek->mSeekPoint,currentPosition);
-		seek->mSeekLength = newVelocity->length(); 			
+                seek->mSeekVelocity->subtract(seek->mSeekPoint,currentPosition);
+		seek->mSeekLength = seek->mSeekVelocity->length(); 			
 
-		seek->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
+		seek->mShape->mMove->mVelocity->copyValuesFrom(seek->mSeekVelocity);
 
                 seek->mShape->mMove->mVelocity->normalise();
         }

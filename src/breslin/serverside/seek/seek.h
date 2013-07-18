@@ -39,17 +39,16 @@ virtual void update();
 //handle letter 
 virtual bool  handleLetter(Letter* letter);
 
-
 Shape* mShape;
 Shape* mSeekShape;
 Vector3D* mSeekPoint;
+Vector3D* mSeekVelocity;
 float mSeekLength;
 void setSeekPoint(Vector3D* seekPoint);
 void setSeekShape(Shape* seekShape);
 void updateSeekPoint();
 
 StateMachine<Seek>* mStateMachine;
-
 
 
 };
