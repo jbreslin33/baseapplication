@@ -22,6 +22,7 @@ Seek::Seek(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 	mSeekShape = NULL;
 	mSeekPoint = NULL;
+	mSeekLength = 0.0f;
 
  	//seek states
 	mStateMachine =  new StateMachine<Seek>(this);

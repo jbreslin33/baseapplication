@@ -35,7 +35,6 @@ void GlobalSeek::enter(Seek* seek)
 }
 void GlobalSeek::execute(Seek* seek)
 {
-
 }
 void GlobalSeek::exit(Seek* seek)
 {
@@ -44,7 +43,6 @@ bool GlobalSeek::onLetter(Seek* seek, Letter* letter)
 {
         return true;
 }
-
 
 /*****************************************
 	Normal_Seek
@@ -62,17 +60,15 @@ void Normal_Seek::execute(Seek* seek)
 {
 	if (seek->mSeekShape || seek->mSeekPoint)
         {
-                Vector3D* newKeyDirection = new Vector3D();
-                Vector3D* currentPosition  = new Vector3D();
+                Vector3D* newVelocity     = new Vector3D();
+                Vector3D* currentPosition = new Vector3D();
 
-                currentPosition->x = seek->mShape->mSceneNode->getPosition().x;
-                currentPosition->y = seek->mShape->mSceneNode->getPosition().y;
-                currentPosition->z = seek->mShape->mSceneNode->getPosition().z;
+		currentPosition->convertFromVector3(seek->mShape->mSceneNode->getPosition());
 
-                newKeyDirection->subtract(seek->mSeekPoint,currentPosition);
-                seek->mShape->mMove->mVelocity->x = newKeyDirection->x;
-                seek->mShape->mMove->mVelocity->y = newKeyDirection->y;
-                seek->mShape->mMove->mVelocity->z = newKeyDirection->z;
+                newVelocity->subtract(seek->mSeekPoint,currentPosition);
+		seek->mSeekLength = newVelocity->length(); 			
+
+		seek->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
 
                 seek->mShape->mMove->mVelocity->normalise();
         }

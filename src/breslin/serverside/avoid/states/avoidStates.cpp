@@ -66,9 +66,10 @@ void Normal_Avoid::execute(Avoid* avoid)
 	}
 
 	Shape* avoidee = avoid->findClosestAvoidee();
-
+/*
 	if (avoidee)
 	{
+
 		//get current proposed velocity from seek and others basically...
 		Vector3D* currentProposedVelocity = new Vector3D();
 		currentProposedVelocity->copyValuesFrom(avoid->mShape->mMove->mVelocity);		
@@ -92,10 +93,8 @@ void Normal_Avoid::execute(Avoid* avoid)
 		compromiseVelocity->multiply(.5);
 		compromiseVelocity->normalise();
 		avoid->mShape->mMove->mVelocity = compromiseVelocity;
-	
-		
-
 	}
+*/
 
 }
 void Normal_Avoid::exit(Avoid* avoid)

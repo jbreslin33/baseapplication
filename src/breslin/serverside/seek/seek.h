@@ -43,6 +43,7 @@ virtual bool  handleLetter(Letter* letter);
 Shape* mShape;
 Shape* mSeekShape;
 Vector3D* mSeekPoint;
+float mSeekLength;
 void setSeekPoint(Vector3D* seekPoint);
 void setSeekShape(Shape* seekShape);
 void updateSeekPoint();
