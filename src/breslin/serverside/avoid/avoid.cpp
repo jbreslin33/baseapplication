@@ -3,6 +3,7 @@
 
 #include "../client/client.h"
 #include "../shape/shape.h"
+#include "../seek/seek.h"
 
 #include "../../math/vector3D.h"
 
@@ -19,6 +20,7 @@ using namespace Ogre;
 Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
 	mShape = shape;
+	mAvoidee = NULL;
 
 	mAvoidLength = 0.0f;
 	mAvoidLengthLast = 0.0f;
@@ -27,6 +29,9 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mAvoidDotLast = 0.0f;
 
 	mAvoidVelocity = new Vector3D();
+
+	mCurrentPosition = new Vector3D();
+	mAvoideePosition = new Vector3D();
 
 	//evade
 	mEvadeWithXPositive = false;
@@ -72,7 +77,7 @@ bool Avoid::removeAvoidShape(Shape* avoidShape)
 	return false;
 }
 
-Shape*  Avoid::findClosestAvoidee()
+void  Avoid::calculateClosestAvoidee()
 {
 	Shape* closestShapeSoFar = NULL;
 	float closestDistanceSoFar = 3000.0f;
@@ -105,6 +110,28 @@ Shape*  Avoid::findClosestAvoidee()
 			closestDistanceSoFar = length;
 		}
 	}
-	return closestShapeSoFar;
+	mAvoidee = closestShapeSoFar;
+	if (mAvoidee)
+	{
+        	mAvoideePosition->convertFromVector3(mAvoidee->mSceneNode->getPosition());
+
+                //avoid velocity and length(this is actually to hit the avoidee)
+                mAvoidVelocity->subtract(mAvoideePosition,mCurrentPosition);
+                mAvoidLengthLast = mAvoidLength;
+                mAvoidLength     = mAvoidVelocity->length();
+                mAvoidVelocity->normalise();
+	}
 }
 
+void Avoid::calculateCurrentPosition()
+{
+	//current position
+        mCurrentPosition->convertFromVector3(mShape->mSceneNode->getPosition());
+}
+
+void Avoid::calculateDot()
+{
+	//the dot between seekVelocity and avoidVelocity
+        mAvoidDotLast = mAvoidDot;
+        mAvoidDot     = mAvoidVelocity->dot(mShape->mSeek->mSeekVelocity);
+}

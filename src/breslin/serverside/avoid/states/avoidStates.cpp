@@ -38,7 +38,9 @@ void GlobalAvoid::enter(Avoid* avoid)
 }
 void GlobalAvoid::execute(Avoid* avoid)
 {
-
+	avoid->calculateClosestAvoidee();
+	avoid->calculateCurrentPosition();
+	avoid->calculateDot();
 }
 void GlobalAvoid::exit(Avoid* avoid)
 {
@@ -68,64 +70,123 @@ void Normal_Avoid::execute(Avoid* avoid)
 		avoid->mStateMachine->changeState(No_Avoid::Instance());
 	}
 
-	Shape* avoidee = avoid->findClosestAvoidee();
-
-	if (avoidee)
+	if (avoid->mAvoidee)
 	{
-          	//current position
-                Vector3D* currentPosition = new Vector3D();
-                currentPosition->convertFromVector3(avoid->mShape->mSceneNode->getPosition());
-
-		//avoidee position
-                Vector3D* avoideePosition = new Vector3D();
-                avoideePosition->convertFromVector3(avoidee->mSceneNode->getPosition());
-
-                //avoid velocity and length(this is actually to hit the avoidee)
-                avoid->mAvoidVelocity->subtract(avoideePosition,currentPosition);
-                avoid->mAvoidLengthLast = avoid->mAvoidLength;
-                avoid->mAvoidLength     = avoid->mAvoidVelocity->length();
-                avoid->mAvoidVelocity->normalise();
-	
-		//the dot between seekVelocity and avoidVelocity
-		avoid->mAvoidDotLast = avoid->mAvoidDot;
-		avoid->mAvoidDot = avoid->mAvoidVelocity->dot(avoid->mShape->mSeek->mSeekVelocity);
-
 		if (avoid->mAvoidDot < .50) 
 		{
 			//just seek
+			avoid->mStateMachine->changeState(No_Avoid::Instance());	
 		} 
-		else //dot lines up, take evasive action..
+		else //dot lines up, take evasive action.. by changing to X_N_Z_N 
 		{
-			//avoid->mShape->mMove->mVelocity->zero();
-
-			//let's turn one of the coordinates to it's inverse
-			Vector3D* evasiveVelocity = new Vector3D();	
-			evasiveVelocity->copyValuesFrom(avoid->mShape->mSeek->mSeekVelocity);
-		
-			//let's just start moving x and z until we evade??
-			evasiveVelocity->z += .10f; 
-			evasiveVelocity->normalise();
-	
-			/*
-			evasiveVelocity->crossProduct(avoid->mShape->mSeek->mSeekVelocity);		
-			evasiveVelocity->x = -1 * evasiveVelocity->x;	
-			evasiveVelocity->normalise();	
-			evasiveVelocity->x = evasiveVelocity->z * -1.0f;	
-			evasiveVelocity->z = evasiveVelocity->x;	
-			*/		
-
-			avoid->mShape->mMove->mVelocity->copyValuesFrom(evasiveVelocity);
-			avoid->mShape->mMove->mVelocity->normalise();
-
-			//avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mShape->mSeek->mSeekVelocity);
+			avoid->mStateMachine->changeState(X_N_Z_N::Instance());
 		}
-
 	}
 }
 void Normal_Avoid::exit(Avoid* avoid)
 {
 }
 bool Normal_Avoid::onLetter(Avoid* avoid, Letter* letter)
+{
+        return true;
+}
+
+/*****************************************
+       X_N_Z_N 
+****************************************/
+X_N_Z_N* X_N_Z_N::Instance()
+{
+        static X_N_Z_N instance;
+        return &instance;
+}
+void X_N_Z_N::enter(Avoid* avoid)
+{
+}
+void X_N_Z_N::execute(Avoid* avoid)
+{
+	//let's turn one of the coordinates to it's inverse
+        Vector3D* evasiveVelocity = new Vector3D();
+        evasiveVelocity->copyValuesFrom(avoid->mShape->mSeek->mSeekVelocity);
+
+       	//let's just start moving x and z until we evade??
+        evasiveVelocity->z += .10f;
+        evasiveVelocity->normalise();
+
+       	avoid->mShape->mMove->mVelocity->copyValuesFrom(evasiveVelocity);
+        avoid->mShape->mMove->mVelocity->normalise();
+
+}
+void X_N_Z_N::exit(Avoid* avoid)
+{
+}
+bool X_N_Z_N::onLetter(Avoid* avoid, Letter* letter)
+{
+        return true;
+}
+
+/*****************************************
+       X_N_Z_P
+****************************************/
+X_N_Z_P* X_N_Z_P::Instance()
+{
+        static X_N_Z_P instance;
+        return &instance;
+}
+void X_N_Z_P::enter(Avoid* avoid)
+{
+}
+void X_N_Z_P::execute(Avoid* avoid)
+{
+}
+void X_N_Z_P::exit(Avoid* avoid)
+{
+}
+bool X_N_Z_P::onLetter(Avoid* avoid, Letter* letter)
+{
+        return true;
+}
+
+
+/*****************************************
+       X_P_Z_P
+****************************************/
+X_P_Z_P* X_P_Z_P::Instance()
+{
+        static X_P_Z_P instance;
+        return &instance;
+}
+void X_P_Z_P::enter(Avoid* avoid)
+{
+}
+void X_P_Z_P::execute(Avoid* avoid)
+{
+}
+void X_P_Z_P::exit(Avoid* avoid)
+{
+}
+bool X_P_Z_P::onLetter(Avoid* avoid, Letter* letter)
+{
+        return true;
+}
+
+/*****************************************
+       X_P_Z_N
+****************************************/
+X_P_Z_N* X_P_Z_N::Instance()
+{
+        static X_P_Z_N instance;
+        return &instance;
+}
+void X_P_Z_N::enter(Avoid* avoid)
+{
+}
+void X_P_Z_N::execute(Avoid* avoid)
+{
+}
+void X_P_Z_N::exit(Avoid* avoid)
+{
+}
+bool X_P_Z_N::onLetter(Avoid* avoid, Letter* letter)
 {
         return true;
 }

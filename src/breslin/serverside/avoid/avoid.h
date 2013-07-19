@@ -28,11 +28,14 @@ virtual void update();
 virtual bool  handleLetter(Letter* letter);
 
 Shape* mShape;
+Shape* mAvoidee;
 
 void addAvoidShape   (Shape* avoidShape);
 bool removeAvoidShape(Shape* avoidShape);
 
 Vector3D* mAvoidVelocity;
+Vector3D* mCurrentPosition;
+Vector3D* mAvoideePosition;
 
 float mAvoidLength;
 float mAvoidLengthLast; //use this to see if you are getting closer
@@ -50,7 +53,9 @@ StateMachine<Avoid>* mStateMachine;
 std::vector<Shape*> mAvoidVector;
 
 Shape* findClosestAvoidee();
-
+void calculateClosestAvoidee();
+void calculateCurrentPosition();
+void calculateDot();
 };
 
 #endif
