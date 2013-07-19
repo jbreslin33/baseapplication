@@ -114,7 +114,15 @@ void Normal_Avoid::execute(Avoid* avoid)
                 avoid->mAvoidVelocity->normalise();
 
 		float d = avoid->mAvoidVelocity->dot(avoid->mShape->mSeek->mSeekVelocity);
-		LogString("dot:%f",d);
+
+		if (d < .98) 
+		{
+			//avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mShape->mSeek->mSeekVelocity);
+		} 
+		else
+		{
+			avoid->mShape->mMove->mVelocity->zero();
+		}
 
 	}
 /*
