@@ -91,12 +91,13 @@ void Computer_Controlled::enter(Computer* computer)
                                 {
                                         computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
                                 }
-/*
+
                                 if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 3)
                                 {
                                         computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
                                 }
-                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
+/*
+                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 2)
                                 {
                                         computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
                                 }

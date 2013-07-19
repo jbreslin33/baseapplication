@@ -28,6 +28,12 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 	mAvoidVelocity = new Vector3D();
 
+	//evade
+	mEvadeWithXPositive = false;
+	mEvadeWithZPositive = false;
+	mEvadeWithXNegative = false;
+	mEvadeWithZNegative = false;
+
  	//avoid states
 	mStateMachine =  new StateMachine<Avoid>(this);
 	mStateMachine->setCurrentState      (Normal_Avoid::Instance());

@@ -40,6 +40,11 @@ float mAvoidLengthLast; //use this to see if you are getting closer
 float mAvoidDot;
 float mAvoidDotLast; //use this to see if angle is getting closer or further.
 
+bool mEvadeWithXPositive;
+bool mEvadeWithZPositive;
+bool mEvadeWithXNegative;
+bool mEvadeWithZNegative;
+
 StateMachine<Avoid>* mStateMachine;
 
 std::vector<Shape*> mAvoidVector;

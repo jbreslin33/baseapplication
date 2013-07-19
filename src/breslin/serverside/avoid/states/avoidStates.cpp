@@ -82,14 +82,15 @@ void Normal_Avoid::execute(Avoid* avoid)
 
                 //avoid velocity and length(this is actually to hit the avoidee)
                 avoid->mAvoidVelocity->subtract(avoideePosition,currentPosition);
-                avoid->mAvoidLength = avoid->mAvoidVelocity->length();
+                avoid->mAvoidLengthLast = avoid->mAvoidLength;
+                avoid->mAvoidLength     = avoid->mAvoidVelocity->length();
                 avoid->mAvoidVelocity->normalise();
 	
 		//the dot between seekVelocity and avoidVelocity
 		avoid->mAvoidDotLast = avoid->mAvoidDot;
 		avoid->mAvoidDot = avoid->mAvoidVelocity->dot(avoid->mShape->mSeek->mSeekVelocity);
 
-		if (avoid->mAvoidDot < .70) 
+		if (avoid->mAvoidDot < .50) 
 		{
 			//just seek
 		} 
@@ -112,7 +113,6 @@ void Normal_Avoid::execute(Avoid* avoid)
 			evasiveVelocity->x = evasiveVelocity->z * -1.0f;	
 			evasiveVelocity->z = evasiveVelocity->x;	
 			*/		
-
 
 			avoid->mShape->mMove->mVelocity->copyValuesFrom(evasiveVelocity);
 			avoid->mShape->mMove->mVelocity->normalise();
