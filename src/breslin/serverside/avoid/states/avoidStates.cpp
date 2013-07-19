@@ -86,9 +86,10 @@ void Normal_Avoid::execute(Avoid* avoid)
                 avoid->mAvoidVelocity->normalise();
 	
 		//the dot between seekVelocity and avoidVelocity
-		float d = avoid->mAvoidVelocity->dot(avoid->mShape->mSeek->mSeekVelocity);
+		avoid->mAvoidDotLast = avoid->mAvoidDot;
+		avoid->mAvoidDot = avoid->mAvoidVelocity->dot(avoid->mShape->mSeek->mSeekVelocity);
 
-		if (d < .80) 
+		if (avoid->mAvoidDot < .70) 
 		{
 			//just seek
 		} 

@@ -33,7 +33,12 @@ void addAvoidShape   (Shape* avoidShape);
 bool removeAvoidShape(Shape* avoidShape);
 
 Vector3D* mAvoidVelocity;
+
 float mAvoidLength;
+float mAvoidLengthLast; //use this to see if you are getting closer
+
+float mAvoidDot;
+float mAvoidDotLast; //use this to see if angle is getting closer or further.
 
 StateMachine<Avoid>* mStateMachine;
 

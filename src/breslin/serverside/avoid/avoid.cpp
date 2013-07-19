@@ -21,6 +21,11 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mShape = shape;
 
 	mAvoidLength = 0.0f;
+	mAvoidLengthLast = 0.0f;
+
+	mAvoidDot = 0.0f;
+	mAvoidDotLast = 0.0f;
+
 	mAvoidVelocity = new Vector3D();
 
  	//avoid states
