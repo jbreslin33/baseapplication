@@ -70,34 +70,6 @@ void Normal_Avoid::execute(Avoid* avoid)
 
 	Shape* avoidee = avoid->findClosestAvoidee();
 
-/*
-    		Vector3D* currentPosition = new Vector3D();
-
-                currentPosition->convertFromVector3(seek->mShape->mSceneNode->getPosition());
-
-                seek->mSeekVelocity->subtract(seek->mSeekPoint,currentPosition);
-                seek->mSeekLength = seek->mSeekVelocity->length();
-
-                seek->mShape->mMove->mVelocity->copyValuesFrom(seek->mSeekVelocity);
-
-                seek->mShape->mMove->mVelocity->normalise();
-*/
-/*
-
-          	//current position
-                Vector3D* currentPosition = new Vector3D();
-                currentPosition->convertFromVector3(seek->mShape->mSceneNode->getPosition());
-
-                //seek velocity and length
-                seek->mSeekVelocity->subtract(seek->mSeekPoint,currentPosition);
-                seek->mSeekLength = seek->mSeekVelocity->length();
-                seek->mSeekVelocity->normalise();
-
-                //set to shape velocity
-                seek->mShape->mMove->mVelocity->copyValuesFrom(seek->mSeekVelocity);
-
-*/
-
 	if (avoidee)
 	{
           	//current position
@@ -108,55 +80,46 @@ void Normal_Avoid::execute(Avoid* avoid)
                 Vector3D* avoideePosition = new Vector3D();
                 avoideePosition->convertFromVector3(avoidee->mSceneNode->getPosition());
 
-                //avoid velocity and length
+                //avoid velocity and length(this is actually to hit the avoidee)
                 avoid->mAvoidVelocity->subtract(avoideePosition,currentPosition);
                 avoid->mAvoidLength = avoid->mAvoidVelocity->length();
                 avoid->mAvoidVelocity->normalise();
-
+	
+		//the dot between seekVelocity and avoidVelocity
 		float d = avoid->mAvoidVelocity->dot(avoid->mShape->mSeek->mSeekVelocity);
 
-		if (d < .98) 
+		if (d < .80) 
 		{
-			//avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mShape->mSeek->mSeekVelocity);
+			//just seek
 		} 
-		else
+		else //dot lines up, take evasive action..
 		{
-			avoid->mShape->mMove->mVelocity->zero();
+			//avoid->mShape->mMove->mVelocity->zero();
+
+			//let's turn one of the coordinates to it's inverse
+			Vector3D* evasiveVelocity = new Vector3D();	
+			evasiveVelocity->copyValuesFrom(avoid->mShape->mSeek->mSeekVelocity);
+		
+			//let's just start moving x and z until we evade??
+			evasiveVelocity->z += .10f; 
+			evasiveVelocity->normalise();
+	
+			/*
+			evasiveVelocity->crossProduct(avoid->mShape->mSeek->mSeekVelocity);		
+			evasiveVelocity->x = -1 * evasiveVelocity->x;	
+			evasiveVelocity->normalise();	
+			evasiveVelocity->x = evasiveVelocity->z * -1.0f;	
+			evasiveVelocity->z = evasiveVelocity->x;	
+			*/		
+
+
+			avoid->mShape->mMove->mVelocity->copyValuesFrom(evasiveVelocity);
+			avoid->mShape->mMove->mVelocity->normalise();
+
+			//avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mShape->mSeek->mSeekVelocity);
 		}
 
 	}
-/*
-	if (avoidee)
-	{
-
-			
-
-		//get current proposed velocity from seek and others basically...
-		Vector3D* currentProposedVelocity = new Vector3D();
-		currentProposedVelocity->copyValuesFrom(avoid->mShape->mMove->mVelocity);		
-		//get current position of avoidee
-		Vector3D* avoideePosition = new Vector3D();	
-		avoideePosition->convertFromVector3(avoidee->mSceneNode->getPosition());
-
-		//let's get a direction vector to the shape to be avoided
- 		Vector3D* velocityToAvoidAvoidee     = new Vector3D();
-                Vector3D* currentPosition = new Vector3D();
-                currentPosition->convertFromVector3(avoid->mShape->mSceneNode->getPosition());
-                velocityToAvoidAvoidee->subtract(currentPosition,avoideePosition);
-		velocityToAvoidAvoidee->normalise();
-
-		//betweeen	
-//		avoid->mShape->mMove->mVelocity = velocityToAvoidAvoidee;
-
-
-		Vector3D* compromiseVelocity = new Vector3D();
-		compromiseVelocity->add(currentProposedVelocity,velocityToAvoidAvoidee); 
-		compromiseVelocity->multiply(.5);
-		compromiseVelocity->normalise();
-		avoid->mShape->mMove->mVelocity = compromiseVelocity;
-	}
-*/
-
 }
 void Normal_Avoid::exit(Avoid* avoid)
 {
