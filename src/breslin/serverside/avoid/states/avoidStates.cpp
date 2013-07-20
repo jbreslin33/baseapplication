@@ -40,7 +40,10 @@ void GlobalAvoid::execute(Avoid* avoid)
 {
         if (avoid->mAvoidVector.size() == 0)
         {
-                avoid->mStateMachine->changeState(No_Avoid::Instance());
+		if (avoid->mStateMachine->currentState() != No_Avoid::Instance())
+		{	
+                	avoid->mStateMachine->changeState(No_Avoid::Instance());
+		}
         }
 	avoid->calculateClosestAvoidee();
 	avoid->calculateCurrentPosition();
@@ -66,7 +69,7 @@ Normal_Avoid* Normal_Avoid::Instance()
 }
 void Normal_Avoid::enter(Avoid* avoid)
 {
-	//LogString("Normal");
+	LogString("Normal_Avoid");
 }
 void Normal_Avoid::execute(Avoid* avoid)
 {
@@ -80,7 +83,30 @@ void Normal_Avoid::execute(Avoid* avoid)
 		} 
 		else //dot lines up, take evasive action.. by changing to X_N_Z_N 
 		{
-			avoid->mStateMachine->changeState(X_N_Z_N::Instance());
+/*
+			double param, result;
+  			param = 60.0f;
+  			result = cos ( param * 3.14f / 180.0f );
+  			LogString("The cosine of %f degrees is %f.\n", param, result );	
+
+			double radians = (90.0f * 3.14) / 180.0f; 
+  			LogString("radians: %f",radians  );	
+*/
+			//get the sine and cosine of 90degrees
+			double cs = cos( 90.0f * 3.14f / 180.0f);	
+			double sn = sin( 90.0f * 3.14f / 180.0f);	
+		
+			Vector3D* newVelocity = new Vector3D();
+
+			newVelocity->x = avoid->mAvoidVelocity->x * cs - avoid->mAvoidVelocity->z * sn;	
+			newVelocity->z = avoid->mAvoidVelocity->x * sn + avoid->mAvoidVelocity->z * cs;	
+
+       			avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
+       			avoid->mShape->mMove->mVelocity->normalise();
+
+	
+			//LogString("x:%f",newVelocity->x);
+			//LogString("z:%f",newVelocity->z);
 		}
 	}
 }
@@ -102,6 +128,7 @@ X_N_Z_N* X_N_Z_N::Instance()
 }
 void X_N_Z_N::enter(Avoid* avoid)
 {
+	LogString("X_N_Z_N");
        	avoid->mEvasiveVelocity->x -= .10f;
        	avoid->mEvasiveVelocity->z -= .10f;
         avoid->mEvasiveVelocity->normalise();
@@ -141,6 +168,7 @@ X_N_Z_P* X_N_Z_P::Instance()
 }
 void X_N_Z_P::enter(Avoid* avoid)
 {
+	LogString("X_N_Z_P");
         avoid->mEvasiveVelocity->x -= .10f;
         avoid->mEvasiveVelocity->z += .10f;
         avoid->mEvasiveVelocity->normalise();
@@ -151,7 +179,7 @@ void X_N_Z_P::execute(Avoid* avoid)
 {
         if (avoid->mAvoidDot > avoid->mAvoidDotLast)
         {
-                avoid->mStateMachine->changeState(X_N_Z_P::Instance());
+                avoid->mStateMachine->changeState(X_P_Z_P::Instance());
         }
         else
         {
@@ -181,6 +209,7 @@ X_P_Z_P* X_P_Z_P::Instance()
 }
 void X_P_Z_P::enter(Avoid* avoid)
 {
+	LogString("X_P_Z_P");
         avoid->mEvasiveVelocity->x += .10f;
         avoid->mEvasiveVelocity->z += .10f;
         avoid->mEvasiveVelocity->normalise();
@@ -191,7 +220,7 @@ void X_P_Z_P::execute(Avoid* avoid)
 {
         if (avoid->mAvoidDot > avoid->mAvoidDotLast)
         {
-                avoid->mStateMachine->changeState(X_N_Z_P::Instance());
+                avoid->mStateMachine->changeState(X_P_Z_N::Instance());
         }
         else
         {
@@ -220,6 +249,7 @@ X_P_Z_N* X_P_Z_N::Instance()
 }
 void X_P_Z_N::enter(Avoid* avoid)
 {
+	LogString("X_P_Z_N");
         avoid->mEvasiveVelocity->x += .10f;
         avoid->mEvasiveVelocity->z -= .10f;
         avoid->mEvasiveVelocity->normalise();
@@ -230,7 +260,7 @@ void X_P_Z_N::execute(Avoid* avoid)
 {
         if (avoid->mAvoidDot > avoid->mAvoidDotLast)
         {
-                avoid->mStateMachine->changeState(X_N_Z_P::Instance());
+                avoid->mStateMachine->changeState(X_N_Z_N::Instance());
         }
         else
         {
@@ -259,7 +289,7 @@ No_Avoid* No_Avoid::Instance()
 }
 void No_Avoid::enter(Avoid* avoid)
 {
-	//LogString("No");
+	LogString("No_Avoid");
 }
 void No_Avoid::execute(Avoid* avoid)
 {
@@ -267,7 +297,7 @@ void No_Avoid::execute(Avoid* avoid)
 	{
 		if (avoid->mAvoidDot >= .50)
 		{
-			avoid->mStateMachine->changeState(X_N_Z_N::Instance());
+			avoid->mStateMachine->changeState(Normal_Avoid::Instance());
 		}
 	}
 }
