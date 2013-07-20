@@ -34,6 +34,7 @@ void addAvoidShape   (Shape* avoidShape);
 bool removeAvoidShape(Shape* avoidShape);
 
 Vector3D* mAvoidVelocity;
+Vector3D* mEvasiveVelocity;
 Vector3D* mCurrentPosition;
 Vector3D* mAvoideePosition;
 
@@ -56,6 +57,7 @@ Shape* findClosestAvoidee();
 void calculateClosestAvoidee();
 void calculateCurrentPosition();
 void calculateDot();
+void setEvasiveVelocityToSeek();
 };
 
 #endif

@@ -29,6 +29,7 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mAvoidDotLast = 0.0f;
 
 	mAvoidVelocity = new Vector3D();
+	mEvasiveVelocity = new Vector3D();
 
 	mCurrentPosition = new Vector3D();
 	mAvoideePosition = new Vector3D();
@@ -134,4 +135,8 @@ void Avoid::calculateDot()
 	//the dot between seekVelocity and avoidVelocity
         mAvoidDotLast = mAvoidDot;
         mAvoidDot     = mAvoidVelocity->dot(mShape->mSeek->mSeekVelocity);
+}
+void Avoid::setEvasiveVelocityToSeek()
+{
+        mEvasiveVelocity->copyValuesFrom(mShape->mSeek->mSeekVelocity);
 }

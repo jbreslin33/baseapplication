@@ -38,9 +38,14 @@ void GlobalAvoid::enter(Avoid* avoid)
 }
 void GlobalAvoid::execute(Avoid* avoid)
 {
+        if (avoid->mAvoidVector.size() == 0)
+        {
+                avoid->mStateMachine->changeState(No_Avoid::Instance());
+        }
 	avoid->calculateClosestAvoidee();
 	avoid->calculateCurrentPosition();
 	avoid->calculateDot();
+	avoid->setEvasiveVelocityToSeek();
 }
 void GlobalAvoid::exit(Avoid* avoid)
 {
@@ -65,10 +70,6 @@ void Normal_Avoid::enter(Avoid* avoid)
 }
 void Normal_Avoid::execute(Avoid* avoid)
 {
-	if (avoid->mAvoidVector.size() == 0)	
-	{
-		avoid->mStateMachine->changeState(No_Avoid::Instance());
-	}
 
 	if (avoid->mAvoidee)
 	{
@@ -101,20 +102,26 @@ X_N_Z_N* X_N_Z_N::Instance()
 }
 void X_N_Z_N::enter(Avoid* avoid)
 {
+       	avoid->mEvasiveVelocity->x -= .10f;
+       	avoid->mEvasiveVelocity->z -= .10f;
+        avoid->mEvasiveVelocity->normalise();
+        avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
+        avoid->mShape->mMove->mVelocity->normalise();
 }
 void X_N_Z_N::execute(Avoid* avoid)
 {
-	//let's turn one of the coordinates to it's inverse
-        Vector3D* evasiveVelocity = new Vector3D();
-        evasiveVelocity->copyValuesFrom(avoid->mShape->mSeek->mSeekVelocity);
-
-       	//let's just start moving x and z until we evade??
-        evasiveVelocity->z += .10f;
-        evasiveVelocity->normalise();
-
-       	avoid->mShape->mMove->mVelocity->copyValuesFrom(evasiveVelocity);
-        avoid->mShape->mMove->mVelocity->normalise();
-
+	if (avoid->mAvoidDot > avoid->mAvoidDotLast)
+	{
+		avoid->mStateMachine->changeState(X_N_Z_P::Instance());
+	}
+	else
+	{
+        	avoid->mEvasiveVelocity->x -= .10f;
+        	avoid->mEvasiveVelocity->z -= .10f;
+        	avoid->mEvasiveVelocity->normalise();
+       		avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
+        	avoid->mShape->mMove->mVelocity->normalise();
+	}
 }
 void X_N_Z_N::exit(Avoid* avoid)
 {
@@ -134,9 +141,26 @@ X_N_Z_P* X_N_Z_P::Instance()
 }
 void X_N_Z_P::enter(Avoid* avoid)
 {
+        avoid->mEvasiveVelocity->x -= .10f;
+        avoid->mEvasiveVelocity->z += .10f;
+        avoid->mEvasiveVelocity->normalise();
+        avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
+        avoid->mShape->mMove->mVelocity->normalise();
 }
 void X_N_Z_P::execute(Avoid* avoid)
 {
+        if (avoid->mAvoidDot > avoid->mAvoidDotLast)
+        {
+                avoid->mStateMachine->changeState(X_N_Z_P::Instance());
+        }
+        else
+        {
+                avoid->mEvasiveVelocity->x -= .10f;
+                avoid->mEvasiveVelocity->z += .10f;
+                avoid->mEvasiveVelocity->normalise();
+                avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
+                avoid->mShape->mMove->mVelocity->normalise();
+        }
 }
 void X_N_Z_P::exit(Avoid* avoid)
 {
@@ -157,9 +181,26 @@ X_P_Z_P* X_P_Z_P::Instance()
 }
 void X_P_Z_P::enter(Avoid* avoid)
 {
+        avoid->mEvasiveVelocity->x += .10f;
+        avoid->mEvasiveVelocity->z += .10f;
+        avoid->mEvasiveVelocity->normalise();
+        avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
+        avoid->mShape->mMove->mVelocity->normalise();
 }
 void X_P_Z_P::execute(Avoid* avoid)
 {
+        if (avoid->mAvoidDot > avoid->mAvoidDotLast)
+        {
+                avoid->mStateMachine->changeState(X_N_Z_P::Instance());
+        }
+        else
+        {
+                avoid->mEvasiveVelocity->x += .10f;
+                avoid->mEvasiveVelocity->z += .10f;
+                avoid->mEvasiveVelocity->normalise();
+                avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
+                avoid->mShape->mMove->mVelocity->normalise();
+        }
 }
 void X_P_Z_P::exit(Avoid* avoid)
 {
@@ -179,9 +220,26 @@ X_P_Z_N* X_P_Z_N::Instance()
 }
 void X_P_Z_N::enter(Avoid* avoid)
 {
+        avoid->mEvasiveVelocity->x += .10f;
+        avoid->mEvasiveVelocity->z -= .10f;
+        avoid->mEvasiveVelocity->normalise();
+        avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
+        avoid->mShape->mMove->mVelocity->normalise();
 }
 void X_P_Z_N::execute(Avoid* avoid)
 {
+        if (avoid->mAvoidDot > avoid->mAvoidDotLast)
+        {
+                avoid->mStateMachine->changeState(X_N_Z_P::Instance());
+        }
+        else
+        {
+                avoid->mEvasiveVelocity->x += .10f;
+                avoid->mEvasiveVelocity->z -= .10f;
+                avoid->mEvasiveVelocity->normalise();
+                avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
+                avoid->mShape->mMove->mVelocity->normalise();
+        }
 }
 void X_P_Z_N::exit(Avoid* avoid)
 {
@@ -207,7 +265,10 @@ void No_Avoid::execute(Avoid* avoid)
 {
 	if (avoid->mAvoidVector.size() > 0)	
 	{
-		avoid->mStateMachine->changeState(Normal_Avoid::Instance());
+		if (avoid->mAvoidDot >= .50)
+		{
+			avoid->mStateMachine->changeState(X_N_Z_N::Instance());
+		}
 	}
 }
 void No_Avoid::exit(Avoid* avoid)
