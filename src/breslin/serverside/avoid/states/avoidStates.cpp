@@ -73,7 +73,6 @@ void Normal_Avoid::enter(Avoid* avoid)
 }
 void Normal_Avoid::execute(Avoid* avoid)
 {
-
 	if (avoid->mAvoidee)
 	{
 		if (avoid->mAvoidDot < .50) 
@@ -83,15 +82,6 @@ void Normal_Avoid::execute(Avoid* avoid)
 		} 
 		else //dot lines up, take evasive action.. by changing to X_N_Z_N 
 		{
-/*
-			double param, result;
-  			param = 60.0f;
-  			result = cos ( param * 3.14f / 180.0f );
-  			LogString("The cosine of %f degrees is %f.\n", param, result );	
-
-			double radians = (90.0f * 3.14) / 180.0f; 
-  			LogString("radians: %f",radians  );	
-*/
 			//get the sine and cosine of 90degrees
 			double cs = cos( 90.0f * 3.14f / 180.0f);	
 			double sn = sin( 90.0f * 3.14f / 180.0f);	
@@ -103,10 +93,6 @@ void Normal_Avoid::execute(Avoid* avoid)
 
        			avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
        			avoid->mShape->mMove->mVelocity->normalise();
-
-	
-			//LogString("x:%f",newVelocity->x);
-			//LogString("z:%f",newVelocity->z);
 		}
 	}
 }
@@ -114,167 +100,6 @@ void Normal_Avoid::exit(Avoid* avoid)
 {
 }
 bool Normal_Avoid::onLetter(Avoid* avoid, Letter* letter)
-{
-        return true;
-}
-
-/*****************************************
-       X_N_Z_N 
-****************************************/
-X_N_Z_N* X_N_Z_N::Instance()
-{
-        static X_N_Z_N instance;
-        return &instance;
-}
-void X_N_Z_N::enter(Avoid* avoid)
-{
-	LogString("X_N_Z_N");
-       	avoid->mEvasiveVelocity->x -= .10f;
-       	avoid->mEvasiveVelocity->z -= .10f;
-        avoid->mEvasiveVelocity->normalise();
-        avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
-        avoid->mShape->mMove->mVelocity->normalise();
-}
-void X_N_Z_N::execute(Avoid* avoid)
-{
-	if (avoid->mAvoidDot > avoid->mAvoidDotLast)
-	{
-		avoid->mStateMachine->changeState(X_N_Z_P::Instance());
-	}
-	else
-	{
-        	avoid->mEvasiveVelocity->x -= .10f;
-        	avoid->mEvasiveVelocity->z -= .10f;
-        	avoid->mEvasiveVelocity->normalise();
-       		avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
-        	avoid->mShape->mMove->mVelocity->normalise();
-	}
-}
-void X_N_Z_N::exit(Avoid* avoid)
-{
-}
-bool X_N_Z_N::onLetter(Avoid* avoid, Letter* letter)
-{
-        return true;
-}
-
-/*****************************************
-       X_N_Z_P
-****************************************/
-X_N_Z_P* X_N_Z_P::Instance()
-{
-        static X_N_Z_P instance;
-        return &instance;
-}
-void X_N_Z_P::enter(Avoid* avoid)
-{
-	LogString("X_N_Z_P");
-        avoid->mEvasiveVelocity->x -= .10f;
-        avoid->mEvasiveVelocity->z += .10f;
-        avoid->mEvasiveVelocity->normalise();
-        avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
-        avoid->mShape->mMove->mVelocity->normalise();
-}
-void X_N_Z_P::execute(Avoid* avoid)
-{
-        if (avoid->mAvoidDot > avoid->mAvoidDotLast)
-        {
-                avoid->mStateMachine->changeState(X_P_Z_P::Instance());
-        }
-        else
-        {
-                avoid->mEvasiveVelocity->x -= .10f;
-                avoid->mEvasiveVelocity->z += .10f;
-                avoid->mEvasiveVelocity->normalise();
-                avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
-                avoid->mShape->mMove->mVelocity->normalise();
-        }
-}
-void X_N_Z_P::exit(Avoid* avoid)
-{
-}
-bool X_N_Z_P::onLetter(Avoid* avoid, Letter* letter)
-{
-        return true;
-}
-
-
-/*****************************************
-       X_P_Z_P
-****************************************/
-X_P_Z_P* X_P_Z_P::Instance()
-{
-        static X_P_Z_P instance;
-        return &instance;
-}
-void X_P_Z_P::enter(Avoid* avoid)
-{
-	LogString("X_P_Z_P");
-        avoid->mEvasiveVelocity->x += .10f;
-        avoid->mEvasiveVelocity->z += .10f;
-        avoid->mEvasiveVelocity->normalise();
-        avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
-        avoid->mShape->mMove->mVelocity->normalise();
-}
-void X_P_Z_P::execute(Avoid* avoid)
-{
-        if (avoid->mAvoidDot > avoid->mAvoidDotLast)
-        {
-                avoid->mStateMachine->changeState(X_P_Z_N::Instance());
-        }
-        else
-        {
-                avoid->mEvasiveVelocity->x += .10f;
-                avoid->mEvasiveVelocity->z += .10f;
-                avoid->mEvasiveVelocity->normalise();
-                avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
-                avoid->mShape->mMove->mVelocity->normalise();
-        }
-}
-void X_P_Z_P::exit(Avoid* avoid)
-{
-}
-bool X_P_Z_P::onLetter(Avoid* avoid, Letter* letter)
-{
-        return true;
-}
-
-/*****************************************
-       X_P_Z_N
-****************************************/
-X_P_Z_N* X_P_Z_N::Instance()
-{
-        static X_P_Z_N instance;
-        return &instance;
-}
-void X_P_Z_N::enter(Avoid* avoid)
-{
-	LogString("X_P_Z_N");
-        avoid->mEvasiveVelocity->x += .10f;
-        avoid->mEvasiveVelocity->z -= .10f;
-        avoid->mEvasiveVelocity->normalise();
-        avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
-        avoid->mShape->mMove->mVelocity->normalise();
-}
-void X_P_Z_N::execute(Avoid* avoid)
-{
-        if (avoid->mAvoidDot > avoid->mAvoidDotLast)
-        {
-                avoid->mStateMachine->changeState(X_N_Z_N::Instance());
-        }
-        else
-        {
-                avoid->mEvasiveVelocity->x += .10f;
-                avoid->mEvasiveVelocity->z -= .10f;
-                avoid->mEvasiveVelocity->normalise();
-                avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mEvasiveVelocity);
-                avoid->mShape->mMove->mVelocity->normalise();
-        }
-}
-void X_P_Z_N::exit(Avoid* avoid)
-{
-}
-bool X_P_Z_N::onLetter(Avoid* avoid, Letter* letter)
 {
         return true;
 }
