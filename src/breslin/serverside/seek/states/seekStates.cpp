@@ -54,7 +54,7 @@ Normal_Seek* Normal_Seek::Instance()
 }
 void Normal_Seek::enter(Seek* seek)
 {
-	//LogString("Normal");
+	LogString("Normal_Seek");
 }
 void Normal_Seek::execute(Seek* seek)
 {
@@ -67,10 +67,18 @@ void Normal_Seek::execute(Seek* seek)
 		//seek velocity and length
                 seek->mSeekVelocity->subtract(seek->mSeekPoint,currentPosition);
 		seek->mSeekLength = seek->mSeekVelocity->length(); 			
-		seek->mSeekVelocity->normalise();
+		
+		if (seek->mSeekLength <= 2) //close enough goto reachdestination
+		{
+                	seek->mStateMachine->changeState(Reached_Destination::Instance());
+		}
+		else //still not close enough seek on
+		{
+			seek->mSeekVelocity->normalise();
 
-		//set to shape velocity
-		seek->mShape->mMove->mVelocity->copyValuesFrom(seek->mSeekVelocity);
+			//set to shape velocity
+			seek->mShape->mMove->mVelocity->copyValuesFrom(seek->mSeekVelocity);
+		}
         }
         else
         {
@@ -100,13 +108,29 @@ void Reached_Destination::enter(Seek* seek)
 void Reached_Destination::execute(Seek* seek)
 {
         if (seek->mSeekShape == NULL && seek->mSeekPoint == NULL)
-        {
-                //LogString("Not seeking");
-        }
-        else
-        {
-                seek->mStateMachine->changeState(Normal_Seek::Instance());
-        }
+	{
+                seek->mStateMachine->changeState(No_Seek::Instance());
+	}
+	else
+	{
+   		//current position
+                Vector3D* currentPosition = new Vector3D();
+                currentPosition->convertFromVector3(seek->mShape->mSceneNode->getPosition());
+
+                //seek velocity and length
+                seek->mSeekVelocity->subtract(seek->mSeekPoint,currentPosition);
+                seek->mSeekLength = seek->mSeekVelocity->length();
+
+		if (seek->mSeekLength > 2) //go to normal seek and seek on!
+		{
+                	seek->mStateMachine->changeState(Normal_Seek::Instance());
+		}
+		else
+		{
+                	//set to shape velocity to zero as you have reached destination
+                	seek->mShape->mMove->mVelocity->zero();
+		}
+	}
 }
 void Reached_Destination::exit(Seek* seek)
 {
@@ -128,7 +152,7 @@ No_Seek* No_Seek::Instance()
 }
 void No_Seek::enter(Seek* seek)
 {
-	//LogString("No");
+	LogString("No_Seek");
 }
 void No_Seek::execute(Seek* seek)
 {
