@@ -80,11 +80,18 @@ void Normal_Avoid::execute(Avoid* avoid)
 			//just seek
 			avoid->mStateMachine->changeState(No_Avoid::Instance());	
 		} 
-		else //dot lines up, take evasive action.. by changing to X_N_Z_N 
+		else //dot lines up, take evasive action.. 
 		{
 			Vector3D* newVelocity = new Vector3D();
 
-			newVelocity = avoid->mAvoidVelocity->getVectorOffset(90.0f,true);
+			if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mSeekPoint)
+			{ 
+				newVelocity = avoid->mAvoidVelocity->getVectorOffset(45.0f,true);
+			}
+			else
+			{
+				newVelocity = avoid->mAvoidVelocity->getVectorOffset(90.0f,true);
+			}
 
        			avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
        			avoid->mShape->mMove->mVelocity->normalise();
