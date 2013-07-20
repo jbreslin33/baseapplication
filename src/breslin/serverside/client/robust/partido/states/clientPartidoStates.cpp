@@ -119,16 +119,16 @@ bool Battle::onLetter(ClientPartido* clientPartido, Letter* letter)
 /****************************************
 	BATTLE_OFF	
 ****************************************/
-Battle_OFF* Battle_OFF::Instance()
+BATTLE_OFF* BATTLE_OFF::Instance()
 {
-  static Battle_OFF instance;
+  static BATTLE_OFF instance;
   return &instance;
 }
-void Battle_OFF::enter(ClientPartido* clientPartido)
+void BATTLE_OFF::enter(ClientPartido* clientPartido)
 {
-        LogString("Battle_OFF::enter");
+        LogString("BATTLE_OFF::enter");
 }
-void Battle_OFF::execute(ClientPartido* clientPartido)
+void BATTLE_OFF::execute(ClientPartido* clientPartido)
 {
 	if (clientPartido->mShapePartido)
 	{
@@ -138,11 +138,11 @@ void Battle_OFF::execute(ClientPartido* clientPartido)
 		}
 	}
 }
-void Battle_OFF::exit(ClientPartido* clientPartido)
+void BATTLE_OFF::exit(ClientPartido* clientPartido)
 {
 }
 
-bool Battle_OFF::onLetter(ClientPartido* clientPartido, Letter* letter)
+bool BATTLE_OFF::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false;  
 }
@@ -164,7 +164,7 @@ void Sending_Question::execute(ClientPartido* clientPartido)
 {
   	if (!clientPartido->mShapePartido->mOpponent)
         {
-                clientPartido->mBattleStateMachine->changeState(Battle_OFF::Instance());
+                clientPartido->mBattleStateMachine->changeState(BATTLE_OFF::Instance());
         }
 
         if (clientPartido->mLoggedIn)
@@ -215,7 +215,7 @@ void Waiting_For_Answer::execute(ClientPartido* clientPartido)
 {
   	if (!clientPartido->mShapePartido->mOpponent)
         {
-                clientPartido->mBattleStateMachine->changeState(Battle_OFF::Instance());
+                clientPartido->mBattleStateMachine->changeState(BATTLE_OFF::Instance());
         }
 	
 	if (!clientPartido->mWaitingForAnswer && clientPartido->mShapePartido->mOpponent)

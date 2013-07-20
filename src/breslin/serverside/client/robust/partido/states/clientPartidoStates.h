@@ -51,12 +51,12 @@ public:
 };
 
 /***BATTLE***/
-class Battle_OFF : public State<ClientPartido>
+class BATTLE_OFF : public State<ClientPartido>
 {
 private:
-  Battle_OFF(){}
+  BATTLE_OFF(){}
 public:
-  static Battle_OFF* Instance();
+  static BATTLE_OFF* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);

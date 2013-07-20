@@ -61,7 +61,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	}
 	else
 	{
-        	mBattleStateMachine->setCurrentState      (Battle_OFF::Instance());
+        	mBattleStateMachine->setCurrentState      (BATTLE_OFF::Instance());
 	}
         mBattleStateMachine->setPreviousState     (NULL);
         mBattleStateMachine->setGlobalState       (NULL);

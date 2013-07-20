@@ -13,6 +13,12 @@
 //server
 #include "../../../server/server.h"
 
+//client
+#include "../../../client/robust/partido/clientPartido.h"
+
+//clientPartido states
+#include "../../../client/robust/partido/states/clientPartidoStates.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -51,9 +57,14 @@ BATTLE_SHAPE_PARTIDO* BATTLE_SHAPE_PARTIDO::Instance()
 } 
 void BATTLE_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
 {
+	LogString("BATTLE_SHAPE_PARTIDO");
 }       
 void BATTLE_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 {
+	if (shapePartido->mClientPartido->mBattleStateMachine->currentState() == BATTLE_OFF::Instance())
+	{
+		shapePartido->mShapePartidoStateMachine->changeState(GAME_SHAPE_PARTIDO::Instance());	
+	}
 }
 void BATTLE_SHAPE_PARTIDO::exit(ShapePartido* shapePartido)
 {
@@ -75,9 +86,17 @@ GAME_SHAPE_PARTIDO* GAME_SHAPE_PARTIDO::Instance()
 }
 void GAME_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
 {
+	LogString("GAME_SHAPE_PARTIDO");
 }
 void GAME_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 {
+	if (shapePartido->mClientPartido)
+	{
+		if (shapePartido->mClientPartido->mBattleStateMachine->currentState() != BATTLE_OFF::Instance())
+		{
+			shapePartido->mShapePartidoStateMachine->changeState(BATTLE_SHAPE_PARTIDO::Instance());	
+		}
+	}
 }
 void GAME_SHAPE_PARTIDO::exit(ShapePartido* shapePartido)
 {
