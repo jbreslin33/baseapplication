@@ -18,6 +18,9 @@
 //math
 #include "../../../math/vector3D.h"
 
+//states
+#include "states/shapePartidoStates.h"
+
 //postgresql
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
@@ -39,8 +42,14 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
 	//setText
 	mClientPartido->setBattleRecordText();	
 	setText(mClientPartido->mBattleRecordText);	
+
+	//statemachine
+	mShapePartidoStateMachine =  new StateMachine<ShapePartido>(this);
+        mShapePartidoStateMachine->setGlobalState      (GLOBAL_SHAPE_PARTIDO::Instance());
+        mShapePartidoStateMachine->setCurrentState      (GAME_SHAPE_PARTIDO::Instance());
+        mShapePartidoStateMachine->setPreviousState      (GAME_SHAPE_PARTIDO::Instance());
 }
-	
+
 ShapePartido::~ShapePartido()
 {
 }
@@ -48,6 +57,7 @@ ShapePartido::~ShapePartido()
 void ShapePartido::update()
 {
 	Shape::update();
+	mShapePartidoStateMachine->update();
 }
 
 bool ShapePartido::handleLetter(Letter* letter)

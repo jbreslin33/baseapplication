@@ -1,19 +1,12 @@
 #ifndef SHAPEPARTIDO_H
 #define SHAPEPARTIDO_H
-/******************************************
-*            INCLUDES
-****************************************/
 
 #include "../shape.h"
+#include "../../../fsm/stateMachine.h"
+template <class entity_type> class State;
 
-/******************************************
-*            FORWARD DECLARATIONS
-****************************************/
 class GamePartido;
 class ClientPartido;
-/******************************************
-*            CLASS
-****************************************/
 class ShapePartido : public Shape
 {
 
@@ -22,17 +15,13 @@ ShapePartido(unsigned int index, GamePartido* gamePartido, ClientPartido* client
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~ShapePartido();
 
-/******************************************
-*            VARIABLES
-****************************************/
+StateMachine<ShapePartido>* mShapePartidoStateMachine;
+
 GamePartido*   mGamePartido;
 ClientPartido* mClientPartido;
 ShapePartido*  mOpponent;
 ShapePartido*  mOpponentLast;
 
-/******************************************
-*            METHODS
-****************************************/
 virtual void update();
 virtual bool handleLetter(Letter* letter);
 virtual void collision(Shape* shape);
