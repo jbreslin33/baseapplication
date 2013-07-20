@@ -86,7 +86,7 @@ void Normal_Avoid::execute(Avoid* avoid)
 
 			if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mSeekPoint)
 			{ 
-				newVelocity = avoid->mAvoidVelocity->getVectorOffset(45.0f,true);
+                		avoid->mStateMachine->changeState(Seek_Avoid::Instance());
 			}
 			else
 			{
@@ -105,6 +105,54 @@ bool Normal_Avoid::onLetter(Avoid* avoid, Letter* letter)
 {
         return true;
 }
+
+/*****************************************
+        Seek_Avoid
+****************************************/
+Seek_Avoid* Seek_Avoid::Instance()
+{
+  static Seek_Avoid instance;
+  return &instance;
+}
+void Seek_Avoid::enter(Avoid* avoid)
+{
+        LogString("Seek_Avoid");
+}
+void Seek_Avoid::execute(Avoid* avoid)
+{
+        if (avoid->mAvoidee)
+        {
+                if (avoid->mAvoidDot < .50)
+                {
+                        //just seek
+                        avoid->mStateMachine->changeState(No_Avoid::Instance());
+                }
+                else //dot lines up, take evasive action..
+                {
+                        Vector3D* newVelocity = new Vector3D();
+
+                        if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mSeekPoint)
+                        {
+                                newVelocity = avoid->mAvoidVelocity->getVectorOffset(45.0f,true);
+                        }
+                        else
+                        {
+                		avoid->mStateMachine->changeState(Normal_Avoid::Instance());
+                        }
+
+                        avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
+                        avoid->mShape->mMove->mVelocity->normalise();
+                }
+        }
+}
+void Seek_Avoid::exit(Avoid* avoid)
+{
+}
+bool Seek_Avoid::onLetter(Avoid* avoid, Letter* letter)
+{
+        return true;
+}
+
 
 /*****************************************
 	No_Avoid

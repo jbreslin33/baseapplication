@@ -39,6 +39,18 @@ public:
   bool onLetter(Avoid* avoid, Letter* letter);
 };
 
+class Seek_Avoid : public State<Avoid>
+{
+private:
+  Seek_Avoid(){}
+public:
+  static Seek_Avoid* Instance();
+  void enter  (Avoid* avoid);
+  void execute(Avoid* avoid);
+  void exit   (Avoid* avoid);
+  bool onLetter(Avoid* avoid, Letter* letter);
+};
+
 class No_Avoid : public State<Avoid>
 {
 private:
