@@ -71,7 +71,6 @@ void Normal_Seek::execute(Seek* seek)
 
 		//set to shape velocity
 		seek->mShape->mMove->mVelocity->copyValuesFrom(seek->mSeekVelocity);
-
         }
         else
         {
@@ -85,6 +84,39 @@ bool Normal_Seek::onLetter(Seek* seek, Letter* letter)
 {
         return true;
 }
+
+/*****************************************
+        Reached_Destination
+****************************************/
+Reached_Destination* Reached_Destination::Instance()
+{
+        static Reached_Destination instance;
+        return &instance;
+}
+void Reached_Destination::enter(Seek* seek)
+{
+        LogString("Reached_Destination");
+}
+void Reached_Destination::execute(Seek* seek)
+{
+        if (seek->mSeekShape == NULL && seek->mSeekPoint == NULL)
+        {
+                //LogString("Not seeking");
+        }
+        else
+        {
+                seek->mStateMachine->changeState(Normal_Seek::Instance());
+        }
+}
+void Reached_Destination::exit(Seek* seek)
+{
+}
+bool Reached_Destination::onLetter(Seek* seek, Letter* letter)
+{
+        return true;
+}
+
+
 
 /*****************************************
 	No_Seek
