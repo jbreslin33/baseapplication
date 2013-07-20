@@ -51,5 +51,9 @@ void convertFromVector3(Vector3 vector3);
 
 Quaternion* getRotationTo(Vector3D* to);
 float getDegreesToSomething(Vector3D* to);
+
+Vector3D* getVectorOffset(float offset, bool degrees);
+
+
 };
 #endif

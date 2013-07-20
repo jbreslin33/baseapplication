@@ -82,14 +82,9 @@ void Normal_Avoid::execute(Avoid* avoid)
 		} 
 		else //dot lines up, take evasive action.. by changing to X_N_Z_N 
 		{
-			//get the sine and cosine of 90degrees
-			double cs = cos( 90.0f * 3.14f / 180.0f);	
-			double sn = sin( 90.0f * 3.14f / 180.0f);	
-		
 			Vector3D* newVelocity = new Vector3D();
 
-			newVelocity->x = avoid->mAvoidVelocity->x * cs - avoid->mAvoidVelocity->z * sn;	
-			newVelocity->z = avoid->mAvoidVelocity->x * sn + avoid->mAvoidVelocity->z * cs;	
+			newVelocity = avoid->mAvoidVelocity->getVectorOffset(90.0f,true);
 
        			avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
        			avoid->mShape->mMove->mVelocity->normalise();

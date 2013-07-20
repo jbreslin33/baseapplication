@@ -165,13 +165,13 @@ Quaternion* Vector3D::getRotationTo(Vector3D* to)
 
 	float d = v0->dot(v1);
 
-    // If dot == 1, vectors are the same
-    if (d >= 1.0f)
-    {
+    	// If dot == 1, vectors are the same
+    	if (d >= 1.0f)
+    	{
 		//LogString("VECTORS ARE THE SAME!!!!!!!!!!!!!!!!");
 		Quaternion* quaternionIdentity = new Quaternion(1.0,0.0,0.0,0.0);
 		return quaternionIdentity;
-    }
+    	}
 			
 	if (d < (1e-6f - 1.0f))
 	{
@@ -188,17 +188,17 @@ Quaternion* Vector3D::getRotationTo(Vector3D* to)
 	else
 	{
 		Real s = Math::Sqrt( (1+d)*2 );
-        Real invs = 1 / s;
+        	Real invs = 1 / s;
 
 		Vector3D* c = v0->crossProduct(v1);
 
-   	    quaternion->x = c->x * invs;
-       	quaternion->y = c->y * invs;
-        quaternion->z = c->z * invs;
-        quaternion->w = s * 0.5f;
+   	    	quaternion->x = c->x * invs;
+       		quaternion->y = c->y * invs;
+        	quaternion->z = c->z * invs;
+        	quaternion->w = s * 0.5f;
 		quaternion->normalise();
 	}
-return quaternion;
+	return quaternion;
 }
 
 
@@ -207,8 +207,8 @@ float Vector3D::getDegreesToSomething(Vector3D* to)
 {
 	Quaternion* toSomething = this->getRotationTo(to);
 	
-    // convert to degrees
-    Real degreesToSomething = toSomething->getYaw().valueDegrees();
+    	// convert to degrees
+    	Real degreesToSomething = toSomething->getYaw().valueDegrees();
 	return degreesToSomething;
 }
 
@@ -228,3 +228,29 @@ void Vector3D::convertFromVector3(Vector3 vector3)
 	z = vector3.z;
 
 }
+Vector3D* Vector3D::getVectorOffset(float offset, bool degrees)
+{
+	//get the sine and cosine of 90degrees
+
+	double cs;
+	double sn;
+
+	if (degrees)
+	{
+        	cs = cos( offset * 3.14f / 180.0f);
+        	sn = sin( offset * 3.14f / 180.0f);
+	}
+	else
+	{
+        	cs = cos(offset);
+        	sn = sin(offset);
+	}
+
+        Vector3D* newVelocity = new Vector3D();
+
+        newVelocity->x = this->x * cs - this->z * sn;
+        newVelocity->z = this->x * sn + this->z * cs;
+
+	return newVelocity;
+}
+
