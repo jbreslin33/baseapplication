@@ -18,7 +18,7 @@ public:
 	~GamePartido();
 
 	//updates
-	void processUpdate();
+	void update();
 
 	//serverPartido
 	ServerPartido* mServerPartido;

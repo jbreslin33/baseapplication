@@ -98,7 +98,7 @@ void Server::addGame(Game* game)
 /*******************************************************
 		UPDATES	
 ********************************************************/
-void Server::processUpdate(int msec)
+void Server::update(int msec)
 {
  	mFrameTime += msec;
         mGameTime += msec;
@@ -140,7 +140,7 @@ void Server::processGames()
 	//update games
   	for (unsigned int i = 0; i < mGameVector.size(); i++)
 	{
-		mGameVector.at(i)->processUpdate();
+		mGameVector.at(i)->update();
 	}
 }
 

@@ -60,7 +60,7 @@ public:
 	void	readDeltaMoveCommand(Message *mes, ClientRobust *client);
 	
 	//time
-	virtual void	processUpdate();
+	virtual void	update();
 	
 	//collision detection
 	virtual void checkCollisions();

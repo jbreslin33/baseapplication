@@ -125,7 +125,7 @@ public:
 	BaseEntity* getBaseEntityFromID(int id);
 
 	//update
-	void processUpdate(int msec);
+	void update(int msec);
 	virtual void processGames();
 	virtual void processClients();
 	virtual void sendCommands();

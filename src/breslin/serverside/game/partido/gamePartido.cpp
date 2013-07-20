@@ -26,10 +26,10 @@ GamePartido::~GamePartido()
 {
 }
 
-//you should call this from server processUpdate
-void GamePartido::processUpdate()
+//you should call this from server update
+void GamePartido::update()
 {
-	Game::processUpdate();
+	Game::update();
 	
 	if (checkForEndOfGame())
 	{

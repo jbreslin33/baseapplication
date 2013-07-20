@@ -69,7 +69,7 @@ Shape* Game::getShapeFromID(int id)
 }
 
 //you should call this from server processUpdate
-void Game::processUpdate()
+void Game::update()
 {
 	//this is where they want to move
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)

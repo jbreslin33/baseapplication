@@ -44,7 +44,7 @@ void ServerPartido::processGames()
         //update games
         for (unsigned int i = 0; i < mGamePartidoVector.size(); i++)
         {
-                mGamePartidoVector.at(i)->processUpdate();
+                mGamePartidoVector.at(i)->update();
         }
 }
 
