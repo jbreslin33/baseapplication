@@ -96,12 +96,6 @@ void COMPUTER_CONTROLLED::enter(Computer* computer)
                                 {
                                         computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
                                 }
-/*
-                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 2)
-                                {
-                                        computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
-                                }
-*/
                         }
                 }
         }
@@ -125,14 +119,6 @@ void COMPUTER_CONTROLLED::execute(Computer* computer)
                 }
         }
 
-/*
-	if (computer->mShape->mClient->db_id == 5)
-	{
-		Vector3D* target = new Vector3D(200.0f,0.0f,200.0f);
-		computer->mShape->mSteering->setTarget(target);
-		computer->mShape->mSteering->mSeekOn = true;
-	}
-*/	
 	//is this human controlled?
 	if (computer->mShape->mClient->mLoggedIn)
 	{
