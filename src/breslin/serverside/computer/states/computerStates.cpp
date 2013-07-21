@@ -81,43 +81,11 @@ COMPUTER_CONTROLLED* COMPUTER_CONTROLLED::Instance()
 
 void COMPUTER_CONTROLLED::enter(Computer* computer)
 {
-    	if (computer->mShape->mAvoid)
-        {
-                if (computer->mShape->mClient->db_id == 5)
-                {
-                        for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
-                        {
-                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
-                                {
-                                        computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
-                                }
-
-                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 3)
-                                {
-                                        computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
-                                }
-                        }
-                }
-        }
 
 }
 
 void COMPUTER_CONTROLLED::execute(Computer* computer)
 {
-
-       	if (computer->mShape->mSeek)
-        {
-                if (computer->mShape->mClient->db_id == 5)
-                {
-                        for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
-                        {
-                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 2)
-                                {
-                                        computer->mShape->mSeek->setSeekShape(computer->mShape->mGame->mShapeVector.at(i));     
-                                }
-                        }
-                }
-        }
 
 	//is this human controlled?
 	if (computer->mShape->mClient->mLoggedIn)

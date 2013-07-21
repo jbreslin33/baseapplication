@@ -10,6 +10,10 @@
 #include "../computerPartido.h"
 
 #include "../../../shape/shape.h"
+#include "../../../client/robust/clientRobust.h"
+#include "../../../game/game.h"
+#include "../../../avoid/avoid.h"
+#include "../../../seek/seek.h"
 
 //rand
 #include <stdlib.h>
@@ -57,17 +61,51 @@ COMPUTER_CONTROLLED_PARTIDO* COMPUTER_CONTROLLED_PARTIDO::Instance()
   return &instance;
 }
 
-void COMPUTER_CONTROLLED_PARTIDO::enter(ComputerPartido* computerPartido)
+void COMPUTER_CONTROLLED_PARTIDO::enter(ComputerPartido* computer)
 {
 	LogString("COMPUTER_CONTROLLED_PARTIDO");
+	if (computer->mShape->mAvoid)
+        {
+                if (computer->mShape->mClient->db_id == 5)
+                {
+                        for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
+                        {
+                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
+                                {
+                                        computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
+                                }
+
+                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 3)
+                                {
+                                        computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
+                                }
+                        }
+                }
+        }
+
 }
 
-void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computerPartido)
+void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 {
-	if (computerPartido->mShape->mComputer->mStateMachine->currentState() == HUMAN_CONTROLLED::Instance())
-	{
-		computerPartido->mComputerPartidoStateMachine->changeState(HUMAN_CONTROLLED_PARTIDO::Instance());
-	} 
+       if (computer->mShape->mSeek)
+        {
+                if (computer->mShape->mClient->db_id == 5)
+                {
+                        for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
+                        {
+                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 2)
+                                {
+                                        computer->mShape->mSeek->setSeekShape(computer->mShape->mGame->mShapeVector.at(i));
+                                }
+                        }
+                }
+        }
+
+        //is this human controlled?
+        if (computer->mShape->mClient->mLoggedIn)
+        {
+                computer->mComputerPartidoStateMachine->changeState(HUMAN_CONTROLLED_PARTIDO::Instance());
+        }
 
 }
 
@@ -93,12 +131,12 @@ void HUMAN_CONTROLLED_PARTIDO::enter(ComputerPartido* computerPartido)
 	LogString("HUMAN_CONTROLLED_PARTIDO");
 }
 
-void HUMAN_CONTROLLED_PARTIDO::execute(ComputerPartido* computerPartido)
+void HUMAN_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 {
-	if (computerPartido->mShape->mComputer->mStateMachine->currentState() != HUMAN_CONTROLLED::Instance())
-	{
-		computerPartido->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
-	} 
+        if (!computer->mShape->mClient->mLoggedIn)
+        {
+                computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
+        }
 }
 
 void HUMAN_CONTROLLED_PARTIDO::exit(ComputerPartido* computerPartido)
