@@ -24,6 +24,9 @@
 //move
 #include "../../move/move.h"
 
+//computerPartido
+#include "../../computer/partido/computerPartido.h"
+
 //postgresql
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
@@ -46,6 +49,11 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
 	mClientPartido->setBattleRecordText();	
 	setText(mClientPartido->mBattleRecordText);	
 
+	//computer abilitys
+  	mComputerPartido = new ComputerPartido(this);
+        addComputerAbility(mComputerPartido);
+
+
 	//statemachine
 	mShapePartidoStateMachine =  new StateMachine<ShapePartido>(this);
         mShapePartidoStateMachine->setGlobalState      (GLOBAL_SHAPE_PARTIDO::Instance());
@@ -59,7 +67,6 @@ ShapePartido::~ShapePartido()
 
 void ShapePartido::update()
 {
-
    	mMove->mPositionBeforeCollision->x = mSceneNode->getPosition().x;
         mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;
         mMove->mPositionBeforeCollision->z = mSceneNode->getPosition().z;
@@ -88,8 +95,6 @@ void ShapePartido::update()
                 sendText();
                 mTextLast = mText;
         }
-
-
 }
 
 bool ShapePartido::handleLetter(Letter* letter)

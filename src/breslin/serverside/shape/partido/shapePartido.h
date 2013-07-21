@@ -7,6 +7,8 @@ template <class entity_type> class State;
 
 class GamePartido;
 class ClientPartido;
+class ComputerPartido;
+
 class ShapePartido : public Shape
 {
 
@@ -21,6 +23,8 @@ GamePartido*   mGamePartido;
 ClientPartido* mClientPartido;
 ShapePartido*  mOpponent;
 ShapePartido*  mOpponentLast;
+
+ComputerPartido* mComputerPartido;
 
 virtual void update();
 virtual bool handleLetter(Letter* letter);
