@@ -33,9 +33,12 @@ GLOBAL_COMPUTER_PARTIDO* GLOBAL_COMPUTER_PARTIDO::Instance()
 void GLOBAL_COMPUTER_PARTIDO::enter(ComputerPartido* computerPartido)
 {
 }
-void GLOBAL_COMPUTER_PARTIDO::execute(ComputerPartido* computerPartido)
+void GLOBAL_COMPUTER_PARTIDO::execute(ComputerPartido* computer)
 {
-
+	if (computer->mTactic == 0 && computer->mShape->mClient->mLoggedIn == false && computer->mComputerPartidoStateMachine->currentState() != COMPUTER_CONTROLLED_PARTIDO::Instance())
+	{
+                computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
+	}
 }
 void GLOBAL_COMPUTER_PARTIDO::exit(ComputerPartido* computerPartido)
 {
