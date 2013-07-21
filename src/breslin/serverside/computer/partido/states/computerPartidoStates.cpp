@@ -49,9 +49,18 @@ bool GLOBAL_COMPUTER_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter*
 /*****************************************
 *******       COMPUTER    ******************
 ****************************************/
+/*
+agressive-no avoid, seek closest 
+scared-no seek, avoid all
+
+preciseAttack-seek one, avoid all else
+sloppyAttack-seek one, avoid no one
+
+
+*/
 
 /*****************************************
-*******      RANDOM COMPUTER    ******************
+*******      COMPUTER CONTROLLED   ******************
 ****************************************/
 /*   COMPUTER_CONTROLLED_PARTIDO   */
 

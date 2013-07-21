@@ -24,6 +24,8 @@ ComputerPartido::ComputerPartido(ShapePartido* shape) : Computer(shape)
 
 	mCounter   = 0;
         mThreshold = 1000;
+
+	mTactic = 0;
 }
 
 ComputerPartido::~ComputerPartido()
@@ -39,5 +41,8 @@ bool ComputerPartido::handleLetter(Letter* letter)
 {
 	return Computer::handleLetter(letter);
 }
-
-
+// 0 = none, 1 = aggressive, 2 = scared, 3 = precise, 4 = sloppy
+void ComputerPartido::setTactic(int tactic)
+{
+	mTactic = tactic;	
+}
