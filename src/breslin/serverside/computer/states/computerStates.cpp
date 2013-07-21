@@ -44,22 +44,22 @@
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalComputer* GlobalComputer::Instance()
+GLOBAL_COMPUTER* GLOBAL_COMPUTER::Instance()
 {
-  static GlobalComputer instance;
+  static GLOBAL_COMPUTER instance;
   return &instance;
 }
-void GlobalComputer::enter(Computer* computer)
+void GLOBAL_COMPUTER::enter(Computer* computer)
 {
 }
-void GlobalComputer::execute(Computer* computer)
+void GLOBAL_COMPUTER::execute(Computer* computer)
 {
 
 }
-void GlobalComputer::exit(Computer* computer)
+void GLOBAL_COMPUTER::exit(Computer* computer)
 {
 }
-bool GlobalComputer::onLetter(Computer* computer, Letter* letter)
+bool GLOBAL_COMPUTER::onLetter(Computer* computer, Letter* letter)
 {
         return true;
 }
@@ -72,14 +72,14 @@ bool GlobalComputer::onLetter(Computer* computer, Letter* letter)
 /*****************************************
 *******      RANDOM COMPUTER    ******************
 ****************************************/
-/*   Computer_Controlled   */
-Computer_Controlled* Computer_Controlled::Instance()
+/*   COMPUTER_CONTROLLED   */
+COMPUTER_CONTROLLED* COMPUTER_CONTROLLED::Instance()
 {
-  static Computer_Controlled instance;
+  static COMPUTER_CONTROLLED instance;
   return &instance;
 }
 
-void Computer_Controlled::enter(Computer* computer)
+void COMPUTER_CONTROLLED::enter(Computer* computer)
 {
     	if (computer->mShape->mAvoid)
         {
@@ -108,7 +108,7 @@ void Computer_Controlled::enter(Computer* computer)
 
 }
 
-void Computer_Controlled::execute(Computer* computer)
+void COMPUTER_CONTROLLED::execute(Computer* computer)
 {
 
        	if (computer->mShape->mSeek)
@@ -136,14 +136,14 @@ void Computer_Controlled::execute(Computer* computer)
 	//is this human controlled?
 	if (computer->mShape->mClient->mLoggedIn)
 	{
-		computer->mStateMachine->changeState(Human_Controlled::Instance());
+		computer->mStateMachine->changeState(HUMAN_CONTROLLED::Instance());
 	}
 }
 
-void Computer_Controlled::exit(Computer* computer)
+void COMPUTER_CONTROLLED::exit(Computer* computer)
 {
 }
-bool Computer_Controlled::onLetter(Computer* computer, Letter* letter)
+bool COMPUTER_CONTROLLED::onLetter(Computer* computer, Letter* letter)
 {
         return true;
 }
@@ -153,21 +153,21 @@ bool Computer_Controlled::onLetter(Computer* computer, Letter* letter)
 /*****************************************
 *******      RANDOM COMPUTER    ******************
 ****************************************/
-Human_Controlled* Human_Controlled::Instance()
+HUMAN_CONTROLLED* HUMAN_CONTROLLED::Instance()
 {
-	static Human_Controlled instance;
+	static HUMAN_CONTROLLED instance;
 	return &instance;
 }
 
-void Human_Controlled::enter(Computer* computer)
+void HUMAN_CONTROLLED::enter(Computer* computer)
 {
 }
 
-void Human_Controlled::execute(Computer* computer)
+void HUMAN_CONTROLLED::execute(Computer* computer)
 {
 	if (!computer->mShape->mClient->mLoggedIn)
 	{
-		computer->mStateMachine->changeState(Computer_Controlled::Instance());
+		computer->mStateMachine->changeState(COMPUTER_CONTROLLED::Instance());
 	}
 
  	computer->mShape->mMove->mVelocity->x = 0;
@@ -211,10 +211,10 @@ void Human_Controlled::execute(Computer* computer)
 
 }
 
-void Human_Controlled::exit(Computer* computer)
+void HUMAN_CONTROLLED::exit(Computer* computer)
 {
 }
-bool Human_Controlled::onLetter(Computer* computer, Letter* letter)
+bool HUMAN_CONTROLLED::onLetter(Computer* computer, Letter* letter)
 {
         return true;
 }

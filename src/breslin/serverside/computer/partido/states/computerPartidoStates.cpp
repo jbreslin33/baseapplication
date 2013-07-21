@@ -1,8 +1,15 @@
-//parent
 #include "computerPartidoStates.h"
+
+//computer states
+#include "../../states/computerStates.h"
 
 //log
 #include "../../../tdreamsock/dreamSockLog.h"
+
+//computerPartido
+#include "../computerPartido.h"
+
+#include "../../../shape/shape.h"
 
 //rand
 #include <stdlib.h>
@@ -14,22 +21,22 @@
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalComputerPartido* GlobalComputerPartido::Instance()
+GLOBAL_COMPUTER_PARTIDO* GLOBAL_COMPUTER_PARTIDO::Instance()
 {
-  static GlobalComputerPartido instance;
+  static GLOBAL_COMPUTER_PARTIDO instance;
   return &instance;
 }
-void GlobalComputerPartido::enter(ComputerPartido* computerPartido)
+void GLOBAL_COMPUTER_PARTIDO::enter(ComputerPartido* computerPartido)
 {
 }
-void GlobalComputerPartido::execute(ComputerPartido* computerPartido)
+void GLOBAL_COMPUTER_PARTIDO::execute(ComputerPartido* computerPartido)
 {
 
 }
-void GlobalComputerPartido::exit(ComputerPartido* computerPartido)
+void GLOBAL_COMPUTER_PARTIDO::exit(ComputerPartido* computerPartido)
 {
 }
-bool GlobalComputerPartido::onLetter(ComputerPartido* computerPartido, Letter* letter)
+bool GLOBAL_COMPUTER_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
 {
         return true;
 }
@@ -42,77 +49,63 @@ bool GlobalComputerPartido::onLetter(ComputerPartido* computerPartido, Letter* l
 /*****************************************
 *******      RANDOM COMPUTER    ******************
 ****************************************/
-/*   ComputerPartido_Controlled   */
+/*   COMPUTER_CONTROLLED_PARTIDO   */
 
-/*
-ComputerPartido_Controlled* ComputerPartido_Controlled::Instance()
+COMPUTER_CONTROLLED_PARTIDO* COMPUTER_CONTROLLED_PARTIDO::Instance()
 {
-  static ComputerPartido_Controlled instance;
+  static COMPUTER_CONTROLLED_PARTIDO instance;
   return &instance;
 }
 
-void ComputerPartido_Controlled::enter(ComputerPartido* computerPartido)
+void COMPUTER_CONTROLLED_PARTIDO::enter(ComputerPartido* computerPartido)
 {
-
+	LogString("COMPUTER_CONTROLLED_PARTIDO");
 }
 
-void ComputerPartido_Controlled::execute(ComputerPartido* computerPartido)
+void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computerPartido)
 {
-	if (computerPartido->mShape->mSeek)
+	if (computerPartido->mShape->mComputer->mStateMachine->currentState() == HUMAN_CONTROLLED::Instance())
 	{
-		if (computerPartido->mShape->mClient->db_id == 5)
-		{
-			for (int i = 0; i < computerPartido->mShape->mGame->mShapeVector.size(); i++)
-			{
-				if (computerPartido->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
-				{
-					computerPartido->mShape->mSeek->setSeekShape(computerPartido->mShape->mGame->mShapeVector.at(i));	
-				}
-			}
-		}
-	}
+		computerPartido->mComputerPartidoStateMachine->changeState(HUMAN_CONTROLLED_PARTIDO::Instance());
+	} 
 
-	//is this human controlled?
-	if (computerPartido->mShape->mClient->mConnectionState == 1)
-	{
-		computerPartido->mStateMachine->changeState(Human_Controlled::Instance());
-	}
 }
 
-void ComputerPartido_Controlled::exit(ComputerPartido* computerPartido)
+void COMPUTER_CONTROLLED_PARTIDO::exit(ComputerPartido* computerPartido)
 {
 }
-bool ComputerPartido_Controlled::onLetter(ComputerPartido* computerPartido, Letter* letter)
+bool COMPUTER_CONTROLLED_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
 {
         return true;
 }
 
-*/
-
 /*****************************************
-*******      RANDOM COMPUTER    ******************
+*******      HUMAN     ******************
 ****************************************/
-/*
-Human_Controlled* Human_Controlled::Instance()
+HUMAN_CONTROLLED_PARTIDO* HUMAN_CONTROLLED_PARTIDO::Instance()
 {
-	static Human_Controlled instance;
+	static HUMAN_CONTROLLED_PARTIDO instance;
 	return &instance;
 }
 
-void Human_Controlled::enter(ComputerPartido* computerPartido)
+void HUMAN_CONTROLLED_PARTIDO::enter(ComputerPartido* computerPartido)
 {
+	LogString("HUMAN_CONTROLLED_PARTIDO");
 }
 
-void Human_Controlled::execute(ComputerPartido* computerPartido)
+void HUMAN_CONTROLLED_PARTIDO::execute(ComputerPartido* computerPartido)
 {
+	if (computerPartido->mShape->mComputer->mStateMachine->currentState() != HUMAN_CONTROLLED::Instance())
+	{
+		computerPartido->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
+	} 
 }
 
-void Human_Controlled::exit(ComputerPartido* computerPartido)
+void HUMAN_CONTROLLED_PARTIDO::exit(ComputerPartido* computerPartido)
 {
 }
-bool Human_Controlled::onLetter(ComputerPartido* computerPartido, Letter* letter)
+bool HUMAN_CONTROLLED_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
 {
         return true;
 }
-*/
 

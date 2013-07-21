@@ -9,12 +9,12 @@ class ComputerPartido;
 *     GLOBAL COMPTER 
 ******************************/
 
-class GlobalComputerPartido : public State<ComputerPartido>
+class GLOBAL_COMPUTER_PARTIDO : public State<ComputerPartido>
 {
 private:
-  GlobalComputerPartido(){}
+  GLOBAL_COMPUTER_PARTIDO(){}
 public:
-  static GlobalComputerPartido* Instance();
+  static GLOBAL_COMPUTER_PARTIDO* Instance();
   void enter  (ComputerPartido* computerPartido);
   void execute(ComputerPartido* computerPartido);
   void exit   (ComputerPartido* computerPartido);
@@ -25,29 +25,28 @@ public:
 /*******************************
 *     COMPTER 
 ******************************/
-/*
-class ComputerPartido_Controlled : public State<ComputerPartido>
+
+class COMPUTER_CONTROLLED_PARTIDO : public State<ComputerPartido>
 {
 private:
-  ComputerPartido_Controlled(){}
+  COMPUTER_CONTROLLED_PARTIDO(){}
 public:
-  static ComputerPartido_Controlled* Instance();
+  static COMPUTER_CONTROLLED_PARTIDO* Instance();
   void enter  (ComputerPartido* computerPartido);
   void execute(ComputerPartido* computerPartido);
   void exit   (ComputerPartido* computerPartido);
   bool onLetter(ComputerPartido* computerPartido, Letter* letter);
 };
 
-class Human_Controlled : public State<ComputerPartido>
+class HUMAN_CONTROLLED_PARTIDO : public State<ComputerPartido>
 {
 private:
-  Human_Controlled(){}
+  HUMAN_CONTROLLED_PARTIDO(){}
 public:
-  static Human_Controlled* Instance();
+  static HUMAN_CONTROLLED_PARTIDO* Instance();
   void enter  (ComputerPartido* computerPartido);
   void execute(ComputerPartido* computerPartido);
   void exit   (ComputerPartido* computerPartido);
   bool onLetter(ComputerPartido* computerPartido, Letter* letter);
 };
-*/
 #endif

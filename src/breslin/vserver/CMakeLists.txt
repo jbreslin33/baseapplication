@@ -298,7 +298,7 @@ set(HDRS
 	../serverside/computer/computer.h
 	../serverside/computer/partido/computerPartido.h
 	
-	#ai states
+	#computer states
 	../serverside/computer/states/computerStates.h	
 	../serverside/computer/partido/states/computerPartidoStates.h	
 	

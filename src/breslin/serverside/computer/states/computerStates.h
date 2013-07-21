@@ -10,12 +10,12 @@ class Computer;
 *     GLOBAL COMPTER 
 ******************************/
 
-class GlobalComputer : public State<Computer>
+class GLOBAL_COMPUTER : public State<Computer>
 {
 private:
-  GlobalComputer(){}
+  GLOBAL_COMPUTER(){}
 public:
-  static GlobalComputer* Instance();
+  static GLOBAL_COMPUTER* Instance();
   void enter  (Computer* computer);
   void execute(Computer* computer);
   void exit   (Computer* computer);
@@ -27,24 +27,24 @@ public:
 *     COMPTER 
 ******************************/
 
-class Computer_Controlled : public State<Computer>
+class COMPUTER_CONTROLLED : public State<Computer>
 {
 private:
-  Computer_Controlled(){}
+  COMPUTER_CONTROLLED(){}
 public:
-  static Computer_Controlled* Instance();
+  static COMPUTER_CONTROLLED* Instance();
   void enter  (Computer* computer);
   void execute(Computer* computer);
   void exit   (Computer* computer);
   bool onLetter(Computer* computer, Letter* letter);
 };
 
-class Human_Controlled : public State<Computer>
+class HUMAN_CONTROLLED : public State<Computer>
 {
 private:
-  Human_Controlled(){}
+  HUMAN_CONTROLLED(){}
 public:
-  static Human_Controlled* Instance();
+  static HUMAN_CONTROLLED* Instance();
   void enter  (Computer* computer);
   void execute(Computer* computer);
   void exit   (Computer* computer);

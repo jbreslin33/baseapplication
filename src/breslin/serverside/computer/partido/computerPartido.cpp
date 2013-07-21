@@ -18,9 +18,9 @@ ComputerPartido::ComputerPartido(ShapePartido* shape) : Computer(shape)
 
  	//computer states
    	mComputerPartidoStateMachine = new StateMachine<ComputerPartido>(this);
-	mComputerPartidoStateMachine->setCurrentState      (NULL);
-	mComputerPartidoStateMachine->setPreviousState     (NULL);
-	mComputerPartidoStateMachine->setGlobalState       (GlobalComputerPartido::Instance());
+	mComputerPartidoStateMachine->setCurrentState      (HUMAN_CONTROLLED_PARTIDO::Instance());
+	mComputerPartidoStateMachine->setPreviousState     (HUMAN_CONTROLLED_PARTIDO::Instance());
+	mComputerPartidoStateMachine->setGlobalState       (GLOBAL_COMPUTER_PARTIDO::Instance());
 
 	mCounter   = 0;
         mThreshold = 1000;
