@@ -68,6 +68,7 @@ Game* mGame;
 //abilitys
 std::vector<BaseEntity*> mAbilityVector;	 //all abilitys for this shape
 std::vector<BaseEntity*> mSteeringAbilityVector;         //all steering abilitys for this shape
+std::vector<BaseEntity*> mComputerAbilityVector;         //all steering abilitys for this shape
 
 Rotation* mRotation;
 Move* 	  mMove;
@@ -100,6 +101,7 @@ bool mIsComputer;
 //abilitys
 void     addAbility(BaseEntity* ability);
 void     addSteeringAbility(BaseEntity* ability);
+void     addComputerAbility(BaseEntity* ability);
 
 //create
 void createShape(Ogre::Root* root, Vector3D* position);

@@ -43,6 +43,7 @@ bool GlobalComputerPartido::onLetter(ComputerPartido* computerPartido, Letter* l
 *******      RANDOM COMPUTER    ******************
 ****************************************/
 /*   ComputerPartido_Controlled   */
+
 /*
 ComputerPartido_Controlled* ComputerPartido_Controlled::Instance()
 {

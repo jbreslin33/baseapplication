@@ -63,6 +63,11 @@ void ShapePartido::update()
    	mMove->mPositionBeforeCollision->x = mSceneNode->getPosition().x;
         mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;
         mMove->mPositionBeforeCollision->z = mSceneNode->getPosition().z;
+        
+	for (unsigned int i = 0; i < mComputerAbilityVector.size(); i++)
+        {
+                mComputerAbilityVector.at(i)->update();
+        }
 
         for (unsigned int i = 0; i < mSteeringAbilityVector.size(); i++)
         {
