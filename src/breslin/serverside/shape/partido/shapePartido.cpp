@@ -21,6 +21,9 @@
 //states
 #include "states/shapePartidoStates.h"
 
+//move
+#include "../../move/move.h"
+
 //postgresql
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
@@ -56,8 +59,32 @@ ShapePartido::~ShapePartido()
 
 void ShapePartido::update()
 {
-	Shape::update();
+
+   	mMove->mPositionBeforeCollision->x = mSceneNode->getPosition().x;
+        mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;
+        mMove->mPositionBeforeCollision->z = mSceneNode->getPosition().z;
+
+        for (unsigned int i = 0; i < mSteeringAbilityVector.size(); i++)
+        {
+                mSteeringAbilityVector.at(i)->update();
+        }
+	
 	mShapePartidoStateMachine->update();
+        
+	//process ticks on abilitys
+        for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+        {
+                mAbilityVector.at(i)->update();
+        }
+
+
+        if (mText.compare(mTextLast) != 0)
+        {
+                sendText();
+                mTextLast = mText;
+        }
+
+
 }
 
 bool ShapePartido::handleLetter(Letter* letter)

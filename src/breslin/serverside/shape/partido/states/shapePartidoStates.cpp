@@ -19,6 +19,12 @@
 //clientPartido states
 #include "../../../client/robust/partido/states/clientPartidoStates.h"
 
+//move
+#include "../../../move/move.h"
+
+//vector3D
+#include "../../../../math/vector3D.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -65,6 +71,10 @@ void BATTLE_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 	{
 		shapePartido->mShapePartidoStateMachine->changeState(GAME_SHAPE_PARTIDO::Instance());	
 	}
+
+	shapePartido->mMove->mVelocity->zero();
+
+
 }
 void BATTLE_SHAPE_PARTIDO::exit(ShapePartido* shapePartido)
 {

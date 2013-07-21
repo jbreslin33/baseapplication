@@ -128,45 +128,6 @@ void Shape::addSteeringAbility(BaseEntity* ability)
         mSteeringAbilityVector.push_back(ability);      
 }
 
-void Shape::remove()
-{
-	//make mMessage on server then send it to each client in turn 
-        for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
-	{
-		if (mGame->mServer->mClientVector.at(i)->mGame == mGame)
-		{
-			if (mGame->mServer->mClientVector.at(i)->mClientID > -1)
-			{
-				if (mGame->mServer->mClientVector.at(i)->mShape != this)
-				{
- 					mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
-       					mGame->mServer->mMessage.WriteByte(mGame->mServer->mMessageRemoveShape); // type
-					if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
-					{
-       						mGame->mServer->mMessage.WriteByte(mGame->mServer->mClientVector.at(i)->mClientID); //client id for browsers
-					}
-       					mGame->mServer->mMessage.WriteByte(mIndex);
-
-					mGame->mServer->mNetwork->sendPacketTo(mGame->mServer->mClientVector.at(i),&mGame->mServer->mMessage);
-					
-				}
-				else
-				{
-				}
-			}
-		}
-        }
-
-	//get rid of shape from games shape vector
-	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
-	{
-		if (mGame->mShapeVector.at(i) == this)
-		{
-			mGame->mShapeVector.erase (mGame->mShapeVector.begin()+i);
-		}
-	}
-}
-
 bool Shape::handleLetter(Letter* letter)
 {
         //return mStateMachine->handleLetter(letter);

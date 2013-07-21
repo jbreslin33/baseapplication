@@ -97,8 +97,6 @@ bool mIsComputer;
 *				METHODS
 ********************************************************/
 
-void remove();
-
 //abilitys
 void     addAbility(BaseEntity* ability);
 void     addSteeringAbility(BaseEntity* ability);
