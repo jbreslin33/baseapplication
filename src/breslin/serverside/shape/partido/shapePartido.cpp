@@ -52,7 +52,13 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
 	//computer abilitys
   	mComputerPartido = new ComputerPartido(this);
         addComputerAbility(mComputerPartido);
-
+	//let's get random tactics
+	//mComputerPartido->mTactic = rand() % 4 + 1;
+	
+	if (mClient->db_id == 4)
+	{
+		mComputerPartido->mTactic = 1;
+	} 
 
 	//statemachine
 	mShapePartidoStateMachine =  new StateMachine<ShapePartido>(this);

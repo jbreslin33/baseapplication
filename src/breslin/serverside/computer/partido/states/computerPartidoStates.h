@@ -25,6 +25,17 @@ public:
 /*******************************
 *     COMPTER 
 ******************************/
+class AGGRESSIVE_PARTIDO : public State<ComputerPartido>
+{
+private:
+  AGGRESSIVE_PARTIDO(){}
+public:
+  static AGGRESSIVE_PARTIDO* Instance();
+  void enter  (ComputerPartido* computerPartido);
+  void execute(ComputerPartido* computerPartido);
+  void exit   (ComputerPartido* computerPartido);
+  bool onLetter(ComputerPartido* computerPartido, Letter* letter);
+};
 
 class COMPUTER_CONTROLLED_PARTIDO : public State<ComputerPartido>
 {

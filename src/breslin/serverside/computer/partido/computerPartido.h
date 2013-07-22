@@ -33,6 +33,7 @@ StateMachine<ComputerPartido>* mComputerPartidoStateMachine;
 
 int mTactic;
 void setTactic(int tactic);
+ShapePartido* getClosestBattleShape();
 
 };
 

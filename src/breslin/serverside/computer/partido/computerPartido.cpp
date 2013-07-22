@@ -2,6 +2,8 @@
 #include "../../tdreamsock/dreamSockLog.h"
 
 #include "../../shape/partido/shapePartido.h"
+#include "../../game/partido/gamePartido.h"
+#include "../../../math/vector3D.h"
 
 #include <string>
 
@@ -45,4 +47,44 @@ bool ComputerPartido::handleLetter(Letter* letter)
 void ComputerPartido::setTactic(int tactic)
 {
 	mTactic = tactic;	
+}
+
+ShapePartido*  ComputerPartido::getClosestBattleShape()
+{
+        ShapePartido* closestShapeSoFar = NULL;
+        float closestDistanceSoFar = 3000.0f;
+
+        for (int i = 0; i < mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
+        {
+                ShapePartido* shape = mShapePartido->mGamePartido->mShapePartidoVector.at(i);
+		if (shape == mShapePartido->mOpponentLast)
+		{
+			continue;
+		}
+
+                Vector3D* newKeyDirection         = new Vector3D();
+
+                Vector3D* currentPosition         = new Vector3D();
+                Vector3D* currentAvoideePosition  = new Vector3D();
+                Vector3D* differenceVector        = new Vector3D();
+
+                currentPosition->x = mShapePartido->mSceneNode->getPosition().x;
+                currentPosition->y = mShapePartido->mSceneNode->getPosition().y;
+                currentPosition->z = mShapePartido->mSceneNode->getPosition().z;
+
+                currentAvoideePosition->x = shape->mSceneNode->getPosition().x;
+                currentAvoideePosition->y = shape->mSceneNode->getPosition().y;
+                currentAvoideePosition->z = shape->mSceneNode->getPosition().z;
+
+                differenceVector->subtract(currentPosition,currentAvoideePosition);
+
+                float length = differenceVector->length();
+
+                if (length < closestDistanceSoFar)
+                {
+                        closestShapeSoFar = shape;
+                        closestDistanceSoFar = length;
+                }
+        }
+	return closestShapeSoFar;       
 }

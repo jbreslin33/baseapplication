@@ -39,6 +39,11 @@ void GLOBAL_COMPUTER_PARTIDO::execute(ComputerPartido* computer)
 	{
                 computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
 	}
+
+	if (computer->mTactic == 1 && computer->mShape->mClient->mLoggedIn == false && computer->mComputerPartidoStateMachine->currentState() != AGGRESSIVE_PARTIDO::Instance())
+	{
+                computer->mComputerPartidoStateMachine->changeState(AGGRESSIVE_PARTIDO::Instance());
+	}
 }
 void GLOBAL_COMPUTER_PARTIDO::exit(ComputerPartido* computerPartido)
 {
@@ -63,6 +68,50 @@ sloppyAttack-seek one, avoid no one
 */
 
 /*****************************************
+*******      AGGRESSIVE_PARTIDO   ******************
+****************************************/
+
+AGGRESSIVE_PARTIDO* AGGRESSIVE_PARTIDO::Instance()
+{
+  static AGGRESSIVE_PARTIDO instance;
+  return &instance;
+}
+
+void AGGRESSIVE_PARTIDO::enter(ComputerPartido* computer)
+{
+        LogString("AGGRESSIVE_PARTIDO:%d",computer->mShape->mClient->db_id);
+}
+
+void AGGRESSIVE_PARTIDO::execute(ComputerPartido* computer)
+{
+
+	//find closest shape that you have not jsust battled then seek it.......		
+	ShapePartido* shape = computer->getClosestBattleShape();
+
+       	if (computer->mShape->mSeek)
+        {
+        	computer->mShape->mSeek->setSeekShape((Shape*)shape);
+        }
+
+        //is this human controlled?
+        if (computer->mShape->mClient->mLoggedIn)
+        {
+		LogString("here");
+                computer->mComputerPartidoStateMachine->changeState(HUMAN_CONTROLLED_PARTIDO::Instance());
+        }
+
+}
+
+void AGGRESSIVE_PARTIDO::exit(ComputerPartido* computerPartido)
+{
+}
+bool AGGRESSIVE_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
+{
+        return true;
+}
+
+
+/*****************************************
 *******      COMPUTER CONTROLLED   ******************
 ****************************************/
 /*   COMPUTER_CONTROLLED_PARTIDO   */
@@ -75,7 +124,7 @@ COMPUTER_CONTROLLED_PARTIDO* COMPUTER_CONTROLLED_PARTIDO::Instance()
 
 void COMPUTER_CONTROLLED_PARTIDO::enter(ComputerPartido* computer)
 {
-	LogString("COMPUTER_CONTROLLED_PARTIDO");
+	LogString("COMPUTER_CONTROLLED_PARTIDO:%d",computer->mShape->mClient->db_id);
 	if (computer->mShape->mAvoid)
         {
                 if (computer->mShape->mClient->db_id == 5)
@@ -138,9 +187,10 @@ HUMAN_CONTROLLED_PARTIDO* HUMAN_CONTROLLED_PARTIDO::Instance()
 	return &instance;
 }
 
-void HUMAN_CONTROLLED_PARTIDO::enter(ComputerPartido* computerPartido)
+void HUMAN_CONTROLLED_PARTIDO::enter(ComputerPartido* computer)
 {
-	LogString("HUMAN_CONTROLLED_PARTIDO");
+	LogString("HUMAN_CONTROLLED_PARTIDO:%d",computer->mShape->mClient->db_id);
+       	computer->mShape->mSeek->setSeekShape(NULL);
 }
 
 void HUMAN_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
