@@ -25,6 +25,9 @@
 //seek
 #include "../../seek/seek.h"
 
+//client
+#include "../../client/robust/clientRobust.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -69,7 +72,7 @@ NORMAL_AVOID* NORMAL_AVOID::Instance()
 }
 void NORMAL_AVOID::enter(Avoid* avoid)
 {
-	LogString("NORMAL_AVOID");
+	LogString("NORMAL_AVOID:%d",avoid->mShape->mClient->db_id);
 }
 void NORMAL_AVOID::execute(Avoid* avoid)
 {
@@ -116,7 +119,7 @@ SEEK_AVOID* SEEK_AVOID::Instance()
 }
 void SEEK_AVOID::enter(Avoid* avoid)
 {
-        LogString("SEEK_AVOID");
+        LogString("SEEK_AVOID:%d",avoid->mShape->mClient->db_id);
 }
 void SEEK_AVOID::execute(Avoid* avoid)
 {
@@ -164,12 +167,13 @@ NO_AVOID* NO_AVOID::Instance()
 }
 void NO_AVOID::enter(Avoid* avoid)
 {
-	LogString("NO_AVOID");
+	LogString("NO_AVOID:%d",avoid->mShape->mClient->db_id);
 }
 void NO_AVOID::execute(Avoid* avoid)
 {
 	if (avoid->mAvoidVector.size() > 0)	
 	{
+
 		if (avoid->mAvoidDot >= .50)
 		{
 			avoid->mStateMachine->changeState(NORMAL_AVOID::Instance());

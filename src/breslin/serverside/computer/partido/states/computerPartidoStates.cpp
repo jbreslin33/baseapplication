@@ -9,9 +9,9 @@
 //computerPartido
 #include "../computerPartido.h"
 
-#include "../../../shape/shape.h"
+#include "../../../shape/partido/shapePartido.h"
 #include "../../../client/robust/clientRobust.h"
-#include "../../../game/game.h"
+#include "../../../game/partido/gamePartido.h"
 #include "../../../avoid/avoid.h"
 #include "../../../seek/seek.h"
 
@@ -52,6 +52,18 @@ void GLOBAL_COMPUTER_PARTIDO::execute(ComputerPartido* computer)
 		if (computer->mTactic == 1 && computer->mComputerPartidoStateMachine->currentState() != BEZERKER_PARTIDO::Instance())
 		{
                 	computer->mComputerPartidoStateMachine->changeState(BEZERKER_PARTIDO::Instance());
+		}
+		if (computer->mTactic == 2 && computer->mComputerPartidoStateMachine->currentState() != SCARED_PARTIDO::Instance())
+		{
+                	computer->mComputerPartidoStateMachine->changeState(SCARED_PARTIDO::Instance());
+		}
+		if (computer->mTactic == 3 && computer->mComputerPartidoStateMachine->currentState() != SNIPER_PARTIDO::Instance())
+		{
+                	computer->mComputerPartidoStateMachine->changeState(SNIPER_PARTIDO::Instance());
+		}
+		if (computer->mTactic == 4 && computer->mComputerPartidoStateMachine->currentState() != SLOPPY_PARTIDO::Instance())
+		{
+                	computer->mComputerPartidoStateMachine->changeState(SLOPPY_PARTIDO::Instance());
 		}
 	}
 }
@@ -128,10 +140,20 @@ SCARED_PARTIDO* SCARED_PARTIDO::Instance()
 void SCARED_PARTIDO::enter(ComputerPartido* computer)
 {
         LogString("SCARED_PARTIDO_PARTIDO:%d",computer->mShape->mClient->db_id);
+	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
+	{
+		if (computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShapePartido)
+		{
+			continue;
+		}
+		
+		computer->mShapePartido->mAvoid->addAvoidShape(computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i));					
+	}
 }
 
 void SCARED_PARTIDO::execute(ComputerPartido* computer)
 {
+
 }
 
 void SCARED_PARTIDO::exit(ComputerPartido* computerPartido)
