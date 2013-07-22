@@ -147,7 +147,17 @@ void ClientRobust::logout()
         }
         mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
+/*
+ 			//send logout letter to clientRobust....
+                        mServer->mClientVector.at(i)->logout();
+                        mConnectionState = DREAMSOCK_DISCONNECTED;
+                        mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
+                        mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
+                        mServer->mClientVector.at(i)->mClientID = mClientID;
+                        //send login letter
+                        mServer->mClientVector.at(i)->login();
 
+*/
 bool ClientRobust::checkLogin(Message* mes)
 {
         LogString("ClientRobust::checkLogin");
@@ -157,7 +167,15 @@ bool ClientRobust::checkLogin(Message* mes)
         {
                 if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
                 {
-                	login();
+ 			//send logout letter to clientRobust....
+                        mServer->mClientVector.at(i)->logout();
+                        mConnectionState = DREAMSOCK_DISCONNECTED;
+                        mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
+                        mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
+                        mServer->mClientVector.at(i)->mClientID = mClientID;
+                        //send login letter
+                        mServer->mClientVector.at(i)->login();
+                	//login();
                 }
         }
 }
