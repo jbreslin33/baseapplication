@@ -7,15 +7,15 @@ class ClientRobust;
 
 
 /*******************************
-*      GlobalClientRobust 
+*      GLOBAL_CLIENT_ROBUST 
 ******************************/
 
-class GlobalClientRobust : public State<ClientRobust>
+class GLOBAL_CLIENT_ROBUST : public State<ClientRobust>
 {
 private:
-  GlobalClientRobust(){}
+  GLOBAL_CLIENT_ROBUST(){}
 public:
-  static GlobalClientRobust* Instance();
+  static GLOBAL_CLIENT_ROBUST* Instance();
   void enter  (ClientRobust* clientRobust);
   void execute(ClientRobust* clientRobust);
   void exit   (ClientRobust* clientRobust);
@@ -26,48 +26,48 @@ public:
 *       CLIENT STATES 
 ******************************/
 
-class Ajax_Node : public State<ClientRobust>
+class AJAX_NODE : public State<ClientRobust>
 {
 private:
-  Ajax_Node(){}
+  AJAX_NODE(){}
 public:
-  static Ajax_Node* Instance();
+  static AJAX_NODE* Instance();
   void enter  (ClientRobust* clientRobust);
   void execute(ClientRobust* clientRobust);
   void exit   (ClientRobust* clientRobust);
   bool onLetter(ClientRobust* clientRobust, Letter* letter);
 };
 
-class Logged_Out : public State<ClientRobust>
+class LOGGED_OUT : public State<ClientRobust>
 {
 private:
-  Logged_Out(){}
+  LOGGED_OUT(){}
 public:
-  static Logged_Out* Instance();
+  static LOGGED_OUT* Instance();
   void enter  (ClientRobust* clientRobust);
   void execute(ClientRobust* clientRobust);
   void exit   (ClientRobust* clientRobust);
   bool onLetter(ClientRobust* clientRobust, Letter* letter);
 };
 
-class Lobby : public State<ClientRobust>
+class LOBBY : public State<ClientRobust>
 {
 private:
-  Lobby(){}
+  LOBBY(){}
 public:
-  static Lobby* Instance();
+  static LOBBY* Instance();
   void enter  (ClientRobust* clientRobust);
   void execute(ClientRobust* clientRobust);
   void exit   (ClientRobust* clientRobust);
   bool onLetter(ClientRobust* clientRobust, Letter* letter);
 };
 
-class Game_Mode : public State<ClientRobust>
+class GAME_MODE : public State<ClientRobust>
 {
 private:
-  Game_Mode(){}
+  GAME_MODE(){}
 public:
-  static Game_Mode* Instance();
+  static GAME_MODE* Instance();
   void enter  (ClientRobust* clientRobust);
   void execute(ClientRobust* clientRobust);
   void exit   (ClientRobust* clientRobust);

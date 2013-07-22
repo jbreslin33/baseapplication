@@ -8,15 +8,15 @@ struct Telegram;
 
 
 /*******************************
-*      GlobalSeek
+*      GLOBAL_SEEK
 ******************************/
 
-class GlobalSeek : public State<Seek>
+class GLOBAL_SEEK : public State<Seek>
 {
 private:
-  GlobalSeek(){}
+  GLOBAL_SEEK(){}
 public:
-  static GlobalSeek* Instance();
+  static GLOBAL_SEEK* Instance();
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
@@ -27,12 +27,12 @@ public:
 *      Seek
 ******************************/
 
-class Normal_Seek : public State<Seek>
+class NORMAL_SEEK : public State<Seek>
 {
 private:
-  Normal_Seek(){}
+  NORMAL_SEEK(){}
 public:
-  static Normal_Seek* Instance();
+  static NORMAL_SEEK* Instance();
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
@@ -52,12 +52,12 @@ public:
 };
 
 
-class No_Seek : public State<Seek>
+class NO_SEEK : public State<Seek>
 {
 private:
-  No_Seek(){}
+  NO_SEEK(){}
 public:
-  static No_Seek* Instance();
+  static NO_SEEK* Instance();
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
