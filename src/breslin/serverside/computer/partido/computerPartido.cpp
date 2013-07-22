@@ -49,7 +49,7 @@ void ComputerPartido::setTactic(int tactic)
 	mTactic = tactic;	
 }
 
-ShapePartido*  ComputerPartido::getClosestBattleShape()
+ShapePartido* ComputerPartido::getClosestBattleShape()
 {
         ShapePartido* closestShapeSoFar = NULL;
         float closestDistanceSoFar = 3000.0f;
@@ -57,7 +57,7 @@ ShapePartido*  ComputerPartido::getClosestBattleShape()
         for (int i = 0; i < mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
         {
                 ShapePartido* shape = mShapePartido->mGamePartido->mShapePartidoVector.at(i);
-		if (shape == mShapePartido->mOpponentLast)
+		if (shape == mShapePartido->mOpponentLast || shape == mShapePartido)
 		{
 			continue;
 		}
