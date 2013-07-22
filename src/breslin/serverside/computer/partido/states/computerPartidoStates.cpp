@@ -33,18 +33,29 @@ GLOBAL_COMPUTER_PARTIDO* GLOBAL_COMPUTER_PARTIDO::Instance()
 void GLOBAL_COMPUTER_PARTIDO::enter(ComputerPartido* computerPartido)
 {
 }
+
 void GLOBAL_COMPUTER_PARTIDO::execute(ComputerPartido* computer)
 {
-	if (computer->mTactic == 0 && computer->mShape->mClient->mLoggedIn == false && computer->mComputerPartidoStateMachine->currentState() != COMPUTER_CONTROLLED_PARTIDO::Instance())
+        //is this human controlled?
+        if (computer->mShape->mClient->mLoggedIn)
+        {
+		if (computer->mComputerPartidoStateMachine->currentState() != HUMAN_CONTROLLED_PARTIDO::Instance())
+                computer->mComputerPartidoStateMachine->changeState(HUMAN_CONTROLLED_PARTIDO::Instance());
+        }
+	else
 	{
-                computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
-	}
+		if (computer->mTactic == 0 && computer->mComputerPartidoStateMachine->currentState() != COMPUTER_CONTROLLED_PARTIDO::Instance())
+		{
+                	computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
+		}
 
-	if (computer->mTactic == 1 && computer->mShape->mClient->mLoggedIn == false && computer->mComputerPartidoStateMachine->currentState() != BEZERKER_PARTIDO::Instance())
-	{
-                computer->mComputerPartidoStateMachine->changeState(BEZERKER_PARTIDO::Instance());
+		if (computer->mTactic == 1 && computer->mComputerPartidoStateMachine->currentState() != BEZERKER_PARTIDO::Instance())
+		{
+                	computer->mComputerPartidoStateMachine->changeState(BEZERKER_PARTIDO::Instance());
+		}
 	}
 }
+
 void GLOBAL_COMPUTER_PARTIDO::exit(ComputerPartido* computerPartido)
 {
 }
@@ -93,12 +104,6 @@ void BEZERKER_PARTIDO::execute(ComputerPartido* computer)
         	computer->mShape->mSeek->setSeekShape((Shape*)shape);
         }
 
-        //is this human controlled?
-        if (computer->mShape->mClient->mLoggedIn)
-        {
-		LogString("here");
-                computer->mComputerPartidoStateMachine->changeState(HUMAN_CONTROLLED_PARTIDO::Instance());
-        }
 
 }
 
