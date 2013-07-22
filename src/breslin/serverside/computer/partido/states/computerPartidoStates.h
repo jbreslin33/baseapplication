@@ -37,6 +37,42 @@ public:
   bool onLetter(ComputerPartido* computerPartido, Letter* letter);
 };
 
+class SCARED_PARTIDO : public State<ComputerPartido>
+{
+private:
+  SCARED_PARTIDO(){}
+public:
+  static SCARED_PARTIDO* Instance();
+  void enter  (ComputerPartido* computerPartido);
+  void execute(ComputerPartido* computerPartido);
+  void exit   (ComputerPartido* computerPartido);
+  bool onLetter(ComputerPartido* computerPartido, Letter* letter);
+};
+
+class SNIPER_PARTIDO : public State<ComputerPartido>
+{
+private:
+  SNIPER_PARTIDO(){}
+public:
+  static SNIPER_PARTIDO* Instance();
+  void enter  (ComputerPartido* computerPartido);
+  void execute(ComputerPartido* computerPartido);
+  void exit   (ComputerPartido* computerPartido);
+  bool onLetter(ComputerPartido* computerPartido, Letter* letter);
+};
+
+class SLOPPY_PARTIDO : public State<ComputerPartido>
+{
+private:
+  SLOPPY_PARTIDO(){}
+public:
+  static SLOPPY_PARTIDO* Instance();
+  void enter  (ComputerPartido* computerPartido);
+  void execute(ComputerPartido* computerPartido);
+  void exit   (ComputerPartido* computerPartido);
+  bool onLetter(ComputerPartido* computerPartido, Letter* letter);
+};
+
 class COMPUTER_CONTROLLED_PARTIDO : public State<ComputerPartido>
 {
 private:

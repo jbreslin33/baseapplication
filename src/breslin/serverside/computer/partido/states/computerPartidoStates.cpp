@@ -110,6 +110,87 @@ bool BEZERKER_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter
         return true;
 }
 
+/*****************************************
+*******      SCARED_PARTIDO   ******************
+****************************************/
+
+SCARED_PARTIDO* SCARED_PARTIDO::Instance()
+{
+  static SCARED_PARTIDO instance;
+  return &instance;
+}
+
+void SCARED_PARTIDO::enter(ComputerPartido* computer)
+{
+        LogString("SCARED_PARTIDO_PARTIDO:%d",computer->mShape->mClient->db_id);
+}
+
+void SCARED_PARTIDO::execute(ComputerPartido* computer)
+{
+}
+
+void SCARED_PARTIDO::exit(ComputerPartido* computerPartido)
+{
+}
+bool SCARED_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
+{
+        return true;
+}
+
+/*****************************************
+*******      SNIPER_PARTIDO   ******************
+****************************************/
+
+SNIPER_PARTIDO* SNIPER_PARTIDO::Instance()
+{
+  static SNIPER_PARTIDO instance;
+  return &instance;
+}
+
+void SNIPER_PARTIDO::enter(ComputerPartido* computer)
+{
+        LogString("SNIPER_PARTIDO:%d",computer->mShape->mClient->db_id);
+}
+
+void SNIPER_PARTIDO::execute(ComputerPartido* computer)
+{
+}
+
+void SNIPER_PARTIDO::exit(ComputerPartido* computerPartido)
+{
+}
+bool SNIPER_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
+{
+        return true;
+}
+
+/*****************************************
+*******      SLOPPY_PARTIDO   ******************
+****************************************/
+
+SLOPPY_PARTIDO* SLOPPY_PARTIDO::Instance()
+{
+  static SLOPPY_PARTIDO instance;
+  return &instance;
+}
+
+void SLOPPY_PARTIDO::enter(ComputerPartido* computer)
+{
+        LogString("SLOPPY_PARTIDO:%d",computer->mShape->mClient->db_id);
+}
+
+void SLOPPY_PARTIDO::execute(ComputerPartido* computer)
+{
+}
+
+void SLOPPY_PARTIDO::exit(ComputerPartido* computerPartido)
+{
+}
+bool SLOPPY_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
+{
+        return true;
+}
+
 
 /*****************************************
 *******      COMPUTER CONTROLLED   ******************
