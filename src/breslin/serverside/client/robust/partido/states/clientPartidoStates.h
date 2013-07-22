@@ -7,15 +7,15 @@ class ClientPartido;
 
 
 /*******************************
-*      GlobalClientPartido 
+*      GLOBAL_CLIENT_PARTIDO 
 ******************************/
 
-class GlobalClientPartido : public State<ClientPartido>
+class GLOBAL_CLIENT_PARTIDO : public State<ClientPartido>
 {
 private:
-  GlobalClientPartido(){}
+  GLOBAL_CLIENT_PARTIDO(){}
 public:
-  static GlobalClientPartido* Instance();
+  static GLOBAL_CLIENT_PARTIDO* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
@@ -26,24 +26,24 @@ public:
 *       CLIENT PARTIDO STATES 
 ******************************/
 
-class Battle : public State<ClientPartido>
+class BATTLE : public State<ClientPartido>
 {
 private:
-  Battle(){}
+  BATTLE(){}
 public:
-  static Battle* Instance();
+  static BATTLE* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
   bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
-class Game_Partido_Mode : public State<ClientPartido>
+class GAME_PARTIDO_MODE : public State<ClientPartido>
 {
 private:
-  Game_Partido_Mode(){}
+  GAME_PARTIDO_MODE(){}
 public:
-  static Game_Partido_Mode* Instance();
+  static GAME_PARTIDO_MODE* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
@@ -63,24 +63,24 @@ public:
   bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
-class Waiting_For_Answer : public State<ClientPartido>
+class WAITING_FOR_ANSWER : public State<ClientPartido>
 {
 private:
-  Waiting_For_Answer(){}
+  WAITING_FOR_ANSWER(){}
 public:
-  static Waiting_For_Answer* Instance();
+  static WAITING_FOR_ANSWER* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
   bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
-class Sending_Question : public State<ClientPartido>
+class SENDING_QUESTION : public State<ClientPartido>
 {
 private:
-  Sending_Question(){}
+  SENDING_QUESTION(){}
 public:
-  static Sending_Question* Instance();
+  static SENDING_QUESTION* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);

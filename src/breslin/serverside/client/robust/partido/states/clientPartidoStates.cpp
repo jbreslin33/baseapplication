@@ -23,22 +23,22 @@ these states are always on...as their is always a gamePartido..and these clients
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalClientPartido* GlobalClientPartido::Instance()
+GLOBAL_CLIENT_PARTIDO* GLOBAL_CLIENT_PARTIDO::Instance()
 {
-  static GlobalClientPartido instance;
+  static GLOBAL_CLIENT_PARTIDO instance;
   return &instance;
 }
-void GlobalClientPartido::enter(ClientPartido* clientPartido)
+void GLOBAL_CLIENT_PARTIDO::enter(ClientPartido* clientPartido)
 {
 }
-void GlobalClientPartido::execute(ClientPartido* clientPartido)
+void GLOBAL_CLIENT_PARTIDO::execute(ClientPartido* clientPartido)
 {
 
 }
-void GlobalClientPartido::exit(ClientPartido* clientPartido)
+void GLOBAL_CLIENT_PARTIDO::exit(ClientPartido* clientPartido)
 {
 }
-bool GlobalClientPartido::onLetter(ClientPartido* clientPartido, Letter* letter)
+bool GLOBAL_CLIENT_PARTIDO::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false;
 }
@@ -51,40 +51,40 @@ bool GlobalClientPartido::onLetter(ClientPartido* clientPartido, Letter* letter)
 /*****************************************
                 GAME_PARTIDO_MODE               
 ****************************************/
-Game_Partido_Mode* Game_Partido_Mode::Instance()
+GAME_PARTIDO_MODE* GAME_PARTIDO_MODE::Instance()
 {
-  static Game_Partido_Mode instance;
+  static GAME_PARTIDO_MODE instance;
   return &instance;
 }
-void Game_Partido_Mode::enter(ClientPartido* clientPartido)
+void GAME_PARTIDO_MODE::enter(ClientPartido* clientPartido)
 {
-        LogString("Game_Partido_Mode:%d",clientPartido->db_id);
+        LogString("GAME_PARTIDO_MODE:%d",clientPartido->db_id);
 }
-void Game_Partido_Mode::execute(ClientPartido* clientPartido)
+void GAME_PARTIDO_MODE::execute(ClientPartido* clientPartido)
 {
   	if (clientPartido->mShapePartido->mOpponent)
         {
-                clientPartido->mClientPartidoStateMachine->changeState(Battle::Instance());
+                clientPartido->mClientPartidoStateMachine->changeState(BATTLE::Instance());
         }
 }
-void Game_Partido_Mode::exit(ClientPartido* clientPartido)
+void GAME_PARTIDO_MODE::exit(ClientPartido* clientPartido)
 {
 }
-bool Game_Partido_Mode::onLetter(ClientPartido* clientPartido, Letter* letter)
+bool GAME_PARTIDO_MODE::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false; 
 }
 /***************************************
-       	Battle
+       	BATTLE
 ****************************************/
-Battle* Battle::Instance()
+BATTLE* BATTLE::Instance()
 {
-  static Battle instance;
+  static BATTLE instance;
   return &instance;
 }
-void Battle::enter(ClientPartido* clientPartido)
+void BATTLE::enter(ClientPartido* clientPartido)
 {
-        LogString("Battle:%d",clientPartido->db_id);
+        LogString("BATTLE:%d",clientPartido->db_id);
 	if (clientPartido->mLoggedIn)
         {
                 clientPartido->sendBattleStart();
@@ -95,17 +95,17 @@ void Battle::enter(ClientPartido* clientPartido)
         clientPartido->mQuestionString = "";
         clientPartido->mShapePartido->mCollidable = false;
 }
-void Battle::execute(ClientPartido* clientPartido)
+void BATTLE::execute(ClientPartido* clientPartido)
 {
   	if (!clientPartido->mShapePartido->mOpponent)
         {
-                clientPartido->mClientPartidoStateMachine->changeState(Game_Partido_Mode::Instance());
+                clientPartido->mClientPartidoStateMachine->changeState(GAME_PARTIDO_MODE::Instance());
         }
 }
-void Battle::exit(ClientPartido* clientPartido)
+void BATTLE::exit(ClientPartido* clientPartido)
 {
 }
-bool Battle::onLetter(ClientPartido* clientPartido, Letter* letter)
+bool BATTLE::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false;
 }
@@ -134,7 +134,7 @@ void BATTLE_OFF::execute(ClientPartido* clientPartido)
 	{
 		if (!clientPartido->mWaitingForAnswer && clientPartido->mShapePartido->mOpponent)
 		{
-                	clientPartido->mBattleStateMachine->changeState(Sending_Question::Instance());
+                	clientPartido->mBattleStateMachine->changeState(SENDING_QUESTION::Instance());
 		}
 	}
 }
@@ -149,18 +149,18 @@ bool BATTLE_OFF::onLetter(ClientPartido* clientPartido, Letter* letter)
 
 
 /*****************************************
-        Sending_Question
+        SENDING_QUESTION
 ****************************************/
-Sending_Question* Sending_Question::Instance()
+SENDING_QUESTION* SENDING_QUESTION::Instance()
 {
-  static Sending_Question instance;
+  static SENDING_QUESTION instance;
   return &instance;
 }
-void Sending_Question::enter(ClientPartido* clientPartido)
+void SENDING_QUESTION::enter(ClientPartido* clientPartido)
 {
-        LogString("Sending_Question:%d",clientPartido->db_id);
+        LogString("SENDING_QUESTION:%d",clientPartido->db_id);
 }
-void Sending_Question::execute(ClientPartido* clientPartido)
+void SENDING_QUESTION::execute(ClientPartido* clientPartido)
 {
   	if (!clientPartido->mShapePartido->mOpponent)
         {
@@ -174,19 +174,19 @@ void Sending_Question::execute(ClientPartido* clientPartido)
                         if (clientPartido->mShapePartido->mOpponent && clientPartido->mWaitingForAnswer == false)
                         {
                                 clientPartido->sendQuestion(clientPartido->getNewQuestionID());
-                		clientPartido->mBattleStateMachine->changeState(Waiting_For_Answer::Instance());
+                		clientPartido->mBattleStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
                         }
                 }
         }
 	else //computer so just go right to wating...
 	{
-               	clientPartido->mBattleStateMachine->changeState(Waiting_For_Answer::Instance());
+               	clientPartido->mBattleStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
 	}
 }
-void Sending_Question::exit(ClientPartido* clientPartido)
+void SENDING_QUESTION::exit(ClientPartido* clientPartido)
 {
 }
-bool Sending_Question::onLetter(ClientPartido* clientPartido, Letter* letter)
+bool SENDING_QUESTION::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false; 
 }
@@ -195,12 +195,12 @@ bool Sending_Question::onLetter(ClientPartido* clientPartido, Letter* letter)
 /*****************************************
         WAITING FOR ANSWER       
 ****************************************/
-Waiting_For_Answer* Waiting_For_Answer::Instance()
+WAITING_FOR_ANSWER* WAITING_FOR_ANSWER::Instance()
 {
-  static Waiting_For_Answer instance;
+  static WAITING_FOR_ANSWER instance;
   return &instance; 
 } 
-void Waiting_For_Answer::enter(ClientPartido* clientPartido)
+void WAITING_FOR_ANSWER::enter(ClientPartido* clientPartido)
 {
         LogString("WAITING_FOR_ANSWER:%d",clientPartido->db_id);
 
@@ -211,7 +211,7 @@ void Waiting_For_Answer::enter(ClientPartido* clientPartido)
 
         clientPartido->mWaitingForAnswer = true;
 }       
-void Waiting_For_Answer::execute(ClientPartido* clientPartido)
+void WAITING_FOR_ANSWER::execute(ClientPartido* clientPartido)
 {
   	if (!clientPartido->mShapePartido->mOpponent)
         {
@@ -220,7 +220,7 @@ void Waiting_For_Answer::execute(ClientPartido* clientPartido)
 	
 	if (!clientPartido->mWaitingForAnswer && clientPartido->mShapePartido->mOpponent)
 	{
-        	clientPartido->mBattleStateMachine->changeState(Sending_Question::Instance());
+        	clientPartido->mBattleStateMachine->changeState(SENDING_QUESTION::Instance());
 	}
 	
 	//mServerPartido->mAnswerVector.at(mQuestionID)
@@ -233,11 +233,11 @@ void Waiting_For_Answer::execute(ClientPartido* clientPartido)
 	}
 	
 }
-void Waiting_For_Answer::exit(ClientPartido* clientPartido)
+void WAITING_FOR_ANSWER::exit(ClientPartido* clientPartido)
 {
 
 }
-bool Waiting_For_Answer::onLetter(ClientPartido* clientPartido, Letter* letter)
+bool WAITING_FOR_ANSWER::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false;   
 }

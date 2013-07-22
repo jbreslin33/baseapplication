@@ -48,10 +48,10 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	}
 	else
 	{
-        	mClientPartidoStateMachine->setCurrentState      (Game_Partido_Mode::Instance());
+        	mClientPartidoStateMachine->setCurrentState      (GAME_PARTIDO_MODE::Instance());
 	}
         mClientPartidoStateMachine->setPreviousState     (NULL);
-        mClientPartidoStateMachine->setGlobalState       (GlobalClientPartido::Instance());
+        mClientPartidoStateMachine->setGlobalState       (GLOBAL_CLIENT_PARTIDO::Instance());
 
         //states
         mBattleStateMachine =  new StateMachine<ClientPartido>(this);
