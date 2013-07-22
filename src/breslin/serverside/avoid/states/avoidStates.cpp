@@ -78,26 +78,24 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 {
 	if (avoid->mAvoidee)
 	{
-		if (avoid->mAvoidDot < .50) 
+		if (avoid->mAvoidVector.size() == 0)	
 		{
-			//just seek
 			avoid->mStateMachine->changeState(NO_AVOID::Instance());	
 		} 
-		else //dot lines up, take evasive action.. 
+		else  
 		{
-			Vector3D* newVelocity = new Vector3D();
-
 			if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mSeekPoint)
 			{ 
                 		avoid->mStateMachine->changeState(SEEK_AVOID::Instance());
 			}
 			else
 			{
+				Vector3D* newVelocity = new Vector3D();
 				newVelocity = avoid->mAvoidVelocity->getVectorOffset(90.0f,true);
-			}
 
-       			avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
-       			avoid->mShape->mMove->mVelocity->normalise();
+       				avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
+       				avoid->mShape->mMove->mVelocity->normalise();
+			}
 		}
 	}
 }
@@ -125,9 +123,8 @@ void SEEK_AVOID::execute(Avoid* avoid)
 {
         if (avoid->mAvoidee)
         {
-                if (avoid->mAvoidDot < .50)
-                {
-                        //just seek
+		if (avoid->mAvoidVector.size() == 0)	
+		{
                         avoid->mStateMachine->changeState(NO_AVOID::Instance());
                 }
                 else //dot lines up, take evasive action..
@@ -136,15 +133,18 @@ void SEEK_AVOID::execute(Avoid* avoid)
 
                         if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mSeekPoint)
                         {
-                                newVelocity = avoid->mAvoidVelocity->getVectorOffset(45.0f,true);
+				if (avoid->mAvoidDot >= .50)
+				{
+                                	newVelocity = avoid->mAvoidVelocity->getVectorOffset(45.0f,true);
+                        		avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
+                        		avoid->mShape->mMove->mVelocity->normalise();
+				}
                         }
                         else
                         {
                 		avoid->mStateMachine->changeState(NORMAL_AVOID::Instance());
                         }
 
-                        avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
-                        avoid->mShape->mMove->mVelocity->normalise();
                 }
         }
 }
@@ -173,11 +173,7 @@ void NO_AVOID::execute(Avoid* avoid)
 {
 	if (avoid->mAvoidVector.size() > 0)	
 	{
-
-		if (avoid->mAvoidDot >= .50)
-		{
-			avoid->mStateMachine->changeState(NORMAL_AVOID::Instance());
-		}
+		avoid->mStateMachine->changeState(NORMAL_AVOID::Instance());
 	}
 }
 void NO_AVOID::exit(Avoid* avoid)
