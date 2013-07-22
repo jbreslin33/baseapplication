@@ -40,9 +40,9 @@ void GLOBAL_COMPUTER_PARTIDO::execute(ComputerPartido* computer)
                 computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
 	}
 
-	if (computer->mTactic == 1 && computer->mShape->mClient->mLoggedIn == false && computer->mComputerPartidoStateMachine->currentState() != AGGRESSIVE_PARTIDO::Instance())
+	if (computer->mTactic == 1 && computer->mShape->mClient->mLoggedIn == false && computer->mComputerPartidoStateMachine->currentState() != BEZERKER_PARTIDO::Instance())
 	{
-                computer->mComputerPartidoStateMachine->changeState(AGGRESSIVE_PARTIDO::Instance());
+                computer->mComputerPartidoStateMachine->changeState(BEZERKER_PARTIDO::Instance());
 	}
 }
 void GLOBAL_COMPUTER_PARTIDO::exit(ComputerPartido* computerPartido)
@@ -58,7 +58,7 @@ bool GLOBAL_COMPUTER_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter*
 *******       COMPUTER    ******************
 ****************************************/
 /*
-agressive-no avoid, seek closest 
+bezerker-no avoid, seek closest 
 scared-no seek, avoid all
 
 preciseAttack-seek one, avoid all else
@@ -68,21 +68,21 @@ sloppyAttack-seek one, avoid no one
 */
 
 /*****************************************
-*******      AGGRESSIVE_PARTIDO   ******************
+*******      BEZERKER_PARTIDO   ******************
 ****************************************/
 
-AGGRESSIVE_PARTIDO* AGGRESSIVE_PARTIDO::Instance()
+BEZERKER_PARTIDO* BEZERKER_PARTIDO::Instance()
 {
-  static AGGRESSIVE_PARTIDO instance;
+  static BEZERKER_PARTIDO instance;
   return &instance;
 }
 
-void AGGRESSIVE_PARTIDO::enter(ComputerPartido* computer)
+void BEZERKER_PARTIDO::enter(ComputerPartido* computer)
 {
-        LogString("AGGRESSIVE_PARTIDO:%d",computer->mShape->mClient->db_id);
+        LogString("BEZERKER_PARTIDO:%d",computer->mShape->mClient->db_id);
 }
 
-void AGGRESSIVE_PARTIDO::execute(ComputerPartido* computer)
+void BEZERKER_PARTIDO::execute(ComputerPartido* computer)
 {
 
 	//find closest shape that you have not jsust battled then seek it.......		
@@ -102,10 +102,10 @@ void AGGRESSIVE_PARTIDO::execute(ComputerPartido* computer)
 
 }
 
-void AGGRESSIVE_PARTIDO::exit(ComputerPartido* computerPartido)
+void BEZERKER_PARTIDO::exit(ComputerPartido* computerPartido)
 {
 }
-bool AGGRESSIVE_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
+bool BEZERKER_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
 {
         return true;
 }

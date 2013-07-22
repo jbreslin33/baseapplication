@@ -25,12 +25,12 @@ public:
 /*******************************
 *     COMPTER 
 ******************************/
-class AGGRESSIVE_PARTIDO : public State<ComputerPartido>
+class BEZERKER_PARTIDO : public State<ComputerPartido>
 {
 private:
-  AGGRESSIVE_PARTIDO(){}
+  BEZERKER_PARTIDO(){}
 public:
-  static AGGRESSIVE_PARTIDO* Instance();
+  static BEZERKER_PARTIDO* Instance();
   void enter  (ComputerPartido* computerPartido);
   void execute(ComputerPartido* computerPartido);
   void exit   (ComputerPartido* computerPartido);
