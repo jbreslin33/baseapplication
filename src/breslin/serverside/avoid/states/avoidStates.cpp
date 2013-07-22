@@ -91,7 +91,7 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 			else
 			{
 				Vector3D* newVelocity = new Vector3D();
-				newVelocity = avoid->mAvoidVelocity->getVectorOffset(90.0f,true);
+				newVelocity = avoid->mAvoidVelocity->getVectorOffset(180.0f,true);
 
        				avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
        				avoid->mShape->mMove->mVelocity->normalise();
