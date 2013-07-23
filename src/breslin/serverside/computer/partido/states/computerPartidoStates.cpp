@@ -105,7 +105,7 @@ void SCARED_PARTIDO::enter(ComputerPartido* computer)
 
 	//let's reset the counter
 	computer->mCounter = 0;
-	computer->mThreshold = 100;
+	computer->mThreshold = 1000;
 
 	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
 	{
@@ -120,7 +120,7 @@ void SCARED_PARTIDO::enter(ComputerPartido* computer)
 
 void SCARED_PARTIDO::execute(ComputerPartido* computer)
 {
-	if (computer->mCounter == computer->mThreshold)
+	if (computer->mCounter >= computer->mThreshold)
 	{
         	//let's give you a new random tactic
         	int tactic = rand() % 4;
