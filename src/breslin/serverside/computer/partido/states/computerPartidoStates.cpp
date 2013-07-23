@@ -46,22 +46,17 @@ void GLOBAL_COMPUTER_PARTIDO::execute(ComputerPartido* computer)
         }
 	else
 	{
-		if (computer->mTactic == 0 && computer->mComputerPartidoStateMachine->currentState() != COMPUTER_CONTROLLED_PARTIDO::Instance())
-		{
-                	computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
-		}
-
-		if (computer->mTactic == 1 && computer->mComputerPartidoStateMachine->currentState() != BEZERKER_PARTIDO::Instance())
-		{
-                	computer->mComputerPartidoStateMachine->changeState(BEZERKER_PARTIDO::Instance());
-		}
-		if (computer->mTactic == 2 && computer->mComputerPartidoStateMachine->currentState() != SCARED_PARTIDO::Instance())
+		if (computer->mTactic == 1 && computer->mComputerPartidoStateMachine->currentState() != SCARED_PARTIDO::Instance())
 		{
                 	computer->mComputerPartidoStateMachine->changeState(SCARED_PARTIDO::Instance());
 		}
-		if (computer->mTactic == 3 && computer->mComputerPartidoStateMachine->currentState() != SNIPER_PARTIDO::Instance())
+		if (computer->mTactic == 2 && computer->mComputerPartidoStateMachine->currentState() != SNIPER_PARTIDO::Instance())
 		{
                 	computer->mComputerPartidoStateMachine->changeState(SNIPER_PARTIDO::Instance());
+		}
+		if (computer->mTactic == 3 && computer->mComputerPartidoStateMachine->currentState() != BEZERKER_PARTIDO::Instance())
+		{
+                	computer->mComputerPartidoStateMachine->changeState(BEZERKER_PARTIDO::Instance());
 		}
 		if (computer->mTactic == 4 && computer->mComputerPartidoStateMachine->currentState() != SLOPPY_PARTIDO::Instance())
 		{
@@ -83,58 +78,11 @@ bool GLOBAL_COMPUTER_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter*
 *******       COMPUTER    ******************
 ****************************************/
 /*
-bezerker-no avoid, seek closest 
 scared-no seek, avoid all
-
 sniper-seek one, avoid all else
+bezerker-no avoid, seek closest 
 sloppy-seek one, avoid no one
-
-
 */
-
-/*****************************************
-*******      BEZERKER_PARTIDO   ******************
-****************************************/
-
-BEZERKER_PARTIDO* BEZERKER_PARTIDO::Instance()
-{
-  static BEZERKER_PARTIDO instance;
-  return &instance;
-}
-
-void BEZERKER_PARTIDO::enter(ComputerPartido* computer)
-{
-        LogString("BEZERKER_PARTIDO:%d",computer->mShape->mClient->db_id);
-
-	//let's reset all seeks and avoids
-	computer->mShape->mAvoid->mAvoidVector.clear();
-	computer->mShape->mSeek->setSeekShape(NULL);
-	computer->mShape->mSeek->setDestinationShape(NULL);
-
-	//find closest shape that you have not just battled then seek it.......		
-	ShapePartido* shape = computer->getClosestBattleShape();
-       	if (computer->mShape->mSeek)
-        {
-        	computer->mShape->mSeek->setDestinationShape((Shape*)shape);
-        }
-}
-
-void BEZERKER_PARTIDO::execute(ComputerPartido* computer)
-{
-	//if you found your prey go back to COMPUTER_CONTROLLED TO get reassigned
-	if (computer->mShape->mSeek->mStateMachine->currentState() == REACHED_DESTINATION::Instance())
-	{
-		computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
-	}
-}
-
-void BEZERKER_PARTIDO::exit(ComputerPartido* computerPartido)
-{
-}
-bool BEZERKER_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
-{
-        return true;
-}
 
 /*****************************************
 *******      SCARED_PARTIDO   ******************
@@ -178,13 +126,17 @@ void SCARED_PARTIDO::execute(ComputerPartido* computer)
         	int tactic = rand() % 4;
         	tactic++;
         	computer->mTactic = tactic;
-        	LogString("SCARED_PARTIDO_PARTIDO_THRESHOLD:%d",computer->mShape->mClient->db_id);
+        	LogString("THRESHOLD:%d",computer->mShape->mClient->db_id);
 	}
 	computer->mCounter++;
 }
 
-void SCARED_PARTIDO::exit(ComputerPartido* computerPartido)
+void SCARED_PARTIDO::exit(ComputerPartido* computer)
 {
+	//let's reset all seeks and avoids
+       	computer->mShape->mAvoid->mAvoidVector.clear();
+       	computer->mShape->mSeek->setSeekShape(NULL);
+       	computer->mShape->mSeek->setDestinationShape(NULL);
 }
 bool SCARED_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
 {
@@ -241,20 +193,79 @@ void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 
 void SNIPER_PARTIDO::execute(ComputerPartido* computer)
 {
-	//if you found your prey go back to COMPUTER_CONTROLLED TO get reassigned
+	//if you found your prey get new tactic
 	if (computer->mShape->mSeek->mStateMachine->currentState() == REACHED_DESTINATION::Instance())
 	{
-		computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
+        	//let's give you a new random tactic
+        	int tactic = rand() % 4;
+        	tactic++;
+        	computer->mTactic = tactic;
 	}
 }
 
-void SNIPER_PARTIDO::exit(ComputerPartido* computerPartido)
+void SNIPER_PARTIDO::exit(ComputerPartido* computer)
 {
+	//let's reset all seeks and avoids
+       	computer->mShape->mAvoid->mAvoidVector.clear();
+       	computer->mShape->mSeek->setSeekShape(NULL);
+       	computer->mShape->mSeek->setDestinationShape(NULL);
 }
 bool SNIPER_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
 {
         return true;
 }
+/*****************************************
+*******      BEZERKER_PARTIDO   ******************
+****************************************/
+
+BEZERKER_PARTIDO* BEZERKER_PARTIDO::Instance()
+{
+  static BEZERKER_PARTIDO instance;
+  return &instance;
+}
+
+void BEZERKER_PARTIDO::enter(ComputerPartido* computer)
+{
+        LogString("BEZERKER_PARTIDO:%d",computer->mShape->mClient->db_id);
+
+	//let's reset all seeks and avoids
+	computer->mShape->mAvoid->mAvoidVector.clear();
+	computer->mShape->mSeek->setSeekShape(NULL);
+	computer->mShape->mSeek->setDestinationShape(NULL);
+
+	//find closest shape that you have not just battled then seek it.......		
+	ShapePartido* shape = computer->getClosestBattleShape();
+       	if (computer->mShape->mSeek)
+        {
+        	computer->mShape->mSeek->setDestinationShape((Shape*)shape);
+        }
+}
+
+void BEZERKER_PARTIDO::execute(ComputerPartido* computer)
+{
+	//if you found your prey get new tactic
+	if (computer->mShape->mSeek->mStateMachine->currentState() == REACHED_DESTINATION::Instance())
+	{
+        	//let's give you a new random tactic
+        	int tactic = rand() % 4;
+        	tactic++;
+        	computer->mTactic = tactic;
+	}
+}
+
+void BEZERKER_PARTIDO::exit(ComputerPartido* computer)
+{
+	//let's reset all seeks and avoids
+       	computer->mShape->mAvoid->mAvoidVector.clear();
+       	computer->mShape->mSeek->setSeekShape(NULL);
+       	computer->mShape->mSeek->setDestinationShape(NULL);
+}
+bool BEZERKER_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
+{
+        return true;
+}
+
+
 
 /*****************************************
 *******      SLOPPY_PARTIDO   ******************
@@ -297,59 +308,24 @@ void SLOPPY_PARTIDO::enter(ComputerPartido* computer)
 
 void SLOPPY_PARTIDO::execute(ComputerPartido* computer)
 {
-	//if you found your prey go back to COMPUTER_CONTROLLED TO get reassigned
+	//if you found your prey get new tactic
 	if (computer->mShape->mSeek->mStateMachine->currentState() == REACHED_DESTINATION::Instance())
 	{
-		computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
+        	//let's give you a new random tactic
+        	int tactic = rand() % 4;
+        	tactic++;
+        	computer->mTactic = tactic;
 	}
 }
 
-void SLOPPY_PARTIDO::exit(ComputerPartido* computerPartido)
+void SLOPPY_PARTIDO::exit(ComputerPartido* computer)
 {
+	//let's reset all seeks and avoids
+       	computer->mShape->mAvoid->mAvoidVector.clear();
+       	computer->mShape->mSeek->setSeekShape(NULL);
+       	computer->mShape->mSeek->setDestinationShape(NULL);
 }
 bool SLOPPY_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
-{
-        return true;
-}
-
-
-/*****************************************
-*******      COMPUTER CONTROLLED   ******************
-****************************************/
-/*   COMPUTER_CONTROLLED_PARTIDO   */
-
-COMPUTER_CONTROLLED_PARTIDO* COMPUTER_CONTROLLED_PARTIDO::Instance()
-{
-  static COMPUTER_CONTROLLED_PARTIDO instance;
-  return &instance;
-}
-
-void COMPUTER_CONTROLLED_PARTIDO::enter(ComputerPartido* computer)
-{
-	LogString("COMPUTER_CONTROLLED_PARTIDO:%d",computer->mShape->mClient->db_id);
-
-	//let's reset all seeks and avoids
-	computer->mShape->mAvoid->mAvoidVector.clear();
-	computer->mShape->mSeek->setSeekShape(NULL);
-	computer->mShape->mSeek->setDestinationShape(NULL);
-
-	//let's give you a new random tactic
-	int tactic = rand() % 4;
-	tactic++;
-	computer->mTactic = tactic; 
-}
-
-void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
-{
-	
-
-
-}
-
-void COMPUTER_CONTROLLED_PARTIDO::exit(ComputerPartido* computerPartido)
-{
-}
-bool COMPUTER_CONTROLLED_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter* letter)
 {
         return true;
 }
@@ -376,7 +352,7 @@ void HUMAN_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 {
         if (!computer->mShape->mClient->mLoggedIn)
         {
-                computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
+                computer->mComputerPartidoStateMachine->changeState(SCARED_PARTIDO::Instance());
         }
 }
 
