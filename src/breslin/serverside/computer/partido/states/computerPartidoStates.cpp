@@ -105,20 +105,27 @@ BEZERKER_PARTIDO* BEZERKER_PARTIDO::Instance()
 void BEZERKER_PARTIDO::enter(ComputerPartido* computer)
 {
         LogString("BEZERKER_PARTIDO:%d",computer->mShape->mClient->db_id);
+
+	//let's reset all seeks and avoids
+	computer->mShape->mAvoid->mAvoidVector.clear();
+	computer->mShape->mSeek->setSeekShape(NULL);
+	computer->mShape->mSeek->setDestinationShape(NULL);
+
+	//find closest shape that you have not just battled then seek it.......		
+	ShapePartido* shape = computer->getClosestBattleShape();
+       	if (computer->mShape->mSeek)
+        {
+        	computer->mShape->mSeek->setDestinationShape((Shape*)shape);
+        }
 }
 
 void BEZERKER_PARTIDO::execute(ComputerPartido* computer)
 {
-
-	//find closest shape that you have not jsust battled then seek it.......		
-	ShapePartido* shape = computer->getClosestBattleShape();
-
-       	if (computer->mShape->mSeek)
-        {
-        	computer->mShape->mSeek->setSeekShape((Shape*)shape);
-        }
-
-
+	//if you found your prey go back to COMPUTER_CONTROLLED TO get reassigned
+	if (computer->mShape->mSeek->mStateMachine->currentState() == REACHED_DESTINATION::Instance())
+	{
+		computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
+	}
 }
 
 void BEZERKER_PARTIDO::exit(ComputerPartido* computerPartido)
@@ -142,6 +149,12 @@ SCARED_PARTIDO* SCARED_PARTIDO::Instance()
 void SCARED_PARTIDO::enter(ComputerPartido* computer)
 {
         LogString("SCARED_PARTIDO_PARTIDO:%d",computer->mShape->mClient->db_id);
+
+	//let's reset all seeks and avoids
+	computer->mShape->mAvoid->mAvoidVector.clear();
+	computer->mShape->mSeek->setSeekShape(NULL);
+	computer->mShape->mSeek->setDestinationShape(NULL);
+
 	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
 	{
 		if (computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShapePartido)
@@ -179,11 +192,18 @@ SNIPER_PARTIDO* SNIPER_PARTIDO::Instance()
 void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 {
         LogString("SNIPER_PARTIDO:%d",computer->mShape->mClient->db_id);
+
+	//let's reset all seeks and avoids
+	computer->mShape->mAvoid->mAvoidVector.clear();
+	computer->mShape->mSeek->setSeekShape(NULL);
+	computer->mShape->mSeek->setDestinationShape(NULL);
+
 	//pick a shape at random to snipe
 	int numberOfShapes = computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); 
+	computer->mShape->mSeek->setDestinationShape(NULL);
 	computer->mShape->mSeek->setSeekShape(NULL);
 
-	while (!computer->mShape->mSeek->getSeekShape())
+	while (!computer->mShape->mSeek->getDestinationShape())
 	{
 		int shapeElementToSnipe  = rand() % numberOfShapes;
         	if (computer->mShape == computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe))
@@ -192,7 +212,7 @@ void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 		}
 		else
 		{
-			computer->mShape->mSeek->setSeekShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe));
+			computer->mShape->mSeek->setDestinationShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe));
 		}
 	}	
 	
@@ -229,6 +249,22 @@ SLOPPY_PARTIDO* SLOPPY_PARTIDO::Instance()
 void SLOPPY_PARTIDO::enter(ComputerPartido* computer)
 {
         LogString("SLOPPY_PARTIDO:%d",computer->mShape->mClient->db_id);
+
+	//let's reset all seeks and avoids
+	computer->mShape->mAvoid->mAvoidVector.clear();
+	computer->mShape->mSeek->setSeekShape(NULL);
+	computer->mShape->mSeek->setDestinationShape(NULL);
+
+	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
+        {
+                if (computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShapePartido)
+                {
+                        continue;
+                }
+
+                computer->mShapePartido->mAvoid->addAvoidShape(computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i));
+        }
+
 }
 
 void SLOPPY_PARTIDO::execute(ComputerPartido* computer)
@@ -258,11 +294,16 @@ COMPUTER_CONTROLLED_PARTIDO* COMPUTER_CONTROLLED_PARTIDO::Instance()
 void COMPUTER_CONTROLLED_PARTIDO::enter(ComputerPartido* computer)
 {
 	LogString("COMPUTER_CONTROLLED_PARTIDO:%d",computer->mShape->mClient->db_id);
+
+	//let's reset all seeks and avoids
+	computer->mShape->mAvoid->mAvoidVector.clear();
+	computer->mShape->mSeek->setSeekShape(NULL);
+	computer->mShape->mSeek->setDestinationShape(NULL);
+
 	//let's give you a new random tactic
 	int tactic = rand() % 4;
 	tactic++;
 	computer->mTactic = tactic; 
-			
 }
 
 void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
@@ -292,7 +333,10 @@ HUMAN_CONTROLLED_PARTIDO* HUMAN_CONTROLLED_PARTIDO::Instance()
 void HUMAN_CONTROLLED_PARTIDO::enter(ComputerPartido* computer)
 {
 	LogString("HUMAN_CONTROLLED_PARTIDO:%d",computer->mShape->mClient->db_id);
-       	computer->mShape->mSeek->setSeekShape(NULL);
+	//let's reset all seeks and avoids
+	computer->mShape->mAvoid->mAvoidVector.clear();
+	computer->mShape->mSeek->setSeekShape(NULL);
+	computer->mShape->mSeek->setDestinationShape(NULL);
 }
 
 void HUMAN_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)

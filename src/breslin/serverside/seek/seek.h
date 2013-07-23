@@ -40,15 +40,33 @@ virtual void update();
 virtual bool  handleLetter(Letter* letter);
 
 Shape* mShape;
+
 Shape* mSeekShape;
+Shape* mDestinationShape;
+
 Vector3D* mSeekPoint;
+Vector3D* mDestinationPoint;
+
 Vector3D* mSeekVelocity;
+Vector3D* mDestinationVelocity;
+
 float mSeekLength;
+float mDestinationLength;
+
 void setSeekPoint(Vector3D* seekPoint);
+void setDestinationPoint(Vector3D* destinationPoint);
+
 Vector3D* getSeekPoint() { return mSeekPoint; }
+Vector3D* getDestinationPoint() { return mDestinationPoint; }
+
 void setSeekShape(Shape* seekShape);
+void setDestinationShape(Shape* destinationShape);
+
 Shape* getSeekShape() { return mSeekShape; }
+Shape* getDestinationShape() { return mDestinationShape; }
+
 void updateSeekPoint();
+void updateDestinationPoint();
 
 StateMachine<Seek>* mStateMachine;
 

@@ -21,14 +21,21 @@ Seek::Seek(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mShape = shape;
 
 	mSeekShape = NULL;
+	mDestinationShape = NULL;
+
 	mSeekPoint = NULL;
+	mDestinationPoint = NULL;
+
 	mSeekVelocity = new Vector3D();
+	mDestinationVelocity = new Vector3D();
+
 	mSeekLength = 0.0f;
+	mDestinationLength = 0.0f;
 
  	//seek states
 	mStateMachine =  new StateMachine<Seek>(this);
-	mStateMachine->setCurrentState      (NORMAL_SEEK::Instance());
-	mStateMachine->setPreviousState     (NORMAL_SEEK::Instance());
+	mStateMachine->setCurrentState      (NO_SEEK::Instance());
+	mStateMachine->setPreviousState     (NO_SEEK::Instance());
 	mStateMachine->setGlobalState       (GLOBAL_SEEK::Instance());
 }
 
@@ -42,6 +49,10 @@ void Seek::update()
 	if (mSeekShape)
 	{
 		updateSeekPoint();
+	}
+	if (mDestinationShape)
+	{
+		updateDestinationPoint();
 	}
 }
 
@@ -63,10 +74,28 @@ void Seek::updateSeekPoint()
         }
 }
 
+void Seek::updateDestinationPoint()
+{
+	//update destination point if seek shape
+ 	if (mDestinationShape)
+        {
+                //set destination point as that is what we will really use...
+                mDestinationPoint = new Vector3D();
+                mDestinationPoint->x = mDestinationShape->mSceneNode->getPosition().x;             
+                mDestinationPoint->y = mDestinationShape->mSceneNode->getPosition().y;             
+                mDestinationPoint->z = mDestinationShape->mSceneNode->getPosition().z;             
+        }
+}
+
 void Seek::setSeekPoint(Vector3D* seekPoint)
 {
 	if (seekPoint)
 	{
+		//make destination vars null
+		mDestinationShape = NULL;		
+		mDestinationPoint = NULL;		
+	
+		//set seek vars
 		mSeekPoint = new Vector3D();
 		mSeekPoint->copyValuesFrom(seekPoint); 
 	}
@@ -81,6 +110,10 @@ void Seek::setSeekShape(Shape* seekShape)
 {
 	if (seekShape)
 	{
+		//make destination vars null
+		mDestinationShape = NULL;		
+		mDestinationPoint = NULL;		
+
 		//set shape
 		mSeekShape = seekShape;
 
@@ -92,3 +125,44 @@ void Seek::setSeekShape(Shape* seekShape)
 		mSeekPoint = NULL;
 	}
 }
+
+void Seek::setDestinationPoint(Vector3D* destinationPoint)
+{
+        if (destinationPoint)
+        {
+                //make seek vars null
+                mSeekShape = NULL;
+                mSeekPoint = NULL;
+
+                //set destination vars
+                mDestinationPoint = new Vector3D();
+                mDestinationPoint->copyValuesFrom(destinationPoint);
+        }
+        else
+        {
+                mDestinationPoint = NULL;
+                mDestinationShape = NULL;
+        }
+}
+
+void Seek::setDestinationShape(Shape* destinationShape)
+{
+        if (destinationShape)
+        {
+                //make seek vars null
+                mSeekShape = NULL;
+                mSeekPoint = NULL;
+
+                //set shape
+                mDestinationShape = destinationShape;
+
+                updateDestinationPoint();
+        }
+        else
+        {
+                mDestinationShape = NULL;
+                mDestinationPoint = NULL;
+        }
+}
+
+

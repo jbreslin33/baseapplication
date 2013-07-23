@@ -51,6 +51,17 @@ public:
   bool onLetter(Seek* seek, Letter* letter);
 };
 
+class SEEK_DESTINATION : public State<Seek>
+{
+private:
+  SEEK_DESTINATION(){}
+public:
+  static SEEK_DESTINATION* Instance();
+  void enter  (Seek* seek);
+  void execute(Seek* seek);
+  void exit   (Seek* seek);
+  bool onLetter(Seek* seek, Letter* letter);
+};
 
 class NO_SEEK : public State<Seek>
 {
