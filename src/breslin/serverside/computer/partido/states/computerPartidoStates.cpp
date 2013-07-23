@@ -164,7 +164,7 @@ void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 
 	//get the shape to snipe
 	int numberOfShapes = computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); 
-	while (!computer->mShape->mSeek->getDestinationShape())
+	while (!computer->mShape->mSeek->getSeekShape())
 	{
 		int shapeElementToSnipe  = rand() % numberOfShapes;
         	if (computer->mShape == computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe))
@@ -173,14 +173,14 @@ void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 		}
 		else
 		{
-			computer->mShape->mSeek->setDestinationShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe));
+			computer->mShape->mSeek->setSeekShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe));
 		}
 	}	
  
 	//avoid all else including self 
 	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
         {
-                if (computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShapePartido || computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShape->mSeek->getDestinationShape())  
+                if (computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShapePartido || computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShape->mSeek->getSeekShape())  
                 {
                         continue;
                 }
@@ -194,7 +194,7 @@ void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 void SNIPER_PARTIDO::execute(ComputerPartido* computer)
 {
 	//if you found your prey get new tactic
-	if (computer->mShape->mSeek->mStateMachine->currentState() == REACHED_DESTINATION::Instance())
+	if (computer->mShapePartido->mOpponentLast == computer->mShape->mSeek->getSeekShape())
 	{
         	//let's give you a new random tactic
         	int tactic = rand() % 4;
@@ -237,14 +237,14 @@ void BEZERKER_PARTIDO::enter(ComputerPartido* computer)
 	ShapePartido* shape = computer->getClosestBattleShape();
        	if (computer->mShape->mSeek)
         {
-        	computer->mShape->mSeek->setDestinationShape((Shape*)shape);
+        	computer->mShape->mSeek->setSeekShape((Shape*)shape);
         }
 }
 
 void BEZERKER_PARTIDO::execute(ComputerPartido* computer)
 {
 	//if you found your prey get new tactic
-	if (computer->mShape->mSeek->mStateMachine->currentState() == REACHED_DESTINATION::Instance())
+	if (computer->mShapePartido->mOpponentLast == computer->mShape->mSeek->getSeekShape())
 	{
         	//let's give you a new random tactic
         	int tactic = rand() % 4;
@@ -288,10 +288,8 @@ void SLOPPY_PARTIDO::enter(ComputerPartido* computer)
 
         //pick a shape at random to snipe
         int numberOfShapes = computer->mShapePartido->mGamePartido->mShapePartidoVector.size();
-        computer->mShape->mSeek->setDestinationShape(NULL);
-        computer->mShape->mSeek->setSeekShape(NULL);
 
-        while (!computer->mShape->mSeek->getDestinationShape())
+        while (!computer->mShape->mSeek->getSeekShape())
         {
                 int shapeElementToSnipe  = rand() % numberOfShapes;
                 if (computer->mShape == computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe))
@@ -300,7 +298,7 @@ void SLOPPY_PARTIDO::enter(ComputerPartido* computer)
                 }
                 else
                 {
-                        computer->mShape->mSeek->setDestinationShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe));
+                        computer->mShape->mSeek->setSeekShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe));
                 }
         }
 
@@ -309,7 +307,7 @@ void SLOPPY_PARTIDO::enter(ComputerPartido* computer)
 void SLOPPY_PARTIDO::execute(ComputerPartido* computer)
 {
 	//if you found your prey get new tactic
-	if (computer->mShape->mSeek->mStateMachine->currentState() == REACHED_DESTINATION::Instance())
+	if (computer->mShapePartido->mOpponentLast == computer->mShape->mSeek->getSeekShape())
 	{
         	//let's give you a new random tactic
         	int tactic = rand() % 4;
