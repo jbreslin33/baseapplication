@@ -255,16 +255,10 @@ void SLOPPY_PARTIDO::enter(ComputerPartido* computer)
 	computer->mShape->mSeek->setSeekShape(NULL);
 	computer->mShape->mSeek->setDestinationShape(NULL);
 
-	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
-        {
-                if (computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShapePartido)
-                {
-                        continue;
-                }
-
-                computer->mShapePartido->mAvoid->addAvoidShape(computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i));
-        }
-
+	//let's give you a new random tactic
+	int tactic = rand() % 4;
+	tactic++;
+	computer->mTactic = tactic; 
 }
 
 void SLOPPY_PARTIDO::execute(ComputerPartido* computer)
