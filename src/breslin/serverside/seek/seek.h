@@ -45,7 +45,9 @@ Vector3D* mSeekPoint;
 Vector3D* mSeekVelocity;
 float mSeekLength;
 void setSeekPoint(Vector3D* seekPoint);
+Vector3D* getSeekPoint() { return mSeekPoint; }
 void setSeekShape(Shape* seekShape);
+Shape* getSeekShape() { return mSeekShape; }
 void updateSeekPoint();
 
 StateMachine<Seek>* mStateMachine;

@@ -14,6 +14,8 @@
 #include "../../../game/partido/gamePartido.h"
 #include "../../../avoid/avoid.h"
 #include "../../../seek/seek.h"
+#include "../../../shape/shape.h"
+#include "../../../seek/states/seekStates.h"
 
 //rand
 #include <stdlib.h>
@@ -84,8 +86,8 @@ bool GLOBAL_COMPUTER_PARTIDO::onLetter(ComputerPartido* computerPartido, Letter*
 bezerker-no avoid, seek closest 
 scared-no seek, avoid all
 
-preciseAttack-seek one, avoid all else
-sloppyAttack-seek one, avoid no one
+sniper-seek one, avoid all else
+sloppy-seek one, avoid no one
 
 
 */
@@ -177,10 +179,33 @@ SNIPER_PARTIDO* SNIPER_PARTIDO::Instance()
 void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 {
         LogString("SNIPER_PARTIDO:%d",computer->mShape->mClient->db_id);
+	//pick a shape at random to snipe
+	int numberOfShapes = computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); 
+	computer->mShape->mSeek->setSeekShape(NULL);
+
+	while (!computer->mShape->mSeek->getSeekShape())
+	{
+		int shapeElementToSnipe  = rand() % numberOfShapes;
+        	if (computer->mShape == computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe))
+		{
+			continue;
+		}
+		else
+		{
+			computer->mShape->mSeek->setSeekShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe));
+		}
+	}	
+	
+		
 }
 
 void SNIPER_PARTIDO::execute(ComputerPartido* computer)
 {
+	//if you found your prey go back to COMPUTER_CONTROLLED TO get reassigned
+	if (computer->mShape->mSeek->mStateMachine->currentState() == REACHED_DESTINATION::Instance())
+	{
+		computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
+	}
 }
 
 void SNIPER_PARTIDO::exit(ComputerPartido* computerPartido)
@@ -233,48 +258,17 @@ COMPUTER_CONTROLLED_PARTIDO* COMPUTER_CONTROLLED_PARTIDO::Instance()
 void COMPUTER_CONTROLLED_PARTIDO::enter(ComputerPartido* computer)
 {
 	LogString("COMPUTER_CONTROLLED_PARTIDO:%d",computer->mShape->mClient->db_id);
-	if (computer->mShape->mAvoid)
-        {
-                if (computer->mShape->mClient->db_id == 5)
-                {
-                        for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
-                        {
-                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
-                                {
-                                        computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
-                                }
-
-                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 3)
-                                {
-                                        computer->mShape->mAvoid->addAvoidShape(computer->mShape->mGame->mShapeVector.at(i));
-                                }
-                        }
-                }
-        }
-
+	//let's give you a new random tactic
+	int tactic = rand() % 4;
+	tactic++;
+	computer->mTactic = tactic; 
+			
 }
 
 void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 {
-       if (computer->mShape->mSeek)
-        {
-                if (computer->mShape->mClient->db_id == 5)
-                {
-                        for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
-                        {
-                                if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 2)
-                                {
-                                        computer->mShape->mSeek->setSeekShape(computer->mShape->mGame->mShapeVector.at(i));
-                                }
-                        }
-                }
-        }
+	
 
-        //is this human controlled?
-        if (computer->mShape->mClient->mLoggedIn)
-        {
-                computer->mComputerPartidoStateMachine->changeState(HUMAN_CONTROLLED_PARTIDO::Instance());
-        }
 
 }
 
