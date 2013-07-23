@@ -155,6 +155,10 @@ void SCARED_PARTIDO::enter(ComputerPartido* computer)
 	computer->mShape->mSeek->setSeekShape(NULL);
 	computer->mShape->mSeek->setDestinationShape(NULL);
 
+	//let's reset the counter
+	computer->mCounter = 0;
+	computer->mThreshold = 100;
+
 	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
 	{
 		if (computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShapePartido)
@@ -168,7 +172,15 @@ void SCARED_PARTIDO::enter(ComputerPartido* computer)
 
 void SCARED_PARTIDO::execute(ComputerPartido* computer)
 {
-
+	if (computer->mCounter > computer->mThreshold)
+	{
+        	//let's give you a new random tactic
+        	int tactic = rand() % 4;
+        	tactic++;
+        	computer->mTactic = tactic;
+        	LogString("SCARED_PARTIDO_PARTIDO_THRESHOLD:%d",computer->mShape->mClient->db_id);
+	}
+	computer->mCounter++;
 }
 
 void SCARED_PARTIDO::exit(ComputerPartido* computerPartido)
@@ -198,11 +210,8 @@ void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 	computer->mShape->mSeek->setSeekShape(NULL);
 	computer->mShape->mSeek->setDestinationShape(NULL);
 
-	//pick a shape at random to snipe
+	//get the shape to snipe
 	int numberOfShapes = computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); 
-	computer->mShape->mSeek->setDestinationShape(NULL);
-	computer->mShape->mSeek->setSeekShape(NULL);
-
 	while (!computer->mShape->mSeek->getDestinationShape())
 	{
 		int shapeElementToSnipe  = rand() % numberOfShapes;
@@ -215,6 +224,17 @@ void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 			computer->mShape->mSeek->setDestinationShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe));
 		}
 	}	
+ 
+	//avoid all else including self 
+	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
+        {
+                if (computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShapePartido || computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShape->mSeek->getDestinationShape())  
+                {
+                        continue;
+                }
+
+                computer->mShapePartido->mAvoid->addAvoidShape(computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i));
+        }
 	
 		
 }
@@ -248,21 +268,40 @@ SLOPPY_PARTIDO* SLOPPY_PARTIDO::Instance()
 
 void SLOPPY_PARTIDO::enter(ComputerPartido* computer)
 {
-        LogString("SLOPPY_PARTIDO:%d",computer->mShape->mClient->db_id);
+	LogString("SLOPPY_PARTIDO:%d",computer->mShape->mClient->db_id);
 
-	//let's reset all seeks and avoids
-	computer->mShape->mAvoid->mAvoidVector.clear();
-	computer->mShape->mSeek->setSeekShape(NULL);
-	computer->mShape->mSeek->setDestinationShape(NULL);
+        //let's reset all seeks and avoids
+        computer->mShape->mAvoid->mAvoidVector.clear();
+        computer->mShape->mSeek->setSeekShape(NULL);
+        computer->mShape->mSeek->setDestinationShape(NULL);
 
-	//let's give you a new random tactic
-	int tactic = rand() % 4;
-	tactic++;
-	computer->mTactic = tactic; 
+        //pick a shape at random to snipe
+        int numberOfShapes = computer->mShapePartido->mGamePartido->mShapePartidoVector.size();
+        computer->mShape->mSeek->setDestinationShape(NULL);
+        computer->mShape->mSeek->setSeekShape(NULL);
+
+        while (!computer->mShape->mSeek->getDestinationShape())
+        {
+                int shapeElementToSnipe  = rand() % numberOfShapes;
+                if (computer->mShape == computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe))
+                {
+                        continue;
+                }
+                else
+                {
+                        computer->mShape->mSeek->setDestinationShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe));
+                }
+        }
+
 }
 
 void SLOPPY_PARTIDO::execute(ComputerPartido* computer)
 {
+	//if you found your prey go back to COMPUTER_CONTROLLED TO get reassigned
+	if (computer->mShape->mSeek->mStateMachine->currentState() == REACHED_DESTINATION::Instance())
+	{
+		computer->mComputerPartidoStateMachine->changeState(COMPUTER_CONTROLLED_PARTIDO::Instance());
+	}
 }
 
 void SLOPPY_PARTIDO::exit(ComputerPartido* computerPartido)

@@ -23,7 +23,7 @@ Computer::Computer(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mStateMachine->setGlobalState       (GLOBAL_COMPUTER::Instance());
 
 	mCounter   = 0;
-        mThreshold = 1000;
+        mThreshold = 10;
 }
 
 Computer::~Computer()
