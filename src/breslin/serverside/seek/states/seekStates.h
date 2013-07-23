@@ -39,12 +39,12 @@ public:
   bool onLetter(Seek* seek, Letter* letter);
 };
 
-class Reached_Destination : public State<Seek>
+class REACHED_DESTINATION : public State<Seek>
 {
 private:
-  Reached_Destination(){}
+  REACHED_DESTINATION(){}
 public:
-  static Reached_Destination* Instance();
+  static REACHED_DESTINATION* Instance();
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);

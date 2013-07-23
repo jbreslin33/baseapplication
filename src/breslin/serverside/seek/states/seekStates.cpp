@@ -70,7 +70,7 @@ void NORMAL_SEEK::execute(Seek* seek)
 		
 		if (seek->mSeekLength <= 2) //close enough goto reachdestination
 		{
-                	seek->mStateMachine->changeState(Reached_Destination::Instance());
+                	seek->mStateMachine->changeState(REACHED_DESTINATION::Instance());
 		}
 		else //still not close enough seek on
 		{
@@ -94,18 +94,18 @@ bool NORMAL_SEEK::onLetter(Seek* seek, Letter* letter)
 }
 
 /*****************************************
-        Reached_Destination
+        REACHED_DESTINATION
 ****************************************/
-Reached_Destination* Reached_Destination::Instance()
+REACHED_DESTINATION* REACHED_DESTINATION::Instance()
 {
-        static Reached_Destination instance;
+        static REACHED_DESTINATION instance;
         return &instance;
 }
-void Reached_Destination::enter(Seek* seek)
+void REACHED_DESTINATION::enter(Seek* seek)
 {
-        LogString("Reached_Destination");
+        LogString("REACHED_DESTINATION");
 }
-void Reached_Destination::execute(Seek* seek)
+void REACHED_DESTINATION::execute(Seek* seek)
 {
         if (seek->mSeekShape == NULL && seek->mSeekPoint == NULL)
 	{
@@ -132,10 +132,10 @@ void Reached_Destination::execute(Seek* seek)
 		}
 	}
 }
-void Reached_Destination::exit(Seek* seek)
+void REACHED_DESTINATION::exit(Seek* seek)
 {
 }
-bool Reached_Destination::onLetter(Seek* seek, Letter* letter)
+bool REACHED_DESTINATION::onLetter(Seek* seek, Letter* letter)
 {
         return true;
 }
