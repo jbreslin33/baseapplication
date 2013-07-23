@@ -105,7 +105,7 @@ void SCARED_PARTIDO::enter(ComputerPartido* computer)
 
 	//let's reset the counter
 	computer->mCounter = 0;
-	computer->mThreshold = 1000;
+	computer->mThreshold = 4000;
 
 	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
 	{
