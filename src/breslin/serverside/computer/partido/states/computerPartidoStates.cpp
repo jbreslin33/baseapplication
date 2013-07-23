@@ -172,7 +172,7 @@ void SCARED_PARTIDO::enter(ComputerPartido* computer)
 
 void SCARED_PARTIDO::execute(ComputerPartido* computer)
 {
-	if (computer->mCounter > computer->mThreshold)
+	if (computer->mCounter == computer->mThreshold)
 	{
         	//let's give you a new random tactic
         	int tactic = rand() % 4;
