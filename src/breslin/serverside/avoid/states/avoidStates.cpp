@@ -72,7 +72,7 @@ NORMAL_AVOID* NORMAL_AVOID::Instance()
 }
 void NORMAL_AVOID::enter(Avoid* avoid)
 {
-	LogString("NORMAL_AVOID:%d",avoid->mShape->mClient->db_id);
+	//LogString("NORMAL_AVOID:%d",avoid->mShape->mClient->db_id);
 }
 void NORMAL_AVOID::execute(Avoid* avoid)
 {
@@ -84,7 +84,7 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 		} 
 		else  
 		{
-			if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mSeekPoint)
+			if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mDestinationPoint)
 			{ 
                 		avoid->mStateMachine->changeState(SEEK_AVOID::Instance());
 			}
@@ -117,7 +117,7 @@ SEEK_AVOID* SEEK_AVOID::Instance()
 }
 void SEEK_AVOID::enter(Avoid* avoid)
 {
-        LogString("SEEK_AVOID:%d",avoid->mShape->mClient->db_id);
+        //LogString("SEEK_AVOID:%d",avoid->mShape->mClient->db_id);
 }
 void SEEK_AVOID::execute(Avoid* avoid)
 {
@@ -131,7 +131,7 @@ void SEEK_AVOID::execute(Avoid* avoid)
                 {
                         Vector3D* newVelocity = new Vector3D();
 
-                        if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mSeekPoint)
+                        if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mDestinationPoint)
                         {
 				if (avoid->mAvoidDot >= .50)
 				{
@@ -167,7 +167,7 @@ NO_AVOID* NO_AVOID::Instance()
 }
 void NO_AVOID::enter(Avoid* avoid)
 {
-	LogString("NO_AVOID:%d",avoid->mShape->mClient->db_id);
+	//LogString("NO_AVOID:%d",avoid->mShape->mClient->db_id);
 }
 void NO_AVOID::execute(Avoid* avoid)
 {
