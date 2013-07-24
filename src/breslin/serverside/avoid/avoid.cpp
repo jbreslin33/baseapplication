@@ -34,7 +34,7 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mCurrentPosition = new Vector3D();
 	mAvoideePosition = new Vector3D();
 
-	mPanicDistance = 3.0f;
+	mPanicDistance = 20.0f;
 
 	//evade
 	mEvadeWithXPositive = false;
