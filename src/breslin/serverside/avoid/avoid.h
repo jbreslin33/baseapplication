@@ -58,6 +58,11 @@ void calculateClosestAvoidee();
 void calculateCurrentPosition();
 void calculateDot();
 void setEvasiveVelocityToSeek();
+
+float mPanicDistance;
+float getPanicDistance() { return mPanicDistance; }
+void setPanicDistance(float panicDistance) { mPanicDistance = panicDistance; }
+
 };
 
 #endif

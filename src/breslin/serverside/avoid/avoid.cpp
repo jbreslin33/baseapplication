@@ -34,6 +34,8 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mCurrentPosition = new Vector3D();
 	mAvoideePosition = new Vector3D();
 
+	mPanicDistance = 3.0f;
+
 	//evade
 	mEvadeWithXPositive = false;
 	mEvadeWithZPositive = false;
@@ -45,6 +47,9 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mStateMachine->setCurrentState      (NORMAL_AVOID::Instance());
 	mStateMachine->setPreviousState     (NORMAL_AVOID::Instance());
 	mStateMachine->setGlobalState       (GLOBAL_AVOID::Instance());
+
+
+
 }
 
 Avoid::~Avoid()
