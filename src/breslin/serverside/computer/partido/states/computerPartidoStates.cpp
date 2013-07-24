@@ -196,18 +196,7 @@ void SNIPER_PARTIDO::execute(ComputerPartido* computer)
 	//if you found your prey get new tactic
 	if (computer->mShapePartido->mOpponentLast == computer->mShape->mSeek->getSeekShape())
 	{
-        	int coin = rand() % 2;
-		if (coin == 1)
-		{ 
-        		computer->mTactic = 1;
-		}	
-		else
-		{
-        		//let's give you a new random tactic
-        		int tactic = rand() % 4;
-        		tactic++;
-        		computer->mTactic = tactic;
-		}
+		computer->getNewTactic();	
 	}
 }
 
@@ -254,18 +243,7 @@ void BEZERKER_PARTIDO::execute(ComputerPartido* computer)
 	//if you found your prey get new tactic
 	if (computer->mShapePartido->mOpponentLast == computer->mShape->mSeek->getSeekShape())
 	{
-		int coin = rand() % 2;
-                if (coin == 1)
-                {
-                        computer->mTactic = 1;
-                }
-                else
-                {
-                        //let's give you a new random tactic
-                        int tactic = rand() % 4;
-                        tactic++;
-                        computer->mTactic = tactic;
-                }
+		computer->getNewTactic();	
 	}
 }
 
@@ -325,18 +303,7 @@ void SLOPPY_PARTIDO::execute(ComputerPartido* computer)
 	//if you found your prey get new tactic
 	if (computer->mShapePartido->mOpponentLast == computer->mShape->mSeek->getSeekShape())
 	{
-		int coin = rand() % 2;
-                if (coin == 1)
-                {
-                        computer->mTactic = 1;
-                }
-                else
-                {
-                        //let's give you a new random tactic
-                        int tactic = rand() % 4;
-                        tactic++;
-                        computer->mTactic = tactic;
-                }
+		computer->getNewTactic();	
 	}
 }
 
