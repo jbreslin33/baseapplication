@@ -198,46 +198,46 @@ unsigned int Game::getOpenIndex()
 	}
 	return 0;
 }
-
 Vector3D* Game::getOpenPoint()
 {
 	Vector3D* vector3D = new Vector3D();
 
-	for (int x = -200; x < 3000; x++)
-	{	
-		bool occupied = false; 
-		vector3D->x = x;
-		vector3D->y = 0;
-		vector3D->z = 35;
+	for (int x = -240; x < 240; x++)
+	{
+		for (int z = 240; z > -240;  z--)
+		{	
+			bool occupied = false; 
+			vector3D->x = x;
+			vector3D->y = 0;
+			vector3D->z = z;
 
-                if (mShapeVector.size() < 1)
-		{
-			return vector3D;
-		}
+                	if (mShapeVector.size() < 1)
+			{
+				return vector3D;
+			}
 
-                for (unsigned int i = 0; i < mShapeVector.size(); i++)
-                {
-                	if (mShapeVector.at(i)->mCollidable == true)
-                        {
-                        	float x1 = vector3D->x;
-                                float z1 = vector3D->z;
-                                float x2 = mShapeVector.at(i)->mSceneNode->getPosition().x;
-                                float z2 = mShapeVector.at(i)->mSceneNode->getPosition().z;
+                	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+                	{
+                		if (mShapeVector.at(i)->mCollidable == true)
+                        	{
+                        		float x1 = vector3D->x;
+                                	float z1 = vector3D->z;
+                                	float x2 = mShapeVector.at(i)->mSceneNode->getPosition().x;
+                                	float z2 = mShapeVector.at(i)->mSceneNode->getPosition().z;
 
-                                float distSq = pow((x1-x2),2) + pow((z1-z2),2);
+                                	float distSq = pow((x1-x2),2) + pow((z1-z2),2);
 
-                                //i am simply adding the 2 collisionradius's of the 2 objects in question then comparing
-                                //to distSQ between them. IS this right or is it working by chance?
-                                if(distSq < mShapeVector.at(i)->mCollisionRadiusSpawn * 300)
-                                {
-					occupied = true; 
-                                }
-                        }
-                }
+                                	if(distSq < mShapeVector.at(i)->mCollisionRadiusSpawn * 30)
+                                	{
+						occupied = true; 
+                                	}
+                        	}
+                	}
 
-		if (!occupied)
-		{
-			return vector3D;
+			if (!occupied)
+			{
+				return vector3D;
+			}
 		}
         }
 }

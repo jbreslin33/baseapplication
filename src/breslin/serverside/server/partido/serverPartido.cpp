@@ -70,7 +70,7 @@ void ServerPartido::createClients()
         int             row;
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,"select * from users WHERE username != 'root' ORDER BY id LIMIT 4");
+        res = PQexec(conn,"select * from users WHERE username != 'root' ORDER BY id LIMIT 20");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
