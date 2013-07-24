@@ -54,8 +54,7 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
         addComputerAbility(mComputerPartido);
 
 	//let's get random tactics
-	mComputerPartido->mTactic = rand() % 4;
-	mComputerPartido->mTactic++;
+	mComputerPartido->getNewTactic();
 /*	
 	if (mClient->db_id == 2)
 	{

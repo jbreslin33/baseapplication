@@ -91,15 +91,17 @@ ShapePartido* ComputerPartido::getClosestBattleShape()
 
 void ComputerPartido::getNewTactic()
 {
-	int coin = rand() % 2;
-        if (coin == 1)
+	int dieroll = rand() % 100;
+	
+        if (dieroll > 0 && dieroll < 50)
         {
                 mTactic = 1;
+		return;
         }
-        else
+
+        if (dieroll >=  50 && dieroll < 100)
         {
-        	int tactic = rand() % 4;
-                tactic++;
-                mTactic = tactic;
+                mTactic = 2;
+		return;
         }
 }
