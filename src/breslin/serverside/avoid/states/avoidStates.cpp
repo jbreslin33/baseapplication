@@ -78,7 +78,7 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 {
 	if (avoid->mAvoidee)
 	{
-		if (avoid->mAvoidVector.size() == 0 && avoid->getPanicDistance() < avoid->mAvoidLength)	
+		if (avoid->mAvoidVector.size() == 0 && avoid->mAvoidLength >= avoid->mPanicDistance)	
 		{
 			avoid->mStateMachine->changeState(NO_AVOID::Instance());	
 		} 
@@ -123,7 +123,7 @@ void SEEK_AVOID::execute(Avoid* avoid)
 {
         if (avoid->mAvoidee)
         {
-		if (avoid->mAvoidVector.size() == 0 && avoid->getPanicDistance() < avoid->mAvoidLength)	
+		if (avoid->mAvoidVector.size() == 0 && avoid->mAvoidLength >= avoid->mPanicDistance)	
 		{
                         avoid->mStateMachine->changeState(NO_AVOID::Instance());
                 }
@@ -171,7 +171,7 @@ void NO_AVOID::enter(Avoid* avoid)
 }
 void NO_AVOID::execute(Avoid* avoid)
 {
-	if (avoid->mAvoidVector.size() > 0 && avoid->getPanicDistance() > avoid->mAvoidLength)	
+	if (avoid->mAvoidVector.size() > 0 && avoid->mAvoidLength < avoid->mPanicDistance)	
 	{
 		avoid->mStateMachine->changeState(NORMAL_AVOID::Instance());
 	}
