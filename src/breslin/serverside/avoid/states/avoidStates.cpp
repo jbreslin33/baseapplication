@@ -72,7 +72,7 @@ NORMAL_AVOID* NORMAL_AVOID::Instance()
 }
 void NORMAL_AVOID::enter(Avoid* avoid)
 {
-	//LogString("NORMAL_AVOID:%d",avoid->mShape->mClient->db_id);
+	LogString("NORMAL_AVOID:%d",avoid->mShape->mClient->db_id);
 }
 void NORMAL_AVOID::execute(Avoid* avoid)
 {
