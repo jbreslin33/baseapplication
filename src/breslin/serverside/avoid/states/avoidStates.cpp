@@ -73,6 +73,9 @@ NORMAL_AVOID* NORMAL_AVOID::Instance()
 void NORMAL_AVOID::enter(Avoid* avoid)
 {
 	LogString("NORMAL_AVOID:%d",avoid->mShape->mClient->db_id);
+	int randomAvoidDegrees = rand() % 180;
+
+	randomAvoidDegrees = randomAvoidDegrees + 90;
 }
 void NORMAL_AVOID::execute(Avoid* avoid)
 {
@@ -91,7 +94,7 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 			else
 			{
 				Vector3D* newVelocity = new Vector3D();
-				newVelocity = avoid->mAvoidVelocity->getVectorOffset(180.0f,true);
+				newVelocity = avoid->mAvoidVelocity->getVectorOffset(90.0f,true);
 
        				avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
        				avoid->mShape->mMove->mVelocity->normalise();
@@ -118,6 +121,8 @@ SEEK_AVOID* SEEK_AVOID::Instance()
 void SEEK_AVOID::enter(Avoid* avoid)
 {
         LogString("SEEK_AVOID:%d",avoid->mShape->mClient->db_id);
+
+
 }
 void SEEK_AVOID::execute(Avoid* avoid)
 {
