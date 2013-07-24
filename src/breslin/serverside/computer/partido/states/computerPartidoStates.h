@@ -25,18 +25,6 @@ public:
 /*******************************
 *     COMPTER 
 ******************************/
-class BEZERKER_PARTIDO : public State<ComputerPartido>
-{
-private:
-  BEZERKER_PARTIDO(){}
-public:
-  static BEZERKER_PARTIDO* Instance();
-  void enter  (ComputerPartido* computerPartido);
-  void execute(ComputerPartido* computerPartido);
-  void exit   (ComputerPartido* computerPartido);
-  bool onLetter(ComputerPartido* computerPartido, Letter* letter);
-};
-
 class SCARED_PARTIDO : public State<ComputerPartido>
 {
 private:
@@ -61,24 +49,25 @@ public:
   bool onLetter(ComputerPartido* computerPartido, Letter* letter);
 };
 
-class SLOPPY_PARTIDO : public State<ComputerPartido>
+class BEZERKER_PARTIDO : public State<ComputerPartido>
 {
 private:
-  SLOPPY_PARTIDO(){}
+  BEZERKER_PARTIDO(){}
 public:
-  static SLOPPY_PARTIDO* Instance();
+  static BEZERKER_PARTIDO* Instance();
   void enter  (ComputerPartido* computerPartido);
   void execute(ComputerPartido* computerPartido);
   void exit   (ComputerPartido* computerPartido);
   bool onLetter(ComputerPartido* computerPartido, Letter* letter);
 };
 
-class COMPUTER_CONTROLLED_PARTIDO : public State<ComputerPartido>
+
+class SLOPPY_PARTIDO : public State<ComputerPartido>
 {
 private:
-  COMPUTER_CONTROLLED_PARTIDO(){}
+  SLOPPY_PARTIDO(){}
 public:
-  static COMPUTER_CONTROLLED_PARTIDO* Instance();
+  static SLOPPY_PARTIDO* Instance();
   void enter  (ComputerPartido* computerPartido);
   void execute(ComputerPartido* computerPartido);
   void exit   (ComputerPartido* computerPartido);
