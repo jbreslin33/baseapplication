@@ -88,3 +88,18 @@ ShapePartido* ComputerPartido::getClosestBattleShape()
         }
 	return closestShapeSoFar;       
 }
+
+void ComputerPartido::getNewTactic()
+{
+	int coin = rand() % 2;
+        if (coin == 1)
+        {
+                mTactic = 1;
+        }
+        else
+        {
+        	int tactic = rand() % 4;
+                tactic++;
+                mTactic = tactic;
+        }
+}
