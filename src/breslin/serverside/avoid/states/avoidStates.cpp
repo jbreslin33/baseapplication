@@ -96,26 +96,27 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 		Vector3D* inverseToAvoidee = new Vector3D();
 		inverseToAvoidee = avoid->mAvoidVelocity->getVectorOffset(180.0f,true);
 
+		//to store the vector to the closest avoidee
+		Vector3D* vectorToClosestAvoidee = new Vector3D();
+
 		//next we will start at 1 degree and then offset from this until we find an open velocity
 		int d = 0;
 		for (d = 1; d < 360; d++)
 		{
-			bool dotMatch = false;
+			bool inTheWay = false;
+			//proposedVelocity is 1 degree further than the original inverseToAvoidee then we increase by 1 deg
 			Vector3D* proposedVelocity = inverseToAvoidee->getVectorOffset(d,true);
 			for (int i = 0; i < avoid->mClosestAvoidees.size(); i++)
 			{
- 				Vector3D* currentAvoideePosition = new Vector3D();
-				currentAvoideePosition->convertFromVector3(avoid->mClosestAvoidees.at(i)->mSceneNode->getPosition());
-				Vector3D* vectorToClosestAvoidee = new Vector3D();
-				vectorToClosestAvoidee->subtract(currentAvoideePosition,avoid->mCurrentPosition);	
+				vectorToClosestAvoidee->subtract(avoid->mAvoideePosition,avoid->mCurrentPosition);	
 				float dotToAvoidee = proposedVelocity->dot(vectorToClosestAvoidee);
 				if (dotToAvoidee > .50)
 				{
-					dotMatch = true;
+					inTheWay = true;
 					i = 2099;	
 				}
 			}
-			if (dotMatch == false)
+			if (inTheWay == false)
 			{
        				avoid->mShape->mMove->mVelocity->copyValuesFrom(proposedVelocity);
        				avoid->mShape->mMove->mVelocity->normalise();
