@@ -55,24 +55,7 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
 
 	//let's get random tactics
 	mComputerPartido->getNewTactic();
-/*	
-	if (mClient->db_id == 2)
-	{
-		mComputerPartido->mTactic = 1;
-	} 
-	if (mClient->db_id == 3)
-	{
-		mComputerPartido->mTactic = 2;
-	} 
-	if (mClient->db_id == 4) 
-	{
-		mComputerPartido->mTactic = 3;
-	} 
-	if (mClient->db_id == 5) 
-	{
-		mComputerPartido->mTactic = 4;
-	} 
-*/
+	
 	//statemachine
 	mShapePartidoStateMachine =  new StateMachine<ShapePartido>(this);
         mShapePartidoStateMachine->setGlobalState      (GLOBAL_SHAPE_PARTIDO::Instance());

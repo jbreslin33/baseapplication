@@ -122,11 +122,13 @@ void SCARED_PARTIDO::execute(ComputerPartido* computer)
 {
 	if (computer->mCounter >= computer->mThreshold)
 	{
-        	//let's give you a new random tactic
-        	int tactic = rand() % 4;
-        	tactic++;
-        	computer->mTactic = tactic;
-        	LogString("THRESHOLD:%d",computer->mShape->mClient->db_id);
+		computer->getNewTactic();	
+		if (computer->mTactic == 1)
+		{
+			//let's reset the counter
+			computer->mCounter = 0;
+			computer->mThreshold = 4000;
+		}
 	}
 	computer->mCounter++;
 }
@@ -187,8 +189,6 @@ void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 
                 computer->mShapePartido->mAvoid->addAvoidShape(computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i));
         }
-	
-		
 }
 
 void SNIPER_PARTIDO::execute(ComputerPartido* computer)
