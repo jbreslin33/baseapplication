@@ -103,7 +103,9 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 
 		//next we will start at 1 degree and then offset from this until we find an open velocity
 		int d = 0;
-		for (d = 1; d < 360; d++)
+		
+		//let's increment by 10 degrees for speed
+		for (d = 1; d < 360; d = d + 10)
 		{
 			bool inTheWay = false;
 			//proposedVelocity is 1 degree further than the original inverseToAvoidee then we increase by 1 deg
@@ -152,8 +154,6 @@ SEEK_AVOID* SEEK_AVOID::Instance()
 void SEEK_AVOID::enter(Avoid* avoid)
 {
         LogString("SEEK_AVOID:%d",avoid->mShape->mClient->db_id);
-
-
 }
 void SEEK_AVOID::execute(Avoid* avoid)
 {
