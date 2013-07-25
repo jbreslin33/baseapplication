@@ -107,43 +107,49 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 */
 	if (avoid->mAvoidee)
 	{
-	if (avoid->mAvoidVector.size() == 0)	
-	{
-		avoid->mStateMachine->changeState(NO_AVOID::Instance());	
-	} 
-	else  
-	{
-		Vector3D* inverseToAvoidee = new Vector3D();
-		inverseToAvoidee = avoid->mAvoidVelocity->getVectorOffset(180.0f,true);
-		int d = 0;
-		for (d = 1; d < 360; d++)
+		if (avoid->mAvoidVector.size() == 0)	
 		{
-			bool dotMatch = false;
-			Vector3D* newVelocity = inverseToAvoidee->getVectorOffset(d,true);
-			for (int i = 0; i < avoid->mClosestAvoidees.size(); i++)
-			{
- 				Vector3D* currentAvoideePosition = new Vector3D();
-				currentAvoideePosition->convertFromVector3(avoid->mClosestAvoidees.at(i)->mSceneNode->getPosition());
-				Vector3D* vectorToClosestAvoidee = new Vector3D();
-				vectorToClosestAvoidee->subtract(currentAvoideePosition,avoid->mCurrentPosition);	
-				float dotToAvoidee = newVelocity->dot(vectorToClosestAvoidee);
-				if (dotToAvoidee > .50)
-				{
-					dotMatch = true;
-					i = 2099;	
-				}
-				
-			}
-			if (dotMatch == false)
-			{
-       				avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
-       				avoid->mShape->mMove->mVelocity->normalise();
-			}
-		}
+			avoid->mStateMachine->changeState(NO_AVOID::Instance());	
+		} 
 		
+		if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mDestinationPoint)
+		{ 
+                	avoid->mStateMachine->changeState(SEEK_AVOID::Instance());
+		}
+		else  
+		{
+			Vector3D* inverseToAvoidee = new Vector3D();
+			inverseToAvoidee = avoid->mAvoidVelocity->getVectorOffset(180.0f,true);
+			int d = 0;
+			for (d = 1; d < 360; d++)
+			{
+				bool dotMatch = false;
+				Vector3D* newVelocity = inverseToAvoidee->getVectorOffset(d,true);
+				for (int i = 0; i < avoid->mClosestAvoidees.size(); i++)
+				{
+ 					Vector3D* currentAvoideePosition = new Vector3D();
+					currentAvoideePosition->convertFromVector3(avoid->mClosestAvoidees.at(i)->mSceneNode->getPosition());
+					Vector3D* vectorToClosestAvoidee = new Vector3D();
+					vectorToClosestAvoidee->subtract(currentAvoideePosition,avoid->mCurrentPosition);	
+					float dotToAvoidee = newVelocity->dot(vectorToClosestAvoidee);
+					if (dotToAvoidee > .50)
+					{
+						dotMatch = true;
+						i = 2099;	
+					}
+				
+				}
+				if (dotMatch == false)
+				{
+       					avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
+       					avoid->mShape->mMove->mVelocity->normalise();
+				}
+			}
+		
+		}
 	}
 }
-}
+
 void NORMAL_AVOID::exit(Avoid* avoid)
 {
 }
