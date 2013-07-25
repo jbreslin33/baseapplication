@@ -79,32 +79,6 @@ void NORMAL_AVOID::enter(Avoid* avoid)
 }
 void NORMAL_AVOID::execute(Avoid* avoid)
 {
-/*
-	if (avoid->mAvoidee)
-	{
-		if (avoid->mAvoidVector.size() == 0)	
-		{
-			avoid->mStateMachine->changeState(NO_AVOID::Instance());	
-		} 
-		else  
-		{
-			if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mDestinationPoint)
-			{ 
-                		avoid->mStateMachine->changeState(SEEK_AVOID::Instance());
-			}
-			else
-			{
-				Vector3D* newVelocity = new Vector3D();
-				newVelocity = avoid->mAvoidVelocity->getVectorOffset(avoid->mRandomAvoidDegrees,true);
-
-       				avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
-       				avoid->mShape->mMove->mVelocity->normalise();
-			}
-		}
-	}
-// mAvoidDot     = mAvoidVelocity->dot(mShape->mSeek->mSeekVelocity);
-
-*/
 	if (avoid->mAvoidee)
 	{
 		if (avoid->mAvoidVector.size() == 0)	
