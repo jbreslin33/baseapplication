@@ -34,7 +34,9 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mCurrentPosition = new Vector3D();
 	mAvoideePosition = new Vector3D();
 
-	mPanicDistance = 8.0f;
+	mPanicDistance = 10.0f;
+
+	mRandomAvoidDegrees = 0.0f;
 
 	//evade
 	mEvadeWithXPositive = false;
@@ -83,10 +85,13 @@ bool Avoid::removeAvoidShape(Shape* avoidShape)
 	return false;
 }
 
-void  Avoid::calculateClosestAvoidee()
+void  Avoid::calculateClosestAvoidees()
 {
+	mClosestAvoidees.clear();	
+
 	Shape* closestShapeSoFar = NULL;
 	float closestDistanceSoFar = 3000.0f;
+
 
 	for (int i = 0; i < mAvoidVector.size(); i++)
 	{
@@ -109,6 +114,11 @@ void  Avoid::calculateClosestAvoidee()
 		differenceVector->subtract(currentPosition,currentAvoideePosition);
 
 		float length = differenceVector->length();
+
+		if (length < mPanicDistance)
+		{
+			mClosestAvoidees.push_back(avoidee);	
+		}
 
 		if (length < closestDistanceSoFar)
 		{

@@ -52,9 +52,10 @@ bool mEvadeWithZNegative;
 StateMachine<Avoid>* mStateMachine;
 
 std::vector<Shape*> mAvoidVector;
+std::vector<Shape*> mClosestAvoidees;
 
 Shape* findClosestAvoidee();
-void calculateClosestAvoidee();
+void calculateClosestAvoidees();
 void calculateCurrentPosition();
 void calculateDot();
 void setEvasiveVelocityToSeek();
@@ -63,6 +64,7 @@ float mPanicDistance;
 float getPanicDistance() { return mPanicDistance; }
 void setPanicDistance(float panicDistance) { mPanicDistance = panicDistance; }
 
+float mRandomAvoidDegrees;
 };
 
 #endif
