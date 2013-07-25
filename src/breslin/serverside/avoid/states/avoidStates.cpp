@@ -54,8 +54,6 @@ void GLOBAL_AVOID::execute(Avoid* avoid)
 	//the dot between seekVelocity and avoidVelocity
         avoid->mAvoidDotLast = avoid->mAvoidDot;
         avoid->mAvoidDot     = avoid->mAvoidVelocity->dot(avoid->mShape->mSeek->mSeekVelocity);
-
-	avoid->mEvasiveVelocity->copyValuesFrom(avoid->mShape->mSeek->mSeekVelocity);
 }
 void GLOBAL_AVOID::exit(Avoid* avoid)
 {
@@ -78,9 +76,6 @@ NORMAL_AVOID* NORMAL_AVOID::Instance()
 void NORMAL_AVOID::enter(Avoid* avoid)
 {
 	LogString("NORMAL_AVOID:%d",avoid->mShape->mClient->db_id);
-	avoid->mRandomAvoidDegrees = rand() % 180;
-
-	avoid->mRandomAvoidDegrees = avoid->mRandomAvoidDegrees + 90;
 }
 
 void NORMAL_AVOID::execute(Avoid* avoid)
@@ -96,21 +91,24 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 		{ 
                 	avoid->mStateMachine->changeState(SEEK_AVOID::Instance());
 		}
-	
+
+		//first let's take the inverse velocity of the closest avoidee	
 		Vector3D* inverseToAvoidee = new Vector3D();
 		inverseToAvoidee = avoid->mAvoidVelocity->getVectorOffset(180.0f,true);
+
+		//next we will start at 1 degree and then offset from this until we find an open velocity
 		int d = 0;
 		for (d = 1; d < 360; d++)
 		{
 			bool dotMatch = false;
-			Vector3D* newVelocity = inverseToAvoidee->getVectorOffset(d,true);
+			Vector3D* proposedVelocity = inverseToAvoidee->getVectorOffset(d,true);
 			for (int i = 0; i < avoid->mClosestAvoidees.size(); i++)
 			{
  				Vector3D* currentAvoideePosition = new Vector3D();
 				currentAvoideePosition->convertFromVector3(avoid->mClosestAvoidees.at(i)->mSceneNode->getPosition());
 				Vector3D* vectorToClosestAvoidee = new Vector3D();
 				vectorToClosestAvoidee->subtract(currentAvoideePosition,avoid->mCurrentPosition);	
-				float dotToAvoidee = newVelocity->dot(vectorToClosestAvoidee);
+				float dotToAvoidee = proposedVelocity->dot(vectorToClosestAvoidee);
 				if (dotToAvoidee > .50)
 				{
 					dotMatch = true;
@@ -119,7 +117,7 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 			}
 			if (dotMatch == false)
 			{
-       				avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
+       				avoid->mShape->mMove->mVelocity->copyValuesFrom(proposedVelocity);
        				avoid->mShape->mMove->mVelocity->normalise();
 			}
 		}

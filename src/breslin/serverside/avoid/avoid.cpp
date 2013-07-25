@@ -29,7 +29,6 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mAvoidDotLast = 0.0f;
 
 	mAvoidVelocity = new Vector3D();
-	mEvasiveVelocity = new Vector3D();
 
 	mCurrentPosition = new Vector3D();
 	mAvoideePosition = new Vector3D();
