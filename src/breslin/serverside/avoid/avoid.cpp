@@ -139,19 +139,3 @@ void  Avoid::calculateClosestAvoidees()
 	}
 }
 
-void Avoid::calculateCurrentPosition()
-{
-	//current position
-        mCurrentPosition->convertFromVector3(mShape->mSceneNode->getPosition());
-}
-
-void Avoid::calculateDot()
-{
-	//the dot between seekVelocity and avoidVelocity
-        mAvoidDotLast = mAvoidDot;
-        mAvoidDot     = mAvoidVelocity->dot(mShape->mSeek->mSeekVelocity);
-}
-void Avoid::setEvasiveVelocityToSeek()
-{
-        mEvasiveVelocity->copyValuesFrom(mShape->mSeek->mSeekVelocity);
-}

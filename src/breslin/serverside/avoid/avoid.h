@@ -56,9 +56,6 @@ std::vector<Shape*> mClosestAvoidees;
 
 Shape* findClosestAvoidee();
 void calculateClosestAvoidees();
-void calculateCurrentPosition();
-void calculateDot();
-void setEvasiveVelocityToSeek();
 
 float mPanicDistance;
 float getPanicDistance() { return mPanicDistance; }
