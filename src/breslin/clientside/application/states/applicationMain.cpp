@@ -58,6 +58,7 @@ void ApplicationMain::execute()
 
 	if (mApplication->mButtonHit == mApplication->mButtonExit)
 	{
+		mApplication->sendLogout();
 		mApplication->mStateMachine->changeState(NULL);
 		mApplication->mStateMachine->setGlobalState(NULL);
 		mApplication->mButtonHit = NULL;
