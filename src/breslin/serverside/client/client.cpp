@@ -234,10 +234,21 @@ bool Client::checkLogin(Message* mes)
 	//we need to goto db....
 	getPasswordMatch(mStringUsername,mStringPassword);
 }
+/*
+int         db_id;
+std::string db_username;
+std::string db_password;
+std::string db_first_name;
+std::string db_last_name;
+int         db_school_id;
 
+*/
 bool Client::getPasswordMatch(std::string username,std::string password)
 {
-	int dbid = 0;
+	int id = 0;
+        std::string firstName = "";
+        std::string LastName = "";
+	int schoolID = 0;
 
         PGconn          *conn;
         PGresult        *res;
@@ -245,7 +256,7 @@ bool Client::getPasswordMatch(std::string username,std::string password)
         int             row;
         int             col;
         bool match = false;
-        std::string query = "select id, username, password from users where username = '";
+        std::string query = "select * from users where username = '";
         std::string a = "' ";
         std::string b = "and password = '";
         std::string c = "'";
@@ -268,13 +279,6 @@ bool Client::getPasswordMatch(std::string username,std::string password)
         rec_count = PQntuples(res);
         if (rec_count > 0)
         {
-    		//id
-                const char* a = PQgetvalue(res, 0, 0);
-                stringstream a_str;
-                a_str << a;
-                unsigned int a_int;
-                a_str >> a_int;
-                dbid = a_int;
 
 		//find a clientRobust that is not logged in...
 		ClientRobust* clientRobust;
@@ -304,8 +308,29 @@ bool Client::getPasswordMatch(std::string username,std::string password)
 			//clientID	
                 	clientRobust->mClientID = mClientID;
 
-			//db_id
-			clientRobust->db_id = dbid; 
+    			//id
+                	const char* a = PQgetvalue(res, 0, 0);
+                	stringstream a_str;
+                	a_str << a;
+                	unsigned int a_int;
+                	a_str >> a_int;
+                	clientRobust->db_id = a_int;
+
+                	//first_name
+                	const char* d = PQgetvalue(res, row, 3);
+                	clientRobust->db_first_name.assign(d);
+
+                	//last_name
+                	const char* e = PQgetvalue(res, row, 7);
+                	clientRobust->db_last_name.assign(e);
+
+                	//school_id
+                	const char* f = PQgetvalue(res, row, 8);
+                	stringstream f_str;
+                	f_str << f;
+                	unsigned int f_int;
+                	f_str >> f_int;
+                	clientRobust->db_school_id = f_int;
 
                 	//send login letter
                 	clientRobust->login();

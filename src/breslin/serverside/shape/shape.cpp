@@ -44,6 +44,10 @@
 Shape::Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool computer)  : BaseEntity(BaseEntity::getNextValidID())
 {
+
+	mText  = "";
+	mTextLast  = "";
+
  	//mPosition = position;
 	mIndex  = index;
 
@@ -249,25 +253,6 @@ void Shape::setText(std::string text)
 {
 	mText.clear();
 	mText.append(text);
-/*
-	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-       	mMessage.WriteByte(mMessageSetText); // add type
-
-	//index id
-	mMessage.WriteByte(mIndex);
-
-	//username
-       	int length = text.length();  
-       	mMessage.WriteByte(length); //send length
-
-       	//loop thru length and write it
-       	for (int b=0; b < length; b++)
-       	{
-               	mMessage.WriteByte(text.at(b));
-       	}
-       	
-	mGame->mServer->mNetwork->broadcast(&mMessage);
-*/
 }
 
 void Shape::sendText()

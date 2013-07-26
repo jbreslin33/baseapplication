@@ -96,7 +96,11 @@ void ShapePartido::update()
         {
                 sendText();
                 mTextLast = mText;
+		LogString("diff");
         }
+	else
+	{
+	}
 }
 
 bool ShapePartido::handleLetter(Letter* letter)
