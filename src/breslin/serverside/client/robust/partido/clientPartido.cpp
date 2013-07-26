@@ -185,26 +185,6 @@ void ClientPartido::sendQuestion(int questionID)
         	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 	}
 }
-/*
-
-STATES:
-permanent
-temp
-
-Human
-Computer
-
-Logged out
-in lobby
-game mode
-
-playgame
-waiting for answer
-sendQuestion
-
-
-*/
-
 
 void ClientPartido::battleStart(ShapePartido* whoToBattle)
 {
