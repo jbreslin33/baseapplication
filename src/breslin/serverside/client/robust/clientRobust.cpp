@@ -22,10 +22,14 @@
 //states
 #include "states/clientRobustStates.h"
 
+/*
+ClientRobust always exists and always has a shape. 
+We will make as many as we can....
+it's shape, db_id and address can change though 
+*/
 
 ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientID, bool permanence) : Client(server,address,clientID,permanence)
 {
-
 	//temp client
 	mClient = NULL;
 
@@ -56,7 +60,6 @@ ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientI
         mClientRobustStateMachine->setCurrentState      (LOGGED_OUT::Instance());
         mClientRobustStateMachine->setPreviousState     (NULL);
         mClientRobustStateMachine->setGlobalState       (GLOBAL_CLIENT_ROBUST::Instance());
-
 }
 
 ClientRobust::~ClientRobust()
@@ -147,17 +150,7 @@ void ClientRobust::logout()
         }
         mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
-/*
- 			//send logout letter to clientRobust....
-                        mServer->mClientVector.at(i)->logout();
-                        mConnectionState = DREAMSOCK_DISCONNECTED;
-                        mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
-                        mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
-                        mServer->mClientVector.at(i)->mClientID = mClientID;
-                        //send login letter
-                        mServer->mClientVector.at(i)->login();
 
-*/
 bool ClientRobust::checkLogin(Message* mes)
 {
         LogString("ClientRobust::checkLogin");
