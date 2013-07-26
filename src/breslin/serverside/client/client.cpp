@@ -206,13 +206,7 @@ void Client::readLoginMessage(Message* mes)
                 }
         }
 }
-/*
-       for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
-        {
-                if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
-                {
 
-*/
 bool Client::checkLogin(Message* mes)
 {
 	LogString("Client::checkLogin");
