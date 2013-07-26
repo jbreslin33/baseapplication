@@ -153,7 +153,6 @@ void ClientRobust::logout()
 
 bool ClientRobust::checkLogin(Message* mes)
 {
-        LogString("ClientRobust::checkLogin");
         readLoginMessage(mes);
 
         for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
@@ -168,8 +167,10 @@ bool ClientRobust::checkLogin(Message* mes)
                         mServer->mClientVector.at(i)->mClientID = mClientID;
                         //send login letter
                         mServer->mClientVector.at(i)->login();
-                	//login();
-                }
+               
+			return true; 
+		}
         }
+	return false;
 }
 

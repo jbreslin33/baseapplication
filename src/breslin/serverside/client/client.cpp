@@ -209,7 +209,6 @@ void Client::readLoginMessage(Message* mes)
 
 bool Client::checkLogin(Message* mes)
 {
-	LogString("Client::checkLogin");
 	readLoginMessage(mes);
 
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
@@ -224,16 +223,22 @@ bool Client::checkLogin(Message* mes)
                         mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
                         mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
                         mServer->mClientVector.at(i)->mClientID = mClientID;
-			
 
 			//send login letter
                         mServer->mClientVector.at(i)->login();
+
+			return true;
 		}
 	}
+
+	//we need to goto db....
+	getPasswordMatch(mStringUsername,mStringPassword);
 }
 
 bool Client::getPasswordMatch(std::string username,std::string password)
 {
+	int dbid = 0;
+
         PGconn          *conn;
         PGresult        *res;
         int             rec_count;
@@ -258,20 +263,59 @@ bool Client::getPasswordMatch(std::string username,std::string password)
         res = PQexec(conn,q);
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
-                puts("We did not get any data!");
-                //exit(0);
+                LogString("Incorrect Username and or password");
         }
         rec_count = PQntuples(res);
         if (rec_count > 0)
         {
-		const char* value = PQgetvalue(res, row, 0);
-		stringstream strValue;
-		strValue << value;
-		unsigned int intValue;
-		strValue >> intValue;
-		//db_id = intValue;
-	
-                match = true;
+    		//id
+                const char* a = PQgetvalue(res, 0, 0);
+                stringstream a_str;
+                a_str << a;
+                unsigned int a_int;
+                a_str >> a_int;
+                dbid = a_int;
+
+		//find a clientRobust that is not logged in...
+		ClientRobust* clientRobust;
+		int i = 0;
+		while (i < mServer->mClientVector.size() && !clientRobust)
+		{
+			if (mServer->mClientVector.at(i)->mLoggedIn == false)
+			{
+				clientRobust = mServer->mClientVector.at(i);
+			}	
+			i++;
+		}
+
+		if (clientRobust)
+		{
+			//set values...
+                	//no need ...mServer->mClientVector.at(i)->logout();
+
+                	mConnectionState = DREAMSOCK_DISCONNECTED;
+			
+			//set address
+                	clientRobust->setSocketAddress(&mSocketAddress);
+		
+			//set connection State
+                	clientRobust->mConnectionState = DREAMSOCK_CONNECTED;
+
+			//clientID	
+                	clientRobust->mClientID = mClientID;
+
+			//db_id
+			clientRobust->db_id = dbid; 
+
+                	//send login letter
+                	clientRobust->login();
+		
+			LogString("Took over a client!!!!!!");
+		}
+		else
+		{
+			LogString("No open Clients!!!!!!");
+		}
         }
         PQclear(res);
         PQfinish(conn);
