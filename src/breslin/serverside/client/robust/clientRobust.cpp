@@ -22,6 +22,9 @@
 //states
 #include "states/clientRobustStates.h"
 
+//shape
+#include "../../shape/shape.h"
+
 /*
 ClientRobust always exists and always has a shape. 
 We will make as many as we can....
@@ -171,6 +174,87 @@ bool ClientRobust::checkLogin(Message* mes)
 			return true; 
 		}
         }
-	return false;
+	getPasswordMatch(mStringUsername,mStringPassword);
+}
+
+bool ClientRobust::getPasswordMatch(std::string username,std::string password)
+{
+	int id = 0;
+        std::string firstName = "";
+        std::string LastName = "";
+	int schoolID = 0;
+
+        PGconn          *conn;
+        PGresult        *res;
+        int             rec_count;
+        int             row;
+        int             col;
+        bool match = false;
+        std::string query = "select * from users where username = '";
+        std::string a = "' ";
+        std::string b = "and password = '";
+        std::string c = "'";
+
+        query.append(username);
+        query.append(a);
+        query.append(b);
+        query.append(password);
+        query.append(c);
+
+        const char * q = query.c_str();
+
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+        res = PQexec(conn,q);
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                LogString("Incorrect Username and or password");
+        }
+        rec_count = PQntuples(res);
+        if (rec_count > 0)
+        {
+		//set address
+                setSocketAddress(&mSocketAddress);
+		
+		//set connection State
+                mConnectionState = DREAMSOCK_CONNECTED;
+
+    		//id
+                const char* a = PQgetvalue(res, 0, 0);
+                stringstream a_str;
+                a_str << a;
+                unsigned int a_int;
+                a_str >> a_int;
+                db_id = a_int;
+
+		db_username = mStringUsername;
+		db_password = mStringPassword;
+
+                //first_name
+                const char* d = PQgetvalue(res, row, 3);
+                db_first_name.assign(d);
+
+                //last_name
+                const char* e = PQgetvalue(res, row, 7);
+                db_last_name.assign(e);
+
+                //school_id
+                const char* f = PQgetvalue(res, row, 8);
+                stringstream f_str;
+                f_str << f;
+                unsigned int f_int;
+                f_str >> f_int;
+                db_school_id = f_int;
+
+                //send login letter
+                login();
+	
+		mShape->sendText();	
+			
+		LogString("swapped a robustClient");
+        }
+        PQclear(res);
+        PQfinish(conn);
+        return match;
 }
 

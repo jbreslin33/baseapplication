@@ -234,15 +234,7 @@ bool Client::checkLogin(Message* mes)
 	//we need to goto db....
 	getPasswordMatch(mStringUsername,mStringPassword);
 }
-/*
-int         db_id;
-std::string db_username;
-std::string db_password;
-std::string db_first_name;
-std::string db_last_name;
-int         db_school_id;
 
-*/
 bool Client::getPasswordMatch(std::string username,std::string password)
 {
 	int id = 0;

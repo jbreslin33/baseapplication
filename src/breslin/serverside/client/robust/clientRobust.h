@@ -61,6 +61,7 @@ void setShape(Shape* shape);
 void login();
 void logout();
 virtual bool checkLogin(Message* message);
+virtual bool getPasswordMatch(std::string username,std::string password);
 
 };
 #endif
