@@ -86,7 +86,7 @@ void Game::setStates()
 //i am guessing i am not clearing the shape arrray???
 void Game::remove()
 {
-
+/*
         if (mShapeVector)
         {
                 for (unsigned int i = 0; i < mShapeVector->size(); i++)
@@ -96,20 +96,33 @@ void Game::remove()
         		//delete objectTitles
 			if (shape)
 			{
+				LogString("before delete of:%d",i);
         			delete shape->mGhost->mObjectTitle;
-        			delete shape->mObjectTitle;
+       				delete shape->mGhost->mEntity; 		
+       				delete shape->mGhost->mSceneNode; 		
         			delete shape->mGhost;
+	
+				delete shape->mObjectTitle;
+       				delete shape->mEntity; 		
+       				delete shape->mSceneNode; 		
         			delete shape;
+				LogString("after delete of:%d",i);
 			}
                 }
         }
+*/
+	LogString("breslin1");
 
 	mApplication->getSceneManager()->destroyAllEntities();
+	LogString("breslin1");
         mApplication->mSceneMgr->destroyLight(mPointLight);
+	LogString("breslin2");
 
 	//clear the vectors....	
 	mShapeVector->clear();
+	LogString("breslin3");
 	mShapeGhostVector->clear();
+	LogString("breslin4");
 }
 
 /*********************************

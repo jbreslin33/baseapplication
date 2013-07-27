@@ -71,10 +71,20 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 }
 Shape::~Shape()
 {
-	LogString("Destructor for Shape:%d",mIndex);
+//	LogString("Destructor for Shape:%d",mIndex);
 	//delete mEntity;
 //	delete mObjectTitle;
-//	delete mSceneNode;
+/*
+	if (mEntity)
+	{
+		delete mEntity;
+	}
+
+	if (mSceneNode)
+	{
+		delete mSceneNode;
+	}
+*/
 }
 
 void Shape::setText(ByteBuffer* byteBuffer)

@@ -88,7 +88,6 @@ public:
 //name
 std::string mName;
 
-private:
 //animate
 bool mAnimate;
 
