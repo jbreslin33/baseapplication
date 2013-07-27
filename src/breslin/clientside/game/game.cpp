@@ -86,7 +86,7 @@ void Game::setStates()
 //i am guessing i am not clearing the shape arrray???
 void Game::remove()
 {
-/*
+
         if (mShapeVector)
         {
                 for (unsigned int i = 0; i < mShapeVector->size(); i++)
@@ -103,7 +103,7 @@ void Game::remove()
 			}
                 }
         }
-*/	
+
 	mApplication->getSceneManager()->destroyAllEntities();
         mApplication->mSceneMgr->destroyLight(mPointLight);
 
