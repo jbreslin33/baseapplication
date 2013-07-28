@@ -123,12 +123,18 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 			}
 			if (inTheWay == false)
 			{
-       				avoid->mShape->mMove->mVelocity->copyValuesFrom(proposedVelocity);
+				avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
+				avoid->mAvoidVelocity->copyValuesFrom(proposedVelocity);
+
+       				avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mAvoidVelocity);
        				avoid->mShape->mMove->mVelocity->normalise();
 			}
 			else //no way out right now atleast avoid the closest
 			{
-       				avoid->mShape->mMove->mVelocity->copyValuesFrom(inverseToAvoidee);
+				avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
+				avoid->mAvoidVelocity->copyValuesFrom(inverseToAvoidee);
+
+       				avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mAvoidVelocity);
        				avoid->mShape->mMove->mVelocity->normalise();
 			}
 		}
@@ -171,8 +177,12 @@ void SEEK_AVOID::execute(Avoid* avoid)
                         {
 				if (avoid->mAvoidDot >= .50)
 				{
-                                	newVelocity = avoid->mVectorToClosestAvoidee->getVectorOffset(45.0f,true);
-                        		avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
+					newVelocity = avoid->mVectorToClosestAvoidee->getVectorOffset(45.0f,true);
+					
+					avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
+					avoid->mAvoidVelocity->copyValuesFrom(newVelocity);
+
+       					avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mAvoidVelocity);
                         		avoid->mShape->mMove->mVelocity->normalise();
 				}
                         }
