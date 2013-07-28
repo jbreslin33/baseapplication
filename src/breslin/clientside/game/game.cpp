@@ -86,66 +86,25 @@ void Game::setStates()
 //i am guessing i am not clearing the shape arrray???
 void Game::remove()
 {
-	if (mShapeVector)
-        {
-                for (unsigned int i = 0; i < mShapeVector->size(); i++)
-                {
-                        Shape* shape = mShapeVector->at(i);
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
+	{
+		delete mShapeVector->at(i)->mGhost->mObjectTitle;
+		delete mShapeVector->at(i)->mObjectTitle;
+	}
 
-                        //delete objectTitles
-                        if (shape)
-                        {
-                                if (shape->mGhost->mObjectTitle)
-                                {
-                                	delete shape->mGhost->mObjectTitle;
-                                }
-                                if (shape->mObjectTitle)
-                                {
-                                	delete shape->mObjectTitle;
-                                }
-                        }
-                }
-        }
 
-	LogString("removeAndDestroyAllChildren");
-   	mApplication->getSceneManager()->getRootSceneNode()->removeAndDestroyAllChildren() ;
-	LogString("destroyAllEntities");
-   	mApplication->getSceneManager()->destroyAllEntities() ;
-	LogString("destroyAllLights");
-   	mApplication->getSceneManager()->destroyAllLights() ;
-	LogString("destroyAllManualObjects");
-   	mApplication->getSceneManager()->destroyAllManualObjects() ;
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
+	{
+		SceneNode* parent = mShapeVector->at(i)->mEntity->getParentSceneNode();
+    		parent->detachObject(mShapeVector->at(i)->mEntity);
+    		mApplication->getSceneManager()->destroyEntity(mShapeVector->at(i)->mEntity->getName());
+	}
 
-	LogString("removeALl");
-   	MeshManager::getSingleton().removeAll() ; // this destroys all the meshes
+	SceneNode* parent = mFloor->getParentSceneNode();
+    	parent->detachObject(mFloor);
+    	mApplication->getSceneManager()->destroyEntity(mFloor->getName());
 
-	LogString("unloadAll");
-   	Ogre::TextureManager::getSingleton().unloadAll() ;
-	LogString("removeAll again");
-   	Ogre::TextureManager::getSingleton().removeAll() ; 
-	
-
-  	if (mShapeVector)
-        {
-                for (unsigned int i = 0; i < mShapeVector->size(); i++)
-                {
-                        Shape* shape = mShapeVector->at(i);
-
-                        //delete objectTitles
-                        if (shape)
-                        {
-                                if (shape->mGhost->mEntity)
-                                {
-                                        delete shape->mGhost->mEntity;
-                                }
-                                if (shape->mEntity)
-                                {
-                                        delete shape->mEntity;
-                                }
-                        }
-                }
-        }
-
+	mApplication->getSceneManager()->destroyAllLights() ;
 
 	//clear the vectors....	
 	mShapeVector->clear();
@@ -263,7 +222,7 @@ void Game::createScene()
 	mFloorNode->attachObject(mFloor);
 	mFloorNode->setPosition(0,0,0);
 
-
+/*
 	// create a northwall mesh resource
         MeshManager::getSingleton().createPlane("northwall", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
                Plane(Vector3::UNIT_Z, 0), 500, 50, 10, 10, true, 1, 10, 10, Vector3::UNIT_Y);
@@ -285,7 +244,7 @@ void Game::createScene()
 	mEastWallNode = mApplication->mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	mEastWallNode->attachObject(mEastWall);
 	mEastWallNode->setPosition(500,0,250);
-
+*/
 
 
 }
