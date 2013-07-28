@@ -195,18 +195,27 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
         transVector->add(abilityMove->mShape->getPosition());
         
 	//set new position
-	abilityMove->mShape->setPosition(transVector);
-	//abliityMove->mShape->mApplication->getCamera()->setPosition(Ogre::Vector3(0,20,20));
- 	// Position it at 500 in Z direction
- 	//   mCamera->setPosition(Ogre::Vector3(0,20,20));
-    	// Look back along -Z
-  	//  mCamera->lookAt(Ogre::Vector3(0,0,0));
-
-	if (abilityMove->mShape->mLocal == 1)
+	if (       transVector->x > 300 
+		|| transVector->x < -300
+		|| transVector->y != 0 
+		|| transVector->z > 300
+		|| transVector->z < -300
+	)	
 	{
-		abilityMove->mShape->mApplication->getCamera()->setPosition(Ogre::Vector3(transVector->x,transVector->y + 500,transVector->z + 20));
+		LogString("vector is out of whack!");
+	}
+	else
+	{
+		
+		abilityMove->mShape->setPosition(transVector);
 
-		abilityMove->mShape->mApplication->getCamera()->lookAt(Ogre::Vector3(transVector->x,transVector->y,transVector->z));
+		//camera Position
+		if (abilityMove->mShape->mLocal == 1)
+		{
+			abilityMove->mShape->mApplication->getCamera()->setPosition(Ogre::Vector3(transVector->x,transVector->y + 500,transVector->z + 20));
+
+			abilityMove->mShape->mApplication->getCamera()->lookAt(Ogre::Vector3(transVector->x,transVector->y,transVector->z));
+		}
 	
 	}
 }

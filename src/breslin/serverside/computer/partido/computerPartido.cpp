@@ -93,7 +93,7 @@ void ComputerPartido::getNewTactic()
 {
 	int dieroll = rand() % 100;
 	
-        if (dieroll > 0 && dieroll < 50)
+        if (dieroll > 0 && dieroll < 75)
         {
                 mTactic = 1;
 		return;
