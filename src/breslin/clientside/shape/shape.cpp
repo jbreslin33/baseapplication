@@ -71,9 +71,8 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 }
 Shape::~Shape()
 {
-//	LogString("Destructor for Shape:%d",mIndex);
 	//delete mEntity;
-//	delete mObjectTitle;
+	//delete mObjectTitle;
 /*
 	if (mEntity)
 	{

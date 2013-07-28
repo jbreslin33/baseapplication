@@ -86,43 +86,70 @@ void Game::setStates()
 //i am guessing i am not clearing the shape arrray???
 void Game::remove()
 {
-/*
-        if (mShapeVector)
+	if (mShapeVector)
         {
                 for (unsigned int i = 0; i < mShapeVector->size(); i++)
                 {
-			Shape* shape = mShapeVector->at(i);
+                        Shape* shape = mShapeVector->at(i);
 
-        		//delete objectTitles
-			if (shape)
-			{
-				LogString("before delete of:%d",i);
-        			delete shape->mGhost->mObjectTitle;
-       				delete shape->mGhost->mEntity; 		
-       				delete shape->mGhost->mSceneNode; 		
-        			delete shape->mGhost;
-	
-				delete shape->mObjectTitle;
-       				delete shape->mEntity; 		
-       				delete shape->mSceneNode; 		
-        			delete shape;
-				LogString("after delete of:%d",i);
-			}
+                        //delete objectTitles
+                        if (shape)
+                        {
+                                if (shape->mGhost->mObjectTitle)
+                                {
+                                	delete shape->mGhost->mObjectTitle;
+                                }
+                                if (shape->mObjectTitle)
+                                {
+                                	delete shape->mObjectTitle;
+                                }
+                        }
                 }
         }
-*/
-	LogString("breslin1");
 
-	mApplication->getSceneManager()->destroyAllEntities();
-	LogString("breslin1");
-        mApplication->mSceneMgr->destroyLight(mPointLight);
-	LogString("breslin2");
+	LogString("removeAndDestroyAllChildren");
+   	mApplication->getSceneManager()->getRootSceneNode()->removeAndDestroyAllChildren() ;
+	LogString("destroyAllEntities");
+   	mApplication->getSceneManager()->destroyAllEntities() ;
+	LogString("destroyAllLights");
+   	mApplication->getSceneManager()->destroyAllLights() ;
+	LogString("destroyAllManualObjects");
+   	mApplication->getSceneManager()->destroyAllManualObjects() ;
+
+	LogString("removeALl");
+   	MeshManager::getSingleton().removeAll() ; // this destroys all the meshes
+
+	LogString("unloadAll");
+   	Ogre::TextureManager::getSingleton().unloadAll() ;
+	LogString("removeAll again");
+   	Ogre::TextureManager::getSingleton().removeAll() ; 
+	
+
+  	if (mShapeVector)
+        {
+                for (unsigned int i = 0; i < mShapeVector->size(); i++)
+                {
+                        Shape* shape = mShapeVector->at(i);
+
+                        //delete objectTitles
+                        if (shape)
+                        {
+                                if (shape->mGhost->mEntity)
+                                {
+                                        delete shape->mGhost->mEntity;
+                                }
+                                if (shape->mEntity)
+                                {
+                                        delete shape->mEntity;
+                                }
+                        }
+                }
+        }
+
 
 	//clear the vectors....	
 	mShapeVector->clear();
-	LogString("breslin3");
 	mShapeGhostVector->clear();
-	LogString("breslin4");
 }
 
 /*********************************
