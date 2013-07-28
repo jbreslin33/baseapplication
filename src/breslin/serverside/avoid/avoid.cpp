@@ -22,13 +22,15 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mShape = shape;
 	mAvoidee = NULL;
 
-	mAvoidLength = 0.0f;
-	mAvoidLengthLast = 0.0f;
+	mVectorToClosestAvoideeLength = 0.0f;
+	mVectorToClosestAvoideeLengthLast = 0.0f;
 
 	mAvoidDot = 0.0f;
 	mAvoidDotLast = 0.0f;
 
+	mVectorToClosestAvoidee = new Vector3D();
 	mAvoidVelocity = new Vector3D();
+	mAvoidVelocityLast = new Vector3D();
 
 	mCurrentPosition = new Vector3D();
 	mAvoideePosition = new Vector3D();
@@ -130,11 +132,11 @@ void  Avoid::calculateClosestAvoidees()
 	{
         	mAvoideePosition->convertFromVector3(mAvoidee->mSceneNode->getPosition());
 
-                //avoid velocity and length(this is actually to hit the avoidee)
-                mAvoidVelocity->subtract(mAvoideePosition,mCurrentPosition);
-                mAvoidLengthLast = mAvoidLength;
-                mAvoidLength     = mAvoidVelocity->length();
-                mAvoidVelocity->normalise();
+                //mVectorToClosestAvoidee and length(this is actually to hit the avoidee)
+                mVectorToClosestAvoidee->subtract(mAvoideePosition,mCurrentPosition);
+                mVectorToClosestAvoideeLengthLast  = mVectorToClosestAvoideeLength;
+                mVectorToClosestAvoideeLength     = mVectorToClosestAvoidee->length();
+                mVectorToClosestAvoidee->normalise();
 	}
 }
 

@@ -33,12 +33,14 @@ Shape* mAvoidee;
 void addAvoidShape   (Shape* avoidShape);
 bool removeAvoidShape(Shape* avoidShape);
 
+Vector3D* mVectorToClosestAvoidee;
 Vector3D* mAvoidVelocity;
+Vector3D* mAvoidVelocityLast;
 Vector3D* mCurrentPosition;
 Vector3D* mAvoideePosition;
 
-float mAvoidLength;
-float mAvoidLengthLast; //use this to see if you are getting closer
+float mVectorToClosestAvoideeLength;
+float mVectorToClosestAvoideeLengthLast;
 
 float mAvoidDot;
 float mAvoidDotLast; //use this to see if angle is getting closer or further.

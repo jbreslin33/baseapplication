@@ -53,7 +53,7 @@ void GLOBAL_AVOID::execute(Avoid* avoid)
 	
 	//the dot between seekVelocity and avoidVelocity
         avoid->mAvoidDotLast = avoid->mAvoidDot;
-        avoid->mAvoidDot     = avoid->mAvoidVelocity->dot(avoid->mShape->mSeek->mSeekVelocity);
+        avoid->mAvoidDot     = avoid->mVectorToClosestAvoidee->dot(avoid->mShape->mSeek->mSeekVelocity);
 }
 void GLOBAL_AVOID::exit(Avoid* avoid)
 {
@@ -94,7 +94,7 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 
 		//first let's take the inverse velocity of the closest avoidee	
 		Vector3D* inverseToAvoidee = new Vector3D();
-		inverseToAvoidee = avoid->mAvoidVelocity->getVectorOffset(180.0f,true);
+		inverseToAvoidee = avoid->mVectorToClosestAvoidee->getVectorOffset(180.0f,true);
 
 		Vector3D* vectorToClosestAvoidee = new Vector3D();
 
@@ -171,7 +171,7 @@ void SEEK_AVOID::execute(Avoid* avoid)
                         {
 				if (avoid->mAvoidDot >= .50)
 				{
-                                	newVelocity = avoid->mAvoidVelocity->getVectorOffset(45.0f,true);
+                                	newVelocity = avoid->mVectorToClosestAvoidee->getVectorOffset(45.0f,true);
                         		avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
                         		avoid->mShape->mMove->mVelocity->normalise();
 				}
