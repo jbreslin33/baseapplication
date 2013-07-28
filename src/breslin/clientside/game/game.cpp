@@ -95,6 +95,12 @@ void Game::remove()
 
 	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
+		//ghost
+		SceneNode* ghostParent = mShapeVector->at(i)->mGhost->mEntity->getParentSceneNode();
+    		ghostParent->detachObject(mShapeVector->at(i)->mGhost->mEntity);
+    		mApplication->getSceneManager()->destroyEntity(mShapeVector->at(i)->mGhost->mEntity->getName());
+		
+		//normal shape	
 		SceneNode* parent = mShapeVector->at(i)->mEntity->getParentSceneNode();
     		parent->detachObject(mShapeVector->at(i)->mEntity);
     		mApplication->getSceneManager()->destroyEntity(mShapeVector->at(i)->mEntity->getName());
