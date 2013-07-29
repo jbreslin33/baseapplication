@@ -30,7 +30,6 @@ virtual bool  handleLetter(Letter* letter);
 Shape* mShape;
 Shape* mAvoidee;
 
-void addAvoidShape   (Shape* avoidShape);
 bool removeAvoidShape(Shape* avoidShape);
 
 Vector3D* mVectorToClosestAvoidee;

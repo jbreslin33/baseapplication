@@ -1,19 +1,3 @@
-#/*
-#-----------------------------------------------------------------------------
-#Filename:    CMakeLists.txt
-#-----------------------------------------------------------------------------
-#
-#This source file is part of the
-#   ___                 __    __ _ _    _ 
-#  /___\__ _ _ __ ___  / / /\ \ (_) | _(_)
-# //  // _` | '__/ _ \ \ \/  \/ / | |/ / |
-#/ \_// (_| | | |  __/  \  /\  /| |   <| |
-#\___/ \__, |_|  \___|   \/  \/ |_|_|\_\_|
-#      |___/                              
-#      Tutorial Framework
-#      http://www.ogre3d.org/tikiwiki/
-#-----------------------------------------------------------------------------
-#*/
 cmake_minimum_required(VERSION 2.6)
  
 project(Server)
@@ -22,65 +6,6 @@ project(Server)
 	set(OGRE_SAMPLES_INCLUDEPATH
 		/usr/local/share/OGRE/samples/Common/include/
 	)
-
-#POSTGRES..........................................
-#
-# Distributed under the OSI-approved BSD License (the "License");
-# see accompanying file Copyright.txt for details.
-#
-# This software is distributed WITHOUT ANY WARRANTY; without even the
-# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the License for more information.
-#=============================================================================
-# (To distribute this file outside of CMake, substitute the full
-#  License text for the above reference.)
-
-# ----------------------------------------------------------------------------
-# History:
-# This module is derived from the module originally found in the VTK source tree.
-#
-# ----------------------------------------------------------------------------
-# Note:
-# PostgreSQL_ADDITIONAL_VERSIONS is a variable that can be used to set the
-# version mumber of the implementation of PostgreSQL.
-# In Windows the default installation of PostgreSQL uses that as part of the path.
-# E.g C:\Program Files\PostgreSQL\8.4.
-# Currently, the following version numbers are known to this module:
-# "9.1" "9.0" "8.4" "8.3" "8.2" "8.1" "8.0"
-#
-# To use this variable just do something like this:
-# set(PostgreSQL_ADDITIONAL_VERSIONS "9.2" "8.4.4")
-# before calling find_package(PostgreSQL) in your CMakeLists.txt file.
-# This will mean that the versions you set here will be found first in the order
-# specified before the default ones are searched.
-#
-# ----------------------------------------------------------------------------
-# You may need to manually set:
-#  PostgreSQL_INCLUDE_DIR  - the path to where the PostgreSQL include files are.
-#  PostgreSQL_LIBRARY_DIR  - The path to where the PostgreSQL library files are.
-# If FindPostgreSQL.cmake cannot find the include files or the library files.
-#
-# ----------------------------------------------------------------------------
-# The following variables are set if PostgreSQL is found:
-#  PostgreSQL_FOUND         - Set to true when PostgreSQL is found.
-#  PostgreSQL_INCLUDE_DIRS  - Include directories for PostgreSQL
-#  PostgreSQL_LIBRARY_DIRS  - Link directories for PostgreSQL libraries
-#  PostgreSQL_LIBRARIES     - The PostgreSQL libraries.
-#
-# ----------------------------------------------------------------------------
-# If you have installed PostgreSQL in a non-standard location.
-# (Please note that in the following comments, it is assumed that <Your Path>
-# points to the root directory of the include directory of PostgreSQL.)
-# Then you have three options.
-# 1) After CMake runs, set PostgreSQL_INCLUDE_DIR to <Your Path>/include and
-#    PostgreSQL_LIBRARY_DIR to wherever the library pq (or libpq in windows) is
-# 2) Use CMAKE_INCLUDE_PATH to set a path to <Your Path>/PostgreSQL<-version>. This will allow find_path()
-#    to locate PostgreSQL_INCLUDE_DIR by utilizing the PATH_SUFFIXES option. e.g. In your CMakeLists.txt file
-#    set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} "<Your Path>/include")
-# 3) Set an environment variable called ${PostgreSQL_ROOT} that points to the root of where you have
-#    installed PostgreSQL, e.g. <Your Path>.
-#
-# ----------------------------------------------------------------------------
 
 set(PostgreSQL_INCLUDE_PATH_DESCRIPTION "top-level directory containing the PostgreSQL include directories. E.g /usr/local/include/PostgreSQL/8.4 or C:/Program Files/PostgreSQL/8.4/include")
 set(PostgreSQL_INCLUDE_DIR_MESSAGE "Set the PostgreSQL_INCLUDE_DIR cmake cache entry to the ${PostgreSQL_INCLUDE_PATH_DESCRIPTION}")
@@ -99,9 +24,6 @@ set( PostgreSQL_ROOT_DIRECTORIES
    ${PostgreSQL_ADDITIONAL_SEARCH_PATHS}
 )
 
-#
-# Look for an installation.
-#
 find_path(PostgreSQL_INCLUDE_DIR
   NAMES libpq-fe.h
   PATHS

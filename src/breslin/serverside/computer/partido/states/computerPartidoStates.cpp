@@ -114,7 +114,7 @@ void SCARED_PARTIDO::enter(ComputerPartido* computer)
 			continue;
 		}
 		
-		computer->mShapePartido->mAvoid->addAvoidShape(computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i));					
+		computer->mShapePartido->mAvoid->mAvoidVector.push_back(computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i));					
 	}
 }
 
@@ -187,7 +187,7 @@ void SNIPER_PARTIDO::enter(ComputerPartido* computer)
                         continue;
                 }
 
-                computer->mShapePartido->mAvoid->addAvoidShape(computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i));
+                computer->mShapePartido->mAvoid->mAvoidVector.push_back(computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i));
         }
 }
 

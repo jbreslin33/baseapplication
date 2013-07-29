@@ -77,11 +77,6 @@ bool Avoid::handleLetter(Letter* letter)
         return mStateMachine->handleLetter(letter);
 }
 
-void Avoid::addAvoidShape(Shape* avoidShape)
-{
-	mAvoidVector.push_back(avoidShape);
-}
-
 bool Avoid::removeAvoidShape(Shape* avoidShape)
 {
 	for (int i = 0; i < mAvoidVector.size(); i++)

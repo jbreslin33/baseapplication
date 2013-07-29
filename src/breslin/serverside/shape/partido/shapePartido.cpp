@@ -80,7 +80,7 @@ void ShapePartido::update()
 
         for (unsigned int i = 0; i < mSteeringAbilityVector.size(); i++)
         {
-                mSteeringAbilityVector.at(i)->update();
+                //mSteeringAbilityVector.at(i)->update();
         }
 	
 	mShapePartidoStateMachine->update();
