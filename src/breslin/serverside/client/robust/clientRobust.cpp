@@ -111,40 +111,31 @@ void ClientRobust::setShape(Shape* shape)
 
 void ClientRobust::login()
 {
-        Message message;
-        message.Init(message.outgoingData, sizeof(message.outgoingData));
-        message.WriteByte(mServer->mMessageLogin); // add type
-
         //set last messageTime
         mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 
         mLoggedIn = true;
 
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServer->mMessageLoggedIn); // add type
+        mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
+        mMessage->WriteByte(mServer->mMessageLoggedIn); // add type
         if (mClientID > 0)
         {
-                mMessage.WriteByte(mClientID); //client id for browsers
+                mMessage->WriteByte(mClientID); //client id for browsers
         }
-        mServer->mNetwork->sendPacketTo(this,&mMessage);
+        mServer->mNetwork->sendPacketTo(this,mMessage);
 }
 
 void ClientRobust::logout()
 {
-        //send letter
-        Message message;
-        message.Init(message.outgoingData, sizeof(message.outgoingData));
-        message.WriteByte(mServer->mMessageLogout); // add type
-
         mLoggedIn = false;
 
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServer->mMessageLoggedOut); // add type
+        mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
+        mMessage->WriteByte(mServer->mMessageLoggedOut); // add type
         if (mClientID > 0)
         {
-                mMessage.WriteByte(mClientID); //client id for browsers
+                mMessage->WriteByte(mClientID); //client id for browsers
         }
-        mServer->mNetwork->sendPacketTo(this,&mMessage);
+        mServer->mNetwork->sendPacketTo(this,mMessage);
 }
 
 bool ClientRobust::checkLogin(Message* mes)

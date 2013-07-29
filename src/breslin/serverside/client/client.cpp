@@ -52,6 +52,9 @@
 
 Client::Client(Server* server, struct sockaddr *address, int clientID, bool permanence) : BaseEntity(BaseEntity::getNextValidID())
 {
+
+	mMessage = new Message();
+
 	mPermanence = permanence;
 	
 	//logged in
@@ -154,13 +157,13 @@ void Client::remove()
 //connected
 void Client::sendConnected()
 {
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServer->mMessageConnected); // add type
+        mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
+        mMessage->WriteByte(mServer->mMessageConnected); // add type
 	if (mClientID > 0)
 	{
-        	mMessage.WriteByte(mClientID); // add mClientID for browsers 
+        	mMessage->WriteByte(mClientID); // add mClientID for browsers 
 	}
-	mServer->mNetwork->sendPacketTo(this,&mMessage);
+	mServer->mNetwork->sendPacketTo(this,mMessage);
 }
 
 void Client::readLoginMessage(Message* mes)

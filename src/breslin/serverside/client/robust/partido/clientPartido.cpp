@@ -141,23 +141,23 @@ void ClientPartido::sendSchools()
         //loop thru each char... 
         for (unsigned int i = 0; i < mServerPartido->mSchoolVector.size(); i++)
         {
-                mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-                mMessage.WriteByte(mServerPartido->mMessageAddSchool); // add type
+                mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
+                mMessage->WriteByte(mServerPartido->mMessageAddSchool); // add type
                 if (mClientID > 0)
                 {
-                        mMessage.WriteByte(mClientID); // add mClientID for browsers 
+                        mMessage->WriteByte(mClientID); // add mClientID for browsers 
                 }
                 int length = mServerPartido->mSchoolVector.at(i).length();  // get length of string containing school 
-                mMessage.WriteByte(length); //send length 
+                mMessage->WriteByte(length); //send length 
 
                 //loop thru length and write it 
                 for (int b=0; b < length; b++)
                 {
-                        mMessage.WriteByte(mServerPartido->mSchoolVector.at(i).at(b));         
+                        mMessage->WriteByte(mServerPartido->mSchoolVector.at(i).at(b));         
                 }
                 
                 //send it
-                mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+                mServerPartido->mNetwork->sendPacketTo(this,mMessage);
         }
 }
 
@@ -165,24 +165,24 @@ void ClientPartido::sendQuestion(int questionID)
 {
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
-        	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        	mMessage.WriteByte(mServerPartido->mMessageAskQuestion); // add type
+        	mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
+        	mMessage->WriteByte(mServerPartido->mMessageAskQuestion); // add type
 
         	if (mClientID > 0)
         	{
-                	mMessage.WriteByte(mClientID); // add mClientID for browsers
+                	mMessage->WriteByte(mClientID); // add mClientID for browsers
         	}
        		int length = mServerPartido->mQuestionVector.at(questionID).length();  
-        	mMessage.WriteByte(length); 
+        	mMessage->WriteByte(length); 
 
         	//loop thru length and write it
         	for (int i=0; i < length; i++)
         	{
-                	mMessage.WriteByte(mServerPartido->mQuestionVector.at(questionID).at(i));
+                	mMessage->WriteByte(mServerPartido->mQuestionVector.at(questionID).at(i));
         	}
 
         	//send it
-        	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+        	mServerPartido->mNetwork->sendPacketTo(this,mMessage);
 	}
 }
 
@@ -270,16 +270,16 @@ void ClientPartido::sendBattleStart()
 {
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
-		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        	mMessage.WriteByte(mServerPartido->mMessageBattleStart); // add type
+		mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
+        	mMessage->WriteByte(mServerPartido->mMessageBattleStart); // add type
 
         	if (mClientID > 0)
         	{
-                	mMessage.WriteByte(mClientID); // add mClientID for browsers
+                	mMessage->WriteByte(mClientID); // add mClientID for browsers
         	}
 
         	//send it
-        	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+        	mServerPartido->mNetwork->sendPacketTo(this,mMessage);
 	}
 }
 
@@ -287,16 +287,16 @@ void ClientPartido::sendBattleEnd()
 {
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
-       		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-       		mMessage.WriteByte(mServerPartido->mMessageBattleEnd); // add type
+       		mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
+       		mMessage->WriteByte(mServerPartido->mMessageBattleEnd); // add type
 
        		if (mClientID > 0)
        		{
-               		mMessage.WriteByte(mClientID); // add mClientID for browsers
+               		mMessage->WriteByte(mClientID); // add mClientID for browsers
        		}
 
        		//send it
-       		mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
+       		mServerPartido->mNetwork->sendPacketTo(this,mMessage);
 	}
 }
 
