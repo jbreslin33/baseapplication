@@ -162,11 +162,11 @@ void Game::sendExitNotification()
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
 
-		mServer->mMessage.Init(mServer->mMessage.outgoingData,
-			sizeof(mServer->mMessage.outgoingData));
+		mServer->mMessage->Init(mServer->mMessage->outgoingData,
+			sizeof(mServer->mMessage->outgoingData));
 
-		mServer->mMessage.WriteByte(mMessageServerExit);	// type
-		mServer->mMessage.WriteShort(mServer->mOutgoingSequence);
+		mServer->mMessage->WriteByte(mMessageServerExit);	// type
+		mServer->mMessage->WriteShort(mServer->mOutgoingSequence);
 	}
 
 	mServer->sendPackets();

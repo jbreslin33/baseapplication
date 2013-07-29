@@ -36,11 +36,9 @@ public:
 	Network* mNetwork;
 
 	//Message
-	Message mMessage;
+	Message* mMessage;
+	Message* mMessageIn;
 
-	//MailMan
-	MailMan* mMailMan;
-	
 	//games
 	std::vector<Game*> mGameVector;
 
@@ -122,7 +120,7 @@ public:
 	virtual void addClient(Client* client, bool permanent);
 
 	//packets
-	int  getPacket  (char *data, struct sockaddr *from);
+	int  getPacket  (Message* message, struct sockaddr *from);
 	void sendPackets();
         void readPackets();
 	virtual void parsePacket(Message *mes, struct sockaddr *address);

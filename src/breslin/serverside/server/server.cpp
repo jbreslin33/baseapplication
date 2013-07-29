@@ -40,8 +40,8 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	//ogre root
 	mRoot = root;
 
-	//MailMan
-	mMailMan = new MailMan(this);
+	mMessage = new Message();
+	mMessageIn = new Message();
 
         //sequence
         mOutgoingSequence = 1;
@@ -219,7 +219,7 @@ void Server::addClient(Client* client, bool permanent)
 /*******************************************************
 		PACKETS
 ********************************************************/
-int Server::getPacket(char *data, struct sockaddr *from)
+int Server::getPacket(Message* message, struct sockaddr *from)
 {
 	// Check if the server is set up
 	if(!mNetwork->mSocket)
@@ -246,20 +246,20 @@ int Server::getPacket(char *data, struct sockaddr *from)
 	// Read data of the socket
 	int ret = 0;
 
-	Message mes;
-	mes.Init(data, sizeof(data));
+//	Message mes;
+//	mes.Init(data, sizeof(data));
 
-	ret = mNetwork->getPacket(mNetwork->mSocket, mes.data, from);
+	ret = mNetwork->getPacket(mNetwork->mSocket, message->data, from);
 
 	if(ret <= 0)
 	{	
 		return 0;
 	}
 
-	mes.SetSize(ret);
+	message->SetSize(ret);
 
 	// Parse system messages
-	parsePacket(&mes, from);
+	parsePacket(message, from);
 
 	return ret;
 }
@@ -436,9 +436,9 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
-        			mMessage.Init(mMessage.outgoingData,sizeof(mMessage.outgoingData));
-        			mMessage.WriteByte(mMessageLeaveGame); 
-	   			mNetwork->sendPacketTo(client,&mMessage);
+        			mMessage->Init(mMessage->outgoingData,sizeof(mMessage->outgoingData));
+        			mMessage->WriteByte(mMessageLeaveGame); 
+	   			mNetwork->sendPacketTo(client,mMessage);
 			}
 		}
 	}
@@ -455,13 +455,13 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
-        			mMessage.Init(mMessage.outgoingData,sizeof(mMessage.outgoingData));
-        			mMessage.WriteByte(mMessageLeaveGame); 
+        			mMessage->Init(mMessage->outgoingData,sizeof(mMessage->outgoingData));
+        			mMessage->WriteByte(mMessageLeaveGame); 
  				if (client->mClientID > 0)
                 		{
-                        		mMessage.WriteByte(client->mClientID); //client id for browsers
+                        		mMessage->WriteByte(client->mClientID); //client id for browsers
                 		}
-	   			mNetwork->sendPacketTo(client,&mMessage);
+	   			mNetwork->sendPacketTo(client,mMessage);
 			}
 		}
 	}
@@ -527,14 +527,14 @@ void Server::sendPackets()
 
 	for (unsigned int i = 0; i < mClientVector.size(); i++)
 	{
-		if(mMessage.GetSize() == 0)
+		if(mMessage->GetSize() == 0)
 			continue;
 
 		//is the a browser client but not THE browser client which is -1 normal c++ clients are 0 if so skip
 		if(mClientVector.at(i)->mClientID > 0)
 			continue; 
 
-		mNetwork->sendPacketTo(mClientVector.at(i),&mMessage);
+		mNetwork->sendPacketTo(mClientVector.at(i),mMessage);
 			
 	}
 }
@@ -548,14 +548,12 @@ void Server::readPackets()
 
 	struct sockaddr address;
 
-	Message mes;
-	mes.Init(data, sizeof(data));
+	mMessageIn->Init(data, sizeof(data));
 
 	// Get the packet from the socket
-	
 	try
 	{
-		while(ret = getPacket(mes.data, &address))
+		while(ret = getPacket(mMessageIn, &address))
 		{
 			//you could do something here, what i have no idea yet..	
 		}
@@ -574,21 +572,20 @@ void Server::sendCommand(Game* game)
 {
         // Fill messages..for all clients
         //standard initialize of mMessage for client in this case
-        mMessage.Init(mMessage.outgoingData,
-                sizeof(mMessage.outgoingData));
+        mMessage->Init(mMessage->outgoingData,sizeof(mMessage->outgoingData));
 
         //start filling said mMessage that belongs to client
-        mMessage.WriteByte(mMessageFrame);                    // type
+        mMessage->WriteByte(mMessageFrame);                    // type
 
-        mMessage.WriteShort(mOutgoingSequence);
+        mMessage->WriteShort(mOutgoingSequence);
 
         //frame time
-        mMessage.WriteByte(mFrameTime);
+        mMessage->WriteByte(mFrameTime);
 
         //this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
         for (unsigned int j = 0; j < game->mShapeVector.size(); j++)
         {                         //the client to send to's message        //the shape command it's about
-                game->mShapeVector.at(j)->addToMoveMessage(&mMessage);
+                game->mShapeVector.at(j)->addToMoveMessage(mMessage);
         }
 
         sendPackets();
