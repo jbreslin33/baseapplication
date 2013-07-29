@@ -111,14 +111,9 @@ void ClientRobust::setShape(Shape* shape)
 
 void ClientRobust::login()
 {
-
-        //send letter
-	LogString("ClientRobust::login");
         Message message;
         message.Init(message.outgoingData, sizeof(message.outgoingData));
         message.WriteByte(mServer->mMessageLogin); // add type
-        Letter* letter = new Letter(this,&message);
-        mServer->mMailMan->deliver(this,letter);
 
         //set last messageTime
         mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
@@ -140,8 +135,6 @@ void ClientRobust::logout()
         Message message;
         message.Init(message.outgoingData, sizeof(message.outgoingData));
         message.WriteByte(mServer->mMessageLogout); // add type
-        Letter* letter = new Letter(this,&message);
-        mServer->mMailMan->deliver(this,letter);
 
         mLoggedIn = false;
 

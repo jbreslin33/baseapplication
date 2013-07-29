@@ -26,31 +26,16 @@ void GLOBAL_CLIENT_ROBUST::enter(ClientRobust* clientRobust)
 }
 void GLOBAL_CLIENT_ROBUST::execute(ClientRobust* clientRobust)
 {
-
+	if (clientRobust->mLoggedIn)
+	{
+		clientRobust->mClientRobustStateMachine->changeState(LOGGED_OUT::Instance());
+	}
 }
 void GLOBAL_CLIENT_ROBUST::exit(ClientRobust* clientRobust)
 {
 }
 bool GLOBAL_CLIENT_ROBUST::onLetter(ClientRobust* clientRobust, Letter* letter)
 {
-	//LogString("GLOBAL_CLIENT_ROBUST::onLetter");
-	Message* message = letter->mMessage;
-	message->BeginReading();	
-	int type = message->ReadByte();
-
-	if (type == clientRobust->mServer->mMessageLogin)
-	{
-		clientRobust->mClientRobustStateMachine->changeState(LOBBY::Instance());
-		return true;
-	}
-	
-	if (type == clientRobust->mServer->mMessageLogout)
-	{
-		clientRobust->mClientRobustStateMachine->changeState(LOGGED_OUT::Instance());
-		return true;
-	}
-
-
         return false;
 }
 
@@ -97,6 +82,10 @@ void LOGGED_OUT::enter(ClientRobust* clientRobust)
 }
 void LOGGED_OUT::execute(ClientRobust* clientRobust)
 {
+	if (clientRobust->mLoggedIn)
+	{
+		clientRobust->mClientRobustStateMachine->changeState(LOBBY::Instance());
+	}
 }
 void LOGGED_OUT::exit(ClientRobust* clientRobust)
 {
