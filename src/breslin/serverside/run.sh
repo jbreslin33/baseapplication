@@ -26,3 +26,8 @@ if test $3 -eq 5
 then
 node ../../udp.js 192.168.1.105 $2 10001 main_71.html 40001 
 fi
+
+if test $3 -eq 7 
+then
+node ../../udp.js 192.168.1.107 $2 10001 main_107.html 40001 
+fi
