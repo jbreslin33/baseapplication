@@ -111,6 +111,7 @@ void NORMAL_AVOID::execute(Avoid* avoid)
                 	vectorToNextAvoidee->subtract(avoid->mClosestAvoidees.at(i)->getPosition(),avoid->mCurrentPosition);
                         if (avoid->mAvoidVelocity->dot(vectorToNextAvoidee) > .50)
                         {
+				LogString("false");	
                                 isOldStillGood = false;
                         }
                         i++;
