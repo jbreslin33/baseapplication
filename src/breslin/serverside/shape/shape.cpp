@@ -101,6 +101,14 @@ Shape::~Shape()
 	delete mSceneNode;
 }
 
+Vector3D* Shape::getPosition()
+{
+	Vector3D* position = new Vector3D();
+	position->convertFromVector3(mSceneNode->getPosition());
+	
+	return position;
+}
+
 void Shape::createShape(Ogre::Root* root, Vector3D* position)
 {
 	//create ogre shape

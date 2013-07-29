@@ -76,6 +76,14 @@ NORMAL_AVOID* NORMAL_AVOID::Instance()
 void NORMAL_AVOID::enter(Avoid* avoid)
 {
 	LogString("NORMAL_AVOID:%d",avoid->mShape->mClient->db_id);
+
+	//first let's take the inverse velocity of the closest avoidee	
+	Vector3D* offsetToAvoidee = new Vector3D();
+	offsetToAvoidee = avoid->mVectorToClosestAvoidee->getVectorOffset(90.0f,true);
+
+	int randomDegree = rand() % 180;
+	avoid->mAvoidVelocity = offsetToAvoidee->getVectorOffset(90.0f + randomDegree,true);
+	avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
 }
 
 void NORMAL_AVOID::execute(Avoid* avoid)
@@ -92,51 +100,45 @@ void NORMAL_AVOID::execute(Avoid* avoid)
                 	avoid->mStateMachine->changeState(SEEK_AVOID::Instance());
 		}
 
-		//first let's take the inverse velocity of the closest avoidee	
-		Vector3D* inverseToAvoidee = new Vector3D();
-		inverseToAvoidee = avoid->mVectorToClosestAvoidee->getVectorOffset(180.0f,true);
+		// from now on I want to take a random opening then stay with that until it is blocked...
 
-		Vector3D* vectorToClosestAvoidee = new Vector3D();
+		bool isOldStillGood = true;
 
-		//get the size to be used later.....	
-		int closestAvoideeSize = avoid->mClosestAvoidees.size();
+                int i = 0;
+                while (i < avoid->mClosestAvoidees.size() && isOldStillGood == true)
+                {
+			Vector3D* vectorToNextAvoidee = new Vector3D();
+                	vectorToNextAvoidee->subtract(avoid->mClosestAvoidees.at(i)->getPosition(),avoid->mCurrentPosition);
+                        if (avoid->mAvoidVelocity->dot(vectorToNextAvoidee) > .50)
+                        {
+                                isOldStillGood = false;
+                        }
+                        i++;
+                }
 
-		//next we will start at 1 degree and then offset from this until we find an open velocity
-		int d = 0;
-		
-		//let's increment by 10 degrees for speed
-		for (d = 1; d < 360; d = d + 10)
+		if (isOldStillGood)
 		{
-			bool inTheWay = false;
-			//proposedVelocity is 1 degree further than the original inverseToAvoidee then we increase by 1 deg
-			Vector3D* proposedVelocity = inverseToAvoidee->getVectorOffset(d,true);
-			
-			int i = 0;
-			while (i < avoid->mClosestAvoidees.size() && inTheWay == false)
-			{
-				vectorToClosestAvoidee->subtract(avoid->mAvoideePosition,avoid->mCurrentPosition);	
-				if (proposedVelocity->dot(vectorToClosestAvoidee) > .50)
-				{
-					inTheWay = true;
-				}
-				i++;
-			}
-			if (inTheWay == false)
-			{
-				avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
-				avoid->mAvoidVelocity->copyValuesFrom(proposedVelocity);
+			//just copy to last
+			avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
+	
+			//and set move velocity
+ 			avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mAvoidVelocity);
+       			avoid->mShape->mMove->mVelocity->normalise();
+		}
+		else //get a new one...
+		{
+			//first let's take the inverse velocity of the closest avoidee
+        		Vector3D* offsetToAvoidee = new Vector3D();
+        		offsetToAvoidee = avoid->mVectorToClosestAvoidee->getVectorOffset(90.0f,true);
 
-       				avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mAvoidVelocity);
-       				avoid->mShape->mMove->mVelocity->normalise();
-			}
-			else //no way out right now atleast avoid the closest
-			{
-				avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
-				avoid->mAvoidVelocity->copyValuesFrom(inverseToAvoidee);
+			//get a random away vector
+        		int randomDegree = rand() % 180;
+        		avoid->mAvoidVelocity = offsetToAvoidee->getVectorOffset(90.0f + randomDegree,true);
+        		avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
 
-       				avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mAvoidVelocity);
-       				avoid->mShape->mMove->mVelocity->normalise();
-			}
+			//set move velocity
+ 			avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mAvoidVelocity);
+       			avoid->mShape->mMove->mVelocity->normalise();
 		}
 	}
 }

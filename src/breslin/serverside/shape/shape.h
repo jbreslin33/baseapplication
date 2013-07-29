@@ -127,6 +127,8 @@ virtual void collision(Shape* shape);
 	//delta move command
 virtual int  setFlag();
 virtual void addToMoveMessage(Message* message);
+
+Vector3D* getPosition();
 };
 
 #endif
