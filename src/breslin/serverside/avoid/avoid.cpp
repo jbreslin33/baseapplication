@@ -35,7 +35,7 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mCurrentPosition = new Vector3D();
 	mAvoideePosition = new Vector3D();
 
-	mPanicDistance = 10.0f;
+	mPanicDistance = 20.0f;
 
 	mRandomAvoidDegrees = 0.0f;
 
@@ -51,8 +51,17 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mStateMachine->setPreviousState     (NORMAL_AVOID::Instance());
 	mStateMachine->setGlobalState       (GLOBAL_AVOID::Instance());
 
+	//get a random old mAvoidVelocity
+	float randomX = rand() % 500; 
+	float randomZ = rand() % 500; 
+	randomX = randomX - 250;
+	randomZ = randomZ - 250;
 
+        Vector3D* randomVector3D = new Vector3D(randomX,0,randomZ);
+        int randomDegree = rand() % 360;
 
+        mAvoidVelocity = randomVector3D->getVectorOffset(randomDegree,true);
+        mAvoidVelocityLast->copyValuesFrom(mAvoidVelocity);
 }
 
 Avoid::~Avoid()
