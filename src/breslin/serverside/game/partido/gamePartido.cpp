@@ -30,12 +30,13 @@ GamePartido::~GamePartido()
 void GamePartido::update()
 {
 	Game::update();
-	
+/*	
 	if (checkForEndOfGame())
 	{
-		LogString("endOFGAME!!!!!!!!!!!!!!!!!!!!!!");
-		reset();		
+		//LogString("endOFGAME!!!!!!!!!!!!!!!!!!!!!!");
+		//reset();		
 	}
+*/
 }
 
 void GamePartido::sendShapes(ClientPartido* clientPartido)
