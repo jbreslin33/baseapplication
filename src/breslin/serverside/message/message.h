@@ -5,6 +5,10 @@ class Client;
 
 class Message
 {
+public:
+Message();
+~Message();
+
 private:
 	bool			overFlow;
 	int				maxSize;

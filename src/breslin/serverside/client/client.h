@@ -64,53 +64,52 @@ StateMachine<Client>* mStateMachine;
 
 bool mPermanence;
 
-	//Message
-        Message mMessage;
+//Message
+Message mMessage;
 
-	//id used just for browser clients for now, if it's 0 then we know it's a c++ java client.
-	int mClientID;
+//id used just for browser clients for now, if it's 0 then we know it's a c++ java client.
+int mClientID;
 
-	int				mConnectionState;		
+int				mConnectionState;		
 
-	signed short	mDroppedPackets;
+signed short	mDroppedPackets;
 
-	struct sockaddr	mSocketAddress;
+struct sockaddr	mSocketAddress;
 
-	int				mLastMessageTime;
+int				mLastMessageTime;
 
-	bool mLoggedIn;
-	std::string mStringUsername;
-	std::string mStringPassword;
+bool mLoggedIn;
+std::string mStringUsername;
+std::string mStringPassword;
 
 public:
 
-	//update
-	virtual void update();
+//update
+virtual void update();
 	
-	//handle letter 
-  	virtual bool  handleLetter(Letter* letter);
+//handle letter 
+virtual bool  handleLetter(Letter* letter);
 
-	//timeout
-	void checkForTimeout();
+//timeout
+void checkForTimeout();
 
-	//client
-	void remove();
+//client
+void remove();
 
-	//connect
-	void sendConnected();
+//connect
+void sendConnected();
 
-	//login
-	virtual bool checkLogin(Message* mes);
-        bool getPasswordMatch(std::string username,std::string password);
-	void readLoginMessage(Message* mes);
+//login
+virtual bool checkLogin(Message* mes);
+bool getPasswordMatch(std::string username,std::string password);
+void readLoginMessage(Message* mes);
 
 
-	//clients address to send back messages to
-	struct sockaddr *GetSocketAddress(void) { return &mSocketAddress; }
-	void setSocketAddress(struct sockaddr *address); 
+//clients address to send back messages to
+struct sockaddr *GetSocketAddress(void) { return &mSocketAddress; }
+void setSocketAddress(struct sockaddr *address); 
 
-	Server* mServer;
-
+Server* mServer;
 
 };
 #endif
