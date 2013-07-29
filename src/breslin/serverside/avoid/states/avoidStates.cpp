@@ -75,7 +75,7 @@ NORMAL_AVOID* NORMAL_AVOID::Instance()
 
 void NORMAL_AVOID::enter(Avoid* avoid)
 {
-	LogString("NORMAL_AVOID:%d",avoid->mShape->mClient->db_id);
+	//LogString("NORMAL_AVOID:%d",avoid->mShape->mClient->db_id);
 
 	//first let's take the inverse velocity of the closest avoidee	
 	Vector3D* offsetToAvoidee = new Vector3D();
@@ -111,7 +111,6 @@ void NORMAL_AVOID::execute(Avoid* avoid)
                 	vectorToNextAvoidee->subtract(avoid->mClosestAvoidees.at(i)->getPosition(),avoid->mCurrentPosition);
                         if (avoid->mAvoidVelocity->dot(vectorToNextAvoidee) > .50)
                         {
-				LogString("false");	
                                 isOldStillGood = false;
                         }
                         i++;
@@ -162,7 +161,7 @@ SEEK_AVOID* SEEK_AVOID::Instance()
 }
 void SEEK_AVOID::enter(Avoid* avoid)
 {
-        LogString("SEEK_AVOID:%d",avoid->mShape->mClient->db_id);
+        //LogString("SEEK_AVOID:%d",avoid->mShape->mClient->db_id);
 }
 void SEEK_AVOID::execute(Avoid* avoid)
 {
@@ -215,7 +214,7 @@ NO_AVOID* NO_AVOID::Instance()
 }
 void NO_AVOID::enter(Avoid* avoid)
 {
-	LogString("NO_AVOID:%d",avoid->mShape->mClient->db_id);
+	//LogString("NO_AVOID:%d",avoid->mShape->mClient->db_id);
 }
 void NO_AVOID::execute(Avoid* avoid)
 {

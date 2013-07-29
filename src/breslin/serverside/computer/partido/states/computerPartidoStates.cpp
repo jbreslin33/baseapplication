@@ -96,7 +96,7 @@ SCARED_PARTIDO* SCARED_PARTIDO::Instance()
 
 void SCARED_PARTIDO::enter(ComputerPartido* computer)
 {
-        LogString("SCARED_PARTIDO_PARTIDO:%d",computer->mShape->mClient->db_id);
+        //LogString("SCARED_PARTIDO_PARTIDO:%d",computer->mShape->mClient->db_id);
 
 	//let's reset all seeks and avoids
 	computer->mShape->mAvoid->mAvoidVector.clear();
@@ -157,7 +157,7 @@ SNIPER_PARTIDO* SNIPER_PARTIDO::Instance()
 
 void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 {
-        LogString("SNIPER_PARTIDO:%d",computer->mShape->mClient->db_id);
+        //LogString("SNIPER_PARTIDO:%d",computer->mShape->mClient->db_id);
 
 	//let's reset all seeks and avoids
 	computer->mShape->mAvoid->mAvoidVector.clear();
@@ -223,7 +223,7 @@ BEZERKER_PARTIDO* BEZERKER_PARTIDO::Instance()
 
 void BEZERKER_PARTIDO::enter(ComputerPartido* computer)
 {
-        LogString("BEZERKER_PARTIDO:%d",computer->mShape->mClient->db_id);
+        //LogString("BEZERKER_PARTIDO:%d",computer->mShape->mClient->db_id);
 
 	//let's reset all seeks and avoids
 	computer->mShape->mAvoid->mAvoidVector.clear();
@@ -273,7 +273,7 @@ SLOPPY_PARTIDO* SLOPPY_PARTIDO::Instance()
 
 void SLOPPY_PARTIDO::enter(ComputerPartido* computer)
 {
-	LogString("SLOPPY_PARTIDO:%d",computer->mShape->mClient->db_id);
+	//LogString("SLOPPY_PARTIDO:%d",computer->mShape->mClient->db_id);
 
         //let's reset all seeks and avoids
         computer->mShape->mAvoid->mAvoidVector.clear();
@@ -330,7 +330,7 @@ HUMAN_CONTROLLED_PARTIDO* HUMAN_CONTROLLED_PARTIDO::Instance()
 
 void HUMAN_CONTROLLED_PARTIDO::enter(ComputerPartido* computer)
 {
-	LogString("HUMAN_CONTROLLED_PARTIDO:%d",computer->mShape->mClient->db_id);
+	//LogString("HUMAN_CONTROLLED_PARTIDO:%d",computer->mShape->mClient->db_id);
 	//let's reset all seeks and avoids
 	computer->mShape->mAvoid->mAvoidVector.clear();
 	computer->mShape->mSeek->setSeekShape(NULL);

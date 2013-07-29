@@ -71,7 +71,7 @@ NORMAL_SEEK* NORMAL_SEEK::Instance()
 }
 void NORMAL_SEEK::enter(Seek* seek)
 {
-	LogString("NORMAL_SEEK:%d",seek->mShape->mClient->db_id);
+	//LogString("NORMAL_SEEK:%d",seek->mShape->mClient->db_id);
 }
 void NORMAL_SEEK::execute(Seek* seek)
 {
@@ -113,7 +113,7 @@ SEEK_DESTINATION* SEEK_DESTINATION::Instance()
 }
 void SEEK_DESTINATION::enter(Seek* seek)
 {
-        LogString("SEEK_DESTINATION:%d",seek->mShape->mClient->db_id);
+        //LogString("SEEK_DESTINATION:%d",seek->mShape->mClient->db_id);
 }
 void SEEK_DESTINATION::execute(Seek* seek)
 {
@@ -163,7 +163,7 @@ REACHED_DESTINATION* REACHED_DESTINATION::Instance()
 }
 void REACHED_DESTINATION::enter(Seek* seek)
 {
-        LogString("REACHED_DESTINATION:%d",seek->mShape->mClient->db_id);
+        //LogString("REACHED_DESTINATION:%d",seek->mShape->mClient->db_id);
         //set to shape velocity to zero as you have reached destination
         seek->mShape->mMove->mVelocity->zero();
 	seek->setDestinationShape(NULL);
@@ -191,7 +191,7 @@ NO_SEEK* NO_SEEK::Instance()
 }
 void NO_SEEK::enter(Seek* seek)
 {
-	LogString("NO_SEEK:%d",seek->mShape->mClient->db_id);
+	//LogString("NO_SEEK:%d",seek->mShape->mClient->db_id);
 }
 void NO_SEEK::execute(Seek* seek)
 {

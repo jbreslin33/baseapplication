@@ -96,7 +96,6 @@ void ShapePartido::update()
         {
                 sendText();
                 mTextLast = mText;
-		LogString("diff");
         }
 	else
 	{
