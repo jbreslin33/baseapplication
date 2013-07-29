@@ -68,24 +68,6 @@ Server::~Server()
 	mNetwork->closeSocket(mNetwork->mSocket);
 }
 
-
-/*******************************************************
-		BASE ENTITYS	
-********************************************************/
-BaseEntity* Server::getBaseEntityFromID(int id)
-{
-        for (unsigned int i = 0; i < mBaseEntityVector.size(); i++)
-        {
-                if (id = mBaseEntityVector.at(i)->mID)
-                {
-                        return mBaseEntityVector.at(i);
-                }
-        }
-
-        return NULL;
-}
-
-
 /*******************************************************
 		GAMES	
 ********************************************************/
@@ -327,16 +309,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				{
 					continue;
 				}
-        			
-				//send letter
-				LogString("message...");
-        			Message message;
-        			message.Init(message.outgoingData, sizeof(message.outgoingData));
-        			message.WriteByte(mMessageJoinGame); 
-        			message.WriteByte(gameID);
-        			Letter* letter = new Letter(client,&message);
-        			mMailMan->deliver(client,letter);
-			
 				client->setGame(gameID);
 			}
 		}
@@ -353,15 +325,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 			{
  				//get client
                                 ClientRobust* client = mClientVector.at(i);
-
-				//send letter
-        			Message message;
-        			message.Init(message.outgoingData, sizeof(message.outgoingData));
-        			message.WriteByte(mMessageJoinGame); 
-        			message.WriteByte(gameID);
-        			Letter* letter = new Letter(client,&message);
-        			mMailMan->deliver(client,letter);
-				
 				client->setGame(gameID);
 			}
                 }

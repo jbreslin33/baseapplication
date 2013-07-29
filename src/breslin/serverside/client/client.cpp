@@ -100,8 +100,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 
         mStateMachine->setPreviousState     (NULL);
         mStateMachine->setGlobalState       (GlobalClient::Instance());
-	
-	mServer->mBaseEntityVector.push_back(this);
 }
 
 Client::~Client()

@@ -11,17 +11,7 @@
 #define DREAMSOCK_CONNECTED				1
 #define DREAMSOCK_DISCONNECTING			2
 #define DREAMSOCK_DISCONNECTED			4
-
-#ifdef WIN32
-	#define DREAMSOCK_INVALID_SOCKET	INVALID_SOCKET
-#else
-	#define DREAMSOCK_INVALID_SOCKET	-1
-#endif
-
-// System messages
-// Note (for all messages - system and user):
-// positive = sequenced message
-// negative = un-sequenced message
+#define DREAMSOCK_INVALID_SOCKET	-1
 
 //Ogre headers
 #include "Ogre.h"
@@ -51,9 +41,6 @@ public:
 	//MailMan
 	MailMan* mMailMan;
 	
-	//games
-	std::vector<BaseEntity*> mBaseEntityVector;
-
 	//games
 	std::vector<Game*> mGameVector;
 
@@ -120,9 +107,6 @@ public:
 public:
 	Server(Ogre::Root* root, const char *localIP, int serverPort);
 	~Server();
-
-	//BaseEntitys
-	BaseEntity* getBaseEntityFromID(int id);
 
 	//update
 	void update(int msec);

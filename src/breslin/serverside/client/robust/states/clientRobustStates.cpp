@@ -124,20 +124,13 @@ void LOBBY::execute(ClientRobust* clientRobust)
 }
 void LOBBY::exit(ClientRobust* clientRobust)
 {
+	if (clientRobust->mGame)
+	{
+		clientRobust->mClientRobustStateMachine->changeState(GAME_MODE::Instance());
+	}		
 }
 bool LOBBY::onLetter(ClientRobust* clientRobust, Letter* letter)
 {
-	Message* message = letter->mMessage;
-	message->BeginReading();	
-	int type = message->ReadByte();
-
-	if (type == clientRobust->mServer->mMessageJoinGame)
-	{
-		int gameID = message->ReadByte();
-		//clientRobust->setGame(gameID);
-		clientRobust->mClientRobustStateMachine->changeState(GAME_MODE::Instance());
-		return true;
-	}
         return false; 
 }
 
