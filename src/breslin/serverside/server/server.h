@@ -7,23 +7,21 @@
 #include <string>
 
 // Connection states
-#define DREAMSOCK_CONNECTING			0
-#define DREAMSOCK_CONNECTED				1
-#define DREAMSOCK_DISCONNECTING			2
-#define DREAMSOCK_DISCONNECTED			4
-#define DREAMSOCK_INVALID_SOCKET	-1
+#define DREAMSOCK_CONNECTING      0
+#define DREAMSOCK_CONNECTED	  1
+#define DREAMSOCK_DISCONNECTING	  2
+#define DREAMSOCK_DISCONNECTED	  4
+#define DREAMSOCK_INVALID_SOCKET -1
 
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
 
 // Introduce classes
-class BaseEntity;
 class Network;
 class ClientRobust;
 class Game;
 class Shape;
-class MailMan;
 
 class Server
 {
