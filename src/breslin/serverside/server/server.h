@@ -63,6 +63,7 @@ public:
 	//frames
 	static const int mMessageFrame 	                = 1;
 	static const int mMessageFrameBrowser     	= 2;
+	static const int mMessageServerExit     	= 3;
 
 	//questions	
 	static const int mMessageQuestion               = -105;

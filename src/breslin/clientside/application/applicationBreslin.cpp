@@ -164,6 +164,12 @@ void ApplicationBreslin::shutdown()
 	mNetwork->reset();
 }
 
+void ApplicationBreslin::sendShutdownServer()
+{
+	ByteBuffer* byteBuffer = new ByteBuffer();
+	byteBuffer->WriteByte(mMessageServerExit);
+	mNetwork->send(byteBuffer);
+}
 
 /*********************************
 		NETWORK
@@ -374,6 +380,11 @@ void ApplicationBreslin::createLoginScreen()
 	{
         	mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 	}
+
+	if (!mButtonShutdownServer)
+	{
+        	mButtonShutdownServer = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonShutdownServer", "Shutdown Server");
+	}
 }
 
 void ApplicationBreslin::showLoginScreen()
@@ -383,12 +394,14 @@ void ApplicationBreslin::showLoginScreen()
         mTrayMgr->moveWidgetToTray(mLabelPassword,OgreBites::TL_CENTER);
         mTrayMgr->moveWidgetToTray(mButtonLogin,OgreBites::TL_CENTER);
         mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
+        mTrayMgr->moveWidgetToTray(mButtonShutdownServer,OgreBites::TL_CENTER);
 
         mSelectMenuSchool->show();
         mLabelUsername->show();
         mLabelPassword->show();
         mButtonLogin->show();
         mButtonExit->show();
+        mButtonShutdownServer->show();
 
         mTrayMgr->showCursor();
 
@@ -403,12 +416,14 @@ void ApplicationBreslin::hideLoginScreen()
         mLabelPassword->hide();
         mButtonLogin->hide();
         mButtonExit->hide();
+        mButtonShutdownServer->hide();
 
         mTrayMgr->removeWidgetFromTray(mSelectMenuSchool);
         mTrayMgr->removeWidgetFromTray(mLabelUsername);
         mTrayMgr->removeWidgetFromTray(mLabelPassword);
         mTrayMgr->removeWidgetFromTray(mButtonLogin);
         mTrayMgr->removeWidgetFromTray(mButtonExit);
+        mTrayMgr->removeWidgetFromTray(mButtonShutdownServer);
 }
 
 
@@ -429,6 +444,11 @@ void ApplicationBreslin::createMainScreen()
 	{
 		mButtonExit     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonExit", "Exit Application");
 	}
+
+	if (!mButtonShutdownServer)
+	{
+		mButtonShutdownServer     = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonShutdownServer", "Shutdown Server");
+	}
 }
 
 void ApplicationBreslin::showMainScreen()
@@ -436,10 +456,12 @@ void ApplicationBreslin::showMainScreen()
 	mTrayMgr->moveWidgetToTray(mButtonJoinGameA,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonLogout,OgreBites::TL_CENTER);
 	mTrayMgr->moveWidgetToTray(mButtonExit,OgreBites::TL_CENTER);
+	mTrayMgr->moveWidgetToTray(mButtonShutdownServer,OgreBites::TL_CENTER);
 	
 	mButtonJoinGameA->show();
 	mButtonLogout->show();
 	mButtonExit->show();
+	mButtonShutdownServer->show();
 	
 	mTrayMgr->showCursor();
 
@@ -453,10 +475,12 @@ void ApplicationBreslin::hideMainScreen()
 	mButtonJoinGameA->hide();
 	mButtonLogout->hide();
 	mButtonExit->hide();
+	mButtonShutdownServer->hide();
 
 	mTrayMgr->removeWidgetFromTray(mButtonJoinGameA);
 	mTrayMgr->removeWidgetFromTray(mButtonLogout);
 	mTrayMgr->removeWidgetFromTray(mButtonExit);
+	mTrayMgr->removeWidgetFromTray(mButtonShutdownServer);
 }
 
 void ApplicationBreslin::buttonHit(OgreBites::Button *button)

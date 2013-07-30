@@ -66,6 +66,12 @@ void ApplicationMain::execute()
 		mApplication->mShutDown = true;
 		delete mApplication;
 	}
+
+	if (mApplication->mButtonHit == mApplication->mButtonShutdownServer)
+	{
+		mApplication->sendShutdownServer();
+		mApplication->mButtonHit = NULL;
+	}
 }
 
 void ApplicationMain::exit()

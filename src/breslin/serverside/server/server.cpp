@@ -276,10 +276,16 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	mes->BeginReading();
 
 	int type = mes->ReadByte();
+
+	/***SHUTDOWN SERVER****/
+	if (type == mMessageServerExit)
+	{
+		LogString("Server EXIT!!!");	
+	}
 	
 	/***CONNECT********/
 	//this should just create a client then client should do what need be done.
-	if (type == mMessageConnect)
+	else if (type == mMessageConnect)
 	{
 		LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		Client* client = new Client(this, address, 0, false);
