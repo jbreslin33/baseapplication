@@ -37,6 +37,9 @@
 
 Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 {
+	//shutdown
+	mShutdown = false;
+
 	//ogre root
 	mRoot = root;
 
@@ -280,6 +283,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/***SHUTDOWN SERVER****/
 	if (type == mMessageServerExit)
 	{
+		mShutdown = true;
 		LogString("Server EXIT!!!");	
 	}
 	

@@ -27,6 +27,9 @@ class Server
 {
 public:
 
+	//shutdown
+	bool mShutdown;
+
 	//Ogre Root
 	Ogre::Root* mRoot;
 

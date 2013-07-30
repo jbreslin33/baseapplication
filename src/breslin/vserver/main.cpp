@@ -109,7 +109,7 @@ int main(int argc, char **argv)
                 //try
                // {       
                         // Keep server alive (wait for keypress to kill it)
-                        while(true)
+                        while(server->mShutdown == false)
                         {
                                 do
                                 {
@@ -137,6 +137,7 @@ int main(int argc, char **argv)
 */
                 LogString("Shutting down everything");
                 server->mNetwork->shutdown();
-                return 0;
+               	delete server; 
+		return 0;
 	}
 }
