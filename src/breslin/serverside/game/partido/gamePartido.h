@@ -24,7 +24,7 @@ public:
 	ServerPartido* mServerPartido;
 
 	//shapes
-        std::vector<ShapePartido*> mShapePartidoVector;       //every tangible item in game world..
+        std::vector<ShapePartido*>* mShapePartidoVector;       //every tangible item in game world..
 	void createShapes();
 	void sendShapes(ClientPartido* clientPartido);
 

@@ -54,9 +54,9 @@ ShapePartido* ComputerPartido::getClosestBattleShape()
         ShapePartido* closestShapeSoFar = NULL;
         float closestDistanceSoFar = 3000.0f;
 
-        for (int i = 0; i < mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
+        for (int i = 0; i < mShapePartido->mGamePartido->mShapePartidoVector->size(); i++)
         {
-                ShapePartido* shape = mShapePartido->mGamePartido->mShapePartidoVector.at(i);
+                ShapePartido* shape = mShapePartido->mGamePartido->mShapePartidoVector->at(i);
 		if (shape == mShapePartido->mOpponentLast || shape == mShapePartido)
 		{
 			continue;

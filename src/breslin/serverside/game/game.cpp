@@ -40,26 +40,22 @@ Game::Game(Server* server, int id)
 	mBounds = new Bounds();
    	mBounds->a = new Vector3D(-250.0f,0.0f,-250.0f);
         mBounds->c = new Vector3D(250.0f,0.0f,250.0f);
-
 }
 
 Game::~Game()
 {
 	LogString("Game::~Game");
 	delete mBounds;
-	
-
-	for (unsigned int i = 0; i < mShapeVector->size(); i++)
+     
+	//delete shapes
+        while (!mShapeVector->empty())
         {
-		LogString("delete in loop shape:%d",i);
-       		delete mShapeVector->at(i); 
-		LogString("delete in loop shape b:%d",i);
-	}
-
-        //clear the vectors....
-        mShapeVector->clear();
-	
-	delete mShapeVector;
+		LogString("delete shape");
+                mShapeVector->front() = NULL;
+                delete mShapeVector->front();
+                mShapeVector->erase(mShapeVector->begin());
+        }
+        delete mShapeVector;
 }
 
 void Game::createShapes()

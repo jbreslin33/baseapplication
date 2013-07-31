@@ -20,10 +20,22 @@
 GamePartido::GamePartido(ServerPartido* serverPartido, int id) : Game(serverPartido,id)
 {
 	mServerPartido = serverPartido;
+
+	mShapePartidoVector = new std::vector<ShapePartido*>();
 }
 
 GamePartido::~GamePartido()
 {
+	LogString("GamePartido::~GamePartido");
+	//delete shapePartidos
+        while (!mShapePartidoVector->empty())
+        {
+		LogString("delete shapePartido in ~GamePartido");
+                mShapePartidoVector->front() = NULL;
+                delete mShapePartidoVector->front();
+                mShapePartidoVector->erase(mShapePartidoVector->begin());
+        }
+        delete mShapePartidoVector;
 }
 
 //you should call this from server update

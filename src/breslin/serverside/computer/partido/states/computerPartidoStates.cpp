@@ -107,14 +107,14 @@ void SCARED_PARTIDO::enter(ComputerPartido* computer)
 	computer->mCounter = 0;
 	computer->mThreshold = 4000;
 
-	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
+	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector->size(); i++)
 	{
-		if (computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShapePartido)
+		if (computer->mShapePartido->mGamePartido->mShapePartidoVector->at(i) == computer->mShapePartido)
 		{
 			continue;
 		}
 		
-		computer->mShapePartido->mAvoid->mAvoidVector.push_back(computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i));					
+		computer->mShapePartido->mAvoid->mAvoidVector.push_back(computer->mShapePartido->mGamePartido->mShapePartidoVector->at(i));					
 	}
 }
 
@@ -165,29 +165,29 @@ void SNIPER_PARTIDO::enter(ComputerPartido* computer)
 	computer->mShape->mSeek->setDestinationShape(NULL);
 
 	//get the shape to snipe
-	int numberOfShapes = computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); 
+	int numberOfShapes = computer->mShapePartido->mGamePartido->mShapePartidoVector->size(); 
 	while (!computer->mShape->mSeek->getSeekShape())
 	{
 		int shapeElementToSnipe  = rand() % numberOfShapes;
-        	if (computer->mShape == computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe))
+        	if (computer->mShape == computer->mShapePartido->mGamePartido->mShapePartidoVector->at(shapeElementToSnipe))
 		{
 			continue;
 		}
 		else
 		{
-			computer->mShape->mSeek->setSeekShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe));
+			computer->mShape->mSeek->setSeekShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector->at(shapeElementToSnipe));
 		}
 	}	
  
 	//avoid all else including self 
-	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector.size(); i++)
+	for (int i = 0; i < computer->mShapePartido->mGamePartido->mShapePartidoVector->size(); i++)
         {
-                if (computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShapePartido || computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i) == computer->mShape->mSeek->getSeekShape())  
+                if (computer->mShapePartido->mGamePartido->mShapePartidoVector->at(i) == computer->mShapePartido || computer->mShapePartido->mGamePartido->mShapePartidoVector->at(i) == computer->mShape->mSeek->getSeekShape())  
                 {
                         continue;
                 }
 
-                computer->mShapePartido->mAvoid->mAvoidVector.push_back(computer->mShapePartido->mGamePartido->mShapePartidoVector.at(i));
+                computer->mShapePartido->mAvoid->mAvoidVector.push_back(computer->mShapePartido->mGamePartido->mShapePartidoVector->at(i));
         }
 }
 
@@ -281,18 +281,18 @@ void SLOPPY_PARTIDO::enter(ComputerPartido* computer)
         computer->mShape->mSeek->setDestinationShape(NULL);
 
         //pick a shape at random to snipe
-        int numberOfShapes = computer->mShapePartido->mGamePartido->mShapePartidoVector.size();
+        int numberOfShapes = computer->mShapePartido->mGamePartido->mShapePartidoVector->size();
 
         while (!computer->mShape->mSeek->getSeekShape())
         {
                 int shapeElementToSnipe  = rand() % numberOfShapes;
-                if (computer->mShape == computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe))
+                if (computer->mShape == computer->mShapePartido->mGamePartido->mShapePartidoVector->at(shapeElementToSnipe))
                 {
                         continue;
                 }
                 else
                 {
-                        computer->mShape->mSeek->setSeekShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector.at(shapeElementToSnipe));
+                        computer->mShape->mSeek->setSeekShape((Shape*)computer->mShapePartido->mGamePartido->mShapePartidoVector->at(shapeElementToSnipe));
                 }
         }
 

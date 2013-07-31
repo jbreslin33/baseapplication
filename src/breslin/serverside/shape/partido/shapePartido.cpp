@@ -43,7 +43,7 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
 	mOpponentLast = NULL;
 
         //register with shapePartido vector
-        mGamePartido->mShapePartidoVector.push_back(this);
+        mGamePartido->mShapePartidoVector->push_back(this);
 
 	//setText
 	mClientPartido->setBattleRecordText();	
