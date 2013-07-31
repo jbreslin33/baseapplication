@@ -103,14 +103,16 @@ Server::~Server()
 /*
         while (!mGameVector->empty())
         {
-		LogString("delete game 1");
-                delete mGameVector->front();
-		LogString("delete game 2");
-        /       mGameVector->erase(mGameVector->begin());
+		if (mGameVector->front())
+		{
+			LogString("delete game 1");
+                	delete mGameVector->front();
+			LogString("delete game 2");
+		}
+        	mGameVector->erase(mGameVector->begin());
         }
+        delete mGameVector;
 */
-        //delete mGameVector;
-
 	//delete ogre root
 	delete mRoot;
 	LogString("delete ROOT!!!");
