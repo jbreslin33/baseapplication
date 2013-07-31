@@ -39,7 +39,7 @@ static const char mMessageServerExit = 3;
         Message mMessage;
 
 	//shapes
-	std::vector<Shape*> mShapeVector;	//every tangible item in game world..
+	std::vector<Shape*>* mShapeVector;	//every tangible item in game world..
 
 	//db
      	PGconn* mDBConnection;

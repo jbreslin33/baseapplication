@@ -28,6 +28,8 @@
 
 Game::Game(Server* server, int id)
 {
+	mShapeVector = new std::vector<Shape*>();
+
 	//id
 	mID = id; 
 
@@ -46,19 +48,18 @@ Game::~Game()
 	LogString("Game::~Game");
 	delete mBounds;
 	
-/*
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
         {
-                //normal shape
-                SceneNode* parent = mShapeVector.at(i)->mEntity->getParentSceneNode();
-                parent->detachObject(mShapeVector.at(i).mEntity);
-                mApplication->getSceneManager()->destroyEntity(mShapeVector.at(i)->mEntity->getName());
-        }
-*/
+		LogString("delete in loop shape:%d",i);
+       		delete mShapeVector->at(i); 
+		LogString("delete in loop shape b:%d",i);
+	}
+
         //clear the vectors....
-        //mShapeVector->clear();
+        mShapeVector->clear();
 	
-//	delete mShapeVector;
+	delete mShapeVector;
 }
 
 void Game::createShapes()
@@ -71,11 +72,11 @@ void Game::createShapes()
 
 Shape* Game::getShapeFromID(int id)
 {
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
-		if (id = mShapeVector.at(i)->mIndex)
+		if (id = mShapeVector->at(i)->mIndex)
 		{
-			return mShapeVector.at(i);
+			return mShapeVector->at(i);
 		}	
 	}
 	
@@ -86,10 +87,10 @@ Shape* Game::getShapeFromID(int id)
 void Game::update()
 {
 	//this is where they want to move
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
-		mShapeVector.at(i)->update();
-		checkBounds(mShapeVector.at(i));
+		mShapeVector->at(i)->update();
+		checkBounds(mShapeVector->at(i));
 	}
 	
 	//this is where they can move..	
@@ -98,27 +99,27 @@ void Game::update()
 
 void Game::checkCollisions()
 {
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
 	{
-		if (mShapeVector.at(i)->mCollidable == true)
+		if (mShapeVector->at(i)->mCollidable == true)
 		{
-			for (unsigned int j = i+1; j < mShapeVector.size(); j++) 
+			for (unsigned int j = i+1; j < mShapeVector->size(); j++) 
 			{
-				if (mShapeVector.at(j)->mCollidable == true)
+				if (mShapeVector->at(j)->mCollidable == true)
 				{
-					float x1 = mShapeVector.at(i)->mSceneNode->getPosition().x;
-					float z1 = mShapeVector.at(i)->mSceneNode->getPosition().z;
-					float x2 = mShapeVector.at(j)->mSceneNode->getPosition().x;
-					float z2 = mShapeVector.at(j)->mSceneNode->getPosition().z;
+					float x1 = mShapeVector->at(i)->mSceneNode->getPosition().x;
+					float z1 = mShapeVector->at(i)->mSceneNode->getPosition().z;
+					float x2 = mShapeVector->at(j)->mSceneNode->getPosition().x;
+					float z2 = mShapeVector->at(j)->mSceneNode->getPosition().z;
 
 					float distSq = pow((x1-x2),2) + pow((z1-z2),2);
 					
 					//i am simply adding the 2 collisionradius's of the 2 objects in question then comparing
 					//to distSQ between them. IS this right or is it working by chance?
-					if(distSq < mShapeVector.at(i)->mCollisionRadius + mShapeVector.at(j)->mCollisionRadius)
+					if(distSq < mShapeVector->at(i)->mCollisionRadius + mShapeVector->at(j)->mCollisionRadius)
 					{
-						mShapeVector.at(i)->collision(mShapeVector.at(j));
-						mShapeVector.at(j)->collision(mShapeVector.at(i));
+						mShapeVector->at(i)->collision(mShapeVector->at(j));
+						mShapeVector->at(j)->collision(mShapeVector->at(i));
 					}
 				}
 			}
@@ -198,9 +199,9 @@ unsigned int Game::getOpenIndex()
 	for (unsigned int proposedIndex = 1; !proposedIndexOpen; proposedIndex++) //keep going till you get an index
 	{
 		bool someoneHasThisIndex = false;
-		for (unsigned int i = 0; i < mShapeVector.size(); i++)
+		for (unsigned int i = 0; i < mShapeVector->size(); i++)
 		{
-			if (mShapeVector.at(i)->mIndex == proposedIndex)
+			if (mShapeVector->at(i)->mIndex == proposedIndex)
 			{
 				someoneHasThisIndex = true;
 			}
@@ -225,23 +226,23 @@ Vector3D* Game::getOpenPoint()
 			vector3D->y = 0;
 			vector3D->z = z;
 
-                	if (mShapeVector.size() < 1)
+                	if (mShapeVector->size() < 1)
 			{
 				return vector3D;
 			}
 
-                	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+                	for (unsigned int i = 0; i < mShapeVector->size(); i++)
                 	{
-                		if (mShapeVector.at(i)->mCollidable == true)
+                		if (mShapeVector->at(i)->mCollidable == true)
                         	{
                         		float x1 = vector3D->x;
                                 	float z1 = vector3D->z;
-                                	float x2 = mShapeVector.at(i)->mSceneNode->getPosition().x;
-                                	float z2 = mShapeVector.at(i)->mSceneNode->getPosition().z;
+                                	float x2 = mShapeVector->at(i)->mSceneNode->getPosition().x;
+                                	float z2 = mShapeVector->at(i)->mSceneNode->getPosition().z;
 
                                 	float distSq = pow((x1-x2),2) + pow((z1-z2),2);
 
-                                	if(distSq < mShapeVector.at(i)->mCollisionRadiusSpawn * 30)
+                                	if(distSq < mShapeVector->at(i)->mCollisionRadiusSpawn * 30)
                                 	{
 						occupied = true; 
                                 	}
@@ -258,7 +259,7 @@ Vector3D* Game::getOpenPoint()
 
 void Game::sendShapes(Client* client)
 {
- 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+ 	for (unsigned int i = 0; i < mShapeVector->size(); i++)
         {
   		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
 
@@ -269,7 +270,7 @@ void Game::sendShapes(Client* client)
                 	mMessage.WriteByte(client->mClientID); //client id for browsers
         	}
                 
-        	if (client == mShapeVector.at(i)->mClient)
+        	if (client == mShapeVector->at(i)->mClient)
         	{       
                 	mMessage.WriteByte(1);
         	}               
@@ -277,29 +278,29 @@ void Game::sendShapes(Client* client)
         	{       
                 	mMessage.WriteByte(0);
         	}
-        	mMessage.WriteByte(mShapeVector.at(i)->mIndex);
+        	mMessage.WriteByte(mShapeVector->at(i)->mIndex);
 
-        	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().x);
-        	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().y);
-        	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().z);
+        	mMessage.WriteFloat(mShapeVector->at(i)->mSceneNode->getPosition().x);
+        	mMessage.WriteFloat(mShapeVector->at(i)->mSceneNode->getPosition().y);
+        	mMessage.WriteFloat(mShapeVector->at(i)->mSceneNode->getPosition().z);
 
-        	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->mRotation->x);
-        	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->mRotation->z);
+        	mMessage.WriteFloat(mShapeVector->at(i)->mRotation->mRotation->x);
+        	mMessage.WriteFloat(mShapeVector->at(i)->mRotation->mRotation->z);
 
         	//mesh
-        	mMessage.WriteByte(mShapeVector.at(i)->mMeshCode);
+        	mMessage.WriteByte(mShapeVector->at(i)->mMeshCode);
 
         	//animation
-        	mMessage.WriteByte(mShapeVector.at(i)->mAnimated);
+        	mMessage.WriteByte(mShapeVector->at(i)->mAnimated);
 
         	//essentially should be setText...previously username...
-        	int length = mShapeVector.at(i)->mText.length(); 
+        	int length = mShapeVector->at(i)->mText.length(); 
         	mMessage.WriteByte(length); //send length
 		
         	//loop thru length and write it
         	for (int b=0; b < length; b++)
         	{
-                	mMessage.WriteByte(mShapeVector.at(i)->mText.at(b));
+                	mMessage.WriteByte(mShapeVector->at(i)->mText.at(b));
         	}
 
                 //send it

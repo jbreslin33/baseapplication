@@ -93,12 +93,26 @@ Shape::Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* pos
 	addAbility(mMove);	
 
 	//register with shape vector
-	mGame->mShapeVector.push_back(this);
+	mGame->mShapeVector->push_back(this);
 }
 
 Shape::~Shape()
 {
+	LogString("Shape::~Shape1");
+	delete mComputer;
+	LogString("Shape::~Shape2");
+	delete mSteering;
+	LogString("Shape::~Shape3");
+	delete mSeek;
+	LogString("Shape::~Shape4");
+	delete mAvoid;
+	LogString("Shape::~Shape5");
+	delete mRotation;
+	LogString("Shape::~Shape6");
+	delete mMove;
+	LogString("Shape::~Shape7");
 	delete mSceneNode;
+	LogString("Shape::~Shape8");
 }
 
 Vector3D* Shape::getPosition()
