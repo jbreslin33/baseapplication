@@ -36,8 +36,8 @@ ServerPartido::~ServerPartido()
   	//delete clients
         while (!mClientPartidoVector->empty())
         {
-                delete mClientPartidoVector->front();
                 mClientPartidoVector->front() = NULL;
+                delete mClientPartidoVector->front();
 		mClientPartidoVector->erase(mClientPartidoVector->begin());
         }
 	delete mClientPartidoVector;

@@ -10,7 +10,7 @@ class ServerPartido : public Server
 {
 public:
 	ServerPartido(Ogre::Root* root, const char *localIP, int serverPort);	
-	~ServerPartido();
+	virtual ~ServerPartido();
 
 	//games
 	void addGame(GamePartido* gamePartido);

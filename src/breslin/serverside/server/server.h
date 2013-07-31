@@ -106,7 +106,7 @@ public:
 
 public:
 	Server(Ogre::Root* root, const char *localIP, int serverPort);
-	~Server();
+	virtual ~Server();
 
 	//update
 	void update(int msec);

@@ -46,7 +46,7 @@ static const char mMessageServerExit = 3;
 
 public:
 	Game(Server* server, int id);
-	~Game();
+	virtual ~Game();
 
 	//index
 	unsigned int getOpenIndex ();

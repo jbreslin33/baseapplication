@@ -15,7 +15,7 @@ class GamePartido : public Game
 public:
 
 	GamePartido(ServerPartido* serverPartido, int id);
-	~GamePartido();
+	virtual ~GamePartido();
 
 	//updates
 	void update();
