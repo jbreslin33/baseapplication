@@ -47,7 +47,6 @@ Game* mGame;
 Game* getGame();
 virtual void setGame(int gameID);
 
-
 //update
 virtual void update();
 	

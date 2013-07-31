@@ -9,7 +9,6 @@
 #include <postgresql/libpq-fe.h>
 
 class ServerPartido;
-class GamePartido;
 class ShapePartido;
 class Utility;
 
@@ -31,17 +30,8 @@ static const int LOSS = -1;
 void sendSchools();
 void parseAnswer();
 
-ServerPartido* mServerPartido;	
-
 //utility
 Utility* utility;
-
-//game
-void addGame(GamePartido* gamePartido);
-std::vector<GamePartido*> mGamePartidoVector;
-GamePartido* mGamePartido;
-GamePartido* getGame();
-virtual void setGame(int gameID);
 
 //battle
 int mQuestionID;
@@ -62,17 +52,12 @@ int getLowestUnpassedLevel(int maxLevel);
 int getMaxLevelAskedID();
 bool checkLevel(int level);
 
-
 //answer
 virtual void parseAnswer(Message* message);
 virtual void readAnswer(int answerTime, std::string answer);
 std::string mStringAnswer;
 int mAnswerTime;
 void insertAnswerAttempt();
-
-//shape
-ShapePartido* mShapePartido;
-void setShape(ShapePartido* shapePartido);
 
 //update
 virtual void update();

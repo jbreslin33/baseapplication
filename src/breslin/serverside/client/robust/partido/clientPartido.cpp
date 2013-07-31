@@ -15,12 +15,6 @@
 
 ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence) : ClientRobust(serverPartido, address, clientID, permanence) 
 {
-	//server
-	mServerPartido = serverPartido;
-
-	//game
-	mGamePartido = NULL;
-
         if (mClientID >= 0)
         {
                 ////sendSchools();
@@ -74,30 +68,6 @@ ClientPartido::~ClientPartido()
 	LogString("ClientPartido::~ClientPartido");
 }
 
-//game
-void ClientPartido::addGame(GamePartido* gamePartido)
-{
-	ClientRobust::addGame(gamePartido);
-        mGamePartidoVector.push_back(gamePartido);
-}
-
-GamePartido* ClientPartido::getGame()
-{
-	return mGamePartido;
-}
-
-void ClientPartido::setGame(int gameID)
-{
-        for (int i = 0; i < mGamePartidoVector.size(); i++)
-        {
-                if (mGamePartidoVector.at(i)->mID == gameID)
-                {
-                        mGamePartido = mGamePartidoVector.at(i);
-                        mGamePartido->sendShapes(this);
-                }
-        }
-}
-
 bool ClientPartido::handleLetter(Letter* letter)
 {
 	return ClientRobust::handleLetter(letter);
@@ -125,20 +95,10 @@ void ClientPartido::update()
 */
 }
 
-
-void ClientPartido::setShape(ShapePartido* shapePartido)
-{
-	ClientRobust::setShape(shapePartido);
-	mShapePartido = shapePartido;
-}
-
-//this gets you question_attempts from a particular questions and particular user_id
-//select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=1 and questions_attempts.user_id = 2 order by questions_attempts.question_attempt_time_start;
-
-
 //you need to send all schools at once and all questions..
 void ClientPartido::sendSchools()
 {
+/*
         //loop thru each char... 
         for (unsigned int i = 0; i < mServerPartido->mSchoolVector.size(); i++)
         {
@@ -160,6 +120,7 @@ void ClientPartido::sendSchools()
                 //send it
                 mServerPartido->mNetwork->sendPacketTo(this,mMessage);
         }
+*/
 }
 
 void ClientPartido::sendQuestion(int questionID)
@@ -167,23 +128,24 @@ void ClientPartido::sendQuestion(int questionID)
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
         	mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
-        	mMessage->WriteByte(mServerPartido->mMessageAskQuestion); // add type
+		ServerPartido* server = (ServerPartido*)mServer;
+        	mMessage->WriteByte(server->mMessageAskQuestion); // add type
 
         	if (mClientID > 0)
         	{
                 	mMessage->WriteByte(mClientID); // add mClientID for browsers
         	}
-       		int length = mServerPartido->mQuestionVector.at(questionID).length();  
+       		int length = server->mQuestionVector.at(questionID).length();  
         	mMessage->WriteByte(length); 
 
         	//loop thru length and write it
         	for (int i=0; i < length; i++)
         	{
-                	mMessage->WriteByte(mServerPartido->mQuestionVector.at(questionID).at(i));
+                	mMessage->WriteByte(server->mQuestionVector.at(questionID).at(i));
         	}
 
         	//send it
-        	mServerPartido->mNetwork->sendPacketTo(this,mMessage);
+        	server->mNetwork->sendPacketTo(this,mMessage);
 	}
 }
 
