@@ -59,9 +59,9 @@ int main(int argc, char **argv)
 		server->addGame(new Game(server,1));
 		server->createClients();
 
-  		for (unsigned int i = 0; i < server->mGameVector.size(); i++)
+  		for (unsigned int i = 0; i < server->mGameVector->size(); i++)
 		{
-			server->mGameVector.at(i)->createShapes();
+			server->mGameVector->at(i)->createShapes();
 		}
 
 		oldTime = server->mNetwork->getCurrentSystemTime();
@@ -96,9 +96,9 @@ int main(int argc, char **argv)
 		server->addGame(new GamePartido(server,2));
 		server->createClients();
 
-                for (unsigned int i = 0; i < server->mGameVector.size(); i++)
+                for (unsigned int i = 0; i < server->mGameVector->size(); i++)
                 {
-                        server->mGameVector.at(i)->createShapes();
+                        server->mGameVector->at(i)->createShapes();
                 }
 
                 oldTime = server->mNetwork->getCurrentSystemTime();

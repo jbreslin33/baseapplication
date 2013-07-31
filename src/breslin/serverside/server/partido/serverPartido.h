@@ -14,7 +14,7 @@ public:
 
 	//games
 	void addGame(GamePartido* gamePartido);
-   	std::vector<GamePartido*> mGamePartidoVector;
+   	std::vector<GamePartido*>* mGamePartidoVector;
 
    	//clients
 	void createClients();

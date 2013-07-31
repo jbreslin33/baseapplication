@@ -41,7 +41,7 @@ public:
 	Message* mMessageIn;
 
 	//games
-	std::vector<Game*> mGameVector;
+	std::vector<Game*>* mGameVector;
 
 	//clients
 	std::vector<ClientRobust*> mClientVector;

@@ -43,6 +43,9 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	//ogre root
 	mRoot = root;
 
+	//game Vector
+	mGameVector = new std::vector<Game*>();
+
 	mMessage = new Message();
 	mMessageIn = new Message();
 
@@ -75,10 +78,11 @@ Server::~Server()
 
 	delete mNetwork;	
 
-	for (int i = 0; i < mGameVector.size(); i++)
+	for (int i = 0; i < mGameVector->size(); i++)
 	{ 
-		delete mGameVector.at(i);
+		delete mGameVector->at(i);
 	}
+	delete mGameVector;
 
 	delete mRoot;
 }
@@ -89,7 +93,7 @@ Server::~Server()
 
 void Server::addGame(Game* game)
 {
-	mGameVector.push_back(game);
+	mGameVector->push_back(game);
 }
 
 /*******************************************************
@@ -135,18 +139,18 @@ void Server::processClients()
 void Server::processGames()
 {
 	//update games
-  	for (unsigned int i = 0; i < mGameVector.size(); i++)
+  	for (unsigned int i = 0; i < mGameVector->size(); i++)
 	{
-		mGameVector.at(i)->update();
+		mGameVector->at(i)->update();
 	}
 }
 
 void Server::sendCommands()
 {
         //send positions and exact frame time the calcs where done on which is mFrameTime
- 	for (unsigned int i = 0; i < mGameVector.size(); i++)
+ 	for (unsigned int i = 0; i < mGameVector->size(); i++)
         {
-		sendCommand(mGameVector.at(i));
+		sendCommand(mGameVector->at(i));
 	}
 }
 
@@ -174,9 +178,9 @@ void Server::createClients()
                 ClientRobust* client = new ClientRobust(this, NULL, -2, true);
 	
 		//add Games
-	 	for (unsigned int i = 0; i < mGameVector.size(); i++)
+	 	for (unsigned int i = 0; i < mGameVector->size(); i++)
 		{
-			client->addGame(mGameVector.at(i));
+			client->addGame(mGameVector->at(i));
 		}
 
                 //id

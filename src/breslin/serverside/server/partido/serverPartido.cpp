@@ -12,6 +12,9 @@ ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPo
 :
  Server(root, localIP, serverPort)
 {
+
+	mGamePartidoVector = new std::vector<GamePartido*>();
+
 	//questionCount
 	mQuestionCount = 0;
 
@@ -24,6 +27,11 @@ ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPo
 
 ServerPartido::~ServerPartido()
 {
+	for (int i = 0; i < mGamePartidoVector->size(); i++)
+        {
+                delete mGamePartidoVector->at(i);
+        }
+        delete mGamePartidoVector;
 }
 
 void ServerPartido::processClients()
@@ -42,25 +50,25 @@ void ServerPartido::processClients()
 void ServerPartido::processGames()
 {
         //update games
-        for (unsigned int i = 0; i < mGamePartidoVector.size(); i++)
+        for (unsigned int i = 0; i < mGamePartidoVector->size(); i++)
         {
-                mGamePartidoVector.at(i)->update();
+                mGamePartidoVector->at(i)->update();
         }
 }
 
 void ServerPartido::sendCommands()
 {
         //send positions and exact frame time the calcs where done on which is mFrameTime
-        for (unsigned int i = 0; i < mGamePartidoVector.size(); i++)
+        for (unsigned int i = 0; i < mGamePartidoVector->size(); i++)
         {
-                sendCommand(mGamePartidoVector.at(i));
+                sendCommand(mGamePartidoVector->at(i));
         }
 }
 
 void ServerPartido::addGame(GamePartido* gamePartido)
 {
 	Server::addGame(gamePartido);
-        mGamePartidoVector.push_back(gamePartido);
+        mGamePartidoVector->push_back(gamePartido);
 }
 void ServerPartido::createClients()
 {
@@ -83,9 +91,9 @@ void ServerPartido::createClients()
                 ClientPartido* clientPartido = new ClientPartido(this, NULL, -2, true);
 
                 //add Games
-                for (unsigned int i = 0; i < mGameVector.size(); i++)
+                for (unsigned int i = 0; i < mGameVector->size(); i++)
                 {
-                        clientPartido->addGame(mGamePartidoVector.at(i));
+                        clientPartido->addGame(mGamePartidoVector->at(i));
                 }
 
                 //id
