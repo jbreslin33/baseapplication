@@ -74,20 +74,39 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 Server::~Server()
 {
 	LogString("Server::~Server");
-	//mClientVector->empty();
-	//mClientVectorTemp->empty();
 
+	//delete messages 
 	delete mMessage;
 	delete mMessageIn;
 
+	//delete network
 	delete mNetwork;	
 
+	//delete clients
+	for (int i = 0; i < mClientVector->size(); i++)
+	{ 
+		delete mClientVector->at(i);
+	}
+	mClientVector->empty();
+	delete mClientVector;
+
+	//delete temp clients
+	for (int i = 0; i < mClientVectorTemp->size(); i++)
+	{ 
+		delete mClientVectorTemp->at(i);
+	}
+	mClientVectorTemp->empty();
+	delete mClientVectorTemp;
+
+	//delete games 
 	for (int i = 0; i < mGameVector->size(); i++)
 	{ 
 		delete mGameVector->at(i);
 	}
+	mGameVector->empty();
 	delete mGameVector;
 
+	//delete ogre root
 	delete mRoot;
 }
 
