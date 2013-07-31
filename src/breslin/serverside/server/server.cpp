@@ -46,6 +46,10 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	//game Vector
 	mGameVector = new std::vector<Game*>();
 
+	//client vectors
+	mClientVector = new std::vector<ClientRobust*>();
+	mClientVectorTemp = new std::vector<Client*>();
+
 	mMessage = new Message();
 	mMessageIn = new Message();
 
@@ -70,8 +74,8 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 Server::~Server()
 {
 	LogString("Server::~Server");
-	mClientVector.empty();
-	mClientVectorTemp.empty();
+	//mClientVector->empty();
+	//mClientVectorTemp->empty();
 
 	delete mMessage;
 	delete mMessageIn;
@@ -125,15 +129,15 @@ void Server::update(int msec)
 void Server::processClients()
 {
 	//update clients
-  	for (unsigned int i = 0; i < mClientVector.size(); i++)
+  	for (unsigned int i = 0; i < mClientVector->size(); i++)
 	{
-		mClientVector.at(i)->update();
-	}
-  	for (unsigned int i = 0; i < mClientVectorTemp.size(); i++)
-	{
-		mClientVectorTemp.at(i)->update();
+		mClientVector->at(i)->update();
 	}
 
+  	for (unsigned int i = 0; i < mClientVectorTemp->size(); i++)
+	{
+		mClientVectorTemp->at(i)->update();
+	}
 }
 
 void Server::processGames()
@@ -223,11 +227,11 @@ void Server::addClient(Client* client, bool permanent)
 {
 	if (permanent)
 	{
-		mClientVector.push_back((ClientRobust*)client);
+		mClientVector->push_back((ClientRobust*)client);
 	}
 	else
 	{
-		mClientVectorTemp.push_back(client);
+		mClientVectorTemp->push_back(client);
 	}
 }
 
@@ -322,12 +326,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		//client is joining game as "original" client! according to memory and then as far as php it is joining as the client id! i think!
 		int gameID = mes->ReadByte();
 
-		for (unsigned int i = 0; i < mClientVector.size(); i++)
+		for (unsigned int i = 0; i < mClientVector->size(); i++)
 		{
-			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+			if( memcmp(mClientVector->at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
 				//get client
-				ClientRobust* client = mClientVector.at(i);
+				ClientRobust* client = mClientVector->at(i);
 				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
 				{
 					continue;
@@ -342,12 +346,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 int clientID = mes->ReadByte();
 		int gameID   = mes->ReadByte();
 
-		for (int i = 0; i < mClientVector.size(); i++)
+		for (int i = 0; i < mClientVector->size(); i++)
 		{
-			if (mClientVector.at(i)->mClientID == clientID)
+			if (mClientVector->at(i)->mClientID == clientID)
 			{
  				//get client
-                                ClientRobust* client = mClientVector.at(i);
+                                ClientRobust* client = mClientVector->at(i);
 				client->setGame(gameID);
 			}
                 }
@@ -357,22 +361,22 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageLogin)
 	{
  		//get client is it a (ClientRobust) one???	
-		for (unsigned int i = 0; i < mClientVector.size(); i++)
+		for (unsigned int i = 0; i < mClientVector->size(); i++)
                 {
-                        if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+                        if( memcmp(mClientVector->at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
-                                client = mClientVector.at(i);
+                                client = mClientVector->at(i);
 				client->checkLogin(mes);
 				return;
 			}
                 }
 
  		//get client is it a temp(Client) one???	
-		for (unsigned int i = 0; i < mClientVectorTemp.size(); i++)
+		for (unsigned int i = 0; i < mClientVectorTemp->size(); i++)
                 {
-                        if( memcmp(mClientVectorTemp.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+                        if( memcmp(mClientVectorTemp->at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
-                                client = mClientVectorTemp.at(i);
+                                client = mClientVectorTemp->at(i);
 				client->checkLogin(mes);
 				return;
 			}
@@ -383,24 +387,24 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
                 int clientID = mes->ReadByte();
  		//get client is it a (ClientRobust) one???	
-		for (int i = 0; i < mClientVector.size(); i++)
+		for (int i = 0; i < mClientVector->size(); i++)
 		{
-			if (mClientVector.at(i)->mClientID == clientID)
+			if (mClientVector->at(i)->mClientID == clientID)
 			{
                                 //set client to pointer
-                                client = mClientVector.at(i);
+                                client = mClientVector->at(i);
 				client->checkLogin(mes);
 				return;
 			}
 		}	
 
  		//get client is it a (Client) one???	
-		for (int i = 0; i < mClientVectorTemp.size(); i++)
+		for (int i = 0; i < mClientVectorTemp->size(); i++)
 		{
-			if (mClientVectorTemp.at(i)->mClientID == clientID)
+			if (mClientVectorTemp->at(i)->mClientID == clientID)
 			{
                                 //set client to pointer
-                                client = mClientVectorTemp.at(i);
+                                client = mClientVectorTemp->at(i);
 				client->checkLogin(mes);
 				return;
 			}
@@ -411,12 +415,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageLogout)
 	{
  		//get client 
-                for (unsigned int i = 0; i < mClientVector.size(); i++)
+                for (unsigned int i = 0; i < mClientVector->size(); i++)
                 {
-                        if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+                        if( memcmp(mClientVector->at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
                                 //set client to pointer
-                                ClientRobust* client = mClientVector.at(i);
+                                ClientRobust* client = mClientVector->at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -430,12 +434,12 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         else if (type == mMessageLogoutBrowser)
         {
                 int clientID = mes->ReadByte();
-                for (int i = 0; i < mClientVector.size(); i++)
+                for (int i = 0; i < mClientVector->size(); i++)
                 {
-                        if (mClientVector.at(i)->mClientID == clientID)
+                        if (mClientVector->at(i)->mClientID == clientID)
                         {
                                 //set client to pointer
-                                ClientRobust* client = mClientVector.at(i);
+                                ClientRobust* client = mClientVector->at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -450,11 +454,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageLeaveGame)
 	{
 		// Find the correct client by comparing addresses
-		for (unsigned int i = 0; i < mClientVector.size(); i++)
+		for (unsigned int i = 0; i < mClientVector->size(); i++)
 		{
-			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+			if( memcmp(mClientVector->at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
-				client = mClientVector.at(i);
+				client = mClientVector->at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -469,11 +473,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageLeaveGameBrowser)
 	{
                 int clientID = mes->ReadByte();
-		for (int i = 0; i < mClientVector.size(); i++)
+		for (int i = 0; i < mClientVector->size(); i++)
 		{
-			if (mClientVector.at(i)->mClientID == clientID)
+			if (mClientVector->at(i)->mClientID == clientID)
 			{
-				client = mClientVector.at(i);
+				client = mClientVector->at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -493,11 +497,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		
 		// Find the correct client by comparing addresses
-		for (unsigned int i = 0; i < mClientVector.size(); i++)
+		for (unsigned int i = 0; i < mClientVector->size(); i++)
 		{
-			if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+			if( memcmp(mClientVector->at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
 			{
-				ClientRobust* client = mClientVector.at(i);
+				ClientRobust* client = mClientVector->at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -518,11 +522,11 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		int clientID = mes->ReadByte();
 		
-		for (unsigned int i = 0; i < mClientVector.size(); i++)
+		for (unsigned int i = 0; i < mClientVector->size(); i++)
 		{
-			if (mClientVector.at(i)->mClientID == clientID)
+			if (mClientVector->at(i)->mClientID == clientID)
 			{
-				ClientRobust* client = mClientVector.at(i);
+				ClientRobust* client = mClientVector->at(i);
  				if (DREAMSOCK_DISCONNECTED == client->mConnectionState)
                                 {
                                         continue;
@@ -548,16 +552,16 @@ void Server::sendPackets()
 	if(!mNetwork->mSocket)
 		return;
 
-	for (unsigned int i = 0; i < mClientVector.size(); i++)
+	for (unsigned int i = 0; i < mClientVector->size(); i++)
 	{
 		if(mMessage->GetSize() == 0)
 			continue;
 
 		//is the a browser client but not THE browser client which is -1 normal c++ clients are 0 if so skip
-		if(mClientVector.at(i)->mClientID > 0)
+		if(mClientVector->at(i)->mClientID > 0)
 			continue; 
 
-		mNetwork->sendPacketTo(mClientVector.at(i),mMessage);
+		mNetwork->sendPacketTo(mClientVector->at(i),mMessage);
 			
 	}
 }

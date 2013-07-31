@@ -211,7 +211,7 @@ void Network::broadcast(Message* message)
                 return;
 	}
 
-        for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+        for (unsigned int i = 0; i < mServer->mClientVector->size(); i++)
         {
                 if(message->GetSize() == 0)
 		{
@@ -220,11 +220,11 @@ void Network::broadcast(Message* message)
 
                 //is the a browser client but not THE browser client which is -1 normal c++ clients are 0 if so skip
 
-                if(mServer->mClientVector.at(i)->mClientID > 0)
+                if(mServer->mClientVector->at(i)->mClientID > 0)
 		{
                         continue;
 		}
-                sendPacketTo(mServer->mClientVector.at(i),message);
+                sendPacketTo(mServer->mClientVector->at(i),message);
         }
 }
 

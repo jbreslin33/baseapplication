@@ -44,8 +44,8 @@ public:
 	std::vector<Game*>* mGameVector;
 
 	//clients
-	std::vector<ClientRobust*> mClientVector;
-	std::vector<Client*> mClientVectorTemp;
+	std::vector<ClientRobust*>* mClientVector;
+	std::vector<Client*>* mClientVectorTemp;
 
 	//port
 	int mPort;					// Port

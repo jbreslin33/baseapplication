@@ -118,11 +118,11 @@ Client::~Client()
 		mGame->leave(this);
 	}
 
-	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+	for (unsigned int i = 0; i < mServer->mClientVector->size(); i++)
         {
-                if (mServer->mClientVector.at(i) == this)
+                if (mServer->mClientVector->at(i) == this)
 		{
- 			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
+ 			mServer->mClientVector->erase(mServer->mClientVector->begin()+i);
 		}
 	}
 */
@@ -146,11 +146,11 @@ bool Client::handleLetter(Letter* letter)
 void Client::remove()
 {
 /*
-	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+	for (unsigned int i = 0; i < mServer->mClientVector->size(); i++)
 	{
-		if (mServer->mClientVector.at(i) == this)
+		if (mServer->mClientVector->at(i) == this)
 		{
-			//mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
+			//mServer->mClientVector->erase(mServer->mClientVector->begin()+i);
 			///delete this;
 		}
 	}
@@ -215,21 +215,21 @@ bool Client::checkLogin(Message* mes)
 {
 	readLoginMessage(mes);
 
-	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+	for (unsigned int i = 0; i < mServer->mClientVector->size(); i++)
 	{
-		if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
+		if (mStringUsername.compare(mServer->mClientVector->at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector->at(i)->db_password) == 0)
 		{
 			//send logout letter to clientRobust....
-                        mServer->mClientVector.at(i)->logout();
+                        mServer->mClientVector->at(i)->logout();
 			
 			mConnectionState = DREAMSOCK_DISCONNECTED; 
 
-                        mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
-                        mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
-                        mServer->mClientVector.at(i)->mClientID = mClientID;
+                        mServer->mClientVector->at(i)->setSocketAddress(&mSocketAddress);
+                        mServer->mClientVector->at(i)->mConnectionState = DREAMSOCK_CONNECTED;
+                        mServer->mClientVector->at(i)->mClientID = mClientID;
 
 			//send login letter
-                        mServer->mClientVector.at(i)->login();
+                        mServer->mClientVector->at(i)->login();
 
 			return true;
 		}
@@ -279,11 +279,11 @@ bool Client::getPasswordMatch(std::string username,std::string password)
 		//find a clientRobust that is not logged in...
 		ClientRobust* clientRobust;
 		int i = 0;
-		while (i < mServer->mClientVector.size() && !clientRobust)
+		while (i < mServer->mClientVector->size() && !clientRobust)
 		{
-			if (mServer->mClientVector.at(i)->mLoggedIn == false)
+			if (mServer->mClientVector->at(i)->mLoggedIn == false)
 			{
-				clientRobust = mServer->mClientVector.at(i);
+				clientRobust = mServer->mClientVector->at(i);
 			}	
 			i++;
 		}
@@ -291,7 +291,7 @@ bool Client::getPasswordMatch(std::string username,std::string password)
 		if (clientRobust)
 		{
 			//set values...
-                	//no need ...mServer->mClientVector.at(i)->logout();
+                	//no need ...mServer->mClientVector->at(i)->logout();
 
                 	mConnectionState = DREAMSOCK_DISCONNECTED;
 			
