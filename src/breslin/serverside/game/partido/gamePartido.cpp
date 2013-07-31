@@ -58,10 +58,9 @@ void GamePartido::sendShapes(ClientPartido* clientPartido)
 
 void GamePartido::reset()
 {
-/*
-        for (unsigned int i = 0; i < mServerPartido->mClientVector->size(); i++)
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector->size(); i++)
 	{
-		ClientPartido* clientPartido = mServerPartido->mClientVector->at(i);
+		ClientPartido* clientPartido = mServerPartido->mClientPartidoVector->at(i);
 		if (clientPartido->mClientID == -1) //browser bridge
 		{
 			continue;
@@ -85,21 +84,20 @@ void GamePartido::reset()
 
 		clientPartido->setBattleRecordText();	
 	}
-*/
+
 }
 
 bool GamePartido::checkForEndOfGame()
 {
 	//check for end of game
-/*
-        for (unsigned int i = 0; i < mServerPartido->mClientVector->size(); i++)
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector->size(); i++)
 	{
-		if (mServerPartido->mClientVector->at(i)->mClientID == -1) //browser bridge
+		if (mServerPartido->mClientPartidoVector->at(i)->mClientID == -1) //browser bridge
 		{
 			continue;
 		}
 
-		if (mServerPartido->mClientVector->at(i)->mLosses == 0)	
+		if (mServerPartido->mClientPartidoVector->at(i)->mLosses == 0)	
 		{
 			return false;
 		}
@@ -109,15 +107,13 @@ bool GamePartido::checkForEndOfGame()
 	}
 	
 	return true;
-*/
-	return false;
 }
 
 void GamePartido::createShapes()
 {
-        for (unsigned int i = 0; i < mServerPartido->mClientVector->size(); i++)
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector->size(); i++)
         {
-                mServerPartido->mClientVector->at(i)->setShape( new ShapePartido(getOpenIndex(),this,(ClientPartido*)mServerPartido->mClientVector->at(i),getOpenPoint(),new Vector3D(),new Vector3D(),mServerPartido->mRoot,true,true,30.0f,1,true) );
+                mServerPartido->mClientPartidoVector->at(i)->setShape( new ShapePartido(getOpenIndex(),this,mServerPartido->mClientPartidoVector->at(i),getOpenPoint(),new Vector3D(),new Vector3D(),mServerPartido->mRoot,true,true,30.0f,1,true) );
 
         }
 }

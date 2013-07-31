@@ -51,6 +51,7 @@ template <class entity_type> class State;
 class Server;
 class Network;
 class Shape;
+class Game;
 
 class Client : public BaseEntity
 {
