@@ -19,8 +19,8 @@ public:
    	//clients
 	void createClients();
 	virtual void addClient(Client* clientPartido, bool permanent);
-        std::vector<ClientPartido*> mClientPartidoVector;
-        std::vector<ClientPartido*> mClientPartidoVectorTemp;
+        std::vector<ClientPartido*>* mClientPartidoVector;
+        std::vector<Client*>* mClientPartidoVectorTemp;
 
         //add school
         static const int mMessageAddSchool = -109;
