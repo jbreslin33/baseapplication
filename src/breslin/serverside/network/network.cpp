@@ -42,11 +42,9 @@ Network::Network(Server* server, const char netInterface[32], int port)
 
 Network::~Network()
 {
-}
-
-void Network::shutdown(void)
-{
-	LogString("Shutting down dreamSock");
+	LogString("Network::~Network");
+	delete mDreamLinuxSock;
+	close(mSocket);
 }
 
 //-----------------------------------------------------------------------------
@@ -175,15 +173,6 @@ int Network::setBroadcasting(SOCKET sock, int mode)
 		return DREAMSOCK_INVALID_SOCKET;
 	}
 	return 0;
-}
-
-void Network::closeSocket(SOCKET sock)
-{
-#ifdef WIN32
-		closesocket(sock);
-#else
-		close(sock);
-#endif
 }
 
 int Network::getPacket(SOCKET sock, char *data, struct sockaddr *from)

@@ -70,8 +70,6 @@ Server::~Server()
 	mClientVector.empty();
 	mClientVectorTemp.empty();
 
-	mNetwork->closeSocket(mNetwork->mSocket);
-
 	delete mMessage;
 	delete mMessageIn;
 

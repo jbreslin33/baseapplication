@@ -67,10 +67,10 @@ int main(int argc, char **argv)
 		oldTime = server->mNetwork->getCurrentSystemTime();
 
 		// App main loop
-		try
-		{
+		//try
+		//{
 			// Keep server alive (wait for keypress to kill it)
-			while(true)
+                        while(server->mShutdown == false)
 			{
 				do
 				{
@@ -80,15 +80,13 @@ int main(int argc, char **argv)
 				server->update(time);
 				oldTime = newTime;
 			}
-		}
-		catch(...)
-		{
-			server->mNetwork->shutdown();
-			LogString("Unknown Exception caught in main loop");
-			return -1;
-		}
-		LogString("Shutting down everything");
-		server->mNetwork->shutdown();
+		//}
+	//	catch(...)
+	//	{
+	//		LogString("Unknown Exception caught in main loop");
+	//		return -1;
+	//	}
+		delete server;
 		return 0;
 	}
 
@@ -135,8 +133,6 @@ int main(int argc, char **argv)
                         return -1;
                 }
 */
-                LogString("Shutting down everything");
-                server->mNetwork->shutdown();
                	delete server; 
 		return 0;
 	}
