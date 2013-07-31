@@ -85,6 +85,7 @@ Server::~Server()
 	//delete clients
         while (!mClientVector->empty())
         {
+		LogString("delete Client");	
                 delete mClientVector->front();
                 mClientVector->erase(mClientVector->begin());
         }
@@ -99,15 +100,20 @@ Server::~Server()
         delete mClientVectorTemp;
 
 	//delete games 
+/*
         while (!mGameVector->empty())
         {
+		LogString("delete game 1");
                 delete mGameVector->front();
-                mGameVector->erase(mGameVector->begin());
+		LogString("delete game 2");
+        /       mGameVector->erase(mGameVector->begin());
         }
-        delete mGameVector;
+*/
+        //delete mGameVector;
 
 	//delete ogre root
 	delete mRoot;
+	LogString("delete ROOT!!!");
 }
 
 /*******************************************************

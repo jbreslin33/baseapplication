@@ -59,6 +59,7 @@ ServerPartido::~ServerPartido()
 		mGamePartidoVector->erase(mGamePartidoVector->begin());
         }
 	delete mGamePartidoVector;
+
 }
 
 void ServerPartido::processClients()
