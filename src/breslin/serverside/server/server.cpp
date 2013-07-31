@@ -81,70 +81,31 @@ Server::~Server()
 
 	//delete network
 	delete mNetwork;	
-	
 
-	LogString("bres1");
 	//delete clients
         while (!mClientVector->empty())
         {
-		LogString("bres2");
-		if (mClientVector->front())
-		{
-			LogString("bres a");
-                	delete mClientVector->front();
-			LogString("bres b");
-		}
-		LogString("bres3");
+                delete mClientVector->front();
                 mClientVector->erase(mClientVector->begin());
-		LogString("bres4");
         }
-	LogString("bres5");
         delete mClientVector;
-	LogString("bres6");
-
-/*
-	if (mClientVector)
-	{
-		for (int i = 0; i < mClientVector->size(); i++)
-		{	 
-			delete mClientVector->at(i);
-		}
-	
-		mClientVector->empty();
-		delete mClientVector;
-	}
-*/
-	//delete [] mClientVector;
 
 	//delete temp clients
-
-/*
-	if (mClientVectorTemp)
-	{
-		for (int i = 0; i < mClientVectorTemp->size(); i++)
-		{	 
-			delete mClientVectorTemp->at(i);
-		}
-	
-		mClientVectorTemp->empty();
-		delete mClientVectorTemp;
-	}
-*/
-//	delete [] mClientVectorTemp;
+        while (!mClientVectorTemp->empty())
+        {
+                delete mClientVectorTemp->front();
+                mClientVectorTemp->erase(mClientVectorTemp->begin());
+        }
+        delete mClientVectorTemp;
 
 	//delete games 
-/*
-	if (mGameVector)
-	{
-		for (int i = 0; i < mGameVector->size(); i++)
-		{ 
-			delete mGameVector->at(i);
-		}
-		mGameVector->empty();
-		delete mGameVector;
-	}
-*/
-//	delete [] mGameVector;
+        while (!mGameVector->empty())
+        {
+                delete mGameVector->front();
+                mGameVector->erase(mGameVector->begin());
+        }
+        delete mGameVector;
+
 	//delete ogre root
 	delete mRoot;
 }
