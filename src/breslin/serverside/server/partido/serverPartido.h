@@ -12,10 +12,6 @@ public:
 	ServerPartido(Ogre::Root* root, const char *localIP, int serverPort);	
 	virtual ~ServerPartido();
 
-	//games
-	void addGame(GamePartido* gamePartido);
-   	std::vector<GamePartido*>* mGamePartidoVector;
-
    	//clients
 	void createClients();
 	virtual void addClient(Client* clientPartido, bool permanent);
@@ -49,9 +45,7 @@ public:
 	void parsePacket(Message *mes, struct sockaddr *address);
 
 	//updates
-        virtual void processGames();
         virtual void processClients();
-        virtual void sendCommands();
 
 };
 

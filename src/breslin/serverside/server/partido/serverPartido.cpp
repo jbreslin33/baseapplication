@@ -12,9 +12,6 @@ ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPo
 :
  Server(root, localIP, serverPort)
 {
-	//game vector
-	mGamePartidoVector = new std::vector<GamePartido*>();
-
 	//client vectors
 	mClientPartidoVector     = new std::vector<ClientPartido*>();
 	mClientPartidoVectorTemp = new std::vector<Client*>();
@@ -50,16 +47,6 @@ ServerPartido::~ServerPartido()
 		mClientPartidoVectorTemp->erase(mClientPartidoVectorTemp->begin());
         }
 	delete mClientPartidoVectorTemp;
-
-  	//delete games 
-        while (!mGamePartidoVector->empty())
-        {
-                mGamePartidoVector->front() == NULL;
-                delete mGamePartidoVector->front();
-		mGamePartidoVector->erase(mGamePartidoVector->begin());
-        }
-	delete mGamePartidoVector;
-
 }
 
 void ServerPartido::processClients()
@@ -75,29 +62,6 @@ void ServerPartido::processClients()
         }
 }
 
-void ServerPartido::processGames()
-{
-        //update games
-        for (unsigned int i = 0; i < mGamePartidoVector->size(); i++)
-        {
-                mGamePartidoVector->at(i)->update();
-        }
-}
-
-void ServerPartido::sendCommands()
-{
-        //send positions and exact frame time the calcs where done on which is mFrameTime
-        for (unsigned int i = 0; i < mGamePartidoVector->size(); i++)
-        {
-                sendCommand(mGamePartidoVector->at(i));
-        }
-}
-
-void ServerPartido::addGame(GamePartido* gamePartido)
-{
-	Server::addGame(gamePartido);
-        mGamePartidoVector->push_back(gamePartido);
-}
 void ServerPartido::createClients()
 {
         PGconn          *conn;
@@ -121,7 +85,7 @@ void ServerPartido::createClients()
                 //add Games
                 for (unsigned int i = 0; i < mGameVector->size(); i++)
                 {
-                        clientPartido->addGame(mGamePartidoVector->at(i));
+                        clientPartido->addGame((GamePartido*)mGameVector->at(i));
                 }
 
                 //id
