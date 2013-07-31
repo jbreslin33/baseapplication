@@ -33,14 +33,22 @@ ServerPartido::~ServerPartido()
 {
 	LogString("ServerPartido::~ServerPartido");	
   	//delete clients
-/*
-        for (int i = 0; i < mClientPartidoVector->size(); i++)
-        {
-                delete mClientPartidoVector->at(i);
-        }
-       	mClientPartidoVector->empty();
-*/
 	LogString("bres1");	
+	int i = 0;
+        while (!mClientPartidoVector->empty())
+        {
+		LogString("delete front:%d",i);
+                delete mClientPartidoVector->front();
+		LogString("bres after delete of front client");
+		mClientPartidoVector->erase(mClientPartidoVector->begin());
+		LogString("bres after erase");
+		i++;
+        }
+	LogString("after for");
+	delete mClientPartidoVector;
+	LogString("after delete mClientPartidoVector");
+
+       	mClientPartidoVector->empty();
         delete[] mClientPartidoVector;
 	LogString("bres2");	
 
