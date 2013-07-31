@@ -43,8 +43,22 @@ Game::Game(Server* server, int id)
 
 Game::~Game()
 {
-	StopLog();
-	delete mServer;
+	LogString("Game::~Game");
+	delete mBounds;
+	
+/*
+	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+        {
+                //normal shape
+                SceneNode* parent = mShapeVector.at(i)->mEntity->getParentSceneNode();
+                parent->detachObject(mShapeVector.at(i).mEntity);
+                mApplication->getSceneManager()->destroyEntity(mShapeVector.at(i)->mEntity->getName());
+        }
+*/
+        //clear the vectors....
+        //mShapeVector->clear();
+	
+//	delete mShapeVector;
 }
 
 void Game::createShapes()

@@ -66,14 +66,22 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 
 Server::~Server()
 {
+	LogString("Server::~Server");
 	mClientVector.empty();
 	mClientVectorTemp.empty();
+
 	mNetwork->closeSocket(mNetwork->mSocket);
 
 	delete mMessage;
 	delete mMessageIn;
 
 	delete mNetwork;	
+
+	for (int i = 0; i < mGameVector.size(); i++)
+	{ 
+		delete mGameVector.at(i);
+	}
+
 	delete mRoot;
 }
 
@@ -254,9 +262,6 @@ int Server::getPacket(Message* message, struct sockaddr *from)
 
 	// Read data of the socket
 	int ret = 0;
-
-//	Message mes;
-//	mes.Init(data, sizeof(data));
 
 	ret = mNetwork->getPacket(mNetwork->mSocket, message->data, from);
 
