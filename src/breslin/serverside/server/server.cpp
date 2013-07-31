@@ -82,9 +82,26 @@ Server::~Server()
 	//delete network
 	delete mNetwork;	
 	
-	LogString("bres1");
 
+	LogString("bres1");
 	//delete clients
+        while (!mClientVector->empty())
+        {
+		LogString("bres2");
+		if (mClientVector->front())
+		{
+			LogString("bres a");
+                	delete mClientVector->front();
+			LogString("bres b");
+		}
+		LogString("bres3");
+                mClientVector->erase(mClientVector->begin());
+		LogString("bres4");
+        }
+	LogString("bres5");
+        delete mClientVector;
+	LogString("bres6");
+
 /*
 	if (mClientVector)
 	{
@@ -97,8 +114,7 @@ Server::~Server()
 		delete mClientVector;
 	}
 */
-	delete [] mClientVector;
-	LogString("bres2");
+	//delete [] mClientVector;
 
 	//delete temp clients
 
@@ -114,7 +130,7 @@ Server::~Server()
 		delete mClientVectorTemp;
 	}
 */
-	delete [] mClientVectorTemp;
+//	delete [] mClientVectorTemp;
 
 	//delete games 
 /*
@@ -128,7 +144,7 @@ Server::~Server()
 		delete mGameVector;
 	}
 */
-	delete [] mGameVector;
+//	delete [] mGameVector;
 	//delete ogre root
 	delete mRoot;
 }

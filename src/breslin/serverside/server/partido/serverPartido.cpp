@@ -32,44 +32,33 @@ ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPo
 ServerPartido::~ServerPartido()
 {
 	LogString("ServerPartido::~ServerPartido");	
+
   	//delete clients
-	LogString("bres1");	
-	int i = 0;
         while (!mClientPartidoVector->empty())
         {
-		LogString("delete front:%d",i);
+                mClientPartidoVector->front() = NULL;
                 delete mClientPartidoVector->front();
-		LogString("bres after delete of front client");
 		mClientPartidoVector->erase(mClientPartidoVector->begin());
-		LogString("bres after erase");
-		i++;
         }
-	LogString("after for");
 	delete mClientPartidoVector;
-	LogString("after delete mClientPartidoVector");
 
-       	mClientPartidoVector->empty();
-        delete[] mClientPartidoVector;
-	LogString("bres2");	
-
-        //delete temp clients
-/*
-        for (int i = 0; i < mClientPartidoVectorTemp->size(); i++)
+  	//delete temp clients
+        while (!mClientPartidoVectorTemp->empty())
         {
-                delete mClientPartidoVectorTemp->at(i);
+                mClientPartidoVectorTemp->front() = NULL;
+                delete mClientPartidoVectorTemp->front();
+		mClientPartidoVectorTemp->erase(mClientPartidoVectorTemp->begin());
         }
-        mClientPartidoVectorTemp->empty();
-*/
-        delete [] mClientPartidoVectorTemp;
+	delete mClientPartidoVectorTemp;
 
-	//delete games
-/*
-	for (int i = 0; i < mGamePartidoVector->size(); i++)
+  	//delete games 
+        while (!mGamePartidoVector->empty())
         {
-                delete mGamePartidoVector->at(i);
+                mGamePartidoVector->front() == NULL;
+                delete mGamePartidoVector->front();
+		mGamePartidoVector->erase(mGamePartidoVector->begin());
         }
-*/
-        delete [] mGamePartidoVector;
+	delete mGamePartidoVector;
 }
 
 void ServerPartido::processClients()

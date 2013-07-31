@@ -67,6 +67,7 @@ ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientI
 
 ClientRobust::~ClientRobust()
 {
+	LogString("ClientRobust::~ClientRobust");
 }
 
 void ClientRobust::update()

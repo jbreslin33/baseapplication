@@ -108,7 +108,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 Client::~Client()
 {
 	LogString("Client::~Client");
-	delete mMessage;
+	//delete mMessage;
 
 /*
 	//this will check if there is an mShape

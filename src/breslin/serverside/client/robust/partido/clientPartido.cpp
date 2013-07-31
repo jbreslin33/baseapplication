@@ -71,6 +71,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 
 ClientPartido::~ClientPartido()
 {
+	LogString("ClientPartido::~ClientPartido");
 }
 
 //game
