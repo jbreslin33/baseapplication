@@ -161,12 +161,15 @@ bool Vector3D::getRotationTo(Vector3D* to)
 	v1->normalise();
 
 	float d = v0->dot(v1);
+	
 
     	// If dot == 1, vectors are the same
     	if (d >= 1.0f)
     	{
 		//LogString("VECTORS ARE THE SAME!!!!!!!!!!!!!!!!");
 		mQuaternion = new Quaternion(1.0,0.0,0.0,0.0);
+		delete v0;
+		delete v1;
 		return true;
     	}
 			
@@ -195,6 +198,8 @@ bool Vector3D::getRotationTo(Vector3D* to)
         	mQuaternion->w = s * 0.5f;
 		mQuaternion->normalise();
 	}
+	delete v0;
+	delete v1;
 	return true;
 }
 
