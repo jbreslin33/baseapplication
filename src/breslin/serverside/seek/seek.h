@@ -41,6 +41,8 @@ virtual bool  handleLetter(Letter* letter);
 
 Shape* mShape;
 
+bool mSeekOn;
+
 Shape* mSeekShape;
 Shape* mDestinationShape;
 

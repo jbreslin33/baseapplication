@@ -20,6 +20,8 @@ Seek::Seek(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
 	mShape = shape;
 
+	mSeekOn = false;
+
 	mSeekShape = NULL;
 	mDestinationShape = NULL;
 
@@ -44,6 +46,10 @@ Seek::~Seek()
 	LogString("Seek::~Seek");
 	delete mSeekVelocity;
 	delete mDestinationVelocity;
+	delete mSeekShape;
+	delete mDestinationShape;
+	delete mSeekPoint;
+	delete mDestinationPoint;
 }
 void Seek::update()
 {
