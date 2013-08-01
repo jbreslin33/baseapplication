@@ -11,7 +11,7 @@ Vector3D::Vector3D()
 	y = 0;
 	z = 0;
 	
-	mQuaternion = NULL;
+	mQuaternion = new Quaternion();
 }
 
 Vector3D::Vector3D(float x1, float y1, float z1)
@@ -149,7 +149,6 @@ Vector3 Vector3D::convertToVector3()
 
 bool Vector3D::getRotationTo(Vector3D* to)
 {
-	mQuaternion = new Quaternion();
 
 	Vector3D* fallbackAxis = new Vector3D(0.0f,0.0f,0.0f);
 
