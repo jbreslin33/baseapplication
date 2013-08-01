@@ -168,8 +168,8 @@ Quaternion* Vector3D::getRotationTo(Vector3D* to)
     	if (d >= 1.0f)
     	{
 		//LogString("VECTORS ARE THE SAME!!!!!!!!!!!!!!!!");
-		Quaternion* quaternionIdentity = new Quaternion(1.0,0.0,0.0,0.0);
-		return quaternionIdentity;
+		mQuaternion = new Quaternion(1.0,0.0,0.0,0.0);
+		return mQuaternion;
     	}
 			
 	if (d < (1e-6f - 1.0f))
