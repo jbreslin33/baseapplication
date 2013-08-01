@@ -168,6 +168,7 @@ bool Vector3D::getRotationTo(Vector3D* to)
     	{
 		//LogString("VECTORS ARE THE SAME!!!!!!!!!!!!!!!!");
 		mQuaternion = new Quaternion(1.0,0.0,0.0,0.0);
+		delete fallbackAxis;
 		delete v0;
 		delete v1;
 		return true;
@@ -198,6 +199,7 @@ bool Vector3D::getRotationTo(Vector3D* to)
         	mQuaternion->w = s * 0.5f;
 		mQuaternion->normalise();
 	}
+	delete fallbackAxis;
 	delete v0;
 	delete v1;
 	return true;
