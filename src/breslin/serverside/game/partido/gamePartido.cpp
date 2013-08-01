@@ -51,11 +51,6 @@ void GamePartido::update()
 */
 }
 
-void GamePartido::sendShapes(ClientPartido* clientPartido)
-{
-	Game::sendShapes(clientPartido);
-}
-
 void GamePartido::reset()
 {
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector->size(); i++)
