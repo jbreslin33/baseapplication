@@ -37,7 +37,6 @@ ServerPartido* mServerPartido;
 Utility* utility;
 
 //game
-std::vector<GamePartido*> mGamePartidoVector;
 GamePartido* mGamePartido;
 virtual void setGame(int gameID);
 
