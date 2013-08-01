@@ -206,6 +206,7 @@ float Vector3D::getDegreesToSomething(Vector3D* to)
 	
     	// convert to degrees
     	Real degreesToSomething = toSomething->getYaw().valueDegrees();
+	delete toSomething;
 	return degreesToSomething;
 }
 
