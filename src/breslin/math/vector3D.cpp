@@ -10,6 +10,8 @@ Vector3D::Vector3D()
 	x = 0;
 	y = 0;
 	z = 0;
+	
+	mQuaternion = NULL;
 }
 
 Vector3D::Vector3D(float x1, float y1, float z1)
@@ -148,7 +150,7 @@ Vector3 Vector3D::convertToVector3()
 Quaternion* Vector3D::getRotationTo(Vector3D* to)
 {
 	
-	Quaternion* quaternion = new Quaternion();
+	mQuaternion = new Quaternion();
 
 	Vector3D* fallbackAxis = new Vector3D(0.0f,0.0f,0.0f);
 
@@ -180,7 +182,7 @@ Quaternion* Vector3D::getRotationTo(Vector3D* to)
 		//quaternion->FromAngleAxis(Radian(Math::PI), fb);
 		
 		// rotate 180 degrees about the fallback axis
-		quaternion->FromAngleAxis(Radian(Math::PI), fb);
+		mQuaternion->FromAngleAxis(Radian(Math::PI), fb);
 	}
 	else
 	{
@@ -189,13 +191,13 @@ Quaternion* Vector3D::getRotationTo(Vector3D* to)
 
 		Vector3D c = v0->crossProduct(v1);
 
-   	    	quaternion->x = c.x * invs;
-       		quaternion->y = c.y * invs;
-        	quaternion->z = c.z * invs;
-        	quaternion->w = s * 0.5f;
-		quaternion->normalise();
+   	    	mQuaternion->x = c.x * invs;
+       		mQuaternion->y = c.y * invs;
+        	mQuaternion->z = c.z * invs;
+        	mQuaternion->w = s * 0.5f;
+		mQuaternion->normalise();
 	}
-	return quaternion;
+	return mQuaternion;
 }
 
 

@@ -50,6 +50,7 @@ Vector3 getVector3();
 void convertFromVector3(Vector3 vector3);
 
 Quaternion* getRotationTo(Vector3D* to);
+Quaternion* mQuaternion;
 float getDegreesToSomething(Vector3D* to);
 
 Vector3D* getVectorOffset(float offset, bool degrees);
