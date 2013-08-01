@@ -45,7 +45,6 @@ Network::~Network()
 	LogString("Network::~Network");
 	delete mDreamLinuxSock;
 	close(mSocket);
-	LogString("Network::~Network EnD");
 }
 
 //-----------------------------------------------------------------------------

@@ -41,6 +41,9 @@ Seek::Seek(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Seek::~Seek()
 {
+	LogString("Seek::~Seek");
+	delete mSeekVelocity;
+	delete mDestinationVelocity;
 }
 void Seek::update()
 {

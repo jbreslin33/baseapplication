@@ -36,6 +36,9 @@ Rotation::Rotation(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Rotation::~Rotation()
 {
+	delete mRotation;
+	delete mRotationLast;
+	delete mStateMachine;
 }
 
 void Rotation::update()
