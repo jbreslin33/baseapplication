@@ -78,7 +78,7 @@ ClientPartido::~ClientPartido()
 void ClientPartido::addGame(GamePartido* gamePartido)
 {
 	ClientRobust::addGame(gamePartido);
-        mGamePartidoVector.push_back(gamePartido);
+        //mGamePartidoVector.push_back(gamePartido);
 }
 
 GamePartido* ClientPartido::getGame()
@@ -88,11 +88,11 @@ GamePartido* ClientPartido::getGame()
 
 void ClientPartido::setGame(int gameID)
 {
-        for (int i = 0; i < mGamePartidoVector.size(); i++)
+        for (int i = 0; i < mGameVector.size(); i++)
         {
-                if (mGamePartidoVector.at(i)->mID == gameID)
+                if (mGameVector.at(i)->mID == gameID)
                 {
-                        mGamePartido = mGamePartidoVector.at(i);
+                        mGamePartido = (GamePartido*)mGameVector.at(i);
                         mGamePartido->sendShapes(this);
                 }
         }
