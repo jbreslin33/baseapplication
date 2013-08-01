@@ -72,6 +72,8 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 ClientPartido::~ClientPartido()
 {
 	LogString("ClientPartido::~ClientPartido");
+        delete mClientPartidoStateMachine;
+        delete mBattleStateMachine;
 }
 
 void ClientPartido::setGame(int gameID)

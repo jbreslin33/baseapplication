@@ -108,24 +108,8 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 Client::~Client()
 {
 	LogString("Client::~Client");
-	//delete mMessage;
-
-/*
-	//this will check if there is an mShape
-
-	if (mGame)
-	{
-		mGame->leave(this);
-	}
-
-	for (unsigned int i = 0; i < mServer->mClientVector->size(); i++)
-        {
-                if (mServer->mClientVector->at(i) == this)
-		{
- 			mServer->mClientVector->erase(mServer->mClientVector->begin()+i);
-		}
-	}
-*/
+	delete mMessage;
+	delete mStateMachine;
 }
 
 void Client::setSocketAddress(struct sockaddr *address)
