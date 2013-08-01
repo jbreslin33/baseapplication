@@ -24,6 +24,8 @@ Steering::Steering(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mSteeringShape = NULL;
 	mSteeringPoint = NULL;
 
+	mDesiredVelocity = new Vector3D();
+
  	//steering states
 	mStateMachine =  new StateMachine<Steering>(this);
 	mStateMachine->setCurrentState      (Normal_Steering::Instance());
@@ -43,6 +45,12 @@ Steering::Steering(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Steering::~Steering()
 {
+	LogString("Steering::~Steering");
+	delete mStateMachine;
+	delete mSteeringForce;
+	delete mTarget;
+	delete mSteeringPoint;
+	delete mDesiredVelocity;
 }
 void Steering::update()
 {
@@ -157,27 +165,27 @@ Vector3D* Steering::sumForces()
 			return mSteeringForce;
 		}
   	}
+	delete force;
   	return mSteeringForce;
 }
 
 Vector3D* Steering::seek(Vector3D* target)
 {
 	Vector3D* currentPosition = new Vector3D();
-	Vector3D* desiredVelocity = new Vector3D();
+	mDesiredVelocity = new Vector3D();
 
 	currentPosition->convertFromVector3(mShape->mSceneNode->getPosition());
 
   	currentPosition->multiply(mShape->mMove->mSpeedMax);
 
-  	desiredVelocity->copyValuesFrom(target);
-  	desiredVelocity->subtract(currentPosition);
+  	mDesiredVelocity->copyValuesFrom(target);
+  	mDesiredVelocity->subtract(currentPosition);
 
+  	mDesiredVelocity->normalise();
 
-  	desiredVelocity->normalise();
+	delete currentPosition;
 
-  	//desiredVelocity->subtract(mShape->mMove->mVelocity);
-
-  	return desiredVelocity;
+  	return mDesiredVelocity;
 }
 
 bool Steering::accumulateForce(Vector3D* sf, Vector3D* forceToAdd)
@@ -245,28 +253,4 @@ void Steering::findNeighbours()
 */
 }
 
-Vector3D* Steering::separation()
-{  
-	//iterate through all the neighbors and calculate the vector from the
-  	Vector3D* steeringForce = new Vector3D();
-
-/*
-  	std::list<Shape*>& allPlayers = AutoList<Shape>::GetAllMembers();
-  	std::list<PlayerBase*>::iterator curPlyr;
-  	for (curPlyr = AllPlayers.begin(); curPlyr!=AllPlayers.end(); ++curPlyr)
-  	{
-    		//make sure this agent isn't included in the calculations and that
-    		//the agent is close enough
-    		if((*curPlyr != m_pPlayer) && (*curPlyr)->Steering()->Tagged())
-    		{
-      			Vector3D* ToAgent = m_pPlayer->Pos() - (*curPlyr)->Pos();
-
-      			//scale the force inversely proportional to the agents distance  
-      			//from its neighbor.
-      			SteeringForce += Vec2DNormalize(ToAgent)/ToAgent.Length();
-    		}
-  	}
-*/
-  	return steeringForce;
-}
 

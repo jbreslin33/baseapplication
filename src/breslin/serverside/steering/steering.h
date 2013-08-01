@@ -35,6 +35,8 @@ void setSteeringPoint(Vector3D* steeringPoint);
 void setSteeringShape(Shape* steeringShape);
 void updateSteeringPoint();
 
+Vector3D* mDesiredVelocity;
+
 StateMachine<Steering>* mStateMachine;
 
 Vector3D* mSteeringForce;
