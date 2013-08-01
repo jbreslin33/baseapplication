@@ -47,7 +47,7 @@ Move::~Move()
 {
 	LogString("Move::~Move");
 	delete mVelocity;
-	delete mStateMacine;
+	delete mStateMachine;
 	delete mPositionLast;
 	delete mPositionBeforeCollision;
 }
