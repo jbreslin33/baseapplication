@@ -48,7 +48,8 @@ Shape::Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* pos
 	mText  = "";
 	mTextLast  = "";
 
- 	//mPosition = position;
+ 	mPosition = new Vector3D();
+
 	mIndex  = index;
 
 	//game
@@ -98,29 +99,21 @@ Shape::Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* pos
 
 Shape::~Shape()
 {
-	LogString("Shape::~Shape1");
+	LogString("Shape::~Shape");
 	delete mComputer;
-	LogString("Shape::~Shape2");
 	delete mSteering;
-	LogString("Shape::~Shape3");
 	delete mSeek;
-	LogString("Shape::~Shape4");
 	delete mAvoid;
-	LogString("Shape::~Shape5");
 	delete mRotation;
-	LogString("Shape::~Shape6");
 	delete mMove;
-	LogString("Shape::~Shape7");
 	delete mSceneNode;
-	LogString("Shape::~Shape8");
+	delete mPosition;
 }
 
 Vector3D* Shape::getPosition()
 {
-	Vector3D* position = new Vector3D();
-	position->convertFromVector3(mSceneNode->getPosition());
-	
-	return position;
+	mPosition->convertFromVector3(mSceneNode->getPosition());
+	return mPosition;
 }
 
 void Shape::createShape(Ogre::Root* root, Vector3D* position)

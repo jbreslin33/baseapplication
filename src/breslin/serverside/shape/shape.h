@@ -36,6 +36,8 @@ Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* position, 
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~Shape();
 
+Vector3D* mPosition;
+
 // ByteBufferes
 static const char mCommandFrameTime = 2;
 
