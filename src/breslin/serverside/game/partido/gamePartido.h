@@ -18,19 +18,19 @@ public:
 	virtual ~GamePartido();
 
 	//updates
-	void update();
+	virtual void update();
 
 	//serverPartido
 	ServerPartido* mServerPartido;
 
 	//shapes
         std::vector<ShapePartido*>* mShapePartidoVector;       //every tangible item in game world..
-	void createShapes();
-	void sendShapes(ClientPartido* clientPartido);
+	virtual void createShapes();
+	virtual void sendShapes(ClientPartido* clientPartido);
 
 	//end of game
-	bool checkForEndOfGame();
-	void reset();
+	virtual bool checkForEndOfGame();
+	virtual void reset();
 };
 
 #endif

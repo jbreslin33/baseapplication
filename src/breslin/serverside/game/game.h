@@ -63,8 +63,8 @@ public:
 	virtual void	update();
 	
 	//collision detection
-	virtual void checkCollisions();
-	virtual void checkBounds(Shape* shape);
+	void checkCollisions();
+	void checkBounds(Shape* shape);
 		
 	//scope
  	bool    checkScope(ClientRobust* client, Shape* shape);
@@ -76,7 +76,7 @@ public:
 	
 	//shapes
 	virtual void createShapes();
-	void sendShapes(Client* client);
+	virtual void sendShapes(Client* client);
 	Shape* getShapeFromID(int id);
 };
 
