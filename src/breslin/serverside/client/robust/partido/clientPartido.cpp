@@ -74,13 +74,6 @@ ClientPartido::~ClientPartido()
 	LogString("ClientPartido::~ClientPartido");
 }
 
-//game
-void ClientPartido::addGame(GamePartido* gamePartido)
-{
-	ClientRobust::addGame(gamePartido);
-        //mGamePartidoVector.push_back(gamePartido);
-}
-
 GamePartido* ClientPartido::getGame()
 {
 	return mGamePartido;
