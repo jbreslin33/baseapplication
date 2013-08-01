@@ -84,6 +84,8 @@ void NORMAL_AVOID::enter(Avoid* avoid)
 	int randomDegree = rand() % 180;
 	avoid->mAvoidVelocity = offsetToAvoidee->getVectorOffset(90.0f + randomDegree,true);
 	avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
+	
+	delete offsetToAvoidee;
 }
 
 void NORMAL_AVOID::execute(Avoid* avoid)
@@ -114,6 +116,7 @@ void NORMAL_AVOID::execute(Avoid* avoid)
                                 isOldStillGood = false;
                         }
                         i++;
+			delete vectorToNextAvoidee;
                 }
 
 		if (isOldStillGood)
@@ -139,6 +142,8 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 			//set move velocity
  			avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mAvoidVelocity);
        			avoid->mShape->mMove->mVelocity->normalise();
+        		
+			delete offsetToAvoidee;
 		}
 	}
 }
@@ -173,12 +178,12 @@ void SEEK_AVOID::execute(Avoid* avoid)
                 }
                 else //dot lines up, take evasive action..
                 {
-                        Vector3D* newVelocity = new Vector3D();
 
                         if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mDestinationPoint)
                         {
 				if (avoid->mAvoidDot >= .50)
 				{
+                        		Vector3D* newVelocity = new Vector3D();
 					newVelocity = avoid->mVectorToClosestAvoidee->getVectorOffset(45.0f,true);
 					
 					avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
@@ -186,6 +191,7 @@ void SEEK_AVOID::execute(Avoid* avoid)
 
        					avoid->mShape->mMove->mVelocity->copyValuesFrom(avoid->mAvoidVelocity);
                         		avoid->mShape->mMove->mVelocity->normalise();
+                        		delete newVelocity;
 				}
                         }
                         else
