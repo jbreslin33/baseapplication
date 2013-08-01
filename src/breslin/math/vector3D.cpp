@@ -147,9 +147,8 @@ Vector3 Vector3D::convertToVector3()
 }
 
 
-Quaternion* Vector3D::getRotationTo(Vector3D* to)
+bool Vector3D::getRotationTo(Vector3D* to)
 {
-	
 	mQuaternion = new Quaternion();
 
 	Vector3D* fallbackAxis = new Vector3D(0.0f,0.0f,0.0f);
@@ -169,7 +168,7 @@ Quaternion* Vector3D::getRotationTo(Vector3D* to)
     	{
 		//LogString("VECTORS ARE THE SAME!!!!!!!!!!!!!!!!");
 		mQuaternion = new Quaternion(1.0,0.0,0.0,0.0);
-		return mQuaternion;
+		return true;
     	}
 			
 	if (d < (1e-6f - 1.0f))
@@ -197,18 +196,17 @@ Quaternion* Vector3D::getRotationTo(Vector3D* to)
         	mQuaternion->w = s * 0.5f;
 		mQuaternion->normalise();
 	}
-	return mQuaternion;
+	return true;
 }
 
 
 //calculate how far off we are from some vector
 float Vector3D::getDegreesToSomething(Vector3D* to)
 {
-	Quaternion* toSomething = this->getRotationTo(to);
+	this->getRotationTo(to);
 	
     	// convert to degrees
-    	Real degreesToSomething = toSomething->getYaw().valueDegrees();
-	delete toSomething;
+    	Real degreesToSomething = mQuaternion->getYaw().valueDegrees();
 	return degreesToSomething;
 }
 
