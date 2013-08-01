@@ -39,7 +39,6 @@ Utility* utility;
 //game
 std::vector<GamePartido*> mGamePartidoVector;
 GamePartido* mGamePartido;
-GamePartido* getGame();
 virtual void setGame(int gameID);
 
 //battle

@@ -74,11 +74,6 @@ ClientPartido::~ClientPartido()
 	LogString("ClientPartido::~ClientPartido");
 }
 
-GamePartido* ClientPartido::getGame()
-{
-	return mGamePartido;
-}
-
 void ClientPartido::setGame(int gameID)
 {
         for (int i = 0; i < mGameVector.size(); i++)
