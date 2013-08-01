@@ -45,6 +45,11 @@ Move::Move(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Move::~Move()
 {
+	LogString("Move::~Move");
+	delete mVelocity;
+	delete mStateMacine;
+	delete mPositionLast;
+	delete mPositionBeforeCollision;
 }
 void Move::update()
 {
