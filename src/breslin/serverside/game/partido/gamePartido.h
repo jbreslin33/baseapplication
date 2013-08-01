@@ -17,9 +17,6 @@ public:
 	GamePartido(ServerPartido* serverPartido, int id);
 	virtual ~GamePartido();
 
-	//updates
-	virtual void update();
-
 	//serverPartido
 	ServerPartido* mServerPartido;
 

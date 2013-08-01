@@ -38,19 +38,6 @@ GamePartido::~GamePartido()
         delete mShapePartidoVector;
 }
 
-//you should call this from server update
-void GamePartido::update()
-{
-	Game::update();
-/*	
-	if (checkForEndOfGame())
-	{
-		//LogString("endOFGAME!!!!!!!!!!!!!!!!!!!!!!");
-		//reset();		
-	}
-*/
-}
-
 void GamePartido::reset()
 {
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector->size(); i++)
