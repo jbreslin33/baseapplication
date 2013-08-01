@@ -89,6 +89,8 @@ void NORMAL_SEEK::execute(Seek* seek)
 
 		//set to shape velocity
 		seek->mShape->mMove->mVelocity->copyValuesFrom(seek->mSeekVelocity);
+		
+		delete currentPosition;
         }
         else
         {
@@ -126,6 +128,8 @@ void SEEK_DESTINATION::execute(Seek* seek)
                 //destination velocity and length
                 seek->mDestinationVelocity->subtract(seek->mDestinationPoint,currentPosition);
                 seek->mDestinationLength = seek->mDestinationVelocity->length();
+
+                delete currentPosition;
 
                 if (seek->mDestinationLength <= 1) //close enough goto reachdestination
                 {
