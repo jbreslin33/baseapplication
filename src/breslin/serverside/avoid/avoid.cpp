@@ -60,7 +60,7 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
         Vector3D* randomVector3D = new Vector3D(randomX,0,randomZ);
         int randomDegree = rand() % 360;
 
-        mAvoidVelocity = randomVector3D->getVectorOffset(randomDegree,true);
+        mAvoidVelocity->set(randomVector3D->getVectorOffset(randomDegree,true));
         mAvoidVelocityLast->copyValuesFrom(mAvoidVelocity);
         delete randomVector3D;
 }

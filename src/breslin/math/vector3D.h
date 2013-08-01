@@ -32,7 +32,7 @@ float z;
 float length();
 bool isZero();
 void zero();
-
+void set(Vector3D vector3D);
 void printValues();
 
 void normalise();
@@ -53,7 +53,7 @@ bool getRotationTo(Vector3D* to);
 Quaternion* mQuaternion;
 float getDegreesToSomething(Vector3D* to);
 
-Vector3D* getVectorOffset(float offset, bool degrees);
+Vector3D getVectorOffset(float offset, bool degrees);
 
 
 };

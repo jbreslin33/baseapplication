@@ -79,10 +79,10 @@ void NORMAL_AVOID::enter(Avoid* avoid)
 
 	//first let's take the inverse velocity of the closest avoidee	
 	Vector3D* offsetToAvoidee = new Vector3D();
-	offsetToAvoidee = avoid->mVectorToClosestAvoidee->getVectorOffset(90.0f,true);
+	offsetToAvoidee->set(avoid->mVectorToClosestAvoidee->getVectorOffset(90.0f,true));
 
 	int randomDegree = rand() % 180;
-	avoid->mAvoidVelocity = offsetToAvoidee->getVectorOffset(90.0f + randomDegree,true);
+	avoid->mAvoidVelocity->set(offsetToAvoidee->getVectorOffset(90.0f + randomDegree,true));
 	avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
 	
 	delete offsetToAvoidee;
@@ -132,11 +132,11 @@ void NORMAL_AVOID::execute(Avoid* avoid)
 		{
 			//first let's take the inverse velocity of the closest avoidee
         		Vector3D* offsetToAvoidee = new Vector3D();
-        		offsetToAvoidee = avoid->mVectorToClosestAvoidee->getVectorOffset(90.0f,true);
+        		offsetToAvoidee->set(avoid->mVectorToClosestAvoidee->getVectorOffset(90.0f,true));
 
 			//get a random away vector
         		int randomDegree = rand() % 180;
-        		avoid->mAvoidVelocity = offsetToAvoidee->getVectorOffset(90.0f + randomDegree,true);
+        		avoid->mAvoidVelocity->set(offsetToAvoidee->getVectorOffset(90.0f + randomDegree,true));
         		avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
 
 			//set move velocity
@@ -184,7 +184,7 @@ void SEEK_AVOID::execute(Avoid* avoid)
 				if (avoid->mAvoidDot >= .50)
 				{
                         		Vector3D* newVelocity = new Vector3D();
-					newVelocity = avoid->mVectorToClosestAvoidee->getVectorOffset(45.0f,true);
+					newVelocity->set(avoid->mVectorToClosestAvoidee->getVectorOffset(45.0f,true));
 					
 					avoid->mAvoidVelocityLast->copyValuesFrom(avoid->mAvoidVelocity);
 					avoid->mAvoidVelocity->copyValuesFrom(newVelocity);

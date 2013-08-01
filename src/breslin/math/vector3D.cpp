@@ -146,6 +146,12 @@ Vector3 Vector3D::convertToVector3()
 	return vector3;
 }
 
+void Vector3D::set(Vector3D vector3D)
+{
+	x = vector3D.x;
+	y = vector3D.y;
+	z = vector3D.z;
+}
 
 bool Vector3D::getRotationTo(Vector3D* to)
 {
@@ -232,7 +238,7 @@ void Vector3D::convertFromVector3(Vector3 vector3)
 	z = vector3.z;
 
 }
-Vector3D* Vector3D::getVectorOffset(float offset, bool degrees)
+Vector3D Vector3D::getVectorOffset(float offset, bool degrees)
 {
 	//get the sine and cosine of 90degrees
 
@@ -250,10 +256,11 @@ Vector3D* Vector3D::getVectorOffset(float offset, bool degrees)
         	sn = sin(offset);
 	}
 
-        Vector3D* newVelocity = new Vector3D();
+        Vector3D newVelocity;
 
-        newVelocity->x = this->x * cs - this->z * sn;
-        newVelocity->z = this->x * sn + this->z * cs;
+        newVelocity.x = this->x * cs - this->z * sn;
+        newVelocity.y = 0; 
+        newVelocity.z = this->x * sn + this->z * cs;
 
 	return newVelocity;
 }
