@@ -100,7 +100,6 @@ Server::~Server()
         delete mClientVectorTemp;
 
 	//delete games 
-/*
         while (!mGameVector->empty())
         {
 		if (mGameVector->front())
@@ -112,7 +111,7 @@ Server::~Server()
         	mGameVector->erase(mGameVector->begin());
         }
         delete mGameVector;
-*/
+
 	//delete ogre root
 	delete mRoot;
 	LogString("delete ROOT!!!");
