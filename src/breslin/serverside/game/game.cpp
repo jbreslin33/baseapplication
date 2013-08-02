@@ -43,6 +43,7 @@ Game::Game(Server* server, int id)
 
 Game::~Game()
 {
+	delete mBounds;
 	StopLog();
 	delete mServer;
 }

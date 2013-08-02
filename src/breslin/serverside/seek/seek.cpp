@@ -32,6 +32,8 @@ Seek::Seek(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Seek::~Seek()
 {
+	delete mStateMachine;
+	delete mSeekPoint;
 }
 void Seek::update()
 {
