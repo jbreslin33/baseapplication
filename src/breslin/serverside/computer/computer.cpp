@@ -18,9 +18,9 @@ Computer::Computer(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
  	//computer states
    	mStateMachine = new StateMachine<Computer>(this);
-	mStateMachine->setCurrentState      (Random_Computer::Instance());
-	mStateMachine->setPreviousState     (Random_Computer::Instance());
-	mStateMachine->setGlobalState       (GlobalComputer::Instance());
+	mStateMachine->setCurrentState      (HUMAN_CONTROLLED::Instance());
+	mStateMachine->setPreviousState     (HUMAN_CONTROLLED::Instance());
+	mStateMachine->setGlobalState       (GLOBAL_COMPUTER::Instance());
 
 	mCounter   = 0;
         mThreshold = 1000;
@@ -28,7 +28,6 @@ Computer::Computer(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Computer::~Computer()
 {
-   	delete mStateMachine;
 }
 
 void Computer::update()
@@ -36,9 +35,9 @@ void Computer::update()
 	mStateMachine->update();
 }
 
-bool Computer::handleMessage(const Telegram& msg)
+bool Computer::handleLetter(Letter* letter)
 {
-        return mStateMachine->handleMessage(msg);
+        return mStateMachine->handleLetter(letter);
 }
 
 

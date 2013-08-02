@@ -13,10 +13,19 @@
 #include "../../game/partido/gamePartido.h"
 
 //client
-#include "../../client/partido/clientPartido.h"
+#include "../../client/robust/partido/clientPartido.h"
 
 //math
 #include "../../../math/vector3D.h"
+
+//states
+#include "states/shapePartidoStates.h"
+
+//move
+#include "../../move/move.h"
+
+//computerPartido
+#include "../../computer/partido/computerPartido.h"
 
 //postgresql
 #include <stdio.h>
@@ -39,26 +48,68 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
 	//setText
 	mClientPartido->setBattleRecordText();	
 	setText(mClientPartido->mBattleRecordText);	
+
+	//computer abilitys
+  	mComputerPartido = new ComputerPartido(this);
+        addComputerAbility(mComputerPartido);
+
+
+	//statemachine
+	mShapePartidoStateMachine =  new StateMachine<ShapePartido>(this);
+        mShapePartidoStateMachine->setGlobalState      (GLOBAL_SHAPE_PARTIDO::Instance());
+        mShapePartidoStateMachine->setCurrentState      (GAME_SHAPE_PARTIDO::Instance());
+        mShapePartidoStateMachine->setPreviousState      (GAME_SHAPE_PARTIDO::Instance());
 }
-	
+
 ShapePartido::~ShapePartido()
 {
 }
 
-void ShapePartido::processTick()
+void ShapePartido::update()
 {
-	Shape::processTick();
+   	mMove->mPositionBeforeCollision->x = mSceneNode->getPosition().x;
+        mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;
+        mMove->mPositionBeforeCollision->z = mSceneNode->getPosition().z;
+        
+	for (unsigned int i = 0; i < mComputerAbilityVector.size(); i++)
+        {
+                mComputerAbilityVector.at(i)->update();
+        }
+
+        for (unsigned int i = 0; i < mSteeringAbilityVector.size(); i++)
+        {
+                mSteeringAbilityVector.at(i)->update();
+        }
+	
+	mShapePartidoStateMachine->update();
+        
+	//process ticks on abilitys
+        for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+        {
+                mAbilityVector.at(i)->update();
+        }
+
+
+        if (mText.compare(mTextLast) != 0)
+        {
+                sendText();
+                mTextLast = mText;
+        }
 }
 
+bool ShapePartido::handleLetter(Letter* letter)
+{
+	return Shape::handleLetter(letter);
+}
+
+//no real collision just detection for battles...this way no one can get stuck
 void ShapePartido::collision(Shape* shape)
 {
-	Shape::collision(shape);	
-
 	if (mOpponent == NULL && mOpponentLast != shape)
 	{
 		if (mClientPartido)
 		{
-			mClientPartido->battleStart((ShapePartido*)shape);
+        		mOpponent = (ShapePartido*)shape;
 		}
 	}
 }

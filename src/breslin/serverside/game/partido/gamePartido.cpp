@@ -10,7 +10,7 @@
 #include "../../shape/partido/shapePartido.h"
 
 //client
-#include "../../client/partido/clientPartido.h"
+#include "../../client/robust/partido/clientPartido.h"
 
 //vector3d
 #include "../../../math/vector3D.h"
@@ -26,10 +26,10 @@ GamePartido::~GamePartido()
 {
 }
 
-//you should call this from server processUpdate
-void GamePartido::processUpdate()
+//you should call this from server update
+void GamePartido::update()
 {
-	Game::processUpdate();
+	Game::update();
 	
 	if (checkForEndOfGame())
 	{
@@ -87,6 +87,9 @@ bool GamePartido::checkForEndOfGame()
 		if (mServerPartido->mClientPartidoVector.at(i)->mLosses == 0)	
 		{
 			return false;
+		}
+		else
+		{
 		}
 	}
 	

@@ -20,7 +20,7 @@ public:
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
-  bool onMessage(Seek* seek, const Telegram& msg);
+  bool onLetter(Seek* seek, Letter* letter);
 };
 
 /*******************************
@@ -36,8 +36,21 @@ public:
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
-  bool onMessage(Seek* seek, const Telegram& msg);
+  bool onLetter(Seek* seek, Letter* letter);
 };
+
+class Reached_Destination : public State<Seek>
+{
+private:
+  Reached_Destination(){}
+public:
+  static Reached_Destination* Instance();
+  void enter  (Seek* seek);
+  void execute(Seek* seek);
+  void exit   (Seek* seek);
+  bool onLetter(Seek* seek, Letter* letter);
+};
+
 
 class No_Seek : public State<Seek>
 {
@@ -48,7 +61,7 @@ public:
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
-  bool onMessage(Seek* seek, const Telegram& msg);
+  bool onLetter(Seek* seek, Letter* letter);
 };
 
 #endif

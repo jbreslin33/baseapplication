@@ -22,6 +22,8 @@ Seek::Seek(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 	mSeekShape = NULL;
 	mSeekPoint = NULL;
+	mSeekVelocity = new Vector3D();
+	mSeekLength = 0.0f;
 
  	//seek states
 	mStateMachine =  new StateMachine<Seek>(this);
@@ -32,8 +34,6 @@ Seek::Seek(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Seek::~Seek()
 {
-	delete mStateMachine;
-	delete mSeekPoint;
 }
 void Seek::update()
 {
@@ -45,9 +45,9 @@ void Seek::update()
 	}
 }
 
-bool Seek::handleMessage(const Telegram& msg)
+bool Seek::handleLetter(Letter* letter)
 {
-        return mStateMachine->handleMessage(msg);
+        return mStateMachine->handleLetter(letter);
 }
 
 void Seek::updateSeekPoint()

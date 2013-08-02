@@ -246,9 +246,11 @@ set(HDRS
 	../fsm/state.h	
 	../fsm/stateMachine.h	
 
-	#messaging
-	../messaging/messageDispatcher.h
-	../messaging/telegram.h
+	#mailman
+	../serverside/mailman/mailMan.h
+
+	#letter
+	../serverside/letter/letter.h
 	
 	#game
 	../serverside/game/game.h
@@ -264,6 +266,9 @@ set(HDRS
 		#shape
 	../serverside/shape/shape.h
 	../serverside/shape/partido/shapePartido.h
+
+	#shape states
+	../serverside/shape/partido/states/shapePartidoStates.h
 	
 	#move
 	../serverside/move/move.h
@@ -271,17 +276,31 @@ set(HDRS
 	#move states
 	../serverside/move/states/moveStates.h
 	
+	#steering
+	../serverside/steering/steering.h
+	
+	#steering states
+	../serverside/steering/states/steeringStates.h
+	
 	#seek
 	../serverside/seek/seek.h
 	
 	#seek states
 	../serverside/seek/states/seekStates.h
 	
+	#avoid
+	../serverside/avoid/avoid.h
+	
+	#avoid states
+	../serverside/avoid/states/avoidStates.h
+	
 	#computer
 	../serverside/computer/computer.h
+	../serverside/computer/partido/computerPartido.h
 	
-	#ai states
+	#computer states
 	../serverside/computer/states/computerStates.h	
+	../serverside/computer/partido/states/computerPartidoStates.h	
 	
 	#rotation
 	../serverside/rotation/rotation.h
@@ -307,12 +326,13 @@ set(HDRS
 	
 	#client
 	../serverside/client/client.h
-	../serverside/client/partido/clientPartido.h
+	../serverside/client/robust/clientRobust.h
+	../serverside/client/robust/partido/clientPartido.h
 	
 	#client states
-	../serverside/client/states/clientStateMachine.h
-	../serverside/client/states/clientState.h
 	../serverside/client/states/clientStates.h
+	../serverside/client/robust/states/clientRobustStates.h
+	../serverside/client/robust/partido/states/clientPartidoStates.h
 
 	#quiz
 	../serverside/quiz/quiz.h
@@ -328,9 +348,12 @@ set(SRCS
 
 	#baseEntity
 	../baseentity/baseEntity.cpp
-	
-	#messaging
-	../messaging/messageDispatcher.cpp
+
+	#mailman
+	../serverside/mailman/mailMan.cpp
+
+	#letter
+	../serverside/letter/letter.cpp
 	
 	#game
 	../serverside/game/game.cpp
@@ -347,11 +370,20 @@ set(SRCS
 	../serverside/shape/shape.cpp
 	../serverside/shape/partido/shapePartido.cpp
 	
+	#shape states
+	../serverside/shape/partido/states/shapePartidoStates.cpp
+
 	#move
 	../serverside/move/move.cpp
 	
 	#move states
 	../serverside/move/states/moveStates.cpp
+	
+	#steering
+	../serverside/steering/steering.cpp
+	
+	#steering states
+	../serverside/steering/states/steeringStates.cpp
 	
 	#seek
 	../serverside/seek/seek.cpp
@@ -359,11 +391,19 @@ set(SRCS
 	#seek states
 	../serverside/seek/states/seekStates.cpp
 	
+	#avoid
+	../serverside/avoid/avoid.cpp
+	
+	#avoid states
+	../serverside/avoid/states/avoidStates.cpp
+	
 	#computer
 	../serverside/computer/computer.cpp
+	../serverside/computer/partido/computerPartido.cpp
 	
 	#computer states
 	../serverside/computer/states/computerStates.cpp
+	../serverside/computer/partido/states/computerPartidoStates.cpp
 	
 	#rotation
 	../serverside/rotation/rotation.cpp
@@ -389,10 +429,13 @@ set(SRCS
 	
 	#client
 	../serverside/client/client.cpp
-	../serverside/client/partido/clientPartido.cpp
+	../serverside/client/robust/clientRobust.cpp
+	../serverside/client/robust/partido/clientPartido.cpp
 
 	#client states
 	../serverside/client/states/clientStates.cpp
+	../serverside/client/robust/states/clientRobustStates.cpp
+	../serverside/client/robust/partido/states/clientPartidoStates.cpp
 
 	#quiz
 	../serverside/quiz/quiz.cpp

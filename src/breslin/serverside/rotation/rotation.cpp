@@ -36,9 +36,6 @@ Rotation::Rotation(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Rotation::~Rotation()
 {
-	delete mRotation;
-	delete mRotationLast;
-	delete mStateMachine;
 }
 
 void Rotation::update()
@@ -53,9 +50,9 @@ void Rotation::update()
 	mStateMachine->update();
 }
 
-bool Rotation::handleMessage(const Telegram& msg)
+bool Rotation::handleLetter(Letter* letter)
 {
-        return mStateMachine->handleMessage(msg);
+        return mStateMachine->handleLetter(letter);
 }
 
 

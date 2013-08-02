@@ -17,17 +17,13 @@ template <class entity_type> class State;
 
 // Define SOCKET data type for UNIX (defined in WinSock for Win32)
 // And socklen_t for Win32
-#ifdef WIN32
-	typedef int socklen_t;
-#else
 	typedef int SOCKET;
 
-	#ifndef TRUE
-	#define TRUE 1
-	#endif
-	#ifndef FALSE
-	#define FALSE 0
-	#endif
+#ifndef TRUE
+#define TRUE 1
+#endif
+#ifndef FALSE
+#define FALSE 0
 #endif
 
 // Connection states
@@ -65,16 +61,8 @@ public:
 ~Client();
 
 StateMachine<Client>* mStateMachine;
-StateMachine<Client>* mControlStateMachine;
-StateMachine<Client>* mPermanenceStateMachine;
 
-//keys
-int mKeyUp;
-int mKeyDown;
-int mKeyLeft;
-int mKeyRight;
-int mKeyCounterClockwise;
-int mKeyClockwise;
+bool mPermanence;
 
 	//Message
         Message mMessage;
@@ -94,16 +82,13 @@ int mKeyClockwise;
 	std::string mStringUsername;
 	std::string mStringPassword;
 
-	int mKey;
-	int mKeyLast;
-
 public:
 
 	//update
 	virtual void update();
 	
-	//handle message
-  	virtual bool  handleMessage(const Telegram& msg);
+	//handle letter 
+  	virtual bool  handleLetter(Letter* letter);
 
 	//timeout
 	void checkForTimeout();
@@ -115,9 +100,7 @@ public:
 	void sendConnected();
 
 	//login
-	void login();
-	void logout();
-	bool checkLogin(Message* mes);
+	virtual bool checkLogin(Message* mes);
         bool getPasswordMatch(std::string username,std::string password);
 	void readLoginMessage(Message* mes);
 
@@ -126,25 +109,7 @@ public:
 	struct sockaddr *GetSocketAddress(void) { return &mSocketAddress; }
 	void setSocketAddress(struct sockaddr *address); 
 
-    	Shape* mShape;  //on server: everybody's got one ...same on clientside mShape is the avatar.
-	void setShape(Shape* shape);  
-
 	Server* mServer;
-
-	//game
-        std::vector<Game*> mGameVector;
-	void addGame(Game* game);
-	Game* mGame;
-	Game* getGame();
-	virtual void setGame(int gameID);
-	
-	//db
-	int         db_id;
-        std::string db_username;
-        std::string db_password;
-        std::string db_first_name;
-        std::string db_last_name;
-        int         db_school_id;
 
 
 };

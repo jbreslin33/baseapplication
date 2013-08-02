@@ -10,7 +10,7 @@
 #include "../network/network.h"
 
 //client
-#include "../client/client.h"
+#include "../client/robust/clientRobust.h"
 
 //shape
 #include "../shape/shape.h"
@@ -43,7 +43,6 @@ Game::Game(Server* server, int id)
 
 Game::~Game()
 {
-	delete mBounds;
 	StopLog();
 	delete mServer;
 }
@@ -70,12 +69,12 @@ Shape* Game::getShapeFromID(int id)
 }
 
 //you should call this from server processUpdate
-void Game::processUpdate()
+void Game::update()
 {
 	//this is where they want to move
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{
-		mShapeVector.at(i)->processTick();
+		mShapeVector.at(i)->update();
 		checkBounds(mShapeVector.at(i));
 	}
 	
@@ -137,7 +136,7 @@ void Game::checkBounds(Shape* shape)
         }
 }
 
-bool Game::checkScope(Client* client, Shape* shape)
+bool Game::checkScope(ClientRobust* client, Shape* shape)
 {
 	//let's check scop here...
 	float x1 = client->mShape->mSceneNode->getPosition().x;  //clientshape
@@ -174,7 +173,7 @@ void Game::sendExitNotification()
 }
 
 //this is just for clients right now, should i make another or hijack this function??
-void Game::readDeltaMoveCommand(Message *mes, Client *client)
+void Game::readDeltaMoveCommand(Message *mes, ClientRobust *client)
 {
 	client->mKey = mes->ReadByte();
 }
@@ -204,7 +203,7 @@ Vector3D* Game::getOpenPoint()
 {
 	Vector3D* vector3D = new Vector3D();
 
-	for (int x = 25; x < 3000; x++)
+	for (int x = -200; x < 3000; x++)
 	{	
 		bool occupied = false; 
 		vector3D->x = x;
@@ -229,7 +228,7 @@ Vector3D* Game::getOpenPoint()
 
                                 //i am simply adding the 2 collisionradius's of the 2 objects in question then comparing
                                 //to distSQ between them. IS this right or is it working by chance?
-                                if(distSq < mShapeVector.at(i)->mCollisionRadiusSpawn * 25)
+                                if(distSq < mShapeVector.at(i)->mCollisionRadiusSpawn * 300)
                                 {
 					occupied = true; 
                                 }
@@ -294,14 +293,12 @@ void Game::sendShapes(Client* client)
         }
 }
 
-
-
 //the client that is leaving????
-void Game::leave(Client* client)
+void Game::leave(ClientRobust* client)
 {
         if (client->mShape)
         {
-  		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+                mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
                 mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
                 mMessage.WriteByte(mServer->mMessageLeaveGame); // add type
                 if (client->mClientID > 0)
@@ -312,4 +309,5 @@ void Game::leave(Client* client)
         }
         client->mGame = NULL;
 }
+
 

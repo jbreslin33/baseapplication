@@ -30,9 +30,10 @@ using namespace Ogre;
 // Introduce classes
 class BaseEntity;
 class Network;
-class Client;
+class ClientRobust;
 class Game;
 class Shape;
+class MailMan;
 
 class Server
 {
@@ -46,6 +47,9 @@ public:
 
 	//Message
 	Message mMessage;
+
+	//MailMan
+	MailMan* mMailMan;
 	
 	//games
 	std::vector<BaseEntity*> mBaseEntityVector;
@@ -54,7 +58,7 @@ public:
 	std::vector<Game*> mGameVector;
 
 	//clients
-	std::vector<Client*> mClientVector;
+	std::vector<ClientRobust*> mClientVector;
 	std::vector<Client*> mClientVectorTemp;
 
 	//port
@@ -121,7 +125,7 @@ public:
 	BaseEntity* getBaseEntityFromID(int id);
 
 	//update
-	void processUpdate(int msec);
+	void update(int msec);
 	virtual void processGames();
 	virtual void processClients();
 	virtual void sendCommands();
@@ -131,7 +135,7 @@ public:
 
 	//client
    	void createClients();
-	void addClient(Client* client, bool permanent);
+	virtual void addClient(Client* client, bool permanent);
 
 	//packets
 	int  getPacket  (char *data, struct sockaddr *from);

@@ -23,10 +23,19 @@ enter: function()
 	
 	this.mGamePartido.mApplicationPartido.showBattleScreen();
 	this.mGamePartido.mBattleStart = false;
+	this.mGamePartido.mApplicationPartido.mAnswerTime = 0;
 },
 
 execute: function()
 {
+
+	if (this.mGamePartido.mApplicationPartido.mAnswerTime > 2) //overtime....
+        {
+                this.mGamePartido.mApplicationPartido.mLabelAnswer.value = 'oot';
+                this.mGamePartido.mApplicationPartido.sendAnswer();
+        }
+
+
 	this.mGamePartido.mApplicationPartido.mLabelAnswer.focus();
 	//check for end of batlle
 	if (this.mGamePartido.mBattleEnd)

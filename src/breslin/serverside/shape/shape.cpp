@@ -11,7 +11,7 @@
 #include "../game/game.h"
 
 //client
-#include "../../serverside/client/client.h"
+#include "../../serverside/client/robust/clientRobust.h"
 
 //server
 #include "../../serverside/server/server.h"
@@ -22,8 +22,14 @@
 //move
 #include "../move/move.h"
 
+//steering
+#include "../steering/steering.h"
+
 //seek
 #include "../seek/seek.h"
+
+//avoid
+#include "../avoid/avoid.h"
 
 //ai
 #include "../computer/computer.h"
@@ -35,8 +41,8 @@
 
 #include <string>
 
-Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
-			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool computer)
+Shape::Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+			 bool animated ,bool collidable, float collisionRadius, int meshCode, bool computer)  : BaseEntity(BaseEntity::getNextValidID())
 {
  	//mPosition = position;
 	mIndex  = index;
@@ -66,10 +72,15 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 	//add abilitys
 	
 	mComputer = new Computer(this);
-	addAbility(mComputer);	
-	
+	addComputerAbility(mComputer);	
+
+	mSteering = new Steering(this);
+
 	mSeek = new Seek(this);
 	addSteeringAbility(mSeek);	
+	
+	mAvoid = new Avoid(this);
+	addSteeringAbility(mAvoid);	
 	
 	mRotation = new Rotation(this);
 	addAbility(mRotation);	
@@ -83,9 +94,6 @@ Shape::Shape(unsigned int index, Game* game, Client* client, Vector3D* position,
 
 Shape::~Shape()
 {
-	delete mSeek;
-	delete mRotation;
-	delete mMove;
 	delete mSceneNode;
 }
 
@@ -117,66 +125,43 @@ void Shape::addAbility(BaseEntity* ability)
 
 void Shape::addSteeringAbility(BaseEntity* ability)
 {
-	mSteeringAbilityVector.push_back(ability);	
+        mSteeringAbilityVector.push_back(ability);      
 }
 
-void Shape::remove()
+void Shape::addComputerAbility(BaseEntity* ability)
 {
-	//make mMessage on server then send it to each client in turn 
-        for (unsigned int i = 0; i < mGame->mServer->mClientVector.size(); i++)
-	{
-		if (mGame->mServer->mClientVector.at(i)->mGame == mGame)
-		{
-			if (mGame->mServer->mClientVector.at(i)->mClientID > -1)
-			{
-				if (mGame->mServer->mClientVector.at(i)->mShape != this)
-				{
- 					mGame->mServer->mMessage.Init(mGame->mServer->mMessage.outgoingData, sizeof(mGame->mServer->mMessage.outgoingData));
-       					mGame->mServer->mMessage.WriteByte(mGame->mServer->mMessageRemoveShape); // type
-					if (mGame->mServer->mClientVector.at(i)->mClientID > 0)
-					{
-       						mGame->mServer->mMessage.WriteByte(mGame->mServer->mClientVector.at(i)->mClientID); //client id for browsers
-					}
-       					mGame->mServer->mMessage.WriteByte(mIndex);
-
-					mGame->mServer->mNetwork->sendPacketTo(mGame->mServer->mClientVector.at(i),&mGame->mServer->mMessage);
-					
-				}
-				else
-				{
-				}
-			}
-		}
-        }
-
-	//get rid of shape from games shape vector
-	for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
-	{
-		if (mGame->mShapeVector.at(i) == this)
-		{
-			mGame->mShapeVector.erase (mGame->mShapeVector.begin()+i);
-		}
-	}
+        mComputerAbilityVector.push_back(ability);      
 }
 
-void Shape::processTick()
+bool Shape::handleLetter(Letter* letter)
+{
+        //return mStateMachine->handleLetter(letter);
+	return false;
+}
+
+void Shape::update()
 {
 	mMove->mPositionBeforeCollision->x = mSceneNode->getPosition().x;
     	mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;
     	mMove->mPositionBeforeCollision->z = mSceneNode->getPosition().z;
+        
+	for (unsigned int i = 0; i < mComputerAbilityVector.size(); i++)
+        {
+                mComputerAbilityVector.at(i)->update();
+        }
 	
+        for (unsigned int i = 0; i < mSteeringAbilityVector.size(); i++)
+        {
+                mSteeringAbilityVector.at(i)->update();
+        }
+
 	//process ticks on abilitys
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
 		mAbilityVector.at(i)->update();
 	}
-	
-	//process ticks on steering abilitys..here you can use one of the precedence or bailout methods in bucklands book
-	for (unsigned int i = 0; i < mSteeringAbilityVector.size(); i++)
-	{
-		mSteeringAbilityVector.at(i)->update();
-	}
-	
+    
+   
 	if (mText.compare(mTextLast) != 0)
 	{
 		sendText();				

@@ -20,7 +20,7 @@
 #include <signal.h>
 #include "../tdreamsock/dreamLinuxSock.h"
 
-#include "../client/client.h"
+#include "../client/robust/clientRobust.h"
 
 //for string
 #include <string>
@@ -42,7 +42,6 @@ Network::Network(Server* server, const char netInterface[32], int port)
 
 Network::~Network()
 {
-	delete mDreamLinuxSock;
 }
 
 void Network::shutdown(void)

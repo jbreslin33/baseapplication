@@ -1,7 +1,7 @@
 #ifndef BASEENTITY_H
 #define BASEENTITY_H
 
-#include "../messaging/telegram.h"
+#include "../serverside/letter/letter.h"
 
 class BaseEntity
 {
@@ -16,11 +16,10 @@ static int mNextValidID;
 
 virtual void update()=0;
 
-virtual bool handleMessage(const Telegram& msg)=0;
+virtual bool handleLetter(Letter* letter)=0;
 
 void setID(int id);
 int  getID()const { return mID; }
-  //use this to grab the next valid ID
 
 static int   getNextValidID(){ return mNextValidID; }
 

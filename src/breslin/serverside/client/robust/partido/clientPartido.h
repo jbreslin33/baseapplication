@@ -1,7 +1,7 @@
 #ifndef CLIENTPARTIDO_H
 #define CLIENTPARTIDO_H
 
-#include "../client.h"
+#include "../clientRobust.h"
 
 #include <vector>
 
@@ -13,13 +13,16 @@ class GamePartido;
 class ShapePartido;
 class Utility;
 
-class ClientPartido : public Client
+class ClientPartido : public ClientRobust
 {
 
 public:
 
 ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID, bool permanence);	
 ~ClientPartido();
+
+StateMachine<ClientPartido>* mClientPartidoStateMachine;
+StateMachine<ClientPartido>* mBattleStateMachine;
 
 static const int WIN  = 1;
 static const int TIE  = 0;
@@ -47,6 +50,8 @@ bool mWaitingForAnswer;
 std::string mQuestionString;
 int mBattleScore;
 std::string mBattleRecordText;
+int mComputerAskedTime;
+int mComputerAnswerTime;
 
 int mWins;
 int mLosses;
@@ -72,8 +77,8 @@ void setShape(ShapePartido* shapePartido);
 //update
 virtual void update();
 
-//handle message
-virtual bool  handleMessage(const Telegram& msg);
+//handle letter 
+virtual bool  handleLetter(Letter* letter);
 
 //battle
 int getNewQuestionID();

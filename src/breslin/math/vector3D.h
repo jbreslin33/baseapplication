@@ -36,9 +36,10 @@ void zero();
 void printValues();
 
 void normalise();
-
+void truncate(float max);
 void multiply(float num);
 void add     (Vector3D* vectorToAddtoThisOne);
+void add     (Vector3D* add1, Vector3D* add2);
 void subtract(Vector3D* vectorToAddtoThisOne);
 void subtract(Vector3D* sub1, Vector3D* sub2);
 void copyValuesFrom(Vector3D* copyFrom);
@@ -50,5 +51,9 @@ void convertFromVector3(Vector3 vector3);
 
 Quaternion* getRotationTo(Vector3D* to);
 float getDegreesToSomething(Vector3D* to);
+
+Vector3D* getVectorOffset(float offset, bool degrees);
+
+
 };
 #endif

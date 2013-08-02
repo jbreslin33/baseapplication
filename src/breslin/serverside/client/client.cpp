@@ -1,5 +1,6 @@
 //parent
 #include "client.h"
+#include "robust/clientRobust.h"
 
 //log
 #include "../tdreamsock/dreamSockLog.h"
@@ -31,6 +32,8 @@
 //states
 #include "states/clientStates.h"
 
+//mailman
+#include "../mailman/mailMan.h"
 
 #ifdef WIN32
 //
@@ -49,47 +52,32 @@
 
 Client::Client(Server* server, struct sockaddr *address, int clientID, bool permanence) : BaseEntity(BaseEntity::getNextValidID())
 {
-        //keys
-        mKeyUp = 1;
-        mKeyDown = 2;
-        mKeyLeft = 4;
-        mKeyRight = 8;
-        mKeyCounterClockwise = 16;
-        mKeyClockwise = 32;
-
+	mPermanence = permanence;
+	
 	//logged in
 	mLoggedIn = false;
 
 	//client id for php but everyone uses one...
 	mClientID = clientID;
 	
-	//db
-	db_id = 0;
-	db_school_id = 0;
-
-	//game--there should be a vector as well. and a mGame to show what the user is playing right now if any 
-	mGame = NULL;
-	
-	//shape
-	mShape = NULL;
-
 	//server
 	mServer = server;
 
-	//key
-	mKey = 0;
-	mKeyLast = 0;
-	
 	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
+
+	mStateMachine =  new StateMachine<Client>(this);
 
 	if (!address)
 	{
 		mConnectionState  = DREAMSOCK_DISCONNECTED;
+        	mStateMachine->setCurrentState      (Disconnected::Instance());
 	}
 	else
 	{
 		setSocketAddress(address);
 		mConnectionState  = DREAMSOCK_CONNECTING;
+        	mStateMachine->setCurrentState      (Connected::Instance());
+
 	}
 
 	if (mClientID >= 0)
@@ -101,40 +89,24 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 		//your the node for web sockets or a dummy ai client using node address temporarily
 	}
 
-	//client states
-	mStateMachine =  new StateMachine<Client>(this);
-        mStateMachine->setCurrentState      (Logged_Out::Instance());
-        mStateMachine->setPreviousState     (NULL);
-        mStateMachine->setGlobalState       (GlobalClient::Instance());
- 
-	//control states	
-	mControlStateMachine =  new StateMachine<Client>(this);
-        mControlStateMachine->setCurrentState      (Computer_Mode::Instance());
-        mControlStateMachine->setPreviousState     (NULL);
-        mControlStateMachine->setGlobalState       (NULL);
-
-	//permanence states
-        mPermanenceStateMachine = new StateMachine<Client>(this);    //setup the state machine
-	
-	if (permanence)
+	if (mPermanence)
 	{
-        	mPermanenceStateMachine->setCurrentState      (Permanent::Instance());
+		mServer->addClient(this,true);
 	}	
 	else
 	{
-        	mPermanenceStateMachine->setCurrentState      (Temporary::Instance());
+		mServer->addClient(this,false);
 	}
 
-        mPermanenceStateMachine->setPreviousState     (NULL);
-        mPermanenceStateMachine->setGlobalState       (NULL);
-
+        mStateMachine->setPreviousState     (NULL);
+        mStateMachine->setGlobalState       (GlobalClient::Instance());
+	
+	mServer->mBaseEntityVector.push_back(this);
 }
 
 Client::~Client()
 {
-	delete mStateMachine;
-	delete mControlStateMachine;
-
+/*
 	//this will check if there is an mShape
 
 	if (mGame)
@@ -149,38 +121,8 @@ Client::~Client()
  			mServer->mClientVector.erase(mServer->mClientVector.begin()+i);
 		}
 	}
+*/
 }
-
-//game
-Game* Client::getGame()
-{
-	return mGame;
-}
-
-void Client::addGame(Game* game)
-{
-	mGameVector.push_back(game);
-} 
-
-void Client::setGame(int gameID)
-{
-	
- 	for (int i = 0; i < mGameVector.size(); i++)
-        {
-        	if (mGameVector.at(i)->mID == gameID)
-               	{
-               		mGame = mGameVector.at(i);
-			mGame->sendShapes(this);
-                }
-	}	
-}
-
-//shape
-void Client::setShape(Shape* shape)
-{
-        mShape = shape;
-}
-
 
 void Client::setSocketAddress(struct sockaddr *address)
 {
@@ -190,17 +132,16 @@ void Client::setSocketAddress(struct sockaddr *address)
 void Client::update()
 {
         mStateMachine->update();
-        mControlStateMachine->update();
-        mPermanenceStateMachine->update();
 }
 
-bool Client::handleMessage(const Telegram& msg)
+bool Client::handleLetter(Letter* letter)
 {
-	return mStateMachine->handleMessage(msg);
+	return mStateMachine->handleLetter(letter);
 }
 
 void Client::remove()
 {
+/*
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
 		if (mServer->mClientVector.at(i) == this)
@@ -209,6 +150,7 @@ void Client::remove()
 			///delete this;
 		}
 	}
+*/
 }
 
 //connected
@@ -220,41 +162,6 @@ void Client::sendConnected()
 	{
         	mMessage.WriteByte(mClientID); // add mClientID for browsers 
 	}
-	mServer->mNetwork->sendPacketTo(this,&mMessage);
-}
-
-//login
-//i should send db_id back as well.....because once a client connects we are not going to delete it..... we will just manage it best we can from here on server....
-//which means when you login from a new address we will send a notification to old address as a courtesy....
-void Client::login()
-{
-	LogString("sending login to clientID:%d",mClientID);
-
-	//set last messageTime
-	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
-
-	mLoggedIn = true;
-
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServer->mMessageLoggedIn); // add type
-	if (mClientID > 0)
-	{
-        	mMessage.WriteByte(mClientID); //client id for browsers
-	}	
-	mServer->mNetwork->sendPacketTo(this,&mMessage);
-}
-
-void Client::logout()
-{
-	LogString("sending logout to clientID:%d",mClientID);
-	mLoggedIn = false;
-
-        mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-        mMessage.WriteByte(mServer->mMessageLoggedOut); // add type
-	if (mClientID > 0)
-	{
-        	mMessage.WriteByte(mClientID); //client id for browsers
-	}	
 	mServer->mNetwork->sendPacketTo(this,&mMessage);
 }
 
@@ -299,46 +206,34 @@ void Client::readLoginMessage(Message* mes)
                 }
         }
 }
+/*
+       for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+        {
+                if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
+                {
 
+*/
 bool Client::checkLogin(Message* mes)
 {
+	LogString("Client::checkLogin");
 	readLoginMessage(mes);
 
-	//let's find what permanent client you are trying to login to	
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
-		//do you match the username/password?
 		if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
 		{
-			LogString("match!!!:%d",mClientID);			
-			//we could have the same client log back in with same up	
-			if (this == mServer->mClientVector.at(i))
-			{
-				login();	
-			}
-			else //we have a diff client but a pass match...
-			{
-				//for (unsigned int b = 0; b < mServer->mClientVector.size(); b++)
-				//{
-				//	if (this == mClientVector	
-
-				//logout client who is logged in under this uname
-				//mServer->mClientVector.at(i)->logout();
-				//let's disconnect this client because it used to control someone
-				//logout();
-				mConnectionState = DREAMSOCK_DISCONNECTED; 
-
-                                //swap
-                                mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
-                                mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
-                                mServer->mClientVector.at(i)->mClientID = mClientID;
-                                mServer->mClientVector.at(i)->login();
-	//			}
-			}
+			//send logout letter to clientRobust....
+                        mServer->mClientVector.at(i)->logout();
 			
-		}
-		else
-		{
+			mConnectionState = DREAMSOCK_DISCONNECTED; 
+
+                        mServer->mClientVector.at(i)->setSocketAddress(&mSocketAddress);
+                        mServer->mClientVector.at(i)->mConnectionState = DREAMSOCK_CONNECTED;
+                        mServer->mClientVector.at(i)->mClientID = mClientID;
+			
+
+			//send login letter
+                        mServer->mClientVector.at(i)->login();
 		}
 	}
 }
@@ -380,20 +275,18 @@ bool Client::getPasswordMatch(std::string username,std::string password)
 		strValue << value;
 		unsigned int intValue;
 		strValue >> intValue;
-		db_id = intValue;
+		//db_id = intValue;
 	
                 match = true;
         }
-
         PQclear(res);
-
         PQfinish(conn);
-
         return match;
 }
 
 void Client::checkForTimeout()
 {
+/*
         // Don't timeout when connecting or if logged out...
         if(mLoggedIn == false || mConnectionState == DREAMSOCK_CONNECTING)
         {
@@ -405,9 +298,7 @@ void Client::checkForTimeout()
         // Check if the client has been silent for 30 seconds if so log him out and start ai up...
         if(currentTime - mLastMessageTime > 30000)
         {
-		LogString("timeout logout");
 		logout();
-		LogString("logging out.. you should fire up ai for:%d",mClientID);
         }
+*/
 }
-

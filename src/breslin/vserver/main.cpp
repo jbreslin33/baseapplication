@@ -77,7 +77,7 @@ int main(int argc, char **argv)
 					newTime = server->mNetwork->getCurrentSystemTime();
 					time = newTime - oldTime;
 				} while (time < 1);
-				server->processUpdate(time);
+				server->update(time);
 				oldTime = newTime;
 			}
 		}
@@ -118,7 +118,7 @@ int main(int argc, char **argv)
                                 } while (time < 1);
 				if (server)
 				{
-                                	server->processUpdate(time);
+                                	server->update(time);
 				}
 				else
 				{

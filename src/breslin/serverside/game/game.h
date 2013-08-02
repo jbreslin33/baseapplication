@@ -14,7 +14,7 @@ using namespace std;
 #define COMMAND_HISTORY_SIZE		64
 
 class Server;
-class Client;
+class ClientRobust;
 class Shape;
 class Vector3D;
 class Bounds;
@@ -57,22 +57,22 @@ public:
 
 	// Network
 	void	sendExitNotification();
-	void	readDeltaMoveCommand(Message *mes, Client *client);
+	void	readDeltaMoveCommand(Message *mes, ClientRobust *client);
 	
 	//time
-	virtual void	processUpdate();
+	virtual void	update();
 	
 	//collision detection
 	virtual void checkCollisions();
 	virtual void checkBounds(Shape* shape);
 		
 	//scope
- 	bool    checkScope(Client* client, Shape* shape);
+ 	bool    checkScope(ClientRobust* client, Shape* shape);
 
 
 	//join
-	void join(Client* client);
-	void leave(Client* client);
+	void join(ClientRobust* client);
+	void leave(ClientRobust* client);
 	
 	//shapes
 	virtual void createShapes();
