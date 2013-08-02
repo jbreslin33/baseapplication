@@ -15,7 +15,6 @@ using namespace Ogre;
 
 class Shape;
 class Vector3D;
-class Letter;
 
 class Seek : public BaseEntity 
 {
@@ -36,41 +35,19 @@ Seek(Shape* shape);
 //update
 virtual void update();
 
-//handle letter 
-virtual bool  handleLetter(Letter* letter);
+//handle message
+virtual bool  handleMessage(const Telegram& msg);
+
 
 Shape* mShape;
-
-bool mSeekOn;
-
 Shape* mSeekShape;
-Shape* mDestinationShape;
-
 Vector3D* mSeekPoint;
-Vector3D* mDestinationPoint;
-
-Vector3D* mSeekVelocity;
-Vector3D* mDestinationVelocity;
-
-float mSeekLength;
-float mDestinationLength;
-
 void setSeekPoint(Vector3D* seekPoint);
-void setDestinationPoint(Vector3D* destinationPoint);
-
-Vector3D* getSeekPoint() { return mSeekPoint; }
-Vector3D* getDestinationPoint() { return mDestinationPoint; }
-
 void setSeekShape(Shape* seekShape);
-void setDestinationShape(Shape* destinationShape);
-
-Shape* getSeekShape() { return mSeekShape; }
-Shape* getDestinationShape() { return mDestinationShape; }
-
 void updateSeekPoint();
-void updateDestinationPoint();
 
 StateMachine<Seek>* mStateMachine;
+
 
 
 };

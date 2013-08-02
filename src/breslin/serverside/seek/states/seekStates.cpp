@@ -22,188 +22,130 @@
 //move
 #include "../../move/move.h"
 
-//client
-#include "../../client/robust/clientRobust.h"
-
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GLOBAL_SEEK* GLOBAL_SEEK::Instance()
+GlobalSeek* GlobalSeek::Instance()
 {
-  static GLOBAL_SEEK instance;
+  static GlobalSeek instance;
   return &instance;
 }
-void GLOBAL_SEEK::enter(Seek* seek)
+void GlobalSeek::enter(Seek* seek)
 {
 }
-void GLOBAL_SEEK::execute(Seek* seek)
+void GlobalSeek::execute(Seek* seek)
 {
-	if (seek->mSeekPoint)
-	{
-		if (seek->mStateMachine->currentState() != NORMAL_SEEK::Instance())
-		{
-			seek->mStateMachine->changeState(NORMAL_SEEK::Instance());
-		}
-	}
-	if (seek->mDestinationPoint)
-	{
-		if (seek->mStateMachine->currentState() != SEEK_DESTINATION::Instance())
-		{ 
-			seek->mStateMachine->changeState(SEEK_DESTINATION::Instance());
-		}
-	}
+
 }
-void GLOBAL_SEEK::exit(Seek* seek)
+void GlobalSeek::exit(Seek* seek)
 {
 }
-bool GLOBAL_SEEK::onLetter(Seek* seek, Letter* letter)
+bool GlobalSeek::onMessage(Seek* seek, const Telegram& msg)
 {
         return true;
 }
 
+
 /*****************************************
-	NORMAL_SEEK
+	Normal_Seek
 ****************************************/
-NORMAL_SEEK* NORMAL_SEEK::Instance()
+Normal_Seek* Normal_Seek::Instance()
 {
-  static NORMAL_SEEK instance;
+  static Normal_Seek instance;
   return &instance;
 }
-void NORMAL_SEEK::enter(Seek* seek)
+void Normal_Seek::enter(Seek* seek)
 {
-	//LogString("NORMAL_SEEK:%d",seek->mShape->mClient->db_id);
+	//LogString("Normal");
 }
-void NORMAL_SEEK::execute(Seek* seek)
+void Normal_Seek::execute(Seek* seek)
 {
 	if (seek->mSeekShape || seek->mSeekPoint)
-        {
-               	//current position 
-		Vector3D* currentPosition = new Vector3D();
-		currentPosition->convertFromVector3(seek->mShape->mSceneNode->getPosition());
+	{
+ 		Vector3D* newKeyDirection = new Vector3D();
+                Vector3D* currentPosition  = new Vector3D();
 
-		//seek velocity and length
-                seek->mSeekVelocity->subtract(seek->mSeekPoint,currentPosition);
-		seek->mSeekLength = seek->mSeekVelocity->length(); 			
-		
-		seek->mSeekVelocity->normalise();
+                currentPosition->x = seek->mShape->mSceneNode->getPosition().x;
+                currentPosition->y = seek->mShape->mSceneNode->getPosition().y;
+                currentPosition->z = seek->mShape->mSceneNode->getPosition().z;
 
-		//set to shape velocity
-		seek->mShape->mMove->mVelocity->copyValuesFrom(seek->mSeekVelocity);
-		
-		delete currentPosition;
-        }
-        else
-        {
-                seek->mStateMachine->changeState(NO_SEEK::Instance());
-        }
+                newKeyDirection->subtract(seek->mSeekPoint,currentPosition);
+                seek->mShape->mMove->mHeading->x = newKeyDirection->x;
+               	seek->mShape->mMove->mHeading->y = newKeyDirection->y;
+                seek->mShape->mMove->mHeading->z  = newKeyDirection->z;
+
+                seek->mShape->mMove->mHeading->normalise();
+	}
+	else
+	{
+//		seek->mStateMachine->changeState(No_Seek::Instance());
+	}
+/*
+	//check for No_seek and Decelerate and Accelerate states..
+    	if (seek->mShape->mHeading.isZeroLength()) 
+	{
+		if(seek->mRunSpeed > 0.0) //Decelerate_Seek
+		{
+			seek->mStateMachine->changeState(Decelerate_Seek::Instance());
+			return;
+		}
+        	else //No_Seek
+		{
+			seek->mStateMachine->changeState(No_Seek::Instance());
+			return;
+		}
+    	}
+	else 
+	{
+        	if(seek->mRunSpeed < seek->mShape->mSpeedMax) //Accelerate_Seek
+		{
+			seek->mStateMachine->changeState(Accelerate_Seek::Instance());
+			return;
+		}
+	}
+
+	//actual seek
+	seek->mShape->mSceneNode->translate(seek->mShape->mHeading.x * seek->mShape->mGame->mServer->mFrameTime / 1000.0f * seek->mRunSpeed,
+		0,
+		seek->mShape->mHeading.z  * seek->mShape->mGame->mServer->mFrameTime / 1000.0f * seek->mRunSpeed,
+		Node::TS_WORLD);
+*/
 }
-void NORMAL_SEEK::exit(Seek* seek)
+void Normal_Seek::exit(Seek* seek)
 {
 }
-bool NORMAL_SEEK::onLetter(Seek* seek, Letter* letter)
+bool Normal_Seek::onMessage(Seek* seek, const Telegram& msg)
 {
         return true;
 }
 
 /*****************************************
-        SEEK_DESTINATION
+	No_Seek
 ****************************************/
-SEEK_DESTINATION* SEEK_DESTINATION::Instance()
+No_Seek* No_Seek::Instance()
 {
-        static SEEK_DESTINATION instance;
-        return &instance;
-}
-void SEEK_DESTINATION::enter(Seek* seek)
-{
-        //LogString("SEEK_DESTINATION:%d",seek->mShape->mClient->db_id);
-}
-void SEEK_DESTINATION::execute(Seek* seek)
-{
- 	if (seek->mDestinationShape || seek->mDestinationPoint)
-        {
-                //current position
-                Vector3D* currentPosition = new Vector3D();
-                currentPosition->convertFromVector3(seek->mShape->mSceneNode->getPosition());
-
-                //destination velocity and length
-                seek->mDestinationVelocity->subtract(seek->mDestinationPoint,currentPosition);
-                seek->mDestinationLength = seek->mDestinationVelocity->length();
-
-                delete currentPosition;
-
-                if (seek->mDestinationLength <= 1) //close enough goto reachdestination
-                {
-                        seek->mStateMachine->changeState(REACHED_DESTINATION::Instance());
-                }
-                else //still not close enough seek on
-                {
-                        seek->mDestinationVelocity->normalise();
-
-                        //set to shape velocity
-                        seek->mShape->mMove->mVelocity->copyValuesFrom(seek->mDestinationVelocity);
-                }
-        }
-        else
-        {
-                seek->mStateMachine->changeState(NO_SEEK::Instance());
-        }
-
-}
-void SEEK_DESTINATION::exit(Seek* seek)
-{
-}
-bool SEEK_DESTINATION::onLetter(Seek* seek, Letter* letter)
-{
-        return true;
-}
-
-/*****************************************
-        REACHED_DESTINATION
-****************************************/
-REACHED_DESTINATION* REACHED_DESTINATION::Instance()
-{
-        static REACHED_DESTINATION instance;
-        return &instance;
-}
-void REACHED_DESTINATION::enter(Seek* seek)
-{
-        //LogString("REACHED_DESTINATION:%d",seek->mShape->mClient->db_id);
-        //set to shape velocity to zero as you have reached destination
-        seek->mShape->mMove->mVelocity->zero();
-	seek->setDestinationShape(NULL);
-}
-void REACHED_DESTINATION::execute(Seek* seek)
-{
-}
-void REACHED_DESTINATION::exit(Seek* seek)
-{
-}
-bool REACHED_DESTINATION::onLetter(Seek* seek, Letter* letter)
-{
-        return true;
-}
-
-
-
-/*****************************************
-	NO_SEEK
-****************************************/
-NO_SEEK* NO_SEEK::Instance()
-{
-	static NO_SEEK instance;
+	static No_Seek instance;
 	return &instance;
 }
-void NO_SEEK::enter(Seek* seek)
+void No_Seek::enter(Seek* seek)
 {
-	//LogString("NO_SEEK:%d",seek->mShape->mClient->db_id);
+	//LogString("No");
 }
-void NO_SEEK::execute(Seek* seek)
+void No_Seek::execute(Seek* seek)
+{
+	if (seek->mSeekShape == NULL && seek->mSeekPoint == NULL)
+	{
+		//LogString("Not seeking");
+	}
+	else
+	{
+		seek->mStateMachine->changeState(Normal_Seek::Instance());
+	}
+}
+void No_Seek::exit(Seek* seek)
 {
 }
-void NO_SEEK::exit(Seek* seek)
-{
-}
-bool NO_SEEK::onLetter(Seek* seek, Letter* letter)
+bool No_Seek::onMessage(Seek* seek, const Telegram& msg)
 {
         return true;
 }

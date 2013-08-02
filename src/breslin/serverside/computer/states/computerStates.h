@@ -4,22 +4,23 @@
 #include "../../../fsm/state.h"
 
 class Computer;
+struct Telegram;
 
 
 /*******************************
 *     GLOBAL COMPTER 
 ******************************/
 
-class GLOBAL_COMPUTER : public State<Computer>
+class GlobalComputer : public State<Computer>
 {
 private:
-  GLOBAL_COMPUTER(){}
+  GlobalComputer(){}
 public:
-  static GLOBAL_COMPUTER* Instance();
+  static GlobalComputer* Instance();
   void enter  (Computer* computer);
   void execute(Computer* computer);
   void exit   (Computer* computer);
-  bool onLetter(Computer* computer, Letter* letter);
+  bool onMessage(Computer* computer, const Telegram& msg);
 };
 
 
@@ -27,28 +28,28 @@ public:
 *     COMPTER 
 ******************************/
 
-class COMPUTER_CONTROLLED : public State<Computer>
+class Random_Computer : public State<Computer>
 {
 private:
-  COMPUTER_CONTROLLED(){}
+  Random_Computer(){}
 public:
-  static COMPUTER_CONTROLLED* Instance();
+  static Random_Computer* Instance();
   void enter  (Computer* computer);
   void execute(Computer* computer);
   void exit   (Computer* computer);
-  bool onLetter(Computer* computer, Letter* letter);
+  bool onMessage(Computer* computer, const Telegram& msg);
 };
 
-class HUMAN_CONTROLLED : public State<Computer>
+class No_Computer : public State<Computer>
 {
 private:
-  HUMAN_CONTROLLED(){}
+  No_Computer(){}
 public:
-  static HUMAN_CONTROLLED* Instance();
+  static No_Computer* Instance();
   void enter  (Computer* computer);
   void execute(Computer* computer);
   void exit   (Computer* computer);
-  bool onLetter(Computer* computer, Letter* letter);
+  bool onMessage(Computer* computer, const Telegram& msg);
 };
 
 #endif

@@ -20,7 +20,7 @@ public:
   void enter  (Rotation* rotation);
   void execute(Rotation* rotation);
   void exit   (Rotation* rotation);
-  bool onLetter(Rotation* rotation, Letter* letter);
+  bool onMessage(Rotation* rotation, const Telegram& msg);
 };
 
 
@@ -37,7 +37,7 @@ public:
   void enter  (Rotation* rotation);
   void execute(Rotation* rotation);
   void exit   (Rotation* rotation);
-  bool onLetter(Rotation* rotation, Letter* letter);
+  bool onMessage(Rotation* rotation, const Telegram& msg);
 };
 
 class No_Rotation : public State<Rotation>
@@ -49,7 +49,7 @@ public:
   void enter  (Rotation* rotation);
   void execute(Rotation* rotation);
   void exit   (Rotation* rotation);
-  bool onLetter(Rotation* rotation, Letter* letter);
+  bool onMessage(Rotation* rotation, const Telegram& msg);
 };
 
 class Accelerate_Rotation : public State<Rotation>
@@ -61,7 +61,7 @@ public:
   void enter  (Rotation* rotation);
   void execute(Rotation* rotation);
   void exit   (Rotation* rotation);
-  bool onLetter(Rotation* rotation, Letter* letter);
+  bool onMessage(Rotation* rotation, const Telegram& msg);
 };
 
 class Decelerate_Rotation : public State<Rotation>
@@ -73,7 +73,7 @@ public:
   void enter  (Rotation* rotation);
   void execute(Rotation* rotation);
   void exit   (Rotation* rotation);
-  bool onLetter(Rotation* rotation, Letter* letter);
+  bool onMessage(Rotation* rotation, const Telegram& msg);
 };
 
 #endif

@@ -4,8 +4,6 @@
 #include <iostream>
 #include <math.h>
 
-class Message;
-
 struct Telegram
 {
   //the entity that sent this telegram
@@ -14,11 +12,9 @@ struct Telegram
   //the entity that is to receive this telegram
   int          mReceiver;
 
-Message* mMessage;
-
   //the message itself. These are all enumerated in the file
   //"MessageTypes.h"
-  int          mMessageNumber;
+  int          mMessage;
 
   //messages can be dispatched immediately or delayed for a specified amount
   //of time. If a delay is necessary this field is stamped with the time 
@@ -32,7 +28,7 @@ Message* mMessage;
   Telegram():mDispatchTime(-1),
                   mSender(-1),
                   mReceiver(-1),
-                  mMessageNumber(-1)
+                  mMessage(-1)
   {}
 
 
@@ -40,13 +36,11 @@ Message* mMessage;
            int    sender,
            int    receiver,
            int    msg,
-           void*  info = NULL,
-	   Message* message = NULL): mDispatchTime(time),
+           void*  info = NULL): mDispatchTime(time),
                                mSender(sender),
                                mReceiver(receiver),
-                               mMessageNumber(msg),
-                               mExtraInfo(info),
-				mMessage(message)
+                               mMessage(msg),
+                               mExtraInfo(info)
   {}
  
 };
@@ -64,7 +58,7 @@ inline bool operator==(const Telegram& t1, const Telegram& t2)
   return ( fabs(t1.mDispatchTime-t2.mDispatchTime) < mSmallestDelay) &&
           (t1.mSender == t2.mSender)        &&
           (t1.mReceiver == t2.mReceiver)    &&
-          (t1.mMessageNumber == t2.mMessageNumber);
+          (t1.mMessage == t2.mMessage);
 }
 
 inline bool operator<(const Telegram& t1, const Telegram& t2)
@@ -83,7 +77,7 @@ inline bool operator<(const Telegram& t1, const Telegram& t2)
 inline std::ostream& operator<<(std::ostream& os, const Telegram& t)
 {
   os << "time: " << t.mDispatchTime << "  Sender: " << t.mSender
-     << "   Receiver: " << t.mReceiver << "   Msg: " << t.mMessageNumber;
+     << "   Receiver: " << t.mReceiver << "   Msg: " << t.mMessage;
 
   return os;
 }

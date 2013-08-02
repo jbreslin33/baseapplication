@@ -18,5 +18,4 @@ void BaseEntity::setID(int id)
   	assert ( (id >= mNextValidID) && "<BaseGameEntity::setID>: invalid ID");
   	mID = id;
   	mNextValidID = mID + 1;
-
 }

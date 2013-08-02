@@ -35,18 +35,14 @@ GamePlayPartidoBattle::~GamePlayPartidoBattle()
 
 void GamePlayPartidoBattle::enter()
 {
-	ApplicationPartido* app = mGamePartido->mApplicationPartido;
-
 	//reset text box 
-	app->mStringAnswer.clear();
-        app->mLabelQuestion->setCaption("");
-        app->mLabelAnswer->setCaption("");
+	mGamePartido->mApplicationPartido->mStringAnswer.clear();
+        mGamePartido->mApplicationPartido->mLabelQuestion->setCaption("");
+        mGamePartido->mApplicationPartido->mLabelAnswer->setCaption("");
 	
-	app->showBattleScreen();
+	mGamePartido->mApplicationPartido->showBattleScreen();
 	mGamePartido->mBattleStart = false;
-      
-	app->mAnswerTime = 0;
- 
+       
 	//set mKeyArray to false 
 	for (int i = 0; i < 128; i++)
 	{
@@ -57,20 +53,26 @@ void GamePlayPartidoBattle::enter()
 
 void GamePlayPartidoBattle::execute()
 {
-	ApplicationPartido* app = mGamePartido->mApplicationPartido;
-
-	if (app->mAnswerTime > 2000) //overtime....
-	{
-		app->mStringAnswer = "oot";		
-		app->sendAnswer();
-
-	}
-
  	if (mGamePartido->mBattleEnd)
         {
                 mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlay); 
         }
 
+	//should end game properly...it should NOT allow you to end battle this should log you out
+//if you hit escape from here...... no you should just lose battle...
+/*
+        if (mGamePartido->mApplicationPartido->mKeyArray[27]) //esc
+        {
+                mGamePartido->mApplicationPartido->mKeyArray[27] = false;
+
+                //send quit game
+                ByteBuffer* byteBuffer = new ByteBuffer();
+                byteBuffer->WriteByte(mGamePartido->mApplicationPartido->mMessageLeaveGame);
+                mGamePartido->mApplicationPartido->mNetwork->send(byteBuffer);
+                mGamePartido->mApplicationPartido->mSentLeaveGame = true;
+        }
+*/
+	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
 	if (mFirstTimeExecute)
 	{
@@ -80,6 +82,7 @@ void GamePlayPartidoBattle::execute()
 		}
 		mFirstTimeExecute = false;
 	}
+	
 
 	if (app->mLabelFocus == app->mLabelAnswer)
 	{
@@ -127,6 +130,7 @@ void GamePlayPartidoBattle::execute()
 
 void GamePlayPartidoBattle::exit()
 {
+	LogString("is this called");
 	mGamePartido->mApplicationPartido->hideBattleScreen();
 	mGamePartido->mBattleEnd   = false;
 	mGamePartido->mBattleStart = false;

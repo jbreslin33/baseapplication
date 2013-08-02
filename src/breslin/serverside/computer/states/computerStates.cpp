@@ -14,21 +14,15 @@
 #include "../../shape/shape.h"
 
 //client
-#include "../../client/robust/clientRobust.h"
-
-//steering
-#include "../../steering/steering.h"
+#include "../../client/client.h"
 
 //seek
 #include "../../seek/seek.h"
 
-//avoid
-#include "../../avoid/avoid.h"
-
-//move
+//seek
 #include "../../move/move.h"
 
-//rotation
+//seek
 #include "../../rotation/rotation.h"
 
 //vector3D
@@ -44,22 +38,22 @@
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GLOBAL_COMPUTER* GLOBAL_COMPUTER::Instance()
+GlobalComputer* GlobalComputer::Instance()
 {
-  static GLOBAL_COMPUTER instance;
+  static GlobalComputer instance;
   return &instance;
 }
-void GLOBAL_COMPUTER::enter(Computer* computer)
+void GlobalComputer::enter(Computer* computer)
 {
 }
-void GLOBAL_COMPUTER::execute(Computer* computer)
+void GlobalComputer::execute(Computer* computer)
 {
 
 }
-void GLOBAL_COMPUTER::exit(Computer* computer)
+void GlobalComputer::exit(Computer* computer)
 {
 }
-bool GLOBAL_COMPUTER::onLetter(Computer* computer, Letter* letter)
+bool GlobalComputer::onMessage(Computer* computer, const Telegram& msg)
 {
         return true;
 }
@@ -72,32 +66,47 @@ bool GLOBAL_COMPUTER::onLetter(Computer* computer, Letter* letter)
 /*****************************************
 *******      RANDOM COMPUTER    ******************
 ****************************************/
-/*   COMPUTER_CONTROLLED   */
-COMPUTER_CONTROLLED* COMPUTER_CONTROLLED::Instance()
+/*   Random_Computer   */
+Random_Computer* Random_Computer::Instance()
 {
-  static COMPUTER_CONTROLLED instance;
+  static Random_Computer instance;
   return &instance;
 }
 
-void COMPUTER_CONTROLLED::enter(Computer* computer)
+void Random_Computer::enter(Computer* computer)
 {
 
 }
 
-void COMPUTER_CONTROLLED::execute(Computer* computer)
+void Random_Computer::execute(Computer* computer)
 {
+	if (computer->mShape->mSeek)
+	{
+/*
+		if (computer->mShape->mClient->db_id == 5)
+		{
+			for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
+			{
+				if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 4)
+				{
+					computer->mShape->mSeek->setSeekShape(computer->mShape->mGame->mShapeVector.at(i));	
+				}
+			}
+		}
+*/
+	}
 
 	//is this human controlled?
-	if (computer->mShape->mClient->mLoggedIn)
+	if (computer->mShape->mClient->mConnectionState == 1)
 	{
-		computer->mStateMachine->changeState(HUMAN_CONTROLLED::Instance());
+		computer->mStateMachine->changeState(No_Computer::Instance());
 	}
 }
 
-void COMPUTER_CONTROLLED::exit(Computer* computer)
+void Random_Computer::exit(Computer* computer)
 {
 }
-bool COMPUTER_CONTROLLED::onLetter(Computer* computer, Letter* letter)
+bool Random_Computer::onMessage(Computer* computer, const Telegram& msg)
 {
         return true;
 }
@@ -107,49 +116,49 @@ bool COMPUTER_CONTROLLED::onLetter(Computer* computer, Letter* letter)
 /*****************************************
 *******      RANDOM COMPUTER    ******************
 ****************************************/
-HUMAN_CONTROLLED* HUMAN_CONTROLLED::Instance()
+No_Computer* No_Computer::Instance()
 {
-	static HUMAN_CONTROLLED instance;
+	static No_Computer instance;
 	return &instance;
 }
 
-void HUMAN_CONTROLLED::enter(Computer* computer)
+void No_Computer::enter(Computer* computer)
 {
 }
 
-void HUMAN_CONTROLLED::execute(Computer* computer)
+void No_Computer::execute(Computer* computer)
 {
-	if (!computer->mShape->mClient->mLoggedIn)
+	if (computer->mShape->mClient->mConnectionState == 4)
 	{
-		computer->mStateMachine->changeState(COMPUTER_CONTROLLED::Instance());
+		computer->mStateMachine->changeState(Random_Computer::Instance());
 	}
 
- 	computer->mShape->mMove->mVelocity->x = 0;
-        computer->mShape->mMove->mVelocity->y = 0;
-        computer->mShape->mMove->mVelocity->z = 0;
+ 	computer->mShape->mMove->mHeading->x = 0;
+        computer->mShape->mMove->mHeading->y = 0;
+        computer->mShape->mMove->mHeading->z = 0;
 
         // keep track of the player's intended direction
         if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyUp)
         {
-                computer->mShape->mMove->mVelocity->z += -1;
+                computer->mShape->mMove->mHeading->z += -1;
         }
 
         if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyLeft)
         {
-                computer->mShape->mMove->mVelocity->x += -1;
+                computer->mShape->mMove->mHeading->x += -1;
         }
 
         if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyDown)
         {
-                computer->mShape->mMove->mVelocity->z += 1;
+                computer->mShape->mMove->mHeading->z += 1;
         }
   
         if(computer->mShape->mClient->mKey & computer->mShape->mClient->mKeyRight)
         {
-                computer->mShape->mMove->mVelocity->x += 1;
+                computer->mShape->mMove->mHeading->x += 1;
         }
 
-        computer->mShape->mMove->mVelocity->normalise();
+        computer->mShape->mMove->mHeading->normalise();
 
 	//Rotation
         computer->mShape->mRotation->mDegrees = 0.0f;
@@ -165,10 +174,10 @@ void HUMAN_CONTROLLED::execute(Computer* computer)
 
 }
 
-void HUMAN_CONTROLLED::exit(Computer* computer)
+void No_Computer::exit(Computer* computer)
 {
 }
-bool HUMAN_CONTROLLED::onLetter(Computer* computer, Letter* letter)
+bool No_Computer::onMessage(Computer* computer, const Telegram& msg)
 {
         return true;
 }

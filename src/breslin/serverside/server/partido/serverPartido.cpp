@@ -4,7 +4,7 @@
 #include "../../tdreamsock/dreamSockLog.h"
 
 #include "../../game/partido/gamePartido.h"
-#include "../../client/robust/partido/clientPartido.h"
+#include "../../client/partido/clientPartido.h"
 #include "../../../math/vector3D.h"
 #include "../../shape/shape.h"
 
@@ -12,10 +12,6 @@ ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPo
 :
  Server(root, localIP, serverPort)
 {
-	//client vectors
-	mClientPartidoVector     = new std::vector<ClientPartido*>();
-	mClientPartidoVectorTemp = new std::vector<Client*>();
-
 	//questionCount
 	mQuestionCount = 0;
 
@@ -28,40 +24,40 @@ ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPo
 
 ServerPartido::~ServerPartido()
 {
-	LogString("ServerPartido::~ServerPartido");	
-
-  	//delete clients
-        while (!mClientPartidoVector->empty())
-        {
-                mClientPartidoVector->front() = NULL;
-                delete mClientPartidoVector->front();
-		mClientPartidoVector->erase(mClientPartidoVector->begin());
-        }
-	delete mClientPartidoVector;
-
-  	//delete temp clients
-        while (!mClientPartidoVectorTemp->empty())
-        {
-                mClientPartidoVectorTemp->front() = NULL;
-                delete mClientPartidoVectorTemp->front();
-		mClientPartidoVectorTemp->erase(mClientPartidoVectorTemp->begin());
-        }
-	delete mClientPartidoVectorTemp;
 }
 
 void ServerPartido::processClients()
 {
         //update clients
-        for (unsigned int i = 0; i < mClientPartidoVector->size(); i++)
+        for (unsigned int i = 0; i < mClientPartidoVector.size(); i++)
         {
-                mClientPartidoVector->at(i)->update();
-        }
-        for (unsigned int i = 0; i < mClientPartidoVectorTemp->size(); i++)
-        {
-                mClientPartidoVectorTemp->at(i)->update();
+                mClientPartidoVector.at(i)->update();
         }
 }
 
+void ServerPartido::processGames()
+{
+        //update games
+        for (unsigned int i = 0; i < mGamePartidoVector.size(); i++)
+        {
+                mGamePartidoVector.at(i)->processUpdate();
+        }
+}
+
+void ServerPartido::sendCommands()
+{
+        //send positions and exact frame time the calcs where done on which is mFrameTime
+        for (unsigned int i = 0; i < mGamePartidoVector.size(); i++)
+        {
+                sendCommand(mGamePartidoVector.at(i));
+        }
+}
+
+void ServerPartido::addGame(GamePartido* gamePartido)
+{
+	Server::addGame(gamePartido);
+        mGamePartidoVector.push_back(gamePartido);
+}
 void ServerPartido::createClients()
 {
         PGconn          *conn;
@@ -70,7 +66,7 @@ void ServerPartido::createClients()
         int             row;
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,"select * from users WHERE username != 'root' ORDER BY id LIMIT 30");
+        res = PQexec(conn,"select * from users WHERE username != 'root' ORDER BY id LIMIT 4");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
@@ -81,11 +77,12 @@ void ServerPartido::createClients()
         {
                 //client
                 ClientPartido* clientPartido = new ClientPartido(this, NULL, -2, true);
+                addClient(clientPartido,true);
 
                 //add Games
-                for (unsigned int i = 0; i < mGameVector->size(); i++)
+                for (unsigned int i = 0; i < mGameVector.size(); i++)
                 {
-                        clientPartido->addGame((GamePartido*)mGameVector->at(i));
+                        clientPartido->addGame(mGamePartidoVector.at(i));
                 }
 
                 //id
@@ -124,17 +121,16 @@ void ServerPartido::createClients()
         PQfinish(conn);
 }
 
-void ServerPartido::addClient(Client* client, bool permanent)
+void ServerPartido::addClient(ClientPartido* clientPartido, bool permanent)
 {
-	Server::addClient(client, permanent);
-	ClientPartido* clientPartido = (ClientPartido*)client;
+	Server::addClient(clientPartido, permanent);
         if (permanent)
         {
-                mClientPartidoVector->push_back(clientPartido);
+                mClientPartidoVector.push_back(clientPartido);
         }
         else
         {
-                mClientPartidoVectorTemp->push_back(clientPartido);
+                mClientPartidoVectorTemp.push_back(clientPartido);
         }
 }
 
@@ -153,29 +149,32 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		if (type == mMessageConnect)
         	{
-                	Client* client = new Client(this, address, 0, false);
+                	ClientPartido* client = new ClientPartido(this, address, 0, false);
 
+			addClient(client,false);
         	}
 
         	else if (type == mMessageConnectBrowser)
         	{
                 	int clientID = mes->ReadByte();
-                	Client* client = new Client(this, address, clientID, false);
+                	ClientPartido* client = new ClientPartido(this, address, clientID, false);
+			addClient(client,false);
         	}
 
         	else if (type == mMessageConnectNode)
         	{
                 	int clientID = mes->ReadByte();
-                	ClientPartido* client = new ClientPartido(this, address, -1, true);
+                	ClientPartido* client = new ClientPartido(this, address, -1, false);
+			addClient(client,true);
         	}     	 
        		else if (type == mMessageAnswerQuestion)
                 {
       			// Find the correct client by comparing addresses
-                	for (unsigned int i = 0; i < mClientPartidoVector->size(); i++)
+                	for (unsigned int i = 0; i < mClientPartidoVector.size(); i++)
                 	{
-                        	if( memcmp(mClientPartidoVector->at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
+                        	if( memcmp(mClientPartidoVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         	{
-                                	ClientPartido* clientPartido = mClientPartidoVector->at(i);
+                                	ClientPartido* clientPartido = mClientPartidoVector.at(i);
   					if (DREAMSOCK_DISCONNECTED == clientPartido->mConnectionState)
                         		{
                         			continue;
@@ -187,10 +186,10 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
     		else if (type == mMessageAnswerQuestionBrowser)
                 {
  			int clientID = mes->ReadByte();
-                	for (unsigned int i = 0; i < mClientPartidoVector->size(); i++)
+                	for (unsigned int i = 0; i < mClientPartidoVector.size(); i++)
                 	{
-                                ClientPartido* clientPartido = mClientPartidoVector->at(i);
-                        	if (mClientPartidoVector->at(i)->mClientID == clientID)
+                                ClientPartido* clientPartido = mClientPartidoVector.at(i);
+                        	if (mClientPartidoVector.at(i)->mClientID == clientID)
                         	{
   					if (DREAMSOCK_DISCONNECTED == clientPartido->mConnectionState)
 					{

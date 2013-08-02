@@ -16,7 +16,7 @@ using namespace Ogre;
 
 Move::Move(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
-        mVelocity = new Vector3D();
+        mHeading = new Vector3D();
 
 	mShape = shape;
 
@@ -33,9 +33,6 @@ Move::Move(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
     	mRunAccel    = .04166f * 30.5;
     	mRunDecel    = .04166f * 30.5;
 
-	//max force
-	mMaxForce = 1.0f;
-
  	//move states
 	mStateMachine =  new StateMachine<Move>(this);
 	mStateMachine->setCurrentState      (Normal_Move::Instance());
@@ -45,20 +42,15 @@ Move::Move(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Move::~Move()
 {
-	LogString("Move::~Move");
-	delete mVelocity;
-	delete mStateMachine;
-	delete mPositionLast;
-	delete mPositionBeforeCollision;
 }
 void Move::update()
 {
 	mStateMachine->update();
 }
 
-bool Move::handleLetter(Letter* letter)
+bool Move::handleMessage(const Telegram& msg)
 {
-        return mStateMachine->handleLetter(letter);
+        return mStateMachine->handleMessage(msg);
 }
 
 

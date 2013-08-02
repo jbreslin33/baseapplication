@@ -40,8 +40,8 @@ execute: function()
 	//exit
 	if (this.mApplicationBreslin.mButtonHit == this.mApplicationBreslin.mButtonExit)
 	{
-                this.mApplicationBreslin.sendLogout();
 	        this.mApplicationBreslin.mButtonHit = 0;
+	
 	}
 },
 

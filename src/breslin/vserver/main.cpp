@@ -59,34 +59,36 @@ int main(int argc, char **argv)
 		server->addGame(new Game(server,1));
 		server->createClients();
 
-  		for (unsigned int i = 0; i < server->mGameVector->size(); i++)
+  		for (unsigned int i = 0; i < server->mGameVector.size(); i++)
 		{
-			server->mGameVector->at(i)->createShapes();
+			server->mGameVector.at(i)->createShapes();
 		}
 
 		oldTime = server->mNetwork->getCurrentSystemTime();
 
 		// App main loop
-		//try
-		//{
+		try
+		{
 			// Keep server alive (wait for keypress to kill it)
-                        while(server->mShutdown == false)
+			while(true)
 			{
 				do
 				{
 					newTime = server->mNetwork->getCurrentSystemTime();
 					time = newTime - oldTime;
 				} while (time < 1);
-				server->update(time);
+				server->processUpdate(time);
 				oldTime = newTime;
 			}
-		//}
-	//	catch(...)
-	//	{
-	//		LogString("Unknown Exception caught in main loop");
-	//		return -1;
-	//	}
-		delete server;
+		}
+		catch(...)
+		{
+			server->mNetwork->shutdown();
+			LogString("Unknown Exception caught in main loop");
+			return -1;
+		}
+		LogString("Shutting down everything");
+		server->mNetwork->shutdown();
 		return 0;
 	}
 
@@ -96,18 +98,18 @@ int main(int argc, char **argv)
 		server->addGame(new GamePartido(server,2));
 		server->createClients();
 
-                for (unsigned int i = 0; i < server->mGameVector->size(); i++)
+                for (unsigned int i = 0; i < server->mGameVector.size(); i++)
                 {
-                        server->mGameVector->at(i)->createShapes();
+                        server->mGameVector.at(i)->createShapes();
                 }
 
                 oldTime = server->mNetwork->getCurrentSystemTime();
 
                 // App main loop
-                //try
-               // {       
+                try
+                {       
                         // Keep server alive (wait for keypress to kill it)
-                        while(server->mShutdown == false)
+                        while(true)
                         {
                                 do
                                 {
@@ -116,7 +118,7 @@ int main(int argc, char **argv)
                                 } while (time < 1);
 				if (server)
 				{
-                                	server->update(time);
+                                	server->processUpdate(time);
 				}
 				else
 				{
@@ -124,16 +126,15 @@ int main(int argc, char **argv)
 				}
                                 oldTime = newTime;
                         }
-                //}
-	/*
+                }
                 catch(...)
                 {
                         server->mNetwork->shutdown();
                         LogString("Unknown Exception caught in main loop");
                         return -1;
                 }
-*/
-               	delete server; 
-		return 0;
+                LogString("Shutting down everything");
+                server->mNetwork->shutdown();
+                return 0;
 	}
 }

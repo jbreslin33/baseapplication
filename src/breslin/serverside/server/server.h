@@ -7,28 +7,36 @@
 #include <string>
 
 // Connection states
-#define DREAMSOCK_CONNECTING      0
-#define DREAMSOCK_CONNECTED	  1
-#define DREAMSOCK_DISCONNECTING	  2
-#define DREAMSOCK_DISCONNECTED	  4
-#define DREAMSOCK_INVALID_SOCKET -1
+#define DREAMSOCK_CONNECTING			0
+#define DREAMSOCK_CONNECTED				1
+#define DREAMSOCK_DISCONNECTING			2
+#define DREAMSOCK_DISCONNECTED			4
+
+#ifdef WIN32
+	#define DREAMSOCK_INVALID_SOCKET	INVALID_SOCKET
+#else
+	#define DREAMSOCK_INVALID_SOCKET	-1
+#endif
+
+// System messages
+// Note (for all messages - system and user):
+// positive = sequenced message
+// negative = un-sequenced message
 
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
 
 // Introduce classes
+class BaseEntity;
 class Network;
-class ClientRobust;
+class Client;
 class Game;
 class Shape;
 
 class Server
 {
 public:
-
-	//shutdown
-	bool mShutdown;
 
 	//Ogre Root
 	Ogre::Root* mRoot;
@@ -37,15 +45,17 @@ public:
 	Network* mNetwork;
 
 	//Message
-	Message* mMessage;
-	Message* mMessageIn;
+	Message mMessage;
+	
+	//games
+	std::vector<BaseEntity*> mBaseEntityVector;
 
 	//games
-	std::vector<Game*>* mGameVector;
+	std::vector<Game*> mGameVector;
 
 	//clients
-	std::vector<ClientRobust*>* mClientVector;
-	std::vector<Client*>* mClientVectorTemp;
+	std::vector<Client*> mClientVector;
+	std::vector<Client*> mClientVectorTemp;
 
 	//port
 	int mPort;					// Port
@@ -66,7 +76,6 @@ public:
 	//frames
 	static const int mMessageFrame 	                = 1;
 	static const int mMessageFrameBrowser     	= 2;
-	static const int mMessageServerExit     	= 3;
 
 	//questions	
 	static const int mMessageQuestion               = -105;
@@ -106,10 +115,13 @@ public:
 
 public:
 	Server(Ogre::Root* root, const char *localIP, int serverPort);
-	virtual ~Server();
+	~Server();
+
+	//BaseEntitys
+	BaseEntity* getBaseEntityFromID(int id);
 
 	//update
-	void update(int msec);
+	void processUpdate(int msec);
 	virtual void processGames();
 	virtual void processClients();
 	virtual void sendCommands();
@@ -119,10 +131,10 @@ public:
 
 	//client
    	void createClients();
-	virtual void addClient(Client* client, bool permanent);
+	void addClient(Client* client, bool permanent);
 
 	//packets
-	int  getPacket  (Message* message, struct sockaddr *from);
+	int  getPacket  (char *data, struct sockaddr *from);
 	void sendPackets();
         void readPackets();
 	virtual void parsePacket(Message *mes, struct sockaddr *address);

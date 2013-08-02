@@ -65,25 +65,16 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	{
 		//create a ghost for this shape
 		mGhost = new Shape(mApplication,byteBuffer,true);
-		mGhost->setVisible(false);
+		mGhost->setVisible(true);
 	}
 
 }
 Shape::~Shape()
 {
+	LogString("Destructor for Shape:%d",mIndex);
 	//delete mEntity;
-	//delete mObjectTitle;
-/*
-	if (mEntity)
-	{
-		delete mEntity;
-	}
-
-	if (mSceneNode)
-	{
-		delete mSceneNode;
-	}
-*/
+//	delete mObjectTitle;
+//	delete mSceneNode;
 }
 
 void Shape::setText(ByteBuffer* byteBuffer)

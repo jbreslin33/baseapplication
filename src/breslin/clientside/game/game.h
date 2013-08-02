@@ -94,7 +94,7 @@ Ogre::Light* mPointLight;
 
 Ogre::Entity* mFloor;
 Ogre::SceneNode* mFloorNode;
-/*
+
 Ogre::Entity* mNorthWall;
 Ogre::SceneNode* mNorthWallNode;
 
@@ -106,7 +106,6 @@ Ogre::SceneNode* mSouthWallNode;
 
 Ogre::Entity* mWestWall;
 Ogre::SceneNode* mWestWallNode;
-*/
 /***************************************
 *			          METHODS
 ***************************************/

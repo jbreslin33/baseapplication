@@ -1,12 +1,6 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-#include "../../baseentity/baseEntity.h"
-
-#include "../../fsm/stateMachine.h"
-
-template <class entity_type> class State;
-
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
@@ -18,25 +12,29 @@ using namespace Ogre;
 
 //forward declarations
 class Game;
-class ClientRobust;
-class Steering;
-class Seek;
-class Avoid;
+class Client;
 class Rotation;
 class Move;
 class Computer;
+class Seek;
 class Vector3D;
-class Letter;
+class Telegram;
+class BaseEntity;
 
-class Shape : BaseEntity
+class Shape
 {
 
 public:
-Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+Shape(unsigned int index, Game* game, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
 	  bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
 ~Shape();
 
-Vector3D* mPosition;
+/*****************************************************
+(unsigned int index, GamePartido* gamePartido, Client* client, Vector3D* position, Vector3D* velocity, Vector3D* rotation, Ogre::Root* root,
+          bool animated, bool collidable, float collisionRadius, int meshCode, bool ai);
+
+*				VARIABLES
+********************************************************/
 
 // ByteBufferes
 static const char mCommandFrameTime = 2;
@@ -69,18 +67,15 @@ Game* mGame;
 
 //abilitys
 std::vector<BaseEntity*> mAbilityVector;	 //all abilitys for this shape
-std::vector<BaseEntity*> mSteeringAbilityVector;         //all steering abilitys for this shape
-std::vector<BaseEntity*> mComputerAbilityVector;         //all steering abilitys for this shape
+std::vector<BaseEntity*> mSteeringAbilityVector;	 //all steering abilitys for this shape
 
 Rotation* mRotation;
 Move* 	  mMove;
-Steering* mSteering;
 Seek*     mSeek;
-Avoid*    mAvoid;
 Computer* mComputer;
 
 //associated client if any
-ClientRobust* mClient;
+Client* mClient;
 
 //mesh
 int mMeshCode;
@@ -100,19 +95,17 @@ bool mIsComputer;
 *				METHODS
 ********************************************************/
 
+void remove();
+
 //abilitys
 void     addAbility(BaseEntity* ability);
 void     addSteeringAbility(BaseEntity* ability);
-void     addComputerAbility(BaseEntity* ability);
 
 //create
 void createShape(Ogre::Root* root, Vector3D* position);
 
-//update
-virtual void update();
-
-//handle letter
-virtual bool  handleLetter(Letter* letter);
+//ticks
+virtual void processTick();
 
 void setValues();
 
@@ -129,8 +122,7 @@ virtual void collision(Shape* shape);
 	//delta move command
 virtual int  setFlag();
 virtual void addToMoveMessage(Message* message);
-
-Vector3D* getPosition();
+virtual bool handleMessage(const Telegram& msg){return false;}
 };
 
 #endif

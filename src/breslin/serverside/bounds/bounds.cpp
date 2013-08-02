@@ -10,9 +10,5 @@ Bounds::Bounds()
 
 Bounds::~Bounds()
 {
-        delete a;
-        delete b;
-        delete c;
-        delete d;
 }
 

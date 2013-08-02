@@ -37,11 +37,13 @@ Network(Server* server, const char netInterface[32], int port);
 DreamLinuxSock* mDreamLinuxSock;
 
 // Function prototypes
+void shutdown();
 SOCKET createSocket(int protocol);
 int setNonBlocking(SOCKET sock, u_long setMode);
 int setBroadcasting(SOCKET sock, int mode);
 int stringToSockaddr(const char *addressString, struct sockaddr *sadr);
 SOCKET openUDPSocket(const char netInterface[32], int port);
+void closeSocket(SOCKET sock);
 
 int getPacket(SOCKET sock, char *data, struct sockaddr *from);
 void sendPacketTo(Client* client, Message* message);

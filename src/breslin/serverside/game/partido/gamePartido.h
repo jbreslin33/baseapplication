@@ -15,18 +15,22 @@ class GamePartido : public Game
 public:
 
 	GamePartido(ServerPartido* serverPartido, int id);
-	virtual ~GamePartido();
+	~GamePartido();
+
+	//updates
+	void processUpdate();
 
 	//serverPartido
 	ServerPartido* mServerPartido;
 
 	//shapes
-        std::vector<ShapePartido*>* mShapePartidoVector;       //every tangible item in game world..
-	virtual void createShapes();
+        std::vector<ShapePartido*> mShapePartidoVector;       //every tangible item in game world..
+	void createShapes();
+	void sendShapes(ClientPartido* clientPartido);
 
 	//end of game
-	virtual bool checkForEndOfGame();
-	virtual void reset();
+	bool checkForEndOfGame();
+	void reset();
 };
 
 #endif

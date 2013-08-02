@@ -10,8 +10,6 @@
 //ability
 #include "../client.h"
 
-//server
-#include "../../server/server.h"
 
 /*****************************************
 *******       GLOBAL    ******************
@@ -26,82 +24,190 @@ void GlobalClient::enter(Client* client)
 }
 void GlobalClient::execute(Client* client)
 {
+
 }
 void GlobalClient::exit(Client* client)
 {
 }
-bool GlobalClient::onLetter(Client* client, Letter* letter)
+bool GlobalClient::onMessage(Client* client, const Telegram& msg)
 {
-	return false;
+        return true;
 }
+
 
 /*****************************************
 *******       CLIENT STATES    ******************	
 ****************************************/
 
 /*****************************************
-        DISCONNECTED      
+	Logged_Out
 ****************************************/
-Disconnected* Disconnected::Instance()
+Logged_Out* Logged_Out::Instance()
 {
-  static Disconnected instance;
-  return &instance; 
-} 
-void Disconnected::enter(Client* client)
-{
-}       
-void Disconnected::execute(Client* client)
+  static Logged_Out instance;
+  return &instance;
+}
+void Logged_Out::enter(Client* client)
 {
 }
-void Disconnected::exit(Client* client)
+void Logged_Out::execute(Client* client)
 {
 
 }
-bool Disconnected::onLetter(Client* client, Letter* letter)
+void Logged_Out::exit(Client* client)
 {
-	return false;	
+}
+bool Logged_Out::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
 }
 
 /*****************************************
-	CONNECTING
+	Lobby
 ****************************************/
-Connecting* Connecting::Instance()
+Lobby* Lobby::Instance()
 {
-  static Connecting instance;
+  static Lobby instance;
   return &instance;
 }
-void Connecting::enter(Client* client)
+void Lobby::enter(Client* client)
 {
 }
-void Connecting::execute(Client* client)
+void Lobby::execute(Client* client)
+{
+
+}
+void Lobby::exit(Client* client)
 {
 }
-void Connecting::exit(Client* client)
+bool Lobby::onMessage(Client* client, const Telegram& msg)
 {
-}
-bool Connecting::onLetter(Client* client, Letter* letter)
-{
-	return false;	
+	return true;
 }
 
 /*****************************************
-	CONNECTED	
+		GAME_MODE		
 ****************************************/
-Connected* Connected::Instance()
+Game_Mode* Game_Mode::Instance()
 {
-  static Connected instance;
+  static Game_Mode instance;
   return &instance;
 }
-void Connected::enter(Client* client)
+void Game_Mode::enter(Client* client)
 {
 }
-void Connected::execute(Client* client)
+void Game_Mode::execute(Client* client)
+{
+
+}
+void Game_Mode::exit(Client* client)
 {
 }
-void Connected::exit(Client* client)
+bool Game_Mode::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
+}
+
+/*****************************************
+*******       CONTROL    ******************	
+****************************************/
+
+/*****************************************
+	Human
+****************************************/
+Human* Human::Instance()
+{
+  static Human instance;
+  return &instance;
+}
+void Human::enter(Client* client)
 {
 }
-bool Connected::onLetter(Client* client, Letter* letter)
+void Human::execute(Client* client)
 {
-	return false;	
+
+}
+void Human::exit(Client* client)
+{
+}
+bool Human::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
+}
+
+
+/*****************************************
+	Computer
+****************************************/
+Computer_Mode* Computer_Mode::Instance()
+{
+	static Computer_Mode instance;
+	return &instance;
+}
+void Computer_Mode::enter(Client* client)
+{
+	LogString("enter computer");
+}
+void Computer_Mode::execute(Client* client)
+{
+	//client->mClientStateMachine->changeState(Human::Instance());
+	//client->checkForTimeout();
+}
+void Computer_Mode::exit(Client* client)
+{
+}
+bool Computer_Mode::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
+}
+
+
+/*****************************************
+*******       PERMANENCE    ******************	
+****************************************/
+
+/*****************************************
+	PERMANENT	
+****************************************/
+Permanent* Permanent::Instance()
+{
+  static Permanent instance;
+  return &instance;
+}
+void Permanent::enter(Client* client)
+{
+}
+void Permanent::execute(Client* client)
+{
+
+}
+void Permanent::exit(Client* client)
+{
+}
+bool Permanent::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
+}
+
+/*****************************************
+	TEMPORARY	
+****************************************/
+Temporary* Temporary::Instance()
+{
+  static Temporary instance;
+  return &instance;
+}
+void Temporary::enter(Client* client)
+{
+}
+void Temporary::execute(Client* client)
+{
+
+}
+void Temporary::exit(Client* client)
+{
+}
+bool Temporary::onMessage(Client* client, const Telegram& msg)
+{
+	return true;
 }

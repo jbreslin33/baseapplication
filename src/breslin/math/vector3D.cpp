@@ -10,8 +10,6 @@ Vector3D::Vector3D()
 	x = 0;
 	y = 0;
 	z = 0;
-	
-	mQuaternion = new Quaternion();
 }
 
 Vector3D::Vector3D(float x1, float y1, float z1)
@@ -23,15 +21,6 @@ Vector3D::Vector3D(float x1, float y1, float z1)
 
 Vector3D::~Vector3D()
 {
-}
-
-void Vector3D::truncate(float max)
-{
-	if (this->length() > max)
-  	{
-    		this->normalise();
-    		this->multiply(max);
-  	} 	
 }
 
 float Vector3D::length()
@@ -90,13 +79,6 @@ void Vector3D::add(Vector3D* vectorToAddtoThisOne)
 	z = z + vectorToAddtoThisOne->z;
 }
 
-void Vector3D::add(Vector3D* add1, Vector3D* add2)
-{
-	x = add1->x - add2->x;
-	y = add1->y - add2->y;
-	z = add1->z - add2->z;	
-}
-
 //subtract another vector from this one
 void Vector3D::subtract(Vector3D* vectorToSubtract)
 {
@@ -126,12 +108,15 @@ float Vector3D::dot(Vector3D* v2)
 	return d;
 }
 
-Vector3D Vector3D::crossProduct(Vector3D* b)
+Vector3D* Vector3D::crossProduct(Vector3D* b)
 {
-	Vector3D c;
-	c.x = this->y * b->z - this->z * b->x;
-	c.y = this->z * b->x - this->x * b->z;
-	c.z = this->x * b->y - this->y * b->x;
+	Vector3D* a = new Vector3D();
+	a->copyValuesFrom(this);
+
+	Vector3D* c = new Vector3D();
+	c->x = a->y * b->z - a->z * b->x;
+	c->y = a->z * b->x - a->x * b->z;
+	c->z = a->x * b->y - a->y * b->x;
 
 	return c;
 }
@@ -146,15 +131,11 @@ Vector3 Vector3D::convertToVector3()
 	return vector3;
 }
 
-void Vector3D::set(Vector3D vector3D)
-{
-	x = vector3D.x;
-	y = vector3D.y;
-	z = vector3D.z;
-}
 
-bool Vector3D::getRotationTo(Vector3D* to)
+Quaternion* Vector3D::getRotationTo(Vector3D* to)
 {
+	
+	Quaternion* quaternion = new Quaternion();
 
 	Vector3D* fallbackAxis = new Vector3D(0.0f,0.0f,0.0f);
 
@@ -167,18 +148,14 @@ bool Vector3D::getRotationTo(Vector3D* to)
 	v1->normalise();
 
 	float d = v0->dot(v1);
-	
 
-    	// If dot == 1, vectors are the same
-    	if (d >= 1.0f)
-    	{
+    // If dot == 1, vectors are the same
+    if (d >= 1.0f)
+    {
 		//LogString("VECTORS ARE THE SAME!!!!!!!!!!!!!!!!");
-		mQuaternion = new Quaternion(1.0,0.0,0.0,0.0);
-		delete fallbackAxis;
-		delete v0;
-		delete v1;
-		return true;
-    	}
+		Quaternion* quaternionIdentity = new Quaternion(1.0,0.0,0.0,0.0);
+		return quaternionIdentity;
+    }
 			
 	if (d < (1e-6f - 1.0f))
 	{
@@ -190,35 +167,32 @@ bool Vector3D::getRotationTo(Vector3D* to)
 		//quaternion->FromAngleAxis(Radian(Math::PI), fb);
 		
 		// rotate 180 degrees about the fallback axis
-		mQuaternion->FromAngleAxis(Radian(Math::PI), fb);
+		quaternion->FromAngleAxis(Radian(Math::PI), fb);
 	}
 	else
 	{
 		Real s = Math::Sqrt( (1+d)*2 );
-        	Real invs = 1 / s;
+        Real invs = 1 / s;
 
-		Vector3D c = v0->crossProduct(v1);
+		Vector3D* c = v0->crossProduct(v1);
 
-   	    	mQuaternion->x = c.x * invs;
-       		mQuaternion->y = c.y * invs;
-        	mQuaternion->z = c.z * invs;
-        	mQuaternion->w = s * 0.5f;
-		mQuaternion->normalise();
+   	    quaternion->x = c->x * invs;
+       	quaternion->y = c->y * invs;
+        quaternion->z = c->z * invs;
+        quaternion->w = s * 0.5f;
+		quaternion->normalise();
 	}
-	delete fallbackAxis;
-	delete v0;
-	delete v1;
-	return true;
+return quaternion;
 }
 
 
 //calculate how far off we are from some vector
 float Vector3D::getDegreesToSomething(Vector3D* to)
 {
-	this->getRotationTo(to);
+	Quaternion* toSomething = this->getRotationTo(to);
 	
-    	// convert to degrees
-    	Real degreesToSomething = mQuaternion->getYaw().valueDegrees();
+    // convert to degrees
+    Real degreesToSomething = toSomething->getYaw().valueDegrees();
 	return degreesToSomething;
 }
 
@@ -238,30 +212,3 @@ void Vector3D::convertFromVector3(Vector3 vector3)
 	z = vector3.z;
 
 }
-Vector3D Vector3D::getVectorOffset(float offset, bool degrees)
-{
-	//get the sine and cosine of 90degrees
-
-	double cs;
-	double sn;
-
-	if (degrees)
-	{
-        	cs = cos( offset * 3.14f / 180.0f);
-        	sn = sin( offset * 3.14f / 180.0f);
-	}
-	else
-	{
-        	cs = cos(offset);
-        	sn = sin(offset);
-	}
-
-        Vector3D newVelocity;
-
-        newVelocity.x = this->x * cs - this->z * sn;
-        newVelocity.y = 0; 
-        newVelocity.z = this->x * sn + this->z * cs;
-
-	return newVelocity;
-}
-

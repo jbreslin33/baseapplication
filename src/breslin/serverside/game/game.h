@@ -14,7 +14,7 @@ using namespace std;
 #define COMMAND_HISTORY_SIZE		64
 
 class Server;
-class ClientRobust;
+class Client;
 class Shape;
 class Vector3D;
 class Bounds;
@@ -39,14 +39,14 @@ static const char mMessageServerExit = 3;
         Message mMessage;
 
 	//shapes
-	std::vector<Shape*>* mShapeVector;	//every tangible item in game world..
+	std::vector<Shape*> mShapeVector;	//every tangible item in game world..
 
 	//db
      	PGconn* mDBConnection;
 
 public:
 	Game(Server* server, int id);
-	virtual ~Game();
+	~Game();
 
 	//index
 	unsigned int getOpenIndex ();
@@ -57,22 +57,22 @@ public:
 
 	// Network
 	void	sendExitNotification();
-	void	readDeltaMoveCommand(Message *mes, ClientRobust *client);
+	void	readDeltaMoveCommand(Message *mes, Client *client);
 	
 	//time
-	void	update();
+	virtual void	processUpdate();
 	
 	//collision detection
-	void checkCollisions();
-	void checkBounds(Shape* shape);
+	virtual void checkCollisions();
+	virtual void checkBounds(Shape* shape);
 		
 	//scope
- 	bool    checkScope(ClientRobust* client, Shape* shape);
+ 	bool    checkScope(Client* client, Shape* shape);
 
 
 	//join
-	void join(ClientRobust* client);
-	void leave(ClientRobust* client);
+	void join(Client* client);
+	void leave(Client* client);
 	
 	//shapes
 	virtual void createShapes();

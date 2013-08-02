@@ -58,19 +58,12 @@ void ApplicationMain::execute()
 
 	if (mApplication->mButtonHit == mApplication->mButtonExit)
 	{
-		mApplication->sendLogout();
 		mApplication->mStateMachine->changeState(NULL);
 		mApplication->mStateMachine->setGlobalState(NULL);
 		mApplication->mButtonHit = NULL;
 		mApplication->shutdown();
 		mApplication->mShutDown = true;
 		delete mApplication;
-	}
-
-	if (mApplication->mButtonHit == mApplication->mButtonShutdownServer)
-	{
-		mApplication->sendShutdownServer();
-		mApplication->mButtonHit = NULL;
 	}
 }
 

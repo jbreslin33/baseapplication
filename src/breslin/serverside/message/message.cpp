@@ -6,15 +6,6 @@
 // Common headers
 #include <stdio.h>
 
-Message::Message()
-{
-
-}
-Message::~Message()
-{
-
-}
-
 void Message::Init(char *d, int length)
 {
 	data		= d;

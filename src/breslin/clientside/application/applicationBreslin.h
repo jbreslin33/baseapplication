@@ -81,7 +81,6 @@ OgreBites::Button* mButtonLogin;
 OgreBites::Button* mButtonLogout;
 OgreBites::Button* mButtonJoinGameA;
 OgreBites::Button* mButtonExit;
-OgreBites::Button* mButtonShutdownServer;
 
 std::string mStringSchool;
 
@@ -144,7 +143,6 @@ void sendLogout();
 
 //shutdown
 void shutdown();
-void sendShutdownServer();
 
 //graphics
 bool runGraphics();

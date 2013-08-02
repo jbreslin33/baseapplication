@@ -20,36 +20,18 @@ Seek::Seek(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
 	mShape = shape;
 
-	mSeekOn = false;
-
 	mSeekShape = NULL;
-	mDestinationShape = NULL;
-
 	mSeekPoint = NULL;
-	mDestinationPoint = NULL;
-
-	mSeekVelocity = new Vector3D();
-	mDestinationVelocity = new Vector3D();
-
-	mSeekLength = 0.0f;
-	mDestinationLength = 0.0f;
 
  	//seek states
 	mStateMachine =  new StateMachine<Seek>(this);
-	mStateMachine->setCurrentState      (NO_SEEK::Instance());
-	mStateMachine->setPreviousState     (NO_SEEK::Instance());
-	mStateMachine->setGlobalState       (GLOBAL_SEEK::Instance());
+	mStateMachine->setCurrentState      (Normal_Seek::Instance());
+	mStateMachine->setPreviousState     (Normal_Seek::Instance());
+	mStateMachine->setGlobalState       (GlobalSeek::Instance());
 }
 
 Seek::~Seek()
 {
-	LogString("Seek::~Seek");
-	delete mSeekVelocity;
-	delete mDestinationVelocity;
-	delete mSeekShape;
-	delete mDestinationShape;
-	delete mSeekPoint;
-	delete mDestinationPoint;
 }
 void Seek::update()
 {
@@ -59,15 +41,11 @@ void Seek::update()
 	{
 		updateSeekPoint();
 	}
-	if (mDestinationShape)
-	{
-		updateDestinationPoint();
-	}
 }
 
-bool Seek::handleLetter(Letter* letter)
+bool Seek::handleMessage(const Telegram& msg)
 {
-        return mStateMachine->handleLetter(letter);
+        return mStateMachine->handleMessage(msg);
 }
 
 void Seek::updateSeekPoint()
@@ -83,28 +61,10 @@ void Seek::updateSeekPoint()
         }
 }
 
-void Seek::updateDestinationPoint()
-{
-	//update destination point if seek shape
- 	if (mDestinationShape)
-        {
-                //set destination point as that is what we will really use...
-                mDestinationPoint = new Vector3D();
-                mDestinationPoint->x = mDestinationShape->mSceneNode->getPosition().x;             
-                mDestinationPoint->y = mDestinationShape->mSceneNode->getPosition().y;             
-                mDestinationPoint->z = mDestinationShape->mSceneNode->getPosition().z;             
-        }
-}
-
 void Seek::setSeekPoint(Vector3D* seekPoint)
 {
 	if (seekPoint)
 	{
-		//make destination vars null
-		mDestinationShape = NULL;		
-		mDestinationPoint = NULL;		
-	
-		//set seek vars
 		mSeekPoint = new Vector3D();
 		mSeekPoint->copyValuesFrom(seekPoint); 
 	}
@@ -119,10 +79,6 @@ void Seek::setSeekShape(Shape* seekShape)
 {
 	if (seekShape)
 	{
-		//make destination vars null
-		mDestinationShape = NULL;		
-		mDestinationPoint = NULL;		
-
 		//set shape
 		mSeekShape = seekShape;
 
@@ -134,44 +90,3 @@ void Seek::setSeekShape(Shape* seekShape)
 		mSeekPoint = NULL;
 	}
 }
-
-void Seek::setDestinationPoint(Vector3D* destinationPoint)
-{
-        if (destinationPoint)
-        {
-                //make seek vars null
-                mSeekShape = NULL;
-                mSeekPoint = NULL;
-
-                //set destination vars
-                mDestinationPoint = new Vector3D();
-                mDestinationPoint->copyValuesFrom(destinationPoint);
-        }
-        else
-        {
-                mDestinationPoint = NULL;
-                mDestinationShape = NULL;
-        }
-}
-
-void Seek::setDestinationShape(Shape* destinationShape)
-{
-        if (destinationShape)
-        {
-                //make seek vars null
-                mSeekShape = NULL;
-                mSeekPoint = NULL;
-
-                //set shape
-                mDestinationShape = destinationShape;
-
-                updateDestinationPoint();
-        }
-        else
-        {
-                mDestinationShape = NULL;
-                mDestinationPoint = NULL;
-        }
-}
-
-

@@ -14,7 +14,6 @@ using namespace Ogre;
 
 class Shape;
 class Vector3D;
-class Letter;
 
 class Move : public BaseEntity 
 {
@@ -27,8 +26,8 @@ Move(Shape* shape);
 //update
 virtual void update();
 
-//handle letter 
-virtual bool  handleLetter(Letter* letter);
+//handle message
+virtual bool  handleMessage(const Telegram& msg);
 
 Shape* mShape;
 
@@ -39,14 +38,12 @@ Vector3D* mPositionBeforeCollision;
 StateMachine<Move>* mStateMachine;
 
 //keys
-Vector3D* mVelocity;
+Vector3D* mHeading;
 
 //run speed
 float mRunSpeed;
 
 float mSpeedMax;
-
-float mMaxForce;
 
 //run acceleration
 float mRunDecel;

@@ -1,19 +1,17 @@
 #include "clientPartido.h"
 //log
-#include "../../../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
-#include "../../../server/partido/serverPartido.h"
-#include "../../../network/network.h"
-#include "../../../game/partido/gamePartido.h"
-#include "../../../shape/partido/shapePartido.h"
+#include "../../server/partido/serverPartido.h"
+#include "../../network/network.h"
+#include "../../game/partido/gamePartido.h"
+#include "../../shape/partido/shapePartido.h"
 
 //utility
-#include "../../../../utility/utility.h"
+#include "../../../utility/utility.h"
 
-//states
-#include "states/clientPartidoStates.h"
 
-ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence) : ClientRobust(serverPartido, address, clientID, permanence) 
+ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence) : Client(serverPartido, address, clientID, permanence) 
 {
 	//server
 	mServerPartido = serverPartido;
@@ -23,7 +21,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 
         if (mClientID >= 0)
         {
-                ////sendSchools();
+                sendSchools();
         }
         else
         {
@@ -37,70 +35,45 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	mWins = 0;
 	mLosses = 0;
 	mTies = 0;	
-	mComputerAskedTime = 0;
-	mComputerAnswerTime = 0;
-
-        //states
-        mClientPartidoStateMachine =  new StateMachine<ClientPartido>(this);
-	if (clientID == -1)
-	{
-        	mClientPartidoStateMachine->setCurrentState      (NULL);
-	}
-	else
-	{
-        	mClientPartidoStateMachine->setCurrentState      (GAME_PARTIDO_MODE::Instance());
-	}
-        mClientPartidoStateMachine->setPreviousState     (NULL);
-        mClientPartidoStateMachine->setGlobalState       (GLOBAL_CLIENT_PARTIDO::Instance());
-
-        //states
-        mBattleStateMachine =  new StateMachine<ClientPartido>(this);
-	if (clientID == -1)
-	{
-        	mBattleStateMachine->setCurrentState      (NULL);
-	}
-	else
-	{
-        	mBattleStateMachine->setCurrentState      (BATTLE_OFF::Instance());
-	}
-        mBattleStateMachine->setPreviousState     (NULL);
-        mBattleStateMachine->setGlobalState       (NULL);
-
-	
 }
 
 ClientPartido::~ClientPartido()
 {
-	LogString("ClientPartido::~ClientPartido");
-        delete mClientPartidoStateMachine;
-        delete mBattleStateMachine;
+}
+
+//game
+void ClientPartido::addGame(GamePartido* gamePartido)
+{
+	Client::addGame(gamePartido);
+        mGamePartidoVector.push_back(gamePartido);
+}
+
+GamePartido* ClientPartido::getGame()
+{
+	return mGamePartido;
 }
 
 void ClientPartido::setGame(int gameID)
 {
-        for (int i = 0; i < mGameVector.size(); i++)
+        for (int i = 0; i < mGamePartidoVector.size(); i++)
         {
-                if (mGameVector.at(i)->mID == gameID)
+                if (mGamePartidoVector.at(i)->mID == gameID)
                 {
-                        mGamePartido = (GamePartido*)mGameVector.at(i);
+                        mGamePartido = mGamePartidoVector.at(i);
                         mGamePartido->sendShapes(this);
                 }
         }
 }
 
-bool ClientPartido::handleLetter(Letter* letter)
+bool ClientPartido::handleMessage(const Telegram& msg)
 {
-	return ClientRobust::handleLetter(letter);
+        return mStateMachine->handleMessage(msg);
 }
 
 //updates
 void ClientPartido::update()
 {
-	ClientRobust::update();
-	mClientPartidoStateMachine->update();
-	mBattleStateMachine->update();
-
-/*
+	Client::update();
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
 		if (mShapePartido)
@@ -112,13 +85,12 @@ void ClientPartido::update()
         		}
 		}
 	}
-*/
 }
 
 
 void ClientPartido::setShape(ShapePartido* shapePartido)
 {
-	ClientRobust::setShape(shapePartido);
+	Client::setShape(shapePartido);
 	mShapePartido = shapePartido;
 }
 
@@ -132,23 +104,23 @@ void ClientPartido::sendSchools()
         //loop thru each char... 
         for (unsigned int i = 0; i < mServerPartido->mSchoolVector.size(); i++)
         {
-                mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
-                mMessage->WriteByte(mServerPartido->mMessageAddSchool); // add type
+                mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+                mMessage.WriteByte(mServerPartido->mMessageAddSchool); // add type
                 if (mClientID > 0)
                 {
-                        mMessage->WriteByte(mClientID); // add mClientID for browsers 
+                        mMessage.WriteByte(mClientID); // add mClientID for browsers 
                 }
                 int length = mServerPartido->mSchoolVector.at(i).length();  // get length of string containing school 
-                mMessage->WriteByte(length); //send length 
+                mMessage.WriteByte(length); //send length 
 
                 //loop thru length and write it 
                 for (int b=0; b < length; b++)
                 {
-                        mMessage->WriteByte(mServerPartido->mSchoolVector.at(i).at(b));         
+                        mMessage.WriteByte(mServerPartido->mSchoolVector.at(i).at(b));         
                 }
                 
                 //send it
-                mServerPartido->mNetwork->sendPacketTo(this,mMessage);
+                mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
         }
 }
 
@@ -156,31 +128,51 @@ void ClientPartido::sendQuestion(int questionID)
 {
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
-        	mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
-        	mMessage->WriteByte(mServerPartido->mMessageAskQuestion); // add type
+        	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        	mMessage.WriteByte(mServerPartido->mMessageAskQuestion); // add type
 
         	if (mClientID > 0)
         	{
-                	mMessage->WriteByte(mClientID); // add mClientID for browsers
+                	mMessage.WriteByte(mClientID); // add mClientID for browsers
         	}
        		int length = mServerPartido->mQuestionVector.at(questionID).length();  
-        	mMessage->WriteByte(length); 
+        	mMessage.WriteByte(length); 
 
         	//loop thru length and write it
         	for (int i=0; i < length; i++)
         	{
-                	mMessage->WriteByte(mServerPartido->mQuestionVector.at(questionID).at(i));
+                	mMessage.WriteByte(mServerPartido->mQuestionVector.at(questionID).at(i));
         	}
 
         	//send it
-        	mServerPartido->mNetwork->sendPacketTo(this,mMessage);
+        	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 	}
 }
+/*
+
+STATES:
+permanent
+temp
+
+Human
+Computer
+
+Logged out
+in lobby
+game mode
+
+playgame
+waiting for answer
+sendQuestion
+
+
+*/
+
 
 void ClientPartido::battleStart(ShapePartido* whoToBattle)
 {
-        mShapePartido->mOpponent = whoToBattle;
         mKey = 0;
+        mShapePartido->mOpponent = whoToBattle;
 
 	mBattleScore = 0;	
 	mWaitingForAnswer = false;
@@ -261,16 +253,17 @@ void ClientPartido::sendBattleStart()
 {
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
-		mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
-        	mMessage->WriteByte(mServerPartido->mMessageBattleStart); // add type
+        
+		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        	mMessage.WriteByte(mServerPartido->mMessageBattleStart); // add type
 
         	if (mClientID > 0)
         	{
-                	mMessage->WriteByte(mClientID); // add mClientID for browsers
+                	mMessage.WriteByte(mClientID); // add mClientID for browsers
         	}
 
         	//send it
-        	mServerPartido->mNetwork->sendPacketTo(this,mMessage);
+        	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 	}
 }
 
@@ -278,16 +271,16 @@ void ClientPartido::sendBattleEnd()
 {
 	if (mConnectionState == DREAMSOCK_CONNECTED)
 	{
-       		mMessage->Init(mMessage->outgoingData, sizeof(mMessage->outgoingData));
-       		mMessage->WriteByte(mServerPartido->mMessageBattleEnd); // add type
+       		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+       		mMessage.WriteByte(mServerPartido->mMessageBattleEnd); // add type
 
        		if (mClientID > 0)
        		{
-               		mMessage->WriteByte(mClientID); // add mClientID for browsers
+               		mMessage.WriteByte(mClientID); // add mClientID for browsers
        		}
 
        		//send it
-       		mServerPartido->mNetwork->sendPacketTo(this,mMessage);
+       		mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 	}
 }
 
@@ -331,35 +324,26 @@ void ClientPartido::readAnswer(int answerTime, std::string answer)
         if (mStringAnswer.compare(mServerPartido->mAnswerVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
 	{
 		ShapePartido* opponent  = mShapePartido->mOpponent;
+
+		//score battle
+		scoreBattle(LOSS);
+		opponent->mClientPartido->scoreBattle(WIN);
 		
-		if (opponent)
-		{
+		//set battle record text .. mBattleRecordText 
+		setBattleRecordText();	
+		opponent->mClientPartido->setBattleRecordText();	
 
-			//score battle
-			scoreBattle(LOSS);
-			opponent->mClientPartido->scoreBattle(WIN);
+		//set Text of shape .. mText
+	       	mShapePartido->setText(mBattleRecordText); 	
+		opponent->mClientPartido->mShapePartido->setText(opponent->mClientPartido->mBattleRecordText);	
 		
-			//set battle record text .. mBattleRecordText 
-			setBattleRecordText();	
-			opponent->mClientPartido->setBattleRecordText();	
+		//reset battle
+		resetBattle();	
+		opponent->mClientPartido->resetBattle();	
 
-			//set Text of shape .. mText
-	       		mShapePartido->setText(mBattleRecordText); 	
-			opponent->mClientPartido->mShapePartido->setText(opponent->mClientPartido->mBattleRecordText);	
-		
-			//reset battle
-			resetBattle();	
-			opponent->mClientPartido->resetBattle();	
-
-			//send battle end to client	
-			sendBattleEnd();
-			opponent->mClientPartido->sendBattleEnd();
-		}
-		else //opponent took care of loss....
-		{
-			// do nothing...
-
-		}
+		//send battle end to client	
+		sendBattleEnd();
+		opponent->mClientPartido->sendBattleEnd();
 	}
 	else
 	{

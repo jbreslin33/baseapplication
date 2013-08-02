@@ -13,7 +13,6 @@
 using namespace Ogre;
 
 class Shape;
-class Letter;
 
 class Rotation : public BaseEntity 
 {
@@ -39,7 +38,7 @@ float mRotationAccel;
 virtual void update();
 
 //handle message
-virtual bool  handleLetter(Letter* letter);
+virtual bool  handleMessage(const Telegram& msg);
 
 StateMachine<Rotation>* mStateMachine;
 

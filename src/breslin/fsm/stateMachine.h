@@ -5,13 +5,13 @@
 #include <string>
 
 #include "state.h"
+#include "../messaging/telegram.h"
 
 //log
 #include "../serverside/tdreamsock/dreamSockLog.h"
 
 #include <typeinfo>
 template <class entity_type>
-
 class StateMachine
 {
 private:
@@ -57,20 +57,24 @@ void  update()const
 	}
   }
 
-bool  handleLetter(Letter* letter)const
-{
-	if (m_pCurrentState && m_pCurrentState->onLetter(m_pOwner, letter))
-    	{
-      		return true;
-    	}
+  bool  handleMessage(const Telegram& msg)const
+  {
+    //first see if the current state is valid and that it can handle
+    //the message
+    if (m_pCurrentState && m_pCurrentState->onMessage(m_pOwner, msg))
+    {
+      return true;
+    }
   
-    	if (m_pGlobalState && m_pGlobalState->onLetter(m_pOwner, letter))
-    	{
-      		return true;
-    	}
+    //if not, and if a global state has been implemented, send 
+    //the message to the global state
+    if (m_pGlobalState && m_pGlobalState->onMessage(m_pOwner, msg))
+    {
+      return true;
+    }
 
-    	return false;
-}
+    return false;
+  }
 
   //change to a new state
   void  changeState(State<entity_type>* pNewState)

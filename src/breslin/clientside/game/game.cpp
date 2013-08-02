@@ -86,31 +86,25 @@ void Game::setStates()
 //i am guessing i am not clearing the shape arrray???
 void Game::remove()
 {
-	for (unsigned int i = 0; i < mShapeVector->size(); i++)
-	{
-		delete mShapeVector->at(i)->mGhost->mObjectTitle;
-		delete mShapeVector->at(i)->mObjectTitle;
-	}
+        if (mShapeVector)
+        {
+                for (unsigned int i = 0; i < mShapeVector->size(); i++)
+                {
+			Shape* shape = mShapeVector->at(i);
 
-
-	for (unsigned int i = 0; i < mShapeVector->size(); i++)
-	{
-		//ghost
-		SceneNode* ghostParent = mShapeVector->at(i)->mGhost->mEntity->getParentSceneNode();
-    		ghostParent->detachObject(mShapeVector->at(i)->mGhost->mEntity);
-    		mApplication->getSceneManager()->destroyEntity(mShapeVector->at(i)->mGhost->mEntity->getName());
-		
-		//normal shape	
-		SceneNode* parent = mShapeVector->at(i)->mEntity->getParentSceneNode();
-    		parent->detachObject(mShapeVector->at(i)->mEntity);
-    		mApplication->getSceneManager()->destroyEntity(mShapeVector->at(i)->mEntity->getName());
-	}
-
-	SceneNode* parent = mFloor->getParentSceneNode();
-    	parent->detachObject(mFloor);
-    	mApplication->getSceneManager()->destroyEntity(mFloor->getName());
-
-	mApplication->getSceneManager()->destroyAllLights() ;
+        		//delete objectTitles
+			if (shape)
+			{
+        			delete shape->mGhost->mObjectTitle;
+        			delete shape->mObjectTitle;
+        			delete shape->mGhost;
+        			delete shape;
+			}
+                }
+        }
+	
+	mApplication->getSceneManager()->destroyAllEntities();
+        mApplication->mSceneMgr->destroyLight(mPointLight);
 
 	//clear the vectors....	
 	mShapeVector->clear();
@@ -228,7 +222,7 @@ void Game::createScene()
 	mFloorNode->attachObject(mFloor);
 	mFloorNode->setPosition(0,0,0);
 
-/*
+
 	// create a northwall mesh resource
         MeshManager::getSingleton().createPlane("northwall", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
                Plane(Vector3::UNIT_Z, 0), 500, 50, 10, 10, true, 1, 10, 10, Vector3::UNIT_Y);
@@ -250,7 +244,7 @@ void Game::createScene()
 	mEastWallNode = mApplication->mSceneMgr->getRootSceneNode()->createChildSceneNode();
 	mEastWallNode->attachObject(mEastWall);
 	mEastWallNode->setPosition(500,0,250);
-*/
+
 
 
 }

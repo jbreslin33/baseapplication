@@ -8,71 +8,47 @@ struct Telegram;
 
 
 /*******************************
-*      GLOBAL_SEEK
+*      GlobalSeek
 ******************************/
 
-class GLOBAL_SEEK : public State<Seek>
+class GlobalSeek : public State<Seek>
 {
 private:
-  GLOBAL_SEEK(){}
+  GlobalSeek(){}
 public:
-  static GLOBAL_SEEK* Instance();
+  static GlobalSeek* Instance();
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
-  bool onLetter(Seek* seek, Letter* letter);
+  bool onMessage(Seek* seek, const Telegram& msg);
 };
 
 /*******************************
 *      Seek
 ******************************/
 
-class NORMAL_SEEK : public State<Seek>
+class Normal_Seek : public State<Seek>
 {
 private:
-  NORMAL_SEEK(){}
+  Normal_Seek(){}
 public:
-  static NORMAL_SEEK* Instance();
+  static Normal_Seek* Instance();
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
-  bool onLetter(Seek* seek, Letter* letter);
+  bool onMessage(Seek* seek, const Telegram& msg);
 };
 
-class REACHED_DESTINATION : public State<Seek>
+class No_Seek : public State<Seek>
 {
 private:
-  REACHED_DESTINATION(){}
+  No_Seek(){}
 public:
-  static REACHED_DESTINATION* Instance();
+  static No_Seek* Instance();
   void enter  (Seek* seek);
   void execute(Seek* seek);
   void exit   (Seek* seek);
-  bool onLetter(Seek* seek, Letter* letter);
-};
-
-class SEEK_DESTINATION : public State<Seek>
-{
-private:
-  SEEK_DESTINATION(){}
-public:
-  static SEEK_DESTINATION* Instance();
-  void enter  (Seek* seek);
-  void execute(Seek* seek);
-  void exit   (Seek* seek);
-  bool onLetter(Seek* seek, Letter* letter);
-};
-
-class NO_SEEK : public State<Seek>
-{
-private:
-  NO_SEEK(){}
-public:
-  static NO_SEEK* Instance();
-  void enter  (Seek* seek);
-  void execute(Seek* seek);
-  void exit   (Seek* seek);
-  bool onLetter(Seek* seek, Letter* letter);
+  bool onMessage(Seek* seek, const Telegram& msg);
 };
 
 #endif

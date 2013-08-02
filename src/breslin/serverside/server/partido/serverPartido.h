@@ -10,13 +10,17 @@ class ServerPartido : public Server
 {
 public:
 	ServerPartido(Ogre::Root* root, const char *localIP, int serverPort);	
-	virtual ~ServerPartido();
+	~ServerPartido();
+
+	//games
+	void addGame(GamePartido* gamePartido);
+   	std::vector<GamePartido*> mGamePartidoVector;
 
    	//clients
 	void createClients();
-	virtual void addClient(Client* clientPartido, bool permanent);
-        std::vector<ClientPartido*>* mClientPartidoVector;
-        std::vector<Client*>* mClientPartidoVectorTemp;
+	void addClient(ClientPartido* clientPartido, bool permanent);
+        std::vector<ClientPartido*> mClientPartidoVector;
+        std::vector<ClientPartido*> mClientPartidoVectorTemp;
 
         //add school
         static const int mMessageAddSchool = -109;
@@ -45,7 +49,9 @@ public:
 	void parsePacket(Message *mes, struct sockaddr *address);
 
 	//updates
+        virtual void processGames();
         virtual void processClients();
+        virtual void sendCommands();
 
 };
 

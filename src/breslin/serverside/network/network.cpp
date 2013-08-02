@@ -20,7 +20,7 @@
 #include <signal.h>
 #include "../tdreamsock/dreamLinuxSock.h"
 
-#include "../client/robust/clientRobust.h"
+#include "../client/client.h"
 
 //for string
 #include <string>
@@ -42,9 +42,11 @@ Network::Network(Server* server, const char netInterface[32], int port)
 
 Network::~Network()
 {
-	LogString("Network::~Network");
-	delete mDreamLinuxSock;
-	close(mSocket);
+}
+
+void Network::shutdown(void)
+{
+	LogString("Shutting down dreamSock");
 }
 
 //-----------------------------------------------------------------------------
@@ -175,6 +177,15 @@ int Network::setBroadcasting(SOCKET sock, int mode)
 	return 0;
 }
 
+void Network::closeSocket(SOCKET sock)
+{
+#ifdef WIN32
+		closesocket(sock);
+#else
+		close(sock);
+#endif
+}
+
 int Network::getPacket(SOCKET sock, char *data, struct sockaddr *from)
 {
 	int ret;
@@ -211,7 +222,7 @@ void Network::broadcast(Message* message)
                 return;
 	}
 
-        for (unsigned int i = 0; i < mServer->mClientVector->size(); i++)
+        for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
         {
                 if(message->GetSize() == 0)
 		{
@@ -220,11 +231,11 @@ void Network::broadcast(Message* message)
 
                 //is the a browser client but not THE browser client which is -1 normal c++ clients are 0 if so skip
 
-                if(mServer->mClientVector->at(i)->mClientID > 0)
+                if(mServer->mClientVector.at(i)->mClientID > 0)
 		{
                         continue;
 		}
-                sendPacketTo(mServer->mClientVector->at(i),message);
+                sendPacketTo(mServer->mClientVector.at(i),message);
         }
 }
 
