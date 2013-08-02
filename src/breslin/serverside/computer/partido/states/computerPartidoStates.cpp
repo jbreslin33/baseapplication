@@ -10,6 +10,9 @@
 #include "../computerPartido.h"
 
 #include "../../../shape/shape.h"
+#include "../../../client/robust/clientRobust.h"
+
+
 
 //rand
 #include <stdlib.h>
@@ -68,6 +71,13 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computerPartido)
 	{
 		computerPartido->mComputerPartidoStateMachine->changeState(HUMAN_CONTROLLED_PARTIDO::Instance());
 	} 
+
+	if (computerPartido->mCounter > computerPartido->mThreshold)
+	{
+		LogString("mThreshold reached! for :%d",computerPartido->mShape->mClient->db_id);
+		computerPartido->mCounter = 0;
+	}
+	computerPartido->mCounter++;
 
 }
 
