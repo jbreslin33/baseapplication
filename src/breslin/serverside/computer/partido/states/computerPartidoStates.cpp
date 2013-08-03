@@ -13,6 +13,7 @@
 #include "../../../client/robust/clientRobust.h"
 #include "../../../game/game.h"
 #include "../../../seek/seek.h"
+#include "../../../../math/vector3D.h"
 
 
 
@@ -77,16 +78,33 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 	if (computer->mCounter > computer->mThreshold)
 	{
 		LogString("mThreshold reached! for :%d",computer->mShape->mClient->db_id);
-		int dieroll = rand() % 4;
-		dieroll = dieroll + 2;
-		for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
+		int dieroll = 0;
+		dieroll = rand() % 4;
+		if (dieroll == 0)
 		{
-			if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == dieroll)	
+			LogString("%d IS ATTACKING", computer->mShape->mClient->db_id);
+			int dieroll = rand() % 4;
+			dieroll = dieroll + 2;
+			for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
 			{
-				computer->mShape->mSeek->setSeekShape(computer->mShape->mGame->mShapeVector.at(i));
-				computer->mCounter = 0;
+				if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == dieroll)	
+				{
+					computer->mShape->mSeek->setSeekShape(computer->mShape->mGame->mShapeVector.at(i));
+				}
 			}
 		}
+		else
+		{
+			LogString("%d IS WANDERING", computer->mShape->mClient->db_id);
+			int dierollX = rand() % 500;
+			dierollX = dierollX - 250;
+			int dierollZ = rand() % 500;
+			dierollZ = dierollZ - 250;
+			Vector3D* vector3D = new Vector3D(dierollX,0.0f,dierollZ);
+			computer->mShape->mSeek->setSeekPoint(vector3D);
+			delete vector3D;
+		}
+		computer->mCounter = 0;
 	}
 	computer->mCounter++;
 }

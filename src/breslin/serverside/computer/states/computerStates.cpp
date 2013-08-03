@@ -81,6 +81,7 @@ COMPUTER_CONTROLLED* COMPUTER_CONTROLLED::Instance()
 
 void COMPUTER_CONTROLLED::enter(Computer* computer)
 {
+/*
     	if (computer->mShape->mAvoid)
         {
                 if (computer->mShape->mClient->db_id == 5)
@@ -99,12 +100,12 @@ void COMPUTER_CONTROLLED::enter(Computer* computer)
                         }
                 }
         }
-
+*/
 }
 
 void COMPUTER_CONTROLLED::execute(Computer* computer)
 {
-
+/*
        	if (computer->mShape->mSeek)
         {
                 if (computer->mShape->mClient->db_id == 5)
@@ -118,7 +119,7 @@ void COMPUTER_CONTROLLED::execute(Computer* computer)
                         }
                 }
         }
-
+*/
 	//is this human controlled?
 	if (computer->mShape->mClient->mLoggedIn)
 	{
