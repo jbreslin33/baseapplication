@@ -77,9 +77,11 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 	if (computer->mCounter > computer->mThreshold)
 	{
 		LogString("mThreshold reached! for :%d",computer->mShape->mClient->db_id);
+		int dieroll = rand() % 4;
+		dieroll = dieroll + 2;
 		for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
 		{
-			if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 2)	
+			if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == dieroll)	
 			{
 				computer->mShape->mSeek->setSeekShape(computer->mShape->mGame->mShapeVector.at(i));
 				computer->mCounter = 0;
@@ -87,7 +89,6 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 		}
 	}
 	computer->mCounter++;
-
 }
 
 void COMPUTER_CONTROLLED_PARTIDO::exit(ComputerPartido* computerPartido)
