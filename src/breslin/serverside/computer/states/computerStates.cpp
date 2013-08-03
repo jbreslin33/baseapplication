@@ -148,6 +148,10 @@ HUMAN_CONTROLLED* HUMAN_CONTROLLED::Instance()
 
 void HUMAN_CONTROLLED::enter(Computer* computer)
 {
+	if (computer->mShape->mSeek)
+	{
+		computer->mShape->mSeek->setSeekShape(NULL);     
+	}
 }
 
 void HUMAN_CONTROLLED::execute(Computer* computer)
