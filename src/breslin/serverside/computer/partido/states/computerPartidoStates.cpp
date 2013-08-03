@@ -11,6 +11,8 @@
 
 #include "../../../shape/shape.h"
 #include "../../../client/robust/clientRobust.h"
+#include "../../../game/game.h"
+#include "../../../seek/seek.h"
 
 
 
@@ -65,19 +67,26 @@ void COMPUTER_CONTROLLED_PARTIDO::enter(ComputerPartido* computerPartido)
 	LogString("COMPUTER_CONTROLLED_PARTIDO");
 }
 
-void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computerPartido)
+void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 {
-	if (computerPartido->mShape->mComputer->mStateMachine->currentState() == HUMAN_CONTROLLED::Instance())
+	if (computer->mShape->mComputer->mStateMachine->currentState() == HUMAN_CONTROLLED::Instance())
 	{
-		computerPartido->mComputerPartidoStateMachine->changeState(HUMAN_CONTROLLED_PARTIDO::Instance());
+		computer->mComputerPartidoStateMachine->changeState(HUMAN_CONTROLLED_PARTIDO::Instance());
 	} 
 
-	if (computerPartido->mCounter > computerPartido->mThreshold)
+	if (computer->mCounter > computer->mThreshold)
 	{
-		LogString("mThreshold reached! for :%d",computerPartido->mShape->mClient->db_id);
-		computerPartido->mCounter = 0;
+		LogString("mThreshold reached! for :%d",computer->mShape->mClient->db_id);
+		for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
+		{
+			if (computer->mShape->mGame->mShapeVector.at(i)->mClient->db_id == 2)	
+			{
+				computer->mShape->mSeek->setSeekShape(computer->mShape->mGame->mShapeVector.at(i));
+				computer->mCounter = 0;
+			}
+		}
 	}
-	computerPartido->mCounter++;
+	computer->mCounter++;
 
 }
 
