@@ -79,7 +79,7 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 	{
 		LogString("mThreshold reached! for :%d",computer->mShape->mClient->db_id);
 		int dieroll = 0;
-		dieroll = rand() % 4;
+		dieroll = rand() % 10;
 		if (dieroll == 0)
 		{
 			LogString("%d IS ATTACKING", computer->mShape->mClient->db_id);
