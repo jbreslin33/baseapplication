@@ -195,7 +195,11 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
         transVector->add(abilityMove->mShape->getPosition());
         
 	//set new position
-	abilityMove->mShape->setPosition(transVector);
+	if (transVector->x < 250.0f && transVector->x > -250.0f && transVector->z < 250.0f && transVector->z > -250.0f)
+	{
+		abilityMove->mShape->setPosition(transVector);
+	}
+
 	//abliityMove->mShape->mApplication->getCamera()->setPosition(Ogre::Vector3(0,20,20));
  	// Position it at 500 in Z direction
  	//   mCamera->setPosition(Ogre::Vector3(0,20,20));

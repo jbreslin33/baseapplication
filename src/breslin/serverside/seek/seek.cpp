@@ -69,6 +69,7 @@ void Seek::setSeekPoint(Vector3D* seekPoint)
 	{
 		mSeekPoint = new Vector3D();
 		mSeekPoint->copyValuesFrom(seekPoint); 
+		mSeekShape = NULL;
 	}
 	else
 	{
