@@ -113,6 +113,7 @@ void ClientRobust::login()
         message.WriteByte(mServer->mMessageLogin); // add type
         Letter* letter = new Letter(this,&message);
         mServer->mMailMan->deliver(this,letter);
+	delete letter;
 
         //set last messageTime
         mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
@@ -136,7 +137,7 @@ void ClientRobust::logout()
         message.WriteByte(mServer->mMessageLogout); // add type
         Letter* letter = new Letter(this,&message);
         mServer->mMailMan->deliver(this,letter);
-
+	delete letter;
         mLoggedIn = false;
 
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));

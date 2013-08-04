@@ -50,7 +50,6 @@ bool GlobalClientRobust::onLetter(ClientRobust* clientRobust, Letter* letter)
 		return true;
 	}
 
-
         return false;
 }
 

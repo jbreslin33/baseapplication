@@ -106,6 +106,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 
 Client::~Client()
 {
+	delete mStateMachine;
 /*
 	//this will check if there is an mShape
 
