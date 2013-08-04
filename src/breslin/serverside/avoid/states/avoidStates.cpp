@@ -95,6 +95,7 @@ void Normal_Avoid::execute(Avoid* avoid)
 
        			avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
        			avoid->mShape->mMove->mVelocity->normalise();
+			delete newVelocity;
 		}
 	}
 }
@@ -142,6 +143,7 @@ void Seek_Avoid::execute(Avoid* avoid)
 
                         avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
                         avoid->mShape->mMove->mVelocity->normalise();
+			delete newVelocity;
                 }
         }
 }
