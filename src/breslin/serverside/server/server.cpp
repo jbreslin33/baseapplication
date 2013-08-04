@@ -74,7 +74,9 @@ Server::~Server()
 	mClientVector.empty();
 	mClientVectorTemp.empty();
 	mNetwork->closeSocket(mNetwork->mSocket);
-
+	
+	delete mNetwork;
+	delete mMailMan;
 	delete mUtility;
 }
 
@@ -350,7 +352,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         			message.WriteByte(gameID);
         			Letter* letter = new Letter(client,&message);
         			mMailMan->deliver(client,letter);
-			
+				delete letter;	
 				client->setGame(gameID);
 			}
 		}
@@ -375,7 +377,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         			message.WriteByte(gameID);
         			Letter* letter = new Letter(client,&message);
         			mMailMan->deliver(client,letter);
-				
+				delete letter;	
 				client->setGame(gameID);
 			}
                 }
