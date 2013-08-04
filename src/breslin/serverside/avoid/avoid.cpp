@@ -49,6 +49,12 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Avoid::~Avoid()
 {
+	delete mAvoidVelocity;
+	delete mEvasiveVelocity;
+
+	delete mCurrentPosition;
+	delete mAvoideePosition;
+	delete mStateMachine;
 }
 void Avoid::update()
 {
@@ -88,7 +94,6 @@ void  Avoid::calculateClosestAvoidee()
 		Shape* avoidee = mAvoidVector.at(i);
 
  		Vector3D* newKeyDirection         = new Vector3D();
-
                 Vector3D* currentPosition         = new Vector3D();
                 Vector3D* currentAvoideePosition  = new Vector3D();
                 Vector3D* differenceVector        = new Vector3D();
@@ -110,6 +115,10 @@ void  Avoid::calculateClosestAvoidee()
 			closestShapeSoFar = avoidee;
 			closestDistanceSoFar = length;
 		}
+ 		delete newKeyDirection;
+                delete currentPosition;
+                delete currentAvoideePosition;
+                delete differenceVector;
 	}
 	mAvoidee = closestShapeSoFar;
 	if (mAvoidee)
