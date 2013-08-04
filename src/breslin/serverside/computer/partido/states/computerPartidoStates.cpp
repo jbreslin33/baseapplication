@@ -13,6 +13,7 @@
 #include "../../../client/robust/clientRobust.h"
 #include "../../../game/game.h"
 #include "../../../seek/seek.h"
+#include "../../../bounds/bounds.h"
 #include "../../../../math/vector3D.h"
 
 
@@ -96,10 +97,10 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 		else
 		{
 			LogString("%d IS WANDERING", computer->mShape->mClient->db_id);
-			int dierollX = rand() % 500;
-			dierollX = dierollX - 250;
-			int dierollZ = rand() % 500;
-			dierollZ = dierollZ - 250;
+			int dierollX = rand() % (int)computer->mShape->mGame->mBounds->c->x + (int)computer->mShape->mGame->mBounds->c->x;
+			dierollX = dierollX - computer->mShape->mGame->mBounds->c->x;
+			int dierollZ = rand() % (int)computer->mShape->mGame->mBounds->c->x + (int)computer->mShape->mGame->mBounds->c->x; 
+			dierollZ = dierollZ - computer->mShape->mGame->mBounds->c->x;
 			Vector3D* vector3D = new Vector3D(dierollX,0.0f,dierollZ);
 			computer->mShape->mSeek->setSeekPoint(vector3D);
 			delete vector3D;
