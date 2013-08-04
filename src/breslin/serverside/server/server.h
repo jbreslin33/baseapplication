@@ -34,13 +34,16 @@ class ClientRobust;
 class Game;
 class Shape;
 class MailMan;
-
+class Utility;
 class Server
 {
 public:
 
 	//Ogre Root
 	Ogre::Root* mRoot;
+
+	//utility
+	Utility* mUtility;
 
 	//network
 	Network* mNetwork;
@@ -60,6 +63,7 @@ public:
 	//clients
 	std::vector<ClientRobust*> mClientVector;
 	std::vector<Client*> mClientVectorTemp;
+	int mNumberOfClients;
 
 	//port
 	int mPort;					// Port

@@ -6,6 +6,7 @@
 #include "../../game/partido/gamePartido.h"
 #include "../../client/robust/partido/clientPartido.h"
 #include "../../../math/vector3D.h"
+#include "../../../utility/utility.h"
 #include "../../shape/shape.h"
 
 ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPort) 
@@ -70,7 +71,13 @@ void ServerPartido::createClients()
         int             row;
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,"select * from users WHERE username != 'root' ORDER BY id LIMIT 4");
+	
+	std::string query = "select * from users WHERE username != 'root' ORDER BY id LIMIT ";
+        query.append(mUtility->intToString(mNumberOfClients));
+        const char * q = query.c_str();
+        res = PQexec(conn,q);
+
+        //res = PQexec(conn,"select * from users WHERE username != 'root' ORDER BY id LIMIT 4");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");

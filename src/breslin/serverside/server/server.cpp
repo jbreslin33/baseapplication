@@ -22,6 +22,9 @@
 //math
 #include "../../math/vector3D.h"
 
+//utility
+#include "../../utility/utility.h"
+
 //rotation
 #include "../rotation/rotation.h"
 
@@ -37,6 +40,11 @@
 
 Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 {
+	mUtility = new Utility();
+
+	//numberOf Clients
+	mNumberOfClients = 4;
+
 	//ogre root
 	mRoot = root;
 
@@ -66,6 +74,8 @@ Server::~Server()
 	mClientVector.empty();
 	mClientVectorTemp.empty();
 	mNetwork->closeSocket(mNetwork->mSocket);
+
+	delete mUtility;
 }
 
 
@@ -164,7 +174,11 @@ void Server::createClients()
         int             row;
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-        res = PQexec(conn,"select * from users ORDER BY id LIMIT 4");
+	
+	std::string query = "select * from users WHERE username != 'root' ORDER BY id LIMIT "; 
+	query.append(mUtility->intToString(mNumberOfClients));	
+ 	const char * q = query.c_str();	
+        res = PQexec(conn,q);
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");
