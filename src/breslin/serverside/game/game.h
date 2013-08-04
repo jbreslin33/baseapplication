@@ -51,6 +51,7 @@ public:
 	//index
 	unsigned int getOpenIndex ();
 	Vector3D* getOpenPoint    ();
+	Vector3D* mOpenPoint;
 
 	//end game
 	virtual bool checkForEndOfGame() { }

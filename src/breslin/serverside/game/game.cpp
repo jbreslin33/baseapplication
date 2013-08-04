@@ -39,11 +39,15 @@ Game::Game(Server* server, int id)
    	mBounds->a = new Vector3D(-250.0f,0.0f,-250.0f);
         mBounds->c = new Vector3D(250.0f,0.0f,250.0f);
 
+	//openpoint
+	mOpenPoint = new Vector3D();
+
 }
 
 Game::~Game()
 {
 	StopLog();
+	delete mBounds;
 	delete mServer;
 }
 
@@ -201,26 +205,24 @@ unsigned int Game::getOpenIndex()
 
 Vector3D* Game::getOpenPoint()
 {
-	Vector3D* vector3D = new Vector3D();
-
 	for (int x = -200; x < 3000; x++)
 	{	
 		bool occupied = false; 
-		vector3D->x = x;
-		vector3D->y = 0;
-		vector3D->z = 35;
+		mOpenPoint->x = x;
+		mOpenPoint->y = 0;
+		mOpenPoint->z = 35;
 
                 if (mShapeVector.size() < 1)
 		{
-			return vector3D;
+			return mOpenPoint;
 		}
 
                 for (unsigned int i = 0; i < mShapeVector.size(); i++)
                 {
                 	if (mShapeVector.at(i)->mCollidable == true)
                         {
-                        	float x1 = vector3D->x;
-                                float z1 = vector3D->z;
+                        	float x1 = mOpenPoint->x;
+                                float z1 = mOpenPoint->z;
                                 float x2 = mShapeVector.at(i)->mSceneNode->getPosition().x;
                                 float z2 = mShapeVector.at(i)->mSceneNode->getPosition().z;
 
@@ -237,7 +239,7 @@ Vector3D* Game::getOpenPoint()
 
 		if (!occupied)
 		{
-			return vector3D;
+			return mOpenPoint;
 		}
         }
 }
