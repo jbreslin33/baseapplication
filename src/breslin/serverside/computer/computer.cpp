@@ -28,6 +28,7 @@ Computer::Computer(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Computer::~Computer()
 {
+   	delete mStateMachine;
 }
 
 void Computer::update()

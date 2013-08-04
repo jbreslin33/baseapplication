@@ -28,6 +28,7 @@ ComputerPartido::ComputerPartido(ShapePartido* shape) : Computer(shape)
 
 ComputerPartido::~ComputerPartido()
 {
+   	delete mComputerPartidoStateMachine;
 }
 
 void ComputerPartido::update()
