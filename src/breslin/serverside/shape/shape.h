@@ -87,6 +87,8 @@ int mMeshCode;
 float mCollisionRadius;
 float mCollisionRadiusSpawn;
 bool  mCollidable;
+int   mCollisionTimeout;
+int   mCollisionTimeoutCounter;
 
 //animation
 bool mAnimated;

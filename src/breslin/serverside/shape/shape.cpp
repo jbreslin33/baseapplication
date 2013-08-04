@@ -60,6 +60,8 @@ Shape::Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* pos
 	mCollisionRadius = collisionRadius;
 	mCollisionRadiusSpawn = collisionRadius * 2;
 	mCollidable = collidable;
+	mCollisionTimeout = 0;
+	mCollisionTimeoutCounter = 0;
 
 	//animated
 	mAnimated = animated;
