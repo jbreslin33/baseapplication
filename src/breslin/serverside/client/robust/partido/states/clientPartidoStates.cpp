@@ -206,8 +206,8 @@ void Waiting_For_Answer::enter(ClientPartido* clientPartido)
 
 	clientPartido->mComputerAskedTime = clientPartido->mServer->mGameTime;	
 
- 	int randomNumber = rand() % 1000;
- 	clientPartido->mComputerAnswerTime = 1500 + randomNumber;
+ 	int randomAnswerTime = rand() % 3000;
+ 	clientPartido->mComputerAnswerTime = randomAnswerTime;
 
         clientPartido->mWaitingForAnswer = true;
 }       
@@ -228,6 +228,7 @@ void Waiting_For_Answer::execute(ClientPartido* clientPartido)
 	{
 		if (clientPartido->mComputerAskedTime + clientPartido->mComputerAnswerTime < clientPartido->mServer->mGameTime)
 		{		
+			LogString("COMPUTER ANSWER");
 			clientPartido->readAnswer(clientPartido->mComputerAnswerTime,clientPartido->mServerPartido->mAnswerVector.at(clientPartido->mQuestionID));
 		}
 	}

@@ -63,7 +63,6 @@ void GamePlayPartidoBattle::execute()
 	{
 		app->mStringAnswer = "oot";		
 		app->sendAnswer();
-
 	}
 
  	if (mGamePartido->mBattleEnd)
