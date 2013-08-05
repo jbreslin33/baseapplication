@@ -242,11 +242,11 @@ Vector3D Vector3D::getVectorOffset(float offset, bool degrees)
         	sn = sin(offset);
 	}
 
-        Vector3D newVelocity;
+        Vector3D offsetVelocity;
 
-        newVelocity.x = this->x * cs - this->z * sn;
-        newVelocity.z = this->x * sn + this->z * cs;
+        offsetVelocity.x = this->x * cs - this->z * sn;
+        offsetVelocity.z = this->x * sn + this->z * cs;
 
-	return newVelocity;
+	return offsetVelocity;
 }
 
