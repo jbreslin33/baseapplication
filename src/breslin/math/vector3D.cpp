@@ -126,18 +126,6 @@ float Vector3D::dot(Vector3D* v2)
 	return d;
 }
 
-Vector3D* Vector3D::crossProduct(Vector3D* b)
-{
-	Vector3D* a = new Vector3D();
-	a->copyValuesFrom(this);
-
-	Vector3D* c = new Vector3D();
-	c->x = a->y * b->z - a->z * b->x;
-	c->y = a->z * b->x - a->x * b->z;
-	c->z = a->x * b->y - a->y * b->x;
-
-	return c;
-}
 
 Vector3 Vector3D::convertToVector3()
 {
@@ -187,15 +175,26 @@ Quaternion* Vector3D::getRotationTo(Vector3D* to)
 		Real s = Math::Sqrt( (1+d)*2 );
         	Real invs = 1 / s;
 
-		Vector3D* c = v0.crossProduct(&v1);
+		Vector3D c;
+		c = v0.crossProduct(v1);
 
-   	    	mQuaternion->x = c->x * invs;
-       		mQuaternion->y = c->y * invs;
-        	mQuaternion->z = c->z * invs;
+   	    	mQuaternion->x = c.x * invs;
+       		mQuaternion->y = c.y * invs;
+        	mQuaternion->z = c.z * invs;
         	mQuaternion->w = s * 0.5f;
 		mQuaternion->normalise();
 	}
 	return mQuaternion;
+}
+
+Vector3D Vector3D::crossProduct(Vector3D b)
+{
+	Vector3D c;
+	c.x = this->y * b.z - this->z * b.x;
+	c.y = this->z * b.x - this->x * b.z;
+	c.z = this->x * b.y - this->y * b.x;
+
+	return c;
 }
 
 
