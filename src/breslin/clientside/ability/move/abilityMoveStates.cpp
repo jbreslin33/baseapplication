@@ -67,9 +67,9 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
                 abilityMove->mProcessTickStateMachine->changeState(Catchup_ProcessTick_Move::Instance());
 	}                
 
-	Vector3D* serverVelocity = new Vector3D();
-       	serverVelocity->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
-        serverVelocity->normalise();
+	Vector3D serverVelocity;
+       	serverVelocity.copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
+        serverVelocity.normalise();
 
         if(abilityMove->mShape->mCommandToRunOnShape->mFrameTime != 0)
         {
@@ -78,8 +78,8 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
                 abilityMove->mShape->mCommandToRunOnShape->mFrameTime);
         }
 
-       	serverVelocity->multiply(abilityMove->mShape->mSpeed);
-        abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(serverVelocity);
+       	serverVelocity.multiply(abilityMove->mShape->mSpeed);
+        abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(&serverVelocity);
 }
 void Normal_ProcessTick_Move::exit(AbilityMove* abilityMove)
 {
@@ -107,29 +107,29 @@ void Catchup_ProcessTick_Move::execute(AbilityMove* abilityMove)
     	}
       	
 	//this is what we will set mCommandToRunOnShape->mVelocity to
-        Vector3D* newVelocity = new Vector3D(); //vector to future server pos
+        Vector3D velocity; //vector to future server pos
 
-        //first set newVelocity to most recent velocity from server.
-        newVelocity->copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
+        //first set velocity to most recent velocity from server.
+        velocity.copyValuesFrom(abilityMove->mShape->mServerCommandCurrent->mVelocity);
 
         //normalise it now we know what direction to head in.
-        newVelocity->normalise();
+        velocity.normalise();
 
         //le'ts find out how fast
         //change in position times our interp factor
         float multiplier = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor;
                 
         //multiply our normalized velocity by multiplier(change * interpfactor)
-        newVelocity->multiply(multiplier);
+        velocity.multiply(multiplier);
                 
-        //add the latest server position to our newvelocity
-        newVelocity->add(abilityMove->mShape->mServerCommandCurrent->mPosition);
+        //add the latest server position to our velocity
+        velocity.add(abilityMove->mShape->mServerCommandCurrent->mPosition);
 
-        //now subtract our current position from our new velocity
-        newVelocity->subtract(abilityMove->mShape->getPosition());
+        //now subtract our current position from our velocity
+        velocity.subtract(abilityMove->mShape->getPosition());
 
         //dist from client pos to future server pos
-        float predictDist = pow(newVelocity->x, 2) + pow(newVelocity->y, 2) + pow(newVelocity->z, 2);
+        float predictDist = pow(velocity.x, 2) + pow(velocity.y, 2) + pow(velocity.z, 2);
         predictDist = sqrt(predictDist);
 
         //server velocity
@@ -145,15 +145,15 @@ abilityMove->mShape->mServerCommandCurrent->mVelocity,
         	//time needed to get to future server pos
                 float time = abilityMove->mDeltaPosition * abilityMove->mPosInterpFactor/abilityMove->mShape->mSpeed;
 
-                newVelocity->normalise();  //?????what the hell why i am normalizing this after all that work above?
+                velocity.normalise();  //?????what the hell why i am normalizing this after all that work above?
 
                 //client vel needed to get to future server pos in time
                 float distTime = predictDist/time;
-                newVelocity->multiply(distTime);
+                velocity.multiply(distTime);
 
-                //set newVelocity to mCommandToRunOnShape->mVelocity which is what interpolateTick uses
-				//abilityMove->regulate(newVelocity);
-                abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(newVelocity);
+                //set velocity to mCommandToRunOnShape->mVelocity which is what interpolateTick uses
+				//abilityMove->regulate(velocity);
+                abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(&velocity);
 	}
         else
         {
@@ -194,7 +194,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
         //add our velocity to current position
         transVector.add(abilityMove->mShape->getPosition());
         
-	//set new position
+	//set position
 	if (transVector.x < 250.0f && transVector.x > -250.0f && transVector.z < 250.0f && transVector.z > -250.0f)
 	{
 		abilityMove->mShape->setPosition(transVector);
