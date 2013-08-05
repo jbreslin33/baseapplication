@@ -56,13 +56,16 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 		addAbility(new AbilityAnimationOgre(this));
 	}
 	
-	setupTitle();
+	//title
+	mObjectTitle = NULL;
 
 	//ghost
 	mGhost = NULL;
 
 	if (!mIsGhost) 
 	{
+		setupTitle();
+
 		//create a ghost for this shape
 		mGhost = new Shape(mApplication,byteBuffer,true);
 		mGhost->setVisible(false);
@@ -231,7 +234,10 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 	}
 
 	//run billboard here for now.
-	drawTitle();
+	if (!mIsGhost)
+	{
+		drawTitle();
+	}
 }
 
 int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
