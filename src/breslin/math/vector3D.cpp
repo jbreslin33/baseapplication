@@ -10,6 +10,8 @@ Vector3D::Vector3D()
 	x = 0;
 	y = 0;
 	z = 0;
+
+	mQuaternion = new Quaternion; 
 }
 
 Vector3D::Vector3D(float x1, float y1, float z1)
@@ -150,27 +152,23 @@ Vector3 Vector3D::convertToVector3()
 
 Quaternion* Vector3D::getRotationTo(Vector3D* to)
 {
-	
-	Quaternion* quaternion = new Quaternion();
-
 	Vector3D* fallbackAxis = new Vector3D(0.0f,0.0f,0.0f);
 
-	Vector3D* v0 = new Vector3D();
-	Vector3D* v1 = new Vector3D();
-	v0->copyValuesFrom(this);
-	v1->copyValuesFrom(to);
+	Vector3D v0;
+	Vector3D v1;
+	v0.copyValuesFrom(this);
+	v1.copyValuesFrom(to);
 
-	v0->normalise();	
-	v1->normalise();
+	v0.normalise();	
+	v1.normalise();
 
-	float d = v0->dot(v1);
+	float d = v0.dot(&v1);
 
     	// If dot == 1, vectors are the same
     	if (d >= 1.0f)
     	{
-		//LogString("VECTORS ARE THE SAME!!!!!!!!!!!!!!!!");
-		Quaternion* quaternionIdentity = new Quaternion(1.0,0.0,0.0,0.0);
-		return quaternionIdentity;
+		mQuaternion = new Quaternion(1.0,0.0,0.0,0.0);
+		return mQuaternion;
     	}
 			
 	if (d < (1e-6f - 1.0f))
@@ -180,35 +178,34 @@ Quaternion* Vector3D::getRotationTo(Vector3D* to)
 		fb.x = fallbackAxis->x;
 		fb.y = fallbackAxis->y;
 		fb.z = fallbackAxis->z;
-		//quaternion->FromAngleAxis(Radian(Math::PI), fb);
 		
 		// rotate 180 degrees about the fallback axis
-		quaternion->FromAngleAxis(Radian(Math::PI), fb);
+		mQuaternion->FromAngleAxis(Radian(Math::PI), fb);
 	}
 	else
 	{
 		Real s = Math::Sqrt( (1+d)*2 );
         	Real invs = 1 / s;
 
-		Vector3D* c = v0->crossProduct(v1);
+		Vector3D* c = v0.crossProduct(&v1);
 
-   	    	quaternion->x = c->x * invs;
-       		quaternion->y = c->y * invs;
-        	quaternion->z = c->z * invs;
-        	quaternion->w = s * 0.5f;
-		quaternion->normalise();
+   	    	mQuaternion->x = c->x * invs;
+       		mQuaternion->y = c->y * invs;
+        	mQuaternion->z = c->z * invs;
+        	mQuaternion->w = s * 0.5f;
+		mQuaternion->normalise();
 	}
-	return quaternion;
+	return mQuaternion;
 }
 
 
 //calculate how far off we are from some vector
 float Vector3D::getDegreesToSomething(Vector3D* to)
 {
-	Quaternion* toSomething = this->getRotationTo(to);
+	mQuaternion = this->getRotationTo(to);
 	
     	// convert to degrees
-    	Real degreesToSomething = toSomething->getYaw().valueDegrees();
+    	Real degreesToSomething = mQuaternion->getYaw().valueDegrees();
 	return degreesToSomething;
 }
 
