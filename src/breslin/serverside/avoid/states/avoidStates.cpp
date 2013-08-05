@@ -69,7 +69,7 @@ Normal_Avoid* Normal_Avoid::Instance()
 }
 void Normal_Avoid::enter(Avoid* avoid)
 {
-	LogString("Normal_Avoid");
+	//LogString("Normal_Avoid");
 }
 void Normal_Avoid::execute(Avoid* avoid)
 {
@@ -116,7 +116,7 @@ Seek_Avoid* Seek_Avoid::Instance()
 }
 void Seek_Avoid::enter(Avoid* avoid)
 {
-        LogString("Seek_Avoid");
+        //LogString("Seek_Avoid");
 }
 void Seek_Avoid::execute(Avoid* avoid)
 {
@@ -164,7 +164,7 @@ No_Avoid* No_Avoid::Instance()
 }
 void No_Avoid::enter(Avoid* avoid)
 {
-	LogString("No_Avoid");
+	//LogString("No_Avoid");
 }
 void No_Avoid::execute(Avoid* avoid)
 {

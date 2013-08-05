@@ -54,7 +54,7 @@ Normal_Seek* Normal_Seek::Instance()
 }
 void Normal_Seek::enter(Seek* seek)
 {
-	LogString("Normal_Seek");
+	//LogString("Normal_Seek");
 }
 void Normal_Seek::execute(Seek* seek)
 {
@@ -103,7 +103,7 @@ Reached_Destination* Reached_Destination::Instance()
 }
 void Reached_Destination::enter(Seek* seek)
 {
-        LogString("Reached_Destination");
+        //LogString("Reached_Destination");
 }
 void Reached_Destination::execute(Seek* seek)
 {
@@ -152,7 +152,7 @@ No_Seek* No_Seek::Instance()
 }
 void No_Seek::enter(Seek* seek)
 {
-	LogString("No_Seek");
+	//LogString("No_Seek");
 }
 void No_Seek::execute(Seek* seek)
 {

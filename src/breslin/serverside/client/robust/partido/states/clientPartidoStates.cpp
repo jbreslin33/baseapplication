@@ -228,7 +228,6 @@ void Waiting_For_Answer::execute(ClientPartido* clientPartido)
 	{
 		if (clientPartido->mComputerAskedTime + clientPartido->mComputerAnswerTime < clientPartido->mServer->mGameTime)
 		{		
-			LogString("COMPUTER ANSWER");
 			clientPartido->readAnswer(clientPartido->mComputerAnswerTime,clientPartido->mServerPartido->mAnswerVector.at(clientPartido->mQuestionID));
 		}
 	}

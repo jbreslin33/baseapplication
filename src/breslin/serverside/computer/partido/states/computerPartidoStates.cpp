@@ -66,7 +66,7 @@ COMPUTER_CONTROLLED_PARTIDO* COMPUTER_CONTROLLED_PARTIDO::Instance()
 
 void COMPUTER_CONTROLLED_PARTIDO::enter(ComputerPartido* computerPartido)
 {
-	LogString("COMPUTER_CONTROLLED_PARTIDO");
+	//LogString("COMPUTER_CONTROLLED_PARTIDO");
 }
 
 void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
@@ -78,12 +78,12 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 
 	if (computer->mCounter > computer->mThreshold)
 	{
-		LogString("mThreshold reached! for :%d",computer->mShape->mClient->db_id);
+		//LogString("mThreshold reached! for :%d",computer->mShape->mClient->db_id);
 		int dieroll = 0;
 		dieroll = rand() % 10;
 		if (dieroll == 0)
 		{
-			LogString("%d IS ATTACKING", computer->mShape->mClient->db_id);
+			//LogString("%d IS ATTACKING", computer->mShape->mClient->db_id);
 			int dieroll = rand() % 4;
 			dieroll = dieroll + 2;
 			for (int i = 0; i < computer->mShape->mGame->mShapeVector.size(); i++)
@@ -96,7 +96,7 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 		}
 		else
 		{
-			LogString("%d IS WANDERING", computer->mShape->mClient->db_id);
+			//LogString("%d IS WANDERING", computer->mShape->mClient->db_id);
 			int dierollX = rand() % (int)computer->mShape->mGame->mBounds->c->x + (int)computer->mShape->mGame->mBounds->c->x;
 			dierollX = dierollX - computer->mShape->mGame->mBounds->c->x;
 			int dierollZ = rand() % (int)computer->mShape->mGame->mBounds->c->x + (int)computer->mShape->mGame->mBounds->c->x; 
@@ -129,7 +129,7 @@ HUMAN_CONTROLLED_PARTIDO* HUMAN_CONTROLLED_PARTIDO::Instance()
 
 void HUMAN_CONTROLLED_PARTIDO::enter(ComputerPartido* computerPartido)
 {
-	LogString("HUMAN_CONTROLLED_PARTIDO");
+	//LogString("HUMAN_CONTROLLED_PARTIDO");
 }
 
 void HUMAN_CONTROLLED_PARTIDO::execute(ComputerPartido* computerPartido)
