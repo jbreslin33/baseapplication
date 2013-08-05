@@ -82,7 +82,7 @@ void Normal_Avoid::execute(Avoid* avoid)
 		} 
 		else //dot lines up, take evasive action.. 
 		{
-			Vector3D* newVelocity = new Vector3D();
+			Vector3D newVelocity;
 
 			if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mSeekPoint)
 			{ 
@@ -93,9 +93,8 @@ void Normal_Avoid::execute(Avoid* avoid)
 				newVelocity = avoid->mAvoidVelocity->getVectorOffset(90.0f,true);
 			}
 
-       			avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
+       			avoid->mShape->mMove->mVelocity->copyValuesFrom(&newVelocity);
        			avoid->mShape->mMove->mVelocity->normalise();
-			delete newVelocity;
 		}
 	}
 }
@@ -130,7 +129,7 @@ void Seek_Avoid::execute(Avoid* avoid)
                 }
                 else //dot lines up, take evasive action..
                 {
-                        Vector3D* newVelocity = new Vector3D();
+                        Vector3D newVelocity;
 
                         if (avoid->mShape->mSeek->mSeekPoint || avoid->mShape->mSeek->mSeekPoint)
                         {
@@ -141,9 +140,8 @@ void Seek_Avoid::execute(Avoid* avoid)
                 		avoid->mStateMachine->changeState(Normal_Avoid::Instance());
                         }
 
-                        avoid->mShape->mMove->mVelocity->copyValuesFrom(newVelocity);
+                        avoid->mShape->mMove->mVelocity->copyValuesFrom(&newVelocity);
                         avoid->mShape->mMove->mVelocity->normalise();
-			delete newVelocity;
                 }
         }
 }

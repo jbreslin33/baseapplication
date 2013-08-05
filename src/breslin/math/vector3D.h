@@ -53,7 +53,7 @@ Quaternion* getRotationTo(Vector3D* to);
 Quaternion* mQuaternion;
 float getDegreesToSomething(Vector3D* to);
 
-Vector3D* getVectorOffset(float offset, bool degrees);
+Vector3D getVectorOffset(float offset, bool degrees);
 
 
 };
