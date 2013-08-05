@@ -56,8 +56,12 @@ void AbilityAnimationOgre::setupAnimations()
 
 void AbilityAnimationOgre::runAnimations()
 {
-	mAnims[mBaseAnimID]->addTime(mShape->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax );
-	mAnims[mTopAnimID]->addTime(mShape->mApplication->getRenderTime() * mShape->mSpeed * 1000/mShape->mSpeedMax );
+	//for now let's slow animations down....
+	float tempSpeed = mShape->mSpeed;
+	tempSpeed = tempSpeed / 3.0f;
+
+	mAnims[mBaseAnimID]->addTime(mShape->mApplication->getRenderTime() * tempSpeed * 1000/mShape->mSpeedMax );
+	mAnims[mTopAnimID]->addTime(mShape->mApplication->getRenderTime() * tempSpeed * 1000/mShape->mSpeedMax );
 	fadeAnimations(mShape->mApplication->getRenderTime());
 }
 
