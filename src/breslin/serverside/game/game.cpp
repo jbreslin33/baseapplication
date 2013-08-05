@@ -83,7 +83,7 @@ void Game::update()
 	}
 	
 	//this is where they can move..	
-	checkCollisions();
+	//checkCollisions();
 }
 
 void Game::checkCollisions()
