@@ -203,7 +203,7 @@ void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 
 	if (abilityMove->mShape->mLocal == 1)
 	{
-		abilityMove->mShape->mApplication->getCamera()->setPosition(Ogre::Vector3(transVector.x,transVector.y + 100,transVector.z + 50));
+		abilityMove->mShape->mApplication->getCamera()->setPosition(Ogre::Vector3(transVector.x,transVector.y + 100,transVector.z + 150));
 
 		abilityMove->mShape->mApplication->getCamera()->lookAt(Ogre::Vector3(transVector.x,transVector.y,transVector.z - 30.0f));
 	
