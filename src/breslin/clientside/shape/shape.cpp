@@ -507,7 +507,7 @@ std::string Shape::getMeshString(int meshCode)
 	}
 	if (meshCode == 1)
 	{
-		mScale = .01f;
+		mScale = 0.10f;
 		return "cube.mesh";
 	}
 }
