@@ -79,6 +79,7 @@ void Normal_ProcessTick_Move::execute(AbilityMove* abilityMove)
         }
 
        	serverVelocity.multiply(abilityMove->mShape->mSpeed);
+	abilityMove->regulate(&serverVelocity);
         abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(&serverVelocity);
 }
 void Normal_ProcessTick_Move::exit(AbilityMove* abilityMove)
@@ -152,7 +153,7 @@ abilityMove->mShape->mServerCommandCurrent->mVelocity,
                 velocity.multiply(distTime);
 
                 //set velocity to mCommandToRunOnShape->mVelocity which is what interpolateTick uses
-				//abilityMove->regulate(velocity);
+		abilityMove->regulate(&velocity);
                 abilityMove->mShape->mCommandToRunOnShape->mVelocity->copyValuesFrom(&velocity);
 	}
         else
