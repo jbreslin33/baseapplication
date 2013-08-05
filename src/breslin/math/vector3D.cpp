@@ -140,7 +140,7 @@ Vector3 Vector3D::convertToVector3()
 
 Quaternion* Vector3D::getRotationTo(Vector3D* to)
 {
-	Vector3D* fallbackAxis = new Vector3D(0.0f,0.0f,0.0f);
+	Vector3D fallbackAxis;
 
 	Vector3D v0;
 	Vector3D v1;
@@ -163,9 +163,9 @@ Quaternion* Vector3D::getRotationTo(Vector3D* to)
 	{
 		// rotate 180 degrees about the fallback axis
 		Vector3 fb;
-		fb.x = fallbackAxis->x;
-		fb.y = fallbackAxis->y;
-		fb.z = fallbackAxis->z;
+		fb.x = fallbackAxis.x;
+		fb.y = fallbackAxis.y;
+		fb.z = fallbackAxis.z;
 		
 		// rotate 180 degrees about the fallback axis
 		mQuaternion->FromAngleAxis(Radian(Math::PI), fb);
