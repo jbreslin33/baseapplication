@@ -24,6 +24,9 @@ Steering::Steering(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 	mSteeringShape = NULL;
 	mSteeringPoint = NULL;
 
+	mDesiredVelocity = new Vector3D(); 
+	
+
  	//steering states
 	mStateMachine =  new StateMachine<Steering>(this);
 	mStateMachine->setCurrentState      (Normal_Steering::Instance());
@@ -43,6 +46,10 @@ Steering::Steering(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 Steering::~Steering()
 {
+	delete mStateMachine;
+	delete mSteeringForce;
+	delete mTarget;
+        delete mSteeringPoint;
 }
 void Steering::update()
 {
@@ -157,27 +164,26 @@ Vector3D* Steering::sumForces()
 			return mSteeringForce;
 		}
   	}
+	delete force;
   	return mSteeringForce;
 }
 
 Vector3D* Steering::seek(Vector3D* target)
 {
 	Vector3D* currentPosition = new Vector3D();
-	Vector3D* desiredVelocity = new Vector3D();
+	Vector3D* mDesiredVelocity = new Vector3D();
 
 	currentPosition->convertFromVector3(mShape->mSceneNode->getPosition());
 
   	currentPosition->multiply(mShape->mMove->mSpeedMax);
 
-  	desiredVelocity->copyValuesFrom(target);
-  	desiredVelocity->subtract(currentPosition);
+  	mDesiredVelocity->copyValuesFrom(target);
+  	mDesiredVelocity->subtract(currentPosition);
 
+  	mDesiredVelocity->normalise();
+	delete currentPosition;
 
-  	desiredVelocity->normalise();
-
-  	//desiredVelocity->subtract(mShape->mMove->mVelocity);
-
-  	return desiredVelocity;
+  	return mDesiredVelocity;
 }
 
 bool Steering::accumulateForce(Vector3D* sf, Vector3D* forceToAdd)

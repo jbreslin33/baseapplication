@@ -39,6 +39,7 @@ StateMachine<Steering>* mStateMachine;
 
 Vector3D* mSteeringForce;
 Vector3D* mTarget;
+Vector3D* mDesiredVelocity;
 double mMultSeperation;
 double mViewDistance;
 bool         mTagged;
