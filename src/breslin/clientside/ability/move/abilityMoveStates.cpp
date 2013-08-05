@@ -180,37 +180,31 @@ void Normal_InterpolateTick_Move::enter(AbilityMove* abilityMove)
 void Normal_InterpolateTick_Move::execute(AbilityMove* abilityMove)
 {
         //to be used to setPosition
-        Vector3D* transVector = new Vector3D();
+        Vector3D transVector;
 
         //copy values from mVelocity so we don't make changes to original
-        transVector->copyValuesFrom(abilityMove->mShape->mCommandToRunOnShape->mVelocity);
+        transVector.copyValuesFrom(abilityMove->mShape->mCommandToRunOnShape->mVelocity);
         
 	//get the mulitplier
         float multipliedRenderTime = abilityMove->mShape->mApplication->getRenderTime() * 1000;
 
         //multiply our vector using render values
-        transVector->multiply(multipliedRenderTime); 
+        transVector.multiply(multipliedRenderTime); 
 
         //add our velocity to current position
-        transVector->add(abilityMove->mShape->getPosition());
+        transVector.add(abilityMove->mShape->getPosition());
         
 	//set new position
-	if (transVector->x < 250.0f && transVector->x > -250.0f && transVector->z < 250.0f && transVector->z > -250.0f)
+	if (transVector.x < 250.0f && transVector.x > -250.0f && transVector.z < 250.0f && transVector.z > -250.0f)
 	{
 		abilityMove->mShape->setPosition(transVector);
 	}
 
-	//abliityMove->mShape->mApplication->getCamera()->setPosition(Ogre::Vector3(0,20,20));
- 	// Position it at 500 in Z direction
- 	//   mCamera->setPosition(Ogre::Vector3(0,20,20));
-    	// Look back along -Z
-  	//  mCamera->lookAt(Ogre::Vector3(0,0,0));
-
 	if (abilityMove->mShape->mLocal == 1)
 	{
-		abilityMove->mShape->mApplication->getCamera()->setPosition(Ogre::Vector3(transVector->x,transVector->y + 500,transVector->z + 20));
+		abilityMove->mShape->mApplication->getCamera()->setPosition(Ogre::Vector3(transVector.x,transVector.y + 500,transVector.z + 20));
 
-		abilityMove->mShape->mApplication->getCamera()->lookAt(Ogre::Vector3(transVector->x,transVector->y,transVector->z));
+		abilityMove->mShape->mApplication->getCamera()->lookAt(Ogre::Vector3(transVector.x,transVector.y,transVector.z));
 	
 	}
 }
@@ -218,3 +212,8 @@ void Normal_InterpolateTick_Move::exit(AbilityMove* abilityMove)
 {
 }
 
+	//abliityMove->mShape->mApplication->getCamera()->setPosition(Ogre::Vector3(0,20,20));
+ 	// Position it at 500 in Z direction
+ 	//   mCamera->setPosition(Ogre::Vector3(0,20,20));
+    	// Look back along -Z
+  	//  mCamera->lookAt(Ogre::Vector3(0,0,0));

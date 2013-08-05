@@ -120,7 +120,7 @@ SceneNode*  getSceneNode() { return mSceneNode; }
 virtual void processDeltaByteBuffer(ByteBuffer* byteBuffer);
 
 //setting position
-void     setPosition          (Vector3D*                  );
+void     setPosition          (Vector3D                  );
 void     setPosition          (float x, float y, float z );
 
 //setting rotation

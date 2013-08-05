@@ -75,6 +75,9 @@ Shape::~Shape()
 	//delete mEntity;
 //	delete mObjectTitle;
 //	delete mSceneNode;
+	delete mServerCommandLast;
+	delete mServerCommandCurrent;
+	delete mCommandToRunOnShape;
 }
 
 void Shape::setText(ByteBuffer* byteBuffer)
@@ -348,11 +351,11 @@ void Shape::interpolateTick(float renderTime)
 
 void Shape::moveGhostShape()
 {
-	Vector3D* transVector = new Vector3D();
+	Vector3D transVector;
 
-	transVector->x = mServerCommandCurrent->mPosition->x;
-	transVector->y = 0;
-	transVector->z = mServerCommandCurrent->mPosition->z;
+	transVector.x = mServerCommandCurrent->mPosition->x;
+	transVector.y = 0;
+	transVector.z = mServerCommandCurrent->mPosition->z;
 
 	if (mGhost)
 	{
@@ -441,9 +444,9 @@ void Shape::translate(Vector3D* translateVector, int perspective)
 	}
 }
 
-void Shape::setPosition(Vector3D* position)
+void Shape::setPosition(Vector3D position)
 {
-	getSceneNode()->setPosition(position->convertToVector3());
+	getSceneNode()->setPosition(position.convertToVector3());
 }
 
 void Shape::setPosition(float x, float y, float z)
