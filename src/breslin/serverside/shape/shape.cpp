@@ -96,6 +96,11 @@ Shape::Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* pos
 
 Shape::~Shape()
 {
+	delete mComputer;
+	delete mSeek;
+	delete mAvoid;
+	delete mRotation;
+	delete mMove;
 	delete mSceneNode;
 }
 

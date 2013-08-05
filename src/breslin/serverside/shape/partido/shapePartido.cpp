@@ -63,6 +63,8 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
 
 ShapePartido::~ShapePartido()
 {
+	delete mShapePartidoStateMachine;
+	delete mComputerPartido;
 }
 
 void ShapePartido::update()
