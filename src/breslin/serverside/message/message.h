@@ -32,7 +32,7 @@ public:
 	float			ReadFloat(void);
 	char			*ReadString(void);
 
-	bool			GetOverFlow(void)	{ return overFlow; }
+	bool			GetOverFlow(void); 
 	int				GetSize(void)		{ return size; }
 	void			SetSize(int s)		{ size = s; }
 
