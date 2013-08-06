@@ -20,6 +20,9 @@ these states are always on...as their is always a gamePartido..and these clients
 //shapePartido
 #include "../../../../shape/partido/shapePartido.h"
 
+//question
+#include "../../../../question/question.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -228,7 +231,7 @@ void Waiting_For_Answer::execute(ClientPartido* clientPartido)
 	{
 		if (clientPartido->mComputerAskedTime + clientPartido->mComputerAnswerTime < clientPartido->mServer->mGameTime)
 		{		
-			clientPartido->readAnswer(clientPartido->mComputerAnswerTime,clientPartido->mServerPartido->mAnswerVector.at(clientPartido->mQuestionID));
+			clientPartido->readAnswer(clientPartido->mComputerAnswerTime,clientPartido->mServerPartido->mQuestionVector.at(clientPartido->mQuestionID)->answer);
 		}
 	}
 	

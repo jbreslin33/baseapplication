@@ -8,14 +8,15 @@ class Question
 public:
 	
 Question();
+Question(std::string i, std::string q, std::string a, std::string l);
 virtual ~Question();
 
-int id;
+std::string id;
 std::string question;
 std::string answer; 
-float level_id; 
+std::string level_id; 
 
-void set(int i, std::string q, std::string a, float l);
+void set(std::string i, std::string q, std::string a, std::string l);
 
 };
 

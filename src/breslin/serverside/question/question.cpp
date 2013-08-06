@@ -2,18 +2,25 @@
 
 Question::Question()
 {
-	id = 0;
+	id = "";
 	question = "";
 	answer = "";
-	level_id = 0.0f;
+	level_id = "";
+}
 
+Question::Question(std::string i, std::string q, std::string a, std::string l)
+{
+	id = i;
+	question = q;
+	answer = a;
+	level_id = l;
 }
 
 Question::~Question()
 {
 }
 
-void Question::set(int i, std::string q, std::string a, float l)
+void Question::set(std::string i, std::string q, std::string a, std::string l)
 {
 	id = i;
 	question = q;

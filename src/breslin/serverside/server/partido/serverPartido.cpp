@@ -8,6 +8,7 @@
 #include "../../../math/vector3D.h"
 #include "../../../utility/utility.h"
 #include "../../shape/shape.h"
+#include "../../question/question.h"
 
 ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPort) 
 :
@@ -240,29 +241,25 @@ void ServerPartido::getQuestions()
         //printf("We received %d records.\n", rec_count);
        
 	//make first elements x so they coincide with db id's 
-        mQuestionIDVector.push_back("x");
-        mQuestionVector.push_back("x");
-	mAnswerVector.push_back("x");
-        mLevelVector.push_back("x");
+	Question* question = new Question("x","x","x","x");
+        mQuestionVector.push_back(question);
 
         for (row=0; row<rec_count; row++)
         {
                 const char* a = PQgetvalue(res, row, 0);
                 std::string aString(a);
-                mQuestionIDVector.push_back(aString);
 
                 const char* b = PQgetvalue(res, row, 1);
                 std::string bString(b);
-                mQuestionVector.push_back(bString);
-		
 
                 const char* c = PQgetvalue(res, row, 2);
                 std::string cString(c);
-                mAnswerVector.push_back(cString);
 
                 const char* d = PQgetvalue(res, row, 3);
                 std::string dString(d);
-                mLevelVector.push_back(dString);
+
+		Question* question = new Question(aString,bString,cString,dString);
+		mQuestionVector.push_back(question);
         }
         PQclear(res);
         PQfinish(conn);

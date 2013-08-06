@@ -5,6 +5,7 @@
 
 class GamePartido;
 class ClientPartido;
+class Question;
 
 class ServerPartido : public Server
 {
@@ -41,10 +42,7 @@ public:
         //questions
 	int mQuestionCount;
         void getQuestions();
-        std::vector<std::string> mQuestionIDVector;
-        std::vector<std::string> mQuestionVector;
-        std::vector<std::string> mAnswerVector;
-        std::vector<std::string> mLevelVector;
+        std::vector<Question*> mQuestionVector;
 
 	void parsePacket(Message *mes, struct sockaddr *address);
 

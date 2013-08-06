@@ -13,6 +13,9 @@
 //states
 #include "states/clientPartidoStates.h"
 
+//question
+#include "../../../question/question.h"
+
 ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence) : ClientRobust(serverPartido, address, clientID, permanence) 
 {
 	//server
@@ -155,13 +158,13 @@ void ClientPartido::sendQuestion(int questionID)
         	{
                 	mMessage.WriteByte(mClientID); // add mClientID for browsers
         	}
-       		int length = mServerPartido->mQuestionVector.at(questionID).length();  
+       		int length = mServerPartido->mQuestionVector.at(questionID)->question.length();  
         	mMessage.WriteByte(length); 
 
         	//loop thru length and write it
         	for (int i=0; i < length; i++)
         	{
-                	mMessage.WriteByte(mServerPartido->mQuestionVector.at(questionID).at(i));
+                	mMessage.WriteByte(mServerPartido->mQuestionVector.at(questionID)->question.at(i));
         	}
 
         	//send it
@@ -319,7 +322,7 @@ void ClientPartido::readAnswer(int answerTime, std::string answer)
 
 	insertAnswerAttempt();
 
-        if (mStringAnswer.compare(mServerPartido->mAnswerVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
+        if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)  
 	{
 		ShapePartido* opponent  = mShapePartido->mOpponent;
 		
