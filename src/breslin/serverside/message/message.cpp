@@ -17,7 +17,6 @@ void Message::Init(char *d, int length)
 
 bool Message::GetOverFlow(void)
 {
-	LogString("size:%d",size);
 	if (size > 1400)
 	{
 		return true;

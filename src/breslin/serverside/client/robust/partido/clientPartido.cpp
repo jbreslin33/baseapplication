@@ -357,7 +357,7 @@ void ClientPartido::readAnswer(int answerTime, std::string answer)
         mAnswerTime = answerTime;
 	mStringAnswer = answer;	
 
-	insertAnswerAttempt();
+	//insertAnswerAttempt();
 
         if (mStringAnswer.compare(mServerPartido->mAnswerVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
 	{
