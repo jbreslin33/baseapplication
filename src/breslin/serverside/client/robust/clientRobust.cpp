@@ -23,7 +23,7 @@
 #include "states/clientRobustStates.h"
 
 
-ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientID, bool permanence) : Client(server,address,clientID,permanence)
+ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientID, bool permanence, int i, std::string u, std::string p, std::string f, std::string m1, std::string m2, std::string m3, std::string l, int s) : Client(server,address,clientID,permanence)
 {
 
 	//temp client
@@ -40,9 +40,16 @@ ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientI
         mKey = 0;
         mKeyLast = 0;
 
-        //db
-        db_id = 0;
-        db_school_id = 0;
+	//user table
+	id = i;
+	username = u;
+	password = p;
+	first_name = f; 
+	middle_name1 = m1; 
+	middle_name2 = m2;
+	middle_name3 = m3;
+	last_name = l; 
+ 	school_id = s;
 
 	//game
 	mInGame = false;
@@ -156,7 +163,7 @@ bool ClientRobust::checkLogin(Message* mes)
 
         for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
         {
-                if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
+                if (mStringUsername.compare(mServer->mClientVector.at(i)->username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->password) == 0)
                 {
                 	login();
                 }

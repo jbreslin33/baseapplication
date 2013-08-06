@@ -15,8 +15,9 @@
 
 //question
 #include "../../../question/question.h"
+#include "../../../question/questionAttempts.h"
 
-ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence) : ClientRobust(serverPartido, address, clientID, permanence) 
+ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence,int i, std::string u, std::string p, std::string f, std::string m1, std::string m2, std::string m3, std::string l,int s) : ClientRobust(serverPartido, address, clientID, permanence,i, u,p,f,m1,m2,m3,l,s) 
 {
 	//server
 	mServerPartido = serverPartido;
@@ -24,15 +25,6 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	//game
 	mGamePartido = NULL;
 
-        if (mClientID >= 0)
-        {
-                ////sendSchools();
-        }
-        else
-        {
-                //your the node for web sockets
-        }
- 	
 	//battle
         mWaitingForAnswer = false;
 	mQuestionID = 0;
@@ -69,7 +61,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
         mBattleStateMachine->setPreviousState     (NULL);
         mBattleStateMachine->setGlobalState       (NULL);
 
-	
+	getQuestionAttempts();
 }
 
 ClientPartido::~ClientPartido()
@@ -203,7 +195,7 @@ void ClientPartido::scoreBattle(int result)
 void ClientPartido::setBattleRecordText()
 {
         mBattleRecordText.clear();
-        mBattleRecordText.append(db_first_name);
+        mBattleRecordText.append(first_name);
         mBattleRecordText.append(":");
         mBattleRecordText.append(utility->intToString(mWins));
         mBattleRecordText.append("-");
@@ -415,7 +407,7 @@ void ClientPartido::insertAnswerAttempt()
 	query.append(c);
 
 	//user_id
-        query.append(utility->intToString(db_id));
+        query.append(utility->intToString(id));
 
 	std::string d = ")";	
 	query.append(d);
@@ -436,7 +428,7 @@ int ClientPartido::getMaxLevelAskedID()
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
 	std::string query = "SELECT question_id FROM questions_attempts WHERE user_id = ";
-	query.append(utility->intToString(db_id));       
+	query.append(utility->intToString(id));       
 	query.append(" ORDER BY question_id DESC LIMIT 1");
 
 	const char * q = query.c_str();
@@ -499,7 +491,7 @@ bool ClientPartido::checkLevel(int level)
 
 	std::string query = "SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions_attempts.user_id = ";
 
-	query.append(utility->intToString(db_id));       
+	query.append(utility->intToString(id));       
 
 	query.append(" AND questions.id = "); 
 	
@@ -593,3 +585,58 @@ int ClientPartido::getNewQuestionID()
 		return mQuestionID;
 	}
 }
+
+//new stuff
+void ClientPartido::getQuestionAttempts()
+{
+        PGconn          *conn;
+        PGresult        *res;
+        int             rec_count;
+        int             row;
+        int             col;
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+	
+	std::string query = "select * from questions_attempts WHERE id = ";
+	query.append(utility->intToString(id)); 
+	query.append(" ORDER BY answer_attempt_time"); 
+	const char * q = query.c_str();
+	LogString("q:%s",q);
+        res = PQexec(conn,q);
+
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+                puts("We did not get any data!");
+        }
+        else
+        {
+        }
+        rec_count = PQntuples(res);
+
+        for (row=0; row<rec_count; row++)
+        {
+		LogString("getting record:%d",row);
+                const char* a = PQgetvalue(res, row, 0);
+                std::string aString(a);
+
+                const char* b = PQgetvalue(res, row, 1);
+                std::string bString(b);
+
+                const char* c = PQgetvalue(res, row, 2);
+                std::string cString(c);
+
+                const char* d = PQgetvalue(res, row, 3);
+                std::string dString(d);
+
+                const char* e = PQgetvalue(res, row, 4);
+                std::string eString(e);
+
+                const char* f = PQgetvalue(res, row, 5);
+                std::string fString(f);
+
+                QuestionAttempts* questionAttempts = new QuestionAttempts(aString,bString,cString,dString,eString,fString);
+                mQuestionAttemptsVector.push_back(questionAttempts);
+        }
+        PQclear(res);
+        PQfinish(conn);
+}
+

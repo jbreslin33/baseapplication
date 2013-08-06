@@ -221,7 +221,7 @@ bool Client::checkLogin(Message* mes)
 
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
-		if (mStringUsername.compare(mServer->mClientVector.at(i)->db_username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->db_password) == 0)
+		if (mStringUsername.compare(mServer->mClientVector.at(i)->username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->password) == 0)
 		{
 			//send logout letter to clientRobust....
                         mServer->mClientVector.at(i)->logout();

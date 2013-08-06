@@ -189,47 +189,58 @@ void Server::createClients()
         //printf("We received %d records from user table.\n", rec_count);
         for (row=0; row<rec_count; row++)
         {
-                //client
-                ClientRobust* client = new ClientRobust(this, NULL, -2, true);
-	
-		//add Games
-	 	for (unsigned int i = 0; i < mGameVector.size(); i++)
-		{
-			client->addGame(mGameVector.at(i));
-		}
-
-                //id
+         	//id
                 const char* a = PQgetvalue(res, row, 0);
                 stringstream a_str;
                 a_str << a;
                 unsigned int a_int;
                 a_str >> a_int;
-                client->db_id = a_int;
 
                 //username
                 const char* b = PQgetvalue(res, row, 1);
-                client->db_username.assign(b);
+                std::string bString(b);
 
                 //password
                 const char* c = PQgetvalue(res, row, 2);
-                client->db_password.assign(c);
+                std::string cString(c);
 
                 //first_name
                 const char* d = PQgetvalue(res, row, 3);
-                client->db_first_name.assign(d);
+                std::string dString(d);
+
+                //middle_name1
+                const char* e = PQgetvalue(res, row, 4);
+                std::string eString(e);
+
+                //middle_name2
+                const char* f = PQgetvalue(res, row, 5);
+                std::string fString(f);
+
+                //middle_name3
+                const char* g = PQgetvalue(res, row, 6);
+                std::string gString(g);
 
                 //last_name
-                const char* e = PQgetvalue(res, row, 7);
-                client->db_last_name.assign(e);
+                const char* h = PQgetvalue(res, row, 7);
+                std::string hString(h);
 
-   		//school_id
-                const char* f = PQgetvalue(res, row, 8);
-                stringstream f_str;
-                f_str << f;
-                unsigned int f_int;
-                f_str >> f_int;
-                client->db_school_id = f_int;
-        }
+                //school_id
+                const char* i = PQgetvalue(res, row, 8);
+                stringstream i_str;
+                i_str << i;
+                unsigned int i_int;
+                i_str >> i_int;
+
+                //client
+                ClientRobust* clientRobust = new ClientRobust(this,NULL,-2,true,a_int,bString,cString,dString,eString,fString,gString,hString,i_int);
+
+                //add Games
+                for (unsigned int i = 0; i < mGameVector.size(); i++)
+                {
+                        clientRobust->addGame(mGameVector.at(i));
+                }
+ 
+	}
         PQclear(res);
         PQfinish(conn);
 }
@@ -323,7 +334,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
- 		ClientRobust* client = new ClientRobust(this, address, -1, true);
+ 		ClientRobust* client = new ClientRobust(this, address, -1, true,0,"","","","","","","",0);
 	}	
 
 	/***JOIN GAME********/

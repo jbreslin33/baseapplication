@@ -12,7 +12,7 @@ class ClientRobust : public Client
 {
 public:
 
-ClientRobust(Server* server, struct sockaddr *address, int clientID, bool permanent);
+ClientRobust(Server* server, struct sockaddr *address, int clientID, bool permanent,int i, std::string username, std::string p, std::string first_name, std::string m1, std::string m2, std::string m3, std::string last_name, int s);
 ~ClientRobust();
 
 StateMachine<ClientRobust>* mClientRobustStateMachine;
@@ -31,13 +31,16 @@ int mKeyClockwise;
 int mKey;
 int mKeyLast;
 
-//db
-int         db_id;
-std::string db_username;
-std::string db_password;
-std::string db_first_name;
-std::string db_last_name;
-int         db_school_id;
+//user table
+int id;
+std::string username;
+std::string password;
+std::string first_name;
+std::string middle_name1;
+std::string middle_name2;
+std::string middle_name3;
+std::string last_name;
+int school_id;
 
 //game
 bool mInGame;

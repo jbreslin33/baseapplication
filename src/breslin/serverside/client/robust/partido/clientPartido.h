@@ -12,13 +12,14 @@ class ServerPartido;
 class GamePartido;
 class ShapePartido;
 class Utility;
+class QuestionAttempts;
 
 class ClientPartido : public ClientRobust
 {
 
 public:
 
-ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID, bool permanence);	
+ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID, bool permanence, int i, std::string username, std::string p, std::string first_name, std::string m1, std::string m2, std::string m3, std::string last_name, int s);	
 ~ClientPartido();
 
 StateMachine<ClientPartido>* mClientPartidoStateMachine;
@@ -58,9 +59,11 @@ int mLosses;
 int mTies;
 
 //questions
+std::vector<QuestionAttempts*> mQuestionAttemptsVector;
 int getLowestUnpassedLevel(int maxLevel);
 int getMaxLevelAskedID();
 bool checkLevel(int level);
+void getQuestionAttempts();
 
 
 //answer
