@@ -110,32 +110,13 @@ void ClientPartido::update()
 	ClientRobust::update();
 	mClientPartidoStateMachine->update();
 	mBattleStateMachine->update();
-
-/*
-	if (mConnectionState == DREAMSOCK_CONNECTED)
-	{
-		if (mShapePartido)
-		{
- 			if (mShapePartido->mOpponent && mWaitingForAnswer == false)
-        		{
-				sendQuestion(getNewQuestionID());
-                		mWaitingForAnswer = true;
-        		}
-		}
-	}
-*/
 }
-
 
 void ClientPartido::setShape(ShapePartido* shapePartido)
 {
 	ClientRobust::setShape(shapePartido);
 	mShapePartido = shapePartido;
 }
-
-//this gets you question_attempts from a particular questions and particular user_id
-//select questions.id, questions.question, questions_attempts.answer, questions_attempts.user_id from questions_attempts inner join questions on questions_attempts.question_id=questions.id where questions.id=1 and questions_attempts.user_id = 2 order by questions_attempts.question_attempt_time_start;
-
 
 //you need to send all schools at once and all questions..
 void ClientPartido::sendSchools()
@@ -187,26 +168,6 @@ void ClientPartido::sendQuestion(int questionID)
         	mServerPartido->mNetwork->sendPacketTo(this,&mMessage);
 	}
 }
-/*
-
-STATES:
-permanent
-temp
-
-Human
-Computer
-
-Logged out
-in lobby
-game mode
-
-playgame
-waiting for answer
-sendQuestion
-
-
-*/
-
 
 void ClientPartido::battleStart(ShapePartido* whoToBattle)
 {
@@ -222,7 +183,6 @@ void ClientPartido::battleStart(ShapePartido* whoToBattle)
        		sendBattleStart();
 	}
 }
-
 
 void ClientPartido::scoreBattle(int result)
 {
@@ -357,7 +317,7 @@ void ClientPartido::readAnswer(int answerTime, std::string answer)
         mAnswerTime = answerTime;
 	mStringAnswer = answer;	
 
-	//insertAnswerAttempt();
+	insertAnswerAttempt();
 
         if (mStringAnswer.compare(mServerPartido->mAnswerVector.at(mQuestionID)) != 0 || mAnswerTime > 2000)  
 	{
@@ -425,7 +385,6 @@ void ClientPartido::readAnswer(int answerTime, std::string answer)
 	//set vars for new question and answer combo....
         mWaitingForAnswer = false;
         mQuestionString = "";
-
 }
 
 void ClientPartido::insertAnswerAttempt()
