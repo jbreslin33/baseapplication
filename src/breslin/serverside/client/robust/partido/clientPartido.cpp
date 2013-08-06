@@ -596,7 +596,7 @@ void ClientPartido::getQuestionAttempts()
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 	
-	std::string query = "select * from questions_attempts WHERE id = ";
+	std::string query = "select * from questions_attempts WHERE user_id = ";
 	query.append(utility->intToString(id)); 
 	query.append(" ORDER BY answer_attempt_time"); 
 	const char * q = query.c_str();
