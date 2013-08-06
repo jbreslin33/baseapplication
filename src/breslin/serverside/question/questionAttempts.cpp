@@ -1,4 +1,5 @@
 #include "questionAttempts.h"
+#include "../tdreamsock/dreamSockLog.h"
 
 QuestionAttempts::QuestionAttempts()
 {
@@ -18,6 +19,8 @@ QuestionAttempts::QuestionAttempts(std::string i, std::string q, std::string a, 
 	answer_attempt_time = aat;
 	answer_time = at;
 	user_id = uid;
+
+	LogString("QuestionAttempts::QuestionAttempts");
 }
 
 QuestionAttempts::~QuestionAttempts()

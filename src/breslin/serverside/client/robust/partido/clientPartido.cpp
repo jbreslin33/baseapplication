@@ -312,7 +312,7 @@ void ClientPartido::readAnswer(int answerTime, std::string answer)
         mAnswerTime = answerTime;
 	mStringAnswer = answer;	
 
-	insertAnswerAttempt();
+	insertAnswerAttempt(false);
 
         if (mStringAnswer.compare(mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)  
 	{
@@ -382,40 +382,6 @@ void ClientPartido::readAnswer(int answerTime, std::string answer)
         mQuestionString = "";
 }
 
-void ClientPartido::insertAnswerAttempt()
-{
-        PGconn          *conn;
-        PGresult        *res;
-        int             rec_count;
-        int             row;
-        int             col;
-
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-	std::string query = "insert into questions_attempts (question_id,answer,answer_time,user_id) VALUES (";
-	query.append(utility->intToString(mQuestionID));
-
-	//answer
-	std::string a = ",'";
-	query.append(a);
-	query.append(mStringAnswer);	
-	std::string b = "',";	
-	query.append(b);
-
-	//answer_time
-        query.append(utility->intToString(mAnswerTime));
-	std::string c = ",";
-	query.append(c);
-
-	//user_id
-        query.append(utility->intToString(id));
-
-	std::string d = ")";	
-	query.append(d);
-
-    	const char * q = query.c_str();
-        PQexec(conn,q);
-        PQfinish(conn);
-}
 
 int ClientPartido::getMaxLevelAskedID()
 {
@@ -640,3 +606,45 @@ void ClientPartido::getQuestionAttempts()
         PQfinish(conn);
 }
 
+void ClientPartido::insertAnswerAttempt(bool db)
+{
+	if (db)
+	{
+        	PGconn          *conn;
+        	PGresult        *res;
+        	int             rec_count;
+        	int             row;
+        	int             col;
+
+        	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+		std::string query = "insert into questions_attempts (question_id,answer,answer_time,user_id) VALUES (";
+		query.append(utility->intToString(mQuestionID));
+
+		//answer
+		std::string a = ",'";
+		query.append(a);
+		query.append(mStringAnswer);	
+		std::string b = "',";	
+		query.append(b);
+
+		//answer_time
+        	query.append(utility->intToString(mAnswerTime));
+		std::string c = ",";
+		query.append(c);
+
+		//user_id
+        	query.append(utility->intToString(id));
+
+		std::string d = ")";	
+		query.append(d);
+
+    		const char * q = query.c_str();
+        	PQexec(conn,q);
+        	PQfinish(conn);
+	}
+	else
+	{
+                QuestionAttempts* questionAttempts = new QuestionAttempts("-1",utility->intToString(mQuestionID),mStringAnswer,utility->intToString(mServer->mNetwork->getCurrentSystemTime()),utility->intToString(mAnswerTime),utility->intToString(id));
+		mQuestionAttemptsVector.push_back(questionAttempts);
+	}
+}

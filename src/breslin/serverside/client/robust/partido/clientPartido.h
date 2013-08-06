@@ -71,7 +71,7 @@ virtual void parseAnswer(Message* message);
 virtual void readAnswer(int answerTime, std::string answer);
 std::string mStringAnswer;
 int mAnswerTime;
-void insertAnswerAttempt();
+void insertAnswerAttempt(bool db);
 
 //shape
 ShapePartido* mShapePartido;
