@@ -15,6 +15,8 @@ std::string question;
 std::string answer; 
 float level_id; 
 
+void set(int i, std::string q, std::string a, float l);
+
 };
 
 #endif
