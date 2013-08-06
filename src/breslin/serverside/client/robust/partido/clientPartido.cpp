@@ -383,66 +383,73 @@ void ClientPartido::readAnswer(int answerTime, std::string answer)
 }
 
 
-int ClientPartido::getMaxLevelAskedID()
+int ClientPartido::getMaxLevelAskedID(bool db)
 {
- 	PGconn          *conn;
-        PGresult        *res;
-        int             rec_count = 0;;
-        int             row = 0;
-        int             col = 0;
+	if (db)
+	{
+ 		PGconn          *conn;
+        	PGresult        *res;
+        	int             rec_count = 0;;
+        	int             row = 0;
+        	int             col = 0;
 	
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+        	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-	std::string query = "SELECT question_id FROM questions_attempts WHERE user_id = ";
-	query.append(utility->intToString(id));       
-	query.append(" ORDER BY question_id DESC LIMIT 1");
+		std::string query = "SELECT question_id FROM questions_attempts WHERE user_id = ";
+		query.append(utility->intToString(id));       
+		query.append(" ORDER BY question_id DESC LIMIT 1");
 
-	const char * q = query.c_str();
+		const char * q = query.c_str();
 
-        res = PQexec(conn,q);
+        	res = PQexec(conn,q);
 
-        if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        {
-                LogString("SQL ERROR OUTER:%s",q);
-        }
+        	if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        	{
+                	LogString("SQL ERROR OUTER:%s",q);
+        	}
 
-        rec_count  = PQntuples(res);
-	int num_fields = PQnfields(res);
+        	rec_count  = PQntuples(res);
+		int num_fields = PQnfields(res);
 	
-	int i = 0;
-	int j = 0;
+		int i = 0;
+		int j = 0;
 
-    	for (i = 0; i < rec_count; i++)
-    	{
-        	for (j = 0; j < num_fields; j++)
-		{
-                	const char* question_id_char = PQgetvalue(res, i, j);
-        		int ret =  atoi (question_id_char);
+    		for (i = 0; i < rec_count; i++)
+    		{
+        		for (j = 0; j < num_fields; j++)
+			{
+                		const char* question_id_char = PQgetvalue(res, i, j);
+        			int ret =  atoi (question_id_char);
 
+				PQclear(res);
+        			PQfinish(conn);
+				return ret;
+			}
+		}
+
+        	//empty result means new user...
+        	if (rec_count == 0)
+        	{
 			PQclear(res);
         		PQfinish(conn);
+                	return 1;
+        	}
+        	else
+        	{
+                	const char* question_id_char = PQgetvalue(res, 0, 0);
+			PQclear(res);
+        		PQfinish(conn);
+		
+        		int ret =  atoi (question_id_char);
 			return ret;
 		}
-	}
-
-        //empty result means new user...
-        if (rec_count == 0)
-        {
 		PQclear(res);
         	PQfinish(conn);
-                return 1;
-        }
-        else
-        {
-                const char* question_id_char = PQgetvalue(res, 0, 0);
-		PQclear(res);
-        	PQfinish(conn);
-		
-        	int ret =  atoi (question_id_char);
-		return ret;
 	}
-	PQclear(res);
-        PQfinish(conn);
+	else
+	{
+		return 1;	
+	}
 }
 
 bool ClientPartido::checkLevel(int level)
@@ -521,7 +528,7 @@ bool ClientPartido::checkLevel(int level)
 
 int ClientPartido::getNewQuestionID()
 {
-	int maxLevel            = getMaxLevelAskedID();
+	int maxLevel            = getMaxLevelAskedID(false);
 
 	if (rand() % 2 == 1)
 	{

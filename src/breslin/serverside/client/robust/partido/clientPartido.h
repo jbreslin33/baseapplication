@@ -61,7 +61,7 @@ int mTies;
 //questions
 std::vector<QuestionAttempts*> mQuestionAttemptsVector;
 int getLowestUnpassedLevel(int maxLevel);
-int getMaxLevelAskedID();
+int getMaxLevelAskedID(bool db);
 bool checkLevel(int level);
 void getQuestionAttempts();
 
