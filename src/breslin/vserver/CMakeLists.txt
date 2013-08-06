@@ -339,6 +339,7 @@ set(HDRS
 
 	#question
 	../serverside/question/question.h
+	../serverside/question/questionAttempts.h
 )
  
 set(SRCS
@@ -442,6 +443,7 @@ set(SRCS
 
 	#question
 	../serverside/question/question.cpp
+	../serverside/question/questionAttempts.cpp
 )
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}
