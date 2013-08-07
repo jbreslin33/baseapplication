@@ -30,3 +30,9 @@ std::string Utility::intToString(int i)
 	std::string s = ss.str();
 	return s;
 }
+
+int Utility::stringToInt(std::string s)
+{
+	int value = atoi(s.c_str());
+	return value;
+}

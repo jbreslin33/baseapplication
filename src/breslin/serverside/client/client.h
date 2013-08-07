@@ -52,6 +52,7 @@ class Server;
 class Network;
 class Shape;
 class Game;
+class Utility;
 
 class Client : public BaseEntity
 {
@@ -111,6 +112,7 @@ public:
 
 	Server* mServer;
 
+	Utility* mUtility;
 
 };
 #endif

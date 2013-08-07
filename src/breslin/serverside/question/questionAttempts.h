@@ -8,17 +8,17 @@ class QuestionAttempts
 public:
 	
 QuestionAttempts();
-QuestionAttempts(std::string i, std::string q, std::string a, std::string aat, std::string at, std::string uid);
+QuestionAttempts(int i, int q, std::string a, double aat, int at, int uid);
 virtual ~QuestionAttempts();
 
-std::string id;
-std::string question_id;
+int id;
+int question_id;
 std::string answer; 
-std::string answer_attempt_time; 
-std::string answer_time; 
-std::string user_id; 
+double answer_attempt_time; 
+int answer_time; 
+int user_id; 
 
-void set(std::string i, std::string q, std::string a, std::string aat, std::string at, std::string uid);
+void set(int i, int q, std::string a, double aat, int at, int uid);
 
 };
 

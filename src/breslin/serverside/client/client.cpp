@@ -35,6 +35,9 @@
 //mailman
 #include "../mailman/mailMan.h"
 
+//mailman
+#include "../../utility/utility.h"
+
 #ifdef WIN32
 //
 #else
@@ -52,6 +55,8 @@
 
 Client::Client(Server* server, struct sockaddr *address, int clientID, bool permanence) : BaseEntity(BaseEntity::getNextValidID())
 {
+	mUtility = new Utility;
+
 	mPermanence = permanence;
 	
 	//logged in
@@ -107,6 +112,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 Client::~Client()
 {
 	delete mStateMachine;
+	delete mUtility;
 /*
 	//this will check if there is an mShape
 

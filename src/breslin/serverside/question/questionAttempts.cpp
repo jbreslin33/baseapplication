@@ -3,15 +3,15 @@
 
 QuestionAttempts::QuestionAttempts()
 {
-	id = "";
-	question_id = "";
+	id = 0;
+	question_id = 0;
 	answer = "";
-	answer_attempt_time = "";
-	answer_time = "";
-	user_id = "";
+	answer_attempt_time = 0.0;
+	answer_time = 0;
+	user_id = 0;
 }
 
-QuestionAttempts::QuestionAttempts(std::string i, std::string q, std::string a, std::string aat, std::string at, std::string uid)
+QuestionAttempts::QuestionAttempts(int i, int q, std::string a, double aat, int at, int uid)
 {
 	id = i;
 	question_id = q;
@@ -19,15 +19,13 @@ QuestionAttempts::QuestionAttempts(std::string i, std::string q, std::string a, 
 	answer_attempt_time = aat;
 	answer_time = at;
 	user_id = uid;
-
-	LogString("QuestionAttempts::QuestionAttempts");
 }
 
 QuestionAttempts::~QuestionAttempts()
 {
 }
 
-void QuestionAttempts::set(std::string i, std::string q, std::string a, std::string aat, std::string at, std::string uid)
+void QuestionAttempts::set(int i, int q, std::string a, double aat, int at, int uid)
 {
 	id = i;
 	question_id = q;

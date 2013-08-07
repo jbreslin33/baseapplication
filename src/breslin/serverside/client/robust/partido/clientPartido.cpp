@@ -383,75 +383,6 @@ void ClientPartido::readAnswer(int answerTime, std::string answer)
 }
 
 
-int ClientPartido::getMaxLevelAskedID(bool db)
-{
-	if (db)
-	{
- 		PGconn          *conn;
-        	PGresult        *res;
-        	int             rec_count = 0;;
-        	int             row = 0;
-        	int             col = 0;
-	
-        	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-
-		std::string query = "SELECT question_id FROM questions_attempts WHERE user_id = ";
-		query.append(utility->intToString(id));       
-		query.append(" ORDER BY question_id DESC LIMIT 1");
-
-		const char * q = query.c_str();
-
-        	res = PQexec(conn,q);
-
-        	if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        	{
-                	LogString("SQL ERROR OUTER:%s",q);
-        	}
-
-        	rec_count  = PQntuples(res);
-		int num_fields = PQnfields(res);
-	
-		int i = 0;
-		int j = 0;
-
-    		for (i = 0; i < rec_count; i++)
-    		{
-        		for (j = 0; j < num_fields; j++)
-			{
-                		const char* question_id_char = PQgetvalue(res, i, j);
-        			int ret =  atoi (question_id_char);
-
-				PQclear(res);
-        			PQfinish(conn);
-				return ret;
-			}
-		}
-
-        	//empty result means new user...
-        	if (rec_count == 0)
-        	{
-			PQclear(res);
-        		PQfinish(conn);
-                	return 1;
-        	}
-        	else
-        	{
-                	const char* question_id_char = PQgetvalue(res, 0, 0);
-			PQclear(res);
-        		PQfinish(conn);
-		
-        		int ret =  atoi (question_id_char);
-			return ret;
-		}
-		PQclear(res);
-        	PQfinish(conn);
-	}
-	else
-	{
-		return 1;	
-	}
-}
-
 bool ClientPartido::checkLevel(int level, bool db)
 {
 	if (db)
@@ -565,6 +496,88 @@ int ClientPartido::getNewQuestionID()
 	}
 }
 
+int ClientPartido::getMaxLevelAskedID(bool db)
+{
+	if (db)
+	{
+ 		PGconn          *conn;
+        	PGresult        *res;
+        	int             rec_count = 0;;
+        	int             row = 0;
+        	int             col = 0;
+	
+        	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+		std::string query = "SELECT question_id FROM questions_attempts WHERE user_id = ";
+		query.append(utility->intToString(id));       
+		query.append(" ORDER BY question_id DESC LIMIT 1");
+
+		const char * q = query.c_str();
+
+        	res = PQexec(conn,q);
+
+        	if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        	{
+                	LogString("SQL ERROR OUTER:%s",q);
+        	}
+
+        	rec_count  = PQntuples(res);
+		int num_fields = PQnfields(res);
+	
+		int i = 0;
+		int j = 0;
+
+    		for (i = 0; i < rec_count; i++)
+    		{
+        		for (j = 0; j < num_fields; j++)
+			{
+                		const char* question_id_char = PQgetvalue(res, i, j);
+        			int ret =  atoi (question_id_char);
+
+				PQclear(res);
+        			PQfinish(conn);
+				return ret;
+			}
+		}
+
+        	//empty result means new user...
+        	if (rec_count == 0)
+        	{
+			PQclear(res);
+        		PQfinish(conn);
+                	return 1;
+        	}
+        	else
+        	{
+                	const char* question_id_char = PQgetvalue(res, 0, 0);
+			PQclear(res);
+        		PQfinish(conn);
+		
+        		int ret =  atoi (question_id_char);
+			return ret;
+		}
+		PQclear(res);
+        	PQfinish(conn);
+	}
+	else
+	{
+		int highestQuestionID = 1;
+
+		for (int i = 0; i < mQuestionAttemptsVector.size(); i++)
+		{
+			if (mQuestionAttemptsVector.at(i)->question_id > highestQuestionID)
+			{
+				LogString("found higher id before");
+				highestQuestionID = mQuestionAttemptsVector.at(i)->question_id;
+				LogString("found higher id after:%d",highestQuestionID);
+			} 	
+	
+		}
+
+		return highestQuestionID;	
+	}
+}
+
 //new stuff
 void ClientPartido::getQuestionAttempts()
 {
@@ -574,8 +587,8 @@ void ClientPartido::getQuestionAttempts()
         int             row;
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-	
-	std::string query = "select * from questions_attempts WHERE user_id = ";
+//extract(epoch from timestamp with time zone '2011-01-02 03:04:05+06')	
+	std::string query = "select id, question_id, answer, extract(epoch from answer_attempt_time), answer_time, user_id from questions_attempts WHERE user_id = ";
 	query.append(utility->intToString(id)); 
 	query.append(" ORDER BY answer_attempt_time"); 
 	const char * q = query.c_str();
@@ -596,23 +609,28 @@ void ClientPartido::getQuestionAttempts()
 		LogString("getting record:%d",row);
                 const char* a = PQgetvalue(res, row, 0);
                 std::string aString(a);
+		int aInt = mUtility->stringToInt(aString);
 
                 const char* b = PQgetvalue(res, row, 1);
                 std::string bString(b);
+		int bInt = mUtility->stringToInt(bString);
 
                 const char* c = PQgetvalue(res, row, 2);
                 std::string cString(c);
 
                 const char* d = PQgetvalue(res, row, 3);
                 std::string dString(d);
+		double dDouble = atof(dString.c_str());
 
                 const char* e = PQgetvalue(res, row, 4);
                 std::string eString(e);
+		int eInt = mUtility->stringToInt(eString);
 
                 const char* f = PQgetvalue(res, row, 5);
                 std::string fString(f);
+		int fInt = mUtility->stringToInt(fString);
 
-                QuestionAttempts* questionAttempts = new QuestionAttempts(aString,bString,cString,dString,eString,fString);
+                QuestionAttempts* questionAttempts = new QuestionAttempts(aInt,bInt,cString,dDouble,eInt,fInt);
                 mQuestionAttemptsVector.push_back(questionAttempts);
         }
         PQclear(res);
@@ -657,7 +675,7 @@ void ClientPartido::insertAnswerAttempt(bool db)
 	}
 	else
 	{
-                QuestionAttempts* questionAttempts = new QuestionAttempts("-1",utility->intToString(mQuestionID),mStringAnswer,utility->intToString(mServer->mNetwork->getCurrentSystemTime()),utility->intToString(mAnswerTime),utility->intToString(id));
+                QuestionAttempts* questionAttempts = new QuestionAttempts(0,mQuestionID,mStringAnswer,mServer->mNetwork->getCurrentSystemTime(),mAnswerTime,id);
 		mQuestionAttemptsVector.push_back(questionAttempts);
 	}
 }
