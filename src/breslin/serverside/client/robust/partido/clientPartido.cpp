@@ -383,86 +383,6 @@ void ClientPartido::readAnswer(int answerTime, std::string answer)
 }
 
 
-bool ClientPartido::checkLevel(int level, bool db)
-{
-	if (db)
-	{
- 		PGconn          *conn;
-        	PGresult        *res;
-        	int             rec_count = 0;;
-        	int             row = 0;
-        	int             col = 0;
-	
-        	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-
-		std::string query = "SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions_attempts.user_id = ";
-
-		query.append(utility->intToString(id));       
-
-		query.append(" AND questions.id = "); 
-	
-		query.append(utility->intToString(level));       
-
-		query.append(" ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10");
-
-		const char * q = query.c_str();
-        	res = PQexec(conn,q);
-        	if (PQresultStatus(res) != PGRES_TUPLES_OK)
-        	{
-                	LogString("SQL ERROR OUTER:%s",q);
-			return false;
-        	}
-        	rec_count = PQntuples(res);
-
-		//quick check...	
-		if (rec_count != 10)
-		{
-			PQclear(res);
-        		PQfinish(conn);
-			return false;
-		}
-		else
-		{
-                	for (row=0; row<rec_count; row++)
-                	{
-                		//real_answer
-                        	const char* real_answer_char = PQgetvalue(res, row, 1);
-                        	std::string real_answer(real_answer_char);
-
-                        	//client_answer
-                        	const char* client_answer_char = PQgetvalue(res, row, 2);
-                        	std::string client_answer(client_answer_char);
-
-                        	//time_in_msec
-                        	const char* time_in_msec_char = PQgetvalue(res, 0, 4);
-                        	int time_in_msec = atoi (time_in_msec_char);
-
-                        	if (time_in_msec > 2000)
-                        	{
-					PQclear(res);
-        				PQfinish(conn);
-                        		return false;
-                       		} 
-
-                        	if (real_answer.compare(client_answer) != 0)
-                        	{
-					PQclear(res);
-        				PQfinish(conn);
-                               		return false;
-                        	}
-			}
-			//if you got here it means you have 10 records and they survived the pass checks so return true
-			PQclear(res);
-        		PQfinish(conn);
-			return true;
-		}
-	}
-	else
-	{
-		return false;
-	}
-}
-
 int ClientPartido::getNewQuestionID()
 {
 	int maxLevel            = getMaxLevelAskedID(false);
@@ -567,14 +487,101 @@ int ClientPartido::getMaxLevelAskedID(bool db)
 		{
 			if (mQuestionAttemptsVector.at(i)->question_id > highestQuestionID)
 			{
-				LogString("found higher id before");
 				highestQuestionID = mQuestionAttemptsVector.at(i)->question_id;
-				LogString("found higher id after:%d",highestQuestionID);
 			} 	
 	
 		}
-
 		return highestQuestionID;	
+	}
+}
+
+bool ClientPartido::checkLevel(int level, bool db)
+{
+	if (db)
+	{
+ 		PGconn          *conn;
+        	PGresult        *res;
+        	int             rec_count = 0;;
+        	int             row = 0;
+        	int             col = 0;
+	
+        	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+		std::string query = "SELECT questions.id, questions.answer AS real_answer, questions_attempts.answer as client_answer, questions_attempts.answer_attempt_time, questions_attempts.answer_time AS time_in_msec, questions_attempts.user_id FROM questions INNER JOIN questions_attempts ON questions.id = questions_attempts.question_id WHERE questions_attempts.user_id = ";
+
+		query.append(utility->intToString(id));       
+
+		query.append(" AND questions.id = "); 
+	
+		query.append(utility->intToString(level));       
+
+		query.append(" ORDER BY questions_attempts.answer_attempt_time DESC LIMIT 10");
+
+		const char * q = query.c_str();
+        	res = PQexec(conn,q);
+        	if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        	{
+                	LogString("SQL ERROR OUTER:%s",q);
+			return false;
+        	}
+        	rec_count = PQntuples(res);
+
+		//quick check...	
+		if (rec_count != 10)
+		{
+			PQclear(res);
+        		PQfinish(conn);
+			return false;
+		}
+		else
+		{
+                	for (row=0; row<rec_count; row++)
+                	{
+                		//real_answer
+                        	const char* real_answer_char = PQgetvalue(res, row, 1);
+                        	std::string real_answer(real_answer_char);
+
+                        	//client_answer
+                        	const char* client_answer_char = PQgetvalue(res, row, 2);
+                        	std::string client_answer(client_answer_char);
+
+                        	//time_in_msec
+                        	const char* time_in_msec_char = PQgetvalue(res, 0, 4);
+                        	int time_in_msec = atoi (time_in_msec_char);
+
+                        	if (time_in_msec > 2000)
+                        	{
+					PQclear(res);
+        				PQfinish(conn);
+                        		return false;
+                       		} 
+
+                        	if (real_answer.compare(client_answer) != 0)
+                        	{
+					PQclear(res);
+        				PQfinish(conn);
+                               		return false;
+                        	}
+			}
+			//if you got here it means you have 10 records and they survived the pass checks so return true
+			PQclear(res);
+        		PQfinish(conn);
+			return true;
+		}
+	}
+	else
+	{
+/*
+		for (int i = mQuestionAttemptsVector.size(); i >= 0; i--)
+		{
+			if (mQuestionAttemptsVector.at(i)->question_id == level)	
+			{
+				LogString("found attempt with id of:%d",level);
+				mQuestionAttemptsVectorTemp.push_back(mQuestionAttemptsVector.at(i));	
+			}
+		}
+*/
+		return false;
 	}
 }
 
