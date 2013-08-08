@@ -571,15 +571,28 @@ bool ClientPartido::checkLevel(int level, bool db)
 	}
 	else
 	{
+		int total = 0;
+		int index = mQuestionAttemptsVector.size() - 1;
+		//clear the vector...
+		mQuestionAttemptsVectorTemp.clear();
 
-		for (int i = mQuestionAttemptsVector.size() - 1; i > 0; i--)
+		while (total < 10 && index > -1)     
 		{
-			LogString("loop:%d",i);
-			if (mQuestionAttemptsVector.at(i)->question_id == level)	
+			if (mQuestionAttemptsVector.at(index)->question_id == level)	
 			{
-				LogString("found attempt with id of:%d",level);
-				mQuestionAttemptsVectorTemp.push_back(mQuestionAttemptsVector.at(i));	
+				mQuestionAttemptsVectorTemp.push_back(mQuestionAttemptsVector.at(index));	
+				total++;
 			}
+			index--;
+		}
+
+		if (mQuestionAttemptsVectorTemp.size() < 10)
+		{
+			LogString("size is small: %d", mQuestionAttemptsVectorTemp.size());
+		}
+		else
+		{
+			LogString("size is good: %d", mQuestionAttemptsVectorTemp.size());
 		}
 
 		return false;
