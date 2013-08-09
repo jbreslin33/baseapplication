@@ -43,7 +43,7 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	mUtility = new Utility();
 
 	//numberOf Clients
-	mNumberOfClients = 15;
+	mNumberOfClients = 5;
 
 	//ogre root
 	mRoot = root;
