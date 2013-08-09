@@ -61,7 +61,10 @@ Game_Partido_Mode* Game_Partido_Mode::Instance()
 }
 void Game_Partido_Mode::enter(ClientPartido* clientPartido)
 {
-        //LogString("Game_Partido_Mode::enter");
+	if (clientPartido->id == 2)
+	{	
+        	LogString("Game_Partido_Mode::enter");
+	}
 }
 void Game_Partido_Mode::execute(ClientPartido* clientPartido)
 {
@@ -79,6 +82,15 @@ bool Game_Partido_Mode::onLetter(ClientPartido* clientPartido, Letter* letter)
 }
 /***************************************
        	Battle
+//battle
+int mQuestionID;
+std::vector<int> mMasteredQuestionIDVector;
+bool mWaitingForAnswer;
+std::string mQuestionString;
+//int mBattleScore;
+std::string mBattleRecordText;
+int mComputerAskedTime;
+int mComputerAnswerTime;
 ****************************************/
 Battle* Battle::Instance()
 {
@@ -87,7 +99,10 @@ Battle* Battle::Instance()
 }
 void Battle::enter(ClientPartido* clientPartido)
 {
-        //LogString("Battle::enter");
+	if (clientPartido->id == 2)
+	{	
+        	LogString("Battle::enter");
+	}
 	if (clientPartido->mLoggedIn)
         {
                 clientPartido->sendBattleStart();
@@ -96,7 +111,7 @@ void Battle::enter(ClientPartido* clientPartido)
         clientPartido->mBattleScore = 0;
         clientPartido->mWaitingForAnswer = false;
         clientPartido->mQuestionString = "";
-        clientPartido->mShapePartido->mCollidable = false;
+        //clientPartido->mShapePartido->mCollidable = false;
 }
 void Battle::execute(ClientPartido* clientPartido)
 {
@@ -129,7 +144,10 @@ BATTLE_OFF* BATTLE_OFF::Instance()
 }
 void BATTLE_OFF::enter(ClientPartido* clientPartido)
 {
-        //LogString("BATTLE_OFF::enter");
+	if (clientPartido->id == 2)
+	{	
+        	LogString("BATTLE_OFF::enter");
+	}
 }
 void BATTLE_OFF::execute(ClientPartido* clientPartido)
 {
@@ -161,7 +179,10 @@ Sending_Question* Sending_Question::Instance()
 }
 void Sending_Question::enter(ClientPartido* clientPartido)
 {
-        //LogString("Sending_Question::enter");
+	if (clientPartido->id == 2)
+	{	
+        	LogString("Sending_Question::enter");
+	}
 }
 void Sending_Question::execute(ClientPartido* clientPartido)
 {
@@ -205,7 +226,10 @@ Waiting_For_Answer* Waiting_For_Answer::Instance()
 } 
 void Waiting_For_Answer::enter(ClientPartido* clientPartido)
 {
-        //LogString("WAITING_FOR_ANSWER::enter");
+	if (clientPartido->id == 2)
+	{
+        	LogString("WAITING_FOR_ANSWER::enter");
+	}
 
 	clientPartido->mComputerAskedTime = clientPartido->mServer->mGameTime;	
 

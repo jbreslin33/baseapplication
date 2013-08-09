@@ -122,6 +122,7 @@ void ShapePartido::collision(Shape* shape)
 		}
 	}
 
+	//reset
 	mCollisionTimeoutCounter = mCollisionTimeout;
 	mCollidable = false;
 }
