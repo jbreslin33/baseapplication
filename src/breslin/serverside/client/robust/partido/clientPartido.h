@@ -13,6 +13,7 @@ class GamePartido;
 class ShapePartido;
 class Utility;
 class QuestionAttempts;
+class Battle;
 
 class ClientPartido : public ClientRobust
 {
@@ -44,6 +45,7 @@ GamePartido* getGame();
 virtual void setGame(int gameID);
 
 //battle
+Battle* mBattle;
 int mQuestionID;
 std::vector<int> mMasteredQuestionIDVector;
 bool mWaitingForAnswer;

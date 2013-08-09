@@ -67,7 +67,7 @@ void Game_Partido_Mode::execute(ClientPartido* clientPartido)
 {
   	if (clientPartido->mShapePartido->mOpponent)
         {
-                clientPartido->mClientPartidoStateMachine->changeState(Battle::Instance());
+                clientPartido->mClientPartidoStateMachine->changeState(CLIENT_PARTIDO_BATTLE::Instance());
         }
 }
 void Game_Partido_Mode::exit(ClientPartido* clientPartido)
@@ -89,12 +89,12 @@ std::string mBattleRecordText;
 int mComputerAskedTime;
 int mComputerAnswerTime;
 ****************************************/
-Battle* Battle::Instance()
+CLIENT_PARTIDO_BATTLE* CLIENT_PARTIDO_BATTLE::Instance()
 {
-  static Battle instance;
+  static CLIENT_PARTIDO_BATTLE instance;
   return &instance;
 }
-void Battle::enter(ClientPartido* clientPartido)
+void CLIENT_PARTIDO_BATTLE::enter(ClientPartido* clientPartido)
 {
        	LogString("-BATTLE::enter:%d",clientPartido->id);
 	
@@ -108,17 +108,17 @@ void Battle::enter(ClientPartido* clientPartido)
         clientPartido->mQuestionString = "";
         //clientPartido->mShapePartido->mCollidable = false;
 }
-void Battle::execute(ClientPartido* clientPartido)
+void CLIENT_PARTIDO_BATTLE::execute(ClientPartido* clientPartido)
 {
   	if (!clientPartido->mShapePartido->mOpponent)
         {
                 clientPartido->mClientPartidoStateMachine->changeState(Game_Partido_Mode::Instance());
         }
 }
-void Battle::exit(ClientPartido* clientPartido)
+void CLIENT_PARTIDO_BATTLE::exit(ClientPartido* clientPartido)
 {
 }
-bool Battle::onLetter(ClientPartido* clientPartido, Letter* letter)
+bool CLIENT_PARTIDO_BATTLE::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false;
 }

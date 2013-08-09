@@ -17,6 +17,9 @@
 #include "../../../question/question.h"
 #include "../../../question/questionAttempts.h"
 
+//battle
+#include "../../../battle/battle.h"
+
 ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence,int i, std::string u, std::string p, std::string f, std::string m1, std::string m2, std::string m3, std::string l,int s) : ClientRobust(serverPartido, address, clientID, permanence,i, u,p,f,m1,m2,m3,l,s) 
 {
 	//server
@@ -26,6 +29,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	mGamePartido = NULL;
 
 	//battle
+	mBattle = NULL;
         mWaitingForAnswer = false;
 	mQuestionID = 0;
 	mBattleScore = 0;

@@ -26,12 +26,12 @@ public:
 *       CLIENT PARTIDO STATES 
 ******************************/
 
-class Battle : public State<ClientPartido>
+class CLIENT_PARTIDO_BATTLE : public State<ClientPartido>
 {
 private:
-  Battle(){}
+  CLIENT_PARTIDO_BATTLE(){}
 public:
-  static Battle* Instance();
+  static CLIENT_PARTIDO_BATTLE* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);

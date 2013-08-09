@@ -3,22 +3,22 @@
 
 #include "../../fsm/stateMachine.h"
 
-class Shape;
+class ClientPartido;
 
 class Battle 
 {
 
 public:
 
-Battle(Shape* shape1, Shape* shape2);
+Battle(ClientPartido* client1, ClientPartido* client2);
 virtual ~Battle();
 
 //update
 void update();
 
 StateMachine<Battle>* mStateMachine;
-Shape* mShape1;
-Shape* mShape2;
+ClientPartido* mClient1;
+ClientPartido* mClient2;
 
 
 };

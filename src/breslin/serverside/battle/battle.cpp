@@ -11,12 +11,12 @@ using namespace Ogre;
 #include "states/battleStates.h"
 
 //shapes
-#include "../shape/shape.h"
+#include "../client/robust/partido/clientPartido.h"
 
-Battle::Battle(Shape* shape1, Shape* shape2)
+Battle::Battle(ClientPartido* client1, ClientPartido* client2)
 {
-	mShape1 = NULL;
-	mShape2 = NULL;
+	mClient1 = NULL;
+	mClient2 = NULL;
 
  	//battle states
 	mStateMachine =  new StateMachine<Battle>(this);

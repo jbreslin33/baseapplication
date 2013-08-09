@@ -7,6 +7,9 @@
 //battle
 #include "../battle.h"
 
+//client
+#include "../../client/robust/partido/clientPartido.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -43,6 +46,22 @@ void INIT_BATTLE::enter(Battle* battle)
 }
 void INIT_BATTLE::execute(Battle* battle)
 {
+	
+	battle->mClient1->mBattle = battle;	
+	battle->mClient2->mBattle = battle;	
+/*
+	if (mOpponent == NULL && mOpponentLast != shape)
+        {
+                if (mClientPartido)
+                {
+                        mOpponent = (ShapePartido*)shape;
+                }
+        }
+
+        //reset
+        mCollisionTimeoutCounter = mCollisionTimeout;
+        mCollidable = false;
+*/
 }
 void INIT_BATTLE::exit(Battle* battle)
 {

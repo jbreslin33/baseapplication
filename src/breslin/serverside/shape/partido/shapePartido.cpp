@@ -118,16 +118,6 @@ bool ShapePartido::handleLetter(Letter* letter)
 //no real collision just detection for battles...this way no one can get stuck
 void ShapePartido::collision(Shape* shape)
 {
-	if (mOpponent == NULL && mOpponentLast != shape)
-	{
-		if (mClientPartido)
-		{
-       			mOpponent = (ShapePartido*)shape;
-		}
-	}
 
-	//reset
-	mCollisionTimeoutCounter = mCollisionTimeout;
-	mCollidable = false;
 }
 
