@@ -20,8 +20,8 @@ Battle::Battle(Shape* shape1, Shape* shape2)
 
  	//battle states
 	mStateMachine =  new StateMachine<Battle>(this);
-	mStateMachine->setCurrentState      (NORMAL_BATTLE::Instance());
-	mStateMachine->setPreviousState     (NORMAL_BATTLE::Instance());
+	mStateMachine->setCurrentState      (INIT_BATTLE::Instance());
+	mStateMachine->setPreviousState     (INIT_BATTLE::Instance());
 	mStateMachine->setGlobalState       (GLOBAL_BATTLE::Instance());
 
 }

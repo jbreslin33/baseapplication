@@ -30,6 +30,28 @@ bool GLOBAL_BATTLE::onLetter(Battle* battle, Letter* letter)
         return true;
 }
 
+/*****************************************
+	INIT_BATTLE
+****************************************/
+INIT_BATTLE* INIT_BATTLE::Instance()
+{
+	static INIT_BATTLE instance;
+	return &instance;
+}
+void INIT_BATTLE::enter(Battle* battle)
+{
+}
+void INIT_BATTLE::execute(Battle* battle)
+{
+}
+void INIT_BATTLE::exit(Battle* battle)
+{
+}
+bool INIT_BATTLE::onLetter(Battle* battle, Letter* letter)
+{
+        return true;
+}
+
 
 /*****************************************
 	NORMAL_BATTLE
@@ -49,28 +71,6 @@ void NORMAL_BATTLE::exit(Battle* battle)
 {
 }
 bool NORMAL_BATTLE::onLetter(Battle* battle, Letter* letter)
-{
-        return true;
-}
-
-/*****************************************
-	INIT_BATTLE
-****************************************/
-INIT_BATTLE* INIT_BATTLE::Instance()
-{
-	static INIT_BATTLE instance;
-	return &instance;
-}
-void INIT_BATTLE::enter(Battle* battle)
-{
-}
-void INIT_BATTLE::execute(Battle* battle)
-{
-}
-void INIT_BATTLE::exit(Battle* battle)
-{
-}
-bool INIT_BATTLE::onLetter(Battle* battle, Letter* letter)
 {
         return true;
 }

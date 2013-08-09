@@ -15,6 +15,9 @@
 //vector3d
 #include "../../../math/vector3D.h"
 
+//battle
+#include "../../battle/battle.h"
+
 #include <stdio.h>
 
 GamePartido::GamePartido(ServerPartido* serverPartido, int id) : Game(serverPartido,id)
@@ -35,6 +38,10 @@ void GamePartido::update()
 	{
 		LogString("endOFGAME!!!!!!!!!!!!!!!!!!!!!!");
 		reset();		
+	}
+        for (unsigned int i = 0; i < mBattleVector.size(); i++)
+	{
+		mBattleVector.at(i)->update();
 	}
 }
 
@@ -126,6 +133,8 @@ void GamePartido::checkCollisions()
                                         //to distSQ between them. IS this right or is it working by chance?
                                         if(distSq < mShapeVector.at(i)->mCollisionRadius + mShapeVector.at(j)->mCollisionRadius)
                                         {
+						Battle* battle = new Battle(mShapeVector.at(i),mShapeVector.at(j));
+						mBattleVector.push_back(battle);
                                                 mShapeVector.at(i)->collision(mShapeVector.at(j));
                                                 mShapeVector.at(j)->collision(mShapeVector.at(i));
                                         }

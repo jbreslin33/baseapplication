@@ -9,6 +9,7 @@ using namespace std;
 class ServerPartido;
 class ShapePartido;
 class ClientPartido;
+class Battle;
 
 class GamePartido : public Game
 {
@@ -22,6 +23,9 @@ public:
 
 	//serverPartido
 	ServerPartido* mServerPartido;
+
+	//battles
+        std::vector<Battle*> mBattleVector;    
 
 	//shapes
         std::vector<ShapePartido*> mShapePartidoVector;       //every tangible item in game world..
