@@ -28,6 +28,9 @@ public:
 	void createShapes();
 	void sendShapes(ClientPartido* clientPartido);
 
+	//coldet
+	virtual void checkCollisions();
+
 	//end of game
 	bool checkForEndOfGame();
 	void reset();
