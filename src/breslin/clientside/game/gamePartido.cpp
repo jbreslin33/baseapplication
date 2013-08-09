@@ -82,13 +82,13 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
         	char c =  byteBuffer->ReadByte();
                 mApplicationPartido->mStringQuestion.append(1,c);
         }
-	if (mApplicationPartido->mLabelQuestion)
+	if (mApplicationPartido->mLabelQuestion && mApplicationPartido->mStringQuestion.size() > 0)
 	{
 		mApplicationPartido->mLabelQuestion->setCaption(mApplicationPartido->mStringQuestion);
 	}
 	else
 	{
-		LogString("no label");
+		LogString("no label or no string");
 	}
 	
 	//reset mAnswerTime	

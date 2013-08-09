@@ -113,6 +113,7 @@ void ClientPartido::setShape(ShapePartido* shapePartido)
 	mShapePartido = shapePartido;
 }
 
+
 void ClientPartido::sendQuestion(int questionID)
 {
 	if (mConnectionState == DREAMSOCK_CONNECTED)

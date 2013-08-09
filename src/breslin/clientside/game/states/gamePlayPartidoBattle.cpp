@@ -97,7 +97,6 @@ void GamePlayPartidoBattle::execute()
                 {
                         if (app->mKeyArray[i])
                         {
-				LogString("mKeyArray:%d",i);
                                 app->mKeyArray[i] = false;
                                 char ascii = (char)i;
                                 app->mStringAnswer.append(1,ascii);
