@@ -16,6 +16,9 @@ virtual ~Battle();
 //update
 void update();
 
+StateMachine<Battle>* mStateMachine;
+Shape* mShape1;
+Shape* mShape2;
 
 
 };

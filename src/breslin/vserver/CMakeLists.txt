@@ -457,7 +457,6 @@ set(SRCS
 	#battle states
 	../serverside/battle/states/battleStates.cpp
 )
-)
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}
 	${OGRE_SAMPLES_INCLUDEPATH}
