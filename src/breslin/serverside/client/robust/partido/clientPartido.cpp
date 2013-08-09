@@ -423,11 +423,11 @@ bool ClientPartido::checkLevel(int level)
 
 	if (mQuestionAttemptsVectorTemp.size() < 10)
 	{
-		LogString("size is small: %d", mQuestionAttemptsVectorTemp.size());
+		//LogString("size is small: %d", mQuestionAttemptsVectorTemp.size());
 	}
 	else
 	{
-		LogString("size is good: %d", mQuestionAttemptsVectorTemp.size());
+		//LogString("size is good: %d", mQuestionAttemptsVectorTemp.size());
 	}
 
 	return false;
@@ -447,7 +447,7 @@ void ClientPartido::getQuestionAttempts()
 	query.append(utility->intToString(id)); 
 	query.append(" ORDER BY answer_attempt_time"); 
 	const char * q = query.c_str();
-	LogString("q:%s",q);
+	//LogString("q:%s",q);
         res = PQexec(conn,q);
 
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
@@ -461,7 +461,6 @@ void ClientPartido::getQuestionAttempts()
 
         for (row=0; row<rec_count; row++)
         {
-		LogString("getting record:%d",row);
                 const char* a = PQgetvalue(res, row, 0);
                 std::string aString(a);
 		int aInt = mUtility->stringToInt(aString);

@@ -75,6 +75,10 @@ void ShapePartido::update()
 	{
 		mCollidable = true;
 	}
+	else
+	{
+		mCollidable = false;
+	}
 
    	mMove->mPositionBeforeCollision->x = mSceneNode->getPosition().x;
         mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;
