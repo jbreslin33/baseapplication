@@ -29,7 +29,6 @@ static const int WIN  = 1;
 static const int TIE  = 0;
 static const int LOSS = -1;
 
-void sendSchools();
 void parseAnswer();
 
 ServerPartido* mServerPartido;	
@@ -62,8 +61,8 @@ int mTies;
 std::vector<QuestionAttempts*> mQuestionAttemptsVector;
 std::vector<QuestionAttempts*> mQuestionAttemptsVectorTemp;
 int getLowestUnpassedLevel(int maxLevel);
-int getMaxLevelAskedID(bool db);
-bool checkLevel(int level,bool db);
+int getMaxLevelAskedID();
+bool checkLevel(int level);
 void getQuestionAttempts();
 
 
@@ -72,7 +71,7 @@ virtual void parseAnswer(Message* message);
 virtual void readAnswer(int answerTime, std::string answer);
 std::string mStringAnswer;
 int mAnswerTime;
-void insertAnswerAttempt(bool db);
+void insertAnswerAttempt();
 
 //shape
 ShapePartido* mShapePartido;
