@@ -52,7 +52,7 @@ int mBattleScore;
 std::string mBattleRecordText;
 int mComputerAskedTime;
 int mComputerAnswerTime;
-
+int mBattleTime;
 int mWins;
 int mLosses;
 int mTies;

@@ -34,6 +34,7 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	mTies = 0;	
 	mComputerAskedTime = 0;
 	mComputerAnswerTime = 0;
+	mBattleTime = 20000;
 
         //states
         mClientPartidoStateMachine =  new StateMachine<ClientPartido>(this);
