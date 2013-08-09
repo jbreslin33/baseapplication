@@ -65,7 +65,8 @@ void Game_Partido_Mode::enter(ClientPartido* clientPartido)
 }
 void Game_Partido_Mode::execute(ClientPartido* clientPartido)
 {
-  	if (clientPartido->mShapePartido->mOpponent)
+	LogString("Game_Partido_Mode::execute:%d",clientPartido->id);	
+  	if (clientPartido->mBattle)
         {
                 clientPartido->mClientPartidoStateMachine->changeState(CLIENT_PARTIDO_BATTLE::Instance());
         }
@@ -79,15 +80,6 @@ bool Game_Partido_Mode::onLetter(ClientPartido* clientPartido, Letter* letter)
 }
 /***************************************
        	Battle
-//battle
-int mQuestionID;
-std::vector<int> mMasteredQuestionIDVector;
-bool mWaitingForAnswer;
-std::string mQuestionString;
-//int mBattleScore;
-std::string mBattleRecordText;
-int mComputerAskedTime;
-int mComputerAnswerTime;
 ****************************************/
 CLIENT_PARTIDO_BATTLE* CLIENT_PARTIDO_BATTLE::Instance()
 {
@@ -97,7 +89,9 @@ CLIENT_PARTIDO_BATTLE* CLIENT_PARTIDO_BATTLE::Instance()
 void CLIENT_PARTIDO_BATTLE::enter(ClientPartido* clientPartido)
 {
        	LogString("-BATTLE::enter:%d",clientPartido->id);
+	clientPartido->mKey = 0;
 	
+/*
 	if (clientPartido->mLoggedIn)
         {
                 clientPartido->sendBattleStart();
@@ -106,11 +100,12 @@ void CLIENT_PARTIDO_BATTLE::enter(ClientPartido* clientPartido)
         clientPartido->mBattleScore = 0;
         clientPartido->mWaitingForAnswer = false;
         clientPartido->mQuestionString = "";
+*/
         //clientPartido->mShapePartido->mCollidable = false;
 }
 void CLIENT_PARTIDO_BATTLE::execute(ClientPartido* clientPartido)
 {
-  	if (!clientPartido->mShapePartido->mOpponent)
+  	if (!clientPartido->mBattle)
         {
                 clientPartido->mClientPartidoStateMachine->changeState(Game_Partido_Mode::Instance());
         }
@@ -144,6 +139,7 @@ void BATTLE_OFF::enter(ClientPartido* clientPartido)
 }
 void BATTLE_OFF::execute(ClientPartido* clientPartido)
 {
+/*
 	if (clientPartido->mShapePartido)
 	{
 		if (!clientPartido->mWaitingForAnswer && clientPartido->mShapePartido->mOpponent)
@@ -151,6 +147,7 @@ void BATTLE_OFF::execute(ClientPartido* clientPartido)
                 	clientPartido->mBattleStateMachine->changeState(Sending_Question::Instance());
 		}
 	}
+*/
 }
 void BATTLE_OFF::exit(ClientPartido* clientPartido)
 {

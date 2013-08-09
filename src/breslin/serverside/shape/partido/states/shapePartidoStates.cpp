@@ -67,7 +67,7 @@ void BATTLE_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
 }       
 void BATTLE_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 {
-	if (shapePartido->mClientPartido->mBattleStateMachine->currentState() == BATTLE_OFF::Instance())
+	if (!shapePartido->mClientPartido->mBattle)
 	{
 		shapePartido->mShapePartidoStateMachine->changeState(GAME_SHAPE_PARTIDO::Instance());	
 	}
@@ -102,7 +102,7 @@ void GAME_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 {
 	if (shapePartido->mClientPartido)
 	{
-		if (shapePartido->mClientPartido->mBattleStateMachine->currentState() != BATTLE_OFF::Instance())
+		if (shapePartido->mClientPartido->mBattle)
 		{
 			shapePartido->mShapePartidoStateMachine->changeState(BATTLE_SHAPE_PARTIDO::Instance());	
 		}

@@ -15,8 +15,8 @@ using namespace Ogre;
 
 Battle::Battle(ClientPartido* client1, ClientPartido* client2)
 {
-	mClient1 = NULL;
-	mClient2 = NULL;
+	mClient1 = client1;
+	mClient2 = client2;
 
  	//battle states
 	mStateMachine =  new StateMachine<Battle>(this);

@@ -70,6 +70,7 @@ ShapePartido::~ShapePartido()
 void ShapePartido::update()
 {
 	//up the collision timeout...
+/*
 	mCollisionTimeoutCounter -= mGamePartido->mServer->mGameTime;
 	if (mCollisionTimeoutCounter < 0) 
 	{
@@ -79,7 +80,7 @@ void ShapePartido::update()
 	{
 		mCollidable = false;
 	}
-
+*/
    	mMove->mPositionBeforeCollision->x = mSceneNode->getPosition().x;
         mMove->mPositionBeforeCollision->y = mSceneNode->getPosition().y;
         mMove->mPositionBeforeCollision->z = mSceneNode->getPosition().z;

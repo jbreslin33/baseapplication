@@ -133,10 +133,15 @@ void GamePartido::checkCollisions()
                                         //to distSQ between them. IS this right or is it working by chance?
                                         if(distSq < mShapePartidoVector.at(i)->mCollisionRadius + mShapePartidoVector.at(j)->mCollisionRadius)
                                         {
+						LogString("breslin1");
 						Battle* battle = new Battle(mShapePartidoVector.at(i)->mClientPartido,mShapePartidoVector.at(j)->mClientPartido);
+						LogString("breslin2");
 						mBattleVector.push_back(battle);
+						LogString("breslin3");
                                                 mShapePartidoVector.at(i)->collision(mShapePartidoVector.at(j));
+						LogString("breslin4");
                                                 mShapePartidoVector.at(j)->collision(mShapePartidoVector.at(i));
+						LogString("breslin5");
                                         }
                                 }
                         }
