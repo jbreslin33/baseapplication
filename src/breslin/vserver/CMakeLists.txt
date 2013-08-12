@@ -346,6 +346,12 @@ set(HDRS
 	
 	#battle states
 	../serverside/battle/states/battleStates.h
+	
+	#combatant
+	../serverside/combatant/combatant.h
+	
+	#combatant states
+	../serverside/combatant/states/combatantStates.h
 )
  
 set(SRCS
@@ -456,6 +462,12 @@ set(SRCS
 	
 	#battle states
 	../serverside/battle/states/battleStates.cpp
+	
+	#combatant
+	../serverside/combatant/combatant.cpp
+	
+	#combatant states
+	../serverside/combatant/states/combatantStates.cpp
 )
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}
