@@ -61,11 +61,9 @@ Game_Partido_Mode* Game_Partido_Mode::Instance()
 }
 void Game_Partido_Mode::enter(ClientPartido* clientPartido)
 {
-       	LogString("-GAME_PARTIDO_MODE::enter:%d",clientPartido->id);
 }
 void Game_Partido_Mode::execute(ClientPartido* clientPartido)
 {
-	LogString("Game_Partido_Mode::execute:%d",clientPartido->id);	
   	if (clientPartido->mBattle)
         {
                 clientPartido->mClientPartidoStateMachine->changeState(CLIENT_PARTIDO_BATTLE::Instance());
@@ -88,7 +86,6 @@ CLIENT_PARTIDO_BATTLE* CLIENT_PARTIDO_BATTLE::Instance()
 }
 void CLIENT_PARTIDO_BATTLE::enter(ClientPartido* clientPartido)
 {
-       	LogString("-BATTLE::enter:%d",clientPartido->id);
 	clientPartido->mKey = 0;
 	
 /*
@@ -134,8 +131,6 @@ BATTLE_OFF* BATTLE_OFF::Instance()
 }
 void BATTLE_OFF::enter(ClientPartido* clientPartido)
 {
-       	LogString("BATTLE_OFF::enter:%d",clientPartido->id);
-       	LogString("----------------------------");
 }
 void BATTLE_OFF::execute(ClientPartido* clientPartido)
 {
@@ -169,7 +164,6 @@ Sending_Question* Sending_Question::Instance()
 }
 void Sending_Question::enter(ClientPartido* clientPartido)
 {
-       	LogString("SENDING_QUESTION::enter:%d",clientPartido->id);
 }
 void Sending_Question::execute(ClientPartido* clientPartido)
 {
@@ -213,9 +207,6 @@ Waiting_For_Answer* Waiting_For_Answer::Instance()
 } 
 void Waiting_For_Answer::enter(ClientPartido* clientPartido)
 {
-       	LogString("WAITING_FOR_ANSWER::enter:%d",clientPartido->id);
-        LogString("WAITING_FOR_ANSWER::enter");
-
 	clientPartido->mComputerAskedTime = clientPartido->mServer->mGameTime;	
 
  	int randomAnswerTime = rand() % 3000;
