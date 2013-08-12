@@ -4,22 +4,23 @@
 #include "../../fsm/stateMachine.h"
 
 class ClientPartido;
+class Combatant;
 
 class Battle 
 {
 
 public:
 
-Battle(ClientPartido* client1, ClientPartido* client2);
+Battle(ClientPartido* homeClient, ClientPartido* awayClient);
 virtual ~Battle();
 
 //update
 void update();
 
 StateMachine<Battle>* mStateMachine;
-ClientPartido* mClient1;
-ClientPartido* mClient2;
 
+Combatant* mHomeCombatant;
+Combatant* mAwayCombatant;
 
 };
 

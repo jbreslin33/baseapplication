@@ -47,8 +47,8 @@ void INIT_BATTLE::enter(Battle* battle)
 void INIT_BATTLE::execute(Battle* battle)
 {
 	
-	battle->mClient1->mBattle = battle;	
-	battle->mClient2->mBattle = battle;	
+	//battle->mClient1->mBattle = battle;	
+	//battle->mClient2->mBattle = battle;	
 /*
 	if (mOpponent == NULL && mOpponentLast != shape)
         {

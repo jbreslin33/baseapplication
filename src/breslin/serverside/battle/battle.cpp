@@ -1,5 +1,6 @@
 #include "battle.h"
 #include "../tdreamsock/dreamSockLog.h"
+#include "../combatant/combatant.h"
 
 #include <string>
 
@@ -13,17 +14,21 @@ using namespace Ogre;
 //shapes
 #include "../client/robust/partido/clientPartido.h"
 
-Battle::Battle(ClientPartido* client1, ClientPartido* client2)
+Battle::Battle(ClientPartido* homeClient, ClientPartido* awayClient)
 {
-	mClient1 = client1;
-	mClient2 = client2;
+	//make 2 Combatants a home and away
+	mHomeCombatant = new Combatant(this,homeClient);
+	mAwayCombatant = new Combatant(this,awayClient);
+
+	//set pointers to foes for combatants
+	mHomeCombatant->mFoe = mHomeCombatant;
+	mAwayCombatant->mFoe = mAwayCombatant;
 
  	//battle states
 	mStateMachine =  new StateMachine<Battle>(this);
 	mStateMachine->setCurrentState      (INIT_BATTLE::Instance());
 	mStateMachine->setPreviousState     (INIT_BATTLE::Instance());
 	mStateMachine->setGlobalState       (GLOBAL_BATTLE::Instance());
-
 }
 
 Battle::~Battle()
