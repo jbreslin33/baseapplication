@@ -67,7 +67,6 @@ int getMaxLevelAskedID();
 bool checkLevel(int level);
 void getQuestionAttempts();
 
-
 //answer
 virtual void parseAnswer(Message* message);
 virtual void readAnswer(int answerTime, std::string answer);

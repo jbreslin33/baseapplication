@@ -53,26 +53,12 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
         mClientPartidoStateMachine->setPreviousState     (NULL);
         mClientPartidoStateMachine->setGlobalState       (GlobalClientPartido::Instance());
 
-        //states
-        mBattleStateMachine =  new StateMachine<ClientPartido>(this);
-	if (clientID == -1)
-	{
-        	mBattleStateMachine->setCurrentState      (NULL);
-	}
-	else
-	{
-        	mBattleStateMachine->setCurrentState      (BATTLE_OFF::Instance());
-	}
-        mBattleStateMachine->setPreviousState     (NULL);
-        mBattleStateMachine->setGlobalState       (NULL);
-
 	getQuestionAttempts();
 }
 
 ClientPartido::~ClientPartido()
 {
 	delete mClientPartidoStateMachine;
-	delete mBattleStateMachine;
 }
 
 //game

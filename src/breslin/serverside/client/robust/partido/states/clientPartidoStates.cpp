@@ -64,10 +64,6 @@ void Game_Partido_Mode::enter(ClientPartido* clientPartido)
 }
 void Game_Partido_Mode::execute(ClientPartido* clientPartido)
 {
-  	if (clientPartido->mBattle)
-        {
-                clientPartido->mClientPartidoStateMachine->changeState(CLIENT_PARTIDO_BATTLE::Instance());
-        }
 }
 void Game_Partido_Mode::exit(ClientPartido* clientPartido)
 {
