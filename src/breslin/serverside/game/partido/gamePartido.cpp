@@ -135,8 +135,6 @@ void GamePartido::checkCollisions()
                                         {
 						Battle* battle = new Battle(mShapePartidoVector.at(i)->mClientPartido,mShapePartidoVector.at(j)->mClientPartido);
 						mBattleVector.push_back(battle);
-                                                mShapePartidoVector.at(i)->collision(mShapePartidoVector.at(j));
-                                                mShapePartidoVector.at(j)->collision(mShapePartidoVector.at(i));
                                         }
                                 }
                         }
