@@ -165,7 +165,7 @@ void Sending_Question::execute(ClientPartido* clientPartido)
 {
   	if (!clientPartido->mShapePartido->mOpponent)
         {
-                clientPartido->mBattleStateMachine->changeState(BATTLE_OFF::Instance());
+                //clientPartido->mBattleStateMachine->changeState(BATTLE_OFF::Instance());
         }
 
         if (clientPartido->mLoggedIn)
@@ -175,13 +175,13 @@ void Sending_Question::execute(ClientPartido* clientPartido)
                         if (clientPartido->mShapePartido->mOpponent && clientPartido->mWaitingForAnswer == false)
                         {
                                 clientPartido->sendQuestion(clientPartido->getNewQuestionID());
-                		clientPartido->mBattleStateMachine->changeState(Waiting_For_Answer::Instance());
+                //		clientPartido->mBattleStateMachine->changeState(Waiting_For_Answer::Instance());
                         }
                 }
         }
 	else //computer so just go right to wating...
 	{
-               	clientPartido->mBattleStateMachine->changeState(Waiting_For_Answer::Instance());
+               	//clientPartido->mBattleStateMachine->changeState(Waiting_For_Answer::Instance());
 	}
 }
 void Sending_Question::exit(ClientPartido* clientPartido)
@@ -214,12 +214,12 @@ void Waiting_For_Answer::execute(ClientPartido* clientPartido)
 {
   	if (!clientPartido->mShapePartido->mOpponent)
         {
-                clientPartido->mBattleStateMachine->changeState(BATTLE_OFF::Instance());
+                //clientPartido->mBattleStateMachine->changeState(BATTLE_OFF::Instance());
         }
 	
 	if (!clientPartido->mWaitingForAnswer && clientPartido->mShapePartido->mOpponent)
 	{
-        	clientPartido->mBattleStateMachine->changeState(Sending_Question::Instance());
+        	//clientPartido->mBattleStateMachine->changeState(Sending_Question::Instance());
 	}
 	
 	//mServerPartido->mAnswerVector.at(mQuestionID)

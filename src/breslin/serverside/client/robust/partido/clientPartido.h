@@ -24,7 +24,6 @@ ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID, boo
 ~ClientPartido();
 
 StateMachine<ClientPartido>* mClientPartidoStateMachine;
-StateMachine<ClientPartido>* mBattleStateMachine;
 
 static const int WIN  = 1;
 static const int TIE  = 0;

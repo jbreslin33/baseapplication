@@ -95,7 +95,6 @@ void ClientPartido::update()
 {
 	ClientRobust::update();
 	mClientPartidoStateMachine->update();
-	mBattleStateMachine->update();
 }
 
 void ClientPartido::setShape(ShapePartido* shapePartido)
