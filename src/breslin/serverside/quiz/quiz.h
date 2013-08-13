@@ -33,7 +33,11 @@ Message mMessage;
 //question
 int mQuestionID;
 std::string mQuestionString;
+int mComputerAskedTime;
 
+//answer
+int mComputerAnswerTime;
+bool mWaitingForAnswer;
 };
 
 #endif

@@ -16,6 +16,14 @@ Quiz::Quiz(ClientPartido* clientPartido)
         mStateMachine->setCurrentState      (INIT_QUIZ::Instance());
         mStateMachine->setPreviousState     (INIT_QUIZ::Instance());
         mStateMachine->setGlobalState       (GLOBAL_QUIZ::Instance());
+
+       	//question 
+	mQuestionID = 0;
+	mComputerAskedTime = 0;
+        
+	//answer	
+	mComputerAnswerTime = 0;
+        mWaitingForAnswer = false;
 }
 
 Quiz::~Quiz()

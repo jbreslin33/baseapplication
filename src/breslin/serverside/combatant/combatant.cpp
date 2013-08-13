@@ -26,13 +26,8 @@ Combatant::Combatant(Battle* battle, ClientPartido* clientPartido)
 	mQuiz = new Quiz(mClientPartido);
 	mFoe = NULL;
 
- 	//battle
-        mQuestionID = 0;
-        mScore = 0;
-        mComputerAskedTime = 0;
-        mComputerAnswerTime = 0;
-        mBattleTime = 20000;
-	mWaitingForAnswer = false;
+	//score
+	mScore = 0;
 
  	//combatant states
 	mStateMachine =  new StateMachine<Combatant>(this);

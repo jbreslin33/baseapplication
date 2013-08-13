@@ -24,16 +24,9 @@ ClientPartido* mClientPartido;
 Combatant* mFoe;
 Quiz* mQuiz;
 
-// question
-int mQuestionID;
-
 //score
 int mScore;
 
-int mComputerAskedTime;
-int mComputerAnswerTime;
-int mBattleTime;
-bool mWaitingForAnswer;
 
 };
 
