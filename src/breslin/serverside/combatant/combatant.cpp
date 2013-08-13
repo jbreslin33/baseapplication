@@ -22,6 +22,14 @@ Combatant::Combatant(Battle* battle, ClientPartido* clientPartido)
 	mClientPartido = clientPartido;
 	mFoe = NULL;
 
+ 	//battle
+        mQuestionID = 0;
+        mScore = 0;
+        mComputerAskedTime = 0;
+        mComputerAnswerTime = 0;
+        mBattleTime = 20000;
+	mWaitingForAnswer = false;
+
  	//combatant states
 	mStateMachine =  new StateMachine<Combatant>(this);
 	mStateMachine->setCurrentState      (INIT_COMBATANT::Instance());

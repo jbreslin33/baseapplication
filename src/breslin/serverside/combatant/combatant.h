@@ -22,6 +22,17 @@ Battle* mBattle;
 ClientPartido* mClientPartido;
 Combatant* mFoe;
 
+// question
+int mQuestionID;
+
+//score
+int mScore;
+
+int mComputerAskedTime;
+int mComputerAnswerTime;
+int mBattleTime;
+bool mWaitingForAnswer;
+
 };
 
 #endif

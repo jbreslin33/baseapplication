@@ -50,11 +50,11 @@ bool GLOBAL_SHAPE_PARTIDO::onLetter(ShapePartido* shapePartido, Letter* letter)
 
 
 /*****************************************
-*******       CLIENT STATES    ******************	
+*******       SHAPE PARTIDO STATES    ******************	
 ****************************************/
 
 /*****************************************
-        AJAX_NODE       
+        BATTLE SHAPE       
 ****************************************/
 BATTLE_SHAPE_PARTIDO* BATTLE_SHAPE_PARTIDO::Instance()
 {
@@ -67,13 +67,14 @@ void BATTLE_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
 }       
 void BATTLE_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 {
+/*
 	if (!shapePartido->mClientPartido->mBattle)
 	{
 		shapePartido->mShapePartidoStateMachine->changeState(GAME_SHAPE_PARTIDO::Instance());	
 	}
 
 	shapePartido->mMove->mVelocity->zero();
-
+*/
 
 }
 void BATTLE_SHAPE_PARTIDO::exit(ShapePartido* shapePartido)
@@ -100,6 +101,7 @@ void GAME_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
 }
 void GAME_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 {
+/*
 	if (shapePartido->mClientPartido)
 	{
 		if (shapePartido->mClientPartido->mBattle)
@@ -107,6 +109,7 @@ void GAME_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 			shapePartido->mShapePartidoStateMachine->changeState(BATTLE_SHAPE_PARTIDO::Instance());	
 		}
 	}
+*/
 }
 void GAME_SHAPE_PARTIDO::exit(ShapePartido* shapePartido)
 {

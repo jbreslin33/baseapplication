@@ -131,6 +131,8 @@ Client::~Client()
 */
 }
 
+
+
 void Client::setSocketAddress(struct sockaddr *address)
 {
 	memcpy(&mSocketAddress, address, sizeof(struct sockaddr)); 
@@ -308,4 +310,20 @@ void Client::checkForTimeout()
 		logout();
         }
 */
+}
+void Client::sendSimpleMessage(int message)
+{
+	if (mConnectionState == DREAMSOCK_CONNECTED)
+        {
+                mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+                mMessage.WriteByte(message); // add type
+
+                if (mClientID > 0)
+               	{ 
+                       	mMessage.WriteByte(mClientID); // add mClientID for browsers
+                }
+
+                //send it
+        	mServer->mNetwork->sendPacketTo(this,&mMessage);
+	}
 }

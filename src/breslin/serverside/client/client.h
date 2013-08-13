@@ -113,6 +113,7 @@ public:
 	Server* mServer;
 
 	Utility* mUtility;
-
+	
+	void sendSimpleMessage(int message);
 };
 #endif

@@ -38,5 +38,35 @@ Battle::~Battle()
 void Battle::update()
 {
 	mStateMachine->update();
+	mHomeCombatant->update();
+	mAwayCombatant->update();
 }
+
+void Battle::scoreBattle(int result)
+{
+/*
+        if (result == WIN)
+        {
+                mWins++;
+        }
+
+        if (result == LOSS)
+        {
+                mLosses++;
+        }
+*/
+}
+
+void Battle::setBattleRecordText()
+{
+/*
+        mBattleRecordText.clear();
+        mBattleRecordText.append(first_name);
+        mBattleRecordText.append(":");
+        mBattleRecordText.append(utility->intToString(mWins));
+        mBattleRecordText.append("-");
+        mBattleRecordText.append(utility->intToString(mLosses));
+*/
+}
+
 

@@ -52,6 +52,7 @@ void GamePartido::sendShapes(ClientPartido* clientPartido)
 
 void GamePartido::reset()
 {
+/*
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
 		ClientPartido* clientPartido = mServerPartido->mClientPartidoVector.at(i);
@@ -78,11 +79,12 @@ void GamePartido::reset()
 
 		clientPartido->setBattleRecordText();	
 	}
-
+*/
 }
 
 bool GamePartido::checkForEndOfGame()
 {
+/*
 	//check for end of game
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
@@ -101,6 +103,8 @@ bool GamePartido::checkForEndOfGame()
 	}
 	
 	return true;
+*/
+	return false;
 }
 
 void GamePartido::createShapes()

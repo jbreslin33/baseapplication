@@ -46,8 +46,8 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
         mGamePartido->mShapePartidoVector.push_back(this);
 
 	//setText
-	mClientPartido->setBattleRecordText();	
-	setText(mClientPartido->mBattleRecordText);	
+	//mClientPartido->setBattleRecordText();	
+	//setText(mClientPartido->mBattleRecordText);	
 
 	//computer abilitys
   	mComputerPartido = new ComputerPartido(this);

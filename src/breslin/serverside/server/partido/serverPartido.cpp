@@ -9,6 +9,7 @@
 #include "../../../utility/utility.h"
 #include "../../shape/shape.h"
 #include "../../question/question.h"
+#include "../../quiz/quiz.h"
 
 ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPort) 
 :
@@ -199,7 +200,7 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
                         		{
                         			continue;
                         		}
-					clientPartido->parseAnswer(mes);
+					clientPartido->mQuiz->parseAnswer(mes);
 				}
 			}
                 }
@@ -217,7 +218,7 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 					}
 					else
 					{
-                       	         		clientPartido->parseAnswer(mes);
+                       	         		clientPartido->mQuiz->parseAnswer(mes);
 					}
 				}	
 			}

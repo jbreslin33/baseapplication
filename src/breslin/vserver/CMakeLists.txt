@@ -337,6 +337,9 @@ set(HDRS
 	#quiz
 	../serverside/quiz/quiz.h
 
+	#quiz states
+	../serverside/quiz/states/quizStates.h
+
 	#question
 	../serverside/question/question.h
 	../serverside/question/questionAttempts.h
@@ -452,6 +455,9 @@ set(SRCS
 
 	#quiz
 	../serverside/quiz/quiz.cpp
+
+	#quiz states
+	../serverside/quiz/states/quizStates.cpp
 
 	#question
 	../serverside/question/question.cpp
