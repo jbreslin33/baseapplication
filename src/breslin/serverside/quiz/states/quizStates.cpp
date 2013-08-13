@@ -10,6 +10,9 @@
 //client
 #include "../../client/robust/partido/clientPartido.h"
 
+//combatant
+#include "../../combatant/combatant.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -46,6 +49,7 @@ void INIT_QUIZ::enter(Quiz* quiz)
 }
 void INIT_QUIZ::execute(Quiz* quiz)
 {
+	if (quiz->mStateMachine->currentState() == WAITING_FOR_ANSWER::Instance());
 	
 }
 void INIT_QUIZ::exit(Quiz* quiz)
@@ -70,7 +74,7 @@ void SENDING_QUESTION::enter(Quiz* quiz)
 }
 void SENDING_QUESTION::execute(Quiz* quiz)
 {
-	if (quiz->mClientPartido->mLoggedIn)
+	if (quiz->mCombatant->mClientPartido->mLoggedIn)
         {
                 if (quiz->mWaitingForAnswer == false)
                 {

@@ -163,4 +163,115 @@ bool Test::checkLevel(int level)
         return false;
 }
 
+void Test::parseAnswer(Message* mes)
+{
+        int answerTime = mes->ReadShort();
+        int sizeOfAnswer = mes->ReadByte();
+
+        std::string answer;
+
+        //loop thru and set stringAnswer
+        for (int i = 0; i < sizeOfAnswer; i++)
+        {
+                if (mClientPartido->mClientID > 0)
+                {
+                        char c = mes->ReadByte();
+                        answer.append(1,c);
+                }
+                else
+                {
+                        int numeric = mes->ReadByte();
+                        char ascii = (char)numeric;
+                        answer.append(1,ascii);
+                }
+        }
+        readAnswer(answerTime,answer);
+}
+
+void Test::readAnswer(int answerTime, std::string answer)
+{
+/*
+        //clear answer string
+        mStringAnswer.clear();
+
+        mAnswerTime = answerTime;
+        mStringAnswer = answer;
+
+        insertAnswerAttempt();
+
+        if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
+        {
+                ShapePartido* opponent  = mShapePartido->mOpponent;
+
+                if (opponent)
+                {
+
+                        //score battle
+                        scoreBattle(LOSS);
+                        opponent->mClientPartido->scoreBattle(WIN);
+
+                        //set battle record text .. mBattleRecordText
+                        setBattleRecordText();
+                        opponent->mClientPartido->setBattleRecordText();
+
+                        //set Text of shape .. mText
+                        mShapePartido->setText(mBattleRecordText);
+                        opponent->mClientPartido->mShapePartido->setText(opponent->mClientPartido->mBattleRecordText);
+
+                        //reset battle
+                        resetBattle();
+                        opponent->mClientPartido->resetBattle();
+
+                        //send battle end to client
+                        sendBattleEnd();
+                        opponent->mClientPartido->sendBattleEnd();
+                }
+                else //opponent took care of loss....
+                {
+                        // do nothing...
+
+                }
+        }
+        else
+        {
+                mBattleScore++;
+        }
+
+        if (mBattleScore > 9)
+        {
+                ShapePartido* opponent  = mShapePartido->mOpponent;
+
+                //score battle
+                scoreBattle(WIN);
+                opponent->mClientPartido->scoreBattle(LOSS);
+
+                //set battle record text .. mBattleRecordText
+                setBattleRecordText();
+                opponent->mClientPartido->setBattleRecordText();
+
+                //set Text of shape .. mText
+                mShapePartido->setText(mBattleRecordText);
+                opponent->mClientPartido->mShapePartido->setText(opponent->mClientPartido->mBattleRecordText);
+
+                //reset battle
+                resetBattle();
+                opponent->mClientPartido->resetBattle();
+
+                //send battle end to client
+                sendBattleEnd();
+                opponent->mClientPartido->sendBattleEnd();
+        }
+
+        //set vars for new question and answer combo....
+        mWaitingForAnswer = false;
+        mQuestionString = "";
+*/
+}
+
+void Test::insertAnswerAttempt(int questionID, std::string stringAnswer)
+{
+        QuestionAttempts* questionAttempts = new QuestionAttempts(0,questionID,stringAnswer,mClientPartido->mServerPartido->mNetwork->getCurrentSystemTime(),mAnswerTime,mClientPartido->id);
+        mQuestionAttemptsVector.push_back(questionAttempts);
+}
+
 

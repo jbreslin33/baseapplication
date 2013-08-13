@@ -23,7 +23,7 @@ Combatant::Combatant(Battle* battle, ClientPartido* clientPartido)
 {
 	mBattle = battle;
 	mClientPartido = clientPartido;
-	mQuiz = new Quiz(mClientPartido);
+	mQuiz = new Quiz(this);
 	mFoe = NULL;
 
 	//score

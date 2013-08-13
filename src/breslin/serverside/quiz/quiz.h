@@ -8,24 +8,23 @@
 #include <string>
 #include <vector>
 
-
 class QuestionAttempts;
 class Message;
-class ClientPartido;
+class Combatant;
 
 class Quiz 
 {
 public:
 	
-	Quiz(ClientPartido* clientPartido);
-	~Quiz();
+Quiz(Combatant* combatant);
+~Quiz();
 
 void update();
 
 StateMachine<Quiz>* mStateMachine;
 
-//client
-ClientPartido* mClientPartido;
+//combatant
+Combatant* mCombatant;
 
 //message
 Message mMessage;

@@ -7,9 +7,9 @@
 #include "../../utility/utility.h"
 #include "../question/questionAttempts.h"
 
-Quiz::Quiz(ClientPartido* clientPartido)
+Quiz::Quiz(Combatant* combatant)
 {
-	mClientPartido = clientPartido;
+	mCombatant = combatant;
  
 	//quiz states
         mStateMachine =  new StateMachine<Quiz>(this);

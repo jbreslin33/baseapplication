@@ -1,5 +1,5 @@
-#ifndef QUIZ_H
-#define QUIZ_H
+#ifndef TEST_H
+#define TEST_H
 
 #include "../../fsm/stateMachine.h"
 
@@ -20,6 +20,7 @@ public:
 	Test(ClientPartido* clientPartido);
 	~Test();
 
+void update();
 StateMachine<Test>* mStateMachine;
 
 //client
@@ -29,26 +30,23 @@ ClientPartido* mClientPartido;
 Message mMessage;
 
 //questions
+void sendQuestion(int questionID);
+int getNewQuestionID();
 std::vector<QuestionAttempts*> mQuestionAttemptsVector;
 std::vector<QuestionAttempts*> mQuestionAttemptsVectorTemp;
 int getLowestUnpassedLevel(int maxLevel);
+void getQuestionAttempts();
 
 //answer
 std::string mStringAnswer;
 int mAnswerTime;
-void insertAnswerAttempt();
+void insertAnswerAttempt(int questionID, std::string stringAnswer);
+void parseAnswer(Message* message);
+void readAnswer(int answerTime, std::string answer);
 
-int getNewQuestionID();
-void sendQuestion(int questionID);
-
-void update();
-void getQuestionAttempts();
-void insertAnswerAttempts();
+//level
 int  getMaxLevelAskedID();
 bool checkLevel(int level);
-void readAnswer(int answerTime, std::string answer);
-void parseAnswer(Message* message);
-
 
 };
 
