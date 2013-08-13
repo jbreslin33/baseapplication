@@ -16,10 +16,14 @@ using namespace Ogre;
 //shapes
 #include "../client/robust/partido/clientPartido.h"
 
+//quiz
+#include "../quiz/quiz.h"
+
 Combatant::Combatant(Battle* battle, ClientPartido* clientPartido)
 {
 	mBattle = battle;
 	mClientPartido = clientPartido;
+	mQuiz = new Quiz(mClientPartido);
 	mFoe = NULL;
 
  	//battle

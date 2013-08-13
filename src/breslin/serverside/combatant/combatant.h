@@ -5,6 +5,7 @@
 
 class Battle;
 class ClientPartido;
+class Quiz;
 
 class Combatant 
 {
@@ -21,6 +22,7 @@ StateMachine<Combatant>* mStateMachine;
 Battle* mBattle;
 ClientPartido* mClientPartido;
 Combatant* mFoe;
+Quiz* mQuiz;
 
 // question
 int mQuestionID;
