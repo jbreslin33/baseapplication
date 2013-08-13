@@ -38,17 +38,30 @@ public:
   bool onLetter(Quiz* quiz, Letter* letter);
 };
 
-class NORMAL_QUIZ : public State<Quiz>
+class SENDING_QUESTION : public State<Quiz>
 {
 private:
-  NORMAL_QUIZ(){}
+  SENDING_QUESTION(){}
 public:
-  static NORMAL_QUIZ* Instance();
+  static SENDING_QUESTION* Instance();
   void enter  (Quiz* quiz);
   void execute(Quiz* quiz);
   void exit   (Quiz* quiz);
   bool onLetter(Quiz* quiz, Letter* letter);
 };
+
+class WAITING_FOR_ANSWER : public State<Quiz>
+{
+private:
+  WAITING_FOR_ANSWER(){}
+public:
+  static WAITING_FOR_ANSWER* Instance();
+  void enter  (Quiz* quiz);
+  void execute(Quiz* quiz);
+  void exit   (Quiz* quiz);
+  bool onLetter(Quiz* quiz, Letter* letter);
+};
+
 
 class OVER_QUIZ : public State<Quiz>
 {

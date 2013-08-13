@@ -47,21 +47,6 @@ void INIT_QUIZ::enter(Quiz* quiz)
 void INIT_QUIZ::execute(Quiz* quiz)
 {
 	
-	//quiz->mClient1->mQuiz = quiz;	
-	//quiz->mClient2->mQuiz = quiz;	
-/*
-	if (mOpponent == NULL && mOpponentLast != shape)
-        {
-                if (mClientPartido)
-                {
-                        mOpponent = (ShapePartido*)shape;
-                }
-        }
-
-        //reset
-        mCollisionTimeoutCounter = mCollisionTimeout;
-        mCollidable = false;
-*/
 }
 void INIT_QUIZ::exit(Quiz* quiz)
 {
@@ -73,23 +58,88 @@ bool INIT_QUIZ::onLetter(Quiz* quiz, Letter* letter)
 
 
 /*****************************************
-	NORMAL_QUIZ
+	SENDING_QUESTING
 ****************************************/
-NORMAL_QUIZ* NORMAL_QUIZ::Instance()
+SENDING_QUESTION* SENDING_QUESTION::Instance()
 {
-  static NORMAL_QUIZ instance;
+  static SENDING_QUESTION instance;
   return &instance;
 }
-void NORMAL_QUIZ::enter(Quiz* quiz)
+void SENDING_QUESTION::enter(Quiz* quiz)
 {
 }
-void NORMAL_QUIZ::execute(Quiz* quiz)
+void SENDING_QUESTION::execute(Quiz* quiz)
+{
+	if (quiz->mClientPartido->mLoggedIn)
+        {
+                if (quiz->mWaitingForAnswer == false)
+                {
+                        //quiz->sendQuestion(clientPartido->getNewQuestionID());
+                        quiz->mStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
+                }
+        }
+        else //computer so just go right to wating...
+        {
+                quiz->mStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
+        }
+
+}
+void SENDING_QUESTION::exit(Quiz* quiz)
 {
 }
-void NORMAL_QUIZ::exit(Quiz* quiz)
+bool SENDING_QUESTION::onLetter(Quiz* quiz, Letter* letter)
+{
+        return true;
+}
+
+/*****************************************
+        WAITING_FOR_ANSWER
+****************************************/
+WAITING_FOR_ANSWER* WAITING_FOR_ANSWER::Instance()
+{
+        static WAITING_FOR_ANSWER instance;
+        return &instance;
+}
+void WAITING_FOR_ANSWER::enter(Quiz* quiz)
+{
+/*
+        clientPartido->mComputerAskedTime = clientPartido->mServer->mGameTime;
+
+        int randomAnswerTime = rand() % 3000;
+        clientPartido->mComputerAnswerTime = randomAnswerTime;
+
+        clientPartido->mWaitingForAnswer = true;
+*/
+
+}
+void WAITING_FOR_ANSWER::execute(Quiz* quiz)
+{
+/*
+        if (!clientPartido->mShapePartido->mOpponent)
+        {
+                //clientPartido->mBattleStateMachine->changeState(BATTLE_OFF::Instance());
+        }
+
+        if (!clientPartido->mWaitingForAnswer && clientPartido->mShapePartido->mOpponent)
+        {
+                //clientPartido->mBattleStateMachine->changeState(Sending_Question::Instance());
+        }
+
+        //mServerPartido->mAnswerVector.at(mQuestionID)
+        if (!clientPartido->mLoggedIn) //send to readAnswer(int,string)
+        {
+                if (clientPartido->mComputerAskedTime + clientPartido->mComputerAnswerTime < clientPartido->mServer->mGameTime)
+                {
+                        clientPartido->readAnswer(clientPartido->mComputerAnswerTime,clientPartido->mServerPartido->mQuestionVector.at(clientPartido->mQuestionID)->answer);
+                }
+        }
+
+*/
+}
+void WAITING_FOR_ANSWER::exit(Quiz* quiz)
 {
 }
-bool NORMAL_QUIZ::onLetter(Quiz* quiz, Letter* letter)
+bool WAITING_FOR_ANSWER::onLetter(Quiz* quiz, Letter* letter)
 {
         return true;
 }

@@ -46,22 +46,7 @@ void INIT_BATTLE::enter(Battle* battle)
 }
 void INIT_BATTLE::execute(Battle* battle)
 {
-	
-	//battle->mClient1->mBattle = battle;	
-	//battle->mClient2->mBattle = battle;	
-/*
-	if (mOpponent == NULL && mOpponentLast != shape)
-        {
-                if (mClientPartido)
-                {
-                        mOpponent = (ShapePartido*)shape;
-                }
-        }
-
-        //reset
-        mCollisionTimeoutCounter = mCollisionTimeout;
-        mCollidable = false;
-*/
+	battle->mStateMachine->changeState(NORMAL_BATTLE::Instance());
 }
 void INIT_BATTLE::exit(Battle* battle)
 {

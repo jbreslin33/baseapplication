@@ -10,6 +10,9 @@
 //client
 #include "../../client/robust/partido/clientPartido.h"
 
+//server
+#include "../../server/partido/serverPartido.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -49,47 +52,10 @@ void INIT_COMBATANT::execute(Combatant* combatant)
 	//we are ready to go if we have a foe
 	if (combatant->mFoe)
 	{
-/*
-		ClientPartido* client = combatant->mClientPartido;
-        	client->mKey = 0;
-
-        	combatant->mScore = 0;
-        	combatant->mClientPartido->mQuizmWaitingForAnswer = false;
-        	combatant->mQuestionString = "";
-        	client->mShape->mCollidable = false; //no more collisions while in battle
-	
 		//let internet client know to start a battle
-		combatant->mClientPartido->sendSimpleMessage(mServerPartido->mMessageBattleStart);
-               
-		//change to sending question even it your a computer          
-		clientPartido->mBattleStateMachine->changeState(SENDING_QUESTION::Instance());
-*/
-	}
-/*
-  	if (clientPartido->mShapePartido)
-        {
-                if (!clientPartido->mWaitingForAnswer && clientPartido->mShapePartido->mOpponent)
-                {
-                        clientPartido->mBattleStateMachine->changeState(Sending_Question::Instance());
-                }
-        }
-*/
-	
-//	combatant->mClient1->mCombatant = combatant;	
-//	combatant->mClient2->mCombatant = combatant;	
-/*
-	if (mOpponent == NULL && mOpponentLast != shape)
-        {
-                if (mClientPartido)
-                {
-                        mOpponent = (ShapePartido*)shape;
-                }
-        }
-
-        //reset
-        mCollisionTimeoutCounter = mCollisionTimeout;
-        mCollidable = false;
-*/
+		//combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleStart);
+                combatant->mStateMachine->changeState(NORMAL_COMBATANT::Instance());
+	}               
 }
 void INIT_COMBATANT::exit(Combatant* combatant)
 {
@@ -101,89 +67,23 @@ bool INIT_COMBATANT::onLetter(Combatant* combatant, Letter* letter)
 
 
 /*****************************************
-	SENDING_QUESTION
+	NORMAL_COMBATANT
 ****************************************/
-SENDING_QUESTION* SENDING_QUESTION::Instance()
+NORMAL_COMBATANT* NORMAL_COMBATANT::Instance()
 {
-  static SENDING_QUESTION instance;
+  static NORMAL_COMBATANT instance;
   return &instance;
 }
-void SENDING_QUESTION::enter(Combatant* combatant)
+void NORMAL_COMBATANT::enter(Combatant* combatant)
 {
 }
-void SENDING_QUESTION::execute(Combatant* combatant)
-{
-/*
-        if (combatant->mClientPartido->mLoggedIn)
-        {
-        	if (combatant->mWaitingForAnswer == false)
-                {
-                        combatant->sendQuestion(clientPartido->getNewQuestionID());
-                	combatant->mStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
-                }
-        }
-        else //computer so just go right to wating...
-        {
-                mCombatant->mStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
-        }
-*/
-}
-void SENDING_QUESTION::exit(Combatant* combatant)
+void NORMAL_COMBATANT::execute(Combatant* combatant)
 {
 }
-bool SENDING_QUESTION::onLetter(Combatant* combatant, Letter* letter)
-{
-        return true;
-}
-
-/*****************************************
-	WAITING_FOR_ANSWER
-****************************************/
-WAITING_FOR_ANSWER* WAITING_FOR_ANSWER::Instance()
-{
-	static WAITING_FOR_ANSWER instance;
-	return &instance;
-}
-void WAITING_FOR_ANSWER::enter(Combatant* combatant)
-{
-/*
-	clientPartido->mComputerAskedTime = clientPartido->mServer->mGameTime;
-
-        int randomAnswerTime = rand() % 3000;
-        clientPartido->mComputerAnswerTime = randomAnswerTime;
-
-        clientPartido->mWaitingForAnswer = true;
-*/
-
-}
-void WAITING_FOR_ANSWER::execute(Combatant* combatant)
-{
-/*
-	if (!clientPartido->mShapePartido->mOpponent)
-        {
-                //clientPartido->mBattleStateMachine->changeState(BATTLE_OFF::Instance());
-        }
-
-        if (!clientPartido->mWaitingForAnswer && clientPartido->mShapePartido->mOpponent)
-        {
-                //clientPartido->mBattleStateMachine->changeState(Sending_Question::Instance());
-        }
-
-        //mServerPartido->mAnswerVector.at(mQuestionID)
-        if (!clientPartido->mLoggedIn) //send to readAnswer(int,string)
-        {
-                if (clientPartido->mComputerAskedTime + clientPartido->mComputerAnswerTime < clientPartido->mServer->mGameTime)
-                {
-                        clientPartido->readAnswer(clientPartido->mComputerAnswerTime,clientPartido->mServerPartido->mQuestionVector.at(clientPartido->mQuestionID)->answer);
-                }
-        }
-
-*/
-}
-void WAITING_FOR_ANSWER::exit(Combatant* combatant)
+void NORMAL_COMBATANT::exit(Combatant* combatant)
 {
 }
-bool WAITING_FOR_ANSWER::onLetter(Combatant* combatant, Letter* letter)
+bool NORMAL_COMBATANT::onLetter(Combatant* combatant, Letter* letter)
 {
         return true;
 }

@@ -38,24 +38,12 @@ public:
   bool onLetter(Combatant* battle, Letter* letter);
 };
 
-class SENDING_QUESTION : public State<Combatant>
+class NORMAL_COMBATANT : public State<Combatant>
 {
 private:
-  SENDING_QUESTION(){}
+  NORMAL_COMBATANT(){}
 public:
-  static SENDING_QUESTION* Instance();
-  void enter  (Combatant* battle);
-  void execute(Combatant* battle);
-  void exit   (Combatant* battle);
-  bool onLetter(Combatant* battle, Letter* letter);
-};
-
-class WAITING_FOR_ANSWER : public State<Combatant>
-{
-private:
-  WAITING_FOR_ANSWER(){}
-public:
-  static WAITING_FOR_ANSWER* Instance();
+  static NORMAL_COMBATANT* Instance();
   void enter  (Combatant* battle);
   void execute(Combatant* battle);
   void exit   (Combatant* battle);
