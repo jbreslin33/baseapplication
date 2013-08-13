@@ -37,6 +37,7 @@ int mComputerAskedTime;
 //answer
 int mComputerAnswerTime;
 bool mWaitingForAnswer;
+void readAnswer(int answerTime, std::string answer);
 };
 
 #endif

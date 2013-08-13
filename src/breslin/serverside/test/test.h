@@ -12,6 +12,7 @@
 class QuestionAttempts;
 class Message;
 class ClientPartido;
+class Quiz;
 
 class Test 
 {
@@ -25,6 +26,9 @@ StateMachine<Test>* mStateMachine;
 
 //client
 ClientPartido* mClientPartido;
+
+//quiz
+Quiz* mQuiz;
 
 //message
 Message mMessage;
@@ -42,7 +46,6 @@ std::string mStringAnswer;
 int mAnswerTime;
 void insertAnswerAttempt(int questionID, std::string stringAnswer);
 void parseAnswer(Message* message);
-void readAnswer(int answerTime, std::string answer);
 
 //level
 int  getMaxLevelAskedID();
