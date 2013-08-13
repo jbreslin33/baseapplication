@@ -12,6 +12,7 @@ class ServerPartido;
 class GamePartido;
 class ShapePartido;
 class Utility;
+class Test;
 
 class ClientPartido : public ClientRobust
 {
@@ -23,14 +24,13 @@ ClientPartido(ServerPartido* server, struct sockaddr *address, int clientID, boo
 
 StateMachine<ClientPartido>* mClientPartidoStateMachine;
 
-static const int WIN  = 1;
-static const int TIE  = 0;
-static const int LOSS = -1;
-
 ServerPartido* mServerPartido;	
 
 //utility
 Utility* utility;
+
+//test
+Test* mTest;
 
 //game
 void addGame(GamePartido* gamePartido);
