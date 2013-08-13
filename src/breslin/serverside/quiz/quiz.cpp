@@ -1,4 +1,5 @@
 #include "quiz.h"
+#include "states/quizStates.h"
 #include "../client/robust/partido/clientPartido.h"
 #include "../server/partido/serverPartido.h"
 #include "../question/question.h"
@@ -10,6 +11,13 @@ Quiz::Quiz(ClientPartido* clientPartido)
 {
 	mClientPartido = clientPartido;
 	getQuestionAttempts();
+ 
+	//quiz states
+        mStateMachine =  new StateMachine<Quiz>(this);
+        mStateMachine->setCurrentState      (INIT_QUIZ::Instance());
+        mStateMachine->setPreviousState     (INIT_QUIZ::Instance());
+        mStateMachine->setGlobalState       (GLOBAL_QUIZ::Instance());
+
 }
 
 Quiz::~Quiz()
@@ -18,7 +26,7 @@ Quiz::~Quiz()
 
 void Quiz::update()
 {
-
+	mStateMachine->update();
 }
 
 void Quiz::sendQuestion(int questionID)

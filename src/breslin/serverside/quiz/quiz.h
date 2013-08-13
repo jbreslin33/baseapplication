@@ -1,6 +1,8 @@
 #ifndef QUIZ_H
 #define QUIZ_H
 
+#include "../../fsm/stateMachine.h"
+
 #include "../message/message.h"
 
 #include <string>
@@ -17,6 +19,8 @@ public:
 	
 	Quiz(ClientPartido* clientPartido);
 	~Quiz();
+
+StateMachine<Quiz>* mStateMachine;
 
 //client
 ClientPartido* mClientPartido;

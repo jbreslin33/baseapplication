@@ -47,6 +47,13 @@ ClientPartido::~ClientPartido()
 	delete mClientPartidoStateMachine;
 }
 
+void ClientPartido::update()
+{
+	ClientRobust::update();
+	mClientPartidoStateMachine->update();
+	mQuiz->update();
+}
+
 //game
 void ClientPartido::addGame(GamePartido* gamePartido)
 {
@@ -76,12 +83,6 @@ bool ClientPartido::handleLetter(Letter* letter)
 	return ClientRobust::handleLetter(letter);
 }
 
-//updates
-void ClientPartido::update()
-{
-	ClientRobust::update();
-	mClientPartidoStateMachine->update();
-}
 
 void ClientPartido::setShape(ShapePartido* shapePartido)
 {
