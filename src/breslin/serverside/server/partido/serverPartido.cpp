@@ -200,7 +200,7 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
                         		{
                         			continue;
                         		}
-					clientPartido->mQuiz->parseAnswer(mes);
+					//clientPartido->mQuiz->parseAnswer(mes);
 				}
 			}
                 }
@@ -218,7 +218,7 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 					}
 					else
 					{
-                       	         		clientPartido->mQuiz->parseAnswer(mes);
+                       	         	//	clientPartido->mQuiz->parseAnswer(mes);
 					}
 				}	
 			}

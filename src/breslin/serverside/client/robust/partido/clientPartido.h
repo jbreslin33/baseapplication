@@ -12,7 +12,6 @@ class ServerPartido;
 class GamePartido;
 class ShapePartido;
 class Utility;
-class Quiz;
 
 class ClientPartido : public ClientRobust
 {
@@ -29,9 +28,6 @@ static const int TIE  = 0;
 static const int LOSS = -1;
 
 ServerPartido* mServerPartido;	
-
-//quiz
-Quiz* mQuiz;
 
 //utility
 Utility* utility;
