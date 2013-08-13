@@ -13,6 +13,10 @@
 //server
 #include "../../server/partido/serverPartido.h"
 
+//battle
+#include "../../battle/battle.h"
+#include "../../battle/states/battleStates.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -50,7 +54,7 @@ void INIT_COMBATANT::enter(Combatant* combatant)
 void INIT_COMBATANT::execute(Combatant* combatant)
 {
 	//we are ready to go if we have a foe
-	if (combatant->mFoe)
+	if (combatant->mBattle->mStateMachine->currentState() == NORMAL_BATTLE::Instance())
 	{
 		//let internet client know to start a battle
 		//combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleStart);
