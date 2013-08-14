@@ -14,8 +14,11 @@ using namespace Ogre;
 //shapes
 #include "../client/robust/partido/clientPartido.h"
 
-Battle::Battle(ClientPartido* homeClient, ClientPartido* awayClient)
+Battle::Battle(GamePartido* gamePartido, ClientPartido* homeClient, ClientPartido* awayClient)
 {
+
+	mGamePartido = gamePartido;
+
 	//make 2 Combatants a home and away
 	mHomeCombatant = new Combatant(this,homeClient);
 	mAwayCombatant = new Combatant(this,awayClient);
@@ -23,6 +26,11 @@ Battle::Battle(ClientPartido* homeClient, ClientPartido* awayClient)
 	//set pointers to foes for combatants
 	mHomeCombatant->mFoe = mHomeCombatant;
 	mAwayCombatant->mFoe = mAwayCombatant;
+
+	mBattleTime       = 0;
+	mBattleStartTime  = 0;
+	mBattleEndTime    = 0;
+	mBattleLengthTime = 10000;
 
  	//battle states
 	mStateMachine =  new StateMachine<Battle>(this);

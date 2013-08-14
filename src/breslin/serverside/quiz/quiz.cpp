@@ -77,7 +77,6 @@ void Quiz::readAnswer(int answerTime, std::string answer)
         //if (mStringAnswer.compare(mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
         if (mStringAnswer.compare(mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0)
         {
-		LogString("wrong");		
 /*
                 ShapePartido* opponent  = mShapePartido->mOpponent;
                 if (opponent)
@@ -109,7 +108,6 @@ void Quiz::readAnswer(int answerTime, std::string answer)
         }
         else
         {
-		LogString("correct");		
  //               mBattleScore++;
         }
 /*

@@ -5,13 +5,14 @@
 
 class ClientPartido;
 class Combatant;
+class GamePartido;
 
 class Battle 
 {
 
 public:
 
-Battle(ClientPartido* homeClient, ClientPartido* awayClient);
+Battle(GamePartido* gamePartido, ClientPartido* homeClient, ClientPartido* awayClient);
 virtual ~Battle();
 
 //update
@@ -19,17 +20,19 @@ void update();
 
 StateMachine<Battle>* mStateMachine;
 
+GamePartido* mGamePartido;
+
 Combatant* mHomeCombatant;
 Combatant* mAwayCombatant;
 
 int mBattleScore;
 std::string mBattleRecordText;
-int mComputerAskedTime;
-int mComputerAnswerTime;
-int mBattleTime;
-int mWins;
-int mLosses;
-int mTies;
+
+// battle time
+long mBattleTime;
+long mBattleStartTime;
+long mBattleEndTime;
+long mBattleLengthTime;
 
 void sendBattleStart();
 void sendBattleEnd();

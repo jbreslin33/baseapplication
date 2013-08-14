@@ -10,6 +10,15 @@
 //client
 #include "../../client/robust/partido/clientPartido.h"
 
+//game partido
+#include "../../game/partido/gamePartido.h"
+
+//server partido
+#include "../../server/partido/serverPartido.h"
+
+//network
+#include "../../network/network.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -67,9 +76,21 @@ NORMAL_BATTLE* NORMAL_BATTLE::Instance()
 }
 void NORMAL_BATTLE::enter(Battle* battle)
 {
+	battle->mBattleStartTime = battle->mGamePartido->mServerPartido->mNetwork->getCurrentSystemTime();
+	battle->mBattleEndTime = battle->mBattleStartTime + battle->mBattleLengthTime;
+	battle->mBattleTime = 0;
+
+	LogString("mBattleStartTime:%d",battle->mBattleStartTime);
 }
 void NORMAL_BATTLE::execute(Battle* battle)
 {
+	battle->mBattleTime = battle->mGamePartido->mServerPartido->mNetwork->getCurrentSystemTime();
+	if (battle->mBattleTime > battle->mBattleEndTime)
+	{
+		battle->mStateMachine->changeState(OVER_BATTLE::Instance());
+	}
+
+
 }
 void NORMAL_BATTLE::exit(Battle* battle)
 {
@@ -89,6 +110,7 @@ OVER_BATTLE* OVER_BATTLE::Instance()
 }
 void OVER_BATTLE::enter(Battle* battle)
 {
+	LogString("OVER_BATTLE");
 }
 void OVER_BATTLE::execute(Battle* battle)
 {

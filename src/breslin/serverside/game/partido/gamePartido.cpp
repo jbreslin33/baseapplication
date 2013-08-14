@@ -137,7 +137,7 @@ void GamePartido::checkCollisions()
                                         //to distSQ between them. IS this right or is it working by chance?
                                         if(distSq < mShapePartidoVector.at(i)->mCollisionRadius + mShapePartidoVector.at(j)->mCollisionRadius)
                                         {
-						Battle* battle = new Battle(mShapePartidoVector.at(i)->mClientPartido,mShapePartidoVector.at(j)->mClientPartido);
+						Battle* battle = new Battle(this,mShapePartidoVector.at(i)->mClientPartido,mShapePartidoVector.at(j)->mClientPartido);
 						//call collision on shape...				
 						mShapePartidoVector.at(i)->collision(mShapePartidoVector.at(j));
 						mShapePartidoVector.at(j)->collision(mShapePartidoVector.at(i));
