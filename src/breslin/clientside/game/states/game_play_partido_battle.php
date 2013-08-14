@@ -33,6 +33,7 @@ execute: function()
         {
                 this.mGamePartido.mApplicationPartido.mLabelAnswer.value = 'oot';
                 this.mGamePartido.mApplicationPartido.sendAnswer();
+		this.mGamePartido.mApplicationPartido.mAnswerTime = 0;
         }
 
 
