@@ -138,6 +138,10 @@ void GamePartido::checkCollisions()
                                         if(distSq < mShapePartidoVector.at(i)->mCollisionRadius + mShapePartidoVector.at(j)->mCollisionRadius)
                                         {
 						Battle* battle = new Battle(mShapePartidoVector.at(i)->mClientPartido,mShapePartidoVector.at(j)->mClientPartido);
+						//call collision on shape...				
+						mShapePartidoVector.at(i)->collision(mShapePartidoVector.at(j));
+						mShapePartidoVector.at(j)->collision(mShapePartidoVector.at(i));
+	
 						mBattleVector.push_back(battle);
                                         }
                                 }
