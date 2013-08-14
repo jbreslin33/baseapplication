@@ -195,9 +195,9 @@ void Test::parseAnswer(Message* mes)
 	}
 }
 
-void Test::insertAnswerAttempt(int questionID, std::string stringAnswer)
+void Test::insertAnswerAttempt(int questionID, std::string stringAnswer, int answerTime)
 {
-        QuestionAttempts* questionAttempts = new QuestionAttempts(0,questionID,stringAnswer,mClientPartido->mServerPartido->mNetwork->getCurrentSystemTime(),mAnswerTime,mClientPartido->id);
+        QuestionAttempts* questionAttempts = new QuestionAttempts(0,questionID,stringAnswer,mClientPartido->mServerPartido->mNetwork->getCurrentSystemTime(),answerTime,mClientPartido->id);
         mQuestionAttemptsVector.push_back(questionAttempts);
 }
 

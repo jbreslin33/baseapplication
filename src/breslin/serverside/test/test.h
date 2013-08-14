@@ -41,9 +41,7 @@ int getLowestUnpassedLevel(int maxLevel);
 void getQuestionAttempts();
 
 //answer
-std::string mStringAnswer;
-int mAnswerTime;
-void insertAnswerAttempt(int questionID, std::string stringAnswer);
+void insertAnswerAttempt(int questionID, std::string stringAnswer, int answerTime);
 void parseAnswer(Message* message);
 
 //level

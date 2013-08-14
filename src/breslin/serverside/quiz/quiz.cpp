@@ -27,6 +27,7 @@ Quiz::Quiz(Combatant* combatant)
 	mComputerAskedTime = 0;
         
 	//answer	
+	mAnswerTime = 0;
 	mComputerAnswerTime = 0;
         mWaitingForAnswer = false;
 }
@@ -65,18 +66,20 @@ void Quiz::sendQuestion(int questionID)
 }
 void Quiz::readAnswer(int answerTime, std::string answer)
 {
-/*
+
         //clear answer string
         mStringAnswer.clear();
         mAnswerTime = answerTime;
         mStringAnswer = answer;
 
-        insertAnswerAttempt(mQuiz->mQuestionID);
+        mCombatant->mClientPartido->mTest->insertAnswerAttempt(mQuestionID,mStringAnswer,mAnswerTime);
 
-        if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
+        //if (mStringAnswer.compare(mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
+        if (mStringAnswer.compare(mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0)
         {
+		LogString("wrong");		
+/*
                 ShapePartido* opponent  = mShapePartido->mOpponent;
-
                 if (opponent)
                 {
                         //score battle
@@ -102,11 +105,14 @@ void Quiz::readAnswer(int answerTime, std::string answer)
                 else //opponent took care of loss....
                 {
                 }
+*/
         }
         else
         {
-                mBattleScore++;
+		LogString("correct");		
+ //               mBattleScore++;
         }
+/*
         if (mBattleScore > 9)
         {
                 ShapePartido* opponent  = mShapePartido->mOpponent;
@@ -131,10 +137,9 @@ void Quiz::readAnswer(int answerTime, std::string answer)
                 sendBattleEnd();
                 opponent->mClientPartido->sendBattleEnd();
         }
-
+*/
         //set vars for new question and answer combo....
         mWaitingForAnswer = false;
         mQuestionString = "";
-*/
 }
 

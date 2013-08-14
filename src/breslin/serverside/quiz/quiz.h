@@ -36,6 +36,8 @@ int mComputerAskedTime;
 void sendQuestion(int questionID);
 
 //answer
+std::string mStringAnswer;
+int mAnswerTime;
 int mComputerAnswerTime;
 bool mWaitingForAnswer;
 void readAnswer(int answerTime, std::string answer);
