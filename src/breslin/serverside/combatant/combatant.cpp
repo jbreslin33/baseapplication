@@ -44,5 +44,6 @@ Combatant::~Combatant()
 void Combatant::update()
 {
 	mStateMachine->update();
+	mQuiz->update();
 }
 

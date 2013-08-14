@@ -53,6 +53,7 @@ INIT_COMBATANT* INIT_COMBATANT::Instance()
 }
 void INIT_COMBATANT::enter(Combatant* combatant)
 {
+	LogString("INIT_COMBAT:%d:",combatant->mClientPartido->id);
 }
 void INIT_COMBATANT::execute(Combatant* combatant)
 {
@@ -86,7 +87,7 @@ NORMAL_COMBATANT* NORMAL_COMBATANT::Instance()
 }
 void NORMAL_COMBATANT::enter(Combatant* combatant)
 {
-	LogString("NORMAL_COMBAT::enter %d:",combatant->mClientPartido->id);
+	LogString("NORMAL_COMBATANT:%d:",combatant->mClientPartido->id);
 }
 void NORMAL_COMBATANT::execute(Combatant* combatant)
 {
@@ -109,6 +110,7 @@ YIELD* YIELD::Instance()
 }
 void YIELD::enter(Combatant* combatant)
 {
+	LogString("YIELD:%d:",combatant->mClientPartido->id);
  	//reset opponent pointers and vars for answers...
 /*
         mBattleScore      = 0;

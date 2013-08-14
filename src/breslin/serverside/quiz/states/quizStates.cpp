@@ -60,6 +60,7 @@ void INIT_QUIZ::enter(Quiz* quiz)
 }
 void INIT_QUIZ::execute(Quiz* quiz)
 {
+	LogString("init");
 	if (quiz->mCombatant->mStateMachine->currentState() == NORMAL_COMBATANT::Instance())
 	{
         	quiz->mStateMachine->changeState(SENDING_QUESTION::Instance());
