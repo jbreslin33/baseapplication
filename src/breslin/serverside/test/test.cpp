@@ -201,4 +201,3 @@ void Test::insertAnswerAttempt(int questionID, std::string stringAnswer)
         mQuestionAttemptsVector.push_back(questionAttempts);
 }
 
-

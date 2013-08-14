@@ -12,6 +12,16 @@
 
 //combatant
 #include "../../combatant/combatant.h"
+#include "../../combatant/states/combatantStates.h"
+
+//test
+#include "../../test/test.h"
+
+//server
+#include "../../server/partido/serverPartido.h"
+
+//question
+#include "../../question/question.h"
 
 /*****************************************
 *******       GLOBAL    ******************
@@ -46,11 +56,14 @@ INIT_QUIZ* INIT_QUIZ::Instance()
 }
 void INIT_QUIZ::enter(Quiz* quiz)
 {
+	LogString("INIT_QUIZ:%d",quiz->mCombatant->mClientPartido->id);	
 }
 void INIT_QUIZ::execute(Quiz* quiz)
 {
-//	if (quiz->mStateMachine->currentState() == WAITING_FOR_ANSWER::Instance())
-	
+	if (quiz->mCombatant->mStateMachine->currentState() == NORMAL_COMBATANT::Instance())
+	{
+        	quiz->mStateMachine->changeState(SENDING_QUESTION::Instance());
+	}
 }
 void INIT_QUIZ::exit(Quiz* quiz)
 {
@@ -71,6 +84,7 @@ SENDING_QUESTION* SENDING_QUESTION::Instance()
 }
 void SENDING_QUESTION::enter(Quiz* quiz)
 {
+	LogString("SENDING_QUESTION:%d",quiz->mCombatant->mClientPartido->id);	
 }
 void SENDING_QUESTION::execute(Quiz* quiz)
 {
@@ -78,7 +92,7 @@ void SENDING_QUESTION::execute(Quiz* quiz)
         {
                 if (quiz->mWaitingForAnswer == false)
                 {
-                        //quiz->sendQuestion(clientPartido->getNewQuestionID());
+                        quiz->sendQuestion(quiz->mCombatant->mClientPartido->mTest->getNewQuestionID());
                         quiz->mStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
                 }
         }
@@ -106,39 +120,32 @@ WAITING_FOR_ANSWER* WAITING_FOR_ANSWER::Instance()
 }
 void WAITING_FOR_ANSWER::enter(Quiz* quiz)
 {
-/*
-        clientPartido->mComputerAskedTime = clientPartido->mServer->mGameTime;
-
-        int randomAnswerTime = rand() % 3000;
-        clientPartido->mComputerAnswerTime = randomAnswerTime;
-
-        clientPartido->mWaitingForAnswer = true;
-*/
-
+	LogString("WAITING_FOR_ANSWER:%d",quiz->mCombatant->mClientPartido->id);	
+        quiz->mComputerAskedTime  = quiz->mCombatant->mClientPartido->mServerPartido->mGameTime;
+        int randomAnswerTime      = rand() % 3000;
+        quiz->mComputerAnswerTime = randomAnswerTime;
+        quiz->mWaitingForAnswer   = true;
 }
+
 void WAITING_FOR_ANSWER::execute(Quiz* quiz)
 {
-/*
-        if (!clientPartido->mShapePartido->mOpponent)
+	if (quiz->mCombatant->mStateMachine->currentState() == YIELD::Instance())
         {
-                //clientPartido->mBattleStateMachine->changeState(BATTLE_OFF::Instance());
+                quiz->mStateMachine->changeState(OVER_QUIZ::Instance());
         }
 
-        if (!clientPartido->mWaitingForAnswer && clientPartido->mShapePartido->mOpponent)
+        if (!quiz->mWaitingForAnswer)
         {
-                //clientPartido->mBattleStateMachine->changeState(Sending_Question::Instance());
+                quiz->mStateMachine->changeState(SENDING_QUESTION::Instance());
         }
 
-        //mServerPartido->mAnswerVector.at(mQuestionID)
-        if (!clientPartido->mLoggedIn)
+	if (!quiz->mCombatant->mClientPartido->mLoggedIn)
         {
-                if (clientPartido->mComputerAskedTime + clientPartido->mComputerAnswerTime < clientPartido->mServer->mGameTime)
+                if (quiz->mComputerAskedTime + quiz->mComputerAnswerTime < quiz->mCombatant->mClientPartido->mServerPartido->mGameTime)
                 {
-                        clientPartido->readAnswer(clientPartido->mComputerAnswerTime,clientPartido->mServerPartido->mQuestionVector.at(clientPartido->mQuestionID)->answer);
+                        quiz->readAnswer(quiz->mComputerAnswerTime,quiz->mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(quiz->mQuestionID)->answer);
                 }
         }
-
-*/
 }
 void WAITING_FOR_ANSWER::exit(Quiz* quiz)
 {
@@ -158,6 +165,7 @@ OVER_QUIZ* OVER_QUIZ::Instance()
 }
 void OVER_QUIZ::enter(Quiz* quiz)
 {
+	LogString("OVER_QUIZ:%d",quiz->mCombatant->mClientPartido->id);	
 }
 void OVER_QUIZ::execute(Quiz* quiz)
 {

@@ -39,10 +39,32 @@ void Quiz::update()
 {
 	mStateMachine->update();
 }
+void Quiz::sendQuestion(int questionID)
+{
+	if (mCombatant->mClientPartido->mConnectionState == DREAMSOCK_CONNECTED)
+	{
+        	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        	mMessage.WriteByte(mCombatant->mClientPartido->mServerPartido->mMessageAskQuestion); // add type
 
+        	if (mCombatant->mClientPartido->mClientID > 0)
+        	{
+                	mMessage.WriteByte(mCombatant->mClientPartido->mClientID); // add mClientID for browsers
+        	}
+       		int length = mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(questionID)->question.length();  
+        	mMessage.WriteByte(length); 
+
+        	//loop thru length and write it
+        	for (int i=0; i < length; i++)
+        	{
+                	mMessage.WriteByte(mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(questionID)->question.at(i));
+        	}
+
+        	//send it
+        	mCombatant->mClientPartido->mServerPartido->mNetwork->sendPacketTo(mCombatant->mClientPartido,&mMessage);
+	}
+}
 void Quiz::readAnswer(int answerTime, std::string answer)
 {
-	LogString("readA");
 /*
         //clear answer string
         mStringAnswer.clear();

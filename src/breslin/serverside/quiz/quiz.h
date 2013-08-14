@@ -33,6 +33,7 @@ Message mMessage;
 int mQuestionID;
 std::string mQuestionString;
 int mComputerAskedTime;
+void sendQuestion(int questionID);
 
 //answer
 int mComputerAnswerTime;

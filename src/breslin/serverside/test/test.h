@@ -34,7 +34,6 @@ Quiz* mQuiz;
 Message mMessage;
 
 //questions
-void sendQuestion(int questionID);
 int getNewQuestionID();
 std::vector<QuestionAttempts*> mQuestionAttemptsVector;
 std::vector<QuestionAttempts*> mQuestionAttemptsVectorTemp;
