@@ -13,9 +13,6 @@ Quiz::Quiz(Combatant* combatant)
 {
 	mCombatant = combatant;
 
-	//let this clients test know about this quiz
-	mCombatant->mClientPartido->mTest->mQuiz = this; 
- 
 	//quiz states
         mStateMachine =  new StateMachine<Quiz>(this);
         mStateMachine->setCurrentState      (INIT_QUIZ::Instance());

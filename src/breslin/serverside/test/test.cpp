@@ -15,6 +15,7 @@ Test::Test(ClientPartido* clientPartido)
 	getQuestionAttempts();
 
 	mQuiz = NULL;
+	mQuizLast = NULL;
  
 	//quiz states
         mStateMachine =  new StateMachine<Test>(this);

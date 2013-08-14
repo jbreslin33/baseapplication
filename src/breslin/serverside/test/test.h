@@ -29,6 +29,7 @@ ClientPartido* mClientPartido;
 
 //quiz
 Quiz* mQuiz;
+Quiz* mQuizLast;
 
 //message
 Message mMessage;
