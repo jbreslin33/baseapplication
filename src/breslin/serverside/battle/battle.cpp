@@ -30,7 +30,7 @@ Battle::Battle(GamePartido* gamePartido, ClientPartido* homeClient, ClientPartid
 	mBattleTime       = 0;
 	mBattleStartTime  = 0;
 	mBattleEndTime    = 0;
-	mBattleLengthTime = 10000;
+	mBattleLengthTime = 20000;
 
  	//battle states
 	mStateMachine =  new StateMachine<Battle>(this);

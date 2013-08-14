@@ -56,7 +56,7 @@ INIT_QUIZ* INIT_QUIZ::Instance()
 }
 void INIT_QUIZ::enter(Quiz* quiz)
 {
-	LogString("INIT_QUIZ:%d",quiz->mCombatant->mClientPartido->id);	
+	//LogString("INIT_QUIZ:%d",quiz->mCombatant->mClientPartido->id);	
 }
 void INIT_QUIZ::execute(Quiz* quiz)
 {
@@ -85,7 +85,7 @@ SENDING_QUESTION* SENDING_QUESTION::Instance()
 }
 void SENDING_QUESTION::enter(Quiz* quiz)
 {
-	LogString("SENDING_QUESTION:%d",quiz->mCombatant->mClientPartido->id);	
+	//LogString("SENDING_QUESTION:%d",quiz->mCombatant->mClientPartido->id);	
 }
 void SENDING_QUESTION::execute(Quiz* quiz)
 {
@@ -121,7 +121,7 @@ WAITING_FOR_ANSWER* WAITING_FOR_ANSWER::Instance()
 }
 void WAITING_FOR_ANSWER::enter(Quiz* quiz)
 {
-	LogString("WAITING_FOR_ANSWER:%d",quiz->mCombatant->mClientPartido->id);	
+	//LogString("WAITING_FOR_ANSWER:%d",quiz->mCombatant->mClientPartido->id);	
         quiz->mComputerAskedTime  = quiz->mCombatant->mClientPartido->mServerPartido->mGameTime;
         int randomAnswerTime      = rand() % 3000;
         quiz->mComputerAnswerTime = randomAnswerTime;
