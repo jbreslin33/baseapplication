@@ -124,7 +124,7 @@ void GamePartido::checkCollisions()
                 {
                         for (unsigned int j = i+1; j < mShapePartidoVector.size(); j++)
                         {
-                                if (mShapePartidoVector.at(j)->mCollidable == true)
+                                if (mShapePartidoVector.at(j)->mCollidable == true && mShapePartidoVector.at(j) != mShapePartidoVector.at(i)->mTimeoutShape)
                                 {
                                         float x1 = mShapePartidoVector.at(i)->mSceneNode->getPosition().x;
                                         float z1 = mShapePartidoVector.at(i)->mSceneNode->getPosition().z;

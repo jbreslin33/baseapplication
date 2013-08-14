@@ -49,9 +49,6 @@ virtual void update();
 //handle letter 
 virtual bool  handleLetter(Letter* letter);
 
-//Battle* mBattle;
-//Quiz* mQuiz;
-//Combatant* mCombatant;
 
 
 };

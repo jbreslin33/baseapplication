@@ -49,7 +49,7 @@ void INIT_QUIZ::enter(Quiz* quiz)
 }
 void INIT_QUIZ::execute(Quiz* quiz)
 {
-	if (quiz->mStateMachine->currentState() == WAITING_FOR_ANSWER::Instance());
+//	if (quiz->mStateMachine->currentState() == WAITING_FOR_ANSWER::Instance())
 	
 }
 void INIT_QUIZ::exit(Quiz* quiz)
@@ -130,7 +130,7 @@ void WAITING_FOR_ANSWER::execute(Quiz* quiz)
         }
 
         //mServerPartido->mAnswerVector.at(mQuestionID)
-        if (!clientPartido->mLoggedIn) //send to readAnswer(int,string)
+        if (!clientPartido->mLoggedIn)
         {
                 if (clientPartido->mComputerAskedTime + clientPartido->mComputerAnswerTime < clientPartido->mServer->mGameTime)
                 {

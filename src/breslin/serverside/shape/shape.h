@@ -125,6 +125,7 @@ void insertIntoDB();
 
 //collision
 virtual void collision(Shape* shape);
+Shape* mTimeoutShape;
 
 	//delta move command
 virtual int  setFlag();

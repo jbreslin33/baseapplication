@@ -92,6 +92,9 @@ Shape::Shape(unsigned int index, Game* game, ClientRobust* client, Vector3D* pos
 
 	//register with shape vector
 	mGame->mShapeVector.push_back(this);
+
+	//timeout shape
+	mTimeoutShape = NULL;
 }
 
 Shape::~Shape()
