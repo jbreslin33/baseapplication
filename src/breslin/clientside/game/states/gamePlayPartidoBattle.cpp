@@ -59,11 +59,15 @@ void GamePlayPartidoBattle::execute()
 {
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
+/*
 	if (app->mAnswerTime > 2000) //overtime....
 	{
 		app->mStringAnswer = "oot";		
+		LogString("sendAnswer via time");
 		app->sendAnswer();
+		app->mAnswerTime = 0;
 	}
+*/
 
  	if (mGamePartido->mBattleEnd)
         {
@@ -107,6 +111,7 @@ void GamePlayPartidoBattle::execute()
 		if (app->mKeyArray[13]) //enter
                 {
                         app->mKeyArray[13] = false;
+			LogString("sendAnswer via enter");
                         app->sendAnswer();
                         app->mStringQuestion.clear();
                         app->mStringAnswer.clear();

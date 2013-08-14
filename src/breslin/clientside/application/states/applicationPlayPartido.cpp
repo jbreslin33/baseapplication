@@ -52,6 +52,7 @@ void ApplicationPlayPartido::execute()
 		{
 			mApplicationPartido->mAnswerTime = 2001;
 			mApplicationPartido->mStringAnswer = "esc";
+			LogString("sendAnswer via esc");
 			mApplicationPartido->sendAnswer();
 		}
 		else

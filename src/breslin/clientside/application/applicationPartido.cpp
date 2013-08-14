@@ -177,7 +177,6 @@ void  ApplicationPartido::hideBattleScreen()
 
 void ApplicationPartido::sendAnswer()
 {
-	LogString("sendAnswer");
         ByteBuffer* byteBuffer = new ByteBuffer();
         byteBuffer->WriteByte(mMessageAnswerQuestion);
 	
