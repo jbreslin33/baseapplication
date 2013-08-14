@@ -25,6 +25,9 @@
 //vector3D
 #include "../../../../math/vector3D.h"
 
+//test
+#include "../../../test/test.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -54,40 +57,6 @@ bool GLOBAL_SHAPE_PARTIDO::onLetter(ShapePartido* shapePartido, Letter* letter)
 ****************************************/
 
 /*****************************************
-        BATTLE SHAPE       
-****************************************/
-BATTLE_SHAPE_PARTIDO* BATTLE_SHAPE_PARTIDO::Instance()
-{
-  static BATTLE_SHAPE_PARTIDO instance;
-  return &instance; 
-} 
-void BATTLE_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
-{
-	//LogString("BATTLE_SHAPE_PARTIDO");
-}       
-void BATTLE_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
-{
-/*
-	if (!shapePartido->mClientPartido->mBattle)
-	{
-		shapePartido->mShapePartidoStateMachine->changeState(GAME_SHAPE_PARTIDO::Instance());	
-	}
-
-	shapePartido->mMove->mVelocity->zero();
-*/
-
-}
-void BATTLE_SHAPE_PARTIDO::exit(ShapePartido* shapePartido)
-{
-
-}
-bool BATTLE_SHAPE_PARTIDO::onLetter(ShapePartido* shapePartido, Letter* letter)
-{
-	return false;	
-}
-
-
-/*****************************************
 	GAME_SHAPE_PARTIDO
 ****************************************/
 GAME_SHAPE_PARTIDO* GAME_SHAPE_PARTIDO::Instance()
@@ -101,15 +70,10 @@ void GAME_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
 }
 void GAME_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 {
-/*
-	if (shapePartido->mClientPartido)
+	if (shapePartido->mClientPartido->mTest->mQuiz)
 	{
-		if (shapePartido->mClientPartido->mBattle)
-		{
-			shapePartido->mShapePartidoStateMachine->changeState(BATTLE_SHAPE_PARTIDO::Instance());	
-		}
+		shapePartido->mShapePartidoStateMachine->changeState(BATTLE_SHAPE_PARTIDO::Instance());	
 	}
-*/
 }
 void GAME_SHAPE_PARTIDO::exit(ShapePartido* shapePartido)
 {
@@ -118,4 +82,35 @@ bool GAME_SHAPE_PARTIDO::onLetter(ShapePartido* shapePartido, Letter* letter)
 {
         return false; 
 }
+
+/*****************************************
+        BATTLE SHAPE       
+****************************************/
+BATTLE_SHAPE_PARTIDO* BATTLE_SHAPE_PARTIDO::Instance()
+{
+  static BATTLE_SHAPE_PARTIDO instance;
+  return &instance; 
+} 
+void BATTLE_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
+{
+	//LogString("BATTLE_SHAPE_PARTIDO");
+}       
+void BATTLE_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
+{
+	if (!shapePartido->mClientPartido->mTest->mQuiz)
+	{
+		shapePartido->mShapePartidoStateMachine->changeState(GAME_SHAPE_PARTIDO::Instance());	
+	}
+
+	shapePartido->mMove->mVelocity->zero();
+}
+void BATTLE_SHAPE_PARTIDO::exit(ShapePartido* shapePartido)
+{
+
+}
+bool BATTLE_SHAPE_PARTIDO::onLetter(ShapePartido* shapePartido, Letter* letter)
+{
+	return false;	
+}
+
 
