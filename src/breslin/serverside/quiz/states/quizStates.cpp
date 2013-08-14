@@ -138,13 +138,12 @@ void WAITING_FOR_ANSWER::execute(Quiz* quiz)
         {
                 quiz->mStateMachine->changeState(OVER_QUIZ::Instance());
         }
-
-        if (!quiz->mWaitingForAnswer)
+        else if (!quiz->mWaitingForAnswer)
         {
                 quiz->mStateMachine->changeState(SENDING_QUESTION::Instance());
         }
 
-	if (!quiz->mCombatant->mClientPartido->mLoggedIn)
+	else if (!quiz->mCombatant->mClientPartido->mLoggedIn)
         {
                 if (quiz->mComputerAskedTime + quiz->mComputerAnswerTime < quiz->mCombatant->mClientPartido->mServerPartido->mGameTime)
                 {
