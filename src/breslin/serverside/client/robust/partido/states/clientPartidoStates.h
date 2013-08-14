@@ -7,15 +7,15 @@ class ClientPartido;
 
 
 /*******************************
-*      GlobalClientPartido 
+*      GLOBAL_CLIENT_PARTIDO 
 ******************************/
 
-class GlobalClientPartido : public State<ClientPartido>
+class GLOBAL_CLIENT_PARTIDO : public State<ClientPartido>
 {
 private:
-  GlobalClientPartido(){}
+  GLOBAL_CLIENT_PARTIDO(){}
 public:
-  static GlobalClientPartido* Instance();
+  static GLOBAL_CLIENT_PARTIDO* Instance();
   void enter  (ClientPartido* clientPartido);
   void execute(ClientPartido* clientPartido);
   void exit   (ClientPartido* clientPartido);
@@ -25,6 +25,18 @@ public:
 /*******************************
 *       CLIENT PARTIDO STATES 
 ******************************/
+
+class GAME_PARTIDO_MODE : public State<ClientPartido>
+{
+private:
+  GAME_PARTIDO_MODE(){}
+public:
+  static GAME_PARTIDO_MODE* Instance();
+  void enter  (ClientPartido* clientPartido);
+  void execute(ClientPartido* clientPartido);
+  void exit   (ClientPartido* clientPartido);
+  bool onLetter(ClientPartido* clientPartido, Letter* letter);
+};
 
 class CLIENT_PARTIDO_BATTLE : public State<ClientPartido>
 {
@@ -38,52 +50,5 @@ public:
   bool onLetter(ClientPartido* clientPartido, Letter* letter);
 };
 
-class Game_Partido_Mode : public State<ClientPartido>
-{
-private:
-  Game_Partido_Mode(){}
-public:
-  static Game_Partido_Mode* Instance();
-  void enter  (ClientPartido* clientPartido);
-  void execute(ClientPartido* clientPartido);
-  void exit   (ClientPartido* clientPartido);
-  bool onLetter(ClientPartido* clientPartido, Letter* letter);
-};
 
-/***BATTLE***/
-class BATTLE_OFF : public State<ClientPartido>
-{
-private:
-  BATTLE_OFF(){}
-public:
-  static BATTLE_OFF* Instance();
-  void enter  (ClientPartido* clientPartido);
-  void execute(ClientPartido* clientPartido);
-  void exit   (ClientPartido* clientPartido);
-  bool onLetter(ClientPartido* clientPartido, Letter* letter);
-};
-
-class Waiting_For_Answer : public State<ClientPartido>
-{
-private:
-  Waiting_For_Answer(){}
-public:
-  static Waiting_For_Answer* Instance();
-  void enter  (ClientPartido* clientPartido);
-  void execute(ClientPartido* clientPartido);
-  void exit   (ClientPartido* clientPartido);
-  bool onLetter(ClientPartido* clientPartido, Letter* letter);
-};
-
-class Sending_Question : public State<ClientPartido>
-{
-private:
-  Sending_Question(){}
-public:
-  static Sending_Question* Instance();
-  void enter  (ClientPartido* clientPartido);
-  void execute(ClientPartido* clientPartido);
-  void exit   (ClientPartido* clientPartido);
-  bool onLetter(ClientPartido* clientPartido, Letter* letter);
-};
 #endif

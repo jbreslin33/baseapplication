@@ -23,25 +23,28 @@ these states are always on...as their is always a gamePartido..and these clients
 //question
 #include "../../../../question/question.h"
 
+//test
+#include "../../../../test/test.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalClientPartido* GlobalClientPartido::Instance()
+GLOBAL_CLIENT_PARTIDO* GLOBAL_CLIENT_PARTIDO::Instance()
 {
-  static GlobalClientPartido instance;
+  static GLOBAL_CLIENT_PARTIDO instance;
   return &instance;
 }
-void GlobalClientPartido::enter(ClientPartido* clientPartido)
+void GLOBAL_CLIENT_PARTIDO::enter(ClientPartido* clientPartido)
 {
 }
-void GlobalClientPartido::execute(ClientPartido* clientPartido)
+void GLOBAL_CLIENT_PARTIDO::execute(ClientPartido* clientPartido)
 {
 
 }
-void GlobalClientPartido::exit(ClientPartido* clientPartido)
+void GLOBAL_CLIENT_PARTIDO::exit(ClientPartido* clientPartido)
 {
 }
-bool GlobalClientPartido::onLetter(ClientPartido* clientPartido, Letter* letter)
+bool GLOBAL_CLIENT_PARTIDO::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false;
 }
@@ -54,21 +57,25 @@ bool GlobalClientPartido::onLetter(ClientPartido* clientPartido, Letter* letter)
 /*****************************************
                 GAME_PARTIDO_MODE               
 ****************************************/
-Game_Partido_Mode* Game_Partido_Mode::Instance()
+GAME_PARTIDO_MODE* GAME_PARTIDO_MODE::Instance()
 {
-  static Game_Partido_Mode instance;
+  static GAME_PARTIDO_MODE instance;
   return &instance;
 }
-void Game_Partido_Mode::enter(ClientPartido* clientPartido)
+void GAME_PARTIDO_MODE::enter(ClientPartido* clientPartido)
 {
 }
-void Game_Partido_Mode::execute(ClientPartido* clientPartido)
+void GAME_PARTIDO_MODE::execute(ClientPartido* clientPartido)
+{
+	if (clientPartido->mTest->mQuiz)
+	{
+		clientPartido->mClientPartidoStateMachine->changeState(CLIENT_PARTIDO_BATTLE::Instance());
+	}
+}
+void GAME_PARTIDO_MODE::exit(ClientPartido* clientPartido)
 {
 }
-void Game_Partido_Mode::exit(ClientPartido* clientPartido)
-{
-}
-bool Game_Partido_Mode::onLetter(ClientPartido* clientPartido, Letter* letter)
+bool GAME_PARTIDO_MODE::onLetter(ClientPartido* clientPartido, Letter* letter)
 {
         return false; 
 }
@@ -82,9 +89,14 @@ CLIENT_PARTIDO_BATTLE* CLIENT_PARTIDO_BATTLE::Instance()
 }
 void CLIENT_PARTIDO_BATTLE::enter(ClientPartido* clientPartido)
 {
+	clientPartido->mKey = 0;
 }
 void CLIENT_PARTIDO_BATTLE::execute(ClientPartido* clientPartido)
 {
+	if (!clientPartido->mTest->mQuiz)
+	{
+		clientPartido->mClientPartidoStateMachine->changeState(GAME_PARTIDO_MODE::Instance());
+	}
 }
 void CLIENT_PARTIDO_BATTLE::exit(ClientPartido* clientPartido)
 {
