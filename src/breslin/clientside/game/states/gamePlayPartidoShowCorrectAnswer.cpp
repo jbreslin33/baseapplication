@@ -22,18 +22,18 @@
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-GamePlayPartidoBattle::GamePlayPartidoBattle(GamePartido* gamePartido)
+GamePlayPartidoShowCorrectAnswer::GamePlayPartidoShowCorrectAnswer(GamePartido* gamePartido)
 {
 	mGamePartido = gamePartido;
 	mFirstTimeExecute = true;
 }
 
-GamePlayPartidoBattle::~GamePlayPartidoBattle()
+GamePlayPartidoShowCorrectAnswer::~GamePlayPartidoShowCorrectAnswer()
 {
 
 }
 
-void GamePlayPartidoBattle::enter()
+void GamePlayPartidoShowCorrectAnswer::enter()
 {
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
@@ -55,7 +55,7 @@ void GamePlayPartidoBattle::enter()
 	mFirstTimeExecute = true;
 }
 
-void GamePlayPartidoBattle::execute()
+void GamePlayPartidoShowCorrectAnswer::execute()
 {
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
@@ -133,7 +133,7 @@ void GamePlayPartidoBattle::execute()
 	}
 }
 
-void GamePlayPartidoBattle::exit()
+void GamePlayPartidoShowCorrectAnswer::exit()
 {
 	mGamePartido->mApplicationPartido->hideBattleScreen();
 	mGamePartido->mBattleEnd   = false;

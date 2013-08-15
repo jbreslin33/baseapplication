@@ -11,6 +11,7 @@
 
 class ApplicationPartido;
 class GamePlayPartidoBattle;
+class GamePlayPartidoShowCorrectAnswer;
 
 class GamePartido : public Game 
 {
@@ -25,6 +26,7 @@ ApplicationPartido* mApplicationPartido;
 
 //states
 State* mGamePlayPartidoBattle;
+State* mGamePlayPartidoShowCorrectAnswer;
 
 // constants
 //question
@@ -47,6 +49,8 @@ void showCorrectAnswer(ByteBuffer* byteBuffer);
 
 bool mBattleStart;
 bool mBattleEnd;
+bool mShowCorrectAnswer;
+bool mShowCorrectAnswerEnd;
 };
 
 #endif

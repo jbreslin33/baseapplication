@@ -21,6 +21,7 @@
 #include "states/gamePlay.h"
 #include "states/gamePlayPartido.h"
 #include "states/gamePlayPartidoBattle.h"
+#include "states/gamePlayPartidoShowCorrectAnswer.h"
 
 /***************************************
 *			          CONSTRUCTORS
@@ -30,6 +31,8 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
 	mApplicationPartido = applicationPartido;
 	mBattleStart = false;
 	mBattleEnd   = false;
+	mShowCorrectAnswerEnd = false;
+	mShowCorrectAnswer = false;
 }
 
 GamePartido::~GamePartido()
@@ -40,6 +43,7 @@ void GamePartido::createStates()
 {
    	mGamePlay              = new GamePlayPartido(this);
    	mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
+   	mGamePlayPartidoShowCorrectAnswer = new GamePlayPartidoShowCorrectAnswer(this);
 }
 
 void GamePartido::setStates()
