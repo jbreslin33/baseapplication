@@ -254,7 +254,7 @@ void Test::sendCorrectAnswer(int questionID)
 		//length
                 int lengthOfQuestion = mClientPartido->mServerPartido->mQuestionVector.at(questionID)->question.length();
 		int lengthOfEqualSign = equalSign.length();
-                int lengthOfAnswer   = mClientPartido->mServerPartido->mQuestionVector.at(questionID)->question.length();
+                int lengthOfAnswer   = mClientPartido->mServerPartido->mQuestionVector.at(questionID)->answer.length();
 		int length = lengthOfQuestion + lengthOfEqualSign + lengthOfAnswer;
                 mMessage.WriteByte(length);
 
@@ -272,7 +272,7 @@ void Test::sendCorrectAnswer(int questionID)
 		//loop thru length and write it
                 for (int i=0; i < lengthOfAnswer; i++)
                 {
-                        mMessage.WriteByte(mClientPartido->mServerPartido->mQuestionVector.at(questionID)->question.at(i));
+                        mMessage.WriteByte(mClientPartido->mServerPartido->mQuestionVector.at(questionID)->answer.at(i));
                 }
 
                 //send it
