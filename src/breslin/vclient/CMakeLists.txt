@@ -138,6 +138,7 @@ set(HDRS
 	../clientside/game/states/gamePlay.h
 	../clientside/game/states/gamePlayPartido.h
 	../clientside/game/states/gamePlayPartidoBattle.h
+	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.h
 
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
@@ -204,6 +205,7 @@ set(SRCS
 	../clientside/game/states/gamePlay.cpp
 	../clientside/game/states/gamePlayPartido.cpp
 	../clientside/game/states/gamePlayPartidoBattle.cpp
+	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.cpp
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp
@@ -284,6 +286,7 @@ set(HDRS
 	../clientside/game/states/gamePlay.h
 	../clientside/game/states/gamePlayPartido.h
 	../clientside/game/states/gamePlayPartidoBattle.h
+	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.h
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
@@ -349,6 +352,7 @@ set(SRCS
 	../clientside/game/states/gamePlay.cpp
 	../clientside/game/states/gamePlayPartido.cpp
 	../clientside/game/states/gamePlayPartidoBattle.cpp
+	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.cpp
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp

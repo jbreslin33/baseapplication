@@ -1,5 +1,5 @@
 //header
-#include "gamePlayPartidoBattle.h"
+#include "gamePlayPartidoShowCorrectAnswer.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
@@ -68,11 +68,6 @@ void GamePlayPartidoShowCorrectAnswer::execute()
 		app->mAnswerTime = 0;
 	}
 */
-
-	if (mGamePartido->mShowCorrectAnswer)
-	{
-                mGamePartido->mStateMachine->changeState(mGamePartido->mShowCorrectAnswerState); 
-	}
 
  	if (mGamePartido->mBattleEnd)
         {

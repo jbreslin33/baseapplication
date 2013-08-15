@@ -71,7 +71,7 @@ void GamePlayPartidoBattle::execute()
 
 	if (mGamePartido->mShowCorrectAnswer)
 	{
-                mGamePartido->mStateMachine->changeState(mGamePartido->mShowCorrectAnswerState); 
+                mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoShowCorrectAnswer); 
 	}
 
  	if (mGamePartido->mBattleEnd)
