@@ -16,6 +16,15 @@ Test::Test(ClientPartido* clientPartido)
 
 	mQuiz = NULL;
 	mQuizLast = NULL;
+
+	//question
+	mQuestionID = 0;
+
+	//answer
+	mWaitingForAnswer = false;
+
+	//time
+	mAnswerTime = 0;
  
 	//quiz states
         mStateMachine =  new StateMachine<Test>(this);
@@ -190,15 +199,55 @@ void Test::parseAnswer(Message* mes)
                         answer.append(1,ascii);
                 }
         }
-	if (mQuiz)
-	{
-        	mQuiz->readAnswer(answerTime,answer);
-	}
+        readAnswer(answerTime,answer);
 }
 
 void Test::insertAnswerAttempt(int questionID, std::string stringAnswer, int answerTime)
 {
         QuestionAttempts* questionAttempts = new QuestionAttempts(0,questionID,stringAnswer,mClientPartido->mServerPartido->mNetwork->getCurrentSystemTime(),answerTime,mClientPartido->id);
         mQuestionAttemptsVector.push_back(questionAttempts);
+}
+
+void Test::sendQuestion(int questionID)
+{
+        if (mClientPartido->mConnectionState == DREAMSOCK_CONNECTED)
+        {
+                mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+                mMessage.WriteByte(mClientPartido->mServerPartido->mMessageAskQuestion); // add type
+
+                if (mClientPartido->mClientID > 0)
+                {
+                        mMessage.WriteByte(mClientPartido->mClientID); // add mClientID for browsers
+                }
+                int length = mClientPartido->mServerPartido->mQuestionVector.at(questionID)->question.length();
+                mMessage.WriteByte(length);
+
+                //loop thru length and write it
+                for (int i=0; i < length; i++)
+                {
+                        mMessage.WriteByte(mClientPartido->mServerPartido->mQuestionVector.at(questionID)->question.at(i));
+                }
+
+                //send it
+                mClientPartido->mServerPartido->mNetwork->sendPacketTo(mClientPartido,&mMessage);
+        }
+}
+void Test::readAnswer(int answerTime, std::string answer)
+{
+        //clear answer string
+        mStringAnswer.clear();
+        mAnswerTime = answerTime;
+        mStringAnswer = answer;
+
+        mClientPartido->mTest->insertAnswerAttempt(mQuestionID,mStringAnswer,mAnswerTime);
+
+        //if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
+        if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0)
+        {
+        
+        }
+        //set vars for new question and answer combo....
+        mWaitingForAnswer = false;
+        mQuestionString = "";
 }
 

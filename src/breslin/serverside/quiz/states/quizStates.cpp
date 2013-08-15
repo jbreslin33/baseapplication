@@ -95,9 +95,9 @@ void SENDING_QUESTION::execute(Quiz* quiz)
 {
 	if (quiz->mCombatant->mClientPartido->mLoggedIn)
         {
-                if (quiz->mWaitingForAnswer == false)
+                if (quiz->mTest->mWaitingForAnswer == false)
                 {
-                        quiz->sendQuestion(quiz->mCombatant->mClientPartido->mTest->getNewQuestionID());
+                        quiz->mTest->sendQuestion(quiz->mCombatant->mClientPartido->mTest->getNewQuestionID());
                         quiz->mStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
                 }
         }
@@ -129,7 +129,7 @@ void WAITING_FOR_ANSWER::enter(Quiz* quiz)
         quiz->mComputerAskedTime  = quiz->mCombatant->mClientPartido->mServerPartido->mGameTime;
         int randomAnswerTime      = rand() % 3000;
         quiz->mComputerAnswerTime = randomAnswerTime;
-        quiz->mWaitingForAnswer   = true;
+        quiz->mTest->mWaitingForAnswer   = true;
 }
 
 void WAITING_FOR_ANSWER::execute(Quiz* quiz)
@@ -138,7 +138,7 @@ void WAITING_FOR_ANSWER::execute(Quiz* quiz)
         {
                 quiz->mStateMachine->changeState(OVER_QUIZ::Instance());
         }
-        else if (!quiz->mWaitingForAnswer)
+        else if (!quiz->mTest->mWaitingForAnswer)
         {
                 quiz->mStateMachine->changeState(SENDING_QUESTION::Instance());
         }
@@ -147,7 +147,7 @@ void WAITING_FOR_ANSWER::execute(Quiz* quiz)
         {
                 if (quiz->mComputerAskedTime + quiz->mComputerAnswerTime < quiz->mCombatant->mClientPartido->mServerPartido->mGameTime)
                 {
-                        quiz->readAnswer(quiz->mComputerAnswerTime,quiz->mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(quiz->mQuestionID)->answer);
+                        quiz->mTest->readAnswer(quiz->mComputerAnswerTime,quiz->mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(quiz->mTest->mQuestionID)->answer);
                 }
         }
 }
@@ -174,7 +174,7 @@ void OVER_QUIZ::enter(Quiz* quiz)
 	quiz->mCombatant->mClientPartido->mTest->mQuiz = NULL;
         quiz->mComputerAnswerTime = 0;
         quiz->mComputerAskedTime  = 0;
-        quiz->mWaitingForAnswer   = false;
+        quiz->mTest->mWaitingForAnswer   = false;
 }
 void OVER_QUIZ::execute(Quiz* quiz)
 {

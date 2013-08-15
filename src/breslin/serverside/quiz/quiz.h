@@ -11,6 +11,7 @@
 class QuestionAttempts;
 class Message;
 class Combatant;
+class Test;
 
 class Quiz 
 {
@@ -26,21 +27,17 @@ StateMachine<Quiz>* mStateMachine;
 //combatant
 Combatant* mCombatant;
 
+//test
+Test* mTest;
+
 //message
 Message mMessage;
 
 //question
-int mQuestionID;
-std::string mQuestionString;
 int mComputerAskedTime;
-void sendQuestion(int questionID);
 
 //answer
-std::string mStringAnswer;
-int mAnswerTime;
 int mComputerAnswerTime;
-bool mWaitingForAnswer;
-void readAnswer(int answerTime, std::string answer);
 };
 
 #endif

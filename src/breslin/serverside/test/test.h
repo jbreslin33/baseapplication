@@ -35,15 +35,22 @@ Quiz* mQuizLast;
 Message mMessage;
 
 //questions
+std::string mQuestionString;
+int mQuestionID;
 int getNewQuestionID();
 std::vector<QuestionAttempts*> mQuestionAttemptsVector;
 std::vector<QuestionAttempts*> mQuestionAttemptsVectorTemp;
 int getLowestUnpassedLevel(int maxLevel);
 void getQuestionAttempts();
+void sendQuestion(int questionID);
 
 //answer
+std::string mStringAnswer;
+bool mWaitingForAnswer;
+int mAnswerTime;
 void insertAnswerAttempt(int questionID, std::string stringAnswer, int answerTime);
 void parseAnswer(Message* message);
+void readAnswer(int answerTime, std::string answer);
 
 //level
 int  getMaxLevelAskedID();
