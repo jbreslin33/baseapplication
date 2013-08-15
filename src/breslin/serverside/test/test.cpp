@@ -22,6 +22,7 @@ Test::Test(ClientPartido* clientPartido)
 
 	//answer
 	mWaitingForAnswer = false;
+	mShowCorrectAnswer = false;
 
 	//time
 	mAnswerTime = 0;
@@ -244,7 +245,7 @@ void Test::readAnswer(int answerTime, std::string answer)
         //if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
         if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0)
         {
-        
+       		mShowCorrectAnswer = true;	 
         }
         //set vars for new question and answer combo....
         mWaitingForAnswer = false;

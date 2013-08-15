@@ -47,6 +47,7 @@ void sendQuestion(int questionID);
 //answer
 std::string mStringAnswer;
 bool mWaitingForAnswer;
+bool mShowCorrectAnswer;
 int mAnswerTime;
 void insertAnswerAttempt(int questionID, std::string stringAnswer, int answerTime);
 void parseAnswer(Message* message);

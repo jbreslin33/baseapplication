@@ -62,6 +62,17 @@ public:
   bool onLetter(Quiz* quiz, Letter* letter);
 };
 
+class SHOW_CORRECT_ANSWER : public State<Quiz>
+{
+private:
+  SHOW_CORRECT_ANSWER(){}
+public:
+  static SHOW_CORRECT_ANSWER* Instance();
+  void enter  (Quiz* quiz);
+  void execute(Quiz* quiz);
+  void exit   (Quiz* quiz);
+  bool onLetter(Quiz* quiz, Letter* letter);
+};
 
 class OVER_QUIZ : public State<Quiz>
 {
