@@ -61,6 +61,19 @@ window.addEvent('domready', function()
                         }
 		}
 
+  		//mMessageShowCorrectAnswer
+                if (type == -62)
+                {
+                        if (mApplication.mGame)
+                        {
+                                mApplication.mGame.showCorrectAnswer(byteBuffer);
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+                }
+
   		//mMessageSetText
                 if (type == -66)
                 {

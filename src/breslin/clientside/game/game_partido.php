@@ -11,6 +11,9 @@ initialize: function(applicationPartido)
 	
 	//questions
 	this.mMessageAskQuestion    = -76;
+
+	//show correct answer
+	this.mMessageShowCorrectAnswer    = -62;
 		
 	//battle
 	this.mMessageBattleStart = -75;
@@ -56,6 +59,24 @@ askQuestion: function(byteBuffer)
        	
 	//reset mAnswerTime 
 	this.mApplicationPartido.mAnswerTime = 0;
+},
+
+showCorrectAnswer: function(byteBuffer)
+{
+        this.mApplicationPartido.mStringQuestion = '';
+
+        this.mApplicationPartido.mStringQuestion = byteBuffer.readByte();
+
+        if (this.mApplicationPartido.mLabelQuestion)
+        {
+                this.mApplicationPartido.mLabelQuestion.value = this.mApplicationPartido.mStringQuestion;
+        }
+        else
+        {
+        }
+
+        //reset mAnswerTime
+        this.mApplicationPartido.mAnswerTime = 0;
 }
 
 });

@@ -28,14 +28,14 @@ enter: function()
 
 execute: function()
 {
-
+/*
 	if (this.mGamePartido.mApplicationPartido.mAnswerTime > 2) //overtime....
         {
                 this.mGamePartido.mApplicationPartido.mLabelAnswer.value = 'oot';
                 this.mGamePartido.mApplicationPartido.sendAnswer();
 		this.mGamePartido.mApplicationPartido.mAnswerTime = 0;
         }
-
+*/
 
 	this.mGamePartido.mApplicationPartido.mLabelAnswer.focus();
 	//check for end of batlle

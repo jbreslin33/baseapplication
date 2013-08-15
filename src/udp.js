@@ -336,7 +336,6 @@ server.on("message", function (msg, rinfo)
 		});
         }
 
-
 	//mMessageAskQuestion
  	if (type == -76)
         {
@@ -361,6 +360,31 @@ server.on("message", function (msg, rinfo)
                         }
                 });
 	}
+  	
+	//mMessageShowCorrectAnswer
+        if (type == -62)
+        {
+                var clientID = msg.readInt8(1);
+                var length   = msg.readInt8(2);
+
+                var questionString = '';
+                for (i = 0; i < length; i++)
+                {
+                        var n = msg.readInt8(parseInt(3 + i));
+                        var c = String.fromCharCode(n);
+                        questionString = questionString + c;
+                }
+
+                var string = type + "," + questionString;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+        }
 
 	//mMessageBattleStart
  	if (type == -75)
