@@ -177,6 +177,7 @@ SHOW_CORRECT_ANSWER* SHOW_CORRECT_ANSWER::Instance()
 void SHOW_CORRECT_ANSWER::enter(Quiz* quiz)
 {
         LogString("SHOW_CORRECT_ANSWER:%d",quiz->mCombatant->mClientPartido->id);
+	quiz->mTest->sendCorrectAnswer(quiz->mTest->mQuestionID);
 }
 
 void SHOW_CORRECT_ANSWER::execute(Quiz* quiz)
@@ -186,7 +187,6 @@ void SHOW_CORRECT_ANSWER::execute(Quiz* quiz)
                 quiz->mStateMachine->changeState(OVER_QUIZ::Instance());
         }
 
-	//quiz->mTest->sendCorrectAnswer(quiz->mCombatant->mClientPartido->mTest->getNewQuestionID());
 }
 
 void SHOW_CORRECT_ANSWER::exit(Quiz* quiz)

@@ -233,6 +233,54 @@ void Test::sendQuestion(int questionID)
                 mClientPartido->mServerPartido->mNetwork->sendPacketTo(mClientPartido,&mMessage);
         }
 }
+
+void Test::sendCorrectAnswer(int questionID)
+{
+        if (mClientPartido->mConnectionState == DREAMSOCK_CONNECTED)
+        {
+		//init message with type
+                mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+                mMessage.WriteByte(mClientPartido->mServerPartido->mMessageShowCorrectAnswer); // add type
+
+		//for browsers
+                if (mClientPartido->mClientID > 0)
+                {
+                        mMessage.WriteByte(mClientPartido->mClientID); // add mClientID for browsers
+                }
+	
+		//equal sign	
+		std::string equalSign = " = "; 
+		
+		//length
+                int lengthOfQuestion = mClientPartido->mServerPartido->mQuestionVector.at(questionID)->question.length();
+		int lengthOfEqualSign = equalSign.length();
+                int lengthOfAnswer   = mClientPartido->mServerPartido->mQuestionVector.at(questionID)->question.length();
+		int length = lengthOfQuestion + lengthOfEqualSign + lengthOfAnswer;
+                mMessage.WriteByte(length);
+
+                //loop thru length and write it
+                for (int i=0; i < lengthOfQuestion; i++)
+                {
+                        mMessage.WriteByte(mClientPartido->mServerPartido->mQuestionVector.at(questionID)->question.at(i));
+                }
+              
+                for (int i=0; i < lengthOfEqualSign; i++)
+		{
+                        mMessage.WriteByte(equalSign.at(i));
+		}
+ 
+		//loop thru length and write it
+                for (int i=0; i < lengthOfAnswer; i++)
+                {
+                        mMessage.WriteByte(mClientPartido->mServerPartido->mQuestionVector.at(questionID)->question.at(i));
+                }
+
+                //send it
+                mClientPartido->mServerPartido->mNetwork->sendPacketTo(mClientPartido,&mMessage);
+        }
+}
+
+
 void Test::readAnswer(int answerTime, std::string answer)
 {
         //clear answer string

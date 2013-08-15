@@ -53,6 +53,9 @@ void insertAnswerAttempt(int questionID, std::string stringAnswer, int answerTim
 void parseAnswer(Message* message);
 void readAnswer(int answerTime, std::string answer);
 
+//showCorrectAnswer
+void sendCorrectAnswer(int questionID);
+
 //level
 int  getMaxLevelAskedID();
 bool checkLevel(int level);
