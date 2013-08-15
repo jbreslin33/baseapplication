@@ -97,7 +97,9 @@ void SENDING_QUESTION::execute(Quiz* quiz)
         {
                 if (quiz->mTest->mWaitingForAnswer == false)
                 {
-                        quiz->mTest->sendQuestion(quiz->mCombatant->mClientPartido->mTest->getNewQuestionID());
+			quiz->mTest->mQuestionID = quiz->mCombatant->mClientPartido->mTest->getNewQuestionID();
+                        quiz->mTest->sendQuestion(quiz->mTest->mQuestionID);
+			
                         quiz->mStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
                 }
         }
@@ -151,7 +153,7 @@ void WAITING_FOR_ANSWER::execute(Quiz* quiz)
         {
                 if (quiz->mComputerAskedTime + quiz->mComputerAnswerTime < quiz->mCombatant->mClientPartido->mServerPartido->mGameTime)
                 {
-                        quiz->mTest->readAnswer(quiz->mComputerAnswerTime,quiz->mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(quiz->mTest->mQuestionID)->answer);
+                        //quiz->mTest->readAnswer(quiz->mComputerAnswerTime,quiz->mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(quiz->mTest->mQuestionID)->answer);
                 }
         }
 }
@@ -179,6 +181,11 @@ void SHOW_CORRECT_ANSWER::enter(Quiz* quiz)
 
 void SHOW_CORRECT_ANSWER::execute(Quiz* quiz)
 {
+  	if (quiz->mCombatant->mStateMachine->currentState() == YIELD::Instance())
+        {
+                quiz->mStateMachine->changeState(OVER_QUIZ::Instance());
+        }
+
 	//quiz->mTest->sendCorrectAnswer(quiz->mCombatant->mClientPartido->mTest->getNewQuestionID());
 }
 

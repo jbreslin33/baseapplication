@@ -235,6 +235,12 @@ void Test::sendQuestion(int questionID)
 }
 void Test::readAnswer(int answerTime, std::string answer)
 {
+	const char * a = answer.c_str();
+	LogString("a:%s",a);
+
+	const char * b = mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer.c_str();
+	LogString("b:%s",b);
+
         //clear answer string
         mStringAnswer.clear();
         mAnswerTime = answerTime;
@@ -245,8 +251,14 @@ void Test::readAnswer(int answerTime, std::string answer)
         //if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
         if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0)
         {
+		LogString("WRONG ANSWER");
        		mShowCorrectAnswer = true;	 
         }
+	else
+	{
+		LogString("RIGHT ANSWER");
+       		mShowCorrectAnswer = false;	 
+	}
         //set vars for new question and answer combo....
         mWaitingForAnswer = false;
         mQuestionString = "";
