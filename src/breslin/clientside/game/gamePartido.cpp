@@ -83,16 +83,15 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 
 void GamePartido::showCorrectAnswer(ByteBuffer* byteBuffer)
 {
-
 	mShowCorrectAnswer = true;
 
-        mApplicationPartido->mCorrectAnswer.clear();
+        mApplicationPartido->mStringCorrectAnswer.clear();
 
         int length = byteBuffer->ReadByte();
         for (int i = 0; i < length; i++)
         {
                 char c =  byteBuffer->ReadByte();
-                mApplicationPartido->mCorrectAnswer.append(1,c);
+                mApplicationPartido->mStringCorrectAnswer.append(1,c);
         }
         if (mApplicationPartido->mLabelQuestion && mApplicationPartido->mStringQuestion.size() > 0)
         {
