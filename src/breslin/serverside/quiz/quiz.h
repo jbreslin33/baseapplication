@@ -38,6 +38,10 @@ int mComputerAskedTime;
 
 //answer
 int mComputerAnswerTime;
+
+//correctAnswer
+int mCorrectAnswerTime;
+int mCorrectAnswerStartTime;
 };
 
 #endif

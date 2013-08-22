@@ -26,6 +26,10 @@ Quiz::Quiz(Combatant* combatant)
         
 	//answer	
 	mComputerAnswerTime = 0;
+
+	//correctAnswer
+	mCorrectAnswerTime = 5000;
+	mCorrectAnswerStartTime = 0;
 }
 
 Quiz::~Quiz()

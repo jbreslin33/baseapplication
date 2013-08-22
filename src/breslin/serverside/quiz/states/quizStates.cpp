@@ -178,11 +178,18 @@ void SHOW_CORRECT_ANSWER::enter(Quiz* quiz)
 {
         LogString("SHOW_CORRECT_ANSWER::enter %d",quiz->mCombatant->mClientPartido->id);
 	quiz->mTest->mClientPartido->sendSimpleMessage(quiz->mTest->mClientPartido->mServerPartido->mMessageCorrectAnswerStart);
-	//quiz->mTest->sendCorrectAnswer(quiz->mTest->mQuestionID);
+        quiz->mCorrectAnswerStartTime = quiz->mCombatant->mClientPartido->mServerPartido->mGameTime;
+	quiz->mTest->sendCorrectAnswer(quiz->mTest->mQuestionID);
 }
 
 void SHOW_CORRECT_ANSWER::execute(Quiz* quiz)
 {
+ 	if (quiz->mCorrectAnswerStartTime + quiz->mCorrectAnswerTime < quiz->mCombatant->mClientPartido->mServerPartido->mGameTime)
+	{
+		quiz->mTest->mClientPartido->sendSimpleMessage(quiz->mTest->mClientPartido->mServerPartido->mMessageCorrectAnswerEnd);
+                quiz->mStateMachine->changeState(SENDING_QUESTION::Instance());
+	}
+
   	if (quiz->mCombatant->mStateMachine->currentState() == YIELD::Instance())
         {
                 quiz->mStateMachine->changeState(OVER_QUIZ::Instance());
@@ -192,6 +199,7 @@ void SHOW_CORRECT_ANSWER::execute(Quiz* quiz)
 
 void SHOW_CORRECT_ANSWER::exit(Quiz* quiz)
 {
+        quiz->mTest->mShowCorrectAnswer = false;
 }
 
 bool SHOW_CORRECT_ANSWER::onLetter(Quiz* quiz, Letter* letter)
