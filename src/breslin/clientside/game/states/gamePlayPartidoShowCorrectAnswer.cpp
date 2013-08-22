@@ -25,7 +25,6 @@
 GamePlayPartidoShowCorrectAnswer::GamePlayPartidoShowCorrectAnswer(GamePartido* gamePartido)
 {
 	mGamePartido = gamePartido;
-	mFirstTimeExecute = true;
 }
 
 GamePlayPartidoShowCorrectAnswer::~GamePlayPartidoShowCorrectAnswer()

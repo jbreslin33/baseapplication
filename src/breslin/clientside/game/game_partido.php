@@ -61,22 +61,19 @@ askQuestion: function(byteBuffer)
 	this.mApplicationPartido.mAnswerTime = 0;
 },
 
-showCorrectAnswer: function(byteBuffer)
+correctAnswer: function(byteBuffer)
 {
-        this.mApplicationPartido.mStringQuestion = '';
+        this.mApplicationPartido.mStringCorrectAnswer = '';
 
-        this.mApplicationPartido.mStringQuestion = byteBuffer.readByte();
+        this.mApplicationPartido.mStringCorrectAnswerQuestion = byteBuffer.readByte();
 
-        if (this.mApplicationPartido.mLabelQuestion)
+        if (this.mApplicationPartido.mLabelCorrectAnswer)
         {
-                this.mApplicationPartido.mLabelQuestion.value = this.mApplicationPartido.mStringQuestion;
+                this.mApplicationPartido.mLabelCorrectAnswer.value = this.mApplicationPartido.mStringCorrectAnswer;
         }
         else
         {
         }
-
-        //reset mAnswerTime
-        this.mApplicationPartido.mAnswerTime = 0;
 }
 
 });

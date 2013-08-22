@@ -362,6 +362,7 @@ server.on("message", function (msg, rinfo)
 	}
     
 	//mMessageCorrectAnswerStart
+/*
         if (type == -61)
         {
                 var clientID = msg.readInt8(1);
@@ -376,9 +377,9 @@ server.on("message", function (msg, rinfo)
                         }
                 });
         }
-	
-	//mMessageShowCorrectAnswer
-        if (type == -62)
+*/	
+	//mMessageShowCorrectAnswerStart
+        if (type == -61)
         {
                 var clientID = msg.readInt8(1);
                 var length   = msg.readInt8(2);
@@ -403,7 +404,7 @@ server.on("message", function (msg, rinfo)
         }
 
 	//mMessageCorrectAnswerEnd
-        if (type == -61)
+        if (type == -63)
         {
                 var clientID = msg.readInt8(1);
                 var string = type;

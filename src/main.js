@@ -62,6 +62,7 @@ window.addEvent('domready', function()
 		}
   
 		//mMessageCorrectAnswerStart
+/*
                 if (type == -61)
                 {
                         if (mApplication.mGame)
@@ -74,13 +75,13 @@ window.addEvent('domready', function()
                         }
 
                 }
-
+*/
   		//mMessageShowCorrectAnswer
-                if (type == -62)
+                if (type == -61)
                 {
                         if (mApplication.mGame)
                         {
-                                mApplication.mGame.showCorrectAnswer(byteBuffer);
+                                mApplication.mGame.correctAnswer(byteBuffer);
                         }
                         else
                         {

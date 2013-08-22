@@ -81,6 +81,7 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
                         break;
                 
 		case mMessageCorrectAnswerStart:
+			mCorrectAnswerStart = true;
                         correctAnswer(byteBuffer);
                         break;
 		
@@ -92,8 +93,6 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 
 void GamePartido::correctAnswer(ByteBuffer* byteBuffer)
 {
-	mCorrectAnswerStart = true;
-
         mApplicationPartido->mStringCorrectAnswer.clear();
 
         int length = byteBuffer->ReadByte();
