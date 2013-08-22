@@ -38,10 +38,6 @@ void GamePlayPartidoShowCorrectAnswer::enter()
 	LogString("GamePlayPartidoShowCorrectAnswer::enter");
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
-	//reset text box 
-	//app->mStringCorrectAnswer.clear();
-        //app->mLabelCorrectAnswer->setCaption("");
-	
 	app->showCorrectAnswerScreen();
 	mGamePartido->mCorrectAnswerStart = false;
 }
@@ -53,6 +49,11 @@ void GamePlayPartidoShowCorrectAnswer::execute()
  	if (mGamePartido->mCorrectAnswerEnd)
         {
                 mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoBattle); 
+        }
+
+        if (mGamePartido->mBattleEnd)
+        {
+                mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoBattle);
         }
 }
 

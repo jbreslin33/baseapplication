@@ -79,7 +79,6 @@ void GamePlayPartidoBattle::execute()
                 mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlay); 
         }
 
-
 	if (mFirstTimeExecute)
 	{
 		for (int i = 0; i < 128; i++)
