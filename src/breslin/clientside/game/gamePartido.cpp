@@ -81,10 +81,6 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
                         break;
                 
 		case mMessageCorrectAnswerStart:
-			mCorrectAnswerStart = true;
-                        break;
-		
-		case mMessageCorrectAnswer:
                         correctAnswer(byteBuffer);
                         break;
 		
@@ -96,7 +92,7 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 
 void GamePartido::correctAnswer(ByteBuffer* byteBuffer)
 {
-	mCorrectAnswer = true;
+	mCorrectAnswerStart = true;
 
         mApplicationPartido->mStringCorrectAnswer.clear();
 
@@ -106,17 +102,14 @@ void GamePartido::correctAnswer(ByteBuffer* byteBuffer)
                 char c =  byteBuffer->ReadByte();
                 mApplicationPartido->mStringCorrectAnswer.append(1,c);
         }
-        if (mApplicationPartido->mLabelQuestion && mApplicationPartido->mStringQuestion.size() > 0)
+        if (mApplicationPartido->mLabelCorrectAnswer && mApplicationPartido->mStringCorrectAnswer.size() > 0)
         {
-                mApplicationPartido->mLabelQuestion->setCaption(mApplicationPartido->mStringQuestion);
+                mApplicationPartido->mLabelCorrectAnswer->setCaption(mApplicationPartido->mStringCorrectAnswer);
         }
         else
         {
                 LogString("no label or no string");
         }
-
-        //reset mAnswerTime
-        mApplicationPartido->mAnswerTime = 0;
 }
 
 void GamePartido::askQuestion(ByteBuffer* byteBuffer)

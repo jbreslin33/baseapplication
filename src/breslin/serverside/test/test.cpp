@@ -240,7 +240,7 @@ void Test::sendCorrectAnswer(int questionID)
         {
 		//init message with type
                 mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-                mMessage.WriteByte(mClientPartido->mServerPartido->mMessageCorrectAnswer); // add type
+                mMessage.WriteByte(mClientPartido->mServerPartido->mMessageCorrectAnswerStart); // add type
 
 		//for browsers
                 if (mClientPartido->mClientID > 0)
