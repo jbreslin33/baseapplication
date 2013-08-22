@@ -176,8 +176,9 @@ SHOW_CORRECT_ANSWER* SHOW_CORRECT_ANSWER::Instance()
 
 void SHOW_CORRECT_ANSWER::enter(Quiz* quiz)
 {
-        LogString("SHOW_CORRECT_ANSWER:%d",quiz->mCombatant->mClientPartido->id);
-	quiz->mTest->sendCorrectAnswer(quiz->mTest->mQuestionID);
+        LogString("SHOW_CORRECT_ANSWER::enter %d",quiz->mCombatant->mClientPartido->id);
+	quiz->mTest->mClientPartido->sendSimpleMessage(quiz->mTest->mClientPartido->mServerPartido->mMessageCorrectAnswerStart);
+	//quiz->mTest->sendCorrectAnswer(quiz->mTest->mQuestionID);
 }
 
 void SHOW_CORRECT_ANSWER::execute(Quiz* quiz)

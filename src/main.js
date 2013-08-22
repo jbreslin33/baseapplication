@@ -60,6 +60,20 @@ window.addEvent('domready', function()
                                 mApplication.log('no game yet on client!');
                         }
 		}
+  
+		//mMessageCorrectAnswerStart
+                if (type == -61)
+                {
+                        if (mApplication.mGame)
+                        {
+                                mApplication.mGame.mCorrectAnswerStart = true;
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+
+                }
 
   		//mMessageShowCorrectAnswer
                 if (type == -62)
@@ -72,6 +86,20 @@ window.addEvent('domready', function()
                         {
                                 mApplication.log('no game yet on client!');
                         }
+                }
+ 		
+		//mMessageCorrectAnswerEnd
+                if (type == -63)
+                {
+                        if (mApplication.mGame)
+                        {
+                                mApplication.mGame.mCorrectAnswerEnd = true;
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+
                 }
 
   		//mMessageSetText

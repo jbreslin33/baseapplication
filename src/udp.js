@@ -360,7 +360,23 @@ server.on("message", function (msg, rinfo)
                         }
                 });
 	}
-  	
+    
+	//mMessageCorrectAnswerStart
+        if (type == -61)
+        {
+                var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+        }
+	
 	//mMessageShowCorrectAnswer
         if (type == -62)
         {
@@ -376,6 +392,22 @@ server.on("message", function (msg, rinfo)
                 }
 
                 var string = type + "," + questionString;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+        }
+
+	//mMessageCorrectAnswerEnd
+        if (type == -61)
+        {
+                var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
 
                 io.sockets.clients().forEach(function (socket)
                 {

@@ -42,15 +42,19 @@ virtual void hideMainScreen();
 void createBattleScreen();
 void showBattleScreen();
 void hideBattleScreen();
-
-//battle
 OgreBites::Label* mLabelQuestion;
 OgreBites::Label* mLabelAnswer;
-
 std::string mStringAnswer;
 std::string mStringQuestion;
+
+//correctAnswer
+void createCorrectAnswerScreen();
+void showCorrectAnswerScreen();
+void hideCorrectAnswerScreen();
+OgreBites::Label* mLabelCorrectAnswer;
 std::string mStringCorrectAnswer;
 
+//time
 unsigned short mAnswerTime;
 
 void sendAnswer();

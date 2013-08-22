@@ -32,7 +32,9 @@ public:
         static const int mMessageAnswerQuestionBrowser = -85;
 
 	//correctAnswer
-        static const int mMessageShowCorrectAnswer     = -62;
+        static const int mMessageCorrectAnswerStart = -61;
+        static const int mMessageCorrectAnswer      = -62;
+        static const int mMessageCorrectAnswerEnd   = -63;
 	
 	//battle
 	static const int mMessageBattleStart = -75; 

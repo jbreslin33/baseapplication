@@ -69,7 +69,7 @@ void GamePlayPartidoBattle::execute()
 	}
 */
 
-	if (mGamePartido->mShowCorrectAnswer)
+	if (mGamePartido->mCorrectAnswerStart)
 	{
                 mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoShowCorrectAnswer); 
 	}
@@ -135,6 +135,7 @@ void GamePlayPartidoBattle::execute()
 
 void GamePlayPartidoBattle::exit()
 {
+	LogString("GamePlayPartido::exit");
 	mGamePartido->mApplicationPartido->hideBattleScreen();
 	mGamePartido->mBattleEnd   = false;
 	mGamePartido->mBattleStart = false;

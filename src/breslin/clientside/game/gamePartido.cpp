@@ -29,10 +29,15 @@
 GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicationPartido)
 {
 	mApplicationPartido = applicationPartido;
+
+	//battle
 	mBattleStart = false;
 	mBattleEnd   = false;
-	mShowCorrectAnswerEnd = false;
-	mShowCorrectAnswer = false;
+
+	//correctAnswer
+	mCorrectAnswerStart = false;
+	mCorrectAnswer = false;
+	mCorrectAnswerEnd = false;
 }
 
 GamePartido::~GamePartido()
@@ -67,10 +72,6 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
                         askQuestion(byteBuffer);
                         break;
 
-                case mMessageShowCorrectAnswer:
-                        showCorrectAnswer(byteBuffer);
-                        break;
-
                 case mMessageBattleStart:
 			mBattleStart = true;
                         break;
@@ -78,12 +79,24 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
                 case mMessageBattleEnd:
 			mBattleEnd = true;
                         break;
+                
+		case mMessageCorrectAnswerStart:
+			mCorrectAnswerStart = true;
+                        break;
+		
+		case mMessageCorrectAnswer:
+                        correctAnswer(byteBuffer);
+                        break;
+		
+		case mMessageCorrectAnswerEnd:
+			mCorrectAnswerEnd = true;
+                        break;
         }
 }
 
-void GamePartido::showCorrectAnswer(ByteBuffer* byteBuffer)
+void GamePartido::correctAnswer(ByteBuffer* byteBuffer)
 {
-	mShowCorrectAnswer = true;
+	mCorrectAnswer = true;
 
         mApplicationPartido->mStringCorrectAnswer.clear();
 

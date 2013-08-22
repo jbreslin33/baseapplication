@@ -35,108 +35,35 @@ GamePlayPartidoShowCorrectAnswer::~GamePlayPartidoShowCorrectAnswer()
 
 void GamePlayPartidoShowCorrectAnswer::enter()
 {
+	LogString("GamePlayPartidoShowCorrectAnswer::enter");
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
 	//reset text box 
-	app->mStringAnswer.clear();
-        app->mLabelQuestion->setCaption("");
-        app->mLabelAnswer->setCaption("");
+	app->mStringCorrectAnswer.clear();
+        app->mLabelCorrectAnswer->setCaption("");
 	
-	app->showBattleScreen();
-	mGamePartido->mBattleStart = false;
-      
-	app->mAnswerTime = 0;
- 
-	//set mKeyArray to false 
-	for (int i = 0; i < 128; i++)
-	{
-        	mGamePartido->mApplicationPartido->mKeyArray[i] = false;
-	}
-	mFirstTimeExecute = true;
+	app->showCorrectAnswerScreen();
+	mGamePartido->mCorrectAnswerStart = false;
 }
 
 void GamePlayPartidoShowCorrectAnswer::execute()
 {
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
-/*
-	if (app->mAnswerTime > 2000) //overtime....
-	{
-		app->mStringAnswer = "oot";		
-		LogString("sendAnswer via time");
-		app->sendAnswer();
-		app->mAnswerTime = 0;
-	}
-*/
-
- 	if (mGamePartido->mBattleEnd)
+ 	if (mGamePartido->mCorrectAnswerEnd)
         {
-                mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlay); 
+                mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoBattle); 
         }
-
-
-	if (mFirstTimeExecute)
-	{
-		for (int i = 0; i < 128; i++)
-		{
-        		mGamePartido->mApplicationPartido->mKeyArray[i] = false;
-		}
-		mFirstTimeExecute = false;
-	}
-
-	if (app->mLabelFocus == app->mLabelAnswer)
-	{
-        	if (app->mKeyArray[8]) //backspace
-                {
-                        app->mKeyArray[8] = false;
-                        int size = app->mStringAnswer.size();
-                        if (size > 0)
-                        {
-                                app->mStringAnswer.resize(size - 1);
-                        }
-                        app->mLabelAnswer->setCaption(app->mStringAnswer);
-                }
-
-                for (int i = 47; i < 123; i++)
-                {
-                        if (app->mKeyArray[i])
-                        {
-                                app->mKeyArray[i] = false;
-                                char ascii = (char)i;
-                                app->mStringAnswer.append(1,ascii);
-                                app->mLabelAnswer->setCaption(app->mStringAnswer);
-                        }
-                }
-		
-		if (app->mKeyArray[13]) //enter
-                {
-                        app->mKeyArray[13] = false;
-			LogString("sendAnswer via enter");
-                        app->sendAnswer();
-                        app->mStringQuestion.clear();
-                        app->mStringAnswer.clear();
-                        app->mLabelQuestion->setCaption("");
-                        app->mLabelAnswer->setCaption("");
-                }
-	
-		//set mKeyArray to false 
-		for (int i = 0; i < 128; i++)
-		{
-        		mGamePartido->mApplicationPartido->mKeyArray[i] = false;
-		}
-
-	}
 }
 
 void GamePlayPartidoShowCorrectAnswer::exit()
 {
-	mGamePartido->mApplicationPartido->hideBattleScreen();
-	mGamePartido->mBattleEnd   = false;
-	mGamePartido->mBattleStart = false;
+	mGamePartido->mApplicationPartido->hideCorrectAnswerScreen();
+	mGamePartido->mCorrectAnswerStart = false;
+	mGamePartido->mCorrectAnswer      = false;
+	mGamePartido->mCorrectAnswerEnd   = false;
 	
 	//reset text box 
-	mGamePartido->mApplicationPartido->mStringQuestion.clear();
-	mGamePartido->mApplicationPartido->mStringAnswer.clear();
-        mGamePartido->mApplicationPartido->mLabelQuestion->setCaption("");
-        mGamePartido->mApplicationPartido->mLabelAnswer->setCaption("");
+	mGamePartido->mApplicationPartido->mStringCorrectAnswer.clear();
+        mGamePartido->mApplicationPartido->mLabelCorrectAnswer->setCaption("");
 }

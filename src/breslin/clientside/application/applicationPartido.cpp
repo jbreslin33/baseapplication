@@ -82,6 +82,11 @@ void ApplicationPartido::processUpdate()
 		createBattleScreen();
 		showBattleScreen();
 		hideBattleScreen();
+		
+		//correctAnswer screen init...
+		createCorrectAnswerScreen();
+		showCorrectAnswerScreen();
+		hideCorrectAnswerScreen();
 
 		//login init
                 createLoginScreen();
@@ -143,7 +148,6 @@ void  ApplicationPartido::createBattleScreen()
         if (!mLabelQuestion)
         {
                 mLabelQuestion  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelQuestion", "Question:");
-
         }
 
         if (!mLabelAnswer)
@@ -174,6 +178,30 @@ void  ApplicationPartido::hideBattleScreen()
         mTrayMgr->removeWidgetFromTray(mLabelQuestion);
         mTrayMgr->removeWidgetFromTray(mLabelAnswer);
 }
+
+//correctAnswer
+void  ApplicationPartido::createCorrectAnswerScreen()
+{
+        if (!mLabelCorrectAnswer)
+        {
+                mLabelCorrectAnswer  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelCorrectAnswer", "CorrectAnswer:");
+        }
+}
+
+void  ApplicationPartido::showCorrectAnswerScreen()
+{
+        mTrayMgr->moveWidgetToTray(mLabelCorrectAnswer,OgreBites::TL_CENTER);
+        mLabelCorrectAnswer->show();
+        mTrayMgr->hideCursor();
+        mLabelFocus = mLabelCorrectAnswer;
+}
+
+void  ApplicationPartido::hideCorrectAnswerScreen()
+{
+        mLabelCorrectAnswer->hide();
+        mTrayMgr->removeWidgetFromTray(mLabelCorrectAnswer);
+}
+
 
 void ApplicationPartido::sendAnswer()
 {

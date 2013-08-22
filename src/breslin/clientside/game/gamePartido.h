@@ -37,7 +37,9 @@ static const char mMessageBattleStart = -75;
 static const char mMessageBattleEnd   = -74;
 
 //showCorrectAnswer
-static const char mMessageShowCorrectAnswer = -62;
+static const char mMessageCorrectAnswerStart = -61;
+static const char mMessageCorrectAnswer = -62;
+static const char mMessageCorrectAnswerEnd = -63;
 
 //states
 virtual void createStates();
@@ -45,12 +47,16 @@ virtual void setStates();
 
 virtual void checkByteBuffer(ByteBuffer* byteBuffer);
 void askQuestion(ByteBuffer* byteBuffer);
-void showCorrectAnswer(ByteBuffer* byteBuffer);
+void correctAnswer(ByteBuffer* byteBuffer);
 
+//battle
 bool mBattleStart;
 bool mBattleEnd;
-bool mShowCorrectAnswer;
-bool mShowCorrectAnswerEnd;
+
+//correctAnswer
+bool mCorrectAnswerStart;
+bool mCorrectAnswer;
+bool mCorrectAnswerEnd;
 };
 
 #endif
