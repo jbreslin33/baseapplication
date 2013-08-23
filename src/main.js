@@ -81,6 +81,7 @@ window.addEvent('domready', function()
                 {
                         if (mApplication.mGame)
                         {
+                                mApplication.mGame.mCorrectAnswerStart = true;
                                 mApplication.mGame.correctAnswer(byteBuffer);
                         }
                         else

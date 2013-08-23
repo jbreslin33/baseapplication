@@ -21,6 +21,11 @@ initialize: function(applicationPartido)
 
 	this.mBattleStart = false;
 	this.mBattleEnd   = false;
+
+	//correctAnswer
+	this.mCorrectAnswerStart = false;
+	this.mCorrectAnswerEnd   = false;
+
 },
 
 log: function(msg)
@@ -35,6 +40,7 @@ createStates: function()
 {
         this.mGamePlay              = new GamePlayPartido(this);
         this.mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
+        this.mGamePlayPartidoCorrectAnswer = new GamePlayPartidoCorrectAnswer(this);
 },
 
 setStates: function()
@@ -63,9 +69,11 @@ askQuestion: function(byteBuffer)
 
 correctAnswer: function(byteBuffer)
 {
+	this.log('correctAnswer called');
         this.mApplicationPartido.mStringCorrectAnswer = '';
 
-        this.mApplicationPartido.mStringCorrectAnswerQuestion = byteBuffer.readByte();
+        this.mApplicationPartido.mStringCorrectAnswer = byteBuffer.readByte();
+	this.log('mStringCorrectAnswer:' + this.mApplicationPartido.mStringCorrectAnswer);
 
         if (this.mApplicationPartido.mLabelCorrectAnswer)
         {

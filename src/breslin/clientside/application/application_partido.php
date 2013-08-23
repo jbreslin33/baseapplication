@@ -14,16 +14,21 @@ initialize: function(serverIP, serverPort)
 	//battle
         this.mLabelQuestion = 0;
         this.mLabelAnswer = 0;
-	
 	this.mStringQuestion = '';
 	this.mStringAnswer = '';
-	
-	this.mAnswerTime = 0;
 
-	//battleScreen
 	this.createBattleScreen();
 	this.showBattleScreen();
 	this.hideBattleScreen();
+	this.mAnswerTime = 0;
+	
+	//correctAnswer
+	this.mLabelCorrectAnswer = 0;
+	this.mStringCorrectAnswer = '';
+	this.createCorrectAnswerScreen();
+	this.showCorrectAnswerScreen();
+	this.hideCorrectAnswerScreen();
+	
 },
 
 
@@ -125,6 +130,26 @@ hideBattleScreen: function()
 {
         this.mLabelQuestion.style.display="none";
         this.mLabelAnswer.style.display="none";
+},
+
+//correctAnswer
+createCorrectAnswerScreen: function()
+{
+        if (this.mLabelCorrectAnswer == 0)
+        {
+                this.mLabelCorrectAnswer = this.createLabel(300,75,100,25,"yellow","CorrectAnswer:");
+        }
+},
+
+showCorrectAnswerScreen: function()
+{
+        this.mLabelCorrectAnswer.style.display="block";
+},
+
+
+hideCorrectAnswerScreen: function()
+{
+        this.mLabelCorrectAnswer.style.display="none";
 },
 
 sendAnswer: function()

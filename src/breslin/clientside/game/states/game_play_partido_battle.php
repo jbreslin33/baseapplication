@@ -38,6 +38,13 @@ execute: function()
 */
 
 	this.mGamePartido.mApplicationPartido.mLabelAnswer.focus();
+
+	if (this.mGamePartido.mCorrectAnswerStart)
+        {
+		this.log('mCorrectAnswerStart true');
+                this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlayPartidoCorrectAnswer);
+        }
+
 	//check for end of batlle
 	if (this.mGamePartido.mBattleEnd)
         {

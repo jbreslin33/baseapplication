@@ -24,7 +24,7 @@ execute: function()
 {
 	if (this.mGamePartido.mCorrectAnswerEnd)
         {
-                mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlayPartidoBattle);
+                this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlayPartidoBattle);
         }
 
         if (this.mGamePartido.mBattleEnd)
