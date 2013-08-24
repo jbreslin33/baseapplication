@@ -19,7 +19,7 @@ int answer_time;
 int user_id; 
 
 void set(int i, int q, std::string a, double aat, int at, int uid);
-
+void dbInsert();
 };
 
 #endif
