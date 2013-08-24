@@ -3,6 +3,8 @@
 
 #include <string>
 
+class Utility;
+
 class QuestionAttempts 
 {
 public:
@@ -10,6 +12,8 @@ public:
 QuestionAttempts();
 QuestionAttempts(int i, int q, std::string a, double aat, int at, int uid);
 virtual ~QuestionAttempts();
+
+Utility* mUtility;
 
 int id;
 int question_id;

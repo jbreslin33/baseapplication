@@ -1,5 +1,6 @@
 #include "questionAttempts.h"
 #include "../tdreamsock/dreamSockLog.h"
+#include "../../utility/utility.h"
 
 //postgresql
 #include <stdio.h>
@@ -13,6 +14,7 @@ QuestionAttempts::QuestionAttempts()
 	answer_attempt_time = 0.0;
 	answer_time = 0;
 	user_id = 0;
+	mUtility = new Utility();
 }
 
 QuestionAttempts::QuestionAttempts(int i, int q, std::string a, double aat, int at, int uid)
@@ -25,6 +27,7 @@ QuestionAttempts::QuestionAttempts(int i, int q, std::string a, double aat, int 
 	user_id = uid;
 
 	//lets try a db insert...
+	dbInsert();
 }
 
 QuestionAttempts::~QuestionAttempts()
@@ -40,9 +43,20 @@ void QuestionAttempts::dbInsert()
         int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-        std::string query = "select * from users WHERE username != 'root' ORDER BY id LIMIT 3";
+       	//std::string query = "select * from users WHERE username != 'root' ORDER BY id LIMIT 3";
+	std::string query = "insert into questions_attempts (question_id, answer, answer_time, user_id) values ("; 
+	query.append(mUtility->intToString(question_id));
+	query.append(",'");
+	query.append(answer);
+	query.append("',");
+	query.append(mUtility->intToString(answer_time));
+	query.append(",");
+	query.append(mUtility->intToString(user_id));
+	query.append(")");
+
         //query.append(mUtility->intToString(mNumberOfClients));
         const char * q = query.c_str();
+	LogString("q:%s",q);
         res = PQexec(conn,q);
 
         //res = PQexec(conn,"select * from users WHERE username != 'root' ORDER BY id LIMIT 4");

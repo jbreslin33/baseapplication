@@ -36,3 +36,12 @@ int Utility::stringToInt(std::string s)
 	int value = atoi(s.c_str());
 	return value;
 }
+
+std::string Utility::doubleToString(double d)
+{
+        ostringstream ss;
+        ss << d;
+	std::string s = ss.str();
+	return s;
+}
+

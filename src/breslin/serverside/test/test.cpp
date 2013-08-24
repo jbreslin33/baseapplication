@@ -283,12 +283,13 @@ void Test::sendCorrectAnswer(int questionID)
 
 void Test::readAnswer(int answerTime, std::string answer)
 {
+	LogString("Test::readAnswer");
         //clear answer string
         mStringAnswer.clear();
         mAnswerTime = answerTime;
         mStringAnswer = answer;
 
-        mClientPartido->mTest->insertAnswerAttempt(mQuestionID,mStringAnswer,mAnswerTime);
+        insertAnswerAttempt(mQuestionID,mStringAnswer,mAnswerTime);
 
         //if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
         if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0)

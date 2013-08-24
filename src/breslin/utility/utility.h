@@ -11,6 +11,7 @@ Utility();
 ~Utility();
 
 std::string intToString(int i);
+std::string doubleToString(double d);
 int stringToInt(std::string s);
 };
 #endif
