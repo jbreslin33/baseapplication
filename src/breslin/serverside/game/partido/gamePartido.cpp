@@ -52,6 +52,8 @@ void GamePartido::sendShapes(ClientPartido* clientPartido)
 
 void GamePartido::reset()
 {
+	mServerPartido->mGameTime = 0;	
+	LogString("Game Over");
 /*
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
@@ -84,6 +86,14 @@ void GamePartido::reset()
 
 bool GamePartido::checkForEndOfGame()
 {
+	if (mServerPartido->mGameTime > 30000)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 /*
 	//check for end of game
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
@@ -104,7 +114,7 @@ bool GamePartido::checkForEndOfGame()
 	
 	return true;
 */
-	return false;
+	//return false;
 }
 
 void GamePartido::createShapes()
