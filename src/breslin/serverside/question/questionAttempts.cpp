@@ -1,6 +1,10 @@
 #include "questionAttempts.h"
 #include "../tdreamsock/dreamSockLog.h"
 
+//postgresql
+#include <stdio.h>
+#include <postgresql/libpq-fe.h>
+
 QuestionAttempts::QuestionAttempts()
 {
 	id = 0;
