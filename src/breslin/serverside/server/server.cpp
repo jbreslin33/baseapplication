@@ -239,7 +239,6 @@ void Server::createClients()
                 {
                         clientRobust->addGame(mGameVector.at(i));
                 }
- 
 	}
         PQclear(res);
         PQfinish(conn);
