@@ -131,7 +131,10 @@ Client::~Client()
 */
 }
 
+void Client::reset()
+{
 
+}
 
 void Client::setSocketAddress(struct sockaddr *address)
 {

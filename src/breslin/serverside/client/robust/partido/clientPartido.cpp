@@ -46,6 +46,11 @@ ClientPartido::~ClientPartido()
 	delete mClientPartidoStateMachine;
 }
 
+void ClientPartido::reset()
+{
+	mTest->reset();
+}
+
 void ClientPartido::update()
 {
 	ClientRobust::update();

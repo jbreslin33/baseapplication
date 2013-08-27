@@ -39,6 +39,33 @@ Test::~Test()
 {
 }
 
+void Test::reset()
+{
+	//also do db stuff...
+	for (int i = 0; i < mQuestionAttemptsVector.size(); i++)
+	{
+		mQuestionAttemptsVector.at(i)->dbInsert();
+	}
+	
+	//quiz
+	mQuiz = NULL;
+	mQuizLast = NULL;
+	
+	//question
+	mQuestionID = 0;
+	
+	//answer
+	mWaitingForAnswer = false;
+	mShowCorrectAnswer = false;
+	
+	//time
+	mAnswerTime = 0;
+        
+        mStateMachine->setPreviousState     (INIT_TEST::Instance());
+	mStateMachine->setCurrentState      (INIT_TEST::Instance());
+	
+}
+
 void Test::update()
 {
 	mStateMachine->update();

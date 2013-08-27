@@ -18,6 +18,12 @@
 //battle
 #include "../../battle/battle.h"
 
+//test
+#include "../../test/test.h"
+
+//questionAttempts
+#include "../../question/questionAttempts.h"
+
 #include <stdio.h>
 
 GamePartido::GamePartido(ServerPartido* serverPartido, int id) : Game(serverPartido,id)
@@ -54,6 +60,13 @@ void GamePartido::reset()
 {
 	mServerPartido->mGameTime = 0;	
 	LogString("Game Over");
+
+	//reset clients
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
+	{
+			mServerPartido->mClientPartidoVector.at(i)->reset();
+	}
+
 /*
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{

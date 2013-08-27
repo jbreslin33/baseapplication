@@ -21,8 +21,12 @@ public:
 	Test(ClientPartido* clientPartido);
 	~Test();
 
+void reset();
+
 void update();
 StateMachine<Test>* mStateMachine;
+
+
 
 //client
 ClientPartido* mClientPartido;
@@ -59,6 +63,7 @@ void sendCorrectAnswer(int questionID);
 //level
 int  getMaxLevelAskedID();
 bool checkLevel(int level);
+
 
 };
 

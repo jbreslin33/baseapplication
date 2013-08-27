@@ -27,7 +27,7 @@ QuestionAttempts::QuestionAttempts(int i, int q, std::string a, double aat, int 
 	user_id = uid;
 
 	//lets try a db insert...
-	dbInsert();
+	//dbInsert();
 }
 
 QuestionAttempts::~QuestionAttempts()
@@ -48,6 +48,8 @@ void QuestionAttempts::dbInsert()
 	query.append(",");
 	query.append(mUtility->intToString(user_id));
 	query.append(")");
+
+	LogString("dbInsert");
 
         const char * q = query.c_str();
         PQexec(conn,q);

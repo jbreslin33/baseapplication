@@ -115,5 +115,8 @@ public:
 	Utility* mUtility;
 	
 	void sendSimpleMessage(int message);
+
+	virtual void reset();
+
 };
 #endif

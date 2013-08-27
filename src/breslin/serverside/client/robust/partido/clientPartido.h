@@ -43,6 +43,9 @@ virtual void setGame(int gameID);
 ShapePartido* mShapePartido;
 void setShape(ShapePartido* shapePartido);
 
+//reset
+virtual void reset();
+
 //update
 virtual void update();
 
