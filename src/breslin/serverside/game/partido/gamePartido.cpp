@@ -17,6 +17,7 @@
 
 //battle
 #include "../../battle/battle.h"
+#include "../../battle/states/battleStates.h"
 
 //test
 #include "../../test/test.h"
@@ -42,7 +43,6 @@ void GamePartido::update()
 	
 	if (checkForEndOfGame())
 	{
-		LogString("endOFGAME!!!!!!!!!!!!!!!!!!!!!!");
 		reset();		
 	}
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
@@ -58,15 +58,23 @@ void GamePartido::sendShapes(ClientPartido* clientPartido)
 
 void GamePartido::reset()
 {
-	mServerPartido->mGameTime = 0;	
-	LogString("Game Over");
+	LogString("GamePartido::reset");
+
+	//end all battles...
+        for (unsigned int i = 0; i < mBattleVector.size(); i++)
+	{
+		//mBattleVector.at(i)->reset();
+		mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
+	}
+
 
 	//reset clients
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
-			mServerPartido->mClientPartidoVector.at(i)->reset();
+		mServerPartido->mClientPartidoVector.at(i)->reset();
 	}
 
+	mServerPartido->mGameTime = 0;	
 /*
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{

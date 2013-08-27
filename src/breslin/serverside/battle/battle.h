@@ -25,22 +25,11 @@ GamePartido* mGamePartido;
 Combatant* mHomeCombatant;
 Combatant* mAwayCombatant;
 
-int mBattleScore;
-std::string mBattleRecordText;
-
 // battle time
 long mBattleTime;
 long mBattleStartTime;
 long mBattleEndTime;
 long mBattleLengthTime;
-
-void sendBattleStart();
-void sendBattleEnd();
-void scoreBattle(int result);
-void resetBattle();
-void resetRecords();
-void resetOpponents();
-void setBattleRecordText();
 
 
 };
