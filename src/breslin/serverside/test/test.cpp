@@ -45,7 +45,10 @@ void Test::reset()
 	for (int i = 0; i < mQuestionAttemptsVector.size(); i++)
 	{
 		mQuestionAttemptsVector.at(i)->dbInsert();
+		mQuestionAttemptsVector.at(i) = NULL;
+		delete mQuestionAttemptsVector.at(i);
 	}
+	mQuestionAttemptsVector.clear();
 	
 	//quiz
 	mQuiz = NULL;
