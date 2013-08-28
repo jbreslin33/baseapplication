@@ -60,12 +60,23 @@ void GamePartido::reset()
 {
 	LogString("GamePartido::reset");
 
-	//end all battles...
+	//let's end battles gracefully
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
-		//mBattleVector.at(i)->reset();
 		mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
 	}
+	
+
+
+	//then delete battles	
+/*
+        for (unsigned int i = 0; i < mBattleVector.size(); i++)
+	{
+		mBattleVector.at(i) = NULL;
+		delete mBattleVector.at(i);
+		//mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
+	}
+	mBattleVector.clear();
 
 
 	//reset clients
@@ -74,6 +85,7 @@ void GamePartido::reset()
 		mServerPartido->mClientPartidoVector.at(i)->reset();
 	}
 
+*/
 	mServerPartido->mGameTime = 0;	
 /*
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)

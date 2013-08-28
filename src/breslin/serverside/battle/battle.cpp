@@ -16,7 +16,6 @@ using namespace Ogre;
 
 Battle::Battle(GamePartido* gamePartido, ClientPartido* homeClient, ClientPartido* awayClient)
 {
-
 	mGamePartido = gamePartido;
 
 	//make 2 Combatants a home and away
@@ -41,6 +40,8 @@ Battle::Battle(GamePartido* gamePartido, ClientPartido* homeClient, ClientPartid
 
 Battle::~Battle()
 {
+	delete mHomeCombatant;
+	delete mAwayCombatant;
 	delete mStateMachine;
 }
 void Battle::update()

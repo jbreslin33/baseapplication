@@ -88,11 +88,12 @@ void NORMAL_COMBATANT::enter(Combatant* combatant)
 }
 void NORMAL_COMBATANT::execute(Combatant* combatant)
 {
-	if (combatant->mBattle->mStateMachine->currentState() == OVER_BATTLE::Instance())
+	if (combatant->mBattle)
 	{
-		//let internet client know to start a battle
-		combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
-                combatant->mStateMachine->changeState(YIELD::Instance());
+		if (combatant->mBattle->mStateMachine->currentState() == OVER_BATTLE::Instance())
+		{
+                	combatant->mStateMachine->changeState(YIELD::Instance());
+		}
 	}
 }
 void NORMAL_COMBATANT::exit(Combatant* combatant)
@@ -114,29 +115,7 @@ YIELD* YIELD::Instance()
 void YIELD::enter(Combatant* combatant)
 {
 	LogString("YIELD:%d:",combatant->mClientPartido->id);
- 	//reset opponent pointers and vars for answers...
-/*
-        mBattleScore      = 0;
-
-        mQuestionString   = "";
-
-        //relieve your last opponents last opponent if it was you
-        if (mShapePartido->mOpponentLast)
-        {
-                if (mShapePartido->mOpponentLast->mOpponentLast == mShapePartido)
-                {
-                        mShapePartido->mOpponentLast->mOpponentLast = NULL;
-                }
-        }
-
-        //set your last opponent
-        mShapePartido->mOpponentLast = mShapePartido->mOpponent;
-
-        //clear you opponent
-        mShapePartido->mOpponent = NULL;
-
-        mShapePartido->mCollidable = true;
-*/
+	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
 }
 void YIELD::execute(Combatant* combatant)
 {

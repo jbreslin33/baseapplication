@@ -32,11 +32,11 @@ Test::Test(ClientPartido* clientPartido)
         mStateMachine->setCurrentState      (INIT_TEST::Instance());
         mStateMachine->setPreviousState     (INIT_TEST::Instance());
         mStateMachine->setGlobalState       (GLOBAL_TEST::Instance());
-
 }
 
 Test::~Test()
 {
+	delete mStateMachine;	
 }
 
 void Test::reset()

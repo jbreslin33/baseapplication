@@ -34,6 +34,8 @@ Quiz::Quiz(Combatant* combatant)
 
 Quiz::~Quiz()
 {
+	delete mTest;
+	delete mStateMachine;
 }
 
 void Quiz::update()
