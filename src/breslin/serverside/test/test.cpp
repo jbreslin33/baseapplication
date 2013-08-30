@@ -313,7 +313,6 @@ void Test::sendCorrectAnswer(int questionID)
 
 void Test::readAnswer(int answerTime, std::string answer)
 {
-	LogString("Test::readAnswer");
         //clear answer string
         mStringAnswer.clear();
         mAnswerTime = answerTime;

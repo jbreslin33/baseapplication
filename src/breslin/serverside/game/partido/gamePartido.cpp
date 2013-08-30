@@ -66,7 +66,8 @@ void GamePartido::reset()
 		mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
 	}
 	
-	//then delete battles	
+	//then delete battles	actually not so fast let's wait till end for this.
+/*
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
 		mBattleVector.at(i) = NULL;
@@ -74,7 +75,7 @@ void GamePartido::reset()
 		//mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
 	}
 	mBattleVector.clear();
-
+*/
 
 	//reset clients
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)

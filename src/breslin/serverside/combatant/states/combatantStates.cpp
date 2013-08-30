@@ -53,7 +53,7 @@ INIT_COMBATANT* INIT_COMBATANT::Instance()
 }
 void INIT_COMBATANT::enter(Combatant* combatant)
 {
-	//LogString("INIT_COMBAT:%d:",combatant->mClientPartido->id);
+	LogString("INIT_COMBAT:%d:",combatant->mClientPartido->id);
 }
 void INIT_COMBATANT::execute(Combatant* combatant)
 {
@@ -84,7 +84,7 @@ NORMAL_COMBATANT* NORMAL_COMBATANT::Instance()
 }
 void NORMAL_COMBATANT::enter(Combatant* combatant)
 {
-	//LogString("NORMAL_COMBATANT:%d:",combatant->mClientPartido->id);
+	LogString("NORMAL_COMBATANT:%d:",combatant->mClientPartido->id);
 }
 void NORMAL_COMBATANT::execute(Combatant* combatant)
 {
@@ -114,7 +114,7 @@ YIELD* YIELD::Instance()
 }
 void YIELD::enter(Combatant* combatant)
 {
-	LogString("YIELD:%d:",combatant->mClientPartido->id);
+	LogString("YIELD:enter%d:",combatant->mClientPartido->id);
 	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
 }
 void YIELD::execute(Combatant* combatant)
