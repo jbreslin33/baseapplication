@@ -67,6 +67,15 @@ void GamePartido::reset()
 	}
 	
 	//then delete battles	actually not so fast let's wait till end for this.
+
+	//reset clients
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
+	{
+		mServerPartido->mClientPartidoVector.at(i)->reset();
+	}
+
+	mServerPartido->mGameTime = 0;	
+
 /*
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
@@ -76,14 +85,6 @@ void GamePartido::reset()
 	}
 	mBattleVector.clear();
 */
-
-	//reset clients
-        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
-	{
-		mServerPartido->mClientPartidoVector.at(i)->reset();
-	}
-
-	mServerPartido->mGameTime = 0;	
 /*
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
