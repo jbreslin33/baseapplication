@@ -40,11 +40,15 @@ GamePartido::~GamePartido()
 void GamePartido::update()
 {
 	Game::update();
-	
+
+	//let's reset for a turn	
 	if (checkForEndOfGame())
 	{
 		reset();		
 	}
+
+	
+
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
 		mBattleVector.at(i)->update();
@@ -69,6 +73,10 @@ void GamePartido::reset()
 	//then delete battles	actually not so fast let's wait till end for this.
 
 	//maybe send all clients a message to freeze for db?????
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
+	{
+		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameEnd);
+	}
 
 	//reset clients
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
@@ -77,6 +85,10 @@ void GamePartido::reset()
 	}
 
 	//maybe send all clients a message to unfreeze for db?????
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
+	{
+		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameStart);
+	}
 
 	mServerPartido->mGameTime = 0;	
 

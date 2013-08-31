@@ -20,11 +20,11 @@
 #include "states/applicationMainPartido.h"
 #include "states/applicationInitialize.h"
 #include "states/applicationPlayPartido.h"
+#include "states/applicationGameReset.h"
 
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
 	mAnswerTime = 0;
-
 }
 
 ApplicationPartido::~ApplicationPartido()
@@ -60,6 +60,7 @@ void ApplicationPartido::createStates()
         mApplicationLogin      = new ApplicationLogin  (this);
         mApplicationMain       = new ApplicationMainPartido  (this);
         mApplicationPlay       = new ApplicationPlayPartido(this);
+        mApplicationGameReset  = new ApplicationGameReset(this);
 }
 
 void ApplicationPartido::setStates()

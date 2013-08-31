@@ -29,6 +29,7 @@
 #include "states/applicationMain.h"
 #include "states/applicationInitialize.h"
 #include "states/applicationPlay.h"
+#include "states/applicationGameReset.h"
 
 
 /***************************************
@@ -57,6 +58,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mRenderTime = 0.0f;
 
 	//game
+	mGameReset = false;
 	setGame(NULL);
 
 	mStateMachine = new StateMachine();
@@ -270,6 +272,16 @@ void ApplicationBreslin::checkForByteBuffer()
 		if (type == mMessageLeaveGame)
 		{
 			mLeaveGame = true;
+		}
+
+		if (type == mMessageGameStart)
+		{
+			mGameReset = false;
+		}
+		
+		if (type == mMessageGameEnd)
+		{
+			mGameReset = true;
 		}
 
 		//pass on to game if there is one....

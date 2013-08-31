@@ -29,6 +29,7 @@ State* mGamePlayPartidoBattle;
 State* mGamePlayPartidoShowCorrectAnswer;
 
 // constants
+
 //question
 static const char mMessageAskQuestion = -76;
 

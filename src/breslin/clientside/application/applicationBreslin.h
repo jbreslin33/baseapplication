@@ -37,6 +37,7 @@ State* mApplicationInitialize;
 State* mApplicationLogin;
 State* mApplicationMain;
 State* mApplicationPlay;
+State* mApplicationGameReset;
 
 //constants
 static const char mMessageServerExit  = 3;
@@ -50,6 +51,9 @@ static const char mMessageLoggedOut   = -114;
 static const char mMessageJoinGame    = -107;
 static const char mMessageDisconnect  = -102;
 static const char mMessageLeaveGame   =  -99;
+static const char mMessageGameStart   =  -57;
+static const char mMessageGameEnd     =  -58;
+
 
 //Network
 Network*     mNetwork;
@@ -165,6 +169,10 @@ bool mouseMoved (const OIS::MouseEvent &arg );
 protected:
 virtual bool keyPressed  ( const OIS::KeyEvent &arg );
 virtual bool keyReleased ( const OIS::KeyEvent &arg );
+
+public:
+//reset
+bool mGameReset;
 
 };
 

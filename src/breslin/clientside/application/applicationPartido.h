@@ -22,6 +22,8 @@ GamePartido* getGame();
 virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);
 
 static const char mMessageAnswerQuestion  = -84;
+static const char mMessageGameStart  = -57;
+static const char mMessageGameEnd    = -58;
 
 //main
 OgreBites::Button* mButtonJoinGameB;

@@ -1,5 +1,5 @@
 //header
-#include "applicationPlayPartido.h"
+#include "applicationGameReset.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
@@ -22,24 +22,24 @@
 /***************************************
 *	CONSTRUCTORS
 ***************************************/
-ApplicationPlayPartido::ApplicationPlayPartido(ApplicationPartido* applicationPartido) : ApplicationPlay(applicationPartido)
+ApplicationGameReset::ApplicationGameReset(ApplicationBreslin* applicationBreslin) 
 {
-	mApplicationPartido = applicationPartido;
+	mApplicationBreslin = applicationBreslin;
 }
 
-ApplicationPlayPartido::~ApplicationPlayPartido()
+ApplicationGameReset::~ApplicationGameReset()
 {
 
 }
 
-void ApplicationPlayPartido::enter()
+void ApplicationGameReset::enter()
 {
-	ApplicationPlay::enter();
 }
 
-void ApplicationPlayPartido::execute()
+void ApplicationGameReset::execute()
 {
   //check for logout as well....
+/*
         if (this->mApplicationPartido->mLoggedIn == false )
         {
                 this->mApplicationPartido->mStateMachine->changeState(this->mApplicationPartido->mApplicationLogin);
@@ -86,10 +86,12 @@ void ApplicationPlayPartido::execute()
                         mApplicationPartido->getGame()->processUpdate();
                 }
         }
+*/
 }
 
-void ApplicationPlayPartido::exit()
+void ApplicationGameReset::exit()
 {
+/*
  	mApplicationPartido->mPlayingGame = false;
         mApplicationPartido->mLeaveGame = false;
         if (mApplicationPartido->getGame())
@@ -97,4 +99,5 @@ void ApplicationPlayPartido::exit()
                 mApplicationPartido->getGame()->remove();
                 mApplicationPartido->setGame(NULL);
         }
+*/
 }

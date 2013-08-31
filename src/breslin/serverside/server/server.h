@@ -81,6 +81,11 @@ public:
 	const char *mLocalIP;
 
 	//codes
+
+	//db
+	static const int mMessageGameStart               = -57;
+	static const int mMessageGameEnd                 = -58;
+
 	//frames
 	static const int mMessageFrame 	                = 1;
 	static const int mMessageFrameBrowser     	= 2;
