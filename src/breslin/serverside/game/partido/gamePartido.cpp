@@ -68,11 +68,15 @@ void GamePartido::reset()
 	
 	//then delete battles	actually not so fast let's wait till end for this.
 
+	//maybe send all clients a message to freeze for db?????
+
 	//reset clients
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
 		mServerPartido->mClientPartidoVector.at(i)->reset();
 	}
+
+	//maybe send all clients a message to unfreeze for db?????
 
 	mServerPartido->mGameTime = 0;	
 
