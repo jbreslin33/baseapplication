@@ -41,6 +41,7 @@ createStates: function()
         this.mGamePlay              = new GamePlayPartido(this);
         this.mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
         this.mGamePlayPartidoCorrectAnswer = new GamePlayPartidoCorrectAnswer(this);
+ 	this.mGamePlayPartidoReset = new GamePlayPartidoReset(this);
 },
 
 setStates: function()

@@ -101,8 +101,34 @@ window.addEvent('domready', function()
                         {
                                 mApplication.log('no game yet on client!');
                         }
-
                 }
+
+		//mMessageGameResetStart
+                if (type == -57)
+                {
+                        if (mApplication.mGame)
+                        {
+                                mApplication.mGameReset = true;
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+                }
+
+             	//mMessageGameResetEnd
+                if (type == -58)
+                {
+                        if (mApplication.mGame)
+                        {
+                                mApplication.mGameReset = false;
+                        }       
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+                }
+
 
   		//mMessageSetText
                 if (type == -66)

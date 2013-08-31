@@ -451,6 +451,38 @@ server.on("message", function (msg, rinfo)
                 });
 	}
 
+ 	//mMessageGameResetStart
+        if (type == -57)
+        {
+                var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+        }
+ 	
+	//mMessageGameResetEnd
+        if (type == -58)
+        {
+                var clientID = msg.readInt8(1);
+                var string = type;
+                string = string + "," + clientID;
+
+                io.sockets.clients().forEach(function (socket)
+                {
+                        if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+        }
+
 	//mMessageConnected
  	if (type == -90)
         {

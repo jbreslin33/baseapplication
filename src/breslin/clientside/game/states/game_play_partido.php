@@ -29,6 +29,11 @@ execute: function()
         {
                 this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlayPartidoBattle);
         }
+        
+        if (this.mGamePartido.mApplicationPartido.mGameReset)
+        {
+                this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlayPartidoReset);
+        }
 
 	this.parent()
 },	

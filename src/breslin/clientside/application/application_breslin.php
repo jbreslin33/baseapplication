@@ -113,6 +113,8 @@ initialize: function(serverIP, serverPort)
  	this.createLoadingScreen();
         this.showLoadingScreen();
 
+	//reset
+	this.mGameReset = false;
 },
 
 log: function(msg)

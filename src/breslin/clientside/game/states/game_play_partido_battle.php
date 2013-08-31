@@ -23,6 +23,10 @@ enter: function()
 	
 	this.mGamePartido.mApplicationPartido.showBattleScreen();
 	this.mGamePartido.mBattleStart = false;
+        this.mGamePartido.mBattleEnd = false;
+        this.mGamePartido.mCorrectAnswerStart = false;
+        this.mGamePartido.mApplicationPartido->mGameReset = false;
+
 	this.mGamePartido.mApplicationPartido.mAnswerTime = 0;
 },
 
@@ -49,6 +53,11 @@ execute: function()
 	if (this.mGamePartido.mBattleEnd)
         {
                	this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlay);
+        }
+       
+	if (this.mGamePartido.mApplicationPartido.mGameReset)
+        {
+                this.mGamePartido.mStateMachine.changeState(this.mGamePartido.mGamePlayPartidoReset);
         }
 	
 	//for enter
