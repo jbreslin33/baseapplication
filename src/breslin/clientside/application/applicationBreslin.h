@@ -37,7 +37,6 @@ State* mApplicationInitialize;
 State* mApplicationLogin;
 State* mApplicationMain;
 State* mApplicationPlay;
-State* mApplicationGameReset;
 
 //constants
 static const char mMessageServerExit  = 3;
@@ -171,7 +170,6 @@ virtual bool keyPressed  ( const OIS::KeyEvent &arg );
 virtual bool keyReleased ( const OIS::KeyEvent &arg );
 
 public:
-//reset
 bool mGameReset;
 
 };

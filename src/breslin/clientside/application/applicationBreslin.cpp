@@ -29,7 +29,6 @@
 #include "states/applicationMain.h"
 #include "states/applicationInitialize.h"
 #include "states/applicationPlay.h"
-#include "states/applicationGameReset.h"
 
 
 /***************************************
@@ -53,12 +52,11 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mLoggedIn = false;
         mLeaveGame = false;
         mSentLeaveGame = false;
+	mGameReset = false;
 
 	//time
 	mRenderTime = 0.0f;
 
-	//game
-	mGameReset = false;
 	setGame(NULL);
 
 	mStateMachine = new StateMachine();

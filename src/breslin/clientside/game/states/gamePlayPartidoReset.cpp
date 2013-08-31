@@ -1,5 +1,5 @@
 //header
-#include "gamePlayPartidoShowCorrectAnswer.h"
+#include "gamePlayPartidoReset.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
@@ -22,29 +22,31 @@
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
-GamePlayPartidoShowCorrectAnswer::GamePlayPartidoShowCorrectAnswer(GamePartido* gamePartido)
+GamePlayPartidoReset::GamePlayPartidoReset(GamePartido* gamePartido)
 {
 	mGamePartido = gamePartido;
 }
 
-GamePlayPartidoShowCorrectAnswer::~GamePlayPartidoShowCorrectAnswer()
+GamePlayPartidoReset::~GamePlayPartidoReset()
 {
 
 }
 
-void GamePlayPartidoShowCorrectAnswer::enter()
+void GamePlayPartidoReset::enter()
 {
-	LogString("GamePlayPartidoShowCorrectAnswer::enter");
+	LogString("GamePlayPartidoReset::enter");
+/*
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
 	app->showCorrectAnswerScreen();
 	mGamePartido->mCorrectAnswerStart = false;
+*/
 }
 
-void GamePlayPartidoShowCorrectAnswer::execute()
+void GamePlayPartidoReset::execute()
 {
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
-
+/*
  	if (mGamePartido->mCorrectAnswerEnd)
         {
                 mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoBattle); 
@@ -54,10 +56,17 @@ void GamePlayPartidoShowCorrectAnswer::execute()
         {
                 mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoBattle);
         }
+ */       
+	if (!mGamePartido->mApplicationPartido->mGameReset)
+        {
+                mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlay);
+        }
 }
 
-void GamePlayPartidoShowCorrectAnswer::exit()
+void GamePlayPartidoReset::exit()
 {
+//	if (!mGamePartido->mApplicationPartido->mGameReset)
+/*
 	mGamePartido->mApplicationPartido->hideCorrectAnswerScreen();
 	mGamePartido->mCorrectAnswerStart = false;
 	mGamePartido->mCorrectAnswer      = false;
@@ -66,4 +75,5 @@ void GamePlayPartidoShowCorrectAnswer::exit()
 	//reset text box 
 	mGamePartido->mApplicationPartido->mStringCorrectAnswer.clear();
         mGamePartido->mApplicationPartido->mLabelCorrectAnswer->setCaption("");
+*/
 }

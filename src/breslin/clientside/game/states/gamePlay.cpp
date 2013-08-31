@@ -28,7 +28,7 @@ GamePlay::~GamePlay()
 
 void GamePlay::enter()
 {
-	
+	LogString("GamePlay::enter");	
 }
 void GamePlay::execute()
 {

@@ -54,6 +54,12 @@ void GamePlayPartidoShowCorrectAnswer::execute()
         {
                 mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoBattle);
         }
+
+        if (mGamePartido->mApplicationPartido->mGameReset)
+        {
+                mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoReset);
+        }
+
 }
 
 void GamePlayPartidoShowCorrectAnswer::exit()

@@ -1,5 +1,5 @@
-#ifndef GAMEPLAYPARTIDOSHOWCORRECTANSWER_H
-#define GAMEPLAYPARTIDOSHOWCORRECTANSWER_H
+#ifndef GAMEPLAYPARTIDORESET_H
+#define GAMEPLAYPARTIDORESET_H
 
 /***************************************
 *   		INCLUDES
@@ -13,7 +13,7 @@
 
 class GamePartido;
 
-class GamePlayPartidoShowCorrectAnswer : public State
+class GamePlayPartidoReset : public State
 {
 public:
 
@@ -24,8 +24,8 @@ public:
 GamePartido* mGamePartido;
 bool mFirstTimeExecute;
 
-GamePlayPartidoShowCorrectAnswer(GamePartido* gamePartido);
-~GamePlayPartidoShowCorrectAnswer();
+GamePlayPartidoReset(GamePartido* gamePartido);
+~GamePlayPartidoReset();
 
 void enter  ();
 void execute();

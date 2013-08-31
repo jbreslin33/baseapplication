@@ -80,12 +80,6 @@ void ApplicationPlayPartido::execute()
         }
         else
         {
-                //game
-		if (mApplicationPartido->mGameReset)
-		{
-                        mApplicationPartido->mStateMachine->changeState(mApplicationPartido->mApplicationGameReset);
-		}	
-               	
 		if (mApplicationPartido->getGame())
                 {
                         mApplicationPartido->getGame()->processUpdate();

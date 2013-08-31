@@ -129,7 +129,6 @@ set(HDRS
 	../clientside/application/states/applicationMainPartido.h
 	../clientside/application/states/applicationPlay.h
 	../clientside/application/states/applicationPlayPartido.h
-	../clientside/application/states/applicationGameReset.h
 	../clientside/application/states/applicationGlobal.h
 	../clientside/application/states/applicationInitialize.h
 	
@@ -140,6 +139,7 @@ set(HDRS
 	../clientside/game/states/gamePlayPartido.h
 	../clientside/game/states/gamePlayPartidoBattle.h
 	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.h
+	../clientside/game/states/gamePlayPartidoReset.h
 
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
@@ -197,7 +197,6 @@ set(SRCS
 	../clientside/application/states/applicationMainPartido.cpp
 	../clientside/application/states/applicationPlay.cpp
 	../clientside/application/states/applicationPlayPartido.cpp
-	../clientside/application/states/applicationGameReset.cpp
 	../clientside/application/states/applicationGlobal.cpp
 	../clientside/application/states/applicationInitialize.cpp
 	
@@ -208,6 +207,7 @@ set(SRCS
 	../clientside/game/states/gamePlayPartido.cpp
 	../clientside/game/states/gamePlayPartidoBattle.cpp
 	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.cpp
+	../clientside/game/states/gamePlayPartidoReset.cpp
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp
@@ -279,7 +279,6 @@ set(HDRS
 	../clientside/application/states/applicationMainPartido.h
 	../clientside/application/states/applicationPlay.h
 	../clientside/application/states/applicationPlayPartido.h
-	../clientside/application/states/applicationGameReset.h
 	../clientside/application/states/applicationGlobal.h
 	../clientside/application/states/applicationInitialize.h
 	
@@ -290,6 +289,7 @@ set(HDRS
 	../clientside/game/states/gamePlayPartido.h
 	../clientside/game/states/gamePlayPartidoBattle.h
 	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.h
+	../clientside/game/states/gamePlayPartidoReset.h
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
@@ -346,7 +346,6 @@ set(SRCS
 	../clientside/application/states/applicationMainPartido.cpp
 	../clientside/application/states/applicationPlay.cpp
 	../clientside/application/states/applicationPlayPartido.cpp
-	../clientside/application/states/applicationGameReset.cpp
 	../clientside/application/states/applicationGlobal.cpp
 	../clientside/application/states/applicationInitialize.cpp
 
@@ -357,6 +356,7 @@ set(SRCS
 	../clientside/game/states/gamePlayPartido.cpp
 	../clientside/game/states/gamePlayPartidoBattle.cpp
 	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.cpp
+	../clientside/game/states/gamePlayPartidoReset.cpp
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp

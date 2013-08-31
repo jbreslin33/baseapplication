@@ -28,6 +28,7 @@ GamePlayPartido::~GamePlayPartido()
 
 void GamePlayPartido::enter()
 {
+	LogString("GamePlayPartido::enter");
 	GamePlay::enter();
 }
 void GamePlayPartido::execute()
@@ -36,6 +37,12 @@ void GamePlayPartido::execute()
 	{
 		mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoBattle);		
 	}
+
+        if (mGamePartido->mApplicationPartido->mGameReset)
+        {
+                mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoReset);
+        }
+
 	GamePlay::execute();
 }
 

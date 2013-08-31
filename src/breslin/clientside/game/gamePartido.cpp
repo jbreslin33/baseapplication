@@ -22,6 +22,7 @@
 #include "states/gamePlayPartido.h"
 #include "states/gamePlayPartidoBattle.h"
 #include "states/gamePlayPartidoShowCorrectAnswer.h"
+#include "states/gamePlayPartidoReset.h"
 
 /***************************************
 *			          CONSTRUCTORS
@@ -49,6 +50,7 @@ void GamePartido::createStates()
    	mGamePlay              = new GamePlayPartido(this);
    	mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
    	mGamePlayPartidoShowCorrectAnswer = new GamePlayPartidoShowCorrectAnswer(this);
+   	mGamePlayPartidoReset = new GamePlayPartidoReset(this);
 }
 
 void GamePartido::setStates()

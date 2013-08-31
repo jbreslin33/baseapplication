@@ -12,6 +12,7 @@
 class ApplicationPartido;
 class GamePlayPartidoBattle;
 class GamePlayPartidoShowCorrectAnswer;
+class GamePlayPartidoReset;
 
 class GamePartido : public Game 
 {
@@ -27,6 +28,7 @@ ApplicationPartido* mApplicationPartido;
 //states
 State* mGamePlayPartidoBattle;
 State* mGamePlayPartidoShowCorrectAnswer;
+State* mGamePlayPartidoReset;
 
 // constants
 

@@ -35,6 +35,7 @@ GamePlayPartidoBattle::~GamePlayPartidoBattle()
 
 void GamePlayPartidoBattle::enter()
 {
+	LogString("GamePlayPartidoBattle::enter");
 	ApplicationPartido* app = mGamePartido->mApplicationPartido;
 
 	//reset text box 
@@ -44,6 +45,9 @@ void GamePlayPartidoBattle::enter()
 	
 	app->showBattleScreen();
 	mGamePartido->mBattleStart = false;
+ 	mGamePartido->mBattleEnd = false;
+	mGamePartido->mCorrectAnswerStart = false;
+	mGamePartido->mApplicationPartido->mGameReset = false;
       
 	app->mAnswerTime = 0;
  
@@ -77,6 +81,11 @@ void GamePlayPartidoBattle::execute()
  	if (mGamePartido->mBattleEnd)
         {
                 mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlay); 
+        }
+ 	
+	if (mGamePartido->mApplicationPartido->mGameReset)
+        {
+                mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoReset); 
         }
 
 	if (mFirstTimeExecute)
@@ -134,7 +143,6 @@ void GamePlayPartidoBattle::execute()
 
 void GamePlayPartidoBattle::exit()
 {
-	LogString("GamePlayPartido::exit");
 	mGamePartido->mApplicationPartido->hideBattleScreen();
 	mGamePartido->mBattleEnd   = false;
 	mGamePartido->mBattleStart = false;
