@@ -2,5 +2,5 @@ cd node
 ./configure
 sudo make
 sudo make install
-curl http://npmjs.org/install.sh
-sudo npm install -d
+echo XXcurl http://npmjs.org/install.sh
+echo XXsudo npm install -d

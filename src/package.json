@@ -1,9 +1,9 @@
 {
-     "name": "mukhin_chat",
-     "description": "example chat application with socket.io",
+     "name": "breslinode",
+     "description": "network helper for network game",
      "version": "0.0.1",
      "dependencies": {
-        "express": "2.4.6",
-        "socket.io": "0.8.4"
+        "express": "3.3.7",
+        "socket.io": "0.9"
      }
 }
