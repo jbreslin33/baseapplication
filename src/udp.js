@@ -8,8 +8,37 @@ process.argv.forEach(function (val, index, array) {
   console.log(index + ': ' + val);
 });
 
-var app = require('express').createServer()
-var io = require('socket.io').listen(app);
+//new
+var express = require('express')
+//, routes = require('./routes')
+, http = require('http');
+ 
+var app = express();
+var serverDude = app.listen(mListenPort);
+var io = require('socket.io').listen(serverDude);
+ 
+//app.configure(function(){
+//;app.set('views', __dirname + '/views');
+//app.set('view engine', 'jade');
+//app.use(express.favicon());
+//app.use(express.logger('dev'));
+//app.use(express.static(__dirname + '/public'));
+//app.use(express.bodyParser());
+//app.use(express.methodOverride());
+//app.use(app.router);
+//});
+ 
+//app.configure('development', function(){
+//app.use(express.errorHandler());
+//});
+ 
+//app.get('/', routes.index);
+ 
+//console.log("Express server listening on port 3000");
+
+//old
+//var app = require('express').createServer()
+//var io = require('socket.io').listen(app);
 io.set('log level', 1); //reduce logging
 var dgram = require("dgram");
 var server = dgram.createSocket("udp4");
@@ -28,7 +57,7 @@ mCommandOriginZ      = 4;
 mCommandRotationX    = 8;
 mCommandRotationZ    = 16;
 
-app.listen(mListenPort);
+//app.listen(mListenPort);
 
 // routing
 app.get('/', function (req, res) {
