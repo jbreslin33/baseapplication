@@ -25,7 +25,7 @@ enter: function()
 	this.mGamePartido.mBattleStart = false;
         this.mGamePartido.mBattleEnd = false;
         this.mGamePartido.mCorrectAnswerStart = false;
-        this.mGamePartido.mApplicationPartido->mGameReset = false;
+        this.mGamePartido.mApplicationPartido.mGameReset = false;
 
 	this.mGamePartido.mApplicationPartido.mAnswerTime = 0;
 },
