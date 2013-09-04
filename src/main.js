@@ -109,6 +109,7 @@ window.addEvent('domready', function()
                         if (mApplication.mGame)
                         {
                                 mApplication.mGameReset = true;
+                                mApplication.log('mGameReset in main.js = true');
                         }
                         else
                         {
@@ -122,6 +123,7 @@ window.addEvent('domready', function()
                         if (mApplication.mGame)
                         {
                                 mApplication.mGameReset = false;
+                                mApplication.log('mGameReset in main.js = false');
                         }       
                         else
                         {
