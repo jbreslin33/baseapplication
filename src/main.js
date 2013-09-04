@@ -103,13 +103,13 @@ window.addEvent('domready', function()
                         }
                 }
 
-		//mMessageGameResetStart
+		//mMessageGameStart
                 if (type == -57)
                 {
                         if (mApplication.mGame)
                         {
-                                mApplication.mGameReset = true;
-                                mApplication.log('mGameReset in main.js = true');
+                                mApplication.mGameReset = false;
+                                mApplication.log('mGameReset in main.js = false');
                         }
                         else
                         {
@@ -117,13 +117,13 @@ window.addEvent('domready', function()
                         }
                 }
 
-             	//mMessageGameResetEnd
+             	//mMessageGameEnd
                 if (type == -58)
                 {
                         if (mApplication.mGame)
                         {
-                                mApplication.mGameReset = false;
-                                mApplication.log('mGameReset in main.js = false');
+                                mApplication.mGameReset = true;
+                                mApplication.log('mGameReset in main.js = true');
                         }       
                         else
                         {
