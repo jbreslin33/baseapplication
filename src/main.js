@@ -246,18 +246,25 @@ window.addEvent('domready', function()
 				mIntervalCount++;
 		
 				//check if we stopped game loop	
-				if (mIntervalCount > 25)
+				if (mApplication.mGameReset)
 				{
-					//game loop stopped so let's clear interval and start a new one.	
-					mApplication.log('gameloop stopped');
-					//clear it
-					clearInterval(mInterval);
 
-					//set it again
-        				mInterval=setInterval("mApplication.processUpdate()",32)
+				}
+				else
+				{
+					if (mIntervalCount > 25)
+					{
+						//game loop stopped so let's clear interval and start a new one.	
+						mApplication.log('gameloop stopped');
+					
+						//clear it
+						clearInterval(mInterval);
 
-					mIntervalCount = 0;
+						//set it again
+        					mInterval=setInterval("mApplication.processUpdate()",32)
 
+						mIntervalCount = 0;
+					}
 				}
                         	mApplication.mGame.readServerTick(byteBuffer);
 			}
