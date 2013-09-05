@@ -8,15 +8,15 @@ struct Telegram;
 
 
 /*******************************
-*      GlobalSteering
+*      GLOBAL_STEERING
 ******************************/
 
-class GlobalSteering : public State<Steering>
+class GLOBAL_STEERING : public State<Steering>
 {
 private:
-  GlobalSteering(){}
+  GLOBAL_STEERING(){}
 public:
-  static GlobalSteering* Instance();
+  static GLOBAL_STEERING* Instance();
   void enter  (Steering* steering);
   void execute(Steering* steering);
   void exit   (Steering* steering);
@@ -27,24 +27,24 @@ public:
 *      Steering
 ******************************/
 
-class Normal_Steering : public State<Steering>
+class NORMAL_STEERING : public State<Steering>
 {
 private:
-  Normal_Steering(){}
+  NORMAL_STEERING(){}
 public:
-  static Normal_Steering* Instance();
+  static NORMAL_STEERING* Instance();
   void enter  (Steering* steering);
   void execute(Steering* steering);
   void exit   (Steering* steering);
   bool onLetter(Steering* steering, Letter* letter);
 };
 
-class No_Steering : public State<Steering>
+class NO_STEERING : public State<Steering>
 {
 private:
-  No_Steering(){}
+  NO_STEERING(){}
 public:
-  static No_Steering* Instance();
+  static NO_STEERING* Instance();
   void enter  (Steering* steering);
   void execute(Steering* steering);
   void exit   (Steering* steering);

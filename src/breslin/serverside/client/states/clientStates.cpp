@@ -16,92 +16,21 @@
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalClient* GlobalClient::Instance()
+GLOBAL_CLIENT* GLOBAL_CLIENT::Instance()
 {
-  static GlobalClient instance;
+  static GLOBAL_CLIENT instance;
   return &instance;
 }
-void GlobalClient::enter(Client* client)
+void GLOBAL_CLIENT::enter(Client* client)
 {
 }
-void GlobalClient::execute(Client* client)
+void GLOBAL_CLIENT::execute(Client* client)
 {
 }
-void GlobalClient::exit(Client* client)
+void GLOBAL_CLIENT::exit(Client* client)
 {
 }
-bool GlobalClient::onLetter(Client* client, Letter* letter)
+bool GLOBAL_CLIENT::onLetter(Client* client, Letter* letter)
 {
 	return false;
-}
-
-/*****************************************
-*******       CLIENT STATES    ******************	
-****************************************/
-
-/*****************************************
-        DISCONNECTED      
-****************************************/
-Disconnected* Disconnected::Instance()
-{
-  static Disconnected instance;
-  return &instance; 
-} 
-void Disconnected::enter(Client* client)
-{
-}       
-void Disconnected::execute(Client* client)
-{
-}
-void Disconnected::exit(Client* client)
-{
-
-}
-bool Disconnected::onLetter(Client* client, Letter* letter)
-{
-	return false;	
-}
-
-/*****************************************
-	CONNECTING
-****************************************/
-Connecting* Connecting::Instance()
-{
-  static Connecting instance;
-  return &instance;
-}
-void Connecting::enter(Client* client)
-{
-}
-void Connecting::execute(Client* client)
-{
-}
-void Connecting::exit(Client* client)
-{
-}
-bool Connecting::onLetter(Client* client, Letter* letter)
-{
-	return false;	
-}
-
-/*****************************************
-	CONNECTED	
-****************************************/
-Connected* Connected::Instance()
-{
-  static Connected instance;
-  return &instance;
-}
-void Connected::enter(Client* client)
-{
-}
-void Connected::execute(Client* client)
-{
-}
-void Connected::exit(Client* client)
-{
-}
-bool Connected::onLetter(Client* client, Letter* letter)
-{
-	return false;	
 }

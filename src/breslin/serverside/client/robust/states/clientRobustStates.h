@@ -7,15 +7,15 @@ class ClientRobust;
 
 
 /*******************************
-*      GlobalClientRobust 
+*      GLOBAL_ROBUST 
 ******************************/
 
-class GlobalClientRobust : public State<ClientRobust>
+class GLOBAL_ROBUST : public State<ClientRobust>
 {
 private:
-  GlobalClientRobust(){}
+  GLOBAL_ROBUST(){}
 public:
-  static GlobalClientRobust* Instance();
+  static GLOBAL_ROBUST* Instance();
   void enter  (ClientRobust* clientRobust);
   void execute(ClientRobust* clientRobust);
   void exit   (ClientRobust* clientRobust);
@@ -26,48 +26,36 @@ public:
 *       CLIENT STATES 
 ******************************/
 
-class Ajax_Node : public State<ClientRobust>
+class LOGGED_OUT : public State<ClientRobust>
 {
 private:
-  Ajax_Node(){}
+  LOGGED_OUT(){}
 public:
-  static Ajax_Node* Instance();
+  static LOGGED_OUT* Instance();
   void enter  (ClientRobust* clientRobust);
   void execute(ClientRobust* clientRobust);
   void exit   (ClientRobust* clientRobust);
   bool onLetter(ClientRobust* clientRobust, Letter* letter);
 };
 
-class Logged_Out : public State<ClientRobust>
+class LOBBY : public State<ClientRobust>
 {
 private:
-  Logged_Out(){}
+  LOBBY(){}
 public:
-  static Logged_Out* Instance();
+  static LOBBY* Instance();
   void enter  (ClientRobust* clientRobust);
   void execute(ClientRobust* clientRobust);
   void exit   (ClientRobust* clientRobust);
   bool onLetter(ClientRobust* clientRobust, Letter* letter);
 };
 
-class Lobby : public State<ClientRobust>
+class GAME_MODE : public State<ClientRobust>
 {
 private:
-  Lobby(){}
+  GAME_MODE(){}
 public:
-  static Lobby* Instance();
-  void enter  (ClientRobust* clientRobust);
-  void execute(ClientRobust* clientRobust);
-  void exit   (ClientRobust* clientRobust);
-  bool onLetter(ClientRobust* clientRobust, Letter* letter);
-};
-
-class Game_Mode : public State<ClientRobust>
-{
-private:
-  Game_Mode(){}
-public:
-  static Game_Mode* Instance();
+  static GAME_MODE* Instance();
   void enter  (ClientRobust* clientRobust);
   void execute(ClientRobust* clientRobust);
   void exit   (ClientRobust* clientRobust);

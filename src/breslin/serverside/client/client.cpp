@@ -70,19 +70,20 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 
 	mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 
+	//fsm
 	mStateMachine =  new StateMachine<Client>(this);
+        mStateMachine->setCurrentState (NULL);
+        mStateMachine->setPreviousState(NULL);
+        mStateMachine->setGlobalState  (GLOBAL_CLIENT::Instance());
 
 	if (!address)
 	{
 		mConnectionState  = DREAMSOCK_DISCONNECTED;
-        	mStateMachine->setCurrentState      (Disconnected::Instance());
 	}
 	else
 	{
 		setSocketAddress(address);
 		mConnectionState  = DREAMSOCK_CONNECTING;
-        	mStateMachine->setCurrentState      (Connected::Instance());
-
 	}
 
 	if (mClientID >= 0)
@@ -102,9 +103,6 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 	{
 		mServer->addClient(this,false);
 	}
-
-        mStateMachine->setPreviousState     (NULL);
-        mStateMachine->setGlobalState       (GlobalClient::Instance());
 	
 	mServer->mBaseEntityVector.push_back(this);
 }

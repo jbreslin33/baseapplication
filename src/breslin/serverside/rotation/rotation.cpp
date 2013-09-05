@@ -29,9 +29,9 @@ Rotation::Rotation(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 	//rotation states
 	mStateMachine = new StateMachine<Rotation>(this);    //setup the state machine
-	mStateMachine->setCurrentState      (Normal_Rotation::Instance());
-	mStateMachine->setPreviousState     (Normal_Rotation::Instance());
-	mStateMachine->setGlobalState       (GlobalRotation::Instance());
+	mStateMachine->setCurrentState      (NORMAL_ROTATION::Instance());
+	mStateMachine->setPreviousState     (NORMAL_ROTATION::Instance());
+	mStateMachine->setGlobalState       (GLOBAL_ROTATION::Instance());
 }
 
 Rotation::~Rotation()

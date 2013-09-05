@@ -8,59 +8,19 @@ struct Telegram;
 
 
 /*******************************
-*      GlobalClient 
+*      GLOBAL_CLIENT 
 ******************************/
 
-class GlobalClient : public State<Client>
+class GLOBAL_CLIENT : public State<Client>
 {
 private:
-  GlobalClient(){}
+  GLOBAL_CLIENT(){}
 public:
-  static GlobalClient* Instance();
+  static GLOBAL_CLIENT* Instance();
   void enter  (Client* client);
   void execute(Client* client);
   void exit   (Client* client);
   bool onLetter(Client* client, Letter* letter);
 };
-
-/*******************************
-*       CLIENT STATES 
-******************************/
-class Disconnected : public State<Client>
-{
-private:
-  Disconnected(){}
-public:
-  static Disconnected* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
-
-class Connecting : public State<Client>
-{
-private:
-  Connecting(){}
-public:
-  static Connecting* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
-
-class Connected : public State<Client>
-{
-private:
-  Connected(){}
-public:
-  static Connected* Instance();
-  void enter  (Client* client);
-  void execute(Client* client);
-  void exit   (Client* client);
-  bool onLetter(Client* client, Letter* letter);
-};
-
 
 #endif

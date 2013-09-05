@@ -29,9 +29,9 @@ Steering::Steering(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
  	//steering states
 	mStateMachine =  new StateMachine<Steering>(this);
-	mStateMachine->setCurrentState      (Normal_Steering::Instance());
-	mStateMachine->setPreviousState     (Normal_Steering::Instance());
-	mStateMachine->setGlobalState       (GlobalSteering::Instance());
+	mStateMachine->setCurrentState      (NORMAL_STEERING::Instance());
+	mStateMachine->setPreviousState     (NORMAL_STEERING::Instance());
+	mStateMachine->setGlobalState       (GLOBAL_STEERING::Instance());
 
 	mSteeringForce = new Vector3D();
 	mTarget = new Vector3D();

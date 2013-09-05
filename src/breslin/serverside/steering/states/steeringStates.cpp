@@ -25,69 +25,69 @@
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalSteering* GlobalSteering::Instance()
+GLOBAL_STEERING* GLOBAL_STEERING::Instance()
 {
-  static GlobalSteering instance;
+  static GLOBAL_STEERING instance;
   return &instance;
 }
-void GlobalSteering::enter(Steering* steering)
+void GLOBAL_STEERING::enter(Steering* steering)
 {
 }
-void GlobalSteering::execute(Steering* steering)
+void GLOBAL_STEERING::execute(Steering* steering)
 {
 
 }
-void GlobalSteering::exit(Steering* steering)
+void GLOBAL_STEERING::exit(Steering* steering)
 {
 }
-bool GlobalSteering::onLetter(Steering* steering, Letter* letter)
+bool GLOBAL_STEERING::onLetter(Steering* steering, Letter* letter)
 {
         return true;
 }
 
 
 /*****************************************
-	Normal_Steering
+	NORMAL_STEERING
 ****************************************/
-Normal_Steering* Normal_Steering::Instance()
+NORMAL_STEERING* NORMAL_STEERING::Instance()
 {
-  static Normal_Steering instance;
+  static NORMAL_STEERING instance;
   return &instance;
 }
-void Normal_Steering::enter(Steering* steering)
+void NORMAL_STEERING::enter(Steering* steering)
 {
 	//LogString("Normal");
 }
-void Normal_Steering::execute(Steering* steering)
+void NORMAL_STEERING::execute(Steering* steering)
 {
 }
-void Normal_Steering::exit(Steering* steering)
+void NORMAL_STEERING::exit(Steering* steering)
 {
 }
-bool Normal_Steering::onLetter(Steering* steering, Letter* letter)
+bool NORMAL_STEERING::onLetter(Steering* steering, Letter* letter)
 {
         return true;
 }
 
 /*****************************************
-	No_Steering
+	NO_STEERING
 ****************************************/
-No_Steering* No_Steering::Instance()
+NO_STEERING* NO_STEERING::Instance()
 {
-	static No_Steering instance;
+	static NO_STEERING instance;
 	return &instance;
 }
-void No_Steering::enter(Steering* steering)
+void NO_STEERING::enter(Steering* steering)
 {
 	//LogString("No");
 }
-void No_Steering::execute(Steering* steering)
+void NO_STEERING::execute(Steering* steering)
 {
 }
-void No_Steering::exit(Steering* steering)
+void NO_STEERING::exit(Steering* steering)
 {
 }
-bool No_Steering::onLetter(Steering* steering, Letter* letter)
+bool NO_STEERING::onLetter(Steering* steering, Letter* letter)
 {
         return true;
 }

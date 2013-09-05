@@ -25,38 +25,38 @@
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalSeek* GlobalSeek::Instance()
+GLOBAL_SEEK* GLOBAL_SEEK::Instance()
 {
-  static GlobalSeek instance;
+  static GLOBAL_SEEK instance;
   return &instance;
 }
-void GlobalSeek::enter(Seek* seek)
+void GLOBAL_SEEK::enter(Seek* seek)
 {
 }
-void GlobalSeek::execute(Seek* seek)
+void GLOBAL_SEEK::execute(Seek* seek)
 {
 }
-void GlobalSeek::exit(Seek* seek)
+void GLOBAL_SEEK::exit(Seek* seek)
 {
 }
-bool GlobalSeek::onLetter(Seek* seek, Letter* letter)
+bool GLOBAL_SEEK::onLetter(Seek* seek, Letter* letter)
 {
         return true;
 }
 
 /*****************************************
-	Normal_Seek
+	NORMAL_SEEK
 ****************************************/
-Normal_Seek* Normal_Seek::Instance()
+NORMAL_SEEK* NORMAL_SEEK::Instance()
 {
-  static Normal_Seek instance;
+  static NORMAL_SEEK instance;
   return &instance;
 }
-void Normal_Seek::enter(Seek* seek)
+void NORMAL_SEEK::enter(Seek* seek)
 {
-	//LogString("Normal_Seek");
+	//LogString("NORMAL_SEEK");
 }
-void Normal_Seek::execute(Seek* seek)
+void NORMAL_SEEK::execute(Seek* seek)
 {
 	if (seek->mSeekShape || seek->mSeekPoint)
         {
@@ -70,7 +70,7 @@ void Normal_Seek::execute(Seek* seek)
 		
 		if (seek->mSeekLength <= 2) //close enough goto reachdestination
 		{
-                	seek->mStateMachine->changeState(Reached_Destination::Instance());
+                	seek->mStateMachine->changeState(REACHED_DESTINATION::Instance());
 		}
 		else //still not close enough seek on
 		{
@@ -82,34 +82,34 @@ void Normal_Seek::execute(Seek* seek)
         }
         else
         {
-                seek->mStateMachine->changeState(No_Seek::Instance());
+                seek->mStateMachine->changeState(NO_SEEK::Instance());
         }
 }
-void Normal_Seek::exit(Seek* seek)
+void NORMAL_SEEK::exit(Seek* seek)
 {
 }
-bool Normal_Seek::onLetter(Seek* seek, Letter* letter)
+bool NORMAL_SEEK::onLetter(Seek* seek, Letter* letter)
 {
         return true;
 }
 
 /*****************************************
-        Reached_Destination
+        REACHED_DESTINATION
 ****************************************/
-Reached_Destination* Reached_Destination::Instance()
+REACHED_DESTINATION* REACHED_DESTINATION::Instance()
 {
-        static Reached_Destination instance;
+        static REACHED_DESTINATION instance;
         return &instance;
 }
-void Reached_Destination::enter(Seek* seek)
+void REACHED_DESTINATION::enter(Seek* seek)
 {
-        //LogString("Reached_Destination");
+        //LogString("REACHED_DESTINATION");
 }
-void Reached_Destination::execute(Seek* seek)
+void REACHED_DESTINATION::execute(Seek* seek)
 {
         if (seek->mSeekShape == NULL && seek->mSeekPoint == NULL)
 	{
-                seek->mStateMachine->changeState(No_Seek::Instance());
+                seek->mStateMachine->changeState(NO_SEEK::Instance());
 	}
 	else
 	{
@@ -123,7 +123,7 @@ void Reached_Destination::execute(Seek* seek)
 
 		if (seek->mSeekLength > 2) //go to normal seek and seek on!
 		{
-                	seek->mStateMachine->changeState(Normal_Seek::Instance());
+                	seek->mStateMachine->changeState(NORMAL_SEEK::Instance());
 		}
 		else
 		{
@@ -132,10 +132,10 @@ void Reached_Destination::execute(Seek* seek)
 		}
 	}
 }
-void Reached_Destination::exit(Seek* seek)
+void REACHED_DESTINATION::exit(Seek* seek)
 {
 }
-bool Reached_Destination::onLetter(Seek* seek, Letter* letter)
+bool REACHED_DESTINATION::onLetter(Seek* seek, Letter* letter)
 {
         return true;
 }
@@ -143,18 +143,18 @@ bool Reached_Destination::onLetter(Seek* seek, Letter* letter)
 
 
 /*****************************************
-	No_Seek
+	NO_SEEK
 ****************************************/
-No_Seek* No_Seek::Instance()
+NO_SEEK* NO_SEEK::Instance()
 {
-	static No_Seek instance;
+	static NO_SEEK instance;
 	return &instance;
 }
-void No_Seek::enter(Seek* seek)
+void NO_SEEK::enter(Seek* seek)
 {
-	//LogString("No_Seek");
+	//LogString("NO_SEEK");
 }
-void No_Seek::execute(Seek* seek)
+void NO_SEEK::execute(Seek* seek)
 {
 	if (seek->mSeekShape == NULL && seek->mSeekPoint == NULL)
 	{
@@ -162,13 +162,13 @@ void No_Seek::execute(Seek* seek)
 	}
 	else
 	{
-		seek->mStateMachine->changeState(Normal_Seek::Instance());
+		seek->mStateMachine->changeState(NORMAL_SEEK::Instance());
 	}
 }
-void No_Seek::exit(Seek* seek)
+void NO_SEEK::exit(Seek* seek)
 {
 }
-bool No_Seek::onLetter(Seek* seek, Letter* letter)
+bool NO_SEEK::onLetter(Seek* seek, Letter* letter)
 {
         return true;
 }

@@ -60,9 +60,9 @@ ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientI
 
 	//states
         mClientRobustStateMachine =  new StateMachine<ClientRobust>(this);
-        mClientRobustStateMachine->setCurrentState      (Logged_Out::Instance());
+        mClientRobustStateMachine->setCurrentState      (LOGGED_OUT::Instance());
         mClientRobustStateMachine->setPreviousState     (NULL);
-        mClientRobustStateMachine->setGlobalState       (GlobalClientRobust::Instance());
+        mClientRobustStateMachine->setGlobalState       (GLOBAL_ROBUST::Instance());
 
 }
 

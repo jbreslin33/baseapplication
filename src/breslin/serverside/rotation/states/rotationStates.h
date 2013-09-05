@@ -8,15 +8,15 @@ struct Telegram;
 
 
 /*******************************
-*      GlobalRotation
+*      GLOBAL_ROTATION
 ******************************/
 
-class GlobalRotation : public State<Rotation>
+class GLOBAL_ROTATION : public State<Rotation>
 {
 private:
-  GlobalRotation(){}
+  GLOBAL_ROTATION(){}
 public:
-  static GlobalRotation* Instance();
+  static GLOBAL_ROTATION* Instance();
   void enter  (Rotation* rotation);
   void execute(Rotation* rotation);
   void exit   (Rotation* rotation);
@@ -28,48 +28,48 @@ public:
 *      ROTATION 
 ******************************/
 
-class Normal_Rotation : public State<Rotation>
+class NORMAL_ROTATION : public State<Rotation>
 {
 private:
-  Normal_Rotation(){}
+  NORMAL_ROTATION(){}
 public:
-  static Normal_Rotation* Instance();
+  static NORMAL_ROTATION* Instance();
   void enter  (Rotation* rotation);
   void execute(Rotation* rotation);
   void exit   (Rotation* rotation);
   bool onLetter(Rotation* rotation, Letter* letter);
 };
 
-class No_Rotation : public State<Rotation>
+class NO_ROTATION : public State<Rotation>
 {
 private:
-  No_Rotation(){}
+  NO_ROTATION(){}
 public:
-  static No_Rotation* Instance();
+  static NO_ROTATION* Instance();
   void enter  (Rotation* rotation);
   void execute(Rotation* rotation);
   void exit   (Rotation* rotation);
   bool onLetter(Rotation* rotation, Letter* letter);
 };
 
-class Accelerate_Rotation : public State<Rotation>
+class ACCELERATE_ROTATION : public State<Rotation>
 {
 private:
-  Accelerate_Rotation(){}
+  ACCELERATE_ROTATION(){}
 public:
-  static Accelerate_Rotation* Instance();
+  static ACCELERATE_ROTATION* Instance();
   void enter  (Rotation* rotation);
   void execute(Rotation* rotation);
   void exit   (Rotation* rotation);
   bool onLetter(Rotation* rotation, Letter* letter);
 };
 
-class Decelerate_Rotation : public State<Rotation>
+class DECELERATE_ROTATION : public State<Rotation>
 {
 private:
-  Decelerate_Rotation(){}
+  DECELERATE_ROTATION(){}
 public:
-  static Decelerate_Rotation* Instance();
+  static DECELERATE_ROTATION* Instance();
   void enter  (Rotation* rotation);
   void execute(Rotation* rotation);
   void exit   (Rotation* rotation);

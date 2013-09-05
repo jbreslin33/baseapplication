@@ -38,8 +38,8 @@ Move::Move(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
  	//move states
 	mStateMachine =  new StateMachine<Move>(this);
-	mStateMachine->setCurrentState      (Normal_Move::Instance());
-	mStateMachine->setPreviousState     (Normal_Move::Instance());
+	mStateMachine->setCurrentState      (NORMAL_MOVE::Instance());
+	mStateMachine->setPreviousState     (NORMAL_MOVE::Instance());
 	mStateMachine->setGlobalState       (NULL);
 }
 

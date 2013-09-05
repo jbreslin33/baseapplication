@@ -42,9 +42,9 @@ Avoid::Avoid(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
  	//avoid states
 	mStateMachine =  new StateMachine<Avoid>(this);
-	mStateMachine->setCurrentState      (Normal_Avoid::Instance());
-	mStateMachine->setPreviousState     (Normal_Avoid::Instance());
-	mStateMachine->setGlobalState       (GlobalAvoid::Instance());
+	mStateMachine->setCurrentState      (NORMAL_AVOID::Instance());
+	mStateMachine->setPreviousState     (NORMAL_AVOID::Instance());
+	mStateMachine->setGlobalState       (GLOBAL_AVOID::Instance());
 }
 
 Avoid::~Avoid()

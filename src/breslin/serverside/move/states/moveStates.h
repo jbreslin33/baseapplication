@@ -7,15 +7,15 @@ class Move;
 struct Telegram;
 
 /*******************************
-*      GlobalMove
+*      GLOBAL_MOVE
 ******************************/
 
-class GlobalMove : public State<Move>
+class GLOBAL_MOVE : public State<Move>
 {
 private:
-  GlobalMove(){}
+  GLOBAL_MOVE(){}
 public:
-  static GlobalMove* Instance();
+  static GLOBAL_MOVE* Instance();
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
@@ -26,48 +26,48 @@ public:
 /*******************************
 *      Move
 ******************************/
-class Normal_Move : public State<Move>
+class NORMAL_MOVE : public State<Move>
 {
 private:
-  Normal_Move(){}
+  NORMAL_MOVE(){}
 public:
-  static Normal_Move* Instance();
+  static NORMAL_MOVE* Instance();
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
   bool onLetter(Move* move, Letter* letter);
 };
 
-class No_Move : public State<Move>
+class NO_MOVE : public State<Move>
 {
 private:
-  No_Move(){}
+  NO_MOVE(){}
 public:
-  static No_Move* Instance();
+  static NO_MOVE* Instance();
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
   bool onLetter(Move* move, Letter* letter);
 };
 
-class Accelerate_Move : public State<Move>
+class ACCELERATE_MOVE : public State<Move>
 {
 private:
-  Accelerate_Move(){}
+  ACCELERATE_MOVE(){}
 public:
-  static Accelerate_Move* Instance();
+  static ACCELERATE_MOVE* Instance();
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
   bool onLetter(Move* move, Letter* letter);
 };
 
-class Decelerate_Move : public State<Move>
+class DECELERATE_MOVE : public State<Move>
 {
 private:
-  Decelerate_Move(){}
+  DECELERATE_MOVE(){}
 public:
-  static Decelerate_Move* Instance();
+  static DECELERATE_MOVE* Instance();
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);

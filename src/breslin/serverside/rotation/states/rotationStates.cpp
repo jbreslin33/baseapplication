@@ -24,56 +24,56 @@
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalRotation* GlobalRotation::Instance()
+GLOBAL_ROTATION* GLOBAL_ROTATION::Instance()
 {
-  static GlobalRotation instance;
+  static GLOBAL_ROTATION instance;
   return &instance;
 }
-void GlobalRotation::enter(Rotation* rotation)
+void GLOBAL_ROTATION::enter(Rotation* rotation)
 {
 }
-void GlobalRotation::execute(Rotation* rotation)
+void GLOBAL_ROTATION::execute(Rotation* rotation)
 {
 
 }
-void GlobalRotation::exit(Rotation* rotation)
+void GLOBAL_ROTATION::exit(Rotation* rotation)
 {
 }
-bool GlobalRotation::onLetter(Rotation* rotation, Letter* letter)
+bool GLOBAL_ROTATION::onLetter(Rotation* rotation, Letter* letter)
 {
         return true;
 }
 
 
-Normal_Rotation* Normal_Rotation::Instance()
+NORMAL_ROTATION* NORMAL_ROTATION::Instance()
 {
-  static Normal_Rotation instance;
+  static NORMAL_ROTATION instance;
   return &instance;
 }
-void Normal_Rotation::enter(Rotation* rotation)
+void NORMAL_ROTATION::enter(Rotation* rotation)
 {
 }
-void Normal_Rotation::execute(Rotation* rotation)
+void NORMAL_ROTATION::execute(Rotation* rotation)
 {
 	
 	if (rotation->mDegrees == 0)
 	{
-		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
+		if(rotation->mRotationSpeed > 0.0) //DECELERATE_ROTATION
 		{
-			rotation->mStateMachine->changeState(Decelerate_Rotation::Instance());
+			rotation->mStateMachine->changeState(DECELERATE_ROTATION::Instance());
 			return;
 		}
-        else //No_Rotation
+        else //NO_ROTATION
 		{
-			rotation->mStateMachine->changeState(No_Rotation::Instance());
+			rotation->mStateMachine->changeState(NO_ROTATION::Instance());
 			return;
 		}
 	}
 	else
 	{
-		if(rotation->mRotationSpeed < MAX_TURN_SPEED) //Accelerate_Rotation
+		if(rotation->mRotationSpeed < MAX_TURN_SPEED) //ACCELERATE_ROTATION
 		{
-			rotation->mStateMachine->changeState(Accelerate_Rotation::Instance());
+			rotation->mStateMachine->changeState(ACCELERATE_ROTATION::Instance());
 			return;
 		}
 	}
@@ -84,53 +84,53 @@ void Normal_Rotation::execute(Rotation* rotation)
 
 //rotation->mShape->mSceneNode->yaw(Degree(rotation->mDegrees * rotation->mShape->mClientFrametime * MAX_TURN_SPEED), Node::TS_WORLD);
 }
-void Normal_Rotation::exit(Rotation* rotation)
+void NORMAL_ROTATION::exit(Rotation* rotation)
 {
 }
-bool Normal_Rotation::onLetter(Rotation* rotation, Letter* letter)
+bool NORMAL_ROTATION::onLetter(Rotation* rotation, Letter* letter)
 {
         return true;
 }
 
-Accelerate_Rotation* Accelerate_Rotation::Instance()
+ACCELERATE_ROTATION* ACCELERATE_ROTATION::Instance()
 {
-  static Accelerate_Rotation instance;
+  static ACCELERATE_ROTATION instance;
   return &instance;
 }
-void Accelerate_Rotation::enter(Rotation* rotation)
+void ACCELERATE_ROTATION::enter(Rotation* rotation)
 {
 }
-void Accelerate_Rotation::execute(Rotation* rotation)
+void ACCELERATE_ROTATION::execute(Rotation* rotation)
 {
 	/*
 	if (rotation->mShape->mKey != 0)
 	{
-		rotation->mStateMachine->changeState(Normal_Rotation::Instance());
+		rotation->mStateMachine->changeState(NORMAL_ROTATION::Instance());
 		return;
 	}
 	*/
 	if (rotation->mDegrees == 0)
 	{
-		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
+		if(rotation->mRotationSpeed > 0.0) //DECELERATE_ROTATION
 		{
-			rotation->mStateMachine->changeState(Decelerate_Rotation::Instance());
+			rotation->mStateMachine->changeState(DECELERATE_ROTATION::Instance());
 			return;
 		}
-        else //No_Rotation
+        else //NO_ROTATION
 		{
-			rotation->mStateMachine->changeState(No_Rotation::Instance());
+			rotation->mStateMachine->changeState(NO_ROTATION::Instance());
 			return;
 		}
     }
 	else 
 	{
-        if(rotation->mRotationSpeed < MAX_TURN_SPEED) //Accelerate_Rotation
+        if(rotation->mRotationSpeed < MAX_TURN_SPEED) //ACCELERATE_ROTATION
 		{
 			rotation->mRotationSpeed += rotation->mRotationAccel;
 		}
-		else //Normal_Rotation 
+		else //NORMAL_ROTATION 
 		{
-			rotation->mStateMachine->changeState(Normal_Rotation::Instance());
+			rotation->mStateMachine->changeState(NORMAL_ROTATION::Instance());
 			return;
 		}
 	}
@@ -139,53 +139,53 @@ void Accelerate_Rotation::execute(Rotation* rotation)
 //	LogString("A:%f",rotation->mRotationSpeed);
 	rotation->mShape->mSceneNode->yaw(Degree(rotation->mDegrees * rotation->mShape->mGame->mServer->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
 }
-void Accelerate_Rotation::exit(Rotation* rotation)
+void ACCELERATE_ROTATION::exit(Rotation* rotation)
 {
 }
-bool Accelerate_Rotation::onLetter(Rotation* rotation, Letter* letter)
+bool ACCELERATE_ROTATION::onLetter(Rotation* rotation, Letter* letter)
 {
         return true;
 }
 
-Decelerate_Rotation* Decelerate_Rotation::Instance()
+DECELERATE_ROTATION* DECELERATE_ROTATION::Instance()
 {
-  static Decelerate_Rotation instance;
+  static DECELERATE_ROTATION instance;
   return &instance;
 }
-void Decelerate_Rotation::enter(Rotation* rotation)
+void DECELERATE_ROTATION::enter(Rotation* rotation)
 {
 }
-void Decelerate_Rotation::execute(Rotation* rotation)
+void DECELERATE_ROTATION::execute(Rotation* rotation)
 {
 	/*
 	if (rotation->mShape->mKey != 0)
 	{
-		rotation->mStateMachine->changeState(Normal_Rotation::Instance());
+		rotation->mStateMachine->changeState(NORMAL_ROTATION::Instance());
 		return;
 	}
 	*/
 	if (rotation->mDegrees == 0)
 	{
-		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
+		if(rotation->mRotationSpeed > 0.0) //DECELERATE_ROTATION
 		{
 			rotation->mRotationSpeed -= rotation->mRotationDecel;
 		}
-        else //No_Rotation
+        else //NO_ROTATION
 		{
-			rotation->mStateMachine->changeState(No_Rotation::Instance());
+			rotation->mStateMachine->changeState(NO_ROTATION::Instance());
 			return;
 		}
     }
 	else 
 	{
-        if(rotation->mRotationSpeed < MAX_TURN_SPEED) //Accelerate_Rotation
+        if(rotation->mRotationSpeed < MAX_TURN_SPEED) //ACCELERATE_ROTATION
 		{
-			rotation->mStateMachine->changeState(Accelerate_Rotation::Instance());
+			rotation->mStateMachine->changeState(ACCELERATE_ROTATION::Instance());
 			return;
 		}
-		else //Normal_Rotation 
+		else //NORMAL_ROTATION 
 		{
-			rotation->mStateMachine->changeState(Normal_Rotation::Instance());
+			rotation->mStateMachine->changeState(NORMAL_ROTATION::Instance());
 			return;
 		}
 	}
@@ -195,55 +195,55 @@ void Decelerate_Rotation::execute(Rotation* rotation)
 	rotation->mShape->mSceneNode->yaw(Degree(rotation->mDegrees * rotation->mShape->mGame->mServer->mFrameTime / 1000.0f * rotation->mRotationSpeed), Node::TS_WORLD);
 
 }
-void Decelerate_Rotation::exit(Rotation* rotation)
+void DECELERATE_ROTATION::exit(Rotation* rotation)
 {
 }
-bool Decelerate_Rotation::onLetter(Rotation* rotation, Letter* letter)
+bool DECELERATE_ROTATION::onLetter(Rotation* rotation, Letter* letter)
 {
         return true;
 }
 
 
-No_Rotation* No_Rotation::Instance()
+NO_ROTATION* NO_ROTATION::Instance()
 {
-  static No_Rotation instance;
+  static NO_ROTATION instance;
   return &instance;
 }
-void No_Rotation::enter(Rotation* rotation)
+void NO_ROTATION::enter(Rotation* rotation)
 {
 }
-void No_Rotation::execute(Rotation* rotation)
+void NO_ROTATION::execute(Rotation* rotation)
 {
 	if (rotation->mDegrees == 0)
 	{
-		if(rotation->mRotationSpeed > 0.0) //Decelerate_Rotation
+		if(rotation->mRotationSpeed > 0.0) //DECELERATE_ROTATION
 		{
-			rotation->mStateMachine->changeState(Decelerate_Rotation::Instance());
+			rotation->mStateMachine->changeState(DECELERATE_ROTATION::Instance());
 			return;
 		}
-        else //No_Rotation
+        else //NO_ROTATION
 		{
            rotation->mRotationSpeed = 0.0;
 		}
     }
 	else 
 	{
-        if(rotation->mRotationSpeed < MAX_TURN_SPEED) //Accelerate_Rotation
+        if(rotation->mRotationSpeed < MAX_TURN_SPEED) //ACCELERATE_ROTATION
 		{
-			rotation->mStateMachine->changeState(Accelerate_Rotation::Instance());
+			rotation->mStateMachine->changeState(ACCELERATE_ROTATION::Instance());
 			return;
 		}
-		else //Normal_Rotation
+		else //NORMAL_ROTATION
 		{
-			rotation->mStateMachine->changeState(Normal_Rotation::Instance());
+			rotation->mStateMachine->changeState(NORMAL_ROTATION::Instance());
 			return;
 		}
 	}
 }
-void No_Rotation::exit(Rotation* rotation)
+void NO_ROTATION::exit(Rotation* rotation)
 {
 }
-bool No_Rotation::onLetter(Rotation* rotation, Letter* letter)
+bool NO_ROTATION::onLetter(Rotation* rotation, Letter* letter)
 {
         return true;
 }

@@ -27,9 +27,9 @@ Seek::Seek(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
  	//seek states
 	mStateMachine =  new StateMachine<Seek>(this);
-	mStateMachine->setCurrentState      (Normal_Seek::Instance());
-	mStateMachine->setPreviousState     (Normal_Seek::Instance());
-	mStateMachine->setGlobalState       (GlobalSeek::Instance());
+	mStateMachine->setCurrentState      (NORMAL_SEEK::Instance());
+	mStateMachine->setPreviousState     (NORMAL_SEEK::Instance());
+	mStateMachine->setGlobalState       (GLOBAL_SEEK::Instance());
 }
 
 Seek::~Seek()

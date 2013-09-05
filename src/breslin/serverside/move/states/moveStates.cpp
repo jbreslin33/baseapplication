@@ -25,59 +25,59 @@
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalMove* GlobalMove::Instance()
+GLOBAL_MOVE* GLOBAL_MOVE::Instance()
 {
-  static GlobalMove instance;
+  static GLOBAL_MOVE instance;
   return &instance;
 }
-void GlobalMove::enter(Move* move)
+void GLOBAL_MOVE::enter(Move* move)
 {
 }
-void GlobalMove::execute(Move* move)
+void GLOBAL_MOVE::execute(Move* move)
 {
 }
-void GlobalMove::exit(Move* move)
+void GLOBAL_MOVE::exit(Move* move)
 {
 }
-bool GlobalMove::onLetter(Move* move, Letter* letter)
+bool GLOBAL_MOVE::onLetter(Move* move, Letter* letter)
 {
         return true;
 }
 
 
 /*****************************************
-	Normal_Move
+	NORMAL_MOVE
 ****************************************/
-Normal_Move* Normal_Move::Instance()
+NORMAL_MOVE* NORMAL_MOVE::Instance()
 {
-  static Normal_Move instance;
+  static NORMAL_MOVE instance;
   return &instance;
 }
-void Normal_Move::enter(Move* move)
+void NORMAL_MOVE::enter(Move* move)
 {
 	//LogString("Normal");
 }
-void Normal_Move::execute(Move* move)
+void NORMAL_MOVE::execute(Move* move)
 {
-	//check for No_move and Decelerate and Accelerate states..
+	//check for No_move and DECELERATE and ACCELARATE states..
     	if (move->mVelocity->isZero()) 
 	{
-		if(move->mRunSpeed > 0.0) //Decelerate_Move
+		if(move->mRunSpeed > 0.0) //DECELERATE_MOVE
 		{
-			move->mStateMachine->changeState(Decelerate_Move::Instance());
+			move->mStateMachine->changeState(DECELERATE_MOVE::Instance());
 			return;
 		}
-        	else //No_Move
+        	else //NO_MOVE
 		{
-			move->mStateMachine->changeState(No_Move::Instance());
+			move->mStateMachine->changeState(NO_MOVE::Instance());
 			return;
 		}
     	}
 	else 
 	{
-        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
+        	if(move->mRunSpeed < move->mSpeedMax) //ACCELERATE_MOVE
 		{
-			move->mStateMachine->changeState(Accelerate_Move::Instance());
+			move->mStateMachine->changeState(ACCELERATE_MOVE::Instance());
 			return;
 		}
 	}
@@ -89,98 +89,98 @@ void Normal_Move::execute(Move* move)
 		move->mVelocity->z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
 		Node::TS_WORLD);
 }
-void Normal_Move::exit(Move* move)
+void NORMAL_MOVE::exit(Move* move)
 {
 }
-bool Normal_Move::onLetter(Move* move, Letter* letter)
+bool NORMAL_MOVE::onLetter(Move* move, Letter* letter)
 {
         return true;
 }
 
 /*****************************************
-	No_Move
+	NO_MOVE
 ****************************************/
-No_Move* No_Move::Instance()
+NO_MOVE* NO_MOVE::Instance()
 {
-	static No_Move instance;
+	static NO_MOVE instance;
 	return &instance;
 }
-void No_Move::enter(Move* move)
+void NO_MOVE::enter(Move* move)
 {
 	//LogString("No");
 }
-void No_Move::execute(Move* move)
+void NO_MOVE::execute(Move* move)
 {
 	if (move->mVelocity->isZero()) 
 	{
-		if(move->mRunSpeed > 0.0) //Decelerate_Move
+		if(move->mRunSpeed > 0.0) //DECELERATE_MOVE
 		{
-			move->mStateMachine->changeState(Decelerate_Move::Instance());
+			move->mStateMachine->changeState(DECELERATE_MOVE::Instance());
 			return;
 		}
-        	else //No_Move
+        	else //NO_MOVE
 		{
            		move->mRunSpeed = 0.0;
 		}
     	}
 	else 
 	{
-        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
+        	if(move->mRunSpeed < move->mSpeedMax) //ACCELERATE_MOVE
 		{
-			move->mStateMachine->changeState(Accelerate_Move::Instance());
+			move->mStateMachine->changeState(ACCELERATE_MOVE::Instance());
 			return;
 		}
-		else //Normal_Move 
+		else //NORMAL_MOVE 
 		{
-			move->mStateMachine->changeState(Normal_Move::Instance());
+			move->mStateMachine->changeState(NORMAL_MOVE::Instance());
 			return;
 		}
 	}
 }
-void No_Move::exit(Move* move)
+void NO_MOVE::exit(Move* move)
 {
 }
-bool No_Move::onLetter(Move* move, Letter* letter)
+bool NO_MOVE::onLetter(Move* move, Letter* letter)
 {
         return true;
 }
 
 /*****************************************
-	Accelerate_Move
+	ACCELERATE_MOVE
 ****************************************/
-Accelerate_Move* Accelerate_Move::Instance()
+ACCELERATE_MOVE* ACCELERATE_MOVE::Instance()
 {
-	static Accelerate_Move instance;
+	static ACCELERATE_MOVE instance;
 	return &instance;
 }
-void Accelerate_Move::enter(Move* move)
+void ACCELERATE_MOVE::enter(Move* move)
 {
-	//LogString("Accelerate");
+	//LogString("ACCELARATE");
 }
-void Accelerate_Move::execute(Move* move)
+void ACCELERATE_MOVE::execute(Move* move)
 {
 	if (move->mVelocity->isZero()) 
 	{
-		if(move->mRunSpeed > 0.0) //Decelerate_Move
+		if(move->mRunSpeed > 0.0) //DECELERATE_MOVE
 		{
-			move->mStateMachine->changeState(Decelerate_Move::Instance());
+			move->mStateMachine->changeState(DECELERATE_MOVE::Instance());
 			return;
 		}
-        	else //No_Move
+        	else //NO_MOVE
 		{
-			move->mStateMachine->changeState(No_Move::Instance());
+			move->mStateMachine->changeState(NO_MOVE::Instance());
 			return;
 		}
     	}
 	else 
 	{
-        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
+        	if(move->mRunSpeed < move->mSpeedMax) //ACCELERATE_MOVE
 		{
 			move->mRunSpeed += move->mRunAccel;
 		}
-		else //Normal_Move 
+		else //NORMAL_MOVE 
 		{
-			move->mStateMachine->changeState(Normal_Move::Instance());
+			move->mStateMachine->changeState(NORMAL_MOVE::Instance());
 			return;
 		}
 	}
@@ -191,50 +191,50 @@ void Accelerate_Move::execute(Move* move)
 		move->mVelocity->z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
 		Node::TS_WORLD);
 }
-void Accelerate_Move::exit(Move* move)
+void ACCELERATE_MOVE::exit(Move* move)
 {
 }
-bool Accelerate_Move::onLetter(Move* move, Letter* letter)
+bool ACCELERATE_MOVE::onLetter(Move* move, Letter* letter)
 {
         return true;
 }
 
 /*****************************************
-	Decelerate_Move
+	DECELERATE_MOVE
 ****************************************/
-Decelerate_Move* Decelerate_Move::Instance()
+DECELERATE_MOVE* DECELERATE_MOVE::Instance()
 {
-	static Decelerate_Move instance;
+	static DECELERATE_MOVE instance;
 	return &instance;
 }
-void Decelerate_Move::enter(Move* move)
+void DECELERATE_MOVE::enter(Move* move)
 {
-	//LogString("Decelerate");
+	//LogString("DECELERATE");
 }
-void Decelerate_Move::execute(Move* move)
+void DECELERATE_MOVE::execute(Move* move)
 {
     	if (move->mVelocity->isZero()) 
 	{
-		if(move->mRunSpeed > 0.0) //Decelerate_Move
+		if(move->mRunSpeed > 0.0) //DECELERATE_MOVE
 		{
 			move->mRunSpeed -= move->mRunDecel;
 		}
-        	else //No_Move
+        	else //NO_MOVE
 		{
-			move->mStateMachine->changeState(No_Move::Instance());
+			move->mStateMachine->changeState(NO_MOVE::Instance());
 			return;
 		}
     	}
 	else 
 	{
-        	if(move->mRunSpeed < move->mSpeedMax) //Accelerate_Move
+        	if(move->mRunSpeed < move->mSpeedMax) //ACCELERATE_MOVE
 		{
-			move->mStateMachine->changeState(Accelerate_Move::Instance());
+			move->mStateMachine->changeState(ACCELERATE_MOVE::Instance());
 			return;
 		}
-		else //Normal_Move 
+		else //NORMAL_MOVE 
 		{
-			move->mStateMachine->changeState(Normal_Move::Instance());
+			move->mStateMachine->changeState(NORMAL_MOVE::Instance());
 			return;
 		}
 	}
@@ -245,10 +245,10 @@ void Decelerate_Move::execute(Move* move)
 		move->mVelocity->z  * move->mShape->mGame->mServer->mFrameTime / 1000.0f * move->mRunSpeed,
 		Node::TS_WORLD);
 }
-void Decelerate_Move::exit(Move* move)
+void DECELERATE_MOVE::exit(Move* move)
 {
 }
-bool Decelerate_Move::onLetter(Move* move, Letter* letter)
+bool DECELERATE_MOVE::onLetter(Move* move, Letter* letter)
 {
         return true;
 }

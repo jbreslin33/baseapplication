@@ -8,15 +8,15 @@ struct Telegram;
 
 
 /*******************************
-*      GlobalAvoid
+*      GLOBAL_AVOID
 ******************************/
 
-class GlobalAvoid : public State<Avoid>
+class GLOBAL_AVOID : public State<Avoid>
 {
 private:
-  GlobalAvoid(){}
+  GLOBAL_AVOID(){}
 public:
-  static GlobalAvoid* Instance();
+  static GLOBAL_AVOID* Instance();
   void enter  (Avoid* avoid);
   void execute(Avoid* avoid);
   void exit   (Avoid* avoid);
@@ -27,12 +27,12 @@ public:
 *      Avoid
 ******************************/
 
-class Normal_Avoid : public State<Avoid>
+class NORMAL_AVOID : public State<Avoid>
 {
 private:
-  Normal_Avoid(){}
+  NORMAL_AVOID(){}
 public:
-  static Normal_Avoid* Instance();
+  static NORMAL_AVOID* Instance();
   void enter  (Avoid* avoid);
   void execute(Avoid* avoid);
   void exit   (Avoid* avoid);
@@ -51,12 +51,12 @@ public:
   bool onLetter(Avoid* avoid, Letter* letter);
 };
 
-class No_Avoid : public State<Avoid>
+class NO_AVOID : public State<Avoid>
 {
 private:
-  No_Avoid(){}
+  NO_AVOID(){}
 public:
-  static No_Avoid* Instance();
+  static NO_AVOID* Instance();
   void enter  (Avoid* avoid);
   void execute(Avoid* avoid);
   void exit   (Avoid* avoid);

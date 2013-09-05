@@ -28,21 +28,21 @@
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
-GlobalAvoid* GlobalAvoid::Instance()
+GLOBAL_AVOID* GLOBAL_AVOID::Instance()
 {
-  static GlobalAvoid instance;
+  static GLOBAL_AVOID instance;
   return &instance;
 }
-void GlobalAvoid::enter(Avoid* avoid)
+void GLOBAL_AVOID::enter(Avoid* avoid)
 {
 }
-void GlobalAvoid::execute(Avoid* avoid)
+void GLOBAL_AVOID::execute(Avoid* avoid)
 {
         if (avoid->mAvoidVector.size() == 0)
         {
-		if (avoid->mStateMachine->currentState() != No_Avoid::Instance())
+		if (avoid->mStateMachine->currentState() != NO_AVOID::Instance())
 		{	
-                	avoid->mStateMachine->changeState(No_Avoid::Instance());
+                	avoid->mStateMachine->changeState(NO_AVOID::Instance());
 		}
         }
 	avoid->calculateClosestAvoidee();
@@ -50,35 +50,35 @@ void GlobalAvoid::execute(Avoid* avoid)
 	avoid->calculateDot();
 	avoid->setEvasiveVelocityToSeek();
 }
-void GlobalAvoid::exit(Avoid* avoid)
+void GLOBAL_AVOID::exit(Avoid* avoid)
 {
 }
-bool GlobalAvoid::onLetter(Avoid* avoid, Letter* letter)
+bool GLOBAL_AVOID::onLetter(Avoid* avoid, Letter* letter)
 {
         return true;
 }
 
 
 /*****************************************
-	Normal_Avoid
+	NORMAL_AVOID
 ****************************************/
-Normal_Avoid* Normal_Avoid::Instance()
+NORMAL_AVOID* NORMAL_AVOID::Instance()
 {
-  static Normal_Avoid instance;
+  static NORMAL_AVOID instance;
   return &instance;
 }
-void Normal_Avoid::enter(Avoid* avoid)
+void NORMAL_AVOID::enter(Avoid* avoid)
 {
-	//LogString("Normal_Avoid");
+	//LogString("NORMAL_AVOID");
 }
-void Normal_Avoid::execute(Avoid* avoid)
+void NORMAL_AVOID::execute(Avoid* avoid)
 {
 	if (avoid->mAvoidee)
 	{
 		if (avoid->mAvoidDot < .50) 
 		{
 			//just seek
-			avoid->mStateMachine->changeState(No_Avoid::Instance());	
+			avoid->mStateMachine->changeState(NO_AVOID::Instance());	
 		} 
 		else //dot lines up, take evasive action.. 
 		{
@@ -98,10 +98,10 @@ void Normal_Avoid::execute(Avoid* avoid)
 		}
 	}
 }
-void Normal_Avoid::exit(Avoid* avoid)
+void NORMAL_AVOID::exit(Avoid* avoid)
 {
 }
-bool Normal_Avoid::onLetter(Avoid* avoid, Letter* letter)
+bool NORMAL_AVOID::onLetter(Avoid* avoid, Letter* letter)
 {
         return true;
 }
@@ -125,7 +125,7 @@ void Seek_Avoid::execute(Avoid* avoid)
                 if (avoid->mAvoidDot < .50)
                 {
                         //just seek
-                        avoid->mStateMachine->changeState(No_Avoid::Instance());
+                        avoid->mStateMachine->changeState(NO_AVOID::Instance());
                 }
                 else //dot lines up, take evasive action..
                 {
@@ -137,7 +137,7 @@ void Seek_Avoid::execute(Avoid* avoid)
                         }
                         else
                         {
-                		avoid->mStateMachine->changeState(Normal_Avoid::Instance());
+                		avoid->mStateMachine->changeState(NORMAL_AVOID::Instance());
                         }
 
                         avoid->mShape->mMove->mVelocity->copyValuesFrom(&newVelocity);
@@ -155,31 +155,31 @@ bool Seek_Avoid::onLetter(Avoid* avoid, Letter* letter)
 
 
 /*****************************************
-	No_Avoid
+	NO_AVOID
 ****************************************/
-No_Avoid* No_Avoid::Instance()
+NO_AVOID* NO_AVOID::Instance()
 {
-	static No_Avoid instance;
+	static NO_AVOID instance;
 	return &instance;
 }
-void No_Avoid::enter(Avoid* avoid)
+void NO_AVOID::enter(Avoid* avoid)
 {
-	//LogString("No_Avoid");
+	//LogString("NO_AVOID");
 }
-void No_Avoid::execute(Avoid* avoid)
+void NO_AVOID::execute(Avoid* avoid)
 {
 	if (avoid->mAvoidVector.size() > 0)	
 	{
 		if (avoid->mAvoidDot >= .50)
 		{
-			avoid->mStateMachine->changeState(Normal_Avoid::Instance());
+			avoid->mStateMachine->changeState(NORMAL_AVOID::Instance());
 		}
 	}
 }
-void No_Avoid::exit(Avoid* avoid)
+void NO_AVOID::exit(Avoid* avoid)
 {
 }
-bool No_Avoid::onLetter(Avoid* avoid, Letter* letter)
+bool NO_AVOID::onLetter(Avoid* avoid, Letter* letter)
 {
         return true;
 }
