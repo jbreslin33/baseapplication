@@ -1,7 +1,7 @@
 #include "message.h"
 #include <string.h>
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../serverside/tdreamsock/dreamSockLog.h"
 
 // Common headers
 #include <stdio.h>

@@ -12,7 +12,7 @@ template <class entity_type> class State;
 using namespace Ogre;
 
 //message
-#include "../message/message.h"
+#include "../../message/message.h"
 
 #include <string>
 

@@ -1,7 +1,7 @@
 #ifndef BASEENTITY_H
 #define BASEENTITY_H
 
-#include "../serverside/letter/letter.h"
+#include "../letter/letter.h"
 
 class BaseEntity
 {

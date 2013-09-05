@@ -9,7 +9,7 @@ template <class entity_type> class State;
 
 #include <string>
 
-#include "../message/message.h"
+#include "../../message/message.h"
 
 #include <vector>
 #include <string.h>

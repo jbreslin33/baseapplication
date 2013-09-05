@@ -11,10 +11,10 @@
 #include "../../game/game.h"
 
 //mailman
-#include "../../mailman/mailMan.h"
+#include "../../../mailman/mailMan.h"
 
 //letter
-#include "../../letter/letter.h"
+#include "../../../letter/letter.h"
 
 //network
 #include "../../network/network.h"

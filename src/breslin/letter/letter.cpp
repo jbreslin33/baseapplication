@@ -1,10 +1,10 @@
 #include "letter.h"
 
-#include "../../baseentity/baseEntity.h"
+#include "../baseentity/baseEntity.h"
 #include "../message/message.h"
 
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../serverside/tdreamsock/dreamSockLog.h"
 
 //message
 #include "../message/message.h"

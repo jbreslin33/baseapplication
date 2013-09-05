@@ -11,7 +11,7 @@
 #include "../client/robust/clientRobust.h"
 
 //message
-#include "../message/message.h" 
+#include "../../message/message.h" 
 
 //shape
 #include "../shape/shape.h"
@@ -32,7 +32,7 @@
 #include "../move/move.h"
 
 //mailman
-#include "../mailman/mailMan.h"
+#include "../../mailman/mailMan.h"
 
 //postgresql
 #include <stdio.h>

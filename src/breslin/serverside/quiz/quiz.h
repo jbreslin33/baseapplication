@@ -3,7 +3,7 @@
 
 #include "../../fsm/stateMachine.h"
 
-#include "../message/message.h"
+#include "../../message/message.h"
 
 #include <string>
 #include <vector>

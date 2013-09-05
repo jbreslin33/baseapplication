@@ -1,9 +1,9 @@
 #include "mailMan.h"
-#include "../../baseentity/baseEntity.h"
-#include "../server/server.h"
+#include "../baseentity/baseEntity.h"
+#include "../serverside/server/server.h"
 
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../serverside/tdreamsock/dreamSockLog.h"
 
 MailMan::MailMan(Server* server)
 {

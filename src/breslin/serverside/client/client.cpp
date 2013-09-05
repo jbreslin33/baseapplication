@@ -6,7 +6,7 @@
 #include "../tdreamsock/dreamSockLog.h"
 
 //message
-#include "../message/message.h"
+#include "../../message/message.h"
 
 //network
 #include "../network/network.h"
@@ -33,7 +33,7 @@
 #include "states/clientStates.h"
 
 //mailman
-#include "../mailman/mailMan.h"
+#include "../../mailman/mailMan.h"
 
 //mailman
 #include "../../utility/utility.h"

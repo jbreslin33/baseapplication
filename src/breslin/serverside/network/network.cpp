@@ -1,6 +1,6 @@
 #include "network.h"
 
-#include "../message/message.h"
+#include "../../message/message.h"
 #include "../server/server.h"
 #include "../tdreamsock/dreamSockLog.h"
 

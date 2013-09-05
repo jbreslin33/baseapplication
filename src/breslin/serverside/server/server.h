@@ -1,7 +1,7 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#include "../message/message.h"
+#include "../../message/message.h"
 
 #include <vector>
 #include <string>

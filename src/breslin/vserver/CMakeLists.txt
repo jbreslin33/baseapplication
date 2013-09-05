@@ -247,10 +247,13 @@ set(HDRS
 	../fsm/stateMachine.h	
 
 	#mailman
-	../serverside/mailman/mailMan.h
+	../mailman/mailMan.h
 
 	#letter
-	../serverside/letter/letter.h
+	../letter/letter.h
+	
+	#message
+	../message/message.h
 	
 	#game
 	../serverside/game/game.h
@@ -317,9 +320,6 @@ set(HDRS
 	#bounds
 	../serverside/bounds/bounds.h
 	
-	#message
-	../serverside/message/message.h
-	
 	#server
 	../serverside/server/server.h
 	../serverside/server/partido/serverPartido.h
@@ -372,10 +372,13 @@ set(SRCS
 	../baseentity/baseEntity.cpp
 
 	#mailman
-	../serverside/mailman/mailMan.cpp
+	../mailman/mailMan.cpp
 
 	#letter
-	../serverside/letter/letter.cpp
+	../letter/letter.cpp
+	
+	#message
+	../message/message.cpp
 	
 	#game
 	../serverside/game/game.cpp
@@ -441,9 +444,6 @@ set(SRCS
 	
 	#bounds
 	../serverside/bounds/bounds.cpp
-	
-	#message
-	../serverside/message/message.cpp
 	
 	#server
 	../serverside/server/server.cpp
