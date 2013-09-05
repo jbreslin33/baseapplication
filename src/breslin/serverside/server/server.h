@@ -30,6 +30,7 @@ using namespace Ogre;
 // Introduce classes
 class BaseEntity;
 class Network;
+class Client;
 class ClientRobust;
 class Game;
 class Shape;

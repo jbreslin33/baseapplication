@@ -14,6 +14,7 @@ using namespace std;
 #define COMMAND_HISTORY_SIZE		64
 
 class Server;
+class Client;
 class ClientRobust;
 class Shape;
 class Vector3D;
