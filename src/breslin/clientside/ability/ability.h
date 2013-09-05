@@ -1,36 +1,29 @@
 #ifndef ABILITY_H
 #define ABILITY_H
 
-/******************************************************
-*				INCLUDES
-********************************************************/
+//parent
+#include "../../baseentity/baseEntity.h"
 
-/******************************************************
-*				FORWARD DECLARATIONS
-********************************************************/
 class Shape;
 
-/******************************************************
-*				CLASS
-********************************************************/
-class Ability
+class Ability : public BaseEntity
 {
 public:
 
 	Ability(Shape* shape);
 	~Ability();
 
-/******************************************************
-*				VARIABLES
-********************************************************/
 Shape* mShape;
-
-/******************************************************
-*				METHODS
-********************************************************/
 
 virtual void processTick() { }
 virtual void interpolateTick(float renderTime) { }
+
+//update
+virtual void update() { }
+
+//handle letter
+virtual bool  handleLetter(Letter* letter) { }
+
 
 };
 

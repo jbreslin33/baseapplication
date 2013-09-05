@@ -86,7 +86,22 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 endif()
  if (WIN32)
 set(HDRS
-	
+
+        #baseEntity
+        ../baseentity/baseEntity.h
+
+        #fsm
+        ../fsm/state.h
+        ../fsm/stateMachine.h
+
+        #mailman
+        ../mailman/mailMan.h
+
+        #letter
+        ../letter/letter.h
+
+        #message
+        ../message/message.h
 
 	#statemachine
 	../statemachine/state.h
@@ -171,6 +186,18 @@ set(SRCS
 
 	#main
 	./main.cpp
+
+        #baseEntity
+        ../baseentity/baseEntity.cpp
+
+        #mailman
+        ../mailman/mailMan.cpp
+
+        #letter
+        ../letter/letter.cpp
+
+        #message
+        ../message/message.cpp
 
 	#ablility
 	../clientside/ability/ability.cpp

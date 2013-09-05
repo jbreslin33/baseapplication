@@ -67,6 +67,12 @@ void interpolateTick(float renderTime);
 float getDegreesToServer();  
 void  calculateServerRotationSpeed(); 
 
+//update
+virtual void update() { }
+
+//handle letter
+virtual bool  handleLetter(Letter* letter) { }
+
 };
 
 #endif

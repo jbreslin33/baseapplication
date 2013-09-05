@@ -57,6 +57,12 @@ public:
 void processTick();
 void interpolateTick(float renderTime);
 
+//update
+virtual void update() { }
+
+//handle letter
+virtual bool  handleLetter(Letter* letter) { }
+
 //move
 void calculateDeltaPosition();  
 float calculateSpeed(Vector3D* velocity, int frameTime);
