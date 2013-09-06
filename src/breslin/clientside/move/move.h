@@ -1,72 +1,72 @@
-#ifndef ABILITYROTATION_H
-#define ABILITYROTATION_H
+#ifndef ABILITYMOVE_H
+#define ABILITYMOVE_H
 
 /******************************************************
 *				INCLUDES
 ********************************************************/
 #include "../ability.h"
-#include "../../../math/vector3D.h"
 
 /******************************************************
 *				FORWARD DECLARATIONS
 ********************************************************/
-class AbilityRotationStateMachine;
-class AbilityRotationState;
+class AbilityMoveStateMachine;
+class AbilityMoveState;
 class Shape;
+class Vector3D;
 
 /******************************************************
 *				CLASS
 ********************************************************/
-class AbilityRotation : public Ability
+class AbilityMove : public Ability
 {
 public:
 
-	AbilityRotation(Shape* shapeDynamic);
-	~AbilityRotation();
+	AbilityMove(Shape* shape);
+	~AbilityMove();
 
 /******************************************************
 *				VARIABLES
 ********************************************************/
-AbilityRotationStateMachine* mProcessTickStateMachine;
-AbilityRotationStateMachine* mInterpolateTickStateMachine;
-
-//shape
+//shapeDynamic
 Shape* mShape;
 
-//rotation
-float mTurnSpeed; 
-float mServerRotSpeed;  
-float mGhostSpeed;
+//state machines
+AbilityMoveStateMachine* mProcessTickStateMachine;
+AbilityMoveStateMachine* mInterpolateTickStateMachine;
 
-float mRotInterpLimitHigh;  
-float mRotInterpLimitLow;  
-float mRotInterpIncrease;   
-float mRotInterpDecrease;  
+//thresholds
+float mPosInterpLimitHigh; 
+float mPosInterpFactor; 
+float mMaximunVelocity;
 
-float    mDegreesToServer;  
-
-float mRotationSpeed;
+float mDeltaPosition; 
 
 private:
 
-//rotation
-Vector3D* mServerRotOld;  
-Vector3D* mServerRotNew;  
+//deltas
+float mDeltaX;  
+float mDeltaZ;  
+float mDeltaY; 
 
-float mServerRotSpeedOld;
+
 /******************************************************
 *				METHODS
 ********************************************************/
 public:
-
 //updating
 void processTick();
 void interpolateTick(float renderTime);
 
-//rotation
-float getDegreesToServer();  
-void  calculateServerRotationSpeed(); 
+//update
+virtual void update() { }
 
+//handle letter
+virtual bool  handleLetter(Letter* letter) { }
+
+//move
+void calculateDeltaPosition();  
+float calculateSpeed(Vector3D* velocity, int frameTime);
+void regulate(Vector3D* velocityToRegulate);
 };
 
 #endif

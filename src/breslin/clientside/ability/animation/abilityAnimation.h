@@ -45,12 +45,6 @@ AbilityAnimationStateMachine* mAnimationInterpolateTickStateMachine;
 void processTick();
 void interpolateTick(float renderTime);
 
-//update
-virtual void update() { }  
-
-//handle letter
-virtual bool  handleLetter(Letter* letter) { }
-
 //animation
 virtual void enterAnimationState(AbilityAnimationState* abilityAnimationState) = 0;
 virtual void     runAnimations        (                          ) = 0;  

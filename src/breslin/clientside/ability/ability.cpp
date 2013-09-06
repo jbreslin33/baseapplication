@@ -1,6 +1,6 @@
 #include "ability.h"
 
-Ability::Ability(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
+Ability::Ability(Shape* shape)
 {
 	mShape = shape;
 }

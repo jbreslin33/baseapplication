@@ -34,6 +34,9 @@
 //mailman
 #include "../../mailman/mailMan.h"
 
+//letter
+#include "../../letter/letter.h"
+
 //postgresql
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
