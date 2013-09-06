@@ -1,7 +1,7 @@
 #ifndef GAMEPARTIDO_H
 #define GAMEPARTIDO_H
 
-#include "game.h"
+#include "../game.h"
 
 //Ogre
 #include <OgreEntity.h>
@@ -10,9 +10,6 @@
 #include <vector>
 
 class ApplicationPartido;
-class GamePlayPartidoBattle;
-class GamePlayPartidoShowCorrectAnswer;
-class GamePlayPartidoReset;
 
 class GamePartido : public Game 
 {
@@ -24,11 +21,6 @@ public:
 public:
 
 ApplicationPartido* mApplicationPartido;
-
-//states
-State* mGamePlayPartidoBattle;
-State* mGamePlayPartidoShowCorrectAnswer;
-State* mGamePlayPartidoReset;
 
 // constants
 
