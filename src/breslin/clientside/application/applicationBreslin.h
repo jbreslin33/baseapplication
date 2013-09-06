@@ -8,13 +8,15 @@
 //parents
 #include "BaseApplication.h"
 
+#include "../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
+
 /***************************************
 *   		FORWARD DECLARATIONS
 ***************************************/
 class Game;
 class Network;
-class StateMachine;
-class State;
 
 class ApplicationBreslin : public BaseApplication
 {
@@ -30,13 +32,7 @@ public:
 public:
 
 //state machine
-StateMachine* mStateMachine;
-
-State* mApplicationGlobal;
-State* mApplicationInitialize;
-State* mApplicationLogin;
-State* mApplicationMain;
-State* mApplicationPlay;
+StateMachine<ApplicationBreslin>* mStateMachine;
 
 //constants
 static const char mMessageServerExit  = 3;
@@ -100,10 +96,6 @@ private:
 ***************************************/
 
 public:
-
-//states
-virtual void createStates();
-virtual void setStates();
 
 //process update
 virtual void processUpdate();

@@ -1,10 +1,12 @@
-#ifndef ABILITYMOVE_H
-#define ABILITYMOVE_H
+#ifndef MOVE_H
+#define MOVE_H
 
-/******************************************************
-*				INCLUDES
-********************************************************/
-#include "../ability.h"
+//parent
+#include "../../baseentity/baseEntity.h"
+
+#include "../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
 
 /******************************************************
 *				FORWARD DECLARATIONS
@@ -17,12 +19,12 @@ class Vector3D;
 /******************************************************
 *				CLASS
 ********************************************************/
-class AbilityMove : public Ability
+class Move : public BaseEntity 
 {
 public:
 
-	AbilityMove(Shape* shape);
-	~AbilityMove();
+	Move(Shape* shape);
+	~Move();
 
 /******************************************************
 *				VARIABLES
@@ -31,8 +33,8 @@ public:
 Shape* mShape;
 
 //state machines
-AbilityMoveStateMachine* mProcessTickStateMachine;
-AbilityMoveStateMachine* mInterpolateTickStateMachine;
+StateMachine<Move>* mProcessTickStateMachine;
+StateMachine<Move>* mInterpolateTickStateMachine;
 
 //thresholds
 float mPosInterpLimitHigh; 

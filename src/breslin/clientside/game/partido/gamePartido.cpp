@@ -45,21 +45,6 @@ GamePartido::~GamePartido()
 {
 }
 
-void GamePartido::createStates()
-{
-   	mGamePlay              = new GamePlayPartido(this);
-   	mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
-   	mGamePlayPartidoShowCorrectAnswer = new GamePlayPartidoShowCorrectAnswer(this);
-   	mGamePlayPartidoReset = new GamePlayPartidoReset(this);
-}
-
-void GamePartido::setStates()
-{
-        mStateMachine->setGlobalState(NULL);
-        mStateMachine->changeState(mGamePlay);
-}
-
-
 void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 {
 	Game::checkByteBuffer(byteBuffer);

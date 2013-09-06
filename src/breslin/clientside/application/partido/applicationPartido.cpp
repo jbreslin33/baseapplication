@@ -2,24 +2,19 @@
  #include "applicationPartido.h"
 
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
 //byteBuffer
-#include "../bytebuffer/byteBuffer.h"
+#include "../../bytebuffer/byteBuffer.h"
 
 //network
-#include "../network/network.h"
+#include "../../network/network.h"
 
 //game
-#include "../game/gamePartido.h"
+#include "../../game/partido/gamePartido.h"
 
-//state machine
-#include "../../statemachine/stateMachine.h"
-#include "states/applicationGlobal.h"
-#include "states/applicationLogin.h"
-#include "states/applicationMainPartido.h"
-#include "states/applicationInitialize.h"
-#include "states/applicationPlayPartido.h"
+//move states
+#include "states/applicationPartidoStates.h"
 
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
@@ -52,22 +47,6 @@ bool ApplicationPartido::frameRenderingQueued(const Ogre::FrameEvent& evt)
         return ret;
 }
 
-void ApplicationPartido::createStates()
-{
-        mApplicationGlobal     = new ApplicationGlobal(this);
-        mApplicationInitialize = new ApplicationInitialize(this);
-        mApplicationLogin      = new ApplicationLogin  (this);
-        mApplicationMain       = new ApplicationMainPartido  (this);
-        mApplicationPlay       = new ApplicationPlayPartido(this);
-}
-
-void ApplicationPartido::setStates()
-{
-        mStateMachine->setGlobalState (mApplicationGlobal);
-        mStateMachine->changeState(mApplicationInitialize);
-        mStateMachine->setPreviousState(mApplicationInitialize);
-}
-
 /*********************************
                         update
 **********************************/
@@ -92,8 +71,6 @@ void ApplicationPartido::processUpdate()
                 hideLoginScreen();
 
                 setGame(new GamePartido(this));
-		getGame()->createStates();
-		getGame()->setStates();
                 mStateMachine->changeState(mApplicationPlay);
 
                 //sneak an update in

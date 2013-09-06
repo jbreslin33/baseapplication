@@ -17,7 +17,6 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
-  bool onLetter(Move* move, Letter* letter);
 };
 
 
@@ -33,7 +32,6 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
-  bool onLetter(Move* move, Letter* letter);
 };
 
 /******************************************************
@@ -48,7 +46,6 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
-  bool onLetter(Move* move, Letter* letter);
 };
 
 /******************************************************
@@ -63,7 +60,6 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
-  bool onLetter(Move* move, Letter* letter);
 };
 
 /******************************************************
@@ -84,8 +80,6 @@ public:
   void enter  (Move* move);
   void execute(Move* move);
   void exit   (Move* move);
-  bool onLetter(Move* move, Letter* letter);
 };
 
 #endif
-  bool onLetter(Move* move, Letter* letter);

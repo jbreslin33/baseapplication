@@ -107,6 +107,10 @@ set(HDRS
 	../statemachine/state.h
 	../statemachine/stateMachine.h
 
+	#move
+	../clientside/move/move.h
+	../clientside/move/states/moveStates.h
+	
 	#ability
 	../clientside/ability/ability.h
 	
@@ -136,25 +140,19 @@ set(HDRS
 	
 	#application
 	../clientside/application/BaseApplication.h
+
 	../clientside/application/applicationBreslin.h
-	../clientside/application/applicationPartido.h
-	../clientside/application/states/applicationLogin.h
-	../clientside/application/states/applicationLogin.h
-	../clientside/application/states/applicationMain.h
-	../clientside/application/states/applicationMainPartido.h
-	../clientside/application/states/applicationPlay.h
-	../clientside/application/states/applicationPlayPartido.h
-	../clientside/application/states/applicationGlobal.h
-	../clientside/application/states/applicationInitialize.h
+	../clientside/application/states/applicationStates.h
+	
+	../clientside/application/partido/applicationPartido.h
+	../clientside/application/partido/states/applicationPartidoStates.h
 	
 	#game	
 	../clientside/game/game.h
-	../clientside/game/gamePartido.h
-	../clientside/game/states/gamePlay.h
-	../clientside/game/states/gamePlayPartido.h
-	../clientside/game/states/gamePlayPartidoBattle.h
-	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.h
-	../clientside/game/states/gamePlayPartidoReset.h
+	../clientside/game/states/gameStates.h
+
+	../clientside/game/partido/gamePartido.h
+	../clientside/game/partido/states/gamePartidoStates.h
 
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
@@ -198,6 +196,10 @@ set(SRCS
 
         #message
         ../message/message.cpp
+	
+	#move
+	../clientside/move/move.cpp
+	../clientside/move/states/moveStates.cpp
 
 	#ablility
 	../clientside/ability/ability.cpp
@@ -217,24 +219,20 @@ set(SRCS
 
 	#application
 	../clientside/application/BaseApplication.cpp
+
 	../clientside/application/applicationBreslin.cpp
-	../clientside/application/applicationPartido.cpp
-	../clientside/application/states/applicationLogin.cpp
-	../clientside/application/states/applicationMain.cpp
-	../clientside/application/states/applicationMainPartido.cpp
-	../clientside/application/states/applicationPlay.cpp
-	../clientside/application/states/applicationPlayPartido.cpp
-	../clientside/application/states/applicationGlobal.cpp
-	../clientside/application/states/applicationInitialize.cpp
+	../clientside/application/states/applicationStates.cpp
+
+	../clientside/application/partido/applicationPartido.cpp
+	../clientside/application/partido/states/applicationPartidoStates.cpp
 	
 	#game	
 	../clientside/game/game.cpp
-	../clientside/game/gamePartido.cpp
-	../clientside/game/states/gamePlay.cpp
-	../clientside/game/states/gamePlayPartido.cpp
-	../clientside/game/states/gamePlayPartidoBattle.cpp
-	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.cpp
-	../clientside/game/states/gamePlayPartidoReset.cpp
+	../clientside/game/states/gameStates.cpp
+
+	../clientside/game/partido/gamePartido.cpp
+	../clientside/game/partido/states/gamePartidoStates.cpp
+
 	
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp
@@ -265,11 +263,29 @@ endif (WIN32)
 
 if (UNIX)
 set(HDRS
+        #baseEntity
+        ../baseentity/baseEntity.h
 
+        #fsm
+        ../fsm/state.h
+        ../fsm/stateMachine.h
+
+        #mailman
+        ../mailman/mailMan.h
+
+        #letter
+        ../letter/letter.h
+
+        #message
+        ../message/message.h
 
 	#statemachine
 	../statemachine/state.h
 	../statemachine/stateMachine.h
+	
+	#move
+	../clientside/move/move.h
+	../clientside/move/states/moveStates.h
 	
 	#ability
 	../clientside/ability/ability.h
@@ -296,28 +312,23 @@ set(HDRS
 	../clientside/ability/rotation/abilityRotationState.h
 	../clientside/ability/rotation/abilityRotationStates.h
 	../clientside/ability/rotation/abilityRotationStateMachine.h
-	
-	#application
-	../clientside/application/BaseApplication.h
-	../clientside/application/applicationBreslin.h
-	../clientside/application/applicationPartido.h
-	../clientside/application/states/applicationLogin.h
-	../clientside/application/states/applicationMain.h
-	../clientside/application/states/applicationMainPartido.h
-	../clientside/application/states/applicationPlay.h
-	../clientside/application/states/applicationPlayPartido.h
-	../clientside/application/states/applicationGlobal.h
-	../clientside/application/states/applicationInitialize.h
-	
-	#game
-	../clientside/game/game.h
-	../clientside/game/gamePartido.h
-	../clientside/game/states/gamePlay.h
-	../clientside/game/states/gamePlayPartido.h
-	../clientside/game/states/gamePlayPartidoBattle.h
-	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.h
-	../clientside/game/states/gamePlayPartidoReset.h
-	
+
+ 	#application
+        ../clientside/application/BaseApplication.h
+
+        ../clientside/application/applicationBreslin.h
+        ../clientside/application/states/applicationStates.h
+
+        ../clientside/application/partido/applicationPartido.h
+        ../clientside/application/partido/states/applicationPartidoStates.h
+
+        #game
+        ../clientside/game/game.h
+        ../clientside/game/states/gameStates.h
+
+        ../clientside/game/partido/gamePartido.h
+        ../clientside/game/partido/states/gamePartidoStates.h
+
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.h
 	
@@ -347,7 +358,23 @@ set(SRCS
 
 	#main
 	./main.cpp
+ 
+	#baseEntity
+        ../baseentity/baseEntity.cpp
 
+        #mailman
+        ../mailman/mailMan.cpp
+
+        #letter
+        ../letter/letter.cpp
+
+        #message
+        ../message/message.cpp
+
+	#move
+	../clientside/move/move.cpp
+	../clientside/move/states/moveStates.cpp
+	
 	#ablility
 	../clientside/ability/ability.cpp
 
@@ -365,26 +392,21 @@ set(SRCS
 	../clientside/ability/rotation/abilityRotationStates.cpp
 
 	#application
-	../clientside/application/BaseApplication.cpp
-	../clientside/application/applicationBreslin.cpp
-	../clientside/application/applicationPartido.cpp
-	../clientside/application/states/applicationLogin.cpp
-	../clientside/application/states/applicationMain.cpp
-	../clientside/application/states/applicationMainPartido.cpp
-	../clientside/application/states/applicationPlay.cpp
-	../clientside/application/states/applicationPlayPartido.cpp
-	../clientside/application/states/applicationGlobal.cpp
-	../clientside/application/states/applicationInitialize.cpp
+        ../clientside/application/BaseApplication.cpp
 
-	#game	
-	../clientside/game/game.cpp
-	../clientside/game/gamePartido.cpp
-	../clientside/game/states/gamePlay.cpp
-	../clientside/game/states/gamePlayPartido.cpp
-	../clientside/game/states/gamePlayPartidoBattle.cpp
-	../clientside/game/states/gamePlayPartidoShowCorrectAnswer.cpp
-	../clientside/game/states/gamePlayPartidoReset.cpp
-	
+        ../clientside/application/applicationBreslin.cpp
+        ../clientside/application/states/applicationStates.cpp
+
+        ../clientside/application/partido/applicationPartido.cpp
+        ../clientside/application/partido/states/applicationPartidoStates.cpp
+
+        #game
+        ../clientside/game/game.cpp
+        ../clientside/game/states/gameStates.cpp
+
+        ../clientside/game/partido/gamePartido.cpp
+        ../clientside/game/partido/states/gamePartidoStates.cpp
+
 	#dreamsock
 	../clientside/tdreamsock/dreamSockLog.cpp
 	../clientside/tdreamsock/dreamLinuxSock.cpp

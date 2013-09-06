@@ -1,38 +1,36 @@
-#include "abilityMove.h"
+#include "move.h"
 
 //log
-#include "../../tdreamsock/dreamSockLog.h"
+#include "../tdreamsock/dreamSockLog.h"
 
 //shape
-#include "../../shape/shape.h"
+#include "../shape/shape.h"
 
 //command
-#include "../../command/command.h"
-
-//state machines
-#include "abilityMoveStateMachine.h"
+#include "../command/command.h"
 
 //states
-#include "abilityMoveStates.h"
+#include "states/moveStates.h"
+
 
 //std lib
 #include <math.h>
 
-AbilityMove::AbilityMove(Shape* shapeDynamic)  : Ability(shapeDynamic)
+Move::Move(Shape* shapeDynamic) : BaseEntity(BaseEntity::getNextValidID()) 
 {
 	mShape = shapeDynamic;
 
 	//move processTick states
-	mProcessTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
-	mProcessTickStateMachine->setCurrentState      (Normal_ProcessTick_Move::Instance());
-	mProcessTickStateMachine->setPreviousState     (Normal_ProcessTick_Move::Instance());
-	mProcessTickStateMachine->setGlobalState       (Global_ProcessTick_Move::Instance());
+	mProcessTickStateMachine = new StateMachine<Move>(this);    //setup the state machine
+	mProcessTickStateMachine->setCurrentState      (NORMAL_PROCESSTICK_MOVE::Instance());
+	mProcessTickStateMachine->setPreviousState     (NORMAL_PROCESSTICK_MOVE::Instance());
+	mProcessTickStateMachine->setGlobalState       (GLOBAL_PROCESSTICK_MOVE::Instance());
 
 	//move interpolateTick states
-	mInterpolateTickStateMachine = new AbilityMoveStateMachine(this);    //setup the state machine
-	mInterpolateTickStateMachine->setCurrentState      (Normal_InterpolateTick_Move::Instance());
-	mInterpolateTickStateMachine->setPreviousState     (Normal_InterpolateTick_Move::Instance());
-	//mInterpolateTickStateMachine->setGlobalState       (Global_InterpolateTick_Move::Instance());
+	mInterpolateTickStateMachine = new StateMachine<Move>(this);    //setup the state machine
+	mInterpolateTickStateMachine->setCurrentState      (NORMAL_INTERPOLATETICK_MOVE::Instance());
+	mInterpolateTickStateMachine->setPreviousState     (NORMAL_INTERPOLATETICK_MOVE::Instance());
+	//mInterpolateTickStateMachine->setGlobalState     (GLOBAL_INTERPOLATETICK_MOVE::Instance());
 	mInterpolateTickStateMachine->setGlobalState       (NULL);
 
     	//thresholds
@@ -47,18 +45,18 @@ AbilityMove::AbilityMove(Shape* shapeDynamic)  : Ability(shapeDynamic)
 	mDeltaPosition = 0.0f;
 }
 
-AbilityMove::~AbilityMove()
+Move::~Move()
 {
 }
 
 /******************************************************
 *				UPDATING
 ********************************************************/
-void AbilityMove::processTick()
+void Move::processTick()
 {
 	mProcessTickStateMachine->update();
 }
-void AbilityMove::interpolateTick(float renderTime)
+void Move::interpolateTick(float renderTime)
 {
 	mInterpolateTickStateMachine->update();
 }
@@ -67,7 +65,7 @@ void AbilityMove::interpolateTick(float renderTime)
 *				MOVE
 ********************************************************/
 
-void AbilityMove::calculateDeltaPosition()  //mov
+void Move::calculateDeltaPosition()  //mov
 {
 
 	mDeltaX = mShape->mServerCommandCurrent->mPosition->x - mShape->getPosition()->x;
@@ -78,7 +76,7 @@ void AbilityMove::calculateDeltaPosition()  //mov
     	mDeltaPosition = sqrt(pow(mDeltaX, 2) + pow(mDeltaY, 2) +  pow(mDeltaZ, 2));
 }
 
-float AbilityMove::calculateSpeed(Vector3D* velocity, int frameTime)
+float Move::calculateSpeed(Vector3D* velocity, int frameTime)
 {
 	float speed = sqrt(
 	pow(velocity->x, 2) + 
@@ -89,7 +87,7 @@ float AbilityMove::calculateSpeed(Vector3D* velocity, int frameTime)
 	return speed;
 }
 
-void AbilityMove::regulate(Vector3D* velocityToRegulate)
+void Move::regulate(Vector3D* velocityToRegulate)
 {
 	//x
 	if (velocityToRegulate->x > mMaximunVelocity)

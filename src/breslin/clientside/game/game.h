@@ -1,26 +1,15 @@
 #ifndef GAME_H
 #define GAME_H
-/**************************************
-@Game: This class should handle game specific duties. It should be able to be destroyed without
-the applicationBreslin crashing. You should be able to switch games while the applicationBreslin is running.
 
-Since this is on the client side it does not need any game logic.
-
-It's main duties will be to track objects to be drawn(Shapes). When it is destroyed or
-reset these objects need to be destroyed.
-
-*************************************/
-
-
-/***************************************
-*   		INCLUDES
-***************************************/
 //Ogre
 #include <OgreEntity.h>
 
-
 //standard library
 #include <vector>
+
+#include "../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
 
 /***************************************
 *   		FORWARD DECLARATIONS
@@ -28,8 +17,6 @@ reset these objects need to be destroyed.
 class ApplicationBreslin;
 class ByteBuffer;
 class Shape;
-class StateMachine;
-class State;
 
 class Game 
 {
@@ -44,9 +31,7 @@ public:
 public:
 
 //states
-StateMachine* mStateMachine;
-
-State* mGamePlay;
+StateMachine<Game>* mStateMachine;
 
 // constants
 static const char mMessageKey       = 1;
@@ -110,10 +95,6 @@ Ogre::SceneNode* mWestWallNode;
 *			          METHODS
 ***************************************/
 public:
-
-//states
-virtual void createStates();
-virtual void setStates();
 
 void remove();
 

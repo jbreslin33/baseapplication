@@ -44,10 +44,6 @@ static const char mMessageCorrectAnswerStart = -61;
 static const char mMessageCorrectAnswer = -62;
 static const char mMessageCorrectAnswerEnd = -63;
 
-//states
-virtual void createStates();
-virtual void setStates();
-
 virtual void checkByteBuffer(ByteBuffer* byteBuffer);
 void askQuestion(ByteBuffer* byteBuffer);
 void correctAnswer(ByteBuffer* byteBuffer);

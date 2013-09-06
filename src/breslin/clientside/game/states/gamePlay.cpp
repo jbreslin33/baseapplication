@@ -139,11 +139,6 @@ void GamePlay::execute()
         	mGame->mApplication->mKeyArray[120] = false;
         }
 
-
-// mKeyCounterClockwise = 16;
- //       mKeyClockwise = 32;
-
-
 	//network outgoing
 	mGame->sendByteBuffer();
 }

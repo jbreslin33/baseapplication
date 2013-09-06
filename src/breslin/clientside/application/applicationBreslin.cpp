@@ -22,14 +22,8 @@
 //game
 #include "../game/game.h"
 
-//state machine
-#include "../../statemachine/stateMachine.h"
-#include "states/applicationGlobal.h"
-#include "states/applicationLogin.h"
-#include "states/applicationMain.h"
-#include "states/applicationInitialize.h"
-#include "states/applicationPlay.h"
-
+//move states
+#include "states/applicationStates.h"
 
 /***************************************
 *	CONSTRUCTORS		          
@@ -59,7 +53,11 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	setGame(NULL);
 
-	mStateMachine = new StateMachine();
+        //move states
+        mStateMachine =  new StateMachine<ApplicationBreslin>(this);
+        mStateMachine->setCurrentState      (INIT_APPLICATION::Instance());
+        mStateMachine->setPreviousState     (INIT_APPLICATION::Instance());
+        mStateMachine->setGlobalState       (GLOBAL_APPLICATION::Instance());
 
 	//init all keys to false as in up/released
 	for (int i = 0; i <= 127; i++)
@@ -75,32 +73,7 @@ ApplicationBreslin::~ApplicationBreslin()
 	delete mNetwork;
 	
 	delete mStateMachine;
-	delete mApplicationInitialize;
-	delete mApplicationLogin;
-	delete mApplicationMain;
-	delete mApplicationPlay;	
-	
 	delete mGame;
-}
-
-/*********************************
-			states	
-**********************************/
-void ApplicationBreslin::createStates()
-{
-	mApplicationGlobal     = new ApplicationGlobal(this);
-	mApplicationInitialize = new ApplicationInitialize(this);
-	mApplicationLogin      = new ApplicationLogin  (this);
-	mApplicationMain       = new ApplicationMain  (this);
-	mApplicationPlay       = new ApplicationPlay(this);
-
-}
-
-void ApplicationBreslin::setStates()
-{
-	mStateMachine->setGlobalState (mApplicationGlobal);
-	mStateMachine->changeState(mApplicationInitialize);
-        mStateMachine->setPreviousState(mApplicationInitialize);
 }
 
 /*********************************
@@ -117,16 +90,14 @@ void ApplicationBreslin::processUpdate()
 		hideLoginScreen();
  		
 		setGame(new Game(this));
-		getGame()->createStates();
-		getGame()->setStates();
-       		mStateMachine->changeState(mApplicationPlay);
+       		mStateMachine->changeState(PLAY_APPLICATION::Instance());
 
 		//sneak an update in
 		mStateMachine->update();
 
 		//fake esc from game
   		mPlayingGame = false;
-                mStateMachine->changeState(mApplicationLogin);
+                mStateMachine->changeState(LOGIN_APPLICATION::Instance());
 		
 		mFake = false;
 	}

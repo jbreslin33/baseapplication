@@ -3,7 +3,7 @@
 #include "../clientside/tdreamsock/dreamSockLog.h"
 
 //app
-#include "../clientside/application/applicationPartido.h"
+#include "../clientside/application/partido/applicationPartido.h"
 
 
 /******************** MAIN ***********************/
@@ -30,10 +30,6 @@ extern "C" {
 #else
         ApplicationPartido* application = new ApplicationPartido(argv[1],30001);
 #endif
-	//call virtual createStates and setStates
-	application->createStates();
-	application->setStates();
-
         try
 	{
 		while (true)

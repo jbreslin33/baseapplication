@@ -2,7 +2,7 @@
 #define APPLICATIONPARTIDO_H
 
 //parents
-#include "applicationBreslin.h"
+#include "../applicationBreslin.h"
 
 class GamePartido;
 
@@ -30,10 +30,6 @@ OgreBites::Button* mButtonJoinGameB;
 
 //processUpdate
 virtual void processUpdate();
-
-//states
-virtual void createStates();
-virtual void setStates();
 
 //main
 virtual void createMainScreen();
