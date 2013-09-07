@@ -47,6 +47,13 @@ GamePartido::~GamePartido()
 {
 }
 
+void GamePartido::processUpdate()
+{
+	Game::processUpdate();
+	LogString("GamePartido::processUpdate");
+        mPartidoStateMachine->update();
+}
+
 void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 {
 	Game::checkByteBuffer(byteBuffer);

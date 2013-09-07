@@ -23,6 +23,8 @@ public:
 	~GamePartido();
 
 public:
+virtual void processUpdate();
+
 StateMachine<GamePartido>* mPartidoStateMachine;
 
 ApplicationPartido* mApplicationPartido;
