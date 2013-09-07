@@ -4,6 +4,10 @@
 //parents
 #include "../applicationBreslin.h"
 
+#include "../../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
+
 class GamePartido;
 
 class ApplicationPartido : public ApplicationBreslin
@@ -12,6 +16,9 @@ public:
 	
 	ApplicationPartido(const char* serverIP, int serverPort);
 	~ApplicationPartido();
+
+//state machine
+StateMachine<ApplicationPartido>* mPartidoStateMachine;
 
 //game partido
 GamePartido* mGamePartido;

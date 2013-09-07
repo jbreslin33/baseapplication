@@ -53,7 +53,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 	setGame(NULL);
 
-        //move states
+        //states
         mStateMachine =  new StateMachine<ApplicationBreslin>(this);
         mStateMachine->setCurrentState      (INIT_APPLICATION::Instance());
         mStateMachine->setPreviousState     (INIT_APPLICATION::Instance());

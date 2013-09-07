@@ -3,77 +3,67 @@
 
 #include "../../../../fsm/state.h"
 
-class Application;
+class ApplicationPartido;
 /******************************************************
-	         GLOBAL_APPLICATION
+	         GLOBAL_PARTIDO_APPLICATION
 ********************************************************/
-/*
-class GLOBAL_APPLICATION : public State<ApplicationBreslin>
+
+class GLOBAL_PARTIDO_APPLICATION : public State<ApplicationPartido>
 {
 private:
-  GLOBAL_APPLICATION(){}
+  GLOBAL_PARTIDO_APPLICATION(){}
 public:
-  static GLOBAL_APPLICATION* Instance();
-  void enter  (ApplicationBreslin* applicationBreslin);
-  void execute(ApplicationBreslin* applicationBreslin);
-  void exit   (ApplicationBreslin* applicationBreslin);
+  static GLOBAL_PARTIDO_APPLICATION* Instance();
+  void enter  (ApplicationPartido* applicationPartido);
+  void execute(ApplicationPartido* applicationPartido);
+  void exit   (ApplicationPartido* applicationPartido);
+  bool onLetter(ApplicationPartido* applicationPartido, Letter* letter);
 };
 
 
 /******************************************************
 *				NORMAL
 ********************************************************/
-class INIT_APPLICATION : public State<ApplicationBreslin>
+class INIT_PARTIDO_APPLICATION : public State<ApplicationPartido>
 {
 private:
-  INIT_APPLICATION(){}
+  INIT_PARTIDO_APPLICATION(){}
 public:
-  static INIT_APPLICATION* Instance();
-  void enter  (ApplicationBreslin* applicationBreslin);
-  void execute(ApplicationBreslin* applicationBreslin);
-  void exit   (ApplicationBreslin* applicationBreslin);
+  static INIT_PARTIDO_APPLICATION* Instance();
+  void enter  (ApplicationPartido* applicationPartido);
+  void execute(ApplicationPartido* applicationPartido);
+  void exit   (ApplicationPartido* applicationPartido);
+  bool onLetter(ApplicationPartido* applicationPartido, Letter* letter);
 };
 
 /******************************************************
 *				NORMAL
 ********************************************************/
-class LOGIN_APPLICATION : public State<ApplicationBreslin>
+class PLAY_PARTIDO_APPLICATION : public State<ApplicationPartido>
 {
 private:
-  LOGIN_APPLICATION(){}
+  PLAY_PARTIDO_APPLICATION(){}
 public:
-  static LOGIN_APPLICATION* Instance();
-  void enter  (ApplicationBreslin* applicationBreslin);
-  void execute(ApplicationBreslin* applicationBreslin);
-  void exit   (ApplicationBreslin* applicationBreslin);
+  static PLAY_PARTIDO_APPLICATION* Instance();
+  void enter  (ApplicationPartido* applicationPartido);
+  void execute(ApplicationPartido* applicationPartido);
+  void exit   (ApplicationPartido* applicationPartido);
+  bool onLetter(ApplicationPartido* applicationPartido, Letter* letter);
 };
 
 /******************************************************
-*			MAIN_APPLICATION	
+*			MAIN_PARTIDO_APPLICATION	
 ********************************************************/
-class MAIN_APPLICATION : public State<ApplicationBreslin>
+class MAIN_PARTIDO_APPLICATION : public State<ApplicationPartido>
 {
 private:
-  MAIN_APPLICATION(){}
+  MAIN_PARTIDO_APPLICATION(){}
 public:
-  static MAIN_APPLICATION* Instance();
-  void enter  (ApplicationBreslin* applicationBreslin);
-  void execute(ApplicationBreslin* applicationBreslin);
-  void exit   (ApplicationBreslin* applicationBreslin);
+  static MAIN_PARTIDO_APPLICATION* Instance();
+  void enter  (ApplicationPartido* applicationPartido);
+  void execute(ApplicationPartido* applicationPartido);
+  void exit   (ApplicationPartido* applicationPartido);
+  bool onLetter(ApplicationPartido* applicationPartido, Letter* letter);
 };
 
-/******************************************************
-*                       PLAY_APPLICATION
-********************************************************/
-class PLAY_APPLICATION : public State<ApplicationBreslin>
-{
-private:
-  PLAY_APPLICATION(){}
-public:
-  static PLAY_APPLICATION* Instance();
-  void enter  (ApplicationBreslin* applicationBreslin);
-  void execute(ApplicationBreslin* applicationBreslin);
-  void exit   (ApplicationBreslin* applicationBreslin);
-};
-*/
 #endif

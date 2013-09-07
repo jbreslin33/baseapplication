@@ -19,6 +19,13 @@
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
 	mAnswerTime = 0;
+   
+	//states
+        mPartidoStateMachine =  new StateMachine<ApplicationPartido>(this);
+        mPartidoStateMachine->setCurrentState      (INIT_PARTIDO_APPLICATION::Instance());
+        mPartidoStateMachine->setPreviousState     (INIT_PARTIDO_APPLICATION::Instance());
+        mPartidoStateMachine->setGlobalState       (GLOBAL_PARTIDO_APPLICATION::Instance());
+
 }
 
 ApplicationPartido::~ApplicationPartido()
@@ -32,6 +39,7 @@ void ApplicationPartido::setGame(GamePartido* gamePartido)
 {
         mGamePartido = gamePartido;
 	ApplicationBreslin::setGame(gamePartido);
+
 }
 
 GamePartido* ApplicationPartido::getGame()
@@ -71,14 +79,15 @@ void ApplicationPartido::processUpdate()
                 hideLoginScreen();
 
                 setGame(new GamePartido(this));
-                mStateMachine->changeState(mApplicationPlay);
+                //mPartidoStateMachine->changeState(PLAY_PARTIDO_APPLICATION::Instance());
+                //mPartidoStateMachine->changeState(PLAY_PARTIDO_APPLICATION::Instance());
 
                 //sneak an update in
                 mStateMachine->update();
 
                 //fake esc from game
                 mPlayingGame = false;
-                mStateMachine->changeState(mApplicationLogin);
+                //mStateMachine->changeState(LOGIN_APPLICATION::Instance());
 
 		mFake = false;
         }
