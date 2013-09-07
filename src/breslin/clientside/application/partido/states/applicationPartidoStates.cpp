@@ -19,6 +19,7 @@
 //command
 #include "../../../command/command.h"
 
+#include "../../../game/partido/states/gamePartidoStates.h"
 
 /******************** GLOBAL_PARTIDO_APPLICATION *****************/
 
@@ -51,8 +52,12 @@ INIT_PARTIDO_APPLICATION* INIT_PARTIDO_APPLICATION::Instance()
 void INIT_PARTIDO_APPLICATION::enter(ApplicationPartido* application)
 {
 }
-void INIT_PARTIDO_APPLICATION::execute(ApplicationPartido* application)
+void INIT_PARTIDO_APPLICATION::execute(ApplicationPartido* applicationPartido)
 {
+	if (applicationPartido->mPlayingGame)
+	{
+                applicationPartido->mPartidoStateMachine->changeState(PLAY_PARTIDO_APPLICATION::Instance());
+	}
 }
 void INIT_PARTIDO_APPLICATION::exit(ApplicationPartido* application)
 {
@@ -71,74 +76,26 @@ PLAY_PARTIDO_APPLICATION* PLAY_PARTIDO_APPLICATION::Instance()
 }
 void PLAY_PARTIDO_APPLICATION::enter(ApplicationPartido* application)
 {
-  	application->createLoginScreen();
-        application->showLoginScreen();
-        application->mLabelFocus = application->mLabelUsername;
-
 }
 void PLAY_PARTIDO_APPLICATION::execute(ApplicationPartido* applicationPartido)
 {
-	//check for logout as well....
-        if (applicationPartido->mLoggedIn == false )
-        {
-               // applicationPartido->mStateMachine->changeState(LOGIN_APPLICATION::Instance());
-        }
-
+	//Should this be in game states...
+/*
         if (applicationPartido->mKeyArray[27]) //esc
         {
                 //check to see if in battle....
-/*
-                if (applicationPartido->getGame()->mStateMachine->getCurrentState() == applicationPartido->getGame()->mGamePlayPartidoBattle)
+                if ( applicationPartido->getGame()->mPartidoStateMachine->currentState() == BATTLE_GAME::Instance() )
                 {
                         applicationPartido->mAnswerTime = 2001;
                         applicationPartido->mStringAnswer = "esc";
                         LogString("sendAnswer via esc");
                         applicationPartido->sendAnswer();
                 }
-                else
-                {
-                        applicationPartido->mKeyArray[27] = false;
-                        ByteBuffer* byteBuffer = new ByteBuffer();
-                        byteBuffer->WriteByte(applicationPartido->mMessageLeaveGame);
-                        applicationPartido->mNetwork->send(byteBuffer);
-                        applicationPartido->mSentLeaveGame = true;
-                }
+	}
 */
-        }
-/*
-        if (applicationPartido->mLeaveGame)
-        {
-                LogString("mLeaveGame true");
-                applicationPartido->mSentLeaveGame = false;
-                if (applicationPartido->mLoggedIn)
-                {
-                        applicationPartido->mStateMachine->changeState(applicationPartido->mApplicationMain);
-                }
-                else
-                {
-                        applicationPartido->mStateMachine->changeState(applicationPartido->mApplicationLogin);
-                }
-        }
-        else
-        {
-                if (applicationPartido->getGame())
-                {
-                        applicationPartido->getGame()->processUpdate();
-                }
-        }
-*/
-
 }
 void PLAY_PARTIDO_APPLICATION::exit(ApplicationPartido* applicationPartido)
 {
-	applicationPartido->mPlayingGame = false;
-        applicationPartido->mLeaveGame = false;
-        if (applicationPartido->getGame())
-        {
-                applicationPartido->getGame()->remove();
-                applicationPartido->setGame(NULL);
-        }
-
 }
 bool PLAY_PARTIDO_APPLICATION::onLetter(ApplicationPartido* application, Letter* letter)
 {
@@ -146,35 +103,3 @@ bool PLAY_PARTIDO_APPLICATION::onLetter(ApplicationPartido* application, Letter*
 }
 
 
-/******************** MAIN_APPLICATION *****************/
-
-
-MAIN_PARTIDO_APPLICATION* MAIN_PARTIDO_APPLICATION::Instance()
-{
-  static MAIN_PARTIDO_APPLICATION instance;
-  return &instance;
-}
-void MAIN_PARTIDO_APPLICATION::enter(ApplicationPartido* applicationPartido)
-{
-}
-void MAIN_PARTIDO_APPLICATION::execute(ApplicationPartido* applicationPartido)
-{
-	//pplicationMain::execute();
-
-        if (applicationPartido->mButtonHit == applicationPartido->mButtonJoinGameB)
-        {
-                LogString("ApplicationMainPartido::execute....button hit for b");
-                applicationPartido->mButtonHit = NULL;
-                applicationPartido->setGame(new GamePartido(applicationPartido));
-                applicationPartido->sendJoinGame(2);
-                applicationPartido->mPartidoStateMachine->changeState(PLAY_PARTIDO_APPLICATION::Instance());
-        }
-
-}
-void MAIN_PARTIDO_APPLICATION::exit(ApplicationPartido* applicationPartido)
-{
-}
-bool MAIN_PARTIDO_APPLICATION::onLetter(ApplicationPartido* application, Letter* letter)
-{
-        return true;
-}

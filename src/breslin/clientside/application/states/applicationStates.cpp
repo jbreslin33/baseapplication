@@ -250,7 +250,7 @@ void MAIN_APPLICATION::execute(ApplicationBreslin* application)
         {
                 application->mButtonHit = NULL;
                 application->setGame(new Game(application));
-                application->sendJoinGame(1);
+                application->sendJoinGame(application->mGameCode);
                 application->mStateMachine->changeState(PLAY_APPLICATION::Instance());
         }
 

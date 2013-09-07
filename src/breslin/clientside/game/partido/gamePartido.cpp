@@ -16,6 +16,8 @@
 //application
 #include "../../application/partido/applicationPartido.h"
 
+//states
+#include "states/gamePartidoStates.h"
 
 /***************************************
 *			          CONSTRUCTORS
@@ -32,6 +34,13 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
 	mCorrectAnswerStart = false;
 	mCorrectAnswer = false;
 	mCorrectAnswerEnd = false;
+
+	//states
+        mPartidoStateMachine =  new StateMachine<GamePartido>(this);
+        mPartidoStateMachine->setCurrentState      (PLAY_PARTIDO_GAME::Instance());
+        mPartidoStateMachine->setPreviousState     (PLAY_PARTIDO_GAME::Instance());
+        mPartidoStateMachine->setGlobalState       (GLOBAL_PARTIDO_GAME::Instance());
+
 }
 
 GamePartido::~GamePartido()

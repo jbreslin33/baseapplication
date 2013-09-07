@@ -47,17 +47,24 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
         mLeaveGame = false;
         mSentLeaveGame = false;
 	mGameReset = false;
+	mGameCode = 1;
 
 	//time
 	mRenderTime = 0.0f;
 
+	LogString("a");
 	setGame(NULL);
+	LogString("b");
 
         //states
         mStateMachine =  new StateMachine<ApplicationBreslin>(this);
+	LogString("c");
         mStateMachine->setCurrentState      (INIT_APPLICATION::Instance());
+	LogString("d");
         mStateMachine->setPreviousState     (INIT_APPLICATION::Instance());
+	LogString("e");
         mStateMachine->setGlobalState       (GLOBAL_APPLICATION::Instance());
+	LogString("f");
 
 	//init all keys to false as in up/released
 	for (int i = 0; i <= 127; i++)
@@ -81,7 +88,9 @@ ApplicationBreslin::~ApplicationBreslin()
 **********************************/
 void ApplicationBreslin::processUpdate()
 {
+	LogString("1");
 	mStateMachine->update();
+	LogString("2");
 
 	if (mFake == true)
 	{
@@ -116,6 +125,11 @@ void ApplicationBreslin::processUpdate()
 void ApplicationBreslin::setGame(Game* game)
 {
 	mGame = game;
+}
+
+void ApplicationBreslin::createGame()
+{
+	mGame = new Game(this);
 }
 
 Game* ApplicationBreslin::getGame()

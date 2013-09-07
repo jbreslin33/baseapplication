@@ -69,7 +69,6 @@ Game::Game(ApplicationBreslin* application)
         mStateMachine->setCurrentState      (PLAY_GAME::Instance());
         mStateMachine->setPreviousState     (PLAY_GAME::Instance());
         mStateMachine->setGlobalState       (GLOBAL_GAME::Instance());
-
 }
 /*
 

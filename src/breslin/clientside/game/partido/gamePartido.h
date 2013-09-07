@@ -9,6 +9,10 @@
 //standard library
 #include <vector>
 
+#include "../../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
+
 class ApplicationPartido;
 
 class GamePartido : public Game 
@@ -19,6 +23,7 @@ public:
 	~GamePartido();
 
 public:
+StateMachine<GamePartido>* mPartidoStateMachine;
 
 ApplicationPartido* mApplicationPartido;
 

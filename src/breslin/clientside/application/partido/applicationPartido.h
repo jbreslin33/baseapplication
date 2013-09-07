@@ -23,7 +23,7 @@ StateMachine<ApplicationPartido>* mPartidoStateMachine;
 //game partido
 GamePartido* mGamePartido;
 void setGame(GamePartido* gamePartido);
-GamePartido* getGame();
+virtual void createGame();
 
 //rendering
 virtual bool frameRenderingQueued (const Ogre::FrameEvent& evt);
