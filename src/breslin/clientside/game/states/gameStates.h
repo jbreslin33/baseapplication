@@ -1,85 +1,41 @@
-#ifndef MOVESTATES_H
-#define MOVESTATES_H
+#ifndef GAMESTATES_H
+#define GAMESTATES_H
 
 #include "../../../fsm/state.h"
 
-class Move;
+class Game;
+
 /******************************************************
 	         GLOBAL_MOVE
 ********************************************************/
 
-class GLOBAL_PROCESSTICK_MOVE : public State<Move>
+class GLOBAL_GAME : public State<Game>
 {
 private:
-  GLOBAL_PROCESSTICK_MOVE(){}
+  GLOBAL_GAME(){}
 public:
-  static GLOBAL_PROCESSTICK_MOVE* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
+  static GLOBAL_GAME* Instance();
+  void enter  (Game* game);
+  void execute(Game* game);
+  void exit   (Game* game);
+  bool onLetter(Game* game, Letter* letter);
 };
 
 
 /******************************************************
 *				NORMAL
 ********************************************************/
-class NORMAL_PROCESSTICK_MOVE : public State<Move>
+class PLAY_GAME : public State<Game>
 {
 private:
-  NORMAL_PROCESSTICK_MOVE(){}
+  PLAY_GAME(){}
 public:
-  static NORMAL_PROCESSTICK_MOVE* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
+  static PLAY_GAME* Instance();
+  void enter  (Game* game);
+  void execute(Game* game);
+  void exit   (Game* game);
+  bool onLetter(Game* game, Letter* letter);
 };
 
-/******************************************************
-*				NORMAL
-********************************************************/
-class STOP_PROCESSTICK_MOVE : public State<Move>
-{
-private:
-  STOP_PROCESSTICK_MOVE(){}
-public:
-  static STOP_PROCESSTICK_MOVE* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
-};
-
-/******************************************************
-*				CATCHUP
-********************************************************/
-class CATCHUP_PROCESSTICK_MOVE : public State<Move>
-{
-private:
-  CATCHUP_PROCESSTICK_MOVE(){}
-public:
-  static CATCHUP_PROCESSTICK_MOVE* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
-};
-
-/******************************************************
-*				INTERPOLATE TICK
-*
-*				   STATES
-********************************************************/
-
-/******************************************************
-*				NORMAL
-********************************************************/
-class NORMAL_INTERPOLATETICK_MOVE : public State<Move>
-{
-private:
-  NORMAL_INTERPOLATETICK_MOVE(){}
-public:
-  static NORMAL_INTERPOLATETICK_MOVE* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
-};
 
 #endif

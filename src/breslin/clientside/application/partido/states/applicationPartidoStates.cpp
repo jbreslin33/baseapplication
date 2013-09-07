@@ -165,9 +165,9 @@ void MAIN_PARTIDO_APPLICATION::execute(ApplicationPartido* applicationPartido)
         {
                 LogString("ApplicationMainPartido::execute....button hit for b");
                 applicationPartido->mButtonHit = NULL;
-                applicationPartido->setGame(new GamePartido(mApplicationPartido));
+                applicationPartido->setGame(new GamePartido(applicationPartido));
                 applicationPartido->sendJoinGame(2);
-                applicationPartido->mStateMachine->changeState(PLAY_PARTIDO_APPLICATION::Instance());
+                applicationPartido->mPartidoStateMachine->changeState(PLAY_PARTIDO_APPLICATION::Instance());
         }
 
 }

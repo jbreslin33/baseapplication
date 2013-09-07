@@ -1,85 +1,84 @@
-#ifndef MOVESTATES_H
-#define MOVESTATES_H
+#ifndef GAMEPARTIDOSTATES_H
+#define GAMEPARTIDOSTATES_H
 
-#include "../../../fsm/state.h"
+#include "../../../../fsm/state.h"
 
-class Move;
+class GamePartido;
 /******************************************************
-	         GLOBAL_MOVE
+	         GLOBAL_GAMEPARTIDO
 ********************************************************/
 
-class GLOBAL_PROCESSTICK_MOVE : public State<Move>
+class GLOBAL_PARTIDO_GAME : public State<GamePartido>
 {
 private:
-  GLOBAL_PROCESSTICK_MOVE(){}
+  GLOBAL_PARTIDO_GAME(){}
 public:
-  static GLOBAL_PROCESSTICK_MOVE* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
+  static GLOBAL_PARTIDO_GAME* Instance();
+  void enter  (GamePartido* gamePartido);
+  void execute(GamePartido* gamePartido);
+  void exit   (GamePartido* gamePartido);
+  bool onLetter(GamePartido* gamePartido, Letter* letter);
 };
 
 
 /******************************************************
-*				NORMAL
+*			BATTLE_GAME	
 ********************************************************/
-class NORMAL_PROCESSTICK_MOVE : public State<Move>
+class BATTLE_GAME : public State<GamePartido>
 {
 private:
-  NORMAL_PROCESSTICK_MOVE(){}
+  BATTLE_GAME(){}
 public:
-  static NORMAL_PROCESSTICK_MOVE* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
+  static BATTLE_GAME* Instance();
+  void enter  (GamePartido* gamePartido);
+  void execute(GamePartido* gamePartido);
+  void exit   (GamePartido* gamePartido);
+  bool onLetter(GamePartido* gamePartido, Letter* letter);
 };
 
 /******************************************************
-*				NORMAL
+*			PLAY_PARTIDO_GAME	
 ********************************************************/
-class STOP_PROCESSTICK_MOVE : public State<Move>
+class PLAY_PARTIDO_GAME : public State<GamePartido>
 {
 private:
-  STOP_PROCESSTICK_MOVE(){}
+  PLAY_PARTIDO_GAME(){}
 public:
-  static STOP_PROCESSTICK_MOVE* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
+  static PLAY_PARTIDO_GAME* Instance();
+  void enter  (GamePartido* gamePartido);
+  void execute(GamePartido* gamePartido);
+  void exit   (GamePartido* gamePartido);
+  bool onLetter(GamePartido* gamePartido, Letter* letter);
 };
 
 /******************************************************
-*				CATCHUP
+*			RESET_PARTIDO_GAME	
 ********************************************************/
-class CATCHUP_PROCESSTICK_MOVE : public State<Move>
+class RESET_PARTIDO_GAME : public State<GamePartido>
 {
 private:
-  CATCHUP_PROCESSTICK_MOVE(){}
+  RESET_PARTIDO_GAME(){}
 public:
-  static CATCHUP_PROCESSTICK_MOVE* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
+  static RESET_PARTIDO_GAME* Instance();
+  void enter  (GamePartido* gamePartido);
+  void execute(GamePartido* gamePartido);
+  void exit   (GamePartido* gamePartido);
+  bool onLetter(GamePartido* gamePartido, Letter* letter);
 };
 
 /******************************************************
-*				INTERPOLATE TICK
-*
-*				   STATES
+*			SHOWCORRECTANSWER_PARTIDO_GAME	
 ********************************************************/
-
-/******************************************************
-*				NORMAL
-********************************************************/
-class NORMAL_INTERPOLATETICK_MOVE : public State<Move>
+class SHOWCORRECTANSWER_PARTIDO_GAME : public State<GamePartido>
 {
 private:
-  NORMAL_INTERPOLATETICK_MOVE(){}
+  SHOWCORRECTANSWER_PARTIDO_GAME(){}
 public:
-  static NORMAL_INTERPOLATETICK_MOVE* Instance();
-  void enter  (Move* move);
-  void execute(Move* move);
-  void exit   (Move* move);
+  static SHOWCORRECTANSWER_PARTIDO_GAME* Instance();
+  void enter  (GamePartido* gamePartido);
+  void execute(GamePartido* gamePartido);
+  void exit   (GamePartido* gamePartido);
+  bool onLetter(GamePartido* gamePartido, Letter* letter);
 };
 
 #endif

@@ -2,27 +2,20 @@
 #include "gamePartido.h"
 
 //log
-#include "../tdreamsock/dreamSockLog.h"
+#include "../../tdreamsock/dreamSockLog.h"
 
 //ObjectTitle
-#include "../billboard/objectTitle.h"
+#include "../../billboard/objectTitle.h"
 
 //byteBuffer
-#include "../bytebuffer/byteBuffer.h"
+#include "../../bytebuffer/byteBuffer.h"
 
 //shape
-#include "../shape/shape.h"
+#include "../../shape/shape.h"
 
 //application
-#include "../application/applicationPartido.h"
+#include "../../application/partido/applicationPartido.h"
 
-//state machine
-#include "../../statemachine/stateMachine.h"
-#include "states/gamePlay.h"
-#include "states/gamePlayPartido.h"
-#include "states/gamePlayPartidoBattle.h"
-#include "states/gamePlayPartidoShowCorrectAnswer.h"
-#include "states/gamePlayPartidoReset.h"
 
 /***************************************
 *			          CONSTRUCTORS

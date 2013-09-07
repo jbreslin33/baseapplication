@@ -20,12 +20,14 @@
 #include "../ability/rotation/abilityRotation.h"
 #include "../ability/move/abilityMove.h"
 
-//state machine
-#include "../../statemachine/stateMachine.h"
-#include "states/gamePlay.h"
-
 //ObjectTitle
 #include "../billboard/objectTitle.h"
+
+#include "../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
+
+#include "states/gameStates.h"
 
 /***************************************
 *			          CONSTRUCTORS
@@ -64,6 +66,9 @@ Game::Game(ApplicationBreslin* application)
 
 	// states
         mStateMachine =  new StateMachine<Game>(this);
+        mStateMachine->setCurrentState      (PLAY_GAME::Instance());
+        mStateMachine->setPreviousState     (PLAY_GAME::Instance());
+        mStateMachine->setGlobalState       (GLOBAL_GAME::Instance());
 
 }
 /*
@@ -72,13 +77,6 @@ Game::Game(ApplicationBreslin* application)
 */
 Game::~Game()
 {
-}
-
-void Game::setStates()
-{
-        mStateMachine->setCurrentState      (PLAY_GAME::Instance());
-        mStateMachine->setPreviousState     (PLAY_GAME::Instance());
-        mStateMachine->setGlobalState       (GLOBAL_GAME::Instance());
 }
 
 //i am guessing i am not clearing the shape arrray???
