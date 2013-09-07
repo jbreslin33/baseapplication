@@ -75,10 +75,13 @@ void INIT_APPLICATION::execute(ApplicationBreslin* application)
 {
    	//setup calls ogre specific graphics setup,
         //when it returns true we can begin our graphics stuff
-        if (application->setup())
-        {
-                application->mSetup = true;
-        }
+        if (!application->mSetup)
+	{
+        	if (application->setup())
+        	{
+                	application->mSetup = true;
+        	}
+	}
 
         if (application->mSetup && application->mConnected)
         {
