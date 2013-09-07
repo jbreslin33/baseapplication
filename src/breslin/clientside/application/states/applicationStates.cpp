@@ -249,7 +249,8 @@ void MAIN_APPLICATION::execute(ApplicationBreslin* application)
 	if (application->mButtonHit == application->mButtonJoinGameA)
         {
                 application->mButtonHit = NULL;
-                application->setGame(new Game(application));
+                //application->setGame(new Game(application));
+                application->createGame();
                 application->sendJoinGame(application->mGameCode);
                 application->mStateMachine->changeState(PLAY_APPLICATION::Instance());
         }

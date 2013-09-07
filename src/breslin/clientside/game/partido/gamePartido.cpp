@@ -50,7 +50,6 @@ GamePartido::~GamePartido()
 void GamePartido::processUpdate()
 {
 	Game::processUpdate();
-	LogString("GamePartido::processUpdate");
         mPartidoStateMachine->update();
 }
 

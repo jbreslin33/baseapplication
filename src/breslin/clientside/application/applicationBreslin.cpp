@@ -52,19 +52,13 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//time
 	mRenderTime = 0.0f;
 
-	LogString("a");
 	setGame(NULL);
-	LogString("b");
 
         //states
         mStateMachine =  new StateMachine<ApplicationBreslin>(this);
-	LogString("c");
         mStateMachine->setCurrentState      (INIT_APPLICATION::Instance());
-	LogString("d");
         mStateMachine->setPreviousState     (INIT_APPLICATION::Instance());
-	LogString("e");
         mStateMachine->setGlobalState       (GLOBAL_APPLICATION::Instance());
-	LogString("f");
 
 	//init all keys to false as in up/released
 	for (int i = 0; i <= 127; i++)
@@ -96,7 +90,8 @@ void ApplicationBreslin::processUpdate()
 		createLoginScreen();
 		hideLoginScreen();
  		
-		setGame(new Game(this));
+		//setGame(new Game(this));
+		createGame();
        		mStateMachine->changeState(PLAY_APPLICATION::Instance());
 
 		//sneak an update in
