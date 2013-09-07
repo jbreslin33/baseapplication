@@ -88,9 +88,7 @@ ApplicationBreslin::~ApplicationBreslin()
 **********************************/
 void ApplicationBreslin::processUpdate()
 {
-	LogString("1");
 	mStateMachine->update();
-	LogString("2");
 
 	if (mFake == true)
 	{

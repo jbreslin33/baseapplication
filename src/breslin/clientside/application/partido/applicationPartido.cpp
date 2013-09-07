@@ -18,19 +18,14 @@
 
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
-	LogString("p1");
 	mAnswerTime = 0;
 	mGameCode = 2;
    
 	//states
         mPartidoStateMachine =  new StateMachine<ApplicationPartido>(this);
-	LogString("p2");
         mPartidoStateMachine->setCurrentState      (INIT_PARTIDO_APPLICATION::Instance());
-	LogString("p3");
         mPartidoStateMachine->setPreviousState     (INIT_PARTIDO_APPLICATION::Instance());
-	LogString("p4");
         mPartidoStateMachine->setGlobalState       (GLOBAL_PARTIDO_APPLICATION::Instance());
-	LogString("p5");
 }
 
 ApplicationPartido::~ApplicationPartido()
@@ -65,26 +60,19 @@ bool ApplicationPartido::frameRenderingQueued(const Ogre::FrameEvent& evt)
 void ApplicationPartido::processUpdate()
 {
 	ApplicationBreslin::processUpdate();
-	LogString("p6");
         mPartidoStateMachine->update();
-	LogString("p7");
 /*
         if (mFake == true)
         {
 		LogString("f1");
 		//battle screen init...
 		createBattleScreen();
-		LogString("f2");
 		showBattleScreen();
-		LogString("f3");
 		hideBattleScreen();
-		LogString("f4");
 		
 		//correctAnswer screen init...
 		createCorrectAnswerScreen();
-		LogString("f5");
 		showCorrectAnswerScreen();
-		LogString("f6");
 		hideCorrectAnswerScreen();
 
 		//login init
@@ -92,8 +80,6 @@ void ApplicationPartido::processUpdate()
                 hideLoginScreen();
 
                 setGame(new GamePartido(this));
-                //mPartidoStateMachine->changeState(PLAY_PARTIDO_APPLICATION::Instance());
-                //mPartidoStateMachine->changeState(PLAY_PARTIDO_APPLICATION::Instance());
 
                 //sneak an update in
                 mStateMachine->update();
@@ -104,7 +90,6 @@ void ApplicationPartido::processUpdate()
 
 		mFake = false;
         }
-	LogString("p8");
 
         //did you sendConnect if not do so
         if (!mConnectSent)
