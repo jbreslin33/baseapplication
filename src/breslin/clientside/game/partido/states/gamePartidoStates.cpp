@@ -49,18 +49,16 @@ BATTLE_GAME* BATTLE_GAME::Instance()
 void BATTLE_GAME::enter(GamePartido* gamePartido)
 {
 	LogString("BATTLE_GAME::enter");
-        ApplicationPartido* app = gamePartido->mApplicationPartido;
-	LogString("a");
+        
+	ApplicationPartido* app = gamePartido->mApplicationPartido;
+        app->createBattleScreen();
+        app->showBattleScreen();
 
         //reset text box
         app->mStringAnswer.clear();
-	LogString("b");
         app->mLabelQuestion->setCaption("");
-	LogString("c");
         app->mLabelAnswer->setCaption("");
-	LogString("d");
 
-        app->showBattleScreen();
         gamePartido->mBattleStart = false;
         gamePartido->mBattleEnd = false;
         gamePartido->mCorrectAnswerStart = false;
@@ -247,6 +245,7 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::enter(GamePartido* gamePartido)
 	LogString("SHOWCORRECTANSWER_PARTIDO_GAME::enter");
         ApplicationPartido* app = gamePartido->mApplicationPartido;
 
+        app->createCorrectAnswerScreen();
         app->showCorrectAnswerScreen();
         gamePartido->mCorrectAnswerStart = false;
 }

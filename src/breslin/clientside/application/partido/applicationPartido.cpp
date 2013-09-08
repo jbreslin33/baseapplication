@@ -18,7 +18,6 @@
 
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
-	mPartidoFake = true;
 	mAnswerTime = 0;
 	mGameCode = 2;
    
@@ -62,25 +61,6 @@ void ApplicationPartido::processUpdate()
 {
 	ApplicationBreslin::processUpdate();
         mPartidoStateMachine->update();
-
-        if (mPartidoFake == true)
-        {
-		//battle screen init...
-		createBattleScreen();
-		showBattleScreen();
-		hideBattleScreen();
-		
-		//correctAnswer screen init...
-		LogString("u1");
-		createCorrectAnswerScreen();
-		showCorrectAnswerScreen();
-		hideCorrectAnswerScreen();
-		LogString("u2");
-                mPartidoStateMachine->update();
-		LogString("u3");
-
-		mPartidoFake = false;
-        }
 }
 
 void  ApplicationPartido::createMainScreen()

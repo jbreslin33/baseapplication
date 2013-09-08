@@ -64,7 +64,6 @@ int mGameCode;
 bool mSetup;
 bool mConnected;
 bool mPlayingGame;
-bool mFake;
 bool mConnectSent;
 bool mLoggedIn;
 bool mLeaveGame;

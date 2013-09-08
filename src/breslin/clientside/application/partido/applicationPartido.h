@@ -44,7 +44,6 @@ virtual void showMainScreen();
 virtual void hideMainScreen();
 
 //battle
-bool mPartidoFake;
 void createBattleScreen();
 void showBattleScreen();
 void hideBattleScreen();

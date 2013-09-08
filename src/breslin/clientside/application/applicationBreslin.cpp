@@ -40,7 +40,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mSetup = false;
 	mConnected = false;
 	mPlayingGame = false;
-	mFake = true;
 	mConnectSent = false;
 	mButtonHit = NULL;
 	mLoggedIn = false;
@@ -52,7 +51,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	//time
 	mRenderTime = 0.0f;
 
-	setGame(NULL);
+	mGame = NULL;
 
         //states
         mStateMachine =  new StateMachine<ApplicationBreslin>(this);
@@ -83,26 +82,7 @@ ApplicationBreslin::~ApplicationBreslin()
 void ApplicationBreslin::processUpdate()
 {
 	mStateMachine->update();
-/*
-	if (mFake == true)
-	{
-		//create login
-		createLoginScreen();
-		hideLoginScreen();
- 		
-		createGame();
-       		mStateMachine->changeState(PLAY_APPLICATION::Instance());
-
-		//sneak an update in
-		mStateMachine->update();
-
-		//fake esc from game
-  		mPlayingGame = false;
-                mStateMachine->changeState(LOGIN_APPLICATION::Instance());
-		
-		mFake = false;
-	}
-*/	
+	
 	//did you sendConnect if not do so
 	if (!mConnectSent)
 	{
