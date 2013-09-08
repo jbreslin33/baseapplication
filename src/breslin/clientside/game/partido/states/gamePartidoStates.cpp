@@ -61,9 +61,6 @@ void PLAY_PARTIDO_GAME::execute(GamePartido* gamePartido)
         {
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
         }
-	LogString("update");
-//	gamePartido->mStateMachine->update();
-
 }
 void PLAY_PARTIDO_GAME::exit(GamePartido* gamePartido)
 {

@@ -54,6 +54,18 @@ void GamePartido::processUpdate()
         mPartidoStateMachine->update();
 }
 
+void GamePartido::processMoveControls()
+{
+	if (mPartidoStateMachine->currentState() == BATTLE_GAME::Instance())
+	{
+				
+	}	
+	else
+	{
+		Game::processMoveControls();
+	}
+}
+
 void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
 {
 	Game::checkByteBuffer(byteBuffer);

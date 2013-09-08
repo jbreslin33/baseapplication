@@ -25,6 +25,8 @@ public:
 public:
 virtual void processUpdate();
 
+virtual void processMoveControls();
+
 StateMachine<GamePartido>* mPartidoStateMachine;
 
 ApplicationPartido* mApplicationPartido;
