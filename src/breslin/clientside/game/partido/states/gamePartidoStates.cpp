@@ -86,10 +86,10 @@ void BATTLE_GAME::enter(GamePartido* gamePartido)
         app->createBattleScreen();
         app->showBattleScreen();
 
-        //reset text box
-        app->mStringAnswer.clear();
-        app->mLabelQuestion->setCaption("");
-        app->mLabelAnswer->setCaption("");
+        //reset text box ...actually let's not
+        //app->mStringAnswer.clear();
+        //app->mLabelQuestion->setCaption("");
+        //app->mLabelAnswer->setCaption("");
 
         gamePartido->mBattleStart = false;
         gamePartido->mBattleEnd = false;
@@ -104,8 +104,6 @@ void BATTLE_GAME::enter(GamePartido* gamePartido)
                 gamePartido->mApplicationPartido->mKeyArray[i] = false;
         }
         gamePartido->mFirstTimeExecute = true;
-	LogString("c");
-
 }
 void BATTLE_GAME::execute(GamePartido* gamePartido)
 {

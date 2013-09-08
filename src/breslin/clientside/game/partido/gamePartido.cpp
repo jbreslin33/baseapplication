@@ -42,6 +42,10 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
         mPartidoStateMachine->setPreviousState     (PLAY_PARTIDO_GAME::Instance());
         mPartidoStateMachine->setGlobalState       (GLOBAL_PARTIDO_GAME::Instance());
 
+	mApplicationPartido->createBattleScreen();
+        mApplicationPartido->hideBattleScreen();
+        mApplicationPartido->createCorrectAnswerScreen();
+        mApplicationPartido->hideCorrectAnswerScreen();
 }
 
 GamePartido::~GamePartido()
@@ -143,6 +147,7 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 	if (mApplicationPartido->mLabelQuestion && mApplicationPartido->mStringQuestion.size() > 0)
 	{
 		mApplicationPartido->mLabelQuestion->setCaption(mApplicationPartido->mStringQuestion);
+		LogString("just setCaption on mLabelQuestion");
 	}
 	else
 	{
