@@ -64,6 +64,13 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	{
 		mKeyArray[i] = false;
 	}
+/*
+	createLoginScreen();
+	hideLoginScreen();
+	createMainScreen();
+	hideMainScreen();
+*/
+
 }
 
 

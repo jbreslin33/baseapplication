@@ -20,7 +20,12 @@ ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : A
 {
 	mAnswerTime = 0;
 	mGameCode = 2;
-   
+/*
+	createBattleScreen();
+	hideBattleScreen();
+	createCorrectAnswerScreen();
+	hideCorrectAnswerScreen();
+ */  
 	//states
         mPartidoStateMachine =  new StateMachine<ApplicationPartido>(this);
         mPartidoStateMachine->setCurrentState      (INIT_PARTIDO_APPLICATION::Instance());
