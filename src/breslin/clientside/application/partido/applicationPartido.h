@@ -38,11 +38,6 @@ OgreBites::Button* mButtonJoinGameB;
 //processUpdate
 virtual void processUpdate();
 
-//main
-virtual void createMainScreen();
-virtual void showMainScreen();
-virtual void hideMainScreen();
-
 //battle
 void createBattleScreen();
 void showBattleScreen();

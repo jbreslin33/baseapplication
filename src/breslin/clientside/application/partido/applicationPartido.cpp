@@ -68,31 +68,6 @@ void ApplicationPartido::processUpdate()
         mPartidoStateMachine->update();
 }
 
-void  ApplicationPartido::createMainScreen()
-{
-	ApplicationBreslin::createMainScreen();
-        if (!mButtonJoinGameB)
-        {
-                mButtonJoinGameB = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButtonJoinGameB", "Join Game B");
-        }
-}
-
-void  ApplicationPartido::showMainScreen()
-{
-	ApplicationBreslin::showMainScreen();
-        mTrayMgr->moveWidgetToTray(mButtonJoinGameB,OgreBites::TL_CENTER);
-
-        mButtonJoinGameB->show();
-}
-
-void  ApplicationPartido::hideMainScreen()
-{
-	ApplicationBreslin::hideMainScreen();
-        mButtonJoinGameB->hide();
-
-        mTrayMgr->removeWidgetFromTray(mButtonJoinGameB);
-}
-
 //battle
 void  ApplicationPartido::createBattleScreen()
 {
