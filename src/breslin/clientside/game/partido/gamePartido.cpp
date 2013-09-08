@@ -128,6 +128,18 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
         	char c =  byteBuffer->ReadByte();
                 mApplicationPartido->mStringQuestion.append(1,c);
         }
+
+	const char * q = mApplicationPartido->mStringQuestion.c_str();
+        LogString("q:%s",q);
+
+	if (!mApplicationPartido->mLabelQuestion)
+	{
+		LogString("!mLabelQuestion");
+	}
+	if (mApplicationPartido->mStringQuestion.size() < 1)
+	{
+		LogString("mStringQuestion < 1");
+	}
 	if (mApplicationPartido->mLabelQuestion && mApplicationPartido->mStringQuestion.size() > 0)
 	{
 		mApplicationPartido->mLabelQuestion->setCaption(mApplicationPartido->mStringQuestion);
