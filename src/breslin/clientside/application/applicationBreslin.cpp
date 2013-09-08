@@ -83,14 +83,13 @@ ApplicationBreslin::~ApplicationBreslin()
 void ApplicationBreslin::processUpdate()
 {
 	mStateMachine->update();
-
+/*
 	if (mFake == true)
 	{
 		//create login
 		createLoginScreen();
 		hideLoginScreen();
  		
-		//setGame(new Game(this));
 		createGame();
        		mStateMachine->changeState(PLAY_APPLICATION::Instance());
 
@@ -103,7 +102,7 @@ void ApplicationBreslin::processUpdate()
 		
 		mFake = false;
 	}
-	
+*/	
 	//did you sendConnect if not do so
 	if (!mConnectSent)
 	{

@@ -50,11 +50,15 @@ void BATTLE_GAME::enter(GamePartido* gamePartido)
 {
 	LogString("BATTLE_GAME::enter");
         ApplicationPartido* app = gamePartido->mApplicationPartido;
+	LogString("a");
 
         //reset text box
         app->mStringAnswer.clear();
+	LogString("b");
         app->mLabelQuestion->setCaption("");
+	LogString("c");
         app->mLabelAnswer->setCaption("");
+	LogString("d");
 
         app->showBattleScreen();
         gamePartido->mBattleStart = false;
@@ -70,6 +74,7 @@ void BATTLE_GAME::enter(GamePartido* gamePartido)
                 gamePartido->mApplicationPartido->mKeyArray[i] = false;
         }
         //mFirstTimeExecute = true;
+	LogString("c");
 
 }
 void BATTLE_GAME::execute(GamePartido* gamePartido)

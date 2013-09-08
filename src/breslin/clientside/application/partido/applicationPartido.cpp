@@ -18,6 +18,7 @@
 
 ApplicationPartido::ApplicationPartido(const char* serverIP, int serverPort) : ApplicationBreslin(serverIP,serverPort)
 {
+	mPartidoFake = true;
 	mAnswerTime = 0;
 	mGameCode = 2;
    
@@ -61,46 +62,26 @@ void ApplicationPartido::processUpdate()
 {
 	ApplicationBreslin::processUpdate();
         mPartidoStateMachine->update();
-/*
-        if (mFake == true)
+
+        if (mPartidoFake == true)
         {
-		LogString("f1");
 		//battle screen init...
 		createBattleScreen();
 		showBattleScreen();
 		hideBattleScreen();
 		
 		//correctAnswer screen init...
+		LogString("u1");
 		createCorrectAnswerScreen();
 		showCorrectAnswerScreen();
 		hideCorrectAnswerScreen();
+		LogString("u2");
+                mPartidoStateMachine->update();
+		LogString("u3");
 
-		//login init
-                createLoginScreen();
-                hideLoginScreen();
-
-                setGame(new GamePartido(this));
-
-                //sneak an update in
-                mStateMachine->update();
-
-                //fake esc from game
-                mPlayingGame = false;
-                //mStateMachine->changeState(LOGIN_APPLICATION::Instance());
-
-		mFake = false;
+		mPartidoFake = false;
         }
-
-        //did you sendConnect if not do so
-        if (!mConnectSent)
-        {
-                mConnectSent = true;
-                sendConnect();
-        }
-*/
 }
-
-
 
 void  ApplicationPartido::createMainScreen()
 {
@@ -149,6 +130,7 @@ void  ApplicationPartido::createBattleScreen()
         {
                 mLabelAnswer  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelAnswer", "Answer:");
         }
+	LogString("b4");
 }
 
 void  ApplicationPartido::showBattleScreen()
