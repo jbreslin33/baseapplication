@@ -190,12 +190,13 @@ void PLAY_PARTIDO_GAME::execute(GamePartido* gamePartido)
         {
                 gamePartido->mPartidoStateMachine->changeState(BATTLE_GAME::Instance());
         }
-/*
-        if (mGamePartido->mApplicationPartido->mGameReset)
+
+        if (gamePartido->mApplicationPartido->mGameReset)
         {
-                mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoReset);
+                gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
+                //mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoReset);
         }
-*/
+
 }
 void PLAY_PARTIDO_GAME::exit(GamePartido* gamePartido)
 {
