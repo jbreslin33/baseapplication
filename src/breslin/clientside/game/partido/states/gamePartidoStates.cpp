@@ -71,14 +71,14 @@ void BATTLE_GAME::enter(GamePartido* gamePartido)
         {
                 gamePartido->mApplicationPartido->mKeyArray[i] = false;
         }
-        //mFirstTimeExecute = true;
+        gamePartido->mFirstTimeExecute = true;
 	LogString("c");
 
 }
 void BATTLE_GAME::execute(GamePartido* gamePartido)
 {
         ApplicationPartido* app = gamePartido->mApplicationPartido;
-	/*
+/*	
         if (app->mAnswerTime > 2000) //overtime....
         {
                 app->mStringAnswer = "oot";
@@ -86,7 +86,7 @@ void BATTLE_GAME::execute(GamePartido* gamePartido)
                 app->sendAnswer();
                 app->mAnswerTime = 0;
         }
-	*/
+*/	
 
         if (gamePartido->mCorrectAnswerStart)
         {
@@ -102,16 +102,16 @@ void BATTLE_GAME::execute(GamePartido* gamePartido)
         {
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
         }
-/*
-        if (mFirstTimeExecute)
+
+        if (gamePartido->mFirstTimeExecute)
         {
                 for (int i = 0; i < 128; i++)
                 {
                         gamePartido->mApplicationPartido->mKeyArray[i] = false;
                 }
-                mFirstTimeExecute = false;
+                gamePartido->mFirstTimeExecute = false;
         }
-*/
+
 	if (app->mLabelFocus == app->mLabelAnswer)
         {
                 if (app->mKeyArray[8]) //backspace
@@ -194,7 +194,6 @@ void PLAY_PARTIDO_GAME::execute(GamePartido* gamePartido)
         if (gamePartido->mApplicationPartido->mGameReset)
         {
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
-                //mGamePartido->mStateMachine->changeState(mGamePartido->mGamePlayPartidoReset);
         }
 
 }

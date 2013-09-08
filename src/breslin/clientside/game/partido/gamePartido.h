@@ -50,6 +50,7 @@ void correctAnswer(ByteBuffer* byteBuffer);
 //battle
 bool mBattleStart;
 bool mBattleEnd;
+bool mFirstTimeExecute;
 
 //correctAnswer
 bool mCorrectAnswerStart;
