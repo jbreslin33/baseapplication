@@ -101,6 +101,9 @@ void remove();
 //update
 virtual void processUpdate();
 
+//keys
+virtual void processMoveControls();
+
 //network
 virtual void sendByteBuffer();
 virtual void checkByteBuffer(ByteBuffer* byteBuffer);
@@ -116,7 +119,6 @@ Shape* getShape(int id);
 void createScene();
 
 //network
-
 void readServerTick(ByteBuffer* byteBuffer);
 void sendCommand();
 };

@@ -61,6 +61,8 @@ void PLAY_PARTIDO_GAME::execute(GamePartido* gamePartido)
         {
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
         }
+	LogString("update");
+//	gamePartido->mStateMachine->update();
 
 }
 void PLAY_PARTIDO_GAME::exit(GamePartido* gamePartido)
@@ -136,15 +138,6 @@ void BATTLE_GAME::execute(GamePartido* gamePartido)
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
         }
 
-        if (gamePartido->mFirstTimeExecute)
-        {
-                for (int i = 0; i < 128; i++)
-                {
-                        gamePartido->mApplicationPartido->mKeyArray[i] = false;
-                }
-                gamePartido->mFirstTimeExecute = false;
-        }
-
 	if (app->mLabelFocus == app->mLabelAnswer)
         {
                 if (app->mKeyArray[8]) //backspace
@@ -186,6 +179,15 @@ void BATTLE_GAME::execute(GamePartido* gamePartido)
                         gamePartido->mApplicationPartido->mKeyArray[i] = false;
                 }
         }
+       // if (gamePartido->mFirstTimeExecute)
+        //{
+                for (int i = 0; i < 128; i++)
+                {
+                        gamePartido->mApplicationPartido->mKeyArray[i] = false;
+                }
+                gamePartido->mFirstTimeExecute = false;
+        //}
+
 
 }
 void BATTLE_GAME::exit(GamePartido* gamePartido)

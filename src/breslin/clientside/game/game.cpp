@@ -78,6 +78,120 @@ Game::~Game()
 {
 }
 
+void Game::processMoveControls()
+{
+       	//process input
+        mKeyCurrent = 0;
+
+        //UP
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_W))
+        {
+                mApplication->mKeyArray[119] = true;
+                mKeyCurrent |= mKeyUp;
+        }
+        else
+        {
+                mApplication->mKeyArray[119] = false;
+        }
+
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_UP))
+        {
+                mApplication->mKeyArray[119] = true;
+                mKeyCurrent |= mKeyUp;
+        }
+        else
+        {
+                mApplication->mKeyArray[119] = false;
+        }
+        
+	//DOWN
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_S))
+        {
+                mApplication->mKeyArray[115] = true;
+                mKeyCurrent |= mKeyDown;
+        }
+        else
+        {
+                mApplication->mKeyArray[115] = false;
+        }
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_DOWN))
+        {
+                mApplication->mKeyArray[115] = true;
+                mKeyCurrent |= mKeyDown;
+        }
+        else
+        {
+                mApplication->mKeyArray[115] = false;
+        }
+ 	
+	//LEFT
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_A))
+        {
+                mApplication->mKeyArray[97] = true;
+                mKeyCurrent |= mKeyLeft;
+        }
+        else
+        {
+                mApplication->mKeyArray[97] = false;
+        }
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_LEFT))
+        {
+                mApplication->mKeyArray[97] = true;
+                mKeyCurrent |= mKeyLeft;
+        }
+        else
+        {
+                mApplication->mKeyArray[97] = false;
+        }
+
+        //RIGHT
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_D))
+        {
+                mApplication->mKeyArray[100] = true;
+                mKeyCurrent |= mKeyRight;
+        }
+        else
+        {
+                mApplication->mKeyArray[100] = false;
+        }
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_RIGHT))
+        {
+                mApplication->mKeyArray[100] = true;
+                mKeyCurrent |= mKeyRight;
+        }
+        else
+        {
+                mApplication->mKeyArray[100] = false;
+        }
+   	
+	//COUNTERCLOCKWISE
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_Z))
+        {
+                mApplication->mKeyArray[122] = true;
+                mKeyCurrent |= mKeyCounterClockwise;
+        }
+        else
+        {
+                mApplication->mKeyArray[122] = false;
+        }
+
+        //CLOCKWISE
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_X))
+        {
+                mApplication->mKeyArray[120] = true;
+                mKeyCurrent |= mKeyClockwise;
+        }
+        else
+        {
+                mApplication->mKeyArray[120] = false;
+        }
+
+        //network outgoing
+        sendByteBuffer();
+
+
+}
+
 //i am guessing i am not clearing the shape arrray???
 void Game::remove()
 {
