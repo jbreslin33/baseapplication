@@ -39,6 +39,39 @@ bool GLOBAL_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
         return true;
 }
 
+/******************** PLAY_PARTIDO_GAME *****************/
+
+PLAY_PARTIDO_GAME* PLAY_PARTIDO_GAME::Instance()
+{
+        static PLAY_PARTIDO_GAME instance;
+        return &instance;
+}
+void PLAY_PARTIDO_GAME::enter(GamePartido* gamePartido)
+{
+	LogString("PLAY_PARTIDO_GAME::enter");
+}
+void PLAY_PARTIDO_GAME::execute(GamePartido* gamePartido)
+{
+	if (gamePartido->mBattleStart)
+        {
+                gamePartido->mPartidoStateMachine->changeState(BATTLE_GAME::Instance());
+        }
+
+        if (gamePartido->mApplicationPartido->mGameReset)
+        {
+                gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
+        }
+
+}
+void PLAY_PARTIDO_GAME::exit(GamePartido* gamePartido)
+{
+}
+bool PLAY_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
+{
+        return true;
+}
+
+
 /******************** BATTLE_GAME *****************/
 
 BATTLE_GAME* BATTLE_GAME::Instance()
@@ -173,66 +206,6 @@ bool BATTLE_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
         return true;
 }
 
-/******************** PLAY_PARTIDO_GAME *****************/
-
-PLAY_PARTIDO_GAME* PLAY_PARTIDO_GAME::Instance()
-{
-        static PLAY_PARTIDO_GAME instance;
-        return &instance;
-}
-void PLAY_PARTIDO_GAME::enter(GamePartido* gamePartido)
-{
-	LogString("PLAY_PARTIDO_GAME::enter");
-}
-void PLAY_PARTIDO_GAME::execute(GamePartido* gamePartido)
-{
-	if (gamePartido->mBattleStart)
-        {
-                gamePartido->mPartidoStateMachine->changeState(BATTLE_GAME::Instance());
-        }
-
-        if (gamePartido->mApplicationPartido->mGameReset)
-        {
-                gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
-        }
-
-}
-void PLAY_PARTIDO_GAME::exit(GamePartido* gamePartido)
-{
-}
-bool PLAY_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
-{
-        return true;
-}
-
-
-/******************** RESET_PARTIDO_GAME *****************/
-
-RESET_PARTIDO_GAME* RESET_PARTIDO_GAME::Instance()
-{
-  static RESET_PARTIDO_GAME instance;
-  return &instance;
-}
-void RESET_PARTIDO_GAME::enter(GamePartido* gamePartido)
-{
-	LogString("RESET_PARTIDO_GAME::enter");
-}
-void RESET_PARTIDO_GAME::execute(GamePartido* gamePartido)
-{
-	if (!gamePartido->mApplicationPartido->mGameReset)
-        {
-                gamePartido->mPartidoStateMachine->changeState(PLAY_PARTIDO_GAME::Instance());
-        }
-
-}
-void RESET_PARTIDO_GAME::exit(GamePartido* gamePartido)
-{
-}
-bool RESET_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
-{
-        return true;
-}
-
 /******************** SHOWCORRECTANSWER_PARTIDO_GAME *****************/
 
 SHOWCORRECTANSWER_PARTIDO_GAME* SHOWCORRECTANSWER_PARTIDO_GAME::Instance()
@@ -285,4 +258,32 @@ bool SHOWCORRECTANSWER_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* 
 {
         return true;
 }
+
+/******************** RESET_PARTIDO_GAME *****************/
+
+RESET_PARTIDO_GAME* RESET_PARTIDO_GAME::Instance()
+{
+  static RESET_PARTIDO_GAME instance;
+  return &instance;
+}
+void RESET_PARTIDO_GAME::enter(GamePartido* gamePartido)
+{
+	LogString("RESET_PARTIDO_GAME::enter");
+}
+void RESET_PARTIDO_GAME::execute(GamePartido* gamePartido)
+{
+	if (!gamePartido->mApplicationPartido->mGameReset)
+        {
+                gamePartido->mPartidoStateMachine->changeState(PLAY_PARTIDO_GAME::Instance());
+        }
+
+}
+void RESET_PARTIDO_GAME::exit(GamePartido* gamePartido)
+{
+}
+bool RESET_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
+{
+        return true;
+}
+
 
