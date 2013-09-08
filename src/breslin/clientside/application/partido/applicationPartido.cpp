@@ -91,10 +91,8 @@ void  ApplicationPartido::hideMainScreen()
 //battle
 void  ApplicationPartido::createBattleScreen()
 {
-	LogString("b1");
         if (!mLabelQuestion)
         {
-		LogString("b2");
 		if (mTrayMgr)
 		{
                 	mLabelQuestion  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelQuestion", "Question:");
@@ -104,13 +102,11 @@ void  ApplicationPartido::createBattleScreen()
 			LogString("NO mTrayMgr");
 		}
         }
-	LogString("b3");
 
         if (!mLabelAnswer)
         {
                 mLabelAnswer  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelAnswer", "Answer:");
         }
-	LogString("b4");
 }
 
 void  ApplicationPartido::showBattleScreen()
