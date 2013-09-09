@@ -7,9 +7,6 @@
 //parent
 #include "abilityAnimation.h"
 
-//abilitys
-#include "../move/abilityMove.h"
-
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;

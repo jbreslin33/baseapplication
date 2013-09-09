@@ -10,9 +10,6 @@
 //game
 #include "../../game/game.h"
 
-//abilitys
-#include "../move/abilityMove.h"
-
 //states
 #include "abilityAnimationStates.h"
 
