@@ -49,6 +49,9 @@ static const char mMessageQuitGame = -108;
 //applicationBreslin
 ApplicationBreslin* mApplication;
 
+//reset
+virtual void reset();
+
 //Shapes
 std::vector<Shape*>* mShapeVector;	 //all shapes in the client world
 std::vector<Shape*>* mShapeGhostVector;	 //all shapes in the client world's ghost 

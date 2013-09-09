@@ -31,7 +31,8 @@ StateMachine<GamePartido>* mPartidoStateMachine;
 
 ApplicationPartido* mApplicationPartido;
 
-// constants
+//reset
+virtual void reset();
 
 //question
 static const char mMessageAskQuestion = -76;

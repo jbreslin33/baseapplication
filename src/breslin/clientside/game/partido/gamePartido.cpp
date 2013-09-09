@@ -158,3 +158,35 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 	mApplicationPartido->mAnswerTime = 0; 
 }
 
+void GamePartido::reset()
+{
+	Game::reset();
+      	
+	//hide screens 
+	mApplicationPartido->hideBattleScreen();
+	mApplicationPartido->hideCorrectAnswerScreen();
+ 	
+	//reset text boxes for battle ...actually let's not
+        mApplicationPartido->mStringAnswer.clear();
+        mApplicationPartido->mLabelQuestion->setCaption("");
+        mApplicationPartido->mLabelAnswer->setCaption("");
+
+	//reset text boxes for showCorrectAnswer ...actually let's not
+        mApplicationPartido->mLabelCorrectAnswer->setCaption("");
+        mApplicationPartido->mStringCorrectAnswer.clear();
+
+	//reset battle vars
+        mBattleStart = false;
+        mBattleEnd = false;
+        mCorrectAnswerStart = false;
+        mApplicationPartido->mGameReset = false;
+
+	//reset correctAnswer vars
+        mCorrectAnswerStart = false;
+        mCorrectAnswer      = false;
+        mCorrectAnswerEnd   = false;
+
+	//answer time
+        mApplicationPartido->mAnswerTime = 0;
+}
+

@@ -77,7 +77,15 @@ Game::Game(ApplicationBreslin* application)
 Game::~Game()
 {
 }
-
+void Game::reset()
+{
+	//set mKeyArray to false
+        for (int i = 0; i < 128; i++)
+        {
+                mApplication->mKeyArray[i] = false;
+        }
+        mKeyCurrent = 0;
+}
 void Game::processMoveControls()
 {
        	//process input

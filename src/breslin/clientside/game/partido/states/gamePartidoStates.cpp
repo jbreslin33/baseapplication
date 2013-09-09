@@ -52,14 +52,14 @@ void PLAY_PARTIDO_GAME::enter(GamePartido* gamePartido)
 }
 void PLAY_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
-	if (gamePartido->mBattleStart)
-        {
-                gamePartido->mPartidoStateMachine->changeState(BATTLE_GAME::Instance());
-        }
-
+	//give precedence to reset
         if (gamePartido->mApplicationPartido->mGameReset)
         {
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
+        }
+	else if (gamePartido->mBattleStart)
+        {
+                gamePartido->mPartidoStateMachine->changeState(BATTLE_GAME::Instance());
         }
 }
 void PLAY_PARTIDO_GAME::exit(GamePartido* gamePartido)
@@ -214,7 +214,6 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::enter(GamePartido* gamePartido)
 {
 	LogString("SHOWCORRECTANSWER_PARTIDO_GAME::enter");
         ApplicationPartido* app = gamePartido->mApplicationPartido;
-
         app->createCorrectAnswerScreen();
         app->showCorrectAnswerScreen();
         gamePartido->mCorrectAnswerStart = false;
@@ -223,21 +222,15 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
 
-        if (gamePartido->mCorrectAnswerEnd)
-        {
-                gamePartido->mPartidoStateMachine->changeState(BATTLE_GAME::Instance());
-        }
-
-        if (gamePartido->mBattleEnd)
-        {
-                gamePartido->mPartidoStateMachine->changeState(BATTLE_GAME::Instance());
-        }
-
+	//again give precedence to a reset...
         if (gamePartido->mApplicationPartido->mGameReset)
         {
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
         }
-
+        else if (gamePartido->mCorrectAnswerEnd || gamePartido->mBattleEnd)
+        {
+                gamePartido->mPartidoStateMachine->changeState(BATTLE_GAME::Instance());
+        }
 }
 void SHOWCORRECTANSWER_PARTIDO_GAME::exit(GamePartido* gamePartido)
 {
@@ -266,6 +259,7 @@ RESET_PARTIDO_GAME* RESET_PARTIDO_GAME::Instance()
 void RESET_PARTIDO_GAME::enter(GamePartido* gamePartido)
 {
 	LogString("RESET_PARTIDO_GAME::enter");
+	gamePartido->reset();
 }
 void RESET_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
