@@ -1,19 +1,12 @@
-#ifndef ABILITYANIMATION_H
-#define ABILITYANIMATION_H
+#ifndef ANIMATION_H
+#define ANIMATION_H
 
-/*************************************
-*         INCLUDES
-*************************************/
 //parent
-#include "../ability.h"
+#include "../../baseentity/baseEntity.h"
 
-/*************************************
-*         FORWARD DECLARATIONS
-*************************************/
+#include "../../fsm/stateMachine.h"
 
-//states
-class AbilityAnimationStateMachine;
-class AbilityAnimationState;
+template <class entity_type> class State;
 
 //shape
 class Shape;
@@ -21,12 +14,12 @@ class Shape;
 /******************************************************
 *				INCLUDES
 ********************************************************/
-class AbilityAnimation : public Ability
+class Animation : public BaseEntity 
 {
 public:
 
-	AbilityAnimation(Shape* shape);
-	~AbilityAnimation();
+	Animation(Shape* shape);
+	~Animation();
 
 /******************************************************
 *				VARIABLES
@@ -34,8 +27,9 @@ public:
 //shape
 Shape* mShape;
 
-//state machine
-AbilityAnimationStateMachine* mAnimationInterpolateTickStateMachine;
+//state machines
+StateMachine<Animation>* mInterpolateTickStateMachine;
+
 
 /******************************************************
 *				METHODS
@@ -48,6 +42,12 @@ void interpolateTick(float renderTime);
 //animation
 virtual void enterAnimationState(AbilityAnimationState* abilityAnimationState) = 0;
 virtual void     runAnimations        (                          ) = 0;  
+
+//update
+virtual void update() { }
+
+//handle letter
+virtual bool  handleLetter(Letter* letter) { }
 
 };
 
