@@ -22,6 +22,7 @@ class Game;
 class Command;
 class ByteBuffer;
 class ObjectTitle;
+class Rotation;
 class Move;
 
 class Shape
@@ -88,6 +89,9 @@ public:
 
 //name
 std::string mName;
+
+//rotation
+Rotation* mRotation;
 
 //move
 Move* mMove;

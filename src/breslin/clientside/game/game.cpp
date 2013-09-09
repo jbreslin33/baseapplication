@@ -28,6 +28,9 @@ template <class entity_type> class State;
 
 #include "states/gameStates.h"
 
+//rotation
+#include "../rotation/rotation.h"
+
 //move
 #include "../move/move.h"
 
@@ -251,8 +254,9 @@ void Game::addShape(ByteBuffer* byteBuffer)
 	Shape* shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
 
 	//ability
-	shape->addAbility(new AbilityRotation(shape));
+	//shape->addAbility(new AbilityRotation(shape));
 	//shape->addAbility(new AbilityMove(shape));
+	shape->mRotation = new Rotation(shape);
 	shape->mMove = new Move(shape);
 
 	//put shape and ghost in game vectors so they can be looped and game now knows of them.

@@ -25,12 +25,16 @@
 //ObjectTitle
 #include "../billboard/objectTitle.h"
 
+//rotation
+#include "../rotation/rotation.h"
+
 //move
 #include "../move/move.h"
 
 Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGhost)
 {
 
+	mRotation = NULL;
 	mMove = NULL;
 
 	mIsGhost = isGhost;
@@ -237,6 +241,7 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 	{
 		mAbilityVector.at(i)->processTick();
 	}
+	mRotation->processTick();
 	mMove->processTick();
 
 	//run billboard here for now.
@@ -359,6 +364,7 @@ void Shape::interpolateTick(float renderTime)
 	{
 		mAbilityVector.at(i)->interpolateTick(renderTime);
 	}
+	mRotation->interpolateTick(renderTime);
 	mMove->interpolateTick(renderTime);
 }
 

@@ -107,6 +107,10 @@ set(HDRS
 	../statemachine/state.h
 	../statemachine/stateMachine.h
 
+	#rotation
+	../clientside/rotation/rotation.h
+	../clientside/rotation/states/rotationStates.h
+	
 	#move
 	../clientside/move/move.h
 	../clientside/move/states/moveStates.h
@@ -188,6 +192,10 @@ set(SRCS
 
         #message
         ../message/message.cpp
+	
+	#rotation
+	../clientside/rotation/rotation.cpp
+	../clientside/rotation/states/rotationStates.cpp
 	
 	#move
 	../clientside/move/move.cpp
@@ -271,6 +279,10 @@ set(HDRS
 	../statemachine/state.h
 	../statemachine/stateMachine.h
 	
+	#rotation
+	../clientside/rotation/rotation.h
+	../clientside/rotation/states/rotationStates.h
+	
 	#move
 	../clientside/move/move.h
 	../clientside/move/states/moveStates.h
@@ -351,6 +363,10 @@ set(SRCS
         #message
         ../message/message.cpp
 
+	#rotation
+	../clientside/rotation/rotation.cpp
+	../clientside/rotation/states/rotationStates.cpp
+	
 	#move
 	../clientside/move/move.cpp
 	../clientside/move/states/moveStates.cpp
