@@ -126,14 +126,6 @@ set(HDRS
 	../clientside/ability/animation/abilityAnimationStates.h
 	../clientside/ability/animation/abilityAnimationStateMachine.h
 	
-	#rotation
-	../clientside/ability/rotation/abilityRotation.h
-	
-	../clientside/ability/rotation/abilityRotationState.h
-	../clientside/ability/rotation/abilityRotationStates.h
-	../clientside/ability/rotation/abilityRotationStateMachine.h
-	
-	
 	#application
 	../clientside/application/BaseApplication.h
 
@@ -208,10 +200,6 @@ set(SRCS
 	../clientside/ability/animation/abilityAnimation.cpp
 	../clientside/ability/animation/abilityAnimationOgre.cpp
 	../clientside/ability/animation/abilityAnimationStates.cpp
-
-	#rotation
-	../clientside/ability/rotation/abilityRotation.cpp
-	../clientside/ability/rotation/abilityRotationStates.cpp
 
 	#application
 	../clientside/application/BaseApplication.cpp
@@ -298,13 +286,6 @@ set(HDRS
 	../clientside/ability/animation/abilityAnimationStates.h
 	../clientside/ability/animation/abilityAnimationStateMachine.h
 	
-	#rotation
-	../clientside/ability/rotation/abilityRotation.h
-	
-	../clientside/ability/rotation/abilityRotationState.h
-	../clientside/ability/rotation/abilityRotationStates.h
-	../clientside/ability/rotation/abilityRotationStateMachine.h
-
  	#application
         ../clientside/application/BaseApplication.h
 
@@ -378,10 +359,6 @@ set(SRCS
 	../clientside/ability/animation/abilityAnimation.cpp
 	../clientside/ability/animation/abilityAnimationOgre.cpp
 	../clientside/ability/animation/abilityAnimationStates.cpp
-
-	#rotation
-	../clientside/ability/rotation/abilityRotation.cpp
-	../clientside/ability/rotation/abilityRotationStates.cpp
 
 	#application
         ../clientside/application/BaseApplication.cpp
