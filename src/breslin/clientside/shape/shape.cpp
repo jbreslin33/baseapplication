@@ -25,8 +25,13 @@
 //ObjectTitle
 #include "../billboard/objectTitle.h"
 
+//move
+#include "../move/move.h"
+
 Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGhost)
 {
+
+	mMove = NULL;
 
 	mIsGhost = isGhost;
 
@@ -232,6 +237,7 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 	{
 		mAbilityVector.at(i)->processTick();
 	}
+	mMove->processTick();
 
 	//run billboard here for now.
 	if (!mIsGhost)
@@ -353,6 +359,7 @@ void Shape::interpolateTick(float renderTime)
 	{
 		mAbilityVector.at(i)->interpolateTick(renderTime);
 	}
+	mMove->interpolateTick(renderTime);
 }
 
 void Shape::moveGhostShape()

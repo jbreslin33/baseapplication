@@ -22,6 +22,7 @@ class Game;
 class Command;
 class ByteBuffer;
 class ObjectTitle;
+class Move;
 
 class Shape
 {
@@ -88,6 +89,9 @@ public:
 //name
 std::string mName;
 
+//move
+Move* mMove;
+
 private:
 //animate
 bool mAnimate;
@@ -103,7 +107,6 @@ float mScale;
 
 //this is your pointer to move shape, really all you need.
 SceneNode*          mSceneNode;
-
 
 /**************************************************
 *			METHODS
