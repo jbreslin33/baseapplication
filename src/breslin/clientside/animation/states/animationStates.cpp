@@ -1,11 +1,8 @@
 //parent
-#include "abilityAnimationStates.h"
+#include "animationStates.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
-
-//state machine
-#include "abilityAnimationStateMachine.h"
 
 //shape
 #include "../../shape/shape.h"
@@ -14,78 +11,82 @@
 #include "../../billboard/objectTitle.h"
 
 //animation
-#include "abilityAnimation.h"
+#include "../animationBreslin.h"
 
 //command
 #include "../../command/command.h"
 
-/******************************************************
-*				INTERPOLATE
-*
-*				   STATES
-*
-********************************************************/
-
-
-/******************************************************
-*				IDLE
-********************************************************/
-
-Idle_InterpolateTick_Animation* Idle_InterpolateTick_Animation::Instance()
+IDLE_INTERPOLATETICK_ANIMATION* IDLE_INTERPOLATETICK_ANIMATION::Instance()
 {
-  static Idle_InterpolateTick_Animation instance;
+  static IDLE_INTERPOLATETICK_ANIMATION instance;
   return &instance;
 }
-void Idle_InterpolateTick_Animation::enter(AbilityAnimation* abilityAnimation)
+void IDLE_INTERPOLATETICK_ANIMATION::enter(AnimationBreslin* animation)
 {
-	abilityAnimation->enterAnimationState(this);
+	// start off in the idle state (top and bottom together)
+        animation->setBaseAnimation(ANIM_IDLE_BASE,false);
+        animation->setTopAnimation(ANIM_IDLE_TOP,false);
+
+        // relax the hands since we're not holding anything
+        animation->mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
 }
 
-void Idle_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
+void IDLE_INTERPOLATETICK_ANIMATION::execute(AnimationBreslin* animation)
 {
 	{
 	Vector3D* positionDiff = new Vector3D();
-	positionDiff->subtract(abilityAnimation->mShape->mServerCommandCurrent->mPosition, abilityAnimation->mShape->mServerCommandLast->mPosition);
+	positionDiff->subtract(animation->mShape->mServerCommandCurrent->mPosition, animation->mShape->mServerCommandLast->mPosition);
  	
 	if (!positionDiff->isZero())
-		abilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Run_InterpolateTick_Animation::Instance());
+		animation->mAnimationInterpolateTickStateMachine->changeState(RUN_INTERPOLATETICK_ANIMATION::Instance());
 	}
 
-	abilityAnimation->runAnimations();
+	animation->runAnimations();
 }
-void Idle_InterpolateTick_Animation::exit(AbilityAnimation* abilityAnimation)
+void IDLE_INTERPOLATETICK_ANIMATION::exit(AnimationBreslin* animation)
 {
 }
 
-/******************************************************
-*				RUN
-********************************************************/
-
-Run_InterpolateTick_Animation* Run_InterpolateTick_Animation::Instance()
+bool IDLE_INTERPOLATETICK_ANIMATION::onLetter(AnimationBreslin* animationBreslin, Letter* letter)
 {
-  static Run_InterpolateTick_Animation instance;
+        return true;
+}
+
+RUN_INTERPOLATETICK_ANIMATION* RUN_INTERPOLATETICK_ANIMATION::Instance()
+{
+  static RUN_INTERPOLATETICK_ANIMATION instance;
   return &instance;
 }
-void Run_InterpolateTick_Animation::enter(AbilityAnimation* abilityAnimation)
+void RUN_INTERPOLATETICK_ANIMATION::enter(AnimationBreslin* animation)
 {
-	abilityAnimation->enterAnimationState(this);
+	animation->setBaseAnimation(ANIM_RUN_BASE, true);
+        animation->setTopAnimation(ANIM_RUN_TOP, true);
+
+        // relax the hands since we're not holding anything
+        if (!animation->mAnims[ANIM_HANDS_RELAXED]->getEnabled())
+        {
+                animation->mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
+        }
 }
-void Run_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
+void RUN_INTERPOLATETICK_ANIMATION::execute(AnimationBreslin* animation)
 {
 		
 	Vector3D* positionDiff = new Vector3D();
-	positionDiff->subtract(abilityAnimation->mShape->mServerCommandCurrent->mPosition, abilityAnimation->mShape->mServerCommandLast->mPosition);
+	positionDiff->subtract(animation->mShape->mServerCommandCurrent->mPosition, animation->mShape->mServerCommandLast->mPosition);
  	
 	if (positionDiff->isZero())
 	{
-		abilityAnimation->mAnimationInterpolateTickStateMachine->changeState(Idle_InterpolateTick_Animation::Instance());
+		animation->mAnimationInterpolateTickStateMachine->changeState(g::Instance());
 	}
 	
-	abilityAnimation->runAnimations();
+	animation->runAnimations();
 }
 
-void Run_InterpolateTick_Animation::exit(AbilityAnimation* abilityAnimation)
+void RUN_INTERPOLATETICK_ANIMATION::exit(AnimationBreslin* animation)
 {
 }
 
-
+bool RUN_INTERPOLATETICK_ANIMATION::onLetter(AnimationBreslin* animationBreslin, Letter* letter)
+{
+        return true;
+}

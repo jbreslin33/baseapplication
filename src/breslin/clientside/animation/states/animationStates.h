@@ -1,55 +1,32 @@
-#ifndef ABILITYANIMATIONSTATES_H
-#define ABILITYANIMATIONSTATES_H
+#ifndef ANIMATIONSTATES_H
+#define ANIMATIONSTATES_H
 
-/******************************************************
-*				INCLUDES
-********************************************************/
+#include "../animationBreslin.h"
 
-//parent
-#include "abilityAnimationState.h"
-
-/******************************************************
-*				FORWARD DECLARATIONS
-********************************************************/
-
-class Ability;
-
-/******************************************************
-*				INTERPOLATE
-*
-*				   STATES
-*
-********************************************************/
-
-
-/******************************************************
-*				IDLE
-********************************************************/
-
-class Idle_InterpolateTick_Animation : public AbilityAnimationState
+class IDLE_INTERPOLATETICK_ANIMATION : public State<AnimationBreslin>
 {
 private:
-  Idle_InterpolateTick_Animation(){}
+  IDLE_INTERPOLATETICK_ANIMATION(){}
 public:
-  static Idle_InterpolateTick_Animation* Instance();
-  void enter  (AbilityAnimation* abilityAnimation);
-  void execute(AbilityAnimation* abilityAnimation);
-  void exit   (AbilityAnimation* abilityAnimation);
+  static IDLE_INTERPOLATETICK_ANIMATION* Instance();
+  void enter  (AnimationBreslin* animationBreslin);
+  void execute(AnimationBreslin* animationBreslin);
+  void exit   (AnimationBreslin* animationBreslin);
+  bool onLetter(AnimationBreslin* animationBreslin, Letter* letter);
+
 };
 
 
-/******************************************************
-*				RUN
-********************************************************/
-class Run_InterpolateTick_Animation : public AbilityAnimationState
+class RUN_INTERPOLATETICK_ANIMATION : public State<AnimationBreslin>
 {
 private:
-  Run_InterpolateTick_Animation(){}
+  RUN_INTERPOLATETICK_ANIMATION(){}
 public:
-  static Run_InterpolateTick_Animation* Instance();
-  void enter  (AbilityAnimation* abilityAnimation);
-  void execute(AbilityAnimation* abilityAnimation);
-  void exit   (AbilityAnimation* abilityAnimation);
+  static RUN_INTERPOLATETICK_ANIMATION* Instance();
+  void enter  (AnimationBreslin* animationBreslin);
+  void execute(AnimationBreslin* animationBreslin);
+  void exit   (AnimationBreslin* animationBreslin);
+  bool onLetter(AnimationBreslin* animationBreslin, Letter* letter);
 };
 
 #endif

@@ -62,31 +62,6 @@ void AbilityAnimationOgre::runAnimations()
 	fadeAnimations(mShape->mApplication->getRenderTime());
 }
 
-void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAnimationState)
-{
-	
-	if (abilityAnimationState == Idle_InterpolateTick_Animation::Instance())
-	{
-		// start off in the idle state (top and bottom together)
-		setBaseAnimation(ANIM_IDLE_BASE,false);
-		setTopAnimation(ANIM_IDLE_TOP,false);
-
-		// relax the hands since we're not holding anything
-		mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
-	}
-	else if (abilityAnimationState == Run_InterpolateTick_Animation::Instance())
-	{
-		setBaseAnimation(ANIM_RUN_BASE, true);
-	    setTopAnimation(ANIM_RUN_TOP, true);
-
-		// relax the hands since we're not holding anything
-		if (!mAnims[ANIM_HANDS_RELAXED]->getEnabled())
-		{
-			mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
-		}
-	}
-}
-
 void AbilityAnimationOgre::fadeAnimations(Real deltaTime)
 {
 	for (int i = 0; i < mNumberOfAnimations; i++)

@@ -14,12 +14,12 @@ class Shape;
 /******************************************************
 *				INCLUDES
 ********************************************************/
-class Animation : public BaseEntity 
+class AnimationBreslin : public BaseEntity 
 {
 public:
 
-	Animation(Shape* shape);
-	~Animation();
+	AnimationBreslin(Shape* shape);
+	~AnimationBreslin();
 
 /******************************************************
 *				VARIABLES
@@ -28,7 +28,7 @@ public:
 Shape* mShape;
 
 //state machines
-StateMachine<Animation>* mInterpolateTickStateMachine;
+StateMachine<AnimationBreslin>* mStateMachine;
 
 
 /******************************************************
@@ -40,14 +40,17 @@ void processTick();
 void interpolateTick(float renderTime);
 
 //animation
-virtual void enterAnimationState(AbilityAnimationState* abilityAnimationState) = 0;
-virtual void     runAnimations        (                          ) = 0;  
+virtual void     runAnimationBreslins        (                          ) = 0;  
 
 //update
 virtual void update() { }
 
 //handle letter
 virtual bool  handleLetter(Letter* letter) { }
+
+//animations
+virtual void run() { };
+virtual void idle() { };
 
 };
 

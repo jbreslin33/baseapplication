@@ -115,16 +115,10 @@ set(HDRS
 	../clientside/move/move.h
 	../clientside/move/states/moveStates.h
 	
-	#ability
-	../clientside/ability/ability.h
-	
 	#animation
-	../clientside/ability/animation/abilityAnimation.h
-	../clientside/ability/animation/abilityAnimationOgre.h
-	
-	../clientside/ability/animation/abilityAnimationState.h
-	../clientside/ability/animation/abilityAnimationStates.h
-	../clientside/ability/animation/abilityAnimationStateMachine.h
+	../clientside/animation/animationBreslin.h
+	../clientside/animation/states/animationStates.h
+	../clientside/animation/ogre/animationOgre.h
 	
 	#application
 	../clientside/application/BaseApplication.h
@@ -193,13 +187,10 @@ set(SRCS
 	../clientside/move/move.cpp
 	../clientside/move/states/moveStates.cpp
 
-	#ablility
-	../clientside/ability/ability.cpp
-
-	#animation
-	../clientside/ability/animation/abilityAnimation.cpp
-	../clientside/ability/animation/abilityAnimationOgre.cpp
-	../clientside/ability/animation/abilityAnimationStates.cpp
+        #animation
+        ../clientside/animation/animationBreslin.cpp
+        ../clientside/animation/states/animationStates.cpp
+        ../clientside/animation/ogre/animationOgre.cpp
 
 	#application
 	../clientside/application/BaseApplication.cpp
@@ -275,17 +266,11 @@ set(HDRS
 	../clientside/move/move.h
 	../clientside/move/states/moveStates.h
 	
-	#ability
-	../clientside/ability/ability.h
-	
-	#animation
-	../clientside/ability/animation/abilityAnimation.h
-	../clientside/ability/animation/abilityAnimationOgre.h
-	
-	../clientside/ability/animation/abilityAnimationState.h
-	../clientside/ability/animation/abilityAnimationStates.h
-	../clientside/ability/animation/abilityAnimationStateMachine.h
-	
+        #animation
+        ../clientside/animation/animationBreslin.h
+        ../clientside/animation/states/animationStates.h
+        ../clientside/animation/ogre/animationOgre.h
+
  	#application
         ../clientside/application/BaseApplication.h
 
@@ -352,13 +337,10 @@ set(SRCS
 	../clientside/move/move.cpp
 	../clientside/move/states/moveStates.cpp
 	
-	#ablility
-	../clientside/ability/ability.cpp
-
-	#animation
-	../clientside/ability/animation/abilityAnimation.cpp
-	../clientside/ability/animation/abilityAnimationOgre.cpp
-	../clientside/ability/animation/abilityAnimationStates.cpp
+        #animation
+        ../clientside/animation/animationBreslin.cpp
+        ../clientside/animation/states/animationStates.cpp
+        ../clientside/animation/ogre/animationOgre.cpp
 
 	#application
         ../clientside/application/BaseApplication.cpp
