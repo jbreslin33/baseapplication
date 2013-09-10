@@ -24,7 +24,6 @@ class ByteBuffer;
 class ObjectTitle;
 class Rotation;
 class Move;
-class AnimationBreslin;
 
 class Shape
 {
@@ -90,9 +89,6 @@ public:
 
 //name
 std::string mName;
-
-//animation
-AnimationBreslin* mAnimation;
 
 //rotation
 Rotation* mRotation;

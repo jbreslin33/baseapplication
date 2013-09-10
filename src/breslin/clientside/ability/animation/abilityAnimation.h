@@ -1,12 +1,19 @@
-#ifndef ANIMATIONBRESLIN_H
-#define ANIMATIONBRESLIN_H
+#ifndef ABILITYANIMATION_H
+#define ABILITYANIMATION_H
 
+/*************************************
+*         INCLUDES
+*************************************/
 //parent
-#include "../../baseentity/baseEntity.h"
+#include "../ability.h"
 
-#include "../../fsm/stateMachine.h"
+/*************************************
+*         FORWARD DECLARATIONS
+*************************************/
 
-template <class entity_type> class State;
+//states
+class AbilityAnimationStateMachine;
+class AbilityAnimationState;
 
 //shape
 class Shape;
@@ -14,12 +21,12 @@ class Shape;
 /******************************************************
 *				INCLUDES
 ********************************************************/
-class AnimationBreslin : public BaseEntity 
+class AbilityAnimation : public Ability
 {
 public:
 
-	AnimationBreslin(Shape* shape);
-	~AnimationBreslin();
+	AbilityAnimation(Shape* shape);
+	~AbilityAnimation();
 
 /******************************************************
 *				VARIABLES
@@ -27,9 +34,8 @@ public:
 //shape
 Shape* mShape;
 
-//state machines
-StateMachine<AnimationBreslin>* mStateMachine;
-
+//state machine
+AbilityAnimationStateMachine* mAnimationInterpolateTickStateMachine;
 
 /******************************************************
 *				METHODS
@@ -40,14 +46,8 @@ void processTick();
 void interpolateTick(float renderTime);
 
 //animation
-virtual void enterAnimationState(State<AnimationBreslin>* s) = 0;
+virtual void enterAnimationState(AbilityAnimationState* abilityAnimationState) = 0;
 virtual void     runAnimations        (                          ) = 0;  
-
-//update
-virtual void update() { }
-
-//handle letter
-virtual bool  handleLetter(Letter* letter) { }
 
 };
 
