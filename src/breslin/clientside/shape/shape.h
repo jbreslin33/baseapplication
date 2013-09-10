@@ -96,6 +96,9 @@ Rotation* mRotation;
 //move
 Move* mMove;
 
+//animation
+AnimationOgre* mAnimation;
+
 private:
 //animate
 bool mAnimate;

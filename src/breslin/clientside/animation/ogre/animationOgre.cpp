@@ -17,7 +17,7 @@
 #include "../../command/command.h"
 
 //states
-//#include "../animationStates.h"
+#include "../states/animationStates.h"
 
 AnimationOgre::AnimationOgre(Shape* shape) : AnimationBreslin(shape)
 {
@@ -189,6 +189,7 @@ void AnimationOgre::idleExecute()
         positionDiff->subtract(mShape->mServerCommandCurrent->mPosition, mShape->mServerCommandLast->mPosition);
 
         if (!positionDiff->isZero())
+	{
                 mStateMachine->changeState(RUN_INTERPOLATETICK_ANIMATION::Instance());
         }
         runAnimations();
