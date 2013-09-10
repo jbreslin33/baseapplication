@@ -49,8 +49,10 @@ virtual void update() { }
 virtual bool  handleLetter(Letter* letter) { }
 
 //animations
-virtual void run() { };
-virtual void idle() { };
+virtual void runEnter() { };
+virtual void runExecute() { };
+virtual void idleEnter() { };
+virtual void idleExecute() { };
 
 };
 

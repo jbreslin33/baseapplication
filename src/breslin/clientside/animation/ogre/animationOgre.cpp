@@ -1,5 +1,5 @@
 //header
-#include "abilityAnimationOgre.h"
+#include "animationOgre.h"
 
 //shape
 #include "../../shape/shape.h"
@@ -10,10 +10,16 @@
 //game
 #include "../../game/game.h"
 
-//states
-#include "abilityAnimationStates.h"
+//math
+#include "../../../math/vector3D.h"
 
-AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : AbilityAnimation(shape)
+//command
+#include "../../command/command.h"
+
+//states
+//#include "../animationStates.h"
+
+AnimationOgre::AnimationOgre(Shape* shape) : AnimationBreslin(shape)
 {
 	mShape = shape;
 
@@ -22,11 +28,11 @@ AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : AbilityAnimation(shap
 	setupAnimations();
 }
 
-AbilityAnimationOgre::~AbilityAnimationOgre()
+AnimationOgre::~AnimationOgre()
 {
 }
 
-void AbilityAnimationOgre::setupAnimations()
+void AnimationOgre::setupAnimations()
 {
 	/*********  setup animations ***************/
     // this is very important due to the nature of the exported animations
@@ -51,7 +57,7 @@ void AbilityAnimationOgre::setupAnimations()
     mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
 }
 
-void AbilityAnimationOgre::runAnimations()
+void AnimationOgre::runAnimations()
 {
 	//for now let's slow animations down....
 	float tempSpeed = mShape->mSpeed;
@@ -62,7 +68,7 @@ void AbilityAnimationOgre::runAnimations()
 	fadeAnimations(mShape->mApplication->getRenderTime());
 }
 
-void AbilityAnimationOgre::fadeAnimations(Real deltaTime)
+void AnimationOgre::fadeAnimations(Real deltaTime)
 {
 	for (int i = 0; i < mNumberOfAnimations; i++)
     {
@@ -90,7 +96,7 @@ void AbilityAnimationOgre::fadeAnimations(Real deltaTime)
 	}
 }
 
-void AbilityAnimationOgre::setBaseAnimation(AnimID id, bool reset)
+void AnimationOgre::setBaseAnimation(AnimID id, bool reset)
 {
 	if (mBaseAnimID >= 0 && mBaseAnimID < mNumberOfAnimations)
     {
@@ -116,7 +122,7 @@ void AbilityAnimationOgre::setBaseAnimation(AnimID id, bool reset)
 	}
 }
 
-void AbilityAnimationOgre::setTopAnimation(AnimID id, bool reset)
+void AnimationOgre::setTopAnimation(AnimID id, bool reset)
 {
 
 	if (mTopAnimID >= 0 && mTopAnimID < mNumberOfAnimations)
@@ -141,4 +147,49 @@ void AbilityAnimationOgre::setTopAnimation(AnimID id, bool reset)
 			mAnims[id]->setTimePosition(0);
         }
 	}
+}
+//animations
+void AnimationOgre::runEnter()
+{
+	setBaseAnimation(ANIM_RUN_BASE, true);
+        setTopAnimation(ANIM_RUN_TOP, true);
+
+        // relax the hands since we're not holding anything
+        if (!mAnims[ANIM_HANDS_RELAXED]->getEnabled())
+        {
+                mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
+        }
+}
+void AnimationOgre::runExecute()
+{
+	Vector3D* positionDiff = new Vector3D();
+        positionDiff->subtract(mShape->mServerCommandCurrent->mPosition, mShape->mServerCommandLast->mPosition);
+
+        if (positionDiff->isZero())
+        {
+                mStateMachine->changeState(IDLE_INTERPOLATETICK_ANIMATION::Instance());
+        }
+        runAnimations();
+}
+
+void AnimationOgre::idleEnter()
+{
+	// start off in the idle state (top and bottom together)
+        setBaseAnimation(ANIM_IDLE_BASE,false);
+        setTopAnimation(ANIM_IDLE_TOP,false);
+
+        // relax the hands since we're not holding anything
+        mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
+
+}
+
+void AnimationOgre::idleExecute()
+{
+        Vector3D* positionDiff = new Vector3D();
+        positionDiff->subtract(mShape->mServerCommandCurrent->mPosition, mShape->mServerCommandLast->mPosition);
+
+        if (!positionDiff->isZero())
+                mStateMachine->changeState(RUN_INTERPOLATETICK_ANIMATION::Instance());
+        }
+        runAnimations();
 }
