@@ -1,11 +1,11 @@
-#ifndef ABILITYANIMATIONOGRE_H
-#define ABILITYANIMATIONOGRE_H
+#ifndef ANIMATIONOGRE_H
+#define ANIMATIONOGRE_H
 
 /******************************************************
 *				INCLUDES
 ********************************************************/
 //parent
-#include "abilityAnimation.h"
+#include "../animationBreslin.h"
 
 //Ogre headers
 #include "Ogre.h"
@@ -15,12 +15,11 @@ using namespace Ogre;
 *				FORWARD DECLARATIONS
 ********************************************************/
 class Shape;
-class AbilityAnimationState;
 
 /******************************************************
 *				CLASS
 ********************************************************/
-class AbilityAnimationOgre : public AbilityAnimation
+class AnimationOgre : public AnimationBreslin
 {
 
 // all the animations our character has, and a null ID
@@ -45,8 +44,8 @@ enum AnimID
 
 public:
 
-	AbilityAnimationOgre(Shape* shape);
-	~AbilityAnimationOgre();
+	AnimationOgre(Shape* shape);
+	~AnimationOgre();
 
 /******************************************************
 *				VARIABLES
@@ -67,7 +66,7 @@ Ogre::AnimationState  *mAnimationState;
 ********************************************************/
 void setupAnimations();
 void runAnimations();
-void enterAnimationState(AbilityAnimationState* abilityState);
+void enterAnimationState(State<Animation>* s);
 void fadeAnimations   (Real deltaTime);
 void setTopAnimation  (AnimID id, bool reset);
 void setBaseAnimation (AnimID id, bool reset);

@@ -17,7 +17,7 @@
 #include "../../math/vector3D.h"
 
 //ability
-#include "../ability/animation/abilityAnimationOgre.h"
+#include "../animation/ogre/animationOgre.h"
 
 //byteBuffer
 #include "../bytebuffer/byteBuffer.h"
@@ -62,7 +62,7 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	//animation
 	if (mAnimate)
 	{
-		addAbility(new AbilityAnimationOgre(this));
+		mAnimation = new AnimationOgre(this);
 	}
 	
 	//title

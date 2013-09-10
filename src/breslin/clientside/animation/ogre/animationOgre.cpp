@@ -1,5 +1,5 @@
 //header
-#include "abilityAnimationOgre.h"
+#include "animationOgre.h"
 
 //shape
 #include "../../shape/shape.h"
@@ -11,9 +11,9 @@
 #include "../../game/game.h"
 
 //states
-#include "abilityAnimationStates.h"
+#include "../states/animationStates.h"
 
-AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : AbilityAnimation(shape)
+AnimationOgre::AnimationOgre(Shape* shape) : AnimationBreslin(shape)
 {
 	mShape = shape;
 
@@ -22,11 +22,11 @@ AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : AbilityAnimation(shap
 	setupAnimations();
 }
 
-AbilityAnimationOgre::~AbilityAnimationOgre()
+AnimationOgre::~AnimationOgre()
 {
 }
 
-void AbilityAnimationOgre::setupAnimations()
+void AnimationOgre::setupAnimations()
 {
 	/*********  setup animations ***************/
     // this is very important due to the nature of the exported animations
@@ -51,7 +51,7 @@ void AbilityAnimationOgre::setupAnimations()
     mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
 }
 
-void AbilityAnimationOgre::runAnimations()
+void AnimationOgre::runAnimations()
 {
 	//for now let's slow animations down....
 	float tempSpeed = mShape->mSpeed;
@@ -62,10 +62,10 @@ void AbilityAnimationOgre::runAnimations()
 	fadeAnimations(mShape->mApplication->getRenderTime());
 }
 
-void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAnimationState)
+void AnimationOgre::enterAnimationState(State<Animation>* s)
 {
 	
-	if (abilityAnimationState == Idle_InterpolateTick_Animation::Instance())
+	if (mStateMachine->currentState() == IDLE_INTERPOLATETICK_ANIMATION::Instance())
 	{
 		// start off in the idle state (top and bottom together)
 		setBaseAnimation(ANIM_IDLE_BASE,false);
@@ -74,7 +74,7 @@ void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAni
 		// relax the hands since we're not holding anything
 		mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
 	}
-	else if (abilityAnimationState == Run_InterpolateTick_Animation::Instance())
+	else if (mStateMachine->currentState() == RUN_INTERPOLATETICK_ANIMATION::Instance())
 	{
 		setBaseAnimation(ANIM_RUN_BASE, true);
 	    setTopAnimation(ANIM_RUN_TOP, true);
@@ -87,7 +87,7 @@ void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAni
 	}
 }
 
-void AbilityAnimationOgre::fadeAnimations(Real deltaTime)
+void AnimationOgre::fadeAnimations(Real deltaTime)
 {
 	for (int i = 0; i < mNumberOfAnimations; i++)
     {
@@ -115,7 +115,7 @@ void AbilityAnimationOgre::fadeAnimations(Real deltaTime)
 	}
 }
 
-void AbilityAnimationOgre::setBaseAnimation(AnimID id, bool reset)
+void AnimationOgre::setBaseAnimation(AnimID id, bool reset)
 {
 	if (mBaseAnimID >= 0 && mBaseAnimID < mNumberOfAnimations)
     {
@@ -141,7 +141,7 @@ void AbilityAnimationOgre::setBaseAnimation(AnimID id, bool reset)
 	}
 }
 
-void AbilityAnimationOgre::setTopAnimation(AnimID id, bool reset)
+void AnimationOgre::setTopAnimation(AnimID id, bool reset)
 {
 
 	if (mTopAnimID >= 0 && mTopAnimID < mNumberOfAnimations)

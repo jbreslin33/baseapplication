@@ -111,20 +111,14 @@ set(HDRS
 	../clientside/rotation/rotation.h
 	../clientside/rotation/states/rotationStates.h
 	
+	#animation
+	../clientside/animation/animationBreslin.h
+	../clientside/animation/states/animationStates.h
+	../clientside/animation/ogre/animationOgre.h
+	
 	#move
 	../clientside/move/move.h
 	../clientside/move/states/moveStates.h
-	
-	#ability
-	../clientside/ability/ability.h
-	
-	#animation
-	../clientside/ability/animation/abilityAnimation.h
-	../clientside/ability/animation/abilityAnimationOgre.h
-	
-	../clientside/ability/animation/abilityAnimationState.h
-	../clientside/ability/animation/abilityAnimationStates.h
-	../clientside/ability/animation/abilityAnimationStateMachine.h
 	
 	#application
 	../clientside/application/BaseApplication.h
@@ -188,6 +182,11 @@ set(SRCS
 	#rotation
 	../clientside/rotation/rotation.cpp
 	../clientside/rotation/states/rotationStates.cpp
+
+        #animation
+        ../clientside/animation/animationBreslin.cpp
+        ../clientside/animation/states/animationStates.cpp
+        ../clientside/animation/ogre/animationOgre.cpp
 	
 	#move
 	../clientside/move/move.cpp
@@ -195,11 +194,6 @@ set(SRCS
 
 	#ablility
 	../clientside/ability/ability.cpp
-
-	#animation
-	../clientside/ability/animation/abilityAnimation.cpp
-	../clientside/ability/animation/abilityAnimationOgre.cpp
-	../clientside/ability/animation/abilityAnimationStates.cpp
 
 	#application
 	../clientside/application/BaseApplication.cpp
@@ -270,21 +264,18 @@ set(HDRS
 	#rotation
 	../clientside/rotation/rotation.h
 	../clientside/rotation/states/rotationStates.h
-	
+
+        #animation
+        ../clientside/animation/animationBreslin.h
+        ../clientside/animation/states/animationStates.h
+        ../clientside/animation/ogre/animationOgre.h
+
 	#move
 	../clientside/move/move.h
 	../clientside/move/states/moveStates.h
 	
 	#ability
 	../clientside/ability/ability.h
-	
-	#animation
-	../clientside/ability/animation/abilityAnimation.h
-	../clientside/ability/animation/abilityAnimationOgre.h
-	
-	../clientside/ability/animation/abilityAnimationState.h
-	../clientside/ability/animation/abilityAnimationStates.h
-	../clientside/ability/animation/abilityAnimationStateMachine.h
 	
  	#application
         ../clientside/application/BaseApplication.h
@@ -347,6 +338,11 @@ set(SRCS
 	#rotation
 	../clientside/rotation/rotation.cpp
 	../clientside/rotation/states/rotationStates.cpp
+
+        #animation
+        ../clientside/animation/animationBreslin.cpp
+        ../clientside/animation/states/animationStates.cpp
+        ../clientside/animation/ogre/animationOgre.cpp
 	
 	#move
 	../clientside/move/move.cpp
@@ -354,11 +350,6 @@ set(SRCS
 	
 	#ablility
 	../clientside/ability/ability.cpp
-
-	#animation
-	../clientside/ability/animation/abilityAnimation.cpp
-	../clientside/ability/animation/abilityAnimationOgre.cpp
-	../clientside/ability/animation/abilityAnimationStates.cpp
 
 	#application
         ../clientside/application/BaseApplication.cpp
