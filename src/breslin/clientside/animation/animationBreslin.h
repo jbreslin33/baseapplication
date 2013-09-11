@@ -40,7 +40,7 @@ void processTick();
 void interpolateTick(float renderTime);
 
 //animation
-virtual void     runAnimationBreslins        (                          ) = 0;  
+virtual void     runAnimations        (                          ) = 0;  
 
 //update
 virtual void update() { }

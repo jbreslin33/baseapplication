@@ -33,7 +33,6 @@
 
 Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGhost)
 {
-
 	mRotation = NULL;
 	mMove = NULL;
 
@@ -46,6 +45,7 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	mServerCommandLast    = new Command();
 	mServerCommandCurrent = new Command();
 	mCommandToRunOnShape  = new Command();
+	
 	//speed
 	mSpeed = 0.0f;
 	mSpeedMax  = 1.66f;
@@ -63,14 +63,16 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	if (mAnimate)
 	{
 		//addAbility(new AbilityAnimationOgre(this));
-		mAnimation = new AnimationOgre(this);
+		LogString("animation new");	
+		mAnimationOgre = new AnimationOgre(this);
 	}
-	
+	LogString("1");	
 	//title
 	mObjectTitle = NULL;
 
 	//ghost
 	mGhost = NULL;
+	LogString("2");	
 
 	if (!mIsGhost) 
 	{
@@ -80,7 +82,7 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 		mGhost = new Shape(mApplication,byteBuffer,true);
 		mGhost->setVisible(false);
 	}
-
+	LogString("3");	
 }
 Shape::~Shape()
 {
@@ -106,29 +108,6 @@ void Shape::setText(ByteBuffer* byteBuffer)
         }
 }
 
-
-/*********************************
-		ABILITY
-******************************/
-
-void Shape::addAbility(Ability* ability)
-{
-	mAbilityVector.push_back(ability);	
-}
-
-Ability* Shape::getAbility(Ability* ability)
-{
-	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
-	{
-		//typeid(ability);
-
-		if (typeid(ability) == typeid(mAbilityVector.at(i)))
-		{
-			return mAbilityVector.at(i);
-		}
-	}
-	return 0;
-}
 /*********************************
 		SPAWN
 ******************************/
@@ -221,6 +200,7 @@ void Shape::spawnShape(Vector3D* position)
 
 void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 {
+LogString("1");
 	clearTitle(); //empty title string so it can be filled anew
 /*	
 	std::string s;
@@ -236,14 +216,18 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 	
 
 	parseDeltaByteBuffer(byteBuffer);
-
-	//process ticks on abilitys
-	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+	if (mAnimationOgre)
 	{
-		mAbilityVector.at(i)->processTick();
+		mAnimationOgre->processTick();
 	}
-	mRotation->processTick();
-	mMove->processTick();
+	if (mRotation)
+	{
+		mRotation->processTick();
+	}
+	if (mMove)
+	{
+		mMove->processTick();
+	}
 
 	//run billboard here for now.
 	if (!mIsGhost)
@@ -360,13 +344,18 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 
 void Shape::interpolateTick(float renderTime)
 {
-	//interpolate ticks on abilitys
-	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+	if (mAnimationOgre)
 	{
-		mAbilityVector.at(i)->interpolateTick(renderTime);
+		mAnimationOgre->interpolateTick(renderTime);
 	}
-	mRotation->interpolateTick(renderTime);
-	mMove->interpolateTick(renderTime);
+	if (mRotation)
+	{
+		mRotation->interpolateTick(renderTime);
+	}
+	if (mMove)
+	{	
+		mMove->interpolateTick(renderTime);
+	}
 }
 
 void Shape::moveGhostShape()

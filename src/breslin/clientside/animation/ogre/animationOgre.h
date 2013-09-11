@@ -67,6 +67,12 @@ virtual void runExecute();
 virtual void idleEnter();
 virtual void idleExecute();
 
+//update
+virtual void update() { }
+
+//handle letter
+virtual bool  handleLetter(Letter* letter) { }
+
 
 };
 

@@ -17,13 +17,13 @@ using namespace Ogre;
 **********************************/
 class ApplicationBreslin;
 class Vector3D;
-class Ability;
 class Game;
 class Command;
 class ByteBuffer;
 class ObjectTitle;
 class Rotation;
 class Move;
+class AnimationOgre;
 
 class Shape
 {
@@ -97,14 +97,11 @@ Rotation* mRotation;
 Move* mMove;
 
 //animation
-AnimationOgre* mAnimation;
+AnimationOgre* mAnimationOgre;
 
 private:
 //animate
 bool mAnimate;
-
-//abilitys
-std::vector<Ability*> mAbilityVector;	 //all abilitys for this shape
 
 //ghost
 bool mIsGhost;
@@ -144,9 +141,6 @@ Vector3D* getRotation          (                          ) ;
 void     appendToTitle        (std::string appendage     ) ;
 void     appendToTitle        (int appendage             ) ;
 void     setTitle (std::string title);
-//abilitys
-void     addAbility(Ability* ability);
-Ability* getAbility(Ability* ability);
 
 //interpolation
 void interpolateTick(float renderTime);

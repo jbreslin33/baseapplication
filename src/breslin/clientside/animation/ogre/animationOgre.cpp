@@ -24,6 +24,8 @@ AnimationOgre::AnimationOgre(Shape* shape) : AnimationBreslin(shape)
 	mShape = shape;
 
 	mAnimationFadeSpeed = 7.5;
+	
+	LogString("AnimationOgre::AnimationOgre");
 
 	setupAnimations();
 }
@@ -59,6 +61,7 @@ void AnimationOgre::setupAnimations()
 
 void AnimationOgre::runAnimations()
 {
+	LogString("AnimationOgre::runAnimations");
 	//for now let's slow animations down....
 	float tempSpeed = mShape->mSpeed;
 	tempSpeed = tempSpeed / 3.0f;
