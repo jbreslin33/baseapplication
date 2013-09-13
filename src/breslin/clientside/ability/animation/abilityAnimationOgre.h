@@ -1,16 +1,26 @@
-#ifndef ANIMATIONOGRE_H
-#define ANIMATIONOGRE_H
+#ifndef ABILITYANIMATIONOGRE_H
+#define ABILITYANIMATIONOGRE_H
 
+/******************************************************
+*				INCLUDES
+********************************************************/
 //parent
-#include "../animationBreslin.h"
+#include "abilityAnimation.h"
 
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
 
+/******************************************************
+*				FORWARD DECLARATIONS
+********************************************************/
 class Shape;
+class AbilityAnimationState;
 
-class AnimationOgre : public AnimationBreslin
+/******************************************************
+*				CLASS
+********************************************************/
+class AbilityAnimationOgre : public AbilityAnimation
 {
 
 // all the animations our character has, and a null ID
@@ -35,8 +45,8 @@ enum AnimID
 
 public:
 
-	AnimationOgre(Shape* shape);
-	~AnimationOgre();
+	AbilityAnimationOgre(Shape* shape);
+	~AbilityAnimationOgre();
 
 /******************************************************
 *				VARIABLES
@@ -57,21 +67,10 @@ Ogre::AnimationState  *mAnimationState;
 ********************************************************/
 void setupAnimations();
 void runAnimations();
+void enterAnimationState(AbilityAnimationState* abilityState);
 void fadeAnimations   (Real deltaTime);
 void setTopAnimation  (AnimID id, bool reset);
 void setBaseAnimation (AnimID id, bool reset);
-
-//animations
-virtual void runEnter();
-virtual void runExecute();
-virtual void idleEnter();
-virtual void idleExecute();
-
-//update
-virtual void update() { }
-
-//handle letter
-virtual bool  handleLetter(Letter* letter) { }
 
 
 };

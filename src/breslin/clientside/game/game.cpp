@@ -16,6 +16,9 @@
 //bytebuffer
 #include "../bytebuffer/byteBuffer.h"
 
+//ability
+#include "../ability/rotation/abilityRotation.h"
+
 //ObjectTitle
 #include "../billboard/objectTitle.h"
 
@@ -249,7 +252,10 @@ void Game::processUpdate()
 void Game::addShape(ByteBuffer* byteBuffer)
 {
 	Shape* shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
-	
+
+	//ability
+	//shape->addAbility(new AbilityRotation(shape));
+	//shape->addAbility(new AbilityMove(shape));
 	shape->mRotation = new Rotation(shape);
 	shape->mMove = new Move(shape);
 
