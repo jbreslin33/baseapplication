@@ -64,7 +64,7 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	{
 		//addAbility(new AbilityAnimationOgre(this));
 		LogString("animation new");	
-		mAnimationOgre = new AnimationOgre(this);
+//		mAnimationOgre = new AnimationOgre(this);
 	}
 	//title
 	mObjectTitle = NULL;

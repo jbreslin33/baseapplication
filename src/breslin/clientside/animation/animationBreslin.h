@@ -1,5 +1,5 @@
-#ifndef ANIMATION_H
-#define ANIMATION_H
+#ifndef ANIMATIONBRESLIN_H
+#define ANIMATIONBRESLIN_H
 
 //parent
 #include "../../baseentity/baseEntity.h"

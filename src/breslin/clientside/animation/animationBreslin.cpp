@@ -9,6 +9,7 @@
 
 AnimationBreslin::AnimationBreslin(Shape* shapeDynamic)  : BaseEntity(BaseEntity::getNextValidID())
 {
+	LogString("AnimationBreslin::AnimationBreslin");
 	//shape
 	mShape = shapeDynamic;
 
