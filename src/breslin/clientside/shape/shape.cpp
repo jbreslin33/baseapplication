@@ -66,13 +66,11 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 		LogString("animation new");	
 		mAnimationOgre = new AnimationOgre(this);
 	}
-	LogString("1");	
 	//title
 	mObjectTitle = NULL;
 
 	//ghost
 	mGhost = NULL;
-	LogString("2");	
 
 	if (!mIsGhost) 
 	{
@@ -82,7 +80,6 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 		mGhost = new Shape(mApplication,byteBuffer,true);
 		mGhost->setVisible(false);
 	}
-	LogString("3");	
 }
 Shape::~Shape()
 {
@@ -200,7 +197,6 @@ void Shape::spawnShape(Vector3D* position)
 
 void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 {
-LogString("1");
 	clearTitle(); //empty title string so it can be filled anew
 /*	
 	std::string s;
@@ -346,6 +342,7 @@ void Shape::interpolateTick(float renderTime)
 {
 	if (mAnimationOgre)
 	{
+		LogString("Shape::interpolateTick in if ogre");
 		mAnimationOgre->interpolateTick(renderTime);
 	}
 	if (mRotation)
