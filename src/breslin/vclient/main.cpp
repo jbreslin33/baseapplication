@@ -32,10 +32,11 @@ extern "C" {
 #endif
         try
 	{
-		while (true)
+		while (!application->mExit)
 		{
        	    		application->processUpdate();
 		}
+		return 0;
         }
 		catch( Ogre::Exception& e )
 		{

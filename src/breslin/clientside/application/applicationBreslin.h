@@ -68,6 +68,7 @@ bool mConnectSent;
 bool mLoggedIn;
 bool mLeaveGame;
 bool mSentLeaveGame;
+bool mExit;
 
 //gui
 OgreBites::SelectMenu* mSelectMenuSchool;

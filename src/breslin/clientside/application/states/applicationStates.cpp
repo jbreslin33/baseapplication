@@ -130,7 +130,9 @@ void LOGIN_APPLICATION::execute(ApplicationBreslin* application)
 
         if (application->mButtonHit == application->mButtonExit)
         {
-                application->mStateMachine->changeState(NULL);
+		LogString("before");
+                application->mStateMachine->changeState(EXIT_APPLICATION::Instance());
+		LogString("after");
                 application->mStateMachine->setGlobalState(NULL);
                 application->mButtonHit = NULL;
                 application->shutdown();
@@ -268,7 +270,9 @@ void MAIN_APPLICATION::execute(ApplicationBreslin* application)
 
         if (application->mButtonHit == application->mButtonExit)
         {
-                application->mStateMachine->changeState(NULL);
+		LogString("abefore");
+                application->mStateMachine->changeState(EXIT_APPLICATION::Instance());
+		LogString("aafter");
                 application->mStateMachine->setGlobalState(NULL);
                 application->mButtonHit = NULL;
                 application->shutdown();
@@ -358,4 +362,25 @@ bool PLAY_APPLICATION::onLetter(ApplicationBreslin* application, Letter* letter)
         return true;
 }
 
+EXIT_APPLICATION* EXIT_APPLICATION::Instance()
+{
+  static EXIT_APPLICATION instance;
+  return &instance;
+}
+void EXIT_APPLICATION::enter(ApplicationBreslin* application)
+{
+	application->mExit = true;
+}
+void EXIT_APPLICATION::execute(ApplicationBreslin* application)
+{
+
+}
+void EXIT_APPLICATION::exit(ApplicationBreslin* application)
+{
+}
+
+bool EXIT_APPLICATION::onLetter(ApplicationBreslin* application, Letter* letter)
+{
+        return true;
+}
 

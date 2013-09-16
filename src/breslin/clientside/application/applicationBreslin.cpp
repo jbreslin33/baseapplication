@@ -47,6 +47,7 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
         mSentLeaveGame = false;
 	mGameReset = false;
 	mGameCode = 1;
+	mExit = false;
 
 	//time
 	mRenderTime = 0.0f;

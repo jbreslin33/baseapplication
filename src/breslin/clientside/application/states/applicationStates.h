@@ -83,4 +83,20 @@ public:
   void exit   (ApplicationBreslin* applicationBreslin);
   bool onLetter(ApplicationBreslin* applicationBreslin, Letter* letter);
 };
+
+/******************************************************
+*                       EXIT_APPLICATION
+********************************************************/
+class EXIT_APPLICATION : public State<ApplicationBreslin>
+{
+private:
+  EXIT_APPLICATION(){}
+public:
+  static EXIT_APPLICATION* Instance();
+  void enter  (ApplicationBreslin* applicationBreslin);
+  void execute(ApplicationBreslin* applicationBreslin);
+  void exit   (ApplicationBreslin* applicationBreslin);
+  bool onLetter(ApplicationBreslin* applicationBreslin, Letter* letter);
+};
+
 #endif
