@@ -52,6 +52,8 @@ public:
 	AbilityAnimationOgre(Shape* shape);
 	~AbilityAnimationOgre();
 
+void processTick();
+
 /******************************************************
 *				VARIABLES
 ********************************************************/
@@ -66,16 +68,24 @@ bool                  mFadingIn[mNumberOfAnimations];  // which animations are f
 bool                  mFadingOut[mNumberOfAnimations]; // which animations are fading out
 Ogre::AnimationState  *mAnimationState;
 
+StateMachine<AbilityAnimationOgre>* mStateMachine;
+
 /******************************************************
 *				METHODS
 ********************************************************/
 void setupAnimations();
 void runAnimations();
-void enterAnimationState(AbilityAnimationState* abilityState);
+void enterRunAnimationState();
+void enterIdleAnimationState();
 void fadeAnimations   (Real deltaTime);
 void setTopAnimation  (AnimID id, bool reset);
 void setBaseAnimation (AnimID id, bool reset);
 
+//update
+virtual void update() { }
+
+//handle letter
+virtual bool  handleLetter(Letter* letter) { }
 
 };
 

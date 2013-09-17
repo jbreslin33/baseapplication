@@ -3,7 +3,7 @@
 
 #include "../../../fsm/state.h"
 
-class AbilityAnimationOgreMove;
+class AbilityAnimationOgre;
 
 
 class IDLE_INTERPOLATETICK_ANIMATION : public State<AbilityAnimationOgre> 

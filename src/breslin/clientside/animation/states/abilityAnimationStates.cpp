@@ -1,11 +1,8 @@
 //parent
-#include "abilityAnimationOgreStates.h"
+#include "abilityAnimationStates.h"
 
 //log
 #include "../../tdreamsock/dreamSockLog.h"
-
-//state machine
-#include "abilityAnimationOgreStateMachine.h"
 
 //shape
 #include "../../shape/shape.h"
@@ -14,7 +11,7 @@
 #include "../../billboard/objectTitle.h"
 
 //animation
-#include "abilityAnimationOgre.h"
+#include "../abilityAnimationOgre.h"
 
 //command
 #include "../../command/command.h"
@@ -38,7 +35,7 @@ IDLE_INTERPOLATETICK_ANIMATION* IDLE_INTERPOLATETICK_ANIMATION::Instance()
 }
 void IDLE_INTERPOLATETICK_ANIMATION::enter(AbilityAnimationOgre* abilityAnimationOgre)
 {
-	abilityAnimationOgre->enterAnimationState(this);
+	abilityAnimationOgre->enterIdleAnimationState();
 }
 
 void IDLE_INTERPOLATETICK_ANIMATION::execute(AbilityAnimationOgre* abilityAnimationOgre)
@@ -48,7 +45,7 @@ void IDLE_INTERPOLATETICK_ANIMATION::execute(AbilityAnimationOgre* abilityAnimat
 	positionDiff->subtract(abilityAnimationOgre->mShape->mServerCommandCurrent->mPosition, abilityAnimationOgre->mShape->mServerCommandLast->mPosition);
  	
 	if (!positionDiff->isZero())
-		abilityAnimationOgre->mAnimationInterpolateTickStateMachine->changeState(RUN_INTERPOLATETICK_ANIMATION::Instance());
+		abilityAnimationOgre->mStateMachine->changeState(RUN_INTERPOLATETICK_ANIMATION::Instance());
 	}
 
 	abilityAnimationOgre->runAnimations();
@@ -72,7 +69,7 @@ RUN_INTERPOLATETICK_ANIMATION* RUN_INTERPOLATETICK_ANIMATION::Instance()
 }
 void RUN_INTERPOLATETICK_ANIMATION::enter(AbilityAnimationOgre* abilityAnimationOgre)
 {
-	abilityAnimationOgre->enterAnimationState(this);
+	abilityAnimationOgre->enterRunAnimationState();
 }
 void RUN_INTERPOLATETICK_ANIMATION::execute(AbilityAnimationOgre* abilityAnimationOgre)
 {
@@ -82,7 +79,7 @@ void RUN_INTERPOLATETICK_ANIMATION::execute(AbilityAnimationOgre* abilityAnimati
  	
 	if (positionDiff->isZero())
 	{
-		abilityAnimationOgre->mAnimationInterpolateTickStateMachine->changeState(IDLE_INTERPOLATETICK_ANIMATION::Instance());
+		abilityAnimationOgre->mStateMachine->changeState(IDLE_INTERPOLATETICK_ANIMATION::Instance());
 	}
 	
 	abilityAnimationOgre->runAnimations();
