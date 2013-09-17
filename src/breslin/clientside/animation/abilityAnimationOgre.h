@@ -5,7 +5,11 @@
 *				INCLUDES
 ********************************************************/
 //parent
-#include "abilityAnimation.h"
+#include "../../baseentity/baseEntity.h"
+
+#include "../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
 
 //Ogre headers
 #include "Ogre.h"
@@ -20,7 +24,7 @@ class AbilityAnimationState;
 /******************************************************
 *				CLASS
 ********************************************************/
-class AbilityAnimationOgre : public AbilityAnimation
+class AbilityAnimationOgre : public BaseEntity 
 {
 
 // all the animations our character has, and a null ID

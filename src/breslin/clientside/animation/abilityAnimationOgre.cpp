@@ -2,18 +2,18 @@
 #include "abilityAnimationOgre.h"
 
 //shape
-#include "../../shape/shape.h"
+#include "../shape/shape.h"
 
 //applicationBreslin
-#include "../../application/applicationBreslin.h"
+#include "../application/applicationBreslin.h"
 
 //game
-#include "../../game/game.h"
+#include "../game/game.h"
 
 //states
-#include "abilityAnimationStates.h"
+#include "states/abilityAnimationStates.h"
 
-AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : AbilityAnimation(shape)
+AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 {
 	mShape = shape;
 
@@ -65,7 +65,7 @@ void AbilityAnimationOgre::runAnimations()
 void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAnimationState)
 {
 	
-	if (abilityAnimationState == Idle_InterpolateTick_Animation::Instance())
+	if (abilityAnimationState == IDLE_INTERPOLATETICK_ANIMATION::Instance())
 	{
 		// start off in the idle state (top and bottom together)
 		setBaseAnimation(ANIM_IDLE_BASE,false);
@@ -74,7 +74,7 @@ void AbilityAnimationOgre::enterAnimationState(AbilityAnimationState* abilityAni
 		// relax the hands since we're not holding anything
 		mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
 	}
-	else if (abilityAnimationState == Run_InterpolateTick_Animation::Instance())
+	else if (abilityAnimationState == RUN_INTERPOLATETICK_ANIMATION::Instance())
 	{
 		setBaseAnimation(ANIM_RUN_BASE, true);
 	    setTopAnimation(ANIM_RUN_TOP, true);

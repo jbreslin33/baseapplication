@@ -118,13 +118,9 @@ set(HDRS
 	#ability
 	../clientside/ability/ability.h
 	
-	#animation
-	../clientside/ability/animation/abilityAnimation.h
-	../clientside/ability/animation/abilityAnimationOgre.h
-	
-	../clientside/ability/animation/abilityAnimationState.h
-	../clientside/ability/animation/abilityAnimationStates.h
-	../clientside/ability/animation/abilityAnimationStateMachine.h
+	#animationOgre
+	../clientside/animation/abilityAnimationOgre.h
+	../clientside/animation/states/abilityAnimationStates.h
 	
 	#application
 	../clientside/application/BaseApplication.h
@@ -196,10 +192,9 @@ set(SRCS
 	#ablility
 	../clientside/ability/ability.cpp
 
-	#animation
-	../clientside/ability/animation/abilityAnimation.cpp
-	../clientside/ability/animation/abilityAnimationOgre.cpp
-	../clientside/ability/animation/abilityAnimationStates.cpp
+        #animationOgre
+        ../clientside/animation/abilityAnimationOgre.cpp
+        ../clientside/animation/states/abilityAnimationStates.cpp
 
 	#application
 	../clientside/application/BaseApplication.cpp
@@ -278,13 +273,9 @@ set(HDRS
 	#ability
 	../clientside/ability/ability.h
 	
-	#animation
-	../clientside/ability/animation/abilityAnimation.h
-	../clientside/ability/animation/abilityAnimationOgre.h
-	
-	../clientside/ability/animation/abilityAnimationState.h
-	../clientside/ability/animation/abilityAnimationStates.h
-	../clientside/ability/animation/abilityAnimationStateMachine.h
+ 	#animationOgre
+        ../clientside/animation/abilityAnimationOgre.h
+        ../clientside/animation/states/abilityAnimationStates.h
 	
  	#application
         ../clientside/application/BaseApplication.h
@@ -355,10 +346,9 @@ set(SRCS
 	#ablility
 	../clientside/ability/ability.cpp
 
-	#animation
-	../clientside/ability/animation/abilityAnimation.cpp
-	../clientside/ability/animation/abilityAnimationOgre.cpp
-	../clientside/ability/animation/abilityAnimationStates.cpp
+        #animationOgre
+        ../clientside/animation/abilityAnimationOgre.cpp
+        ../clientside/animation/states/abilityAnimationStates.cpp
 
 	#application
         ../clientside/application/BaseApplication.cpp
