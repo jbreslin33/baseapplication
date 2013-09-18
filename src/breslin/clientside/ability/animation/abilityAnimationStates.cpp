@@ -14,7 +14,7 @@
 #include "../../billboard/objectTitle.h"
 
 //animation
-#include "abilityAnimation.h"
+#include "abilityAnimationOgre.h"
 
 //command
 #include "../../command/command.h"
@@ -36,12 +36,12 @@ Idle_InterpolateTick_Animation* Idle_InterpolateTick_Animation::Instance()
   static Idle_InterpolateTick_Animation instance;
   return &instance;
 }
-void Idle_InterpolateTick_Animation::enter(AbilityAnimation* abilityAnimation)
+void Idle_InterpolateTick_Animation::enter(AbilityAnimationOgre* abilityAnimation)
 {
 	abilityAnimation->enterAnimationState(this);
 }
 
-void Idle_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
+void Idle_InterpolateTick_Animation::execute(AbilityAnimationOgre* abilityAnimation)
 {
 	{
 	Vector3D* positionDiff = new Vector3D();
@@ -53,7 +53,7 @@ void Idle_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
 
 	abilityAnimation->runAnimations();
 }
-void Idle_InterpolateTick_Animation::exit(AbilityAnimation* abilityAnimation)
+void Idle_InterpolateTick_Animation::exit(AbilityAnimationOgre* abilityAnimation)
 {
 }
 
@@ -66,11 +66,11 @@ Run_InterpolateTick_Animation* Run_InterpolateTick_Animation::Instance()
   static Run_InterpolateTick_Animation instance;
   return &instance;
 }
-void Run_InterpolateTick_Animation::enter(AbilityAnimation* abilityAnimation)
+void Run_InterpolateTick_Animation::enter(AbilityAnimationOgre* abilityAnimation)
 {
 	abilityAnimation->enterAnimationState(this);
 }
-void Run_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
+void Run_InterpolateTick_Animation::execute(AbilityAnimationOgre* abilityAnimation)
 {
 		
 	Vector3D* positionDiff = new Vector3D();
@@ -84,7 +84,7 @@ void Run_InterpolateTick_Animation::execute(AbilityAnimation* abilityAnimation)
 	abilityAnimation->runAnimations();
 }
 
-void Run_InterpolateTick_Animation::exit(AbilityAnimation* abilityAnimation)
+void Run_InterpolateTick_Animation::exit(AbilityAnimationOgre* abilityAnimation)
 {
 }
 

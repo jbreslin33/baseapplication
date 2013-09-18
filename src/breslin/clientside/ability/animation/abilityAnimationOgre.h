@@ -5,7 +5,7 @@
 *				INCLUDES
 ********************************************************/
 //parent
-#include "abilityAnimation.h"
+#include "../ability.h"
 
 //Ogre headers
 #include "Ogre.h"
@@ -16,11 +16,13 @@ using namespace Ogre;
 ********************************************************/
 class Shape;
 class AbilityAnimationState;
+//states
+class AbilityAnimationStateMachine;
 
 /******************************************************
 *				CLASS
 ********************************************************/
-class AbilityAnimationOgre : public AbilityAnimation
+class AbilityAnimationOgre : public Ability
 {
 
 // all the animations our character has, and a null ID
@@ -52,6 +54,9 @@ public:
 *				VARIABLES
 ********************************************************/
 //animation
+//state machine
+AbilityAnimationStateMachine* mAnimationInterpolateTickStateMachine;
+
 static const int mNumberOfAnimations = 13;
 float mAnimationFadeSpeed;
 Shape* mShape;
@@ -72,6 +77,9 @@ void fadeAnimations   (Real deltaTime);
 void setTopAnimation  (AnimID id, bool reset);
 void setBaseAnimation (AnimID id, bool reset);
 
+//updating
+void processTick();
+void interpolateTick(float renderTime);
 
 };
 

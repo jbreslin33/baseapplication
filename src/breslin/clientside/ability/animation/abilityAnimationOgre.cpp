@@ -10,12 +10,20 @@
 //game
 #include "../../game/game.h"
 
+//state machine
+#include "abilityAnimationStateMachine.h"
+
 //states
 #include "abilityAnimationStates.h"
 
-AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : AbilityAnimation(shape)
+AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : Ability(shape)
 {
 	mShape = shape;
+
+        //animation interpolateTick states
+    mAnimationInterpolateTickStateMachine = new AbilityAnimationStateMachine(this);    //setup the state machine
+    mAnimationInterpolateTickStateMachine->setCurrentState (Idle_InterpolateTick_Animation::Instance());
+    mAnimationInterpolateTickStateMachine->setPreviousState(Idle_InterpolateTick_Animation::Instance());
 
 	mAnimationFadeSpeed = 7.5;
 
@@ -24,6 +32,17 @@ AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : AbilityAnimation(shap
 
 AbilityAnimationOgre::~AbilityAnimationOgre()
 {
+}
+/******************************************************
+*                               UPDATING
+********************************************************/
+void AbilityAnimationOgre::processTick()
+{
+
+}
+void AbilityAnimationOgre::interpolateTick(float renderTime)
+{
+        mAnimationInterpolateTickStateMachine->update();
 }
 
 void AbilityAnimationOgre::setupAnimations()

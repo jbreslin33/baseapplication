@@ -10,7 +10,7 @@
 /**********************************
 *          FORWARD DECLARATIONS
 **********************************/
-class AbilityAnimation;
+class AbilityAnimationOgre;
 
 /**********************************
 *          CLASS
@@ -19,7 +19,7 @@ class AbilityAnimationStateMachine
 {
 public:
 
-AbilityAnimationStateMachine(AbilityAnimation* owner):m_pOwner(owner),
+AbilityAnimationStateMachine(AbilityAnimationOgre* owner):m_pOwner(owner),
 	                               m_pCurrentState(0),
                                    m_pPreviousState(0),
                                    m_pGlobalState(0)
@@ -33,7 +33,7 @@ virtual ~AbilityAnimationStateMachine(){}
 **********************************/
 private:
   
-AbilityAnimation*        m_pOwner;
+AbilityAnimationOgre*        m_pOwner;
 AbilityAnimationState*   m_pCurrentState;
 AbilityAnimationState*   m_pPreviousState;
 AbilityAnimationState*   m_pGlobalState;

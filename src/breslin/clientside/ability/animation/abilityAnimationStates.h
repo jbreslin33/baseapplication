@@ -32,9 +32,9 @@ private:
   Idle_InterpolateTick_Animation(){}
 public:
   static Idle_InterpolateTick_Animation* Instance();
-  void enter  (AbilityAnimation* abilityAnimation);
-  void execute(AbilityAnimation* abilityAnimation);
-  void exit   (AbilityAnimation* abilityAnimation);
+  void enter  (AbilityAnimationOgre* abilityAnimation);
+  void execute(AbilityAnimationOgre* abilityAnimation);
+  void exit   (AbilityAnimationOgre* abilityAnimation);
 };
 
 
@@ -47,9 +47,9 @@ private:
   Run_InterpolateTick_Animation(){}
 public:
   static Run_InterpolateTick_Animation* Instance();
-  void enter  (AbilityAnimation* abilityAnimation);
-  void execute(AbilityAnimation* abilityAnimation);
-  void exit   (AbilityAnimation* abilityAnimation);
+  void enter  (AbilityAnimationOgre* abilityAnimation);
+  void execute(AbilityAnimationOgre* abilityAnimation);
+  void exit   (AbilityAnimationOgre* abilityAnimation);
 };
 
 #endif
