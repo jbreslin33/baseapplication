@@ -73,7 +73,14 @@ Run_InterpolateTick_Animation* Run_InterpolateTick_Animation::Instance()
 }
 void Run_InterpolateTick_Animation::enter(AbilityAnimationOgre* abilityAnimation)
 {
-	abilityAnimation->enterAnimationState(this);
+	abilityAnimation->setBaseAnimation(abilityAnimation->ANIM_RUN_BASE, true);
+        abilityAnimation->setTopAnimation(abilityAnimation->ANIM_RUN_TOP, true);
+
+        // relax the hands since we're not holding anything
+        if (!abilityAnimation->mAnims[abilityAnimation->ANIM_HANDS_RELAXED]->getEnabled())
+        {
+                abilityAnimation->mAnims[abilityAnimation->ANIM_HANDS_RELAXED]->setEnabled(true);
+        }
 }
 void Run_InterpolateTick_Animation::execute(AbilityAnimationOgre* abilityAnimation)
 {
