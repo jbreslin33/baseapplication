@@ -4,15 +4,13 @@
 /******************************************************
 *				INCLUDES
 ********************************************************/
-
-//parent
-#include "abilityAnimationState.h"
+#include "../../../fsm/state.h"
 
 /******************************************************
 *				FORWARD DECLARATIONS
 ********************************************************/
 
-class Ability;
+class AbilityAnimationOgre;
 
 /******************************************************
 *				INTERPOLATE
@@ -21,12 +19,11 @@ class Ability;
 *
 ********************************************************/
 
-
 /******************************************************
 *				IDLE
 ********************************************************/
 
-class Idle_InterpolateTick_Animation : public AbilityAnimationState
+class Idle_InterpolateTick_Animation : public State<AbilityAnimationOgre> 
 {
 private:
   Idle_InterpolateTick_Animation(){}
@@ -35,13 +32,15 @@ public:
   void enter  (AbilityAnimationOgre* abilityAnimation);
   void execute(AbilityAnimationOgre* abilityAnimation);
   void exit   (AbilityAnimationOgre* abilityAnimation);
+ bool onLetter(AbilityAnimationOgre* abilityAnimation, Letter* letter);
+
 };
 
 
 /******************************************************
 *				RUN
 ********************************************************/
-class Run_InterpolateTick_Animation : public AbilityAnimationState
+class Run_InterpolateTick_Animation : public State<AbilityAnimationOgre>
 {
 private:
   Run_InterpolateTick_Animation(){}
@@ -50,6 +49,7 @@ public:
   void enter  (AbilityAnimationOgre* abilityAnimation);
   void execute(AbilityAnimationOgre* abilityAnimation);
   void exit   (AbilityAnimationOgre* abilityAnimation);
+ bool onLetter(AbilityAnimationOgre* abilityAnimation, Letter* letter);
 };
 
 #endif

@@ -7,6 +7,11 @@
 //parent
 #include "../ability.h"
 
+#include "../../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
+
+
 //Ogre headers
 #include "Ogre.h"
 using namespace Ogre;
@@ -15,9 +20,6 @@ using namespace Ogre;
 *				FORWARD DECLARATIONS
 ********************************************************/
 class Shape;
-class AbilityAnimationState;
-//states
-class AbilityAnimationStateMachine;
 
 /******************************************************
 *				CLASS
@@ -54,9 +56,8 @@ enum AnimID
 /******************************************************
 *				VARIABLES
 ********************************************************/
-//animation
 //state machine
-AbilityAnimationStateMachine* mAnimationInterpolateTickStateMachine;
+StateMachine<AbilityAnimationOgre>* mAnimationInterpolateTickStateMachine;
 
 static const int mNumberOfAnimations = 13;
 float mAnimationFadeSpeed;

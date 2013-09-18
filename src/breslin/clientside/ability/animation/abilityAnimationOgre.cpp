@@ -21,9 +21,9 @@ AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : Ability(shape)
 	mShape = shape;
 
         //animation interpolateTick states
-    mAnimationInterpolateTickStateMachine = new AbilityAnimationStateMachine(this);    //setup the state machine
-    mAnimationInterpolateTickStateMachine->setCurrentState (Idle_InterpolateTick_Animation::Instance());
-    mAnimationInterpolateTickStateMachine->setPreviousState(Idle_InterpolateTick_Animation::Instance());
+    	mAnimationInterpolateTickStateMachine = new StateMachine<AbilityAnimationOgre>(this);    //setup the state machine
+    	mAnimationInterpolateTickStateMachine->setCurrentState (Idle_InterpolateTick_Animation::Instance());
+    	mAnimationInterpolateTickStateMachine->setPreviousState(Idle_InterpolateTick_Animation::Instance());
 
 	mAnimationFadeSpeed = 7.5;
 

@@ -11,8 +11,6 @@ template <class entity_type> class State;
 /******************************************************
 *				FORWARD DECLARATIONS
 ********************************************************/
-class AbilityMoveStateMachine;
-class AbilityMoveState;
 class Shape;
 class Vector3D;
 

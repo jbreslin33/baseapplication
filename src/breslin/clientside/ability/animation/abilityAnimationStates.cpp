@@ -61,6 +61,10 @@ void Idle_InterpolateTick_Animation::execute(AbilityAnimationOgre* abilityAnimat
 void Idle_InterpolateTick_Animation::exit(AbilityAnimationOgre* abilityAnimation)
 {
 }
+bool Idle_InterpolateTick_Animation::onLetter(AbilityAnimationOgre* abilityAnimationOgre, Letter* letter)
+{
+        return true;
+}
 
 /******************************************************
 *				RUN
@@ -100,4 +104,8 @@ void Run_InterpolateTick_Animation::exit(AbilityAnimationOgre* abilityAnimation)
 {
 }
 
+bool Run_InterpolateTick_Animation::onLetter(AbilityAnimationOgre* abilityAnimationOgre, Letter* letter)
+{
+        return true;
+}
 
