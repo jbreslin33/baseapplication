@@ -62,7 +62,8 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	//animation
 	if (mAnimate)
 	{
-		addAbility(new AbilityAnimationOgre(this));
+		//addAbility(new AbilityAnimationOgre(this));
+		mAbilityAnimationOgre = new AbilityAnimationOgre(this);
 	}
 	
 	//title
@@ -240,6 +241,10 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
 		mAbilityVector.at(i)->processTick();
+	}
+	if (mAbilityAnimationOgre)
+	{
+		mAbilityAnimationOgre->		
 	}
 	mRotation->processTick();
 	mMove->processTick();
