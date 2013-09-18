@@ -17,7 +17,7 @@
 #include "../../math/vector3D.h"
 
 //ability
-#include "../animation/abilityAnimationOgre.h"
+#include "../ability/animation/abilityAnimationOgre.h"
 
 //byteBuffer
 #include "../bytebuffer/byteBuffer.h"
@@ -62,8 +62,7 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	//animation
 	if (mAnimate)
 	{
-//		addAbility(new AbilityAnimationOgre(this));
-		mAbilityAnimationOgre = new AbilityAnimationOgre(this);
+		addAbility(new AbilityAnimationOgre(this));
 	}
 	
 	//title
@@ -106,6 +105,29 @@ void Shape::setText(ByteBuffer* byteBuffer)
         }
 }
 
+
+/*********************************
+		ABILITY
+******************************/
+
+void Shape::addAbility(Ability* ability)
+{
+	mAbilityVector.push_back(ability);	
+}
+
+Ability* Shape::getAbility(Ability* ability)
+{
+	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+	{
+		//typeid(ability);
+
+		if (typeid(ability) == typeid(mAbilityVector.at(i)))
+		{
+			return mAbilityVector.at(i);
+		}
+	}
+	return 0;
+}
 /*********************************
 		SPAWN
 ******************************/
@@ -214,9 +236,10 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 
 	parseDeltaByteBuffer(byteBuffer);
 
-	if (mAbilityAnimationOgre)
+	//process ticks on abilitys
+	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
-		mAbilityAnimationOgre->processTick();
+		mAbilityVector.at(i)->processTick();
 	}
 	mRotation->processTick();
 	mMove->processTick();
@@ -337,7 +360,10 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 void Shape::interpolateTick(float renderTime)
 {
 	//interpolate ticks on abilitys
-	//mAbilityAnimationOgre->interpolateTick(renderTime);
+	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
+	{
+		mAbilityVector.at(i)->interpolateTick(renderTime);
+	}
 	mRotation->interpolateTick(renderTime);
 	mMove->interpolateTick(renderTime);
 }

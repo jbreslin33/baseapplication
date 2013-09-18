@@ -5,11 +5,7 @@
 *				INCLUDES
 ********************************************************/
 //parent
-#include "../../baseentity/baseEntity.h"
-
-#include "../../fsm/stateMachine.h"
-
-template <class entity_type> class State;
+#include "abilityAnimation.h"
 
 //Ogre headers
 #include "Ogre.h"
@@ -24,7 +20,7 @@ class AbilityAnimationState;
 /******************************************************
 *				CLASS
 ********************************************************/
-class AbilityAnimationOgre : public BaseEntity 
+class AbilityAnimationOgre : public AbilityAnimation
 {
 
 // all the animations our character has, and a null ID
@@ -52,8 +48,6 @@ public:
 	AbilityAnimationOgre(Shape* shape);
 	~AbilityAnimationOgre();
 
-void processTick();
-
 /******************************************************
 *				VARIABLES
 ********************************************************/
@@ -68,24 +62,16 @@ bool                  mFadingIn[mNumberOfAnimations];  // which animations are f
 bool                  mFadingOut[mNumberOfAnimations]; // which animations are fading out
 Ogre::AnimationState  *mAnimationState;
 
-StateMachine<AbilityAnimationOgre>* mStateMachine;
-
 /******************************************************
 *				METHODS
 ********************************************************/
 void setupAnimations();
 void runAnimations();
-void enterRunAnimationState();
-void enterIdleAnimationState();
+void enterAnimationState(AbilityAnimationState* abilityState);
 void fadeAnimations   (Real deltaTime);
 void setTopAnimation  (AnimID id, bool reset);
 void setBaseAnimation (AnimID id, bool reset);
 
-//update
-virtual void update() { }
-
-//handle letter
-virtual bool  handleLetter(Letter* letter) { }
 
 };
 
