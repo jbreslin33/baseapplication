@@ -38,7 +38,12 @@ Idle_InterpolateTick_Animation* Idle_InterpolateTick_Animation::Instance()
 }
 void Idle_InterpolateTick_Animation::enter(AbilityAnimationOgre* abilityAnimation)
 {
-	abilityAnimation->enterAnimationState(this);
+        // start off in the idle state (top and bottom together)
+	abilityAnimation->setBaseAnimation(abilityAnimation->ANIM_IDLE_BASE,false);
+        abilityAnimation->setTopAnimation(abilityAnimation->ANIM_IDLE_TOP,false);
+
+        // relax the hands since we're not holding anything
+        abilityAnimation->mAnims[abilityAnimation->ANIM_HANDS_RELAXED]->setEnabled(true);
 }
 
 void Idle_InterpolateTick_Animation::execute(AbilityAnimationOgre* abilityAnimation)
