@@ -16,9 +16,6 @@
 //bytebuffer
 #include "../bytebuffer/byteBuffer.h"
 
-//ability
-#include "../ability/rotation/abilityRotation.h"
-
 //ObjectTitle
 #include "../billboard/objectTitle.h"
 

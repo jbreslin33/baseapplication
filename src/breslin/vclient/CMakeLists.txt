@@ -115,9 +115,6 @@ set(HDRS
 	../clientside/move/move.h
 	../clientside/move/states/moveStates.h
 	
-	#ability
-	../clientside/ability/ability.h
-	
 	#animation
 	../clientside/ability/animation/abilityAnimationOgre.h
 	
@@ -191,9 +188,6 @@ set(SRCS
 	#move
 	../clientside/move/move.cpp
 	../clientside/move/states/moveStates.cpp
-
-	#ablility
-	../clientside/ability/ability.cpp
 
 	#animation
 	../clientside/ability/animation/abilityAnimationOgre.cpp
@@ -273,9 +267,6 @@ set(HDRS
 	../clientside/move/move.h
 	../clientside/move/states/moveStates.h
 	
-	#ability
-	../clientside/ability/ability.h
-	
 	#animation
 	../clientside/ability/animation/abilityAnimationOgre.h
 	
@@ -349,9 +340,6 @@ set(SRCS
 	../clientside/move/move.cpp
 	../clientside/move/states/moveStates.cpp
 	
-	#ablility
-	../clientside/ability/ability.cpp
-
 	../clientside/ability/animation/abilityAnimationOgre.cpp
 	../clientside/ability/animation/abilityAnimationStates.cpp
 
