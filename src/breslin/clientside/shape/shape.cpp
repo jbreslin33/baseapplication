@@ -505,7 +505,7 @@ std::string Shape::getMeshString(int meshCode)
 	}
 	if (meshCode == 1)
 	{
-		mScale = 0.10f;
+		mScale = 1.50f;
 		return "sinbad.mesh";
 	}
 }
