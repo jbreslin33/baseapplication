@@ -62,9 +62,7 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	//animation
 	if (mAnimate)
 	{
-		LogString("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		mAbilityAnimationOgre = new AbilityAnimationOgre(this);
-		mAbilityVector.push_back(mAbilityAnimationOgre);
 	}
 	
 	//title
@@ -211,11 +209,6 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 
 	parseDeltaByteBuffer(byteBuffer);
 
-	//process ticks on abilitys
-	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
-	{
-//		mAbilityVector.at(i)->processTick();
-	}
 	if (mAbilityAnimationOgre) 	
 	{
 		mAbilityAnimationOgre->processTick();	
@@ -338,10 +331,9 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 
 void Shape::interpolateTick(float renderTime)
 {
-	//interpolate ticks on abilitys
-	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
-	{
-		mAbilityVector.at(i)->interpolateTick(renderTime);
+	if (mAbilityAnimationOgre)
+	{	
+		mAbilityAnimationOgre->interpolateTick(renderTime);
 	}
 	mRotation->interpolateTick(renderTime);
 	mMove->interpolateTick(renderTime);
