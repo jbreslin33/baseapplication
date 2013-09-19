@@ -16,7 +16,7 @@
 //states
 #include "abilityAnimationStates.h"
 
-AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) :  BaseEntity(BaseEntity::getNextValidID()) 
+AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : Ability(shape)
 {
 	mShape = shape;
 
@@ -160,4 +160,3 @@ void AbilityAnimationOgre::setTopAnimation(AnimID id, bool reset)
        		}
 	}
 }
-

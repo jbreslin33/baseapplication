@@ -5,7 +5,7 @@
 *				INCLUDES
 ********************************************************/
 //parent
-#include "../../../baseentity/baseEntity.h"
+#include "../ability.h"
 
 #include "../../../fsm/stateMachine.h"
 
@@ -24,7 +24,7 @@ class Shape;
 /******************************************************
 *				CLASS
 ********************************************************/
-class AbilityAnimationOgre : public BaseEntity 
+class AbilityAnimationOgre : public Ability
 {
 
 // all the animations our character has, and a null ID
@@ -81,12 +81,6 @@ void setBaseAnimation (AnimID id, bool reset);
 //updating
 void processTick();
 void interpolateTick(float renderTime);
-
-//update
-virtual void update() { }
-
-//handle letter
-virtual bool  handleLetter(Letter* letter) { }
 
 };
 

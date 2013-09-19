@@ -24,7 +24,6 @@ class ByteBuffer;
 class ObjectTitle;
 class Rotation;
 class Move;
-class AbilityAnimationOgre;
 
 class Shape
 {
@@ -96,9 +95,6 @@ Rotation* mRotation;
 
 //move
 Move* mMove;
-
-//anim
-AbilityAnimationOgre* mAbilityAnimationOgre;
 
 private:
 //animate
