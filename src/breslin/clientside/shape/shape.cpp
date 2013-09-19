@@ -62,7 +62,8 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	//animation
 	if (mAnimate)
 	{
-		mAbilityVector.push_back(new AbilityAnimationOgre(this));
+		mAbilityAnimationOgre = new AbilityAnimationOgre(this);
+		mAbilityVector.push_back(mAbilityAnimationOgre);
 	}
 	
 	//title
