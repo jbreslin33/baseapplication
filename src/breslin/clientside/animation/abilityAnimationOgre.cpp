@@ -2,19 +2,16 @@
 #include "abilityAnimationOgre.h"
 
 //shape
-#include "../../shape/shape.h"
+#include "../shape/shape.h"
 
 //applicationBreslin
-#include "../../application/applicationBreslin.h"
+#include "../application/applicationBreslin.h"
 
 //game
-#include "../../game/game.h"
-
-//state machine
-#include "abilityAnimationStateMachine.h"
+#include "../game/game.h"
 
 //states
-#include "abilityAnimationStates.h"
+#include "states/abilityAnimationStates.h"
 
 AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : BaseEntity(BaseEntity::getNextValidID()) 
 {

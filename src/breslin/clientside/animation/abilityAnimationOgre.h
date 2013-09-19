@@ -5,10 +5,10 @@
 *				INCLUDES
 ********************************************************/
 //parent
-#include "../../../baseentity/baseEntity.h"
+#include "../../baseentity/baseEntity.h"
 
 
-#include "../../../fsm/stateMachine.h"
+#include "../../fsm/stateMachine.h"
 
 template <class entity_type> class State;
 

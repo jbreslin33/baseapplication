@@ -4,9 +4,6 @@
 //log
 #include "../../tdreamsock/dreamSockLog.h"
 
-//state machine
-#include "abilityAnimationStateMachine.h"
-
 //shape
 #include "../../shape/shape.h"
 
@@ -14,7 +11,7 @@
 #include "../../billboard/objectTitle.h"
 
 //animation
-#include "abilityAnimationOgre.h"
+#include "../abilityAnimationOgre.h"
 
 //command
 #include "../../command/command.h"
