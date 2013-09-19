@@ -62,6 +62,7 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 	//animation
 	if (mAnimate)
 	{
+		LogString("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		mAbilityAnimationOgre = new AbilityAnimationOgre(this);
 		mAbilityVector.push_back(mAbilityAnimationOgre);
 	}
@@ -157,10 +158,6 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
 	mServerCommandLast->mPosition->copyValuesFrom(mSpawnPosition);
 	mServerCommandCurrent->mPosition->copyValuesFrom(mSpawnPosition);
-
-
-	
-
 }
 
 void Shape::spawnShape(Vector3D* position)
@@ -217,7 +214,11 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 	//process ticks on abilitys
 	for (unsigned int i = 0; i < mAbilityVector.size(); i++)
 	{
-		mAbilityVector.at(i)->processTick();
+//		mAbilityVector.at(i)->processTick();
+	}
+	if (mAbilityAnimationOgre) 	
+	{
+		mAbilityAnimationOgre->processTick();	
 	}
 	mRotation->processTick();
 	mMove->processTick();
@@ -505,6 +506,6 @@ std::string Shape::getMeshString(int meshCode)
 	if (meshCode == 1)
 	{
 		mScale = 0.10f;
-		return "cube.mesh";
+		return "sinbad.mesh";
 	}
 }
