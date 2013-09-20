@@ -45,10 +45,10 @@ void Test::reset()
 	for (int i = 0; i < mQuestionAttemptsVector.size(); i++)
 	{
 		mQuestionAttemptsVector.at(i)->dbInsert();
-		mQuestionAttemptsVector.at(i) = NULL;
-		delete mQuestionAttemptsVector.at(i);
+		//mQuestionAttemptsVector.at(i) = NULL;
+		//delete mQuestionAttemptsVector.at(i);
 	}
-	mQuestionAttemptsVector.clear();
+	//mQuestionAttemptsVector.clear();
 	
 	//quiz
 	mQuiz = NULL;
@@ -79,6 +79,7 @@ int Test::getNewQuestionID()
         int maxLevel            = getMaxLevelAskedID();
 	int questionID = 0;
 
+	LogString("maxLevel:%d",maxLevel);
 /*
         if (rand() % 2 == 1)
         {
@@ -92,12 +93,14 @@ int Test::getNewQuestionID()
                                 {
                                         //advance level
                                         questionID = maxLevel + 1;
+					LogString("maxLevel questionID:%d",questionID);
                                         return questionID;
                                 }
                         }
                         else
                         {
                                 questionID = i;
+				LogString("ELSE questionID:%d",questionID);
                                 return questionID;
                         }
                 }
@@ -175,8 +178,10 @@ int Test::getMaxLevelAskedID()
 
         for (int i = 0; i < mQuestionAttemptsVector.size(); i++)
         {
+		LogString("questionID:%d", mQuestionAttemptsVector.at(i)->question_id);
                 if (mQuestionAttemptsVector.at(i)->question_id > highestQuestionID)
                 {
+			LogString("highestQuestionID:%d",highestQuestionID);
                         highestQuestionID = mQuestionAttemptsVector.at(i)->question_id;
                 }
         }
