@@ -83,10 +83,9 @@ int Test::getNewQuestionID()
 	int questionID = 0;
 
 	LogString("maxLevel:%d",maxLevel);
-/*
+
         if (rand() % 2 == 1)
         {
-*/
                 //you could advance here if you passed maxLevel and all before it...
                 for (int i = 1; i <= maxLevel; i++)
                 {
@@ -96,7 +95,7 @@ int Test::getNewQuestionID()
                                 {
                                         //advance level
                                         questionID = maxLevel + 1;
-					LogString("maxLevel questionID:%d",questionID);
+					LogString("ADVANCE maxLevel questionID:%d",questionID);
                                         return questionID;
                                 }
                         }
@@ -107,7 +106,7 @@ int Test::getNewQuestionID()
                                 return questionID;
                         }
                 }
-/*
+
         }
         else
         {
@@ -115,7 +114,7 @@ int Test::getNewQuestionID()
                 questionID  = rand() % maxLevel + 1;
                 return questionID;
         }
-*/
+
 }
 
 
@@ -198,7 +197,7 @@ bool Test::checkLevel(int level)
         //clear the vector...
         mQuestionAttemptsVectorTemp.clear();
 
-        while (total < 1 && index > -1)
+        while (total < 3 && index > -1)
         {
                 if (mQuestionAttemptsVector.at(index)->question_id == level)
                 {
@@ -208,17 +207,14 @@ bool Test::checkLevel(int level)
                 index--;
         }
 
-        if (mQuestionAttemptsVectorTemp.size() < 1)
+        if (mQuestionAttemptsVectorTemp.size() < 3)
         {
-                //LogString("size is small: %d", mQuestionAttemptsVectorTemp.size());
 		return false;
         }
         else
         {
         	return true;
-                //LogString("size is good: %d", mQuestionAttemptsVectorTemp.size());
         }
-
 }
 
 void Test::parseAnswer(Message* mes)
