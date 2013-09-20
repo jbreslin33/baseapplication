@@ -79,8 +79,10 @@ int Test::getNewQuestionID()
         int maxLevel            = getMaxLevelAskedID();
 	int questionID = 0;
 
+/*
         if (rand() % 2 == 1)
         {
+*/
                 //you could advance here if you passed maxLevel and all before it...
                 for (int i = 1; i <= maxLevel; i++)
                 {
@@ -99,6 +101,7 @@ int Test::getNewQuestionID()
                                 return questionID;
                         }
                 }
+/*
         }
         else
         {
@@ -106,6 +109,7 @@ int Test::getNewQuestionID()
                 questionID  = rand() % maxLevel + 1;
                 return questionID;
         }
+*/
 }
 
 
