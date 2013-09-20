@@ -14,6 +14,9 @@ QuestionAttempts::QuestionAttempts()
 	answer_attempt_time = 0.0;
 	answer_time = 0;
 	user_id = 0;
+
+	mWrittenToDisk = false;
+
 	mUtility = new Utility();
 }
 

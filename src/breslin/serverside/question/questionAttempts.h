@@ -21,6 +21,7 @@ std::string answer;
 double answer_attempt_time; 
 int answer_time; 
 int user_id; 
+bool mWrittenToDisk;
 
 void set(int i, int q, std::string a, double aat, int at, int uid);
 void dbInsert();
