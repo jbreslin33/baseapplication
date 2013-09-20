@@ -186,7 +186,7 @@ bool Test::checkLevel(int level)
         //clear the vector...
         mQuestionAttemptsVectorTemp.clear();
 
-        while (total < 10 && index > -1)
+        while (total < 1 && index > -1)
         {
                 if (mQuestionAttemptsVector.at(index)->question_id == level)
                 {
@@ -196,7 +196,7 @@ bool Test::checkLevel(int level)
                 index--;
         }
 
-        if (mQuestionAttemptsVectorTemp.size() < 10)
+        if (mQuestionAttemptsVectorTemp.size() < 1)
         {
                 //LogString("size is small: %d", mQuestionAttemptsVectorTemp.size());
 		return false;
