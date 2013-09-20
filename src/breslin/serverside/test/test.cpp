@@ -37,6 +37,12 @@ Test::Test(ClientPartido* clientPartido)
 Test::~Test()
 {
 	delete mStateMachine;	
+	for (int i = 0; i < mQuestionAttemptsVector.size(); i++)
+	{
+		mQuestionAttemptsVector.at(i) = NULL;
+		delete mQuestionAttemptsVector.at(i);
+	}
+	mQuestionAttemptsVector.clear();
 }
 
 void Test::reset()
@@ -45,10 +51,7 @@ void Test::reset()
 	for (int i = 0; i < mQuestionAttemptsVector.size(); i++)
 	{
 		mQuestionAttemptsVector.at(i)->dbInsert();
-		//mQuestionAttemptsVector.at(i) = NULL;
-		//delete mQuestionAttemptsVector.at(i);
 	}
-	//mQuestionAttemptsVector.clear();
 	
 	//quiz
 	mQuiz = NULL;
