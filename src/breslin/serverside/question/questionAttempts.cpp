@@ -15,12 +15,11 @@ QuestionAttempts::QuestionAttempts()
 	answer_time = 0;
 	user_id = 0;
 
-	mWrittenToDisk = false;
 
 	mUtility = new Utility();
 }
 
-QuestionAttempts::QuestionAttempts(int i, int q, std::string a, double aat, int at, int uid)
+QuestionAttempts::QuestionAttempts(int i, int q, std::string a, double aat, int at, int uid, bool writtenToDisk)
 {
 	id = i;
 	question_id = q;
@@ -29,6 +28,7 @@ QuestionAttempts::QuestionAttempts(int i, int q, std::string a, double aat, int 
 	answer_time = at;
 	user_id = uid;
 
+	mWrittenToDisk = writtenToDisk;
 	//lets try a db insert...
 	//dbInsert();
 }
@@ -39,24 +39,26 @@ QuestionAttempts::~QuestionAttempts()
 
 void QuestionAttempts::dbInsert()
 {
- 	PGconn* conn;
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+	if (!mWrittenToDisk)
+	{
+		LogString("writting questionAttempt to disk");
+ 		PGconn* conn;
+        	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-	std::string query = "insert into questions_attempts (question_id, answer, answer_time, user_id) values ("; 
-	query.append(mUtility->intToString(question_id));
-	query.append(",'");
-	query.append(answer);
-	query.append("',");
-	query.append(mUtility->intToString(answer_time));
-	query.append(",");
-	query.append(mUtility->intToString(user_id));
-	query.append(")");
-
-	LogString("dbInsert");
-
-        const char * q = query.c_str();
-        PQexec(conn,q);
-        PQfinish(conn);
+		std::string query = "insert into questions_attempts (question_id, answer, answer_time, user_id) values ("; 
+		query.append(mUtility->intToString(question_id));
+		query.append(",'");
+		query.append(answer);
+		query.append("',");
+		query.append(mUtility->intToString(answer_time));
+		query.append(",");
+		query.append(mUtility->intToString(user_id));
+		query.append(")");
+        	const char * q = query.c_str();
+        	PQexec(conn,q);
+        	PQfinish(conn);
+		mWrittenToDisk = true;
+	}
 }
 
 void QuestionAttempts::set(int i, int q, std::string a, double aat, int at, int uid)

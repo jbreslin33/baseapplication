@@ -10,7 +10,7 @@ class QuestionAttempts
 public:
 	
 QuestionAttempts();
-QuestionAttempts(int i, int q, std::string a, double aat, int at, int uid);
+QuestionAttempts(int i, int q, std::string a, double aat, int at, int uid, bool writtenToDisk);
 virtual ~QuestionAttempts();
 
 Utility* mUtility;

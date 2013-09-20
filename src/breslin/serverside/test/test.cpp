@@ -158,7 +158,7 @@ void Test::getQuestionAttempts()
                 std::string fString(f);
                 int fInt = mClientPartido->mServerPartido->mUtility->stringToInt(fString);
 
-                QuestionAttempts* questionAttempts = new QuestionAttempts(aInt,bInt,cString,dDouble,eInt,fInt);
+                QuestionAttempts* questionAttempts = new QuestionAttempts(aInt,bInt,cString,dDouble,eInt,fInt,true);
                 mQuestionAttemptsVector.push_back(questionAttempts);
         }
         PQclear(res);
@@ -235,7 +235,7 @@ void Test::parseAnswer(Message* mes)
 
 void Test::insertAnswerAttempt(int questionID, std::string stringAnswer, int answerTime)
 {
-        QuestionAttempts* questionAttempts = new QuestionAttempts(0,questionID,stringAnswer,mClientPartido->mServerPartido->mNetwork->getCurrentSystemTime(),answerTime,mClientPartido->id);
+        QuestionAttempts* questionAttempts = new QuestionAttempts(0,questionID,stringAnswer,mClientPartido->mServerPartido->mNetwork->getCurrentSystemTime(),answerTime,mClientPartido->id,false);
         mQuestionAttemptsVector.push_back(questionAttempts);
 }
 
