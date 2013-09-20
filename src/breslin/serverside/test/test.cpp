@@ -199,13 +199,14 @@ bool Test::checkLevel(int level)
         if (mQuestionAttemptsVectorTemp.size() < 10)
         {
                 //LogString("size is small: %d", mQuestionAttemptsVectorTemp.size());
+		return false;
         }
         else
         {
+        	return true;
                 //LogString("size is good: %d", mQuestionAttemptsVectorTemp.size());
         }
 
-        return false;
 }
 
 void Test::parseAnswer(Message* mes)
