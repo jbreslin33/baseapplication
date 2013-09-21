@@ -223,11 +223,13 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
 
 	//again give precedence to a reset...
+/*
         if (gamePartido->mApplicationPartido->mGameReset)
         {
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
         }
-        else if (gamePartido->mCorrectAnswerEnd || gamePartido->mBattleEnd)
+*/
+        if (gamePartido->mCorrectAnswerEnd || gamePartido->mBattleEnd || gamePartido->mApplicationPartido->mGameReset)
         {
                 gamePartido->mPartidoStateMachine->changeState(BATTLE_GAME::Instance());
         }
