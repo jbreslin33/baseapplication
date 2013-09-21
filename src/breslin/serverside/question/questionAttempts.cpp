@@ -6,19 +6,6 @@
 #include <stdio.h>
 #include <postgresql/libpq-fe.h>
 
-QuestionAttempts::QuestionAttempts()
-{
-	id = 0;
-	question_id = 0;
-	answer = "";
-	answer_attempt_time = 0.0;
-	answer_time = 0;
-	user_id = 0;
-
-
-	mUtility = new Utility();
-}
-
 QuestionAttempts::QuestionAttempts(int i, int q, std::string a, double aat, int at, int uid, bool writtenToDisk)
 {
 	id = i;

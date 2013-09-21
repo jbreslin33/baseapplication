@@ -62,26 +62,22 @@ void GamePartido::sendShapes(ClientPartido* clientPartido)
 
 void GamePartido::reset()
 {
-	//LogString("GamePartido::reset");
-
-	//LogString("RESET::switch to OVER BATTLE");
 	//let's end battles gracefully
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
 		mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
 	}
 	
-	//then delete battles	actually not so fast let's wait till end for this.
-
-	//LogString("RESET:Send game end to clients");
 	//maybe send all clients a message to freeze for db?????
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
 		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameEnd);
 	}
 
+
+	//make a multi-insert
+
 	//reset clients
-	//LogString("RESET:reset the clients");
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
 		mServerPartido->mClientPartidoVector.at(i)->reset();

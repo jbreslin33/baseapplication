@@ -38,6 +38,7 @@ public:
 	//end of game
 	bool checkForEndOfGame();
 	void reset();
-};
 
+	std::string mMassiveInsert;
+};
 #endif
