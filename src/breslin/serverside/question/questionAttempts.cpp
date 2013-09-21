@@ -41,7 +41,6 @@ void QuestionAttempts::dbInsert()
 {
 	if (!mWrittenToDisk)
 	{
-		LogString("writting questionAttempt to disk");
  		PGconn* conn;
         	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 

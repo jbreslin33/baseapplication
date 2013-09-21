@@ -56,7 +56,7 @@ INIT_QUIZ* INIT_QUIZ::Instance()
 }
 void INIT_QUIZ::enter(Quiz* quiz)
 {
-	LogString("INIT_QUIZ:%d",quiz->mCombatant->mClientPartido->id);	
+	//LogString("INIT_QUIZ:%d",quiz->mCombatant->mClientPartido->id);	
 }
 void INIT_QUIZ::execute(Quiz* quiz)
 {
@@ -89,7 +89,7 @@ SENDING_QUESTION* SENDING_QUESTION::Instance()
 }
 void SENDING_QUESTION::enter(Quiz* quiz)
 {
-	LogString("SENDING_QUESTION:%d",quiz->mCombatant->mClientPartido->id);	
+	//LogString("SENDING_QUESTION:%d",quiz->mCombatant->mClientPartido->id);	
 }
 void SENDING_QUESTION::execute(Quiz* quiz)
 {
@@ -128,7 +128,7 @@ WAITING_FOR_ANSWER* WAITING_FOR_ANSWER::Instance()
 }
 void WAITING_FOR_ANSWER::enter(Quiz* quiz)
 {
-	LogString("WAITING_FOR_ANSWER:%d",quiz->mCombatant->mClientPartido->id);	
+	//LogString("WAITING_FOR_ANSWER:%d",quiz->mCombatant->mClientPartido->id);	
         quiz->mComputerAskedTime  = quiz->mCombatant->mClientPartido->mServerPartido->mGameTime;
         int randomAnswerTime      = rand() % 3000;
         quiz->mComputerAnswerTime = randomAnswerTime;
@@ -177,7 +177,7 @@ SHOW_CORRECT_ANSWER* SHOW_CORRECT_ANSWER::Instance()
 
 void SHOW_CORRECT_ANSWER::enter(Quiz* quiz)
 {
-        LogString("SHOW_CORRECT_ANSWER::enter %d",quiz->mCombatant->mClientPartido->id);
+        //LogString("SHOW_CORRECT_ANSWER::enter %d",quiz->mCombatant->mClientPartido->id);
 	//quiz->mTest->mClientPartido->sendSimpleMessage(quiz->mTest->mClientPartido->mServerPartido->mMessageCorrectAnswerStart);
         quiz->mCorrectAnswerStartTime = quiz->mCombatant->mClientPartido->mServerPartido->mGameTime;
 	quiz->mTest->sendCorrectAnswer(quiz->mTest->mQuestionID);
@@ -220,7 +220,7 @@ OVER_QUIZ* OVER_QUIZ::Instance()
 }
 void OVER_QUIZ::enter(Quiz* quiz)
 {
-	LogString("OVER_QUIZ:%d",quiz->mCombatant->mClientPartido->id);	
+	//LogString("OVER_QUIZ:%d",quiz->mCombatant->mClientPartido->id);	
 	quiz->mCombatant->mClientPartido->mTest->mQuizLast = quiz;
 	quiz->mCombatant->mClientPartido->mTest->mQuiz = NULL;
         quiz->mComputerAnswerTime = 0;
