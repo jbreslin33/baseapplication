@@ -98,7 +98,7 @@ void SENDING_QUESTION::execute(Quiz* quiz)
                 if (quiz->mTest->mWaitingForAnswer == false)
                 {
 			quiz->mTest->mQuestionID = quiz->mCombatant->mClientPartido->mTest->getNewQuestionID();
-			LogString("mQuestionID:%d",quiz->mTest->mQuestionID);
+			//LogString("mQuestionID:%d",quiz->mTest->mQuestionID);
                         quiz->mTest->sendQuestion(quiz->mTest->mQuestionID);
 			
                         quiz->mStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
