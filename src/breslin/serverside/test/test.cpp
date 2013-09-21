@@ -82,10 +82,9 @@ int Test::getNewQuestionID()
         int maxLevel            = getMaxLevelAskedID();
 	int questionID = 0;
 
-	LogString("MAXLEVEL:%d",maxLevel);
-
         if (rand() % 2 == 1)
         {
+		LogString("RANDOM LEVEL CHECK");
                 //you could advance here if you passed maxLevel and all before it...
                 for (int i = 1; i <= maxLevel; i++)
                 {
@@ -110,6 +109,7 @@ int Test::getNewQuestionID()
         }
         else
         {
+		LogString("RANDOM LEVEL");
                 //do it random based on maxLevel, you cannot advance a level here.
                 questionID  = rand() % maxLevel + 1;
                 return questionID;
