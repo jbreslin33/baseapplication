@@ -25,11 +25,15 @@
 //questionAttempts
 #include "../../question/questionAttempts.h"
 
+//utility
+#include "../../../utility/utility.h"
+
 #include <stdio.h>
 
 GamePartido::GamePartido(ServerPartido* serverPartido, int id) : Game(serverPartido,id)
 {
 	mServerPartido = serverPartido;
+	mUtility = new Utility();
 }
 
 GamePartido::~GamePartido()
@@ -74,9 +78,82 @@ void GamePartido::reset()
 		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameEnd);
 	}
 
+	//make a multi-insert ..actually can this be added to in dbInsert???
+	mMassiveInsert.clear();
+	PGconn* conn;
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-	//make a multi-insert
+	QuestionAttempts* questionAttempt = NULL;	
+	ClientPartido* clientPartido = NULL;
+	Test* test = NULL;
 
+        mMassiveInsert = "insert into questions_attempts (question_id, answer, answer_time, user_id) values ";
+
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
+	{
+ 		if (mServerPartido->mClientPartidoVector.at(i)->mClientID == -1) //browser bridge
+                {
+                        continue;
+                }
+
+		LogString("client:%d",mServerPartido->mClientPartidoVector.at(i)->mClientID);
+		test = mServerPartido->mClientPartidoVector.at(i)->mTest;
+
+		if (test)
+		{	
+ 			for (int z = 0; z < test->mQuestionAttemptsVector.size(); z++)
+        		{
+                		questionAttempt = test->mQuestionAttemptsVector.at(z);
+				LogString("questionAttemptsV");
+				if (!questionAttempt->mWrittenToDisk)
+				{
+					LogString("WRITING");
+					mMassiveInsert.append("(");
+                			mMassiveInsert.append(mUtility->intToString(questionAttempt->question_id));
+                			mMassiveInsert.append(",'");
+                			mMassiveInsert.append(questionAttempt->answer);
+                			mMassiveInsert.append("',");
+                			mMassiveInsert.append(mUtility->intToString(questionAttempt->answer_time));
+                			mMassiveInsert.append(",");
+                			mMassiveInsert.append(mUtility->intToString(questionAttempt->user_id));
+                			mMassiveInsert.append(")");
+                			mMassiveInsert.append(", ");
+					questionAttempt->mWrittenToDisk = true;
+				}
+				else	
+				{
+					LogString("SKIPPING");
+				}
+			}
+       		}
+	}
+	//mMassiveInsert.resize(mMassiveInsert.size() - 1); //to get rid of last comma
+	LogString("am i here");
+        const char * q = mMassiveInsert.c_str();
+	LogString("q:%s",q);
+        PQexec(conn,q);
+        PQfinish(conn);
+
+/*
+PGconn* conn;
+                conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+                std::string query = "insert into questions_attempts (question_id, answer, answer_time, user_id) values (";
+                query.append(mUtility->intToString(question_id));
+                query.append(",'");
+                query.append(answer);
+                query.append("',");
+                query.append(mUtility->intToString(answer_time));
+                query.append(",");
+                query.append(mUtility->intToString(user_id));
+                query.append(")");
+                const char * q = query.c_str();
+                PQexec(conn,q);
+                PQfinish(conn);
+                mWrittenToDisk = true;
+
+
+*/
 	//reset clients
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{

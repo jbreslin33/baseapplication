@@ -53,11 +53,12 @@ Test::~Test()
 void Test::reset()
 {
 	//also do db stuff...
+/*
 	for (int i = 0; i < mQuestionAttemptsVector.size(); i++)
 	{
 		mQuestionAttemptsVector.at(i)->dbInsert();
 	}
-	
+*/	
 	//quiz
 	mQuiz = NULL;
 	mQuizLast = NULL;

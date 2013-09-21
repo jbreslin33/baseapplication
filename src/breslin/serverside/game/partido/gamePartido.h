@@ -10,6 +10,7 @@ class ServerPartido;
 class ShapePartido;
 class ClientPartido;
 class Battle;
+class Utility;
 
 class GamePartido : public Game
 {
@@ -17,6 +18,9 @@ public:
 
 	GamePartido(ServerPartido* serverPartido, int id);
 	~GamePartido();
+
+	//utility
+	Utility* mUtility;
 
 	//updates
 	void update();
