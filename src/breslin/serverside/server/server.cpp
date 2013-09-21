@@ -322,7 +322,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	//this should just create a client then client should do what need be done.
 	if (type == mMessageConnect)
 	{
-		LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		//LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		Client* client = new Client(this, address, 0, false);
 	}
 
@@ -334,7 +334,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 
 	else if (type == mMessageConnectNode)
 	{
-		LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		//LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		int clientID = mes->ReadByte();
  		ClientRobust* client = new ClientRobust(this, address, -1, true,0,"","","","","","","",0);
 	}	
@@ -358,7 +358,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				}
         			
 				//send letter
-				LogString("message...");
+				//LogString("message...");
         			Message message;
         			message.Init(message.outgoingData, sizeof(message.outgoingData));
         			message.WriteByte(mMessageJoinGame); 
@@ -464,7 +464,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
-				LogString("mMessageLogout:logout");
+				//LogString("mMessageLogout:logout");
 				client->logout();
 			}
 		}
@@ -483,7 +483,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                                 {
                                         continue;
                                 }
-				LogString("mMessageLogoutBrowser:logout");
+				//LogString("mMessageLogoutBrowser:logout");
 				client->logout();
 			}
 		}

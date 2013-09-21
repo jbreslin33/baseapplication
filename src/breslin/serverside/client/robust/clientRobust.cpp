@@ -114,7 +114,7 @@ void ClientRobust::login()
 {
 
         //send letter
-	LogString("ClientRobust::login");
+	//LogString("ClientRobust::login");
         Message message;
         message.Init(message.outgoingData, sizeof(message.outgoingData));
         message.WriteByte(mServer->mMessageLogin); // add type
@@ -158,7 +158,7 @@ void ClientRobust::logout()
 
 bool ClientRobust::checkLogin(Message* mes)
 {
-        LogString("ClientRobust::checkLogin");
+        //LogString("ClientRobust::checkLogin");
         readLoginMessage(mes);
 
         for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
