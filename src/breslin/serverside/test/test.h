@@ -64,7 +64,9 @@ void sendCorrectAnswer(int questionID);
 int  getMaxLevelAskedID();
 bool checkLevel(int level);
 
-
+int mRandom;
+int mCurrent;
+int mAdvance;
 };
 
 #endif

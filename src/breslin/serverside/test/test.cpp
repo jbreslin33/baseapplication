@@ -32,6 +32,11 @@ Test::Test(ClientPartido* clientPartido)
         mStateMachine->setCurrentState      (INIT_TEST::Instance());
         mStateMachine->setPreviousState     (INIT_TEST::Instance());
         mStateMachine->setGlobalState       (GLOBAL_TEST::Instance());
+
+	mRandom = 0;
+	mCurrent = 0;
+	mAdvance = 0;
+
 }
 
 Test::~Test()
@@ -94,6 +99,8 @@ int Test::getNewQuestionID()
                                         //advance level
                                         questionID = maxLevel + 1;
 					LogString("ADVANCE:%d",questionID);
+					mAdvance++;
+					LogString("mRandom:%d mCurrent:%d mAdvance:%d",mRandom,mCurrent,mAdvance);
                                         return questionID;
                                 }
                         }
@@ -101,6 +108,8 @@ int Test::getNewQuestionID()
                         {
                                 questionID = i;
 				LogString("CURRENT:%d",questionID);
+				mCurrent++;
+				LogString("mRandom:%d mCurrent:%d mAdvance:%d",mRandom,mCurrent,mAdvance);
                                 return questionID;
                         }
                 }
@@ -111,6 +120,8 @@ int Test::getNewQuestionID()
                 //do it random based on maxLevel, you cannot advance a level here.
                 questionID  = rand() % maxLevel + 1;
 		LogString("RANDOM:%d",questionID);
+		mRandom++;
+		LogString("mRandom:%d mCurrent:%d mAdvance:%d",mRandom,mCurrent,mAdvance);
                 return questionID;
         }
 
