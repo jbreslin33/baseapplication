@@ -127,7 +127,7 @@ void GamePartido::reset()
 			}
        		}
 	}
-	//mMassiveInsert.resize(mMassiveInsert.size() - 1); //to get rid of last comma
+	mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
 	LogString("am i here");
         const char * q = mMassiveInsert.c_str();
 	LogString("q:%s",q);
