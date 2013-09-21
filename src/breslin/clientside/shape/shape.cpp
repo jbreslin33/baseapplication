@@ -16,9 +16,6 @@
 //math
 #include "../../math/vector3D.h"
 
-//ability
-#include "../ability/animation/abilityAnimationOgre.h"
-
 //byteBuffer
 #include "../bytebuffer/byteBuffer.h"
 
@@ -30,6 +27,9 @@
 
 //move
 #include "../move/move.h"
+
+//animatin
+#include "../animation/abilityAnimationOgre.h"
 
 Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGhost)
 {

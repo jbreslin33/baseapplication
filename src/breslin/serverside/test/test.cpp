@@ -82,7 +82,7 @@ int Test::getNewQuestionID()
         int maxLevel            = getMaxLevelAskedID();
 	int questionID = 0;
 
-	LogString("maxLevel:%d",maxLevel);
+	LogString("MAXLEVEL:%d",maxLevel);
 
         if (rand() % 2 == 1)
         {
@@ -180,10 +180,8 @@ int Test::getMaxLevelAskedID()
 
         for (int i = 0; i < mQuestionAttemptsVector.size(); i++)
         {
-		LogString("questionID:%d", mQuestionAttemptsVector.at(i)->question_id);
                 if (mQuestionAttemptsVector.at(i)->question_id > highestQuestionID)
                 {
-			LogString("highestQuestionID:%d",highestQuestionID);
                         highestQuestionID = mQuestionAttemptsVector.at(i)->question_id;
                 }
         }
