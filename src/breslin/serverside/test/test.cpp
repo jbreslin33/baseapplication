@@ -98,18 +98,18 @@ int Test::getNewQuestionID()
                                 {
                                         //advance level
                                         questionID = maxLevel + 1;
-					LogString("ADVANCE:%d",questionID);
+					//LogString("ADVANCE:%d",questionID);
 					mAdvance++;
-					LogString("mRandom:%d mCurrent:%d mAdvance:%d",mRandom,mCurrent,mAdvance);
+					//LogString("mRandom:%d mCurrent:%d mAdvance:%d",mRandom,mCurrent,mAdvance);
                                         return questionID;
                                 }
                         }
                         else
                         {
                                 questionID = i;
-				LogString("CURRENT:%d",questionID);
+				//LogString("CURRENT:%d",questionID);
 				mCurrent++;
-				LogString("mRandom:%d mCurrent:%d mAdvance:%d",mRandom,mCurrent,mAdvance);
+				//LogString("mRandom:%d mCurrent:%d mAdvance:%d",mRandom,mCurrent,mAdvance);
                                 return questionID;
                         }
                 }
@@ -119,9 +119,9 @@ int Test::getNewQuestionID()
         {
                 //do it random based on maxLevel, you cannot advance a level here.
                 questionID  = rand() % maxLevel + 1;
-		LogString("RANDOM:%d",questionID);
+		//LogString("RANDOM:%d",questionID);
 		mRandom++;
-		LogString("mRandom:%d mCurrent:%d mAdvance:%d",mRandom,mCurrent,mAdvance);
+		//LogString("mRandom:%d mCurrent:%d mAdvance:%d",mRandom,mCurrent,mAdvance);
                 return questionID;
         }
 

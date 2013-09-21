@@ -134,24 +134,24 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
         }
 
 	const char * q = mApplicationPartido->mStringQuestion.c_str();
-        LogString("q:%s",q);
+        //LogString("q:%s",q);
 
 	if (!mApplicationPartido->mLabelQuestion)
 	{
-		LogString("!mLabelQuestion");
+		LogString("GamePartido::askQuestion : no mLabelQuestion exists yet.");
 	}
 	if (mApplicationPartido->mStringQuestion.size() < 1)
 	{
-		LogString("mStringQuestion < 1");
+		LogString("GamePartido::askQuestion : mStringQuestion less than 1 in size.");
 	}
 	if (mApplicationPartido->mLabelQuestion && mApplicationPartido->mStringQuestion.size() > 0)
 	{
 		mApplicationPartido->mLabelQuestion->setCaption(mApplicationPartido->mStringQuestion);
-		LogString("just setCaption on mLabelQuestion");
+		//LogString("just setCaption on mLabelQuestion");
 	}
 	else
 	{
-		LogString("no label or no string");
+		LogString("GamePartido::askQuestion : no label or no string");
 	}
 	
 	//reset mAnswerTime	
