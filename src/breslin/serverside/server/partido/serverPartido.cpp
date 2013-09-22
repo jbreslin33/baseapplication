@@ -97,6 +97,7 @@ void ServerPartido::createClients()
 
                 //username
                 const char* b = PQgetvalue(res, row, 1);
+		LogString("b:%s",b);
  		std::string bString(b);
 
                 //password
@@ -105,6 +106,7 @@ void ServerPartido::createClients()
 
                 //first_name
                 const char* d = PQgetvalue(res, row, 3);
+		LogString("d:%s",d);
  		std::string dString(d);
                 
 		//middle_name1

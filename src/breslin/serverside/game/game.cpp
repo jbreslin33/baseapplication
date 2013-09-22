@@ -284,13 +284,14 @@ void Game::sendShapes(Client* client)
         	mMessage.WriteByte(mShapeVector.at(i)->mAnimated);
 
         	//essentially should be setText...previously username...
-        	int length = mShapeVector.at(i)->mText.length(); 
+        	int length = mShapeVector.at(i)->mClient->first_name.length(); 
         	mMessage.WriteByte(length); //send length
-		
+	
         	//loop thru length and write it
         	for (int b=0; b < length; b++)
         	{
-                	mMessage.WriteByte(mShapeVector.at(i)->mText.at(b));
+                	//mMessage.WriteByte(mShapeVector.at(i)->mText.at(b));
+                	mMessage.WriteByte(mShapeVector.at(i)->mClient->first_name.at(b));
         	}
 
                 //send it
