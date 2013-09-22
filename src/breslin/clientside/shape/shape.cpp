@@ -194,7 +194,7 @@ void Shape::spawnShape(Vector3D* position)
 void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 {
 	clearTitle(); //empty title string so it can be filled anew
-/*	
+	
 	std::string s;
 
 	s.append(mStringUsername);
@@ -202,9 +202,9 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 	s.append(StringConverter::toString(mIndex));
  
 	appendToTitle(s);
-*/
-	clearTitle();
-	appendToTitle(mText);
+
+	//clearTitle();
+	//appendToTitle(mText);
 	
 
 	parseDeltaByteBuffer(byteBuffer);
