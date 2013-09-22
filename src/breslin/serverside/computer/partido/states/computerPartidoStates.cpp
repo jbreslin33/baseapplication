@@ -75,7 +75,7 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 	{
 		computer->mComputerPartidoStateMachine->changeState(HUMAN_CONTROLLED_PARTIDO::Instance());
 	} 
-/*
+
 	if (computer->mCounter > computer->mThreshold)
 	{
 		int dieroll = 0;
@@ -105,7 +105,7 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 		computer->mCounter = 0;
 	}
 	computer->mCounter++;
-*/
+
 }
 
 void COMPUTER_CONTROLLED_PARTIDO::exit(ComputerPartido* computerPartido)
