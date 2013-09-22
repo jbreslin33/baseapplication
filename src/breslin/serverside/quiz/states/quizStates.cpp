@@ -154,7 +154,7 @@ void WAITING_FOR_ANSWER::execute(Quiz* quiz)
         {
                 if (quiz->mComputerAskedTime + quiz->mComputerAnswerTime < quiz->mCombatant->mClientPartido->mServerPartido->mGameTime)
                 {
-                        //quiz->mTest->readAnswer(quiz->mComputerAnswerTime,quiz->mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(quiz->mTest->mQuestionID)->answer);
+                        quiz->mTest->readAnswer(quiz->mComputerAnswerTime,quiz->mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(quiz->mTest->mQuestionID)->answer);
                 }
         }
 }
