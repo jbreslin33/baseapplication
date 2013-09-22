@@ -165,7 +165,8 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
         	char c =  byteBuffer->ReadByte();
                 mStringUsername.append(1,c);
         }
-
+	byteBuffer->BeginReading();
+        byteBuffer->ReadByte();
 	setText(byteBuffer);
 
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
