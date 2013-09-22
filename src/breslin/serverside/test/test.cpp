@@ -8,6 +8,7 @@
 #include "../../utility/utility.h"
 #include "../question/questionAttempts.h"
 #include "../quiz/quiz.h"
+#include "../combatant/combatant.h"
 
 Test::Test(ClientPartido* clientPartido)
 {
@@ -338,13 +339,15 @@ void Test::readAnswer(int answerTime, std::string answer)
 
         insertAnswerAttempt(mQuestionID,mStringAnswer,mAnswerTime);
 
-        //if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
-        if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0)
+        if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
+        //if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0)
         {
        		mShowCorrectAnswer = true;	 
         }
 	else
 	{
+		mQuiz->mCombatant->mScore++;	
+		LogString("mScore:%d",mQuiz->mCombatant->mScore);
        		mShowCorrectAnswer = false;	 
 	}
         //set vars for new question and answer combo....
