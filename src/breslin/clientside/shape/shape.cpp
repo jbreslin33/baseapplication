@@ -119,7 +119,27 @@ void Shape::setText(ByteBuffer* byteBuffer)
 
                 mTextLast = mText;
         }
+}
 
+void Shape::setText(std::string string)
+{
+        mText.clear();
+
+	mText.append(string);
+
+        if (mText.compare(mTextLast) != 0)
+        {
+                clearTitle(); //empty title string so it can be filled anew
+
+                std::string s;
+
+                s.append(mStringUsername);
+                s.append(":");
+                s.append(mText);
+
+                appendToTitle(s);
+                mTextLast = mText;
+        }
 }
 
 /*********************************
@@ -165,9 +185,10 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
         	char c =  byteBuffer->ReadByte();
                 mStringUsername.append(1,c);
         }
-	byteBuffer->BeginReading();
-        byteBuffer->ReadByte();
-	setText(byteBuffer);
+	//byteBuffer->BeginReading();
+        //byteBuffer->ReadByte();
+	std::string s = "0";
+	setText(s);
 
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
 	mServerCommandLast->mPosition->copyValuesFrom(mSpawnPosition);

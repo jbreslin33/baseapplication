@@ -120,6 +120,7 @@ SceneNode*          mSceneNode;
 public:
 
 void setText(ByteBuffer* byteBuffer);
+void setText(std::string string);
 
 //ogre scene node
 SceneNode*  getSceneNode() { return mSceneNode; }
