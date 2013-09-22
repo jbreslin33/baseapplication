@@ -9,9 +9,13 @@
 #include "../question/questionAttempts.h"
 #include "../quiz/quiz.h"
 #include "../combatant/combatant.h"
+#include "../shape/shape.h"
+#include "../../utility/utility.h"
 
 Test::Test(ClientPartido* clientPartido)
 {
+	mUtility = new Utility();
+
 	mClientPartido = clientPartido;
 	getQuestionAttempts();
 
@@ -348,6 +352,7 @@ void Test::readAnswer(int answerTime, std::string answer)
 	{
 		mQuiz->mCombatant->mScore++;	
 		LogString("mScore:%d",mQuiz->mCombatant->mScore);
+		mClientPartido->mShape->setText(mUtility->intToString(mQuiz->mCombatant->mScore));
        		mShowCorrectAnswer = false;	 
 	}
         //set vars for new question and answer combo....

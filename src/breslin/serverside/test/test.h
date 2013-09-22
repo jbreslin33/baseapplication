@@ -13,6 +13,7 @@ class QuestionAttempts;
 class Message;
 class ClientPartido;
 class Quiz;
+class Utility;
 
 class Test 
 {
@@ -67,6 +68,8 @@ bool checkLevel(int level);
 int mRandom;
 int mCurrent;
 int mAdvance;
+
+Utility* mUtility;
 };
 
 #endif

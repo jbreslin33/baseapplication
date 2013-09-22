@@ -44,6 +44,7 @@ ApplicationBreslin* mApplication;
 int   mIndex;
 std::string mStringUsername;
 std::string mText;
+std::string mTextLast;
 
 //speed
 float mSpeed;

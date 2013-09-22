@@ -290,7 +290,6 @@ void Game::sendShapes(Client* client)
         	//loop thru length and write it
         	for (int b=0; b < length; b++)
         	{
-                	//mMessage.WriteByte(mShapeVector.at(i)->mText.at(b));
                 	mMessage.WriteByte(mShapeVector.at(i)->mClient->first_name.at(b));
         	}
 

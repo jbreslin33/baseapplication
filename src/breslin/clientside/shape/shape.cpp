@@ -100,9 +100,26 @@ void Shape::setText(ByteBuffer* byteBuffer)
         int length = byteBuffer->ReadByte();
         for (int i = 0; i < length; i++)
         {
+		LogString("byte:%d",i);
                 char c =  byteBuffer->ReadByte();
                 mText.append(1,c);
         }
+
+        if (mText.compare(mTextLast) != 0)
+        {
+		clearTitle(); //empty title string so it can be filled anew
+
+        	std::string s;
+
+        	s.append(mStringUsername);
+        	s.append(":");
+        	s.append(mText);
+
+        	appendToTitle(s);
+
+                mTextLast = mText;
+        }
+
 }
 
 /*********************************
@@ -193,6 +210,7 @@ void Shape::spawnShape(Vector3D* position)
 
 void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 {
+/*
 	clearTitle(); //empty title string so it can be filled anew
 	
 	std::string s;
@@ -205,7 +223,7 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 
 	//clearTitle();
 	//appendToTitle(mText);
-	
+*/	
 
 	parseDeltaByteBuffer(byteBuffer);
 

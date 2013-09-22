@@ -282,6 +282,7 @@ void Shape::setText(std::string text)
 
 void Shape::sendText()
 {
+	LogString("Shape::sendText");
 	if (!mGame)
 	{
 		return;
@@ -297,11 +298,13 @@ void Shape::sendText()
        	int length = mText.length();  
        	mMessage.WriteByte(length); //send length
 
+	LogString("length:%d",length);
        	//loop thru length and write it
        	for (int b=0; b < length; b++)
        	{
                	mMessage.WriteByte(mText.at(b));
        	}
-	
+
+		
        	mGame->mServer->mNetwork->broadcast(&mMessage);
 }

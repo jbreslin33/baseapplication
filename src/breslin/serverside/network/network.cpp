@@ -259,7 +259,7 @@ void Network::sendPacketTo(Client* client, Message* message)
 	int	ret;
 	
 	ret = sendto(mSocket, message->data, message->GetSize(), 0, &client->mSocketAddress, sizeof(client->mSocketAddress));
-
+	
 	if(ret == -1)
 	{
 		// Silently handle wouldblock
