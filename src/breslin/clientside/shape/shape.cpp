@@ -166,9 +166,7 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
                 mStringUsername.append(1,c);
         }
 
-	//setText
-	mText.clear();
-	mText.append(mStringUsername);
+	setText(byteBuffer);
 
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
 	mServerCommandLast->mPosition->copyValuesFrom(mSpawnPosition);
