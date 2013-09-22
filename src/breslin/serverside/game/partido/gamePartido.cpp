@@ -79,6 +79,7 @@ void GamePartido::reset()
 	}
 
 	//make a multi-insert ..actually can this be added to in dbInsert???
+	
 	mMassiveInsert.clear();
 	PGconn* conn;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
@@ -96,7 +97,6 @@ void GamePartido::reset()
                         continue;
                 }
 
-		LogString("client:%d",mServerPartido->mClientPartidoVector.at(i)->mClientID);
 		test = mServerPartido->mClientPartidoVector.at(i)->mTest;
 
 		if (test)
@@ -104,10 +104,8 @@ void GamePartido::reset()
  			for (int z = 0; z < test->mQuestionAttemptsVector.size(); z++)
         		{
                 		questionAttempt = test->mQuestionAttemptsVector.at(z);
-				LogString("questionAttemptsV");
 				if (!questionAttempt->mWrittenToDisk)
 				{
-					LogString("WRITING");
 					mMassiveInsert.append("(");
                 			mMassiveInsert.append(mUtility->intToString(questionAttempt->question_id));
                 			mMassiveInsert.append(",'");
@@ -122,38 +120,15 @@ void GamePartido::reset()
 				}
 				else	
 				{
-					LogString("SKIPPING");
 				}
 			}
        		}
 	}
 	mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
-	LogString("am i here");
         const char * q = mMassiveInsert.c_str();
-	LogString("q:%s",q);
         PQexec(conn,q);
         PQfinish(conn);
 
-/*
-PGconn* conn;
-                conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-
-                std::string query = "insert into questions_attempts (question_id, answer, answer_time, user_id) values (";
-                query.append(mUtility->intToString(question_id));
-                query.append(",'");
-                query.append(answer);
-                query.append("',");
-                query.append(mUtility->intToString(answer_time));
-                query.append(",");
-                query.append(mUtility->intToString(user_id));
-                query.append(")");
-                const char * q = query.c_str();
-                PQexec(conn,q);
-                PQfinish(conn);
-                mWrittenToDisk = true;
-
-
-*/
 	//reset clients
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
