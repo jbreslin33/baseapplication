@@ -282,7 +282,6 @@ void Shape::setText(std::string text)
 
 void Shape::sendText()
 {
-	LogString("Shape::sendText");
 	if (!mGame)
 	{
 		return;
