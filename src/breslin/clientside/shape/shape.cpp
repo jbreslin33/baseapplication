@@ -530,7 +530,7 @@ std::string Shape::getMeshString(int meshCode)
 		
 	{
 		//this cube is exactly 1 ogre world unit. Which I take to be 1 meter.
-		mScale = .01f;
+		mScale = .07f;
 		return "cube.mesh";
 	}
 	if (meshCode == 1)
