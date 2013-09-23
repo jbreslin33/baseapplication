@@ -79,7 +79,6 @@ void ServerPartido::createClients()
         const char * q = query.c_str();
         res = PQexec(conn,q);
 
-        //res = PQexec(conn,"select * from users WHERE username != 'root' ORDER BY id LIMIT 4");
         if (PQresultStatus(res) != PGRES_TUPLES_OK)
         {
                 puts("We did not get any data!");

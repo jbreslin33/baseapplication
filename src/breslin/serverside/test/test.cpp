@@ -350,10 +350,16 @@ void Test::readAnswer(int answerTime, std::string answer)
         }
 	else
 	{
-		mQuiz->mCombatant->mScore++;	
-		LogString("mScore:%d",mQuiz->mCombatant->mScore);
-		mClientPartido->mShape->setText(mUtility->intToString(mQuiz->mCombatant->mScore));
-       		mShowCorrectAnswer = false;	 
+		if (mQuiz)
+		{	
+			if (mQuiz->mCombatant)
+			{
+				mQuiz->mCombatant->mScore++;	
+				LogString("mScore:%d",mQuiz->mCombatant->mScore);
+				mClientPartido->mShape->setText(mUtility->intToString(mQuiz->mCombatant->mScore));
+       				mShowCorrectAnswer = false;	 
+			}
+		}
 	}
         //set vars for new question and answer combo....
         mWaitingForAnswer = false;
