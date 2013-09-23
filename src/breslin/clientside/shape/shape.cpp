@@ -588,15 +588,23 @@ void Shape::createColourCube()
     RGBA colours[nVertices];
     RGBA *pColour = colours;
     // Use render system to convert colour value since colour packing varies
-    rs->convertColourValue(ColourValue(1.0,0.0,0.0), pColour++); //0 colour
-    rs->convertColourValue(ColourValue(1.0,1.0,0.0), pColour++); //1 colour
-    rs->convertColourValue(ColourValue(0.0,1.0,0.0), pColour++); //2 colour
-    rs->convertColourValue(ColourValue(0.0,0.0,0.0), pColour++); //3 colour
-    rs->convertColourValue(ColourValue(1.0,0.0,1.0), pColour++); //4 colour
-    rs->convertColourValue(ColourValue(1.0,1.0,1.0), pColour++); //5 colour
-    rs->convertColourValue(ColourValue(0.0,1.0,1.0), pColour++); //6 colour
+   // rs->convertColourValue(ColourValue(1.0,0.0,0.0), pColour++); //0 colour
+
+//    rs->convertColourValue(ColourValue(1.0,1.0,0.0), pColour++); //1 colour
+  //  rs->convertColourValue(ColourValue(0.0,1.0,0.0), pColour++); //2 colour
+   // rs->convertColourValue(ColourValue(0.0,0.0,0.0), pColour++); //3 colour
+    //rs->convertColourValue(ColourValue(1.0,0.0,1.0), pColour++); //4 colour
+    //rs->convertColourValue(ColourValue(1.0,1.0,1.0), pColour++); //5 colour
+    //rs->convertColourValue(ColourValue(0.0,1.0,1.0), pColour++); //6 colour
     rs->convertColourValue(ColourValue(0.0,0.0,1.0), pColour++); //7 colour
- 
+    rs->convertColourValue(ColourValue(0.0,0.0,1.0), pColour++); //7 colour
+    rs->convertColourValue(ColourValue(0.0,0.0,1.0), pColour++); //7 colour
+    rs->convertColourValue(ColourValue(0.0,0.0,1.0), pColour++); //7 colour
+    rs->convertColourValue(ColourValue(0.0,0.0,1.0), pColour++); //7 colour
+    rs->convertColourValue(ColourValue(0.0,0.0,1.0), pColour++); //7 colour
+    rs->convertColourValue(ColourValue(0.0,0.0,1.0), pColour++); //7 colour
+    rs->convertColourValue(ColourValue(0.0,0.0,1.0), pColour++); //7 colour
+
     /// Define 12 triangles (two triangles per cube face)
     /// The values in this table refer to vertices in the above table
     const size_t ibufCount = 36;
