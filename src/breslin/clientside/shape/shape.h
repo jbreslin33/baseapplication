@@ -192,7 +192,7 @@ void processSpawnByteBuffer(ByteBuffer* byteBuffer);
 // Parse ByteBuffers
 void parseSpawnByteBuffer(ByteBuffer* byteBuffer);
 
-
+void createColourCube();
 };
 
 #endif
