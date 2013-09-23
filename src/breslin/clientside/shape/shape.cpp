@@ -369,7 +369,7 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 
 void Shape::interpolateTick(float renderTime)
 {
-	if (mAbilityAnimationOgre)
+	if (mAnimate)
 	{	
 		mAbilityAnimationOgre->interpolateTick(renderTime);
 	}
