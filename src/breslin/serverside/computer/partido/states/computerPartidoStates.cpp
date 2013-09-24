@@ -78,6 +78,7 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 
 	if (computer->mCounter > computer->mThreshold)
 	{
+		/*
 		int dieroll = 0;
 		dieroll = rand() % 10;
 		if (dieroll == 0)
@@ -103,6 +104,15 @@ void COMPUTER_CONTROLLED_PARTIDO::execute(ComputerPartido* computer)
 			delete vector3D;
 		}
 		computer->mCounter = 0;
+		*/
+		int dierollX = rand() % 500;
+		int dierollZ = rand() % 500;
+		dierollX = dierollX - 250;
+		dierollZ = dierollZ - 250;
+
+		Vector3D* vector3D = new Vector3D(dierollX,0.0f,dierollZ);
+		computer->mShape->mSeek->setSeekPoint(vector3D);
+		delete vector3D;
 	}
 	computer->mCounter++;
 

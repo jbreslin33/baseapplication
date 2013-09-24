@@ -22,8 +22,8 @@ ComputerPartido::ComputerPartido(ShapePartido* shape) : Computer(shape)
 	mComputerPartidoStateMachine->setPreviousState     (HUMAN_CONTROLLED_PARTIDO::Instance());
 	mComputerPartidoStateMachine->setGlobalState       (GLOBAL_COMPUTER_PARTIDO::Instance());
 
-	mCounter   = 0;
-        mThreshold = 1000;
+	mCounter   = 59000;
+        mThreshold = 60000;
 }
 
 ComputerPartido::~ComputerPartido()
