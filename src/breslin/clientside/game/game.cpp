@@ -113,6 +113,16 @@ void Game::processMoveControls()
         {
                 mApplication->mKeyArray[119] = false;
         }
+
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_NUMPAD8))
+        {
+                mApplication->mKeyArray[119] = true;
+                mKeyCurrent |= mKeyUp;
+        }
+        else
+        {
+                mApplication->mKeyArray[119] = false;
+        }
         
 	//DOWN
         if (mApplication->getKeyboard()->isKeyDown(OIS::KC_S))
@@ -125,6 +135,15 @@ void Game::processMoveControls()
                 mApplication->mKeyArray[115] = false;
         }
         if (mApplication->getKeyboard()->isKeyDown(OIS::KC_DOWN))
+        {
+                mApplication->mKeyArray[115] = true;
+                mKeyCurrent |= mKeyDown;
+        }
+        else
+        {
+                mApplication->mKeyArray[115] = false;
+        }
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_NUMPAD2))
         {
                 mApplication->mKeyArray[115] = true;
                 mKeyCurrent |= mKeyDown;
@@ -153,6 +172,15 @@ void Game::processMoveControls()
         {
                 mApplication->mKeyArray[97] = false;
         }
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_NUMPAD4))
+        {
+                mApplication->mKeyArray[97] = true;
+                mKeyCurrent |= mKeyLeft;
+        }
+        else
+        {
+                mApplication->mKeyArray[97] = false;
+        }
 
         //RIGHT
         if (mApplication->getKeyboard()->isKeyDown(OIS::KC_D))
@@ -165,6 +193,15 @@ void Game::processMoveControls()
                 mApplication->mKeyArray[100] = false;
         }
         if (mApplication->getKeyboard()->isKeyDown(OIS::KC_RIGHT))
+        {
+                mApplication->mKeyArray[100] = true;
+                mKeyCurrent |= mKeyRight;
+        }
+        else
+        {
+                mApplication->mKeyArray[100] = false;
+        }
+        if (mApplication->getKeyboard()->isKeyDown(OIS::KC_NUMPAD6))
         {
                 mApplication->mKeyArray[100] = true;
                 mKeyCurrent |= mKeyRight;
