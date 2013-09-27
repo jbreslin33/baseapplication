@@ -175,6 +175,7 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 		if (type == mMessageConnect)
         	{
                 	Client* client = new Client(this, address, 0, false);
+			LogString("c++ client:",client->mClientID);
 
         	}
 

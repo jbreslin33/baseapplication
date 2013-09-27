@@ -322,8 +322,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	//this should just create a client then client should do what need be done.
 	if (type == mMessageConnect)
 	{
-		//LogString("client %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		Client* client = new Client(this, address, 0, false);
+		LogString("c++ client:",client->mClientID);
 	}
 
 	else if (type == mMessageConnectBrowser)
