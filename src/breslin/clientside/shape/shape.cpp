@@ -160,7 +160,7 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 
 
 	mLocal	=    byteBuffer->ReadByte();
-	mIndex	=    byteBuffer->ReadByte();
+	mIndex	=    byteBuffer->ReadShort();
 
 	mSpawnPosition->x =   byteBuffer->ReadFloat();
 	mSpawnPosition->y =   byteBuffer->ReadFloat();
