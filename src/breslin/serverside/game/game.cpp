@@ -205,44 +205,48 @@ unsigned int Game::getOpenIndex()
 
 Vector3D* Game::getOpenPoint()
 {
-	for (int x = mBounds->a->x; x < mBounds->c->x; x++)
+	while (true)
 	{	
-		for (int z = mBounds->a->z; z < mBounds->c->z; z++)
-		{
-			bool occupied = false; 
-			mOpenPoint->x = x;
-			mOpenPoint->y = 0;
-			mOpenPoint->z = z;
+		int x = rand() % 500;
+		x = x - 250;	
+		int z = rand() % 500;
+		z = z - 250;	
+
+		LogString("x:%d",x);
+		LogString("z:%d",z);
+		bool occupied = false; 
+		mOpenPoint->x = x;
+		mOpenPoint->y = 0;
+		mOpenPoint->z = z;
                 
-			if (mShapeVector.size() < 1)
-			{
-				return mOpenPoint;
-			}
+		if (mShapeVector.size() < 1)
+		{
+			return mOpenPoint;
+		}
 
-                	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-                	{
-                		if (mShapeVector.at(i)->mCollidable == true)
-                        	{
-                        		float x1 = mOpenPoint->x;
-                                	float z1 = mOpenPoint->z;
-                                	float x2 = mShapeVector.at(i)->mSceneNode->getPosition().x;
-                                	float z2 = mShapeVector.at(i)->mSceneNode->getPosition().z;
+                for (unsigned int i = 0; i < mShapeVector.size(); i++)
+                {
+                	if (mShapeVector.at(i)->mCollidable == true)
+                       	{
+                       		float x1 = mOpenPoint->x;
+                               	float z1 = mOpenPoint->z;
+                               	float x2 = mShapeVector.at(i)->mSceneNode->getPosition().x;
+                               	float z2 = mShapeVector.at(i)->mSceneNode->getPosition().z;
 
-                                	float distSq = pow((x1-x2),2) + pow((z1-z2),2);
+                               	float distSq = pow((x1-x2),2) + pow((z1-z2),2);
 
-                                	//i am simply adding the 2 collisionradius's of the 2 objects in question then comparing
-                                	//to distSQ between them. IS this right or is it working by chance?
-                                	if(distSq < mShapeVector.at(i)->mCollisionRadiusSpawn * 20)
-                                	{
-						occupied = true; 
-                                	}
-                        	}
-                	}
+                               	//i am simply adding the 2 collisionradius's of the 2 objects in question then comparing
+                               	//to distSQ between them. IS this right or is it working by chance?
+                               	if(distSq < mShapeVector.at(i)->mCollisionRadiusSpawn * 20)
+                               	{
+					occupied = true; 
+                               	}
+                       	}
+               	}
 
-			if (!occupied)
-			{
-				return mOpenPoint;
-			}
+		if (!occupied)
+		{
+			return mOpenPoint;
 		}
         }
 }
