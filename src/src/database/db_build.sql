@@ -358,6 +358,8 @@ CREATE TABLE battles (
     id integer NOT NULL,
     battle_time_start timestamp,
     battle_time_end timestamp
+    home_combatant integer, 
+    away_combatant integer 
 );
 
 --==================================================================

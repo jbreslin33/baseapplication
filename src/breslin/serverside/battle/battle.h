@@ -6,6 +6,7 @@
 class ClientPartido;
 class Combatant;
 class GamePartido;
+class Utility;
 
 class Battle 
 {
@@ -32,6 +33,8 @@ long mBattleEndTime;
 long mBattleLengthTime;
 
 
+//utility
+Utility* mUtility;
 };
 
 #endif

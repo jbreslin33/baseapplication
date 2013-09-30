@@ -11,6 +11,9 @@ using namespace Ogre;
 //steering states
 #include "states/battleStates.h"
 
+//utility
+#include "../../utility/utility.h"
+
 //shapes
 #include "../client/robust/partido/clientPartido.h"
 
@@ -36,6 +39,8 @@ Battle::Battle(GamePartido* gamePartido, ClientPartido* homeClient, ClientPartid
 	mStateMachine->setCurrentState      (INIT_BATTLE::Instance());
 	mStateMachine->setPreviousState     (INIT_BATTLE::Instance());
 	mStateMachine->setGlobalState       (GLOBAL_BATTLE::Instance());
+
+	mUtility = new Utility();
 }
 
 Battle::~Battle()

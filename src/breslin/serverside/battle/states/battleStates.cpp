@@ -19,6 +19,15 @@
 //network
 #include "../../network/network.h"
 
+//combatant
+#include "../../combatant/combatant.h"
+
+//shape
+#include "../../shape/shape.h"
+
+//utility
+#include "../../../utility/utility.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -114,9 +123,35 @@ OVER_BATTLE* OVER_BATTLE::Instance()
 void OVER_BATTLE::enter(Battle* battle)
 {
 	//LogString("OVER_BATTLE");
+	//home wins
+	if (battle->mHomeCombatant->mScore > battle->mAwayCombatant->mScore)
+	{
+		battle->mHomeCombatant->mClientPartido->mWins++;
+		battle->mHomeCombatant->mFoe->mClientPartido->mLosses++;
+	}
+	
+	//away wins
+	if (battle->mHomeCombatant->mScore < battle->mAwayCombatant->mScore)
+	{
+		//record records
+		battle->mHomeCombatant->mClientPartido->mLosses++;
+		battle->mHomeCombatant->mFoe->mClientPartido->mWins++;
+
+		//set strings
+		std::string homeString = "wins:";
+		homeString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
+		battle->mHomeCombatant->mClientPartido->mShape->setText(homeString);
+
+		std::string awayString = "wins:";
+		awayString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
+		battle->mHomeCombatant->mClientPartido->mShape->setText(awayString);
+	}
+
+
 	battle->mBattleTime       = 0;
         battle->mBattleStartTime  = 0;
         battle->mBattleEndTime    = 0;
+
 }
 void OVER_BATTLE::execute(Battle* battle)
 {

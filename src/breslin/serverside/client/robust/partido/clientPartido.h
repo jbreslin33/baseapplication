@@ -52,6 +52,9 @@ virtual void update();
 //handle letter 
 virtual bool  handleLetter(Letter* letter);
 
+//wins and losses
+int mWins;
+int mLosses;
 
 
 };
