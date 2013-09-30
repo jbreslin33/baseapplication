@@ -66,6 +66,7 @@ void GamePartido::sendShapes(ClientPartido* clientPartido)
 
 void GamePartido::reset()
 {
+	LogString("GamePartido::reset");
 	//let's end battles gracefully
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
@@ -185,7 +186,7 @@ void GamePartido::reset()
 
 bool GamePartido::checkForEndOfGame()
 {
-	if (mServerPartido->mGameTime > 30000)
+	if (mServerPartido->mGameTime > 99000)
 	{
 		return true;
 	}
