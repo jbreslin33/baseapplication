@@ -20,6 +20,9 @@
 //shape
 #include "../../shape/partido/shapePartido.h"
 
+//utility
+#include "../../../utility/utility.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -128,7 +131,7 @@ void YIELD::enter(Combatant* combatant)
         
 	//set strings home
         std::string winString = "wins:";
-        winString.append(battle->mUtility->intToString(combatant->mClientPartido->mWins));
+        winString.append(combatant->mBattle->mUtility->intToString(combatant->mClientPartido->mWins));
         combatant->mClientPartido->mShape->setText(winString);
 	
 /*
