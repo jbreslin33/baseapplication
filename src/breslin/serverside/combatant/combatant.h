@@ -27,7 +27,7 @@ Quiz* mQuiz;
 //score
 int mScore;
 
-
+bool mWrittenToDisk;
 };
 
 #endif

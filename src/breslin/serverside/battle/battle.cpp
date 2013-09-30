@@ -41,6 +41,8 @@ Battle::Battle(GamePartido* gamePartido, ClientPartido* homeClient, ClientPartid
 	mStateMachine->setGlobalState       (GLOBAL_BATTLE::Instance());
 
 	mUtility = new Utility();
+
+	mWrittenToDisk = false;
 }
 
 Battle::~Battle()

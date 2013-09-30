@@ -34,6 +34,8 @@ Combatant::Combatant(Battle* battle, ClientPartido* clientPartido)
 	mStateMachine->setCurrentState      (INIT_COMBATANT::Instance());
 	mStateMachine->setPreviousState     (INIT_COMBATANT::Instance());
 	mStateMachine->setGlobalState       (GLOBAL_COMBATANT::Instance());
+
+	mWrittenToDisk = false;
 }
 
 Combatant::~Combatant()

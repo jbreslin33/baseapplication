@@ -35,6 +35,8 @@ long mBattleLengthTime;
 
 //utility
 Utility* mUtility;
+
+bool mWrittenToDisk;
 };
 
 #endif

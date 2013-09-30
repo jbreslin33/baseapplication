@@ -19,6 +19,9 @@
 #include "../../battle/battle.h"
 #include "../../battle/states/battleStates.h"
 
+//combatant
+#include "../../combatant/combatant.h"
+
 //test
 #include "../../test/test.h"
 
@@ -161,45 +164,37 @@ void GamePartido::massiveCombatantInsert()
 	PGconn* conn;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
-	QuestionAttempts* questionAttempt = NULL;	
-	ClientPartido* clientPartido = NULL;
-	Test* test = NULL;
+	Battle* battle = NULL;
+	Combatant* homeCombatant = NULL;	
+	Combatant* awayCombatant = NULL;	
 
-        mMassiveInsert = "insert into questions_attempts (question_id, answer, answer_time, user_id) values ";
+        mMassiveInsert = "insert into combatants (score, user_id, battle_id) values ";
 
-        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
+        for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
- 		if (mServerPartido->mClientPartidoVector.at(i)->mClientID == -1) //browser bridge
-                {
-                        continue;
-                }
+		battle = mBattleVector.at(i);
+		homeCombatant = battle->mHomeCombatant;
+		awayCombatant = battle->mAwayCombatant;
 
-		test = mServerPartido->mClientPartidoVector.at(i)->mTest;
-
-		if (test)
-		{	
- 			for (int z = 0; z < test->mQuestionAttemptsVector.size(); z++)
-        		{
-                		questionAttempt = test->mQuestionAttemptsVector.at(z);
-				if (!questionAttempt->mWrittenToDisk)
-				{
-					mMassiveInsert.append("(");
-                			mMassiveInsert.append(mUtility->intToString(questionAttempt->question_id));
-                			mMassiveInsert.append(",'");
-                			mMassiveInsert.append(questionAttempt->answer);
-                			mMassiveInsert.append("',");
-                			mMassiveInsert.append(mUtility->intToString(questionAttempt->answer_time));
-                			mMassiveInsert.append(",");
-                			mMassiveInsert.append(mUtility->intToString(questionAttempt->user_id));
-                			mMassiveInsert.append(")");
-                			mMassiveInsert.append(", ");
-					questionAttempt->mWrittenToDisk = true;
-				}
-				else	
-				{
-				}
+		if (!battle->mWrittenToDisk)
+		{
+			if (!homeCombatant->mWrittenToDisk)
+			{
+				/*
+				mMassiveInsert.append("(");
+                		mMassiveInsert.append(mUtility->intToString(questionAttempt->question_id));
+                		mMassiveInsert.append(",'");
+                		mMassiveInsert.append(questionAttempt->answer);
+                		mMassiveInsert.append("',");
+                		mMassiveInsert.append(mUtility->intToString(questionAttempt->answer_time));
+                		mMassiveInsert.append(",");
+                		mMassiveInsert.append(mUtility->intToString(questionAttempt->user_id));
+                		mMassiveInsert.append(")");
+                		mMassiveInsert.append(", ");
+				questionAttempt->mWrittenToDisk = true;
+				*/
 			}
-       		}
+		}
 	}
 	mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
         const char * q = mMassiveInsert.c_str();
