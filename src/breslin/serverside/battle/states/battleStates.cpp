@@ -147,7 +147,7 @@ void OVER_BATTLE::enter(Battle* battle)
 	//set strings away 
 	std::string awayString = "wins:";
 	awayString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
-	battle->mHomeCombatant->mClientPartido->mShape->setText(awayString);
+	battle->mHomeCombatant->mFoe->mClientPartido->mShape->setText(awayString);
 
 	battle->mBattleTime       = 0;
         battle->mBattleStartTime  = 0;
