@@ -83,6 +83,7 @@ NORMAL_BATTLE* NORMAL_BATTLE::Instance()
   static NORMAL_BATTLE instance;
   return &instance;
 }
+
 void NORMAL_BATTLE::enter(Battle* battle)
 {
 	battle->mBattleStartTime = battle->mGamePartido->mServerPartido->mNetwork->getCurrentSystemTime();
@@ -91,6 +92,7 @@ void NORMAL_BATTLE::enter(Battle* battle)
 
 	//LogString("mBattleStartTime:%d",battle->mBattleStartTime);
 }
+
 void NORMAL_BATTLE::execute(Battle* battle)
 {
 	battle->mBattleTime = battle->mGamePartido->mServerPartido->mNetwork->getCurrentSystemTime();
@@ -98,8 +100,6 @@ void NORMAL_BATTLE::execute(Battle* battle)
 	{
 		battle->mStateMachine->changeState(OVER_BATTLE::Instance());
 	}
-
-
 }
 void NORMAL_BATTLE::exit(Battle* battle)
 {
@@ -123,33 +123,7 @@ OVER_BATTLE* OVER_BATTLE::Instance()
 void OVER_BATTLE::enter(Battle* battle)
 {
 	LogString("OVER_BATTLE");
-/*
-	//home wins
-	if (battle->mHomeCombatant->mScore > battle->mAwayCombatant->mScore)
-	{
-		battle->mHomeCombatant->mClientPartido->mWins++;
-		battle->mHomeCombatant->mFoe->mClientPartido->mLosses++;
-	}
 	
-	//away wins
-	if (battle->mHomeCombatant->mScore < battle->mAwayCombatant->mScore)
-	{
-		//record records
-		battle->mHomeCombatant->mClientPartido->mLosses++;
-		battle->mHomeCombatant->mFoe->mClientPartido->mWins++;
-
-	}
-
-	//set strings home
-	std::string homeString = "wins:";
-	homeString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
-	battle->mHomeCombatant->mClientPartido->mShape->setText(homeString);
-
-	//set strings away 
-	std::string awayString = "wins:";
-	awayString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
-	battle->mHomeCombatant->mFoe->mClientPartido->mShape->setText(awayString);
-*/
 	battle->mBattleTime       = 0;
         battle->mBattleStartTime  = 0;
         battle->mBattleEndTime    = 0;
