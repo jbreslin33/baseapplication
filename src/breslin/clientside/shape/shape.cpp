@@ -230,6 +230,12 @@ void Shape::spawnShape(Vector3D* position)
 	v.y = mScale;
 	v.z = mScale;
 	scale(v);
+
+Ogre::MaterialPtr m_pMat = mEntity->getSubEntity(0)->getMaterial();
+m_pMat->getTechnique(0)->getPass(0)->setAmbient(1, 0, 0);
+m_pMat->getTechnique(0)->getPass(0)->setDiffuse(1, 0, 0, 0);
+mEntity->setMaterialName(m_pMat->getName());
+
 }
 
 /*********************************
