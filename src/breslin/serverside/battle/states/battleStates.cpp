@@ -137,16 +137,17 @@ void OVER_BATTLE::enter(Battle* battle)
 		battle->mHomeCombatant->mClientPartido->mLosses++;
 		battle->mHomeCombatant->mFoe->mClientPartido->mWins++;
 
-		//set strings
-		std::string homeString = "wins:";
-		homeString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
-		battle->mHomeCombatant->mClientPartido->mShape->setText(homeString);
-
-		std::string awayString = "wins:";
-		awayString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
-		battle->mHomeCombatant->mClientPartido->mShape->setText(awayString);
 	}
 
+	//set strings home
+	std::string homeString = "wins:";
+	homeString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
+	battle->mHomeCombatant->mClientPartido->mShape->setText(homeString);
+
+	//set strings away 
+	std::string awayString = "wins:";
+	awayString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
+	battle->mHomeCombatant->mClientPartido->mShape->setText(awayString);
 
 	battle->mBattleTime       = 0;
         battle->mBattleStartTime  = 0;
