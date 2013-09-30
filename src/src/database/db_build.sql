@@ -1138,6 +1138,9 @@ ALTER TABLE questions ADD FOREIGN KEY (level_id) REFERENCES levels(id);
 
 --BATTLES
 
+--COMBATANTS
+ALTER TABLE combatants ADD FOREIGN KEY (battle_id) REFERENCES battles(id);
+ALTER TABLE combatants ADD FOREIGN KEY (user_id) REFERENCES users(id);
 
 --****************************************************************
 --***************************************************************
