@@ -11,6 +11,12 @@
 --====================== BATTLES  =============================
 --==================================================================
 
+DROP TABLE combatants cascade;
+
+--==================================================================
+--====================== BATTLES  =============================
+--==================================================================
+
 DROP TABLE battles cascade;
 
 --==================================================================
@@ -358,8 +364,16 @@ CREATE TABLE battles (
     id integer NOT NULL,
     battle_time_start timestamp,
     battle_time_end timestamp
-    home_combatant integer, 
-    away_combatant integer 
+);
+
+--==================================================================
+--================= BATTLES  ====================================
+--==================================================================
+CREATE TABLE combatants (
+    id integer NOT NULL,
+    score integer, 
+    user_id integer, 
+    battle_id integer
 );
 
 --==================================================================
@@ -594,6 +608,21 @@ CREATE SEQUENCE battles_id_seq
     NO MAXVALUE
     CACHE 1;
 
+--==================================================================
+--==================================================================
+--================= COMBATANTS  ====================================
+--==================================================================
+--COMBATANTS
+CREATE SEQUENCE combatants_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--****************************************************************
+
 
 
 --****************************************************************
@@ -713,6 +742,9 @@ ALTER TABLE public.questions OWNER TO postgres;
 
 --BATTLES
 ALTER TABLE public.battles OWNER TO postgres;
+
+--COMBATANTS
+ALTER TABLE public.combatants OWNER TO postgres;
 
 --****************************************************************
 --***************************************************************
@@ -862,6 +894,11 @@ ALTER TABLE public.battles_id_seq OWNER TO postgres;
 ALTER SEQUENCE battles_id_seq OWNED BY battles.id;
 ALTER TABLE ONLY battles ALTER COLUMN id SET DEFAULT nextval('battles_id_seq'::regclass);
 
+--COMBATANTS
+ALTER TABLE public.combatants_id_seq OWNER TO postgres;
+ALTER SEQUENCE combatants_id_seq OWNED BY combatants.id;
+ALTER TABLE ONLY combatants ALTER COLUMN id SET DEFAULT nextval('combatants_id_seq'::regclass);
+
 --****************************************************************
 --***************************************************************
 --****************** PRIMARY KEY  *************************
@@ -983,6 +1020,9 @@ ALTER TABLE questions ADD PRIMARY KEY (id);
 
 --BATTLES
 ALTER TABLE battles ADD PRIMARY KEY (id);
+
+--COMBATANTS
+ALTER TABLE combatants ADD PRIMARY KEY (id);
 
 --****************************************************************
 --***************************************************************
