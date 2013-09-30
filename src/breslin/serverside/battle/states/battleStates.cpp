@@ -122,7 +122,7 @@ OVER_BATTLE* OVER_BATTLE::Instance()
 }
 void OVER_BATTLE::enter(Battle* battle)
 {
-	//LogString("OVER_BATTLE");
+	LogString("OVER_BATTLE");
 	//home wins
 	if (battle->mHomeCombatant->mScore > battle->mAwayCombatant->mScore)
 	{
