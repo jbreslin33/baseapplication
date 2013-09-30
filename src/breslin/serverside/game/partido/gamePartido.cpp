@@ -51,8 +51,6 @@ void GamePartido::update()
 		reset();		
 	}
 
-	
-
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
 		mBattleVector.at(i)->update();
@@ -67,6 +65,7 @@ void GamePartido::sendShapes(ClientPartido* clientPartido)
 void GamePartido::reset()
 {
 	LogString("GamePartido::reset");
+
 	//let's end battles gracefully
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
@@ -78,9 +77,34 @@ void GamePartido::reset()
 	{
 		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameEnd);
 	}
-
-	//make a multi-insert ..actually can this be added to in dbInsert???
 	
+	//make a multi-insert to questions_attempts 
+	massiveQuestionsAttemptsInsert();
+
+	//battles and combatants....
+	massiveCombatantInsert();
+
+	massiveBattleInsert();
+
+	//reset clients
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
+	{
+		mServerPartido->mClientPartidoVector.at(i)->reset();
+	}
+
+	//start game
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
+	{
+		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameStart);
+	}
+
+	mServerPartido->mGameTime = 0;	
+
+}
+
+
+void GamePartido::massiveQuestionsAttemptsInsert()
+{
 	mMassiveInsert.clear();
 	PGconn* conn;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
@@ -129,59 +153,110 @@ void GamePartido::reset()
         const char * q = mMassiveInsert.c_str();
         PQexec(conn,q);
         PQfinish(conn);
+}
 
-	//reset clients
+void GamePartido::massiveCombatantInsert()
+{
+	mMassiveInsert.clear();
+	PGconn* conn;
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+	QuestionAttempts* questionAttempt = NULL;	
+	ClientPartido* clientPartido = NULL;
+	Test* test = NULL;
+
+        mMassiveInsert = "insert into questions_attempts (question_id, answer, answer_time, user_id) values ";
+
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
-		mServerPartido->mClientPartidoVector.at(i)->reset();
-	}
+ 		if (mServerPartido->mClientPartidoVector.at(i)->mClientID == -1) //browser bridge
+                {
+                        continue;
+                }
 
-	//LogString("RESET:send game start to clients");
-	//maybe send all clients a message to unfreeze for db?????
+		test = mServerPartido->mClientPartidoVector.at(i)->mTest;
+
+		if (test)
+		{	
+ 			for (int z = 0; z < test->mQuestionAttemptsVector.size(); z++)
+        		{
+                		questionAttempt = test->mQuestionAttemptsVector.at(z);
+				if (!questionAttempt->mWrittenToDisk)
+				{
+					mMassiveInsert.append("(");
+                			mMassiveInsert.append(mUtility->intToString(questionAttempt->question_id));
+                			mMassiveInsert.append(",'");
+                			mMassiveInsert.append(questionAttempt->answer);
+                			mMassiveInsert.append("',");
+                			mMassiveInsert.append(mUtility->intToString(questionAttempt->answer_time));
+                			mMassiveInsert.append(",");
+                			mMassiveInsert.append(mUtility->intToString(questionAttempt->user_id));
+                			mMassiveInsert.append(")");
+                			mMassiveInsert.append(", ");
+					questionAttempt->mWrittenToDisk = true;
+				}
+				else	
+				{
+				}
+			}
+       		}
+	}
+	mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
+        const char * q = mMassiveInsert.c_str();
+        PQexec(conn,q);
+        PQfinish(conn);
+}
+
+void GamePartido::massiveBattleInsert()
+{
+	mMassiveInsert.clear();
+	PGconn* conn;
+        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+
+	QuestionAttempts* questionAttempt = NULL;	
+	ClientPartido* clientPartido = NULL;
+	Test* test = NULL;
+
+        mMassiveInsert = "insert into questions_attempts (question_id, answer, answer_time, user_id) values ";
+
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
-		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameStart);
+ 		if (mServerPartido->mClientPartidoVector.at(i)->mClientID == -1) //browser bridge
+                {
+                        continue;
+                }
+
+		test = mServerPartido->mClientPartidoVector.at(i)->mTest;
+
+		if (test)
+		{	
+ 			for (int z = 0; z < test->mQuestionAttemptsVector.size(); z++)
+        		{
+                		questionAttempt = test->mQuestionAttemptsVector.at(z);
+				if (!questionAttempt->mWrittenToDisk)
+				{
+					mMassiveInsert.append("(");
+                			mMassiveInsert.append(mUtility->intToString(questionAttempt->question_id));
+                			mMassiveInsert.append(",'");
+                			mMassiveInsert.append(questionAttempt->answer);
+                			mMassiveInsert.append("',");
+                			mMassiveInsert.append(mUtility->intToString(questionAttempt->answer_time));
+                			mMassiveInsert.append(",");
+                			mMassiveInsert.append(mUtility->intToString(questionAttempt->user_id));
+                			mMassiveInsert.append(")");
+                			mMassiveInsert.append(", ");
+					questionAttempt->mWrittenToDisk = true;
+				}
+				else	
+				{
+				}
+			}
+       		}
 	}
-
-	mServerPartido->mGameTime = 0;	
-
-/*
-        for (unsigned int i = 0; i < mBattleVector.size(); i++)
-	{
-		mBattleVector.at(i) = NULL;
-		delete mBattleVector.at(i);
-		//mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
-	}
-	mBattleVector.clear();
-*/
-/*
-        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
-	{
-		ClientPartido* clientPartido = mServerPartido->mClientPartidoVector.at(i);
-		if (clientPartido->mClientID == -1) //browser bridge
-		{
-			continue;
-		}
-
-		//reset opponent pointers	
-		clientPartido->resetOpponents();
-		
-		//collision
-        	clientPartido->mShapePartido->mCollidable = true; 
-	
-		//is anyone in a battle as game ends?	
-   		if (clientPartido->mConnectionState == DREAMSOCK_CONNECTED)
-		{
-			clientPartido->sendBattleEnd();	
-		}	
-			
-		clientPartido->mBattleScore = 0;	
-
-		clientPartido->resetRecords();	
-
-		clientPartido->setBattleRecordText();	
-	}
-*/
+	mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
+        const char * q = mMassiveInsert.c_str();
+        PQexec(conn,q);
+        PQfinish(conn);
 }
 
 bool GamePartido::checkForEndOfGame()

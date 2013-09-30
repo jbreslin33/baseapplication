@@ -43,6 +43,12 @@ public:
 	bool checkForEndOfGame();
 	void reset();
 
+	//massiveInserts
+	void massiveQuestionsAttemptsInsert();
+	void massiveCombatantInsert();
+	void massiveBattleInsert();
+
 	std::string mMassiveInsert;
+
 };
 #endif
