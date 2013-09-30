@@ -220,7 +220,7 @@ OVER_QUIZ* OVER_QUIZ::Instance()
 }
 void OVER_QUIZ::enter(Quiz* quiz)
 {
-	//LogString("OVER_QUIZ:%d",quiz->mCombatant->mClientPartido->id);	
+	LogString("OVER_QUIZ:%d",quiz->mCombatant->mClientPartido->id);	
 	quiz->mCombatant->mClientPartido->mTest->mQuizLast = quiz;
 	quiz->mCombatant->mClientPartido->mTest->mQuiz = NULL;
         quiz->mComputerAnswerTime = 0;

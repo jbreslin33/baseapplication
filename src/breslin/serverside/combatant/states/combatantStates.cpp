@@ -114,7 +114,7 @@ YIELD* YIELD::Instance()
 }
 void YIELD::enter(Combatant* combatant)
 {
-	//LogString("YIELD:enter%d:",combatant->mClientPartido->id);
+	LogString("YIELD:enter%d:",combatant->mClientPartido->id);
 	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
 }
 void YIELD::execute(Combatant* combatant)

@@ -64,6 +64,7 @@ GAME_PARTIDO_MODE* GAME_PARTIDO_MODE::Instance()
 }
 void GAME_PARTIDO_MODE::enter(ClientPartido* clientPartido)
 {
+	LogString("GAME_PARTIDO_MODE::enter:%d",clientPartido->id);
 }
 void GAME_PARTIDO_MODE::execute(ClientPartido* clientPartido)
 {
@@ -89,6 +90,7 @@ CLIENT_PARTIDO_BATTLE* CLIENT_PARTIDO_BATTLE::Instance()
 }
 void CLIENT_PARTIDO_BATTLE::enter(ClientPartido* clientPartido)
 {
+	LogString("CLIENT_PARTIDO_BATTLE::enter:%d",clientPartido->id);
 	clientPartido->mKey = 0;
 }
 void CLIENT_PARTIDO_BATTLE::execute(ClientPartido* clientPartido)
