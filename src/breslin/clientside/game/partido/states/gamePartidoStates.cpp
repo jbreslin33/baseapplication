@@ -48,7 +48,7 @@ PLAY_PARTIDO_GAME* PLAY_PARTIDO_GAME::Instance()
 }
 void PLAY_PARTIDO_GAME::enter(GamePartido* gamePartido)
 {
-	//LogString("PLAY_PARTIDO_GAME::enter");
+	LogString("PLAY_PARTIDO_GAME::enter");
 }
 void PLAY_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
@@ -80,7 +80,7 @@ BATTLE_GAME* BATTLE_GAME::Instance()
 }
 void BATTLE_GAME::enter(GamePartido* gamePartido)
 {
-	//LogString("BATTLE_GAME::enter");
+	LogString("BATTLE_GAME::enter");
         
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
         app->createBattleScreen();
@@ -92,7 +92,7 @@ void BATTLE_GAME::enter(GamePartido* gamePartido)
         //app->mLabelAnswer->setCaption("");
 
         gamePartido->mBattleStart = false;
-        gamePartido->mBattleEnd = false;
+        //gamePartido->mBattleEnd = false;
         gamePartido->mCorrectAnswerStart = false;
         gamePartido->mApplicationPartido->mGameReset = false;
 
@@ -212,7 +212,7 @@ SHOWCORRECTANSWER_PARTIDO_GAME* SHOWCORRECTANSWER_PARTIDO_GAME::Instance()
 }
 void SHOWCORRECTANSWER_PARTIDO_GAME::enter(GamePartido* gamePartido)
 {
-	//LogString("SHOWCORRECTANSWER_PARTIDO_GAME::enter");
+	LogString("SHOWCORRECTANSWER_PARTIDO_GAME::enter");
         ApplicationPartido* app = gamePartido->mApplicationPartido;
         app->createCorrectAnswerScreen();
         app->showCorrectAnswerScreen();
@@ -260,7 +260,7 @@ RESET_PARTIDO_GAME* RESET_PARTIDO_GAME::Instance()
 }
 void RESET_PARTIDO_GAME::enter(GamePartido* gamePartido)
 {
-	//LogString("RESET_PARTIDO_GAME::enter");
+	LogString("RESET_PARTIDO_GAME::enter");
 	gamePartido->reset();
 }
 void RESET_PARTIDO_GAME::execute(GamePartido* gamePartido)
