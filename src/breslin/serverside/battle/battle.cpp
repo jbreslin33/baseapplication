@@ -26,8 +26,8 @@ Battle::Battle(GamePartido* gamePartido, ClientPartido* homeClient, ClientPartid
 	mAwayCombatant = new Combatant(this,awayClient);
 
 	//set pointers to foes for combatants
-	mHomeCombatant->mFoe = mHomeCombatant;
-	mAwayCombatant->mFoe = mAwayCombatant;
+	mHomeCombatant->mFoe = mAwayCombatant;
+	mAwayCombatant->mFoe = mHomeCombatant;
 
 	mBattleTime       = 0;
 	mBattleStartTime  = 0;

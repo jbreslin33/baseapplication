@@ -116,6 +116,49 @@ void YIELD::enter(Combatant* combatant)
 {
 	LogString("YIELD:enter%d:",combatant->mClientPartido->id);
 	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
+
+        if (combatant->mScore > combatant->mFoe->mScore)
+	{
+                combatant->mClientPartido->mWins++;
+	}
+        if (combatant->mScore < combatant->mFoe->mScore)
+	{
+                combatant->mClientPartido->mLosses++;
+	}
+        
+	//set strings home
+        std::string winString = "wins:";
+        winString.append(battle->mUtility->intToString(combatant->mClientPartido->mWins));
+        combatant->mClientPartido->mShape->setText(winString);
+	
+/*
+        //home wins
+        if (battle->mHomeCombatant->mScore > battle->mAwayCombatant->mScore)
+        {
+                battle->mHomeCombatant->mClientPartido->mWins++;
+                battle->mHomeCombatant->mFoe->mClientPartido->mLosses++;
+        }
+
+        //away wins
+        if (battle->mHomeCombatant->mScore < battle->mAwayCombatant->mScore)
+        {
+                //record records
+                battle->mHomeCombatant->mClientPartido->mLosses++;
+                battle->mHomeCombatant->mFoe->mClientPartido->mWins++;
+        }
+
+        //set strings home
+        std::string homeString = "wins:";
+        homeString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
+        battle->mHomeCombatant->mClientPartido->mShape->setText(homeString);
+
+        //set strings away
+        std::string awayString = "wins:";
+        awayString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
+        battle->mHomeCombatant->mFoe->mClientPartido->mShape->setText(awayString);
+*/
+
+
 }
 void YIELD::execute(Combatant* combatant)
 {

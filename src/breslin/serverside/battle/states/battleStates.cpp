@@ -123,6 +123,7 @@ OVER_BATTLE* OVER_BATTLE::Instance()
 void OVER_BATTLE::enter(Battle* battle)
 {
 	LogString("OVER_BATTLE");
+/*
 	//home wins
 	if (battle->mHomeCombatant->mScore > battle->mAwayCombatant->mScore)
 	{
@@ -148,7 +149,7 @@ void OVER_BATTLE::enter(Battle* battle)
 	std::string awayString = "wins:";
 	awayString.append(battle->mUtility->intToString(battle->mHomeCombatant->mClientPartido->mWins));
 	battle->mHomeCombatant->mFoe->mClientPartido->mShape->setText(awayString);
-
+*/
 	battle->mBattleTime       = 0;
         battle->mBattleStartTime  = 0;
         battle->mBattleEndTime    = 0;
