@@ -45,7 +45,6 @@ public:
 
 	//massiveInserts
 	void massiveQuestionsAttemptsInsert();
-	void massiveCombatantInsert();
 	void massiveBattleInsert();
 
 	std::string mMassiveInsert;
