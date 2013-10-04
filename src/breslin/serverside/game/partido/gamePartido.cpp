@@ -52,12 +52,20 @@ void GamePartido::update()
 	Game::update();
 
 	//let's reset for a turn	
+/*
 	if (checkForEndOfGame())
 	{
 		reset();		
 	}
-
-        for (unsigned int i = 0; i < mBattleVector.size(); i++)
+*/
+	mDataDumpCounter++;
+	LogString("mDataDumpCounter:%d",mDataDumpCounter);
+	if (mDataDumpCounter > mDataDumpThreshold)
+	{
+		dataDump();
+	}
+        
+	for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
 		mBattleVector.at(i)->update();
 	}
