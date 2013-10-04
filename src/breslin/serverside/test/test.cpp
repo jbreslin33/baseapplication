@@ -23,7 +23,7 @@ Test::Test(ClientPartido* clientPartido)
 	mQuizLast = NULL;
 
 	//question
-	mQuestionID = 0;
+	mQuestionID = 1;
 
 	//answer
 	mWaitingForAnswer = false;
@@ -69,7 +69,7 @@ void Test::reset()
 	mQuizLast = NULL;
 	
 	//question
-	mQuestionID = 0;
+	mQuestionID = 1;
 	
 	//answer
 	mWaitingForAnswer = false;
@@ -91,7 +91,7 @@ void Test::update()
 int Test::getNewQuestionID()
 {
         int maxLevel            = getMaxLevelAskedID();
-	int questionID = 0;
+	int questionID = 1;
 
         if (rand() % 2 == 1)
         {
