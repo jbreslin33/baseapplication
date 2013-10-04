@@ -37,6 +37,9 @@ GamePartido::GamePartido(ServerPartido* serverPartido, int id) : Game(serverPart
 {
 	mServerPartido = serverPartido;
 	mUtility = new Utility();
+	
+	mDataDumpThreshold = 10000;
+	mDataDumpCounter   = 0;
 }
 
 GamePartido::~GamePartido()
@@ -63,6 +66,15 @@ void GamePartido::update()
 void GamePartido::sendShapes(ClientPartido* clientPartido)
 {
 	Game::sendShapes(clientPartido);
+}
+
+void GamePartido::dataDump()
+{
+	//make a multi-insert to questions_attempts 
+	massiveQuestionsAttemptsInsert();
+
+	//battles  inserts....
+	massiveBattleInsert();
 }
 
 void GamePartido::reset()
@@ -130,6 +142,7 @@ void GamePartido::massiveQuestionsAttemptsInsert()
  			for (int z = 0; z < test->mQuestionAttemptsVector.size(); z++)
         		{
                 		questionAttempt = test->mQuestionAttemptsVector.at(z);
+
 				if (!questionAttempt->mWrittenToDisk)
 				{
 					mMassiveInsert.append("(");
@@ -173,7 +186,8 @@ void GamePartido::massiveBattleInsert()
 	{
 		battle = mBattleVector.at(i);
 
-		if (!battle->mWrittenToDisk)
+		//mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
+		if (!battle->mWrittenToDisk && mBattleVector.at(i)->mStateMachine->currentState() == OVER_BATTLE::Instance())
 		{
 			mMassiveInsert.append("(to_timestamp(");
                 	mMassiveInsert.append(mUtility->intToString(battle->mBattleStartTime));

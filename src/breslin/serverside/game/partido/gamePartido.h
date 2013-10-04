@@ -46,8 +46,10 @@ public:
 	//massiveInserts
 	void massiveQuestionsAttemptsInsert();
 	void massiveBattleInsert();
-
+	void dataDump();
 	std::string mMassiveInsert;
+	int mDataDumpThreshold;
+	int mDataDumpCounter;
 
 };
 #endif
