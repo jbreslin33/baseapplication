@@ -356,7 +356,7 @@ CREATE TABLE questions_attempts (
 CREATE TABLE battles (
     id integer NOT NULL,
     battle_start_time timestamp,
-    battle_end_time_end timestamp,
+    battle_end_time timestamp,
     home_score integer,
     away_score integer,
     home_user_id integer,

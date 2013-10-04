@@ -85,7 +85,7 @@ void GamePartido::reset()
 	massiveQuestionsAttemptsInsert();
 
 	//battles  inserts....
-	//massiveBattleInsert();
+	massiveBattleInsert();
 
 	//reset clients
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
@@ -159,13 +159,14 @@ void GamePartido::massiveQuestionsAttemptsInsert()
 
 void GamePartido::massiveBattleInsert()
 {
+	LogString("GamePartido::massiveBattleInsert");
 	mMassiveInsert.clear();
 	PGconn* conn;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
 	Battle* battle = NULL;
 
-        mMassiveInsert = "insert into battles (battle_time_start,battle_time_end,home_score,away_score,home_user_id,away_user_id) values ";
+        mMassiveInsert = "insert into battles (battle_start_time,battle_end_time,home_score,away_score,home_user_id,away_user_id) values ";
 
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
@@ -173,11 +174,11 @@ void GamePartido::massiveBattleInsert()
 
 		if (!battle->mWrittenToDisk)
 		{
-			mMassiveInsert.append("(");
+			mMassiveInsert.append("(to_timestamp(");
                 	mMassiveInsert.append(mUtility->intToString(battle->mBattleStartTime));
-                	mMassiveInsert.append(",");
+                	mMassiveInsert.append("),to_timestamp(");
                 	mMassiveInsert.append(mUtility->intToString(battle->mBattleEndTime));
-                	mMassiveInsert.append(",");
+                	mMassiveInsert.append("),");
                 	mMassiveInsert.append(mUtility->intToString(battle->mHomeCombatant->mScore));
                 	mMassiveInsert.append(",");
                 	mMassiveInsert.append(mUtility->intToString(battle->mAwayCombatant->mScore));
@@ -192,6 +193,7 @@ void GamePartido::massiveBattleInsert()
 	}
 	mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
         const char * q = mMassiveInsert.c_str();
+	LogString("q:%s",q);
         PQexec(conn,q);
         PQfinish(conn);
 }

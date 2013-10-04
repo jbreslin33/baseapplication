@@ -8,11 +8,20 @@
 #include "Ogre.h"
 using namespace Ogre;
 
-//steering states
+//states
 #include "states/battleStates.h"
 
 //utility
 #include "../../utility/utility.h"
+
+//gamePartido
+#include "../game/partido/gamePartido.h"
+
+//serverPartido
+#include "../server/partido/serverPartido.h"
+
+//network
+#include "../network/network.h"
 
 //shapes
 #include "../client/robust/partido/clientPartido.h"
@@ -30,8 +39,8 @@ Battle::Battle(GamePartido* gamePartido, ClientPartido* homeClient, ClientPartid
 	mAwayCombatant->mFoe = mHomeCombatant;
 
 	mBattleTime       = 0;
-	mBattleStartTime  = 0;
-	mBattleEndTime    = 0;
+	mBattleStartTime  = mGamePartido->mServerPartido->mNetwork->getCurrentSystemTime();
+	mBattleEndTime    = mGamePartido->mServerPartido->mNetwork->getCurrentSystemTime();
 	mBattleLengthTime = 20000;
 
  	//battle states

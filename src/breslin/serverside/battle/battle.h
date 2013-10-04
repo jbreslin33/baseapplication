@@ -28,8 +28,8 @@ Combatant* mAwayCombatant;
 
 // battle time
 long mBattleTime;
-long mBattleStartTime;
-long mBattleEndTime;
+double mBattleStartTime;
+double mBattleEndTime;
 long mBattleLengthTime;
 
 
