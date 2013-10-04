@@ -153,7 +153,8 @@ void GamePartido::massiveQuestionsAttemptsInsert()
 	}
 	mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
         const char * q = mMassiveInsert.c_str();
-        PQexec(conn,q);
+       	LogString("questionAttempt:%s",q); 
+	PQexec(conn,q);
         PQfinish(conn);
 }
 
