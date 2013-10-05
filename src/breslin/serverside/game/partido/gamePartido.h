@@ -44,8 +44,8 @@ public:
 	void reset();
 
 	//massiveInserts
-	void massiveQuestionsAttemptsInsert();
-	void massiveBattleInsert();
+	bool massiveQuestionsAttemptsInsert();
+	bool massiveBattleInsert();
 	void dataDump();
 	std::string mMassiveInsert;
 	int mDataDumpThreshold;

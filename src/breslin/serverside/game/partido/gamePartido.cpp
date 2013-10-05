@@ -38,7 +38,7 @@ GamePartido::GamePartido(ServerPartido* serverPartido, int id) : Game(serverPart
 	mServerPartido = serverPartido;
 	mUtility = new Utility();
 	
-	mDataDumpThreshold = 10000;
+	mDataDumpThreshold = 2000;
 	mDataDumpCounter   = 0;
 }
 
@@ -52,19 +52,22 @@ void GamePartido::update()
 	Game::update();
 
 	//let's reset for a turn	
-/*
+
 	if (checkForEndOfGame())
 	{
 		reset();		
 	}
-*/
+
 	mDataDumpCounter++;
-	LogString("mDataDumpCounter:%d",mDataDumpCounter);
+/*
 	if (mDataDumpCounter > mDataDumpThreshold)
 	{
+		LogString("data dump start:%d",mDataDumpCounter);
 		dataDump();
+		LogString("data dump end:%d",mDataDumpCounter);
+		mDataDumpCounter = 0;
 	}
-        
+ */       
 	for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
 		mBattleVector.at(i)->update();
@@ -124,11 +127,10 @@ void GamePartido::reset()
 }
 
 
-void GamePartido::massiveQuestionsAttemptsInsert()
+bool GamePartido::massiveQuestionsAttemptsInsert()
 {
+	bool weGotOne = false;
 	mMassiveInsert.clear();
-	PGconn* conn;
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
 	QuestionAttempts* questionAttempt = NULL;	
 	ClientPartido* clientPartido = NULL;
@@ -165,6 +167,7 @@ void GamePartido::massiveQuestionsAttemptsInsert()
                 			mMassiveInsert.append(", ");
 					LogString("writing");
 					questionAttempt->mWrittenToDisk = true;
+					weGotOne = true;
 				}
 				else	
 				{
@@ -172,19 +175,28 @@ void GamePartido::massiveQuestionsAttemptsInsert()
 			}
        		}
 	}
-	mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
-        const char * q = mMassiveInsert.c_str();
-       	LogString("questionAttempt:%s",q); 
-	PQexec(conn,q);
-        PQfinish(conn);
+
+	if (weGotOne)
+	{
+		PGconn* conn;
+        	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+		mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
+        	const char * q = mMassiveInsert.c_str();
+       		LogString("questionAttempt:%s",q); 
+		PQexec(conn,q);
+        	PQfinish(conn);
+	}
+	else
+	{
+		LogString("no question attempts");
+	}
 }
 
-void GamePartido::massiveBattleInsert()
+bool GamePartido::massiveBattleInsert()
 {
+	bool weGotOne = false;
 	LogString("GamePartido::massiveBattleInsert");
 	mMassiveInsert.clear();
-	PGconn* conn;
-        conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 
 	Battle* battle = NULL;
 
@@ -197,6 +209,7 @@ void GamePartido::massiveBattleInsert()
 		//mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
 		if (!battle->mWrittenToDisk && mBattleVector.at(i)->mStateMachine->currentState() == OVER_BATTLE::Instance())
 		{
+			weGotOne = true;
 			mMassiveInsert.append("(to_timestamp(");
                 	mMassiveInsert.append(mUtility->intToString(battle->mBattleStartTime));
                 	mMassiveInsert.append("),to_timestamp(");
@@ -214,11 +227,22 @@ void GamePartido::massiveBattleInsert()
 			battle->mWrittenToDisk = true;
 		}
 	}
-	mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
-        const char * q = mMassiveInsert.c_str();
-	LogString("q:%s",q);
-        PQexec(conn,q);
-        PQfinish(conn);
+	if (weGotOne)
+	{
+		PGconn* conn;
+        	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
+		mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
+        	const char * q = mMassiveInsert.c_str();
+		LogString("q:%s",q);
+        	PQexec(conn,q);
+        	PQfinish(conn);
+		return true;
+	}
+	else
+	{
+		LogString("no battles");
+		return false;
+	}
 }
 
 bool GamePartido::checkForEndOfGame()
