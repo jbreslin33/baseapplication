@@ -256,7 +256,7 @@ setText: function(text)
 {
 	this.mObjectTitle.innerHTML= '';
 	this.mObjectTitle.innerHTML= '' + text;
-	this.log('text:' + text);
+	this.log('text:' + this.mStringUsername + ' ' + text);
 },
 
 setSrc: function(src)

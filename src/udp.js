@@ -533,15 +533,17 @@ server.on("message", function (msg, rinfo)
 	//mMessageSetText
 	if (type == -66)
 	{
-		var index    = msg.readInt8(1);
+		var index    = msg.readInt16LE(1);
 
-                var length   = msg.readInt8(2);
+                var length   = msg.readInt8(3);
 
                 var setTextString = '';
                 for (i = 0; i < length; i++)
                 {
-                        var n = msg.readInt8(parseInt(3 + i));
+                        var n = msg.readInt8(parseInt(4 + i));
+			console.log('n:' + n);
                         var c = String.fromCharCode(n);
+			console.log('c:' + c);
                         setTextString = setTextString + c;
                 }
 

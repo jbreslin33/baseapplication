@@ -291,7 +291,7 @@ void Shape::sendText()
        	mMessage.WriteByte(mMessageSetText); // add type
 	
 	//index id
-	mMessage.WriteByte(mIndex);
+	mMessage.WriteShort(mIndex);
 
 	//text
        	int length = mText.length();  
