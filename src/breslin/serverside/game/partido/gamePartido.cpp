@@ -108,7 +108,7 @@ void GamePartido::reset()
 	massiveQuestionsAttemptsInsert();
 
 	//battles  inserts....
-	//massiveBattleInsert();
+	massiveBattleInsert();
 
 	//reset clients
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
