@@ -356,7 +356,7 @@ void Test::readAnswer(int answerTime, std::string answer)
 			{
 				mQuiz->mCombatant->mScore++;	
 				//LogString("mScore:%d",mQuiz->mCombatant->mScore);
-				mClientPartido->mShape->setText(mUtility->intToString(mQuiz->mCombatant->mScore));
+				//mClientPartido->mShape->setText(mUtility->intToString(mQuiz->mCombatant->mScore));
        				mShowCorrectAnswer = false;	 
 			}
 		}

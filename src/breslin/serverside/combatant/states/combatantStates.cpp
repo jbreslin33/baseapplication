@@ -129,10 +129,11 @@ void YIELD::enter(Combatant* combatant)
                 combatant->mClientPartido->mLosses++;
 	}
         
-	//set strings home
+/*
         std::string winString = "wins:";
         winString.append(combatant->mBattle->mUtility->intToString(combatant->mClientPartido->mWins));
         combatant->mClientPartido->mShape->setText(winString);
+*/
 }
 void YIELD::execute(Combatant* combatant)
 {

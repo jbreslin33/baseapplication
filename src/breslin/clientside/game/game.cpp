@@ -434,15 +434,12 @@ void Game::checkByteBuffer(ByteBuffer* byteBuffer)
                         }
                         break;
 		case mMessageSetText:
-			LogString("mMessageSetText");
-        		int index = byteBuffer->ReadByte();
-			LogString("index:%d",index);
+        		int index = byteBuffer->ReadShort();
    			for (unsigned int i = 0; i < mShapeVector->size(); i++)
                 	{
                         	Shape* shape = mShapeVector->at(i);
 				if (shape->mIndex == index)
 				{
-					LogString("setText on shape");
 					shape->setText(byteBuffer);	
 				}
 

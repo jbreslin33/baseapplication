@@ -277,11 +277,8 @@ void Game::sendShapes(Client* client)
         	mMessage.WriteShort(mShapeVector.at(i)->mIndex);
 
         	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().x);
-		LogString("xspawn:%f",mShapeVector.at(i)->mSceneNode->getPosition().x);
         	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().y);
-		LogString("yspawn:%f",mShapeVector.at(i)->mSceneNode->getPosition().y);
         	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().z);
-		LogString("zspawn:%f",mShapeVector.at(i)->mSceneNode->getPosition().z);
 
         	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->mRotation->x);
         	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->mRotation->z);

@@ -1,3 +1,3 @@
 ./build.sh
 cd ../vclient/dist/bin
-./Client 192.168.1.100
+./Client_d 192.168.1.103
