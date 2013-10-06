@@ -1,6 +1,6 @@
 ./build.sh
-pkill Server
-./../vserver/dist/bin/Server $1 $2 &
+pkill Server_2
+./../vserver/dist/bin/Server_d $1 $2 &
 
 if test $3 -eq 1
 then

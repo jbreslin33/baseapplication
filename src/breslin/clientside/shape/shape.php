@@ -371,6 +371,7 @@ parseDeltaByteBuffer: function(byteBuffer)
 
 getMeshString: function(meshCode)
 {
+	meshCode = 1;
         if (meshCode == 0)
         {
                 //this cube is exactly 1 ogre world unit. Which I take to be 1 meter.
