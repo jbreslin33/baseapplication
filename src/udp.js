@@ -331,22 +331,23 @@ server.on("message", function (msg, rinfo)
         { 
                 var clientID = msg.readInt8(1);
                 var client   = msg.readInt8(2);
-                var index    = msg.readInt8(3);
-                var xpos     = msg.readFloatLE(4);
-                var ypos     = msg.readFloatLE(8);
-                var zpos     = msg.readFloatLE(12);
-                var xrot     = msg.readFloatLE(16);
-                var zrot     = msg.readFloatLE(20);
-                var mesh     = msg.readInt8(24);
-                var anim     = msg.readInt8(25);
+                var index    = msg.readInt16LE(3);
+                var xpos     = msg.readFloatLE(5);
+                var ypos     = msg.readFloatLE(9);
+                var zpos     = msg.readFloatLE(13);
+ 		console.log("xpos:" +  xpos + "zpos:" + zpos); 
+                var xrot     = msg.readFloatLE(17);
+                var zrot     = msg.readFloatLE(21);
+                var mesh     = msg.readInt8(25);
+                var anim     = msg.readInt8(26);
 
-  		var length = msg.readInt8(26);
+  		var length = msg.readInt8(27);
 
                 string = "" + length + ",";
 
                 for (i = 0; i < length; i++)
                 {
-                        var n = msg.readInt8(parseInt(27 + i));
+                        var n = msg.readInt8(parseInt(28 + i));
                         var c = String.fromCharCode(n);
                         string = string + c;
                 }
@@ -356,6 +357,7 @@ server.on("message", function (msg, rinfo)
 
                 addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim + "," + string; 
 //-103,0,50,1936,0,35,0,1,1,1,0
+		console.log('addShapeString:' + addShapeString);
 		io.sockets.clients().forEach(function (socket)
 		{
 			if (socket.mClientID == clientID)

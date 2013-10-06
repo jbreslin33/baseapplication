@@ -263,7 +263,8 @@ void Game::sendShapes(Client* client)
         	{
                 	mMessage.WriteByte(client->mClientID); //client id for browsers
         	}
-                
+               
+		//local 
         	if (client == mShapeVector.at(i)->mClient)
         	{       
                 	mMessage.WriteByte(1);
@@ -272,11 +273,15 @@ void Game::sendShapes(Client* client)
         	{       
                 	mMessage.WriteByte(0);
         	}
+
         	mMessage.WriteShort(mShapeVector.at(i)->mIndex);
 
         	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().x);
+		LogString("xspawn:%f",mShapeVector.at(i)->mSceneNode->getPosition().x);
         	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().y);
+		LogString("yspawn:%f",mShapeVector.at(i)->mSceneNode->getPosition().y);
         	mMessage.WriteFloat(mShapeVector.at(i)->mSceneNode->getPosition().z);
+		LogString("zspawn:%f",mShapeVector.at(i)->mSceneNode->getPosition().z);
 
         	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->mRotation->x);
         	mMessage.WriteFloat(mShapeVector.at(i)->mRotation->mRotation->z);
