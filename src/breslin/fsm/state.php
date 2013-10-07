@@ -1,4 +1,4 @@
-var AbilityMoveState = new Class(
+var State = new Class(
 {
 
 initialize: function ()
@@ -6,17 +6,17 @@ initialize: function ()
 
 },
 
-enter: function(abilityMove)
+enter: function(entity_type)
 {
 
 },
 
-execute: function(abilityMove)
+execute: function(entity_type)
 {
 
 },
 
-exit: function(abilityMove)
+exit: function(entity_type)
 {
 
 }
