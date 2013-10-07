@@ -23,14 +23,14 @@ enter: function(gamePartido)
 
 execute: function(gamePartido)
 {
-        if (gamePartido.mBattleStart)
-        {
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoBattle);
-        }
         
         if (gamePartido.mApplicationPartido.mGameReset)
         {
                 gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoReset);
+        }
+        else if (gamePartido.mBattleStart)
+        {
+                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoBattle);
         }
 },	
 
