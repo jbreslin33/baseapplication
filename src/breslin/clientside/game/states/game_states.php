@@ -1,9 +1,8 @@
 var GamePlay = new Class(
 {
 
-initialize: function(game)
+initialize: function()
 {
-	this.mGame = game; 
 },
 
 log: function(msg)
@@ -14,21 +13,21 @@ log: function(msg)
         }, 0);
 },
 
-enter: function()
+enter: function(game)
 {
 
 },
 
-execute: function()
+execute: function(game)
 {
 	//user input
-        this.mGame.processInput();
+        game.processInput();
 
         //network outgoing
-        this.mGame.sendByteBuffer();
+        game.sendByteBuffer();
 },	
 
-exit: function()
+exit: function(game)
 {
 
 }
