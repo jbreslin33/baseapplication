@@ -155,21 +155,10 @@ enter: function(gamePartido)
 
 execute: function(gamePartido)
 {
-	if (gamePartido.mCorrectAnswerEnd)
+	if (gamePartido.mCorrectAnswerEnd || gamePartido.mBattleEnd || gamePartido.mApplicationPartido.mGameReset)
         {
                 gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoBattle);
         }
-
-        if (gamePartido.mBattleEnd)
-        {
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoBattle);
-        }
-        
-        if (gamePartido.mApplicationPartido.mGameReset)
-        {
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoReset);
-        }
-
 },	
 
 exit: function(gamePartido)
