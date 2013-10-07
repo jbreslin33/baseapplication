@@ -1,10 +1,9 @@
 var NormalProcessTickMove = new Class(
 {
 
-Extends: AbilityMoveState,
-initialize: function (move)
+Extends: State,
+initialize: function ()
 {
-	this.mMove = move;
 },
 
 log: function(msg)
@@ -15,41 +14,41 @@ log: function(msg)
         }, 0);
 },
 
-enter: function()
+enter: function(move)
 {
 //	this.log('enter n');
 },
 
-execute: function()
+execute: function(move)
 {
-//	this.mMove.mShape.mMesh.innerHTML='n:' + this.mMove.mShape.mIndex;
+//	move.mShape.mMesh.innerHTML='n:' + move.mShape.mIndex;
 
         // if distance exceeds threshold && server velocity is zero
-        if(this.mMove.mDeltaPosition > this.mMove.mPosInterpLimitHigh && !this.mMove.mShape.mServerCommandCurrent.mVelocity.isZero())
+        if(move.mDeltaPosition > move.mPosInterpLimitHigh && !move.mShape.mServerCommandCurrent.mVelocity.isZero())
         {
-       		this.mMove.mProcessTickStateMachine.changeState(this.mMove.mCatchupProcessTickMove);
+       		move.mProcessTickStateMachine.changeState(move.mCatchupProcessTickMove);
         }
         
 	serverVelocity = new Vector3D();
 
-        serverVelocity.copyValuesFrom(this.mMove.mShape.mServerCommandCurrent.mVelocity);
+        serverVelocity.copyValuesFrom(move.mShape.mServerCommandCurrent.mVelocity);
 	
         serverVelocity.normalise();
 
-        if(this.mMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
+        if(move.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
-                v = this.mMove.mShape.mServerCommandCurrent.mVelocity;
-                f = this.mMove.mShape.mCommandToRunOnShape.mFrameTime;
+                v = move.mShape.mServerCommandCurrent.mVelocity;
+                f = move.mShape.mCommandToRunOnShape.mFrameTime;
 		
-                this.mMove.mShape.mSpeed = this.mMove.calculateSpeed(v,f);
+                move.mShape.mSpeed = move.calculateSpeed(v,f);
         }
-        serverVelocity.multiply(this.mMove.mShape.mSpeed);
+        serverVelocity.multiply(move.mShape.mSpeed);
  
-	this.mMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(serverVelocity);
+	move.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(serverVelocity);
 	
 },
 
-exit: function()
+exit: function(move)
 {
 
 }

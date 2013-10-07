@@ -89,7 +89,7 @@ initialize: function(serverIP, serverPort)
 	this.mWestBorder  = 0;
 
         //state machine (Menus)
-        this.mStateMachine = new StateMachine();
+        this.mStateMachine = new StateMachine(this);
 
 	//input
 	this.mKey_up = false;

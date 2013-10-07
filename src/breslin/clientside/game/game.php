@@ -51,7 +51,7 @@ initialize: function(application)
 	this.mPollDelayCounter = 0;
 	this.mFrameTimeServer = 0;
 
-	this.mStateMachine = new StateMachine();
+	this.mStateMachine = new StateMachine(this);
 /*
         //set Camera
         // Position it at 500 in Z direction

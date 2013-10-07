@@ -1,8 +1,9 @@
 var StateMachine = new Class(
 {
 
-initialize: function()
+initialize: function(owner)
 {
+	this.mOwner = owner;
 	this.mCurrentState = 0;
 	this.mPreviousState = 0;
 	this.mGlobalState = 0;
@@ -29,11 +30,11 @@ update: function()
 {
 	if(this.mGlobalState)
 	{
-		this.mGlobalState.execute();
+		this.mGlobalState.execute(this.mOwner);
 	}
 	if (this.mCurrentState)
 	{
-		this.mCurrentState.execute();
+		this.mCurrentState.execute(this.mOwner);
 	}
 },
 
@@ -43,14 +44,14 @@ changeState: function(pNewState)
 
 	if(this.mCurrentState)
 	{
-       		this.mCurrentState.exit();
+       		this.mCurrentState.exit(this.mOwner);
 	}
 
 	this.mCurrentState = pNewState;
 
 	if(this.mCurrentState)
 	{
-        	this.mCurrentState.enter();
+        	this.mCurrentState.enter(this.mOwner);
 	}
 }
 

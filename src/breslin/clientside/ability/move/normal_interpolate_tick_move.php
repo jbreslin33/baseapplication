@@ -1,10 +1,9 @@
 var NormalInterpolateTickMove = new Class(
 {
 
-Extends: AbilityMoveState,
-initialize: function (move)
+Extends: State,
+initialize: function ()
 {
-	this.mMove = move;
 },
 
 log: function(msg)
@@ -15,35 +14,35 @@ log: function(msg)
         }, 0);
 },
 
-enter: function()
+enter: function(move)
 {
  	//this.mAbilityMove.mShape.mObjectTitle.innerHTML='' + ername + ':' + this.mIndex;
  	//this.mAbilityMove.mShape.mObjectTitle.innerHTML='N';  
 },
 
-execute: function()
+execute: function(move)
 {
         //to be used to setPosition
         transVector = new Vector3D();
 
 
         //copy values from mVelocity so we don't make changes to original
-        transVector.copyValuesFrom(this.mMove.mShape.mCommandToRunOnShape.mVelocity);
+        transVector.copyValuesFrom(move.mShape.mCommandToRunOnShape.mVelocity);
         //get the mulitplier
-        parsedRenderTime = parseFloat(this.mMove.mShape.mApplication.getRenderTime());
+        parsedRenderTime = parseFloat(move.mShape.mApplication.getRenderTime());
 	
 	multipliedRenderTime = parsedRenderTime * 1000;
 
         //multiply our vector using render values
         transVector.multiply(multipliedRenderTime);
 
-	transVector.add(this.mMove.mShape.getPosition());
+	transVector.add(move.mShape.getPosition());
 
 	//add our velocity to current position
 
 	//set new position
-	this.mMove.mShape.setPosition(transVector);
-	//document.getElementById('mMessageFrameG').innerHTML=':mSequence ' + this.mMove.mShape.mApplication.mGame.mSequence;	
+	move.mShape.setPosition(transVector);
+	//document.getElementById('mMessageFrameG').innerHTML=':mSequence ' + move.mShape.mApplication.mGame.mSequence;	
 /*
         if (abilityMove->mShape->mLocal == 1)
         {
@@ -55,7 +54,7 @@ execute: function()
 */
 },
 
-exit: function()
+exit: function(move)
 {
 
 }

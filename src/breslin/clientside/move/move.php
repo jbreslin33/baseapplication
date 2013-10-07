@@ -8,12 +8,12 @@ initialize: function (shapeDynamic)
 
 	/******************************** Process **/
 	//processTick StateMachine
-        this.mProcessTickStateMachine       = new AbilityMoveStateMachine(this);    //setup the state machine
+        this.mProcessTickStateMachine       = new StateMachine(this);    //setup the state machine
 
 	//processTick states	
-	this.mGlobalProcessTickMove  = new GlobalProcessTickMove(this); 
+	this.mGlobalProcessTickMove  = new GlobalProcessTickMove (this); 
 	this.mCatchupProcessTickMove = new CatchupProcessTickMove(this); 
-	this.mNormalProcessTickMove  = new NormalProcessTickMove(this); 
+	this.mNormalProcessTickMove  = new NormalProcessTickMove (this); 
         
         this.mProcessTickStateMachine.setCurrentState      (this.mNormalProcessTickMove);
         this.mProcessTickStateMachine.setPreviousState     (this.mNormalProcessTickMove);
@@ -21,7 +21,7 @@ initialize: function (shapeDynamic)
 
 	/************************************ Interpolate **/
 	//interpolateTick StateMachine
-        this.mInterpolateTickStateMachine       = new AbilityMoveStateMachine(this);    //setup the state machine
+        this.mInterpolateTickStateMachine       = new StateMachine(this);    //setup the state machine
 
 	//interpolate states
 	this.mNormalInterpolateTickMove  = new NormalInterpolateTickMove(this); 
@@ -36,8 +36,6 @@ initialize: function (shapeDynamic)
     	this.mPosInterpLimitHigh = parseFloat(.066); //how far away from server till we try to catch up
     	this.mPosInterpFactor    = parseFloat(4.0);
         this.mMaximunVelocity    = parseFloat(.003083); //do not let velocity go above this in any direction.
-
-
 
         //deltas
         this.mDeltaX        = 0.0;

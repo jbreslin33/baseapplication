@@ -1,10 +1,9 @@
 var GlobalProcessTickMove = new Class(
 {
 
-Extends: AbilityMoveState,
-initialize: function (move)
+Extends: State,
+initialize: function ()
 {
-	this.mMove = move;
 },
 
 log: function(msg)
@@ -15,18 +14,18 @@ log: function(msg)
         }, 0);
 },
 
-enter: function()
+enter: function(move)
 {
 
 },
 
-execute: function()
+execute: function(move)
 {
-        this.mMove.mShape.moveGhostShape();
-        this.mMove.calculateDeltaPosition();
+        move.mShape.moveGhostShape();
+        move.calculateDeltaPosition();
 },
 
-exit: function()
+exit: function(move)
 {
 
 }
