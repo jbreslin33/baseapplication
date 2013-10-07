@@ -2,9 +2,9 @@ var NormalProcessTickMove = new Class(
 {
 
 Extends: AbilityMoveState,
-initialize: function (abilityMove)
+initialize: function (move)
 {
-	this.mAbilityMove = abilityMove;
+	this.mMove = move;
 },
 
 log: function(msg)
@@ -22,30 +22,30 @@ enter: function()
 
 execute: function()
 {
-//	this.mAbilityMove.mShape.mMesh.innerHTML='n:' + this.mAbilityMove.mShape.mIndex;
+//	this.mMove.mShape.mMesh.innerHTML='n:' + this.mMove.mShape.mIndex;
 
         // if distance exceeds threshold && server velocity is zero
-        if(this.mAbilityMove.mDeltaPosition > this.mAbilityMove.mPosInterpLimitHigh && !this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())
+        if(this.mMove.mDeltaPosition > this.mMove.mPosInterpLimitHigh && !this.mMove.mShape.mServerCommandCurrent.mVelocity.isZero())
         {
-       		this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mCatchupProcessTickMove);
+       		this.mMove.mProcessTickStateMachine.changeState(this.mMove.mCatchupProcessTickMove);
         }
         
 	serverVelocity = new Vector3D();
 
-        serverVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
+        serverVelocity.copyValuesFrom(this.mMove.mShape.mServerCommandCurrent.mVelocity);
 	
         serverVelocity.normalise();
 
-        if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
+        if(this.mMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
-                v = this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity;
-                f = this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime;
+                v = this.mMove.mShape.mServerCommandCurrent.mVelocity;
+                f = this.mMove.mShape.mCommandToRunOnShape.mFrameTime;
 		
-                this.mAbilityMove.mShape.mSpeed = this.mAbilityMove.calculateSpeed(v,f);
+                this.mMove.mShape.mSpeed = this.mMove.calculateSpeed(v,f);
         }
-        serverVelocity.multiply(this.mAbilityMove.mShape.mSpeed);
+        serverVelocity.multiply(this.mMove.mShape.mSpeed);
  
-	this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(serverVelocity);
+	this.mMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(serverVelocity);
 	
 },
 

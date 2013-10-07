@@ -2,9 +2,9 @@ var CatchupProcessTickMove = new Class(
 {
 
 Extends: AbilityMoveState,
-initialize: function (abilityMove)
+initialize: function (move)
 {
-        this.mAbilityMove = abilityMove;
+        this.mMove = move;
 },
 
 log: function(msg)
@@ -17,65 +17,63 @@ log: function(msg)
 
 enter: function()
 {
-//	this.log('enter c');
-//	this.mAbilityMove.mShape.mObjectTitle.innerHTML='C';  
 },
 
 execute: function()
 {
 //let's check if it's mInterpLimitHigh is greater than  1 than snap to it.
 /*
-	if (this.mAbilityMove.mDeltaPosition > 1)
+	if (this.mMove.mDeltaPosition > 1)
 	{
-		this.mAbilityMove.mShape.setPosition(this.mAbilityMove.mShape.mServerCommandCurrent.mPosition);
+		this.mMove.mShape.setPosition(this.mMove.mShape.mServerCommandCurrent.mPosition);
 		return;
 	}		
 */
-        //this.mAbilityMove.mShape.mMesh.innerHTML='C:' + this.mAbilityMove.mShape.mIndex;
+        //this.mMove.mShape.mMesh.innerHTML='C:' + this.mMove.mShape.mIndex;
 	//if we are back in sync
-        if(this.mAbilityMove.mDeltaPosition <= this.mAbilityMove.mPosInterpLimitHigh || this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity.isZero())
+        if(this.mMove.mDeltaPosition <= this.mMove.mPosInterpLimitHigh || this.mMove.mShape.mServerCommandCurrent.mVelocity.isZero())
         {
-                this.mAbilityMove.mProcessTickStateMachine.changeState(this.mAbilityMove.mNormalProcessTickMove);
+                this.mMove.mProcessTickStateMachine.changeState(this.mMove.mNormalProcessTickMove);
         }
-	//this.mAbilityMove.mShape.mObjectTitle.innerHTML='C_D:' + this.mAbilityMove.mDeltaPosition;  
+	//this.mMove.mShape.mObjectTitle.innerHTML='C_D:' + this.mMove.mDeltaPosition;  
         //this is what we will set mCommandToRunOnShape->mVelocity to
         newVelocity = new Vector3D(); //vector to future server pos
 
         //first set newVelocity to most recent velocity from server.
-        newVelocity.copyValuesFrom(this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity);
+        newVelocity.copyValuesFrom(this.mMove.mShape.mServerCommandCurrent.mVelocity);
 
         //normalise it now we know what direction to head in.
         newVelocity.normalise();
 
         //le'ts find out how fast
         //change in position times our interp factor
-        multiplier = this.mAbilityMove.mDeltaPosition * this.mAbilityMove.mPosInterpFactor;
+        multiplier = this.mMove.mDeltaPosition * this.mMove.mPosInterpFactor;
 
         //multiply our normalized velocity by multiplier(change * interpfactor)
         newVelocity.multiply(multiplier);
 
         //add the latest server position to our newvelocity
-        newVelocity.add(this.mAbilityMove.mShape.mServerCommandCurrent.mPosition);
+        newVelocity.add(this.mMove.mShape.mServerCommandCurrent.mPosition);
 
         //now subtract our current position from our new velocity
-        newVelocity.subtract(this.mAbilityMove.mShape.getPosition());
+        newVelocity.subtract(this.mMove.mShape.getPosition());
 
         //dist from client pos to future server pos
         predictDist = Math.pow(newVelocity.x, 2) + Math.pow(newVelocity.y, 2) + Math.pow(newVelocity.z, 2);
         predictDist = Math.sqrt(predictDist);
 
         //server velocity
-        if(this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
+        if(this.mMove.mShape.mCommandToRunOnShape.mFrameTime != 0)
         {
-                this.mAbilityMove.mShape.mSpeed = abilityMove.calculateSpeed(
-this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity,
-               this.mAbilityMove.mShape.mCommandToRunOnShape.mFrameTime);
+                this.mMove.mShape.mSpeed = this.mMove.calculateSpeed(
+this.mMove.mShape.mServerCommandCurrent.mVelocity,
+               this.mMove.mShape.mCommandToRunOnShape.mFrameTime);
         }
 
-        if(this.mAbilityMove.mShape.mSpeed != 0.0)
+        if(this.mMove.mShape.mSpeed != 0.0)
         {
                 //time needed to get to future server pos
-                time = this.mAbilityMove.mDeltaPosition * this.mAbilityMove.mPosInterpFactor/this.mAbilityMove.mShape.mSpeed;
+                time = this.mMove.mDeltaPosition * this.mMove.mPosInterpFactor/this.mMove.mShape.mSpeed;
 
                 newVelocity.normalise();  //?????what the hell why i am normalizing this after all that work above?
 
@@ -84,12 +82,12 @@ this.mAbilityMove.mShape.mServerCommandCurrent.mVelocity,
                 newVelocity.multiply(distTime);
 
                 //set newVelocity to mCommandToRunOnShape->mVelocity which is what interpolateTick uses
-                this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(newVelocity);
+                this.mMove.mShape.mCommandToRunOnShape.mVelocity.copyValuesFrom(newVelocity);
         }
         else
         {
                 //why would catchup ever need to set velocity to zero, wouldn't we simply leave catchup state??
-                this.mAbilityMove.mShape.mCommandToRunOnShape.mVelocity.zero();
+                this.mMove.mShape.mCommandToRunOnShape.mVelocity.zero();
         }
 },
 

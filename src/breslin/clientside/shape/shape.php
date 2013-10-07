@@ -27,9 +27,6 @@ initialize: function(application, byteBuffer, isGhost)
 	this.mPosition       = new Vector3D();
 	this.mPositionRender = new Vector3D();
 	
-	//abilitys
-	this.mAbilityVector = new Array();
-
         //application
         this.mApplication = application;
 
@@ -59,6 +56,7 @@ initialize: function(application, byteBuffer, isGhost)
         {
                 //this.addAbility(new AbilityAnimationOgre(this));
         }
+	
 
         //process Spawn ByteBuffer
         this.processSpawnByteBuffer(byteBuffer);
@@ -95,20 +93,8 @@ interpolateTick: function(renderTime)
                 this.mAnimation.update();
         }
 
-	//interpolate ticks on abilitys
-        //for (i = 0; i < this.mAbilityVector.length; i++)
-        //{
-                this.mAbilityVector[0].interpolateTick(renderTime);
-        //}
+        this.mMove.interpolateTick(renderTime);
 	
-},
-
-/*********************************
-               ABILITY 
-******************************/
-addAbility: function(ability)
-{
-	this.mAbilityVector.push(ability);
 },
 
 /*********************************
@@ -270,7 +256,7 @@ setSrc: function(src)
 processDeltaByteBuffer: function(byteBuffer)
 {
  	this.parseDeltaByteBuffer(byteBuffer);
-        this.mAbilityVector[0].processTick();
+        this.mMove.processTick();
 },
 
 parseDeltaByteBuffer: function(byteBuffer)

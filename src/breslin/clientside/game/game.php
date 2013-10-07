@@ -157,10 +157,8 @@ addShape: function(byteBuffer)
 {
 	shape = new Shape(this.mApplication,byteBuffer,false);
 
-	//ability
-        abilityMove = new AbilityMove(shape);
-        shape.addAbility(abilityMove);
-        
+	shape.mMove = new Move(shape);
+
 	//put shape and ghost in game vectors so they can be looped and game now knows of them.
         this.mShapeVector.push(shape);
         this.mShapeGhostVector.push(shape.mGhost);
