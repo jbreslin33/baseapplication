@@ -32,8 +32,6 @@ execute: function(gamePartido)
         {
                 gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoReset);
         }
-
-	this.parent()
 },	
 
 exit: function(gamePartido)
