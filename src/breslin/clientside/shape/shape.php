@@ -243,9 +243,10 @@ spawnShape: function(position)
 
 	//objectTitle
         this.mObjectTitle = document.createElement("p");
-	this.mObjectTitle.innerHTML='' + this.mStringUsername + ':' + this.mIndex;
         this.mDiv.mDiv.appendChild(this.mObjectTitle);
-
+	
+	this.setText(this.mStringUsername);
+	//this.mObjectTitle.innerHTML='' + this.mStringUsername + ':' + this.mIndex;
 
 	v = new Vector3D();	
 	//this.scale();
@@ -255,7 +256,7 @@ spawnShape: function(position)
 setText: function(text)
 {
 	this.mObjectTitle.innerHTML= '';
-	this.mObjectTitle.innerHTML= '' + this.mStringUsername + ' ' + text;
+	this.mObjectTitle.innerHTML= '' + text;
 },
 
 setSrc: function(src)

@@ -541,9 +541,7 @@ server.on("message", function (msg, rinfo)
                 for (i = 0; i < length; i++)
                 {
                         var n = msg.readInt8(parseInt(4 + i));
-			console.log('n:' + n);
                         var c = String.fromCharCode(n);
-			console.log('c:' + c);
                         setTextString = setTextString + c;
                 }
 
