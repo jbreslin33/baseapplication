@@ -151,18 +151,21 @@ enter: function(gamePartido)
 {
 	gamePartido.mApplicationPartido.showCorrectAnswerScreen();
         gamePartido.mCorrectAnswerStart = false;
+	this.log('GamePlayPartidoCorrectAnswer:enter');
 },
 
 execute: function(gamePartido)
 {
 	if (gamePartido.mCorrectAnswerEnd || gamePartido.mBattleEnd || gamePartido.mApplicationPartido.mGameReset)
         {
+		this.log('GamePlayPartidoCorrectAnswer:execute if satisfied');
                 gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoBattle);
         }
 },	
 
 exit: function(gamePartido)
 {
+	this.log('GamePlayPartidoCorrectAnswer:exit');
  	gamePartido.mApplicationPartido.hideCorrectAnswerScreen();
         gamePartido.mCorrectAnswerStart = false;
         gamePartido.mCorrectAnswer      = false;
