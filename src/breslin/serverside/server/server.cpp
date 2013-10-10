@@ -405,6 +405,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
                                 client = mClientVector.at(i);
+				LogString("robust");
 				client->checkLogin(mes);
 				return;
 			}
@@ -415,6 +416,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 {
                         if( memcmp(mClientVectorTemp.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
+				LogString("temp");
                                 client = mClientVectorTemp.at(i);
 				client->checkLogin(mes);
 				return;
