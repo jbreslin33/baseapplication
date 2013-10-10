@@ -212,8 +212,6 @@ Vector3D* Game::getOpenPoint()
 		int z = rand() % 500;
 		z = z - 250;	
 
-		LogString("x:%d",x);
-		LogString("z:%d",z);
 		bool occupied = false; 
 		mOpenPoint->x = x;
 		mOpenPoint->y = 0;

@@ -232,6 +232,7 @@ bool Client::checkLogin(Message* mes)
 	{
 		if (mStringUsername.compare(mServer->mClientVector.at(i)->username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->password) == 0)
 		{
+			LogString("checkLogin::logout");
 			//send logout letter to clientRobust....
                         mServer->mClientVector.at(i)->logout();
 			
@@ -243,6 +244,7 @@ bool Client::checkLogin(Message* mes)
 			
 
 			//send login letter
+			LogString("checkLogin::login");
                         mServer->mClientVector.at(i)->login();
 		}
 	}
