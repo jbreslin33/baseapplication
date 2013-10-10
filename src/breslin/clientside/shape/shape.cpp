@@ -33,6 +33,7 @@
 
 Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGhost)
 {
+	mEntity = NULL;
 
 	mRotation = NULL;
 	mMove = NULL;
@@ -84,6 +85,16 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 Shape::~Shape()
 {
 	LogString("Destructor for Shape:%d",mIndex);
+/*
+	SceneNode* parent = mEntity->getParentSceneNode();
+    	parent->detachObject(mEntity);
+    	mApplication->mSceneMgr->destroyEntity(mEntity->getName());
+
+    	// entity is now destroyed, don't try to use the pointer anymore!
+ 
+    	// optionally destroy node
+    	mApplication->mSceneMgr->destroySceneNode(parent->getName());
+*/
 	//delete mEntity;
 //	delete mObjectTitle;
 //	delete mSceneNode;
@@ -206,9 +217,13 @@ void Shape::spawnShape(Vector3D* position)
 	mSceneNode->setPosition(position->x,position->y,position->z);	
 	
 	//create mesh
-	mEntity = mApplication->getSceneManager()->createEntity(mName, mMeshName);
-
+	if (!mEntity)
+	{
+		mEntity = mApplication->getSceneManager()->createEntity(mName, mMeshName);
+	}
+	LogString("before");
 	mEntity->setMaterialName("Test/ColourTest");
+	LogString("after");
 
 	//attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
     	mSceneNode->attachObject(mEntity);
