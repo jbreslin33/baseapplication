@@ -53,6 +53,11 @@ changeState: function(pNewState)
 	{
         	this.mCurrentState.enter(this.mOwner);
 	}
+},
+
+getCurrentState: function()
+{
+	return this.mCurrentState;
 }
 
 });
