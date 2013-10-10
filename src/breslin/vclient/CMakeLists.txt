@@ -103,10 +103,6 @@ set(HDRS
         #message
         ../message/message.h
 
-	#statemachine
-	../statemachine/state.h
-	../statemachine/stateMachine.h
-
 	#rotation
 	../clientside/rotation/rotation.h
 	../clientside/rotation/states/rotationStates.h
@@ -252,10 +248,6 @@ set(HDRS
         #message
         ../message/message.h
 
-	#statemachine
-	../statemachine/state.h
-	../statemachine/stateMachine.h
-	
 	#rotation
 	../clientside/rotation/rotation.h
 	../clientside/rotation/states/rotationStates.h
