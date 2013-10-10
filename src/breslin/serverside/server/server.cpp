@@ -399,6 +399,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/******* LOGIN **********/
 	else if (type == mMessageLogin)
 	{
+/*
  		//get client is it a (ClientRobust) one???	
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
                 {
@@ -410,7 +411,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				return;
 			}
                 }
-
+*/
  		//get client is it a temp(Client) one???	
 		for (unsigned int i = 0; i < mClientVectorTemp.size(); i++)
                 {
