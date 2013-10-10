@@ -85,6 +85,8 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 Shape::~Shape()
 {
 	LogString("Destructor for Shape:%d",mIndex);
+	mSceneNode->removeAndDestroyAllChildren();
+
 /*
 	SceneNode* parent = mEntity->getParentSceneNode();
     	parent->detachObject(mEntity);
