@@ -18,6 +18,7 @@ log: function(msg)
 
 enter: function(gamePartido)
 {
+	this.log('GamePlayPartido::enter');
 	this.parent(gamePartido);
 },
 
@@ -36,6 +37,7 @@ execute: function(gamePartido)
 
 exit: function(gamePartido)
 {
+	this.log('GamePlayPartido::exit');
 	this.parent(gamePartido);
 }
 
@@ -59,6 +61,7 @@ log: function(msg)
 enter: function(gamePartido)
 {
 	//reset text labels	
+	this.log('GamePlayPartidoBattle::enter');
 	gamePartido.mApplicationPartido.mStringAnswer = '';
 	gamePartido.mApplicationPartido.mLabelAnswer.value = '';
 	gamePartido.mApplicationPartido.mLabelAnswer.focus();
@@ -120,6 +123,8 @@ execute: function(gamePartido)
 
 exit: function(gamePartido)
 {
+	this.log('GamePlayPartidoBattle::exit');
+	gamePartido.mApplicationPartido.mStringAnswer = '';
         gamePartido.mApplicationPartido.hideBattleScreen();
         gamePartido.mBattleEnd   = false;
         gamePartido.mBattleStart = false;
