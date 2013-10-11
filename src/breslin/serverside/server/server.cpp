@@ -368,6 +368,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				delete letter;	
 				LogString("gameID:%d",gameID);
 				client->setGame(gameID);
+				LogString("mClientID:%d",client->mClientID);
 			}
 		}
 	}
@@ -402,7 +403,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
 
  		//get client is it a (ClientRobust) one???	
-/*
+
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
                 {
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
@@ -413,7 +414,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				return;
 			}
                 }
-*/
+
  		//get client is it a temp(Client) one???	
 		for (unsigned int i = 0; i < mClientVectorTemp.size(); i++)
                 {
