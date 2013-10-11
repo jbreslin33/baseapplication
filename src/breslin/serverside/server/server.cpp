@@ -358,7 +358,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				}
         			
 				//send letter
-				//LogString("message...");
+				LogString("join game");
         			Message message;
         			message.Init(message.outgoingData, sizeof(message.outgoingData));
         			message.WriteByte(mMessageJoinGame); 
