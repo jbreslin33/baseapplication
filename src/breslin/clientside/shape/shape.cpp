@@ -85,24 +85,9 @@ Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGho
 Shape::~Shape()
 {
 	LogString("Destructor for Shape:%d",mIndex);
-	mSceneNode->removeAndDestroyAllChildren();
-
-/*
-	SceneNode* parent = mEntity->getParentSceneNode();
-    	parent->detachObject(mEntity);
-    	mApplication->mSceneMgr->destroyEntity(mEntity->getName());
-
-    	// entity is now destroyed, don't try to use the pointer anymore!
- 
-    	// optionally destroy node
-    	mApplication->mSceneMgr->destroySceneNode(parent->getName());
-*/
-	//delete mEntity;
-//	delete mObjectTitle;
-//	delete mSceneNode;
-	delete mServerCommandLast;
-	delete mServerCommandCurrent;
-	delete mCommandToRunOnShape;
+	//delete mServerCommandLast;
+	//delete mServerCommandCurrent;
+	//delete mCommandToRunOnShape;
 }
 
 void Shape::setText(ByteBuffer* byteBuffer)
@@ -160,10 +145,7 @@ void Shape::processSpawnByteBuffer(ByteBuffer* byteBuffer)
 void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 {
 	byteBuffer->BeginReading();
-
 	byteBuffer->ReadByte(); //should read -103 to add a shape..
-
-
 	mLocal	=    byteBuffer->ReadByte();
 	mIndex	=    byteBuffer->ReadShort();
 

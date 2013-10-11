@@ -242,6 +242,7 @@ void Game::processMoveControls()
 //i am guessing i am not clearing the shape arrray???
 void Game::remove()
 {
+/*
         if (mShapeVector)
         {
                 for (unsigned int i = 0; i < mShapeVector->size(); i++)
@@ -265,6 +266,7 @@ void Game::remove()
 	//clear the vectors....	
 	mShapeVector->clear();
 	mShapeGhostVector->clear();
+*/
 }
 
 /*********************************
@@ -285,17 +287,30 @@ void Game::processUpdate()
 **********************************/
 void Game::addShape(ByteBuffer* byteBuffer)
 {
-	Shape* shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
+	byteBuffer->BeginReading();
+        byteBuffer->ReadByte(); //should read -103 to add a shape..
+        int local  =    byteBuffer->ReadByte();
+        int index  =    byteBuffer->ReadShort();
 
-	//ability
-	//shape->addAbility(new AbilityRotation(shape));
-	//shape->addAbility(new AbilityMove(shape));
-	shape->mRotation = new Rotation(shape);
-	shape->mMove = new Move(shape);
+	bool exists = false;	
+	for (unsigned int i = 0; i < mShapeVector->size(); i++)
+	{
+		if (mShapeVector->at(i)->mIndex == index)
+		{
+			exists = true;
+		}
+	}
+	
+	if (!exists)
+	{
+		Shape* shape = new Shape(mApplication,byteBuffer,false);  //you should just need to call this...
+		shape->mRotation = new Rotation(shape);
+		shape->mMove = new Move(shape);
 
-	//put shape and ghost in game vectors so they can be looped and game now knows of them.
-	mShapeVector->push_back(shape);
-	mShapeGhostVector->push_back(shape->mGhost);
+		//put shape and ghost in game vectors so they can be looped and game now knows of them.
+		mShapeVector->push_back(shape);
+		mShapeGhostVector->push_back(shape->mGhost);
+	}
 }
 
 void Game::removeShape(ByteBuffer* byteBuffer)

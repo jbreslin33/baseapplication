@@ -42,7 +42,10 @@ void ApplicationPartido::setGame(GamePartido* gamePartido)
 }
 void ApplicationPartido::createGame()
 {
-        mGamePartido = new GamePartido(this);
+	if (!mGamePartido)
+	{
+        	mGamePartido = new GamePartido(this);
+	}
 	setGame(mGamePartido);
 }
 

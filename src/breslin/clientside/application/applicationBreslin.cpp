@@ -77,11 +77,15 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 
 ApplicationBreslin::~ApplicationBreslin()
 {
+/*
+	mSceneMgr->clearScene();
 	mNetwork->close();
 	delete mNetwork;
 	
 	delete mStateMachine;
 	delete mGame;
+*/
+
 }
 
 /*********************************
@@ -109,7 +113,10 @@ void ApplicationBreslin::setGame(Game* game)
 
 void ApplicationBreslin::createGame()
 {
-	mGame = new Game(this);
+	if (!mGame)
+	{
+		mGame = new Game(this);
+	}
 }
 
 Game* ApplicationBreslin::getGame()

@@ -130,9 +130,7 @@ void LOGIN_APPLICATION::execute(ApplicationBreslin* application)
 
         if (application->mButtonHit == application->mButtonExit)
         {
-		LogString("before");
                 application->mStateMachine->changeState(EXIT_APPLICATION::Instance());
-		LogString("after");
                 application->mStateMachine->setGlobalState(NULL);
                 application->mButtonHit = NULL;
                 application->shutdown();
@@ -270,9 +268,7 @@ void MAIN_APPLICATION::execute(ApplicationBreslin* application)
 
         if (application->mButtonHit == application->mButtonExit)
         {
-		LogString("abefore");
                 application->mStateMachine->changeState(EXIT_APPLICATION::Instance());
-		LogString("aafter");
                 application->mStateMachine->setGlobalState(NULL);
                 application->mButtonHit = NULL;
                 application->shutdown();
@@ -351,8 +347,8 @@ void PLAY_APPLICATION::exit(ApplicationBreslin* application)
         application->mLeaveGame = false;
         if (application->getGame())
         {
-                application->getGame()->remove();
-                application->setGame(NULL);
+                //application->getGame()->remove();
+                //application->setGame(NULL);
         }
 
 }
