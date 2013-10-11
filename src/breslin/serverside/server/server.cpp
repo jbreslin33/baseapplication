@@ -366,6 +366,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         			Letter* letter = new Letter(client,&message);
         			mMailMan->deliver(client,letter);
 				delete letter;	
+				LogString("gameID:%d",gameID);
 				client->setGame(gameID);
 			}
 		}
