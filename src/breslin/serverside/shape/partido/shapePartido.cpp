@@ -45,14 +45,9 @@ ShapePartido::ShapePartido(unsigned int index, GamePartido* gamePartido, ClientP
         //register with shapePartido vector
         mGamePartido->mShapePartidoVector.push_back(this);
 
-	//setText
-	//mClientPartido->setBattleRecordText();	
-	//setText(mClientPartido->mBattleRecordText);	
-
 	//computer abilitys
   	mComputerPartido = new ComputerPartido(this);
         addComputerAbility(mComputerPartido);
-
 
 	//statemachine
 	mShapePartidoStateMachine =  new StateMachine<ShapePartido>(this);

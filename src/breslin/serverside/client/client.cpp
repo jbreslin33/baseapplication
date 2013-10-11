@@ -225,11 +225,15 @@ void Client::readLoginMessage(Message* mes)
 */
 bool Client::checkLogin(Message* mes)
 {
-	//LogString("Client::checkLogin");
+	LogString("Client::checkLogin");
 	readLoginMessage(mes);
+
+	Client* client = NULL;
 
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
+		client = mServer->mClientVector.at(i);
+
 		if (mStringUsername.compare(mServer->mClientVector.at(i)->username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->password) == 0)
 		{
 			LogString("checkLogin::logout");
