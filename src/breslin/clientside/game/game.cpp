@@ -298,6 +298,14 @@ void Game::addShape(ByteBuffer* byteBuffer)
 		if (mShapeVector->at(i)->mIndex == index)
 		{
 			exists = true;
+			if (local)
+			{
+				mShapeVector->at(i)->mLocal = true;
+			}
+			else
+			{
+				mShapeVector->at(i)->mLocal = false;
+			}
 		}
 	}
 	
