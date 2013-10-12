@@ -161,11 +161,46 @@ bool ClientRobust::checkLogin(Message* mes)
         LogString("ClientRobust::checkLogin");
         readLoginMessage(mes);
 
+	//ok you matched the address of a robust client in vector now who does your username and password match up with 
         for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
         {
                 if (mStringUsername.compare(mServer->mClientVector.at(i)->username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->password) == 0)
                 {
-                	login();
+                        ClientRobust* clientRobust = mServer->mClientVector.at(i);
+
+			if (this == clientRobust)
+			{
+				LogString("no swap just login");
+                        	clientRobust->mConnectionState = DREAMSOCK_CONNECTED;
+				login();
+				return true;
+			}
+			else //swap robust for robust
+			{
+				LogString("swap robust for new robust");
+                        	//send logout letter to matched clientRobust address in case someone is logged in as them
+                        	clientRobust->logout();
+			
+				//set this client to disconnected as you are going to swap..
+                        	mConnectionState = DREAMSOCK_DISCONNECTED;
+
+				//set the new client with your address
+                        	clientRobust->setSocketAddress(&mSocketAddress);
+
+				//set to connected
+                        	clientRobust->mConnectionState = DREAMSOCK_CONNECTED;
+
+				//swap clientID's
+                        	clientRobust->mClientID = mClientID;
+
+                        	//send login letter
+                        	clientRobust->login();
+                       
+				//set this client address to null 
+				///setSocketAddress(NULL);
+		
+				return true;
+			}
                 }
         }
 }

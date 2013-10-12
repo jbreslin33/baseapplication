@@ -401,17 +401,17 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	/******* LOGIN **********/
 	else if (type == mMessageLogin)
 	{
-
  		//get client is it a (ClientRobust) one???	
-
 		for (unsigned int i = 0; i < mClientVector.size(); i++)
                 {
+			//do you match the address of a robust client?
                         if( memcmp(mClientVector.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
                                 client = mClientVector.at(i);
-				LogString("robust");
+				LogString("call checkLogin on the client robust vector match..");
 				client->checkLogin(mes);
 				return;
+
 			}
                 }
 
@@ -420,7 +420,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 {
                         if( memcmp(mClientVectorTemp.at(i)->GetSocketAddress(), address, sizeof(address)) == 0)
                         {
-				LogString("temp");
                                 client = mClientVectorTemp.at(i);
 				client->checkLogin(mes);
 				return;
