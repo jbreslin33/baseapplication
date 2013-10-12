@@ -3,11 +3,11 @@ mServerPort = process.argv[3];
 mListenPort = process.argv[4];
 mMainFile   = process.argv[5];
 mServerBind = process.argv[6];
-
+/*
 process.argv.forEach(function (val, index, array) {
   console.log(index + ': ' + val);
 });
-
+*/
 //new
 var express = require('express')
 //, routes = require('./routes')
@@ -175,7 +175,7 @@ io.sockets.on('connection', function (socket)
 
         socket.on('send_leave_game', function(message,remote)
 	{
-		console.log('received send_leave_game..');		
+		//console.log('received send_leave_game..');		
                 //send to c++ server
                 var buf = new Buffer(2);
 
@@ -335,7 +335,6 @@ server.on("message", function (msg, rinfo)
                 var xpos     = msg.readFloatLE(5);
                 var ypos     = msg.readFloatLE(9);
                 var zpos     = msg.readFloatLE(13);
- 		console.log("xpos:" +  xpos + "zpos:" + zpos); 
                 var xrot     = msg.readFloatLE(17);
                 var zrot     = msg.readFloatLE(21);
                 var mesh     = msg.readInt8(25);
@@ -357,7 +356,6 @@ server.on("message", function (msg, rinfo)
 
                 addShapeString = addShapeString + "," + client + "," + index + "," + xpos + "," + ypos + "," + zpos + "," + xrot + "," + zrot + "," + mesh + "," + anim + "," + string; 
 //-103,0,50,1936,0,35,0,1,1,1,0
-		console.log('addShapeString:' + addShapeString);
 		io.sockets.clients().forEach(function (socket)
 		{
 			if (socket.mClientID == clientID)
@@ -631,7 +629,6 @@ server.on("message", function (msg, rinfo)
 
         if (type == -99)
 	{
-		console.log('9999');
                 var clientID = msg.readInt8(1);
 		var string = type;
 		string = string + "," + clientID; 

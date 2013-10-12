@@ -90,7 +90,6 @@ void NORMAL_BATTLE::enter(Battle* battle)
 	battle->mBattleEndTime = battle->mBattleStartTime + battle->mBattleLengthTime;
 	battle->mBattleTime = 0;
 
-	//LogString("mBattleStartTime:%d",battle->mBattleStartTime);
 }
 
 void NORMAL_BATTLE::execute(Battle* battle)
@@ -122,7 +121,6 @@ OVER_BATTLE* OVER_BATTLE::Instance()
 }
 void OVER_BATTLE::enter(Battle* battle)
 {
-	LogString("OVER_BATTLE");
 	
 	battle->mBattleTime       = 0;
         //battle->mBattleStartTime  = 0;

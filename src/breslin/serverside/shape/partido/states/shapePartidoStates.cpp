@@ -66,7 +66,6 @@ GAME_SHAPE_PARTIDO* GAME_SHAPE_PARTIDO::Instance()
 }
 void GAME_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
 {
-	LogString("GAME_SHAPE_PARTIDO::enter:%d",shapePartido->mClientPartido->id);
 }
 void GAME_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 {
@@ -93,7 +92,6 @@ BATTLE_SHAPE_PARTIDO* BATTLE_SHAPE_PARTIDO::Instance()
 } 
 void BATTLE_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
 {
-	LogString("BATTLE_SHAPE_PARTIDO::enter:%d",shapePartido->mClientPartido->id);
 }       
 void BATTLE_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 {

@@ -114,7 +114,6 @@ void ClientRobust::login()
 {
 
         //send letter
-	//LogString("ClientRobust::login");
         Message message;
         message.Init(message.outgoingData, sizeof(message.outgoingData));
         message.WriteByte(mServer->mMessageLogin); // add type
@@ -158,7 +157,6 @@ void ClientRobust::logout()
 
 bool ClientRobust::checkLogin(Message* mes)
 {
-        LogString("ClientRobust::checkLogin");
         readLoginMessage(mes);
 
 	//ok you matched the address of a robust client in vector now who does your username and password match up with 
@@ -171,7 +169,6 @@ bool ClientRobust::checkLogin(Message* mes)
 
 			if (this == clientRobust)
 			{
-				LogString("no swap just login");
                         	clientRobust->mConnectionState = DREAMSOCK_CONNECTED;
 				login();
 				return true;
@@ -188,7 +185,6 @@ bool ClientRobust::checkLogin(Message* mes)
 				}
 				else	
 				{
-					LogString("swap robust for new robust");
                         		//send logout letter to matched clientRobust address in case someone isloggedinasthem
 					clientRobust->logout();
 			
