@@ -136,7 +136,15 @@ void Client::reset()
 
 void Client::setSocketAddress(struct sockaddr *address)
 {
-	memcpy(&mSocketAddress, address, sizeof(struct sockaddr)); 
+	if (address == NULL)
+	{
+		struct sockaddr	tempSocketAddress;
+		memcpy(&mSocketAddress, &tempSocketAddress, sizeof(struct sockaddr)); 
+	}
+	else
+	{
+		memcpy(&mSocketAddress, address, sizeof(struct sockaddr)); 
+	}
 }
 
 void Client::update()

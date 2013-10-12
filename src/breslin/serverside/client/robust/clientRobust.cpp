@@ -166,6 +166,7 @@ bool ClientRobust::checkLogin(Message* mes)
         {
                 if (mStringUsername.compare(mServer->mClientVector.at(i)->username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->password) == 0)
                 {
+
                         ClientRobust* clientRobust = mServer->mClientVector.at(i);
 
 			if (this == clientRobust)
@@ -177,29 +178,38 @@ bool ClientRobust::checkLogin(Message* mes)
 			}
 			else //swap robust for robust
 			{
-				LogString("swap robust for new robust");
-                        	//send logout letter to matched clientRobust address in case someone is logged in as them
-                        	clientRobust->logout();
+				if( memcmp(clientRobust->GetSocketAddress(), GetSocketAddress(), sizeof(GetSocketAddress())) == 0)
+                        	{
+					//set to connected
+                        		clientRobust->mConnectionState = DREAMSOCK_CONNECTED;
+                        	
+					//send login letter
+                        		clientRobust->login();
+				}
+				else	
+				{
+					LogString("swap robust for new robust");
+                        		//send logout letter to matched clientRobust address in case someone isloggedinasthem
+					clientRobust->logout();
 			
-				//set this client to disconnected as you are going to swap..
-                        	mConnectionState = DREAMSOCK_DISCONNECTED;
+					//set this client to disconnected as you are going to swap..
+                        		mConnectionState = DREAMSOCK_DISCONNECTED;
 
-				//set the new client with your address
-                        	clientRobust->setSocketAddress(&mSocketAddress);
+					//set the new client with your address
+                        		clientRobust->setSocketAddress(&mSocketAddress);
 
-				//set to connected
-                        	clientRobust->mConnectionState = DREAMSOCK_CONNECTED;
+					//set to connected
+                        		clientRobust->mConnectionState = DREAMSOCK_CONNECTED;
 
-				//swap clientID's
-                        	clientRobust->mClientID = mClientID;
+					//swap clientID's
+                        		clientRobust->mClientID = mClientID;
 
-                        	//send login letter
-                        	clientRobust->login();
-                       
-				//set this client address to null 
-				///setSocketAddress(NULL);
-		
-				return true;
+                        		//send login letter
+                        		clientRobust->login();
+                      
+					setSocketAddress(NULL); 
+					return true;
+				}	
 			}
                 }
         }
