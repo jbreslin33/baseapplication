@@ -205,9 +205,7 @@ void Shape::spawnShape(Vector3D* position)
 	{
 		mEntity = mApplication->getSceneManager()->createEntity(mName, mMeshName);
 	}
-	LogString("before");
 	mEntity->setMaterialName("Test/ColourTest");
-	LogString("after");
 
 	//attache mesh to scenenode, henceforward we will use mSceneNode to control shape.
     	mSceneNode->attachObject(mEntity);
