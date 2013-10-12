@@ -206,8 +206,16 @@ bool ClientRobust::checkLogin(Message* mes)
 
                         		//send login letter
                         		clientRobust->login();
-                      
-					setSocketAddress(NULL); 
+                     		
+					if (mClientID == 0)
+					{
+						setSocketAddress(NULL); 
+					}
+					else 
+					{
+						setSocketAddress(NULL); 
+						mClientID = 0;
+					}
 					return true;
 				}	
 			}
