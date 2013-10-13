@@ -42,6 +42,12 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
         mPartidoStateMachine->setPreviousState     (PLAY_PARTIDO_GAME::Instance());
         mPartidoStateMachine->setGlobalState       (GLOBAL_PARTIDO_GAME::Instance());
 
+	//states
+        mBattleStateMachine =  new StateMachine<GamePartido>(this);
+        mBattleStateMachine->setCurrentState      (BATTLE_OFF::Instance());
+        mBattleStateMachine->setPreviousState     (BATLLE_OFF::Instance());
+        mBattleStateMachine->setGlobalState       (NULL);
+
 	mApplicationPartido->createBattleScreen();
         mApplicationPartido->hideBattleScreen();
         mApplicationPartido->createCorrectAnswerScreen();

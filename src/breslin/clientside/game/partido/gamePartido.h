@@ -28,6 +28,7 @@ virtual void processUpdate();
 virtual void processMoveControls();
 
 StateMachine<GamePartido>* mPartidoStateMachine;
+StateMachine<GamePartido>* mBattleStateMachine;
 
 ApplicationPartido* mApplicationPartido;
 
