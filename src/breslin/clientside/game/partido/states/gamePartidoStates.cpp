@@ -92,7 +92,7 @@ void BATTLE_GAME::enter(GamePartido* gamePartido)
         //app->mLabelAnswer->setCaption("");
 
         gamePartido->mBattleStart = false;
-        //gamePartido->mBattleEnd = false;
+        gamePartido->mBattleEnd = false;
         gamePartido->mCorrectAnswerStart = false;
         gamePartido->mApplicationPartido->mGameReset = false;
 

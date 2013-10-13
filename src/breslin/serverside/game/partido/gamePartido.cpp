@@ -93,11 +93,12 @@ void GamePartido::reset()
 	LogString("GamePartido::reset");
 
 	//let's end battles gracefully
+/*
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
 		mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
 	}
-	
+*/	
 	//maybe send all clients a message to freeze for db?????
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
