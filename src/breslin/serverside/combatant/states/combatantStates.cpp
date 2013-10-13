@@ -59,7 +59,10 @@ void INIT_COMBATANT::enter(Combatant* combatant)
 }
 void INIT_COMBATANT::execute(Combatant* combatant)
 {
-	//LogString("INIT_COMBATANT:%d",combatant->mClientPartido->mShape->mIndex);
+	if (combatant->mClientPartido->mShape->mIndex)
+	{
+		LogString("INIT_COMBATANT:%d",combatant->mClientPartido->mShape->mIndex);
+	}
 	//we are ready to go if we have a foe
 	if (combatant->mBattle->mStateMachine->currentState() == NORMAL_BATTLE::Instance())
 	{
@@ -87,7 +90,10 @@ NORMAL_COMBATANT* NORMAL_COMBATANT::Instance()
 }
 void NORMAL_COMBATANT::enter(Combatant* combatant)
 {
-	//LogString("NORMAL_COMBATANT:%d",combatant->mClientPartido->mShape->mIndex);
+	if (combatant->mClientPartido->mShape->mIndex)
+	{
+		LogString("NORMAL_COMBATANT:%d",combatant->mClientPartido->mShape->mIndex);
+	}
 }
 void NORMAL_COMBATANT::execute(Combatant* combatant)
 {
@@ -117,7 +123,10 @@ YIELD* YIELD::Instance()
 }
 void YIELD::enter(Combatant* combatant)
 {
-	//LogString("YIELD:%d",combatant->mClientPartido->mShape->mIndex);
+	if (combatant->mClientPartido->mShape->mIndex)
+	{
+		LogString("YIELD:%d",combatant->mClientPartido->mShape->mIndex);
+	}
 	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
 
         if (combatant->mScore > combatant->mFoe->mScore)

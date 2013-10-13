@@ -57,10 +57,6 @@ void PLAY_PARTIDO_GAME::execute(GamePartido* gamePartido)
         {
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
         }
-	else if (gamePartido->mBattleStart)
-        {
-                gamePartido->mPartidoStateMachine->changeState(BATTLE_GAME::Instance());
-        }
 }
 void PLAY_PARTIDO_GAME::exit(GamePartido* gamePartido)
 {
@@ -70,29 +66,78 @@ bool PLAY_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
         return true;
 }
 
+/******************** RESET_PARTIDO_GAME *****************/
 
-/******************** BATTLE_GAME *****************/
-
-BATTLE_GAME* BATTLE_GAME::Instance()
+RESET_PARTIDO_GAME* RESET_PARTIDO_GAME::Instance()
 {
-  static BATTLE_GAME instance;
+  static RESET_PARTIDO_GAME instance;
   return &instance;
 }
-void BATTLE_GAME::enter(GamePartido* gamePartido)
+void RESET_PARTIDO_GAME::enter(GamePartido* gamePartido)
 {
-	LogString("BATTLE_GAME::enter");
-//going into battle then right into play but server still thinks your in battle...        
+	LogString("RESET_PARTIDO_GAME::enter");
+	gamePartido->reset();
+}
+void RESET_PARTIDO_GAME::execute(GamePartido* gamePartido)
+{
+	if (!gamePartido->mApplicationPartido->mGameReset)
+        {
+                gamePartido->mPartidoStateMachine->changeState(PLAY_PARTIDO_GAME::Instance());
+        }
+
+}
+void RESET_PARTIDO_GAME::exit(GamePartido* gamePartido)
+{
+}
+bool RESET_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
+{
+        return true;
+}
+
+/******************** BATTLE_OFF *****************/
+
+BATTLE_OFF* BATTLE_OFF::Instance()
+{
+  static BATTLE_OFF instance;
+  return &instance;
+}
+void BATTLE_OFF::enter(GamePartido* gamePartido)
+{
+	LogString("RESET_PARTIDO_GAME::enter");
+	gamePartido->reset();
+}
+void BATTLE_OFF::execute(GamePartido* gamePartido)
+{
+ 	if (gamePartido->mBattleStart)
+        {
+                gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
+        }
+}
+void BATTLE_OFF::exit(GamePartido* gamePartido)
+{
+}
+bool BATTLE_OFF::onLetter(GamePartido* gamePartido, Letter* letter)
+{
+        return true;
+}
+
+/******************** ANSWER_QUESTION *****************/
+
+ANSWER_QUESTION* ANSWER_QUESTION::Instance()
+{
+  static ANSWER_QUESTION instance;
+  return &instance;
+}
+void ANSWER_QUESTION::enter(GamePartido* gamePartido)
+{
+	LogString("ANSWER_QUESTION::enter");
+	//going into battle then right into play but server still thinks your in battle...        
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
         app->createBattleScreen();
         app->showBattleScreen();
 
-        //reset text box ...actually let's not
-        //app->mStringAnswer.clear();
-        //app->mLabelQuestion->setCaption("");
-        //app->mLabelAnswer->setCaption("");
-
         gamePartido->mBattleStart = false;
-        gamePartido->mBattleEnd = false;
+        //gamePartido->mBattleEnd = false;
         gamePartido->mCorrectAnswerStart = false;
         gamePartido->mApplicationPartido->mGameReset = false;
 
@@ -105,18 +150,9 @@ void BATTLE_GAME::enter(GamePartido* gamePartido)
         }
         gamePartido->mFirstTimeExecute = true;
 }
-void BATTLE_GAME::execute(GamePartido* gamePartido)
+void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 {
         ApplicationPartido* app = gamePartido->mApplicationPartido;
-/*	
-        if (app->mAnswerTime > 2000) //overtime....
-        {
-                app->mStringAnswer = "oot";
-                //LogString("sendAnswer via time");
-                app->sendAnswer();
-                app->mAnswerTime = 0;
-        }
-*/	
 
         if (gamePartido->mCorrectAnswerStart)
         {
@@ -127,13 +163,7 @@ void BATTLE_GAME::execute(GamePartido* gamePartido)
         if (gamePartido->mBattleEnd)
         {
 		LogString("mBattleEnd");
-                gamePartido->mPartidoStateMachine->changeState(PLAY_PARTIDO_GAME::Instance());
-        }
-
-        if (gamePartido->mApplicationPartido->mGameReset)
-        {
-		LogString("mGameReset");
-                gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
+                gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
         }
 
 	if (app->mLabelFocus == app->mLabelAnswer)
@@ -177,18 +207,15 @@ void BATTLE_GAME::execute(GamePartido* gamePartido)
                         gamePartido->mApplicationPartido->mKeyArray[i] = false;
                 }
         }
-       // if (gamePartido->mFirstTimeExecute)
-        //{
-                for (int i = 0; i < 128; i++)
-                {
-                        gamePartido->mApplicationPartido->mKeyArray[i] = false;
-                }
-                gamePartido->mFirstTimeExecute = false;
-        //}
-
-
+        
+	for (int i = 0; i < 128; i++)
+        {
+                gamePartido->mApplicationPartido->mKeyArray[i] = false;
+       	}
+        gamePartido->mFirstTimeExecute = false;
 }
-void BATTLE_GAME::exit(GamePartido* gamePartido)
+
+void ANSWER_QUESTION::exit(GamePartido* gamePartido)
 {
 	gamePartido->mApplicationPartido->hideBattleScreen();
         gamePartido->mBattleEnd   = false;
@@ -201,7 +228,7 @@ void BATTLE_GAME::exit(GamePartido* gamePartido)
         gamePartido->mApplicationPartido->mLabelAnswer->setCaption("");
 
 }
-bool BATTLE_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
+bool ANSWER_QUESTION::onLetter(GamePartido* gamePartido, Letter* letter)
 {
         return true;
 }
@@ -232,9 +259,14 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
         }
 */
-        if (gamePartido->mCorrectAnswerEnd || gamePartido->mBattleEnd || gamePartido->mApplicationPartido->mGameReset)
+        if (gamePartido->mCorrectAnswerEnd || gamePartido->mBattleEnd)
         {
-                gamePartido->mPartidoStateMachine->changeState(BATTLE_GAME::Instance());
+                gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
+        }
+        if (gamePartido->mBattleEnd)
+        {
+		LogString("mBattleEnd");
+                gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
         }
 }
 void SHOWCORRECTANSWER_PARTIDO_GAME::exit(GamePartido* gamePartido)
@@ -254,32 +286,5 @@ bool SHOWCORRECTANSWER_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* 
         return true;
 }
 
-/******************** RESET_PARTIDO_GAME *****************/
-
-RESET_PARTIDO_GAME* RESET_PARTIDO_GAME::Instance()
-{
-  static RESET_PARTIDO_GAME instance;
-  return &instance;
-}
-void RESET_PARTIDO_GAME::enter(GamePartido* gamePartido)
-{
-	LogString("RESET_PARTIDO_GAME::enter");
-	gamePartido->reset();
-}
-void RESET_PARTIDO_GAME::execute(GamePartido* gamePartido)
-{
-	if (!gamePartido->mApplicationPartido->mGameReset)
-        {
-                gamePartido->mPartidoStateMachine->changeState(PLAY_PARTIDO_GAME::Instance());
-        }
-
-}
-void RESET_PARTIDO_GAME::exit(GamePartido* gamePartido)
-{
-}
-bool RESET_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
-{
-        return true;
-}
 
 

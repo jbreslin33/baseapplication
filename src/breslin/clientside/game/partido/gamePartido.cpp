@@ -45,7 +45,7 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
 	//states
         mBattleStateMachine =  new StateMachine<GamePartido>(this);
         mBattleStateMachine->setCurrentState      (BATTLE_OFF::Instance());
-        mBattleStateMachine->setPreviousState     (BATLLE_OFF::Instance());
+        mBattleStateMachine->setPreviousState     (BATTLE_OFF::Instance());
         mBattleStateMachine->setGlobalState       (NULL);
 
 	mApplicationPartido->createBattleScreen();
@@ -62,16 +62,18 @@ void GamePartido::processUpdate()
 {
 	Game::processUpdate();
         mPartidoStateMachine->update();
+        mBattleStateMachine->update();
 }
 
 void GamePartido::processMoveControls()
 {
-	if (mPartidoStateMachine->currentState() == BATTLE_GAME::Instance())
+	if (mBattleStateMachine->currentState() != BATTLE_OFF::Instance())
 	{
-				
+		//we are in battle			
 	}	
 	else
 	{
+		//not in battle let player move
 		Game::processMoveControls();
 	}
 }
