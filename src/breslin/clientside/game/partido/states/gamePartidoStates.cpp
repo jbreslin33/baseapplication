@@ -81,7 +81,7 @@ BATTLE_GAME* BATTLE_GAME::Instance()
 void BATTLE_GAME::enter(GamePartido* gamePartido)
 {
 	LogString("BATTLE_GAME::enter");
-        
+//going into battle then right into play but server still thinks your in battle...        
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
         app->createBattleScreen();
         app->showBattleScreen();
@@ -120,16 +120,19 @@ void BATTLE_GAME::execute(GamePartido* gamePartido)
 
         if (gamePartido->mCorrectAnswerStart)
         {
+		LogString("mCorrectAnswerStart");
                 gamePartido->mPartidoStateMachine->changeState(SHOWCORRECTANSWER_PARTIDO_GAME::Instance());
         }
 
         if (gamePartido->mBattleEnd)
         {
+		LogString("mBattleEnd");
                 gamePartido->mPartidoStateMachine->changeState(PLAY_PARTIDO_GAME::Instance());
         }
 
         if (gamePartido->mApplicationPartido->mGameReset)
         {
+		LogString("mGameReset");
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
         }
 
