@@ -137,7 +137,6 @@ void ANSWER_QUESTION::enter(GamePartido* gamePartido)
         app->showBattleScreen();
 
         gamePartido->mBattleStart = false;
-        //gamePartido->mBattleEnd = false;
         gamePartido->mCorrectAnswerStart = false;
         gamePartido->mApplicationPartido->mGameReset = false;
 
