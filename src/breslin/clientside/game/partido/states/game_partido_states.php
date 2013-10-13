@@ -68,7 +68,7 @@ enter: function(gamePartido)
 	
 	gamePartido.mApplicationPartido.showBattleScreen();
 	gamePartido.mBattleStart = false;
-        //gamePartido.mBattleEnd = false;
+        gamePartido.mBattleEnd = false;
         gamePartido.mCorrectAnswerStart = false;
         gamePartido.mApplicationPartido.mGameReset = false;
 
