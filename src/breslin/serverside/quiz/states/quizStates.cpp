@@ -23,6 +23,9 @@
 //question
 #include "../../question/question.h"
 
+//shape
+#include "../../shape/shape.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -59,6 +62,10 @@ void INIT_QUIZ::enter(Quiz* quiz)
 }
 void INIT_QUIZ::execute(Quiz* quiz)
 {
+	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
+	{
+		LogString("INIT_quiz:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
+	}
 	if (quiz->mCombatant->mStateMachine->currentState() == NORMAL_COMBATANT::Instance())
 	{
         	quiz->mStateMachine->changeState(SENDING_QUESTION::Instance());
@@ -87,6 +94,10 @@ SENDING_QUESTION* SENDING_QUESTION::Instance()
 }
 void SENDING_QUESTION::enter(Quiz* quiz)
 {
+	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
+	{
+		LogString("SENDING_QUESTION:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
+	}
 }
 void SENDING_QUESTION::execute(Quiz* quiz)
 {
@@ -124,6 +135,10 @@ WAITING_FOR_ANSWER* WAITING_FOR_ANSWER::Instance()
 }
 void WAITING_FOR_ANSWER::enter(Quiz* quiz)
 {
+	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
+	{
+		LogString("WAITING_FOR_ANSWER:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
+	}
         quiz->mComputerAskedTime  = quiz->mCombatant->mClientPartido->mServerPartido->mGameTime;
         int randomAnswerTime      = rand() % 3000;
         quiz->mComputerAnswerTime = randomAnswerTime;
@@ -172,6 +187,10 @@ SHOW_CORRECT_ANSWER* SHOW_CORRECT_ANSWER::Instance()
 
 void SHOW_CORRECT_ANSWER::enter(Quiz* quiz)
 {
+	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
+	{
+		LogString("SHOW_CORRECT_ANSWER:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
+	}
 	//quiz->mTest->mClientPartido->sendSimpleMessage(quiz->mTest->mClientPartido->mServerPartido->mMessageCorrectAnswerStart);
         quiz->mCorrectAnswerStartTime = quiz->mCombatant->mClientPartido->mServerPartido->mGameTime;
 	quiz->mTest->sendCorrectAnswer(quiz->mTest->mQuestionID);
@@ -214,6 +233,10 @@ OVER_QUIZ* OVER_QUIZ::Instance()
 }
 void OVER_QUIZ::enter(Quiz* quiz)
 {
+	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
+	{
+		LogString("OVER_QUIZ:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
+	}
 	quiz->mCombatant->mClientPartido->mTest->mQuizLast = quiz;
 	quiz->mCombatant->mClientPartido->mTest->mQuiz = NULL;
         quiz->mComputerAnswerTime = 0;
