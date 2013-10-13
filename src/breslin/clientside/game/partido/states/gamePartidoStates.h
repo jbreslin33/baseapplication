@@ -4,21 +4,6 @@
 #include "../../../../fsm/state.h"
 
 class GamePartido;
-/******************************************************
-	         GLOBAL_GAMEPARTIDO
-********************************************************/
-
-class GLOBAL_PARTIDO_GAME : public State<GamePartido>
-{
-private:
-  GLOBAL_PARTIDO_GAME(){}
-public:
-  static GLOBAL_PARTIDO_GAME* Instance();
-  void enter  (GamePartido* gamePartido);
-  void execute(GamePartido* gamePartido);
-  void exit   (GamePartido* gamePartido);
-  bool onLetter(GamePartido* gamePartido, Letter* letter);
-};
 
 /******************************************************
 *			PLAY_PARTIDO_GAME	

@@ -16,29 +16,6 @@
 //utility
 #include <math.h>
 
-
-/******************** GLOBAL_PARTIDO_GAME *****************/
-
-GLOBAL_PARTIDO_GAME* GLOBAL_PARTIDO_GAME::Instance()
-{
-  static GLOBAL_PARTIDO_GAME instance;
-  return &instance;
-}
-void GLOBAL_PARTIDO_GAME::enter(GamePartido* gamePartido)
-{
-
-}
-void GLOBAL_PARTIDO_GAME::execute(GamePartido* gamePartido)
-{
-}
-void GLOBAL_PARTIDO_GAME::exit(GamePartido* gamePartido)
-{
-}
-bool GLOBAL_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
-{
-        return true;
-}
-
 /******************** PLAY_PARTIDO_GAME *****************/
 
 PLAY_PARTIDO_GAME* PLAY_PARTIDO_GAME::Instance()
@@ -94,6 +71,10 @@ bool RESET_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
         return true;
 }
 
+/**************************************************
+*************** BATTLE STATES ***********************
+***************************************************/
+
 /******************** BATTLE_OFF *****************/
 
 BATTLE_OFF* BATTLE_OFF::Instance()
@@ -103,8 +84,7 @@ BATTLE_OFF* BATTLE_OFF::Instance()
 }
 void BATTLE_OFF::enter(GamePartido* gamePartido)
 {
-	LogString("RESET_PARTIDO_GAME::enter");
-	gamePartido->reset();
+	LogString("BATTLE_OFF::enter");
 }
 void BATTLE_OFF::execute(GamePartido* gamePartido)
 {
@@ -132,13 +112,9 @@ ANSWER_QUESTION* ANSWER_QUESTION::Instance()
 void ANSWER_QUESTION::enter(GamePartido* gamePartido)
 {
 	LogString("ANSWER_QUESTION::enter");
-	//going into battle then right into play but server still thinks your in battle...        
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
         app->createBattleScreen();
         app->showBattleScreen();
-
-        gamePartido->mCorrectAnswerStart = false;
-        gamePartido->mApplicationPartido->mGameReset = false;
 
         app->mAnswerTime = 0;
 
@@ -157,12 +133,6 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
         {
 		LogString("mCorrectAnswerStart");
                 gamePartido->mPartidoStateMachine->changeState(SHOWCORRECTANSWER_PARTIDO_GAME::Instance());
-        }
-
-        if (gamePartido->mBattleEnd)
-        {
-		LogString("mBattleEnd");
-                gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
         }
 
 	if (app->mLabelFocus == app->mLabelAnswer)
@@ -217,7 +187,6 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 void ANSWER_QUESTION::exit(GamePartido* gamePartido)
 {
 	gamePartido->mApplicationPartido->hideBattleScreen();
-        gamePartido->mBattleEnd   = false;
         gamePartido->mBattleStart = false;
 
         //reset text box
@@ -251,21 +220,10 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
 
-	//again give precedence to a reset...
-/*
-        if (gamePartido->mApplicationPartido->mGameReset)
+        if (gamePartido->mCorrectAnswerEnd)
         {
-                gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
-        }
-*/
-        if (gamePartido->mCorrectAnswerEnd || gamePartido->mBattleEnd)
-        {
+		LogString("mCorrectAnswerEnd");
                 gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
-        }
-        if (gamePartido->mBattleEnd)
-        {
-		LogString("mBattleEnd");
-                gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
         }
 }
 void SHOWCORRECTANSWER_PARTIDO_GAME::exit(GamePartido* gamePartido)

@@ -26,9 +26,25 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
 {
 	mApplicationPartido = applicationPartido;
 
+/*
+  //reset battle vars
+        mBattleStart = false;
+        mCorrectAnswerStart = false;
+        mApplicationPartido->mGameReset = false;
+
+        //reset correctAnswer vars
+        mCorrectAnswerStart = false;
+        mCorrectAnswer      = false;
+        mCorrectAnswerEnd   = false;
+
+        //answer time
+        mApplicationPartido->mAnswerTime = 0;
+
+*/
+
+
 	//battle
 	mBattleStart = false;
-	mBattleEnd   = false;
 	mFirstTimeExecute = true;
 
 	//correctAnswer
@@ -40,7 +56,7 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
         mPartidoStateMachine =  new StateMachine<GamePartido>(this);
         mPartidoStateMachine->setCurrentState      (PLAY_PARTIDO_GAME::Instance());
         mPartidoStateMachine->setPreviousState     (PLAY_PARTIDO_GAME::Instance());
-        mPartidoStateMachine->setGlobalState       (GLOBAL_PARTIDO_GAME::Instance());
+        mPartidoStateMachine->setGlobalState       (NULL);
 
 	//states
         mBattleStateMachine =  new StateMachine<GamePartido>(this);
@@ -97,8 +113,8 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
                         break;
 
                 case mMessageBattleEnd:
-			mBattleEnd = true;
-                        break;
+ 			mPartidoStateMachine->changeState(BATTLE_OFF::Instance());                        
+			break;
                 
 		case mMessageCorrectAnswerStart:
 			mCorrectAnswerStart = true;
@@ -185,7 +201,6 @@ void GamePartido::reset()
 
 	//reset battle vars
         mBattleStart = false;
-        mBattleEnd = false;
         mCorrectAnswerStart = false;
         mApplicationPartido->mGameReset = false;
 

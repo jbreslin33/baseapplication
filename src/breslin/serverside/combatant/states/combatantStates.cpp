@@ -128,25 +128,20 @@ void YIELD::enter(Combatant* combatant)
 		LogString("YIELD:%d",combatant->mClientPartido->mShape->mIndex);
 	}
 	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
-
         if (combatant->mScore > combatant->mFoe->mScore)
 	{
-                combatant->mClientPartido->mWins++;
+               	combatant->mClientPartido->mWins++;
 	}
         if (combatant->mScore < combatant->mFoe->mScore)
 	{
-                combatant->mClientPartido->mLosses++;
+               	combatant->mClientPartido->mLosses++;
 	}
-        
-/*
-        std::string winString = "wins:";
-        winString.append(combatant->mBattle->mUtility->intToString(combatant->mClientPartido->mWins));
-        combatant->mClientPartido->mShape->setText(winString);
-*/
 }
 void YIELD::execute(Combatant* combatant)
 {
-	//stand down and do nothing or change cleanup
+	//if (combatant->mQuiz->mStateMachine->currentState() != SHOW_CORRECT_ANSWER::Instance())
+//	{ 
+//	}
 }
 void YIELD::exit(Combatant* combatant)
 {
