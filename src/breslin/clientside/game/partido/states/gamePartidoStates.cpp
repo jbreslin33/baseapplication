@@ -110,6 +110,7 @@ void BATTLE_OFF::execute(GamePartido* gamePartido)
 {
  	if (gamePartido->mBattleStart)
         {
+        	gamePartido->mBattleStart = false;
                 gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
         }
 }
@@ -136,7 +137,6 @@ void ANSWER_QUESTION::enter(GamePartido* gamePartido)
         app->createBattleScreen();
         app->showBattleScreen();
 
-        gamePartido->mBattleStart = false;
         gamePartido->mCorrectAnswerStart = false;
         gamePartido->mApplicationPartido->mGameReset = false;
 
