@@ -70,15 +70,13 @@ Game::Game(ApplicationBreslin* application)
         mStateMachine =  new StateMachine<Game>(this);
         mStateMachine->setCurrentState      (PLAY_GAME::Instance());
         mStateMachine->setPreviousState     (PLAY_GAME::Instance());
-        mStateMachine->setGlobalState       (GLOBAL_GAME::Instance());
+        mStateMachine->setGlobalState       (NULL);
 }
-/*
 
-
-*/
 Game::~Game()
 {
 }
+
 void Game::reset()
 {
 	//set mKeyArray to false

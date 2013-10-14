@@ -22,30 +22,6 @@
 //command
 #include "../../command/command.h"
 
-
-/******************** GLOBAL_GAME *****************/
-
-GLOBAL_GAME* GLOBAL_GAME::Instance()
-{
-  static GLOBAL_GAME instance;
-  return &instance;
-}
-void GLOBAL_GAME::enter(Game* game)
-{
-
-}
-void GLOBAL_GAME::execute(Game* game)
-{
-}
-void GLOBAL_GAME::exit(Game* game)
-{
-}
-bool GLOBAL_GAME::onLetter(Game* game, Letter* letter)
-{
-        return true;
-}
-
-
 /******************** PLAY_GAME *****************/
 
 PLAY_GAME* PLAY_GAME::Instance()

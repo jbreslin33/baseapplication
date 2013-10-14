@@ -89,6 +89,12 @@ reset: function()
 {
 	this.parent();
 
+},
+
+processUpdate: function()
+{
+	this.parent();
 }
+
 
 });
