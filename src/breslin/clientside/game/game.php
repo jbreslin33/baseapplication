@@ -366,6 +366,11 @@ processInput: function()
 	{
 		this.mKeyCurrent |= this.mKeyClockwise;
 	}
+},
+
+reset: function()
+{
+
 }
 
 });

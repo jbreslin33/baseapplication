@@ -83,6 +83,12 @@ correctAnswer: function(byteBuffer)
         else
         {
         }
+},
+
+reset: function()
+{
+	this.parent();
+
 }
 
 });
