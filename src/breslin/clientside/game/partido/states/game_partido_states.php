@@ -1,5 +1,6 @@
 var GamePlayPartido = new Class(
 {
+Extends: State,
 
 initialize: function()
 {
@@ -38,6 +39,7 @@ exit: function(gamePartido)
 
 var GamePlayPartidoBattle = new Class(
 {
+Extends: State,
 
 initialize: function()
 {
@@ -131,6 +133,7 @@ exit: function(gamePartido)
 
 var GamePlayPartidoCorrectAnswer = new Class(
 {
+Extends: State,
 
 initialize: function()
 {
@@ -177,6 +180,7 @@ exit: function(gamePartido)
 
 var GamePlayPartido = new Class(
 {
+Extends: State,
 
 initialize: function()
 {
@@ -216,6 +220,7 @@ exit: function(gamePartido)
 
 var GamePlayPartidoReset = new Class(
 {
+Extends: State,
 
 initialize: function()
 {

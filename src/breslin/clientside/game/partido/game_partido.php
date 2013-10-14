@@ -27,8 +27,8 @@ initialize: function(applicationPartido)
 	this.mCorrectAnswerEnd   = false;
 
 	//state machines
-	this.mPartidoStateMachine = new StateMachine();
-	this.mBattleStateMachine  = new StateMachine();
+	this.mPartidoStateMachine = new StateMachine(this);
+	this.mBattleStateMachine  = new StateMachine(this);
 
 },
 
@@ -42,6 +42,7 @@ log: function(msg)
 
 createStates: function()
 {
+	this.parent();
         this.mGamePlayPartido              = new GamePlayPartido(this);
         this.mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
         this.mGamePlayPartidoCorrectAnswer = new GamePlayPartidoCorrectAnswer(this);
@@ -99,8 +100,8 @@ reset: function()
 processUpdate: function()
 {
 	this.parent();
-        this.mPartidoStateMachine.update();
-        this.mBattleStateMachine.update();
+        //this.mPartidoStateMachine.update();
+        //this.mBattleStateMachine.update();
 }
 
 

@@ -1,5 +1,6 @@
 var GamePlay = new Class(
 {
+Extends: State,
 
 initialize: function()
 {

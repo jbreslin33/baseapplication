@@ -64,15 +64,12 @@ initialize: function(application)
 
 createStates: function()
 {
-        this.mGameGlobal = new GameGlobal(this);
-        this.mGameInitialize = new GameInitialize(this);
         this.mGamePlay = new GamePlay(this);
-        this.mGamePause = new GamePause(this);
 },
 
 setStates: function()
 {
-        this.mStateMachine.setGlobalState(this.mGameGlobal);
+        this.mStateMachine.setGlobalState(0);
         this.mStateMachine.changeState(this.mGamePlay);
 },
 
