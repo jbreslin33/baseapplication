@@ -1,11 +1,9 @@
 var GamePlayPartido = new Class(
 {
 
-Extends: GamePlay,
-
-
 initialize: function()
 {
+
 },
 
 log: function(msg)
@@ -18,13 +16,10 @@ log: function(msg)
 
 enter: function(gamePartido)
 {
-	this.log('GamePlayPartido::enter');
-	this.parent(gamePartido);
 },
 
 execute: function(gamePartido)
 {
-        
         if (gamePartido.mApplicationPartido.mGameReset)
         {
                 gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoReset);
@@ -37,8 +32,6 @@ execute: function(gamePartido)
 
 exit: function(gamePartido)
 {
-	this.log('GamePlayPartido::exit');
-	this.parent(gamePartido);
 }
 
 });
@@ -61,7 +54,6 @@ log: function(msg)
 enter: function(gamePartido)
 {
 	//reset text labels	
-	this.log('GamePlayPartidoBattle::enter');
 	gamePartido.mApplicationPartido.mStringAnswer = '';
 	gamePartido.mApplicationPartido.mLabelAnswer.value = '';
 	gamePartido.mApplicationPartido.mLabelAnswer.focus();
@@ -186,9 +178,6 @@ exit: function(gamePartido)
 var GamePlayPartido = new Class(
 {
 
-Extends: GamePlay,
-
-
 initialize: function()
 {
 },
@@ -203,7 +192,6 @@ log: function(msg)
 
 enter: function(gamePartido)
 {
-	this.parent(gamePartido);
 },
 
 execute: function(gamePartido)
@@ -218,12 +206,10 @@ execute: function(gamePartido)
                 gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoReset);
         }
 
-	this.parent(gamePartido)
 },	
 
 exit: function(gamePartido)
 {
-	this.parent(gamePartido);
 }
 
 });

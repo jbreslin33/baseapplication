@@ -26,6 +26,10 @@ initialize: function(applicationPartido)
 	this.mCorrectAnswerStart = false;
 	this.mCorrectAnswerEnd   = false;
 
+	//state machines
+	this.mPartidoStateMachine = new StateMachine();
+	this.mBattleStateMachine  = new StateMachine();
+
 },
 
 log: function(msg)
@@ -38,7 +42,7 @@ log: function(msg)
 
 createStates: function()
 {
-        this.mGamePlay              = new GamePlayPartido(this);
+        this.mGamePlayPartido              = new GamePlayPartido(this);
         this.mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
         this.mGamePlayPartidoCorrectAnswer = new GamePlayPartidoCorrectAnswer(this);
  	this.mGamePlayPartidoReset = new GamePlayPartidoReset(this);
@@ -46,8 +50,9 @@ createStates: function()
 
 setStates: function()
 {
-        this.mStateMachine.setGlobalState(this.mGameGlobal);
-        this.mStateMachine.changeState(this.mGamePlay);
+	this.parent();
+        this.mPartidoStateMachine.changeState(this.mGamePlayPartido);
+        //this.mBattleStateStateMachine.changeState(this.mGamePlayPartido);
 },
 
 askQuestion: function(byteBuffer)
@@ -94,6 +99,8 @@ reset: function()
 processUpdate: function()
 {
 	this.parent();
+        this.mPartidoStateMachine.update();
+        this.mBattleStateMachine.update();
 }
 
 
