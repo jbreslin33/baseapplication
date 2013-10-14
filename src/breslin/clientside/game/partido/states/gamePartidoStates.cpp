@@ -25,11 +25,9 @@ PLAY_PARTIDO_GAME* PLAY_PARTIDO_GAME::Instance()
 }
 void PLAY_PARTIDO_GAME::enter(GamePartido* gamePartido)
 {
-	LogString("PLAY_PARTIDO_GAME::enter");
 }
 void PLAY_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
-	//give precedence to reset
         if (gamePartido->mApplicationPartido->mGameReset)
         {
                 gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
@@ -52,7 +50,6 @@ RESET_PARTIDO_GAME* RESET_PARTIDO_GAME::Instance()
 }
 void RESET_PARTIDO_GAME::enter(GamePartido* gamePartido)
 {
-	LogString("RESET_PARTIDO_GAME::enter");
 	gamePartido->reset();
 }
 void RESET_PARTIDO_GAME::execute(GamePartido* gamePartido)
@@ -84,7 +81,6 @@ BATTLE_OFF* BATTLE_OFF::Instance()
 }
 void BATTLE_OFF::enter(GamePartido* gamePartido)
 {
-	LogString("BATTLE_OFF::enter");
 }
 void BATTLE_OFF::execute(GamePartido* gamePartido)
 {
@@ -111,7 +107,6 @@ ANSWER_QUESTION* ANSWER_QUESTION::Instance()
 }
 void ANSWER_QUESTION::enter(GamePartido* gamePartido)
 {
-	LogString("ANSWER_QUESTION::enter");
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
         app->createBattleScreen();
         app->showBattleScreen();
@@ -131,7 +126,6 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 
         if (gamePartido->mCorrectAnswerStart)
         {
-		LogString("mCorrectAnswerStart");
                 gamePartido->mPartidoStateMachine->changeState(SHOWCORRECTANSWER_PARTIDO_GAME::Instance());
         }
 
@@ -162,7 +156,6 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
                 if (app->mKeyArray[13]) //enter
                 {
                         app->mKeyArray[13] = false;
-                        //LogString("sendAnswer via enter");
                         app->sendAnswer();
                         app->mStringQuestion.clear();
                         app->mStringAnswer.clear();
@@ -210,7 +203,6 @@ SHOWCORRECTANSWER_PARTIDO_GAME* SHOWCORRECTANSWER_PARTIDO_GAME::Instance()
 }
 void SHOWCORRECTANSWER_PARTIDO_GAME::enter(GamePartido* gamePartido)
 {
-	LogString("SHOWCORRECTANSWER_PARTIDO_GAME::enter");
         ApplicationPartido* app = gamePartido->mApplicationPartido;
         app->createCorrectAnswerScreen();
         app->showCorrectAnswerScreen();
@@ -222,7 +214,6 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 
         if (gamePartido->mCorrectAnswerEnd)
         {
-		LogString("mCorrectAnswerEnd");
                 gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
         }
 }
