@@ -52,7 +52,6 @@ void GamePartido::update()
 	Game::update();
 
 	//let's reset for a turn	
-
 	if (checkForEndOfGame())
 	{
 		reset();		
@@ -256,27 +255,6 @@ bool GamePartido::checkForEndOfGame()
 	{
 		return false;
 	}
-/*
-	//check for end of game
-        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
-	{
-		if (mServerPartido->mClientPartidoVector.at(i)->mClientID == -1) //browser bridge
-		{
-			continue;
-		}
-
-		if (mServerPartido->mClientPartidoVector.at(i)->mLosses == 0)	
-		{
-			return false;
-		}
-		else
-		{
-		}
-	}
-	
-	return true;
-*/
-	//return false;
 }
 
 void GamePartido::createShapes()
