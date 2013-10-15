@@ -43,10 +43,12 @@ log: function(msg)
 createStates: function()
 {
 	this.parent();
-        this.mGamePlayPartido              = new GamePlayPartido(this);
-        this.mGamePlayPartidoBattle = new GamePlayPartidoBattle(this);
-        this.mGamePlayPartidoCorrectAnswer = new GamePlayPartidoCorrectAnswer(this);
- 	this.mGamePlayPartidoReset = new GamePlayPartidoReset(this);
+        this.mPLAY_PARTIDO_GAME              = new PLAY_PARTIDO_GAME(this);
+ 	this.mRESET_PARTIDO_GAME             = new RESET_PARTIDO_GAME(this);
+ 	
+	this.mBATTLE_OFF                     = new BATTLE_OFF(this);
+        this.mANSWER_QUESTION                = new ANSWER_QUESTION(this);
+        this.mSHOWCORRECTANSWER_PARTIDO_GAME = new SHOWCORRECTANSWER_PARTIDO_GAME(this);
 },
 
 setStates: function()

@@ -1,4 +1,4 @@
-var GamePlayPartido = new Class(
+var PLAY_PARTIDO_GAME = new Class(
 {
 Extends: State,
 
@@ -23,11 +23,11 @@ execute: function(gamePartido)
 {
         if (gamePartido.mApplicationPartido.mGameReset)
         {
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoReset);
+                gamePartido.mStateMachine.changeState(gamePartido.mRESET_PARTIDO_GAME);
         }
         else if (gamePartido.mBattleStart)
         {
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoBattle);
+                gamePartido.mStateMachine.changeState(gamePartido.mANSWER_QUESTION);
         }
 },	
 
@@ -37,7 +37,80 @@ exit: function(gamePartido)
 
 });
 
-var GamePlayPartidoBattle = new Class(
+var RESET_PARTIDO_GAME = new Class(
+{
+Extends: State,
+
+initialize: function()
+{
+},
+
+log: function(msg)
+{
+        setTimeout(function()
+        {
+                throw new Error(msg);
+        }, 0);
+},
+
+enter: function(gamePartido)
+{
+	this.log("GamePlayPartidoReset::enter");
+},
+
+execute: function(gamePartido)
+{
+	if (!gamePartido.mApplicationPartido.mGameReset)
+        {
+                gamePartido.mStateMachine.changeState(gamePartido.mPLAY_PARTIDO_GAME);
+        }
+
+},	
+
+exit: function(gamePartido)
+{
+}
+
+});
+
+var BATTLE_OFF = new Class(
+{
+Extends: State,
+
+initialize: function()
+{
+},
+
+log: function(msg)
+{
+        setTimeout(function()
+        {
+                throw new Error(msg);
+        }, 0);
+},
+
+enter: function(gamePartido)
+{
+	//this.log("GamePlayPartidoReset::enter");
+},
+
+execute: function(gamePartido)
+{
+/*
+	if (!gamePartido.mApplicationPartido.mGameReset)
+        {
+                gamePartido.mStateMachine.changeState(gamePartido.mPLAY_PARTIDO_GAME);
+        }
+*/
+},	
+
+exit: function(gamePartido)
+{
+}
+
+});
+
+var ANSWER_QUESTION = new Class(
 {
 Extends: State,
 
@@ -85,18 +158,18 @@ execute: function(gamePartido)
 	if (gamePartido.mCorrectAnswerStart)
         {
 		this.log('mCorrectAnswerStart true');
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoCorrectAnswer);
+                gamePartido.mStateMachine.changeState(gamePartido.mSHOWCORRECTANSWER_PARTIDO_GAME);
         }
 
 	//check for end of batlle
 	if (gamePartido.mBattleEnd)
         {
-               	gamePartido.mStateMachine.changeState(gamePartido.mGamePlay);
+               	gamePartido.mStateMachine.changeState(gamePartido.mPLAY_PARTIDO_GAME);
         }
        
 	if (gamePartido.mApplicationPartido.mGameReset)
         {
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoReset);
+                gamePartido.mStateMachine.changeState(gamePartido.mPLAY_PARTIDO_RESET);
         }
 	
 	//for enter
@@ -131,7 +204,7 @@ exit: function(gamePartido)
 
 });
 
-var GamePlayPartidoCorrectAnswer = new Class(
+var SHOWCORRECTANSWER_PARTIDO_GAME = new Class(
 {
 Extends: State,
 
@@ -159,7 +232,7 @@ execute: function(gamePartido)
 	if (gamePartido.mCorrectAnswerEnd || gamePartido.mBattleEnd || gamePartido.mApplicationPartido.mGameReset)
         {
 		this.log('GamePlayPartidoCorrectAnswer:execute if satisfied');
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoBattle);
+                gamePartido.mStateMachine.changeState(gamePartido.mANSWER_QUESTION);
         }
 },	
 
@@ -177,105 +250,3 @@ exit: function(gamePartido)
 }
 
 });
-
-var GamePlayPartido = new Class(
-{
-Extends: State,
-
-initialize: function()
-{
-},
-
-log: function(msg)
-{
-        setTimeout(function()
-        {
-                throw new Error(msg);
-        }, 0);
-},
-
-enter: function(gamePartido)
-{
-},
-
-execute: function(gamePartido)
-{
-        if (gamePartido.mBattleStart)
-        {
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoBattle);
-        }
-        
-        if (gamePartido.mApplicationPartido.mGameReset)
-        {
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoReset);
-        }
-
-},	
-
-exit: function(gamePartido)
-{
-}
-
-});
-
-var GamePlayPartidoReset = new Class(
-{
-Extends: State,
-
-initialize: function()
-{
-},
-
-log: function(msg)
-{
-        setTimeout(function()
-        {
-                throw new Error(msg);
-        }, 0);
-},
-
-enter: function(gamePartido)
-{
-	this.log("GamePlayPartidoReset::enter");
-/*
-	gamePartido.mApplicationPartido.showCorrectAnswerScreen();
-        gamePartido.mCorrectAnswerStart = false;
-*/
-},
-
-execute: function(gamePartido)
-{
-/*
-	if (gamePartido.mCorrectAnswerEnd)
-        {
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoBattle);
-        }
-
-        if (gamePartido.mBattleEnd)
-        {
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlayPartidoBattle);
-        }
-*/
-	if (!gamePartido.mApplicationPartido.mGameReset)
-        {
-                gamePartido.mStateMachine.changeState(gamePartido.mGamePlay);
-        }
-
-},	
-
-exit: function(gamePartido)
-{
-/*
- 	gamePartido.mApplicationPartido.hideCorrectAnswerScreen();
-        gamePartido.mCorrectAnswerStart = false;
-        gamePartido.mCorrectAnswer      = false;
-        gamePartido.mCorrectAnswerEnd   = false;
-
-        //reset text box
-        gamePartido.mApplicationPartido.mStringCorrectAnswer = '';
-        gamePartido.mApplicationPartido.mLabelCorrectAnswer.value = '';
-*/
-}
-
-});
-
