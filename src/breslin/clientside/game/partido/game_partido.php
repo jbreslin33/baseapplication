@@ -54,8 +54,8 @@ createStates: function()
 setStates: function()
 {
 	this.parent();
-        this.mPartidoStateMachine.changeState(this.mGamePlayPartido);
-        //this.mBattleStateStateMachine.changeState(this.mGamePlayPartido);
+        this.mPartidoStateMachine.changeState(this.mPLAY_PARTIDO_GAME);
+        this.mBattleStateMachine.changeState(this.mBATTLE_OFF);
 },
 
 askQuestion: function(byteBuffer)
@@ -102,8 +102,8 @@ reset: function()
 processUpdate: function()
 {
 	this.parent();
-        //this.mPartidoStateMachine.update();
-        //this.mBattleStateMachine.update();
+        this.mPartidoStateMachine.update();
+        this.mBattleStateMachine.update();
 }
 
 

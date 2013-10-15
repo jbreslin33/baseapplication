@@ -165,10 +165,8 @@ parseSpawnByteBuffer: function(byteBuffer)
 	this.mLocal           = parseInt(byteBuffer.readByte());
 	this.mIndex           = parseInt(byteBuffer.readByte());
 	this.mSpawnPosition.x = byteBuffer.readByte();
-	this.log('x:' + this.mSpawnPosition.x);
 	this.mSpawnPosition.y = byteBuffer.readByte();
 	this.mSpawnPosition.z = byteBuffer.readByte();
-	this.log('z:' + this.mSpawnPosition.z);
 	this.mSpawnRotation.x = parseFloat(byteBuffer.readByte());
 	this.mSpawnRotation.z = parseFloat(byteBuffer.readByte());
 	this.mMeshCode        = parseInt(byteBuffer.readByte());
