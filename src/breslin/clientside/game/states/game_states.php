@@ -1,4 +1,4 @@
-var GamePlay = new Class(
+var GAME_PLAY = new Class(
 {
 Extends: State,
 

@@ -64,13 +64,13 @@ initialize: function(application)
 
 createStates: function()
 {
-        this.mGamePlay = new GamePlay(this);
+        this.mGAME_PLAY = new GAME_PLAY(this);
 },
 
 setStates: function()
 {
         this.mStateMachine.setGlobalState(0);
-        this.mStateMachine.changeState(this.mGamePlay);
+        this.mStateMachine.changeState(this.mGAME_PLAY);
 },
 
 log: function(msg)
