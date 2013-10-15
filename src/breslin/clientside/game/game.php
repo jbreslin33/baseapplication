@@ -52,6 +52,9 @@ initialize: function(application)
 	this.mFrameTimeServer = 0;
 
 	this.mStateMachine = new StateMachine(this);
+        this.mGAME_PLAY = new GAME_PLAY(this);
+        this.mStateMachine.setGlobalState(0);
+        this.mStateMachine.changeState(this.mGAME_PLAY);
 /*
         //set Camera
         // Position it at 500 in Z direction
@@ -62,16 +65,6 @@ initialize: function(application)
 */
 },
 
-createStates: function()
-{
-        this.mGAME_PLAY = new GAME_PLAY(this);
-},
-
-setStates: function()
-{
-        this.mStateMachine.setGlobalState(0);
-        this.mStateMachine.changeState(this.mGAME_PLAY);
-},
 
 log: function(msg)
 {

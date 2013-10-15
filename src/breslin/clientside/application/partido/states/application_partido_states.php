@@ -21,8 +21,6 @@ execute: function(applicationPartido)
 	{
 	        applicationPartido.mButtonHit = 0;
 		applicationPartido.setGame(new GamePartido(applicationPartido));
-		applicationPartido.getGame().createStates();
-		applicationPartido.getGame().setStates();
  		applicationPartido.sendJoinGame('2');
                 applicationPartido.mStateMachine.changeState(applicationPartido.mApplicationPlay);
 	}

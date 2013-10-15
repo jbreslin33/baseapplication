@@ -26,10 +26,22 @@ initialize: function(applicationPartido)
 	this.mCorrectAnswerStart = false;
 	this.mCorrectAnswerEnd   = false;
 
-	//state machines
+	//partido state machines
 	this.mPartidoStateMachine = new StateMachine(this);
+
+        this.mPLAY_PARTIDO_GAME              = new PLAY_PARTIDO_GAME(this);
+ 	this.mRESET_PARTIDO_GAME             = new RESET_PARTIDO_GAME(this);
+	
+	this.mPartidoStateMachine.changeState(this.mPLAY_PARTIDO_GAME);
+ 
+	//battle state machine	
 	this.mBattleStateMachine  = new StateMachine(this);
 
+	this.mBATTLE_OFF                     = new BATTLE_OFF(this);
+        this.mANSWER_QUESTION                = new ANSWER_QUESTION(this);
+        this.mSHOWCORRECTANSWER_PARTIDO_GAME = new SHOWCORRECTANSWER_PARTIDO_GAME(this);
+        
+        this.mBattleStateMachine.changeState(this.mBATTLE_OFF);
 },
 
 log: function(msg)
@@ -40,23 +52,6 @@ log: function(msg)
         }, 0);
 },
 
-createStates: function()
-{
-	this.parent();
-        this.mPLAY_PARTIDO_GAME              = new PLAY_PARTIDO_GAME(this);
- 	this.mRESET_PARTIDO_GAME             = new RESET_PARTIDO_GAME(this);
- 	
-	this.mBATTLE_OFF                     = new BATTLE_OFF(this);
-        this.mANSWER_QUESTION                = new ANSWER_QUESTION(this);
-        this.mSHOWCORRECTANSWER_PARTIDO_GAME = new SHOWCORRECTANSWER_PARTIDO_GAME(this);
-},
-
-setStates: function()
-{
-	this.parent();
-        this.mPartidoStateMachine.changeState(this.mPLAY_PARTIDO_GAME);
-        this.mBattleStateMachine.changeState(this.mBATTLE_OFF);
-},
 
 askQuestion: function(byteBuffer)
 {

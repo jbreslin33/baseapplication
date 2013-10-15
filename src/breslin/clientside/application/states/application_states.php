@@ -174,8 +174,6 @@ execute: function(applicationBreslin)
 	{
 	        applicationBreslin.mButtonHit = 0;
 		applicationBreslin.setGame(new Game(applicationBreslin));
-		applicationBreslin.getGame().createStates();
-		applicationBreslin.getGame().setStates();
  		applicationBreslin.sendJoinGame('1');
                 applicationBreslin.mStateMachine.changeState(applicationBreslin.mApplicationPlay);
 	}
