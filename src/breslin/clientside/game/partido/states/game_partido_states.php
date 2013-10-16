@@ -52,7 +52,6 @@ log: function(msg)
 
 enter: function(gamePartido)
 {
-	this.log("GamePlayPartidoReset::enter");
 },
 
 execute: function(gamePartido)
@@ -88,7 +87,6 @@ log: function(msg)
 
 enter: function(gamePartido)
 {
-	//this.log("GamePlayPartidoReset::enter");
 },
 
 execute: function(gamePartido)
@@ -121,7 +119,20 @@ log: function(msg)
                 throw new Error(msg);
         }, 0);
 },
+/*
+ApplicationPartido* app = gamePartido->mApplicationPartido;
+        app->createBattleScreen();
+        app->showBattleScreen();
 
+        app->mAnswerTime = 0;
+
+        //set mKeyArray to false
+        for (int i = 0; i < 128; i++)
+        {
+                gamePartido->mApplicationPartido->mKeyArray[i] = false;
+        }
+        gamePartido->mFirstTimeExecute = true;
+*/
 enter: function(gamePartido)
 {
 	//reset text labels	
@@ -130,10 +141,11 @@ enter: function(gamePartido)
 	gamePartido.mApplicationPartido.mLabelAnswer.focus();
 	
 	gamePartido.mApplicationPartido.showBattleScreen();
-	gamePartido.mBattleStart = false;
-        gamePartido.mBattleEnd = false;
-        gamePartido.mCorrectAnswerStart = false;
-        gamePartido.mApplicationPartido.mGameReset = false;
+
+	//gamePartido.mBattleStart = false;
+        //gamePartido.mBattleEnd = false;
+        //gamePartido.mCorrectAnswerStart = false;
+        ///gamePartido.mApplicationPartido.mGameReset = false;
 
 	gamePartido.mApplicationPartido.mAnswerTime = 0;
 },
@@ -153,21 +165,9 @@ execute: function(gamePartido)
 
 	if (gamePartido.mCorrectAnswerStart)
         {
-		this.log('mCorrectAnswerStart true');
                 gamePartido.mStateMachine.changeState(gamePartido.mSHOWCORRECTANSWER_PARTIDO_GAME);
         }
 
-	//check for end of batlle
-	if (gamePartido.mBattleEnd)
-        {
-               	gamePartido.mStateMachine.changeState(gamePartido.mPLAY_PARTIDO_GAME);
-        }
-       
-	if (gamePartido.mApplicationPartido.mGameReset)
-        {
-                gamePartido.mStateMachine.changeState(gamePartido.mPLAY_PARTIDO_RESET);
-        }
-	
 	//for enter
    	if (gamePartido.mApplicationPartido.mLabelAnswer == document.activeElement)
        	{ 
@@ -189,7 +189,7 @@ exit: function(gamePartido)
 	this.log('GamePlayPartidoBattle::exit');
 	gamePartido.mApplicationPartido.mStringAnswer = '';
         gamePartido.mApplicationPartido.hideBattleScreen();
-        gamePartido.mBattleEnd   = false;
+        //gamePartido.mBattleEnd   = false;
         gamePartido.mBattleStart = false;
 	
 	//reset text labels	
