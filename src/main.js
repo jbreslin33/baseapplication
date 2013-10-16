@@ -164,8 +164,7 @@ window.addEvent('domready', function()
 		{
 			if (mApplication.mGame)
                         {
-				
-                                mApplication.mGame.mBattleEnd = true;
+				mApplication.mGame.mBattleStateMachine.changeState(mApplication.mGame.mBATTLE_OFF);
                         }
                         else
                         {

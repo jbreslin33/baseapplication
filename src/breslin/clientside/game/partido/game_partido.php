@@ -20,7 +20,6 @@ initialize: function(applicationPartido)
 	this.mMessageBattleEnd   = -74;
 
 	this.mBattleStart = false;
-	this.mBattleEnd   = false;
 
 	//correctAnswer
 	this.mCorrectAnswerStart = false;
