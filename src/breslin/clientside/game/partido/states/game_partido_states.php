@@ -24,7 +24,7 @@ execute: function(gamePartido)
 {
         if (gamePartido.mApplicationPartido.mGameReset)
         {
-                gamePartido.mStateMachine.changeState(gamePartido.mRESET_PARTIDO_GAME);
+                gamePartido.mPartidoStateMachine.changeState(gamePartido.mRESET_PARTIDO_GAME);
         }
 },	
 
@@ -58,9 +58,8 @@ execute: function(gamePartido)
 {
 	if (!gamePartido.mApplicationPartido.mGameReset)
         {
-                gamePartido.mStateMachine.changeState(gamePartido.mPLAY_PARTIDO_GAME);
+                gamePartido.mPartidoStateMachine.changeState(gamePartido.mPLAY_PARTIDO_GAME);
         }
-
 },	
 
 exit: function(gamePartido)
@@ -165,7 +164,7 @@ execute: function(gamePartido)
 
 	if (gamePartido.mCorrectAnswerStart)
         {
-                gamePartido.mStateMachine.changeState(gamePartido.mSHOWCORRECTANSWER_PARTIDO_GAME);
+                gamePartido.mBattleStateMachine.changeState(gamePartido.mSHOWCORRECTANSWER_PARTIDO_GAME);
         }
 
 	//for enter
@@ -220,15 +219,13 @@ enter: function(gamePartido)
 {
 	gamePartido.mApplicationPartido.showCorrectAnswerScreen();
         gamePartido.mCorrectAnswerStart = false;
-	this.log('GamePlayPartidoCorrectAnswer:enter');
 },
 
 execute: function(gamePartido)
 {
-	if (gamePartido.mCorrectAnswerEnd || gamePartido.mBattleEnd || gamePartido.mApplicationPartido.mGameReset)
+ 	if (gamePartido.mCorrectAnswerEnd)
         {
-		this.log('GamePlayPartidoCorrectAnswer:execute if satisfied');
-                gamePartido.mStateMachine.changeState(gamePartido.mANSWER_QUESTION);
+                gamePartido.mPartidoStateMachine.changeState(gamePartido.mANSWER_QUESTION);
         }
 },	
 
