@@ -90,11 +90,6 @@ enter: function(gamePartido)
 
 execute: function(gamePartido)
 {
- 	if (gamePartido.mBattleStart)
-        {
-                gamePartido.mBattleStart = false;
-                gamePartido.mBattleStateMachine.changeState(gamePartido.mANSWER_QUESTION);
-        }
 },	
 
 exit: function(gamePartido)
@@ -141,11 +136,6 @@ enter: function(gamePartido)
 	
 	gamePartido.mApplicationPartido.showBattleScreen();
 
-	//gamePartido.mBattleStart = false;
-        //gamePartido.mBattleEnd = false;
-        //gamePartido.mCorrectAnswerStart = false;
-        ///gamePartido.mApplicationPartido.mGameReset = false;
-
 	gamePartido.mApplicationPartido.mAnswerTime = 0;
 },
 
@@ -187,11 +177,8 @@ execute: function(gamePartido)
 //ANSWER_QUESTION
 exit: function(gamePartido)
 {
-	//this.log('ANSWER_QUESTION::exit');
 	gamePartido.mApplicationPartido.mStringAnswer = '';
         gamePartido.mApplicationPartido.hideBattleScreen();
-        //gamePartido.mBattleEnd   = false;
-        gamePartido.mBattleStart = false;
 	
 	//reset text labels	
 	gamePartido.mApplicationPartido.mStringAnswer = '';
@@ -227,7 +214,6 @@ execute: function(gamePartido)
 {
  	if (gamePartido.mCorrectAnswerEnd)
         {
-		this.log('SHOWCORRECTANSWER_PARTIDO_GAME:: gamePartido.mCorrectAnswerEnd == true');
                 gamePartido.mBattleStateMachine.changeState(gamePartido.mANSWER_QUESTION);
         }
 },	

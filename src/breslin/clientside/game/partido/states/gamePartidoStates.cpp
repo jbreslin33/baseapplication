@@ -84,11 +84,6 @@ void BATTLE_OFF::enter(GamePartido* gamePartido)
 }
 void BATTLE_OFF::execute(GamePartido* gamePartido)
 {
- 	if (gamePartido->mBattleStart)
-        {
-        	gamePartido->mBattleStart = false;
-                gamePartido->mBattleStateMachine->changeState(ANSWER_QUESTION::Instance());
-        }
 }
 void BATTLE_OFF::exit(GamePartido* gamePartido)
 {
@@ -180,7 +175,6 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 void ANSWER_QUESTION::exit(GamePartido* gamePartido)
 {
 	gamePartido->mApplicationPartido->hideBattleScreen();
-        gamePartido->mBattleStart = false;
 
         //reset text box
         gamePartido->mApplicationPartido->mStringQuestion.clear();

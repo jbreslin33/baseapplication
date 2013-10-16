@@ -19,8 +19,6 @@ initialize: function(applicationPartido)
 	this.mMessageBattleStart = -75;
 	this.mMessageBattleEnd   = -74;
 
-	this.mBattleStart = false;
-
 	//correctAnswer
 	this.mCorrectAnswerStart = false;
 	this.mCorrectAnswerEnd   = false;
@@ -105,7 +103,6 @@ reset: function()
         mApplicationPartido->mStringCorrectAnswer.clear();
 */
         //reset battle vars
-        this.mBattleStart = false;
         this.mCorrectAnswerStart = false;
         this.mApplicationPartido.mGameReset = false;
 

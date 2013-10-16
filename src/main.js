@@ -150,7 +150,7 @@ window.addEvent('domready', function()
 		{
 			if (mApplication.mGame)
                         {
-                                mApplication.mGame.mBattleStart = true;
+				mApplication.mGame.mBattleStateMachine.changeState(mApplication.mGame.mANSWER_QUESTION);
                         }
                         else
                         {

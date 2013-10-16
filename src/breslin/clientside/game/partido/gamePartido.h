@@ -52,7 +52,6 @@ void askQuestion(ByteBuffer* byteBuffer);
 void correctAnswer(ByteBuffer* byteBuffer);
 
 //battle
-bool mBattleStart;
 bool mFirstTimeExecute;
 
 //correctAnswer

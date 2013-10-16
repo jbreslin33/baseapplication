@@ -26,25 +26,7 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
 {
 	mApplicationPartido = applicationPartido;
 
-/*
-  //reset battle vars
-        mBattleStart = false;
-        mCorrectAnswerStart = false;
-        mApplicationPartido->mGameReset = false;
-
-        //reset correctAnswer vars
-        mCorrectAnswerStart = false;
-        mCorrectAnswer      = false;
-        mCorrectAnswerEnd   = false;
-
-        //answer time
-        mApplicationPartido->mAnswerTime = 0;
-
-*/
-
-
 	//battle
-	mBattleStart = false;
 	mFirstTimeExecute = true;
 
 	//correctAnswer
@@ -108,7 +90,7 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
                         break;
 
                 case mMessageBattleStart:
-			mBattleStart = true;
+			mBattleStateMachine->changeState(ANSWER_QUESTION::Instance());
                         break;
 
                 case mMessageBattleEnd:
@@ -199,7 +181,6 @@ void GamePartido::reset()
         mApplicationPartido->mStringCorrectAnswer.clear();
 
 	//reset battle vars
-        mBattleStart = false;
         mCorrectAnswerStart = false;
         mApplicationPartido->mGameReset = false;
 
