@@ -244,6 +244,12 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 	//clearTitle();
 	//appendToTitle(mText);
 */	
+	//set name and score in title	
+	std::string s;
+	s.append(mStringUsername);
+	s.append(" Score:");
+	s.append(StringConverter::toString(mCommandToRunOnShape->mScore));
+	setText(s);	
 
 	parseDeltaByteBuffer(byteBuffer);
 
