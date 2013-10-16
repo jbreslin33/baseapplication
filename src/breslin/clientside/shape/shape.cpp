@@ -172,7 +172,15 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
         	char c =  byteBuffer->ReadByte();
                 mStringUsername.append(1,c);
         }
-	setText(mStringUsername);
+	//setText(mStringUsername);
+
+	//set name and score in title
+        std::string s;
+        s.append(mStringUsername);
+        s.append(" Score:");
+        s.append(StringConverter::toString(mCommandToRunOnShape->mScore));
+        setText(s);
+
 
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
 	mServerCommandLast->mPosition->copyValuesFrom(mSpawnPosition);
