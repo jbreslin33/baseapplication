@@ -108,11 +108,11 @@ void Shape::setText(ByteBuffer* byteBuffer)
 
         	std::string s;
 
-        	//s.append(mStringUsername);
-        	//s.append(":");
-        	//s.append(mText);
+        	s.append(mStringUsername);
+        	s.append(":");
+        	s.append(mText);
 
-        	appendToTitle(s);
+        	setTitle(s);
 
                 mTextLast = mText;
         }

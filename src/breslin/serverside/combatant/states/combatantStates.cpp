@@ -131,6 +131,7 @@ void YIELD::enter(Combatant* combatant)
         if (combatant->mScore > combatant->mFoe->mScore)
 	{
                	combatant->mClientPartido->mWins++;
+		combatant->mClientPartido->mShape->setText("g");
 	}
 }
 void YIELD::execute(Combatant* combatant)

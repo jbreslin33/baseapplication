@@ -298,11 +298,14 @@ void Shape::sendText()
        	mMessage.WriteByte(length); //send length
 
        	//loop thru length and write it
+	LogString("length:%d",length);
        	for (int b=0; b < length; b++)
        	{
-               	mMessage.WriteByte(mText.at(b));
+	//	LogString("loop:%d",b);
+	//	LogString("mText:%c" + mText.at(b));
+              	mMessage.WriteByte(mText.at(b));
        	}
 
-		
+	//LogString("Shape::sendText");	
        	mGame->mServer->mNetwork->broadcast(&mMessage);
 }
