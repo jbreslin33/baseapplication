@@ -132,10 +132,6 @@ void YIELD::enter(Combatant* combatant)
 	{
                	combatant->mClientPartido->mWins++;
 	}
-        if (combatant->mScore < combatant->mFoe->mScore)
-	{
-               	combatant->mClientPartido->mLosses++;
-	}
 }
 void YIELD::execute(Combatant* combatant)
 {

@@ -42,7 +42,6 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 
 	//wins losses
 	mWins = 0;
-	mLosses = 0;
 }
 
 ClientPartido::~ClientPartido()

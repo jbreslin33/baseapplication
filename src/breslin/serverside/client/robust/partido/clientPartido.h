@@ -54,7 +54,6 @@ virtual bool  handleLetter(Letter* letter);
 
 //wins and losses
 int mWins;
-int mLosses;
 
 
 };
