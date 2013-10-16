@@ -49,7 +49,6 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
 
 	//correctAnswer
 	mCorrectAnswerStart = false;
-	mCorrectAnswer = false;
 	mCorrectAnswerEnd = false;
 
 	//states
@@ -113,7 +112,7 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
                         break;
 
                 case mMessageBattleEnd:
- 			mPartidoStateMachine->changeState(BATTLE_OFF::Instance());                        
+ 			mBattleStateMachine->changeState(BATTLE_OFF::Instance());                        
 			break;
                 
 		case mMessageCorrectAnswerStart:
@@ -206,7 +205,6 @@ void GamePartido::reset()
 
 	//reset correctAnswer vars
         mCorrectAnswerStart = false;
-        mCorrectAnswer      = false;
         mCorrectAnswerEnd   = false;
 
 	//answer time

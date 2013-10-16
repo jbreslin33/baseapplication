@@ -87,7 +87,7 @@ void BATTLE_OFF::execute(GamePartido* gamePartido)
  	if (gamePartido->mBattleStart)
         {
         	gamePartido->mBattleStart = false;
-                gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
+                gamePartido->mBattleStateMachine->changeState(ANSWER_QUESTION::Instance());
         }
 }
 void BATTLE_OFF::exit(GamePartido* gamePartido)
@@ -126,7 +126,7 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 
         if (gamePartido->mCorrectAnswerStart)
         {
-                gamePartido->mPartidoStateMachine->changeState(SHOWCORRECTANSWER_PARTIDO_GAME::Instance());
+                gamePartido->mBattleStateMachine->changeState(SHOWCORRECTANSWER_PARTIDO_GAME::Instance());
         }
 
 	if (app->mLabelFocus == app->mLabelAnswer)
@@ -214,14 +214,13 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 
         if (gamePartido->mCorrectAnswerEnd)
         {
-                gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
+                gamePartido->mBattleStateMachine->changeState(ANSWER_QUESTION::Instance());
         }
 }
 void SHOWCORRECTANSWER_PARTIDO_GAME::exit(GamePartido* gamePartido)
 {
 	gamePartido->mApplicationPartido->hideCorrectAnswerScreen();
         gamePartido->mCorrectAnswerStart = false;
-        gamePartido->mCorrectAnswer      = false;
         gamePartido->mCorrectAnswerEnd   = false;
 
         //reset text box

@@ -149,6 +149,7 @@ enter: function(gamePartido)
 	gamePartido.mApplicationPartido.mAnswerTime = 0;
 },
 
+//ANSWER_QUESTION
 execute: function(gamePartido)
 {
 /*
@@ -164,6 +165,7 @@ execute: function(gamePartido)
 
 	if (gamePartido.mCorrectAnswerStart)
         {
+		//this.log('ANSWER_QUESTION: gamePartido.mCorrectAnswerStart == true');
                 gamePartido.mBattleStateMachine.changeState(gamePartido.mSHOWCORRECTANSWER_PARTIDO_GAME);
         }
 
@@ -182,10 +184,10 @@ execute: function(gamePartido)
 		}
         }
 },	
-
+//ANSWER_QUESTION
 exit: function(gamePartido)
 {
-	this.log('GamePlayPartidoBattle::exit');
+	//this.log('ANSWER_QUESTION::exit');
 	gamePartido.mApplicationPartido.mStringAnswer = '';
         gamePartido.mApplicationPartido.hideBattleScreen();
         //gamePartido.mBattleEnd   = false;
@@ -225,16 +227,16 @@ execute: function(gamePartido)
 {
  	if (gamePartido.mCorrectAnswerEnd)
         {
+		this.log('SHOWCORRECTANSWER_PARTIDO_GAME:: gamePartido.mCorrectAnswerEnd == true');
                 gamePartido.mPartidoStateMachine.changeState(gamePartido.mANSWER_QUESTION);
         }
 },	
 
 exit: function(gamePartido)
 {
-	this.log('GamePlayPartidoCorrectAnswer:exit');
+	//this.log('SHOWCORRECTANSWER_PARTIDO_GAME:exit');
  	gamePartido.mApplicationPartido.hideCorrectAnswerScreen();
         gamePartido.mCorrectAnswerStart = false;
-        gamePartido.mCorrectAnswer      = false;
         gamePartido.mCorrectAnswerEnd   = false;
 
         //reset text box

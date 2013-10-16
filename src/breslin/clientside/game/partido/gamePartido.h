@@ -58,7 +58,6 @@ bool mFirstTimeExecute;
 
 //correctAnswer
 bool mCorrectAnswerStart;
-bool mCorrectAnswer;
 bool mCorrectAnswerEnd;
 };
 
