@@ -24,10 +24,14 @@ ObjectTitle::ObjectTitle(const String& name, MovableObject* object, Camera* came
     textArea->setCaption(title);
  
     container->addChild(textArea);
-    overlay->show();
+
+	mVisible = true;
+
+   setVisible(mVisible);
  
     textDim = getTextDimensions(title);
     container->setDimensions(textDim.x, textDim.y);
+
 }
  
 ObjectTitle::~ObjectTitle()
@@ -51,7 +55,8 @@ void ObjectTitle::update()
 {
     if(!object->isInScene())
     {
-        overlay->hide();
+	setVisible(false);
+        //overlay->hide();
         return;
     }
  
@@ -66,7 +71,8 @@ void ObjectTitle::update()
     Ogre::Plane cameraPlane = Plane(Vector3(camera->getDerivedOrientation().zAxis()), camera->getDerivedPosition());
     if(cameraPlane.getSide(point) != Plane::NEGATIVE_SIDE)
     {
-        overlay->hide();
+	setVisible(false);
+        //overlay->hide();
         return;
     }
  
@@ -79,7 +85,8 @@ void ObjectTitle::update()
  
     // Update the position (centering the text)
     container->setPosition(x - (textDim.x / 2), y);
-    overlay->show();
+    //setVisible(true)
+    //overlay->show();
 }
  
 Vector2 ObjectTitle::getTextDimensions(String text)
@@ -100,4 +107,16 @@ Vector2 ObjectTitle::getTextDimensions(String text)
     result.y = charHeight / (float)camera->getViewport()->getActualHeight();
  
     return result;
+}
+
+void ObjectTitle::setVisible(bool b)
+{
+	if (b)
+	{
+		overlay->show();
+	}
+	else
+	{
+		overlay->hide();
+	}
 }

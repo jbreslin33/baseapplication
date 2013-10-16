@@ -494,6 +494,10 @@ Vector3D* Shape::getPosition()
 void Shape::setVisible(bool visible)
 {
 	getSceneNode()->setVisible(visible);
+	if (mObjectTitle)
+	{
+		mObjectTitle->setVisible(visible);
+	}
 }
 
 //title

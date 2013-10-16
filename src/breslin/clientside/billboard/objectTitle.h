@@ -24,6 +24,8 @@ public:
  
     void setTitle(const Ogre::String& title);
     void update();
+    void setVisible(bool b);	
+    bool mVisible;
 };
  
 #endif
