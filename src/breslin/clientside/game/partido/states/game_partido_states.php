@@ -17,6 +17,7 @@ log: function(msg)
 
 enter: function(gamePartido)
 {
+	gamePartido.reset();
 },
 
 execute: function(gamePartido)
@@ -24,10 +25,6 @@ execute: function(gamePartido)
         if (gamePartido.mApplicationPartido.mGameReset)
         {
                 gamePartido.mStateMachine.changeState(gamePartido.mRESET_PARTIDO_GAME);
-        }
-        else if (gamePartido.mBattleStart)
-        {
-                gamePartido.mStateMachine.changeState(gamePartido.mANSWER_QUESTION);
         }
 },	
 
@@ -96,12 +93,11 @@ enter: function(gamePartido)
 
 execute: function(gamePartido)
 {
-/*
-	if (!gamePartido.mApplicationPartido.mGameReset)
+ 	if (gamePartido.mBattleStart)
         {
-                gamePartido.mStateMachine.changeState(gamePartido.mPLAY_PARTIDO_GAME);
+                gamePartido.mBattleStart = false;
+                gamePartido.mPartidoStateMachine.changeState(gamePartido.mANSWER_QUESTION);
         }
-*/
 },	
 
 exit: function(gamePartido)

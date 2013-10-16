@@ -91,6 +91,32 @@ correctAnswer: function(byteBuffer)
 reset: function()
 {
 	this.parent();
+	//hide screens
+        this.mApplicationPartido.hideBattleScreen();
+        this.mApplicationPartido.hideCorrectAnswerScreen();
+
+        //reset text boxes for battle ...actually let's not
+	/*
+        mApplicationPartido->mStringAnswer.clear();
+        mApplicationPartido->mLabelQuestion->setCaption("");
+        mApplicationPartido->mLabelAnswer->setCaption("");
+
+        //reset text boxes for showCorrectAnswer ...actually let's not
+        mApplicationPartido->mLabelCorrectAnswer->setCaption("");
+        mApplicationPartido->mStringCorrectAnswer.clear();
+*/
+        //reset battle vars
+        this.mBattleStart = false;
+        this.mCorrectAnswerStart = false;
+        this.mApplicationPartido.mGameReset = false;
+
+        //reset correctAnswer vars
+        this.mCorrectAnswerStart = false;
+        this.mCorrectAnswer      = false;
+        this.mCorrectAnswerEnd   = false;
+
+        //answer time
+        this.mApplicationPartido.mAnswerTime = 0;
 
 },
 
