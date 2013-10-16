@@ -93,7 +93,7 @@ execute: function(gamePartido)
  	if (gamePartido.mBattleStart)
         {
                 gamePartido.mBattleStart = false;
-                gamePartido.mPartidoStateMachine.changeState(gamePartido.mANSWER_QUESTION);
+                gamePartido.mBattleStateMachine.changeState(gamePartido.mANSWER_QUESTION);
         }
 },	
 
@@ -228,7 +228,7 @@ execute: function(gamePartido)
  	if (gamePartido.mCorrectAnswerEnd)
         {
 		this.log('SHOWCORRECTANSWER_PARTIDO_GAME:: gamePartido.mCorrectAnswerEnd == true');
-                gamePartido.mPartidoStateMachine.changeState(gamePartido.mANSWER_QUESTION);
+                gamePartido.mBattleStateMachine.changeState(gamePartido.mANSWER_QUESTION);
         }
 },	
 
