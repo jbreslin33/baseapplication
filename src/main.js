@@ -108,8 +108,7 @@ window.addEvent('domready', function()
                 {
                         if (mApplication.mGame)
                         {
-                                mApplication.mGameReset = false;
-                                mApplication.log('mGameReset in main.js = false');
+				mApplication.mGame.mStateMachine.changeState(mApplication.mGame.mPLAY_GAME);
                         }
                         else
                         {
@@ -122,8 +121,7 @@ window.addEvent('domready', function()
                 {
                         if (mApplication.mGame)
                         {
-                                mApplication.mGameReset = true;
-                                mApplication.log('mGameReset in main.js = true');
+				mApplication.mGame.mStateMachine.changeState(mApplication.mGame.mRESET_GAME);
                         }       
                         else
                         {
@@ -150,7 +148,7 @@ window.addEvent('domready', function()
 		{
 			if (mApplication.mGame)
                         {
-				mApplication.mGame.mBattleStateMachine.changeState(mApplication.mGame.mANSWER_QUESTION);
+				mApplication.mGame.mPartidoStateMachine.changeState(mApplication.mGame.mANSWER_QUESTION);
                         }
                         else
                         {
@@ -164,7 +162,7 @@ window.addEvent('domready', function()
 		{
 			if (mApplication.mGame)
                         {
-				mApplication.mGame.mBattleStateMachine.changeState(mApplication.mGame.mBATTLE_OFF);
+				mApplication.mGame.mPartidoStateMachine.changeState(mApplication.mGame.mBATTLE_OFF);
                         }
                         else
                         {

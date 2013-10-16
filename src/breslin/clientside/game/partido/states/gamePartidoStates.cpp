@@ -16,58 +16,6 @@
 //utility
 #include <math.h>
 
-/******************** PLAY_PARTIDO_GAME *****************/
-
-PLAY_PARTIDO_GAME* PLAY_PARTIDO_GAME::Instance()
-{
-        static PLAY_PARTIDO_GAME instance;
-        return &instance;
-}
-void PLAY_PARTIDO_GAME::enter(GamePartido* gamePartido)
-{
-}
-void PLAY_PARTIDO_GAME::execute(GamePartido* gamePartido)
-{
-        if (gamePartido->mApplicationPartido->mGameReset)
-        {
-                gamePartido->mPartidoStateMachine->changeState(RESET_PARTIDO_GAME::Instance());
-        }
-}
-void PLAY_PARTIDO_GAME::exit(GamePartido* gamePartido)
-{
-}
-bool PLAY_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
-{
-        return true;
-}
-
-/******************** RESET_PARTIDO_GAME *****************/
-
-RESET_PARTIDO_GAME* RESET_PARTIDO_GAME::Instance()
-{
-  static RESET_PARTIDO_GAME instance;
-  return &instance;
-}
-void RESET_PARTIDO_GAME::enter(GamePartido* gamePartido)
-{
-	gamePartido->reset();
-}
-void RESET_PARTIDO_GAME::execute(GamePartido* gamePartido)
-{
-	if (!gamePartido->mApplicationPartido->mGameReset)
-        {
-                gamePartido->mPartidoStateMachine->changeState(PLAY_PARTIDO_GAME::Instance());
-        }
-
-}
-void RESET_PARTIDO_GAME::exit(GamePartido* gamePartido)
-{
-}
-bool RESET_PARTIDO_GAME::onLetter(GamePartido* gamePartido, Letter* letter)
-{
-        return true;
-}
-
 /**************************************************
 *************** BATTLE STATES ***********************
 ***************************************************/
@@ -121,7 +69,7 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 
         if (gamePartido->mCorrectAnswerStart)
         {
-                gamePartido->mBattleStateMachine->changeState(SHOWCORRECTANSWER_PARTIDO_GAME::Instance());
+                gamePartido->mPartidoStateMachine->changeState(SHOWCORRECTANSWER_PARTIDO_GAME::Instance());
         }
 
 	if (app->mLabelFocus == app->mLabelAnswer)
@@ -208,7 +156,7 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 
         if (gamePartido->mCorrectAnswerEnd)
         {
-                gamePartido->mBattleStateMachine->changeState(ANSWER_QUESTION::Instance());
+                gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
         }
 }
 void SHOWCORRECTANSWER_PARTIDO_GAME::exit(GamePartido* gamePartido)

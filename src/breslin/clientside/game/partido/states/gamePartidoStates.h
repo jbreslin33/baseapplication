@@ -6,36 +6,6 @@
 class GamePartido;
 
 /******************************************************
-*			PLAY_PARTIDO_GAME	
-********************************************************/
-class PLAY_PARTIDO_GAME : public State<GamePartido>
-{
-private:
-  PLAY_PARTIDO_GAME(){}
-public:
-  static PLAY_PARTIDO_GAME* Instance();
-  void enter  (GamePartido* gamePartido);
-  void execute(GamePartido* gamePartido);
-  void exit   (GamePartido* gamePartido);
-  bool onLetter(GamePartido* gamePartido, Letter* letter);
-};
-
-/******************************************************
-*			RESET_PARTIDO_GAME	
-********************************************************/
-class RESET_PARTIDO_GAME : public State<GamePartido>
-{
-private:
-  RESET_PARTIDO_GAME(){}
-public:
-  static RESET_PARTIDO_GAME* Instance();
-  void enter  (GamePartido* gamePartido);
-  void execute(GamePartido* gamePartido);
-  void exit   (GamePartido* gamePartido);
-  bool onLetter(GamePartido* gamePartido, Letter* letter);
-};
-
-/******************************************************
 *			BATTLE_OFF
 ********************************************************/
 class BATTLE_OFF : public State<GamePartido>

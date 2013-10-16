@@ -113,8 +113,6 @@ initialize: function(serverIP, serverPort)
  	this.createLoadingScreen();
         this.showLoadingScreen();
 
-	//reset
-	this.mGameReset = false;
 },
 
 log: function(msg)
@@ -168,7 +166,7 @@ processUpdate: function()
 	this.mTimeSinceLastServerTick += this.mRenderTime;
 	if (this.getGame())
 	{
-		if (this.mGameReset)
+		if (this.getGame().mStateMachine.currentState() == this.getGame().mRESET_GAME)
 		{
 
 		}

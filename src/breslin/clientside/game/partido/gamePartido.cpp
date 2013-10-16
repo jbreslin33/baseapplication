@@ -35,15 +35,9 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
 
 	//states
         mPartidoStateMachine =  new StateMachine<GamePartido>(this);
-        mPartidoStateMachine->setCurrentState      (PLAY_PARTIDO_GAME::Instance());
-        mPartidoStateMachine->setPreviousState     (PLAY_PARTIDO_GAME::Instance());
+        mPartidoStateMachine->setCurrentState      (BATTLE_OFF::Instance());
+        mPartidoStateMachine->setPreviousState     (BATTLE_OFF::Instance());
         mPartidoStateMachine->setGlobalState       (NULL);
-
-	//states
-        mBattleStateMachine =  new StateMachine<GamePartido>(this);
-        mBattleStateMachine->setCurrentState      (BATTLE_OFF::Instance());
-        mBattleStateMachine->setPreviousState     (BATTLE_OFF::Instance());
-        mBattleStateMachine->setGlobalState       (NULL);
 
 	mApplicationPartido->createBattleScreen();
         mApplicationPartido->hideBattleScreen();
@@ -59,12 +53,11 @@ void GamePartido::processUpdate()
 {
 	Game::processUpdate();
         mPartidoStateMachine->update();
-        mBattleStateMachine->update();
 }
 
 void GamePartido::processMoveControls()
 {
-	if (mBattleStateMachine->currentState() != BATTLE_OFF::Instance())
+	if (mPartidoStateMachine->currentState() != BATTLE_OFF::Instance())
 	{
 		//we are in battle			
 	}	
@@ -90,11 +83,11 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
                         break;
 
                 case mMessageBattleStart:
-			mBattleStateMachine->changeState(ANSWER_QUESTION::Instance());
+			mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
                         break;
 
                 case mMessageBattleEnd:
- 			mBattleStateMachine->changeState(BATTLE_OFF::Instance());                        
+ 			mPartidoStateMachine->changeState(BATTLE_OFF::Instance());                        
 			break;
                 
 		case mMessageCorrectAnswerStart:
@@ -182,7 +175,6 @@ void GamePartido::reset()
 
 	//reset battle vars
         mCorrectAnswerStart = false;
-        mApplicationPartido->mGameReset = false;
 
 	//reset correctAnswer vars
         mCorrectAnswerStart = false;

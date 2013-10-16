@@ -25,6 +25,9 @@
 //move states
 #include "states/applicationStates.h"
 
+//game states
+#include "../game/states/gameStates.h"
+
 /***************************************
 *	CONSTRUCTORS		          
 ***************************************/
@@ -45,7 +48,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	mLoggedIn = false;
         mLeaveGame = false;
         mSentLeaveGame = false;
-	mGameReset = false;
 	mGameCode = 1;
 	mExit = false;
 
@@ -246,12 +248,12 @@ void ApplicationBreslin::checkForByteBuffer()
 
 		if (type == mMessageGameStart)
 		{
-			mGameReset = false;
+			getGame()->mStateMachine->changeState(PLAY_GAME::Instance());
 		}
 		
 		if (type == mMessageGameEnd)
 		{
-			mGameReset = true;
+			getGame()->mStateMachine->changeState(RESET_GAME::Instance());
 		}
 
 		//pass on to game if there is one....

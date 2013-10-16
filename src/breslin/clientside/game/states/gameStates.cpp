@@ -44,3 +44,25 @@ bool PLAY_GAME::onLetter(Game* game, Letter* letter)
         return true;
 }
 
+/******************** RESET_GAME *****************/
+
+RESET_GAME* RESET_GAME::Instance()
+{
+  static RESET_GAME instance;
+  return &instance;
+}
+void RESET_GAME::enter(Game* game)
+{
+}
+void RESET_GAME::execute(Game* game)
+{
+	game->processMoveControls();
+}
+void RESET_GAME::exit(Game* game)
+{
+}
+bool RESET_GAME::onLetter(Game* game, Letter* letter)
+{
+        return true;
+}
+

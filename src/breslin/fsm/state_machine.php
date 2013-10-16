@@ -55,7 +55,7 @@ changeState: function(pNewState)
 	}
 },
 
-getCurrentState: function()
+currentState: function()
 {
 	return this.mCurrentState;
 }

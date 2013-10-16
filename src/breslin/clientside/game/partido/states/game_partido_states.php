@@ -1,73 +1,3 @@
-var PLAY_PARTIDO_GAME = new Class(
-{
-Extends: State,
-
-initialize: function()
-{
-
-},
-
-log: function(msg)
-{
-        setTimeout(function()
-        {
-                throw new Error(msg);
-        }, 0);
-},
-
-enter: function(gamePartido)
-{
-	gamePartido.reset();
-},
-
-execute: function(gamePartido)
-{
-        if (gamePartido.mApplicationPartido.mGameReset)
-        {
-                gamePartido.mPartidoStateMachine.changeState(gamePartido.mRESET_PARTIDO_GAME);
-        }
-},	
-
-exit: function(gamePartido)
-{
-}
-
-});
-
-var RESET_PARTIDO_GAME = new Class(
-{
-Extends: State,
-
-initialize: function()
-{
-},
-
-log: function(msg)
-{
-        setTimeout(function()
-        {
-                throw new Error(msg);
-        }, 0);
-},
-
-enter: function(gamePartido)
-{
-},
-
-execute: function(gamePartido)
-{
-	if (!gamePartido.mApplicationPartido.mGameReset)
-        {
-                gamePartido.mPartidoStateMachine.changeState(gamePartido.mPLAY_PARTIDO_GAME);
-        }
-},	
-
-exit: function(gamePartido)
-{
-}
-
-});
-
 var BATTLE_OFF = new Class(
 {
 Extends: State,
@@ -156,7 +86,7 @@ execute: function(gamePartido)
 	if (gamePartido.mCorrectAnswerStart)
         {
 		//this.log('ANSWER_QUESTION: gamePartido.mCorrectAnswerStart == true');
-                gamePartido.mBattleStateMachine.changeState(gamePartido.mSHOWCORRECTANSWER_PARTIDO_GAME);
+                gamePartido.mPartidoStateMachine.changeState(gamePartido.mSHOWCORRECTANSWER_PARTIDO_GAME);
         }
 
 	//for enter
@@ -214,7 +144,7 @@ execute: function(gamePartido)
 {
  	if (gamePartido.mCorrectAnswerEnd)
         {
-                gamePartido.mBattleStateMachine.changeState(gamePartido.mANSWER_QUESTION);
+                gamePartido.mPartidoStateMachine.changeState(gamePartido.mANSWER_QUESTION);
         }
 },	
 
