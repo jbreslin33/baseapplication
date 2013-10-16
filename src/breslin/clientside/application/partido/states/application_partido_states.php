@@ -58,7 +58,7 @@ execute: function(applicationPartido)
 	if (applicationPartido.mKeyArray[27] && applicationPartido.mSentLeaveGame == false)
         {
 		//check to see if in battle....
-		if (applicationPartido.getGame().mStateMachine.getCurrentState() == applicationPartido.getGame().mGamePlayPartidoBattle)
+		if (applicationPartido.getGame().mStateMachine.currentState() == applicationPartido.getGame().mGamePlayPartidoBattle)
 		{	
 			applicationPartido.mAnswerTime = 3;
 			applicationPartido.mStringAnswer = 'esc';
