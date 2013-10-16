@@ -168,14 +168,15 @@ void checkExtents(Vector3D min);
 // Parse ByteBuffers
 virtual int parseDeltaByteBuffer(ByteBuffer *byteBuffer);
 
-private:
 
 //size
 void     scale                (Vector3D                  ) ;
 
+public:
 //visibility
 void     setVisible           (bool b                    ) ;
 
+private:
 
 //title
 void     drawTitle            (                          ) ;

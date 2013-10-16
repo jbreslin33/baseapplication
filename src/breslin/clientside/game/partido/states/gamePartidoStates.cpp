@@ -29,12 +29,20 @@ BATTLE_OFF* BATTLE_OFF::Instance()
 }
 void BATTLE_OFF::enter(GamePartido* gamePartido)
 {
+	for (unsigned int i = 0; i < gamePartido->mShapeVector->size(); i++)
+	{	
+		gamePartido->mShapeVector->at(i)->setVisible(true);
+	}
 }
 void BATTLE_OFF::execute(GamePartido* gamePartido)
 {
 }
 void BATTLE_OFF::exit(GamePartido* gamePartido)
 {
+	for (unsigned int i = 0; i < gamePartido->mShapeVector->size(); i++)
+	{	
+		gamePartido->mShapeVector->at(i)->setVisible(false);
+	}
 }
 bool BATTLE_OFF::onLetter(GamePartido* gamePartido, Letter* letter)
 {
