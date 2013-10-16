@@ -16,6 +16,10 @@ log: function(msg)
 
 enter: function(gamePartido)
 {
+	for (i = 0; i < gamePartido.mShapeVector.length; i++)
+	{
+		gamePartido.mShapeVector[i].setVisible(true);
+	}
 },
 
 execute: function(gamePartido)
@@ -24,6 +28,10 @@ execute: function(gamePartido)
 
 exit: function(gamePartido)
 {
+	for (i = 0; i < gamePartido.mShapeVector.length; i++)
+	{
+		gamePartido.mShapeVector[i].setVisible(false);
+	}
 }
 
 });
