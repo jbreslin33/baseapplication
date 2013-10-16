@@ -55,6 +55,9 @@
 
 Client::Client(Server* server, struct sockaddr *address, int clientID, bool permanence) : BaseEntity(BaseEntity::getNextValidID())
 {
+	mScore = 0;	
+	mScoreLast = 0;	
+	
 	mUtility = new Utility;
 
 	mPermanence = permanence;
@@ -338,4 +341,13 @@ void Client::sendSimpleMessage(int message)
                 //send it
         	mServer->mNetwork->sendPacketTo(this,&mMessage);
 	}
+}
+
+int Client::getScore()
+{
+	return mScore;
+}
+int Client::getScoreLast()
+{
+	return mScoreLast;
 }

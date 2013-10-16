@@ -130,7 +130,7 @@ void YIELD::enter(Combatant* combatant)
 	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
         if (combatant->mScore > combatant->mFoe->mScore)
 	{
-               	combatant->mClientPartido->mWins++;
+               	combatant->mClientPartido->mScore++;
 		combatant->mClientPartido->mShape->setText("g");
 	}
 }

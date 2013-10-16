@@ -8,6 +8,7 @@ Command::Command()
 	mFrameTime = 0;
 
 	mRotationSpeed = 0.0f;	
+	mScore = 0;
 }
 
 Command::~Command()

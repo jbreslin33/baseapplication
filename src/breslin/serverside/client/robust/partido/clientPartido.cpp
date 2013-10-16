@@ -40,8 +40,6 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
         mClientPartidoStateMachine->setPreviousState     (NULL);
         mClientPartidoStateMachine->setGlobalState       (GLOBAL_CLIENT_PARTIDO::Instance());
 
-	//wins losses
-	mWins = 0;
 }
 
 ClientPartido::~ClientPartido()

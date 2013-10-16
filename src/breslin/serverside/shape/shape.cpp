@@ -207,6 +207,12 @@ int Shape::setFlag()
 		flags |= mCommandRotationZ;
 	}
 
+	//score
+	if (mClient->getScore() != mClient->getScoreLast())
+	{
+		flags |= mCommandScore;
+	}
+
 	//if(mGame->mFrameTime != mGame->mFrameTimeLast)
 	//{
 	//	flags |= mCommandFrameTime;
@@ -246,6 +252,13 @@ void Shape::addToMoveMessage(Message* message)
 	{
 		message->WriteFloat(mRotation->mRotation->z);
 	}
+
+	//score
+	if(flags & mCommandScore)
+	{
+		message->WriteByte(mClient->getScore());
+	}	
+	
 
 	//frameTime
 	//if(flags & mGame->mCommandFrameTime)

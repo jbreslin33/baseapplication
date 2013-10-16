@@ -268,6 +268,7 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
         bool moveXChanged = true;
         bool moveYChanged = true;
         bool moveZChanged = true;
+        bool scoreChanged = true;
 
         // Flags
         flags = mes->ReadByte();
@@ -323,6 +324,14 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
                 mServerCommandCurrent->mFrameTime = mApplication->mGame->mFrameTimeServer;
                 mCommandToRunOnShape->mFrameTime = mServerCommandCurrent->mFrameTime;
        // }
+
+	if (flags & mCommandScore)
+	{
+		mServerCommandCurrent->mScore = mServerCommandCurrent->mScore;
+                mServerCommandCurrent->mScore = mes->ReadByte();
+		mCommandToRunOnShape->mScore = mServerCommandCurrent->mScore;
+
+	}
 
 	
        	//LogString("x:%f",mServerCommandCurrent->mPosition->x);         
