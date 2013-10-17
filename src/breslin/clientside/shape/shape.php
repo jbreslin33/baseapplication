@@ -58,7 +58,6 @@ initialize: function(application, byteBuffer, isGhost)
                 //this.addAbility(new AbilityAnimationOgre(this));
         }
 	
-
         //process Spawn ByteBuffer
         this.processSpawnByteBuffer(byteBuffer);
 
@@ -186,12 +185,13 @@ parseSpawnByteBuffer: function(byteBuffer)
 /*
         for (i = 0; i < length; i++)
         {
-		this.log('B:' + this.mStringUsername);
 		this.mStringUsername = this.mStringUsername + byteBuffer.readByte();	
         }
 */
-	this.mStringUsername = byteBuffer.readByte();	
 
+        //set name and score in title
+	this.mStringUsername = byteBuffer.readByte();	
+	this.log('mStringUsername:' + this.mStringUsername);
 
 	//set control object
 	if (this.mLocal == 1 && this.mIsGhost == false)
@@ -230,8 +230,10 @@ spawnShape: function(position)
         this.mObjectTitle = document.createElement("p");
         this.mDiv.mDiv.appendChild(this.mObjectTitle);
 	
-	this.setText(this.mStringUsername);
+	//this.setText(this.mStringUsername);
 	//this.mObjectTitle.innerHTML='' + this.mStringUsername + ':' + this.mIndex;
+	//this.mStringUsername = byteBuffer.readByte();	
+	this.setText('' + this.mStringUsername + ' Score:' + this.mCommandToRunOnShape.mScore);
 
 	v = new Vector3D();	
 	//this.scale();
@@ -320,6 +322,7 @@ parseDeltaByteBuffer: function(byteBuffer)
         {
                 this.mServerCommandLast.mScore = this.mServerCommandCurrent.mScore;
                 this.mServerCommandCurrent.mScore = byteBuffer.readByte();
+		this.setText('' + this.mStringUsername + ' Score:' + this.mCommandToRunOnShape.mScore);
 	}
 	else
 	{
