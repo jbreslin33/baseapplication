@@ -9,6 +9,7 @@ initialize: function()
 	this.mFrameTime = 0;
 
 	this.mRotationSpeed = 0.0;	
+	this.mScore = 0;
 }
 
 

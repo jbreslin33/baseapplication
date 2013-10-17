@@ -56,6 +56,7 @@ mCommandOriginY      = 2;
 mCommandOriginZ      = 4;
 mCommandRotationX    = 8;
 mCommandRotationZ    = 16;
+mCommandScore        = 32;
 
 //app.listen(mListenPort);
 
@@ -652,7 +653,6 @@ server.on("message", function (msg, rinfo)
         	dataString = dataString + "," + msg.readUInt16LE(count);
 		count = count + 2;
 
-
 		if (skipCounter > fireNumber)
 		{
 
@@ -720,7 +720,13 @@ server.on("message", function (msg, rinfo)
         				dataString = dataString + "," + msg.readFloatLE(count);
 					count = count + 4;
         			}
-		
+
+				if (flags & mCommandScore)
+				{
+        				dataString = dataString + "," + msg.readInt8(count);
+					count++;
+				}	
+	
 			} //  end while count < length
 		
 		       	io.sockets.clients().forEach(function (socket)
