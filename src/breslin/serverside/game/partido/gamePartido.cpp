@@ -246,7 +246,7 @@ bool GamePartido::massiveBattleInsert()
 
 bool GamePartido::checkForEndOfGame()
 {
-	if (mGameTime > 50000)
+	if (mGameTime > mGameTimeEnd)
 	{
 		return true;
 	}

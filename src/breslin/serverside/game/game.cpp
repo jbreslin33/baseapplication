@@ -43,6 +43,7 @@ Game::Game(Server* server, int id)
 	mOpenPoint = new Vector3D();
 
 	mGameTime = 0;
+	mGameTimeEnd = 50000;
 }
 
 Game::~Game()
