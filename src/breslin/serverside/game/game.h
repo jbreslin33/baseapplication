@@ -62,7 +62,8 @@ public:
 	void	readDeltaMoveCommand(Message *mes, ClientRobust *client);
 	
 	//time
-	virtual void	update();
+	virtual void	update(int msec);
+	int mGameTime;
 	
 	//collision detection
 	virtual void checkCollisions();
@@ -80,6 +81,8 @@ public:
 	virtual void createShapes();
 	void sendShapes(Client* client);
 	Shape* getShapeFromID(int id);
+
+	
 };
 
 #endif

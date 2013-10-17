@@ -26,6 +26,12 @@
 //shape
 #include "../../shape/shape.h"
 
+//battle
+#include "../../battle/battle.h"
+
+//game
+#include "../../game/partido/gamePartido.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -139,7 +145,7 @@ void WAITING_FOR_ANSWER::enter(Quiz* quiz)
 	{
 		LogString("WAITING_FOR_ANSWER:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
 	}
-        quiz->mComputerAskedTime  = quiz->mCombatant->mClientPartido->mServerPartido->mGameTime;
+        quiz->mComputerAskedTime  = quiz->mCombatant->mBattle->mGamePartido->mGameTime;
         int randomAnswerTime      = rand() % 3000;
         quiz->mComputerAnswerTime = randomAnswerTime;
         quiz->mTest->mWaitingForAnswer   = true;
@@ -162,7 +168,7 @@ void WAITING_FOR_ANSWER::execute(Quiz* quiz)
 
 	else if (!quiz->mCombatant->mClientPartido->mLoggedIn)
         {
-                if (quiz->mComputerAskedTime + quiz->mComputerAnswerTime < quiz->mCombatant->mClientPartido->mServerPartido->mGameTime)
+                if (quiz->mComputerAskedTime + quiz->mComputerAnswerTime < quiz->mCombatant->mBattle->mGamePartido->mGameTime)
                 {
                         quiz->mTest->readAnswer(quiz->mComputerAnswerTime,quiz->mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(quiz->mTest->mQuestionID)->answer);
                 }
@@ -192,13 +198,13 @@ void SHOW_CORRECT_ANSWER::enter(Quiz* quiz)
 		LogString("SHOW_CORRECT_ANSWER:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
 	}
 	//quiz->mTest->mClientPartido->sendSimpleMessage(quiz->mTest->mClientPartido->mServerPartido->mMessageCorrectAnswerStart);
-        quiz->mCorrectAnswerStartTime = quiz->mCombatant->mClientPartido->mServerPartido->mGameTime;
+        quiz->mCorrectAnswerStartTime = quiz->mCombatant->mBattle->mGamePartido->mGameTime;
 	quiz->mTest->sendCorrectAnswer(quiz->mTest->mQuestionID);
 }
 
 void SHOW_CORRECT_ANSWER::execute(Quiz* quiz)
 {
- 	if (quiz->mCorrectAnswerStartTime + quiz->mCorrectAnswerTime < quiz->mCombatant->mClientPartido->mServerPartido->mGameTime)
+ 	if (quiz->mCorrectAnswerStartTime + quiz->mCorrectAnswerTime < quiz->mCombatant->mBattle->mGamePartido->mGameTime)
 	{
 		quiz->mTest->mClientPartido->sendSimpleMessage(quiz->mTest->mClientPartido->mServerPartido->mMessageCorrectAnswerEnd);
                 quiz->mStateMachine->changeState(SENDING_QUESTION::Instance());

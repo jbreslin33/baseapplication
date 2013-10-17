@@ -23,7 +23,7 @@ public:
 	Utility* mUtility;
 
 	//updates
-	void update();
+	void update(int msec);
 
 	//serverPartido
 	ServerPartido* mServerPartido;

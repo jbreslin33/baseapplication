@@ -60,7 +60,6 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	//time
 	mTickLength = 32;
  	mFrameTime  = 0;
-        mGameTime   = 0;
         mFrameTimeLast  = 0;
 
 	mLocalIP = localIP;
@@ -116,13 +115,12 @@ void Server::addGame(Game* game)
 void Server::update(int msec)
 {
  	mFrameTime += msec;
-        mGameTime += msec;
 
 	readPackets();
 	
 	processClients();
 
-	processGames();
+	processGames(msec);
 
         // Wait full 32 ms before allowing to send
         if(mFrameTime < mTickLength)
@@ -150,12 +148,12 @@ void Server::processClients()
 
 }
 
-void Server::processGames()
+void Server::processGames(int msec)
 {
 	//update games
   	for (unsigned int i = 0; i < mGameVector.size(); i++)
 	{
-		mGameVector.at(i)->update();
+		mGameVector.at(i)->update(msec);
 	}
 }
 

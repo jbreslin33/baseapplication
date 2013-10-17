@@ -42,12 +42,12 @@ void ServerPartido::processClients()
         }
 }
 
-void ServerPartido::processGames()
+void ServerPartido::processGames(int msec)
 {
         //update games
         for (unsigned int i = 0; i < mGamePartidoVector.size(); i++)
         {
-                mGamePartidoVector.at(i)->update();
+                mGamePartidoVector.at(i)->update(msec);
         }
 }
 

@@ -72,7 +72,6 @@ public:
 	//time
 	int mTickLength;
  	int mFrameTime;
-        int mGameTime;
         int mFrameTimeLast;
  	
 	//sequence
@@ -136,7 +135,7 @@ public:
 
 	//update
 	void update(int msec);
-	virtual void processGames();
+	virtual void processGames(int msec);
 	virtual void processClients();
 	virtual void sendCommands();
 

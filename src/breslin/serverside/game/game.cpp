@@ -42,6 +42,7 @@ Game::Game(Server* server, int id)
 	//openpoint
 	mOpenPoint = new Vector3D();
 
+	mGameTime = 0;
 }
 
 Game::~Game()
@@ -73,8 +74,10 @@ Shape* Game::getShapeFromID(int id)
 }
 
 //you should call this from server processUpdate
-void Game::update()
+void Game::update(int msec)
 {
+	mGameTime += msec;
+
 	//this is where they want to move
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)
 	{

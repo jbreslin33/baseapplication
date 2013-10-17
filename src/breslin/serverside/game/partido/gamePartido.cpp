@@ -47,9 +47,9 @@ GamePartido::~GamePartido()
 }
 
 //you should call this from server update
-void GamePartido::update()
+void GamePartido::update(int msec)
 {
-	Game::update();
+	Game::update(msec);
 
 	//let's reset for a turn	
 	if (checkForEndOfGame())
@@ -98,7 +98,7 @@ void GamePartido::reset()
 		mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
 	}
 	
-	//maybe send all clients a message to freeze for db?????
+	//this sends internet users to RESET_GAME state
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
 		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameEnd);
@@ -122,8 +122,7 @@ void GamePartido::reset()
 		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameStart);
 	}
 
-	mServerPartido->mGameTime = 0;	
-
+	mGameTime = 0;	
 }
 
 
@@ -247,7 +246,7 @@ bool GamePartido::massiveBattleInsert()
 
 bool GamePartido::checkForEndOfGame()
 {
-	if (mServerPartido->mGameTime > 50000)
+	if (mGameTime > 50000)
 	{
 		return true;
 	}
