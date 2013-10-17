@@ -65,6 +65,8 @@ public:
 	virtual void	update(int msec);
 	int mGameTime;
 	int mGameTimeEnd;
+	int mGameResetTimeEnd;
+	int mGameResetTime;
 	
 	//collision detection
 	virtual void checkCollisions();

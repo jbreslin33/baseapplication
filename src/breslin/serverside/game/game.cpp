@@ -44,6 +44,8 @@ Game::Game(Server* server, int id)
 
 	mGameTime = 0;
 	mGameTimeEnd = 50000;
+	mGameTimeReset = 0;
+	mGameTimeResetEnd = 0;
 }
 
 Game::~Game()

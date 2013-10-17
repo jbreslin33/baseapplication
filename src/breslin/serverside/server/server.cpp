@@ -82,7 +82,6 @@ Server::~Server()
 	delete mUtility;
 }
 
-
 /*******************************************************
 		BASE ENTITYS	
 ********************************************************/
@@ -98,7 +97,6 @@ BaseEntity* Server::getBaseEntityFromID(int id)
 
         return NULL;
 }
-
 
 /*******************************************************
 		GAMES	
