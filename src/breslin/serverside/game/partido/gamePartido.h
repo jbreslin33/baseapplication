@@ -42,11 +42,9 @@ public:
 	//reset
 	virtual void reset();
  	void endBattles();
-        void sendGameEnd();
-        void resetClients();
-        void sendGameStart();
 
 	//massiveInserts
+	virtual void massiveInserts();
 	bool massiveQuestionsAttemptsInsert();
 	bool massiveBattleInsert();
 	void dataDump();

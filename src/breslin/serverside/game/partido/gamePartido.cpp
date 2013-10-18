@@ -62,15 +62,6 @@ void GamePartido::sendShapes(ClientPartido* clientPartido)
 	Game::sendShapes(clientPartido);
 }
 
-void GamePartido::dataDump()
-{
-	//make a multi-insert to questions_attempts 
-	massiveQuestionsAttemptsInsert();
-
-	//battles  inserts....
-	massiveBattleInsert();
-}
-
 void GamePartido::endBattles()
 {
 	//let's end battles gracefully
@@ -80,48 +71,20 @@ void GamePartido::endBattles()
 	}
 }
 
-void GamePartido::sendGameEnd()
-{
-	//this sends internet users to RESET_GAME state
-        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
-	{
-		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameEnd);
-	}
-}
-
-void GamePartido::resetClients()
-{
-	//reset clients
-        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
-	{
-		mServerPartido->mClientPartidoVector.at(i)->reset();
-	}
-}
-
-void GamePartido::sendGameStart()
-{
-	//start game
-        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
-	{
-		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameStart);
-	}
-}
-
 void GamePartido::reset()
 {
 	endBattles();
 	sendGameEnd();	
-	
-	//make a multi-insert to questions_attempts 
-	massiveQuestionsAttemptsInsert();
-
-	massiveBattleInsert();
-
+	massiveInserts();
 	resetClients();
-
-	mGameTime = 0;	
 }
 
+void GamePartido::massiveInserts()
+{
+	//make a multi-insert to questions_attempts 
+	massiveQuestionsAttemptsInsert();
+	massiveBattleInsert();
+}
 
 bool GamePartido::massiveQuestionsAttemptsInsert()
 {

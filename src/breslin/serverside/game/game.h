@@ -63,6 +63,10 @@ public:
 	//reset
 	virtual bool checkForEndOfGame();
 	virtual void reset();	
+	virtual void resetClients();	
+	virtual void sendGameStart();
+	virtual void sendGameEnd();
+	virtual void massiveInserts();
 
 	// Network
 	void	sendExitNotification();

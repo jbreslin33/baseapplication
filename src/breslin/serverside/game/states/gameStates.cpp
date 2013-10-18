@@ -68,6 +68,7 @@ NORMAL_GAME* NORMAL_GAME::Instance()
 }
 void NORMAL_GAME::enter(Game* game)
 {
+	game->mGameTime = 0;
 }
 void NORMAL_GAME::execute(Game* game)
 {
@@ -103,6 +104,7 @@ void RESET_GAME::execute(Game* game)
 }
 void RESET_GAME::exit(Game* game)
 {
+	game->sendGameStart();
 }
 bool RESET_GAME::onLetter(Game* game, Letter* letter)
 {

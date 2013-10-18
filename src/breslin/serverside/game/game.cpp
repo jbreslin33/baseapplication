@@ -350,4 +350,34 @@ void Game::leave(ClientRobust* client)
         client->mGame = NULL;
 }
 
+void Game::massiveInserts()
+{
+
+}
+void Game::sendGameEnd()
+{
+        //this sends internet users to RESET_GAME state
+        for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+        {
+                mServer->mClientVector.at(i)->sendSimpleMessage(mServer->mMessageGameEnd);
+        }
+}
+
+void Game::resetClients()
+{
+        //reset clients
+        for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+        {
+                mServer->mClientVector.at(i)->reset();
+        }
+}
+
+void Game::sendGameStart()
+{
+        //start game
+        for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+        {
+                mServer->mClientVector.at(i)->sendSimpleMessage(mServer->mMessageGameStart);
+        }
+}
 
