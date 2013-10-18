@@ -53,6 +53,9 @@ RESET_GAME* RESET_GAME::Instance()
 }
 void RESET_GAME::enter(Game* game)
 {
+	ApplicationBreslin* app = game->mApplication;
+        app->createResetScreen();
+        app->showResetScreen();
 }
 void RESET_GAME::execute(Game* game)
 {
@@ -60,6 +63,8 @@ void RESET_GAME::execute(Game* game)
 }
 void RESET_GAME::exit(Game* game)
 {
+	ApplicationBreslin* app = game->mApplication;
+        app->hideResetScreen();
 }
 bool RESET_GAME::onLetter(Game* game, Letter* letter)
 {
