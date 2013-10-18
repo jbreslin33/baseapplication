@@ -82,6 +82,10 @@ initialize: function(serverIP, serverPort)
 	this.mStringUsername = '';
 	this.mStringPassword = '';
 
+	//reset
+	this.mLabelReset = 0;
+	this.mStringReset = 'Reset:';
+
 	//border
 	this.mNorthBorder = 0;
 	this.mEastBorder  = 0;
@@ -474,6 +478,30 @@ hideMainScreen: function()
 	this.mButtonLogout.style.display="none";
 },
 
+//RESET SCREEN
+createResetScreen: function()
+{
+        if (this.mLabelReset == 0)
+        {
+                this.mLabelReset = this.createLabel(300,75,100,25,"yellow","Reset");
+                this.mLabelReset.focus();
+        }
+},
+
+showResetScreen: function()
+{      
+        this.mLabelReset.style.display="block";
+
+        //clear it
+        this.mStringReset = '';
+
+        this.mLabelReset.value = '';
+},
+
+hideResetScreen: function()
+{      
+        this.mLabelReset.style.display="none";
+},
 
 /*********************************
                 GRAPHICS
