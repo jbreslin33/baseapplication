@@ -44,8 +44,7 @@ void INIT_GAME::execute(Game* game)
 {
 	game->mGameTime = 0;
         game->mGameTimeEnd = 50000;
-        game->mGameTimeReset = 0;
-        game->mGameTimeResetEnd = 0;
+        game->mResetTime = 10000;
 
 	game->mStateMachine->changeState(NORMAL_GAME::Instance());
 
@@ -73,7 +72,7 @@ void NORMAL_GAME::enter(Game* game)
 void NORMAL_GAME::execute(Game* game)
 {
 	//let's reset for a turn
-        if (game->checkForEndOfGame())
+        if (game->mGameTime > game->mGameTimeEnd)
         {
 		game->mStateMachine->changeState(RESET_GAME::Instance());	
         }
@@ -100,7 +99,10 @@ void RESET_GAME::enter(Game* game)
 }
 void RESET_GAME::execute(Game* game)
 {
-	game->mStateMachine->changeState(NORMAL_GAME::Instance());	
+        if (game->mGameTime > game->mGameTimeEnd + game->mResetTime)
+	{
+		game->mStateMachine->changeState(NORMAL_GAME::Instance());	
+	}
 }
 void RESET_GAME::exit(Game* game)
 {

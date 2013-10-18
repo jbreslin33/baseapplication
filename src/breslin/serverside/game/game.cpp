@@ -83,18 +83,6 @@ void Game::update(int msec)
 	checkCollisions();
 }
 
-bool Game::checkForEndOfGame()
-{
-        if (mGameTime > mGameTimeEnd)
-        {
-                return true;
-        }
-        else
-        {
-                return false;
-        }
-}
-
 void Game::createShapes()
 {
         for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)

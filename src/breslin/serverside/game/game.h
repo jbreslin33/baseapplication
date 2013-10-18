@@ -61,7 +61,6 @@ public:
 	Vector3D* mOpenPoint;
 
 	//reset
-	virtual bool checkForEndOfGame();
 	virtual void reset();	
 	virtual void resetClients();	
 	virtual void sendGameStart();
@@ -77,8 +76,7 @@ public:
 	int mGameTime;
 	int mGameTimeEnd;
 
-	int mGameTimeReset;
-	int mGameTimeResetEnd;
+	int mResetTime;
 	
 	//collision detection
 	virtual void checkCollisions();
