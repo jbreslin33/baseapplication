@@ -191,7 +191,6 @@ parseSpawnByteBuffer: function(byteBuffer)
 
         //set name and score in title
 	this.mStringUsername = byteBuffer.readByte();	
-	this.log('mStringUsername:' + this.mStringUsername);
 
 	//set control object
 	if (this.mLocal == 1 && this.mIsGhost == false)

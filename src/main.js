@@ -121,6 +121,7 @@ window.addEvent('domready', function()
                 {
                         if (mApplication.mGame)
                         {
+				mApplication.log('mMessageGameEnd');	
 				mApplication.mGame.mStateMachine.changeState(mApplication.mGame.mRESET_GAME);
                         }       
                         else
