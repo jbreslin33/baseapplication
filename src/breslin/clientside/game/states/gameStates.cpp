@@ -56,7 +56,7 @@ void RESET_GAME::enter(Game* game)
 }
 void RESET_GAME::execute(Game* game)
 {
-	game->processMoveControls();
+	//game->processMoveControls();
 }
 void RESET_GAME::exit(Game* game)
 {

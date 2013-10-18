@@ -67,6 +67,7 @@ NORMAL_GAME* NORMAL_GAME::Instance()
 }
 void NORMAL_GAME::enter(Game* game)
 {
+	LogString("NORMAL_GAME::enter");
 	game->mGameTime = 0;
 }
 void NORMAL_GAME::execute(Game* game)
@@ -95,6 +96,7 @@ RESET_GAME* RESET_GAME::Instance()
 }
 void RESET_GAME::enter(Game* game)
 {
+	LogString("RESET_GAME::enter");
 	game->reset();
 }
 void RESET_GAME::execute(Game* game)
