@@ -53,6 +53,7 @@ log: function(msg)
 
 enter: function(game)
 {
+	this.log('RESET_GAME::enter');
 	game.mApplication.createResetScreen();
         game.mApplication.showResetScreen();
 },

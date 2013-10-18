@@ -53,6 +53,7 @@ initialize: function(application)
 
 	this.mStateMachine = new StateMachine(this);
         this.mPLAY_GAME = new PLAY_GAME(this);
+        this.mRESET_GAME = new RESET_GAME(this);
         this.mStateMachine.setGlobalState(0);
         this.mStateMachine.changeState(this.mPLAY_GAME);
 /*
