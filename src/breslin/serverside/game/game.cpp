@@ -60,10 +60,21 @@ Game::~Game()
 	delete mStateMachine;
 }
 
+void Game::reset()
+{
+
+}
+
 //you should call this from server processUpdate
 void Game::update(int msec)
 {
 	mGameTime += msec;
+	
+	//let's reset for a turn
+        if (checkForEndOfGame())
+        {
+                reset();
+        }
 
 	mStateMachine->update();
 
@@ -76,6 +87,18 @@ void Game::update(int msec)
 	
 	//this is where they can move..	
 	checkCollisions();
+}
+
+bool Game::checkForEndOfGame()
+{
+        if (mGameTime > mGameTimeEnd)
+        {
+                return true;
+        }
+        else
+        {
+                return false;
+        }
 }
 
 void Game::createShapes()

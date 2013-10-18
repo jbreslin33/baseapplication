@@ -51,22 +51,6 @@ void GamePartido::update(int msec)
 {
 	Game::update(msec);
 
-	//let's reset for a turn	
-	if (checkForEndOfGame())
-	{
-		reset();		
-	}
-
-	mDataDumpCounter++;
-/*
-	if (mDataDumpCounter > mDataDumpThreshold)
-	{
-		LogString("data dump start:%d",mDataDumpCounter);
-		dataDump();
-		LogString("data dump end:%d",mDataDumpCounter);
-		mDataDumpCounter = 0;
-	}
- */       
 	for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
 		mBattleVector.at(i)->update();
@@ -240,18 +224,6 @@ bool GamePartido::massiveBattleInsert()
 	else
 	{
 		LogString("no battles");
-		return false;
-	}
-}
-
-bool GamePartido::checkForEndOfGame()
-{
-	if (mGameTime > mGameTimeEnd)
-	{
-		return true;
-	}
-	else
-	{
 		return false;
 	}
 }

@@ -39,9 +39,8 @@ public:
 	//coldet
 	virtual void checkCollisions();
 
-	//end of game
-	bool checkForEndOfGame();
-	void reset();
+	//reset
+	virtual void reset();
 
 	//massiveInserts
 	bool massiveQuestionsAttemptsInsert();

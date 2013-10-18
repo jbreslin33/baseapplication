@@ -60,8 +60,9 @@ public:
 	Vector3D* getOpenPoint    ();
 	Vector3D* mOpenPoint;
 
-	//end game
-	virtual bool checkForEndOfGame() { }
+	//reset
+	virtual bool checkForEndOfGame();
+	virtual void reset();	
 
 	// Network
 	void	sendExitNotification();
@@ -91,8 +92,6 @@ public:
 	virtual void createShapes();
 	void sendShapes(Client* client);
 	Shape* getShapeFromID(int id);
-
-	
 };
 
 #endif
