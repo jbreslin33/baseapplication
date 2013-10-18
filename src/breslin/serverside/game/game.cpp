@@ -70,12 +70,6 @@ void Game::update(int msec)
 {
 	mGameTime += msec;
 	
-	//let's reset for a turn
-        if (checkForEndOfGame())
-        {
-                reset();
-        }
-
 	mStateMachine->update();
 
 	//this is where they want to move
