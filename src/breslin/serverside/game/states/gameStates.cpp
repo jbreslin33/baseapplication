@@ -7,6 +7,9 @@
 //game
 #include "../game.h"
 
+//shape
+#include "../../shape/shape.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -77,6 +80,14 @@ void NORMAL_GAME::execute(Game* game)
         {
 		game->mStateMachine->changeState(RESET_GAME::Instance());	
         }
+	
+	//this is where they want to move
+        for (unsigned int i = 0; i < game->mShapeVector.size(); i++)
+        {
+                game->mShapeVector.at(i)->update();
+                game->checkBounds(game->mShapeVector.at(i));
+        }
+
 }
 void NORMAL_GAME::exit(Game* game)
 {

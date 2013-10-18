@@ -72,13 +72,6 @@ void Game::update(int msec)
 	
 	mStateMachine->update();
 
-	//this is where they want to move
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		mShapeVector.at(i)->update();
-		checkBounds(mShapeVector.at(i));
-	}
-	
 	//this is where they can move..	
 	checkCollisions();
 }
