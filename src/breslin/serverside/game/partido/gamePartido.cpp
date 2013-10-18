@@ -71,40 +71,53 @@ void GamePartido::dataDump()
 	massiveBattleInsert();
 }
 
-void GamePartido::reset()
+void GamePartido::endBattles()
 {
-	LogString("GamePartido::reset");
-
 	//let's end battles gracefully
-
         for (unsigned int i = 0; i < mBattleVector.size(); i++)
 	{
 		mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
 	}
-	
+}
+
+void GamePartido::sendGameEnd()
+{
 	//this sends internet users to RESET_GAME state
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
 		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameEnd);
 	}
-	
-	//make a multi-insert to questions_attempts 
-	massiveQuestionsAttemptsInsert();
+}
 
-	//battles  inserts....
-	massiveBattleInsert();
-
+void GamePartido::resetClients()
+{
 	//reset clients
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
 		mServerPartido->mClientPartidoVector.at(i)->reset();
 	}
+}
 
+void GamePartido::sendGameStart()
+{
 	//start game
         for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
 	{
 		mServerPartido->mClientPartidoVector.at(i)->sendSimpleMessage(mServerPartido->mMessageGameStart);
 	}
+}
+
+void GamePartido::reset()
+{
+	endBattles();
+	sendGameEnd();	
+	
+	//make a multi-insert to questions_attempts 
+	massiveQuestionsAttemptsInsert();
+
+	massiveBattleInsert();
+
+	resetClients();
 
 	mGameTime = 0;	
 }

@@ -41,6 +41,10 @@ public:
 
 	//reset
 	virtual void reset();
+ 	void endBattles();
+        void sendGameEnd();
+        void resetClients();
+        void sendGameStart();
 
 	//massiveInserts
 	bool massiveQuestionsAttemptsInsert();
