@@ -67,12 +67,6 @@ ApplicationBreslin::ApplicationBreslin(const char* serverIP, int serverPort)
 	{
 		mKeyArray[i] = false;
 	}
-/*
-	createLoginScreen();
-	hideLoginScreen();
-	createMainScreen();
-	hideMainScreen();
-*/
 
 }
 
@@ -407,7 +401,6 @@ void ApplicationBreslin::showMainScreen()
 
 	//set intial focus on username
 	mLabelFocus = mLabelUsername;
-
 }
 
 void ApplicationBreslin::hideMainScreen()
@@ -420,6 +413,34 @@ void ApplicationBreslin::hideMainScreen()
 	mTrayMgr->removeWidgetFromTray(mButtonLogout);
 	mTrayMgr->removeWidgetFromTray(mButtonExit);
 }
+
+//RESET
+void ApplicationBreslin::createResetScreen()
+{
+	if (!mLabelReset)
+	{
+        	mLabelReset  = mTrayMgr->createLabel(OgreBites::TL_CENTER, "mLabelReset", "Reset:");
+	}
+}
+
+void ApplicationBreslin::showResetScreen()
+{
+        mTrayMgr->moveWidgetToTray(mLabelReset,OgreBites::TL_CENTER);
+
+        mLabelReset->show();
+
+        //mTrayMgr->showCursor();
+
+        //set intial focus on username
+        mLabelFocus = mLabelReset;
+}
+
+void ApplicationBreslin::hideResetScreen()
+{
+        mLabelReset->hide();
+        mTrayMgr->removeWidgetFromTray(mLabelReset);
+}
+
 
 void ApplicationBreslin::buttonHit(OgreBites::Button *button)
 {

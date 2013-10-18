@@ -119,6 +119,13 @@ virtual void createMainScreen();
 virtual void showMainScreen();
 virtual void hideMainScreen();
 
+//reset
+virtual void createResetScreen();
+virtual void showResetScreen();
+virtual void hideResetScreen();
+OgreBites::Label* mLabelReset;
+std::string mStringReset;
+
 //input
 OIS::Keyboard* getKeyboard() { return mKeyboard; }
 
