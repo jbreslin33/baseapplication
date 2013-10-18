@@ -1,6 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "../../fsm/stateMachine.h"
+
+template <class entity_type> class State;
+
 #include "../../message/message.h"
 
 #include <string.h>
@@ -49,6 +53,8 @@ public:
 	Game(Server* server, int id);
 	~Game();
 
+	StateMachine<Game>* mStateMachine;
+
 	//index
 	unsigned int getOpenIndex ();
 	Vector3D* getOpenPoint    ();
@@ -65,8 +71,9 @@ public:
 	virtual void	update(int msec);
 	int mGameTime;
 	int mGameTimeEnd;
-	int mGameResetTimeEnd;
-	int mGameResetTime;
+
+	int mGameTimeReset;
+	int mGameTimeResetEnd;
 	
 	//collision detection
 	virtual void checkCollisions();

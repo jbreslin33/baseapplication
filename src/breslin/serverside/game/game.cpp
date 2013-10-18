@@ -24,6 +24,9 @@
 //rotation
 #include "../rotation/rotation.h"
 
+//game states
+#include "states/gameStates.h"
+
 #include <stdio.h>
 
 Game::Game(Server* server, int id)
@@ -46,6 +49,12 @@ Game::Game(Server* server, int id)
 	mGameTimeEnd = 50000;
 	mGameTimeReset = 0;
 	mGameTimeResetEnd = 0;
+
+	//move states
+        mStateMachine =  new StateMachine<Game>(this);
+        mStateMachine->setCurrentState      (INIT_GAME::Instance());
+        mStateMachine->setPreviousState     (INIT_GAME::Instance());
+        mStateMachine->setGlobalState       (NULL);
 }
 
 Game::~Game()
@@ -80,6 +89,8 @@ Shape* Game::getShapeFromID(int id)
 void Game::update(int msec)
 {
 	mGameTime += msec;
+
+	mStateMachine->update();
 
 	//this is where they want to move
 	for (unsigned int i = 0; i < mShapeVector.size(); i++)

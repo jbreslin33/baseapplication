@@ -258,6 +258,9 @@ set(HDRS
 	#game
 	../serverside/game/game.h
 	../serverside/game/partido/gamePartido.h
+
+	#game states
+        ../serverside/game/states/gameStates.h
 	
 	#network
 	../serverside/network/network.h
@@ -383,6 +386,9 @@ set(SRCS
 	#game
 	../serverside/game/game.cpp
 	../serverside/game/partido/gamePartido.cpp
+
+	#game states
+        ../serverside/game/states/gameStates.cpp
 
 	#dreamsock
 	../serverside/tdreamsock/dreamSockLog.cpp
