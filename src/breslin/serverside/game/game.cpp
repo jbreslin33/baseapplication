@@ -45,11 +45,6 @@ Game::Game(Server* server, int id)
 	//openpoint
 	mOpenPoint = new Vector3D();
 
-	mGameTime = 0;
-	mGameTimeEnd = 50000;
-	mGameTimeReset = 0;
-	mGameTimeResetEnd = 0;
-
 	//move states
         mStateMachine =  new StateMachine<Game>(this);
         mStateMachine->setCurrentState      (INIT_GAME::Instance());
@@ -62,6 +57,25 @@ Game::~Game()
 	StopLog();
 	delete mBounds;
 	delete mServer;
+	delete mStateMachine;
+}
+
+//you should call this from server processUpdate
+void Game::update(int msec)
+{
+	mGameTime += msec;
+
+	mStateMachine->update();
+
+	//this is where they want to move
+	for (unsigned int i = 0; i < mShapeVector.size(); i++)
+	{
+		mShapeVector.at(i)->update();
+		checkBounds(mShapeVector.at(i));
+	}
+	
+	//this is where they can move..	
+	checkCollisions();
 }
 
 void Game::createShapes()
@@ -85,23 +99,6 @@ Shape* Game::getShapeFromID(int id)
 	return NULL;
 }
 
-//you should call this from server processUpdate
-void Game::update(int msec)
-{
-	mGameTime += msec;
-
-	mStateMachine->update();
-
-	//this is where they want to move
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		mShapeVector.at(i)->update();
-		checkBounds(mShapeVector.at(i));
-	}
-	
-	//this is where they can move..	
-	checkCollisions();
-}
 
 void Game::checkCollisions()
 {
