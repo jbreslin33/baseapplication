@@ -54,6 +54,7 @@ ClientRobust::ClientRobust(Server* server, struct sockaddr *address, int clientI
 	//game
 	mInGame = false;
 	mGame = NULL;
+	mPlayed = false;
 
         //shape
         mShape = NULL;

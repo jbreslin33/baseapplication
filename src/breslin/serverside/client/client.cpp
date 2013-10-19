@@ -61,7 +61,7 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 	mUtility = new Utility;
 
 	mPermanence = permanence;
-	
+
 	//logged in
 	mLoggedIn = false;
 

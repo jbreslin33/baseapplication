@@ -49,6 +49,7 @@ void addGame(Game* game);
 Game* mGame;
 Game* getGame();
 virtual void setGame(int gameID);
+bool mPlayed;
 
 
 //update

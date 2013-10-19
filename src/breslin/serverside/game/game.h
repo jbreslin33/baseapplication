@@ -96,6 +96,7 @@ public:
 	Shape* getShapeFromID(int id);
 
 	//standings
+	int mNumberOfClientsThatPlayed; 
 	void setStandings();
 };
 

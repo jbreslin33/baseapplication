@@ -45,6 +45,9 @@ Game::Game(Server* server, int id)
 	//openpoint
 	mOpenPoint = new Vector3D();
 
+	//standings
+	mNumberOfClientsThatPlayed = 0;
+
 	//move states
         mStateMachine =  new StateMachine<Game>(this);
         mStateMachine->setCurrentState      (INIT_GAME::Instance());
@@ -62,7 +65,10 @@ Game::~Game()
 
 void Game::reset()
 {
-
+        for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+	{
+        	mServer->mClientVector.at(i)->mPlayed = false;
+	}
 }
 
 //you should call this from server processUpdate
@@ -364,8 +370,24 @@ void Game::sendGameStart()
 
 void Game::setStandings()
 {
+	//get highScore	
+	int highScore = 0;
         for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
-		LogString("mScore:%d",mServer->mClientVector.at(i)->mScore);
+		if (!mServer->mClientVector.at(i)->mPlayed)
+		{
+			continue;
+		}
+
+		LogString("clientplayed");
+
+		if (mServer->mClientVector.at(i)->mScore > highScore)
+		{
+			highScore = mServer->mClientVector.at(i)->mScore;
+			LogString("found new high score of:%d",highScore);
+		}
 	}
+	LogString("highScore:%d",highScore);
+
+
 }

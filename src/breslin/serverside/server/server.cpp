@@ -354,7 +354,6 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				}
         			
 				//send letter
-				LogString("join game");
         			Message message;
         			message.Init(message.outgoingData, sizeof(message.outgoingData));
         			message.WriteByte(mMessageJoinGame); 
@@ -362,9 +361,8 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         			Letter* letter = new Letter(client,&message);
         			mMailMan->deliver(client,letter);
 				delete letter;	
-				LogString("gameID:%d",gameID);
 				client->setGame(gameID);
-				LogString("mClientID:%d",client->mClientID);
+				client->mPlayed = true;
 			}
 		}
 	}

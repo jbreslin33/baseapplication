@@ -73,6 +73,7 @@ void GamePartido::endBattles()
 
 void GamePartido::reset()
 {
+	Game::reset();
 	endBattles();
 	sendGameEnd();	
 	massiveInserts();
