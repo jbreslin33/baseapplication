@@ -68,6 +68,7 @@ Game::~Game()
 
 void Game::resetEnter()
 {
+	setStandings();
         sendGameEnd();
         massiveInserts();
         resetClients();
@@ -75,20 +76,15 @@ void Game::resetEnter()
 
 void Game::resetExecute()
 {
-	sendGameStart();
 }
 
 void Game::resetExit()
 {
 	//erase from standings vector
 	int size = mClientStandingsVector.size();
-	LogString("erase");
+
+	LogString("erase mClientStandingsVector");
 	mClientStandingsVector.erase (mClientStandingsVector.begin(),mClientStandingsVector.begin()+size);
-        
-	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
-	{
-        	mServer->mClientVector.at(i)->mScore = 0; 
-	}
 }
 
 //you should call this from server processUpdate

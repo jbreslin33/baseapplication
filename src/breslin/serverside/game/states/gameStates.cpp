@@ -10,6 +10,9 @@
 //shape
 #include "../../shape/shape.h"
 
+//server
+#include "../../server/server.h"
+
 //client robust
 #include "../../client/robust/clientRobust.h"
 
@@ -75,6 +78,14 @@ void NORMAL_GAME::enter(Game* game)
 {
 	LogString("NORMAL_GAME::enter");
 	game->mGameTime = 0;
+   	
+	//set scores to zero.
+        for (unsigned int i = 0; i < game->mServer->mClientVector.size(); i++)
+        {
+                game->mServer->mClientVector.at(i)->mScore = 0;
+        }
+
+	game->sendGameStart();
 }
 void NORMAL_GAME::execute(Game* game)
 {
@@ -110,8 +121,8 @@ RESET_GAME* RESET_GAME::Instance()
 }
 void RESET_GAME::enter(Game* game)
 {
+	LogString("RESET_GAME::enter");
 	game->resetEnter();
-	game->setStandings();
 }
 void RESET_GAME::execute(Game* game)
 {
