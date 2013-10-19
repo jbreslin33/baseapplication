@@ -91,6 +91,7 @@ void NORMAL_GAME::execute(Game* game)
 }
 void NORMAL_GAME::exit(Game* game)
 {
+	game->setStandings();
 }
 bool NORMAL_GAME::onLetter(Game* game, Letter* letter)
 {

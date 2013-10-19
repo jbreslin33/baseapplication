@@ -94,6 +94,9 @@ public:
 	virtual void createShapes();
 	void sendShapes(Client* client);
 	Shape* getShapeFromID(int id);
+
+	//standings
+	void setStandings();
 };
 
 #endif

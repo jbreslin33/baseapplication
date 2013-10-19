@@ -362,3 +362,10 @@ void Game::sendGameStart()
         }
 }
 
+void Game::setStandings()
+{
+        for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+	{
+		LogString("mScore:%d",mServer->mClientVector.at(i)->mScore);
+	}
+}
