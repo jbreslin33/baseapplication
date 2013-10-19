@@ -98,6 +98,7 @@ public:
 	//standings
 	int mNumberOfClientsThatPlayed; 
 	void setStandings();
+	std::vector<ClientRobust*> mClientStandingsVector;
 };
 
 #endif

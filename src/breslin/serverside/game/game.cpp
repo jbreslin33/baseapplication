@@ -388,6 +388,18 @@ void Game::setStandings()
 		}
 	}
 	LogString("highScore:%d",highScore);
-
-
+        
+	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+	{
+		if (mServer->mClientVector.at(i)->mScore == highScore)
+		{	
+			mClientStandingsVector.push_back(mServer->mClientVector.at(i));
+		}
+	}
+	
+	for (unsigned int i = 0; i < mClientStandingsVector.size(); i++)
+	{
+		LogString("STANDINGS:");
+		LogString("ID:%d SCORE:%d",mClientStandingsVector.at(i)->id, mClientStandingsVector.at(i)->mScore);
+	}
 }
