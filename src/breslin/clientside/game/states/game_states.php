@@ -56,6 +56,11 @@ enter: function(game)
 	this.log('RESET_GAME::enter');
 	game.mApplication.createResetScreen();
         game.mApplication.showResetScreen();
+  
+	for (i = 0; i < game.mShapeVector.length; i++)
+        {
+                game.mShapeVector[i].setVisible(false);
+        }
 },
 
 execute: function(game)
@@ -65,6 +70,11 @@ execute: function(game)
 exit: function(game)
 {
         game.mApplication.hideResetScreen();
+	
+	for (i = 0; i < game.mShapeVector.length; i++)
+        {
+                game.mShapeVector[i].setVisible(true);
+        }
 }
 
 });
