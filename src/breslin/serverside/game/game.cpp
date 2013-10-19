@@ -65,9 +65,10 @@ Game::~Game()
 
 void Game::reset()
 {
+
         for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
-        	mServer->mClientVector.at(i)->mPlayed = false;
+        	mServer->mClientVector.at(i)->mScore = 0; 
 	}
 
 	//erase from standings vector
@@ -378,11 +379,12 @@ void Game::setStandings()
 	int highScore = 0;
         for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
+/*
 		if (!mServer->mClientVector.at(i)->mPlayed)
 		{
 			continue;
 		}
-
+*/
 		if (mServer->mClientVector.at(i)->mScore > highScore)
 		{
 			highScore = mServer->mClientVector.at(i)->mScore;
@@ -396,12 +398,12 @@ void Game::setStandings()
 		//loop thru all clients who have played	
 		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 		{
-			
+/*			
 			if (!mServer->mClientVector.at(i)->mPlayed)
 			{
 				continue;
 			}
-		
+*/		
 			//is this clients score = to scoreInQuestion if so add to standings vector
 			if (mServer->mClientVector.at(i)->mScore == scoreInQuestion) 
 			{	
