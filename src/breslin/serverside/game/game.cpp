@@ -69,6 +69,10 @@ void Game::reset()
 	{
         	mServer->mClientVector.at(i)->mPlayed = false;
 	}
+
+	//erase from standings vector
+	int size = mClientStandingsVector.size();
+	mClientStandingsVector.erase (mClientStandingsVector.begin(),mClientStandingsVector.begin()+size);
 }
 
 //you should call this from server processUpdate
@@ -379,22 +383,16 @@ void Game::setStandings()
 			continue;
 		}
 
-		LogString("clientplayed");
-
 		if (mServer->mClientVector.at(i)->mScore > highScore)
 		{
 			highScore = mServer->mClientVector.at(i)->mScore;
-			LogString("found new high score of:%d",highScore);
 		}
 	}
-	LogString("highScore:%d",highScore);
       
 	//add to standings vector in order of score 
-	
 	//loop thru scores starting at high score...
 	for (unsigned int scoreInQuestion = highScore; scoreInQuestion > 0; scoreInQuestion--) 
 	{
-	
 		//loop thru all clients who have played	
 		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 		{
