@@ -52,7 +52,7 @@ void INIT_GAME::enter(Game* game)
 void INIT_GAME::execute(Game* game)
 {
 	game->mGameTime = 0;
-        game->mGameTimeEnd = 50000;
+        game->mGameTimeEnd = 90000;
         game->mResetTime = 2000;
 
 	game->mStateMachine->changeState(NORMAL_GAME::Instance());
@@ -143,7 +143,7 @@ void RESET_GAME::execute(Game* game)
 			{		
 				game->mClientStandingsVector.at(i)->mStandingsSent = true;
 				areWeDone = false;
-				LogString("id:%d",game->mClientStandingsVector.at(i));		
+				LogString("id:%d",game->mClientStandingsVector.at(i)->id);		
 			}
 		}
 		if (areWeDone)
