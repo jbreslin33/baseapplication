@@ -127,9 +127,6 @@ void RESET_GAME::enter(Game* game)
 void RESET_GAME::execute(Game* game)
 {
 	//send out standings here....
-
-	LogString("RESET_GAME::execute");	
-
 	//do this one every mResetTime
         if (game->mGameTime > game->mGameTimeEnd + game->mResetTime)
 	{
