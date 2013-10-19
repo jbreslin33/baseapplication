@@ -53,9 +53,15 @@ RESET_GAME* RESET_GAME::Instance()
 }
 void RESET_GAME::enter(Game* game)
 {
+
 	ApplicationBreslin* app = game->mApplication;
         app->createResetScreen();
         app->showResetScreen();
+ 	
+	for (unsigned int i = 0; i < game->mShapeVector->size(); i++)
+        {
+                game->mShapeVector->at(i)->setVisible(false);
+        }
 }
 void RESET_GAME::execute(Game* game)
 {
@@ -64,6 +70,11 @@ void RESET_GAME::exit(Game* game)
 {
 	ApplicationBreslin* app = game->mApplication;
         app->hideResetScreen();
+	
+	for (unsigned int i = 0; i < game->mShapeVector->size(); i++)
+        {
+                game->mShapeVector->at(i)->setVisible(true);
+        }
 }
 bool RESET_GAME::onLetter(Game* game, Letter* letter)
 {
