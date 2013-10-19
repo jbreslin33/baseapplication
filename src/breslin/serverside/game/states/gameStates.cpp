@@ -144,6 +144,7 @@ void RESET_GAME::execute(Game* game)
 				game->mClientStandingsVector.at(i)->mStandingsSent = true;
 				areWeDone = false;
 				LogString("id:%d",game->mClientStandingsVector.at(i)->id);		
+				i = 5000;
 			}
 		}
 		if (areWeDone)
