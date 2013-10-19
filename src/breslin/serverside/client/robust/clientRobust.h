@@ -50,7 +50,7 @@ Game* mGame;
 Game* getGame();
 virtual void setGame(int gameID);
 bool mPlayed;
-
+bool mStandingsSent;
 
 //update
 virtual void update();

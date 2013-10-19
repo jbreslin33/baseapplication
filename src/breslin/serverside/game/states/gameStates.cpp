@@ -108,11 +108,15 @@ RESET_GAME* RESET_GAME::Instance()
 }
 void RESET_GAME::enter(Game* game)
 {
-	LogString("RESET_GAME::enter");
-	game->reset();
+	game->resetEnter();
+	
+
 }
 void RESET_GAME::execute(Game* game)
 {
+	//send out standings here....
+	
+
         if (game->mGameTime > game->mGameTimeEnd + game->mResetTime)
 	{
 		game->mStateMachine->changeState(NORMAL_GAME::Instance());	

@@ -71,13 +71,22 @@ void GamePartido::endBattles()
 	}
 }
 
-void GamePartido::reset()
+void GamePartido::resetEnter()
 {
-	Game::reset();
 	endBattles();
-	sendGameEnd();	
-	massiveInserts();
-	resetClients();
+	Game::resetEnter();
+}
+
+void GamePartido::resetExecute()
+{
+	Game::resetExecute();
+
+}
+
+void GamePartido::resetExit()
+{
+	Game::resetExit();
+
 }
 
 void GamePartido::massiveInserts()

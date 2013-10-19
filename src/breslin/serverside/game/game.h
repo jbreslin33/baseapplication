@@ -61,7 +61,9 @@ public:
 	Vector3D* mOpenPoint;
 
 	//reset
-	virtual void reset();	
+	virtual void resetEnter();	
+	virtual void resetExecute();	
+	virtual void resetExit();	
 	virtual void resetClients();	
 	virtual void sendGameStart();
 	virtual void sendGameEnd();

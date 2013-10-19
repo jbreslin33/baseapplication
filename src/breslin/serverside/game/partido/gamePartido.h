@@ -40,7 +40,9 @@ public:
 	virtual void checkCollisions();
 
 	//reset
-	virtual void reset();
+	virtual void resetEnter();
+	virtual void resetExecute();
+	virtual void resetExit();
  	void endBattles();
 
 	//massiveInserts

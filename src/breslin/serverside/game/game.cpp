@@ -53,6 +53,9 @@ Game::Game(Server* server, int id)
         mStateMachine->setCurrentState      (INIT_GAME::Instance());
         mStateMachine->setPreviousState     (INIT_GAME::Instance());
         mStateMachine->setGlobalState       (NULL);
+
+
+
 }
 
 Game::~Game()
@@ -63,17 +66,28 @@ Game::~Game()
 	delete mStateMachine;
 }
 
-void Game::reset()
+void Game::resetEnter()
+{
+        sendGameEnd();
+        massiveInserts();
+        resetClients();
+}
+
+void Game::resetExecute()
 {
 
-        for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
-	{
-        	mServer->mClientVector.at(i)->mScore = 0; 
-	}
+}
 
+void Game::resetExit()
+{
 	//erase from standings vector
 	int size = mClientStandingsVector.size();
 	mClientStandingsVector.erase (mClientStandingsVector.begin(),mClientStandingsVector.begin()+size);
+        
+	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
+	{
+        	mServer->mClientVector.at(i)->mScore = 0; 
+	}
 }
 
 //you should call this from server processUpdate
