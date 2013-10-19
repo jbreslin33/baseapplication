@@ -127,7 +127,9 @@ void RESET_GAME::enter(Game* game)
 void RESET_GAME::execute(Game* game)
 {
 	//send out standings here....
-	
+
+	LogString("RESET_GAME::execute");	
+
 	//do this one every mResetTime
         if (game->mGameTime > game->mGameTimeEnd + game->mResetTime)
 	{
@@ -137,8 +139,9 @@ void RESET_GAME::execute(Game* game)
 		bool areWeDone = true;
         	for (unsigned int i = 0; i < game->mClientStandingsVector.size(); i++)
         	{
-			if (game->mClientStandingsVector.at(i)->mStandingsSent = false)
+			if (game->mClientStandingsVector.at(i)->mStandingsSent == false)
 			{		
+				game->mClientStandingsVector.at(i)->mStandingsSent = true;
 				areWeDone = false;
 				LogString("id:%d",game->mClientStandingsVector.at(i));		
 			}

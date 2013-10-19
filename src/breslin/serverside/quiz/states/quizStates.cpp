@@ -70,7 +70,6 @@ void INIT_QUIZ::execute(Quiz* quiz)
 {
 	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
 	{
-		LogString("INIT_quiz:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
 	}
 	if (quiz->mCombatant->mStateMachine->currentState() == NORMAL_COMBATANT::Instance())
 	{
@@ -102,7 +101,6 @@ void SENDING_QUESTION::enter(Quiz* quiz)
 {
 	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
 	{
-		LogString("SENDING_QUESTION:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
 	}
 }
 void SENDING_QUESTION::execute(Quiz* quiz)
@@ -143,7 +141,6 @@ void WAITING_FOR_ANSWER::enter(Quiz* quiz)
 {
 	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
 	{
-		LogString("WAITING_FOR_ANSWER:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
 	}
         quiz->mComputerAskedTime  = quiz->mCombatant->mBattle->mGamePartido->mGameTime;
         int randomAnswerTime      = rand() % 3000;
@@ -195,7 +192,6 @@ void SHOW_CORRECT_ANSWER::enter(Quiz* quiz)
 {
 	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
 	{
-		LogString("SHOW_CORRECT_ANSWER:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
 	}
 	//quiz->mTest->mClientPartido->sendSimpleMessage(quiz->mTest->mClientPartido->mServerPartido->mMessageCorrectAnswerStart);
         quiz->mCorrectAnswerStartTime = quiz->mCombatant->mBattle->mGamePartido->mGameTime;
@@ -241,7 +237,6 @@ void OVER_QUIZ::enter(Quiz* quiz)
 {
 	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
 	{
-		LogString("OVER_QUIZ:%d",quiz->mCombatant->mClientPartido->mShape->mIndex);
 	}
 	quiz->mCombatant->mClientPartido->mTest->mQuizLast = quiz;
 	quiz->mCombatant->mClientPartido->mTest->mQuiz = NULL;

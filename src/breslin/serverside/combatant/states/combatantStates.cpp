@@ -61,7 +61,6 @@ void INIT_COMBATANT::execute(Combatant* combatant)
 {
 	if (combatant->mClientPartido->mShape->mIndex)
 	{
-		LogString("INIT_COMBATANT:%d",combatant->mClientPartido->mShape->mIndex);
 	}
 	//we are ready to go if we have a foe
 	if (combatant->mBattle->mStateMachine->currentState() == NORMAL_BATTLE::Instance())
@@ -92,7 +91,6 @@ void NORMAL_COMBATANT::enter(Combatant* combatant)
 {
 	if (combatant->mClientPartido->mShape->mIndex)
 	{
-		LogString("NORMAL_COMBATANT:%d",combatant->mClientPartido->mShape->mIndex);
 	}
 }
 void NORMAL_COMBATANT::execute(Combatant* combatant)
@@ -125,7 +123,6 @@ void YIELD::enter(Combatant* combatant)
 {
 	if (combatant->mClientPartido->mShape->mIndex)
 	{
-		LogString("YIELD:%d",combatant->mClientPartido->mShape->mIndex);
 	}
 	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
         if (combatant->mScore > combatant->mFoe->mScore)
