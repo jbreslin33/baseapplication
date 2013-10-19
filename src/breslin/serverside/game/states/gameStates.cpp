@@ -10,6 +10,9 @@
 //shape
 #include "../../shape/shape.h"
 
+//client robust
+#include "../../client/robust/clientRobust.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -47,7 +50,7 @@ void INIT_GAME::execute(Game* game)
 {
 	game->mGameTime = 0;
         game->mGameTimeEnd = 50000;
-        game->mResetTime = 10000;
+        game->mResetTime = 2000;
 
 	game->mStateMachine->changeState(NORMAL_GAME::Instance());
 
@@ -116,10 +119,25 @@ void RESET_GAME::execute(Game* game)
 {
 	//send out standings here....
 	
-
+	//do this one every mResetTime
         if (game->mGameTime > game->mGameTimeEnd + game->mResetTime)
 	{
-		game->mStateMachine->changeState(NORMAL_GAME::Instance());	
+		//go back in time for next one
+		game->mGameTime = game->mGameTime - game->mResetTime;
+
+		bool areWeDone = true;
+        	for (unsigned int i = 0; i < game->mClientStandingsVector.size(); i++)
+        	{
+			if (game->mClientStandingsVector.at(i)->mStandingsSent = false)
+			{		
+				areWeDone = false;
+				LogString("id:%d",game->mClientStandingsVector.at(i));		
+			}
+		}
+		if (areWeDone)
+		{
+			game->mStateMachine->changeState(NORMAL_GAME::Instance());	
+		}
 	}
 }
 void RESET_GAME::exit(Game* game)
