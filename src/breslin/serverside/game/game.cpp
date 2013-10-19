@@ -75,13 +75,14 @@ void Game::resetEnter()
 
 void Game::resetExecute()
 {
-
+	sendGameStart();
 }
 
 void Game::resetExit()
 {
 	//erase from standings vector
 	int size = mClientStandingsVector.size();
+	LogString("erase");
 	mClientStandingsVector.erase (mClientStandingsVector.begin(),mClientStandingsVector.begin()+size);
         
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)

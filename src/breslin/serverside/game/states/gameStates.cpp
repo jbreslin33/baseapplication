@@ -140,7 +140,7 @@ void RESET_GAME::execute(Game* game)
 }
 void RESET_GAME::exit(Game* game)
 {
-	game->sendGameStart();
+	game->resetExit();
 }
 bool RESET_GAME::onLetter(Game* game, Letter* letter)
 {
