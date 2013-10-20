@@ -56,6 +56,7 @@ Battle::Battle(GamePartido* gamePartido, ClientPartido* homeClient, ClientPartid
 
 Battle::~Battle()
 {
+	LogString("Battle::~Battle");
 	delete mHomeCombatant;
 	delete mAwayCombatant;
 	delete mStateMachine;

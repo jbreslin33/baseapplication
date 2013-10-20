@@ -40,6 +40,7 @@ Combatant::Combatant(Battle* battle, ClientPartido* clientPartido)
 
 Combatant::~Combatant()
 {
+	LogString("Combatant::~Combatant");
 	delete mQuiz;
 	delete mStateMachine;
 }
