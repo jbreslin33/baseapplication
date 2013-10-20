@@ -87,13 +87,26 @@ void GamePartido::resetExit()
 {
 	Game::resetExit();
 
+	//clear battle vectors...
+        for (unsigned int i = 0; i < mBattleVector.size(); i++)
+	{	
+		delete mBattleVector.at(i);	
+	}
+	int size = mBattleVector.size();
+	mBattleVector.erase (mBattleVector.begin(),mBattleVector.begin()+size);
+
+	//reset sent standings
+        for (unsigned int i = 0; i < mServerPartido->mClientPartidoVector.size(); i++)
+	{
+        	mServerPartido->mClientPartidoVector.at(i)->mStandingsSent = false;
+	}
 }
 
 void GamePartido::massiveInserts()
 {
 	//make a multi-insert to questions_attempts 
 	massiveQuestionsAttemptsInsert();
-	massiveBattleInsert();
+	//massiveBattleInsert();
 }
 
 bool GamePartido::massiveQuestionsAttemptsInsert()
@@ -175,7 +188,6 @@ bool GamePartido::massiveBattleInsert()
 	{
 		battle = mBattleVector.at(i);
 
-		//mBattleVector.at(i)->mStateMachine->changeState(OVER_BATTLE::Instance());
 		if (!battle->mWrittenToDisk && mBattleVector.at(i)->mStateMachine->currentState() == OVER_BATTLE::Instance())
 		{
 			weGotOne = true;
