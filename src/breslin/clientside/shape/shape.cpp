@@ -121,15 +121,9 @@ void Shape::setText(ByteBuffer* byteBuffer)
 void Shape::setText(std::string string)
 {
         mText.clear();
-
 	mText.append(string);
-
-        if (mText.compare(mTextLast) != 0)
-        {
-                clearTitle(); //empty title string so it can be filled anew
-                appendToTitle(mText);
-                mTextLast = mText;
-        }
+        clearTitle(); //empty title string so it can be filled anew
+        appendToTitle(mText);
 }
 
 /*********************************
@@ -172,7 +166,6 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
         	char c =  byteBuffer->ReadByte();
                 mStringUsername.append(1,c);
         }
-	//setText(mStringUsername);
 
 	//set name and score in title
         std::string s;
@@ -180,7 +173,6 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
         s.append(" Score:");
         s.append(StringConverter::toString(mCommandToRunOnShape->mScore));
         setText(s);
-
 
 	//should I set the commands mServerCommandLast and mServerCommandCurrent here?
 	mServerCommandLast->mPosition->copyValuesFrom(mSpawnPosition);
@@ -252,12 +244,6 @@ void Shape::processDeltaByteBuffer(ByteBuffer* byteBuffer)
 	//clearTitle();
 	//appendToTitle(mText);
 */	
-	//set name and score in title	
-	std::string s;
-	s.append(mStringUsername);
-	s.append(" Score:");
-	s.append(StringConverter::toString(mCommandToRunOnShape->mScore));
-	setText(s);	
 
 	parseDeltaByteBuffer(byteBuffer);
 
@@ -344,9 +330,14 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 		mServerCommandCurrent->mScore = mServerCommandCurrent->mScore;
                 mServerCommandCurrent->mScore = mes->ReadByte();
 		mCommandToRunOnShape->mScore = mServerCommandCurrent->mScore;
-
+	
+		 //set name and score in title
+                std::string s;
+                s.append(mStringUsername);
+                s.append(" Score:");
+                s.append(StringConverter::toString(mCommandToRunOnShape->mScore));
+                setText(s);
 	}
-
 	
        	//LogString("x:%f",mServerCommandCurrent->mPosition->x);         
        	//LogString("z:%f",mServerCommandCurrent->mPosition->z);         

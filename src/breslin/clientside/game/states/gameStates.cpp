@@ -57,7 +57,8 @@ void RESET_GAME::enter(Game* game)
 	ApplicationBreslin* app = game->mApplication;
         app->createResetScreen();
         app->showResetScreen();
- 	
+
+	//set shapes visible and reset scores  	
 	for (unsigned int i = 0; i < game->mShapeVector->size(); i++)
         {
                 game->mShapeVector->at(i)->setVisible(false);
@@ -74,6 +75,11 @@ void RESET_GAME::exit(Game* game)
 	for (unsigned int i = 0; i < game->mShapeVector->size(); i++)
         {
                 game->mShapeVector->at(i)->setVisible(true);
+		//set name and score in title back to zero
+        	std::string s;
+        	s.append(game->mShapeVector->at(i)->mStringUsername);
+        	s.append(" Score: 0");
+        	game->mShapeVector->at(i)->setText(s);
         }
 }
 bool RESET_GAME::onLetter(Game* game, Letter* letter)
