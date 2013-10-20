@@ -83,6 +83,7 @@ void NORMAL_GAME::enter(Game* game)
         for (unsigned int i = 0; i < game->mServer->mClientVector.size(); i++)
         {
                 game->mServer->mClientVector.at(i)->mScore = 0;
+                game->mServer->mClientVector.at(i)->mScoreLast = 0;
         }
 
 	game->sendGameStart();
