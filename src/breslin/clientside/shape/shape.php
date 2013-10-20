@@ -224,19 +224,13 @@ spawnShape: function(position)
 	//back to div
         this.mDiv.mDiv.appendChild(this.mMesh);
 
-
 	//objectTitle
         this.mObjectTitle = document.createElement("p");
         this.mDiv.mDiv.appendChild(this.mObjectTitle);
 	
-	//this.setText(this.mStringUsername);
-	//this.mObjectTitle.innerHTML='' + this.mStringUsername + ':' + this.mIndex;
-	//this.mStringUsername = byteBuffer.readByte();	
 	this.setText('' + this.mStringUsername + ' Score:' + this.mCommandToRunOnShape.mScore);
 
 	v = new Vector3D();	
-	//this.scale();
-
 },
 
 setText: function(text)
@@ -322,6 +316,7 @@ parseDeltaByteBuffer: function(byteBuffer)
                 this.mServerCommandLast.mScore = this.mServerCommandCurrent.mScore;
                 this.mServerCommandCurrent.mScore = byteBuffer.readByte();
                 this.mCommandToRunOnShape.mScore = this.mServerCommandCurrent.mScore;
+		this.log('this.mCommandScore flag');
 		this.setText('' + this.mStringUsername + ' Score:' + this.mCommandToRunOnShape.mScore);
 	}
 	else

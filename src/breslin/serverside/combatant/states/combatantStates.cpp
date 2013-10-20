@@ -127,6 +127,7 @@ void YIELD::enter(Combatant* combatant)
 	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
         if (combatant->mScore > combatant->mFoe->mScore)
 	{
+               	combatant->mClientPartido->mScoreLast = combatant->mClientPartido->mScore;
                	combatant->mClientPartido->mScore++;
 	}
 }

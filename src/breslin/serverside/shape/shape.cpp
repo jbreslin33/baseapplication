@@ -210,6 +210,7 @@ int Shape::setFlag()
 	//score
 	if (mClient->getScore() != mClient->getScoreLast())
 	{
+		mClient->mScoreLast = mClient->mScore;
 		flags |= mCommandScore;
 	}
 
