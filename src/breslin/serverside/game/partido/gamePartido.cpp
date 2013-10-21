@@ -106,7 +106,6 @@ void GamePartido::massiveInserts()
 {
 	//make a multi-insert to questions_attempts 
 	massiveQuestionsAttemptsInsert();
-	//massiveBattleInsert();
 }
 
 bool GamePartido::massiveQuestionsAttemptsInsert()
@@ -171,58 +170,6 @@ bool GamePartido::massiveQuestionsAttemptsInsert()
 	else
 	{
 		LogString("no question attempts");
-	}
-}
-
-bool GamePartido::massiveBattleInsert()
-{
-	bool weGotOne = false;
-	LogString("GamePartido::massiveBattleInsert");
-	mMassiveInsert.clear();
-
-	Battle* battle = NULL;
-
-        mMassiveInsert = "insert into battles (battle_start_time,battle_end_time,home_score,away_score,home_user_id,away_user_id) values ";
-
-        for (unsigned int i = 0; i < mBattleVector.size(); i++)
-	{
-		battle = mBattleVector.at(i);
-
-		if (!battle->mWrittenToDisk && mBattleVector.at(i)->mStateMachine->currentState() == OVER_BATTLE::Instance())
-		{
-			weGotOne = true;
-			mMassiveInsert.append("(to_timestamp(");
-                	mMassiveInsert.append(mUtility->intToString(battle->mBattleStartTime));
-                	mMassiveInsert.append("),to_timestamp(");
-                	mMassiveInsert.append(mUtility->intToString(battle->mBattleEndTime));
-                	mMassiveInsert.append("),");
-                	mMassiveInsert.append(mUtility->intToString(battle->mHomeCombatant->mScore));
-                	mMassiveInsert.append(",");
-                	mMassiveInsert.append(mUtility->intToString(battle->mAwayCombatant->mScore));
-                	mMassiveInsert.append(",");
-                	mMassiveInsert.append(mUtility->intToString(battle->mHomeCombatant->mClientPartido->id));
-                	mMassiveInsert.append(",");
-                	mMassiveInsert.append(mUtility->intToString(battle->mAwayCombatant->mClientPartido->id));
-                	mMassiveInsert.append(")");
-                	mMassiveInsert.append(", ");
-			battle->mWrittenToDisk = true;
-		}
-	}
-	if (weGotOne)
-	{
-		PGconn* conn;
-        	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
-		mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
-        	const char * q = mMassiveInsert.c_str();
-		LogString("q:%s",q);
-        	PQexec(conn,q);
-        	PQfinish(conn);
-		return true;
-	}
-	else
-	{
-		LogString("no battles");
-		return false;
 	}
 }
 
