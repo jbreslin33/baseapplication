@@ -417,3 +417,21 @@ void Game::setStandings()
 		LogString("ID:%d SCORE:%d",mClientStandingsVector.at(i)->id, mClientStandingsVector.at(i)->mScore);
 	}
 }
+
+void Game::reportStandings(std::string username)
+{
+	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
+        mMessage.WriteByte(mServer->mMessageReportStandings); // add type
+
+        int length = username.length();
+        mMessage.WriteByte(length);
+
+        //loop thru length and write it
+        for (int i=0; i < length; i++)
+        {
+                mMessage.WriteByte(username.at(i));
+        }
+
+        //send it
+        mServer->mNetwork->broadcast(&mMessage);
+}

@@ -454,6 +454,9 @@ void Game::checkByteBuffer(ByteBuffer* byteBuffer)
                         	readServerTick(byteBuffer);
                         }
                         break;
+		case mMessageReportStandings:
+ 			setStandings(byteBuffer);
+                        break;
 		case mMessageSetText:
         		int index = byteBuffer->ReadShort();
    			for (unsigned int i = 0; i < mShapeVector->size(); i++)
@@ -532,3 +535,25 @@ void Game::sendByteBuffer()
 		mRunNetworkTime = 0.0f;
     	}
 }
+
+void Game::setStandings(ByteBuffer* byteBuffer)
+{
+        mApplication->mStringReset.clear();
+
+        int length = byteBuffer->ReadByte();
+        for (int i = 0; i < length; i++)
+        {
+                char c =  byteBuffer->ReadByte();
+                mApplication->mStringReset.append(1,c);
+        }
+        if (mApplication->mLabelReset && mApplication->mStringReset.size() > 0)
+        {
+                mApplication->mLabelReset->setCaption(mApplication->mStringReset);
+		LogString("got someting");
+        }
+        else
+        {
+                LogString("no label or no string");
+        }
+}
+

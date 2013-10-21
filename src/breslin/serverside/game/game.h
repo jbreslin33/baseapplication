@@ -101,6 +101,7 @@ public:
 	int mNumberOfClientsThatPlayed; 
 	void setStandings();
 	std::vector<ClientRobust*> mClientStandingsVector;
+	void reportStandings(std::string username);
 };
 
 #endif

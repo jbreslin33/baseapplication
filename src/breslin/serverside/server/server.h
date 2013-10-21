@@ -126,6 +126,10 @@ public:
 	static const int mMessageAddShape    	         = -103;
 	static const int mMessageRemoveShape             = -104;
 
+	//standings
+	static const int mMessageReportStandings         = -94;
+	
+
 public:
 	Server(Ogre::Root* root, const char *localIP, int serverPort);
 	~Server();

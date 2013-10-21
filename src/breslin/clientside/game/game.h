@@ -44,6 +44,7 @@ static const char mMessageRemoveShape = -104;
 static const char mMessageSetText     = -66;
 
 static const char mMessageQuitGame = -108;
+static const char mMessageReportStandings = -94;
 
 
 //applicationBreslin
@@ -124,6 +125,9 @@ void createScene();
 //network
 void readServerTick(ByteBuffer* byteBuffer);
 void sendCommand();
+
+void setStandings(ByteBuffer* byteBuffer);
+
 };
 
 #endif
