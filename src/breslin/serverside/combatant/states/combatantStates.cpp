@@ -127,7 +127,8 @@ void YIELD::enter(Combatant* combatant)
 	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
         if (combatant->mScore > combatant->mFoe->mScore)
 	{
-		LogString("winner id:%d", combatant->mClientPartido->id);
+						
+		LogString("com:%d foe:%d winner id:%d", combatant->mScore , combatant->mFoe->mScore, combatant->mClientPartido->id);
                	combatant->mClientPartido->mScoreLast = combatant->mClientPartido->mScore;
                	combatant->mClientPartido->mScore++;
 	}
