@@ -316,7 +316,6 @@ parseDeltaByteBuffer: function(byteBuffer)
                 this.mServerCommandLast.mScore = this.mServerCommandCurrent.mScore;
                 this.mServerCommandCurrent.mScore = byteBuffer.readByte();
                 this.mCommandToRunOnShape.mScore = this.mServerCommandCurrent.mScore;
-		this.log('this.mCommandScore flag');
 		this.setText('' + this.mStringUsername + ' Score:' + this.mCommandToRunOnShape.mScore);
 	}
 	else

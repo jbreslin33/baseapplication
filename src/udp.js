@@ -723,6 +723,7 @@ server.on("message", function (msg, rinfo)
 
 				if (flags & mCommandScore)
 				{
+					console.log("mCommandScore flag set in udp.js");	
         				dataString = dataString + "," + msg.readInt8(count);
 					count++;
 				}	

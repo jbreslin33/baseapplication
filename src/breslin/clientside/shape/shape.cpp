@@ -339,9 +339,6 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
                 setText(s);
 	}
 	
-       	//LogString("x:%f",mServerCommandCurrent->mPosition->x);         
-       	//LogString("z:%f",mServerCommandCurrent->mPosition->z);         
-
         if (mServerCommandCurrent->mFrameTime != 0) 
         {
                 //position

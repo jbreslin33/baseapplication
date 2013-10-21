@@ -74,6 +74,7 @@ exit: function(game)
 	for (i = 0; i < game.mShapeVector.length; i++)
         {
                 game.mShapeVector[i].setVisible(true);
+		game.mShapeVector[i].setText('' + this.mStringUsername + ' Score:0');
         }
 }
 

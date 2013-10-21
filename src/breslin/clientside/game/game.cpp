@@ -463,7 +463,6 @@ void Game::checkByteBuffer(ByteBuffer* byteBuffer)
 				{
 					shape->setText(byteBuffer);	
 				}
-
 			}
 			break;
 	}
