@@ -120,7 +120,5 @@ public:
 
 	int mScore;
 	int mScoreLast;
-	virtual int getScore();
-	virtual int getScoreLast();
 };
 #endif

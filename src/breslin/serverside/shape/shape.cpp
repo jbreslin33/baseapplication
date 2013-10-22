@@ -208,7 +208,7 @@ int Shape::setFlag()
 	}
 
 	//score
-	if (mClient->getScore() != mClient->getScoreLast())
+	if (mClient->mScore != mClient->mScoreLast)
 	{
 		mClient->mScoreLast = mClient->mScore;
 		flags |= mCommandScore;
@@ -257,7 +257,7 @@ void Shape::addToMoveMessage(Message* message)
 	//score
 	if(flags & mCommandScore)
 	{
-		message->WriteByte(mClient->getScore());
+		message->WriteByte(mClient->mScore);
 	}	
 	
 

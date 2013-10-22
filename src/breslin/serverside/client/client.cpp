@@ -343,11 +343,3 @@ void Client::sendSimpleMessage(int message)
 	}
 }
 
-int Client::getScore()
-{
-	return mScore;
-}
-int Client::getScoreLast()
-{
-	return mScoreLast;
-}
