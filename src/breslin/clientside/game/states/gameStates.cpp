@@ -78,7 +78,7 @@ void RESET_GAME::exit(Game* game)
 		//set name and score in title back to zero
         	std::string s;
         	s.append(game->mShapeVector->at(i)->mStringUsername);
-        	s.append(" Score: 0");
+        	s.append(": 0");
         	game->mShapeVector->at(i)->setText(s);
         }
 }

@@ -60,6 +60,7 @@ Battle::~Battle()
 	delete mHomeCombatant;
 	delete mAwayCombatant;
 	delete mStateMachine;
+	delete mUtility;
 }
 void Battle::update()
 {

@@ -228,7 +228,7 @@ spawnShape: function(position)
         this.mObjectTitle = document.createElement("p");
         this.mDiv.mDiv.appendChild(this.mObjectTitle);
 	
-	this.setText('' + this.mStringUsername + ' Score:' + this.mCommandToRunOnShape.mScore);
+	this.setText('' + this.mStringUsername + ':' + this.mCommandToRunOnShape.mScore);
 
 	v = new Vector3D();	
 },
@@ -316,7 +316,7 @@ parseDeltaByteBuffer: function(byteBuffer)
                 this.mServerCommandLast.mScore = this.mServerCommandCurrent.mScore;
                 this.mServerCommandCurrent.mScore = byteBuffer.readByte();
                 this.mCommandToRunOnShape.mScore = this.mServerCommandCurrent.mScore;
-		this.setText('' + this.mStringUsername + ' Score:' + this.mCommandToRunOnShape.mScore);
+		this.setText('' + this.mStringUsername + ':' + this.mCommandToRunOnShape.mScore);
 	}
 	else
 	{

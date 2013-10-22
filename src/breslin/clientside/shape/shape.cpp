@@ -170,7 +170,7 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 	//set name and score in title
         std::string s;
         s.append(mStringUsername);
-        s.append(" Score:");
+        s.append(":");
         s.append(StringConverter::toString(mCommandToRunOnShape->mScore));
         setText(s);
 
@@ -334,7 +334,7 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 		 //set name and score in title
                 std::string s;
                 s.append(mStringUsername);
-                s.append(" Score:");
+                s.append(":");
                 s.append(StringConverter::toString(mCommandToRunOnShape->mScore));
                 setText(s);
 	}
