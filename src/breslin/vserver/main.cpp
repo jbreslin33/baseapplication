@@ -23,6 +23,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <exception>
 
 //Ogre headers
 #include "Ogre.h"
@@ -81,9 +82,10 @@ int main(int argc, char **argv)
 				oldTime = newTime;
 			}
 		}
-		catch(...)
+		catch(exception& e)
 		{
 			server->mNetwork->shutdown();
+			LogString(e.what());
 			LogString("Unknown Exception caught in main loop");
 			return -1;
 		}
@@ -127,9 +129,10 @@ int main(int argc, char **argv)
                                 oldTime = newTime;
                         }
                 }
-                catch(...)
+                catch(exception& e)
                 {
                         server->mNetwork->shutdown();
+			LogString(e.what());
                         LogString("Unknown Exception caught in main loop");
                         return -1;
                 }

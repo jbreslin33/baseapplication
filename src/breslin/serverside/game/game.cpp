@@ -406,7 +406,8 @@ void Game::setStandings()
 			//is this clients score = to scoreInQuestion if so add to standings vector
 			if (mServer->mClientVector.at(i)->mScore == scoreInQuestion) 
 			{	
-				mClientStandingsVector.push_back(mServer->mClientVector.at(i));
+				//mClientStandingsVector.push_back(mServer->mClientVector.at(i));
+				mClientStandingsVector.insert(mClientStandingsVector.begin(),mServer->mClientVector.at(i));
 			}
 		}
 	}

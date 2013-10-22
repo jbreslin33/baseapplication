@@ -135,10 +135,13 @@ void RESET_GAME::execute(Game* game)
 		game->mGameTime = game->mGameTime - game->mResetTime;
 
 		bool areWeDone = true;
+		LogString("size of standings vectori:%d",game->mClientStandingsVector.size());
         	for (unsigned int i = 0; i < game->mClientStandingsVector.size(); i++)
         	{
+			LogString("i:%d",i);
 			if (game->mClientStandingsVector.at(i)->mStandingsSent == false)
 			{		
+				LogString("if i:%d",i);
 				game->mClientStandingsVector.at(i)->mStandingsSent = true;
 				areWeDone = false;
 				LogString("id:%d",game->mClientStandingsVector.at(i)->id);		
@@ -147,7 +150,7 @@ void RESET_GAME::execute(Game* game)
 				s.append(" ");
 				s.append(game->mClientStandingsVector.at(i)->first_name);
 				game->reportStandings(s);
-				i = 5000;
+				//i = -2;
 			}
 		}
 		if (areWeDone)
