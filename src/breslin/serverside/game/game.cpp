@@ -84,7 +84,13 @@ void Game::resetExit()
 	int size = mClientStandingsVector.size();
 
 	LogString("erase mClientStandingsVector");
-	mClientStandingsVector.erase (mClientStandingsVector.begin(),mClientStandingsVector.begin()+size);
+	mClientStandingsVector.erase (mClientStandingsVector.begin(),mClientStandingsVector.end());
+	
+	LogString("SIZE:%d",mClientStandingsVector.size());
+        for (unsigned int i = 0; i < mClientStandingsVector.size(); i++)
+	{
+		LogString("is this here:%d",i);
+	}
 }
 
 //you should call this from server processUpdate
