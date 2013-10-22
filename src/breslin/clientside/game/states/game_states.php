@@ -74,7 +74,7 @@ exit: function(game)
 	for (i = 0; i < game.mShapeVector.length; i++)
         {
                 game.mShapeVector[i].setVisible(true);
-		game.mShapeVector[i].setText('' + this.mStringUsername + ':0');
+		game.mShapeVector[i].setText('' + game.mShapeVector[i].mStringUsername + ':0');
         }
 }
 
