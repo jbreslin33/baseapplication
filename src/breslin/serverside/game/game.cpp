@@ -418,18 +418,18 @@ void Game::setStandings()
 	}
 }
 
-void Game::reportStandings(std::string username)
+void Game::reportStandings(std::string first_name)
 {
 	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServer->mMessageReportStandings); // add type
 
-        int length = username.length();
+        int length = first_name.length();
         mMessage.WriteByte(length);
 
         //loop thru length and write it
         for (int i=0; i < length; i++)
         {
-                mMessage.WriteByte(username.at(i));
+                mMessage.WriteByte(first_name.at(i));
         }
 
         //send it

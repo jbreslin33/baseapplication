@@ -362,6 +362,24 @@ processInput: function()
 reset: function()
 {
 
+},
+
+setStandings: function(byteBuffer)
+{
+	this.log('setStandings called');
+        this.mApplication.mStringReset = '';
+
+        this.mApplication.mStringReset = byteBuffer.readByte();
+        this.log('mStringReset:' + this.mApplication.mStringReset);
+
+        if (this.mApplication.mLabelReset)
+        {
+		this.log('setting mLabelReset!!');
+                this.mApplication.mLabelReset.value = this.mApplication.mStringReset;
+        }
+        else
+        {
+        }
 }
 
 });

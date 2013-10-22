@@ -448,6 +448,33 @@ server.on("message", function (msg, rinfo)
                         }
                 });
         }
+	
+	//mMessageStandings
+        if (type == -94)
+        {
+                //var clientID = msg.readInt8(1);
+                var length   = msg.readInt8(1);
+
+                var standingsString = '';
+                for (i = 0; i < length; i++)
+                {
+                        var n = msg.readInt8(parseInt(2 + i));
+                        var c = String.fromCharCode(n);
+                        standingsString = standingsString + c;
+                }
+
+                var string = type + "," + standingsString;
+		console.log('standings:' + string);
+
+                io.sockets.clients().forEach(function (socket)
+                {
+			if (socket.mClientID > 0)
+                        //if (socket.mClientID == clientID)
+                        {
+                                socket.emit('news', string)
+                        }
+                });
+        }
 
 	//mMessageBattleStart
  	if (type == -75)

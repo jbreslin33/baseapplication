@@ -142,7 +142,11 @@ void RESET_GAME::execute(Game* game)
 				game->mClientStandingsVector.at(i)->mStandingsSent = true;
 				areWeDone = false;
 				LogString("id:%d",game->mClientStandingsVector.at(i)->id);		
-				game->reportStandings(game->mClientStandingsVector.at(i)->username);
+				std::string s = "Place: ";
+				s.append(StringConverter::toString(i));
+				s.append(" ");
+				s.append(game->mClientStandingsVector.at(i)->first_name);
+				game->reportStandings(s);
 				i = 5000;
 			}
 		}

@@ -89,7 +89,21 @@ window.addEvent('domready', function()
                                 mApplication.log('no game yet on client!');
                         }
                 }
- 		
+ 
+                //mMessageReportStandings
+                if (type == -94)
+                {
+			mApplication.log('mMessageReportStandings in main');		i
+                        if (mApplication.mGame)
+                        {
+                                mApplication.mGame.setStandings(byteBuffer);
+                        }
+                        else
+                        {
+                                mApplication.log('no game yet on client!');
+                        }
+                }
+	
 		//mMessageCorrectAnswerEnd
                 if (type == -63)
                 {
