@@ -135,6 +135,7 @@ int ShapePartido::setFlag()
 	//score
         if (mClientPartido->mBattle)
         {
+		LogString("set battle flag");
                 mClientPartido->mBattle = false;
                 flags |= mCommandBattle;
         }

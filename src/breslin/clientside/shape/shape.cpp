@@ -120,7 +120,6 @@ void Shape::setText(ByteBuffer* byteBuffer)
 
 void Shape::setText(std::string string)
 {
-	LogString("Shape::setText");
         mText.clear();
 	mText.append(string);
         clearTitle(); //empty title string so it can be filled anew

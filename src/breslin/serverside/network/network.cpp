@@ -276,7 +276,7 @@ void Network::sendPacketTo(Client* client, Message* message)
         if(type > 0)
         {
                 mServer->mOutgoingSequence++;
-		LogString("mOutgoingSequence:%d",mServer->mOutgoingSequence);
+		//LogString("mOutgoingSequence:%d",mServer->mOutgoingSequence);
         }
 }
 
