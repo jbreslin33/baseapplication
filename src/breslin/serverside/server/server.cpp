@@ -653,7 +653,8 @@ void Server::sendCommand(Game* game)
         //this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
         for (unsigned int j = 0; j < game->mShapeVector.size(); j++)
         {                         //the client to send to's message        //the shape command it's about
-                game->mShapeVector.at(j)->addToMoveMessage(&mMessage);
+                int flag = game->mShapeVector.at(j)->setFlag();
+                game->mShapeVector.at(j)->addToMoveMessage(flag,&mMessage);
         }
 
         sendPackets();

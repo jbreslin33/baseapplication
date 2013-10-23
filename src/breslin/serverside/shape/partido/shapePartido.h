@@ -19,6 +19,9 @@ ShapePartido(unsigned int index, GamePartido* gamePartido, ClientPartido* client
 
 StateMachine<ShapePartido>* mShapePartidoStateMachine;
 
+//network flags
+static const char mCommandBattle        = 64;
+
 GamePartido*   mGamePartido;
 ClientPartido* mClientPartido;
 ShapePartido*  mOpponent;
@@ -29,6 +32,9 @@ ComputerPartido* mComputerPartido;
 virtual void update();
 virtual bool handleLetter(Letter* letter);
 virtual void collision(Shape* shape);
+
+virtual int setFlag();
+virtual void addToMoveMessage(int flag, Message* message);
 
 };
 

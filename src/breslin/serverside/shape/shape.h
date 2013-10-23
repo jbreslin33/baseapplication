@@ -130,7 +130,7 @@ Shape* mTimeoutShape;
 
 	//delta move command
 virtual int  setFlag();
-virtual void addToMoveMessage(Message* message);
+virtual void addToMoveMessage(int flags, Message* message);
 };
 
 #endif

@@ -339,6 +339,10 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
                 s.append(StringConverter::toString(mCommandToRunOnShape->mScore));
                 setText(s);
 	}
+	if (flags & mCommandBattle)
+	{
+		LogString("BATTLE START OR END");
+	}
 	
         if (mServerCommandCurrent->mFrameTime != 0) 
         {

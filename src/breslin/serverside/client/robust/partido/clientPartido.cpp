@@ -24,6 +24,9 @@ ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *addr
 	//game
 	mGamePartido = NULL;
 
+	//battle
+	mBattle = false;
+
 	//test
 	mTest = new Test(this);
 

@@ -117,3 +117,27 @@ void ShapePartido::collision(Shape* shape)
 	mTimeoutShape = shape;
 }
 
+void ShapePartido::addToMoveMessage(int flags, Message* message)
+{
+	Shape::addToMoveMessage(flags,message);
+
+	//battle ..if not in one start one if your in one end it.
+        if(flags & mCommandBattle)
+        {
+                message->WriteByte(mClientPartido->mServerPartido->mMessageBattle);
+        }
+}
+
+int ShapePartido::setFlag()
+{
+	int flags = Shape::setFlag();
+
+	//score
+        if (mClientPartido->mBattle)
+        {
+                mClientPartido->mBattle = false;
+                flags |= mCommandBattle;
+        }
+
+        return flags;
+}

@@ -66,7 +66,8 @@ void INIT_COMBATANT::execute(Combatant* combatant)
 	if (combatant->mBattle->mStateMachine->currentState() == NORMAL_BATTLE::Instance())
 	{
 		//let internet client know to start a battle
-		combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleStart);
+	//	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleStart);
+		combatant->mClientPartido->mBattle = true; //this should fire of command to start battle if not in one
                 combatant->mStateMachine->changeState(NORMAL_COMBATANT::Instance());
 	}               
 }

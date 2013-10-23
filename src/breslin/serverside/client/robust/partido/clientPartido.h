@@ -39,6 +39,9 @@ GamePartido* mGamePartido;
 GamePartido* getGame();
 virtual void setGame(int gameID);
 
+//battle
+bool mBattle;
+
 //shape
 ShapePartido* mShapePartido;
 void setShape(ShapePartido* shapePartido);

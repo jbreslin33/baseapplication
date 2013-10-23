@@ -39,6 +39,7 @@ public:
 	//battle
 	static const int mMessageBattleStart = -75; 
 	static const int mMessageBattleEnd   = -74; 
+	static const int mMessageBattle   = -71; 
 
 	//schools
         std::vector<std::string> mSchoolVector;

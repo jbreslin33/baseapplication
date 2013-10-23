@@ -214,17 +214,11 @@ int Shape::setFlag()
 		flags |= mCommandScore;
 	}
 
-	//if(mGame->mFrameTime != mGame->mFrameTimeLast)
-	//{
-	//	flags |= mCommandFrameTime;
-	//}		
 	return flags;
 }
 
-void Shape::addToMoveMessage(Message* message)
+void Shape::addToMoveMessage(int flags, Message* message)
 {
-	int flags = setFlag();
-
 	message->WriteByte(mIndex);
 
 	// Flags
@@ -259,13 +253,6 @@ void Shape::addToMoveMessage(Message* message)
 	{
 		message->WriteByte(mClient->mScore);
 	}	
-	
-
-	//frameTime
-	//if(flags & mGame->mCommandFrameTime)
-	//{
-	//	message->WriteByte(mGame->mFrameTime);
-	//}
 }
 
 //to everyone
