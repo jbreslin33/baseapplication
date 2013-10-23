@@ -344,7 +344,7 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 	{
               //  mServerCommandCurrent->mBattle = mes->ReadByte();
 	//	mCommandToRunOnShape->mBattle = mServerCommandCurrent->mBattle;
-	//	LogString("BATTLE START OR END");
+		LogString("BATTLE START OR END");
 		//mApplication->mGame->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
 		mApplication->mGame->mBattle = mes->ReadByte();
 	}
