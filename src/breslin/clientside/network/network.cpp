@@ -54,9 +54,6 @@ Network::Network(ApplicationBreslin* application, const char serverIP[32], int s
 	mServerIP = serverIP;
 	mServerPort = serverPort;
 
-	//sequences
-	mIncomingSequence		= 0;
-
 #ifdef WIN32
 	mDreamWinSock = new DreamWinSock();
 #else
@@ -294,19 +291,17 @@ void Network::checkPacketSequence(ByteBuffer *mes)
 	// Check if the type is a positive number
 	// = is the packet sequenced
 
-	if(type > 0)
+	if(type == 1)
 	{
 		signed short sequence		= mes->ReadShort();
-
 		if(sequence <= mIncomingSequence)
 		{
+			LogString("type:%d",type);
 			LogString("Client: (sequence: %d <= incoming seq: %d)",
 				sequence, mIncomingSequence);
 			mIgnorePacket = true;	
 		}
-
 		mDroppedPackets = sequence - mIncomingSequence + 1;
-
 		mIncomingSequence = sequence;
 	}
 }
