@@ -49,6 +49,9 @@ Game::Game(ApplicationBreslin* application)
 	mKeyCounterClockwise = 16;
 	mKeyClockwise = 32;
 
+	//mBattle
+	mBattle = 0;
+
 	//input
 	mKeyCurrent = 0;
 	mKeyLast = 0;

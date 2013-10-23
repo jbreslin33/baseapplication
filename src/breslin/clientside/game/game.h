@@ -64,6 +64,9 @@ int mKeyLeft;
 int mKeyRight;
 int mKeyCounterClockwise;
 int mKeyClockwise;
+
+//battle
+int mBattle;
 	
 //key input
 int mKeyCurrent;   

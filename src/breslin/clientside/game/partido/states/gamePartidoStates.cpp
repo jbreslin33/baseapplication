@@ -36,6 +36,11 @@ void BATTLE_OFF::enter(GamePartido* gamePartido)
 }
 void BATTLE_OFF::execute(GamePartido* gamePartido)
 {
+	if (gamePartido->mBattle == 1)
+	{
+                gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
+	}
+
 }
 void BATTLE_OFF::exit(GamePartido* gamePartido)
 {

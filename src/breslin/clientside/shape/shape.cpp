@@ -31,6 +31,9 @@
 //animatin
 #include "../animation/abilityAnimationOgre.h"
 
+//
+
+
 Shape::Shape(ApplicationBreslin* application, ByteBuffer* byteBuffer, bool isGhost)
 {
 	mEntity = NULL;
@@ -339,10 +342,11 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 	}
 	if (flags & mCommandBattle)
 	{
-                mServerCommandCurrent->mBattle = mes->ReadByte();
-		mCommandToRunOnShape->mBattle = mServerCommandCurrent->mBattle;
-		LogString("BATTLE START OR END");
-		mApplication->mGame->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
+              //  mServerCommandCurrent->mBattle = mes->ReadByte();
+	//	mCommandToRunOnShape->mBattle = mServerCommandCurrent->mBattle;
+	//	LogString("BATTLE START OR END");
+		//mApplication->mGame->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
+		mApplication->mGame->mBattle = mes->ReadByte();
 	}
 	
         if (mServerCommandCurrent->mFrameTime != 0) 

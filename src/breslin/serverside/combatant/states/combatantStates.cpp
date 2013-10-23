@@ -67,7 +67,7 @@ void INIT_COMBATANT::execute(Combatant* combatant)
 	{
 		//let internet client know to start a battle
 	//	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleStart);
-		combatant->mClientPartido->mBattle = 1; 
+		combatant->mClientPartido->mBattle = 2; 
                 combatant->mStateMachine->changeState(NORMAL_COMBATANT::Instance());
 	}               
 }
