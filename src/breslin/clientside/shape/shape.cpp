@@ -327,7 +327,6 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 
 	if (flags & mCommandScore)
 	{
-		mServerCommandCurrent->mScore = mServerCommandCurrent->mScore;
                 mServerCommandCurrent->mScore = mes->ReadByte();
 		mCommandToRunOnShape->mScore = mServerCommandCurrent->mScore;
 	
@@ -340,7 +339,10 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 	}
 	if (flags & mCommandBattle)
 	{
+                mServerCommandCurrent->mBattle = mes->ReadByte();
+		mCommandToRunOnShape->mBattle = mServerCommandCurrent->mBattle;
 		LogString("BATTLE START OR END");
+		mApplication->mGame->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
 	}
 	
         if (mServerCommandCurrent->mFrameTime != 0) 

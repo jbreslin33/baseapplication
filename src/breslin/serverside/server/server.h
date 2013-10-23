@@ -157,7 +157,7 @@ public:
 	virtual void parsePacket(Message *mes, struct sockaddr *address);
 
         //commands
-        void storeCommands(Shape* shape);
+        virtual void storeCommands(Shape* shape);
 	void sendCommand(Game* game);
 };
 

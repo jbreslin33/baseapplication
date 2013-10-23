@@ -10,6 +10,7 @@
 #include "../../shape/shape.h"
 #include "../../question/question.h"
 #include "../../test/test.h"
+#include "../../shape/partido/shapePartido.h"
 
 ServerPartido::ServerPartido(Ogre::Root* root, const char *localIP, int serverPort) 
 :
@@ -307,4 +308,8 @@ void ServerPartido::getSchools()
 
         PQfinish(conn);
 }
-
+void ServerPartido::storeCommands(ShapePartido* shapePartido)
+{
+	Server::storeCommands(shapePartido);
+        shapePartido->mClientPartido->mBattleLast = shapePartido->mClientPartido->mBattle;
+}

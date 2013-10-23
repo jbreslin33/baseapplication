@@ -158,6 +158,7 @@ void Server::processGames(int msec)
 void Server::sendCommands()
 {
         //send positions and exact frame time the calcs where done on which is mFrameTime
+	LogString("mGameVector.size:%d",mGameVector.size());
  	for (unsigned int i = 0; i < mGameVector.size(); i++)
         {
 		sendCommand(mGameVector.at(i));
@@ -670,9 +671,12 @@ void Server::storeCommands(Shape* shape)
 {
         shape->mClient->mKeyLast = shape->mClient->mKey;
 
+        shape->mClient->mScoreLast = shape->mClient->mScore;
+
         shape->mMove->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
 
         shape->mRotation->mRotationLast->copyValuesFrom(shape->mRotation->mRotation);
+
 }
 
 

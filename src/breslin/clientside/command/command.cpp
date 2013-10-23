@@ -9,6 +9,7 @@ Command::Command()
 
 	mRotationSpeed = 0.0f;	
 	mScore = 0;
+	mBattle = 0;
 }
 
 Command::~Command()

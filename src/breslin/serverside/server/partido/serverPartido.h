@@ -6,6 +6,7 @@
 class GamePartido;
 class ClientPartido;
 class Question;
+class ShapePartido;
 
 class ServerPartido : public Server
 {
@@ -56,6 +57,9 @@ public:
         virtual void processGames(int msec);
         virtual void processClients();
         virtual void sendCommands();
+
+ 	virtual void storeCommands(ShapePartido* shapePartido);
+
 
 };
 

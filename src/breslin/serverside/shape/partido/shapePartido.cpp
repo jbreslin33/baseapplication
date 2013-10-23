@@ -132,11 +132,10 @@ int ShapePartido::setFlag()
 {
 	int flags = Shape::setFlag();
 
-	//score
-        if (mClientPartido->mBattle)
+	//battle outOfBattle = 1...inbattle =2 ...answerQuestion = 3..showCorrectAnser = 4
+        if (mClientPartido->mBattle != mClientPartido->mBattleLast)
         {
 		LogString("set battle flag");
-                mClientPartido->mBattle = false;
                 flags |= mCommandBattle;
         }
 
