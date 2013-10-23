@@ -663,20 +663,22 @@ void Server::sendCommand(Game* game)
         // Store the sent command in
         for (unsigned int i = 0; i < game->mShapeVector.size(); i++)
         {
-                storeCommands(game->mShapeVector.at(i));
+                storeCommands();
         }
+
+
 }
 
-void Server::storeCommands(Shape* shape)
+void Server::storeCommands()
 {
-        shape->mClient->mKeyLast = shape->mClient->mKey;
-
-        shape->mClient->mScoreLast = shape->mClient->mScore;
-
-        shape->mMove->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
-
-        shape->mRotation->mRotationLast->copyValuesFrom(shape->mRotation->mRotation);
-
+        for (unsigned int i = 0; i < mGameVector.at(0)->mShapeVector.size(); i++)
+	{
+                Shape* shape = mGameVector.at(0)->mShapeVector.at(i);
+        	shape->mClient->mKeyLast = shape->mClient->mKey;
+        	shape->mClient->mScoreLast = shape->mClient->mScore;
+        	shape->mMove->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
+        	shape->mRotation->mRotationLast->copyValuesFrom(shape->mRotation->mRotation);
+	}
 }
 
 

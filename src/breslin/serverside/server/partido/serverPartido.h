@@ -40,7 +40,7 @@ public:
 	//battle
 	static const int mMessageBattleStart = -75; 
 	static const int mMessageBattleEnd   = -74; 
-	static const int mMessageBattle   = -71; 
+	static const int mMessageBattle      = -71; 
 
 	//schools
         std::vector<std::string> mSchoolVector;
@@ -58,7 +58,7 @@ public:
         virtual void processClients();
         virtual void sendCommands();
 
- 	virtual void storeCommands(ShapePartido* shapePartido);
+ 	virtual void storeCommands();
 
 
 };

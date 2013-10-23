@@ -308,8 +308,17 @@ void ServerPartido::getSchools()
 
         PQfinish(conn);
 }
-void ServerPartido::storeCommands(ShapePartido* shapePartido)
+void ServerPartido::storeCommands()
 {
-	Server::storeCommands(shapePartido);
-        shapePartido->mClientPartido->mBattleLast = shapePartido->mClientPartido->mBattle;
+	Server::storeCommands();
+	if (mGameVector.size() > 0)
+	{
+		GamePartido* gamePartido = (GamePartido*)mGameVector.at(0);
+        	for (unsigned int i = 0; i < gamePartido->mShapePartidoVector.size(); i++)
+        	{
+               		ShapePartido* shapePartido = gamePartido->mShapePartidoVector.at(i);
+        		shapePartido->mClientPartido->mBattleLast = shapePartido->mClientPartido->mBattle;
+        	}
+	}
 }
+
