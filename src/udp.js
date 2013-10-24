@@ -754,6 +754,13 @@ server.on("message", function (msg, rinfo)
         				dataString = dataString + "," + msg.readInt8(count);
 					count++;
 				}	
+				
+				if (flags & mCommandBattle)
+				{
+					console.log("mCommandBattle flag set in udp.js");	
+        				dataString = dataString + "," + msg.readInt8(count);
+					count++;
+				}	
 	
 			} //  end while count < length
 		

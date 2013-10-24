@@ -261,6 +261,7 @@ parseDeltaByteBuffer: function(byteBuffer)
         var moveYChanged = true;
        	var moveZChanged = true;
        	var scoreChanged = true;
+       	var battleChanged = true;
 
 	flags = byteBuffer.readByte();
 	if (this.mIndex == 1)
@@ -311,6 +312,7 @@ parseDeltaByteBuffer: function(byteBuffer)
                 this.mServerCommandLast.mRotation.z = this.mServerCommandCurrent.mRotation.z;
                 this.mServerCommandCurrent.mRotation.z = byteBuffer.readByte();
         }
+
         if(flags & this.mCommandScore)
         {
                 this.mServerCommandLast.mScore = this.mServerCommandCurrent.mScore;
@@ -322,6 +324,17 @@ parseDeltaByteBuffer: function(byteBuffer)
 	{
 		scoreChanged = false;
 	}
+        
+	if(flags & this.mCommandBattle)
+        {
+                this.mGame.mBattle = byteBuffer.readByte();
+		this.setText('' + this.mStringUsername + ':' + this.mGame.mBattle);
+	}
+	else
+	{
+		scoreChanged = false;
+	}
+
 
         this.mServerCommandCurrent.mFrameTime = this.mApplication.mGame.mFrameTimeServer;
         this.mCommandToRunOnShape.mFrameTime = this.mServerCommandCurrent.mFrameTime;
