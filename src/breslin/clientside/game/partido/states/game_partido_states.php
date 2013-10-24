@@ -24,6 +24,11 @@ enter: function(gamePartido)
 
 execute: function(gamePartido)
 {
+	if (gamePartido.mBattle == 2)
+        {
+		this.log('hellllllllllllllllllllllll');
+                gamePartido.mPartidoStateMachine.changeState(gamePartido.mANSWER_QUESTION);
+        }
 },	
 
 exit: function(gamePartido)
@@ -90,6 +95,11 @@ execute: function(gamePartido)
 */
 
 	gamePartido.mApplicationPartido.mLabelAnswer.focus();
+  	
+	if (gamePartido.mBattle == 3)
+        {
+                gamePartido.mPartidoStateMachine.changeState(gamePartido.mBATTLE_OFF);
+        }
 
 	if (gamePartido.mCorrectAnswerStart)
         {
@@ -150,6 +160,11 @@ enter: function(gamePartido)
 
 execute: function(gamePartido)
 {
+	if (gamePartido.mBattle == 3)
+        {
+                gamePartido.mPartidoStateMachine.changeState(gamePartido.mBATTLE_OFF);
+        }
+
  	if (gamePartido.mCorrectAnswerEnd)
         {
                 gamePartido.mPartidoStateMachine.changeState(gamePartido.mANSWER_QUESTION);

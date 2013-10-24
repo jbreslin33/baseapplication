@@ -16,6 +16,7 @@ initialize: function(application, byteBuffer, isGhost)
 	this.mCommandRotationX = 8;
 	this.mCommandRotationZ = 16;
 	this.mCommandScore     = 32;
+	this.mCommandBattle    = 64;
 
  	this.mIsGhost = isGhost;
 	this.mAnimate = false;
@@ -327,12 +328,12 @@ parseDeltaByteBuffer: function(byteBuffer)
         
 	if(flags & this.mCommandBattle)
         {
-                this.mGame.mBattle = byteBuffer.readByte();
-		this.setText('' + this.mStringUsername + ':' + this.mGame.mBattle);
+                this.mApplication.mGame.mBattle = byteBuffer.readByte();
+		this.setText('' + this.mStringUsername + ':' + this.mApplication.mGame.mBattle);
 	}
 	else
 	{
-		scoreChanged = false;
+		battleChanged = false;
 	}
 
 

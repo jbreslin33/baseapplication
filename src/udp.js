@@ -57,6 +57,7 @@ mCommandOriginZ      = 4;
 mCommandRotationX    = 8;
 mCommandRotationZ    = 16;
 mCommandScore        = 32;
+mCommandBattle       = 64;
 
 //app.listen(mListenPort);
 
