@@ -34,14 +34,15 @@ void BATTLE_OFF::enter(GamePartido* gamePartido)
 		gamePartido->mShapeVector->at(i)->setVisible(true);
 	}
 }
+
 void BATTLE_OFF::execute(GamePartido* gamePartido)
 {
-	if (gamePartido->mBattle == 1)
+	if (gamePartido->mBattle == 2)
 	{
                 gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
 	}
-
 }
+
 void BATTLE_OFF::exit(GamePartido* gamePartido)
 {
 	for (unsigned int i = 0; i < gamePartido->mShapeVector->size(); i++)

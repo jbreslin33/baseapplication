@@ -125,7 +125,7 @@ void ShapePartido::addToMoveMessage(int flags, Message* message)
         if(flags & mCommandBattle)
         {
 		LogString("flag set to mCommandBattle");
-                message->WriteByte(mClientPartido->mServerPartido->mMessageBattle);
+                message->WriteByte(mClientPartido->mBattle);
         }
 }
 
