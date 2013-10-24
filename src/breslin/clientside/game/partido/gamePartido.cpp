@@ -87,7 +87,7 @@ void GamePartido::checkByteBuffer(ByteBuffer* byteBuffer)
                         break;
 
                 case mMessageBattleEnd:
- 			mPartidoStateMachine->changeState(BATTLE_OFF::Instance());                        
+ 			//mPartidoStateMachine->changeState(BATTLE_OFF::Instance());                        
 			break;
                 
 		case mMessageCorrectAnswerStart:

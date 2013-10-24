@@ -81,6 +81,11 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 {
         ApplicationPartido* app = gamePartido->mApplicationPartido;
 
+	if (gamePartido->mBattle == 3)
+	{
+                gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
+	}
+
         if (gamePartido->mCorrectAnswerStart)
         {
                 gamePartido->mPartidoStateMachine->changeState(SHOWCORRECTANSWER_PARTIDO_GAME::Instance());
@@ -167,6 +172,11 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::enter(GamePartido* gamePartido)
 void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
+	
+	if (gamePartido->mBattle == 3)
+	{
+                gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
+	}
 
         if (gamePartido->mCorrectAnswerEnd)
         {
