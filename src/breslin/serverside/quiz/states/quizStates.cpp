@@ -193,7 +193,6 @@ void SHOW_CORRECT_ANSWER::enter(Quiz* quiz)
 	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
 	{
 	}
-	//quiz->mTest->mClientPartido->sendSimpleMessage(quiz->mTest->mClientPartido->mServerPartido->mMessageCorrectAnswerStart);
         quiz->mCorrectAnswerStartTime = quiz->mCombatant->mBattle->mGamePartido->mGameTime;
 	quiz->mTest->sendCorrectAnswer(quiz->mTest->mQuestionID);
 }

@@ -66,7 +66,6 @@ void INIT_COMBATANT::execute(Combatant* combatant)
 	if (combatant->mBattle->mStateMachine->currentState() == NORMAL_BATTLE::Instance())
 	{
 		//let internet client know to start a battle
-	//	combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleStart);
 		combatant->mClientPartido->mDeltaCode = combatant->mClientPartido->mServerPartido->mMessageBattleStart; 
                 combatant->mStateMachine->changeState(NORMAL_COMBATANT::Instance());
 	}               
@@ -125,7 +124,6 @@ void YIELD::enter(Combatant* combatant)
 	if (combatant->mClientPartido->mShape->mIndex)
 	{
 	}
-	//combatant->mClientPartido->sendSimpleMessage(combatant->mClientPartido->mServerPartido->mMessageBattleEnd);
 	combatant->mClientPartido->mDeltaCode = combatant->mClientPartido->mServerPartido->mMessageBattleEnd;
 
         if (combatant->mScore > combatant->mFoe->mScore)
