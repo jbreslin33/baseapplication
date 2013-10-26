@@ -37,7 +37,7 @@ void BATTLE_OFF::enter(GamePartido* gamePartido)
 
 void BATTLE_OFF::execute(GamePartido* gamePartido)
 {
-	if (gamePartido->mBattle == 2)
+	if (gamePartido->mBattle == gamePartido->mMessageBattleStart)
 	{
                 gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
 	}
@@ -81,7 +81,7 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 {
         ApplicationPartido* app = gamePartido->mApplicationPartido;
 
-	if (gamePartido->mBattle == 3)
+	if (gamePartido->mBattle == gamePartido->mMessageBattleEnd)
 	{
                 gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
 	}
@@ -173,7 +173,7 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
 	
-	if (gamePartido->mBattle == 3)
+	if (gamePartido->mBattle == gamePartido->mMessageBattleEnd)
 	{
                 gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
 	}
