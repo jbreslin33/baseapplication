@@ -125,7 +125,7 @@ void ShapePartido::addToMoveMessage(int flags, Message* message)
         if(flags & mCommandBattle)
         {
 		LogString("flag set to mCommandBattle");
-                message->WriteByte(mClientPartido->mBattle);
+                message->WriteByte(mClientPartido->mDeltaCode);
         }
 }
 
@@ -134,7 +134,7 @@ int ShapePartido::setFlag()
 	int flags = Shape::setFlag();
 
 	//battle outOfBattle = 1...inbattle =2 ...answerQuestion = 3..showCorrectAnser = 4
-        if (mClientPartido->mBattle != mClientPartido->mBattleLast)
+        if (mClientPartido->mDeltaCode != mClientPartido->mDeltaCodeLast)
         {
 		LogString("set battle flag");
                 flags |= mCommandBattle;

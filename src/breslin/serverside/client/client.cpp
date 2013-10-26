@@ -57,6 +57,9 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 {
 	mScore = 0;	
 	mScoreLast = 0;	
+
+	mDeltaCode = 0;
+	mDeltaCodeLast = 0;
 	
 	mUtility = new Utility;
 

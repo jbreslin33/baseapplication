@@ -317,7 +317,7 @@ void ServerPartido::storeCommands()
         	for (unsigned int i = 0; i < gamePartido->mShapePartidoVector.size(); i++)
         	{
                		ShapePartido* shapePartido = gamePartido->mShapePartidoVector.at(i);
-        		shapePartido->mClientPartido->mBattleLast = shapePartido->mClientPartido->mBattle;
+        		shapePartido->mClientPartido->mDeltaCodeLast = shapePartido->mClientPartido->mDeltaCode;
         	}
 	}
 }
