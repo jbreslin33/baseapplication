@@ -66,14 +66,6 @@ void RESET_GAME::enter(Game* game)
         app->createResetScreen();
         app->showResetScreen();
 
-	if (game->mControlObject)
-	{
-		if (game->mControlObject->mCommandToRunOnShape->mDeltaCode == game->mApplication->mMessageGameStart)
-		{
-			game->mStateMachine->changeState(PLAY_GAME::Instance());
-		}
-	}
-
 	//set shapes visible and reset scores  	
 	for (unsigned int i = 0; i < game->mShapeVector->size(); i++)
         {
@@ -82,6 +74,14 @@ void RESET_GAME::enter(Game* game)
 }
 void RESET_GAME::execute(Game* game)
 {
+	if (game->mControlObject)
+	{
+		if (game->mControlObject->mCommandToRunOnShape->mDeltaCode == game->mApplication->mMessageGameStart)
+		{
+			game->mStateMachine->changeState(PLAY_GAME::Instance());
+		}
+	}
+
 }
 void RESET_GAME::exit(Game* game)
 {
