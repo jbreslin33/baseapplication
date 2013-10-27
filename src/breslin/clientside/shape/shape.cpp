@@ -146,9 +146,9 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 	mLocal	=    byteBuffer->ReadByte();
 	if (mLocal == 1)
 	{
-		LogString("mControlObject set..");
 		if (!mIsGhost)
 		{
+			LogString("mControlObject set..");
 			mApplication->mGame->mControlObject = this;
 		}
 	}	
