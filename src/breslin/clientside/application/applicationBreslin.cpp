@@ -104,6 +104,7 @@ void ApplicationBreslin::processUpdate()
 **********************************/
 void ApplicationBreslin::createGame()
 {
+	LogString("ApplicationBreslin::createGame");
 	if (!mGame)
 	{
 		mGame = new Game(this);

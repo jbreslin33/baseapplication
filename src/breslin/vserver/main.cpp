@@ -59,7 +59,6 @@ int main(int argc, char **argv)
 		Server* server = new Server(root,"",intValue);	
 		server->mGame = new Game(server,1);
 		server->createClients();
-
 		server->mGame->createShapes();
 
 		oldTime = server->mNetwork->getCurrentSystemTime();

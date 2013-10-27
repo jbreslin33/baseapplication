@@ -37,6 +37,7 @@ ApplicationPartido::~ApplicationPartido()
 **********************************/
 void ApplicationPartido::createGame()
 {
+ 	LogString("ApplicationPartido::createGame");
 	if (!mGamePartido)
 	{
         	mGamePartido = new GamePartido(this);

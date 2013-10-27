@@ -40,10 +40,12 @@ void BATTLE_OFF::enter(GamePartido* gamePartido)
 
 void BATTLE_OFF::execute(GamePartido* gamePartido)
 {
-	//LogString("mDeltaCode:%d",gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode);
-	if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleStart)
+	if (gamePartido->mControlObject)
 	{
-       		gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
+		if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleStart)
+		{
+       			gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
+		}
 	}
 }
 
@@ -85,9 +87,12 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 {
         ApplicationPartido* app = gamePartido->mApplicationPartido;
 
-	if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleEnd)
+	if (gamePartido->mControlObject)
 	{
-                gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
+		if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleEnd)
+		{
+                	gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
+		}
 	}
 
         if (gamePartido->mCorrectAnswerStart)
@@ -177,9 +182,12 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
 	
-	if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleEnd)
+	if (gamePartido->mControlObject)
 	{
-                gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
+		if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleEnd)
+		{
+                	gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
+		}
 	}
 
         if (gamePartido->mCorrectAnswerEnd)

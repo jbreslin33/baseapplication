@@ -336,6 +336,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 				delete letter;	
 				client->mGame = mGame;
 				client->mPlayed = true;
+				mGame->sendShapes(client);
 			}
 		}
 	}
@@ -361,6 +362,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         			mMailMan->deliver(client,letter);
 				delete letter;	
 				client->mGame = mGame;
+				mGame->sendShapes(client);
 			}
                 }
 	}
