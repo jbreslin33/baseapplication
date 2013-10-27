@@ -215,6 +215,10 @@ int Shape::setFlags()
         
 	if (mClient->mDeltaCode != mClient->mDeltaCodeLast)
         {
+		if (mClient->mDeltaCode == mGame->mServer->mMessageGameStart)
+		{
+			LogString("GAME START FOUND!!!!");
+		}
                 flags |= mCommandDeltaCode;
         }
 

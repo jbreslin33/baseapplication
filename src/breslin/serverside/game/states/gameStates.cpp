@@ -84,7 +84,11 @@ void NORMAL_GAME::enter(Game* game)
         {
                 game->mServer->mClientVector.at(i)->mScore = 0;
                 game->mServer->mClientVector.at(i)->mScoreLast = 0;
-                game->mServer->mClientVector.at(i)->mDeltaCode = game->mServer->mMessageGameStart;
+	
+		if (game->mServer->mClientVector.at(i)->mConnectionState == DREAMSOCK_CONNECTED)
+		{
+                	game->mServer->mClientVector.at(i)->mDeltaCode = game->mServer->mMessageGameStart;
+		}
         }
 }
 void NORMAL_GAME::execute(Game* game)
@@ -127,7 +131,14 @@ void RESET_GAME::enter(Game* game)
 void RESET_GAME::execute(Game* game)
 {
 	//send out standings here....
-	//do this one every mResetTime
+	
+	//this is where they want to move
+        for (unsigned int i = 0; i < game->mShapeVector.size(); i++)
+        {
+                game->mShapeVector.at(i)->update();
+                game->checkBounds(game->mShapeVector.at(i));
+        }
+
         if (game->mGameTime > game->mGameTimeEnd + game->mResetTime)
 	{
 		//go back in time for next one

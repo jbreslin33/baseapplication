@@ -638,8 +638,6 @@ void Server::sendCommand(Game* game)
         {
                 storeCommands();
         }
-
-
 }
 
 void Server::storeCommands()
