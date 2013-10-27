@@ -291,6 +291,7 @@ Vector3D* Game::getOpenPoint()
 
 void Game::sendShapes(ClientRobust* client)
 {
+	LogString("Game::sendShapes");
  	for (unsigned int i = 0; i < mShapeVector.size(); i++)
         {
   		mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
