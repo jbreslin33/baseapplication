@@ -43,29 +43,7 @@ void ServerPartido::processClients()
         }
 }
 
-void ServerPartido::processGames(int msec)
-{
-        //update games
-        for (unsigned int i = 0; i < mGamePartidoVector.size(); i++)
-        {
-                mGamePartidoVector.at(i)->update(msec);
-        }
-}
 
-void ServerPartido::sendCommands()
-{
-        //send positions and exact frame time the calcs where done on which is mFrameTime
-        for (unsigned int i = 0; i < mGamePartidoVector.size(); i++)
-        {
-                sendCommand(mGamePartidoVector.at(i));
-        }
-}
-
-void ServerPartido::addGame(GamePartido* gamePartido)
-{
-	Server::addGame(gamePartido);
-        mGamePartidoVector.push_back(gamePartido);
-}
 void ServerPartido::createClients()
 {
         PGconn          *conn;
@@ -133,11 +111,8 @@ void ServerPartido::createClients()
 		//client
                 ClientPartido* clientPartido = new ClientPartido(this,NULL,-2,true,a_int,bString,cString,dString,eString,fString,gString,hString,i_int);
 
-                //add Games
-                for (unsigned int i = 0; i < mGameVector.size(); i++)
-                {
-                        clientPartido->addGame(mGamePartidoVector.at(i));
-                }
+                clientPartido->mGamePartido = mGamePartido;
+                clientPartido->mGame = mGamePartido;
 
         }
         PQclear(res);
@@ -307,18 +282,5 @@ void ServerPartido::getSchools()
         PQclear(res);
 
         PQfinish(conn);
-}
-void ServerPartido::storeCommands()
-{
-	Server::storeCommands();
-	if (mGameVector.size() > 0)
-	{
-		GamePartido* gamePartido = (GamePartido*)mGameVector.at(0);
-        	for (unsigned int i = 0; i < gamePartido->mShapePartidoVector.size(); i++)
-        	{
-               		ShapePartido* shapePartido = gamePartido->mShapePartidoVector.at(i);
-        		shapePartido->mClientPartido->mDeltaCodeLast = shapePartido->mClientPartido->mDeltaCode;
-        	}
-	}
 }
 

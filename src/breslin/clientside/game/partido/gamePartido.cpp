@@ -51,8 +51,11 @@ GamePartido::~GamePartido()
 
 void GamePartido::processUpdate()
 {
-	Game::processUpdate();
-        mPartidoStateMachine->update();
+	if (mControlObject)
+	{
+		Game::processUpdate();
+        	mPartidoStateMachine->update();
+	}
 }
 
 void GamePartido::processMoveControls()

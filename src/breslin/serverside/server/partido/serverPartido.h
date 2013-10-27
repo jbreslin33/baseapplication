@@ -15,8 +15,7 @@ public:
 	~ServerPartido();
 
 	//games
-	void addGame(GamePartido* gamePartido);
-   	std::vector<GamePartido*> mGamePartidoVector;
+	GamePartido* mGamePartido;
 
    	//clients
 	void createClients();
@@ -54,12 +53,7 @@ public:
 	void parsePacket(Message *mes, struct sockaddr *address);
 
 	//updates
-        virtual void processGames(int msec);
         virtual void processClients();
-        virtual void sendCommands();
-
- 	virtual void storeCommands();
-
 
 };
 

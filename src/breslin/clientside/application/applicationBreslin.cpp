@@ -102,22 +102,12 @@ void ApplicationBreslin::processUpdate()
 /*********************************
 	GAME	
 **********************************/
-void ApplicationBreslin::setGame(Game* game)
-{
-	mGame = game;
-}
-
 void ApplicationBreslin::createGame()
 {
 	if (!mGame)
 	{
 		mGame = new Game(this);
 	}
-}
-
-Game* ApplicationBreslin::getGame()
-{
-	return mGame;
 }
 
 /*********************************
@@ -242,18 +232,18 @@ void ApplicationBreslin::checkForByteBuffer()
 
 		if (type == mMessageGameStart)
 		{
-			getGame()->mStateMachine->changeState(PLAY_GAME::Instance());
+			mGame->mStateMachine->changeState(PLAY_GAME::Instance());
 		}
 		
 		if (type == mMessageGameEnd)
 		{
-			getGame()->mStateMachine->changeState(RESET_GAME::Instance());
+			mGame->mStateMachine->changeState(RESET_GAME::Instance());
 		}
 
 		//pass on to game if there is one....
-		if (getGame())
+		if (mGame)
 		{
-			getGame()->checkByteBuffer(byteBuffer);
+			mGame->checkByteBuffer(byteBuffer);
 		}
         }
 }

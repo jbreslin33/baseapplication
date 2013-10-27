@@ -35,18 +35,13 @@ ApplicationPartido::~ApplicationPartido()
 /*********************************
         GAME
 **********************************/
-void ApplicationPartido::setGame(GamePartido* gamePartido)
-{
-        mGamePartido = gamePartido;
-	ApplicationBreslin::setGame(gamePartido);
-}
 void ApplicationPartido::createGame()
 {
 	if (!mGamePartido)
 	{
         	mGamePartido = new GamePartido(this);
 	}
-	setGame(mGamePartido);
+	mGame = mGamePartido;
 }
 
 bool ApplicationPartido::frameRenderingQueued(const Ogre::FrameEvent& evt)

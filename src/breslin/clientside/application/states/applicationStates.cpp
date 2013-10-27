@@ -249,7 +249,6 @@ void MAIN_APPLICATION::execute(ApplicationBreslin* application)
 	if (application->mButtonHit == application->mButtonJoinGameA)
         {
                 application->mButtonHit = NULL;
-                //application->setGame(new Game(application));
                 application->createGame();
                 application->sendJoinGame(application->mGameCode);
                 application->mStateMachine->changeState(PLAY_APPLICATION::Instance());
@@ -333,9 +332,9 @@ void PLAY_APPLICATION::execute(ApplicationBreslin* application)
         else
         {
                 //game
-                if (application->getGame())
+                if (application->mGame)
                 {
-                        application->getGame()->processUpdate();
+                        application->mGame->processUpdate();
                 }
         }
 
@@ -345,12 +344,6 @@ void PLAY_APPLICATION::exit(ApplicationBreslin* application)
 {
 	application->mPlayingGame = false;
         application->mLeaveGame = false;
-        if (application->getGame())
-        {
-                //application->getGame()->remove();
-                //application->setGame(NULL);
-        }
-
 }
 
 bool PLAY_APPLICATION::onLetter(ApplicationBreslin* application, Letter* letter)

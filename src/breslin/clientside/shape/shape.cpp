@@ -144,6 +144,11 @@ void Shape::parseSpawnByteBuffer(ByteBuffer* byteBuffer)
 	byteBuffer->BeginReading();
 	byteBuffer->ReadByte(); //should read -103 to add a shape..
 	mLocal	=    byteBuffer->ReadByte();
+	if (mLocal == 1)
+	{
+		LogString("mControlObject set..");
+		mApplication->mGame->mControlObject = this;
+	}	
 	mIndex	=    byteBuffer->ReadShort();
 
 	mSpawnPosition->x =   byteBuffer->ReadFloat();
@@ -340,13 +345,11 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
                 s.append(StringConverter::toString(mCommandToRunOnShape->mScore));
                 setText(s);
 	}
-	if (flags & mCommandBattle)
+	if (flags & mCommandDeltaCode)
 	{
-              //  mServerCommandCurrent->mBattle = mes->ReadByte();
-	//	mCommandToRunOnShape->mBattle = mServerCommandCurrent->mBattle;
-		LogString("BATTLE START OR END");
-		//mApplication->mGame->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
-		mApplication->mGame->mBattle = mes->ReadByte();
+		mServerCommandCurrent->mDeltaCode = mes->ReadByte();
+		mCommandToRunOnShape->mDeltaCode = mServerCommandCurrent->mDeltaCode;
+		LogString("flag mCommandDeltaCode%d",mServerCommandCurrent->mDeltaCode);	
 	}
 	
         if (mServerCommandCurrent->mFrameTime != 0) 

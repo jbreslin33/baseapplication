@@ -117,28 +117,3 @@ void ShapePartido::collision(Shape* shape)
 	mTimeoutShape = shape;
 }
 
-void ShapePartido::addToMoveMessage(int flags, Message* message)
-{
-	Shape::addToMoveMessage(flags,message);
-
-	//battle ..if not in one start one if your in one end it.
-        if(flags & mCommandBattle)
-        {
-		LogString("flag set to mCommandBattle");
-                message->WriteByte(mClientPartido->mDeltaCode);
-        }
-}
-
-int ShapePartido::setFlag()
-{
-	int flags = Shape::setFlag();
-
-	//battle outOfBattle = 1...inbattle =2 ...answerQuestion = 3..showCorrectAnser = 4
-        if (mClientPartido->mDeltaCode != mClientPartido->mDeltaCodeLast)
-        {
-		LogString("set battle flag");
-                flags |= mCommandBattle;
-        }
-
-        return flags;
-}

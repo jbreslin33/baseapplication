@@ -33,12 +33,7 @@ Utility* utility;
 Test* mTest;
 
 //game
-void addGame(GamePartido* gamePartido);
-std::vector<GamePartido*> mGamePartidoVector;
 GamePartido* mGamePartido;
-GamePartido* getGame();
-virtual void setGame(int gameID);
-
 
 //shape
 ShapePartido* mShapePartido;

@@ -44,11 +44,7 @@ int school_id;
 
 //game
 bool mInGame;
-std::vector<Game*> mGameVector;
-void addGame(Game* game);
 Game* mGame;
-Game* getGame();
-virtual void setGame(int gameID);
 bool mPlayed;
 bool mStandingsSent;
 

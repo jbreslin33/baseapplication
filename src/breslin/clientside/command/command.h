@@ -16,6 +16,6 @@ Vector3D* mVelocity; //this is calculated on the client side and not passed acro
 
 int mFrameTime;      //server frame time i.e time it took for shape to move from point to point.
 int mScore;
-int mBattle;
+int mDeltaCode;
 };
 #endif

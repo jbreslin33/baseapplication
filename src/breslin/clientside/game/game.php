@@ -6,9 +6,6 @@ initialize: function(application)
 	this.mDelayClick = 100;
 	this.mDelayClickCounter = 0;
 	
-	//battle
-	this.mBattle = 0;
-
 	//keys
  	this.mKeyArray     = new Array();
 

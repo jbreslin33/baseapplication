@@ -22,7 +22,6 @@ StateMachine<ApplicationPartido>* mPartidoStateMachine;
 
 //game partido
 GamePartido* mGamePartido;
-void setGame(GamePartido* gamePartido);
 virtual void createGame();
 
 //rendering

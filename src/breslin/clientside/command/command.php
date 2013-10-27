@@ -10,6 +10,7 @@ initialize: function()
 
 	this.mRotationSpeed = 0.0;	
 	this.mScore = 0;
+	this.mDeltaCode = 0;
 }
 
 

@@ -57,10 +57,6 @@ void GamePartido::update(int msec)
 	}
 }
 
-void GamePartido::sendShapes(ClientPartido* clientPartido)
-{
-	Game::sendShapes(clientPartido);
-}
 
 void GamePartido::endBattles()
 {

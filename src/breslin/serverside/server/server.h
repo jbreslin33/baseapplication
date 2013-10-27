@@ -58,8 +58,8 @@ public:
 	//games
 	std::vector<BaseEntity*> mBaseEntityVector;
 
-	//games
-	std::vector<Game*> mGameVector;
+	//game
+	Game* mGame;
 
 	//clients
 	std::vector<ClientRobust*> mClientVector;
@@ -139,12 +139,7 @@ public:
 
 	//update
 	void update(int msec);
-	virtual void processGames(int msec);
 	virtual void processClients();
-	virtual void sendCommands();
-
-	//game
-	void addGame(Game* game);	
 
 	//client
    	void createClients();

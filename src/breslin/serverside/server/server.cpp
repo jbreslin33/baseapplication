@@ -51,6 +51,8 @@ Server::Server(Ogre::Root* root, const char *localIP, int serverPort)
 	//ogre root
 	mRoot = root;
 
+	mGame = NULL;
+
 	//MailMan
 	mMailMan = new MailMan(this);
 
@@ -98,14 +100,6 @@ BaseEntity* Server::getBaseEntityFromID(int id)
         return NULL;
 }
 
-/*******************************************************
-		GAMES	
-********************************************************/
-
-void Server::addGame(Game* game)
-{
-	mGameVector.push_back(game);
-}
 
 /*******************************************************
 		UPDATES	
@@ -118,7 +112,7 @@ void Server::update(int msec)
 	
 	processClients();
 
-	processGames(msec);
+	mGame->update(msec);
 
         // Wait full 32 ms before allowing to send
         if(mFrameTime < mTickLength)
@@ -126,7 +120,7 @@ void Server::update(int msec)
                 return;
         }
 
-	sendCommands();
+	sendCommand(mGame);
 
         mFrameTimeLast = mFrameTime;
         mFrameTime = 0;
@@ -144,25 +138,6 @@ void Server::processClients()
 		mClientVectorTemp.at(i)->update();
 	}
 
-}
-
-void Server::processGames(int msec)
-{
-	//update games
-  	for (unsigned int i = 0; i < mGameVector.size(); i++)
-	{
-		mGameVector.at(i)->update(msec);
-	}
-}
-
-void Server::sendCommands()
-{
-        //send positions and exact frame time the calcs where done on which is mFrameTime
-	LogString("mGameVector.size:%d",mGameVector.size());
- 	for (unsigned int i = 0; i < mGameVector.size(); i++)
-        {
-		sendCommand(mGameVector.at(i));
-	}
 }
 
 /*******************************************************
@@ -235,10 +210,7 @@ void Server::createClients()
                 ClientRobust* clientRobust = new ClientRobust(this,NULL,-2,true,a_int,bString,cString,dString,eString,fString,gString,hString,i_int);
 
                 //add Games
-                for (unsigned int i = 0; i < mGameVector.size(); i++)
-                {
-                        clientRobust->addGame(mGameVector.at(i));
-                }
+                clientRobust->mGame = mGame;
 	}
         PQclear(res);
         PQfinish(conn);
@@ -362,7 +334,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         			Letter* letter = new Letter(client,&message);
         			mMailMan->deliver(client,letter);
 				delete letter;	
-				client->setGame(gameID);
+				client->mGame = mGame;
 				client->mPlayed = true;
 			}
 		}
@@ -388,7 +360,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         			Letter* letter = new Letter(client,&message);
         			mMailMan->deliver(client,letter);
 				delete letter;	
-				client->setGame(gameID);
+				client->mGame = mGame;
 			}
                 }
 	}
@@ -654,8 +626,7 @@ void Server::sendCommand(Game* game)
         //this is where you need to actually loop thru the shapes not the clients but put write to client mMessage
         for (unsigned int j = 0; j < game->mShapeVector.size(); j++)
         {                         //the client to send to's message        //the shape command it's about
-                int flag = game->mShapeVector.at(j)->setFlag();
-                game->mShapeVector.at(j)->addToMoveMessage(flag,&mMessage);
+                game->mShapeVector.at(j)->addToMoveMessage(&mMessage);
         }
 
         sendPackets();
@@ -671,13 +642,14 @@ void Server::sendCommand(Game* game)
 
 void Server::storeCommands()
 {
-        for (unsigned int i = 0; i < mGameVector.at(0)->mShapeVector.size(); i++)
+        for (unsigned int i = 0; i < mGame->mShapeVector.size(); i++)
 	{
-                Shape* shape = mGameVector.at(0)->mShapeVector.at(i);
+                Shape* shape = mGame->mShapeVector.at(i);
         	shape->mClient->mKeyLast = shape->mClient->mKey;
         	shape->mClient->mScoreLast = shape->mClient->mScore;
         	shape->mMove->mPositionLast->convertFromVector3(shape->mSceneNode->getPosition());
         	shape->mRotation->mRotationLast->copyValuesFrom(shape->mRotation->mRotation);
+		shape->mClient->mDeltaCodeLast = shape->mClient->mDeltaCode;
 	}
 }
 

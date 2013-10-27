@@ -79,7 +79,7 @@ static const char mCommandOriginZ      = 4;
 static const char mCommandRotationX    = 8;
 static const char mCommandRotationZ    = 16;
 static const char mCommandScore        = 32;
-static const char mCommandBattle       = 64;
+static const char mCommandDeltaCode    = 64;
 
 //spawn orientation
 Vector3D* mSpawnPosition;

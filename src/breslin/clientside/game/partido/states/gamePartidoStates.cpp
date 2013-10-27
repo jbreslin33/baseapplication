@@ -13,6 +13,9 @@
 //shape
 #include "../../../shape/shape.h"
 
+//shape
+#include "../../../command/command.h"
+
 //utility
 #include <math.h>
 
@@ -37,9 +40,10 @@ void BATTLE_OFF::enter(GamePartido* gamePartido)
 
 void BATTLE_OFF::execute(GamePartido* gamePartido)
 {
-	if (gamePartido->mBattle == gamePartido->mMessageBattleStart)
+	//LogString("mDeltaCode:%d",gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode);
+	if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleStart)
 	{
-                gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
+       		gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
 	}
 }
 
@@ -81,7 +85,7 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 {
         ApplicationPartido* app = gamePartido->mApplicationPartido;
 
-	if (gamePartido->mBattle == gamePartido->mMessageBattleEnd)
+	if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleEnd)
 	{
                 gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
 	}
@@ -173,7 +177,7 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
 	
-	if (gamePartido->mBattle == gamePartido->mMessageBattleEnd)
+	if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleEnd)
 	{
                 gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
 	}

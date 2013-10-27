@@ -57,13 +57,10 @@ int main(int argc, char **argv)
 	if (strcmp (argv[1],aServer) == 0)
 	{
 		Server* server = new Server(root,"",intValue);	
-		server->addGame(new Game(server,1));
+		server->mGame = new Game(server,1);
 		server->createClients();
 
-  		for (unsigned int i = 0; i < server->mGameVector.size(); i++)
-		{
-			server->mGameVector.at(i)->createShapes();
-		}
+		server->mGame->createShapes();
 
 		oldTime = server->mNetwork->getCurrentSystemTime();
 
@@ -97,13 +94,11 @@ int main(int argc, char **argv)
 	if (strcmp (argv[1],aServerPartido) == 0)
 	{
 		ServerPartido* server = new ServerPartido(root,"",intValue);	
-		server->addGame(new GamePartido(server,2));
+		server->mGamePartido = new GamePartido(server,2);
+		server->mGame = server->mGamePartido; 
 		server->createClients();
 
-                for (unsigned int i = 0; i < server->mGameVector.size(); i++)
-                {
-                        server->mGameVector.at(i)->createShapes();
-                }
+                server->mGamePartido->createShapes();
 
                 oldTime = server->mNetwork->getCurrentSystemTime();
 

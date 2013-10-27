@@ -53,6 +53,7 @@ static const char mCommandOriginZ      = 4;
 static const char mCommandRotationX    = 8;
 static const char mCommandRotationZ    = 16;
 static const char mCommandScore        = 32;
+static const char mCommandDeltaCode    = 64;
 
 
 //ogre scene stuff
@@ -129,8 +130,8 @@ virtual void collision(Shape* shape);
 Shape* mTimeoutShape;
 
 	//delta move command
-virtual int  setFlag();
-virtual void addToMoveMessage(int flags, Message* message);
+virtual int  setFlags();
+virtual void addToMoveMessage(Message* message);
 };
 
 #endif

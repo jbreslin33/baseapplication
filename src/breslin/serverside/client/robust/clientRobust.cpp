@@ -91,23 +91,6 @@ bool ClientRobust::handleLetter(Letter* letter)
 }
 
 
-void ClientRobust::addGame(Game* game)
-{
-        mGameVector.push_back(game);
-}
-
-void ClientRobust::setGame(int gameID)
-{
-        for (int i = 0; i < mGameVector.size(); i++)
-        {
-                if (mGameVector.at(i)->mID == gameID)
-                {
-                        mGame = mGameVector.at(i);
-                        mGame->sendShapes(this);
-                }
-        }
-}
-
 //shape
 void ClientRobust::setShape(Shape* shape)
 {

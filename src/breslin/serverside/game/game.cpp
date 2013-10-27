@@ -289,7 +289,7 @@ Vector3D* Game::getOpenPoint()
         }
 }
 
-void Game::sendShapes(Client* client)
+void Game::sendShapes(ClientRobust* client)
 {
  	for (unsigned int i = 0; i < mShapeVector.size(); i++)
         {
@@ -305,6 +305,7 @@ void Game::sendShapes(Client* client)
 		//local 
         	if (client == mShapeVector.at(i)->mClient)
         	{       
+			LogString("id is local:%d",client->id);
                 	mMessage.WriteByte(1);
         	}               
         	else    

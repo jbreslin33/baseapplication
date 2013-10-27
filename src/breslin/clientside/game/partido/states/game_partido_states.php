@@ -24,7 +24,7 @@ enter: function(gamePartido)
 
 execute: function(gamePartido)
 {
-	if (gamePartido.mBattle == gamePartido.mMessageBattleStart)
+	if (gamePartido.mControlObject.mCommandToRunOnShape.mDeltaCode == gamePartido.mMessageBattleStart)
         {
 		this.log('hellllllllllllllllllllllll');
                 gamePartido.mPartidoStateMachine.changeState(gamePartido.mANSWER_QUESTION);
@@ -96,7 +96,7 @@ execute: function(gamePartido)
 
 	gamePartido.mApplicationPartido.mLabelAnswer.focus();
   	
-	if (gamePartido.mBattle == gamePartido.mMessageBattleEnd)
+	if (gamePartido.mControlObject.mCommandToRunOnShape.mDeltaCode == gamePartido.mMessageBattleEnd)
         {
                 gamePartido.mPartidoStateMachine.changeState(gamePartido.mBATTLE_OFF);
         }
@@ -160,7 +160,7 @@ enter: function(gamePartido)
 
 execute: function(gamePartido)
 {
-	if (gamePartido.mBattle == gamePartido.mMessageBattleEnd)
+	if (gamePartido.mControlObject.mCommandToRunOnShape.mDeltaCode == gamePartido.mMessageBattleEnd)
         {
                 gamePartido.mPartidoStateMachine.changeState(gamePartido.mBATTLE_OFF);
         }

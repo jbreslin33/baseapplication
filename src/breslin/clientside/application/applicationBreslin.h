@@ -55,9 +55,7 @@ Network*     mNetwork;
 
 //game
 Game* mGame;
-void setGame(Game* game);
 virtual void createGame();
-Game* getGame();
 int mGameCode;
 
 //state transition variables

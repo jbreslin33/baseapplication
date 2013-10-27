@@ -179,7 +179,7 @@ void Shape::update()
 	}
 }
 
-int Shape::setFlag()
+int Shape::setFlags()
 {
 	int flags = 0;
 
@@ -212,12 +212,19 @@ int Shape::setFlag()
 	{
 		flags |= mCommandScore;
 	}
+        
+	if (mClient->mDeltaCode != mClient->mDeltaCodeLast)
+        {
+                LogString("set deltaCode flag");
+                flags |= mCommandDeltaCode;
+        }
 
 	return flags;
 }
 
-void Shape::addToMoveMessage(int flags, Message* message)
+void Shape::addToMoveMessage(Message* message)
 {
+	int flags = setFlags();
 	message->WriteByte(mIndex);
 
 	// Flags
@@ -252,6 +259,12 @@ void Shape::addToMoveMessage(int flags, Message* message)
 	{
 		message->WriteByte(mClient->mScore);
 	}	
+        
+	if(flags & mCommandDeltaCode)
+        {
+                LogString("flag set to mCommandDeltaCode");
+                message->WriteByte(mClient->mDeltaCode);
+        }
 }
 
 //to everyone
@@ -259,25 +272,6 @@ void Shape::setText(std::string text)
 {
 	mText.clear();
 	mText.append(text);
-/*
-	mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
-       	mMessage.WriteByte(mMessageSetText); // add type
-
-	//index id
-	mMessage.WriteByte(mIndex);
-
-	//username
-       	int length = text.length();  
-       	mMessage.WriteByte(length); //send length
-
-       	//loop thru length and write it
-       	for (int b=0; b < length; b++)
-       	{
-               	mMessage.WriteByte(text.at(b));
-       	}
-       	
-	mGame->mServer->mNetwork->broadcast(&mMessage);
-*/
 }
 
 void Shape::sendText()

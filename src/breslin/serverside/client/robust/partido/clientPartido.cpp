@@ -58,30 +58,6 @@ void ClientPartido::update()
 	mClientPartidoStateMachine->update();
 }
 
-//game
-void ClientPartido::addGame(GamePartido* gamePartido)
-{
-	ClientRobust::addGame(gamePartido);
-        mGamePartidoVector.push_back(gamePartido);
-}
-
-GamePartido* ClientPartido::getGame()
-{
-	return mGamePartido;
-}
-
-void ClientPartido::setGame(int gameID)
-{
-        for (int i = 0; i < mGamePartidoVector.size(); i++)
-        {
-                if (mGamePartidoVector.at(i)->mID == gameID)
-                {
-                        mGamePartido = mGamePartidoVector.at(i);
-                        mGamePartido->sendShapes(this);
-                }
-        }
-}
-
 bool ClientPartido::handleLetter(Letter* letter)
 {
 	return ClientRobust::handleLetter(letter);
