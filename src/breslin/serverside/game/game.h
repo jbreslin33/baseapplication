@@ -65,8 +65,6 @@ public:
 	virtual void resetExecute();	
 	virtual void resetExit();	
 	virtual void resetClients();	
-	virtual void sendGameStart();
-	virtual void sendGameEnd();
 	virtual void massiveInserts();
 
 	// Network

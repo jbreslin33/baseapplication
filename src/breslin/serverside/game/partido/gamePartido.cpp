@@ -142,7 +142,6 @@ bool GamePartido::massiveQuestionsAttemptsInsert()
                 			mMassiveInsert.append(mUtility->intToString(questionAttempt->user_id));
                 			mMassiveInsert.append(")");
                 			mMassiveInsert.append(", ");
-					LogString("writing");
 					questionAttempt->mWrittenToDisk = true;
 					weGotOne = true;
 				}

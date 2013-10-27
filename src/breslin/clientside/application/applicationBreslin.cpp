@@ -231,16 +231,6 @@ void ApplicationBreslin::checkForByteBuffer()
 			mLeaveGame = true;
 		}
 
-		if (type == mMessageGameStart)
-		{
-			mGame->mStateMachine->changeState(PLAY_GAME::Instance());
-		}
-		
-		if (type == mMessageGameEnd)
-		{
-			mGame->mStateMachine->changeState(RESET_GAME::Instance());
-		}
-
 		//pass on to game if there is one....
 		if (mGame)
 		{

@@ -128,7 +128,6 @@ void YIELD::enter(Combatant* combatant)
 
         if (combatant->mScore > combatant->mFoe->mScore)
 	{
-		LogString("com:%d foe:%d winner id:%d", combatant->mScore , combatant->mFoe->mScore, combatant->mClientPartido->id);
                	combatant->mClientPartido->mScore++;
 	}
 }

@@ -352,7 +352,6 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 	{
 		mServerCommandCurrent->mDeltaCode = mes->ReadByte();
 		mCommandToRunOnShape->mDeltaCode = mServerCommandCurrent->mDeltaCode;
-		LogString("flag mCommandDeltaCode%d",mServerCommandCurrent->mDeltaCode);	
 	}
 	
         if (mServerCommandCurrent->mFrameTime != 0) 

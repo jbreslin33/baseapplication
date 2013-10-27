@@ -79,14 +79,13 @@ void NORMAL_GAME::enter(Game* game)
 	LogString("NORMAL_GAME::enter");
 	game->mGameTime = 0;
    	
-	//set scores to zero.
+	//set scores to zero and set delta code to mMessageGameStart.
         for (unsigned int i = 0; i < game->mServer->mClientVector.size(); i++)
         {
                 game->mServer->mClientVector.at(i)->mScore = 0;
                 game->mServer->mClientVector.at(i)->mScoreLast = 0;
+                game->mServer->mClientVector.at(i)->mDeltaCode = game->mServer->mMessageGameStart;
         }
-
-	game->sendGameStart();
 }
 void NORMAL_GAME::execute(Game* game)
 {

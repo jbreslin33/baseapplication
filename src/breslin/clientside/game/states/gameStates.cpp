@@ -31,9 +31,17 @@ PLAY_GAME* PLAY_GAME::Instance()
 }
 void PLAY_GAME::enter(Game* game)
 {
+	LogString("PLAY_GAME::enter");
 }
 void PLAY_GAME::execute(Game* game)
 {
+	if (game->mControlObject)
+	{
+		if (game->mControlObject->mCommandToRunOnShape->mDeltaCode == game->mApplication->mMessageGameEnd)
+		{
+			game->mStateMachine->changeState(RESET_GAME::Instance());
+		}
+	}
 	game->processMoveControls();
 }
 void PLAY_GAME::exit(Game* game)
@@ -53,10 +61,18 @@ RESET_GAME* RESET_GAME::Instance()
 }
 void RESET_GAME::enter(Game* game)
 {
-
+	LogString("RESET_GAME::enter");
 	ApplicationBreslin* app = game->mApplication;
         app->createResetScreen();
         app->showResetScreen();
+
+	if (game->mControlObject)
+	{
+		if (game->mControlObject->mCommandToRunOnShape->mDeltaCode == game->mApplication->mMessageGameStart)
+		{
+			game->mStateMachine->changeState(PLAY_GAME::Instance());
+		}
+	}
 
 	//set shapes visible and reset scores  	
 	for (unsigned int i = 0; i < game->mShapeVector->size(); i++)
@@ -72,6 +88,7 @@ void RESET_GAME::exit(Game* game)
 	ApplicationBreslin* app = game->mApplication;
         app->hideResetScreen();
 	
+
 	for (unsigned int i = 0; i < game->mShapeVector->size(); i++)
         {
                 game->mShapeVector->at(i)->setVisible(true);

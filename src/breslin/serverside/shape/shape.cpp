@@ -215,7 +215,6 @@ int Shape::setFlags()
         
 	if (mClient->mDeltaCode != mClient->mDeltaCodeLast)
         {
-                LogString("set deltaCode flag");
                 flags |= mCommandDeltaCode;
         }
 
@@ -262,7 +261,6 @@ void Shape::addToMoveMessage(Message* message)
         
 	if(flags & mCommandDeltaCode)
         {
-                LogString("flag set to mCommandDeltaCode");
                 message->WriteByte(mClient->mDeltaCode);
         }
 }
