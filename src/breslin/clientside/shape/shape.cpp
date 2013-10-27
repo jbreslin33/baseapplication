@@ -352,6 +352,10 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 	{
 		mServerCommandCurrent->mDeltaCode = mes->ReadByte();
 		mCommandToRunOnShape->mDeltaCode = mServerCommandCurrent->mDeltaCode;
+		if (mCommandToRunOnShape->mDeltaCode == mApplication->mMessageGameStart)
+		{
+			LogString("GAME START FOUND!!!!!!!!!!");
+		}
 	}
 	
         if (mServerCommandCurrent->mFrameTime != 0) 
