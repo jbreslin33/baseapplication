@@ -21,6 +21,14 @@ enter: function(game)
 
 execute: function(game)
 {
+        if (game.mControlObject)
+        {
+                if (game.mControlObject.mCommandToRunOnShape.mDeltaCode == game.mApplication.mMessageGameEnd)
+                {
+                        game.mStateMachine.changeState(game.mRESET_GAME);
+                }
+        }
+
 	//user input
         game.processInput();
 
@@ -65,6 +73,14 @@ enter: function(game)
 
 execute: function(game)
 {
+        if (game.mControlObject)
+        {
+                if (game.mControlObject.mCommandToRunOnShape.mDeltaCode == game.mApplication.mMessageGameStart)
+                {
+                        game.mStateMachine.changeState(game.mPLAY_GAME);
+                }
+        }
+
 },
 
 exit: function(game)
