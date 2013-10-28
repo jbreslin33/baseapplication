@@ -354,7 +354,11 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
 		mCommandToRunOnShape->mDeltaCode = mServerCommandCurrent->mDeltaCode;
 		if (mCommandToRunOnShape->mDeltaCode == mApplication->mMessageGameStart)
 		{
-			LogString("GAME START FOUND!!!!!!!!!!");
+			LogString("mMessageGameStart FOUND!!!!!!!!!!");
+		}
+		if (mCommandToRunOnShape->mDeltaCode == mApplication->mMessageGameEnd)
+		{
+			LogString("mMessageGameEnd FOUND!!!!!!!!!!");
 		}
 	}
 	

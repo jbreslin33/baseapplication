@@ -551,11 +551,11 @@ void Game::setStandings(ByteBuffer* byteBuffer)
         if (mApplication->mLabelReset && mApplication->mStringReset.size() > 0)
         {
                 mApplication->mLabelReset->setCaption(mApplication->mStringReset);
-		LogString("got someting");
+		LogString("got someting for standings");
         }
         else
         {
-                LogString("no label or no string");
+                LogString("no label or no string for standings");
         }
 }
 
