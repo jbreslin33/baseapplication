@@ -25,6 +25,7 @@ execute: function(game)
         {
                 if (game.mControlObject.mCommandToRunOnShape.mDeltaCode == game.mApplication.mMessageGameEnd)
                 {
+			this.log('control object delta says reset');
                         game.mStateMachine.changeState(game.mRESET_GAME);
                 }
         }

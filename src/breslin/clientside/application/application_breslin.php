@@ -39,6 +39,8 @@ initialize: function(serverIP, serverPort)
 	this.mMessageLeaveGame   = -99; //from server
 	this.mMessageLeaveGameBrowswer   = -45; //browser
 	this.mSentLeaveGame      = false; 
+	this.mMessageGameEnd     = -58
+	this.mMessageGameStart   = -57
 
 	//network
 	this.mNetwork = new Network(this,serverIP,serverPort);
