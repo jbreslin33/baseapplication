@@ -23,6 +23,10 @@
 //utility
 #include "../../../utility/utility.h"
 
+//game
+#include "../../game/game.h"
+#include "../../game/states/gameStates.h"
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -121,10 +125,10 @@ YIELD* YIELD::Instance()
 }
 void YIELD::enter(Combatant* combatant)
 {
-	if (combatant->mClientPartido->mShape->mIndex)
+	if (combatant->mClientPartido->mGame->mStateMachine->currentState() != RESET_GAME::Instance())
 	{
+		combatant->mClientPartido->mDeltaCode = combatant->mClientPartido->mServerPartido->mMessageBattleEnd;
 	}
-	combatant->mClientPartido->mDeltaCode = combatant->mClientPartido->mServerPartido->mMessageBattleEnd;
 
         if (combatant->mScore > combatant->mFoe->mScore)
 	{

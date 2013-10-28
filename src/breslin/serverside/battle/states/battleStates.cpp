@@ -103,8 +103,6 @@ void NORMAL_BATTLE::execute(Battle* battle)
 void NORMAL_BATTLE::exit(Battle* battle)
 {
 	battle->mBattleTime       = 0;
-        //battle->mBattleStartTime  = 0;
-        //battle->mBattleEndTime    = 0;
 }
 bool NORMAL_BATTLE::onLetter(Battle* battle, Letter* letter)
 {
