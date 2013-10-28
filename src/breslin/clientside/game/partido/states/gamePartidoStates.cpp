@@ -32,6 +32,7 @@ BATTLE_OFF* BATTLE_OFF::Instance()
 }
 void BATTLE_OFF::enter(GamePartido* gamePartido)
 {
+	LogString("BATTLE_OFF::enter");
 	for (unsigned int i = 0; i < gamePartido->mShapeVector->size(); i++)
 	{	
 		gamePartido->mShapeVector->at(i)->setVisible(true);
@@ -70,6 +71,7 @@ ANSWER_QUESTION* ANSWER_QUESTION::Instance()
 }
 void ANSWER_QUESTION::enter(GamePartido* gamePartido)
 {
+	LogString("ANSWER_QUESTION::enter");
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
         app->createBattleScreen();
         app->showBattleScreen();
@@ -173,6 +175,7 @@ SHOWCORRECTANSWER_PARTIDO_GAME* SHOWCORRECTANSWER_PARTIDO_GAME::Instance()
 }
 void SHOWCORRECTANSWER_PARTIDO_GAME::enter(GamePartido* gamePartido)
 {
+	LogString("SHOWCORRECTANSWER_PARTIDO_GAME::enter");
         ApplicationPartido* app = gamePartido->mApplicationPartido;
         app->createCorrectAnswerScreen();
         app->showCorrectAnswerScreen();
