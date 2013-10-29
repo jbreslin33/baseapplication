@@ -9,6 +9,7 @@
 
 //gamePartido
 #include "../gamePartido.h"
+#include "../../../game/states/gameStates.h"
 
 //shape
 #include "../../../shape/shape.h"
@@ -89,6 +90,22 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 {
         ApplicationPartido* app = gamePartido->mApplicationPartido;
 
+	//if game end message?
+	if (gamePartido->mControlObject)
+        {
+                if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mApplication->mMessageGameEnd)
+                {
+                        gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
+                }
+        }
+
+	//or if RESET_GAME State?
+	if (gamePartido->mStateMachine->currentState() == RESET_GAME::Instance())
+	{
+        	gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
+	}
+
+	//if message battle end?
 	if (gamePartido->mControlObject)
 	{
 		if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleEnd)
@@ -97,6 +114,7 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 		}
 	}
 
+	//show correct?
         if (gamePartido->mCorrectAnswerStart)
         {
                 gamePartido->mPartidoStateMachine->changeState(SHOWCORRECTANSWER_PARTIDO_GAME::Instance());
@@ -184,15 +202,32 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::enter(GamePartido* gamePartido)
 void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
 	ApplicationPartido* app = gamePartido->mApplicationPartido;
-	
-	if (gamePartido->mControlObject)
-	{
-		if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleEnd)
-		{
-                	gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
-		}
-	}
 
+	//if game end message?
+        if (gamePartido->mControlObject)
+        {
+                if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mApplication->mMessageGameEnd)
+                {
+                        gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
+                }
+        }
+
+        //or if RESET_GAME State?
+        if (gamePartido->mStateMachine->currentState() == RESET_GAME::Instance())
+        {
+                gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
+        }
+        
+        //if message battle end?
+        if (gamePartido->mControlObject)
+        {
+                if (gamePartido->mControlObject->mCommandToRunOnShape->mDeltaCode == gamePartido->mMessageBattleEnd)
+                {
+                        gamePartido->mPartidoStateMachine->changeState(BATTLE_OFF::Instance());
+                }
+        }
+	
+	//if correctAnswer end?
         if (gamePartido->mCorrectAnswerEnd)
         {
                 gamePartido->mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
