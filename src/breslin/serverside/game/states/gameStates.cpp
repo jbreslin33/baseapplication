@@ -133,12 +133,13 @@ void RESET_GAME::execute(Game* game)
 	//send out standings here....
 	
 	//this is where they want to move
+/*
         for (unsigned int i = 0; i < game->mShapeVector.size(); i++)
         {
                 game->mShapeVector.at(i)->update();
                 game->checkBounds(game->mShapeVector.at(i));
         }
-
+*/
         if (game->mGameTime > game->mGameTimeEnd + game->mResetTime)
 	{
 		//go back in time for next one
