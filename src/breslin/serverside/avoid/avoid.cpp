@@ -73,7 +73,7 @@ void Avoid::addAvoidShape(Shape* avoidShape)
 
 bool Avoid::removeAvoidShape(Shape* avoidShape)
 {
-	for (int i = 0; i < mAvoidVector.size(); i++)
+	for (unsigned int i = 0; i < mAvoidVector.size(); i++)
 	{
 		if (mAvoidVector.at(i) == avoidShape)
 		{
@@ -89,7 +89,7 @@ void  Avoid::calculateClosestAvoidee()
 	Shape* closestShapeSoFar = NULL;
 	float closestDistanceSoFar = 3000.0f;
 
-	for (int i = 0; i < mAvoidVector.size(); i++)
+	for (unsigned int i = 0; i < mAvoidVector.size(); i++)
 	{
 		Shape* avoidee = mAvoidVector.at(i);
 

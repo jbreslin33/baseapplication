@@ -23,7 +23,7 @@ class Seek : public BaseEntity
 public:
 
 Seek(Shape* shape);
-~Seek();
+virtual ~Seek();
 
 /***********************************************
 		VARIABLES

@@ -134,9 +134,6 @@ public:
 	Server(Ogre::Root* root, const char *localIP, int serverPort);
 	~Server();
 
-	//BaseEntitys
-	BaseEntity* getBaseEntityFromID(int id);
-
 	//update
 	void update(int msec);
 	virtual void processClients();

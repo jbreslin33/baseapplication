@@ -21,7 +21,7 @@ class Rotation : public BaseEntity
 public:
 
 Rotation(Shape* shape);
-~Rotation();
+virtual ~Rotation();
 
 Vector3D* mRotation;
 Vector3D* mRotationLast;

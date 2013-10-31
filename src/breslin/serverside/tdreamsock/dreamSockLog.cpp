@@ -76,7 +76,6 @@ void LogString(const char *string, ...)
 	char buf[1024];
 	va_list ap;
 	va_start(ap, string);
-	size_t t = 1024;
 	
 #ifdef WIN32
 vsprintf_s(buf, t, string, ap);
@@ -89,8 +88,6 @@ vsprintf(buf,string,ap);
 	time_t current = time(NULL);
 
 	char timedate[64];
-	size_t tt = 64;
-char buf2[64];
 
 #ifdef WIN32
 ctime_s(buf2,tt,&current);

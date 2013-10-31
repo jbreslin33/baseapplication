@@ -104,13 +104,12 @@ void GamePartido::massiveInserts()
 	massiveQuestionsAttemptsInsert();
 }
 
-bool GamePartido::massiveQuestionsAttemptsInsert()
+void GamePartido::massiveQuestionsAttemptsInsert()
 {
 	bool weGotOne = false;
 	mMassiveInsert.clear();
 
 	QuestionAttempts* questionAttempt = NULL;	
-	ClientPartido* clientPartido = NULL;
 	Test* test = NULL;
 
         mMassiveInsert = "insert into questions_attempts (question_id, answer, answer_time, user_id) values ";
@@ -126,7 +125,7 @@ bool GamePartido::massiveQuestionsAttemptsInsert()
 
 		if (test)
 		{	
- 			for (int z = 0; z < test->mQuestionAttemptsVector.size(); z++)
+ 			for (unsigned int z = 0; z < test->mQuestionAttemptsVector.size(); z++)
         		{
                 		questionAttempt = test->mQuestionAttemptsVector.at(z);
 

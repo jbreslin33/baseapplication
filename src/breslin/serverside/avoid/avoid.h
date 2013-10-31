@@ -19,7 +19,7 @@ class Avoid : public BaseEntity
 public:
 
 Avoid(Shape* shape);
-~Avoid();
+virtual ~Avoid();
 
 //update
 virtual void update();

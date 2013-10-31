@@ -366,7 +366,7 @@ void Game::setStandings()
       
 	//add to standings vector in order of score 
 	//loop thru scores starting at high score...
-	for (unsigned int scoreInQuestion = highScore; scoreInQuestion > 0; scoreInQuestion--) 
+	for (int scoreInQuestion = highScore; scoreInQuestion > 0; scoreInQuestion--) 
 	{
 		//loop thru all clients who have played	
 		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)

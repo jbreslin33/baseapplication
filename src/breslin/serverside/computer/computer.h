@@ -17,7 +17,7 @@ class Computer : public BaseEntity
 public:
 
 Computer(Shape* shape);
-~Computer();
+virtual ~Computer();
 
 //update
 virtual void update();

@@ -22,7 +22,7 @@ class Move : public BaseEntity
 public:
 
 Move(Shape* shape);
-~Move();
+virtual ~Move();
 
 //update
 virtual void update();

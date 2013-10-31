@@ -85,23 +85,6 @@ Server::~Server()
 }
 
 /*******************************************************
-		BASE ENTITYS	
-********************************************************/
-BaseEntity* Server::getBaseEntityFromID(int id)
-{
-        for (unsigned int i = 0; i < mBaseEntityVector.size(); i++)
-        {
-                if (id = mBaseEntityVector.at(i)->mID)
-                {
-                        return mBaseEntityVector.at(i);
-                }
-        }
-
-        return NULL;
-}
-
-
-/*******************************************************
 		UPDATES	
 ********************************************************/
 void Server::update(int msec)
@@ -149,7 +132,6 @@ void Server::createClients()
         PGresult        *res;
         int             rec_count;
         int             row;
-        int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 	
 	std::string query = "select * from users WHERE username != 'root' ORDER BY id LIMIT "; 
