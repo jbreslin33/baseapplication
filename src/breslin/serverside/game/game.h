@@ -93,7 +93,6 @@ public:
 	//shapes
 	virtual void createShapes();
 	void sendShapes(ClientRobust* client);
-	Shape* getShapeFromID(int id);
 
 	//standings
 	int mNumberOfClientsThatPlayed; 

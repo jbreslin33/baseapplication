@@ -187,7 +187,8 @@ float Message::ReadFloat(void)
 char *Message::ReadString(void)
 {
 	static char string[2048];
-	int	l, c;
+	unsigned int l;
+	int c;
 
 	l = 0;
 

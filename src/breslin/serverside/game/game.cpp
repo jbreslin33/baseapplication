@@ -62,7 +62,6 @@ Game::~Game()
 {
 	StopLog();
 	delete mBounds;
-	delete mServer;
 	delete mStateMachine;
 }
 
@@ -83,17 +82,7 @@ void Game::resetExecute()
 
 void Game::resetExit()
 {
-	//erase from standings vector
-	int size = mClientStandingsVector.size();
-
-	LogString("erase mClientStandingsVector");
 	mClientStandingsVector.erase (mClientStandingsVector.begin(),mClientStandingsVector.end());
-	
-	LogString("SIZE:%d",mClientStandingsVector.size());
-        for (unsigned int i = 0; i < mClientStandingsVector.size(); i++)
-	{
-		LogString("is this here:%d",i);
-	}
 }
 
 //you should call this from server processUpdate
@@ -114,20 +103,6 @@ void Game::createShapes()
                 mServer->mClientVector.at(i)->setShape( new Shape(getOpenIndex(),this,mServer->mClientVector.at(i),getOpenPoint(),new Vector3D(),new Vector3D(),mServer->mRoot,true,true,30.0f,1,false) );
         }
 }
-
-Shape* Game::getShapeFromID(int id)
-{
-	for (unsigned int i = 0; i < mShapeVector.size(); i++)
-	{
-		if (id = mShapeVector.at(i)->mIndex)
-		{
-			return mShapeVector.at(i);
-		}	
-	}
-	
-	return NULL;
-}
-
 
 void Game::checkCollisions()
 {
@@ -228,7 +203,7 @@ void Game::readDeltaMoveCommand(Message *mes, ClientRobust *client)
 unsigned int Game::getOpenIndex()
 {
 	bool proposedIndexOpen = false;
-	for (unsigned int proposedIndex = 1; !proposedIndexOpen; proposedIndex++) //keep going till you get an index
+	for (int proposedIndex = 1; !proposedIndexOpen; proposedIndex++) //keep going till you get an index
 	{
 		bool someoneHasThisIndex = false;
 		for (unsigned int i = 0; i < mShapeVector.size(); i++)
