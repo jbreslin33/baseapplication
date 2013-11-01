@@ -26,9 +26,6 @@ GamePartido::GamePartido(ApplicationPartido* applicationPartido) : Game(applicat
 {
 	mApplicationPartido = applicationPartido;
 
-	//battle
-	mFirstTimeExecute = true;
-
 	//correctAnswer
 	mCorrectAnswerStart = false;
 	mCorrectAnswerEnd = false;

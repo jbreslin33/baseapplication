@@ -50,9 +50,6 @@ virtual void checkByteBuffer(ByteBuffer* byteBuffer);
 void askQuestion(ByteBuffer* byteBuffer);
 void correctAnswer(ByteBuffer* byteBuffer);
 
-//battle
-bool mFirstTimeExecute;
-
 //correctAnswer
 bool mCorrectAnswerStart;
 bool mCorrectAnswerEnd;

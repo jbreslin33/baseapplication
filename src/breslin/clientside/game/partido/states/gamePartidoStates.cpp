@@ -84,7 +84,6 @@ void ANSWER_QUESTION::enter(GamePartido* gamePartido)
         {
                 gamePartido->mApplicationPartido->mKeyArray[i] = false;
         }
-        gamePartido->mFirstTimeExecute = true;
 }
 void ANSWER_QUESTION::execute(GamePartido* gamePartido)
 {
@@ -165,7 +164,6 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
         {
                 gamePartido->mApplicationPartido->mKeyArray[i] = false;
        	}
-        gamePartido->mFirstTimeExecute = false;
 }
 
 void ANSWER_QUESTION::exit(GamePartido* gamePartido)

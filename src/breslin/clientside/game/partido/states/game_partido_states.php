@@ -56,20 +56,7 @@ log: function(msg)
                 throw new Error(msg);
         }, 0);
 },
-/*
-ApplicationPartido* app = gamePartido->mApplicationPartido;
-        app->createBattleScreen();
-        app->showBattleScreen();
 
-        app->mAnswerTime = 0;
-
-        //set mKeyArray to false
-        for (int i = 0; i < 128; i++)
-        {
-                gamePartido->mApplicationPartido->mKeyArray[i] = false;
-        }
-        gamePartido->mFirstTimeExecute = true;
-*/
 enter: function(gamePartido)
 {
 	//reset text labels	
