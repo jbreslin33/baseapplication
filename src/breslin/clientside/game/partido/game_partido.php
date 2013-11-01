@@ -44,6 +44,12 @@ log: function(msg)
 
 askQuestion: function(byteBuffer)
 {
+	//if you get a question should you not change to ANSWER_QUESTION????????
+        if (mPartidoStateMachine.currentState() != mGamePartido.mANSWER_QUESTION)
+        {       
+                mPartidoStateMachine.changeState(mGamePartido.mANSWER_QUESTION);
+        }
+
         this.mApplicationPartido.mStringQuestion = '';
 
         this.mApplicationPartido.mStringQuestion = byteBuffer.readByte();

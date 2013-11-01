@@ -123,6 +123,12 @@ void GamePartido::correctAnswer(ByteBuffer* byteBuffer)
 
 void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 {
+	//if you get a question should you not change to ANSWER_QUESTION????????
+	if (mPartidoStateMachine->currentState() != ANSWER_QUESTION::Instance())
+	{	
+		mPartidoStateMachine->changeState(ANSWER_QUESTION::Instance());
+	}
+
 	mApplicationPartido->mStringQuestion.clear();
         int length = byteBuffer->ReadByte();
         for (int i = 0; i < length; i++)
@@ -130,9 +136,6 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
         	char c =  byteBuffer->ReadByte();
                 mApplicationPartido->mStringQuestion.append(1,c);
         }
-
-	//const char * q = mApplicationPartido->mStringQuestion.c_str();
-        //LogString("q:%s",q);
 
 	if (!mApplicationPartido->mLabelQuestion)
 	{
@@ -145,7 +148,6 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
 	if (mApplicationPartido->mLabelQuestion && mApplicationPartido->mStringQuestion.size() > 0)
 	{
 		mApplicationPartido->mLabelQuestion->setCaption(mApplicationPartido->mStringQuestion);
-		//LogString("just setCaption on mLabelQuestion");
 	}
 	else
 	{
