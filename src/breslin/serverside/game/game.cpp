@@ -363,6 +363,7 @@ void Game::setStandings()
 			highScore = mServer->mClientVector.at(i)->mScore;
 		}
 	}
+	LogString("highScore:%d",highScore);
       
 	//add to standings vector in order of score 
 	//loop thru scores starting at high score...
