@@ -65,6 +65,10 @@ INIT_QUIZ* INIT_QUIZ::Instance()
 }
 void INIT_QUIZ::enter(Quiz* quiz)
 {
+	if (quiz->mCombatant->mClientPartido->id == 2)
+	{
+		LogString("INIT_QUIZ::enter");
+	}
 }
 void INIT_QUIZ::execute(Quiz* quiz)
 {
@@ -99,8 +103,9 @@ SENDING_QUESTION* SENDING_QUESTION::Instance()
 }
 void SENDING_QUESTION::enter(Quiz* quiz)
 {
-	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
+	if (quiz->mCombatant->mClientPartido->id == 2)
 	{
+		LogString("SENDING_QUESTION::enter");
 	}
 }
 void SENDING_QUESTION::execute(Quiz* quiz)
@@ -139,10 +144,12 @@ WAITING_FOR_ANSWER* WAITING_FOR_ANSWER::Instance()
 }
 void WAITING_FOR_ANSWER::enter(Quiz* quiz)
 {
-	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
+	if (quiz->mCombatant->mClientPartido->id == 2)
 	{
+		LogString("WAITING_FOR_ANSWER::enter");
 	}
-        quiz->mComputerAskedTime  = quiz->mCombatant->mBattle->mGamePartido->mGameTime;
+        
+	quiz->mComputerAskedTime  = quiz->mCombatant->mBattle->mGamePartido->mGameTime;
         int randomAnswerTime      = rand() % 3000;
         quiz->mComputerAnswerTime = randomAnswerTime;
         quiz->mTest->mWaitingForAnswer   = true;
@@ -190,10 +197,12 @@ SHOW_CORRECT_ANSWER* SHOW_CORRECT_ANSWER::Instance()
 
 void SHOW_CORRECT_ANSWER::enter(Quiz* quiz)
 {
-	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
+	if (quiz->mCombatant->mClientPartido->id == 2)
 	{
+		LogString("SHOW_CORRECT_ANSWER::enter");
 	}
-        quiz->mCorrectAnswerStartTime = quiz->mCombatant->mBattle->mGamePartido->mGameTime;
+        
+	quiz->mCorrectAnswerStartTime = quiz->mCombatant->mBattle->mGamePartido->mGameTime;
 	quiz->mTest->sendCorrectAnswer(quiz->mTest->mQuestionID);
 }
 
@@ -234,8 +243,9 @@ OVER_QUIZ* OVER_QUIZ::Instance()
 }
 void OVER_QUIZ::enter(Quiz* quiz)
 {
-	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
+	if (quiz->mCombatant->mClientPartido->id == 2)
 	{
+		LogString("OVER_QUIZ::enter");
 	}
 	quiz->mCombatant->mClientPartido->mTest->mQuizLast = quiz;
 	quiz->mCombatant->mClientPartido->mTest->mQuiz = NULL;
