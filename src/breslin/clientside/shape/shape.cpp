@@ -279,7 +279,6 @@ int Shape::parseDeltaByteBuffer(ByteBuffer *mes)
         bool moveXChanged = true;
         bool moveYChanged = true;
         bool moveZChanged = true;
-        bool scoreChanged = true;
 
         // Flags
         flags = mes->ReadByte();
@@ -581,6 +580,7 @@ std::string Shape::getMeshString(int meshCode)
 		mScale = .035f;
 		return "ColourCube";
 	}
+	return "cube.mesh";
 }
 void Shape::createColourCube()
 {

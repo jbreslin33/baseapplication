@@ -42,6 +42,7 @@ public:
     virtual ~BaseApplication(void);
 
     virtual bool setup();
+    Ogre::Root *mRoot;
     Ogre::SceneManager* mSceneMgr;
 protected:
     
@@ -73,7 +74,6 @@ protected:
     //Unattach OIS before window shutdown (very important under Linux)
     virtual void windowClosed(Ogre::RenderWindow* rw);
 
-    Ogre::Root *mRoot;
     Ogre::Camera* mCamera;
     Ogre::RenderWindow* mWindow;
     Ogre::String mResourcesCfg;

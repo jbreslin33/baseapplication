@@ -201,8 +201,6 @@ void SHOWCORRECTANSWER_PARTIDO_GAME::enter(GamePartido* gamePartido)
 }
 void SHOWCORRECTANSWER_PARTIDO_GAME::execute(GamePartido* gamePartido)
 {
-	ApplicationPartido* app = gamePartido->mApplicationPartido;
-
 	//if game end message?
         if (gamePartido->mControlObject)
         {

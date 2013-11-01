@@ -17,7 +17,7 @@ class Vector3D;
 /******************************************************
 *				CLASS
 ********************************************************/
-class Move : public BaseEntity 
+class Move 
 {
 public:
 
@@ -59,9 +59,6 @@ void interpolateTick(float renderTime);
 
 //update
 virtual void update() { }
-
-//handle letter
-virtual bool  handleLetter(Letter* letter) { }
 
 //move
 void calculateDeltaPosition();  

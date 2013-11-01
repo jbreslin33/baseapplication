@@ -131,7 +131,7 @@ void GamePartido::askQuestion(ByteBuffer* byteBuffer)
                 mApplicationPartido->mStringQuestion.append(1,c);
         }
 
-	const char * q = mApplicationPartido->mStringQuestion.c_str();
+	//const char * q = mApplicationPartido->mStringQuestion.c_str();
         //LogString("q:%s",q);
 
 	if (!mApplicationPartido->mLabelQuestion)

@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #endif
 
-Rotation::Rotation(Shape* shape) : BaseEntity(BaseEntity::getNextValidID()) 
+Rotation::Rotation(Shape* shape) 
 {
 	mShape = shape;
 

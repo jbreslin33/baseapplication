@@ -13,7 +13,7 @@
 //states
 #include "states/abilityAnimationStates.h"
 
-AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) : BaseEntity(BaseEntity::getNextValidID()) 
+AbilityAnimationOgre::AbilityAnimationOgre(Shape* shape) 
 {
 	mShape = shape;
 

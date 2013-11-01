@@ -25,7 +25,7 @@ class Shape;
 /******************************************************
 *				CLASS
 ********************************************************/
-class AbilityAnimationOgre : public BaseEntity 
+class AbilityAnimationOgre 
 {
 
 // all the animations our character has, and a null ID
@@ -85,9 +85,6 @@ void interpolateTick(float renderTime);
 
 //update
 virtual void update() { }
-
-//handle letter
-virtual bool  handleLetter(Letter* letter) { }
 
 };
 

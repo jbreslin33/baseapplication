@@ -16,7 +16,7 @@
 //std lib
 #include <math.h>
 
-Move::Move(Shape* shapeDynamic) : BaseEntity(BaseEntity::getNextValidID()) 
+Move::Move(Shape* shapeDynamic) 
 {
 	mShape = shapeDynamic;
 

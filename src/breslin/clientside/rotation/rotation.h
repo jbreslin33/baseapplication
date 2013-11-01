@@ -14,7 +14,7 @@ class AbilityRotationStateMachine;
 class AbilityRotationState;
 class Shape;
 
-class Rotation : public BaseEntity
+class Rotation
 {
 public:
 
@@ -67,9 +67,6 @@ void  calculateServerRotationSpeed();
 
 //update
 virtual void update() { }
-
-//handle letter
-virtual bool  handleLetter(Letter* letter) { }
 
 };
 
