@@ -365,18 +365,16 @@ void Game::setStandings()
 	}
 	LogString("highScore:%d",highScore);
       
-	//add to standings vector in order of score 
-	//loop thru scores starting at high score...
-	for (int scoreInQuestion = highScore; scoreInQuestion > 0; scoreInQuestion--) 
+	//add to standings vector in order of lowest score 
+	for (int score = 0; score <= highScore; score++) 
 	{
-		//loop thru all clients who have played	
+		//loop thru all clients	
 		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 		{
 			//is this clients score = to scoreInQuestion if so add to standings vector
-			if (mServer->mClientVector.at(i)->mScore == scoreInQuestion) 
+			if (mServer->mClientVector.at(i)->mScore == score) 
 			{	
-				//mClientStandingsVector.push_back(mServer->mClientVector.at(i));
-				mClientStandingsVector.insert(mClientStandingsVector.begin(),mServer->mClientVector.at(i));
+				mClientStandingsVector.push_back(mServer->mClientVector.at(i));
 			}
 		}
 	}

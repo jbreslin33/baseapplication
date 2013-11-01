@@ -131,6 +131,7 @@ void RESET_GAME::enter(Game* game)
 void RESET_GAME::execute(Game* game)
 {
 	//send out standings here....
+        LogString("mGameTime:%d mGameTimeEnd:%d mResetTime:%d",game->mGameTime,game->mGameTimeEnd,game->mResetTime);
         if (game->mGameTime > game->mGameTimeEnd + game->mResetTime)
 	{
 		//go back in time for next one
@@ -142,12 +143,14 @@ void RESET_GAME::execute(Game* game)
 			if (game->mClientStandingsVector.at(i)->mStandingsSent == false)
 			{		
 				game->mClientStandingsVector.at(i)->mStandingsSent = true;
-				areWeDone = false;
 				std::string s = "Place: ";
 				s.append(StringConverter::toString(i));
 				s.append(" ");
 				s.append(game->mClientStandingsVector.at(i)->first_name);
 				game->reportStandings(s);
+				LogString("cause:%d",game->mClientStandingsVector.at(i)->id);
+				areWeDone = false;
+				i = 4000;
 			}
 		}
 		if (areWeDone)
