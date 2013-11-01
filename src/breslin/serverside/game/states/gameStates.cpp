@@ -52,7 +52,7 @@ void INIT_GAME::enter(Game* game)
 void INIT_GAME::execute(Game* game)
 {
 	game->mGameTime = 0;
-        game->mGameTimeEnd = 90000;
+        game->mGameTimeEnd = 180000;
         game->mResetTime = 2000;
 
 	game->mStateMachine->changeState(NORMAL_GAME::Instance());

@@ -164,6 +164,14 @@ void ANSWER_QUESTION::execute(GamePartido* gamePartido)
         {
                 gamePartido->mApplicationPartido->mKeyArray[i] = false;
        	}
+      
+        if (app->mAnswerTime > 2000) //overtime....
+        {
+                app->mStringAnswer = "oot";
+                LogString("sendAnswer via time");
+                app->sendAnswer();
+                app->mAnswerTime = 0;
+        }
 }
 
 void ANSWER_QUESTION::exit(GamePartido* gamePartido)

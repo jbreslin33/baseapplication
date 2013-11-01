@@ -157,7 +157,7 @@ void GamePartido::massiveQuestionsAttemptsInsert()
         	conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 		mMassiveInsert.resize(mMassiveInsert.size() - 2); //to get rid of last comma
         	const char * q = mMassiveInsert.c_str();
-       		LogString("questionAttempt:%s",q); 
+       		//LogString("questionAttempt:%s",q); 
 		PQexec(conn,q);
         	PQfinish(conn);
 	}
