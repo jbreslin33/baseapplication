@@ -372,7 +372,7 @@ void Game::setStandings()
 		for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 		{
 			//is this clients score = to scoreInQuestion if so add to standings vector
-			if (mServer->mClientVector.at(i)->mScore == score) 
+			if (mServer->mClientVector.at(i)->mScore == score && score != 0) 
 			{	
 				mClientStandingsVector.push_back(mServer->mClientVector.at(i));
 			}
