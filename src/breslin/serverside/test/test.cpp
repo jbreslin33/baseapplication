@@ -47,7 +47,7 @@ Test::Test(ClientPartido* clientPartido)
 Test::~Test()
 {
 	delete mStateMachine;	
-	for (int i = 0; i < mQuestionAttemptsVector.size(); i++)
+	for (unsigned int i = 0; i < mQuestionAttemptsVector.size(); i++)
 	{
 		mQuestionAttemptsVector.at(i) = NULL;
 		delete mQuestionAttemptsVector.at(i);
@@ -130,7 +130,7 @@ int Test::getNewQuestionID()
 		//LogString("mRandom:%d mCurrent:%d mAdvance:%d",mRandom,mCurrent,mAdvance);
                 return questionID;
         }
-
+        return questionID;
 }
 
 
@@ -140,7 +140,6 @@ void Test::getQuestionAttempts()
         PGresult        *res;
         int             rec_count;
         int             row;
-        int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
         std::string query = "select id, question_id, answer, extract(epoch from answer_attempt_time), answer_time, user_id from questions_attempts WHERE user_id = ";
         query.append(mClientPartido->mServerPartido->mUtility->intToString(mClientPartido->id));
@@ -194,7 +193,7 @@ int Test::getMaxLevelAskedID()
 {
         int highestQuestionID = 1;
 
-        for (int i = 0; i < mQuestionAttemptsVector.size(); i++)
+        for (unsigned int i = 0; i < mQuestionAttemptsVector.size(); i++)
         {
                 if (mQuestionAttemptsVector.at(i)->question_id > highestQuestionID)
                 {

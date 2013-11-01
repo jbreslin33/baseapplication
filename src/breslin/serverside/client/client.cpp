@@ -241,12 +241,9 @@ bool Client::checkLogin(Message* mes)
 {
 	readLoginMessage(mes);
 
-	Client* client = NULL;
 
 	for (unsigned int i = 0; i < mServer->mClientVector.size(); i++)
 	{
-		client = mServer->mClientVector.at(i);
-
 		if (mStringUsername.compare(mServer->mClientVector.at(i)->username) == 0 && mStringPassword.compare(mServer->mClientVector.at(i)->password) == 0)
 		{
 			//send logout letter to clientRobust....
@@ -261,8 +258,10 @@ bool Client::checkLogin(Message* mes)
 
 			//send login letter
                         mServer->mClientVector.at(i)->login();
+			return true;
 		}
 	}
+	return true;
 }
 
 bool Client::getPasswordMatch(std::string username,std::string password)
@@ -270,8 +269,7 @@ bool Client::getPasswordMatch(std::string username,std::string password)
         PGconn          *conn;
         PGresult        *res;
         int             rec_count;
-        int             row;
-        int             col;
+        int             row = 0;
         bool match = false;
         std::string query = "select id, username, password from users where username = '";
         std::string a = "' ";

@@ -204,5 +204,6 @@ bool ClientRobust::checkLogin(Message* mes)
 			}
                 }
         }
+	return true;
 }
 

@@ -111,8 +111,7 @@ bool LOBBY::onLetter(ClientRobust* clientRobust, Letter* letter)
 
 	if (type == clientRobust->mServer->mMessageJoinGame)
 	{
-		int gameID = message->ReadByte();
-		//clientRobust->setGame(gameID);
+		message->ReadByte();
 		clientRobust->mClientRobustStateMachine->changeState(GAME_MODE::Instance());
 		return true;
 	}

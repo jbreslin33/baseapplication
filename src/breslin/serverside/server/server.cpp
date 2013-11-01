@@ -280,14 +280,14 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageConnectBrowser)
 	{
 		int clientID = mes->ReadByte();
- 		Client* client = new Client(this, address, clientID, false);
+ 		new Client(this, address, clientID, false);
 	}
 
 	else if (type == mMessageConnectNode)
 	{
 		//LogString("Connect node.... %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-		int clientID = mes->ReadByte();
- 		ClientRobust* client = new ClientRobust(this, address, -1, true,0,"","","","","","","",0);
+		mes->ReadByte();
+ 		new ClientRobust(this, address, -1, true,0,"","","","","","","",0);
 	}	
 
 	/***JOIN GAME********/
@@ -328,7 +328,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
                 int clientID = mes->ReadByte();
 		int gameID   = mes->ReadByte();
 
-		for (int i = 0; i < mClientVector.size(); i++)
+		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
@@ -382,7 +382,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	{
                 int clientID = mes->ReadByte();
  		//get client is it a (ClientRobust) one???	
-		for (int i = 0; i < mClientVector.size(); i++)
+		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
@@ -394,7 +394,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 		}	
 
  		//get client is it a (Client) one???	
-		for (int i = 0; i < mClientVectorTemp.size(); i++)
+		for (unsigned int i = 0; i < mClientVectorTemp.size(); i++)
 		{
 			if (mClientVectorTemp.at(i)->mClientID == clientID)
 			{
@@ -429,7 +429,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
         else if (type == mMessageLogoutBrowser)
         {
                 int clientID = mes->ReadByte();
-                for (int i = 0; i < mClientVector.size(); i++)
+                for (unsigned int i = 0; i < mClientVector.size(); i++)
                 {
                         if (mClientVector.at(i)->mClientID == clientID)
                         {
@@ -468,7 +468,7 @@ void Server::parsePacket(Message *mes, struct sockaddr *address)
 	else if (type == mMessageLeaveGameBrowser)
 	{
                 int clientID = mes->ReadByte();
-		for (int i = 0; i < mClientVector.size(); i++)
+		for (unsigned int i = 0; i < mClientVector.size(); i++)
 		{
 			if (mClientVector.at(i)->mClientID == clientID)
 			{
@@ -565,9 +565,6 @@ void Server::readPackets()
 {
 	char data[1400];
 
-	int type;
-	int ret;
-
 	struct sockaddr address;
 
 	Message mes;
@@ -577,7 +574,7 @@ void Server::readPackets()
 	
 	try
 	{
-		while(ret = getPacket(mes.data, &address))
+		while(getPacket(mes.data, &address))
 		{
 			//you could do something here, what i have no idea yet..	
 		}

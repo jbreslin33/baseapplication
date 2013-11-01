@@ -50,7 +50,6 @@ void ServerPartido::createClients()
         PGresult        *res;
         int             rec_count;
         int             row;
-        int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
 	
 	std::string query = "select * from users WHERE username != 'root' ORDER BY id LIMIT ";
@@ -135,7 +134,6 @@ void ServerPartido::addClient(Client* client, bool permanent)
 
 void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
 {
-        ClientPartido* client;
         mes->BeginReading();
 
         int type = mes->ReadByte();
@@ -156,13 +154,13 @@ void ServerPartido::parsePacket(Message *mes, struct sockaddr *address)
         	else if (type == mMessageConnectBrowser)
         	{
                 	int clientID = mes->ReadByte();
-                	Client* client = new Client(this, address, clientID, false);
+                	new Client(this, address, clientID, false);
         	}
 
         	else if (type == mMessageConnectNode)
         	{
-                	int clientID = mes->ReadByte();
-                	ClientRobust* client = new ClientRobust(this, address, -1, true,0,"","","","","","","",0);
+                	mes->ReadByte();
+                	new ClientRobust(this, address, -1, true,0,"","","","","","","",0);
         	}     	 
        		else if (type == mMessageAnswerQuestion)
                 {
@@ -213,7 +211,6 @@ void ServerPartido::getQuestions()
         PGresult        *res;
         int             rec_count;
         int             row;
-        int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
         res = PQexec(conn,
        "select * from questions ORDER BY level_id");
@@ -260,7 +257,6 @@ void ServerPartido::getSchools()
         PGresult        *res;
         int             rec_count;
         int             row;
-        int             col;
         conn = PQconnectdb("dbname=abcandyou host=localhost user=postgres password=mibesfat");
         res = PQexec(conn,
        "select * from schools");
