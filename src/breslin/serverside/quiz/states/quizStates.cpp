@@ -9,6 +9,7 @@
 
 //client
 #include "../../client/robust/partido/clientPartido.h"
+#include "../../client/robust/states/clientRobustStates.h"
 
 //combatant
 #include "../../combatant/combatant.h"
@@ -107,24 +108,16 @@ void SENDING_QUESTION::enter(Quiz* quiz)
 	{
 		LogString("SENDING_QUESTION::enter");
 	}
+	
+	if (quiz->mCombatant->mClientPartido->mClientRobustStateMachine->currentState() == GAME_MODE::Instance())
+        {
+		quiz->mTest->mQuestionID = quiz->mCombatant->mClientPartido->mTest->getNewQuestionID();
+                quiz->mTest->sendQuestion(quiz->mTest->mQuestionID);
+        }
 }
 void SENDING_QUESTION::execute(Quiz* quiz)
 {
-	if (quiz->mCombatant->mClientPartido->mLoggedIn)
-        {
-                if (quiz->mTest->mWaitingForAnswer == false)
-                {
-			quiz->mTest->mQuestionID = quiz->mCombatant->mClientPartido->mTest->getNewQuestionID();
-                        quiz->mTest->sendQuestion(quiz->mTest->mQuestionID);
-			
-                        quiz->mStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
-                }
-        }
-        else //computer so just go right to wating...
-        {
-                quiz->mStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
-        }
-
+      quiz->mStateMachine->changeState(WAITING_FOR_ANSWER::Instance());
 }
 void SENDING_QUESTION::exit(Quiz* quiz)
 {
@@ -152,7 +145,6 @@ void WAITING_FOR_ANSWER::enter(Quiz* quiz)
 	quiz->mComputerAskedTime  = quiz->mCombatant->mBattle->mGamePartido->mGameTime;
         int randomAnswerTime      = rand() % 3000;
         quiz->mComputerAnswerTime = randomAnswerTime;
-        quiz->mTest->mWaitingForAnswer   = true;
 }
 
 void WAITING_FOR_ANSWER::execute(Quiz* quiz)
@@ -161,22 +153,20 @@ void WAITING_FOR_ANSWER::execute(Quiz* quiz)
         {
                 quiz->mStateMachine->changeState(OVER_QUIZ::Instance());
         }
-        else if (quiz->mTest->mShowCorrectAnswer)
+       
+	if (quiz->mTest->mShowCorrectAnswer)
         {
                 quiz->mStateMachine->changeState(SHOW_CORRECT_ANSWER::Instance());
         }
-        else if (!quiz->mTest->mWaitingForAnswer)
-        {
-                quiz->mStateMachine->changeState(SENDING_QUESTION::Instance());
-        }
-
-	else if (!quiz->mCombatant->mClientPartido->mLoggedIn)
+	
+	if (quiz->mCombatant->mClientPartido->mClientRobustStateMachine->currentState() != GAME_MODE::Instance())
         {
                 if (quiz->mComputerAskedTime + quiz->mComputerAnswerTime < quiz->mCombatant->mBattle->mGamePartido->mGameTime)
                 {
                         quiz->mTest->readAnswer(quiz->mComputerAnswerTime,quiz->mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(quiz->mTest->mQuestionID)->answer);
                 }
         }
+
 }
 void WAITING_FOR_ANSWER::exit(Quiz* quiz)
 {
@@ -251,7 +241,6 @@ void OVER_QUIZ::enter(Quiz* quiz)
 	quiz->mCombatant->mClientPartido->mTest->mQuiz = NULL;
         quiz->mComputerAnswerTime = 0;
         quiz->mComputerAskedTime  = 0;
-        quiz->mTest->mWaitingForAnswer   = false;
 }
 void OVER_QUIZ::execute(Quiz* quiz)
 {

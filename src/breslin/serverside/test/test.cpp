@@ -8,6 +8,7 @@
 #include "../../utility/utility.h"
 #include "../question/questionAttempts.h"
 #include "../quiz/quiz.h"
+#include "../quiz/states/quizStates.h"
 #include "../combatant/combatant.h"
 #include "../shape/shape.h"
 #include "../../utility/utility.h"
@@ -26,7 +27,6 @@ Test::Test(ClientPartido* clientPartido)
 	mQuestionID = 1;
 
 	//answer
-	mWaitingForAnswer = false;
 	mShowCorrectAnswer = false;
 
 	//time
@@ -72,7 +72,6 @@ void Test::reset()
 	mQuestionID = 1;
 	
 	//answer
-	mWaitingForAnswer = false;
 	mShowCorrectAnswer = false;
 	
 	//time
@@ -343,7 +342,6 @@ void Test::readAnswer(int answerTime, std::string answer)
         insertAnswerAttempt(mQuestionID,mStringAnswer,mAnswerTime);
 
         if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
-        //if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0)
         {
        		mShowCorrectAnswer = true;	 
         }
@@ -354,14 +352,16 @@ void Test::readAnswer(int answerTime, std::string answer)
 			if (mQuiz->mCombatant)
 			{
 				mQuiz->mCombatant->mScore++;	
-				//LogString("mScore:%d",mQuiz->mCombatant->mScore);
-				//mClientPartido->mShape->setText(mUtility->intToString(mQuiz->mCombatant->mScore));
        				mShowCorrectAnswer = false;	 
 			}
 		}
 	}
-        //set vars for new question and answer combo....
-        mWaitingForAnswer = false;
+ 
+	//send another question	
+	if (mQuiz)
+	{
+		mQuiz->mStateMachine->changeState(SENDING_QUESTION::Instance());
+	}
         mQuestionString = "";
 }
 
