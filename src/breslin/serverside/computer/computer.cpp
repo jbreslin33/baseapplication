@@ -24,6 +24,7 @@ Computer::Computer(Shape* shape) : BaseEntity(BaseEntity::getNextValidID())
 
 	mCounter   = 0;
         mThreshold = 1000;
+	mRandomMove = 0;
 }
 
 Computer::~Computer()

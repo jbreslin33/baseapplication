@@ -90,6 +90,54 @@ void COMPUTER_CONTROLLED::execute(Computer* computer)
 	{
 		computer->mStateMachine->changeState(HUMAN_CONTROLLED::Instance());
 	}
+
+	if (computer->mCounter > computer->mThreshold)
+	{
+		computer->mRandomMove = rand() % 6;
+		computer->mCounter = 0;
+	}
+	computer->mCounter++;
+
+	
+	computer->mShape->mMove->mVelocity->x = 0;
+        computer->mShape->mMove->mVelocity->y = 0;
+        computer->mShape->mMove->mVelocity->z = 0;
+
+        // keep track of the player's intended direction
+        if(computer->mRandomMove == 0)
+        {
+                computer->mShape->mMove->mVelocity->z += -1;
+        }
+
+        if(computer->mRandomMove == 1)
+        {
+                computer->mShape->mMove->mVelocity->x += -1;
+        }
+
+        if(computer->mRandomMove == 2)
+        {
+                computer->mShape->mMove->mVelocity->z += 1;
+        }
+ 
+        if(computer->mRandomMove == 3)
+        {
+                computer->mShape->mMove->mVelocity->x += 1;
+        }
+
+        computer->mShape->mMove->mVelocity->normalise();
+
+	//Rotation
+        computer->mShape->mRotation->mDegrees = 0.0f;
+        // keep track of the player's intended rotation
+        if(computer->mRandomMove == 4)
+        {
+                computer->mShape->mRotation->mDegrees += -1;
+        }
+        if(computer->mRandomMove == 5)
+        {
+                computer->mShape->mRotation->mDegrees += 1;
+        }
+
 }
 
 void COMPUTER_CONTROLLED::exit(Computer* computer)

@@ -31,6 +31,7 @@ StateMachine<Computer>* mStateMachine;
 
 int mCounter;
 int mThreshold;
+int mRandomMove;
 
 };
 
