@@ -131,6 +131,7 @@ void RESET_GAME::enter(Game* game)
 void RESET_GAME::execute(Game* game)
 {
 	//send out standings here....
+/*
         LogString("mGameTime:%d mGameTimeEnd:%d mResetTime:%d",game->mGameTime,game->mGameTimeEnd,game->mResetTime);
         if (game->mGameTime > game->mGameTimeEnd + game->mResetTime)
 	{
@@ -158,6 +159,8 @@ void RESET_GAME::execute(Game* game)
 			game->mStateMachine->changeState(NORMAL_GAME::Instance());	
 		}
 	}
+*/
+	game->mStateMachine->changeState(NORMAL_GAME::Instance());	
 }
 void RESET_GAME::exit(Game* game)
 {
