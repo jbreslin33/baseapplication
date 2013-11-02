@@ -30,6 +30,13 @@ Quiz::Quiz(Combatant* combatant)
 	//correctAnswer
 	mCorrectAnswerTime = 5000;
 	mCorrectAnswerStartTime = 0;
+
+        //question
+        mQuestionID = 1;
+
+        //time
+        mAnswerTime = 0;
+
 }
 
 Quiz::~Quiz()
@@ -41,5 +48,33 @@ Quiz::~Quiz()
 void Quiz::update()
 {
 	mStateMachine->update();
+}
+
+void Quiz::readAnswer(int answerTime, std::string answer)
+{
+        //clear answer string
+        mStringAnswer.clear();
+        mAnswerTime = answerTime;
+        mStringAnswer = answer;
+
+        mTest->insertAnswerAttempt(mQuestionID,mStringAnswer,mAnswerTime);
+
+        if (mStringAnswer.compare(mCombatant->mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
+        {
+                mTest->mShowCorrectAnswer = true;
+        }
+        else
+        {
+                if (mCombatant)
+                {
+                    	mCombatant->mScore++;
+                        mTest->mShowCorrectAnswer = false;
+                }
+
+        }
+
+        //send another question
+        mStateMachine->changeState(SENDING_QUESTION::Instance());
+        mTest->mQuestionString = "";
 }
 

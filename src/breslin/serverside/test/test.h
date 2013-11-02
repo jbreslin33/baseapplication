@@ -46,12 +46,8 @@ void getQuestionAttempts();
 void sendQuestion(int questionID);
 
 //answer
-std::string mStringAnswer;
 bool mShowCorrectAnswer;
-int mAnswerTime;
 void insertAnswerAttempt(int questionID, std::string stringAnswer, int answerTime);
-void parseAnswer(Message* message);
-void readAnswer(int answerTime, std::string answer);
 
 //showCorrectAnswer
 void sendCorrectAnswer(int questionID);

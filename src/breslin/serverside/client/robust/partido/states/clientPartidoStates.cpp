@@ -26,6 +26,16 @@ these states are always on...as their is always a gamePartido..and these clients
 //test
 #include "../../../../test/test.h"
 
+//test
+#include "../../../../battle/battle.h"
+
+//combatant
+#include "../../../../combatant/combatant.h"
+
+//game
+#include "../../../../game/partido/gamePartido.h"
+
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -67,15 +77,15 @@ void GAME_PARTIDO_MODE::enter(ClientPartido* clientPartido)
 }
 void GAME_PARTIDO_MODE::execute(ClientPartido* clientPartido)
 {
-	for (unsigned int i = 0; i < clientPartiodo->mGame->mBattleVector.size(); i++)
+	for (unsigned int i = 0; i < clientPartido->mGamePartido->mBattleVector.size(); i++)
 	{
 		//if either of these is true than you you go to battle state
-		if (!clientPartiodo->mGame->mBattleVector.at(i)->mHomeCombatant->mClientPartido == clientPartido)	
+		if (clientPartido->mGamePartido->mBattleVector.at(i)->mHomeCombatant->mClientPartido == clientPartido)	
 		{
 			clientPartido->mClientPartidoStateMachine->changeState(CLIENT_PARTIDO_BATTLE::Instance());
 		}
 		//if either of these is true than you you go to battle state
-		if (!clientPartiodo->mGame->mBattleVector.at(i)->mAwayCombatant->mClientPartido == clientPartido)	
+		if (clientPartido->mGamePartido->mBattleVector.at(i)->mAwayCombatant->mClientPartido == clientPartido)	
 		{
 			clientPartido->mClientPartidoStateMachine->changeState(CLIENT_PARTIDO_BATTLE::Instance());
 		}
@@ -103,15 +113,15 @@ void CLIENT_PARTIDO_BATTLE::enter(ClientPartido* clientPartido)
 void CLIENT_PARTIDO_BATTLE::execute(ClientPartido* clientPartido)
 {
 	bool inBattle = false;
- 	for (unsigned int i = 0; i < clientPartiodo->mGame->mBattleVector.size(); i++)
+ 	for (unsigned int i = 0; i < clientPartido->mGamePartido->mBattleVector.size(); i++)
         {
         	//if either of these is true than you you go to battle state
-                if (clientPartiodo->mGame->mBattleVector.at(i)->mHomeCombatant->mClientPartido == clientPartido)
+                if (clientPartido->mGamePartido->mBattleVector.at(i)->mHomeCombatant->mClientPartido == clientPartido)
                 {
 			inBattle = true;
                 }
                 //if either of these is true than you you go to battle state
-                if (clientPartiodo->mGame->mBattleVector.at(i)->mAwayCombatant->mClientPartido == clientPartido)
+                if (clientPartido->mGamePartido->mBattleVector.at(i)->mAwayCombatant->mClientPartido == clientPartido)
                 {
 			inBattle = true;
                 }

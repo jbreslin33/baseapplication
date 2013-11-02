@@ -46,10 +46,6 @@ void INIT_TEST::enter(Test* test)
 }
 void INIT_TEST::execute(Test* test)
 {
-	if (test->mQuiz)
-	{
-		test->mStateMachine->changeState(NORMAL_TEST::Instance());
-	}
 }
 void INIT_TEST::exit(Test* test)
 {
@@ -73,10 +69,6 @@ void NORMAL_TEST::enter(Test* test)
 }
 void NORMAL_TEST::execute(Test* test)
 {
-	if (!test->mQuiz)
-	{
-		test->mStateMachine->changeState(OVER_TEST::Instance());
-	}
 }
 void NORMAL_TEST::exit(Test* test)
 {
@@ -99,10 +91,6 @@ void OVER_TEST::enter(Test* test)
 }
 void OVER_TEST::execute(Test* test)
 {
-	if (test->mQuiz)
-	{
-		test->mStateMachine->changeState(NORMAL_TEST::Instance());
-	}
 }
 void OVER_TEST::exit(Test* test)
 {

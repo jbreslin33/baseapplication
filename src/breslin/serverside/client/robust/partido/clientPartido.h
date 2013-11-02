@@ -47,6 +47,6 @@ virtual void update();
 
 //handle letter 
 virtual bool  handleLetter(Letter* letter);
-
+void parseAnswer(Message* message);
 };
 #endif

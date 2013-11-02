@@ -42,6 +42,13 @@ int mComputerAnswerTime;
 //correctAnswer
 int mCorrectAnswerTime;
 int mCorrectAnswerStartTime;
+
+void readAnswer(int answerTime, std::string answer);
+
+std::string mStringAnswer;
+int mAnswerTime;
+int mQuestionID;
+
 };
 
 #endif
