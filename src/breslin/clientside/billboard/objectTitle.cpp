@@ -56,7 +56,7 @@ void ObjectTitle::update()
     if(!object->isInScene())
     {
 	setVisible(false);
-        //overlay->hide();
+        overlay->hide();
         return;
     }
  
@@ -72,7 +72,7 @@ void ObjectTitle::update()
     if(cameraPlane.getSide(point) != Plane::NEGATIVE_SIDE)
     {
 	setVisible(false);
-        //overlay->hide();
+        overlay->hide();
         return;
     }
  
@@ -85,8 +85,8 @@ void ObjectTitle::update()
  
     // Update the position (centering the text)
     container->setPosition(x - (textDim.x / 2), y);
-    //setVisible(true)
-    //overlay->show();
+    setVisible(true);
+    overlay->show();
 }
  
 Vector2 ObjectTitle::getTextDimensions(String text)
