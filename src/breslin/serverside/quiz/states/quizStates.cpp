@@ -73,16 +73,9 @@ void INIT_QUIZ::enter(Quiz* quiz)
 }
 void INIT_QUIZ::execute(Quiz* quiz)
 {
-	if (quiz->mCombatant->mClientPartido->mShape->mIndex == 1)
-	{
-	}
 	if (quiz->mCombatant->mStateMachine->currentState() == NORMAL_COMBATANT::Instance())
 	{
         	quiz->mStateMachine->changeState(SENDING_QUESTION::Instance());
-		
-		//set quiz pointer on test
-		quiz->mCombatant->mClientPartido->mTest->mQuiz = quiz;
-
 	}
 }
 void INIT_QUIZ::exit(Quiz* quiz)
@@ -237,8 +230,6 @@ void OVER_QUIZ::enter(Quiz* quiz)
 	{
 		LogString("OVER_QUIZ::enter");
 	}
-	quiz->mCombatant->mClientPartido->mTest->mQuizLast = quiz;
-	quiz->mCombatant->mClientPartido->mTest->mQuiz = NULL;
         quiz->mComputerAnswerTime = 0;
         quiz->mComputerAskedTime  = 0;
 }

@@ -67,9 +67,18 @@ void GAME_PARTIDO_MODE::enter(ClientPartido* clientPartido)
 }
 void GAME_PARTIDO_MODE::execute(ClientPartido* clientPartido)
 {
-	if (clientPartido->mTest->mQuiz)
+	for (unsigned int i = 0; i < clientPartiodo->mGame->mBattleVector.size(); i++)
 	{
-		clientPartido->mClientPartidoStateMachine->changeState(CLIENT_PARTIDO_BATTLE::Instance());
+		//if either of these is true than you you go to battle state
+		if (!clientPartiodo->mGame->mBattleVector.at(i)->mHomeCombatant->mClientPartido == clientPartido)	
+		{
+			clientPartido->mClientPartidoStateMachine->changeState(CLIENT_PARTIDO_BATTLE::Instance());
+		}
+		//if either of these is true than you you go to battle state
+		if (!clientPartiodo->mGame->mBattleVector.at(i)->mAwayCombatant->mClientPartido == clientPartido)	
+		{
+			clientPartido->mClientPartidoStateMachine->changeState(CLIENT_PARTIDO_BATTLE::Instance());
+		}
 	}
 }
 void GAME_PARTIDO_MODE::exit(ClientPartido* clientPartido)
@@ -93,7 +102,21 @@ void CLIENT_PARTIDO_BATTLE::enter(ClientPartido* clientPartido)
 }
 void CLIENT_PARTIDO_BATTLE::execute(ClientPartido* clientPartido)
 {
-	if (!clientPartido->mTest->mQuiz)
+	bool inBattle = false;
+ 	for (unsigned int i = 0; i < clientPartiodo->mGame->mBattleVector.size(); i++)
+        {
+        	//if either of these is true than you you go to battle state
+                if (clientPartiodo->mGame->mBattleVector.at(i)->mHomeCombatant->mClientPartido == clientPartido)
+                {
+			inBattle = true;
+                }
+                //if either of these is true than you you go to battle state
+                if (clientPartiodo->mGame->mBattleVector.at(i)->mAwayCombatant->mClientPartido == clientPartido)
+                {
+			inBattle = true;
+                }
+        }
+	if (!inBattle)
 	{
 		clientPartido->mClientPartidoStateMachine->changeState(GAME_PARTIDO_MODE::Instance());
 	}

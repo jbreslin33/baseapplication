@@ -20,9 +20,6 @@ Test::Test(ClientPartido* clientPartido)
 	mClientPartido = clientPartido;
 	getQuestionAttempts();
 
-	mQuiz = NULL;
-	mQuizLast = NULL;
-
 	//question
 	mQuestionID = 1;
 

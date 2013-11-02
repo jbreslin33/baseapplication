@@ -28,6 +28,16 @@
 //test
 #include "../../../test/test.h"
 
+//battle
+#include "../../../battle/battle.h"
+
+//combatant
+#include "../../../combatant/combatant.h"
+
+//game
+#include "../../../game/partido/gamePartido.h"
+
+
 /*****************************************
 *******       GLOBAL    ******************
 ****************************************/
@@ -69,10 +79,18 @@ void GAME_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
 }
 void GAME_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 {
-	if (shapePartido->mClientPartido->mTest->mQuiz)
-	{
-		shapePartido->mShapePartidoStateMachine->changeState(BATTLE_SHAPE_PARTIDO::Instance());	
-	}
+	for (unsigned int i = 0; i < shapePartido->mClientPartido->mGamePartido->mBattleVector.size(); i++)
+        {
+                //if either of these is true than you you go to battle state
+                if (shapePartido->mClientPartido->mGamePartido->mBattleVector.at(i)->mHomeCombatant->mClientPartido == shapePartido->mClientPartido)
+                {
+                	shapePartido->mShapePartidoStateMachine->changeState(BATTLE_SHAPE_PARTIDO::Instance());
+                }
+                if (shapePartido->mClientPartido->mGamePartido->mBattleVector.at(i)->mAwayCombatant->mClientPartido == shapePartido->mClientPartido)
+                {
+               		shapePartido->mShapePartidoStateMachine->changeState(BATTLE_SHAPE_PARTIDO::Instance());
+                }
+        }
 }
 void GAME_SHAPE_PARTIDO::exit(ShapePartido* shapePartido)
 {
@@ -95,7 +113,20 @@ void BATTLE_SHAPE_PARTIDO::enter(ShapePartido* shapePartido)
 }       
 void BATTLE_SHAPE_PARTIDO::execute(ShapePartido* shapePartido)
 {
-	if (!shapePartido->mClientPartido->mTest->mQuiz)
+	bool inBattle = false;
+ 	for (unsigned int i = 0; i < shapePartido->mClientPartido->mGamePartido->mBattleVector.size(); i++)
+        {
+                if (shapePartido->mClientPartido->mGamePartido->mBattleVector.at(i)->mHomeCombatant->mClientPartido == shapePartido->mClientPartido)
+                {
+			inBattle = true;
+                }
+                if (shapePartido->mClientPartido->mGamePartido->mBattleVector.at(i)->mAwayCombatant->mClientPartido == shapePartido->mClientPartido)
+                {
+			inBattle = true;
+                }
+        }
+
+	if (!inBattle)
 	{
 		shapePartido->mShapePartidoStateMachine->changeState(GAME_SHAPE_PARTIDO::Instance());	
 	}
