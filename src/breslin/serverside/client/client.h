@@ -79,6 +79,7 @@ bool mPermanence;
 
 	int				mLastMessageTime;
 
+	bool mLoggedIn;
 	std::string mStringUsername;
 	std::string mStringPassword;
 

@@ -65,6 +65,9 @@ Client::Client(Server* server, struct sockaddr *address, int clientID, bool perm
 
 	mPermanence = permanence;
 
+	//logged in
+	mLoggedIn = false;
+
 	//client id for php but everyone uses one...
 	mClientID = clientID;
 	

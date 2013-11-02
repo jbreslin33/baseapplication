@@ -32,6 +32,10 @@ StateMachine<Test>* mStateMachine;
 //client
 ClientPartido* mClientPartido;
 
+//quiz
+Quiz* mQuiz;
+Quiz* mQuizLast;
+
 //message
 Message mMessage;
 
@@ -46,8 +50,13 @@ void getQuestionAttempts();
 void sendQuestion(int questionID);
 
 //answer
+std::string mStringAnswer;
+bool mWaitingForAnswer;
 bool mShowCorrectAnswer;
+int mAnswerTime;
 void insertAnswerAttempt(int questionID, std::string stringAnswer, int answerTime);
+void parseAnswer(Message* message);
+void readAnswer(int answerTime, std::string answer);
 
 //showCorrectAnswer
 void sendCorrectAnswer(int questionID);

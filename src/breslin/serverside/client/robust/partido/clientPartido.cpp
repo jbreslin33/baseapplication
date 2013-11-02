@@ -16,15 +16,6 @@
 //test
 #include "../../../test/test.h"
 
-//combatant
-#include "../../../combatant/combatant.h"
-
-//quiz
-#include "../../../quiz/quiz.h"
-
-//battle
-#include "../../../battle/battle.h"
-
 ClientPartido::ClientPartido(ServerPartido* serverPartido, struct sockaddr *address, int clientID, bool permanence,int i, std::string u, std::string p, std::string f, std::string m1, std::string m2, std::string m3, std::string l,int s) : ClientRobust(serverPartido, address, clientID, permanence,i, u,p,f,m1,m2,m3,l,s) 
 {
 	//server
@@ -77,43 +68,5 @@ void ClientPartido::setShape(ShapePartido* shapePartido)
 {
 	ClientRobust::setShape(shapePartido);
 	mShapePartido = shapePartido;
-}
-
-void ClientPartido::parseAnswer(Message* mes)
-{
-        int answerTime = mes->ReadShort();
-        int sizeOfAnswer = mes->ReadByte();
-
-        std::string answer;
-
-        //loop thru and set stringAnswer
-        for (int i = 0; i < sizeOfAnswer; i++)
-        {
-                if (mClientID > 0)
-                {
-                        char c = mes->ReadByte();
-                        answer.append(1,c);
-                }
-                else
-                {
-                        int numeric = mes->ReadByte();
-                        char ascii = (char)numeric;
-                        answer.append(1,ascii);
-                }
-        }
- 	
-	for (unsigned int i = 0; i < mGamePartido->mBattleVector.size(); i++)
-        {
-                //if either of these is true than you you go to battle state
-                if (mGamePartido->mBattleVector.at(i)->mHomeCombatant->mClientPartido == this)
-                {
-			mGamePartido->mBattleVector.at(i)->mHomeCombatant->mQuiz->readAnswer(answerTime,answer);	
-                }
-                //if either of these is true than you you go to battle state
-                if (mGamePartido->mBattleVector.at(i)->mAwayCombatant->mClientPartido == this)
-                {
-			mGamePartido->mBattleVector.at(i)->mHomeCombatant->mQuiz->readAnswer(answerTime,answer);	
-                }
-        }
 }
 

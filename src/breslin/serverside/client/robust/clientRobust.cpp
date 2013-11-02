@@ -99,13 +99,20 @@ void ClientRobust::setShape(Shape* shape)
 
 void ClientRobust::login()
 {
-	//change to LOBBY STATE
-	mClientRobustStateMachine->changeState(LOBBY::Instance());
+
+        //send letter
+        Message message;
+        message.Init(message.outgoingData, sizeof(message.outgoingData));
+        message.WriteByte(mServer->mMessageLogin); // add type
+        Letter* letter = new Letter(this,&message);
+        mServer->mMailMan->deliver(this,letter);
+	delete letter;
 
         //set last messageTime
         mLastMessageTime = mServer->mNetwork->getCurrentSystemTime();
 
-	//notify client to log in
+        mLoggedIn = true;
+
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServer->mMessageLoggedIn); // add type
         if (mClientID > 0)
@@ -117,10 +124,15 @@ void ClientRobust::login()
 
 void ClientRobust::logout()
 {
-	//change to LOGGED_OUT STATE
-	mClientRobustStateMachine->changeState(LOGGED_OUT::Instance());
+        //send letter
+        Message message;
+        message.Init(message.outgoingData, sizeof(message.outgoingData));
+        message.WriteByte(mServer->mMessageLogout); // add type
+        Letter* letter = new Letter(this,&message);
+        mServer->mMailMan->deliver(this,letter);
+	delete letter;
+        mLoggedIn = false;
 
-	//notify client
         mMessage.Init(mMessage.outgoingData, sizeof(mMessage.outgoingData));
         mMessage.WriteByte(mServer->mMessageLoggedOut); // add type
         if (mClientID > 0)

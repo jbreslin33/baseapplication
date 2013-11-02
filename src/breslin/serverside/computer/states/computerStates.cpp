@@ -15,7 +15,6 @@
 
 //client
 #include "../../client/robust/clientRobust.h"
-#include "../../client/robust/states/clientRobustStates.h"
 
 //steering
 #include "../../steering/steering.h"
@@ -87,7 +86,7 @@ void COMPUTER_CONTROLLED::enter(Computer* computer)
 void COMPUTER_CONTROLLED::execute(Computer* computer)
 {
 	//is this human controlled?
-	if (computer->mShape->mClient->mClientRobustStateMachine->currentState()  == GAME_MODE::Instance()) 
+	if (computer->mShape->mClient->mLoggedIn)
 	{
 		computer->mStateMachine->changeState(HUMAN_CONTROLLED::Instance());
 	}
@@ -122,7 +121,7 @@ void HUMAN_CONTROLLED::enter(Computer* computer)
 
 void HUMAN_CONTROLLED::execute(Computer* computer)
 {
-	if (computer->mShape->mClient->mClientRobustStateMachine->currentState()  != GAME_MODE::Instance()) 
+	if (!computer->mShape->mClient->mLoggedIn)
 	{
 		computer->mStateMachine->changeState(COMPUTER_CONTROLLED::Instance());
 	}

@@ -8,7 +8,6 @@
 #include "../../utility/utility.h"
 #include "../question/questionAttempts.h"
 #include "../quiz/quiz.h"
-#include "../quiz/states/quizStates.h"
 #include "../combatant/combatant.h"
 #include "../shape/shape.h"
 #include "../../utility/utility.h"
@@ -20,9 +19,19 @@ Test::Test(ClientPartido* clientPartido)
 	mClientPartido = clientPartido;
 	getQuestionAttempts();
 
+	mQuiz = NULL;
+	mQuizLast = NULL;
+
+	//question
+	mQuestionID = 1;
+
 	//answer
+	mWaitingForAnswer = false;
 	mShowCorrectAnswer = false;
 
+	//time
+	mAnswerTime = 0;
+ 
 	//quiz states
         mStateMachine =  new StateMachine<Test>(this);
         mStateMachine->setCurrentState      (INIT_TEST::Instance());
@@ -55,9 +64,20 @@ void Test::reset()
 		mQuestionAttemptsVector.at(i)->dbInsert();
 	}
 */	
+	//quiz
+	mQuiz = NULL;
+	mQuizLast = NULL;
+	
+	//question
+	mQuestionID = 1;
+	
 	//answer
+	mWaitingForAnswer = false;
 	mShowCorrectAnswer = false;
 	
+	//time
+	mAnswerTime = 0;
+        
         mStateMachine->setPreviousState     (INIT_TEST::Instance());
 	mStateMachine->setCurrentState      (INIT_TEST::Instance());
 	
@@ -210,6 +230,31 @@ bool Test::checkLevel(int level)
         }
 }
 
+void Test::parseAnswer(Message* mes)
+{
+        int answerTime = mes->ReadShort();
+        int sizeOfAnswer = mes->ReadByte();
+
+        std::string answer;
+
+        //loop thru and set stringAnswer
+        for (int i = 0; i < sizeOfAnswer; i++)
+        {
+                if (mClientPartido->mClientID > 0)
+                {
+                        char c = mes->ReadByte();
+                        answer.append(1,c);
+                }
+                else
+                {
+                        int numeric = mes->ReadByte();
+                        char ascii = (char)numeric;
+                        answer.append(1,ascii);
+                }
+        }
+        readAnswer(answerTime,answer);
+}
+
 void Test::insertAnswerAttempt(int questionID, std::string stringAnswer, int answerTime)
 {
         QuestionAttempts* questionAttempts = new QuestionAttempts(0,questionID,stringAnswer,mClientPartido->mServerPartido->mNetwork->getCurrentSystemTime(),answerTime,mClientPartido->id,false);
@@ -285,5 +330,38 @@ void Test::sendCorrectAnswer(int questionID)
                 //send it
                 mClientPartido->mServerPartido->mNetwork->sendPacketTo(mClientPartido,&mMessage);
         }
+}
+
+
+void Test::readAnswer(int answerTime, std::string answer)
+{
+        //clear answer string
+        mStringAnswer.clear();
+        mAnswerTime = answerTime;
+        mStringAnswer = answer;
+
+        insertAnswerAttempt(mQuestionID,mStringAnswer,mAnswerTime);
+
+        if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0 || mAnswerTime > 2000)
+        //if (mStringAnswer.compare(mClientPartido->mServerPartido->mQuestionVector.at(mQuestionID)->answer) != 0)
+        {
+       		mShowCorrectAnswer = true;	 
+        }
+	else
+	{
+		if (mQuiz)
+		{	
+			if (mQuiz->mCombatant)
+			{
+				mQuiz->mCombatant->mScore++;	
+				//LogString("mScore:%d",mQuiz->mCombatant->mScore);
+				//mClientPartido->mShape->setText(mUtility->intToString(mQuiz->mCombatant->mScore));
+       				mShowCorrectAnswer = false;	 
+			}
+		}
+	}
+        //set vars for new question and answer combo....
+        mWaitingForAnswer = false;
+        mQuestionString = "";
 }
 
